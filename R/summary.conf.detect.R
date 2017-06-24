@@ -1,0 +1,30 @@
+#*******************************************************
+# Summary for conf.detect object
+summary.conf.detect <- function( object , digits = 3 , file=NULL , ...){
+
+    # open sink
+    CDM::osink( file = file , suffix = paste0(  "__SUMMARY.Rout") )
+
+	cat("-----------------------------------------------------------------\n")
+    d1 <- utils::packageDescription("sirt")
+	cat( paste( d1$Package , " " , d1$Version , " (" , d1$Date , ")" , sep="") , "\n\n" )	
+	
+	cat("Call:\n", paste(deparse(object$CALL), sep = "\n", collapse = "\n"), 
+				"\n\n", sep = "")	
+	itemcluster <- object$itemcluster
+	IC <- length( unique(itemcluster) )
+				
+	des1 <- paste0( "Confirmatory DETECT Analysis with " , IC , " Item Clusters" )
+	cat(des1,"\n")
+    cat(paste("Bandwidth Scale:" , object$bwscale , "\n" ) ) 	
+
+	cat("-----------------------------------------------------------------\n")
+	cat("Dimensionality Statistics \n")
+	obji <- object$detect.summary
+	obji <- round( obji , digits)
+	print( obji ) 
+
+	# close sink
+   CDM::csink( file = file )		
+}
+#*******************************************************

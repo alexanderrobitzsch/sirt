@@ -1,0 +1,955 @@
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+----------------------- sirt NEWS -----------------------------
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+sirt: Supplementary Item Response Theory
+
+##     
+##                       _/              _/   
+##              _/_/_/      _/  _/_/  _/_/_/_/
+##           _/_/      _/  _/_/        _/     
+##              _/_/  _/  _/          _/      
+##         _/_/_/    _/  _/            _/_/   
+##   
+
+Alexander Robitzsch
+IPN - Leibniz Institute for Science and Mathematics Education 
+at Kiel University
+
+Questions or suggestions about sirt can be sent to:
+robitzsch@ipn.uni-kiel.de
+
+For reporting a bug, please provide always a reproducible R script 
+and (if necessary) a corresponding dataset.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CHANGELOG sirt
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 2.1  |  2017-06-24  |  Last: sirt 2.1-8
+------------------------------------------------------------------------
+
+xxx   * ...
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 2.0  |  2017-05-11  |  Last: sirt 2.0-26
+------------------------------------------------------------------------
+
+NOTE  * moved 'amh', 'loglike_mvnorm', 'mlnormal' and 'pmle' functions 
+        to LAM package (soon at CRAN)
+NOTE  * moved 'starts_cov' and 'starts_sim1dim' functions to 
+        STARTS package (soon at CRAN)
+FIXED * fixed a bug in 'IRT.likelihood' for fitted models in mirt which
+        occured due to an output restructure in mirt
+FIXED * fixed a bug in 'mirt.specify.partable'
+NOTE  * avoid division by zero in 'IRT.mle' which caused numerical 
+        problems (thanks to Marit List)
+NOTE  * some subfunctions in 'xxirt' were rewritten in Rcpp for reducing
+        computation time
+NOTE  * removed dependency from MCMCpack package
+ADDED * added functionality for handling missing values unter MCAR 
+        assumption in 'lsem.estimate'. The argument 
+        'sufficient_statistics=TRUE' allows for local estimation
+        of SEM based on weighted means and weighted covariances.
+        (suggested by Ulrich Schroeders)
+FIXED * fixed a bug in 'lsem.estimate' if the object name of the argument
+        'lavmodel' is not 'lavmodel' 
+        (thanks to Ulrich Schroeders and Jenny Wagner)
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: lsem.estimate (1)
+
+------------------------------------------------------------------------
+VERSIONS sirt 1.15  |  2017-03-02  |  Last: sirt 1.15-41
+------------------------------------------------------------------------
+
+NOTE  * included option for choosing 'lavaan::lavaan' or 'lavaan::sem' as
+        estimation function in function 'lsem.estimate'. In previous
+        versions, only the 'lavaan::sem' function could be chosen 
+        (thanks to Jenny Wagner).
+NOTE  * restructured Rcpp functions
+NOTE  * removed 'CallSwitch' function from namespace and package
+NOTE  * removed minor bug in labeling items in 'sim.raschtype'
+FIXED * fixed a bug in 'smirt' with handling of parameter bounds which
+        was recently introduced in sirt 1.13 (thanks to David Armstrong)
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+------------------------------------------------------------------------
+Versions 1.14 -- 2017-01-11  --  CRAN sirt 1.14-0
+------------------------------------------------------------------------
+
+NOTE  * changed output of 'sim.raschtype' which is now of class data frame
+NOTE  * added a not in 'lsem.estimate' that the model syntax should be
+        always specified in an object lavmodel 
+        (thanks to a communicated problem of Jenny Wagner)
+NOTE  * included utility function 'mcmc_Rhat' for computation of the 
+        Rhat statistic from a single chain
+NOTE  * added statistics of average conditional covariances and MADCOV
+        in 'conf.detect' and 'expl.detect'. An example for DETECT analysis
+        for simulated unidimensional data has been included (Example 3)
+        which shows that DETECT can become negative (motivated by discussions
+        with Berend Terluin, Weiyi Cheng, Yifan Liu and Yunfei Chang)
+NOTE  * added summary method for 'conf.detect'
+NOTE  * disabled default fixed seed in 'expl.detect'
+        
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: mcmc_Rhat (1), conf.detect (3)
+
+------------------------------------------------------------------------
+Versions 1.13 -- 2016-11-17  --  CRAN sirt 1.13-1
+------------------------------------------------------------------------
+
+FIXED * fixed a bug in 'conf.detect' and 'expl.detect' with too few 
+        items (routine crashed, thanks to Berend Terluin)
+FIXED * fixed a bug in data preprocessing in 'mlnormal' function
+NOTE  * included reference to subscore package in 'prmse.subscores.scales'
+NOTE  * extended output values in 'categorize' function
+NOTE  * added arguments for boundary values of a, b, c and d parameters
+        in noncompensatory IRT model function 'smirt'
+        (requested by Chia-Ling Hsu)
+ADDED * added robust linking method for multiple studies based on bisquare
+        robust regression estimation in 'linking.haberman'.
+        In addition, a summary method has been added.
+NOTE  * included functions 'starts_cov' and 'starts_sim1dim' for the 
+        STARTS model of Kenny and Zautra
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: mlnormal (3), linking.haberman (5),
+        starts_cov (1)
+
+------------------------------------------------------------------------
+Versions 1.12 -- 2016-07-19  --  CRAN sirt 1.12-2
+------------------------------------------------------------------------
+
+NOTE  * included utility function 'prior_model_parse' for convenient
+        specifications of priors for the 'amh' function
+NOTE  * included utility function 'loglike_mvnorm' for calculation 
+        of log-likelihood for a multivariate normal distribution based 
+        on sufficient statistics
+ADDED * added deterministic optimization for Bayesian model estimation 
+        in the function 'pmle' (penalized maximum likelihood estimation).
+        See the 'amh' help page.
+NOTE  * fixed a bug in LSEM plot function for subsets of parameters
+        (thanks to Johanna Hartung) 
+NOTE  * corrected a bug in Example 1 in 'equating.rasch' 
+        (thanks to Kelvin Gregory)
+NOTE  * changed labelling of response pattern in 'md.pattern.sirt'
+        to integers
+NOTE  * included example in 'nedelsky-methods' for fitting the Nedelsky 
+        model with xxirt function
+NOTE  * added history of adaptive proposal standard deviations in
+        'amh' function in output
+NOTE  * added sampled parameter vector with highest value of posterior
+        distribution in 'amh' for comparison with 'pmle' function
+NOTE  * added comparison of MAP, multivariate MAP and mean estimator
+        in 'amh' in value 'comp_estimators'. Now also included in
+        'summary.amh'.
+NOTE  * Defunct functions: 'rasch.conquest', 'rasch.pml2' , 'yen.q3',
+        'testlet.yen.q3'
+NOTE  * included utility functions 'CallSwitch' and 'parmsummary_extend'
+NOTE  * included utility functions 'pow', 'tracemat', 'soft_thresholding',
+        'hard_thresholding', 'bounds_parameters', 'dimproper',
+        'ginverse_sym' (see '?sirt-utilities')
+ADDED * included estimation routine 'mlnormal' for (restricted) maximum 
+        likelihood estimation for mean and covariance structures for a
+        multivariate normal distribution (e.g. multilevel models, factor
+        analysis, structural equation models, multilevel structural equation
+        models, social relations model, ...). Prior distribution and lasso
+        penalities are also accomodated.
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: prior_model_parse (1),
+        loglike_mvnorm (1), amh (1), equating.rasch (1), amh (1),
+        nedelsky-methods (1), sirt-utilities (1,2,3,4), 
+        parmsummary_extend (1), mlnormal (1,2)
+
+------------------------------------------------------------------------
+Versions 1.11 -- 2016-05-30  --  CRAN sirt 1.11-0
+------------------------------------------------------------------------
+
+FIXED  * fixed a bug in 'mirt.wrapper.coef' which occured due to
+         changes in output structures of mirt package
+ADDED  * added user defined item response model estimation 'xxirt' with
+         corresponding S3 methods
+ADDED  * added experimental adaptive Metropolis-Hastings routine 'amh'
+         with corresponding S3 methods
+ADDED  * added utility functions for objects of class 'mcmc.list' (from
+         coda package): 'mcmc_coef', 'mcmc_vcov', ..., 'mcmc_WaldTest'
+NOTE   * included inverse gamma distribution ('rinvgamma2') with 
+         parametrization in prior sample size and prior variance
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: rasch.jml (1), xxirt (1,2),
+        xxirt_createParTable (1), xxirt_createThetaDistribution (1),
+        amh (1,2), mcmc_coef (1), rinvgamma2 (1)
+
+------------------------------------------------------------------------
+Versions 1.10 -- 2016-01-29  --  CRAN sirt 1.10-0
+------------------------------------------------------------------------
+
+FIXED * fixed a bug in summary function of MCMC based item
+        response models (thanks to Andres Burga)  
+FIXED * fixed a bug in 'rasch.mml2' when using the 'center.b'
+        argument (thanks to Sarah Thomas) 
+NOTE  * renamed functions 'yen.q3' into 'Q3' and 'testlet.yen.q3'
+        into 'Q3.testlet'. The old function names can still be used.
+NOTE  * included argument 'standardized' in 'lsem.estimate' which
+        adds standardized solutions in the output using
+        'lavaan::standardizedSolution' (thanks to Janina Kuenecke)
+NOTE  * cleaned namespace file and defined imported functions
+        in a more explicit way
+		
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: lsem.estimate (1)
+
+------------------------------------------------------------------------
+Versions 1.9 -- 2015-11-04  --  CRAN sirt 1.9-0
+------------------------------------------------------------------------
+
+NOTE  * allows thinning in 'plot.mcmc.sirt' function
+NOTE  * fixed a minor bug in summary output of 'rasch.mml2' for
+        irtmodel='missing1'
+NOTE  * included argument 'zerosum' in 'rasch.pairwise' and 
+        'rasch.pairwise.itemcluster' to apply a zero sum constraint of 
+        for item difficulties (suggested by Chen-Wei Liu)
+NOTE  * included example for bootstrapping standard errors for
+        'rasch.pairwise' (suggested by Chen-Wei Liu)
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: rasch.pairwise (1),
+        dif.logistic.regression (2) 
+
+------------------------------------------------------------------------
+Versions 1.8 -- 2015-06-28  --  CRAN sirt 1.8-9
+------------------------------------------------------------------------
+
+NOTE  * corrected a non-working example in 'lsem.estimate' 
+        (thanks to Takuya Yanagida)
+NOTE  * changed defaults and outputs in 'mcmc.list.descriptives'
+        and 'plot.mcmc.sirt'
+ADDED * included argument 'est.delta' in 'rasch.mml2' for item specific
+        estimation of delta parameters in irtmodel='missing1'. Now,
+        the specification of est.delta has slightly been changed.
+ADDED * included function 'likelihood.adjustment' for adjusting
+        individual likelihood 
+NOTE  * disabled the broken plot method for 'noharm.sirt' objects        
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: lsem.estimate (1),
+        rasch.mml2 (7.12-14, 8), likelihood.adjustment (1)
+
+------------------------------------------------------------------------
+Versions 1.7 -- 2015-06-05  --  CRAN sirt 1.7-0
+------------------------------------------------------------------------
+
+ADDED * included function 'btm' for estimating an extended Bradley-Terry
+        model (suggested and fixed by Chris Weadon)
+NOTE  * added minimum and maximum values in summary of 'lsem.estimate'
+NOTE  * included JML estimation of Bradley-Terry model ('btm') with 
+        elimination of persons with extreme scores
+NOTE  * included infit and outfit statistics in 'btm'
+NOTE  * changed layout of summary of 'lsem.estimate' and
+        'plot.lsemPermutationTest'
+NOTE  * added separation index for Bradley-Terry model
+        (suggested by Sven De Maeyer)
+FIXED * fixed a bug in 'categorize' function
+
+DATA  * included/modified datasets: data.pw01
+EXAMP * included/modified examples: btm (1,2)
+
+------------------------------------------------------------------------
+Versions 1.6 -- 2015-05-20  --  CRAN sirt 1.6-0
+------------------------------------------------------------------------
+
+NOTE  * added arguments 'minnode' and 'maxnode' in 'R2conquest' which 
+        now allows full specification for the theta grid used in
+        numerical approximation
+FIXED * fixed a bug in 'truescore.irt' when no standard errors were provided
+ADDED * added utility functions 'categorize' and 'decategorize' for
+        categorizing variables in a data frame
+ADDED * added function 'lsem.estimate' for fitting local structural
+        equation models (LSEM). In addition, the permutation test
+        is implemented in 'lsem.permutationTest'.         
+
+DATA  * included/modified datasets: data.lsem01
+EXAMP * included/modified examples: categorize (1,2), lsem.estimate (1)
+
+------------------------------------------------------------------------
+Versions 1.4/1.5 -- 2015-03-03  --  CRAN sirt 1.5-0
+------------------------------------------------------------------------
+
+NOTE  * changed default for argument 'itemcodes' in R2conquest fuction
+NOTE  * included S3 methods for probabilistic Guttman model 'prob.guttman'
+ADDED * included plot method for hierarchical rater model 'rm.sdt'
+NOTE  * changed calculation of transformed parameters in 'rm.sdt'
+FIXED * fixed a bug in 'rm.sdt' for datasets with differing number of
+        item categories
+ADDED * added option for specifying a discrete latemt variable in
+        'rm.sdt' function. Options for fixed item parameters were also
+        added.
+NOTE  * added arguments for bounds of item slope and item difficulty
+        parameters in 'rasch.mml2' (requested by Aysenur Erdemir)
+ADDED * added option for estimating the missingness delta parameter
+        in 'rasch.mml2' and 'irtmodel="missing1"'
+FIXED * fixed a bug in 'rasch.mml2' for missing data models and 
+        included CALL in summary
+FIXED * corrected missing output of individual likelihood and posterior
+        in 'rasch.mml2' for irtmodel='missing1'
+
+DATA  * included/modified datasets: data.bs07a
+EXAMP * included/modified examples: data.eid (4.3a),
+        data.read (8e,9a), data.bs (07a), rm.sdt (2,3), rasch.mml2 (1,7)
+
+------------------------------------------------------------------------
+Versions 1.3 -- 2015-01-06  --  CRAN sirt 1.3
+------------------------------------------------------------------------
+
+NOTE  * defined several S3 methods for 'rasch.copula2' and 
+        'rasch.copula3'
+NOTE  * adapted S3 methods for mirt because the new class
+        'SingleGroupClass' is defined in mirt >= 1.7 and removed
+        'ConfirmatoryClass' and 'ExploratoryClass' methods
+NOTE  * exported the object pcm.fit (it was spuriously 
+        non-exported in sirt 1.2; reported by Sven Liepertz)
+NOTE  * included the argument 'ignore.pid' for ignoring person
+        identifiers in 'R2conquest' function (suggested by
+        Kelvin Gregory)
+NOTE  * changed Example 1 in 'f1d.irt' due to a change in 
+        Suggests regarding the MASS package in the psych package
+        which caused an error in CRAN checks (suggested by William 
+        Revelle) 
+ADDED * included S3 methods logLik, IRT.likelihood, IRT.posterior,
+        IRT.modelfit, summary.IRT.modelfit and IRT.irfprob for 
+        functions 'rasch.mml2', 'smirt', 'rasch.mirtlc', 'gom',
+        'rm.facets' and 'rm.sdt'
+NOTE  * extended modelfit.sirt for objects of class gom
+ADDED * included function 'modelfit.cor.poly' for assessing
+        absolute model fit for polytomous item responses
+ADDED * included arguments for fixing item and rater parameters in 
+        'rm.facets'
+ADDED * included IRT.factor.scores method for 'rm.facets' and
+        'rm.sdt'
+ADDED * included function 'IRT.mle' for estimating MLE, WLE and
+        MAP factor scores with user defined item response functions
+        
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: f1d.irt (1), rasch.mml2 (1),
+        rasch.mirtlc (1), gom.em (1), rm.facets (2), IRT.mle (1,2,3)        
+
+------------------------------------------------------------------------
+Versions 1.2 -- 2014-12-12  --  CRAN sirt 1.2
+------------------------------------------------------------------------
+
+NOTE  * included standard errors of WLE parameters in 'wle.rasch'
+NOTE  * corrected formulas help file for 'pcm.conversion'
+        (thanks to Thomas Kiefer)
+FIXED * fixed computational problems for calculating tetrachoric        
+        correlation with empty cells in 'tetrachoric2' resp.
+        'polychoric2' (method of Olsson; thanks to a dataset 
+        privided by Ulrike Kipman)
+NOTE  * included S3 methods IRT.likelihood, IRT.posterior and
+        IRT.irfprob for two classes (ConfirmatoryClass and
+        ExploratoryClass) of mirt objects
+ADDED * included item and person fit statistic in 'pcm.fit' 
+        for the partial credit model (suggested by Hiroyuki 
+        Yamada and Sven Liepertz) 
+NOTE  * included C-test dataset 'data.g308' from 
+        Schroeders et al. (2014)
+NOTE  * included several examples from the book of Eid
+        and Schmidt: "Testtheorie und Testkonstruktion",
+        see data.eid
+
+DATA  * included/modified datasets: data.g308, data.eid
+EXAMP * included/modified examples: pcm.conversion (1),
+        pcm.fit (1,2,3), brm.sim (1), data.g308 (1),
+        data.eid (1,2)
+
+------------------------------------------------------------------------
+Versions 1.1  -- 2014-11-23  --  CRAN sirt 1.1
+------------------------------------------------------------------------
+
+NOTE  * included arguments for mean and covariance matrix for
+        confirmatory multidimensional models in 'f1d.irt'
+NOTE  * removed 'lavaanify.sirt' from sirt package and
+        included this function as 'lavaanify.IRT' in 
+        TAM package 
+FIXED * fixed a bug in 'lavaan2mirt' (thanks to Hong Giang Pham)        
+NOTE  * extended some person fit statistics to handle datasets
+        with missing responses (thanks to Hiroyuki Yamada)
+ADDED * included functions for estimating the Beta item 
+        response model for continuous item responses 
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: f1d.irt (2), brm.sim (1)
+
+------------------------------------------------------------------------
+Versions 1.0  -- 2014-10-27  --  CRAN sirt 1.0-3
+------------------------------------------------------------------------
+
+NOTE  * included argument 'progress' in 'gom.em' for optional
+        printing of iteration progress
+NOTE  * disabled warnings produced in 'rasch.mirtlc' by the glm
+        function 
+FIXED * fixed a bug in calculating the posterior in 'mirt.wrapper'
+        for nonlinear item response models 
+FIXED * fixed a bug in running exploratory factor analysis with
+        one dimension in noharm.sirt (thanks to Russell Zheng)
+FIXED * fixed a bug in datawide2long with Q-matrix input
+FIXED * fixed a bug in data handling in 'invariance.alignment'
+        with some missing intercepts and slopes
+ADDED * included an extension of lavaan syntax to accomodate
+        guessing and slipping parameters and "__" (item shortage 
+        declaration) -> function 'lavaanify.sirt'
+        The function lavaan2mirt also includes these options.
+NOTE  * included coef and vcov method for function 'rasch.evm.pcm'
+NOTE  * included argument weights in 'dirichlet.mle'
+NOTE  * included utility function for conversion of different
+        parameterizations in partial credit model
+NOTE  * included helper function 'mirt.wrapper.itemplot'        
+NOTE  * enabled progress argument in rasch.copula functions        
+NOTE  * renamed DeCarlo's hierarchical rater model based on
+        signal detection theory 'rm.hrm' into 'rm.sdt'
+NOTE  * fixed an error in description of missing IRT models in
+        'rasch.mml2.Rd' (thanks to Carmen Koehler)
+NOTE  * fixed a bug in 'tam2mirt' for polytomous items 
+        (thanks to Michal Modzelewski)
+ADDED * included function 'mirt.specify.partable' for modifying
+        a parameter table in mirt package 
+NOTE  * included argument item type for polytomous data in 'lavaan2mirt'
+NOTE  * updated 'lavaanify.sirt' function because of changes in 
+        the lavaan::lavaanify function from lavaan 0.5-16 to the
+        lavaan 0.5-17 package
+NOTE  * changed mean constraint for rater parameters in 'rm.facets' 
+ADDED * included estimation and simulation functions for the Nedelsky model
+        ('nedelsky.sim', 'nedelsky.irf')
+
+DATA  * included/modified datasets: data.ratings2, data.si06, data.ratings3
+EXAMP * included/modified examples: dirichlet.simul (1,2),
+        data.read (2), mirt.model.vars (1), rasch.mirtlc (4), 
+        data.long (3,4), lavaanify.sirt (1), lavaan2mirt (1),
+        dirichlet.mle (1,2), pcm.conversion (1), data.big5 (1),
+        mirt.specify.partable (1), nedelsky-methods (1,2)
+
+------------------------------------------------------------------------
+Versions 0.47 -- 2014-08-30  --  CRAN sirt 0.47-36
+------------------------------------------------------------------------
+
+ADDED * included wrapper function of mirt output of extracting
+        item parameters ('mirt.wrapper.coef')
+EXAMP * added more examples for model estimation in mirt package
+        using customized item response functions and/or 
+        customized latent structure distributions
+          o Ramsay's quotient model ('sim.qm.ramsay', Example 1)
+          o Latent class analysis ('data.read', Model 7)
+          o Mixed Rasch model ('data.read', Model 8)
+          o Located latent class model/Latent class IRT model
+            ('data.read', Model 12; 'rasch.mirtlc', Example 4, Model 4)
+          o Probabilistic Guttman model ('prob.guttman', Example 1, 
+            Model 3)
+          o Nonparametric item response model with monotone item
+            response functions ('prob.guttman', Example 4, Model 4)          
+          o Discrete grade of membership model ('gom.em', Simulated 
+            Example 2, Model 2m)
+          o Multimensional item response model with discrete traits
+            ('data.read', Model 13)   
+          o DINA model ('data.read', Model 14)       
+          o Rasch copula model ('rasch.copula2', Example 5)  
+          o Rasch model with non-normal distibution ('data.read', Model 15)          
+ADDED * included wrapper function of mirt output for extracting
+        likelihood, posterior and expected counts 
+ADDED * extended modelfit.sirt for fitted objects from mirt package
+ADDED * included function 'lavaan2mirt' for converting syntax for the
+        lavaan package to syntax for the mirt package
+ADDED * included function 'tam2mirt' for converting a fitted object
+        in TAM package into an object of class mirt in the mirt package
+NOTE  * corrected some typos and improved some examples (thanks to Phil Chalmers)
+EXAMP * included an example for running Mplus from within R using the
+        MplusAutomation package ('data.read', Model 1)
+NOTE  * renamed functionrasch.conquest into R2conquest -> function rasch.conquest
+        can still be used
+ADDED * included function 'mirt.wrapper.fscores' for computing EAPs, MAPs and MLEs
+        for objects of class mirt
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: mirt.wrapper (1,2,3,4,5),
+        sim.qm.ramsay (1), modelfit.sirt (1), data.read (1,3,7,8,12,13,14),
+        lavaan2mirt (1,2,3), tam2mirt (1,2,3,4), prob.guttman (1), gom.em (2),
+        equating.rasch (1), data.reck (2), rasch.mirtlc (4),
+        rasch.copula2 (5)
+
+------------------------------------------------------------------------
+Versions 0.46 -- 2014-08-05  --  CRAN sirt 0.46-15
+------------------------------------------------------------------------
+
+NOTE  * used the operator '::' for functions which are used from 
+        other packages than sirt in example files for datasets
+FIXED * fixed a bug in plot.noharm.sirt for unidimensional models
+NOTE  * fixed a minor bug in summary in 'summary.rasch.pml2'
+NOTE  * included argument 'use.maxincrement' for controlling
+        increments in 'rasch.pml3'
+NOTE  * speeded invariance alignment function and choose now 
+        different starting values to ensure a global minimum.
+        Changed also default parameters to obtain more
+        stable results. 
+NOTE  * excluded plotting function of 'invariance.alignment'
+NOTE  * changed calculation of measures of noninvariance in
+        invariance.alignment. Now, the noninvariance measures 
+        in 'invariance.alignment' and 'linking.haberman' 
+        are equivalent.
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: data.read, data.big5,
+        invariance.alignment (4,5) 
+
+------------------------------------------------------------------------
+Versions 0.45 -- 2014-05-30  --  CRAN sirt 0.45-23
+------------------------------------------------------------------------
+
+FIXED * fixed a bug in reliability calculation in noharm.sirt
+NOTE  * included plots for 'noharm.sirt' using the semPlot package
+ADDED * included first version of statistical implicative analysis ('sia.sirt')
+ADDED * included function 'rasch.conquest' for running ConQuest from within R
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: data.mixed1, noharm.sirt (1,2),
+        sia.sirt (1), data.read, rasch.evm.pcm (4)
+
+------------------------------------------------------------------------
+Versions 0.44 -- 2014-04-27  --  CRAN sirt 0.44-48
+------------------------------------------------------------------------
+
+FIXED * fixed a bug in calculation of marginal parameters for testlet model
+ADDED * included the partially compensatory item response model
+        (irtmodel='partcomp' in 'smirt')
+NOTE  * speeded 'rasch.copula' functions a bit
+NOTE  * included argument 'increment.factor' in rasch.copula to improve
+        convergence behavior
+FIXED * fixed a bug in 'rasch.mirtlc' in saved parameter estimates for
+        models with different initial estimates (n.starts>0)
+ADDED * included function for calculating marginal item parameters for
+        testlet (bifactor) model ('testlet.marginalized')
+ADDED * extended 'modelfit.sirt' for objects of class tam.mml, tam.mml.2pl
+        and tam.fa (from the TAM package)
+FIXED * fixed a bug in parsing residual matrix from NOHARM output in 'R2noharm'
+NOTE  * extended output in mcmc.list. descriptives
+NOTE  * changed chi square p value in R2noharm in Values according to summary
+ADDED * included R implementation of NOHARM ('noharm.sirt')
+NOTE  * modelfit.sirt also allows for objects of class noharm.sirt
+NOTE  * included Divgi estimation method of tetrachoric correlation
+ADDED * included maximum likelihood estimation of polychoric correlation
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: data.wide2long (1), smirt (3), modelfit.sirt (1),
+        R2noharm (4), mcmc.list.descriptives (1), noharm.sirt (1,2), data.read,
+        tetrachoric (2), polychoric2 (1)
+
+------------------------------------------------------------------------
+Versions 0.43 -- 2014-03-12  --  CRAN sirt 0.43-70
+------------------------------------------------------------------------
+
+ADDED * included function 'isop.test' for testing the ISOP model
+ADDED * included (non-iterative) eigenvector method for estimating
+        the partial credit model -> 'rasch.evm.pcm'
+NOTE  * included argument 'ref.item' in rasch.mirtlc for specification
+        of reference items
+ADDED * included test of de Gooijer and Yuan (2011) that CSN is non-positive
+        -> 'unidim.test.csn'   
+ADDED * included option for testing differential item functioning in
+        rasch.evm.pcm
+NOTE  * changed convergence behavior in rasch.mirtlc for 2PL models
+ADDED * robust linking alternative to mean-mean linking ('linking.robust')
+NOTE  * corrected output for hierarchical rater model ('rm.hrm')
+ADDED * included simple latent class model for two exchangeable raters 
+        ('lc.2raters')
+ADDED * extended unidimensional copula model to multiple dimensions ('rasch.copula3')
+NOTE  * changed numerical differentiation parameters in several functions
+        to a smaller value
+ADDED * included missing data IRT model ('rasch.mml2', irtmodel='missing1')
+NOTE  * included person (containing person parameters) as a value in rasch.copula2
+        and rasch.copula2
+FIXED * fixed a bug in 'testlet.yen.q3'
+NOTE  * allowed correlated residuals in reliability calculation of 
+        'reliability.nonlinearSEM'
+NOTE  * included reliability estimation for pseudo maximum likelihood 
+        estimation ('rasch.pml3')
+NOTE  * included marginal item parameters in the output in testlet model 
+        ('mcmc.3pno.testlet')
+
+DATA  * included/modified datasets: data.reck73C1a, data.reck73C1b,
+        data.reck75C2, data.reck78ExA, data.reck79ExB, 
+        data.liking.science, data.si02, data.si03, data.si04, data.si05
+EXAMP * included/modified examples: isop.test (1), rasch.evm.pcm (1,2,3,4,5,6),
+        data.reck (2,3), rasch.mirtlc (3,4,5), gom.em (2), unidim.test.csn (1,2),
+        gom.em (1), linking.robust (1,2,3), lc.2raters (1), data.wide2long (2),
+        rasch.copula (4), rasch.mml2 (7), reliability.nonlinearSEM (1)  
+
+------------------------------------------------------------------------
+Versions 0.42 -- 2014-01-31  --  CRAN sirt 0.42-25
+------------------------------------------------------------------------
+
+NOTE  * included further values in smirt to allow to apply itemfit.sx2
+        in the CDM package
+FIXED * fixed a bug in output of person parameters in smirt (missing
+        standard errors; thanks to Balal Izanloo)
+NOTE  * included empirical item-attribute discriminations in lsdm
+NOTE  * changed NAMESPACE and DESCRIPTION files due to a change in Rcpp
+FIXED * fixed a bug for constraint in mu for multidimensional models
+        in rasch.mml2
+FIXED * fixed warning messages when reading NOHARM output files
+NOTE  * stabilized estimation of tetrachoric correlation coefficients
+        for Tucker method (addition of cell sizes with a value .5) 
+ADDED * included the method of Bonett and Price for calculation a
+        tetrachoric correlation
+NOTE  * included additional outputs and item parameters for the 
+        HRM-SDT (thanks to a discussion with Robin Gleeson)
+NOTE  * extended modelfit.sirt to objects of class R2noharm
+
+DATA  * included/modified datasets: data.timss07.G8.RUS, data.reck611
+EXAMP * included/modified examples: fuzcluster (1), modelfit.sirt (1)
+
+------------------------------------------------------------------------
+Versions 0.41 -- 2014-01-07  --  CRAN sirt 0.41-21
+------------------------------------------------------------------------
+
+ADDED * included maximum likelihood estimation for discrete data in the
+        belief function framework ('fuzdiscr')
+ADDED * included pseudo-log-likelihood estimation for fractional item
+        responses (values between 0 and 1) in 'rasch.mml2'
+ADDED * included clustering fur fuzzy continuous data (belief function
+        framework) ('fuzcluster')
+
+DATA  * included datasets: data.pirlsmissing
+EXAMP * included examples: mcmc.2pno.ml (3), rasch.mml2 (7)
+
+------------------------------------------------------------------------
+Versions 0.40 -- 2013-12-09  --  CRAN sirt 0.40-9
+------------------------------------------------------------------------
+
+FIXED * fixed a bug in 'data.wide2long'
+NOTE  * changed Rcpp code in eigenvalue calculation due to a CRAN request
+
+DATA  * included datasets: data.big5.qgraph 
+EXAMP * included examples: ---
+
+------------------------------------------------------------------------
+Versions 0.39 -- 2013-11-17  --  CRAN sirt 0.39-30
+------------------------------------------------------------------------
+
+NOTE  * included approximating function of expected percent score in
+        truescore.irt
+NOTE  * added a check function for inits in smirt (thanks to Balal Izanloo)
+FIXED * fixed a bug in output of person parameters (thanks to Balal Izanloo)
+NOTE  * speeded latent regression model 'latent.em.regression.raschtype'
+ADDED * included latent.em.regression.normal for normally distributed
+        outcomes
+NOTE  * included factor for convergence acceleration in invariance.alignment
+NOTE  * included summary for latent regression models
+ADDED * included function 'mle.pcm.group' for maximum likelihood estimation
+        in generalized item response models which includes an option for
+        estimating group parameters
+NOTE  * changed algorithm in 'invariance.alignment' into a two-step approach
+NOTE  * included plot method for function 'invariance.alignment'
+
+DATA  * included datasets: data.inv4gr, data.ess2005, data.mcdonald.rape,
+        data.si01 
+EXAMP * included examples: lsdm (4,5), invariance.alignment (3),
+        plausible.value.imputation.raschtype (2,3)
+
+------------------------------------------------------------------------
+Versions 0.38 -- 2013-10-23  --  CRAN sirt 0.38-25
+------------------------------------------------------------------------
+
+ADDED * included function for automated finding of a scoring key in
+        a data frame with raw item responses ('automatic.recode')
+FIXED * fixed a bug in linking.haberman function 
+NOTE  * added argument personpars in linking.haberman for transformation
+        of person parameters
+ADDED * included alignment method for approximate invariance
+        (Asparouhov & Muthen, 2013)
+ADDED * included function truescore.irt for conversion of trait scores
+        into true scores for unidimensional item response models
+
+DATA  * included item parameters data.activity.itempars
+
+------------------------------------------------------------------------
+Versions 0.37 -- 2013-10-02  --  CRAN sirt 0.37-24
+------------------------------------------------------------------------
+
+FIXED * fixed a bug in rasch.mirtlc with multiple starts in latent
+        class models
+NOTE  * allowed input of student weights and product-moment
+        matrix in R2noharm
+FIXED * fixed a bug in calculation of degrees of freedom in R2noharm 
+        function
+FIXED * fixed a bug in linear transformation for person parameters
+        in linking.haberman
+ADDED * included eigenvalue decomposition function 'eigenvalues.sirt'
+
+DATA  * included datasets: 'data.noharmExC', 'data.mcdonald', 'data.reck'
+DATA  * included data conversion function 'data.wide2long'  
+DATA  * renamed 'data.noharm' into 'data.noharm18'  
+  
+------------------------------------------------------------------------
+Versions 0.35/0.36 -- 2013-09-08  --  CRAN sirt 0.36-30
+------------------------------------------------------------------------
+
+NOTE  * corrected legends and labels in plot.isop function
+ADDED * included function rowKSmallest2.sirt
+FIXED * fixed a bug in mcmc.3pno.testlet (thanks to Chun-Hsien Wu)
+        -> removed parametrization 3 (bifactor model) because it
+        produced untrustworthy results
+NOTE  * included gregmisc in imports (thanks to Jean-Paul Fox)
+NOTE  * disabled parametrization 2 in mcmc.3pno.testlet
+        -> now only the original model from the Glas paper
+          (parametrization 1) is estimated
+NOTE  * included argument for item parameter fixings in
+        pairwise conditional likelihood function rasch.pairwise.itemcluster
+NOTE  * included ETS classification labels of uniform DIF in
+        function dif.logistic.regression
+NOTE  * included the option of not submitting any item strata 
+        to stratified.cronbach.alpha and an example for using 
+        the psych package
+ADDED * included function 'md.pattern.sirt' for analyzing
+        response patterns
+NOTE  * included crossprod function in several sirt functions
+ADDED * included monotone nonparametric estimation in 'rasch.mml2'
+        as the default in case of irtmodel='npirt' and npformula=NULL
+NOTE  * speeded irtmodel='npirt' in case of providing npformula
+NOTE  * included output of summary of testlet effects in 
+        mcmc.3pno.testlet
+ADDED * included the functional unidimensional model (Ip et al. 2013)
+ADDED * included the linking method of Haberman (2009)
+NOTE  * included plot method for rasch.mml2 function
+NOTE  * removed rasch.testlet.glmer function
+
+------------------------------------------------------------------------
+Version 0.34 -- 2013-08-13  --  CRAN sirt 0.34-46
+------------------------------------------------------------------------
+
+ADDED * included estimation of ISOP and ADISOP models
+FIXED * fixed a bug in pbivnorm2 for negative correlations
+NOTE  * included argument increment.factor in smirt to
+        prevent nonconvergence (thanks to Balal Izanloo)
+ADDED * included rowwise maximum and minimum and rowwise
+        cumulative sum of a matrix based on Rcpp code
+ADDED * included matrix functions rowIntervalIndex.sirt 
+        (useful for simulations) and rowKSmallest.sirt 
+        (useful for sorting matrix entries, e.g. for
+        predictive mean matching in mice)
+FIXED * fixed a bug in mcmc.2pno.ml (thanks to Ronny Scherer)
+ADDED * included matrix row and column wise monotone regression
+        function monoreg.rowwise (adapted from fdrtool package)
+ADDED * included graded response model estimation in isop.poly
+        function
+ADDED * included plot method for ISOP models (isop.dich and
+        isop.poly)
+
+DATA  * included example data.big5
+EXAMP * included an example for DETECT for polytomous data
+
+------------------------------------------------------------------------
+Versions 0.32/0.33 -- 2013-07-09  --  CRAN sirt 0.33-16
+------------------------------------------------------------------------
+
+ADDED * included the estimation  of the 2PL model via MCMC (mcmc.2pno)
+NOTE  * included a function for estimating Rhat and MAP from MCMC output
+        (mcmc.list.descriptives)
+ADDED * included a function for writing coda files (mcmclist2coda)
+NOTE  * renamed jacknife.rasch.jml into rasch.jml.jackknife1
+ADDED * included mcmc.2pnoh for estimating a hierarchical IRT model
+ADDED * included mcmc.3pno.testlet for estimating IRT testlet and
+        bifactor models for dichotomous data
+ADDED * included mcmc.2pno.ml function for estimating a multilevel
+        IRT model for dichotomous and normally distributed data
+ADDED * included R2NOHARM functions into this package for running
+        NOHARM from within R
+NOTE  * modelfit.sirt now allows objects of class smirt
+NOTE  * speeded calculation of modelfit.sirt
+NOTE  * speeded rasch.mml2, prob.guttman, rasch.mirtlc, rm.facets, rm.hrm
+
+------------------------------------------------------------------------
+Version 0.31 -- 2013-05-27  --  CRAN sirt 0.31-20
+             [*** First CRAN Release ***]
+------------------------------------------------------------------------
+
+NOTE  * speeded rasch.pml2 a bit
+FIXED * fixed a bug in smirt function (thanks to Izanloo Balal)
+ADDED * included function tetrachoric2 faster calculation
+        of the tetrachoric correlation matrix
+ADDED * included pbivnorm2 for calculating the bivariate normal integral
+NOTE  * included rasch.pml3, a bit faster version than rasch.pml2
+FIXED * eliminated warning statements in smirt and fixed a bug in 
+        estimation of a and b parameters in smirt (thanks to Izanloo Balal)
+
+------------------------------------------------------------------------
+Version 0.30  -- 2013-04-30
+------------------------------------------------------------------------
+
+NOTE  * included a Rcpp function for faster calculations in rm.hrm
+        (now there is a dependency of Rcpp and RcppArmadillo)
+ADDED * included smirt function for estimating the multdimensional
+        noncompensatory and compensatory models
+ADDED * included variational approximation for the Rasch model
+ADDED * included the (Rasch) grade of membership model
+
+------------------------------------------------------------------------
+Version 0.29  -- 2013-04-08
+------------------------------------------------------------------------
+
+ADDED * included function for computing eigenvalues and inverses of
+        many matrices
+ADDED * included facets models with item/rater intercepts and slopes
+ADDED * included initial version of the hierarchical rater model based on
+        signal detection theory (DeCarlo et al., 2011)
+ADDED * included function for simulating and estimating the
+        Dirichlet distribution
+ADDED * included grade of membership model with joint maximum 
+        likelihood estimation -> gom.jml
+
+------------------------------------------------------------------------
+Version 0.28  -- 2013-03-24
+------------------------------------------------------------------------
+
+NOTE  * included standard errors in rasch.mml2
+ADDED * included marginal true score reliability for binary item 
+        response data (Dimitrov, 2003; thanks to Ulrich Schroeders)
+
+------------------------------------------------------------------------
+Version 0.27  -- 2013-02-26
+------------------------------------------------------------------------
+
+ADDED * included classification accuracy in the Rasch model
+ADDED * implemented the multidimensional latent class Rasch model
+        (Bartolucci, 2007)
+NOTE  * cleaning of help files, included several datasets and
+        examples
+NOTE  * included log-linear smoothing of the theta distribution
+        in rasch.mirtlc
+ADDED * included 2PL estimation in rasch.mirtlc
+ADDED * included global fit statistics in modelfit.sirt
+NOTE  * included log-linear smoothing of the ability distribution
+        in rasch.mml2
+NOTE  * accelerated rasch.pml function and renamed it into rasch.pml2
+NOTE  * allowed for linear constraints for residual correlations
+        in rasch.pml2
+NOTE  * accelerated latent.regression.em.raschtype and 
+        plausible value routines
+
+------------------------------------------------------------------------
+Version 0.26  -- 2013-01-17
+------------------------------------------------------------------------
+
+NOTE  * restructured rasch.mml2 function to get a bit more compact code
+NOTE  * do not export rasch.mml and rasch.copula anymore via namespace
+ADDED * included nonparametric IRT function estimation in rasch.mml2
+        -> argument irtmodel='npirt' (Rossi, Wang & Ramsay, 2002)
+ADDED * included multidimensional models in rasch.mml2
+NOTE  * added corrected AIC (AICc) in rasch.mml2 and rasch.copula2
+NOTE  * corrected mean and SD estimation in rasch.mml2
+FIXED * fixed a bug in the calculation of the number of estimated parameters
+        in rasch.copula2
+FIXED * corrected rasch.mml2 function in case of fixed weights of
+        trait distribution
+FIXED * corrected a bug in wle.rasch
+ADDED * included probabilistic Guttman model
+ADDED * added analytical bias correction method for JML estimation of the Rasch model
+NOTE  * accelerated PMML estimation algorithm
+ADDED * added 2PL estimation in rasch.pml
+
+------------------------------------------------------------------------
+Version 0.25  -- 2012-10-16
+------------------------------------------------------------------------
+
+FIXED * fixed bad numerical behavior in rasch.copula2 for Cook-Johnson
+        and Frank copula models
+NOTE  * improved speed in yen.q3 and extended output
+NOTE  * speed improvement in rasch.mml and rasch.copula2
+NOTE  * included version rasch.mml2 with substantial speed improvements
+NOTE  * speed improvements for rasch.jml function
+
+------------------------------------------------------------------------
+Version 0.24 -- 2012-09-20
+------------------------------------------------------------------------
+
+NOTE  * changed algorithms behavior of rasch.copula2 
+        (parameter increments depend on number of iterations)
+FIXED * corrected deviance calculation in rasch.copula
+
+------------------------------------------------------------------------
+Version 0.23  -- 2012-08-31
+------------------------------------------------------------------------
+
+NOTE  * removed functions for running ConQuest from this package
+ADDED * included Cook-Johnson and Frank copula in rasch.copula2 function
+ADDED * included examples for wle.rasch.jackknife
+FIXED * removed a minor printing bug in rasch.copula
+FIXED * fixed a bug in jackknife.rasch.jml
+NOTE  * included item parameter constraints in jackknife.rasch.jml
+FIXED * corrected handling of extreme responses in rasch.prox
+
+------------------------------------------------------------------------
+Version 0.22 -- 2012-07-17
+------------------------------------------------------------------------
+
+ADDED * included estimation of residual error correlations in rasch.pml
+NOTE  * restructured rasch.testlet.glmer function
+DATA  * included data set reading data.read
+NOTE  * set a different default in rasch.mml (estimation of trait SD seemed incorrect)
+NOTE  * rasch.testlet.glmer: output EAPs and EAP reliability
+NOTE  * included loglog and cloglog link functions in rasch.testlet.glmer
+ADDED * included jackknife estimation of the joint maximum likelihood
+        Rasch model
+NOTE  * included a speeded version of rasch.copula and labelled it 
+        as rasch.copula2 -> The old version rasch.copula remains in the package.
+NOTE  * output posterior distribition, EAP estimates and
+        EAP reliability in rasch.copula    
+ADDED * introduced probit and logit version of rasch.pml: pairwise marginal 
+        likelihood estimation
+FIXED * removed some bugs (or inefficiencies) in numerical differentiation 
+        in rasch.mml and rasch.copula
+NOTE  * renamed sim.rasch.copula into sim.rasch.dep
+ADDED * included function rasch.pairwise.itemcluster for the conditional 
+        pairwise estimation method for locally dependent items   
+NOTE  * package structure of sirtr is created
+ADDED * included simulation function for Rasch copula model ('sim.rasch.copula')
+
+
+**************************************************************************
+# older sirt versions (formerly sirtr up to 0.21)
+
+Version 0.21 -- 2012-06-23
+Version 0.20 -- 2012-06-18
+Version 0.19 -- 2012-04-26
+Version 0.18 -- 2012-03-29
+Version 0.17 -- 2012-02-22
+Version 0.16 -- 2012-02-17
+Version 0.15 -- 2011-12-19
+Version 0.14 -- 2011-10-06
+Version 0.13 -- 2010-08-26
+Version 0.12 -- 2010-01-13
+Version 0.11 -- 2010-01-12
+Version 0.10 -- 2010-01-02
+Version 0.9  -- 2009-11-01
+Version 0.8  -- 2009-03-08
+Version 0.7  -- 2009-03-02
+Version 0.6  -- 2009-12-02
+Version 0.5  -- 2008-11-12
+Version 0.4  -- 2008-08-25
+Version 0.3  -- 2008-05-06
+Version 0.2  -- 2008-01-29
+Version 0.1  -- 2007-12-22
+Version 0.0  -- 2007-12-18
