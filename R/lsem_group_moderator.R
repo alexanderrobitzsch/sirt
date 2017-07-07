@@ -21,9 +21,9 @@ lsem_group_moderator <- function( data , type , moderator.grid,
 		h <- 1E-5
 		moderator.grid <- moderator.grouped$mid
 	}
-	res <- list( "data" = data , "moderator.grouped " = moderator.grouped ,
-				"residualize"=residualize , "h"=h ,
-				"moderator.grid" = moderator.grid )
+	res <- list( data = data , moderator.grouped  = moderator.grouped ,
+				residualize=residualize , h=h ,
+				moderator.grid = moderator.grid )
 	return(res)			
 }
 #########################################################			

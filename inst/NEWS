@@ -33,12 +33,14 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.1  |  2017-06-24  |  Last: sirt 2.1-8
+VERSIONS sirt 2.1  |  2017-07-07  |  Last: sirt 2.1-11
 ------------------------------------------------------------------------
 
-xxx   * ...
+NOTE  * included synthetic datasets simulated from original datasets
+        from the test theory book of Eid and Schmidt (2014)
 
-DATA  * included/modified datasets: ---
+DATA  * included/modified datasets: data.eid.kap4, data.eid.kap5,
+        data.eid.kap6, data.eid.kap7
 EXAMP * included/modified examples: ---
 
 

@@ -94,23 +94,23 @@ lsem.estimate <- function( data , moderator , moderator.grid ,
 		
 	# output
 	s2 <- Sys.time()	
-	res <- list( "parameters"=parameters , "weights"=weights , 				 
-				 "parameters_summary" = parameters_summary , 
-				 "bw"=out$bw , "h"=h , "N"=out$N , 
-				 "moderator.density"=out$moderator.density , 
-				 "moderator.stat" = moderator.stat , 
-				 "moderator.grouped" = moderator.grouped , 
-				 "m.moderator" = mean( data[,moderator] , na.rm=TRUE ) ,
-				 "sd.moderator"=out$sd.moderator , "moderator"=moderator ,
-				 "moderator.grid" = moderator.grid ,
-				 "lavmodel"=lavmodel , "residualize"=residualize ,
-				 "data"=data , "residualized.intercepts" = residualized_interceps , 
-				 "lavaan.args"=lavaan.args ,
-				 "fit_measures"=fit_measures , "s1"=s1 , "s2"=s2 ,
-				 "standardized" = standardized , 
-				 "standardized_type" = standardized_type , 
-				 "lavaan_fct" = lavaan_fct ,
-				 "type"=type , "CALL" = CALL )	
+	res <- list( parameters=parameters , weights=weights , 				 
+				 parameters_summary = parameters_summary , 
+				 bw=out$bw , h=h , N=out$N , 
+				 moderator.density=out$moderator.density , 
+				 moderator.stat = moderator.stat , 
+				 moderator.grouped = moderator.grouped , 
+				 m.moderator = mean( data[,moderator] , na.rm=TRUE ) ,
+				 sd.moderator=out$sd.moderator , moderator=moderator ,
+				 moderator.grid = moderator.grid ,
+				 lavmodel=lavmodel , residualize=residualize ,
+				 data=data , residualized.intercepts = residualized_interceps , 
+				 lavaan.args=lavaan.args ,
+				 fit_measures=fit_measures , s1=s1 , s2=s2 ,
+				 standardized = standardized , 
+				 standardized_type = standardized_type , 
+				 lavaan_fct = lavaan_fct ,
+				 type=type , CALL = CALL )	
 	class(res) <- "lsem"	
 	return(res)			
 }

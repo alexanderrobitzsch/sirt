@@ -97,22 +97,22 @@ lsem.permutationTest <- function( lsem.object, B=1000 , residualize = TRUE ,
 				
 	s2 <- Sys.time()
 		
-	res <- list( "teststat" = teststat , 
-					"parameters_pointwise_test" = parameters_pointwise_test ,
-					 "parameters" = parameters ,
-					 "parameters_permutation" = parameters_permutation ,
-					 "parameters_summary" = parameters_summary , 
-					 "parameters_summary_M" = parameters_summary_M ,
-					 "parameters_summary_SD" = parameters_summary_SD ,
-					 "parameters_summary_MAD" = parameters_summary_MAD ,
-					 "parameters_summary_lin_slo" = parameters_summary_lin_slo	,
-					 "par_pointwise_perm" = par_pointwise_perm , 
-					 "moderator.density" = object$moderator.density	,
-					 "moderator" = object$moderator	,
-					 "moderator.grid" = object$moderator.grid ,
-					 "h" = object$h , "bw" = object$bw , "N" = object$N , 
-					 "B"= B , "s1"=s1 , "s2"=s2 ,
-					 "lavmodel" = object$lavmodel , CALL = CALL
+	res <- list( teststat = teststat , 
+					parameters_pointwise_test = parameters_pointwise_test ,
+					 parameters = parameters ,
+					 parameters_permutation = parameters_permutation ,
+					 parameters_summary = parameters_summary , 
+					 parameters_summary_M = parameters_summary_M ,
+					 parameters_summary_SD = parameters_summary_SD ,
+					 parameters_summary_MAD = parameters_summary_MAD ,
+					 parameters_summary_lin_slo = parameters_summary_lin_slo	,
+					 par_pointwise_perm = par_pointwise_perm , 
+					 moderator.density = object$moderator.density	,
+					 moderator = object$moderator	,
+					 moderator.grid = object$moderator.grid ,
+					 h = object$h , bw = object$bw , N = object$N , 
+					 B= B , s1=s1 , s2=s2 ,
+					 lavmodel = object$lavmodel , CALL = CALL
 							)
 	class(res) <- "lsem.permutationTest"							
 	return(res)

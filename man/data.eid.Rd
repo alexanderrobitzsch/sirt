@@ -1,6 +1,13 @@
 \name{data.eid}
 \alias{data.eid}
+\alias{data.eid.kap4}
+\alias{data.eid.kap5}
+\alias{data.eid.kap6}
+\alias{data.eid.kap7}
+
 \docType{data}
+
+
 \title{
 Examples with Datasets from Eid and Schmidt (2014)
 }
@@ -9,14 +16,74 @@ Examples with Datasets from Eid and Schmidt (2014)
 Examples with datasets from Eid and Schmidt (2014),
 illustrations with several \R packages. The examples
 follow closely the online material of Hosoya (2014).
+The datasets are completely synthetic datasets which were
+resimulated from the originally available data.
 }
 
 \usage{
-data(data.eid)
+data(data.eid.kap4)
+data(data.eid.kap5)
+data(data.eid.kap6)
+data(data.eid.kap7)
 }
 
 \format{
-The dataset \code{data.eid} is just a placeholder.
+\itemize{	
+\item  \code{data.eid.kap4} is the dataset from Chapter 4.
+
+\code{'data.frame':   193 obs. of  11 variables:} \cr
+\code{ $ sex     : int  0 0 0 0 0 0 1 0 0 1 ...} \cr
+\code{ $ Freude_1: int  1 1 1 0 1 1 1 1 1 1 ...} \cr
+\code{ $ Wut_1   : int  1 1 1 0 1 1 1 1 1 1 ...} \cr
+\code{ $ Angst_1 : int  1 0 0 0 1 1 1 0 1 0 ...} \cr
+\code{ $ Trauer_1: int  1 1 1 0 1 1 1 1 1 1 ...} \cr
+\code{ $ Ueber_1 : int  1 1 1 0 1 1 0 1 1 1 ...} \cr
+\code{ $ Trauer_2: int  0 1 1 1 1 1 1 1 1 0 ...} \cr
+\code{ $ Angst_2 : int  0 0 1 0 0 1 0 0 0 0 ...} \cr
+\code{ $ Wut_2   : int  1 1 1 1 1 1 1 1 1 1 ...} \cr
+\code{ $ Ueber_2 : int  1 0 1 0 1 1 1 0 1 1 ...} \cr
+\code{ $ Freude_2: int  1 1 1 0 1 1 1 1 1 1 ...} \cr
+
+\item \code{data.eid.kap5} is the dataset from Chapter 5.
+
+\code{'data.frame':   499 obs. of  7 variables:} \cr
+\code{ $ sex   : int  0 0 0 0 1 1 1 0 0 0 ...} \cr
+\code{ $ item_1: int  2 3 3 2 4 1 0 0 0 2 ...} \cr
+\code{ $ item_2: int  1 1 4 1 3 3 2 1 2 3 ...} \cr
+\code{ $ item_3: int  1 3 3 2 3 3 0 0 0 1 ...} \cr
+\code{ $ item_4: int  2 4 3 4 3 3 3 2 0 2 ...} \cr
+\code{ $ item_5: int  1 3 2 2 0 0 0 0 1 2 ...} \cr
+\code{ $ item_6: int  4 3 4 3 4 3 2 1 1 3 ...} \cr
+
+
+\item \code{data.eid.kap6} is the dataset from Chapter 6.
+
+\code{'data.frame':   238 obs. of  7 variables:} \cr
+\code{ $ geschl: int  1 1 0 0 0 1 0 1 1 0 ...} \cr
+\code{ $ item_1: int  3 3 3 3 2 0 1 4 3 3 ...} \cr
+\code{ $ item_2: int  2 2 2 2 2 0 2 3 1 3 ...} \cr
+\code{ $ item_3: int  2 2 1 3 2 0 0 3 1 3 ...} \cr
+\code{ $ item_4: int  2 3 3 3 3 0 2 4 3 4 ...} \cr
+\code{ $ item_5: int  1 2 1 2 2 0 1 2 2 2 ...} \cr
+\code{ $ item_6: int  2 2 2 2 2 0 1 2 1 2 ...} \cr
+
+
+\item \code{data.eid.kap7} is the dataset \emph{Emotionale Klarheit} from Chapter 7.
+
+\code{'data.frame':   238 obs. of  9 variables:} \cr
+\code{ $ geschl : int  1 0 1 1 0 1 0 1 0 1 ...} \cr
+\code{ $ reakt_1: num  2.13 1.78 1.28 1.82 1.9 1.63 1.73 1.49 1.43 1.27 ...} \cr
+\code{ $ reakt_2: num  1.2 1.73 0.95 1.5 1.99 1.75 1.58 1.71 1.41 0.96 ...} \cr
+\code{ $ reakt_3: num  1.77 1.42 0.76 1.54 2.36 1.84 2.06 1.21 1.75 0.92 ...} \cr
+\code{ $ reakt_4: num  2.18 1.28 1.39 1.82 2.09 2.15 2.1 1.13 1.71 0.78 ...} \cr
+\code{ $ reakt_5: num  1.47 1.7 1.08 1.77 1.49 1.73 1.96 1.76 1.88 1.1 ...} \cr
+\code{ $ reakt_6: num  1.63 0.9 0.82 1.63 1.79 1.37 1.79 1.11 1.27 1.06 ...} \cr
+\code{ $ kla_th1: int  8 11 11 8 10 11 12 5 6 12 ...} \cr
+\code{ $ kla_th2: int  7 11 12 8 10 11 12 5 8 11 ...} \cr
+
+}
+
+
 }
 
 %\details{
@@ -24,8 +91,8 @@ The dataset \code{data.eid} is just a placeholder.
 %}
 
 \source{
-The material can be downloaded from
-\url{http://www.hogrefe.de/buecher/lehrbuecher/psychlehrbuchplus/lehrbuecher/
+The material and original datasets can be downloaded from
+\emph{http://www.hogrefe.de/buecher/lehrbuecher/psychlehrbuchplus/lehrbuecher/
 testtheorie-und-testkonstruktion/zusatzmaterial/}.
 }
 
@@ -41,10 +108,6 @@ Modelle mit \R}. Available at
 
 \examples{
 \dontrun{	
-# The "dataset" data.eid is just a placeholder.
-site <- paste0( "http://www.hogrefe.de/fileadmin/redakteure/hogrefe_de/" ,
-        "Psychlehrbuchplus/Testtheorie_und_Testkonstruktion/R-Analysen/" )
-
 miceadds::library_install("foreign")
 #---- load some IRT packages in R
 miceadds::library_install("TAM")        # package (a)
@@ -58,8 +121,9 @@ miceadds::library_install("psychomix")  # package (f)
 # EXAMPLES Ch. 4: Unidimensional IRT models | dichotomous data
 #############################################################################
 
-# link to dataset
-linkname <- paste0( site , "ids_new.sav")
+data(data.eid.kap4)
+data0 <- data.eid.kap4
+
 # load data
 data0 <- foreign::read.spss( linkname , to.data.frame=TRUE , use.value.labels=FALSE)
 # extract items
@@ -280,10 +344,8 @@ plot(mod3f)
 # EXAMPLES Ch. 5: Unidimensional IRT models | polytomous data
 #############################################################################
 
-# link to dataset
-linkname <- paste0( site , "Daten-kapitel-5-sex.sav")
-# load data
-data0 <- foreign::read.spss( linkname , to.data.frame=TRUE , use.value.labels=FALSE)
+data(data.eid.kap5)
+data0 <- data.eid.kap5
 # extract items
 dat <- data0[,2:7]
 

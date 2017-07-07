@@ -87,7 +87,7 @@ lsem_fitsem <- function( dat , weights , lavfit ,
 	}
 	parameters <- parameters[ order(parameters$parindex) , ]	
 	#--- OUTPUT			
-	res <- list( "parameters" = parameters ) #  , "fits" = fits )
+	res <- list( parameters = parameters )
 	return(res)	
 }
 #######################################################################			

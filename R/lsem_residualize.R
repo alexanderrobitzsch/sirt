@@ -65,11 +65,11 @@ lsem_residualize <- function( data , moderator , moderator.grid ,
 		}
 	}
 	#--- OUTPUT
-	res <- list( "resid_vars" = vars , "data" = dat2 ,
-			"weights_grid" = weights , "bw" = bw ,
-			"moderator.density"=moderator.density ,			
-			"sd.moderator"= sd.moderator , "G"= G , "N"=N ,
-			"residualized_interceps" = residualized_interceps )
+	res <- list( resid_vars = vars , data = dat2 ,
+			weights_grid = weights , bw = bw ,
+			moderator.density=moderator.density ,			
+			sd.moderator= sd.moderator , G= G , N=N ,
+			residualized_interceps = residualized_interceps )
 	return(res)
 }
 ###############################################		
