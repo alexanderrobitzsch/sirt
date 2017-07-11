@@ -106,8 +106,9 @@ tetrachoric2 <- function( dat , method="Ol" ,  delta=.007 , maxit = 1000000 ,
 		TC[ as.matrix(dfr[ , c("item1","item2") ] ) ] <- dfr$r0
 		TC[ as.matrix(dfr[ , c("item2","item1") ] ) ] <- dfr$r0
 		if (cor.smooth){ 
+			TAM::require_namespace_msg("psych")
 			TC <- psych::cor.smooth(TC) 
-					}
+		}
 		rownames(TC) <- colnames(TC) <- colnames(dat)
 		res <- list("tau"=tau , "rho" = TC )
 		

@@ -56,9 +56,10 @@ lsem_fitsem <- function( dat , weights , lavfit ,
 			sol <- lavaan::standardizedSolution( survey.fit )
 			colnames(sol)[ which( colnames(sol) == "est.std" ) ] <- "est"
 			sol$lhs <- paste0( "std__" , sol$lhs)
-			pars <- plyr::rbind.fill( pars , sol )	
+			pars <- sirt_rbind_fill( x=pars, y=sol )
+			# pars <- plyr::rbind.fill( pars , sol )	
 			dfr.gg <- pars
-		} 							
+		} 					
 		pars <- paste0( pars$lhs , pars$op , pars$rhs )					
 		NP <- length(pars0)
 		ind <- match( pars0 , pars )

@@ -138,6 +138,7 @@ rowCumsums.colbundles <- function( mat , ind , multmat = NULL ){
 #-------------------------------------------------------------------------------
 # compute column-bundlewise rowSums of a matrix
 rowSums.colbundles <- function( mat , ind , multmat = NULL ){
+    TAM::require_namespace_msg("Matrix")
     if (is.null(multmat)){
         matlist <- as.list( rep(1,length(ind)))
         for (ii in 1:( length(ind) )){
@@ -147,7 +148,7 @@ rowSums.colbundles <- function( mat , ind , multmat = NULL ){
         multmat <- Matrix::bdiag(lapply(matlist, as.matrix))
         }
     as.matrix( mat %*% multmat )
-        }
+}
 #-------------------------------------------------------------------------------
 
 

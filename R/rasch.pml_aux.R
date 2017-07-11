@@ -4,6 +4,7 @@
 ######################################################################
 # calculation of pairwise marginal likelihood
 .ll.rasch.pml.probit <- function( b , a , sigma , Q ,eps.corr, itempairs  , IP , eps=10^(-14) ){
+    TAM::require_namespace_msg("pbivnorm")
 	# multidimensional case
 	if ( ! is.null(Q) ){ 
 		t1 <- a^2 * diag( ( Q %*% sigma %*% t(Q) ) )
@@ -50,7 +51,7 @@
 # update calculation of pairwise marginal likelihood
 .update.ll.rasch.pml.probit <- function( respml , b , a , sigma , Q ,eps.corr , 
 						itempairs  , IP , eps=10^(-14) ){
-#	xi <- - b  / sqrt( 1 + a^2*sigma^2 )
+    TAM::require_namespace_msg("pbivnorm")						
 	# multidimensional case
 	if ( ! is.null(Q) ){ 
 		t1 <- a^2 * diag( ( Q %*% sigma %*% t(Q) ) )
@@ -80,7 +81,7 @@
     itempairs$p1.item2 <- a1[ itempairs$item2 ]
     ind10 <- which( b != respml$b )
     ind10 <- c( which( itempairs$item1 %in% ind10  ) , which( itempairs$item2 %in% ind10  )  )
-	itempairs[ind10,"p11"] <- pbivnorm( x = xi1[ind10] , y = xi2[ind10] , 
+	itempairs[ind10,"p11"] <- pbivnorm::pbivnorm( x = xi1[ind10] , y = xi2[ind10] , 
 			rho = cor.Sigma[ind10] )
     itempairs$p10 <- itempairs$p1.item1 - itempairs$p11
     itempairs$p01 <- itempairs$p1.item2 - itempairs$p11

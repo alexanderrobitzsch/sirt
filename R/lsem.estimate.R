@@ -53,7 +53,8 @@ lsem.estimate <- function( data , moderator , moderator.grid ,
 		sol <- lavaan::standardizedSolution( lavfit , type=standardized_type)
 		colnames(sol)[ which( colnames(sol) == "est.std" ) ] <- "est"
 		sol$lhs <- paste0( "std__" , sol$lhs)
-		pars <- plyr::rbind.fill( pars , sol )	
+		# pars <- plyr::rbind.fill( pars , sol )	
+		pars <- sirt_rbind_fill( x=pars, y=sol )	
 	} 
 	pars <- apply( pars[ , c("lhs" , "op" , "rhs" ) ] , 1 , FUN = function(ll){
 				paste0( ll[1] , ll[2] , ll[3] ) } )			

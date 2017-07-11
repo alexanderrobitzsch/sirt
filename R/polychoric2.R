@@ -7,8 +7,7 @@ polychoric2 <- function( dat , maxiter = 100 , cor.smooth = TRUE ){
 	# maximum number of categories
 	maxK <- max(dat1 , na.rm=TRUE )
 	# perform polychoric correlation
-	res0 <- polychoric2_aux_rcpp(
-				dat1 , maxK , maxiter)
+	res0 <- polychoric2_aux_rcpp( dat1 , maxK , maxiter)
 	# include cpp Call here
 	#***
 	# output cleaning
@@ -29,10 +28,11 @@ polychoric2 <- function( dat , maxiter = 100 , cor.smooth = TRUE ){
 	diag(rho) <- 1
 	if ( sum( is.na(rho) > 0 ) ){ cor.smooth <- FALSE }
 	if (cor.smooth){ 
-			rho <- psych::cor.smooth(rho) 
-					}
+	    TAM::require_namespace_msg("psych")
+		rho <- psych::cor.smooth(rho) 
+	}
 	# output list
 	res <- list("tau"=tau , "rho"= rho , "Nobs"=res0$Nobs , "maxcat" = res0$maxcat )
 	return(res)
-	}
+}
 #########################################################################

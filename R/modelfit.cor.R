@@ -174,7 +174,7 @@ function( data=NULL , posterior=NULL , probs=NULL , pmlobject=NULL ){
 
 		# fisherz from psych package
 		# residual of correlation
-		itempairs$fcor <- psych::fisherz( itempairs$corObs ) - psych::fisherz( itempairs$corExp )
+		itempairs$fcor <- sirt_fisherz( itempairs$corObs ) - sirt_fisherz( itempairs$corExp )
 		
 		#----
 		# p values and p value adjustments adjustments

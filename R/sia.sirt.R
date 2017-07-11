@@ -3,13 +3,12 @@
 # statistical implicative analysis
 # simplified algorithm
 sia.sirt <- function(dat , significance=.85 ){
-
+	TAM::require_namespace_msg("igraph")
 	dat1 <- dat
 	# order items
 	dat1 <- dat1[ , order( colMeans(dat1 , na.rm=TRUE ) ) ]	
 	p <- colMeans(dat1 , na.rm=TRUE )
-	
-	
+		
 	# handle missing responses
 	dat1.resp <- 1*(1-is.na(dat1) )
 	dat1[ is.na(dat1) ] <- 0
@@ -58,11 +57,7 @@ sia.sirt <- function(dat , significance=.85 ){
 							} # end l2 = 2
 			   
 							}
-						}
-
-
-# print(I1)
-# stop()						
+						}		
 						
 	# remove transitive relations
 	I1 <- .sia.remove.transitive(I1)	
@@ -155,9 +150,7 @@ sia.sirt <- function(dat , significance=.85 ){
 	# create igraph object
 	igraph.obj <-  igraph::graph.edgelist(dfr)
 	# create Rgraphviz object
-	
-	
-	
+			
 	#*****
 	# OUTPUT
 	res <- list( "adj.matrix" = I1 , 
@@ -192,16 +185,14 @@ sia.sirt <- function(dat , significance=.85 ){
 				if (ii!= jj ){
 					if ( sum( IS[ii,] * IS[,jj] ) > 0 ){ 
 							I1[ii,jj] <- 0
-									}
-						}
 					}
 				}
-		  IS <- IS + IS %*% I1
-		  IS <- 1*(IS > 0 )
-		  BB <- sum( abs( I0 - IS ) )
-#		  BB <- 0
 			}
-			
-	return(I1)
 		}
+		IS <- IS + IS %*% I1
+		IS <- 1*(IS > 0 )
+		BB <- sum( abs( I0 - IS ) )
+	}		
+	return(I1)
+}
 ####################################################################

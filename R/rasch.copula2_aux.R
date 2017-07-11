@@ -1,23 +1,24 @@
 
 
 
+sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
+{
+	TAM::require_namespace_msg("gtools")
+	res <- gtools::permutations(n=n, r=r, v=v, repeats.allowed=repeats.allowed)
+	return(res)
+}
 
 #--------------------------------------------------------------------------------------
 # Function calculates necessary patterns for copula IRT models (Braeken, 2011)
 .calc.copula.itemcluster <- function(D){
-#aa0 <- Sys.time()
-    res <- gtools::permutations(n=2, r=D, v=0:1, repeats.allowed=TRUE)
+    res <- sirt_permutations(n=2, r=D, v=0:1, repeats.allowed=TRUE)
     rownames(res) <- apply( res , 1 , FUN = function(ll){ paste("P" , paste( ll ,collapse="") ,sep="") } )
     RR <- nrow(res) 
     matr <- matrix( 0 , RR , RR )
     rownames(matr) <- colnames(matr) <- rownames(res) 
     colnames(matr) <- gsub( "P" , "F" , colnames(matr) )
-#cat("   ***  permutations") ; aa1 <- Sys.time(); print(aa1-aa0) ; aa0 <- aa1	
     vec <- 1:RR
-    # calculation of formulas
-	# This loop must be simplified!!!
     for (rr in vec){
-        # rr <- 2
         res.rr <- outer( rep(1,nrow(res)) , res[rr,] ) - res
         a1.rr <- apply( res.rr , 1 , FUN = function(ll){ paste("F" , paste( ll ,collapse="") ,sep="") } )
         g1.rr <- ( (-1)^rowSums( res ))
@@ -25,12 +26,10 @@
         a1.rr <- a1.rr[ind.rr]
         g1.rr <- g1.rr[ind.rr]
         matr[ rr , a1.rr ]  <- g1.rr
-            }
-# cat("   ***  after outer") ; aa1 <- Sys.time(); print(aa1-aa0) ; aa0 <- aa1			
-# print(matr)
+    }
     res1 <- list( "patt" = res , "calc" = matr )
     return(res1)
-    }
+}
 #--------------------------------------------------------------------------------------
 
 
@@ -38,20 +37,16 @@
 #--------------------------------------------------------------------------------------
 # Function calculates necessary patterns for copula IRT models (Braeken, 2011)
 .calc.copula.itemcluster2 <- function(D){
-#aa0 <- Sys.time()
-    res <- gtools::permutations(n=2, r=D, v=0:1, repeats.allowed=TRUE)
+    res <- sirt_permutations(n=2, r=D, v=0:1, repeats.allowed=TRUE)
     rownames(res) <- apply( res , 1 , FUN = function(ll){ paste("P" , paste( ll ,collapse="") ,sep="") } )
     RR <- nrow(res) 
     matr <- matrix( 0 , RR , RR )
     rownames(matr) <- colnames(matr) <- rownames(res) 
     colnames(matr) <- gsub( "P" , "F" , colnames(matr) )
-#cat("   ***  permutations") ; aa1 <- Sys.time(); print(aa1-aa0) ; aa0 <- aa1	
     matr <-  calc_copula_itemcluster_C( D , res )$matr	
-# cat("   ***  after outer") ; aa1 <- Sys.time(); print(aa1-aa0) ; aa0 <- aa1			
-# print(matr)
     res1 <- list( "patt" = res , "calc" = matr )
     return(res1)
-    }
+}
 #--------------------------------------------------------------------------------------
 
 
@@ -65,10 +60,9 @@
 		# use this function for log likelihood calculation
 		# look for items which change parameters for necessary update
 		G <- GG
-# vv0 <- Sys.time()		
 		# calculation of terms of independent itemclusters?
 		calc.ind <- length(itemcluster0) > 0	
-		eps1 <- 10^(-14)		
+		eps1 <- 1E-14
 		# calculate necessary updates
 		ind.b <- which( b != rescopula$b )
 		ind.a <- which( a != rescopula$a )

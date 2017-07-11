@@ -7,6 +7,7 @@
 \alias{bounds_parameters}
 \alias{dimproper}
 \alias{ginverse_sym}
+\alias{sirt_rbind_fill}
 
 \title{Utility Functions in \pkg{sirt}}
 
@@ -35,6 +36,9 @@ pow(x, a)
 
 # trace of a matrix
 tracemat(A)
+
+# plyr::rbind.fill implementation in sirt
+sirt_rbind_fill(x, y)
 }
 
 \arguments{

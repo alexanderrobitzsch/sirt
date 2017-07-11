@@ -188,7 +188,6 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 	# Green-Yang reliability
 	v1 <- 1 * ( ( wgtm - diag(wgtm) ) > 0 )
 	# positive definiteness
-#	rf1 <- psych::cor.smooth( res$factor.cor )
     res$omega.rel <- NA
 		L0 <- sqrt( diag(Pval ) )
 		N1 <- length(L0)

@@ -27,7 +27,7 @@ invariance.alignment <- function( lambda , nu , wgt=NULL ,
 	lambda[ missM == 0 ] <- mean( lambda , na.rm=TRUE )
 	nu[ missM == 0 ] <- mean( nu , na.rm=TRUE )
 	
-	group.combis <- t( combinat::combn( G , 2 ) )
+	group.combis <- t( utils::combn( G , 2 ) )
 	group.combis <- rbind( group.combis , group.combis[,c(2,1) ] )
 #	group.combis <- group.combis[ order( group.combis[,1] ) , ]
 

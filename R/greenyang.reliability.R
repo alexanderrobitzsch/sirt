@@ -2,7 +2,8 @@
 
 #--------------------------------------------------------------------------
 # Reliability from a multidimensional nonlinear SEM for dichotomous data
-greenyang.reliability <- function( object.tetra , nfactors){ 
+greenyang.reliability <- function( object.tetra , nfactors){
+	TAM::require_namespace_msg("psych")
     cat("Reliability Estimation Based on a Nonlinear SEM\n\n")
     cat("Green & Yang (2009, Psychometrika). Reliability of summed item scores\n") 
     cat("  using structural equation modeling: An alternative to coefficient alpha\n\n")

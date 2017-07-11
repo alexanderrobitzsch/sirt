@@ -33,11 +33,16 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.1  |  2017-07-07  |  Last: sirt 2.1-11
+VERSIONS sirt 2.1  |  2017-07-11  |  Last: sirt 2.1-15
 ------------------------------------------------------------------------
 
 NOTE  * included synthetic datasets simulated from original datasets
         from the test theory book of Eid and Schmidt (2014)
+NOTE  * moved packages gtools, ic.infer, igraph, Matrix, pbivnorm, psych
+        and sm from 'Imports' to 'Suggests'. Removed combinat, MASS 
+        and plyr packages from 'Imports'.
+NOTE  * exported 'sirt_rbind_fill' utility function which is a
+        reimplementation of plyr::rbind.fill
 
 DATA  * included/modified datasets: data.eid.kap4, data.eid.kap5,
         data.eid.kap6, data.eid.kap7

@@ -18,6 +18,7 @@ lsdm <- function( data , Qmatrix , theta = qnorm(seq(.0005,.9995,len=100)) , qua
         # c     ... guessing parameter                      #
 		# theta ... grid of theta values					#
 		#####################################################
+		TAM::require_namespace_msg("ic.infer")
 		# generate sequence for display
         display.separate <- paste( rep("." , each=80 ) , collapse="" )
         # display progress
@@ -67,7 +68,6 @@ lsdm <- function( data , Qmatrix , theta = qnorm(seq(.0005,.9995,len=100)) , qua
 			# including weights leads to
 			# log(P) = w1 * log(A1) + w2 * log(A2)
             # restricted linear model
-#            mod2.tt <- ic.infer::orlm( mod1.tt , index = 1:K , ui )
 			mod2.tt <- ic.infer::orlm.lm( mod1.tt , index = 1:K , ui )			
 			mod2.tt$b.restr
                 } )	

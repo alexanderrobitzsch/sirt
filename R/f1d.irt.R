@@ -5,10 +5,11 @@ f1d.irt <- function( dat=NULL , nnormal=1000 , nfactors=3 ,
 			A=NULL , intercept=NULL , mu=NULL , Sigma = NULL , maxiter=100 ,
 			conv=10^(-5) , progress=TRUE ){
 	if ( ! is.null(dat) ){		
+		TAM::require_namespace_msg("psych")
 		# estimate tetrachoric correlation matrix
 		if (progress){
 			cat("*** Estimate tetrachoric correlation\n")
-					}
+		}
 		tetra <- res <- tetrachoric2(dat , progress=progress)
 		# estimate factor analysis
 		fac1 <- psych::fa( r=res$rho , nfactors=nfactors , rotate="none" )
@@ -28,7 +29,7 @@ f1d.irt <- function( dat=NULL , nnormal=1000 , nfactors=3 ,
 		A[ is.na(A) ] <- 0
 		names.dat <- names(intercept)
 		tetra <- NULL
-				}
+	}
 						
 	#***************************************
 	# approximation of normal distribution using quasi Monte Carlo integration nodes

@@ -10,7 +10,7 @@ lc.2raters <- function( data , conv=.001 , maxiter=1000 , progress=TRUE ){
 	maxK <- res$maxK
 	m1 <- res$m1
 	
-	m2.combs <- t( combinat::combn( maxK+1 , 2 ) )
+	m2.combs <- t( utils::combn( maxK+1 , 2 ) )
 	N2 <- nrow(m2.combs)
 	m2.combs <- rbind( m2.combs , m2.combs[,c(2,1)] , cbind( 1:(maxK+1) , 1:(maxK+1 ) ) )
 	m2.combs <- m2.combs[ order(paste( m2.combs[,1],m2.combs[,2])) , ]	

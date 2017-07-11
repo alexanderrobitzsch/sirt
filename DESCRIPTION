@@ -1,8 +1,8 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 2.1-11
-Date: 2017-07-07 11:16:09
+Version: 2.1-15
+Date: 2017-07-11 10:50:00
 Author: Alexander Robitzsch [aut,cre]
 Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
 Description: 
@@ -15,12 +15,12 @@ Description:
 Depends:
     R (>= 3.1)
 Imports:
-    CDM, coda, combinat, graphics, gtools, ic.infer,
-    igraph, lavaan, lavaan.survey, MASS, Matrix, 
-    methods, mirt, mvtnorm, pbivnorm, plyr, psych, 
-    Rcpp, sfsmisc, sm, stats, survey, TAM, utils
+    CDM, coda, graphics, lavaan, lavaan.survey, methods, 
+    mirt, mvtnorm, Rcpp, sfsmisc, stats, survey, 
+    TAM (>= 2.5-3), utils
 Suggests:
-    LSAmitR, miceadds
+    gtools, ic.infer, igraph, Matrix, miceadds, pbivnorm, 
+    psych, sm
 LinkingTo: 
     Rcpp, RcppArmadillo
 URL: https://github.com/alexanderrobitzsch/sirt
