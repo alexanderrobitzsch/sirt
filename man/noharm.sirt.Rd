@@ -238,8 +238,8 @@ f1[ 6:10 ,2] <- c(.8,.7,.6,.5 , .5 )
 # covariance matrix
 Pval <- matrix( c(1,.5,.5,1) , 2 , 2 )
 # simulate theta
-library(MASS)
-theta <- MASS::mvrnorm(N , mu=c(0,0) , Sigma = Pval )
+library(mvtnorm)
+theta <- mvtnorm::rmvnorm(N , mean=c(0,0) , sigma = Pval )
 # simulate item responses
 dat <- matrix( NA , N , I )
 for (ii in 1:I){ # ii <- 1

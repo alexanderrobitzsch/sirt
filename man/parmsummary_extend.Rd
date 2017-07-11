@@ -63,7 +63,7 @@ Extended parameter summary table
 ## EXAMPLE 1: Toy example parameter summary table 
 #############################################################################
 
-dfr <- base::data.frame( "parm" = c("b0" , "b1" ) , "est" = c(0.1 , 1.3 ) , 
+dfr <- data.frame( "parm" = c("b0" , "b1" ) , "est" = c(0.1 , 1.3 ) , 
                 "se" = c(.21 , .32) )
 print( sirt::parmsummary_extend(dfr) , digits= 4 )
   ##    parm est   se      t         p lower95 upper95

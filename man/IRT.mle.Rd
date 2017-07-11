@@ -113,13 +113,13 @@ b <- mod1$ipars.dat2$b
 theta0 <- mod1$person$EAP
 # define item response function for item ii
 calc.pcm <- function( theta , a , b , ii ){
-    K <- base::ncol(b)
-    N <- base::length(theta)
-    matrK <- base::matrix( 0:K , nrow=N , ncol=K+1 , byrow=TRUE)
-    eta <- a[ii] * theta * matrK - base::matrix( c(0,b[ii,]), nrow=N, ncol=K+1, byrow=TRUE)
-    eta <- base::exp(eta)
-    probs <- eta / base::rowSums(eta, na.rm=TRUE)    
-    base::return(probs)
+    K <- ncol(b)
+    N <- length(theta)
+    matrK <- matrix( 0:K , nrow=N , ncol=K+1 , byrow=TRUE)
+    eta <- a[ii] * theta * matrK - matrix( c(0,b[ii,]), nrow=N, ncol=K+1, byrow=TRUE)
+    eta <- exp(eta)
+    probs <- eta / rowSums(eta, na.rm=TRUE)    
+    return(probs)
 }
 arg.list <- list("a"=a , "b"=b )
 

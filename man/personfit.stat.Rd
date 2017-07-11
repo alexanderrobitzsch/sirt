@@ -76,8 +76,8 @@ See \code{\link{pcm.fit}} for person fit in the partial credit model.
 See the \pkg{irtProb} and \pkg{PerFit} packages for person fit statistics
 and person response curves and functions included in other packages: 
 \code{\link[mirt:personfit]{mirt::personfit}},
-\code{\link[eRm:personfit]{eRm::personfit}} and
-\code{\link[ltm:person.fit]{ltm::person.fit}}.
+\code{eRm::personfit} and
+\code{ltm::person.fit}.
 }
 
 % \code{\link[TAM:tam.fa]{tam.fa}} (\pkg{TAM})

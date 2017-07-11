@@ -57,7 +57,8 @@
 #*********	
 .pml2.est.b.aux <- function( xib1 , xib2 , itempairs , a , sigma , 
 			eps.corr , cor.Sigma , eps ){
-# a0 <- Sys.time()			
+# a0 <- Sys.time()	
+	TAM::require_namespace_msg("pbivnorm")
     xi1 <- xib1[ itempairs[,"item1"] ] 
     xi2 <- xib2[ itempairs[,"item2"] ] 
 	a1 <- a[ itempairs[,"item1"] ] 	
@@ -71,7 +72,7 @@
 # cat("pnorm") ; a1 <- Sys.time(); print(a1-a0) ; a0 <- a1		        		
     itempairs$p1.item1 <- pxi1[ itempairs$item1 ]
     itempairs$p1.item2 <- pxi2[ itempairs$item2 ]
-	itempairs$p11 <- pbivnorm( x = xi1 , y = xi2 , rho = cor.Sigma )
+	itempairs$p11 <- pbivnorm::pbivnorm( x = xi1 , y = xi2 , rho = cor.Sigma )
 # cat("pbivnorm") ; a1 <- Sys.time(); print(a1-a0) ; a0 <- a1		        			
     itempairs$p10 <- itempairs$p1.item1 - itempairs$p11
     itempairs$p01 <- itempairs$p1.item2 - itempairs$p11
@@ -147,8 +148,9 @@
 
 #*********	
 .pml2.est.a.aux <- function( b , itempairs , a01 , a02 , sigma , 
-			eps.corr , cor.Sigma , eps ){
-	
+			eps.corr , cor.Sigma , eps )
+{
+	TAM::require_namespace_msg("pbivnorm")
 	# unidimensional case
 	t11 <- a01^2*sigma^2	
 	t12 <- a02^2*sigma^2	
@@ -172,7 +174,7 @@
 	
     itempairs$p1.item1 <- pxi1[ itempairs$item1 ]
     itempairs$p1.item2 <- pxi2[ itempairs$item2 ]
-	itempairs$p11 <- pbivnorm( x = xi1 , y = xi2 , rho = cor.Sigma )
+	itempairs$p11 <- pbivnorm::pbivnorm( x = xi1 , y = xi2 , rho = cor.Sigma )
     itempairs$p10 <- itempairs$p1.item1 - itempairs$p11
     itempairs$p01 <- itempairs$p1.item2 - itempairs$p11
     itempairs$p00 <- 1 - itempairs$p11 - itempairs$p01 - itempairs$p10
@@ -227,8 +229,9 @@
 
 #*********	
 .pml2.est.eps.aux <- function( b , itempairs , a , sigma , 
-			eps.corr , cor.Sigma , eps ){
-	
+			eps.corr , cor.Sigma , eps )
+{
+	TAM::require_namespace_msg("pbivnorm")	
 	# unidimensional case
 	t11 <- a^2*sigma^2	
 	t12 <- a^2*sigma^2	
@@ -252,7 +255,7 @@
 	
     itempairs$p1.item1 <- pxi1[ itempairs$item1 ]
     itempairs$p1.item2 <- pxi2[ itempairs$item2 ]
-	itempairs$p11 <- pbivnorm( x = xi1 , y = xi2 , rho = cor.Sigma )
+	itempairs$p11 <- pbivnorm::pbivnorm( x = xi1 , y = xi2 , rho = cor.Sigma )
     itempairs$p10 <- itempairs$p1.item1 - itempairs$p11
     itempairs$p01 <- itempairs$p1.item2 - itempairs$p11
     itempairs$p00 <- 1 - itempairs$p11 - itempairs$p01 - itempairs$p10

@@ -61,9 +61,9 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link[MCMCpack:rinvgamma]{MCMCpack::rinvgamma}},
+\code{MCMCpack::rinvgamma},
 \code{\link[stats:GammaDist]{stats::rgamma}},
-\code{\link[MCMCpack:dinvgamma]{MCMCpack::dinvgamma}},
+\code{MCMCpack::dinvgamma},
 \code{\link[stats:GammaDist]{stats::dgamma}}
 }
 \examples{
@@ -81,7 +81,7 @@ summary(y1)
 graphics::hist(y1)
 
 # density y at grid x
-x <- base::seq( 0 , 2 , len=100 )
+x <- seq( 0 , 2 , len=100 )
 y <- sirt::dinvgamma2( x , n0 , var0 )
 graphics::plot( x , y , type="l")
 }

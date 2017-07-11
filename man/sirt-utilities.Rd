@@ -8,6 +8,8 @@
 \alias{dimproper}
 \alias{ginverse_sym}
 \alias{sirt_rbind_fill}
+\alias{sirt_fisherz}
+\alias{sirt_antifisherz}
 
 \title{Utility Functions in \pkg{sirt}}
 
@@ -39,18 +41,26 @@ tracemat(A)
 
 # plyr::rbind.fill implementation in sirt
 sirt_rbind_fill(x, y)
+
+# Fisher-z transformation, see psych::fisherz
+sirt_fisherz(rho)
+# inverse Fisher-z transformation, see psych::fisherz2r
+sirt_antifisherz(z)
 }
 
 \arguments{
 \item{pars}{Numeric vector}
 \item{lower}{Numeric vector}
 \item{upper}{Numeric vector}
-	\item{x}{Numeric vector}
+	\item{x}{Numeric vector or a matrix}
 	\item{eps}{Numerical. Shrinkage parameter of eigenvalue in 
 	\code{ginverse_sym}}
 	\item{a}{Numeric vector}
 	\item{lambda}{Numeric value}
 	\item{A}{Matrix}
+    \item{y}{Matrix}
+    \item{rho}{Numeric}
+    \item{z}{Numeric}
 }
 
 %\details{

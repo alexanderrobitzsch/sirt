@@ -59,15 +59,15 @@ item responses. See also the \pkg{PerFit} package for further person
 fit statistics.
 
 Item fit in other \R packages: 
-\code{\link[eRm:itemfit]{eRm::itemfit}},
+\code{eRm::itemfit},
 \code{\link[TAM:tam.fit]{TAM::tam.fit}},
 \code{\link[mirt:itemfit]{mirt::itemfit}},
-\code{\link[ltm:item.fit]{ltm::item.fit}},
+\code{ltm::item.fit},
 
 Person fit in other \R packages: 
-\code{\link[eRm:itemfit]{eRm::itemfit}},
+\code{eRm::itemfit},
 \code{\link[mirt:itemfit]{mirt::itemfit}},
-\code{\link[ltm:person.fit]{ltm::person.fit}},
+\code{ltm::person.fit},
 
 See \code{\link{pcm.conversion}} for conversions of different 
 parametrizations of the partial credit model.

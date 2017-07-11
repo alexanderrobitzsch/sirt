@@ -125,7 +125,7 @@ For estimation of bifactor models based on marginal maximum likelihood
 }
 
 
-\examples{
+\examples{              
 #############################################################################
 # EXAMPLE 1: Dataset Mathematics data.math | Exploratory multidimensional model
 #############################################################################
@@ -140,19 +140,16 @@ mod1 <- sirt::f1d.irt( dat =dat , nfactors=3)
 
 #++ (2) plot results
      par(mfrow=c(1,2))
-library(MASS)     
 # Intercepts
 plot( mod1$item$di0 , mod1$item$di.ast , pch=16 , main="Item Intercepts" ,
         xlab= expression( paste( d[i] , " (Unidimensional Model)" )) ,
         ylab= expression( paste( d[i] , " (Functional Unidimensional Model)" )))
 abline( lm(mod1$item$di.ast ~ mod1$item$di0) , col=2 , lty=2 )
-abline( MASS::rlm(mod1$item$di.ast ~ mod1$item$di0) , col=3 , lty=3 )
 # Discriminations
 plot( mod1$item$ai0 , mod1$item$ai.ast , pch=16 , main="Item Discriminations" ,
         xlab= expression( paste( a[i] , " (Unidimensional Model)" )) ,
         ylab= expression( paste( a[i] , " (Functional Unidimensional Model)" )))
 abline( lm(mod1$item$ai.ast ~ mod1$item$ai0) , col=2 , lty=2 )
-abline( MASS::rlm(mod1$item$ai.ast ~ mod1$item$ai0) , col=3 , lty=3 )
      par(mfrow=c(1,1))
 
 #++ (3) estimate bifactor model and Green-Yang reliability

@@ -522,8 +522,8 @@ mui[ seq(2*I+1 , 3*I) ] <- 0.65
 dat <- matrix( NA , N , 3*I )
 colnames(dat) <- paste0("It" , 1:(3*I) )
 # simulate item responses
-library(MASS)
-theta <- MASS::mvrnorm(N , mu=c(0,0) , Sigma = matrix( c( 1.2 , .6,.6,1.6)  ,2 , 2 ) )
+library(mvtnorm)
+theta <- mvtnorm::rmvnorm(N , mean=c(0,0) , sigma = matrix( c( 1.2 , .6,.6,1.6)  ,2 , 2 ) )
 for (ii in 1:(3*I)){
     # define probability
     tmp1 <- exp( theta[,1] * Q[ii,1] - b[ii,1] +  theta[,2] * Q[ii,2] - b[ii,2] )
@@ -533,7 +533,7 @@ for (ii in 1:(3*I)){
     co1 <- ( 1 + tmp1 )  
     p1 <- tmp1 / ( mui[ii] * nco1 + ( 1 - mui[ii] )*co1 )
     dat[,ii] <- 1 * ( stats::runif(N) < p1 )
-            }
+}
 
 #*** Model 1: Joint mu.i parameter for all items
 est.mu.i <- rep(0,3*I)
