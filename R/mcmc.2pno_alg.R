@@ -63,11 +63,11 @@
 			}		
     #--------------							
     # draw item parameters
-    ipars <- mvtnorm::rmvnorm( I , sigma=Sigma ) + mj
+    ipars <- CDM::CDM_rmvnorm( I , sigma=Sigma ) + mj
     a <- ipars[,1]
     b <- ipars[,2]
     return( list( "a"=a , "b"=b) )
-            }
+}
 
 			
 #################################################

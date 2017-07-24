@@ -33,7 +33,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.1  |  2017-07-11  |  Last: sirt 2.1-18
+VERSIONS sirt 2.1  |  2017-07-24  |  Last: sirt 2.1-20
 ------------------------------------------------------------------------
 
 NOTE  * included synthetic datasets simulated from original datasets
@@ -44,6 +44,8 @@ NOTE  * moved packages gtools, ic.infer, igraph, Matrix, pbivnorm, psych
 NOTE  * exported 'sirt_rbind_fill' utility function which is a
         reimplementation of plyr::rbind.fill
 NOTE  * exported utility functions 'sirt_fisherz' and 'sirt_antifisherz'
+NOTE  * fixed potential problems with frequencies of zero in 
+        'dif.logistic.regression' (thanks to Armin Haba) 
 
 DATA  * included/modified datasets: data.eid.kap4, data.eid.kap5,
         data.eid.kap6, data.eid.kap7

@@ -1,12 +1,9 @@
  
-
-
-##NS export(dif.logistic.regression)
 #---------------------------------------------------------------------------------------##
 # This function performs itemwise DIF analysis by using logistic regression methods     ##
 # uniform and nonuniform DIF                                                            ##
-dif.logistic.regression <- function( dat , group , score ,
-		quant=1.645){
+dif.logistic.regression <- function( dat , group , score , quant=1.645)
+{
     # INPUT:
     # dat       ... data frame (must only include item responses)
     # group     ... group identifier (this has to be a dummy variable)
@@ -38,8 +35,10 @@ dif.logistic.regression <- function( dat , group , score ,
 		h1$se.uniformDIF <- sqrt( diag( stats::vcov(mod2)) )[3]
 		h1$t.uniformDIF <- mod2$coef[3] / sqrt( diag( stats::vcov(mod2) ) )[3] 
 		h1$sig.uniformDIF <- ""
-		if ( h1$t.uniformDIF > quant ){ h1$sig.uniformDIF <- "+" }
-		if ( h1$t.uniformDIF < - quant ){ h1$sig.uniformDIF <- "-" }
+		if ( ! is.na( h1$t.uniformDIF ) ){
+			if ( h1$t.uniformDIF > quant ){ h1$sig.uniformDIF <- "+" }
+			if ( h1$t.uniformDIF < - quant ){ h1$sig.uniformDIF <- "-" }
+		}
 		h1$DIF.ETS <- ""
 		#****
 		# nonuniform DIF
@@ -47,10 +46,13 @@ dif.logistic.regression <- function( dat , group , score ,
 		h1$se.nonuniformDIF <- sqrt( diag( stats::vcov(mod3)) )[4]
 		h1$t.nonuniformDIF <- mod3$coef[4] / sqrt( diag( stats::vcov(mod3) ) )[4] 
 		h1$sig.nonuniformDIF <- ""
-		if ( h1$t.nonuniformDIF > quant ){ h1$sig.nonuniformDIF <- "+" }
-		if ( h1$t.nonuniformDIF < - quant ){ h1$sig.nonuniformDIF <- "-" }
+		if ( ! is.na( h1$t.nonuniformDIF ) ){		
+			if ( h1$t.nonuniformDIF > quant ){ h1$sig.nonuniformDIF <- "+" }
+			if ( h1$t.nonuniformDIF < - quant ){ h1$sig.nonuniformDIF <- "-" }
+		}
 		matr <- rbind( matr , h1 )
-        cat( ii , " " ) ; utils::flush.console()
+        cat( ii , " " )
+		utils::flush.console()	
         if ( ii %% 15 == 0 ){ cat("\n") }
         }
     cat("\n")
@@ -80,10 +82,8 @@ dif.logistic.regression <- function( dat , group , score ,
 	# sorting of the items
 	g1 <- rank( matr$uniformDIF )
 	matr <- data.frame( "itemnr" = 1:nrow(matr) ,
-			"sortDIFindex" = g1 , 
-				matr )
-    # matr <- data.frame( "item" = colnames(dat) , matr )
+			"sortDIFindex" = g1 , matr )
     return(matr)
-    }
+}
 #------------------------------------------------------------------------------
 

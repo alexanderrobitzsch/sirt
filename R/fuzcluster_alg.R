@@ -14,13 +14,11 @@ fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
     if ( is.null(seed) ){ seed <- round( stats::runif(1 ,1000, 9999 ) )}
 	set.seed( seed )
 	# initial mu estimate
-	mu_est <- mvtnorm::rmvnorm( K , mean=m1 , sigma = 1.0*diag(s1) )
-# mu_est[1,] <- 4
-# mu_est[2,] <- 2
+	mu_est <- CDM::CDM_rmvnorm( K , mean=m1 , sigma = 1.0*diag(s1) )
 
 	# initial SD estimate
 	sd_est <- t(sapply( 1:K , FUN = function(kk){ 
-			stats::runif( I , 1.05*s1 , 2*s1 ) } ))
+				stats::runif( I , 1.05*s1 , 2*s1 ) } ))
 	# initial pi estimate
 	pi_est <- stats::runif(K)
 #	pi_est <- rep(1/K , K )

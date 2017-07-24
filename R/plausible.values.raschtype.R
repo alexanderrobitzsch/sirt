@@ -174,7 +174,7 @@ plausible.value.imputation.raschtype <- function( data=NULL ,
         mod <- stats::lm( pv ~ 0 + X )
         res <- list( "est.beta" = stats::coef(mod) , "vcov.beta" = stats::vcov(mod) )
         # sample beta parameter
-        res$samp.beta <- as.vector( mvtnorm::rmvnorm( 1, mean = res$est.beta , sigma = res$vcov.beta ) )
+        res$samp.beta <- CDM::CDM_rmvnorm( 1, mean = res$est.beta , sigma = res$vcov.beta )
         # residual standard deviation
         n <- nrow(X)
 		p <- ncol(X)
@@ -183,8 +183,8 @@ plausible.value.imputation.raschtype <- function( data=NULL ,
         mod1 <- stats::lm( residuals.mod ~ 0 + Z )
 #        summary(mod1)
         # sample gamma coefficients for heteroscedasticity
-        res$samp.gamma <- as.vector( mvtnorm::rmvnorm( 1, mean = stats::coef(mod1) , 
-							sigma = stats::vcov(mod1) ) )
+        res$samp.gamma <- CDM::CDM_rmvnorm( 1, mean = stats::coef(mod1) , 
+							sigma = stats::vcov(mod1) ) 
         res$fitted.sigma <- sqrt( stats::fitted(mod1) )
         res$lm.latent.regression <- mod
         res$lm.residualsd <- mod1

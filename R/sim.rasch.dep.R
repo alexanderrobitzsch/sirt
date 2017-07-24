@@ -17,9 +17,9 @@ sim.rasch.dep <- function( theta , b , itemcluster , rho ){
                         if ( ii != jj ){ cov.dep[ii,jj] <- rho[cc] 
                                 } } }
             }	
-    random.gen <- stats::pnorm( mvtnorm::rmvnorm( n , mean = rep(0,I) , sigma = cov.dep ) )
+    random.gen <- stats::pnorm( CDM::CDM_rmvnorm( n , mean = rep(0,I) , sigma = cov.dep ) )
     dat <- 1 * ( probmat > random.gen )
 	colnames(dat) <- paste( "I" , substring(100+1:I,2) , sep="")	
     return(dat)
-        }
+}
 ###########################################################################

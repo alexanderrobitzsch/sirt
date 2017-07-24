@@ -83,6 +83,7 @@ importFrom(utils, write.table)
 #********** Imports (own packages) *****************
 #***************************************************
 
+importFrom(CDM, CDM_rmvnorm)
 importFrom(CDM, csink)
 importFrom(CDM, IRT.anova)
 importFrom(CDM, IRT.compareModels)
@@ -143,7 +144,7 @@ importFrom(mirt, mirt.model)
 importFrom(mirt, probtrace)
 importFrom(mvtnorm, dmvnorm)
 importFrom(mvtnorm, pmvnorm)
-importFrom(mvtnorm, rmvnorm)
+# importFrom(mvtnorm, rmvnorm) # replaced by CDM::CDM_rmvnorm
 importFrom(sfsmisc, QUnif)
 importFrom(survey, svydesign)
 
