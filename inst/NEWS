@@ -33,7 +33,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.1  |  2017-07-24  |  Last: sirt 2.1-20
+VERSIONS sirt 2.1  |  2017-08-09  |  Last: sirt 2.1-24
 ------------------------------------------------------------------------
 
 NOTE  * included synthetic datasets simulated from original datasets
@@ -50,8 +50,6 @@ NOTE  * fixed potential problems with frequencies of zero in
 DATA  * included/modified datasets: data.eid.kap4, data.eid.kap5,
         data.eid.kap6, data.eid.kap7
 EXAMP * included/modified examples: ---
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 2.0  |  2017-05-11  |  Last: sirt 2.0-26
