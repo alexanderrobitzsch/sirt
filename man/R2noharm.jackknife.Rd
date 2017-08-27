@@ -1,3 +1,7 @@
+%% File Name: R2noharm.jackknife.Rd
+%% File Version: 1.10
+%% File Last Change: 2017-01-18 18:08:40
+
 \name{R2noharm.jackknife}
 \alias{R2noharm.jackknife}
 \alias{summary.R2noharm.jackknife}

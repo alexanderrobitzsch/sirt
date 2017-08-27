@@ -1,3 +1,6 @@
+## File Name: prior_model_parse.R
+## File Version: 0.13
+## File Last Change: 2017-01-18 11:02:51
 
 #############################################################
 prior_model_parse <- function( prior_model ){

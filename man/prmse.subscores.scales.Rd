@@ -1,3 +1,7 @@
+%% File Name: prmse.subscores.scales.Rd
+%% File Version: 0.21
+%% File Last Change: 2017-08-21 17:59:55
+
 \name{prmse.subscores.scales}
 \alias{prmse.subscores.scales}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -8,7 +12,8 @@ Error (PRMSE) for Subscale Scores
 \description{
 This function estimates the proportional reduction of mean squared
 error (PRMSE) according to
-Haberman (Haberman 2008; Haberman, Sinharay & Puhan, 2008).
+Haberman (Haberman 2008; Haberman, Sinharay & Puhan, 2008; see
+Meijer et al. 2017 for an overview).
 }
 \usage{
 prmse.subscores.scales(data, subscale)
@@ -40,7 +45,12 @@ Haberman, S., Sinharay, S., & Puhan, G. (2008).
 Reporting subscores for institutions.
 \emph{British Journal of Mathematical and Statistical Psychology},
 \bold{62}, 79-95.
+
+Meijer, R. R., Boeve, A. J., Tendeiro, J. N., Bosker, R. J., & Albers, C. J. (2017). 
+The use of subscores in higher education: When is this useful?. 
+\emph{Frontiers in Psychology | Educational Psychology, 8}.
 }
+
 \author{
 Alexander Robitzsch
 }

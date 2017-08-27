@@ -1,3 +1,6 @@
+## File Name: nr.numdiff.R
+## File Version: 0.02
+## File Last Change: 2017-01-18 11:02:51
 
 nr.numdiff <- function( ll0 , ll1 , ll2 , h , eps = 10^(-10) ){ 
     d1 <- ( ll1 - ll2  ) / ( 2 * h )    # negative sign?

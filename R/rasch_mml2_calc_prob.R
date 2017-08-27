@@ -1,3 +1,6 @@
+## File Name: rasch_mml2_calc_prob.R
+## File Version: 0.02
+## File Last Change: 2017-06-17 17:48:26
 
 rasch_mml2_calc_prob <- function( theta.k, b, fixed.a, fixed.c, fixed.d,
 	alpha1, alpha2, Qmatrix , eps = 1e-40)

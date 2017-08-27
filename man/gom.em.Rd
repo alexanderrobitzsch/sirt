@@ -1,3 +1,7 @@
+%% File Name: gom.em.Rd
+%% File Version: 1.62
+%% File Last Change: 2017-01-18 18:08:38
+
 \name{gom.em}
 \alias{gom.em}
 \alias{summary.gom}

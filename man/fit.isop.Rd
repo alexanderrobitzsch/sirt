@@ -1,3 +1,7 @@
+%% File Name: fit.isop.Rd
+%% File Version: 1.12
+%% File Last Change: 2017-01-18 18:08:38
+
 \name{fit.isop}
 \alias{fit.isop}
 \alias{fit.adisop}

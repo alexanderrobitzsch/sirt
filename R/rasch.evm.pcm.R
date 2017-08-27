@@ -1,3 +1,6 @@
+## File Name: rasch.evm.pcm.R
+## File Version: 1.26
+## File Last Change: 2017-02-22 13:00:38
 #####################################################################
 # estimation of the partial credit model employing the eigenvector method
 rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,

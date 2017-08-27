@@ -1,3 +1,6 @@
+## File Name: lsem.estimate.R
+## File Version: 0.81
+## File Last Change: 2017-07-09 13:00:27
 
 #################################################
 # estimate LSEM model

@@ -1,3 +1,6 @@
+## File Name: summary.lsem.permutationTest.R
+## File Version: 0.13
+## File Last Change: 2017-01-31 18:33:40
 ######################################################
 summary.lsem.permutationTest <- function( object , file=NULL , digits=3 , ... ){
 

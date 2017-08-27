@@ -1,3 +1,6 @@
+## File Name: invariance.alignment2.aux.R
+## File Version: 0.16
+## File Last Change: 2017-02-17 13:36:35
 
 ##############################################################################
 # Algorithm for LAMBDA

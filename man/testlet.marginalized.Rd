@@ -1,3 +1,7 @@
+%% File Name: testlet.marginalized.Rd
+%% File Version: 0.14
+%% File Last Change: 2017-01-18 18:08:42
+
 \name{testlet.marginalized}
 \alias{testlet.marginalized}
 %- Also NEED an '\alias' for EACH other topic documented here.

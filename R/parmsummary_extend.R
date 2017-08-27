@@ -1,3 +1,6 @@
+## File Name: parmsummary_extend.R
+## File Version: 0.05
+## File Last Change: 2017-01-18 11:02:51
 
 ####################################################
 # extend parameter summary

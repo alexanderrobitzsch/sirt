@@ -1,3 +1,6 @@
+## File Name: mle.pcm.group.R
+## File Version: 0.06
+## File Last Change: 2017-02-17 13:39:11
 #################################################################
 # MLE of person parameters for individuals and groups
 mle.pcm.group <- function( dat , b , a =rep(1,ncol(dat)) ,

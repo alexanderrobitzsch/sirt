@@ -1,3 +1,7 @@
+%% File Name: monoreg.rowwise.Rd
+%% File Version: 0.10
+%% File Last Change: 2017-01-18 18:08:39
+
 \name{monoreg.rowwise}
 \alias{monoreg.rowwise}
 \alias{monoreg.colwise}

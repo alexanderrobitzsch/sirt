@@ -1,3 +1,7 @@
+%% File Name: rm.facets.Rd
+%% File Version: 0.42
+%% File Last Change: 2017-01-18 18:08:41
+
 \name{rm.facets}
 \alias{rm.facets}
 \alias{summary.rm.facets}

@@ -1,3 +1,7 @@
+%% File Name: sim.qm.ramsay.Rd
+%% File Version: 0.30
+%% File Last Change: 2017-01-18 18:08:41
+
 \name{sim.qm.ramsay}
 \alias{sim.qm.ramsay}
 %- Also NEED an '\alias' for EACH other topic documented here.

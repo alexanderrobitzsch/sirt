@@ -1,3 +1,6 @@
+//// File Name: gooijer_isop.cpp
+//// File Version: 
+//// File Last Change: 2017-02-18 18:49:46
 
 
 // [[Rcpp::depends(RcppArmadillo)]]

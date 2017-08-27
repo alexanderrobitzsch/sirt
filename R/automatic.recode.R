@@ -1,3 +1,6 @@
+## File Name: automatic.recode.R
+## File Version: 1.08
+## File Last Change: 2017-01-18 11:02:46
 ###############################################
 # automatic recoding of a dataset
 automatic.recode <- function( data , exclude=NULL , pstart.min=.6 , 

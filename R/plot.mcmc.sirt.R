@@ -1,3 +1,6 @@
+## File Name: plot.mcmc.sirt.R
+## File Version: 0.16
+## File Last Change: 2017-01-18 11:02:51
 
 ######################################################
 # plot results of objects of class mcmc.sirt

@@ -1,3 +1,6 @@
+## File Name: rm.hrm.calcprobs.R
+## File Version: 0.03
+## File Last Change: 2017-01-18 11:02:54
 
 ################################################################
 # calculate probabilities

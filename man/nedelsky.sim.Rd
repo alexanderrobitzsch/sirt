@@ -1,3 +1,7 @@
+%% File Name: nedelsky.sim.Rd
+%% File Version: 0.16
+%% File Last Change: 2017-01-18 18:19:11
+
 \name{nedelsky-methods}
 
 \alias{nedelsky.sim}

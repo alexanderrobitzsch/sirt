@@ -1,3 +1,7 @@
+%% File Name: qmc.nodes.Rd
+%% File Version: 0.11
+%% File Last Change: 2017-01-18 18:08:40
+
 \name{qmc.nodes}
 \alias{qmc.nodes}
 \title{

@@ -1,3 +1,7 @@
+%% File Name: expl.detect.Rd
+%% File Version: 1.09
+%% File Last Change: 2017-01-11 15:53:48
+
 \name{expl.detect}
 \alias{expl.detect}
 %- Also NEED an '\alias' for EACH other topic documented here.

@@ -1,3 +1,7 @@
+%% File Name: rinvgamma2.Rd
+%% File Version: 0.11
+%% File Last Change: 2017-07-11 16:34:32
+
 \name{rinvgamma2}
 \alias{rinvgamma2}
 \alias{dinvgamma2}

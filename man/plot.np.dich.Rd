@@ -1,3 +1,7 @@
+%% File Name: plot.np.dich.Rd
+%% File Version: 0.11
+%% File Last Change: 2014-08-01 14:13:44
+
 \name{plot.np.dich}
 \alias{plot.np.dich}
 %- Also NEED an '\alias' for EACH other topic documented here.

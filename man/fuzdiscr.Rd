@@ -1,3 +1,7 @@
+%% File Name: fuzdiscr.Rd
+%% File Version: 0.12
+%% File Last Change: 2017-01-18 18:08:38
+
 \name{fuzdiscr}
 \alias{fuzdiscr}
 %- Also NEED an '\alias' for EACH other topic documented here.

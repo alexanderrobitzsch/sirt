@@ -1,3 +1,6 @@
+## File Name: lsem_fitsem.R
+## File Version: 0.36
+## File Last Change: 2017-07-09 12:59:38
 
 ##############################################################
 lsem_fitsem <- function( dat , weights , lavfit ,

@@ -1,9 +1,12 @@
+## File Name: linking_haberman_als_residual_weights.R
+## File Version: 0.05
+## File Last Change: 2017-08-21 18:29:13
 
 
 linking_haberman_als_residual_weights <- function( logaj , logaAt ,
 		logaM , cutoff , wgtM0 , eps )
 {
-	loga_expected <- outer( logaj , logaAt , FUN = "+" )
+	loga_expected <- TAM::tam_outer( logaj , logaAt , FUN = "+" )
 	loga_resid <- logaM - loga_expected
 	wgt_adj <- 1 + 0 * wgtM0
 	wgtM <- wgtM0

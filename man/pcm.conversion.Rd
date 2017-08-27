@@ -1,3 +1,7 @@
+%% File Name: pcm.conversion.Rd
+%% File Version: 0.11
+%% File Last Change: 2017-01-18 18:08:40
+
 \name{pcm.conversion}
 \alias{pcm.conversion}
 %- Also NEED an '\alias' for EACH other topic documented here.

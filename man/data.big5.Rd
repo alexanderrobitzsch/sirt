@@ -1,3 +1,7 @@
+%% File Name: data.big5.Rd
+%% File Version: 0.41
+%% File Last Change: 2017-01-18 18:08:37
+
 \name{data.big5}
 \alias{data.big5}
 \alias{data.big5.qgraph}

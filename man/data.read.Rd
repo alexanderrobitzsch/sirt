@@ -1,3 +1,7 @@
+%% File Name: data.read.Rd
+%% File Version: 1.992
+%% File Last Change: 2017-01-18 18:08:37
+
 \name{data.read}
 \alias{data.read}
 \docType{data}

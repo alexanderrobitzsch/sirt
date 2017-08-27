@@ -1,3 +1,6 @@
+## File Name: smirt_squeeze.R
+## File Version: 0.03
+## File Last Change: 2017-02-28 20:15:31
 
 smirt_squeeze <- function( val , lower , upper, est)
 {

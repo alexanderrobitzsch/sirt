@@ -1,3 +1,7 @@
+%% File Name: tetrachoric2.Rd
+%% File Version: 1.27
+%% File Last Change: 2017-01-18 18:08:42
+
 \name{tetrachoric2}
 \alias{tetrachoric2}
 %- Also NEED an '\alias' for EACH other topic documented here.

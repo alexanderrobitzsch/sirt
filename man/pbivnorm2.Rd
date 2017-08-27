@@ -1,3 +1,7 @@
+%% File Name: pbivnorm2.Rd
+%% File Version: 0.15
+%% File Last Change: 2017-01-18 18:08:40
+
 \name{pbivnorm2}
 \alias{pbivnorm2}
 %- Also NEED an '\alias' for EACH other topic documented here.

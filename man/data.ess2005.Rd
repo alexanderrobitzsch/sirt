@@ -1,3 +1,7 @@
+%% File Name: data.ess2005.Rd
+%% File Version: 0.06
+%% File Last Change: 2017-01-18 18:08:37
+
 \name{data.ess2005}
 \alias{data.ess2005}
 \docType{data}

@@ -1,3 +1,7 @@
+%% File Name: pgenlogis.Rd
+%% File Version: 0.18
+%% File Last Change: 2017-01-18 18:08:40
+
 \name{pgenlogis}
 \alias{pgenlogis}
 \alias{genlogis.moments}

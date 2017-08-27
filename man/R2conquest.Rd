@@ -1,3 +1,7 @@
+%% File Name: R2conquest.Rd
+%% File Version: 3.13
+%% File Last Change: 2017-01-18 18:08:40
+
 \name{R2conquest}
 \alias{R2conquest}
 \alias{summary.R2conquest}

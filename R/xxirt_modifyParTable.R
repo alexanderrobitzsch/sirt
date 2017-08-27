@@ -1,3 +1,6 @@
+## File Name: xxirt_modifyParTable.R
+## File Version: 0.11
+## File Last Change: 2017-06-15 18:46:39
 
 ################################################################
 # modify parameter table

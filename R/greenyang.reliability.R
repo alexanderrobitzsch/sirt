@@ -1,3 +1,6 @@
+## File Name: greenyang.reliability.R
+## File Version: 1.09
+## File Last Change: 2017-07-10 10:26:59
  
 
 #--------------------------------------------------------------------------

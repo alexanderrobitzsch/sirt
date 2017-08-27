@@ -1,3 +1,6 @@
+## File Name: mcmc.2pno.ml_alg.R
+## File Version: 3.17
+## File Last Change: 2017-01-18 11:02:48
 
 #***********************************************
 # parts of algorithm:

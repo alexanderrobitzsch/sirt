@@ -1,3 +1,7 @@
+%% File Name: lc.2raters.Rd
+%% File Version: 0.12
+%% File Last Change: 2017-01-18 18:08:38
+
 \name{lc.2raters}
 \alias{lc.2raters}
 \alias{summary.lc.2raters}

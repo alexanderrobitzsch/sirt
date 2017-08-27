@@ -1,3 +1,6 @@
+## File Name: data.wide2long.R
+## File Version: 0.17
+## File Last Change: 2017-06-23 14:07:49
 
 #####################################################################
 # converts a data frame in wide format into long format

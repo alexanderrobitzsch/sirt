@@ -1,9 +1,12 @@
+## File Name: linking_haberman_als.R
+## File Version: 0.45
+## File Last Change: 2017-08-21 18:20:39
 
 
 ##########################################################################
 # alternating least squares for Haberman linking
 linking_haberman_als <- function(logaM , wgtM , maxiter , conv,
-	   progress , est.type , cutoff )
+	   progress , est.type , cutoff, reference_value = 0 )
 {
 	#****************
     iter <- 0
@@ -14,8 +17,7 @@ linking_haberman_als <- function(logaM , wgtM , maxiter , conv,
 	logaAt <- rep(0,NS)
 	At_inits <- TRUE
 	if ( At_inits ){
-		logaAt <- colSums( logaM * wgtM , na.rm=TRUE ) / 
-						colSums( wgtM , na.rm=TRUE )
+		logaAt <- colSums( logaM * wgtM , na.rm=TRUE ) / colSums( wgtM , na.rm=TRUE )
 		logaAt <- logaAt - logaAt[1]						
 	}
 	wgtM0 <- wgtM
@@ -42,9 +44,7 @@ linking_haberman_als <- function(logaM , wgtM , maxiter , conv,
 		# logaAt <- colSums( logaMadj * wgtM , na.rm=TRUE ) / 
 		# 				colSums( wgtM , na.rm=TRUE )
 		logaAt <- weighted_colMeans( mat = logaMadj , wgt = wgtM )					
-		logaAt[1] <- 0
-		# logaAt <- logaAt - logaAt[1]		
-		# logaj <- logaj - mean(logaj)
+		logaAt[1] <- reference_value
 		
 		#*** calculate residual and weight
 		res <- linking_haberman_als_residual_weights( logaj = logaj , logaAt = logaAt,
@@ -55,7 +55,7 @@ linking_haberman_als <- function(logaM , wgtM , maxiter , conv,
 	
 		parchange <- max( abs( logaAt0 - logaAt )  )
 		if (progress){
-			cat( paste0( "** " , est.type , " estimation | Iteration " , iter  , " | " , 
+			cat( paste0( "** " , est.type , " estimation | Iteration " , iter+1  , " | " , 
 				"Max. parameter change = " , round( parchange , 6 ) ) , "\n")
 			utils::flush.console()
 		}

@@ -1,3 +1,6 @@
+## File Name: mcmc_confint.R
+## File Version: 0.03
+## File Last Change: 2017-01-18 11:02:49
 
 ###########################################
 # confidence interval

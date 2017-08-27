@@ -1,3 +1,7 @@
+%% File Name: conf.detect.Rd
+%% File Version: 1.32
+%% File Last Change: 2017-01-18 18:08:37
+
 \name{conf.detect}
 \alias{conf.detect}
 \alias{summary.conf.detect}

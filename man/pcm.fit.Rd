@@ -1,3 +1,7 @@
+%% File Name: pcm.fit.Rd
+%% File Version: 0.14
+%% File Last Change: 2017-07-11 16:33:13
+
 \name{pcm.fit}
 \alias{pcm.fit}
 %- Also NEED an '\alias' for EACH other topic documented here.

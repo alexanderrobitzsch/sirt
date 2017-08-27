@@ -1,3 +1,6 @@
+## File Name: btm.R
+## File Version: 1.21
+## File Last Change: 2017-05-10 17:14:01
 
 ###############################################
 # Bradley-Terry model in sirt

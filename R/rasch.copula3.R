@@ -1,3 +1,6 @@
+## File Name: rasch.copula3.R
+## File Version: 6.42
+## File Last Change: 2017-01-18 11:02:52
 
 
 

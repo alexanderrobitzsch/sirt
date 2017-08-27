@@ -1,3 +1,7 @@
+%% File Name: xxirt_createParTable.Rd
+%% File Version: 1.07
+%% File Last Change: 2017-01-18 18:08:42
+
 \name{xxirt_createParTable}
 \alias{xxirt_createParTable}
 \alias{xxirt_createDiscItem}

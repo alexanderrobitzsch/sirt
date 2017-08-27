@@ -1,3 +1,6 @@
+## File Name: truescore.irt.R
+## File Version: 0.15
+## File Last Change: 2017-01-18 11:02:55
 
 ###############################################################
 truescore.irt <- function( A , B , c=NULL , d =NULL ,

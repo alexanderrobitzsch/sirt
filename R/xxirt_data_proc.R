@@ -1,3 +1,6 @@
+## File Name: xxirt_data_proc.R
+## File Version: 0.11
+## File Last Change: 2017-06-15 18:42:29
 
 ##############################################################
 xxirt_data_proc <- function(dat , group = NULL, weights=NULL )

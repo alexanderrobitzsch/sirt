@@ -1,3 +1,7 @@
+%% File Name: linking.haberman.Rd
+%% File Version: 0.53
+%% File Last Change: 2017-08-21 18:52:46
+
 \name{linking.haberman}
 \alias{linking.haberman}
 \alias{summary.linking.haberman}
@@ -9,11 +13,13 @@ Linking in the 2PL/Generalized Partial Credit Model
 This function does the linking of serval studies which are calibrated
 using the 2PL or the generalized item response model according to
 Haberman (2009). This method is a generalization of log-mean-mean
-linking from one study to several studies.
+linking from one study to several studies. The default \code{a_log=TRUE}
+logarithmizes item slopes for linking while otherwise an additive regression
+model is assumed for the original item loadings (see Details; Battauz, xxxx) 
 }
 \usage{
-linking.haberman(itempars, personpars, a_trim = Inf, b_trim = Inf, conv = 1e-05, 
-    maxiter = 1000, progress = TRUE)
+linking.haberman(itempars, personpars, a_trim = Inf, b_trim = Inf, a_log=TRUE,
+    conv = 1e-05, maxiter = 1000, progress = TRUE)
     
 \method{summary}{linking.haberman}(object, digits = 3, file = NULL, ...)    
 }
@@ -37,6 +43,8 @@ then it is left untransformed.
 bisquare regression (see Details).}
 \item{b_trim}{Trimming parameter for item slopes \eqn{b_{it}} in
 bisquare regression (see Details).}
+\item{a_log}{Logical indicating whether item slopes should be logarithmized
+for linking.}
 \item{conv}{
 Convergence criterion.
 }
@@ -70,7 +78,9 @@ while for polytomous responses the generalized partial credit model holds
 = a_i ( \theta_p - b_i + d_{ik} ) }
 
 The parameters \eqn{ \{ a_{it} , b_{it} \}} of all items and studies are
-linearly transformed using equations \eqn{a_{it} \approx a_i / A_t} and
+linearly transformed using equations \eqn{a_{it} \approx a_i / A_t} 
+(if \code{a_log=TRUE}) or \eqn{a_{it} \approx a_i + A_t} 
+(if \code{a_log=FALSE}) and
 \eqn{b_{it} \cdot A_t \approx B_t + b_i}. For identification reasons
 we define \eqn{A_1=1} and \eqn{B_1} = 0.
 
@@ -82,7 +92,8 @@ be weighted (specified in the fifth column of \code{itempars}).
 Alternatively, a robust regression method can be employed for linking
 using the arguments \code{a_trim} and \code{b_trim}. For example, in the case
 of item loadings, bisquare weighting is applied to
-residuals \eqn{e_{it} = a_{it} - a_i - A_t } forming weights
+residuals \eqn{e_{it} = a_{it} - a_i - A_t } (where logarithmized or non-logarithmized
+item loadings are employed) forming weights
 \eqn{w_{it} = [ 1 - ( e_{it} / k )^2 ]^2} where \eqn{k} is
 the trimming constant \code{a_trim}. Items in studies with large residuals
 (differential item functioning) are effectively set to zero in the
@@ -136,6 +147,9 @@ Asparouhov, T., & Muthen, B. (2014).
 Multiple-group factor analysis alignment.
 \emph{Structural Equation Modeling}, \bold{21}, 1-14.
 	
+Battauz, M. (2016). Multiple equating of separate IRT calibrations. 
+\emph{Psychometrika, xx}, xxx-xxx.    
+                                     
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
 from an item response model through separate calibrations}. 
 ETS Research Report ETS RR-09-40. Princeton, ETS.
@@ -196,6 +210,10 @@ summary(mod1b)
 data(data.pars1.2pl)
 mod2 <- sirt::linking.haberman( itempars=data.pars1.2pl )
 summary(mod2)
+
+# additive model instaed of logarithmic model for item slopes 
+mod2b <- sirt::linking.haberman( itempars=data.pars1.2pl, a_log=FALSE )
+summary(mod2b)
 
 \dontrun{
 #############################################################################

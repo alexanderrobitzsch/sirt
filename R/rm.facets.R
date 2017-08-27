@@ -1,3 +1,6 @@
+## File Name: rm.facets.R
+## File Version: 4.14
+## File Last Change: 2017-01-18 11:02:54
 
 #################################################################
 # Facets Model for Raters:

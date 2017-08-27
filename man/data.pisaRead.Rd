@@ -1,3 +1,7 @@
+%% File Name: data.pisaRead.Rd
+%% File Version: 0.06
+%% File Last Change: 2015-01-13 13:07:36
+
 \name{data.pisaRead}
 \alias{data.pisaRead}
 \docType{data}

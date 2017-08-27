@@ -1,3 +1,6 @@
+## File Name: summary.rasch.evm.pcm.R
+## File Version: 0.06
+## File Last Change: 2017-01-18 11:02:55
 #*******************************************************
 # Summary for rasch.mirtlc object                         *
 summary.rasch.evm.pcm <- function( object,... ){

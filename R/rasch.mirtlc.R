@@ -1,3 +1,6 @@
+## File Name: rasch.mirtlc.R
+## File Version: 91.30
+## File Last Change: 2017-01-18 11:02:53
 
 ##########################################################
 # Muiltidimensional Latent Class IRT models

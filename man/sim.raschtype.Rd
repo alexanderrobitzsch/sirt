@@ -1,3 +1,7 @@
+%% File Name: sim.raschtype.Rd
+%% File Version: 0.15
+%% File Last Change: 2017-07-11 16:36:47
+
 \name{sim.raschtype}
 \alias{sim.raschtype}
 %- Also NEED an '\alias' for EACH other topic documented here.

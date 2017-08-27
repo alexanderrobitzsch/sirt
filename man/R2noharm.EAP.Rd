@@ -1,3 +1,7 @@
+%% File Name: R2noharm.EAP.Rd
+%% File Version: 0.10
+%% File Last Change: 2017-01-18 18:08:40
+
 \name{R2noharm.EAP}
 \alias{R2noharm.EAP}
 %- Also NEED an '\alias' for EACH other topic documented here.

@@ -1,3 +1,6 @@
+## File Name: fit.isop.R
+## File Version: 2.07
+## File Last Change: 2017-01-18 11:02:47
 
 ############################################################
 # Fit ISOP Model

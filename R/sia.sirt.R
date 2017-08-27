@@ -1,3 +1,6 @@
+## File Name: sia.sirt.R
+## File Version: 0.16
+## File Last Change: 2017-07-10 10:24:39
 
 ###################################################
 # statistical implicative analysis

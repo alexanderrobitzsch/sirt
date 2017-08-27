@@ -1,3 +1,6 @@
+## File Name: matrixfunctions_sirt.R
+## File Version: 0.11
+## File Last Change: 2017-02-21 16:30:04
 
 ##########################################################################
 # rowwise maximum and minimum function

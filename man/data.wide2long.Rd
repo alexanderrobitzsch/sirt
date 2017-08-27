@@ -1,3 +1,7 @@
+%% File Name: data.wide2long.Rd
+%% File Version: 0.16
+%% File Last Change: 2017-01-18 18:08:37
+
 \name{data.wide2long}
 \alias{data.wide2long}
 %- Also NEED an '\alias' for EACH other topic documented here.

@@ -1,3 +1,7 @@
+%% File Name: data.lsem.Rd
+%% File Version: 0.03
+%% File Last Change: 2017-01-18 18:08:37
+
 \name{data.lsem}
 \alias{data.lsem01}
 

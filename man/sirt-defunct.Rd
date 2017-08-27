@@ -1,3 +1,7 @@
+%% File Name: sirt-defunct.Rd
+%% File Version: 0.04
+%% File Last Change: 2017-02-08 15:11:22
+
 \name{sirt-defunct}
 \alias{sirt-defunct}
 \alias{rasch.conquest}

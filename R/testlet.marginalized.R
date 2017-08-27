@@ -1,3 +1,6 @@
+## File Name: testlet.marginalized.R
+## File Version: 0.05
+## File Last Change: 2017-01-18 11:02:55
 testlet.marginalized <-
 function( tam.fa.obj=NULL , a1=NULL, d1=NULL, testlet=NULL, a.testlet=NULL, var.testlet=NULL){
     

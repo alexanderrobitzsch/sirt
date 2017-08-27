@@ -1,3 +1,7 @@
+%% File Name: latent.regression.em.raschtype.Rd
+%% File Version: 1.32
+%% File Last Change: 2017-01-18 18:08:38
+
 \name{latent.regression.em.raschtype}
 \alias{latent.regression.em.raschtype}
 \alias{latent.regression.em.normal}

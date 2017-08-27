@@ -1,3 +1,6 @@
+## File Name: lsem.permutationTest.R
+## File Version: 0.23
+## File Last Change: 2017-07-07 11:14:55
 
 ############################################
 # permutation test for LSEM model

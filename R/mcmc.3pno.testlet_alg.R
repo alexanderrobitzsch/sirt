@@ -1,3 +1,6 @@
+## File Name: mcmc.3pno.testlet_alg.R
+## File Version: 2.16
+## File Last Change: 2017-07-12 10:54:43
 
 ##############################################
 # draw latent response data W

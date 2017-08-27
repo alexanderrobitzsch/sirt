@@ -1,3 +1,7 @@
+%% File Name: isop.test.Rd
+%% File Version: 0.12
+%% File Last Change: 2017-01-18 18:08:38
+
 \name{isop.test}
 \alias{isop.test}
 \alias{summary.isop.test}

@@ -1,3 +1,7 @@
+%% File Name: categorize.Rd
+%% File Version: 0.10
+%% File Last Change: 2017-01-18 18:08:36
+
 \name{categorize}
 \alias{categorize}
 \alias{decategorize}

@@ -1,3 +1,7 @@
+%% File Name: sirt-package.Rd
+%% File Version: 2.43
+%% File Last Change: 2017-03-03 17:43:23
+
 \name{sirt-package}
 \alias{sirt-package}
 \alias{sirt}

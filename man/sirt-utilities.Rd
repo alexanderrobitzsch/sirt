@@ -1,3 +1,7 @@
+%% File Name: sirt-utilities.Rd
+%% File Version: 0.13
+%% File Last Change: 2017-07-11 16:07:50
+
 \name{sirt-utilities}
 \alias{sirt-utilities}
 \alias{tracemat}

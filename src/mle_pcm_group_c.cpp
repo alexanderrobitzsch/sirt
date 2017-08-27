@@ -1,3 +1,6 @@
+//// File Name: mle_pcm_group_c.cpp
+//// File Version: 
+//// File Last Change: 2017-02-17 11:29:22
 
 
 // [[Rcpp::depends(RcppArmadillo)]]

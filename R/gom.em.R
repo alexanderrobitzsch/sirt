@@ -1,3 +1,6 @@
+## File Name: gom.em.R
+## File Version: 5.14
+## File Last Change: 2017-01-18 11:02:47
 
 #################################################################
 # gom EM algorithm

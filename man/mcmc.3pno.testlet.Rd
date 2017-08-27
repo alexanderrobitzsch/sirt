@@ -1,3 +1,7 @@
+%% File Name: mcmc.3pno.testlet.Rd
+%% File Version: 1.17
+%% File Last Change: 2017-06-23 13:46:39
+
 \name{mcmc.3pno.testlet}
 \alias{mcmc.3pno.testlet}
 %- Also NEED an '\alias' for EACH other topic documented here.

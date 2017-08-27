@@ -1,3 +1,6 @@
+## File Name: lavaan2mirt.R
+## File Version: 0.51
+## File Last Change: 2017-01-18 11:02:47
 
 ###################################################################
 # Converting lavaan syntax into mirt syntax

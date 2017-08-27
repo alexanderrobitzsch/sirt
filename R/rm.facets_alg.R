@@ -1,3 +1,6 @@
+## File Name: rm.facets_alg.R
+## File Version: 4.16
+## File Last Change: 2017-02-17 13:44:22
 
 #######################################################
 # parameters expanded dataset

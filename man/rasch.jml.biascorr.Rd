@@ -1,3 +1,7 @@
+%% File Name: rasch.jml.biascorr.Rd
+%% File Version: 0.16
+%% File Last Change: 2017-01-18 18:08:41
+
 \name{rasch.jml.biascorr}
 \alias{rasch.jml.biascorr}
 %- Also NEED an '\alias' for EACH other topic documented here.

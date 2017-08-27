@@ -1,3 +1,7 @@
+%% File Name: rasch.mirtlc.Rd
+%% File Version: 2.85
+%% File Last Change: 2017-01-18 18:23:05
+
 \name{rasch.mirtlc}
 \alias{rasch.mirtlc}
 \alias{summary.rasch.mirtlc}

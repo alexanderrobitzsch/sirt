@@ -1,3 +1,6 @@
+## File Name: rm.facets_PP.R
+## File Version: 0.06
+## File Last Change: 2017-01-18 11:02:54
 
 #############################################################
 # person parameter estimation in partial credit model

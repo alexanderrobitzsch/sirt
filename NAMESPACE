@@ -119,6 +119,7 @@ importFrom(TAM, lavaanify.IRT)
 importFrom(TAM, require_namespace_msg)
 importFrom(TAM, tam.modelfit)
 importFrom(TAM, tam.ctt3)
+importFrom(TAM, tam_outer)
 
 
 

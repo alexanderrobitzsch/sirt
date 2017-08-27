@@ -1,3 +1,7 @@
+%% File Name: ccov.np.Rd
+%% File Version: 0.11
+%% File Last Change: 2016-10-04 10:53:07
+
 \name{ccov.np}
 \alias{ccov.np}
 %- Also NEED an '\alias' for EACH other topic documented here.

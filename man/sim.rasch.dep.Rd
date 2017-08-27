@@ -1,3 +1,7 @@
+%% File Name: sim.rasch.dep.Rd
+%% File Version: 0.22
+%% File Last Change: 2017-01-18 18:08:41
+
 \name{sim.rasch.dep}
 \alias{sim.rasch.dep}
 %- Also NEED an '\alias' for EACH other topic documented here.

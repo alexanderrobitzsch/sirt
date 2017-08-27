@@ -1,3 +1,7 @@
+%% File Name: data.liking.science.Rd
+%% File Version: 0.05
+%% File Last Change: 2017-01-18 18:08:37
+
 \name{data.liking.science}
 \alias{data.liking.science}
 \docType{data}

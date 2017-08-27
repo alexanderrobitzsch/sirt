@@ -1,3 +1,7 @@
+%% File Name: person.parameter.rasch.copula.Rd
+%% File Version: 1.12
+%% File Last Change: 2017-01-18 18:08:40
+
 \name{person.parameter.rasch.copula}
 \alias{person.parameter.rasch.copula}
 %- Also NEED an '\alias' for EACH other topic documented here.

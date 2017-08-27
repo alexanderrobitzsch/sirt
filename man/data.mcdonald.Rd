@@ -1,3 +1,7 @@
+%% File Name: data.mcdonald.Rd
+%% File Version: 0.14
+%% File Last Change: 2017-01-18 18:16:29
+
 \name{data.mcdonald}
 
 \alias{data.mcdonald.act15}

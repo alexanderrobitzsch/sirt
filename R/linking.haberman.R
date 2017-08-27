@@ -1,9 +1,12 @@
+## File Name: linking.haberman.R
+## File Version: 2.46
+## File Last Change: 2017-08-21 18:22:20
 
 ##################################################
 # Linking Haberman ETS Research Report
 linking.haberman <- function( itempars , personpars=NULL ,
-    a_trim = Inf , b_trim = Inf ,
-	conv = .00001 , maxiter=1000 ,progress=TRUE ){
+    a_trim = Inf , b_trim = Inf , a_log = TRUE, 
+	conv = .00001 , maxiter=1000, progress=TRUE ){
 	
 	CALL <- match.call()
 	s1 <- Sys.time()
@@ -14,7 +17,7 @@ linking.haberman <- function( itempars , personpars=NULL ,
 	# include wgt if there does not exist a fifth columm
 	if ( ncol(itempars) == 4){
 		itempars$wgt <- 1
-				}
+	}
 	# extract studies
 	studies <- sort( paste( unique( itempars[,1] ) ) )
 	NS <- length(studies)
@@ -32,18 +35,28 @@ linking.haberman <- function( itempars , personpars=NULL ,
 		aM[ paste(itempars.ss[,2]) , ss ] <- itempars.ss[,3] 
 		bM[ paste(itempars.ss[,2]) , ss ] <- itempars.ss[,4] 
 		wgtM[ paste(itempars.ss[,2]) , ss ] <- itempars.ss[,5] 
-					}
+	}
 	a.orig <- aM
 	b.orig <- bM
 	wgtM <- wgtM / matrix( rowSums( wgtM , na.rm=TRUE ) , nrow=NI , ncol=NS )
 	#*****
 	# estimation of A
-	logaM <- log( aM )	
+	if (a_log){
+		logaM <- log(aM)	
+	} else {
+		logaM <- aM
+	}
+	est_type <- "A (slopes)"
 	resA <- linking_haberman_als(logaM=logaM , wgtM=wgtM , maxiter=maxiter , 
-				 conv=conv , progress = progress , est.type="A (slopes)",
-				 cutoff = a_trim )
-	aj <- exp( resA$logaj )
-	At <- exp( resA$logaAt )
+				 conv=conv , progress = progress , est.type=est_type,
+				 cutoff = a_trim, reference_value = 1 - a_log )
+    if (a_log){
+		aj <- exp(resA$logaj)
+		At <- exp(resA$logaAt)	
+	} else {
+		aj <- resA$logaj
+		At <- resA$logaAt
+	}
     aj_resid <- resA$loga_resid
 	aj_wgt_adj <- resA$loga_wgt_adj
 	aj_wgtM <- resA$loga_wgt
@@ -60,12 +73,10 @@ linking.haberman <- function( itempars , personpars=NULL ,
 
 	#******
 	# estimation of B
-	#	bMadj <- bM / matrix( At , NI , NS , byrow=TRUE )
-	# correction ARb 2013-10-09
-
+	est_type <- "B (intercepts)"
 	bMadj <- bM * matrix( At , nrow=NI , ncol=NS , byrow=TRUE )
 	resB <- linking_haberman_als(logaM=bMadj , wgtM=wgtM , maxiter=maxiter , 
-				 conv=conv , progress = progress , est.type="B (intercepts)" ,
+				 conv=conv , progress = progress , est.type=est_type ,
 				 cutoff = b_trim )
 	Bj <- resB$logaj
 	Bt <- resB$logaAt
@@ -99,9 +110,7 @@ linking.haberman <- function( itempars , personpars=NULL ,
 	# transf.personpars <- transf.itempars[,c(1,2,4)]
 	transf.personpars <- transf.itempars[,c("study","At","se_At2" ,"Bt", "se_Bt")]
 	transf.personpars$At <- transf.pars$At
-#	transf.personpars$Bt <-  - transf.itempars$Bt / transf.itempars$At	
 	transf.personpars$Bt <-  - transf.pars$Bt 
-#	transf.personpars <- transf.personpars
 	colnames(transf.personpars) <- c("study" , "A_theta" ,
 				"se_A_theta" , "B_theta" , "se_B_theta" )
 	colnames(transf.itempars) <- c("study" , "A_a" , "se_A_a" ,
@@ -146,27 +155,18 @@ linking.haberman <- function( itempars , personpars=NULL ,
 	a.res <- a.orig - aj1
 
 	Rsquared.invariance["slopes"] <- 1 -
-		sum( a.res[ selitems,]^2  , na.rm=TRUE ) / 
-		sum( a.orig[ selitems , ]^2  , na.rm=TRUE )
-	
+		sum0( a.res[ selitems,]^2 ) / sum0( a.orig[ selitems , ]^2 )	
 	Rsquared.partial.invariance["slopes"] <- 1 -
-		sum( a.res[ selitems,]^2 * aj_wgtM[selitems,] , na.rm=TRUE ) / 
-		sum( a.orig[ selitems , ]^2 * aj_wgtM[selitems, ] , na.rm=TRUE )
-#	Rsquared.invariance["slopes"] <- 1 -
-#		sum( a.res[ selitems,]^2 , na.rm=TRUE ) / 
-#		var( as.vector(a.orig[ selitems , ]^2) , na.rm=TRUE )
+		sum0( a.res[ selitems,]^2 * aj_wgtM[selitems,]  ) / 
+		sum0( a.orig[ selitems , ]^2 * aj_wgtM[selitems, ]  )
 	bj1 <- 1 / AtM *( Bj + BtM )
 	b.res <- b.orig - bj1
 
 	Rsquared.partial.invariance["intercepts"] <- 1 -
-		sum( b.res[ selitems,]^2 * Bj_wgtM[selitems,] , na.rm=TRUE ) / 
-		sum( b.orig[ selitems , ]^2 * Bj_wgtM[selitems,] , na.rm=TRUE )
+		sum0( b.res[ selitems,]^2 * Bj_wgtM[selitems,] ) / 
+		sum0( b.orig[ selitems , ]^2 * Bj_wgtM[selitems,] )
 	Rsquared.invariance["intercepts"] <- 1 -
-		sum( b.res[ selitems,]^2  , na.rm=TRUE ) / 
-		sum( b.orig[ selitems , ]^2  , na.rm=TRUE )		
-#	Rsquared.invariance["intercepts"] <- 1 -
-#		sum( b.res[ selitems,]^2 , na.rm=TRUE ) / 
-#		var( as.vector(b.orig[ selitems , ]^2) , na.rm=TRUE )
+		sum0( b.res[ selitems,]^2  ) / 	sum0( b.orig[ selitems , ]^2 )		
 	es.invariance <- rbind( Rsquared.invariance ,
 			sqrt( 1- Rsquared.invariance ) )
 	rownames(es.invariance) <- c("R2" , "sqrtU2")
@@ -178,26 +178,17 @@ linking.haberman <- function( itempars , personpars=NULL ,
 	linking_slopes <- stats::sd( transf.pars$At ) < 1E-10
 	
 	res <- list( 
-		"transf.pars" = transf.pars , 
-		"transf.itempars" = transf.itempars , 
-	    "transf.personpars" = transf.personpars , 
-		"joint.itempars" = joint.itempars ,
-		"a.trans" = aM ,
-		"b.trans" = bM ,
-		"a.orig" = a.orig , "b.orig" = b.orig , 
-		"a.resid" = aj_resid , "b.resid" = Bj_resid ,
-		"personpars" = personpars,
-		"es.invariance"= es.invariance,
-		"es.robust" = es.partial.invariance ,
-		"selitems" = selitems ,
-		"a_trim" = a_trim , b_trim = b_trim , 
-		a.wgt = aj_wgtM , b.wgt = Bj_wgtM  ,
-		a.wgt.adj = aj_wgt_adj , b.wgt.adj = Bj_wgt_adj  ,
-		a.vcov = aj_vcov , b.vcov = Bj_vcov , 
-		a.item_stat = aj_item_stat  , b.item_stat = Bj_item_stat , 
-		"linking_slopes" = linking_slopes ,
-		"description" = "Linking according to Haberman (2009)" ,
-		"CALL" = CALL , "time" = s1 
+		transf.pars = transf.pars , transf.itempars = transf.itempars , 
+	    transf.personpars = transf.personpars , joint.itempars = joint.itempars ,
+		a.trans = aM , b.trans = bM , a.orig = a.orig , b.orig = b.orig , 
+		a.resid = aj_resid , b.resid = Bj_resid , personpars = personpars,
+		es.invariance= es.invariance, es.robust = es.partial.invariance ,
+		selitems = selitems , a_trim = a_trim , b_trim = b_trim , 
+		a.wgt = aj_wgtM , b.wgt = Bj_wgtM  , a.wgt.adj = aj_wgt_adj , b.wgt.adj = Bj_wgt_adj  ,
+		a.vcov = aj_vcov , b.vcov = Bj_vcov , a.item_stat = aj_item_stat  , 
+		b.item_stat = Bj_item_stat , linking_slopes = linking_slopes ,
+		description = 'Linking according to Haberman (2009)' ,
+		CALL = CALL , time = s1 
 		)
 	class(res) <- "linking.haberman"
 	return(res)

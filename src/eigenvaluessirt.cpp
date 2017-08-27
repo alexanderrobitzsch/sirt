@@ -1,3 +1,6 @@
+//// File Name: eigenvaluessirt.cpp
+//// File Version: 
+//// File Last Change: 2017-02-17 13:24:15
 
 
 // [[Rcpp::depends(RcppArmadillo)]]

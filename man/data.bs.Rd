@@ -1,3 +1,7 @@
+%% File Name: data.bs.Rd
+%% File Version: 0.07
+%% File Last Change: 2017-01-18 18:08:37
+
 
 \name{data.bs}
 \alias{data.bs}

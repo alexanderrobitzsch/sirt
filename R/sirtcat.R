@@ -1,3 +1,6 @@
+## File Name: sirtcat.R
+## File Version: 0.04
+## File Last Change: 2017-03-17 18:05:29
 
 ######################################################
 sirtcat <- function( label , time0 , active ){

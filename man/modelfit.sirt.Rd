@@ -1,3 +1,7 @@
+%% File Name: modelfit.sirt.Rd
+%% File Version: 0.51
+%% File Last Change: 2017-01-18 18:08:39
+
 \name{modelfit.sirt}
 \alias{modelfit.sirt}
 \alias{modelfit.cor.poly}

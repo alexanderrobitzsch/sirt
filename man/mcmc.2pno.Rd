@@ -1,3 +1,7 @@
+%% File Name: mcmc.2pno.Rd
+%% File Version: 1.24
+%% File Last Change: 2017-01-18 18:08:39
+
 \name{mcmc.2pno}
 \alias{mcmc.2pno}
 %- Also NEED an '\alias' for EACH other topic documented here.

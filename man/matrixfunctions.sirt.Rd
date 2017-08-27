@@ -1,3 +1,7 @@
+%% File Name: matrixfunctions.sirt.Rd
+%% File Version: 1.11
+%% File Last Change: 2017-01-18 18:08:39
+
 \name{matrixfunctions.sirt}
 
 \alias{rowMaxs.sirt}

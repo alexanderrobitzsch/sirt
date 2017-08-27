@@ -1,3 +1,6 @@
+## File Name: linking_haberman_als_vcov.R
+## File Version: 0.03
+## File Last Change: 2017-01-18 11:02:48
 
 linking_haberman_als_vcov <- function( regr_resid , regr_wgt , transf_pars ,
 		selitems )

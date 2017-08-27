@@ -1,3 +1,6 @@
+## File Name: marginal.truescore.reliability.R
+## File Version: 0.03
+## File Last Change: 2017-01-18 11:02:48
 marginal.truescore.reliability <-
 function(  b , a=1+0*b , c =0*b , d=1+0*b ,
     mean.trait=0 , sd.trait=1 , theta.k = seq( -6 , 6 , len=200) ){

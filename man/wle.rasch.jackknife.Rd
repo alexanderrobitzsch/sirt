@@ -1,3 +1,7 @@
+%% File Name: wle.rasch.jackknife.Rd
+%% File Version: 1.16
+%% File Last Change: 2017-01-18 18:08:42
+
 \name{wle.rasch.jackknife}
 \alias{wle.rasch.jackknife}
 %- Also NEED an '\alias' for EACH other topic documented here.

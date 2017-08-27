@@ -1,3 +1,7 @@
+%% File Name: dif.variance.Rd
+%% File Version: 0.08
+%% File Last Change: 2017-01-18 18:08:38
+
 \name{dif.variance}
 \alias{dif.variance}
 %- Also NEED an '\alias' for EACH other topic documented here.

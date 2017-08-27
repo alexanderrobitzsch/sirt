@@ -1,3 +1,6 @@
+## File Name: summary.rasch.pml.R
+## File Version: 0.08
+## File Last Change: 2017-01-18 11:02:55
 
 
 #*******************************************************

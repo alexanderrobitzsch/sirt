@@ -1,3 +1,6 @@
+## File Name: plot.isop.R
+## File Version: 1.07
+## File Last Change: 2017-01-18 11:02:51
 
 #############################################################
 # plot ISOP item response functions

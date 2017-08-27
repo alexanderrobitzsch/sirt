@@ -1,3 +1,7 @@
+%% File Name: mcmc.list.descriptives.Rd
+%% File Version: 0.20
+%% File Last Change: 2017-01-18 18:08:39
+
 \name{mcmc.list.descriptives}
 \alias{mcmc.list.descriptives}
 %- Also NEED an '\alias' for EACH other topic documented here.

@@ -1,3 +1,7 @@
+%% File Name: mirt.wrapper.Rd
+%% File Version: 1.74
+%% File Last Change: 2017-01-18 18:17:54
+
 \name{mirt.wrapper}
 \alias{mirt.wrapper}
 \alias{mirt.wrapper.coef}

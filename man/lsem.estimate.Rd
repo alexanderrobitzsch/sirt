@@ -1,3 +1,7 @@
+%% File Name: lsem.estimate.Rd
+%% File Version: 0.48
+%% File Last Change: 2017-05-11 13:08:56
+
 \name{lsem.estimate}
 \alias{lsem.estimate}
 \alias{summary.lsem}

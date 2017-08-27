@@ -1,3 +1,6 @@
+## File Name: rm.sdt.R
+## File Version: 8.25
+## File Last Change: 2017-01-18 11:02:54
 
 #################################################################
 # Hierarchical rater model

@@ -1,3 +1,6 @@
+## File Name: equating.rasch.R
+## File Version: 0.07
+## File Last Change: 2017-01-18 11:02:47
 
 #***************************************************************************************************
 # Equating (Linking) in the Rasch model

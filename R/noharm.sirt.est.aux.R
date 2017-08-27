@@ -1,3 +1,6 @@
+## File Name: noharm.sirt.est.aux.R
+## File Version: 4.05
+## File Last Change: 2017-01-18 11:02:50
 
 
 ###############################################################

@@ -1,3 +1,6 @@
+//// File Name: rm_smirt_mml2_code.cpp
+//// File Version: 
+//// File Last Change: 2017-02-17 12:57:23
 // [[Rcpp::depends(RcppArmadillo)]]
 
 #include <RcppArmadillo.h>

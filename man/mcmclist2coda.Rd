@@ -1,3 +1,7 @@
+%% File Name: mcmclist2coda.Rd
+%% File Version: 0.10
+%% File Last Change: 2017-01-18 18:08:39
+
 \name{mcmclist2coda}
 \alias{mcmclist2coda}
 %- Also NEED an '\alias' for EACH other topic documented here.

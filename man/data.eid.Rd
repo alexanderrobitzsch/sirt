@@ -1,3 +1,7 @@
+%% File Name: data.eid.Rd
+%% File Version: 0.23
+%% File Last Change: 2017-07-06 15:57:49
+
 \name{data.eid}
 \alias{data.eid}
 \alias{data.eid.kap4}

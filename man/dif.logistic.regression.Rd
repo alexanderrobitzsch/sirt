@@ -1,3 +1,7 @@
+%% File Name: dif.logistic.regression.Rd
+%% File Version: 0.24
+%% File Last Change: 2017-01-18 18:08:38
+
 \name{dif.logistic.regression}
 \alias{dif.logistic.regression}
 \title{

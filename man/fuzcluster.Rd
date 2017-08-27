@@ -1,3 +1,7 @@
+%% File Name: fuzcluster.Rd
+%% File Version: 0.15
+%% File Last Change: 2017-01-18 18:08:38
+
 \name{fuzcluster}
 \alias{fuzcluster}
 \alias{summary.fuzcluster}

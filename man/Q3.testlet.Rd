@@ -1,3 +1,7 @@
+%% File Name: Q3.testlet.Rd
+%% File Version: 1.07
+%% File Last Change: 2017-05-10 18:24:48
+
 \name{Q3.testlet}
 \alias{Q3.testlet}
 

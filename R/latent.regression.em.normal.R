@@ -1,3 +1,6 @@
+## File Name: latent.regression.em.normal.R
+## File Version: 2.08
+## File Last Change: 2017-01-18 11:02:47
 
 
 #----------------------------------------------------------------------------

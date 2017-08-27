@@ -1,3 +1,7 @@
+%% File Name: rasch.mml.Rd
+%% File Version: 3.9904
+%% File Last Change: 2017-01-18 18:23:37
+
 \name{rasch.mml2}
 \alias{rasch.mml2}
 \alias{summary.rasch.mml}

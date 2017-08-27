@@ -1,3 +1,7 @@
+%% File Name: brm.sim.Rd
+%% File Version: 0.36
+%% File Last Change: 2017-01-18 18:08:36
+
 \name{brm-Methods}
 \alias{brm.sim}
 \alias{brm.irf}

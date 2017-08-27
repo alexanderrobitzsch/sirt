@@ -1,3 +1,6 @@
+## File Name: tetrachoric2.R
+## File Version: 1.18
+## File Last Change: 2017-07-10 10:31:49
 
 tetrachoric2 <- function( dat , method="Ol" ,  delta=.007 , maxit = 1000000 ,
 	cor.smooth=TRUE , progress=TRUE){

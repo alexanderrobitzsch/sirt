@@ -1,3 +1,7 @@
+%% File Name: lsdm.Rd
+%% File Version: 2.06
+%% File Last Change: 2017-01-18 18:08:39
+
 
 \name{lsdm}
 \alias{lsdm}

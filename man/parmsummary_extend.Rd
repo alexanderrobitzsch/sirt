@@ -1,3 +1,7 @@
+%% File Name: parmsummary_extend.Rd
+%% File Version: 0.05
+%% File Last Change: 2017-07-11 16:35:55
+
 \name{parmsummary_extend}
 \alias{parmsummary_extend}
 %- Also NEED an '\alias' for EACH other topic documented here.

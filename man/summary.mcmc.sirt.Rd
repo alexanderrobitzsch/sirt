@@ -1,3 +1,7 @@
+%% File Name: summary.mcmc.sirt.Rd
+%% File Version: 0.06
+%% File Last Change: 2014-08-01 14:13:44
+
 \name{summary.mcmc.sirt}
 \alias{summary.mcmc.sirt}
 %- Also NEED an '\alias' for EACH other topic documented here.

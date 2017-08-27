@@ -1,3 +1,7 @@
+%% File Name: unidim.test.csn.Rd
+%% File Version: 1.15
+%% File Last Change: 2017-01-18 18:08:42
+
 \name{unidim.test.csn}
 \alias{unidim.test.csn}
 %- Also NEED an '\alias' for EACH other topic documented here.
