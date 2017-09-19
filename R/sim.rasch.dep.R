@@ -1,6 +1,6 @@
 ## File Name: sim.rasch.dep.R
-## File Version: 0.12
-## File Last Change: 2017-07-12 10:56:05
+## File Version: 0.13
+## File Last Change: 2017-09-19 20:50:58
 
 
 ###########################################################################
@@ -20,7 +20,7 @@ sim.rasch.dep <- function( theta , b , itemcluster , rho ){
                         if ( ii != jj ){ cov.dep[ii,jj] <- rho[cc] 
                                 } } }
             }	
-    random.gen <- stats::pnorm( CDM::CDM_rmvnorm( n , mean = rep(0,I) , sigma = cov.dep ) )
+    random.gen <- stats::pnorm( sirt_rmvnorm( n , mean = rep(0,I) , sigma = cov.dep ) )
     dat <- 1 * ( probmat > random.gen )
 	colnames(dat) <- paste( "I" , substring(100+1:I,2) , sep="")	
     return(dat)

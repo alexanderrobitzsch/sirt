@@ -1,10 +1,10 @@
 ## File Name: fuzcluster_alg.R
-## File Version: 0.16
-## File Last Change: 2017-07-12 10:53:31
+## File Version: 0.17
+## File Last Change: 2017-09-19 20:48:36
 
 fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
-	maxiter=1000 , parmconv=.0001 , progress=TRUE , seed=NULL ,
-	fac.oldxsi=0){
+	maxiter=1000 , parmconv=.0001 , progress=TRUE , seed=NULL ,	fac.oldxsi=0)
+{
 
 	dat.resp <- dat_resp
 	# inits
@@ -14,10 +14,11 @@ fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
 	# items
 	I <- ncol(dat_m)
 	N <- nrow(dat_m)
-    if ( is.null(seed) ){ seed <- round( stats::runif(1 ,1000, 9999 ) )}
-	set.seed( seed )
+    if ( ! is.null(seed) ){ 
+		set.seed( seed )
+	}	
 	# initial mu estimate
-	mu_est <- CDM::CDM_rmvnorm( K , mean=m1 , sigma = 1.0*diag(s1) )
+	mu_est <- sirt_rmvnorm( K , mean=m1 , sigma = 1.0*diag(s1) )
 
 	# initial SD estimate
 	sd_est <- t(sapply( 1:K , FUN = function(kk){ 
@@ -34,11 +35,11 @@ fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
 	mu_estmin <- mu_est
 	sd_estmin <- sd_est
 	pi_estmin <- pi_est
-	dev_min <- 10^90
+	dev_min <- 1E90
 	itermin <- iter
-		if (progress){
-		   cat("****************************************************************\n")
-				}
+	if (progress){
+	   cat("****************************************************************\n")
+	}
 	#*************************************************
 	# begin algorithm
 	while ( ( iter < maxiter ) & ( parmchange > parmconv) ){
@@ -141,4 +142,4 @@ fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
 		"seed"=seed 
 		 )
 	return(res)
-		}
+}

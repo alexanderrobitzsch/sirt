@@ -1,6 +1,6 @@
 ## File Name: plausible.values.raschtype.R
-## File Version: 2.16
-## File Last Change: 2017-07-12 10:55:28
+## File Version: 2.18
+## File Last Change: 2017-09-19 20:50:31
  
 #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -11,7 +11,8 @@ plausible.value.imputation.raschtype <- function( data=NULL ,
         b = rep(1,ncol(X)) ,  a = rep(1 , length(b) ) , c = rep(0 , length(b) ),
         d = 1+0*b , alpha1 =0 , alpha2 =0 ,
         theta.list=seq(-5,5,len=50) , cluster = NULL , 
-        iter , burnin , nplausible=1 , printprogress = TRUE ){
+        iter , burnin , nplausible=1 , printprogress = TRUE )
+{
     #........................................................................
     # INPUT:                                                            
     # data  ... matrix of dichotomous item responses
@@ -177,7 +178,7 @@ plausible.value.imputation.raschtype <- function( data=NULL ,
         mod <- stats::lm( pv ~ 0 + X )
         res <- list( "est.beta" = stats::coef(mod) , "vcov.beta" = stats::vcov(mod) )
         # sample beta parameter
-        res$samp.beta <- CDM::CDM_rmvnorm( 1, mean = res$est.beta , sigma = res$vcov.beta )
+        res$samp.beta <- sirt_rmvnorm( 1, mean = res$est.beta , sigma = res$vcov.beta )
         # residual standard deviation
         n <- nrow(X)
 		p <- ncol(X)
@@ -186,8 +187,7 @@ plausible.value.imputation.raschtype <- function( data=NULL ,
         mod1 <- stats::lm( residuals.mod ~ 0 + Z )
 #        summary(mod1)
         # sample gamma coefficients for heteroscedasticity
-        res$samp.gamma <- CDM::CDM_rmvnorm( 1, mean = stats::coef(mod1) , 
-							sigma = stats::vcov(mod1) ) 
+        res$samp.gamma <- sirt_rmvnorm( 1, mean = stats::coef(mod1), sigma = stats::vcov(mod1) ) 
         res$fitted.sigma <- sqrt( stats::fitted(mod1) )
         res$lm.latent.regression <- mod
         res$lm.residualsd <- mod1

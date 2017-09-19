@@ -1,18 +1,22 @@
-citHeader("To cite the 'sirt' package in publications use:")
 
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
 vers <- paste("R package version", meta$Version)
 
+pkg <- meta$Package
+pkg_title <- "Supplementary item response theory models"
+
+citHeader( paste0( "To cite the '", pkg , "' package in publications use:") )
+
 citEntry(entry="Manual",
-         title = "sirt: Supplementary item response theory models",
+         title = paste0( pkg , ": " , pkg_title ) ,
          author = personList(as.person("Alexander Robitzsch")),
          year = year,
          note = vers,
-	 url = "https://CRAN.R-project.org/package=sirt" ,
+         url =  paste0( "https://CRAN.R-project.org/package=", pkg) ,
          textVersion =
-         paste0("Robitzsch, A. (",  year,"). 
-               sirt: Supplementary item response theory models. ",
-               vers, 
-               ". https://CRAN.R-project.org/package=sirt")
-               )
+         paste0("Robitzsch, A. (",
+               year,
+               "). " , pkg , ": " , pkg_title , ". ",
+               vers, paste0( ". https://CRAN.R-project.org/package=", pkg) )
+    )
 

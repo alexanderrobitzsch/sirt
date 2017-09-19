@@ -35,11 +35,13 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.2  |  2017-08-27  |  Last: sirt 2.2-6
+VERSIONS sirt 2.2  |  2017-09-19  |  Last: sirt 2.2-10
 ------------------------------------------------------------------------
 
 ADDED * added option for additive linking of item slopes in 
         'linking.haberman'
+FIXED * fixed broken 'mcmc.3pno.testlet' and 'mcmc.2pno' functions
+        (thanks to Hyeon-Ah Kang)
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: linking.haberman (1)

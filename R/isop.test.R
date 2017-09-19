@@ -1,11 +1,11 @@
 ## File Name: isop.test.R
-## File Version: 0.07
-## File Last Change: 2017-02-17 13:37:25
+## File Version: 0.13
+## File Last Change: 2017-09-19 20:58:12
 
 ############################################################
 # testing the ISOP model
-isop.test <- 
-function( data , jackunits = 20 , weights=rep(1,nrow(data)) ){
+isop.test <- function( data , jackunits = 20 , weights=rep(1,nrow(data)) )
+{
 	dat <- as.matrix( data )
 	dat.resp <- 1 - is.na( dat )
 	dat[ is.na(dat) ] <- 0
@@ -13,11 +13,12 @@ function( data , jackunits = 20 , weights=rep(1,nrow(data)) ){
 	N <- nrow(dat) 
 	if ( length(jackunits==1)){
 		jackunits <- ( 1:N ) %% jackunits
-							}
+	}
 	JJ <- max( jackunits )+1    
 
-	# apply Cpp routine
-	res <- isop_tests_cpp( dat , dat.resp , weights , jackunits , JJ )
+	# apply Rcpp routine
+	res <- isop_tests_cpp( dat=dat, dat.resp=dat.resp, weights=weights, 
+				jackunits=jackunits, JJ=JJ ) 
 
 	#**********************
 	# arrange output
@@ -39,31 +40,7 @@ function( data , jackunits = 20 , weights=rep(1,nrow(data)) ){
 			itemstat[,-1] )
 	itemstat$t <- itemstat$est / itemstat$se        
 	rownames(itemstat) <- NULL
-	res <- list("itemstat" = itemstat , "Es" = res$Esi[,1], "Ed" = res$Edi[,1])
-	res$JJ <- JJ
+	res <- list("itemstat" = itemstat , "Es" = res$Esi[,1], "Ed" = res$Edi[,1], JJ=JJ)
 	class(res) <- "isop.test"
 	return(res)
 }
-####################################################
-# summary for ISOP test
-summary.isop.test <- function( object , ... ){
-    obji <- object$itemstat
-	VV <- ncol(obji)
-	cat("*** Test for the W1 Axiom in the ISOP Model **** \n\n")
-	for (vv in 2:VV){
-		obji[,vv] <- round( obji[,vv],3) 
-				}
-	print(obji)
-	cat(paste0("\n-- Statistical inference is based on ", object$JJ ,
-			" jackknife units.\n"))
-	}
-##########################################################
-# call to Rcpp function
-# res <- isop_tests_cpp( dat , dat.resp , weights , jackunits , JJ )
-# SEXP isop_tests_C( SEXP dat_, SEXP dat_resp_, SEXP weights_, SEXP jackunits_, SEXP JJ_) ;
-isop_tests_cpp <- function ( dat , dat.resp , weights , jackunits , JJ ){ 
-	isop_tests_C(
-				 dat ,  dat.resp , weights ,  
-				 jackunits ,  JJ )
-}	
-#############################################################

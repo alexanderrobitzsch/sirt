@@ -1,6 +1,6 @@
 ## File Name: mcmc.2pno_alg.R
-## File Version: 1.13
-## File Last Change: 2017-07-12 10:54:10
+## File Version: 1.15
+## File Last Change: 2017-09-19 20:49:58
 
 
 ######################
@@ -17,7 +17,7 @@
     # simulate Z
     Zij <- stats::qnorm( pij , mean = mij )
     return(Zij)
-        }
+}
 		
 ########################################
 # draw theta
@@ -66,7 +66,7 @@
 			}		
     #--------------							
     # draw item parameters
-    ipars <- CDM::CDM_rmvnorm( I , sigma=Sigma ) + mj
+    ipars <- sirt_rmvnorm( I , sigma=Sigma ) + mj
     a <- ipars[,1]
     b <- ipars[,2]
     return( list( "a"=a , "b"=b) )
