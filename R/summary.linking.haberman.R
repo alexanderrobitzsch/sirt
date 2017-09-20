@@ -1,6 +1,6 @@
 ## File Name: summary.linking.haberman.R
 ## File Version: 0.15
-## File Last Change: 2017-09-20 10:45:08
+## File Last Change: 2017-09-20 10:45:16
 
 
 summary.linking.haberman <- function( object , digits = 3 , file=NULL , ... ){

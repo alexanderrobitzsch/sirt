@@ -1,6 +1,6 @@
 ## File Name: sirt_vector_with_names.R
 ## File Version: 0.01
-## File Last Change: 2017-09-20 10:18:52
+## File Last Change: 2017-09-20 10:21:39
 
 sirt_vector_with_names <- function(value, names)
 {
