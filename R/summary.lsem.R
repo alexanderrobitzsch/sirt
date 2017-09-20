@@ -1,27 +1,26 @@
 ## File Name: summary.lsem.R
-## File Version: 0.16
-## File Last Change: 2017-01-31 18:34:11
+## File Version: 0.18
+## File Last Change: 2017-09-20 10:52:32
 
 #############################################
 # summary lsem
 summary.lsem <- function( object , file=NULL , digits=3 , ... ){
 
 	# open sink for a file
-	CDM::osink( file=file , suffix="__SUMMARY.Rout" )
+	sirt_osink( file=file  )
 
 	cat("-----------------------------------------------------------------\n")
 	cat("Local Structural Equation Model \n\n")
 		
-	cat( package_version_date("sirt") , "\n" )
-	cat( package_version_date("lavaan") , "\n" )	
-	cat( package_version_date("lavaan.survey") , "\n" )			
+	packages <- c("sirt", "lavaan", "lavaan.survey")
+	sirt_summary_print_packages(packages=packages)	
 	
 	cat(paste0("\nFunction 'sirt::lsem.estimate', type='" , object$type,"'") , "\n\n")
 		
-	cat("Call:\n", paste(deparse(object$CALL), sep = "\n", collapse = "\n"), 
-				"\n\n", sep = "")		
+	#- print call
+	sirt_summary_print_call(CALL=object$CALL)
 	
-	cat( "Date of Analysis:" , paste( object$s2 ) , "\n" )
+	cat( "Date of Analysis:" , paste(object$s2 ) , "\n" )
 	cat("Computation Time:" , print(object$s2 - object$s1), "\n\n")
     
 	
@@ -70,7 +69,7 @@ summary.lsem <- function( object , file=NULL , digits=3 , ... ){
 	print(obji)	
 	
 	# close file
-	CDM::csink(file)
+	sirt_csink(file)
 	
-	}
+}
 #############################################

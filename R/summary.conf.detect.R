@@ -1,12 +1,12 @@
 ## File Name: summary.conf.detect.R
-## File Version: 0.03
-## File Last Change: 2017-03-01 11:29:28
+## File Version: 0.04
+## File Last Change: 2017-09-20 10:44:49
 #*******************************************************
 # Summary for conf.detect object
 summary.conf.detect <- function( object , digits = 3 , file=NULL , ...){
 
     # open sink
-    CDM::osink( file = file , suffix = paste0(  "__SUMMARY.Rout") )
+    sirt_osink( file = file )
 
 	cat("-----------------------------------------------------------------\n")
     d1 <- utils::packageDescription("sirt")
@@ -28,6 +28,6 @@ summary.conf.detect <- function( object , digits = 3 , file=NULL , ...){
 	print( obji ) 
 
 	# close sink
-   CDM::csink( file = file )		
+    sirt_csink( file = file )		
 }
 #*******************************************************

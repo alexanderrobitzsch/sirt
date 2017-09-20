@@ -1,12 +1,12 @@
 ## File Name: summary.xxirt.R
-## File Version: 0.11
-## File Last Change: 2017-03-01 11:30:05
+## File Version: 0.12
+## File Last Change: 2017-09-20 10:47:26
 #*******************************************************
 # Summary for xxirt object
 summary.xxirt <- function( object , digits = 3 , file=NULL , ...){
 
     # open sink
-    CDM::osink( file = file , suffix = paste0(  "__SUMMARY.Rout") )
+    sirt_osink( file = file )
 
 	cat("-----------------------------------------------------------------\n")
     d1 <- utils::packageDescription("sirt")
@@ -54,6 +54,6 @@ summary.xxirt <- function( object , digits = 3 , file=NULL , ...){
 	print( obji ) 
 
 	# close sink
-   CDM::csink( file = file )		
-			}
+    sirt_csink( file = file )		
+}
 #*******************************************************

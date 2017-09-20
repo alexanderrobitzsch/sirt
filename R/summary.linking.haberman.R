@@ -1,12 +1,12 @@
 ## File Name: summary.linking.haberman.R
-## File Version: 0.14
-## File Last Change: 2017-02-28 19:53:12
+## File Version: 0.15
+## File Last Change: 2017-09-20 10:45:08
 
 
 summary.linking.haberman <- function( object , digits = 3 , file=NULL , ... ){
 
     # open sink
-    CDM::osink( file = file , suffix = paste0( "__SUMMARY.Rout") )
+    sirt_osink( file = file)
 
 	cat("-----------------------------------------------------------------\n")
 	d1 <- utils::packageDescription("sirt")
@@ -72,6 +72,6 @@ summary.linking.haberman <- function( object , digits = 3 , file=NULL , ... ){
 	print( obji ) 		
 	
 	# close sink
-    CDM::csink( file = file )		
+    sirt_csink( file = file )		
 	
 }
