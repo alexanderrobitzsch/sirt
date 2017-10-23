@@ -1,10 +1,11 @@
 ## File Name: rm_proc.R
-## File Version: 0.04
-## File Last Change: 2017-01-18 11:02:54
+## File Version: 0.07
+## File Last Change: 2017-10-02 13:57:57
 
 ##########################################
 # Data preprocessing rater models
-.prep.data.rm <- function( dat , pid , rater ){
+rm_proc <- function( dat , pid , rater )
+{
     rater <- paste( rater )
     # create table of rater indizes
     rater.index <- data.frame( "rater" = sort( unique( rater )) )
@@ -29,7 +30,7 @@
         i1 <- match(  pid.rr , person.index$pid )
         colnames(dat.rr) <- NULL
         dat2[ i1 , VV*(rr-1) + 1:VV ] <- dat.rr
-            }
+    }
 	# variable list
     dataproc.vars <- list( "item.index" = rep( 1:VV , RR )	 ,
 			"rater.index" = rep(1:RR , each=VV ) )
@@ -37,11 +38,20 @@
     dat2.resp <- 1 - is.na(dat2)
 	dat20 <- dat2
 	dat2[ dat2.resp == 0 ] <- 0
-    res <- list( "dat2" = dat2 , "dat2.resp" = dat2.resp , 
-				"dat2.NA" = dat20 , 
-				"dat" = dat , "person.index" = person.index , 
-                "rater.index" = rater.index , "VV"=VV , "N" = PP , "RR" = RR ,
-				"dataproc.vars" = dataproc.vars )
+	#--- dat2.ind.resp
+	n <- nrow(dat2)
+	p <- ncol(dat2)
+	K <- max( dat2, na.rm=TRUE) + 1
+    dat2.ind.resp <- array( 0 , dim=c(n,p,K) )
+	for (kk in 1:K){
+		dat2.ind.resp[,,kk] <- dat2.resp * ( dat2 == ( kk - 1 ) )
+	}
+	#--- output
+    res <- list( dat2=dat2, dat2.resp=dat2.resp, dat2.NA=dat20, dat=dat, 
+				person.index=person.index, rater.index=rater.index, VV=VV, N=PP, RR=RR, 
+				dataproc.vars=dataproc.vars, dat2.ind.resp=dat2.ind.resp ) 
     return(res)
-        }
+}
 #################################################
+
+.prep.data.rm <- rm_proc

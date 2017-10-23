@@ -1,6 +1,6 @@
 %% File Name: rm.sdt.Rd
-%% File Version: 1.18
-%% File Last Change: 2017-01-18 18:08:41
+%% File Version: 1.23
+%% File Last Change: 2017-10-23 16:08:58
 
 \name{rm.sdt}
 \alias{rm.sdt}
@@ -36,9 +36,10 @@ rm.sdt(dat, pid, rater, Qmatrix = NULL, theta.k = seq(-9, 9, len = 30),
     est.a.item = FALSE, est.c.rater = "n", est.d.rater = "n", est.mean=FALSE , 
     skillspace="normal" , tau.item.fixed = NULL , a.item.fixed = NULL , 
     d.min = 0.5, d.max = 100, d.start = 3, max.increment = 1, numdiff.parm = 0.00001, 
-    maxdevchange = 0.1, globconv = .001, maxiter = 1000, msteps = 4, mstepconv = 0.001)
+    maxdevchange = 0.1, globconv = .001, maxiter = 1000, msteps = 4, 
+    mstepconv = 0.001, fac_incr=.99, PEM=FALSE, PEM_itermax=maxiter )
 
-\method{summary}{rm.sdt}(object,...)    
+\method{summary}{rm.sdt}(object, file=NULL, ...)    
 
 \method{plot}{rm.sdt}(x, ask=TRUE, ...)
 
@@ -135,9 +136,17 @@ Maximum number of iterations during an M step
   \item{mstepconv}{
 Convergence criterion in an M step
 }
+\item{fac_incr}{Factor for decreasing the increments in every iteration.
+	The factor should be smaller than 1, small values correspond
+to strong decreases in parameter changes in iterations.}
+\item{PEM}{Logical indicating whether the P-EM acceleration should be
+applied (Berlinet & Roland, 2012).}
+\item{PEM_itermax}{Number of iterations in which the P-EM method should be
+applied.}
   \item{object}{
 Object of class \code{rm.sdt}
 }
+\item{file}{Optional file name in which summary should be written.}
 \item{x}{Object of class \code{rm.sdt}}
 \item{ask}{Optional logical indicating whether a new plot should be asked for.}
 \item{type}{Factor score estimation method. Up to now, 
@@ -233,6 +242,10 @@ errors}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \references{	
+Berlinet, A. F., & Roland, C. (2012). 
+Acceleration of the EM algorithm: P-EM versus epsilon algorithm.
+\emph{Computational Statistics & Data Analysis}, \bold{56}(12), 4122-4137.		
+	
 DeCarlo, L. T. (2005). A model of rater behavior in essay grading 
 based on signal detection theory. 
 \emph{Journal of Educational Measurement}, \bold{42}, 53-76.	
@@ -278,25 +291,25 @@ dat <- data.ratings1
 \dontrun{
 # Model 1: Partial Credit Model: no rater effects
 mod1 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
-            pid=dat$idstud , est.c.rater="n" , est.d.rater="n" , maxiter=15)
+            pid=dat$idstud , est.c.rater="n", d.start=100,  est.d.rater="n" )
 summary(mod1)
             
 # Model 2: Generalized Partial Credit Model: no rater effects
 mod2 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
             pid=dat$idstud , est.c.rater="n" , est.d.rater="n" , 
-            est.a.item =TRUE , d.start=100 , maxiter=15)
+            est.a.item =TRUE , d.start=100)
 summary(mod2)
 }
             
 # Model 3: Equal effects in SDT
 mod3 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
-            pid=dat$idstud , est.c.rater="e" , est.d.rater="e" , maxiter=15)
+            pid=dat$idstud , est.c.rater="e" , est.d.rater="e")
 summary(mod3)
 
 \dontrun{
 # Model 4: Rater effects in SDT
 mod4 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
-            pid=dat$idstud , est.c.rater="r" , est.d.rater="r" , maxiter=15)
+            pid=dat$idstud , est.c.rater="r" , est.d.rater="r")
 summary(mod4)
 
 #############################################################################
@@ -310,13 +323,13 @@ psych::describe(dat)
             
 # Model 1: item- and rater-specific effects
 mod1 <- sirt::rm.sdt( dat[ , paste0( "crit",c(2:4)) ] , rater=dat$rater , 
-            pid=dat$idstud , est.c.rater="a" , est.d.rater="a" , maxiter=10)
+            pid=dat$idstud , est.c.rater="a" , est.d.rater="a" )
 summary(mod1)
 plot(mod1)
 
 # Model 2: Differing number of categories per variable
 mod2 <- sirt::rm.sdt( dat[ , paste0( "crit",c(2:4,6)) ] , rater=dat$rater , 
-            pid=dat$idstud , est.c.rater="a" , est.d.rater="a" , maxiter=10)
+            pid=dat$idstud , est.c.rater="a" , est.d.rater="a")
 summary(mod2)
 plot(mod2)
 
@@ -331,8 +344,7 @@ psych::describe(dat)
 
 # Model 1: Discrete theta skill space with values of 0,1,2 and 3
 mod1 <- sirt::rm.sdt( dat[ , paste0( "crit",c(2:4)) ] , theta.k = 0:3 , rater=dat$rater , 
-            pid=dat$idstud , est.c.rater="a" , est.d.rater="a" , skillspace="discrete" ,
-            maxiter=20)
+            pid=dat$idstud , est.c.rater="a" , est.d.rater="a" , skillspace="discrete" )
 summary(mod1)
 plot(mod1)
 
@@ -345,7 +357,7 @@ a.item.fixed <- cbind( 1, 100 )
 # fit HRM-SDT 
 mod2 <- sirt::rm.sdt( dat[ , "crit2" , drop=FALSE] , theta.k = 0:3 , rater=dat$rater , 
             tau.item.fixed=tau.item.fixed ,a.item.fixed=a.item.fixed, pid=dat$idstud, 
-            est.c.rater="a", est.d.rater="a", skillspace="discrete", maxiter=20)
+            est.c.rater="a", est.d.rater="a", skillspace="discrete" )
 summary(mod2)            
 plot(mod2)
 }            

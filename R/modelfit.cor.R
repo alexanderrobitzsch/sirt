@@ -1,130 +1,6 @@
 ## File Name: modelfit.cor.R
-## File Version: 2.27
-## File Last Change: 2017-07-10 10:28:39
-
-##############################################################
-# summary
-summary.modelfit.sirt <- function( object , ... ){	
-	cat("Test of Global Model Fit\n")
-	obji <- object$modelfit.test
-	for (vv in seq(2,ncol(obji))){	obji[,vv] <- round( obji[,vv] , 5 ) }
-	print(obji)
-	cat("\nFit Statistics\n")
-	obji <- object$modelfit.stat
-	for (vv in seq(1,ncol(obji))){	obji[,vv] <- round( obji[,vv] , 5 ) }
-	print(obji)		
-		}
-#################################################################	
-
-
-
-##########################################
-# Modelfit in sirt
-modelfit.sirt <- function( object ){
-	#****
-	# object of class tam.mml, tam.mml.2pl or tam.fa
-	# Note that only dichotomous responses are allowed
-	if (class(object) %in% c("tam.mml","tam.mml.2pl")){
-		mod <- object
-		# fmod1b <- modelfit.cor2(data=dat, 
-		#	posterior=mod1b$post, probs=mod1b$rprobs)
-		posterior <- mod$hwt
-		probs <- mod$rprobs
-		dat <- mod$resp
-		dat[ mod$resp.ind == 0 ] <- NA
-					}
-	#*****
-	# rasch.mml
-	if (class(object)=="rasch.mml"){
-		mod <- object
-		posterior <- mod$f.qk.yi
-		prob1 <- mod$pjk
-			probs <- array( NA , dim=c( ncol(prob1) , 2 , nrow(prob1)) )
-			probs[ , 2 , ] <- t(prob1)
-			probs[ , 1 , ] <- 1 - t(prob1)
-		dat <- mod$dat
-					}
-	#*****
-	# rasch.mirtlc
-	if (class(object)=="rasch.mirtlc"){
-		mod <- object$estep.res
-		posterior <- mod$f.qk.yi
-		prob1 <- mod$pjk
-			probs <- array( NA , dim=c( ncol(prob1) , 2 , nrow(prob1)) )
-			probs[ , 2 , ] <- t(prob1)
-			probs[ , 1 , ] <- 1 - t(prob1)
-		dat <- object$dat
-					}	
-	#******
-	# rasch.pml
-	if ( class(object) !="rasch.pml"){ pmlobject <- NULL } else {
-		data <- NULL ; posterior <- NULL ; probs <- NULL ; pmlobject <- object }	
-	#*******
-	# smirt	
-	if (class(object) == "smirt"){
-		# note that for polytomous response data some adaptations are
-		# necessary: see modelfit in the CDM package
-		mod <- object
-		probs <- mod$probs
-		posterior <- mod$f.qk.yi
-		dat <- mod$dat
-					}
-	#*******
-	# smirt	
-	if (class(object) == "gom"){
-		mod <- object
-		probs <- mod$probs
-		posterior <- mod$f.qk.yi
-		dat <- mod$dat
-					}					
-	#*******
-	# rm.facets
-#	if (class(object) %in% c("rm.facets") ){
-#		mod <- object
-#		probs <- mod$probs
-#		posterior <- mod$f.qk.yi
-#		dat <- mod$procdata$dat2.NA
-#					}						
-					
-	#*******
-	# mirt	
-	if (class(object) == "ConfirmatoryClass" | class(object)=="ExploratoryClass" ){
-		mod <- object
-		mod <- mirt.wrapper.posterior(mod)		
-		probs <- mod$probs
-		posterior <- mod$f.qk.yi
-		dat <- mod$dat
-					}					
-	#******
-	# R2noharm, noharm.sirt
-    if ( class(object) %in% c("R2noharm","noharm.sirt") ){
-		# exclusion criteria for noharm.sirt
-		if ( class(object) == "noharm.sirt") {
-			if ( object$estpars$estPsi > 0 ){
-				stop("Model fit cannot be calculated because of correlated residuals")
-										}
-			if ( ! ( object$wgtm.default ) ){
-				stop("Model fit cannot be calculated because not all item pairs are used for estimation")
-										}										
-								}
-		  # evaluation of posterior
-		  mod <- R2noharm.EAP(noharmobj=object, theta.k = seq(-6, 6, len = 15 ) ,
-				print.output=FALSE )
-		  probs <- aperm( mod$probs , c(1,3,2) )
-		  posterior <- mod$posterior
-		  dat <- object$dat		  		  
-									}
-	# calculate modelfit.cor
-    if ( class(object) == "rasch.pml" ){
-		res <- modelfit.cor.sirt.pml( data = dat , posterior =posterior , probs = probs ,
-				           pmlobject=pmlobject)
-								} else {
-		res <- CDM::modelfit.cor2( data = dat , posterior =posterior , probs = probs )								
-							}
-    class(res) <- "modelfit.sirt"							
-	return(res)
-	}
-################################################################################
+## File Version: 2.31
+## File Last Change: 2017-10-23 15:38:25
 
 #############################################################################
 modelfit.cor.sirt.pml <-
@@ -201,8 +77,7 @@ function( data=NULL , posterior=NULL , probs=NULL , pmlobject=NULL ){
 				mean( abs( itempairs$corObs - itempairs$corExp ) ) ,
 				sqrt( mean( ( itempairs$corObs - itempairs$corExp )^2 ) ) ,			
 				mean( itempairs$X2 ) , # mean( itempairs$G2) ,
-				mean( 100*abs(itempairs$RESIDCOV ) ) 
-						)
+				mean( 100*abs(itempairs$RESIDCOV ) ) )
 							) 
 		rownames(modelfit) <- c("MADcor" , "SRMSR" , "MX2" , # "MG2",
 					"100*MADRESIDCOV" )
@@ -211,8 +86,7 @@ function( data=NULL , posterior=NULL , probs=NULL , pmlobject=NULL ){
 	# summary statistics
 	modelfit.test <- data.frame("type" = c("max(X2)","abs(fcor)") , 
 			"value" = c( max( itempairs$X2) , max( abs(itempairs$fcor) )  ) ,
-			"p" = c( min( itempairs$X2_p.holm) , min( itempairs$fcor_p.holm)  ) 
-				)					
+			"p" = c( min( itempairs$X2_p.holm) , min( itempairs$fcor_p.holm)  ) )					
 	#****
 	# print results
     res <- list( "modelfit.stat" = modelfit , "itempairs" = itempairs , 

@@ -1,6 +1,6 @@
 %% File Name: Q3.Rd
-%% File Version: 1.10
-%% File Last Change: 2017-01-18 18:08:40
+%% File Version: 1.11
+%% File Last Change: 2017-10-23 15:30:42
 
 \name{Q3}
 \alias{Q3}
@@ -103,7 +103,7 @@ abline(h=c(5,9))
 # posterior distribution of theta and not on observed values
 fitmod <- sirt::modelfit.sirt( mod )
 # extract Q3 statistic
-q3stat <- fit$itempairs$Q3
+q3stat <- fitmod$itempairs$Q3
   ##  > summary(q3stat)
   ##      Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
   ##  -0.21760 -0.11590 -0.07280 -0.05545 -0.01220  0.44710 

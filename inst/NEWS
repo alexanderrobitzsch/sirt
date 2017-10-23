@@ -34,13 +34,16 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.3  |  2017-09-20  |  Last: sirt 2.3-1
+VERSIONS sirt 2.3  |  2017-10-23  |  Last: sirt 2.3-20
 ------------------------------------------------------------------------
 
-xxx   * ...
+NOTE  * included different parameter centering options in 'rm.facets'
+FIXED * fixed a bug in data processing in 'xxirt' function
+NOTE  * included EM acceleration method 'PEM' in 'rm.sdt' and 'rm.facets'
+NOTE  * corrected example for 'Q3' function (thanks to Amina Fraij)
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: Q3 (1)
 
 
 ------------------------------------------------------------------------

@@ -1,8 +1,8 @@
 ## File Name: summary.mcmc.sirt.R
-## File Version: 1.21
-## File Last Change: 2017-09-20 10:39:19
+## File Version: 1.22
+## File Last Change: 2017-10-02 11:18:33
 
-
+#*******************************************************
 # summary for MCMC item analysis in sirt
 summary.mcmc.sirt <- function( object , digits=3, file=NULL, ... ){
 	

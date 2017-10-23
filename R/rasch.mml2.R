@@ -1,6 +1,6 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.403
-## File Last Change: 2017-06-17 18:19:53
+## File Version: 7.404
+## File Last Change: 2017-10-03 18:36:43
 
 
 #------------------------------------------------------------------------
@@ -76,7 +76,8 @@ rasch.mml2 <- function( dat , theta.k = seq(-6,6,len=21) , group = NULL , weight
     #******************************************************************************************##
     #****
     # specifications
-    conv1 <- parm.conv ; nplausible = 5 
+    conv1 <- parm.conv
+	nplausible = 5 
 	dat <- as.matrix(dat)
 	adaptive.quadrature <- FALSE
 	CALL <- match.call()

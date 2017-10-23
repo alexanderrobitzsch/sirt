@@ -1,11 +1,12 @@
 ## File Name: xxirt_prepare_response_data.R
-## File Version: 0.01
-## File Last Change: 2017-04-12 20:27:37
+## File Version: 0.02
+## File Last Change: 2017-10-02 22:50:53
 
 xxirt_prepare_response_data <- function(G, group_index, weights, dat1, 
 			dat_resp, maxK )
 {	
 	N <- nrow(dat_resp)
+	I <- ncol(dat_resp)
 	dat1_resp <- array(0 , dim=c(N,I,maxK) )
 	for (gg in 1:G){
 		ind_gg <- group_index[[gg]]	

@@ -1,6 +1,6 @@
 ## File Name: xxirt.R
-## File Version: 0.901
-## File Last Change: 2017-06-15 18:38:03
+## File Version: 0.903
+## File Last Change: 2017-10-02 22:51:38
 
 
 #########################################################################
@@ -39,12 +39,12 @@ xxirt <- function( dat , Theta = NULL , itemtype = NULL , customItems = NULL ,
 		
 	#*** eps - handle numerical instabilities
 	eps <- 1E-8		
-				
+
 	# create partable if not provided
 	if ( is.null(partable) ){				
 		partable <- xxirt_createParTable( dat=dat , itemtype=itemtype , customItems=customItems )				
 	}
-									
+
 	# process partable and itemtype				
 	res <- xxirt_proc_ParTable( itemtype=itemtype , partable=partable , items=items )
 	itemtype <- res$itemtype
@@ -55,19 +55,19 @@ xxirt <- function( dat , Theta = NULL , itemtype = NULL , customItems = NULL ,
 	mstep_method <- res$mstep_method
 	item_index <- res$item_index
 	dat <- as.matrix(dat) 	
-		  
+
 	# create item list												
 	item_list <- xxirt_createItemList( customItems = customItems , itemtype=itemtype ,
 						items=items, partable = partable )
-						
+
 	# shortcut for calculating expected counts				
 	dat1_resp <- xxirt_prepare_response_data(G=G, group_index=group_index, 
 						weights=weights, dat1=dat1, dat_resp=dat_resp, maxK=maxK )
-			
+
 	#*** starting values item parameters
 	par0 <- xxirt_partable_extract_freeParameters( partable=partable )
 	par1 <- xxirt_ThetaDistribution_extract_freeParameters( customTheta=customTheta )
-			
+	
 	disp <- "...........................................................\n"			
 	iter <- 1
 	dev <- 1E100

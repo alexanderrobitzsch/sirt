@@ -1,17 +1,27 @@
 ## File Name: summary.rm.facets.R
-## File Version: 0.08
-## File Last Change: 2017-01-18 11:02:55
+## File Version: 0.15
+## File Last Change: 2017-10-02 11:36:02
 
 
 #*******************************************************
 # Summary for rm.facets object                         *
-summary.rm.facets <- function( object , ... ){
+summary.rm.facets <- function( object , file=NULL, ... ){
+
+	# open sink for a file
+	sirt_osink( file=file  )
+
 	cat("-----------------------------------------------------------------\n")
-		d1 <- utils::packageDescription("sirt")
-		cat( paste( d1$Package , " " , d1$Version , " (" , d1$Date , ")" , sep="") , "\n\n" )	
-		cat( "Date of Analysis:" , paste( object$s2 ) , "\n" )
-		cat("Computation time:" , print(object$s2 - object$s1), "\n\n")
-    cat("Rater Facet Model with Item/Rater Intercepts and Slopes \n")
+	#- package and R session
+    sirt_summary_print_package_rsession(pack="sirt")	
+	
+	#- print call
+	sirt_summary_print_call(CALL=object$CALL)
+	
+	#-- print computation time
+	sirt_summary_print_computation_time_s1(object=object)
+    
+	#-- number of parameters
+	cat("Rater Facet Model with Item/Rater Intercepts and Slopes \n")
 	cat("-----------------------------------------------------------------\n")
 	cat( "Number of iterations =" , object$iter , "\n" )
     cat( "Deviance = " , round( object$deviance , 2 ) , " | " )
@@ -24,33 +34,25 @@ summary.rm.facets <- function( object , ... ){
     cat( "   Number of rater parameters  = " , object$ic$np.rater , "\n" )    		
     cat( "   Number of distribution parameters  = " , object$ic$np.trait , "\n\n" )    			
 			
-    cat( "AIC  = " , round( object$ic$AIC , 2 ) , " | penalty =" , round( object$ic$AIC - object$ic$deviance ,2 ) , 
-			"   | AIC = -2*LL + 2*p  \n" )    
-    cat( "AICc = " , round( object$ic$AICc , 2 ) ," | penalty =" , round( object$ic$AICc - object$ic$deviance ,2 ) )
-		cat("    | AICc = -2*LL + 2*p + 2*p*(p+1)/(n-p-1)  (bias corrected AIC)\n" )   	
-    cat( "BIC  = " , round( object$ic$BIC , 2 ) , " | penalty =" , round( object$ic$BIC - object$ic$deviance ,2 ) , 
-			"   | BIC = -2*LL + log(n)*p  \n" )  
-    cat( "CAIC = " , round( object$ic$CAIC , 2 ) ," | penalty =" , round( object$ic$CAIC - object$ic$deviance ,2 ) )
-		cat("   | CAIC = -2*LL + [log(n)+1]*p  (consistent AIC)\n\n" )   
-
-	cat( "Trait Distribution\n" )
-	cat( "Mean=" , round( object$mu , 3) , " SD=" , round( object$sigma , 3) ) 
-	cat( "\n\nEAP Reliability = ") 
-	cat(round( object$EAP.rel,3 ) )
-	cat( "\n")
+	#--- information criteria
+	rm_summary_information_criteria(object=object)
+	
+	#--- trait distribution
+	rm_summary_trait_distribution(object=object)
+	
 	cat("-----------------------------------------------------------------\n")
 	cat("Item Parameters \n")
 	obji <- object$item
-	rvars <- seq( 2 , ncol(obji ) )
-	for (vv in rvars ){ obji[,vv] <- round( obji[,vv] , 3 ) }
-	print(obji)
+	sirt_summary_print_objects(obji=obji, digits=3, from=2)	
+	
 	cat("-----------------------------------------------------------------\n")
 	cat("Rater Parameters \n")
 	obji <- object$rater
-	rvars <- seq( 2 , ncol(obji ) )
-	for (vv in rvars ){ obji[,vv] <- round( obji[,vv] , 3 ) }
-	print(obji)	
-                }
+	sirt_summary_print_objects(obji=obji, digits=3, from=2)	
+	
+	sirt_csink(file=file)
+	
+}
 #*******************************************************
 
 
