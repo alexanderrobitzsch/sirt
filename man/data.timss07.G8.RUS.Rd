@@ -1,6 +1,5 @@
 %% File Name: data.timss07.G8.RUS.Rd
 %% File Version: 0.03
-%% File Last Change: 2017-01-18 18:08:37
 
 \name{data.timss07.G8.RUS}
 \alias{data.timss07.G8.RUS}

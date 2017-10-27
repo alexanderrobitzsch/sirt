@@ -1,6 +1,5 @@
 %% File Name: polychoric2.Rd
 %% File Version: 0.10
-%% File Last Change: 2017-01-18 18:08:40
 
 \name{polychoric2}
 \alias{polychoric2}

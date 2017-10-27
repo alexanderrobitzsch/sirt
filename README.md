@@ -10,15 +10,15 @@ The official version of `sirt` is hosted on CRAN and may be found [here](https:/
 The CRAN version can be installed from within R using:
 
 ```r
-install.packages("sirt")
+utils::install.packages("sirt")
 ```
 
-#### GitHub version `sirt` 2.3-20 (2017-10-23)
+#### GitHub version `sirt` 2.3-24 (2017-10-27)
 
 The version hosted [here](https://github.com/alexanderrobitzsch/sirt) is the development version of `sirt`. 
 The GitHub version can be installed using `devtools` as:
 
 ```r
-install.packages("devtools")
+utils::install.packages("devtools")
 devtools::install_github("alexanderrobitzsch/sirt")
 ```

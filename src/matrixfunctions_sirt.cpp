@@ -1,6 +1,5 @@
 //// File Name: matrixfunctions_sirt.cpp
 //// File Version: 2.04
-//// File Last Change: 2017-04-13 10:21:40
 
 
 

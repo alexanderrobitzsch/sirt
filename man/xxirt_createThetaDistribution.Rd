@@ -1,6 +1,5 @@
 %% File Name: xxirt_createThetaDistribution.Rd
 %% File Version: 0.05
-%% File Last Change: 2017-01-18 18:08:42
 
 \name{xxirt_createThetaDistribution}
 \alias{xxirt_createThetaDistribution}

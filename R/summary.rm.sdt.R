@@ -1,6 +1,5 @@
 ## File Name: summary.rm.sdt.R
-## File Version: 1.08
-## File Last Change: 2017-10-02 17:37:36
+## File Version: 1.11
 
 
 #*******************************************************
@@ -24,15 +23,15 @@ summary.rm.sdt <- function( object , file=NULL, ...){
 	cat("Hierarchical Rater Model: Signal Detection Model \n")
 	cat("-----------------------------------------------------------------\n")
 	cat( "Number of iterations =" , object$iter , "\n" )
-    cat( "Deviance = " , round( object$deviance , 2 ) , " | " )
-    cat( "Log Likelihood = " , round( -object$deviance/2 , 2 ) , "\n" )	
-    cat( "Number of persons = " , object$ic$n , "\n" )    
-    cat( "Number of items   = " , object$ic$VV , "\n" )    		
-    cat( "Number of raters  = " , object$ic$RR , "\n" )    	
-    cat( "Number of estimated parameters = " , object$ic$np , "\n" )    
-    cat( "  Distribution parameters  = " , object$ic$np.skill , "\n" )    		
-    cat( "  Item parameters  = " , object$ic$np.item , "\n" )    	
-    cat( "  Rater parameters = " , object$ic$np.rater , "\n" )    		
+	cat( "Deviance = " , round( object$deviance , 2 ) , " | " )
+	cat( "Log Likelihood = " , round( -object$deviance/2 , 2 ) , "\n" )	
+	cat( "Number of persons = " , object$ic$n , "\n" )    
+	cat( "Number of items   = " , object$ic$VV , "\n" )    		
+	cat( "Number of raters  = " , object$ic$RR , "\n" )    	
+	cat( "Number of estimated parameters = " , object$ic$np , "\n" )    
+	cat( "  Distribution parameters  = " , object$ic$np.skill , "\n" )    		
+	cat( "  Item parameters  = " , object$ic$np.item , "\n" )    	
+	cat( "  Rater parameters = " , object$ic$np.rater , "\n" )    		
 		
 	#--- information criteria
 	rm_summary_information_criteria(object=object)

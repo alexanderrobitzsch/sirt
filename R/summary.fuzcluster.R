@@ -1,6 +1,5 @@
 ## File Name: summary.fuzcluster.R
 ## File Version: 0.05
-## File Last Change: 2017-01-18 11:02:54
 #*******************************************************
 summary.fuzcluster <- function( object,... ){
     # object      ... object from rasch.mml                #

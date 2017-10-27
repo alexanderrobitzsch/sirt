@@ -1,6 +1,5 @@
 %% File Name: smirt.Rd
 %% File Version: 2.29
-%% File Last Change: 2017-07-11 15:58:50
 
 \name{smirt}
 \alias{smirt}

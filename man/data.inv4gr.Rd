@@ -1,6 +1,5 @@
 %% File Name: data.inv4gr.Rd
 %% File Version: 0.05
-%% File Last Change: 2017-01-18 18:08:37
 
 \name{data.inv4gr}
 \alias{data.inv4gr}

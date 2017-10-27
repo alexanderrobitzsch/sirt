@@ -1,6 +1,5 @@
 %% File Name: Q3.Rd
 %% File Version: 1.11
-%% File Last Change: 2017-10-23 15:30:42
 
 \name{Q3}
 \alias{Q3}

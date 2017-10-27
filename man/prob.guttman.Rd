@@ -1,6 +1,5 @@
 %% File Name: prob.guttman.Rd
 %% File Version: 1.18
-%% File Last Change: 2017-01-18 18:08:40
 
 \name{prob.guttman}
 \alias{prob.guttman}

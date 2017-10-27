@@ -1,6 +1,5 @@
 ## File Name: noharm.sirt.preprocess.R
 ## File Version: 0.14
-## File Last Change: 2017-01-18 11:02:50
 
 
 # e1 <- environment()	

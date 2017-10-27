@@ -1,6 +1,5 @@
 ## File Name: dif.logisticregression.R
 ## File Version: 1.07
-## File Last Change: 2017-07-24 15:36:53
  
 #---------------------------------------------------------------------------------------##
 # This function performs itemwise DIF analysis by using logistic regression methods     ##

@@ -1,6 +1,5 @@
 %% File Name: greenyang.reliability.Rd
 %% File Version: 1.22
-%% File Last Change: 2017-01-18 18:08:38
 
 \name{greenyang.reliability}
 \alias{greenyang.reliability}

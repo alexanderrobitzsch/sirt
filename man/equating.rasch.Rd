@@ -1,6 +1,5 @@
 %% File Name: equating.rasch.Rd
 %% File Version: 1.27
-%% File Last Change: 2017-01-18 18:08:38
 
 \name{equating.rasch}
 \alias{equating.rasch}

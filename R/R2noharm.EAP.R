@@ -1,6 +1,5 @@
 ## File Name: R2noharm.EAP.R
 ## File Version: 0.17
-## File Last Change: 2017-01-18 11:02:52
 R2noharm.EAP <-
 function( noharmobj , theta.k =seq(-6,6,len=21) , print.output=TRUE ){
     mod <- noharmobj

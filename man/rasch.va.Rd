@@ -1,6 +1,5 @@
 %% File Name: rasch.va.Rd
 %% File Version: 0.10
-%% File Last Change: 2017-01-18 18:08:41
 
 \name{rasch.va}
 \alias{rasch.va}

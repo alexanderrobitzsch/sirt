@@ -1,6 +1,5 @@
 ## File Name: xxirt_hessian.R
 ## File Version: 0.23
-## File Last Change: 2017-06-15 18:44:25
 
 #############################################
 # computation of hessian matrix

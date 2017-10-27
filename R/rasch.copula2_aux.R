@@ -1,6 +1,5 @@
 ## File Name: rasch.copula2_aux.R
 ## File Version: 1.13
-## File Last Change: 2017-07-10 10:23:52
 
 
 

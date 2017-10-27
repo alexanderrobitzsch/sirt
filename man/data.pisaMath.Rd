@@ -1,6 +1,5 @@
 %% File Name: data.pisaMath.Rd
 %% File Version: 0.08
-%% File Last Change: 2015-01-13 13:07:14
 
 \name{data.pisaMath}
 \alias{data.pisaMath}

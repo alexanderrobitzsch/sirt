@@ -1,6 +1,5 @@
 %% File Name: plot.mcmc.sirt.Rd
 %% File Version: 0.08
-%% File Last Change: 2017-01-18 18:08:40
 
 \name{plot.mcmc.sirt}
 \alias{plot.mcmc.sirt}

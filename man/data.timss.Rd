@@ -1,6 +1,5 @@
 %% File Name: data.timss.Rd
 %% File Version: 0.06
-%% File Last Change: 2015-01-13 13:10:34
 
 \name{data.timss}
 \alias{data.timss}

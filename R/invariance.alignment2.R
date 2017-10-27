@@ -1,6 +1,5 @@
 ## File Name: invariance.alignment2.R
 ## File Version: 3.33
-## File Last Change: 2017-07-09 12:46:25
 ################################################################
 invariance.alignment <- function( lambda , nu , wgt=NULL ,
 	align.scale=c(1,1) , align.pow=c(1,1) , eps=.01 , 

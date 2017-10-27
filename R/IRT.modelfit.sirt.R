@@ -1,6 +1,5 @@
 ## File Name: IRT.modelfit.sirt.R
 ## File Version: 0.15
-## File Last Change: 2017-01-18 11:02:47
 
 
 ###########################################################

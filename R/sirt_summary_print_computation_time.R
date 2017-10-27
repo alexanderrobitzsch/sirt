@@ -1,6 +1,5 @@
 ## File Name: sirt_summary_print_computation_time.R
 ## File Version: 0.01
-## File Last Change: 2017-09-20 09:54:22
 
 sirt_summary_print_computation_time <- function( object )
 {

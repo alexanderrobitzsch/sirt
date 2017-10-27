@@ -1,6 +1,5 @@
 %% File Name: stratified.cronbach.alpha.Rd
 %% File Version: 0.18
-%% File Last Change: 2017-01-18 18:08:41
 
 \name{stratified.cronbach.alpha}
 \alias{stratified.cronbach.alpha}

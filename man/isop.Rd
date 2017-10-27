@@ -1,6 +1,5 @@
 %% File Name: isop.Rd
 %% File Version: 3.18
-%% File Last Change: 2017-01-18 18:08:38
 
 \name{isop}
 \alias{isop.dich}

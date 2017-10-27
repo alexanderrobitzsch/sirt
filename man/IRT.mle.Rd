@@ -1,6 +1,5 @@
 %% File Name: IRT.mle.Rd
 %% File Version: 0.12
-%% File Last Change: 2017-07-11 16:35:22
 
 \name{IRT.mle}
 \alias{IRT.mle}

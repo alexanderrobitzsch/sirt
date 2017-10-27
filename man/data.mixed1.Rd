@@ -1,6 +1,5 @@
 %% File Name: data.mixed1.Rd
 %% File Version: 0.08
-%% File Last Change: 2017-01-18 18:08:37
 
 \name{data.mixed1}
 \alias{data.mixed1}

@@ -1,6 +1,5 @@
 %% File Name: rasch.jml.Rd
 %% File Version: 1.30
-%% File Last Change: 2017-01-18 18:08:41
 
 \name{rasch.jml}
 \alias{rasch.jml}

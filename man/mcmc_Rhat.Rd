@@ -1,6 +1,5 @@
 %% File Name: mcmc_Rhat.Rd
 %% File Version: 0.05
-%% File Last Change: 2017-01-18 18:08:39
 
 \name{mcmc_Rhat}
 \alias{mcmc_Rhat}

@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_pem_acceleration.R
 ## File Version: 0.08
-## File Last Change: 2017-10-03 18:07:41
 
 rm_sdt_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter_sequence,
 		c.rater, Qmatrix, tau.item, VV, K, I, TP, a.item, d.rater, item.index, rater.index, theta.k, RR, 

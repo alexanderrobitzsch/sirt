@@ -1,6 +1,5 @@
 ## File Name: md.pattern.sirt.R
 ## File Version: 0.06
-## File Last Change: 2017-02-17 13:38:32
 
 ###########################################
 # Function for analyzing response patterns

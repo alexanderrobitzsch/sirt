@@ -1,6 +1,5 @@
 %% File Name: linking.robust.Rd
 %% File Version: 0.18
-%% File Last Change: 2017-01-18 18:08:38
 
 \name{linking.robust}
 \alias{linking.robust}

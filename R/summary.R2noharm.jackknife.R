@@ -1,6 +1,5 @@
 ## File Name: summary.R2noharm.jackknife.R
 ## File Version: 1.02
-## File Last Change: 2017-01-18 11:02:55
 
 #---------------------------------------------------
 # summary of jackknife statistic

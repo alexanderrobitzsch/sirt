@@ -1,6 +1,5 @@
 %% File Name: rasch.pairwise.itemcluster.Rd
 %% File Version: 0.27
-%% File Last Change: 2017-01-18 18:08:41
 
 \name{rasch.pairwise.itemcluster}
 \alias{rasch.pairwise.itemcluster}

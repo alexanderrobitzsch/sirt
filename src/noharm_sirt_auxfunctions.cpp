@@ -1,6 +1,5 @@
 //// File Name: noharm_sirt_auxfunctions.cpp
 //// File Version: 3.01
-//// File Last Change: 2017-02-17 11:53:19
 
 // [[Rcpp::depends(RcppArmadillo)]]
 

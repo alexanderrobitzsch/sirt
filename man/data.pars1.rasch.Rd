@@ -1,6 +1,5 @@
 %% File Name: data.pars1.rasch.Rd
 %% File Version: 0.10
-%% File Last Change: 2017-01-18 18:08:37
 
 \name{data.pars1.rasch}
 \alias{data.pars1.rasch}

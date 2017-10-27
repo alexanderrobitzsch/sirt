@@ -1,6 +1,5 @@
 ## File Name: xxirt_postproc_parameters.R
 ## File Version: 0.11
-## File Last Change: 2017-06-15 18:51:26
 
 #######################################################
 xxirt_postproc_parameters <- function( partable , customTheta , 

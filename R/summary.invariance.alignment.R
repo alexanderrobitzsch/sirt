@@ -1,6 +1,5 @@
 ## File Name: summary.invariance.alignment.R
 ## File Version: 0.11
-## File Last Change: 2017-01-18 11:02:55
 #*******************************************************
 # Summary for smirt object
 summary.invariance.alignment <- function( object , ...){

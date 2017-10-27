@@ -1,6 +1,5 @@
 ## File Name: rm_facets_est_a_item.R
 ## File Version: 0.09
-## File Last Change: 2017-10-03 10:31:05
 
 
 #####################################################

@@ -1,6 +1,5 @@
 %% File Name: data.pisaPars.Rd
 %% File Version: 0.06
-%% File Last Change: 2015-01-13 13:07:26
 
 \name{data.pisaPars}
 \alias{data.pisaPars}

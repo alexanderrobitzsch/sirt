@@ -1,6 +1,5 @@
 ## File Name: summary.rm.facets.R
-## File Version: 0.15
-## File Last Change: 2017-10-02 11:36:02
+## File Version: 0.16
 
 
 #*******************************************************
@@ -24,15 +23,15 @@ summary.rm.facets <- function( object , file=NULL, ... ){
 	cat("Rater Facet Model with Item/Rater Intercepts and Slopes \n")
 	cat("-----------------------------------------------------------------\n")
 	cat( "Number of iterations =" , object$iter , "\n" )
-    cat( "Deviance = " , round( object$deviance , 2 ) , " | " )
-    cat( "Log Likelihood = " , round( -object$deviance/2 , 2 ) , "\n" )	
-    cat( "Number of persons = " , object$ic$n , "\n" )    
-    cat( "Number of items   = " , object$ic$VV , "\n" )    		
-    cat( "Number of raters  = " , object$ic$RR , "\n" )    	
-    cat( "Number of estimated parameters = " , object$ic$np , "\n" )    
-    cat( "   Number of item parameters   = " , object$ic$np.item , "\n" )    	
-    cat( "   Number of rater parameters  = " , object$ic$np.rater , "\n" )    		
-    cat( "   Number of distribution parameters  = " , object$ic$np.trait , "\n\n" )    			
+	cat( "Deviance = " , round( object$deviance , 2 ) , " | " )
+	cat( "Log Likelihood = " , round( -object$deviance/2 , 2 ) , "\n" )	
+	cat( "Number of persons = " , object$ic$n , "\n" )    
+	cat( "Number of items   = " , object$ic$VV , "\n" )    		
+	cat( "Number of raters  = " , object$ic$RR , "\n" )    	
+	cat( "Number of estimated parameters = " , object$ic$np , "\n" )    
+	cat( "   Number of item parameters   = " , object$ic$np.item , "\n" )    	
+	cat( "   Number of rater parameters  = " , object$ic$np.rater , "\n" )    		
+	cat( "   Number of distribution parameters  = " , object$ic$np.trait , "\n\n" )    			
 			
 	#--- information criteria
 	rm_summary_information_criteria(object=object)
@@ -50,8 +49,7 @@ summary.rm.facets <- function( object , file=NULL, ... ){
 	obji <- object$rater
 	sirt_summary_print_objects(obji=obji, digits=3, from=2)	
 	
-	sirt_csink(file=file)
-	
+	sirt_csink(file=file)	
 }
 #*******************************************************
 

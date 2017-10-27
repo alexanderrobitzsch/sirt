@@ -1,6 +1,5 @@
 ## File Name: sirt_pem_collect_parameters.R
 ## File Version: 0.03
-## File Last Change: 2017-10-03 11:15:33
 
 sirt_pem_collect_parameters <- function( parmlist, pem_parameter_index )
 {

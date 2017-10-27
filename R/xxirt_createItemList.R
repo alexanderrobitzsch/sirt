@@ -1,6 +1,5 @@
 ## File Name: xxirt_createItemList.R
 ## File Version: 0.06
-## File Last Change: 2017-06-15 18:40:57
 
 #########################################################
 # create item list

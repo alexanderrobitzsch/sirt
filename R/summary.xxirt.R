@@ -1,6 +1,5 @@
 ## File Name: summary.xxirt.R
 ## File Version: 0.16
-## File Last Change: 2017-10-02 22:55:23
 #*******************************************************
 # Summary for xxirt object
 summary.xxirt <- function( object , digits = 3 , file=NULL , ...)

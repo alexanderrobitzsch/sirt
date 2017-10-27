@@ -1,6 +1,5 @@
 %% File Name: class.accuracy.rasch.Rd
 %% File Version: 0.13
-%% File Last Change: 2017-01-18 18:08:36
 
 \name{class.accuracy.rasch}
 \alias{class.accuracy.rasch}

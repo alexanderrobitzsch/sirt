@@ -1,6 +1,5 @@
 ## File Name: mcmc.2pno_alg.R
 ## File Version: 1.15
-## File Last Change: 2017-09-19 20:49:58
 
 
 ######################

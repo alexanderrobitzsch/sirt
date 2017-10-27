@@ -1,6 +1,5 @@
 ## File Name: mirt.specify.partable.R
 ## File Version: 0.03
-## File Last Change: 2017-03-17 19:05:45
 
 
 ####################################################################### 

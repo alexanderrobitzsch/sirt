@@ -1,6 +1,5 @@
 %% File Name: xxirt.Rd
 %% File Version: 0.41
-%% File Last Change: 2017-03-01 19:30:55
 
 \name{xxirt}
 \alias{xxirt}

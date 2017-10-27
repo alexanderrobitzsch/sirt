@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_calc_loglikelihood.R
 ## File Version: 0.09
-## File Last Change: 2017-10-03 13:09:33
 
 rm_sdt_calc_loglikelihood <- function( c.rater, Qmatrix, tau.item, VV, K, I, TP, a.item, 
 			d.rater, item.index, rater.index, theta.k, RR, dat2, dat2.resp, pi.k=NULL, dat2.ind.resp,

@@ -1,6 +1,5 @@
 %% File Name: R2noharm.Rd
 %% File Version: 2.22
-%% File Last Change: 2017-01-18 18:08:40
 
 \name{R2noharm}
 \alias{R2noharm}

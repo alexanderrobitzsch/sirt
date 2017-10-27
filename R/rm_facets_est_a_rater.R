@@ -1,6 +1,5 @@
 ## File Name: rm_facets_est_a_rater.R
 ## File Version: 0.05
-## File Last Change: 2017-10-03 10:31:15
 
 
 #####################################################

@@ -1,6 +1,5 @@
 ## File Name: rm_calclike.R
 ## File Version: 0.03
-## File Last Change: 2017-10-02 18:53:47
 
 ################################################
 # calculation of the likelihood

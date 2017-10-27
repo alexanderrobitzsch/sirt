@@ -1,6 +1,5 @@
 ## File Name: R2conquest.R
 ## File Version: 1.28
-## File Last Change: 2017-01-18 11:02:52
 
 
 

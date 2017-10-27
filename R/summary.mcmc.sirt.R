@@ -1,6 +1,5 @@
 ## File Name: summary.mcmc.sirt.R
 ## File Version: 1.22
-## File Last Change: 2017-10-02 11:18:33
 
 #*******************************************************
 # summary for MCMC item analysis in sirt

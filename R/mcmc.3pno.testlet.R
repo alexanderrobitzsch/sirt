@@ -1,6 +1,5 @@
 ## File Name: mcmc.3pno.testlet.R
 ## File Version: 4.14
-## File Last Change: 2017-09-19 21:02:39
 ######################################################
 # MCMC estimation 2PNO model
 mcmc.3pno.testlet <- function(dat , testlets=rep(NA , ncol(dat)) , 

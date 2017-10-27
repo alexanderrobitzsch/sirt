@@ -1,6 +1,5 @@
 ## File Name: IRT.factor.scores.sirt.R
 ## File Version: 0.05
-## File Last Change: 2017-01-18 11:02:47
 
 
 ########################################################################

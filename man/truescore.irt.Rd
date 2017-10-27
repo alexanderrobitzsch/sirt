@@ -1,6 +1,5 @@
 %% File Name: truescore.irt.Rd
 %% File Version: 0.14
-%% File Last Change: 2017-01-18 18:08:42
 
 \name{truescore.irt}
 \alias{truescore.irt}

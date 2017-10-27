@@ -1,6 +1,5 @@
 %% File Name: data.math.Rd
 %% File Version: 0.09
-%% File Last Change: 2015-01-13 13:05:48
 
 \name{data.math}
 \alias{data.math}

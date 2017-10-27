@@ -1,6 +1,5 @@
 ## File Name: noharm.sirt.R
 ## File Version: 0.49
-## File Last Change: 2017-07-10 10:30:21
 
 ########################################
 # NOHARM implementation in R

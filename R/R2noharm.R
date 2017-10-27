@@ -1,6 +1,5 @@
 ## File Name: R2noharm.R
 ## File Version: 2.15
-## File Last Change: 2017-01-18 11:02:52
 
 #------------------------------------------------------------------
 # NOHARM exploratory factor analysis                      

@@ -1,6 +1,5 @@
 %% File Name: rasch.pairwise.Rd
 %% File Version: 0.20
-%% File Last Change: 2017-01-18 18:08:41
 
 \name{rasch.pairwise}
 \alias{rasch.pairwise}

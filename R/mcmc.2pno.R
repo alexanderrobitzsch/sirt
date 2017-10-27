@@ -1,6 +1,5 @@
 ## File Name: mcmc.2pno.R
 ## File Version: 1.17
-## File Last Change: 2017-01-18 11:02:48
 ##############################################
 # MCMC estimation 2PNO model
 mcmc.2pno <- function(dat , weights=NULL , burnin=500 , iter=1000 , N.sampvalues = 1000 ,

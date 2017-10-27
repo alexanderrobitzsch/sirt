@@ -1,6 +1,5 @@
 %% File Name: prior_model_parse.Rd
 %% File Version: 0.05
-%% File Last Change: 2017-03-03 19:04:58
 
 \name{prior_model_parse}
 \alias{prior_model_parse}

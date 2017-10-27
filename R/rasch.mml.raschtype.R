@@ -1,6 +1,5 @@
 ## File Name: rasch.mml.raschtype.R
 ## File Version: 2.46
-## File Last Change: 2017-02-17 13:42:53
 
 ################################################
 # calculation of the likelihood

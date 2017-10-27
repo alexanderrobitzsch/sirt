@@ -1,6 +1,5 @@
 ## File Name: summary_round_helper.R
 ## File Version: 0.02
-## File Last Change: 2017-01-18 11:02:55
 
 summary_round_helper <- function( obji , digits , exclude = NULL, print=TRUE){
 	NC <- ncol(obji)

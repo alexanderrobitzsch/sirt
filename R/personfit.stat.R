@@ -1,6 +1,5 @@
 ## File Name: personfit.stat.R
 ## File Version: 0.04
-## File Last Change: 2017-01-18 11:02:51
 personfit.stat <-
 function( dat , abil , b ){
     dfr <- data.frame( "case" = seq( 1 , nrow(dat)) )

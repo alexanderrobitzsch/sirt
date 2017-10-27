@@ -1,6 +1,5 @@
 ## File Name: unidim.csn.R
 ## File Version: 0.11
-## File Last Change: 2017-02-17 13:48:25
 
 #############################################################
 unidim.test.csn <- function( dat , RR=400 , prop.perm=.75 ,

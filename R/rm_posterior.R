@@ -1,6 +1,5 @@
 ## File Name: rm_posterior.R
-## File Version: 0.06
-## File Last Change: 2017-10-02 14:07:00
+## File Version: 0.07
 
 
 #######################################################
@@ -23,8 +22,8 @@ rm_posterior <- function( dat2 , dat2.resp , TP , pi.k ,
 		n.ik[,,kk] <- crossprod( f.qk.yi , dat2.ind.resp[,,kk] )
 		N.ik <- N.ik + n.ik[,,kk]
 	}		
-    pi2 <- sirt_matrix2( x=pi.k, nrow= nrow(f.yi.qk) )
-    ll <- sum( log( rowSums( f.yi.qk * pi2 ) ) )
+	pi2 <- sirt_matrix2( x=pi.k, nrow= nrow(f.yi.qk) )
+	ll <- sum( log( rowSums( f.yi.qk * pi2 ) ) )
 					
 	#--- compute pi.k
 	pi.k <- colMeans( f.qk.yi )

@@ -1,6 +1,5 @@
 %% File Name: summary.mcmc.sirt.Rd
 %% File Version: 0.07
-%% File Last Change: 2017-09-20 10:40:06
 
 \name{summary.mcmc.sirt}
 \alias{summary.mcmc.sirt}

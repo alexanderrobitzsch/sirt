@@ -1,6 +1,5 @@
 %% File Name: marginal.truescore.reliability.Rd
 %% File Version: 0.16
-%% File Last Change: 2017-01-18 18:08:39
 
 \name{marginal.truescore.reliability}
 \alias{marginal.truescore.reliability}

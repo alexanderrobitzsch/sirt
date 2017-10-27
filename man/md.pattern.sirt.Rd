@@ -1,6 +1,5 @@
 %% File Name: md.pattern.sirt.Rd
 %% File Version: 0.13
-%% File Last Change: 2017-01-18 18:08:39
 
 \name{md.pattern.sirt}
 \alias{md.pattern.sirt}

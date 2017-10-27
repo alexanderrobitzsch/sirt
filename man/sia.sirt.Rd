@@ -1,6 +1,5 @@
 %% File Name: sia.sirt.Rd
 %% File Version: 0.13
-%% File Last Change: 2017-01-18 18:08:41
 
 \name{sia.sirt}
 \alias{sia.sirt}

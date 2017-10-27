@@ -1,6 +1,5 @@
 //// File Name: first_eigenvalue_sirt.h
 //// File Version: 2.19
-//// File Last Change: 2016-01-29 15:48:19
 
 
 // includes from the plugin

@@ -1,6 +1,5 @@
 ## File Name: gom.em.alg.R
 ## File Version: 5.10
-## File Last Change: 2017-01-18 11:02:47
 
 
 

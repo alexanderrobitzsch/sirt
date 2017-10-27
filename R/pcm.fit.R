@@ -1,6 +1,5 @@
 ## File Name: pcm.fit.R
 ## File Version: 0.06
-## File Last Change: 2017-01-18 11:02:51
 
 #############################################
 # fit partial credit (or Rasch model)

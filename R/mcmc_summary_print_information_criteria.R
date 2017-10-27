@@ -1,6 +1,5 @@
 ## File Name: mcmc_summary_print_information_criteria.R
 ## File Version: 0.02
-## File Last Change: 2017-09-20 10:34:00
 
 mcmc_summary_print_information_criteria <- function(object)
 {

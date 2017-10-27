@@ -1,6 +1,5 @@
 ## File Name: smirt_preproc.R
 ## File Version: 1.05
-## File Last Change: 2017-01-18 11:02:54
 
 ################################################################
 	# define estimation functions depending on condensation type

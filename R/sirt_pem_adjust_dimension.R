@@ -1,6 +1,5 @@
 ## File Name: sirt_pem_adjust_dimension.R
 ## File Version: 0.01
-## File Last Change: 2017-10-03 11:27:33
 
 sirt_pem_adjust_dimension <- function(x, x_dim )
 {

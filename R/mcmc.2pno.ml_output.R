@@ -1,6 +1,5 @@
 ## File Name: mcmc.2pno.ml_output.R
 ## File Version: 1.06
-## File Last Change: 2017-01-18 11:02:48
 
 ######################################################				
 # subfunction for calculating the DIC

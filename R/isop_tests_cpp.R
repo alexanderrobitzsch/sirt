@@ -1,6 +1,5 @@
 ## File Name: isop_tests_cpp.R
 ## File Version: 0.01
-## File Last Change: 2017-09-19 20:56:01
 
 
 ##########################################################

@@ -1,6 +1,5 @@
 %% File Name: data.pw01.Rd
 %% File Version: 0.04
-%% File Last Change: 2017-01-18 18:08:37
 
 \name{data.pw}
 \alias{data.pw01}

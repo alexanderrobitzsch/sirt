@@ -1,6 +1,5 @@
 %% File Name: dirichlet.mle.Rd
 %% File Version: 0.15
-%% File Last Change: 2017-01-18 18:08:38
 
 \name{dirichlet.mle}
 \alias{dirichlet.mle}

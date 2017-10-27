@@ -1,6 +1,5 @@
 %% File Name: rasch.evm.pcm.Rd
 %% File Version: 0.33
-%% File Last Change: 2017-01-18 18:08:40
 
 \name{rasch.evm.pcm}
 \alias{rasch.evm.pcm}

@@ -1,14 +1,13 @@
 ## File Name: rm_proc.R
-## File Version: 0.07
-## File Last Change: 2017-10-02 13:57:57
+## File Version: 0.11
 
 ##########################################
 # Data preprocessing rater models
 rm_proc <- function( dat , pid , rater )
 {
-    rater <- paste( rater )
-    # create table of rater indizes
-    rater.index <- data.frame( "rater" = sort( unique( rater )) )
+	rater <- paste( rater )
+	# create table of rater indizes
+	rater.index <- data.frame( "rater" = sort( unique( rater )) )
     rater.index$rater.id <- seq( 1 , nrow(rater.index) )
     RR <- nrow(rater.index)
     # create table of person indizes
@@ -35,14 +34,14 @@ rm_proc <- function( dat , pid , rater )
     dataproc.vars <- list( "item.index" = rep( 1:VV , RR )	 ,
 			"rater.index" = rep(1:RR , each=VV ) )
 	# arrange response data
-    dat2.resp <- 1 - is.na(dat2)
+	dat2.resp <- 1 - is.na(dat2)
 	dat20 <- dat2
 	dat2[ dat2.resp == 0 ] <- 0
 	#--- dat2.ind.resp
 	n <- nrow(dat2)
 	p <- ncol(dat2)
 	K <- max( dat2, na.rm=TRUE) + 1
-    dat2.ind.resp <- array( 0 , dim=c(n,p,K) )
+	dat2.ind.resp <- array( 0 , dim=c(n,p,K) )
 	for (kk in 1:K){
 		dat2.ind.resp[,,kk] <- dat2.resp * ( dat2 == ( kk - 1 ) )
 	}

@@ -1,6 +1,5 @@
 ## File Name: latent.regression.em.raschtype.R
 ## File Version: 2.50
-## File Last Change: 2017-01-18 11:02:47
 
 
 #----------------------------------------------------------------------------

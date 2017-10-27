@@ -1,6 +1,5 @@
 %% File Name: equating.rasch.jackknife.Rd
 %% File Version: 0.15
-%% File Last Change: 2017-01-18 18:17:35
 
 \name{equating.rasch.jackknife}
 \alias{equating.rasch.jackknife}

@@ -1,6 +1,5 @@
 ## File Name: rm_hrm_est_c_rater.R
 ## File Version: 0.11
-## File Last Change: 2017-10-03 17:19:12
 
 ###################################################			
 # c.rater

@@ -1,6 +1,5 @@
 ## File Name: isop.scoring.R
 ## File Version: 1.04
-## File Last Change: 2017-01-18 11:02:47
 #################################################
 # scoring students and items according to the
 # Scheiblechner's ISOP model

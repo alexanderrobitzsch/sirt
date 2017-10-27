@@ -1,6 +1,5 @@
 ## File Name: monoreg.rowwise.R
 ## File Version: 0.04
-## File Last Change: 2017-02-17 13:39:36
 
 ##############################################################
 # monotone regression for all rows in a matrix

@@ -1,6 +1,5 @@
 ## File Name: mcmc_vcov.R
 ## File Version: 0.04
-## File Last Change: 2017-01-18 11:02:49
 
 
 ###########################################

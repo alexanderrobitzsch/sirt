@@ -1,6 +1,5 @@
 %% File Name: linking.haberman.Rd
 %% File Version: 0.53
-%% File Last Change: 2017-08-21 18:52:46
 
 \name{linking.haberman}
 \alias{linking.haberman}

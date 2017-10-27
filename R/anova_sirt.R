@@ -1,6 +1,5 @@
 ## File Name: anova_sirt.R
 ## File Version: 0.13
-## File Last Change: 2017-01-18 11:02:46
 
 ##############################################################
 # anova rasch.mml

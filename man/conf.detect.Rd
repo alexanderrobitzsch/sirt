@@ -1,6 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.32
-%% File Last Change: 2017-01-18 18:08:37
+%% File Version: 1.33
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -17,6 +16,9 @@ under a confirmatory specification of item clusters
 1999a, 1999b; Zhang, 2007; Bonifay, Reise, Scheines, & Meijer, 2015). 
 
 Item responses in a multi-matrix design are allowed (Zhang, 2013).
+
+An exploratory DETECT analysis can be conducted using the
+\code{\link{expl.detect}} function.
 }
 \usage{
 conf.detect(data, score, itemcluster, bwscale = 1.1, progress = TRUE, 
@@ -134,6 +136,8 @@ Alexander Robitzsch
 \seealso{
 For a download of the free \emph{DIM-Pack} software (DIMTEST, DETECT) see  
 \url{http://psychometrictools.measuredprogress.org/home}.
+
+See \code{\link{expl.detect}} for exploratory DETECT analysis.
 }
 
 

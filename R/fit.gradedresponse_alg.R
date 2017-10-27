@@ -1,6 +1,5 @@
 ## File Name: fit.gradedresponse_alg.R
 ## File Version: 1.08
-## File Last Change: 2017-01-18 11:02:47
 
 
 #####################################################################

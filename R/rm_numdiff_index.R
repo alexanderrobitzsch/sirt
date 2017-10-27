@@ -1,6 +1,5 @@
 ## File Name: rm_numdiff_index.R
-## File Version: 0.08
-## File Last Change: 2017-10-02 12:19:34
+## File Version: 0.09
 
 
 ####################################################################
@@ -10,7 +9,7 @@ rm_numdiff_index <- function( pjk , pjk1 , pjk2 , n.ik , diffindex ,
 		max.increment , numdiff.parm , eps=1E-80, eps2=1E-10 )
 {					
 	h <- numdiff.parm
-    an.ik <- aperm( n.ik , c(2,3,1) )
+	an.ik <- aperm( n.ik , c(2,3,1) )
 	# str("pjk")	
 	# [items, categories, nodes]
 	
@@ -25,8 +24,8 @@ rm_numdiff_index <- function( pjk , pjk1 , pjk2 , n.ik , diffindex ,
 	d2 <- res$d2
     
 	#-- compute incremental change in item parameters
-    d2[ abs(d2) < eps2 ] <- eps2
-    increment <- - d1 / d2
+	d2[ abs(d2) < eps2 ] <- eps2
+	increment <- - d1 / d2
 	
 	#-- trim increment
 	increment <- rm_numdiff_trim_increment( increment=increment, max.increment=max.increment, eps2=eps2 ) 

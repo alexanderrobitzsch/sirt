@@ -1,6 +1,5 @@
 %% File Name: mcmc.2pno.ml.Rd
 %% File Version: 0.34
-%% File Last Change: 2017-01-18 18:08:39
 
 \name{mcmc.2pno.ml}
 \alias{mcmc.2pno.ml}

@@ -1,6 +1,5 @@
 ## File Name: invariance.alignment.R
 ## File Version: 2.24
-## File Last Change: 2017-01-18 11:02:47
 ################################################################
 invariance.alignment__sirt045 <- function( lambda , nu , wgt ,
    align.scale=c(1,1) , align.pow=c(1,1) , eps=.0001 , 

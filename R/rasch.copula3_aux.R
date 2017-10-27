@@ -1,6 +1,5 @@
 ## File Name: rasch.copula3_aux.R
 ## File Version: 6.11
-## File Last Change: 2017-01-18 11:02:52
 
 #----------------------------------------------------------------------------------------------
 .ll.rasch.copula320 <- function( theta.k , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 

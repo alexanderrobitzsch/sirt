@@ -1,6 +1,5 @@
 %% File Name: likelihood.adjustment.Rd
 %% File Version: 0.06
-%% File Last Change: 2017-01-18 18:08:38
 
 \name{likelihood.adjustment}
 \alias{likelihood.adjustment}

@@ -1,6 +1,5 @@
 ## File Name: rasch.evm.pcm_aux.R
 ## File Version: 0.14
-## File Last Change: 2017-01-18 11:02:52
 
 rasch.evm.pcm.dif <- function( b_evm , item , PARS_vcov , I , G , group.unique ,
 		dat , dat.resp ){

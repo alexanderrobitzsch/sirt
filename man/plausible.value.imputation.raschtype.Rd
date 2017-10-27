@@ -1,6 +1,5 @@
 %% File Name: plausible.value.imputation.raschtype.Rd
 %% File Version: 1.24
-%% File Last Change: 2017-01-18 18:08:40
 
 \name{plausible.value.imputation.raschtype}
 \alias{plausible.value.imputation.raschtype}

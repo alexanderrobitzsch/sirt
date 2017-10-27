@@ -1,6 +1,5 @@
 %% File Name: wle.rasch.Rd
 %% File Version: 1.10
-%% File Last Change: 2017-01-18 18:08:42
 
 \name{wle.rasch}
 \alias{wle.rasch}

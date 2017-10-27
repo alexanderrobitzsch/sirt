@@ -1,6 +1,5 @@
 ## File Name: summary.lsem.R
 ## File Version: 0.23
-## File Last Change: 2017-10-02 11:17:54
 
 #############################################
 # summary lsem

@@ -1,6 +1,5 @@
 ## File Name: rm_facets_print_progress_deviance.R
 ## File Version: 0.01
-## File Last Change: 2017-10-02 15:45:14
 
 
 rm_facets_print_progress_deviance <- function( dev, dev0, digits_deviance, iter )

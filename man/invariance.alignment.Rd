@@ -1,6 +1,5 @@
 %% File Name: invariance.alignment.Rd
 %% File Version: 1.37
-%% File Last Change: 2017-01-18 18:08:38
 
 \name{invariance.alignment}
 \alias{invariance.alignment}

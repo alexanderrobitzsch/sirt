@@ -1,6 +1,5 @@
 ## File Name: rm_determine_fixed_tau_parameters.R
 ## File Version: 0.01
-## File Last Change: 2017-10-03 10:37:45
 
 rm_determine_fixed_tau_parameters <- function( K, maxK, VV, tau.item.fixed = NULL, val=99)
 {	

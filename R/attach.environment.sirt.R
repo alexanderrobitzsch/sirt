@@ -1,6 +1,5 @@
 ## File Name: attach.environment.sirt.R
 ## File Version: 0.03
-## File Last Change: 2017-01-18 11:02:46
 ##################################################
 # attach all elements of an object in an environment   
 .attach.environment.sirt <- function( res , envir ){

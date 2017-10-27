@@ -1,6 +1,5 @@
 %% File Name: rasch.copula.Rd
 %% File Version: 1.58
-%% File Last Change: 2017-01-18 18:08:40
 
 \name{rasch.copula2}
 \alias{rasch.copula2}

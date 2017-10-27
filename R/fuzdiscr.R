@@ -1,6 +1,5 @@
 ## File Name: fuzdiscr.R
 ## File Version: 0.03
-## File Last Change: 2017-01-18 11:02:47
 fuzdiscr <- function( X , theta0 = NULL , maxiter =200 , conv=.0001 ){
     if ( is.null(theta0) ){ theta0 <- rep( 1/ ncol(X) , ncol(X) ) }
     theta <- theta0

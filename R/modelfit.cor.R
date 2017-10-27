@@ -1,6 +1,5 @@
 ## File Name: modelfit.cor.R
 ## File Version: 2.31
-## File Last Change: 2017-10-23 15:38:25
 
 #############################################################################
 modelfit.cor.sirt.pml <-

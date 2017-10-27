@@ -1,6 +1,5 @@
 %% File Name: f1d.irt.Rd
 %% File Version: 1.21
-%% File Last Change: 2017-07-11 16:26:56
 
 \name{f1d.irt}
 \alias{f1d.irt}

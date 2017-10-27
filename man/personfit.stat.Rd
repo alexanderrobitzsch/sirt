@@ -1,6 +1,5 @@
 %% File Name: personfit.stat.Rd
 %% File Version: 0.17
-%% File Last Change: 2017-07-11 16:33:41
 
 \name{personfit.stat}
 \alias{personfit.stat}

@@ -1,6 +1,5 @@
 ## File Name: btm_fit.R
 ## File Version: 0.04
-## File Last Change: 2017-05-10 17:17:13
 
 
 ############################################

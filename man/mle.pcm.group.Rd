@@ -1,6 +1,5 @@
 %% File Name: mle.pcm.group.Rd
 %% File Version: 0.16
-%% File Last Change: 2017-01-18 18:08:39
 
 \name{mle.pcm.group}
 \alias{mle.pcm.group}

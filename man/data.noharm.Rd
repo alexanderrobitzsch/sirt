@@ -1,6 +1,5 @@
 %% File Name: data.noharm.Rd
 %% File Version: 2.08
-%% File Last Change: 2017-01-18 18:08:37
 
 \name{data.noharm}
 

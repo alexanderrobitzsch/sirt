@@ -1,6 +1,5 @@
 %% File Name: eigenvalues.manymatrices.Rd
 %% File Version: 0.10
-%% File Last Change: 2017-01-18 18:08:38
 
 \name{eigenvalues.manymatrices}
 \alias{eigenvalues.manymatrices}

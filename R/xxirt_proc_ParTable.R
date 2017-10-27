@@ -1,6 +1,5 @@
 ## File Name: xxirt_proc_ParTable.R
 ## File Version: 0.35
-## File Last Change: 2017-06-15 18:52:48
 
 #################################################
 # process parameter table

@@ -1,6 +1,5 @@
 ## File Name: summary.isop.test.R
 ## File Version: 0.01
-## File Last Change: 2017-09-19 20:54:27
 
 ####################################################
 # summary for ISOP test

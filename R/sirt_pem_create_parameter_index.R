@@ -1,6 +1,5 @@
 ## File Name: sirt_pem_create_parameter_index.R
 ## File Version: 0.05
-## File Last Change: 2017-10-03 11:02:58
 
 
 sirt_pem_create_parameter_index <- function( parmlist )

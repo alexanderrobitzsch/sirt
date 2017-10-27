@@ -1,6 +1,5 @@
 ## File Name: rm_facets_est_tau_item.R
 ## File Version: 0.12
-## File Last Change: 2017-10-03 17:32:03
 
 
 #####################################################

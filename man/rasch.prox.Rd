@@ -1,6 +1,5 @@
 %% File Name: rasch.prox.Rd
 %% File Version: 1.10
-%% File Last Change: 2017-01-18 18:08:41
 
 \name{rasch.prox}
 \alias{rasch.prox}

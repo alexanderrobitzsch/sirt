@@ -1,6 +1,5 @@
 ## File Name: fit.adisop.R
 ## File Version: 2.12
-## File Last Change: 2017-01-18 11:02:47
 ###################################################################
 # Fit ADISOP model
 fit.adisop <- function( freq.correct , wgt , conv = .0001 , 

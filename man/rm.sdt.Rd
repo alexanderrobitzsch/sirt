@@ -1,6 +1,5 @@
 %% File Name: rm.sdt.Rd
 %% File Version: 1.23
-%% File Last Change: 2017-10-23 16:08:58
 
 \name{rm.sdt}
 \alias{rm.sdt}

@@ -1,6 +1,5 @@
 %% File Name: mirt.specify.partable.Rd
 %% File Version: 0.03
-%% File Last Change: 2017-01-18 18:08:39
 
 \name{mirt.specify.partable}
 \alias{mirt.specify.partable}

@@ -1,6 +1,5 @@
 ## File Name: rm_eap_reliability.R
 ## File Version: 0.01
-## File Last Change: 2017-10-02 16:09:19
 
 rm_eap_reliability <- function( EAP , SE_EAP )
 {

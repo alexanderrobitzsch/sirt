@@ -1,6 +1,5 @@
 ## File Name: mcmc.2pnoh.R
 ## File Version: 1.05
-## File Last Change: 2017-01-18 11:02:48
 ##############################################
 # MCMC estimation 2PNO model
 mcmc.2pnoh <- function(dat , itemgroups , prob.mastery = c(.5 , .8 ) ,

@@ -1,6 +1,5 @@
 %% File Name: expl.detect.Rd
-%% File Version: 1.09
-%% File Last Change: 2017-01-11 15:53:48
+%% File Version: 1.11
 
 \name{expl.detect}
 \alias{expl.detect}
@@ -21,7 +20,7 @@ expl.detect(data, score, nclusters, N.est = NULL, seed = NULL, bwscale = 1.1)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{data}{
-An \eqn{N \times I} data frame of dichotomous responses.
+An \eqn{N \times I} data frame of dichotomous or polytomous responses.
 Missing responses are allowed.
 }
   \item{score}{

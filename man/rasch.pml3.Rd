@@ -1,6 +1,5 @@
 %% File Name: rasch.pml3.Rd
 %% File Version: 2.64
-%% File Last Change: 2017-10-23 15:27:32
 
 
 

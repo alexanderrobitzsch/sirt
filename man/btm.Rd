@@ -1,6 +1,5 @@
 %% File Name: btm.Rd
 %% File Version: 0.14
-%% File Last Change: 2017-01-18 18:08:36
 
 \name{btm}
 \alias{btm}
