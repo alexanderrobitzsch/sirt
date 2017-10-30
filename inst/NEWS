@@ -34,16 +34,21 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.3  |  2017-10-27  |  Last: sirt 2.3-24
+VERSIONS sirt 2.3  |  2017-10-30  |  Last: sirt 2.3-39
 ------------------------------------------------------------------------
 
 NOTE  * included different parameter centering options in 'rm.facets'
 FIXED * fixed a bug in data processing in 'xxirt' function
 NOTE  * included EM acceleration method 'PEM' in 'rm.sdt' and 'rm.facets'
 NOTE  * corrected example for 'Q3' function (thanks to Amina Fraij)
+ADDED * added prior distributions for item parameters in 'rm.sdt'
+NOTE  * included option for defining a reference rater in 'rm.facets'.
+        See Example 2.6.
+NOTE  * included argument 'rater_item_int' for modelling
+        rater-item-interaction effects in 'rm.facets' (see Example 2.7)
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: Q3 (1)
+EXAMP * included/modified examples: Q3 (1), rm.facets (2.6, 2.7)
 
 
 ------------------------------------------------------------------------

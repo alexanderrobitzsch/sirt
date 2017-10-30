@@ -1,5 +1,5 @@
 %% File Name: rm.sdt.Rd
-%% File Version: 1.23
+%% File Version: 1.26
 
 \name{rm.sdt}
 \alias{rm.sdt}
@@ -34,7 +34,8 @@ DeCarlo, Kim & Johnson, 2011).
 rm.sdt(dat, pid, rater, Qmatrix = NULL, theta.k = seq(-9, 9, len = 30), 
     est.a.item = FALSE, est.c.rater = "n", est.d.rater = "n", est.mean=FALSE , 
     skillspace="normal" , tau.item.fixed = NULL , a.item.fixed = NULL , 
-    d.min = 0.5, d.max = 100, d.start = 3, max.increment = 1, numdiff.parm = 0.00001, 
+    d.min = 0.5, d.max = 100, d.start = 3, d.prior = c(3,100), c.prior=c(3,100), 
+    tau.prior=c(0,1000), a.prior=c(1,100), max.increment = 1, numdiff.parm = 0.00001, 
     maxdevchange = 0.1, globconv = .001, maxiter = 1000, msteps = 4, 
     mstepconv = 0.001, fac_incr=.99, PEM=FALSE, PEM_itermax=maxiter )
 
@@ -114,6 +115,12 @@ Maximal \eqn{d} parameter to be estimated
   \item{d.start}{
 Starting value of \eqn{d} parameters
 }
+\item{d.prior}{Normal prior \eqn{N(M,S^2)} for \eqn{d} parameters}
+\item{c.prior}{Normal prior for \eqn{c} parameters. The prior for
+	parameter \eqn{c_{irk}} is defined as \eqn{M \cdot ( k - 0.5) }
+	where \eqn{M} is \code{c.prior[1]}. }
+\item{tau.prior}{Normal prior for \eqn{\tau} parameters}	
+\item{a.prior}{Normal prior for \eqn{a} parameters}
   \item{max.increment}{
 Maximum increment of item parameters during estimation
 }

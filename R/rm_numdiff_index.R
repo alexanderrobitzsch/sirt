@@ -1,12 +1,12 @@
 ## File Name: rm_numdiff_index.R
-## File Version: 0.09
+## File Version: 0.13
 
 
 ####################################################################
 # general function for numerical differentiation
 # diffindex aggregates across super items
 rm_numdiff_index <- function( pjk , pjk1 , pjk2 , n.ik , diffindex , 
-		max.increment , numdiff.parm , eps=1E-80, eps2=1E-10 )
+		max.increment , numdiff.parm , eps=1E-80, eps2=1E-10, prior=NULL, value=NULL )
 {					
 	h <- numdiff.parm
 	an.ik <- aperm( n.ik , c(2,3,1) )
@@ -18,6 +18,14 @@ rm_numdiff_index <- function( pjk , pjk1 , pjk2 , n.ik , diffindex ,
 	ll1 <- rm_grouped_expected_likelihood(pjk=pjk1, n.ik=an.ik, diffindex=diffindex, eps=eps)	
 	ll2 <- rm_grouped_expected_likelihood(pjk=pjk2, n.ik=an.ik, diffindex=diffindex, eps=eps)	
 	
+	if (! is.null(prior)){
+		M <- prior[1]
+		SD <- sqrt(prior[2])
+		ll0 <- ll0 + stats::dnorm( value, mean=M, sd = SD , log=TRUE)
+		ll1 <- ll1 + stats::dnorm( value+h, mean=M, sd = SD , log=TRUE)
+		ll2 <- ll2 + stats::dnorm( value-h, mean=M, sd = SD , log=TRUE)
+	}
+		
 	#-- discrete differences
 	res <- rm_numdiff_discrete_differences(ll0=ll0, ll1=ll1, ll2=ll2, h=h)
 	d1 <- res$d1

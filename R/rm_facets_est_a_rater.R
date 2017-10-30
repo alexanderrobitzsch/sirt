@@ -1,5 +1,5 @@
 ## File Name: rm_facets_est_a_rater.R
-## File Version: 0.05
+## File Version: 0.06
 
 
 #####################################################
@@ -7,7 +7,7 @@
 rm_facets_est_a_rater <- function( b.item , b.rater , Qmatrix , tau.item ,
         VV , K , I , TP , a.item , a.rater , item.index , rater.index ,
         n.ik , numdiff.parm=.001 , max.b.increment=1,theta.k , msteps ,
-		mstepconv , a.rater.center , a.rater.fixed, a_lower=.05, a_upper=10 )
+		mstepconv , a.rater.center , a.rater.fixed, a_lower, a_upper )
 {
     h <- numdiff.parm
 	diffindex <- rater.index

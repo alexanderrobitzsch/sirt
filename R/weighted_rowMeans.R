@@ -1,7 +1,8 @@
 ## File Name: weighted_rowMeans.R
-## File Version: 0.04
+## File Version: 0.05
 
-weighted_rowMeans <- function( mat , wgt=NULL){
+weighted_rowMeans <- function( mat , wgt=NULL)
+{
 	wgt <- weighted_stats_extend_wgt( wgt=wgt , mat=mat )
 	mat1 <- rowSums( mat * wgt , na.rm=TRUE) 
 	mat2 <- rowSums( wgt , na.rm=TRUE) 

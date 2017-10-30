@@ -1,5 +1,5 @@
 %% File Name: rm.facets.Rd
-%% File Version: 0.51
+%% File Version: 0.57
 
 \name{rm.facets}
 \alias{rm.facets}
@@ -30,11 +30,12 @@ maximum likelihood.
 
 \usage{
 rm.facets(dat, pid=NULL, rater=NULL, Qmatrix=NULL, theta.k=seq(-9, 9, len=30), 
-    est.b.rater=TRUE, est.a.item=FALSE, est.a.rater=FALSE, est.mean=FALSE ,
-    tau.item.fixed=NULL , a.item.fixed=NULL , b.rater.fixed=NULL , a.rater.fixed=NULL ,
-    b.rater.center=2, a.rater.center=2, a.item.center=2, max.b.increment=1, 
-    numdiff.parm=0.00001, maxdevchange=0.1, globconv=0.001, 
-    maxiter=1000, msteps=4, mstepconv=0.001, PEM=FALSE, PEM_itermax=maxiter)
+    est.b.rater=TRUE, est.a.item=FALSE, est.a.rater=FALSE, rater_item_int=FALSE, est.mean=FALSE,
+    tau.item.fixed=NULL, a.item.fixed=NULL, b.rater.fixed=NULL, a.rater.fixed=NULL,
+    b.rater.center=2, a.rater.center=2, a.item.center=2, a_lower=.05, a_upper=10, 
+    reference_rater = NULL, max.b.increment=1, numdiff.parm=0.00001, maxdevchange=0.1, 
+    globconv=0.001, maxiter=1000, msteps=4, mstepconv=0.001, 
+    PEM=FALSE, PEM_itermax=maxiter)
     
 \method{summary}{rm.facets}(object, file=NULL, ...)	  
 
@@ -83,6 +84,8 @@ Should the item slopes \eqn{a_i} be estimated?
   \item{est.a.rater}{
 Should the rater slopes \eqn{a_r} be estimated?
 }
+\item{rater_item_int}{Logical indicating whether rater-item-interactions
+should be modelled.}
 \item{est.mean}{Optional logical indicating whether the mean of the 
 trait distribution should be estimated.}
 \item{tau.item.fixed}{Matrix with fixed \eqn{\tau} parameters. Non-fixed
@@ -99,7 +102,11 @@ parameters must be declared by \code{NA} values.}
 \item{a.item.center}{Centering method for item discrimination parameters. The
 	value \code{0} corresponds to no centering, the values \code{1} and
 \code{2} to different methods to ensure that their product equals one.}  
-  \item{max.b.increment}{
+\item{a_lower}{Lower bound for \eqn{a} parameters}
+\item{a_upper}{Upper bound for \eqn{a} parameters}
+\item{reference_rater}{Identifier for rater as a reference rater for which
+a fixed rater mean of 0 and a fixed rater slope of 1 is assumed.}
+\item{max.b.increment}{
 Maximum increment of item parameters during estimation
 }
   \item{numdiff.parm}{
@@ -255,12 +262,11 @@ dat <- data.ratings1
 # select rater db01
 dat <- dat[ paste(dat$rater) == "db01" , ]
 
-# Model 1: Partial Credit Model
+#****  Model 1: Partial Credit Model
 mod1 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , pid=dat$idstud )
 
-# Model 2: Generalized Partial Credit Model
-mod2 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] ,  pid=dat$idstud  , 
-           est.a.item=TRUE)
+#****  Model 2: Generalized Partial Credit Model
+mod2 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ],  pid=dat$idstud, est.a.item=TRUE)
 
 summary(mod1)
 summary(mod2)
@@ -273,11 +279,11 @@ summary(mod2)
 data(data.ratings1)
 dat <- data.ratings1
 
-# Model 1: Partial Credit Model: no rater effects
+#****  Model 1: Partial Credit Model: no rater effects
 mod1 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
              pid=dat$idstud  , est.b.rater=FALSE )
 
-# Model 2: Partial Credit Model: intercept rater effects
+#****  Model 2: Partial Credit Model: intercept rater effects
 mod2 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ], rater=dat$rater, pid=dat$idstud)
 
 # extract individual likelihood
@@ -301,14 +307,14 @@ IRT.factor.scores(mod2)
 # extract WLEs
 IRT.factor.scores(mod2 , type="WLE")
 
-# Model 2a: compare results with TAM package
+#****  Model 2a: compare results with TAM package
 #   Results should be similar to Model 2
 library(TAM)
 mod2a <- TAM::tam.mml.mfr( resp= dat[ , paste0( "k",1:5) ] , 
              facets= dat[ , "rater" , drop=FALSE] ,
              pid= dat$pid , formulaA = ~ item*step + rater )
 
-# Model 2b: Partial Credit Model: some fixed parameters
+#****  Model 2b: Partial Credit Model: some fixed parameters
 # fix rater parameters for raters 1, 4 and 5
 b.rater.fixed <- rep(NA,7)
 b.rater.fixed[ c(1,4,5) ] <- c(1,-.8,0)  # fixed parameters
@@ -320,17 +326,17 @@ mod2b <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater  ,
              est.mean = TRUE , pid=dat$idstud)
 summary(mod2b)             
              
-# Model 3: estimated rater slopes
+#****  Model 3: estimated rater slopes
 mod3 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
             est.a.rater=TRUE)
 
-# Model 4: estimated item slopes
+#****  Model 4: estimated item slopes
 mod4 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
              pid=dat$idstud, est.a.item=TRUE)
 
-# Model 5: estimated rater and item slopes
-mod5 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
-             pid=dat$idstud  , est.a.rater=TRUE , est.a.item=TRUE)
+#****  Model 5: estimated rater and item slopes
+mod5 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ], rater=dat$rater , 
+             pid=dat$idstud, est.a.rater=TRUE, est.a.item=TRUE)
 summary(mod1)
 summary(mod2)
 summary(mod2a)
@@ -338,7 +344,7 @@ summary(mod3)
 summary(mod4)
 summary(mod5)
 
-# Model 5a: Some fixed parameters in Model 5
+#****  Model 5a: Some fixed parameters in Model 5
 # fix rater b parameters for raters 1, 4 and 5
 b.rater.fixed <- rep(NA,7)
 b.rater.fixed[ c(1,4,5) ] <- c(1,-.8,0)
@@ -358,6 +364,18 @@ mod5a <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
              a.rater.fixed=a.rater.fixed , a.item.fixed=a.item.fixed , 
              est.mean=TRUE)
 summary(mod5a)
+
+#****  Model 6: Estimate rater model with reference rater 'db03'
+mod6 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ], rater=dat$rater, est.a.item=TRUE, 
+             est.a.rater=TRUE, pid=dat$idstud, reference_rater="db03" )
+summary(mod6)
+
+#**** Model 7: Modelling rater-item-interactions 
+mod7 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater, est.a.item=FALSE, 
+             est.a.rater=TRUE, pid=dat$idstud, reference_rater="db03", 
+             rater_item_int=TRUE) 
+summary(mod7)
+
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

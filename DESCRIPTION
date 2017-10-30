@@ -1,8 +1,8 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 2.3-24
-Date: 2017-10-27 13:39:14
+Version: 2.3-39
+Date: 2017-10-30 16:22:18
 Author: Alexander Robitzsch [aut,cre]
 Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
 Description: 

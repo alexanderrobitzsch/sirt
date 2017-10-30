@@ -1,11 +1,11 @@
 ## File Name: rm_hrm_calcprobs.R
-## File Version: 0.04
+## File Version: 0.07
 
 ################################################################
 # calculate probabilities
 rm_hrm_calcprobs <- function(  c.rater , Qmatrix , tau.item ,
 				VV , K , I , TP , a.item , d.rater , item.index , rater.index ,
-				theta.k ,RR , prob.item=NULL , prob.rater = NULL )
+				theta.k ,RR , prob.item=NULL , prob.rater = NULL, output_prob_total=FALSE )
 {
 	# calculate probabilities for true ratings
 	a <- a.item
@@ -38,8 +38,15 @@ rm_hrm_calcprobs <- function(  c.rater , Qmatrix , tau.item ,
 		y <- rm_sdt_arraymult1( A=AM, dimA=dimA, B=BM, dimB=dimB )
 		prob.categ <- array( y , dim= c(dimA[c(1,2)],dimB[3]) )    
 	}
+	#-- restrict prob.total
+	prob.total <- prob.categ
+	eps <- 1E-4
+	prob.total[ prob.total < eps ] <- eps	
 	#--- output
-	res <- list(prob.total=prob.categ , prob.rater=prob.rater , prob.item	= res )
+	res <- list(prob.total=prob.total , prob.rater=prob.rater, prob.item=res )
+	if (output_prob_total){
+		res <- res$prob.total
+	}
 	return(res)	
 }
 #############################################################

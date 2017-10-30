@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_pem_acceleration.R
-## File Version: 0.08
+## File Version: 0.09
 
 rm_sdt_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter_sequence,
 		c.rater, Qmatrix, tau.item, VV, K, I, TP, a.item, d.rater, item.index, rater.index, theta.k, RR, 
@@ -46,6 +46,10 @@ rm_sdt_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter_se
 							pem_parameter_index=pem_parameter_index ) 
 			res <- do.call( what=rm_sdt_calc_loglikelihood, args = ll_args )
 			ll <- res$ll
+			if (is.na(ll)){
+				ll <- -Inf
+				iterate <- FALSE
+			}
 			if ( ll < ll0 ){
 				iterate <- FALSE				
 			}

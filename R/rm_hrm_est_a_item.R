@@ -1,5 +1,5 @@
 ## File Name: rm_hrm_est_a_item.R
-## File Version: 0.06
+## File Version: 0.09
 
 
 #########################################################################
@@ -7,7 +7,7 @@ rm_hrm_est_a_item <- function( c.rater , Qmatrix , tau.item ,
 				VV , K , I , TP , a.item , d.rater , item.index , rater.index ,
 				n.ik , numdiff.parm , max.b.increment=1,theta.k ,
 				msteps, mstepconv , prob.rater , a.item.fixed, a_lower=.05, a_upper=999,
-				a_center_type = 2, a.item0)
+				a_center_type = 2, a.item0, a.prior)
 {
     h <- numdiff.parm
 	diffindex <- item.index
@@ -37,7 +37,7 @@ rm_hrm_est_a_item <- function( c.rater , Qmatrix , tau.item ,
 		
 		#-- increments
 		res <- rm_numdiff_index( pjk=pjk, pjk1=pjk1, pjk2=pjk2, n.ik=n.ik, diffindex=diffindex, 
-					max.increment=max.b.increment, numdiff.parm=numdiff.parm ) 			
+					max.increment=max.b.increment, numdiff.parm=numdiff.parm, prior=a.prior, value=a.item )
 		a.item <- a.item + res$increment
 		#-- bound parameter estimates
 		a.item <- rm_squeeze(x=a.item, lower=a_lower, upper=a_upper )

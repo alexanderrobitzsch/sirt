@@ -1,10 +1,10 @@
 ## File Name: rm_facets_pem_acceleration.R
-## File Version: 0.03
+## File Version: 0.11
 
 rm_facets_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter_sequence,
 		a.rater, Qmatrix, tau.item, VV, K, I, TP, a.item, b.item, b.rater, item.index, rater.index, theta.k, RR, 
 		dat2, dat2.resp, pi.k, dat2.ind.resp, ll, mu, sigma, pem_pars, a_center_type,
-		PEM_itermax,  b.rater.center , a.rater.center, a.item.center ) 
+		PEM_itermax,  b.rater.center , a.rater.center, a.item.center, a_lower, a_upper ) 
 {		
 	PEM <- TRUE
 	#-- collect all parameters in a list
@@ -23,7 +23,8 @@ rm_facets_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter
 						a.item=a.item, b.rater=b.rater, item.index=item.index, rater.index=rater.index, 
 						theta.k=theta.k, RR=RR, dat2=dat2, dat2.resp=dat2.resp, pi.k=NULL, 
 						dat2.ind.resp=dat2.ind.resp, mu=mu, sigma=sigma, b.rater.center=b.rater.center, 
-						a.rater.center=a.rater.center, a.item.center=a.item.center ) 						
+						a.rater.center=a.rater.center, a.item.center=a.item.center, a_lower=a_lower, a_upper=a_upper
+						) 						
 		#** baseline likelihood
 		ll_args <- sirt_pem_include_ll_args( ll_args=ll_args, pem_parm=pem_parm, pem_pars=pem_pars, 
 							pem_parameter_index=pem_parameter_index ) 
@@ -45,11 +46,17 @@ rm_facets_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter
 							pem_parameter_index=pem_parameter_index ) 
 			res <- do.call( what=rm_facets_calc_loglikelihood, args = ll_args )
 			ll <- res$ll
+			if ( is.na(ll) ){
+				ll <- - Inf
+				iterate <- FALSE
+			}
 			if ( ll < ll0 ){
 				iterate <- FALSE				
 			}
 			ii <- ii + 1
-		}		
+		}
+		#-- end PEM iterations
+	
 		tau.item <- ll_args0$tau.item
 		mu <- ll_args0$mu
 		sigma <- ll_args0$sigma		

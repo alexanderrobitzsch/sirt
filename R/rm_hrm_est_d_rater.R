@@ -1,5 +1,5 @@
 ## File Name: rm_hrm_est_d_rater.R
-## File Version: 0.02
+## File Version: 0.12
 
 
 
@@ -8,41 +8,39 @@
 rm_hrm_est_d_rater <- function(  c.rater , Qmatrix , tau.item ,
 					VV , K , I , TP , a.item , d.rater , item.index , rater.index ,
 					n.ik , numdiff.parm, max.b.increment=1,theta.k ,
-					msteps , mstepconv , d.min , d.max , est.d.rater , prob.item, d.rater0 )
+					msteps , mstepconv , d.min , d.max , est.d.rater , prob.item, d.rater0, diffindex,
+					d.prior )
 {
-    h <- numdiff.parm
-	
-	if (est.d.rater=="r"){ diffindex <- rater.index }
-	if (est.d.rater=="i"){ diffindex <- item.index }
-	if (est.d.rater=="e"){ diffindex <- rep(1,I) }	
-	if (est.d.rater=="a"){ diffindex <- 1:I }			
+    h <- numdiff.parm			
 	
 	RR <- I/VV	
 	cat("  M steps d.rater parameter    |")
 	it <- 0
 	conv1 <- 1000
+	ND <- length(d.rater)
 	
 	#-- input calcprobs
 	args <- list( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
 					d.rater=d.rater, item.index=item.index, rater.index=rater.index, theta.k=theta.k, RR=RR, 
-					prob.item=prob.item, prob.rater=NULL )
-	
+					prob.item=prob.item, prob.rater=NULL, output_prob_total=TRUE )
+
 	#--- begin M-steps
 	while( ( it < msteps ) & ( conv1 > mstepconv ) ){
 		b0 <- d.rater
 
 		args$d.rater <- d.rater
-		pjk <- do.call(what=rm_hrm_calcprobs, args=args)$prob.total						
-
+		pjk <- do.call(what=rm_hrm_calcprobs, args=args)
+		
 		args$d.rater <- d.rater + h
-		pjk1 <- do.call(what=rm_hrm_calcprobs, args=args)$prob.total						
+		pjk1 <- do.call(what=rm_hrm_calcprobs, args=args)
 
 		args$d.rater <- d.rater - h
-		pjk2 <- do.call(what=rm_hrm_calcprobs, args=args)$prob.total						
+		pjk2 <- do.call(what=rm_hrm_calcprobs, args=args)
 		
 		#-- increments
 		res <- rm_numdiff_index( pjk=pjk, pjk1=pjk1, pjk2=pjk2, n.ik=n.ik, diffindex=diffindex, 
-					max.increment=max.b.increment, numdiff.parm=numdiff.parm ) 	
+					max.increment=max.b.increment, numdiff.parm=numdiff.parm, prior=d.prior, 
+					value=d.rater ) 	
 		d.rater <- d.rater + res$increment[diffindex]
 		d.rater[ d.rater < d.min ] <- d.min		
 		d.rater[ d.rater > d.max ] <- d.max				

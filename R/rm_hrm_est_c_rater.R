@@ -1,5 +1,5 @@
 ## File Name: rm_hrm_est_c_rater.R
-## File Version: 0.11
+## File Version: 0.25
 
 ###################################################			
 # c.rater
@@ -7,24 +7,23 @@ rm_hrm_est_c_rater <- function(  c.rater , Qmatrix , tau.item ,
 					VV , K , I , TP , a.item , d.rater , item.index , rater.index ,
 					n.ik , numdiff.parm, max.b.increment=1,theta.k ,
 					msteps , mstepconv , est.c.rater , prob.item ,
-					c.rater.fixed, c.rater0 )
+					c.rater.fixed, c.rater0, diffindex, c.prior )
 {
     h <- numdiff.parm
-	if (est.c.rater=="r"){ diffindex <- rater.index }
-	if (est.c.rater=="i"){ diffindex <- item.index }
-	if (est.c.rater=="e"){ diffindex <- rep(1,I) }	
-	if (est.c.rater=="a"){ diffindex <- 1:I }		
+	
 	RR <- I/VV
 	cat("  M steps c.rater parameter    |")
 	it <- 0
 	conv1 <- 1000
 	se.c.rater <- 0 * c.rater
 	Q0 <- 0 * c.rater
+	c_prior_kk <- c.prior
 
 	#--- input calcprobs
 	args <- list( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
 						d.rater=d.rater, item.index=item.index, rater.index=rater.index, theta.k=theta.k, RR=RR, 
-						prob.item=prob.item, prob.rater=NULL )	
+						prob.item=prob.item, prob.rater=NULL, output_prob_total=TRUE  )	
+	mstep_fct <- rm_hrm_calcprobs
 	
 	#--- begin M-steps
 	while( ( it < msteps ) & ( conv1 > mstepconv ) ){
@@ -33,17 +32,17 @@ rm_hrm_est_c_rater <- function(  c.rater , Qmatrix , tau.item ,
 		for (kk in 1:K){	
 			Q1 <- Q0
 			Q1[,kk] <- 1			
-			
 			args$c.rater <- c.rater11
-			pjk <- do.call(what=rm_hrm_calcprobs, args=args)$prob.total	
+			pjk <- do.call(what=mstep_fct, args=args)
 			args$c.rater <- c.rater11 + h*Q1
-			pjk1 <- do.call(what=rm_hrm_calcprobs, args=args)$prob.total	
+			pjk1 <- do.call(what=mstep_fct, args=args)
 			args$c.rater <- c.rater11 - h*Q1
-			pjk2 <- do.call(what=rm_hrm_calcprobs, args=args)$prob.total	
+			pjk2 <- do.call(what=mstep_fct, args=args)
 			
 			#-- increments
+			c_prior_kk[1] <- c.prior[1] * ( kk - 0.5 )
 			res <- rm_numdiff_index( pjk=pjk, pjk1=pjk1, pjk2=pjk2, n.ik=n.ik, diffindex=diffindex, 
-						max.increment=max.b.increment, numdiff.parm=numdiff.parm ) 								
+						max.increment=max.b.increment, numdiff.parm=numdiff.parm, prior=c_prior_kk, value=c.rater[,kk] ) 								
 			c.rater[,kk] <- c.rater[,kk] + res$increment[diffindex]
 			se.c.rater[,kk] <- ( sqrt( abs(-1/res$d2) ) )[diffindex ]
 			if (kk>1){ 

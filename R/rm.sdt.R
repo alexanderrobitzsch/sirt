@@ -1,5 +1,5 @@
 ## File Name: rm.sdt.R
-## File Version: 8.542
+## File Version: 8.553
 
 #################################################################
 # Hierarchical rater model
@@ -8,7 +8,8 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	est.a.item=FALSE , est.c.rater= "n" , 
 	est.d.rater= "n" , est.mean = FALSE , skillspace="normal" , 
 	tau.item.fixed = NULL , a.item.fixed = NULL , 
-	d.min=.5 , d.max=100 ,  d.start = 3 , 
+	d.min=.5 , d.max=100 ,  d.start = 3,  
+	d.prior = c(3,100), c.prior=c(3,100), tau.prior=c(0,1000), a.prior=c(1,100), 
 	max.increment=1 , numdiff.parm=.00001 , maxdevchange=.10 ,
 	globconv=.001 , maxiter=1000 , msteps=4 , mstepconv=.001, fac_incr=.99,
 	PEM=FALSE, PEM_itermax=maxiter )
@@ -22,7 +23,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	a_center_type <- 2	
 	
 	#-- process data
-	procdata <- res <- rm_proc( dat=dat , rater=rater , pid=pid )
+	procdata <- res <- rm_proc_data( dat=dat , rater=rater , pid=pid )
 	dat2 <- as.matrix(res$dat2)
 	dat2.resp <- as.matrix(res$dat2.resp)
 	rater.index1 <- res$rater.index
@@ -83,13 +84,16 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 		c.rater.fixed <- c.rater.fixed[ ! is.na( c.rater.fixed[,2] ) , ] 
 		c.rater[ c.rater.fixed[,1:2] ] <- c.rater.fixed[,3]		
 	}
+	
+	#--- indices for derivatives	
+    diffindex <- rm_sdt_prepare_diffindex( item.index=item.index, rater.index=rater.index, I=I, est.c.rater=est.c.rater, 
+					est.d.rater=est.d.rater ) 
 		
     # init standard errors
 	se.d.rater <- NA*d.rater
 	se.c.rater <- NA*c.rater
 	se.a.item <- NA*a.item
 	
-
 	d.rater.incr <- 2 
 	tau.item.incr  <- max.b.increment
 	c.rater.incr <- max.b.increment
@@ -153,7 +157,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 					d.rater=d.rater, item.index=item.index, rater.index=rater.index, n.ik=n.ik, 
 					numdiff.parm=numdiff.parm, max.b.increment=tau.item.incr, theta.k=theta.k, 
 					msteps=msteps, mstepconv=mstepconv, tau.item.fixed=tau.item.fixed, 
-					prob.rater=prob.rater, tau.item0=tau.item0 ) 
+					prob.rater=prob.rater, tau.item0=tau.item0, tau.prior=tau.prior ) 
 		tau.item <- res$tau.item
 		se.tau.item <- res$se.tau.item
 		g1  <- abs( tau.item0 - tau.item )
@@ -167,7 +171,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 						d.rater=d.rater, item.index=item.index, rater.index=rater.index, n.ik=n.ik, 
 						numdiff.parm=numdiff.parm, max.b.increment=a.item.incr, theta.k=theta.k, msteps=msteps, 
 						mstepconv=mstepconv, prob.rater=prob.rater, a.item.fixed=a.item.fixed, a_center_type = a_center_type,
-						a.item0=a.item0) 
+						a.item0=a.item0, a.prior=a.prior) 
 			a.item <- res$a.item
 			se.a.item <- res$se.a.item
 			# a.item.incr <- abs( a.item0 - a.item )
@@ -181,21 +185,20 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 						d.rater=d.rater, item.index=item.index, rater.index=rater.index, n.ik=n.ik, 
 						numdiff.parm=numdiff.parm, max.b.increment=d.rater.incr, theta.k=theta.k, 
 						msteps=msteps, mstepconv=mstepconv, d.min=d.min, d.max=d.max, est.d.rater=est.d.rater, 
-						prob.item=prob.item, d.rater0=d.rater0 ) 
+						prob.item=prob.item, d.rater0=d.rater0, diffindex = diffindex$d.rater, d.prior=d.prior ) 
 			d.rater <- res$d.rater
-			se.d.rater <- res$se.d.rater	
-			# g1 <- .99^iter * abs( d.rater0 - d.rater )
+			se.d.rater <- res$se.d.rater
 			g1 <- fac_incr^iter
 			d.rater.incr <- max(g1)			
 		}				
 					
 		#-- estimate c.rater parameter
-		if( est.c.rater != "n" ){	
+		if( est.c.rater != "n" ){			
 			res <- rm_hrm_est_c_rater( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
 						d.rater=d.rater, item.index=item.index, rater.index=rater.index, n.ik=n.ik, 
 						numdiff.parm=numdiff.parm, max.b.increment=c.rater.incr, theta.k=theta.k, 
 						msteps=msteps, mstepconv=mstepconv, est.c.rater=est.c.rater, prob.item=prob.item, 
-						c.rater.fixed=c.rater.fixed, c.rater0=c.rater0 ) 
+						c.rater.fixed=c.rater.fixed, c.rater0=c.rater0, diffindex=diffindex$c.rater, c.prior=c.prior ) 
 			c.rater <- res$c.rater
 			se.c.rater <- res$se.c.rater
 			g1 <- abs( c.rater0 - c.rater )
@@ -246,7 +249,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 		
 	}
 	#---------------------------- end EM algorithm
-				
+
 	# *********
 	# arrange OUTPUT
 	
@@ -309,7 +312,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	ic <- rm_ic_criteria(ic=ic)	
 	
 	#---
-	# person
+	# person parameters
 	res <- rm_facets_postproc_person( dat2=dat2, dat2.resp=dat2.resp, procdata=procdata, maxK=maxK, RR=RR, theta.k=theta.k, 
 				f.qk.yi=f.qk.yi ) 
 	person <- res$person

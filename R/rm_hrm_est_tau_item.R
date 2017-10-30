@@ -1,12 +1,12 @@
 ## File Name: rm_hrm_est_tau_item.R
-## File Version: 0.11
+## File Version: 0.15
 
 		
 #####################################################################
 rm_hrm_est_tau_item <- function( c.rater , Qmatrix , tau.item ,
 				VV , K , I , TP , a.item , d.rater , item.index , rater.index ,
 				n.ik , numdiff.parm , max.b.increment=1  , theta.k ,
-				msteps, mstepconv , tau.item.fixed , prob.rater, tau.item0 )
+				msteps, mstepconv , tau.item.fixed , prob.rater, tau.item0, tau.prior )
 {
     h <- numdiff.parm
 	diffindex <- item.index
@@ -40,10 +40,10 @@ rm_hrm_est_tau_item <- function( c.rater , Qmatrix , tau.item ,
 			
 			args$tau.item <- tau.item11 - h*Q1			
 			pjk2 <- do.call(what=rm_hrm_calcprobs, args=args)$prob.total
-				
+
 			#-- increment
 			res <- rm_numdiff_index( pjk=pjk, pjk1=pjk1, pjk2=pjk2, n.ik=n.ik, diffindex=diffindex, 
-						max.increment=max.b.increment, numdiff.parm=numdiff.parm ) 
+						max.increment=max.b.increment, numdiff.parm=numdiff.parm, prior=tau.prior, value=tau.item[,kk] ) 
 			increment <- Q1 * matrix( res$increment , nrow=VV , ncol=K)	
 			tau.item <- tau.item + increment
 			se.tau.item[,kk] <- sqrt(abs(-1/res$d2)	)
@@ -54,6 +54,7 @@ rm_hrm_est_tau_item <- function( c.rater , Qmatrix , tau.item ,
 		if ( !is.null(tau.item.fixed) ){
 			tau.item[ tau.item.fixed[,1:2,drop=FALSE] ] <- tau.item.fixed[,3]
 		}
+		
 	}
 	#---- end M-steps
 	

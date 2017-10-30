@@ -1,5 +1,5 @@
 ## File Name: prmse.subscores.R
-## File Version: 0.05
+## File Version: 0.06
 
 #--------------------------------------------------------------------------
 # calculation of PRMSE for Subscores according to Haberman (2007)
@@ -38,7 +38,7 @@ prmse.subscores <- function( data.X , data.Z){
     res$cor.TX_TZ <- res$cor.X_Z / sqrt( res$alpha.X * res$alpha.Z ) - 
                         res$Var.EX / sqrt( res$Var.TX * res$Var.Z )
     res$cor.TX_Z <- res$cor.TX_TZ * sqrt( res$alpha.Z )
-    # RMSE basierend auf Subscores (Kelleyformel)
+    # RMSE basierend auf Subscores (Kelley formula)
     res$rmse.X <- sqrt( res$Var.TX * ( 1 - res$alpha.X ) )
     # RMSE basierend auf Total Scores
     res$rmse.Z <- sqrt( res$Var.TX * ( 1 - res$cor.TX_Z^2 ) )

@@ -1,7 +1,7 @@
 ## File Name: rm_grouped_expected_likelihood.R
-## File Version: 0.01
+## File Version: 0.03
 
-rm_grouped_expected_likelihood <- function(pjk, n.ik, diffindex=NULL, eps=1E-80)
+rm_grouped_expected_likelihood <- function(pjk, n.ik, diffindex=NULL, eps=1E-30)
 {
     ll0 <- rowSums( n.ik * log(pjk+eps) )
 	if ( ! is.null(diffindex) ){
