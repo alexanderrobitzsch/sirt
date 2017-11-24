@@ -1,5 +1,5 @@
 ## File Name: btm.R
-## File Version: 1.21
+## File Version: 1.23
 
 ###############################################
 # Bradley-Terry model in sirt
@@ -8,29 +8,28 @@ btm <- function( data ,	ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL ,
 {
 
 	s1 <- Sys.time()
-	CALL <- match.call()		
+	CALL <- match.call()
 	admiss <- c(0,1,.5)
 	est.delta <- TRUE
 	est.eta <- TRUE
 	delta <- -1
 	eta <- 0
 	center.theta <- TRUE
-		
 	if ( ! is.null( fix.eta ) ){
 		eta <- fix.eta
 		est.eta <- FALSE
-	}		
-		
+	}
+
 	if ( ignore.ties ){ 
 		admiss <- admiss[1:2] 
 		delta <- -99
 		est.delta <- FALSE
 	}
-		
+
 	data <- data[ ! is.na( data[,3] ) , ]
 	data <- data[ data[,3] %in% admiss , ]		
 	dat0 <- dat <- data
-					
+
 	# teams
 	teams <- unique( sort( c( paste(dat[,1] ) , paste(dat[,2] ) ) ) )
 	dat0[,1] <- match( paste( dat0[,1] ) , teams )
@@ -82,15 +81,15 @@ btm <- function( data ,	ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL ,
 		if ( sum( is.na( fix.theta.index ) ) > 0 ){
 			stop( paste0( "Cannot find all individuals with fixed values\n" ,
 					"  in 'fixed.theta'\n") )
-		}			
+		}
 		some.fixed.theta <- TRUE
 		center.theta <- FALSE
 	}
 		
 	# number of dyads
-	ND <-  nrow(dat0)
+	ND <- nrow(dat0)
 	max.change <- 1E5
-	iter <- 0			
+	iter <- 0
 	incrfac <- .98
 	maxincr <- 1
 	se.delta <- NA
@@ -178,12 +177,12 @@ btm <- function( data ,	ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL ,
 		if (center.theta){
 			theta <- theta - mean(theta2 , na.rm=TRUE)	
 		}
-							
+
 		if (some.fixed.theta){
 			theta[ fix.theta.index ] <- fix.theta
 			se.theta[ fix.theta.index ] <- NA
 		}
-													
+
 		# assess convergence			
 		iter <- iter + 1		
 		theta_ch <- abs( theta - theta0 )
@@ -227,7 +226,7 @@ btm <- function( data ,	ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL ,
 	theta2 <- theta
 	theta2[ abs(theta) %in% Inf ] <- NA	
 	summary.effects <- data.frame( 
-			        "M" = mean(theta2,na.rm=TRUE) ,
+					"M" = mean(theta2,na.rm=TRUE) ,
 					"median" = stats::median(theta) ,
 					"SD" = stats::sd(theta2,na.rm=TRUE) , 
 					"min" = min(theta) ,

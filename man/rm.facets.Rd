@@ -1,5 +1,5 @@
 %% File Name: rm.facets.Rd
-%% File Version: 0.57
+%% File Version: 0.59
 
 \name{rm.facets}
 \alias{rm.facets}
@@ -28,13 +28,14 @@ maximum likelihood.
 %% ARGUMENTS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \usage{
 rm.facets(dat, pid=NULL, rater=NULL, Qmatrix=NULL, theta.k=seq(-9, 9, len=30), 
-    est.b.rater=TRUE, est.a.item=FALSE, est.a.rater=FALSE, rater_item_int=FALSE, est.mean=FALSE,
-    tau.item.fixed=NULL, a.item.fixed=NULL, b.rater.fixed=NULL, a.rater.fixed=NULL,
-    b.rater.center=2, a.rater.center=2, a.item.center=2, a_lower=.05, a_upper=10, 
-    reference_rater = NULL, max.b.increment=1, numdiff.parm=0.00001, maxdevchange=0.1, 
-    globconv=0.001, maxiter=1000, msteps=4, mstepconv=0.001, 
+    est.b.rater=TRUE, est.a.item=FALSE, est.a.rater=FALSE, rater_item_int=FALSE, 
+    est.mean=FALSE, tau.item.fixed=NULL, a.item.fixed=NULL, b.rater.fixed=NULL, 
+    a.rater.fixed=NULL, b.rater.center=2, a.rater.center=2, a.item.center=2, a_lower=.05, 
+    a_upper=10, reference_rater = NULL, max.b.increment=1, numdiff.parm=0.00001, 
+    maxdevchange=0.1, globconv=0.001, maxiter=1000, msteps=4, mstepconv=0.001, 
     PEM=FALSE, PEM_itermax=maxiter)
     
 \method{summary}{rm.facets}(object, file=NULL, ...)	  

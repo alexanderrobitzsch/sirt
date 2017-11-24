@@ -1,5 +1,5 @@
 //// File Name: rm_smirt_mml2_code.cpp
-//// File Version: 5.15
+//// File Version: 5.16
 // [[Rcpp::depends(RcppArmadillo)]]
 
 #include <RcppArmadillo.h>
@@ -24,28 +24,25 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 Rcpp::NumericMatrix rm_arraymult1( Rcpp::NumericMatrix AA, 
 	Rcpp::NumericVector dimAA, Rcpp::NumericMatrix BB, 
-	Rcpp::NumericVector dimBB ){
-           
-      Rcpp::NumericMatrix CC( dimAA[0]*dimAA[1] , dimBB[2] ) ; 
-      int a1 = dimAA[0];
-      int a2 = dimAA[1];
-      int a3 = dimAA[2];
-      int b3 = dimBB[2]; 
-      
-      // ii -> loop within a matrix
-      //for (int ii=0 ; ii < a1 ; ++ii ){
-      for (int zz=0 ; zz < a2 ; ++zz){
-          for (int ii=0 ; ii < a1 ; ++ii ){        
-              for (int hh=0 ; hh < b3 ; ++hh){ // loop over columns
-                  for (int kk=0 ; kk < a3 ; ++kk){
-                      CC(ii+zz*a1,hh) += AA(ii+zz*a1,kk)*BB(ii+a1*kk,hh)  ; // *BB(kk,hh) ;
-                              }
-                          }
-                      }
-                  }
-      
-      // output
-      return CC;
+	Rcpp::NumericVector dimBB )
+{
+	Rcpp::NumericMatrix CC( dimAA[0]*dimAA[1] , dimBB[2] ) ; 
+	int a1 = dimAA[0];
+	int a2 = dimAA[1];
+	int a3 = dimAA[2];
+	int b3 = dimBB[2]; 
+	for (int zz=0 ; zz < a2 ; ++zz){
+		for (int ii=0 ; ii < a1 ; ++ii ){        
+			for (int hh=0 ; hh < b3 ; ++hh){ // loop over columns
+				for (int kk=0 ; kk < a3 ; ++kk){
+					CC(ii+zz*a1,hh) += AA(ii+zz*a1,kk)*BB(ii+a1*kk,hh)  ; // *BB(kk,hh) ;
+				}
+			}
+		}
+	}
+
+	// output
+	return CC;
 }
 
 
@@ -64,36 +61,33 @@ Rcpp::NumericMatrix rm_arraymult1( Rcpp::NumericMatrix AA,
 // [[Rcpp::export]]
 Rcpp::List RM_CALCPOST( Rcpp::NumericMatrix DAT2, 
 	Rcpp::NumericMatrix DAT2RESP, Rcpp::NumericMatrix PROBS, 
-	Rcpp::NumericVector KK ){
-         
-     int N=DAT2.nrow();  
-     int I=DAT2.ncol();  
-     int TP=PROBS.ncol();  
-     int KKK = KK[0] + 1 ;   
-       
-     //*****  
-     // calculate individual likelihood  
-     Rcpp::NumericMatrix fyiqk (N,TP) ;  
-     fyiqk.fill(1);  
-     for (int ii=0;ii<I;++ii){      
-     for (int nn=0;nn<N;++nn){  
-         if ( DAT2RESP(nn,ii)>0){  
-         for (int tt=0;tt<TP;++tt){  
-             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( KKK*ii + DAT2(nn,ii) , tt ) ;  
-                         }  
-                     }  
-                 }  
-             }  
-       		  
-     ///////////////////////////////////////////////////////  
-     ///////////// O U T P U T   ///////////////////////////  
-     return Rcpp::List::create(
-            Rcpp::_["fyiqk"] = fyiqk 
-                );  		
+	Rcpp::NumericVector KK )
+{
+
+	int N=DAT2.nrow();  
+	int I=DAT2.ncol();  
+	int TP=PROBS.ncol();  
+	int KKK = KK[0] + 1 ;   
+
+	//*****  
+	// calculate individual likelihood  
+	Rcpp::NumericMatrix fyiqk (N,TP) ;  
+	fyiqk.fill(1);  
+	for (int ii=0;ii<I;++ii){      
+		for (int nn=0;nn<N;++nn){  
+			if ( DAT2RESP(nn,ii)>0){  
+				for (int tt=0;tt<TP;++tt){  
+					fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( KKK*ii + DAT2(nn,ii) , tt ) ;  
+				}
+			}
+		}
+	}
+	///////////////////////////////////////////////////////  
+	///////////// O U T P U T   ///////////////////////////  
+	return Rcpp::List::create(
+			Rcpp::Named("fyiqk") = fyiqk 
+		); 
 }
-
-
-
 
 
 //**********************************************************************
@@ -109,7 +103,8 @@ Rcpp::List RM_CALCPOST( Rcpp::NumericMatrix DAT2,
 // [[Rcpp::export]]
 Rcpp::List rm_probraterfct1( Rcpp::NumericMatrix CRA, 
 	Rcpp::NumericVector DRA , Rcpp::IntegerVector dimAA, 
-	Rcpp::NumericMatrix BB, Rcpp::IntegerVector dimBB ){
+	Rcpp::NumericMatrix BB, Rcpp::IntegerVector dimBB )
+{
 
       int K = CRA.ncol();
       int I = CRA.nrow();
@@ -224,7 +219,8 @@ Rcpp::NumericMatrix rm_facets_calcprobs_cpp( Rcpp::NumericVector b_item,
 	Rcpp::NumericMatrix tau_item, int K, int I, int TP, 
 	Rcpp::NumericVector a_item, Rcpp::NumericVector a_rater, 
 	Rcpp::NumericVector item_index, Rcpp::NumericVector rater_index, 
-	Rcpp::NumericVector theta_k ){
+	Rcpp::NumericVector theta_k )
+{
 
      // int RR = as<int>(RR_);  
      //    probs <- .rm.facets.calcprobs( b.item , b.rater , Qmatrix , tau.item ,  
@@ -304,7 +300,8 @@ Rcpp::NumericMatrix rm_facets_calcprobs_cpp( Rcpp::NumericVector b_item,
 Rcpp::List SMIRT_CALCPOST( Rcpp::IntegerMatrix DAT2, 
 	Rcpp::IntegerMatrix DAT2RESP, Rcpp::NumericMatrix PROBS, 
 	Rcpp::NumericMatrix DAT2IND, Rcpp::NumericVector PIK, 
-	Rcpp::NumericVector KK1 ){
+	Rcpp::NumericVector KK1 )
+{
          
      int N=DAT2.nrow();  
      int I=DAT2.ncol();  
@@ -389,7 +386,8 @@ Rcpp::List SMIRT_CALCPOST( Rcpp::IntegerMatrix DAT2,
 Rcpp::NumericMatrix SMIRT_CALCPROB_COMP( Rcpp::NumericMatrix A, 
 	Rcpp::NumericVector B, Rcpp::NumericMatrix QQ, 
 	Rcpp::NumericMatrix THETA, Rcpp::NumericVector CC, 
-	Rcpp::NumericVector DD ){
+	Rcpp::NumericVector DD )
+{
  
     int I=A.nrow();
     int D=A.ncol();
@@ -441,7 +439,8 @@ Rcpp::NumericMatrix SMIRT_CALCPROB_COMP( Rcpp::NumericMatrix A,
 Rcpp::NumericMatrix SMIRT_CALCPROB_NONCOMP( Rcpp::NumericMatrix A, 
 	Rcpp::NumericMatrix B, Rcpp::NumericMatrix QQ, 
 	Rcpp::NumericMatrix THETA, Rcpp::NumericVector CC, 
-	Rcpp::NumericVector DD ){
+	Rcpp::NumericVector DD )
+{
         
      int I=A.nrow();  
      int D=A.ncol();  
@@ -493,7 +492,8 @@ Rcpp::NumericMatrix SMIRT_CALCPROB_NONCOMP( Rcpp::NumericMatrix A,
 Rcpp::NumericMatrix SMIRT_CALCPROB_PARTCOMP( Rcpp::NumericMatrix A, 
 	Rcpp::NumericMatrix B, Rcpp::NumericMatrix QQ, 
 	Rcpp::NumericMatrix THETA, Rcpp::NumericVector CC, 
-	Rcpp::NumericVector DD , Rcpp::NumericVector MUI ){
+	Rcpp::NumericVector DD , Rcpp::NumericVector MUI )
+{
        
      int I=A.nrow();  
      int D=A.ncol();  
@@ -544,7 +544,8 @@ Rcpp::NumericMatrix SMIRT_CALCPROB_PARTCOMP( Rcpp::NumericMatrix A,
 Rcpp::List MML2_RASCHTYPE_COUNTS( Rcpp::NumericMatrix DAT2, 
 	Rcpp::NumericMatrix DAT2RESP, Rcpp::NumericVector DAT1, 
 	Rcpp::NumericMatrix FQKYI, Rcpp::NumericVector PIK, 
-	Rcpp::NumericMatrix FYIQK ){
+	Rcpp::NumericMatrix FYIQK )
+{
 
      int N=DAT2.nrow();  
      int I=DAT2.ncol();  
@@ -612,7 +613,8 @@ Rcpp::List MML2_RASCHTYPE_COUNTS( Rcpp::NumericMatrix DAT2,
 ///** MML2_CALCPOST_V1
 // [[Rcpp::export]]
 Rcpp::List MML2_CALCPOST_V1( Rcpp::NumericMatrix DAT2, 
-	Rcpp::NumericMatrix DAT2RESP, Rcpp::NumericMatrix PROBS ){
+	Rcpp::NumericMatrix DAT2RESP, Rcpp::NumericMatrix PROBS )
+{
        
      int N=DAT2.nrow();  
      int I=DAT2.ncol();  
@@ -650,7 +652,8 @@ Rcpp::List MML2_CALCPOST_V1( Rcpp::NumericMatrix DAT2,
 ///** MML2_CALCPOST_V2
 // [[Rcpp::export]]
 Rcpp::List MML2_CALCPOST_V2( Rcpp::NumericMatrix DAT2, 
-	Rcpp::NumericMatrix DAT2RESP, Rcpp::NumericMatrix PROBS ){
+	Rcpp::NumericMatrix DAT2RESP, Rcpp::NumericMatrix PROBS )
+{
        
      int N=DAT2.nrow();  
      int I=DAT2.ncol();  
@@ -694,7 +697,8 @@ Rcpp::List MML2_CALCPOST_V2( Rcpp::NumericMatrix DAT2,
 ///** MML2_CALCPOST_V3
 // [[Rcpp::export]]
 Rcpp::List MML2_CALCPOST_V3( Rcpp::NumericMatrix DAT2,
-	Rcpp::NumericMatrix DAT2RESP, Rcpp::NumericMatrix PROBS ){
+	Rcpp::NumericMatrix DAT2RESP, Rcpp::NumericMatrix PROBS )
+{
        
      int N=DAT2.nrow();  
      int I=DAT2.ncol();  
@@ -726,12 +730,4 @@ Rcpp::List MML2_CALCPOST_V3( Rcpp::NumericMatrix DAT2,
                         );   
      	  
 }
-
-
-
-
-
-
-
-
 

@@ -1,5 +1,5 @@
 //// File Name: polychoric2_tetrachoric2_rcpp_aux.cpp
-//// File Version: 3.07
+//// File Version: 3.13
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -36,7 +36,7 @@ Rcpp::NumericVector tetrachoric2_rcpp_aux( Rcpp::NumericMatrix dfr,
      double incr=0;  
      double maxincr = 1e-9 ;
      double eps=1e-10;
-     
+	 
      int iter=0 ;  
        
      for (int zz = 0 ; zz<ZZ;zz++){  
@@ -44,26 +44,23 @@ Rcpp::NumericVector tetrachoric2_rcpp_aux( Rcpp::NumericMatrix dfr,
      	iter=0 ;   
      	aincr=1 ;  
      	  
-     	x[0] = dfr(zz,10 );  
-     	y[0] = dfr(zz,11 );  
+     	x[0] = dfr(zz,10);  
+     	y[0] = dfr(zz,11);  
      	rho[0] = dfr(zz,15) ;  
      	p11[0] = dfr(zz,7) ;  
      	  
      	while ( ( iter < maxiter ) & ( aincr > maxincr ) ){  
-     		L0 = pbivnorm2_rcpp( x , y , rho ) ;  
-     		L0h = pbivnorm2_rcpp( x , y , rho+numdiffparm ) ;  
+     		L0 = pbivnorm2_rcpp( x, y, rho );  
+     		L0h = pbivnorm2_rcpp( x, y, rho + numdiffparm ) ;  
      		L1 = ( L0h[0] - L0[0] ) / numdiffparm ;  
      		// Newton-Raphson step according Divgi (1979)  
      		incr = ( L0[0] - p11[0] ) / ( L1 + eps ) ;  
      		rho[0] = rho[0] - incr ;  
      		iter ++ ;  
      		if (incr <0){ aincr = - incr ; } else { aincr=incr ; }  
-     //		Rcout << "*** zz " << zz << " iter " << iter << "  incr " << incr << std::endl;  
-     //		Rcout << "rho " << rho[0] << std::endl;  
      			}  
      	rhores[zz] = rho[0] ;  
-     }  
-       
+     }         
      return rhores ;  
 }
 

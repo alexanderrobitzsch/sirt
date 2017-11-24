@@ -1,5 +1,5 @@
 %% File Name: rm.sdt.Rd
-%% File Version: 1.26
+%% File Version: 1.28
 
 \name{rm.sdt}
 \alias{rm.sdt}
@@ -34,10 +34,11 @@ DeCarlo, Kim & Johnson, 2011).
 rm.sdt(dat, pid, rater, Qmatrix = NULL, theta.k = seq(-9, 9, len = 30), 
     est.a.item = FALSE, est.c.rater = "n", est.d.rater = "n", est.mean=FALSE , 
     skillspace="normal" , tau.item.fixed = NULL , a.item.fixed = NULL , 
-    d.min = 0.5, d.max = 100, d.start = 3, d.prior = c(3,100), c.prior=c(3,100), 
-    tau.prior=c(0,1000), a.prior=c(1,100), max.increment = 1, numdiff.parm = 0.00001, 
-    maxdevchange = 0.1, globconv = .001, maxiter = 1000, msteps = 4, 
-    mstepconv = 0.001, fac_incr=.99, PEM=FALSE, PEM_itermax=maxiter )
+    d.min = 0.5, d.max = 100, d.start = 3, c.start=NULL, tau.start=NULL, sd.start=1, 
+    d.prior = c(3,100), c.prior=c(3,100), tau.prior=c(0,1000), a.prior=c(1,100), 
+    max.increment = 1, numdiff.parm = 0.00001, maxdevchange = 0.1, globconv = .001, 
+    maxiter = 1000, msteps = 4, mstepconv = 0.001, fac_incr=.99, 
+    PEM=FALSE, PEM_itermax=maxiter )
 
 \method{summary}{rm.sdt}(object, file=NULL, ...)    
 
@@ -112,8 +113,17 @@ Minimal \eqn{d} parameter to be estimated
   \item{d.max}{
 Maximal \eqn{d} parameter to be estimated
 }
-  \item{d.start}{
-Starting value of \eqn{d} parameters
+\item{d.start}{
+Starting value(s) of \eqn{d} parameters
+}
+\item{c.start}{
+Starting values of \eqn{c} parameters
+}
+\item{tau.start}{
+Starting values of \eqn{\tau} parameters
+}
+\item{sd.start}{
+Starting value for trait standard deviation
 }
 \item{d.prior}{Normal prior \eqn{N(M,S^2)} for \eqn{d} parameters}
 \item{c.prior}{Normal prior for \eqn{c} parameters. The prior for
@@ -305,14 +315,12 @@ mod2 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
             pid=dat$idstud , est.c.rater="n" , est.d.rater="n" , 
             est.a.item =TRUE , d.start=100)
 summary(mod2)
-}
             
 # Model 3: Equal effects in SDT
 mod3 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
             pid=dat$idstud , est.c.rater="e" , est.d.rater="e")
 summary(mod3)
 
-\dontrun{
 # Model 4: Rater effects in SDT
 mod4 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
             pid=dat$idstud , est.c.rater="r" , est.d.rater="r")

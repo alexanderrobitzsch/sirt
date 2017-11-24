@@ -1,5 +1,5 @@
 ## File Name: summary.rm.sdt.R
-## File Version: 1.11
+## File Version: 1.14
 
 
 #*******************************************************
@@ -22,7 +22,7 @@ summary.rm.sdt <- function( object , file=NULL, ...){
 	
 	cat("Hierarchical Rater Model: Signal Detection Model \n")
 	cat("-----------------------------------------------------------------\n")
-	cat( "Number of iterations =" , object$iter , "\n" )
+	cat( "Iteration with minimal deviance =" , object$iter_opt , "\n" )
 	cat( "Deviance = " , round( object$deviance , 2 ) , " | " )
 	cat( "Log Likelihood = " , round( -object$deviance/2 , 2 ) , "\n" )	
 	cat( "Number of persons = " , object$ic$n , "\n" )    
@@ -31,7 +31,8 @@ summary.rm.sdt <- function( object , file=NULL, ...){
 	cat( "Number of estimated parameters = " , object$ic$np , "\n" )    
 	cat( "  Distribution parameters  = " , object$ic$np.skill , "\n" )    		
 	cat( "  Item parameters  = " , object$ic$np.item , "\n" )    	
-	cat( "  Rater parameters = " , object$ic$np.rater , "\n" )    		
+	cat( "  Rater parameters = " , object$ic$np.rater , "\n" ) 
+	cat("\n")
 		
 	#--- information criteria
 	rm_summary_information_criteria(object=object)
@@ -47,7 +48,7 @@ summary.rm.sdt <- function( object , file=NULL, ...){
 	}
 		
 			  
-	cat( "\nEAP Reliability = ") 
+	cat( "\n\nEAP Reliability = ") 
 	cat(round( object$EAP.rel,3 ) )
 	cat( "\n")
 	

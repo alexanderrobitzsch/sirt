@@ -1,15 +1,15 @@
 ## File Name: rm_facets_est_a_rater.R
-## File Version: 0.06
+## File Version: 0.07
 
 
 #####################################################
 # estimation of slope parameter for rater
 rm_facets_est_a_rater <- function( b.item , b.rater , Qmatrix , tau.item ,
-        VV , K , I , TP , a.item , a.rater , item.index , rater.index ,
-        n.ik , numdiff.parm=.001 , max.b.increment=1,theta.k , msteps ,
+		VV , K , I , TP , a.item , a.rater , item.index , rater.index ,
+		n.ik , numdiff.parm=.001 , max.b.increment=1,theta.k , msteps ,
 		mstepconv , a.rater.center , a.rater.fixed, a_lower, a_upper )
 {
-    h <- numdiff.parm
+	h <- numdiff.parm
 	diffindex <- rater.index
 	RR <- length(b.rater)
 	cat("  M steps a.rater parameter  |")
@@ -36,8 +36,8 @@ rm_facets_est_a_rater <- function( b.item , b.rater , Qmatrix , tau.item ,
 		a.rater <- rm_squeeze(x=a.rater, lower=a_lower, upper=a_upper )		
 		if ( ! is.null( a.rater.fixed) ){		
 			ind <- which( ! is.na( a.rater.fixed  ) )
-		    a.rater[ind] <- a.rater.fixed[ind]
-            res$d2[ ind ] <- -1E10			
+			a.rater[ind] <- a.rater.fixed[ind]
+		res$d2[ ind ] <- -1E10			
 		}
 		#-- center rater discriminations
 		a.rater <- rm_center_vector( vec=a.rater, center_type=a.rater.center, do_log=TRUE)		
@@ -46,9 +46,8 @@ rm_facets_est_a_rater <- function( b.item , b.rater , Qmatrix , tau.item ,
 		cat("-") 
 	}
 	cat(" " , it , "Step(s) \n")	
-    res <- list(a.rater = a.rater , se.a.rater = sqrt( abs(-1/res$d2 )), ll = sum(res$ll0) )
-    return(res)
-}				
-			
+	res <- list(a.rater = a.rater , se.a.rater = sqrt( abs(-1/res$d2 )), ll = sum(res$ll0) )
+	return(res)
+}
+
 .rm.facets.est.a.rater <- rm_facets_est_a_rater
-			

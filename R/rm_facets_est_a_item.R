@@ -1,15 +1,15 @@
 ## File Name: rm_facets_est_a_item.R
-## File Version: 0.11
+## File Version: 0.12
 
 
 #####################################################
 # estimation of slope parameter for items
 rm_facets_est_a_item <- function( b.item , b.rater , Qmatrix , tau.item ,
-        VV , K , I , TP , a.item , a.rater , item.index , rater.index ,
-        n.ik , numdiff.parm=.001 , max.b.increment=1,theta.k , msteps ,
+		VV , K , I , TP , a.item , a.rater , item.index , rater.index ,
+		n.ik , numdiff.parm=.001 , max.b.increment=1,theta.k , msteps ,
 		mstepconv , a.item.center , a.item.fixed , a_lower = .05 , a_upper = 10 )
 {
-    h <- numdiff.parm
+	h <- numdiff.parm
 	diffindex <- item.index
 	RR <- length(b.rater)
 	cat("  M steps a.item parameter   |")
@@ -21,7 +21,7 @@ rm_facets_est_a_item <- function( b.item , b.rater , Qmatrix , tau.item ,
 	#---- begin M-steps
 	while( ( it < msteps ) & ( conv1 > mstepconv ) ){	
 		a.item0 <- a.item
-		args$a.item <- a.item				
+		args$a.item <- a.item
 		pjk <- do.call( what=rm_facets_calcprobs, args=args)
 		args$a.item <- a.item + h
 		pjk1 <- do.call( what=rm_facets_calcprobs, args=args)
@@ -36,8 +36,8 @@ rm_facets_est_a_item <- function( b.item , b.rater , Qmatrix , tau.item ,
 		#-- fixed item parameters
 		if ( ! is.null( a.item.fixed) ){		
 			ind <- which( ! is.na( a.item.fixed  ) )
-		    a.item[ind] <- a.item.fixed[ind]
-            res$d2[ind] <- -1E10			
+			a.item[ind] <- a.item.fixed[ind]
+			res$d2[ind] <- -1E10
 		}
 		#-- center item discriminations
 		a.item <- rm_center_vector( vec=a.item, center_type=a.item.center, do_log=TRUE)				
@@ -47,8 +47,8 @@ rm_facets_est_a_item <- function( b.item , b.rater , Qmatrix , tau.item ,
 	}
 	cat(" " , it , "Step(s) \n")
 	#--- output
-    res <- list(a.item = a.item , se.a.item = sqrt( abs(-1/res$d2 )), ll = sum(res$ll0) )
-    return(res)
+	res <- list(a.item = a.item , se.a.item = sqrt( abs(-1/res$d2 )), ll = sum(res$ll0) )
+	return(res)
 }			
 			
 .rm.facets.est.a.item <- rm_facets_est_a_item 			

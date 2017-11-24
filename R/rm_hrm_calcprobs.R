@@ -1,5 +1,5 @@
 ## File Name: rm_hrm_calcprobs.R
-## File Version: 0.07
+## File Version: 0.08
 
 ################################################################
 # calculate probabilities
@@ -22,7 +22,7 @@ rm_hrm_calcprobs <- function(  c.rater , Qmatrix , tau.item ,
 	}
 	dimA <- c(I , K+1, K+1 )
 	res2 <- res[ item.index ,,]	
-	dimB <- dim(res2)					
+	dimB <- dim(res2)
 	BM <- matrix( res2 , dimA[1]*dimB[2] , dimB[3] )
 	#****	
 	# if prob.rater is calculated	
@@ -30,11 +30,11 @@ rm_hrm_calcprobs <- function(  c.rater , Qmatrix , tau.item ,
 		res2 <- rm_sdt_probraterfct1( crater=c.rater, drater=d.rater, dimA=dimA, B=BM, dimB=dimB ) 
 		prob.categ <- array( res2$probtotal , dim= c(dimA[c(1,2)],dimB[3]) )
 		prob.rater <- array( res2$PRA , dim=dimA )		
-	}									
+	}
 	#***
 	# if prob.rater is not calculated
 	AM <- matrix( prob.rater , dimA[1]*dimA[2] , dimA[3] )
-    if ( ! calc.rater ){
+	if ( ! calc.rater ){
 		y <- rm_sdt_arraymult1( A=AM, dimA=dimA, B=BM, dimB=dimB )
 		prob.categ <- array( y , dim= c(dimA[c(1,2)],dimB[3]) )    
 	}

@@ -1,5 +1,5 @@
 ## File Name: rm_hrm_est_tau_item.R
-## File Version: 0.15
+## File Version: 0.16
 
 		
 #####################################################################
@@ -8,7 +8,7 @@ rm_hrm_est_tau_item <- function( c.rater , Qmatrix , tau.item ,
 				n.ik , numdiff.parm , max.b.increment=1  , theta.k ,
 				msteps, mstepconv , tau.item.fixed , prob.rater, tau.item0, tau.prior )
 {
-    h <- numdiff.parm
+	h <- numdiff.parm
 	diffindex <- item.index
 	RR <- length(c.rater)	
 	Q0 <- matrix(0,nrow=VV, ncol=K)
@@ -29,9 +29,9 @@ rm_hrm_est_tau_item <- function( c.rater , Qmatrix , tau.item ,
 		for (kk in 1:K){
 			Q1 <- Q0
 			Q1[,kk] <- 1
-						
+
 			args$tau.item <- tau.item11			
-			res <- do.call(what=rm_hrm_calcprobs, args=args)						
+			res <- do.call(what=rm_hrm_calcprobs, args=args)
 			pjk <- res$prob.total	
 			prob.item <- res$prob.item
 
@@ -64,9 +64,8 @@ rm_hrm_est_tau_item <- function( c.rater , Qmatrix , tau.item ,
 	cat(" " , it , "Step(s) \n")
 	res <- list(tau.item = tau.item , se.tau.item = se.tau.item , 
 					ll = sum(res$ll0) , prob.item=prob.item )
-    return(res)
+	return(res)
 }
 
 .rm.hrm.est.tau.item <- rm_hrm_est_tau_item
-					
-					
+

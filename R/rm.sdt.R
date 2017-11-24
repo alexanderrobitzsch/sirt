@@ -1,5 +1,5 @@
 ## File Name: rm.sdt.R
-## File Version: 8.553
+## File Version: 8.575
 
 #################################################################
 # Hierarchical rater model
@@ -8,7 +8,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	est.a.item=FALSE , est.c.rater= "n" , 
 	est.d.rater= "n" , est.mean = FALSE , skillspace="normal" , 
 	tau.item.fixed = NULL , a.item.fixed = NULL , 
-	d.min=.5 , d.max=100 ,  d.start = 3,  
+	d.min=.5 , d.max=100 ,  d.start = 3,  c.start=NULL, tau.start=NULL, sd.start = 1,
 	d.prior = c(3,100), c.prior=c(3,100), tau.prior=c(0,1000), a.prior=c(1,100), 
 	max.increment=1 , numdiff.parm=.00001 , maxdevchange=.10 ,
 	globconv=.001 , maxiter=1000 , msteps=4 , mstepconv=.001, fac_incr=.99,
@@ -18,10 +18,10 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	CALL <- match.call()	
 	s1 <- Sys.time()
 	theta.k0 <- theta.k
-	pi.k <- sirt_dnorm_discrete(x=theta.k, mean=0, sd=1)
-	max.b.increment <- max.increment		
+	pi.k <- sirt_dnorm_discrete(x=theta.k, mean=0, sd=sd.start)
+	max.b.increment <- max.increment
 	a_center_type <- 2	
-	
+
 	#-- process data
 	procdata <- res <- rm_proc_data( dat=dat , rater=rater , pid=pid )
 	dat2 <- as.matrix(res$dat2)
@@ -33,9 +33,8 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	item.index <- res$dataproc.vars$item.index 
 	rater.index <- res$dataproc.vars$rater.index 
 	dat2.ind.resp <- res$dat2.ind.resp	
-	
 	deviance.history <- rep(NA, maxiter )
-	
+
 	# maximum categories
 	maxK <- sirt_colMaxs(dat)
 	K <- max( maxK )
@@ -56,8 +55,11 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	rownames(tau.item) <- colnames(dat)
 	
 	tau.item <- matrix( seq( -2 , 2 , len=K ) , nrow=VV , ncol=K , byrow=TRUE )
+	if ( ! is.null(tau.start) ){
+		tau.item <- tau.start
+	}	
 	if ( ! is.null(tau.item.fixed) ){
-	    tau.item[ tau.item.fixed[,1:2,drop=FALSE] ] <- tau.item.fixed[,3]
+		tau.item[ tau.item.fixed[,1:2,drop=FALSE] ] <- tau.item.fixed[,3]
 	}
 		
 	a.item <- rep( 1 , VV )
@@ -71,7 +73,12 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	
 	# rater parameter
 	d.rater <- matrix( d.start , nrow=I , ncol=1 )
-	c.rater <- matrix( d.start*((1:K) - .5 ) , nrow=I , ncol=K , byrow=TRUE )
+	if (is.null(c.start)){
+		c.rater <- matrix( d.start*((1:K) - .5 ) , nrow=I , ncol=K , byrow=TRUE )
+	}
+	if ( ! is.null(c.start) ){
+		c.rater <- c.start
+	}
 	
 	# set c.rater for fixed items to 99
 	c.rater.fixed <- NULL
@@ -79,17 +86,17 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 		tau1 <- tau.item.fixed[ tau.item.fixed[,3] == 99 , , drop=FALSE]		
 		ind <- match( item.index , tau1[,1] )
 		c.rater.fixed <- tau1[ ind , ]
-        c.rater.fixed[,1] <- seq( 1 , nrow(c.rater.fixed) )	
+		c.rater.fixed[,1] <- seq( 1 , nrow(c.rater.fixed) )	
 		c.rater.fixed[,3] <- 999
 		c.rater.fixed <- c.rater.fixed[ ! is.na( c.rater.fixed[,2] ) , ] 
 		c.rater[ c.rater.fixed[,1:2] ] <- c.rater.fixed[,3]		
 	}
 	
 	#--- indices for derivatives	
-    diffindex <- rm_sdt_prepare_diffindex( item.index=item.index, rater.index=rater.index, I=I, est.c.rater=est.c.rater, 
+	diffindex <- rm_sdt_prepare_diffindex( item.index=item.index, rater.index=rater.index, I=I, est.c.rater=est.c.rater, 
 					est.d.rater=est.d.rater ) 
-		
-    # init standard errors
+					
+	# init standard errors
 	se.d.rater <- NA*d.rater
 	se.c.rater <- NA*c.rater
 	se.a.item <- NA*a.item
@@ -112,7 +119,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	
 	# inits
 	iter <- 0
-	dev0 <- dev <- 0
+	dev0 <- dev <- 1E300
 	conv <- devchange <- 1000
 	mu <- 0
 	sigma <- 1
@@ -122,7 +129,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	
 	#****************************************************
 	# start EM algorithm
-    while( ( ( maxdevchange < devchange ) | (globconv < conv) ) &
+	while( ( ( maxdevchange < devchange ) | (globconv < conv) ) &
 			( iter < maxiter ) ){
 		cat(disp)	
 		cat("Iteration" , iter+1 , "   " , paste( Sys.time() ) , "\n" )	
@@ -139,21 +146,23 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 		# calculate probabilities
 		res <- rm_hrm_calcprobs( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
 					d.rater=d.rater, item.index=item.index, rater.index=rater.index, theta.k=theta.k, RR=RR ) 
-        probs <- res$prob.total				
+		probs <- res$prob.total	
 		prob.rater <- res$prob.rater
 		prob.item <- res$prob.item
 		
 		#-- calculate posterior
-		res <- rm_posterior( dat2=dat2, dat2.resp=dat2.resp, TP=TP, pi.k=pi.k, K=K, I=I, probs=probs, dat2.ind.resp=dat2.ind.resp ) 
+		res <- rm_posterior( dat2=dat2, dat2.resp=dat2.resp, TP=TP, pi.k=pi.k, K=K, I=I, 
+					probs=probs, dat2.ind.resp=dat2.ind.resp ) 
 		f.yi.qk <- res$f.yi.qk
 		f.qk.yi <- res$f.qk.yi
 		n.ik <- res$n.ik
 		N.ik <- res$N.ik
 		pi.k <- res$pi.k
 		ll <- res$ll
-																					
-    	#-- estimate tau.item parameters
-		res <- rm_hrm_est_tau_item( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
+
+		#-- estimate tau.item parameters
+		res <- rm_hrm_est_tau_item( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, 
+					VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
 					d.rater=d.rater, item.index=item.index, rater.index=rater.index, n.ik=n.ik, 
 					numdiff.parm=numdiff.parm, max.b.increment=tau.item.incr, theta.k=theta.k, 
 					msteps=msteps, mstepconv=mstepconv, tau.item.fixed=tau.item.fixed, 
@@ -161,16 +170,18 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 		tau.item <- res$tau.item
 		se.tau.item <- res$se.tau.item
 		g1  <- abs( tau.item0 - tau.item )
-		# tau.item.incr <- ifelse( tau.item.incr > g1 , g1 , tau.item.incr )						
+		# tau.item.incr <- ifelse( tau.item.incr > g1 , g1 , tau.item.incr )
 		tau.item.incr <- fac_incr^iter
 		prob.item <- res$prob.item
 		
 		#-- estimate a.item parameter
 		if (est.a.item){
-			res <- rm_hrm_est_a_item( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
+			res <- rm_hrm_est_a_item( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, 
+						VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
 						d.rater=d.rater, item.index=item.index, rater.index=rater.index, n.ik=n.ik, 
-						numdiff.parm=numdiff.parm, max.b.increment=a.item.incr, theta.k=theta.k, msteps=msteps, 
-						mstepconv=mstepconv, prob.rater=prob.rater, a.item.fixed=a.item.fixed, a_center_type = a_center_type,
+						numdiff.parm=numdiff.parm, max.b.increment=a.item.incr, theta.k=theta.k, 
+						msteps=msteps, mstepconv=mstepconv, prob.rater=prob.rater, 
+						a.item.fixed=a.item.fixed, a_center_type = a_center_type,
 						a.item0=a.item0, a.prior=a.prior) 
 			a.item <- res$a.item
 			se.a.item <- res$se.a.item
@@ -181,11 +192,13 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 				
 		#-- estimate d.rater parameter
 		if (est.d.rater!="n"){
-			res <- rm_hrm_est_d_rater( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
+			res <- rm_hrm_est_d_rater( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, 
+						VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
 						d.rater=d.rater, item.index=item.index, rater.index=rater.index, n.ik=n.ik, 
 						numdiff.parm=numdiff.parm, max.b.increment=d.rater.incr, theta.k=theta.k, 
-						msteps=msteps, mstepconv=mstepconv, d.min=d.min, d.max=d.max, est.d.rater=est.d.rater, 
-						prob.item=prob.item, d.rater0=d.rater0, diffindex = diffindex$d.rater, d.prior=d.prior ) 
+						msteps=msteps, mstepconv=mstepconv, d.min=d.min, d.max=d.max, 
+						est.d.rater=est.d.rater, prob.item=prob.item, d.rater0=d.rater0, 
+						diffindex = diffindex$d.rater, d.prior=d.prior ) 
 			d.rater <- res$d.rater
 			se.d.rater <- res$se.d.rater
 			g1 <- fac_incr^iter
@@ -194,7 +207,8 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 					
 		#-- estimate c.rater parameter
 		if( est.c.rater != "n" ){			
-			res <- rm_hrm_est_c_rater( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
+			res <- rm_hrm_est_c_rater( c.rater=c.rater, Qmatrix=Qmatrix, tau.item=tau.item, 
+						VV=VV, K=K, I=I, TP=TP, a.item=a.item, 
 						d.rater=d.rater, item.index=item.index, rater.index=rater.index, n.ik=n.ik, 
 						numdiff.parm=numdiff.parm, max.b.increment=c.rater.incr, theta.k=theta.k, 
 						msteps=msteps, mstepconv=mstepconv, est.c.rater=est.c.rater, prob.item=prob.item, 
@@ -237,6 +251,12 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 		#-- save deviance values
 		deviance.history[iter+1] <- dev <- -2*ll
 		
+		if (dev < dev0 ){
+			parm_minimal <- list( iter_opt=iter, dev=dev, d.rater=d.rater, 
+							c.rater = c.rater, tau.item = tau.item, a.item=a.item,
+							mu = mu , sigma=sigma, pi.k=pi.k)		
+		}
+		
 		#-- convergence criteria
 		conv <- max( abs(c.rater-c.rater0) , abs( c.rater-c.rater0) , 
 					abs( tau.item0-tau.item) , abs( a.item - a.item0 ) )
@@ -244,14 +264,19 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 		devchange <- abs( ( dev - dev0 ) / dev0  )
 
 		#-- print progress			
-		res <- rm_sdt_print_progress( dev=dev, dev0=dev0, c.rater=c.rater, c.rater0=c.rater0, d.rater=d.rater, d.rater0=d.rater0, 
-					tau.item=tau.item, tau.item0=tau.item0, a.item=a.item, a.item0=a.item0, mu=mu, sigma=sigma, iter=iter ) 
-		
+		res <- rm_sdt_print_progress( dev=dev, dev0=dev0, c.rater=c.rater, c.rater0=c.rater0, 
+					d.rater=d.rater, d.rater0=d.rater0, tau.item=tau.item, tau.item0=tau.item0, 
+					a.item=a.item, a.item0=a.item0, mu=mu, sigma=sigma, iter=iter ) 		
 	}
 	#---------------------------- end EM algorithm
 
 	# *********
 	# arrange OUTPUT
+	
+	#-- assign elements of parm_minimal
+	iter_opt <- NULL	
+	envir <- environment()	
+	res <- sirt_attach_list_elements(x=parm_minimal, envir=envir)
 	
 	# c parameters
 	if ( ! is.null( c.rater.fixed ) ){
@@ -307,7 +332,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 		}			
 	}		
 	ic$np <- ic$np.skill + ic$np.item + ic$np.rater
-    
+
 	#-- compute information criteria
 	ic <- rm_ic_criteria(ic=ic)	
 	
@@ -322,7 +347,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	# item
 	if (!is.null(tau.item.fixed)){
 		K <- max(maxK)
-        I <- nrow(tau.item)
+		I <- nrow(tau.item)
 		for (ii in 1:I){
 			if ( maxK[ii] < K ){
 				for (kk in seq(maxK[ii]+1,K) ){
@@ -332,13 +357,12 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 		}
 		se.tau.item[ tau.item.fixed[,1:2,drop=FALSE] ] <- NA								
 	}
-							
-    item <- data.frame( "item" = colnames(dat) , 
+
+	item <- data.frame( "item" = colnames(dat) , 
 			"N" = colSums( 1-is.na(dat)) , 
 			"M" = colMeans( dat , na.rm=TRUE ) )
 	for (kk in 1:K){ item[ , paste0("tau.Cat",kk) ] <- tau.item[,kk] }
     item$a <- a.item
-#	item$b <- rowMeans(tau.item)
 
 	# latent mean and standard deviation
 	me1 <- rep(NA,VV)
@@ -361,15 +385,14 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	# rater
 	M1 <- colSums( dat2 ) / colSums( dat2.resp )
 	N <- colSums( dat2.resp )
-    rater <- data.frame( "item.rater" = colnames(dat2) , 
+	rater <- data.frame( "item.rater" = colnames(dat2) , 
 			"N" = N , "M" = M1 , "d" = d.rater )
-    for (zz in 1:(ncol(c.rater) ) ){
+	for (zz in 1:(ncol(c.rater) ) ){
 		rater[ , paste0("c_",zz)] <- c.rater[,zz] 
 	}
 	# transformed c parameters
-    for (zz in 1:(ncol(c.rater) ) ){
-		# rater[ , paste0("c_",zz,".trans")] <- c.rater[,zz] / d.rater / K 
-        rater[ , paste0("c_",zz,".trans")] <- c.rater[,zz] / d.rater	
+	for (zz in 1:(ncol(c.rater) ) ){
+		rater[ , paste0("c_",zz,".trans")] <- c.rater[,zz] / d.rater	
 	}
 
 	rater <- rater[ order( paste( rater$item.rater) ) , ]
@@ -405,14 +428,14 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	
 	s2 <- Sys.time()
 
-    res <- list( deviance=dev, ic=ic, item=item, rater=rater, person=person, EAP.rel=EAP.rel, mu=mu, 
+	res <- list( deviance=dev, ic=ic, item=item, rater=rater, person=person, EAP.rel=EAP.rel, mu=mu, 
 					sigma=sigma, theta.k=theta.k, pi.k=pi.k, G=1, tau.item=tau.item, se.tau.item=se.tau.item, 
 					a.item=a.item, se.a.item=se.a.item, c.rater=c.rater, se.c.rater=se.c.rater, 
 					d.rater=d.rater, se.d.rater=se.d.rater, f.yi.qk=f.yi.qk, f.qk.yi=f.qk.yi, probs=probs, 
 					prob.item=prob.item, n.ik=n.ik, maxK=maxK, pi.k=pi.k, procdata=procdata, iter=iter, 
 					theta.k=theta.k, Qmatrix=Qmatrix, s1=s1, s2=s2, tau.item.fixed=tau.item.fixed, rater2=rt1, 
-					maxK=maxK, skill.distribution=skill.distribution, skillspace=skillspace, CALL=CALL,
-					deviance.history=deviance.history) 
+					maxK=maxK, skill.distribution=skill.distribution, skillspace=skillspace, iter_opt=iter_opt, 
+					CALL=CALL,	deviance.history=deviance.history) 
 	class(res) <- "rm.sdt"
 	return(res)
 }

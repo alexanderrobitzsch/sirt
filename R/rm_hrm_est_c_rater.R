@@ -1,5 +1,5 @@
 ## File Name: rm_hrm_est_c_rater.R
-## File Version: 0.25
+## File Version: 0.33
 
 ###################################################			
 # c.rater
@@ -9,7 +9,7 @@ rm_hrm_est_c_rater <- function(  c.rater , Qmatrix , tau.item ,
 					msteps , mstepconv , est.c.rater , prob.item ,
 					c.rater.fixed, c.rater0, diffindex, c.prior )
 {
-    h <- numdiff.parm
+	h <- numdiff.parm
 	
 	RR <- I/VV
 	cat("  M steps c.rater parameter    |")
@@ -28,35 +28,29 @@ rm_hrm_est_c_rater <- function(  c.rater , Qmatrix , tau.item ,
 	#--- begin M-steps
 	while( ( it < msteps ) & ( conv1 > mstepconv ) ){
 		c.rater11 <- b0 <- c.rater
-		
-		for (kk in 1:K){	
+		for (kk in 1:K){
 			Q1 <- Q0
-			Q1[,kk] <- 1			
+			Q1[,kk] <- 1
 			args$c.rater <- c.rater11
 			pjk <- do.call(what=mstep_fct, args=args)
 			args$c.rater <- c.rater11 + h*Q1
 			pjk1 <- do.call(what=mstep_fct, args=args)
 			args$c.rater <- c.rater11 - h*Q1
-			pjk2 <- do.call(what=mstep_fct, args=args)
-			
+			pjk2 <- do.call(what=mstep_fct, args=args)			
 			#-- increments
-			c_prior_kk[1] <- c.prior[1] * ( kk - 0.5 )
+			c_prior_kk[1] <- c.prior[1] * ( kk - 0.5 )			
 			res <- rm_numdiff_index( pjk=pjk, pjk1=pjk1, pjk2=pjk2, n.ik=n.ik, diffindex=diffindex, 
-						max.increment=max.b.increment, numdiff.parm=numdiff.parm, prior=c_prior_kk, value=c.rater[,kk] ) 								
-			c.rater[,kk] <- c.rater[,kk] + res$increment[diffindex]
-			se.c.rater[,kk] <- ( sqrt( abs(-1/res$d2) ) )[diffindex ]
-			if (kk>1){ 
-				ind <- which( c.rater[,kk] < c.rater[,kk-1] )
-				if (length(ind)>0){
-					l1 <- c.rater[ind,kk-1]
-					c.rater[ind, kk-1] <- c.rater[ind,kk]				
-					c.rater[ ind , kk ] <- l1
-				}
-			}
-		}
+						max.increment=max.b.increment, numdiff.parm=numdiff.parm, prior=c_prior_kk, 
+						value=c.rater11[,kk] )									
+			incr <- res$increment[diffindex]
+			c.rater[,kk] <- c.rater[,kk] + incr
+			se.c.rater[,kk] <- ( sqrt( abs(-1/res$d2) ) )[diffindex]
+		} ##--- end kk		
+		#----- re-order in case of unordered rater effects
+		c.rater <- rm_hrm_est_c_rater_order_parameters(c.rater=c.rater, K=K)
 		if ( ! is.null( c.rater.fixed ) ){
-		    c.rater[ c.rater.fixed[,1:2] ] <- c.rater.fixed[,3]
-		}
+			c.rater[ c.rater.fixed[,1:2] ] <- c.rater.fixed[,3]
+		}		
 		conv1 <- max( abs( c.rater - b0 ) )
 		it <- it+1
 		cat("-")  
@@ -67,9 +61,9 @@ rm_hrm_est_c_rater <- function(  c.rater , Qmatrix , tau.item ,
 	c.rater <- rm_trim_increments_mstep( parm=c.rater, parm0=c.rater0 , max.increment=max.b.increment )
 	
 	cat(" " , it , "Step(s) \n")	
-    res <- list(c.rater = c.rater , se.c.rater = se.c.rater , ll = sum(res$ll0) )
-    return(res)
-}				
+	res <- list(c.rater = c.rater , se.c.rater = se.c.rater , ll = sum(res$ll0) )
+	return(res)
+}
 
 .rm.hrm.est.c.rater <- rm_hrm_est_c_rater
 

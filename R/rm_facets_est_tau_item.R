@@ -1,16 +1,16 @@
 ## File Name: rm_facets_est_tau_item.R
-## File Version: 0.12
+## File Version: 0.13
 
 
 #####################################################
 # estimation of tau.item parameters
 rm_facets_est_tau_item <- function( b.item , b.rater , Qmatrix , tau.item ,
-        VV , K , I , TP , a.item , a.rater , item.index , rater.index ,
-        n.ik , numdiff.parm=.001 , max.b.increment=1,theta.k , msteps ,
+		VV , K , I , TP , a.item , a.rater , item.index , rater.index ,
+		n.ik , numdiff.parm=.001 , max.b.increment=1,theta.k , msteps ,
 		mstepconv , tau.item.fixed , tau.item.fixed_val )
 {
 		
-    h <- numdiff.parm
+	h <- numdiff.parm
 	diffindex <- item.index
 	RR <- length(b.rater)	
 	Q0 <- matrix(0,nrow=VV, ncol=K)
@@ -44,7 +44,7 @@ rm_facets_est_tau_item <- function( b.item , b.rater , Qmatrix , tau.item ,
 		}
 					
 		if ( ! is.null( tau.item.fixed_val ) ){
-            MK <- ncol( tau.item.fixed_val )
+			MK <- ncol( tau.item.fixed_val )
 			for ( kk in 1:MK){
 				ind <- which( ! is.na( tau.item.fixed_val[,kk]) )
 				if ( length(ind) > 0 ){
@@ -62,7 +62,7 @@ rm_facets_est_tau_item <- function( b.item , b.rater , Qmatrix , tau.item ,
 	cat(" " , it , "Step(s) \n")	
 	#-- output
 	res <- list(tau.item = tau.item , se.tau.item = se.tau.item , ll = sum(res$ll0) )
-    return(res)
+	return(res)
 }
 
 .rm.facets.est.tau.item <- rm_facets_est_tau_item

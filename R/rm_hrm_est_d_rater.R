@@ -1,7 +1,5 @@
 ## File Name: rm_hrm_est_d_rater.R
-## File Version: 0.12
-
-
+## File Version: 0.14
 
 ###################################################			
 # d.rater
@@ -11,7 +9,7 @@ rm_hrm_est_d_rater <- function(  c.rater , Qmatrix , tau.item ,
 					msteps , mstepconv , d.min , d.max , est.d.rater , prob.item, d.rater0, diffindex,
 					d.prior )
 {
-    h <- numdiff.parm			
+	h <- numdiff.parm			
 	
 	RR <- I/VV	
 	cat("  M steps d.rater parameter    |")
@@ -44,7 +42,7 @@ rm_hrm_est_d_rater <- function(  c.rater , Qmatrix , tau.item ,
 		d.rater <- d.rater + res$increment[diffindex]
 		d.rater[ d.rater < d.min ] <- d.min		
 		d.rater[ d.rater > d.max ] <- d.max				
-#		max.b.increment <- abs( b.rater - b0 )
+		#max.b.increment <- abs( b.rater - b0 )
 		conv1 <- max( abs( d.rater - b0 ) )
 		it <- it+1
 		cat("-")  
@@ -54,8 +52,8 @@ rm_hrm_est_d_rater <- function(  c.rater , Qmatrix , tau.item ,
 	d.rater <- rm_trim_increments_mstep( parm=d.rater, parm0=d.rater0 , max.increment=max.b.increment )	
 	
 	cat(" " , it , "Step(s) \n")	
-    res <- list(d.rater = d.rater , se.d.rater = sqrt( abs(-1/res$d2) ) , ll = sum(res$ll0) )
-    return(res)
+	res <- list(d.rater = d.rater , se.d.rater = sqrt( abs(-1/res$d2) ) , ll = sum(res$ll0) )
+	return(res)
 }				
 
 .rm.hrm.est.d.rater <- rm_hrm_est_d_rater

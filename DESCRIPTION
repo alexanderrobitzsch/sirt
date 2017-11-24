@@ -1,8 +1,8 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 2.3-39
-Date: 2017-10-30 16:22:18
+Version: 2.4-2
+Date: 2017-11-24 10:50:40
 Author: Alexander Robitzsch [aut,cre]
 Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
 Description: 
@@ -15,7 +15,7 @@ Description:
 Depends:
     R (>= 3.1)
 Imports:
-    CDM (>= 5.8-5), coda, graphics, lavaan, lavaan.survey, 
+    CDM (>= 6.0), coda, graphics, lavaan, lavaan.survey, 
     methods, mirt, mvtnorm, Rcpp, sfsmisc, stats, survey, 
     TAM (>= 2.5-5), utils
 Suggests:

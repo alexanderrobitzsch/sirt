@@ -1,8 +1,9 @@
 ## File Name: brm.irf.R
-## File Version: 0.04
+## File Version: 0.05
 #############################################################
 # item response function (discretized) beta response model
-brm.irf <- function( Theta , delta , tau , ncat , thdim=1 , eps=1E-10 ){
+brm.irf <- function( Theta , delta , tau , ncat , thdim=1 , eps=1E-10 )
+{
 	TP <- nrow(Theta)
 	K <- ncat
 	# compute mid points
@@ -15,11 +16,10 @@ brm.irf <- function( Theta , delta , tau , ncat , thdim=1 , eps=1E-10 ){
 	m2 <- - Theta[,thdim] + delta + tau
 	m2 <- exp( m2 / 2 )
 	for (cc in 1:ncat){
-		# cc <- 1
 		probs[,cc] <- stats::dbeta( mp[cc] , shape1 = m1 , shape2 = m2 )
-					   }
+	}
 	probs <- probs + eps
 	probs <- probs / rowSums(probs)
 	return(probs)
-		}
+}
 ################################################################

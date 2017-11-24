@@ -1,5 +1,5 @@
 %% File Name: sirt-utilities.Rd
-%% File Version: 0.13
+%% File Version: 0.18
 
 \name{sirt-utilities}
 \alias{sirt-utilities}
@@ -13,6 +13,13 @@
 \alias{sirt_rbind_fill}
 \alias{sirt_fisherz}
 \alias{sirt_antifisherz}
+\alias{sirt_attach_list_elements}
+\alias{sirt_summary_print_objects}
+\alias{sirt_summary_print_package_rsession}
+\alias{sirt_summary_print_package}
+\alias{sirt_summary_print_rsession}
+\alias{sirt_summary_print_call}
+
 
 \title{Utility Functions in \pkg{sirt}}
 
@@ -49,13 +56,27 @@ sirt_rbind_fill(x, y)
 sirt_fisherz(rho)
 # inverse Fisher-z transformation, see psych::fisherz2r
 sirt_antifisherz(z)
+
+# attach all elements in a list in a specified environment
+sirt_attach_list_elements(x, envir)
+
+# print objects in a summary 
+sirt_summary_print_objects(obji, from=NULL, to=NULL, digits=3, rownames_null=TRUE)
+# print package version and R session
+sirt_summary_print_package_rsession(pack)
+# print package version
+sirt_summary_print_package(pack)
+# print R session
+sirt_summary_print_rsession()
+# print call
+sirt_summary_print_call(CALL)
 }
 
 \arguments{
 \item{pars}{Numeric vector}
 \item{lower}{Numeric vector}
 \item{upper}{Numeric vector}
-	\item{x}{Numeric vector or a matrix}
+	\item{x}{Numeric vector or a matrix or a list}
 	\item{eps}{Numerical. Shrinkage parameter of eigenvalue in 
 	\code{ginverse_sym}}
 	\item{a}{Numeric vector}
@@ -64,6 +85,14 @@ sirt_antifisherz(z)
     \item{y}{Matrix}
     \item{rho}{Numeric}
     \item{z}{Numeric}
+\item{envir}{Environment}  
+\item{obji}{Data frame}
+\item{from}{Integer}
+\item{to}{Integer}
+\item{digits}{Integer}
+\item{rownames_null}{Logical}
+\item{pack}{Package name}
+\item{CALL}{Call statement}
 }
 
 %\details{

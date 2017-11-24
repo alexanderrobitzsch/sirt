@@ -1,5 +1,5 @@
 ## File Name: rm_facets_postproc_rater_parameters.R
-## File Version: 0.01
+## File Version: 0.02
 
 rm_facets_postproc_rater_parameters <- function( rater.index, dat2, dat2.resp, b.rater, a.rater,
 		rater.index1, rater_item_int )
@@ -8,7 +8,7 @@ rm_facets_postproc_rater_parameters <- function( rater.index, dat2, dat2.resp, b
 	M1 <- colSums( dat2 ) / N
 	N <- stats::aggregate( N , list( rater.index ) , sum, na.rm=TRUE )[,2]
 	M1 <- stats::aggregate( M1 , list( rater.index ) , mean, na.rm=TRUE )[,2]	
-    rater <- data.frame( "rater" = rater.index1[,1] , "N" = N , "M" = M1 , 	"b" = b.rater ,	"a" = a.rater )
+	rater <- data.frame( "rater" = rater.index1[,1] , "N" = N , "M" = M1 , 	"b" = b.rater ,	"a" = a.rater )
 	rater$thresh <- rater$a * rater$b
 	if ( ! rater_item_int){
 		rater$b.cent <- rm_facets_center_value(x=rater$b, value=0)

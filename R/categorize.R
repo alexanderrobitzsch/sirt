@@ -1,10 +1,10 @@
 ## File Name: categorize.R
-## File Version: 0.10
+## File Version: 0.11
 
 #################################################################
 # categorize variables into classes
-categorize <- function( dat , categorical=NULL , quant=NULL ,
-			lowest=0){
+categorize <- function( dat , categorical=NULL , quant=NULL, lowest=0)
+{
 
 	dat2 <- dat
 
@@ -14,7 +14,6 @@ categorize <- function( dat , categorical=NULL , quant=NULL ,
 	if (! is.null( categorical) ){
 		VV <- length(categorical)	
 		for (vv in 1:VV){
-			# vv <- 1
 			var.vv <- categorical[vv]    
 			dat.vv <- dat[,var.vv]
 			vals.vv <- sort( unique( dat.vv ) )
@@ -41,7 +40,7 @@ categorize <- function( dat , categorical=NULL , quant=NULL ,
 			vars.vv <- vars[vv]
 			q1 <- quant[ vars.vv ]
 			quant.vv <- stats::quantile( dat[,vars.vv] , na.rm=TRUE , 
-						   prob = seq( 0 , 1 , len=q1+1 )  )
+							prob = seq( 0, 1, len=q1+1 )  )
 			quant.vv[1] <- quant.vv[1] - 1
 			quant.vv[q1+1] <- quant.vv[q1+1] + 1		
 			quant.vv <- unique( quant.vv )
@@ -51,16 +50,16 @@ categorize <- function( dat , categorical=NULL , quant=NULL ,
 						"column" = which( colnames(dat) == vars.vv ) ,
 						"orig" = m2 , 
 						"min" = quant.vv[ - length(quant.vv) ] ,
-						"max" = quant.vv[ - 1 ] ,						
+						"max" = quant.vv[ - 1 ],
 						"recode" = seq( 0 , length(m2) -1 + lowest)
-									)  				
+									) 
 			# The minimum is not included in the interval
 			# while the maximum value is included in the interval.
-			dfr2 <- rbind( dfr2 , dfr2.vv )							
+			dfr2 <- rbind( dfr2 , dfr2.vv )	
 			dat2[ , vars.vv ] <- match( m1 , m2 ) - 1 + lowest		
 		}
 	}
-						
+
 	#***************************
 	# OUTPUT
 	res <- list( "data" = dat2 , "categ_design" = dfr ,
