@@ -1,5 +1,5 @@
 ## File Name: rm_facets_est_b_rater.R
-## File Version: 0.13
+## File Version: 0.15
 
 
 #########################################
@@ -18,7 +18,7 @@ rm_facets_est_b_rater <- function( b.item , b.rater , Qmatrix , tau.item ,
 	#--- input for rm_facets_calcprobs
 	args <- list( b.item=b.item, b.rater=b.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, I=I, TP=TP, 
 					a.item=a.item, a.rater=a.rater, item.index=item.index, rater.index=rater.index, 
-					theta.k=theta.k, RR=RR ) 	
+					theta.k=theta.k, RR=RR ) 						
 	#---- begin algorithm
 	while( ( it < msteps ) & ( conv1 > mstepconv ) ){
 		b0 <- b.rater
@@ -41,7 +41,7 @@ rm_facets_est_b_rater <- function( b.item , b.rater , Qmatrix , tau.item ,
 		brc <- mean( b.rater )
 
 		#-- centering
-		b.rater <- rm_center_vector( vec=b.rater , center_type=b.rater.center)
+		b.rater <- rm_center_vector( vec=b.rater , center_type=b.rater.center)	
 		conv1 <- max( abs( b.rater - b0 ) )
 		it <- it+1
 		cat("-")  

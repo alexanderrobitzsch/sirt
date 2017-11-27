@@ -1,5 +1,5 @@
 ## File Name: modelfit.sirt.R
-## File Version: 1.02
+## File Version: 1.03
 
 
 # model fit in sirt
@@ -79,7 +79,7 @@ modelfit.sirt <- function( object )
 	}					
 	#******
 	# R2noharm, noharm.sirt
-    if ( class(object) %in% c("R2noharm","noharm.sirt") ){
+	if ( class(object) %in% c("R2noharm","noharm.sirt") ){
 		# exclusion criteria for noharm.sirt
 		if ( class(object) == "noharm.sirt") {
 			if ( object$estpars$estPsi > 0 ){
@@ -87,7 +87,7 @@ modelfit.sirt <- function( object )
 			}
 			if ( ! ( object$wgtm.default ) ){
 				stop("Model fit cannot be calculated because not all item pairs are used for estimation")
-			}										
+			}
 		}
 		# evaluation of posterior
 		mod <- R2noharm.EAP(noharmobj=object, theta.k = seq(-6, 6, len = 15 ) ,
@@ -97,13 +97,13 @@ modelfit.sirt <- function( object )
 		dat <- object$dat		  		  
 	}
 	# calculate modelfit.cor
-    if ( class(object) == "rasch.pml" ){
+	if ( class(object) == "rasch.pml" ){
 		res <- modelfit.cor.sirt.pml( data = dat , posterior =posterior , probs = probs ,
-				           pmlobject=pmlobject)
+						pmlobject=pmlobject)
 	} else {
-		res <- CDM::modelfit.cor2( data = dat , posterior =posterior , probs = probs )								
+		res <- CDM::modelfit.cor2( data = dat , posterior =posterior , probs = probs )
 	}
-    class(res) <- "modelfit.sirt"							
+	class(res) <- "modelfit.sirt"	
 	return(res)
 }
 ################################################################################

@@ -35,14 +35,16 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.4  |  2017-11-24  |  Last: sirt 2.4-2
+VERSIONS sirt 2.4  |  2017-11-27  |  Last: sirt 2.4-6
 ------------------------------------------------------------------------
 
-xxx   * ...
+FIXED * fixed bug in rm.facets() when argument rater_item_int=TRUE 
+        was used
+
+
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
-
 
 
 
@@ -50,21 +52,21 @@ EXAMP * included/modified examples: ---
 VERSIONS sirt 2.3  |  2017-11-23  |  Last: sirt 2.3-57
 ------------------------------------------------------------------------
 
-NOTE  * included different parameter centering options in 'rm.facets'
-FIXED * fixed a bug in data processing in 'xxirt' function
-NOTE  * included EM acceleration method 'PEM' in 'rm.sdt' and 'rm.facets'
-NOTE  * corrected example for 'Q3' function (thanks to Amina Fraij)
-ADDED * added prior distributions for item parameters in 'rm.sdt'
-NOTE  * included option for defining a reference rater in 'rm.facets'.
+NOTE  * included different parameter centering options in rm.facets()
+FIXED * fixed a bug in data processing in xxirt() function
+NOTE  * included EM acceleration method 'PEM' in rm.sdt() and rm.facets()
+NOTE  * corrected example for Q3() function (thanks to Amina Fraij)
+ADDED * added prior distributions for item parameters in rm.sdt()
+NOTE  * included option for defining a reference rater in rm.facets().
         See Example 2.6.
 NOTE  * included argument 'rater_item_int' for modelling
-        rater-item-interaction effects in 'rm.facets' (see Example 2.7)
-NOTE  * included more arguments for starting values in 'rm.sdt'
-NOTE  * exported utility function 'sirt_attach_list_elements' and 
-        several 'sirt_summary_print_XXX' functions
+        rater-item-interaction effects in rm.facets() (see Example 2.7)
+NOTE  * included more arguments for starting values in rm.sdt()
+NOTE  * exported utility function sirt_attach_list_elements() and 
+        several sirt_summary_print_XXX() functions
 ADDED * included synthetic dataset 'data.befki' as an example for 
         local structural equation modeling (thanks to Ulrich Schroeders,
-        Stefan Schipolowski, & Oliver Wilhelm)
+        Stefan Schipolowski & Oliver Wilhelm)
 
 DATA  * included/modified datasets: data.befki, data.befki_resp
 EXAMP * included/modified examples: Q3 (1), rm.facets (2.6, 2.7)

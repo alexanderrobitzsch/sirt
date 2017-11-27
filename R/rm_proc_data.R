@@ -1,5 +1,5 @@
 ## File Name: rm_proc_data.R
-## File Version: 0.25
+## File Version: 0.31
 
 ##########################################
 # Data preprocessing rater models
@@ -19,11 +19,11 @@ rm_proc_data <- function( dat, pid , rater, rater_item_int=FALSE, reference_rate
 		dat <- res$dat
 		rater <- res$rater
 		pid <- res$pid
-		reference_rater <- res$reference_rater
+		reference_rater <- res$reference_rater		
 	}
 	
 	#-- create rater indices
-	rater <- paste( rater )
+	rater <- paste(rater)
 	# create table of rater indizes
 	rater.index <- data.frame( "rater" = sort( unique( rater )) )
 	rater.index$rater.id <- seq( 1 , nrow(rater.index) )
@@ -49,7 +49,7 @@ rm_proc_data <- function( dat, pid , rater, rater_item_int=FALSE, reference_rate
 		colnames(dat.rr) <- NULL
 		dat2[ i1 , VV*(rr-1) + 1:VV ] <- dat.rr
 	}
-	
+
 	# variable list
 	dataproc.vars <- list( "item.index" = rep( 1:VV , RR ), "rater.index" = rep(1:RR , each=VV ) )
 	# arrange response data

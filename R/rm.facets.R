@@ -1,5 +1,5 @@
 ## File Name: rm.facets.R
-## File Version: 4.626
+## File Version: 4.632
 
 #################################################################
 # Facets Model for Raters:
@@ -17,7 +17,8 @@ rm.facets <- function( dat , pid=NULL , rater=NULL ,
 	s1 <- Sys.time()
 	
 	skillspace <- "normal"
-	dat <- as.matrix(dat)	
+	dat0 <- dat <- as.matrix(dat)
+	rater0 <- rater
 	if ( is.null(rater)){	
 		rater <- rep(1,nrow(dat)) 
 		est.b.rater <- FALSE
@@ -138,7 +139,7 @@ rm.facets <- function( dat , pid=NULL , rater=NULL ,
 
 	b.rater.incr <- max.b.increment
 	tau.item.incr  <- max.b.increment
-	
+
 active <- TRUE
 active <- FALSE
 	
@@ -170,31 +171,33 @@ active <- FALSE
 		n.ik <- res$n.ik
 		N.ik <- res$N.ik
 		pi.k <- res$pi.k
-		ll <- res$ll
+		ll <- res$ll		
 		
 		#--- estimate b.rater parameter
 		if( est.b.rater ){
 			res <- rm_facets_est_b_rater( b.item=b.item, b.rater=b.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, 
 							I=I, TP=TP, a.item=a.item, a.rater=a.rater, item.index=item.index, 
 							rater.index=rater.index, n.ik=n.ik, numdiff.parm=numdiff.parm, 
-							max.b.increment=b.rater.incr, theta.k=theta.k, msteps=msteps, 
+							max.b.increment=1, theta.k=theta.k, msteps=msteps, 
 							mstepconv=mstepconv, b.rater.center=b.rater.center, 
 							b.rater.fixed=b.rater.fixed ) 
 			b.rater <- res$b.rater
 			se.b.rater <- res$se.b.rater
 			b.rater.incr <- abs( b.rater0 - b.rater )
+			# b.rater.incr <- 1
 		}
-
+		
 		#--- estimate tau.item parameters
 		res <- rm_facets_est_tau_item( b.item=b.item, b.rater=b.rater, Qmatrix=Qmatrix, tau.item=tau.item, VV=VV, K=K, 
 					I=I, TP=TP, a.item=a.item, a.rater=a.rater, item.index=item.index, 
 					rater.index=rater.index, n.ik=n.ik, numdiff.parm=numdiff.parm, 
-					max.b.increment=tau.item.incr, theta.k=theta.k, msteps=msteps, 
+					max.b.increment=1, theta.k=theta.k, msteps=msteps, 
 					mstepconv=mstepconv, tau.item.fixed=tau.item.fixed, 
 					tau.item.fixed_val=tau.item.fixed_val ) 
 		tau.item <- res$tau.item
 		se.tau.item <- res$se.tau.item
 		tau.item.incr  <- abs( tau.item0 - tau.item )
+		# tau.item.incr  <- 1
 
 		#--- estimate a.item parameter
 		if (est.a.item){
