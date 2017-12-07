@@ -1,5 +1,5 @@
 ## File Name: rm.sdt.R
-## File Version: 8.575
+## File Version: 8.578
 
 #################################################################
 # Hierarchical rater model
@@ -120,6 +120,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	# inits
 	iter <- 0
 	dev0 <- dev <- 1E300
+	parm_minimal <- list(dev=dev)
 	conv <- devchange <- 1000
 	mu <- 0
 	sigma <- 1
@@ -251,7 +252,7 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 		#-- save deviance values
 		deviance.history[iter+1] <- dev <- -2*ll
 		
-		if (dev < dev0 ){
+		if (dev < parm_minimal$dev ){
 			parm_minimal <- list( iter_opt=iter, dev=dev, d.rater=d.rater, 
 							c.rater = c.rater, tau.item = tau.item, a.item=a.item,
 							mu = mu , sigma=sigma, pi.k=pi.k)		
@@ -338,8 +339,8 @@ rm.sdt <- function( dat , pid , rater ,Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
 	
 	#---
 	# person parameters
-	res <- rm_facets_postproc_person( dat2=dat2, dat2.resp=dat2.resp, procdata=procdata, maxK=maxK, RR=RR, theta.k=theta.k, 
-				f.qk.yi=f.qk.yi ) 
+	res <- rm_facets_postproc_person( dat2=dat2, dat2.resp=dat2.resp, procdata=procdata, 
+				maxK=maxK, RR=RR, theta.k=theta.k, f.qk.yi=f.qk.yi ) 
 	person <- res$person
 	EAP.rel <- res$EAP.rel					
 	

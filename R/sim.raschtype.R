@@ -1,5 +1,5 @@
 ## File Name: sim.raschtype.R
-## File Version: 0.11
+## File Version: 0.12
 
 
 #########################################################################
@@ -24,7 +24,7 @@ sim.raschtype <- function( theta , b , alpha1 = 0, alpha2 = 0 , fixed.a = NULL ,
     dat.resp <- 1 * ( expprob > matrix( stats::runif( nrow(expprob)*ncol(expprob) ) , 
 							ncol= ncol(expprob )) )
 	I <- length(b)
-	pot <- max( 2 , log10(I) + 1 )
+	pot <- max( 2 , floor(log10(I) + 1 ) )
 	colnames(dat.resp) <- paste( "I" , substring( 10^pot + 1:I,2) , sep="")
 	dat.resp <- as.data.frame(dat.resp)
     return(dat.resp)

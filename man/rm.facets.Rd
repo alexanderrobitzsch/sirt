@@ -1,5 +1,5 @@
 %% File Name: rm.facets.Rd
-%% File Version: 0.59
+%% File Version: 0.63
 
 \name{rm.facets}
 \alias{rm.facets}
@@ -12,6 +12,7 @@
 \alias{IRT.modelfit.rm.facets}
 \alias{IRT.factor.scores.rm.facets}
 \alias{summary.IRT.modelfit.rm.facets}
+\alias{rm_proc_data}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
@@ -55,6 +56,9 @@ rm.facets(dat, pid=NULL, rater=NULL, Qmatrix=NULL, theta.k=seq(-9, 9, len=30),
 \method{IRT.modelfit}{rm.facets}(object,...)
 
 \method{summary}{IRT.modelfit.rm.facets}(object, ...)
+
+## function for processing data
+rm_proc_data( dat, pid, rater, rater_item_int=FALSE, reference_rater=NULL )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -360,9 +364,9 @@ a.item.fixed <- rep(NA,5)
 a.item.fixed[ 1:4 ] <- 1
 # estimate model
 mod5a <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater , 
-             pid=dat$idstud  , est.a.rater=TRUE , est.a.item=TRUE , 
-             tau.item.fixed=tau.item.fixed , b.rater.fixed=b.rater.fixed , 
-             a.rater.fixed=a.rater.fixed , a.item.fixed=a.item.fixed , 
+             pid=dat$idstud, est.a.rater=TRUE, est.a.item=TRUE, 
+             tau.item.fixed=tau.item.fixed, b.rater.fixed=b.rater.fixed, 
+             a.rater.fixed=a.rater.fixed, a.item.fixed=a.item.fixed, 
              est.mean=TRUE)
 summary(mod5a)
 
@@ -376,7 +380,6 @@ mod7 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater, est.a.item
              est.a.rater=TRUE, pid=dat$idstud, reference_rater="db03", 
              rater_item_int=TRUE) 
 summary(mod7)
-
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

@@ -1,5 +1,5 @@
 ## File Name: rm_proc_data.R
-## File Version: 0.31
+## File Version: 0.32
 
 ##########################################
 # Data preprocessing rater models
@@ -59,7 +59,7 @@ rm_proc_data <- function( dat, pid , rater, rater_item_int=FALSE, reference_rate
 	#--- dat2.ind.resp
 	n <- nrow(dat2)
 	p <- ncol(dat2)
-	K <- max( dat2, na.rm=TRUE) + 1
+	K <- max(dat2, na.rm=TRUE) + 1
 	dat2.ind.resp <- array( 0 , dim=c(n,p,K) )
 	for (kk in 1:K){
 		dat2.ind.resp[,,kk] <- dat2.resp * ( dat2 == ( kk - 1 ) )
