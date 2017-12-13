@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.4  |  2017-12-06  |  Last: sirt 2.4-12
+VERSIONS sirt 2.4  |  2017-12-13  |  Last: sirt 2.4-16
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in rm.facets() when argument rater_item_int=TRUE 
