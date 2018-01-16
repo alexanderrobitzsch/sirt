@@ -35,13 +35,13 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.4  |  2017-12-13  |  Last: sirt 2.4-16
+VERSIONS sirt 2.4  |  2018-01-16  |  Last: sirt 2.4-17
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in rm.facets() when argument rater_item_int=TRUE 
         was used
 NOTE  * exported function rm_proc_data() for processing rating datasets
-
+FIXED * avoided numeric overflow in pcm.fit() (thanks to Chen Chen)
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---

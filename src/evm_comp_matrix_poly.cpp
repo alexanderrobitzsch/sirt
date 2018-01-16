@@ -1,5 +1,5 @@
 //// File Name: evm_comp_matrix_poly.cpp
-//// File Version: 3.607
+//// File Version: 3.608
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -7,12 +7,6 @@
 #include <Rcpp.h>
 
 using namespace Rcpp;
-
-
-// [[packageNONincludes]]
-// #include "evm_eigaux_fcts.h"
-// #include "c:/Users/robitzsch/Dropbox/Eigene_Projekte/R-Routinen/IRT-Functions/sirt_package/1.15/sirt_work/src/evm_eigaux_fcts__4.10.h"
-
 
 
 
