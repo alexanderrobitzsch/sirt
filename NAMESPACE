@@ -165,7 +165,7 @@ importFrom(survey, svydesign)
 # require_namespace_msg("another_package")
 
 # importFrom(gtools, permutations)
-# importFrom(ic.infer, orlm.lm)
+# importFrom(ic.infer, orlm)
 # importFrom(igraph, graph.edgelist)
 # importFrom(Matrix, bdiag)
 # importFrom(pbivnorm, pbivnorm)

@@ -1,5 +1,5 @@
 ## File Name: pcm.fit.R
-## File Version: 0.13
+## File Version: 0.16
 
 #############################################
 # fit partial credit (or Rasch model)
@@ -18,8 +18,9 @@ pcm.fit <- function( b , theta , dat )
 	# create probability matrix
 	rprobs <- array( 0 , dim = c( N , K +1 , I ) )
 	score_vec <- 0:K
+	M0 <- TAM::tam_outer( theta , score_vec )
 	for (ii in 1:I){	
-		M1 <- TAM::tam_outer( theta , score_vec )
+		M1 <- M0
 		M1[,-1] <- M1[,-1] - TAM::tam_matrix2( b[ii,], nrow=N )
 		M1_max <- rowMaxs.sirt(matr=M1)$maxval
 		M1 <- M1 - M1_max
@@ -31,20 +32,21 @@ pcm.fit <- function( b , theta , dat )
 	# expected response
 	Eni <- array( 0 , dim= c(N,I) )
 
+	M2 <- TAM::tam_matrix2( 0:K , nrow=N)
 	for (ii in 1:I){
-		Eni[,ii] <- rowSums( outer( rep(1,N) , 0:(K) )*rprobs[,,ii]  )
+		Eni[,ii] <- rowSums( M2*rprobs[,,ii]  )
 	}                
 	# calculate residuals
 	Yni <- dat - Eni
 	# calculate variances
 	Wni <- array( 0 , dim= c(N,I) )
 	for (ii in 1:I){
-		Wni[,ii] <- rowSums( ( outer( rep(1,N) , 0:(K) )  - Eni[,ii] )^2 *rprobs[,,ii]  )
+		Wni[,ii] <- rowSums( ( M2  - Eni[,ii] )^2 *rprobs[,,ii]  )
 	}
 	# calculate kurtosis
 	Cni <- array( 0 , dim= c(N,I) )
 	for (ii in 1:I){
-		Cni[,ii] <- rowSums( ( outer( rep(1,N) , 0:(K) )  - Eni[,ii] )^4 *rprobs[,,ii]  )
+		Cni[,ii] <- rowSums( ( M2  - Eni[,ii] )^4 *rprobs[,,ii]  )
 	}
 	# standardized residual
 	zni <- Yni / sqrt( Wni )
@@ -53,8 +55,7 @@ pcm.fit <- function( b , theta , dat )
 	N.item <- colSums( dat.ind )	
 	#--- Outfit
 	outfit <- colSums( zni^2 * dat.ind ) / N.item
-	itemfit <- data.frame( "item" = colnames(dat) , 
-					"outfit" = outfit )
+	itemfit <- data.frame( "item" = colnames(dat) , "outfit" = outfit )
 	qi <- sqrt( colSums( dat.ind * Cni / Wni^2  ) / N.item^2 - 1 / N.item )
 	itemfit$outfit.t <- ( itemfit$outfit^(1/3) - 1 ) * ( 3 / qi ) + qi / 3
 	#--- Infit

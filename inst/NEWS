@@ -35,18 +35,29 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.4  |  2018-01-16  |  Last: sirt 2.4-17
+VERSIONS sirt 2.5  |  2018-01-30  |  Last: sirt 2.5-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 2.4  |  2018-01-29  |  Last: sirt 2.4-20
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in rm.facets() when argument rater_item_int=TRUE 
         was used
 NOTE  * exported function rm_proc_data() for processing rating datasets
 FIXED * avoided numeric overflow in pcm.fit() (thanks to Chen Chen)
+FIXED * fixed broken function lsdm() because exported functions in
+        dependent package 'ic.infer' have been changed
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 2.3  |  2017-11-23  |  Last: sirt 2.3-57
