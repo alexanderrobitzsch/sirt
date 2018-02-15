@@ -1,5 +1,5 @@
 ## File Name: rm_proc_data.R
-## File Version: 0.49
+## File Version: 0.53
 
 ##########################################
 # Data preprocessing rater models
@@ -39,13 +39,15 @@ rm_proc_data <- function( dat, pid , rater, rater_item_int=FALSE, reference_rate
 	vars <- colnames(dat)    
 	# create data frame with crossed items and raters
 	dat2 <- data.frame( matrix( NA , nrow=PP , ncol=RR*VV ) )	
-	colnames(dat2) <- paste0( rep(vars , RR ) , "-" , rep( rater.index$rater , each=VV) )
+	colnames_dat2 <- colnames(dat2) <- paste0( rep(vars , RR ) , "-" , 
+				rep( rater.index$rater , each=VV) )
 	rownames(dat2) <- person.index$pid
 	
 	# create expanded dataset
 	rater0 <- match( rater, rater.index$rater) - 1
 	pid0 <- match( pid, person.index$pid) - 1
 	dat2 <- rm_proc_expand_dataset(dat=as.matrix(dat), rater0=rater0, pid0=pid0, N=PP, R=RR)
+	colnames(dat2) <- colnames_dat2
 	dat20 <- dat2
 	
 	# variable list
@@ -55,9 +57,10 @@ rm_proc_data <- function( dat, pid , rater, rater_item_int=FALSE, reference_rate
 	N <- nrow(dat2)
 	K <- max(dat2, na.rm=TRUE)
 	I <- ncol(dat2)
-	res <- rm_proc_datasets_na_indicators(dat=as.matrix(dat2), K=K )
+	res <- rm_proc_datasets_na_indicators(dat=as.matrix(dat2), K=K )	
 	dat2 <- res$dat2
 	dat2.resp <- res$dat_resp
+	colnames(dat2) <- colnames_dat2
 	dat2.ind.resp <- array( res$dat2_ind_resp , dim=c(N,I,K+1) ) 
 	
 	#--- output
