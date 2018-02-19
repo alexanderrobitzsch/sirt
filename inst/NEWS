@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.5  |  2018-02-17  |  Last: sirt 2.5-6
+VERSIONS sirt 2.5  |  2018-02-19  |  Last: sirt 2.5-11
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in postprocessing in rm.sdt() function
@@ -43,7 +43,9 @@ FIXED * fixed bugs in mcmc_XXX() functions when mcmc object (from coda)
         is a list
 FIXED * handle case of characters "[", "]", "," in variable names in
         functions mcmc_derivedPars() and mcmc_WaldTest() 
- 
+FIXED * mcmc_WaldTest() now also handle cases of multicollinear
+        hypotheses 
+
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
 

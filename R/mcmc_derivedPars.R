@@ -1,5 +1,5 @@
 ## File Name: mcmc_derivedPars.R
-## File Version: 0.13
+## File Version: 0.22
 
 #####################################################
 # derived parameters for objects of class mcmc
@@ -14,8 +14,9 @@ mcmc_derivedPars <- function( mcmcobj, derivedPars )
 	trans <- res$trans
 	colnames(data) <- mcmc_rename_parameter_names( vec=colnames(data), orig=orig, trans=trans)	
 	for (pp in 1:NP){
-		der_pp <- mcmc_rename_parameter_names( vec=paste(derivedPars[[pp]]), orig=orig, trans=trans)
-		data_pp <- stats::model.matrix( as.formula(der_pp) , data )
+		der_pp <- mcmc_rename_parameter_names( vec=paste0(derivedPars[[pp]]), orig=orig, trans=trans)
+		form_pp <- mcmc_as_formula(der_pp)			
+		data_pp <- stats::model.matrix( form_pp , data )
 		if (ncol(data_pp) > 1){
 			data_pp <- data_pp[,-1]
 		}
