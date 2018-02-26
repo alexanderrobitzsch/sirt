@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.33
+%% File Version: 0.35
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -25,9 +25,9 @@ noharm.sirt(dat, weights = NULL, Fval = NULL, Fpatt = NULL, Pval = NULL,
    Ppatt = NULL, Psival = NULL, Psipatt = NULL, dimensions = NULL, 
    lower = rep(0, ncol(dat)), upper = rep(1, ncol(dat)), wgtm = NULL, modesttype=1,
    pos.loading=FALSE , pos.variance = FALSE ,  pos.residcorr = FALSE ,       
-   maxiter = 1000, conv = 10^(-6), increment.factor = 1.01)
+   maxiter = 1000, conv = 10^(-6), increment.factor = 1.01, reliability=TRUE)
 
-\method{summary}{noharm.sirt}(object, logfile=NULL , \dots) 
+\method{summary}{noharm.sirt}(object, file=NULL , \dots) 
 }
 
 %% \method{plot}{noharm.sirt}(x, what="est", efa.load.min=.3, ...)
@@ -96,8 +96,9 @@ Numeric value larger than 1 which controls the size of increments
 in increasing iteration numbers. With a larger value, the increments
 are heavier penalized.
 }
+\item{reliability}{Logical indicating whether reliability should be computed.}
 \item{object}{Object of class \code{noharm.sirt}}
-\item{logfile}{String indicating a file name for summary.}
+\item{file}{String indicating a file name for summary.}
 \item{\dots}{Further arguments to be passed. }
 }
 

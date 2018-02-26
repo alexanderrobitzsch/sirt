@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.49
+## File Version: 0.67
 
 ########################################
 # NOHARM implementation in R
@@ -18,7 +18,8 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 	lower=rep(0,ncol(dat)), upper=rep(1,ncol(dat)) , wgtm=NULL ,
 	modesttype=1 , pos.loading=FALSE , pos.variance = FALSE ,
 	pos.residcorr = FALSE , 
-	maxiter=1000 , conv=10^(-6) ,  increment.factor=1.01){
+	maxiter=1000 , conv=10^(-6) ,  increment.factor=1.01,
+	reliability=TRUE ){
 	#*****************************************
 	# data processing
 	e1 <- environment()
@@ -65,7 +66,8 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 	estF <- 1 * ( sum( Fpatt > 0 ) > 0 )	
 	estP <- 1 * ( sum( Ppatt > 0 ) > 0 )	
 	estpars <- list("estF"=estF, "estP"=estP,"estPsi"=estPsi)
-    eps <- 10^(-4)
+    eps <- 2*conv
+	
 	#*******************
 	# algorithm
     while( ( iter < maxiter ) & ( parchange > conv ) ){
@@ -88,14 +90,18 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 #					I , D    ,  b0.jk , b1.jk , b2.jk , b3.jk , wgtm , pm ,
 #					Psival , Psipatt , maxincrement ) 
 		if (estP==1){
-#		    Pval_old <- Pval
+		    Pval_old00 <- Pval
 			res <- noharm_estPcpp( Fval , Pval    , Fpatt , Ppatt ,
 						I , D    ,  b0.jk , b1.jk , b2.jk , b3.jk , wgtm , pm ,
 						Psival , Psipatt , maxincrement , modesttype )
 			changeP <- res$change
 			Pval <- res$Pval_		
-			if ( pos.variance ){	diag(Pval)[ diag(Pval) < 0 ] <- eps  }			
-					}
+			if ( pos.variance ){	
+				diag(Pval)[ diag(Pval) < 0 ] <- eps				
+			}			
+			diag(Pval)[ is.na(diag(Pval)) ] <- eps
+			# changeP <- abs( Pval - Pval_old00	 )
+		}
 		#---- update Psi
 #		res <- noharm_estPsicpp( Fval , Pval    , Fpatt , Ppatt ,
 #					I , D    ,  b0.jk , b1.jk , b2.jk , b3.jk , wgtm , pm ,
@@ -110,14 +116,15 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 					}
 		parchange <- max( c(changeP,changeF,changePsi) )
 		iter <- iter + 1 
-			
-		}	
+	}
+	#--------------------------------
+
 	#****************
 	# calculate final constants
 	if (modesttype==2){
 		dj2 <- diag( Fval %*% Pval %*% t(Fval) ) 
 		Fval <- Fval / sqrt( 1 - dj2 )
-					}
+	}
 	# recalculation of f0 coefficient (final constant)
 	dj <- sqrt( diag( Fval %*% Pval %*% t(Fval) ) )
 	ej <- sqrt( 1 + dj^2 )
@@ -126,7 +133,6 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 	uqn <- 1 - ( dj^2 / ( 1 + dj^2 ) )
 	# standardized loadings
 	loadingsF <- Fval / ej
-
 	#****************
 	# post processing
 	residuals <- .noharm.est.residuals( Fval , Pval , Fpatt , Ppatt , 
@@ -186,6 +192,7 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 		# calculate p values
 		res$p.chisquare <- 1 - pchisq( res$chisquare , df = res$df )
 						}
+
 	#************************
 	# Green-Yang reliability
 	v1 <- 1 * ( ( wgtm - diag(wgtm) ) > 0 )
@@ -204,14 +211,16 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 		ej <- sqrt( 1+dj^2 )
 		Fval2 <- Fval2 / ej
 		standardized.solution <- list( "Fval"=Fval2 , "Pval" = Pval2 )					
+	if (reliability){
 		res$omega.rel <- reliability.nonlinearSEM(facloadings= Fval2 , 
-			thresh=res$thresholds, 
-        	resid.cov = res$residcorr  , cor.factors = Pval2 )$omega.rel
-	if ( sum(v1) + I < I^2 ){	res$omega.rel <- NA  } 
-
-	#***********************
-	# rotated solution
+			thresh=res$thresholds, resid.cov = res$residcorr  , cor.factors = Pval2 )$omega.rel
+	}
+	if ( sum(v1) + I < I^2 ){
+		res$omega.rel <- NA  
+	} 
 	
+	#***********************
+	# rotated solution	
 	if (model.type=="EFA"){	
 		m1 <- stats::promax(res$loadings)		
 		p1 <- matrix( 0 , nrow=I,D)

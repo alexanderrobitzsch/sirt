@@ -1,5 +1,5 @@
 ## File Name: reliability.nonlinear.sem.R
-## File Version: 1.10
+## File Version: 1.11
 
 
 

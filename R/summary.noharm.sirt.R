@@ -1,23 +1,23 @@
 ## File Name: summary.noharm.sirt.R
-## File Version: 1.07
+## File Version: 1.09
 
-#..........................................................
-# R2Noharm summary function
 
 #----------------------------------------------------------
-# summary function for R2noharm
-summary.noharm.sirt <- function( object , logfile=NULL , ...){
-	#**********************
-	# global summary
-	if ( ! is.null(logfile) ){ sink( paste0(logfile,".Rout") , split=TRUE ) }
-	cat( paste( "-------------------------------------------------") , "\n" )	
-#	cat( paste( "NOHARM | '", class(object),"' | " , object$systime , sep="") , "\n" )	
+# summary function for noharm.sirt
+summary.noharm.sirt <- function( object , file=NULL , ...)
+{
+    # open sink
+    sirt_osink( file = file )
+		
+	cat("-----------------------------------------------------------------\n")
+	#--- package and R session
+    sirt_summary_print_package_rsession(pack="sirt")	
+	
 	cat( paste( "Function '", class(object),"' | " , object$systime , sep="") , "\n" )	
-	d <- utils::packageDescription("sirt")
-	cat(paste(d$Package," " , d$Version," (",d$Date,")",sep=""))
+	
 	cat( paste( "\n-------------------------------------------------") , "\n\n" )	
-	#**********************
-	# model type
+	
+	#--- model type
 	if (object$modtype == 2){ cat( "Multidimensional Exploratory Factor Analysis\n") }
 	if (object$modtype == 3){ cat( "Multidimensional Confirmatory Factor Analysis\n") }
 
@@ -127,7 +127,7 @@ summary.noharm.sirt <- function( object , logfile=NULL , ...){
 		print( l1 )		
 				}												
 				
-	if ( ! is.null(logfile) ){ sink() }				
-		invisible(res)
-	}
+	# close sink
+    sirt_csink( file = file )
+}
 #--------------------------------------------------------------------------------------

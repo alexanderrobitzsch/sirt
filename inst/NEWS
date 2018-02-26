@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.5  |  2018-02-19  |  Last: sirt 2.5-11
+VERSIONS sirt 2.5  |  2018-02-26  |  Last: sirt 2.5-19
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in postprocessing in rm.sdt() function
@@ -45,11 +45,12 @@ FIXED * handle case of characters "[", "]", "," in variable names in
         functions mcmc_derivedPars() and mcmc_WaldTest() 
 FIXED * mcmc_WaldTest() now also handle cases of multicollinear
         hypotheses 
+FIXED * handled NaN problems in noharm.sirt()
+NOTE  * included argument 'reliability' in noharm.sirt()
+NOTE  * changed argument 'logfile' to 'file' in summary.noharm.sirt()
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 2.4  |  2018-01-29  |  Last: sirt 2.4-20
@@ -60,7 +61,7 @@ FIXED * fixed a bug in rm.facets() when argument rater_item_int=TRUE
 NOTE  * exported function rm_proc_data() for processing rating datasets
 FIXED * avoided numeric overflow in pcm.fit() (thanks to Chen Chen)
 FIXED * fixed broken function lsdm() because exported functions in
-        dependent package ic.infer have been changed
+        dependent package 'ic.infer' have been changed
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
