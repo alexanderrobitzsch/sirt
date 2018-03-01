@@ -1,5 +1,5 @@
-//// File Name: probs_multcat_items_counts_csirt.cpp
-//// File Version: 3.01
+//// File Name: probs_multcat_items_counts_rcpp.cpp
+//// File Version: 3.02
 
 
 #include <Rcpp.h>

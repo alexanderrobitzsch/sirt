@@ -1,5 +1,5 @@
 //// File Name: rm_proc_data_rcpp.cpp
-//// File Version: 0.15
+//// File Version: 0.16
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -42,7 +42,7 @@ Rcpp::List rm_proc_datasets_na_indicators(Rcpp::NumericMatrix dat, int K)
 	return Rcpp::List::create(    
 				Rcpp::Named("dat2") = dat2,
 				Rcpp::Named("dat_resp") = dat_resp,
-				Rcpp::Named("dat2_ind_resp") = dat2_ind_resp				
+				Rcpp::Named("dat2_ind_resp") = dat2_ind_resp
 			) ; 
 }
 ///********************************************************************

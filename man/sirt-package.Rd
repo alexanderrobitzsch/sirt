@@ -1,5 +1,5 @@
 %% File Name: sirt-package.Rd
-%% File Version: 2.43
+%% File Version: 2.47
 
 \name{sirt-package}
 \alias{sirt-package}
@@ -9,12 +9,21 @@
 Supplementary Item Response Theory Models
 }
 \description{
-    Supplementary item response theory models to complement existing 
-    functions in R, including multidimensional compensatory and
-    noncompensatory IRT models, MCMC for hierarchical IRT models and 
-    testlet models, NOHARM, Rasch copula model, faceted and 
-    hierarchical rater models, ordinal IRT model (ISOP), 
-    DETECT statistic, local structural equation modeling (LSEM).
+    Supplementary functions for item response models aiming
+    to complement existing R packages. The functionality includes among others
+    multidimensional compensatory and noncompensatory IRT models
+    (Reckase, 2009, <doi:10.1007/978-0-387-89976-3>), 
+    MCMC for hierarchical IRT models and testlet models
+    (Fox, 2010, <doi:10.1007/978-1-4419-0742-4>), 
+    NOHARM (Fraser & McDonald, 1982, <doi:10.1207/s15327906mbr2302_9>), 
+    Rasch copula model (Braeken, 2011, <doi:10.1007/s11336-010-9190-4>;
+    Schroeders, Robitzsch & Schipolowski, 2014, <doi:10.1111/jedm.12054>),
+    faceted and hierarchical rater models (DeCarlo, Kim & Johnson, 2011,
+    <doi:10.1111/j.1745-3984.2011.00143.x>),
+    ordinal IRT model (ISOP; Scheiblechner, 1995, <doi:10.1007/BF02301417>), 
+    DETECT statistic (Stout et al., 1996, <doi:10.1177/014662169602000403>), 
+    local structural equation modeling (LSEM; Hildebrandt et al., 2016,
+    <doi:10.1080/00273171.2016.1142856>).
 }
 \details{
 
@@ -216,11 +225,16 @@ Describing disability through individual-level mixture models
 for multivariate binary data. \emph{Annals of Applied Statistics},
 \bold{1}, 502-537.
 
+Fox, J.-P. (2010). \emph{Bayesian item response modeling}. New York: Springer.
+
 Fox, J.-P., & Verhagen, A.-J. (2010). Random item effects modeling for 
 cross-national survey data. 
 In E. Davidov, P. Schmidt, & J. Billiet (Eds.), 
 \emph{Cross-cultural Analysis: Methods and Applications} 
 (pp. 467-488), London: Routledge Academic.
+
+Fraser, C., & McDonald, R. P. (1988). NOHARM: Least squares item factor analysis. 
+\emph{Multivariate Behavioral Research}, \bold{23}, 267-269.
 
 Glas, C. A. W. (2012). \emph{Estimating and testing the extended testlet model.}
 LSAC Research Report Series, RR 12-03.
@@ -232,6 +246,11 @@ coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167.
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
 from an item respone model through separate calibrations}. 
 ETS Research Report ETS RR-09-40. Princeton, ETS.
+
+Hildebrandt, A., Luedtke, O., Robitzsch, A., Sommer, C., &
+Wilhelm, O. (2016). Exploring factor model parameters across continuous variables 
+with local structural equation models. 
+\emph{Multivariate Behavioral Research}, \bold{51}, 257-278.
 
 Ip, E. H., Molenberghs, G., Chen, S. H., Goegebeur, Y., & 
 De Boeck, P. (2013). Functionally unidimensional item 
@@ -296,6 +315,10 @@ probabilistic models (ISOP). \emph{Psychometrika},
 Scheiblechner, H. (1999). Additive conjoint isotonic
 probabilistic models (ADISOP). \emph{Psychometrika},
 \bold{64}, 295-316.
+
+Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014). A comparison of different 
+psychometric approaches to modeling testlet structures: An example with C-tests. 
+\emph{Journal of Educational Measurement, 51}(4), 400-418.
 
 Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996). 
 Conditional covariance-based nonparametric multidimensionality assessment. 

@@ -1,17 +1,26 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 2.5-19
-Date: 2018-02-26 11:21:26
+Version: 2.5-41
+Date: 2018-03-01 14:53:06
 Author: Alexander Robitzsch [aut,cre]
 Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
 Description: 
-    Supplementary item response theory models to complement existing 
-    functions in R, including multidimensional compensatory and
-    noncompensatory IRT models, MCMC for hierarchical IRT models and 
-    testlet models, NOHARM, Rasch copula model, faceted and 
-    hierarchical rater models, ordinal IRT model (ISOP), 
-    DETECT statistic, local structural equation modeling (LSEM).
+    Supplementary functions for item response models aiming
+    to complement existing R packages. The functionality includes among others
+    multidimensional compensatory and noncompensatory IRT models
+    (Reckase, 2009, <doi:10.1007/978-0-387-89976-3>), 
+    MCMC for hierarchical IRT models and testlet models
+    (Fox, 2010, <doi:10.1007/978-1-4419-0742-4>), 
+    NOHARM (Fraser & McDonald, 1982, <doi:10.1207/s15327906mbr2302_9>), 
+    Rasch copula model (Braeken, 2011, <doi:10.1007/s11336-010-9190-4>;
+    Schroeders, Robitzsch & Schipolowski, 2014, <doi:10.1111/jedm.12054>),
+    faceted and hierarchical rater models (DeCarlo, Kim & Johnson, 2011,
+    <doi:10.1111/j.1745-3984.2011.00143.x>),
+    ordinal IRT model (ISOP; Scheiblechner, 1995, <doi:10.1007/BF02301417>), 
+    DETECT statistic (Stout et al., 1996, <doi:10.1177/014662169602000403>), 
+    local structural equation modeling (LSEM; Hildebrandt et al., 2016,
+    <doi:10.1080/00273171.2016.1142856>).
 Depends:
     R (>= 3.1)
 Imports:

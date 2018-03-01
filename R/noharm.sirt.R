@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.67
+## File Version: 0.73
 
 ########################################
 # NOHARM implementation in R
@@ -31,7 +31,7 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 		Ppatt , Pval , Psipatt , Psival, wgtm , dimensions )	
 	# attach objects locally
 	.attach.environment.sirt( res , envir =e1)
-    D <- ncol(Fval)
+	D <- ncol(Fval)
 #	modesttype <- 1		# NOHARM estimation
 #	modesttype <- 2		# estimation using tetrachoric correlations
 	if (modesttype==2){
@@ -40,23 +40,23 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 		betaj <- pm2$tau
 		lower <- 0*lower
 		upper <- 1+lower
-					}
+	}
 	#----
 	# compute betaj
 	if (modesttype==1){
-		betaj <- - qnorm( ( diag(pm) - lower ) / ( upper - lower ) )
-						}
-		# compute bjk coefficients
-		# include lower and upper asymptotes here
-		b0 <- lower + (upper-lower) * pnorm( - betaj )
-		b1 <- (upper-lower) * dnorm( betaj )
-		b2 <- (upper-lower) * betaj * dnorm( betaj ) / sqrt(2)
-		b3 <- (upper-lower) * ( betaj^2 -1 ) * dnorm(betaj) / sqrt(6)
-		# create fixed cofficients
-		b0.jk <- as.matrix(outer(b0,b0) )
-		b1.jk <- as.matrix(outer(b1,b1) )
-		b2.jk <- as.matrix(outer(b2,b2) )
-		b3.jk <- as.matrix(outer(b3,b3))
+		betaj <- - stats::qnorm( ( diag(pm) - lower ) / ( upper - lower ) )
+	}
+	# compute bjk coefficients
+	# include lower and upper asymptotes here
+	b0 <- lower + (upper-lower) * stats::pnorm( - betaj )
+	b1 <- (upper-lower) * stats::dnorm( betaj )
+	b2 <- (upper-lower) * betaj * stats::dnorm( betaj ) / sqrt(2)
+	b3 <- (upper-lower) * ( betaj^2 -1 ) * stats::dnorm(betaj) / sqrt(6)
+	# create fixed cofficients
+	b0.jk <- as.matrix(outer(b0,b0) )
+	b1.jk <- as.matrix(outer(b1,b1) )
+	b2.jk <- as.matrix(outer(b2,b2) )
+	b3.jk <- as.matrix(outer(b3,b3))
 
 	parchange <- 1
 	changeF <- changeP <- changePsi <- 0
@@ -66,54 +66,43 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 	estF <- 1 * ( sum( Fpatt > 0 ) > 0 )	
 	estP <- 1 * ( sum( Ppatt > 0 ) > 0 )	
 	estpars <- list("estF"=estF, "estP"=estP,"estPsi"=estPsi)
-    eps <- 2*conv
+	eps <- 2*conv
 	
 	#*******************
 	# algorithm
-    while( ( iter < maxiter ) & ( parchange > conv ) ){
-		maxincrement <- maxincrement  / increment.factor		
+	while( ( iter < maxiter ) & ( parchange > conv ) ){
+		maxincrement <- maxincrement  / increment.factor
 		#---- update F
-#		res <- noharm_estFcpp( Fval , Pval    , Fpatt , Ppatt ,
-#					I , D    ,  b0.jk , b1.jk , b2.jk , b3.jk , wgtm , pm ,
-#					Psival , Psipatt , maxincrement ) 
 		if (estF==1){	
-			res <- noharm_estFcpp(
-						Fval , Pval    , Fpatt , Ppatt ,
-						I , D    ,  b0.jk , b1.jk , b2.jk , b3.jk , wgtm , pm ,
-						Psival , Psipatt , maxincrement , modesttype )
+			res <- noharm_estFcpp( Fval=Fval, Pval=Pval, Fpatt=Fpatt, Ppatt=Ppatt, I=I, D=D, 
+						b0jk=b0.jk, b1jk=b1.jk, b2jk=b2.jk, b3jk=b3.jk, wgtm=wgtm, pm=pm, Psival=Psival, 
+						Psipatt=Psipatt, maxincrement=maxincrement, modtype=modesttype ) 
 			changeF <- res$change	
 			Fval <- res$Fval_	
-			if ( pos.loading ){	Fval[ Fval < 0 ] <- eps  }						
-					}
+			if ( pos.loading ){	Fval[ Fval < 0 ] <- eps  }
+		}
 		#---- update P
-#		res <- noharm_estPcpp( Fval , Pval    , Fpatt , Ppatt ,
-#					I , D    ,  b0.jk , b1.jk , b2.jk , b3.jk , wgtm , pm ,
-#					Psival , Psipatt , maxincrement ) 
 		if (estP==1){
-		    Pval_old00 <- Pval
-			res <- noharm_estPcpp( Fval , Pval    , Fpatt , Ppatt ,
-						I , D    ,  b0.jk , b1.jk , b2.jk , b3.jk , wgtm , pm ,
-						Psival , Psipatt , maxincrement , modesttype )
+			Pval_old00 <- Pval
+			res <- noharm_estPcpp( Fval=Fval, Pval=Pval, Fpatt=Fpatt, Ppatt=Ppatt, I=I, D=D, 
+						b0jk=b0.jk, b1jk=b1.jk, b2jk=b2.jk, b3jk=b3.jk, wgtm=wgtm, pm=pm, Psival=Psival, 
+						Psipatt=Psipatt, maxincrement=maxincrement, modtype=modesttype )
 			changeP <- res$change
 			Pval <- res$Pval_		
 			if ( pos.variance ){	
-				diag(Pval)[ diag(Pval) < 0 ] <- eps				
+				diag(Pval)[ diag(Pval) < 0 ] <- eps	
 			}			
 			diag(Pval)[ is.na(diag(Pval)) ] <- eps
-			# changeP <- abs( Pval - Pval_old00	 )
 		}
 		#---- update Psi
-#		res <- noharm_estPsicpp( Fval , Pval    , Fpatt , Ppatt ,
-#					I , D    ,  b0.jk , b1.jk , b2.jk , b3.jk , wgtm , pm ,
-#					Psival , Psipatt , maxincrement ) 
-        if (estPsi==1){
-			res <- noharm_estPsicpp( Fval , Pval    , Fpatt , Ppatt ,
-						I , D    ,  b0.jk , b1.jk , b2.jk , b3.jk , wgtm , pm ,
-						Psival , Psipatt , maxincrement , modesttype )				
+		if (estPsi==1){
+			res <- noharm_estPsicpp( Fval=Fval, Pval=Pval, Fpatt=Fpatt, Ppatt=Ppatt, I=I, D=D, 
+						b0jk=b0.jk, b1jk=b1.jk, b2jk=b2.jk, b3jk=b3.jk, wgtm=wgtm, pm=pm, Psival=Psival, 
+						Psipatt=Psipatt, maxincrement=maxincrement, modtype=modesttype ) 
 			changePsi <- res$change
 			Psival <- res$Psival_	
 			if ( pos.residcorr ){	Psival[ Psival < 0 ] <- eps  }
-					}
+		}
 		parchange <- max( c(changeP,changeF,changePsi) )
 		iter <- iter + 1 
 	}
@@ -191,7 +180,7 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 		res$rmsea <- rmsea <- sqrt(max(c( (X2 / res$Nobs ) / df - 1/res$Nobs , 0)))
 		# calculate p values
 		res$p.chisquare <- 1 - pchisq( res$chisquare , df = res$df )
-						}
+	}
 
 	#************************
 	# Green-Yang reliability

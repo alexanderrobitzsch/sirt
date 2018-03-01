@@ -1,5 +1,5 @@
-//// File Name: invariance_alignment.cpp
-//// File Version: 1.04
+//// File Name: invariance_alignment_rcpp.cpp
+//// File Version: 1.05
 
 
 // [[Rcpp::depends(RcppArmadillo)]]

@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.58
+%% File Version: 1.59
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -23,7 +23,8 @@ Multidimensional IRT Copula Model
 This function handles local dependence by specifying 
 copulas for residuals in multidimensional item response
 models for dichotomous item responses 
-(Braeken, 2011; Braeken, Tuerlinckx & de Boeck, 2007).
+(Braeken, 2011; Braeken, Tuerlinckx & de Boeck, 2007;
+Schroeders, Robitzsch & Schipolowski, 2014).
 Estimation is allowed for item difficulties, item slopes and
 a generalized logistic link function (Stukel, 1988).
 
@@ -195,6 +196,10 @@ response models: A MATLAB IRTm toolbox.
     Braeken, J., Tuerlinckx, F., & De Boeck, P. (2007). 
     Copulas for residual dependencies. 
     \emph{Psychometrika}, \bold{72}, 393-411.
+
+Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014). A comparison of different 
+psychometric approaches to modeling testlet structures: An example with C-tests. 
+\emph{Journal of Educational Measurement, 51}(4), 400-418.
 
     Stukel, T. A. (1988). Generalized logistic models. 
     \emph{Journal of the American Statistical Association},

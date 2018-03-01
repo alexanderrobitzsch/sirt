@@ -1,5 +1,5 @@
-//// File Name: evm_comp_matrix_poly.cpp
-//// File Version: 3.608
+//// File Name: evm_comp_matrix_poly_rcpp.cpp
+//// File Version: 3.616
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -73,21 +73,26 @@ Rcpp::List parameters_jackknife( Rcpp::NumericMatrix PARS )
 	int JJ=PARS.ncol() ;
 	Rcpp::NumericVector PARS_means(VV);
 	Rcpp::NumericMatrix PARS_vcov(VV,VV);
+	Rcpp::NumericMatrix PARS_(VV,JJ);
+	for (int jj=0; jj<JJ; jj++){
+		PARS_(_,jj) = PARS(_,jj);
+	}	
+
 	double tmp3=0;
 	// compute row means
 	for (int vv=0;vv<VV;vv++){
 		tmp3=0;
 		for (int jj=0;jj<JJ;jj++){
-			tmp3+= PARS(vv,jj) ;
+			tmp3+= PARS_(vv,jj) ;
 		}
 		PARS_means[vv] = tmp3 / JJ ;  
-		PARS(vv,_) = PARS(vv,_) - PARS_means[vv] ; 
-		}
+		PARS_(vv,_) = PARS_(vv,_) - PARS_means[vv] ; 
+	}
 	// compute covariance
 	for (int vv1=0;vv1<VV;vv1++){
 		for (int vv2=vv1;vv2<VV;vv2++){	
 			for (int jj=0;jj<JJ;jj++){
-				PARS_vcov(vv1,vv2) += PARS(vv1,jj)*PARS(vv2,jj) ;
+				PARS_vcov(vv1,vv2) += PARS_(vv1,jj)*PARS_(vv2,jj) ;
 			} // end jj
 			PARS_vcov(vv1,vv2) = PARS_vcov(vv1,vv2) * (JJ-1) / JJ ;
 			if (vv1!=vv2){
@@ -110,8 +115,11 @@ Rcpp::List parameters_jackknife( Rcpp::NumericMatrix PARS )
 Rcpp::List evm_aux( arma::mat B , int I , int powD ,
 	int maxit, double conv, double K )
 {
-	arma::mat TMP = B ;    
-	arma::mat D= arma::zeros(I,I);
+	int n1 = B.n_rows;
+	int n2 = B.n_cols;
+	arma::mat TMP = B( arma::span(0, n1-1), arma::span(0, n2-1) );
+	
+	arma::mat D = arma::zeros(I,I);
 	for ( int hh=0;hh<(powD-1) ; hh++){
 		TMP = TMP * B ;
 	}
@@ -157,13 +165,18 @@ Rcpp::List evm_aux( arma::mat B , int I , int powD ,
 Rcpp::NumericVector choppin_rowaveraging( arma::mat B , int I , double priorweight)
 {
 	Rcpp::NumericVector b_ra(I) ;
-	arma::mat TMP2= arma::zeros(I,I) ;
-	B = B + priorweight ;    
+	arma::mat TMP2= arma::zeros(I,I);
+
+	int n1 = B.n_rows;
+	int n2 = B.n_cols;
+	arma::mat B_ = B( arma::span(0, n1-1), arma::span(0, n2-1) );		
+	B_ = B_ + priorweight ;    
+	
 	//  calculate ratios in D
 	for (int ii=0;ii<I;ii++){
 		for (int jj=0;jj<I;jj++){
 			if (ii!=jj){ 
-				TMP2(ii,jj) = log(  B(jj,ii)  /  B(ii,jj)  )  ;    
+				TMP2(ii,jj) = log(  B_(jj,ii)  /  B_(ii,jj)  )  ;    
 			} 
 		}
 	} 
@@ -251,7 +264,9 @@ Rcpp::List evm_comp_matrix_poly( Rcpp::NumericMatrix dat ,
 	for (int jj=0;jj<JJ;jj++){  
 		B2=0*B2 ;  
 		B2 = B - Bjack.submat( arma::span(0,I-1), arma::span(jj*I, I-1+jj*I) );
-		if (JJ==1){ B2 = B ; }  
+		if (JJ==1){ 
+			B2 = B; 
+		}  
 		Rcpp::List res2 = evm_aux(B2 , I , powD , maxit, conv, K) ;            
 		Rcpp::NumericVector v1 = res2["b"] ; 
 		b_evm_jack(_,jj) = v1 ;  

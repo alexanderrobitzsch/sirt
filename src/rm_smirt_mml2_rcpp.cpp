@@ -1,5 +1,5 @@
-//// File Name: rm_smirt_mml2_code.cpp
-//// File Version: 5.16
+//// File Name: rm_smirt_mml2_rcpp.cpp
+//// File Version: 5.18
 // [[Rcpp::depends(RcppArmadillo)]]
 
 #include <RcppArmadillo.h>
@@ -275,11 +275,11 @@ Rcpp::NumericMatrix rm_facets_calcprobs_cpp( Rcpp::NumericVector b_item,
      				}  
      	for (int kk=0;kk<K+1;kk++){  
      		probs( ii , kk + tt*(K+1) ) = probs( ii , kk + tt*(K+1) ) / tmp1 ;  
-     				}								  
+     				}
      		}   // end ii  
      	} // end tt  
        
-     return probs ;       	  
+     return probs ;  
 }
 
 
@@ -671,7 +671,7 @@ Rcpp::List MML2_CALCPOST_V2( Rcpp::NumericMatrix DAT2,
              fyiqk(nn,tt) = fyiqk(nn,tt) * pow( PROBS(2*ii+1,tt),DAT2(nn,ii) )*
                 	pow( PROBS( 2*ii  , tt ) , 1 - DAT2(nn,ii) ) ;
          } else {
-             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii) , tt ) ;                			
+             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii) , tt ) ; 
                 		}
                          }  
                      }  
@@ -716,7 +716,7 @@ Rcpp::List MML2_CALCPOST_V3( Rcpp::NumericMatrix DAT2,
              fyiqk(nn,tt) = fyiqk(nn,tt) * 
               (PROBS(2*ii+1,tt) * DAT2(nn,ii) + (PROBS( 2*ii , tt ) *(1-DAT2(nn,ii))) );
                 		} else {
-             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii) , tt ) ;                			
+             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii) , tt ) ;  
                 		}
                          }  
                      }  

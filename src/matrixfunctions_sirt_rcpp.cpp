@@ -1,5 +1,5 @@
-//// File Name: matrixfunctions_sirt.cpp
-//// File Version: 2.04
+//// File Name: matrixfunctions_sirt_rcpp.cpp
+//// File Version: 2.06
 
 
 
@@ -24,9 +24,8 @@ using namespace Rcpp;
 ///********************************************************************
 ///** interval_index_C
 // [[Rcpp::export]]
-Rcpp::NumericVector interval_index_C( Rcpp::NumericMatrix MATR, 
-	Rcpp::NumericVector RN ){
-
+Rcpp::NumericVector interval_index_C( Rcpp::NumericMatrix MATR, Rcpp::NumericVector RN )
+{
      int NR=MATR.nrow();  
      int NC=MATR.ncol();         
      // create output vectors  
@@ -65,7 +64,8 @@ Rcpp::NumericVector interval_index_C( Rcpp::NumericMatrix MATR,
 ///********************************************************************
 ///** rowCumsums2_source
 // [[Rcpp::export]]
-Rcpp::NumericMatrix rowCumsums2_source( Rcpp::NumericMatrix input ){
+Rcpp::NumericMatrix rowCumsums2_source( Rcpp::NumericMatrix input )
+{
      Rcpp::NumericMatrix output  = Rcpp::clone<Rcpp::NumericMatrix>( input ) ;  
      int nr = input.nrow();
      int nc = input.ncol() ;  
@@ -92,9 +92,9 @@ Rcpp::NumericMatrix rowCumsums2_source( Rcpp::NumericMatrix input ){
 ///********************************************************************
 ///** rowKSmallest_C
 // [[Rcpp::export]]
-Rcpp::List rowKSmallest_C( Rcpp::NumericMatrix MATR, 
-	 Rcpp::IntegerVector KK1, Rcpp::NumericMatrix INDEXMATR, 
-	 Rcpp::NumericMatrix RNMATR ){
+Rcpp::List rowKSmallest_C( Rcpp::NumericMatrix MATR, Rcpp::IntegerVector KK1, Rcpp::NumericMatrix INDEXMATR, 
+	 Rcpp::NumericMatrix RNMATR )
+{
   
      // define row and column numbers  
      int NR=MATR.nrow();  
@@ -189,8 +189,8 @@ Rcpp::List rowMaxsCPP_source(Rcpp::NumericMatrix MATR ){
 ///********************************************************************
 ///** rowmins2_bundle_C
 // [[Rcpp::export]]
-Rcpp::NumericMatrix rowmins2_bundle_C( Rcpp::NumericMatrix m1, 
-	Rcpp::NumericVector v1 ){
+Rcpp::NumericMatrix rowmins2_bundle_C( Rcpp::NumericMatrix m1, Rcpp::NumericVector v1 )
+{
 
      int L1= v1.size();  
      int N1=m1.nrow() ;  
@@ -251,8 +251,7 @@ Rcpp::NumericMatrix rowmins2_bundle_C( Rcpp::NumericMatrix m1,
 ///********************************************************************
 ///** calc_copula_itemcluster_C
 // [[Rcpp::export]]
-Rcpp::List calc_copula_itemcluster_C( Rcpp::NumericVector DD , 
-	Rcpp::NumericMatrix res ){
+Rcpp::List calc_copula_itemcluster_C( Rcpp::NumericVector DD , Rcpp::NumericMatrix res ){
         
      int RR = res.nrow() ;  
      Rcpp::NumericMatrix matr(RR,RR) ;  

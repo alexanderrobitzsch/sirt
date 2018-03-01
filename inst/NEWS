@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.5  |  2018-02-26  |  Last: sirt 2.5-19
+VERSIONS sirt 2.5  |  2018-03-01  |  Last: sirt 2.5-41
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in postprocessing in rm.sdt() function
@@ -48,9 +48,13 @@ FIXED * mcmc_WaldTest() now also handle cases of multicollinear
 FIXED * handled NaN problems in noharm.sirt()
 NOTE  * included argument 'reliability' in noharm.sirt()
 NOTE  * changed argument 'logfile' to 'file' in summary.noharm.sirt()
+NOTE  * rewrote some Rcpp function because of memory problems documented at
+        https://cran.r-project.org/web/checks/check_issue_kinds.html
+
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
+
 
 ------------------------------------------------------------------------
 VERSIONS sirt 2.4  |  2018-01-29  |  Last: sirt 2.4-20
