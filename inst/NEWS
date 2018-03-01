@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.5  |  2018-03-01  |  Last: sirt 2.5-41
+VERSIONS sirt 2.5  |  2018-03-01  |  Last: sirt 2.5-42
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in postprocessing in rm.sdt() function
