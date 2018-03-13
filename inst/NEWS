@@ -35,7 +35,18 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.5  |  2018-03-01  |  Last: sirt 2.5-42
+VERSIONS sirt 2.6  |  2018-03-13  |  Last: sirt 2.6-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 2.5  |  2018-03-13  |  Last: sirt 2.5-45
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in postprocessing in rm.sdt() function
@@ -51,10 +62,8 @@ NOTE  * changed argument 'logfile' to 'file' in summary.noharm.sirt()
 NOTE  * rewrote some Rcpp function because of memory problems documented at
         https://cran.r-project.org/web/checks/check_issue_kinds.html
 
-
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 2.4  |  2018-01-29  |  Last: sirt 2.4-20

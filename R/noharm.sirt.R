@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.73
+## File Version: 0.74
 
 ########################################
 # NOHARM implementation in R
@@ -53,10 +53,10 @@ noharm.sirt <- function(dat,weights=NULL,Fval=NULL,Fpatt=NULL,
 	b2 <- (upper-lower) * betaj * stats::dnorm( betaj ) / sqrt(2)
 	b3 <- (upper-lower) * ( betaj^2 -1 ) * stats::dnorm(betaj) / sqrt(6)
 	# create fixed cofficients
-	b0.jk <- as.matrix(outer(b0,b0) )
-	b1.jk <- as.matrix(outer(b1,b1) )
-	b2.jk <- as.matrix(outer(b2,b2) )
-	b3.jk <- as.matrix(outer(b3,b3))
+	b0.jk <- as.matrix( TAM::tam_outer(b0,b0) )
+	b1.jk <- as.matrix( TAM::tam_outer(b1,b1) )
+	b2.jk <- as.matrix( TAM::tam_outer(b2,b2) )
+	b3.jk <- as.matrix( TAM::tam_outer(b3,b3) )
 
 	parchange <- 1
 	changeF <- changeP <- changePsi <- 0
