@@ -1,5 +1,5 @@
 %% File Name: isop.test.Rd
-%% File Version: 0.12
+%% File Version: 0.13
 
 \name{isop.test}
 \alias{isop.test}
@@ -78,7 +78,7 @@ Alexander Robitzsch
 \seealso{
 Fit the ISOP model with \code{\link{isop.dich}} or \code{\link{isop.poly}}.
 
-See also the \pkg{ISOP} package at \emph{Rforge}: \url{http://www.rforge.net/ISOP/}. 
+See also the \pkg{ISOP} package at \emph{Rforge}: \emph{http://www.rforge.net/ISOP/}. 
 }
 
 

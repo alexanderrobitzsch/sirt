@@ -1,5 +1,5 @@
 %% File Name: isop.Rd
-%% File Version: 3.18
+%% File Version: 3.19
 
 \name{isop}
 \alias{isop.dich}
@@ -238,7 +238,7 @@ This function uses \code{\link{isop.scoring}},
 Tests of the W1 axiom of the ISOP model (Scheiblechner, 1995) can be performed with 
 \code{\link{isop.test}}.
 
-See also the \pkg{ISOP} package at \emph{Rforge}: \url{http://www.rforge.net/ISOP/}. 
+See also the \pkg{ISOP} package at \emph{Rforge}: \emph{http://www.rforge.net/ISOP/}. 
 
 Install this package using 
 

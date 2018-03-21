@@ -1,5 +1,5 @@
 //// File Name: rm_proc_data_rcpp.cpp
-//// File Version: 0.16
+//// File Version: 0.19
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -19,7 +19,7 @@ Rcpp::List rm_proc_datasets_na_indicators(Rcpp::NumericMatrix dat, int K)
 	int N = dat.nrow();
 	int I = dat.ncol();
 	Rcpp::IntegerMatrix dat_resp(N,I);
-	Rcpp::IntegerMatrix dat2(N,I);
+	Rcpp::NumericMatrix dat2(N,I);
 	dat_resp.fill(0);
 	dat2.fill(0);
 	
@@ -51,12 +51,12 @@ Rcpp::List rm_proc_datasets_na_indicators(Rcpp::NumericMatrix dat, int K)
 ///********************************************************************
 ///** rm_proc_expand_dataset      
 // [[Rcpp::export]]    
-Rcpp::IntegerMatrix rm_proc_expand_dataset(Rcpp::NumericMatrix dat, Rcpp::IntegerVector rater0,
+Rcpp::NumericMatrix rm_proc_expand_dataset(Rcpp::NumericMatrix dat, Rcpp::IntegerVector rater0,
 		Rcpp::IntegerVector pid0, int N, int R)
 {
 	int ND = dat.nrow();
 	int I = dat.ncol();	
-	Rcpp::IntegerMatrix dat2(N,I*R);
+	Rcpp::NumericMatrix dat2(N,I*R);
 	dat2.fill(NA_REAL);
 	int rater_dd=0;
 	int IR = 0;

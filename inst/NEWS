@@ -35,15 +35,20 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.6  |  2018-03-13  |  Last: sirt 2.6-1
+VERSIONS sirt 2.6  |  2018-03-21  |  Last: sirt 2.6-9
 ------------------------------------------------------------------------
 
-xxx   * ...
+NOTE  * changed matrix types in rm.facets() Rcpp data processing functions.
+        This addresses UBSAN problems causing detected problems in rm.facets():
+        [...] Rcpp/include/Rcpp/internal/caster.h:30:25: 
+        runtime error: nan is outside the range of representable values of type 'int'. 
+        SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior in 
+        [...]/data/gannet/ripley/R/test-clang/Rcpp/include/Rcpp/internal/caster.h:30:25
+FIXED * fixed a bug in tam2mirt() due to changed output structure in mirt
+        package (thanks to Sarah Anne Aretz)
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 2.5  |  2018-03-13  |  Last: sirt 2.5-45

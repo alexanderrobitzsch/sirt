@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.404
+## File Version: 7.405
 
 
 #------------------------------------------------------------------------
@@ -579,7 +579,7 @@ rasch.mml2 <- function( dat , theta.k = seq(-6,6,len=21) , group = NULL , weight
 				if ( adaptive.quadrature ){ 
 					theta.k <- mu + theta.k0 %*% chol(Sigma.cov)				
 							}
-				pi.k <- matrix( dmvnorm( theta.k , mean = mu , sigma = Sigma.cov )	, ncol=1 )		
+				pi.k <- matrix( mvtnorm::dmvnorm( theta.k , mean = mu , sigma = Sigma.cov )	, ncol=1 )		
 				m1$pi.k <- pi.k <- pi.k / sum( pi.k )	
 
 							}
