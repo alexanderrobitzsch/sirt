@@ -1,5 +1,5 @@
 //// File Name: polychoric2_tetrachoric2_rcpp.cpp
-//// File Version: 3.22
+//// File Version: 3.24
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -353,71 +353,67 @@ Rcpp::NumericVector tetrachoric2_rcpp_aux( Rcpp::NumericMatrix dfr,
 ///** polychoric2_aux_rcpp
 // [[Rcpp::export]]
 Rcpp::List polychoric2_aux_rcpp( Rcpp::NumericMatrix dat, 
-	int maxK , int maxiter ){
-      
-     // int N = dat.nrow() ;  
-     int I = dat.ncol() ;  
-     int maxK3 = maxK + 3 ;  
-       
-     Rcpp::NumericVector v1 , tmp1 , tmp2 ;  
-     Rcpp::NumericVector v2;  
-     Rcpp::List res ;  
-       
-     Rcpp::NumericMatrix rho(I,I);  
-     Rcpp::NumericMatrix Nobs(I,I);  
-     Rcpp::NumericMatrix thresh(I,maxK3) ;  
-     Rcpp::NumericVector maxcat(I);  
-     Rcpp::NumericVector tmp3;  
-     Rcpp::NumericVector Ntot_used(I);  
-       
-     for (int ii=0 ; ii < I-1;ii++){  
-     for (int jj=ii+1;jj<I;jj++){  
-     	v1 = dat(_,ii) ;  
-     	v2 = dat(_,jj) ;	  
-     	res=polychoric2_itempair( v1 , v2 , maxK , maxiter ) ;  
-     	tmp1 = res["rho"] ;  
-     	rho(ii,jj) = tmp1[0] ;  
-     	rho(jj,ii) = rho(ii,jj);  
-     	tmp1 = res["Ntotal"] ;  
-     	Nobs(ii,jj) = tmp1[0] ;  
-     	Nobs(jj,ii)=Nobs(ii,jj) ;  
-     	Ntot_used(ii) += tmp1[0] ;  
-     	Ntot_used(jj) += tmp1[0] ;	  
-     	tmp2 = res["thresh1"] ;  
-     	for (int uu=0;uu<maxK3 ;uu++){  
-     		thresh(ii,uu) += tmp2[uu]*Nobs(ii,jj) ;  
-     				}  
-     	tmp2 = res["thresh2"] ;  
-     	for (int uu=0;uu<maxK3 ;uu++){  
-     		thresh(jj,uu) += tmp2[uu]*Nobs(ii,jj) ;  
-     				}  
-     	tmp3 = res["maxK1"];  
-     	if (tmp3[0] > maxcat[ii] ){ maxcat[ii] = tmp3[0] ; }  
-     	tmp3 = res["maxK2"];  
-     	if (tmp3[0] > maxcat[jj] ){ maxcat[jj] = tmp3[0] ; }  
-     		}  
-     	}  
-       
-     for (int ii=0 ; ii < I;ii++){	  
-     for (int uu=0;uu<maxK3 ; uu++){  
-     	thresh(ii,uu) = thresh(ii,uu) / Ntot_used(ii) ;  
-     	if ( uu > maxcat[ii]  ){  
-     		thresh(ii,uu) = 99 ;  
-     				}  
-     			}  
-     	rho(ii,ii) = 1 ;  
-     			}  
-       
-     //*************************************************      
-     // OUTPUT              
-                   
-     return Rcpp::List::create(    
-         Rcpp::_["rho"] = rho  , 
-         Rcpp::_["thresh"]=thresh ,  
-         Rcpp::_["maxcat"] = maxcat , 
-         Rcpp::_["Nobs"]=Nobs , 
-         Rcpp::_["Ntot_used"] = Ntot_used  
-         ) ;    
+	int maxK , int maxiter )
+{
+	int I = dat.ncol() ;  
+	int maxK3 = maxK + 3 ;  
+	Rcpp::NumericVector v1 , tmp1 , tmp2 ;  
+	Rcpp::NumericVector v2;  
+	Rcpp::List res ;  
+	Rcpp::NumericMatrix rho(I,I);  
+	Rcpp::NumericMatrix Nobs(I,I);  
+	Rcpp::NumericMatrix thresh(I,maxK3) ;  
+	Rcpp::NumericVector maxcat(I);  
+	Rcpp::NumericVector tmp3;  
+	Rcpp::NumericVector Ntot_used(I);  
+
+	for (int ii=0 ; ii < I-1;ii++){  
+		for (int jj=ii+1;jj<I;jj++){  
+			v1 = dat(_,ii) ;
+			v2 = dat(_,jj) ;
+			res=polychoric2_itempair( v1 , v2 , maxK , maxiter ) ;  
+			tmp1 = res["rho"] ;  
+			rho(ii,jj) = tmp1[0] ;  
+			rho(jj,ii) = rho(ii,jj);  
+			tmp1 = res["Ntotal"] ;  
+			Nobs(ii,jj) = tmp1[0] ;  
+			Nobs(jj,ii)=Nobs(ii,jj) ;  
+			Ntot_used(ii) += tmp1[0] ;  
+			Ntot_used(jj) += tmp1[0] ;	  
+			tmp2 = res["thresh1"] ;  
+			for (int uu=0;uu<maxK3 ;uu++){  
+				thresh(ii,uu) += tmp2[uu]*Nobs(ii,jj) ;  
+			}
+			tmp2 = res["thresh2"] ;  
+			for (int uu=0;uu<maxK3 ;uu++){  
+				thresh(jj,uu) += tmp2[uu]*Nobs(ii,jj) ;  
+			}
+			tmp3 = res["maxK1"];  
+			if (tmp3[0] > maxcat[ii] ){ maxcat[ii] = tmp3[0] ; }  
+			tmp3 = res["maxK2"];  
+			if (tmp3[0] > maxcat[jj] ){ maxcat[jj] = tmp3[0] ; }  
+		}  
+	}  
+
+	for (int ii=0 ; ii < I;ii++){	  
+		for (int uu=0;uu<maxK3 ; uu++){  
+			thresh(ii,uu) = thresh(ii,uu) / Ntot_used(ii) ;  
+			if ( uu > maxcat[ii]  ){  
+				thresh(ii,uu) = 99 ;  
+			}  
+		}  
+		rho(ii,ii) = 1 ;  
+	}  
+
+	//*************************************************      
+	// OUTPUT              
+	return Rcpp::List::create(    
+			Rcpp::Named("rho") = rho  , 
+			Rcpp::Named("thresh")=thresh ,  
+			Rcpp::Named("maxcat") = maxcat , 
+			Rcpp::Named("Nobs")=Nobs , 
+			Rcpp::Named("Ntot_used") = Ntot_used  
+		) ;    
 }
 
 

@@ -1,5 +1,5 @@
 ## File Name: tam2mirt_freed.R
-## File Version: 0.02
+## File Version: 0.07
 
 
 
@@ -29,7 +29,7 @@ tam2mirt_freed <- function( D , factors , B , dat , AXsi ,
 		}
 		lavsyn <- paste0( lavsyn , syn0 )
 	} 
-	# create syntax for intercepts
+	# create syntax for intercepts	
 	maxK <- ncol(AXsi) - 1
 	for (kk in 1:maxK){
 		t1 <- round( AXsi[,kk+1] , 4 )
@@ -37,8 +37,9 @@ tam2mirt_freed <- function( D , factors , B , dat , AXsi ,
 		t1 <- paste0(string1, "_" , seq(1,length(t1) ) )
 		syn0 <- paste0( colnames(dat) , " | " , t1 , "*" , string1)
 		syn0 <- paste0( syn0 , collapse="\n")
-		lavsyn <- paste0( lavsyn , syn0)
+		lavsyn <- paste0( lavsyn , syn0, "\n")
 	}
+
 	# syntax for means
 	syn0 <- paste0( factors , " ~ " , round(as.vector(mean.trait),4) , "*1"  )
 	syn0 <- paste0( syn0 , collapse="\n")

@@ -1,5 +1,5 @@
 ## File Name: tam2mirt.R
-## File Version: 0.21
+## File Version: 0.25
 
 ##########################################################
 # convert a fitted tam object into a mirt object
@@ -32,6 +32,7 @@ tam2mirt <- function( tamobj )
 			AXsi=AXsi, mean.trait=mean.trait, cov.trait=cov.trait, tamobj=tamobj ) 
 	# pseudo-estimate model in mirt: just create mirt object structure
 	res <- lavaan2mirt( dat=dat, lavmodel=lavsyn, est.mirt=TRUE )
+	#--- include parameters in mirt object
 	res$mirt@Model$nest <- as.integer(tamobj$ic$np ) # number of estimated parameters	
 	# recalculate AIC, BIC, AICc and SABIC
 	res$mirt@Fit$AIC <- tamobj$ic$AIC

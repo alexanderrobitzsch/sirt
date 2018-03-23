@@ -1,5 +1,5 @@
 ## File Name: lavaan2mirt.R
-## File Version: 0.52
+## File Version: 0.54
 
 ###################################################################
 # Converting lavaan syntax into mirt syntax
@@ -37,13 +37,13 @@ lavaan2mirt <- function( dat , lavmodel , est.mirt=TRUE , poly.itemtype="gpcm" ,
 		mirtmodel <- paste0( mirtmodel , 
 				paste0( ff , "=" , paste0( mff , collapse="," ) , "\n")  )
 	}
+	
 	#------------
 	#***** look for constraints	among item parameters (loadings and intercepts)				
 	lavmodel21 <- lavmodel2
 	lavmodel21 <- lavmodel21[ paste(lavmodel21$op) %in% c("=~","|","?=") , ]	
 	lavlabels <- unique(paste(lavmodel21$label))	
-	lavlabels <- lavlabels[ paste(lavlabels ) != "" ]
-
+	lavlabels <- lavlabels[ paste(lavlabels ) != "" ]	
 	if ( length(lavlabels) > 0 ){
 		vv0 <- "CONSTRAIN = "
 		for (ll in lavlabels ){
@@ -106,7 +106,6 @@ lavaan2mirt <- function( dat , lavmodel , est.mirt=TRUE , poly.itemtype="gpcm" ,
 	mirtmodel1 <- mirt::mirt.model(mirtmodel)
 	#------------	
 	#**** create parameter values
-
 	# define item types: 4PL or gpcm
 	I <- ncol(dat)
 	maxK1 <- apply( dat , 2 , max , na.rm=TRUE )
@@ -145,9 +144,7 @@ lavaan2mirt <- function( dat , lavmodel , est.mirt=TRUE , poly.itemtype="gpcm" ,
 	#***** handle slipping parameters
 	lavmodel21 <- lavmodel2[ lavmodel2$op == "?=" , ]
 	lavmodel21 <- lavmodel21[ lavmodel21$rhs == "s1" , ]
-	lavmodel21 <- lavmodel21[ lavmodel21$free > 0 , ]
-	
-	
+	lavmodel21 <- lavmodel21[ lavmodel21$free > 0 , ]	
 	if ( nrow(lavmodel21) > 0 ){	
 		ind <- match( paste0(lavmodel21$lhs,"-","u") , 
 						paste0(mirtpars$item,"-",mirtpars$name) )
@@ -160,7 +157,7 @@ lavaan2mirt <- function( dat , lavmodel , est.mirt=TRUE , poly.itemtype="gpcm" ,
 			mirtpars[ind,"est"] <- FALSE
 		}
 	}
-
+	
 	#------------	
 	#**** constraints for parameter values
     lavmodel21 <- lavmodel2[ lavmodel2$free == 0 , ]

@@ -36,10 +36,11 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.7  |  2018-03-22  |  Last: sirt 2.7-1
+VERSIONS sirt 2.7  |  2018-03-23  |  Last: sirt 2.7-6
 ------------------------------------------------------------------------
 
-xxx   * ...
+FIXED * fixed a bug in tam2mirt() for models with polytomous data which
+        do not contain any dichotomous item (thanks to Sarah Anne Aretz)
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
