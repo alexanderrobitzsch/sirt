@@ -1,5 +1,5 @@
-//// File Name: xxirt_functions_rcpp.cpp
-//// File Version: 0.14
+//// File Name: sirt_rcpp_xxirt.cpp
+//// File Version: 0.22
 
 
 
@@ -12,11 +12,10 @@ using namespace Rcpp;
 
 
 ///********************************************************************
-///** xxirt_compute_posterior_expected_counts
+///** sirt_rcpp_xxirt_compute_posterior_expected_counts
 // [[Rcpp::export]]           
-Rcpp::NumericMatrix xxirt_compute_posterior_expected_counts( 
-		Rcpp::NumericMatrix dat1_resp_gg , 
-		Rcpp::NumericMatrix p_aj_xi_gg )
+Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_posterior_expected_counts( 
+		Rcpp::LogicalMatrix dat1_resp_gg, Rcpp::NumericMatrix p_aj_xi_gg )
 {
 	int N = dat1_resp_gg.nrow();
 	int I = dat1_resp_gg.ncol();
@@ -30,29 +29,28 @@ Rcpp::NumericMatrix xxirt_compute_posterior_expected_counts(
 		for (int tt=0;tt<TP;tt++){
 			val=0;
 			for (int nn=0;nn<N;nn++){
-				val += dat1_resp_gg(nn,ii) * p_aj_xi_gg(nn,tt) ;
+				if ( dat1_resp_gg(nn,ii) ){
+					val +=  p_aj_xi_gg(nn,tt) ;
+				}
 			}  // end nn
 			nij(ii,tt) = val;
 		}   // end tt
 	}   // end ii  
-	//*************************************************      
-	// OUTPUT              
+
+	//--- OUTPUT              
 	return nij ;
 }
 ///********************************************************************
 
-
-
 ///********************************************************************
-///** xxirt_compute_likelihood_helper
+///** sirt_rcpp_xxirt_compute_likelihood
 // [[Rcpp::export]]           
-Rcpp::NumericMatrix xxirt_compute_likelihood_helper( 
-		Rcpp::IntegerMatrix dat, Rcpp::IntegerMatrix dat_resp,
+Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_likelihood( 
+		Rcpp::IntegerMatrix dat, Rcpp::LogicalMatrix dat_resp_bool,
 		Rcpp::NumericMatrix probs, int TP, int maxK )
 {
 	int N = dat.nrow();
 	int I = dat.ncol();
-
 	Rcpp::NumericMatrix p_xi_aj(N, TP);
 
 	for (int nn=0;nn<N;nn++){
@@ -60,7 +58,7 @@ Rcpp::NumericMatrix xxirt_compute_likelihood_helper(
 			p_xi_aj(nn,tt) = 1 ;
 		}
 		for (int ii=0;ii<I;ii++){
-			if ( dat_resp(nn,ii) == 1){
+			if ( dat_resp_bool(nn,ii) ){
 				for (int tt=0;tt<TP;tt++){
 					p_xi_aj(nn,tt) = p_xi_aj(nn,tt) * probs(ii , dat(nn,ii) + tt*maxK );
 				}
@@ -68,8 +66,7 @@ Rcpp::NumericMatrix xxirt_compute_likelihood_helper(
 		} 
 	}
 
-	//*************************************************      
-	// OUTPUT
+	//---- OUTPUT
 	return p_xi_aj ;    
 }
 ///********************************************************************

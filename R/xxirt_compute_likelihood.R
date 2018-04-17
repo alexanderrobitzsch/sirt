@@ -1,10 +1,10 @@
 ## File Name: xxirt_compute_likelihood.R
-## File Version: 0.16
+## File Version: 0.17
 
 
 ###########################################################################
 xxirt_compute_likelihood <- function( probs_items , dat , resp_index,
-		dat_resp=NULL )
+		dat_resp_bool=NULL )
 {		
 	N <- nrow(dat)
 	TP <- dim(probs_items)[3]
@@ -12,7 +12,7 @@ xxirt_compute_likelihood <- function( probs_items , dat , resp_index,
 	maxK <- dim(probs_items)[2]
 	p.xi.aj <- matrix( 1 , nrow=N , ncol=TP )
 	probs <- matrix( probs_items , nrow=I , ncol=maxK*TP )
-	p.xi.aj <- xxirt_compute_likelihood_helper( dat = dat, dat_resp = dat_resp ,
+	p.xi.aj <- sirt_rcpp_xxirt_compute_likelihood( dat = dat, dat_resp_bool = dat_resp_bool ,
 					probs = probs, TP=TP , maxK = maxK )
 	return(p.xi.aj)
 }

@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 0.903
+## File Version: 0.905
 
 
 #########################################################################
@@ -29,6 +29,7 @@ xxirt <- function( dat , Theta = NULL , itemtype = NULL , customItems = NULL ,
 	dat_resp <- res$dat_resp
 	resp_index <- res$resp_index
 	dat1 <- res$dat1 
+	dat_resp_bool <- res$dat_resp_bool
 		
 	#*** default Theta
 	if ( is.null(Theta) ){
@@ -92,7 +93,7 @@ xxirt <- function( dat , Theta = NULL , itemtype = NULL , customItems = NULL ,
 							
 		#*** compute individual likelihood				
 		p.xi.aj <- xxirt_compute_likelihood( probs_items = probs_items , dat=dat , 
-							 resp_index=resp_index , dat_resp = dat_resp )
+							 resp_index=resp_index , dat_resp_bool = dat_resp_bool )
 							 
 		#*** compute prior distribution		
 		prior_Theta <- xxirt_compute_priorDistribution( Theta=Theta , 

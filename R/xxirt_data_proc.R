@@ -1,5 +1,5 @@
 ## File Name: xxirt_data_proc.R
-## File Version: 0.11
+## File Version: 0.12
 
 ##############################################################
 xxirt_data_proc <- function(dat , group = NULL, weights=NULL )
@@ -26,6 +26,7 @@ xxirt_data_proc <- function(dat , group = NULL, weights=NULL )
 	}
 	#*** data with response indices
 	dat_na <- is.na(dat)
+	dat_resp_bool <- ! dat_na
 	dat_resp <- 1 - dat_na
 	resp_index <- as.list( 1:I )				
 	for ( ii in 1:I){
@@ -38,7 +39,7 @@ xxirt_data_proc <- function(dat , group = NULL, weights=NULL )
 					group0 = group0 , G = G , groups_unique = groups_unique,
 					maxK = maxK , ncat = ncat, weights=weights,
 					group_index = group_index , dat_resp = dat_resp ,
-					resp_index = resp_index , dat1 = dat1 )
+					resp_index = resp_index , dat1 = dat1, dat_resp_bool=dat_resp_bool )
 	return(res)		
 }
 ##############################################################		
