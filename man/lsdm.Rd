@@ -1,5 +1,5 @@
 %% File Name: lsdm.Rd
-%% File Version: 2.06
+%% File Version: 2.08
 
 
 \name{lsdm}
@@ -42,7 +42,7 @@ zero and one are permitted. There must not be any items with only zero
 Q-matrix entries in a row.
 }
   \item{theta}{
-The discrete grid points where item response fuctions
+The discrete grid points where item response functions
 are evaluated for doing the LSDM method.
 }
   \item{quant.list}{
@@ -111,11 +111,11 @@ A list with following entries
 \item{mean.mad.lltm}{Mean of \eqn{MAD} statistics for LLTM}
 \item{attr.curves}{Estimated attribute response curves evaluated at \code{theta}}
 \item{attr.pars}{Estimated attribute parameters for LSDM and LLTM}
-\item{data.fitted}{LSDM-fitted item reponse functions evaluated at \code{theta}}
+\item{data.fitted}{LSDM-fitted item response functions evaluated at \code{theta}}
 \item{theta}{Grid of ability distributions at which 
 functions are evaluated}
 \item{item}{Item statistics (p value, \eqn{MAD}, ...)}
-\item{data}{Estimated or fixed item reponse functions evaluated at \code{theta}}
+\item{data}{Estimated or fixed item response functions evaluated at \code{theta}}
 \item{Qmatrix}{Used Q-matrix}
 \item{lltm}{Model output of LLTM (\code{lm} values)}
 \item{W}{Matrix with empirical item-attribute discriminations}

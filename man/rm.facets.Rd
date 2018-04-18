@@ -1,5 +1,5 @@
 %% File Name: rm.facets.Rd
-%% File Version: 0.63
+%% File Version: 0.73
 
 \name{rm.facets}
 \alias{rm.facets}
@@ -20,7 +20,7 @@ Rater Facets Models with Item/Rater Intercepts and Slopes
 }
 \description{
 This function estimates the unidimensional rater facets model (Lincare, 1994)
-and an extension to slopes (see Details). The estimation
+and an extension to slopes (see Details; Robitzsch & Steinfeld, 2018). The estimation
 is conducted by an EM algorithm employing marginal
 maximum likelihood.
 }
@@ -90,14 +90,14 @@ Should the item slopes \eqn{a_i} be estimated?
 Should the rater slopes \eqn{a_r} be estimated?
 }
 \item{rater_item_int}{Logical indicating whether rater-item-interactions
-should be modelled.}
+should be modeled.}
 \item{est.mean}{Optional logical indicating whether the mean of the 
 trait distribution should be estimated.}
 \item{tau.item.fixed}{Matrix with fixed \eqn{\tau} parameters. Non-fixed
 parameters must be declared by \code{NA} values.}
 \item{a.item.fixed}{Vector with fixed item discriminations}
 \item{b.rater.fixed}{Vector with fixed rater intercept parameters}
-\item{a.rater.fixed}{Vector with fixed rater discrmination parameters}
+\item{a.rater.fixed}{Vector with fixed rater discrimination parameters}
 \item{b.rater.center}{Centering method for rater intercept parameters. The
 	value \code{0} corresponds to no centering, the values \code{1} and
 \code{2} to different methods to ensure that they sum to zero.}
@@ -166,7 +166,7 @@ Further arguments to be passed
 \details{
 This function models ratings \eqn{X_{pri}}
 for person \eqn{p}, rater \eqn{r} and item \eqn{i}
-and category \eqn{k}
+and category \eqn{k} (see also Robitzsch & Steinfeld, 2018; Uto & Ueno, 2010; Wu, 2017)
 \deqn{P( X_{pri} = k | \theta_p ) \propto
     exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r -   \tau_{ik} ) \quad , 
 	\quad \theta_p \sim N( 0 , \sigma^2 )}{%
@@ -225,10 +225,20 @@ A list with following entries:
 \references{
 Berlinet, A. F., & Roland, C. (2012). 
 Acceleration of the EM algorithm: P-EM versus epsilon algorithm.
-\emph{Computational Statistics & Data Analysis}, \bold{56}(12), 4122-4137.	
+\emph{Computational Statistics & Data Analysis, 56}(12), 4122-4137.	
 	
 Linacre, J. M. (1994). \emph{Many-Facet Rasch Measurement}. 
 Chicago: MESA Press.
+
+Robitzsch, A., & Steinfeld, J. (2018). Item response models for human ratings: Overview, 
+estimation methods, and implementation in R. 
+\emph{Psychological Test and Assessment Modeling, 60}(1), 101-139.
+
+Uto, M., & Ueno, M. (2016). Item response theory for peer assessment. 
+\emph{IEEE Transactions on Learning Technologies, 9}(2), 157-170.
+
+Wu, M. (2017). Some IRT-based analyses for interpreting rater effects. 
+\emph{Psychological Test and Assessment Modeling, 59}(4), 453-470.
 }
 
 

@@ -1,5 +1,5 @@
 %% File Name: data.mcdonald.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{data.mcdonald}
 
@@ -15,7 +15,7 @@ Some Datasets from McDonald's \emph{Test Theory} Book
 
 \description{
 Some datasets from McDonald (1999), especially related to using
-NOHARM for item response modelling. See Examples below.
+NOHARM for item response modeling. See Examples below.
 }
 
 

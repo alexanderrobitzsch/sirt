@@ -1,5 +1,5 @@
 %% File Name: pcm.fit.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{pcm.fit}
 \alias{pcm.fit}
@@ -11,7 +11,7 @@ Item and Person Fit Statistics for the Partial Credit Model
 \description{
 Computes item and person fit statistics in the 
 partial credit model (Wright & Masters, 1990). 
-The rating scale model is accomodated as a particular partial
+The rating scale model is accommodated as a particular partial
 credit model (see Example 3).
 }
 

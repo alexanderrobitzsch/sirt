@@ -1,5 +1,5 @@
 %% File Name: automatic.recode.Rd
-%% File Version: 0.11
+%% File Version: 0.12
 
 \name{automatic.recode}
 \alias{automatic.recode}
@@ -43,7 +43,7 @@ A logical which indicates if iteration progress should be displayed
 %%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-A list with folowing entries
+A list with following entries
 \item{item.stat}{Data frame with item name, p value, item discrimination
 and the calculated key}
 \item{data.scored}{Scored data frame using calculated keys 

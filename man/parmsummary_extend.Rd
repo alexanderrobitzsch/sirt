@@ -1,14 +1,14 @@
 %% File Name: parmsummary_extend.Rd
-%% File Version: 0.05
+%% File Version: 0.06
 
 \name{parmsummary_extend}
 \alias{parmsummary_extend}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Includes Confindence Interval in Parameter Summary Table 
+Includes Confidence Interval in Parameter Summary Table 
 }
 \description{
-Includes confindence interval in parameter summary table.
+Includes confidence interval in parameter summary table.
 }
 \usage{
 parmsummary_extend(dfr, level = .95 , est_label = "est", se_label = "se", 

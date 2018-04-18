@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.59
+%% File Version: 1.61
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -101,12 +101,12 @@ An optional vector of starting values for the dependency parameter \code{delta}.
 Discretized trait distribution
 }
   \item{alpha1}{
-\code{alpha1} parameter in the generalized logistic item reponse model 
+\code{alpha1} parameter in the generalized logistic item response model 
 (Stukel, 1988). The default is 0 which leads together with \code{alpha2=0} 
 to the logistic link function.
 }
   \item{alpha2}{
-\code{alpha2} parameter in the generalized logistic item reponse model
+\code{alpha2} parameter in the generalized logistic item response model
 }
   \item{numdiff.parm}{
 Parameter for numerical differentiation

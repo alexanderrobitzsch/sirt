@@ -1,5 +1,5 @@
 %% File Name: lc.2raters.Rd
-%% File Version: 0.12
+%% File Version: 0.13
 
 \name{lc.2raters}
 \alias{lc.2raters}

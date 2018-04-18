@@ -1,5 +1,5 @@
 %% File Name: mirt.wrapper.Rd
-%% File Version: 1.74
+%% File Version: 1.76
 
 \name{mirt.wrapper}
 \alias{mirt.wrapper}
@@ -171,7 +171,7 @@ latent class models / Multidimensional latent class IRT models
 \code{\link{rasch.mirtlc}}, Example 4)
 
 %4
-\item Multimensional IRT model with discrete latent traits
+\item Multidimensional IRT model with discrete latent traits
  (\code{\link{data.read}}, Model 13)
  
 %5 

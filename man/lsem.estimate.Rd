@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.48
+%% File Version: 0.51
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -16,7 +16,7 @@ Local structural equation models (LSEM) are structural equation models (SEM)
 which are evaluated for each value of a pre-defined moderator variable
 (Hildebrandt, Wilhelm, & Robitzsch, 2009; Hildebrandt et al., 2016).
 Like in nonparametric regression models, observations near a focal point - at
-which the model is evaluated - obtain higher weights, far distant obervations
+which the model is evaluated - obtain higher weights, far distant observations
 obtain lower weights. The LSEM can be specified by making use of \pkg{lavaan} syntax.
 It is also possible to specify a discretized version of LSEM in which 
 values of the moderator are grouped and a multiple group SEM is specified.
@@ -137,7 +137,7 @@ columns and values of the grid of the moderator are in rows.}
 \item{moderator.grid}{Used grid of focal points for moderator}
 \item{moderator.grouped}{Data frame with informations about grouping of
 moderator if \code{type="MGM"}.}
-\item{residualized.intercepts}{Estmated intercept functions used for
+\item{residualized.intercepts}{Estimated intercept functions used for
 residualization.}
 \item{lavmodel}{Used lavaan model}
 \item{data}{Used data frame, possibly residualized if \code{residualize=TRUE}}

@@ -1,5 +1,5 @@
 %% File Name: f1d.irt.Rd
-%% File Version: 1.21
+%% File Version: 1.22
 
 \name{f1d.irt}
 \alias{f1d.irt}
@@ -31,7 +31,7 @@ normal distribution
 Number of dimensions to be estimated
 }
   \item{A}{
-Matrix of item discrminations (if the IRT model is already estimated) 
+Matrix of item discriminations (if the IRT model is already estimated) 
 }
   \item{intercept}{
 Vector of item intercepts (if the IRT model is already estimated)

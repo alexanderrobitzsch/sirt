@@ -1,5 +1,5 @@
 %% File Name: sim.raschtype.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{sim.raschtype}
 \alias{sim.raschtype}
@@ -35,10 +35,10 @@ Parameter \eqn{\alpha_2} in generalized logistic link function
   \item{fixed.a}{
 Vector of item slopes \eqn{a}}
   \item{fixed.c}{
-Vector of lower item asymototes \eqn{c}
+Vector of lower item asymptotes \eqn{c}
 }
   \item{fixed.d}{
-Vector of lower item asymototes \eqn{d}
+Vector of lower item asymptotes \eqn{d}
 }
 }
 \details{

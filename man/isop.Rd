@@ -1,5 +1,5 @@
 %% File Name: isop.Rd
-%% File Version: 3.19
+%% File Version: 3.22
 
 \name{isop}
 \alias{isop.dich}
@@ -83,8 +83,8 @@ Here, \eqn{F(p,i)} denotes
 the proportion correct for item \eqn{i}  in score group
 \eqn{p}, while \eqn{n_{pi}} denotes the number of persons
 in group \eqn{p} and on item \eqn{i}. The isotonic 
-probabilistic model (Scheiblechner, 1995) monotonely
-smoothes this distribution function \eqn{F} such that
+probabilistic model (Scheiblechner, 1995) monotonically
+smooths this distribution function \eqn{F} such that
 \deqn{ P( X_{pi} = 1 | p , i ) = F^\ast( p , i ) }
 where the two-dimensional distribution function
 \eqn{F^\ast} is isotonic in \eqn{p} and \eqn{i}. Model fit is

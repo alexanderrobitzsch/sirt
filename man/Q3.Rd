@@ -1,5 +1,5 @@
 %% File Name: Q3.Rd
-%% File Version: 1.11
+%% File Version: 1.12
 
 \name{Q3}
 \alias{Q3}
@@ -66,7 +66,7 @@ Alexander Robitzsch
 For the estimation of the average \eqn{Q_3} statistic within testlets see 
 \code{\link{Q3.testlet}}. 
 
-For modelling testlet effects see \code{\link{mcmc.3pno.testlet}}.
+For modeling testlet effects see \code{\link{mcmc.3pno.testlet}}.
 
 For handling local dependencies in IRT models see 
 \code{\link{rasch.copula2}}, \code{\link{rasch.pml3}} or \cr

@@ -1,5 +1,5 @@
 %% File Name: R2noharm.jackknife.Rd
-%% File Version: 1.10
+%% File Version: 1.11
 
 \name{R2noharm.jackknife}
 \alias{R2noharm.jackknife}
@@ -28,7 +28,7 @@ to the number of jackknife units. If it is a vector of integers, then this vecto
 defines the allocation of persons jackknife units. Integers corresponds to
 row indexes in the data set.
 }
-\item{logfile}{File name if the summary should be sinked into a file}
+\item{logfile}{File name if the summary should be sunk into a file}
 \item{\dots}{Further arguments to be passed}
 }
 %\details{

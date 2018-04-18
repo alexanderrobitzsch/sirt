@@ -1,5 +1,5 @@
 %% File Name: xxirt_createParTable.Rd
-%% File Version: 1.07
+%% File Version: 1.08
 
 \name{xxirt_createParTable}
 \alias{xxirt_createParTable}
@@ -45,7 +45,7 @@ Data frame with item responses
 Vector of item types
 }
  \item{customItems}{
-List with item objects creeated by \code{xxirt_createDiscItem}
+List with item objects created by \code{xxirt_createDiscItem}
 }
 \item{partable}{Item parameter table}
 \item{parname}{Parameter name}

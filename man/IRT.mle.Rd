@@ -1,5 +1,5 @@
 %% File Name: IRT.mle.Rd
-%% File Version: 0.12
+%% File Version: 0.13
 
 \name{IRT.mle}
 \alias{IRT.mle}
@@ -40,7 +40,7 @@ List of arguments for \code{irffct}.
   \item{type}{Type of ability estimate. It can be \code{"MLE"} (the default),
   	  \code{"WLE"} or \code{"MAP"}. 
 }
-\item{mu}{Mean of normal prior distriubution (for \code{type="MAP"})}
+\item{mu}{Mean of normal prior distribution (for \code{type="MAP"})}
 \item{sigma}{Standard deviation of normal prior distriubution (for \code{type="MAP"})}
   \item{maxiter}{
 Maximum number of iterations

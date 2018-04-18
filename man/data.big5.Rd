@@ -1,5 +1,5 @@
 %% File Name: data.big5.Rd
-%% File Version: 0.41
+%% File Version: 0.42
 
 \name{data.big5}
 \alias{data.big5}
@@ -12,7 +12,7 @@ Dataset Big 5 from \pkg{qgraph} Package
 }
 
 \description{
-This is a Big 5 dataset from the \pkg{qgraph} package (Dolen, Oorts,
+This is a Big 5 dataset from the \pkg{qgraph} package (Dolan, Oorts,
 Stoel, Wicherts, 2009). It contains 500 subjects on 240 items.
 }
 

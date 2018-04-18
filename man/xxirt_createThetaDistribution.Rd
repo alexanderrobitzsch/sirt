@@ -1,5 +1,5 @@
 %% File Name: xxirt_createThetaDistribution.Rd
-%% File Version: 0.05
+%% File Version: 0.06
 
 \name{xxirt_createThetaDistribution}
 \alias{xxirt_createThetaDistribution}
@@ -20,7 +20,7 @@ xxirt_createThetaDistribution(par, est, P, prior = NULL, prior_par1 = NULL,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{par}{
-Parameter vector with statrting values
+Parameter vector with starting values
 }
   \item{est}{
 Vector of logicals indicating which parameters should be estimated 

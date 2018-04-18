@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pnoh.Rd
-%% File Version: 0.18
+%% File Version: 0.19
 
 \name{mcmc.2pnoh}
 \alias{mcmc.2pnoh}
@@ -58,7 +58,7 @@ to measure a criterion \eqn{k}. The item response function is defined as
 \deqn{ P(X_{pik} = 1 | \theta_p ) = 
 		\Phi [ \alpha_{ik} ( \theta_p - \beta_{ik} ) ]
 		\quad ,  \quad \theta_p \sim N(0,1) }
-Item parameters \eqn{(\alpha_{ik},\beta_{ik})} are hierarchically modelled, i.e.
+Item parameters \eqn{(\alpha_{ik},\beta_{ik})} are hierarchically modeled, i.e.
 \deqn{ \beta_{ik} \sim N( \xi_k , \sigma^2 ) \quad \mbox{and} \quad 
 	\alpha_{ik} \sim N( \omega_k , \nu^2 ) }
 In the \code{mcmc.list} output object, also the derived parameters 

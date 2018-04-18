@@ -1,5 +1,5 @@
 %% File Name: expl.detect.Rd
-%% File Version: 1.11
+%% File Version: 1.12
 
 \name{expl.detect}
 \alias{expl.detect}
@@ -44,7 +44,7 @@ Bandwidth scale factor
 %%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-A list with followinmg entries
+A list with following entries
 \item{detect.unweighted}{Unweighted DETECT statistics}
 \item{detect.weighted}{Weighted DETECT statistics. Weighting is done 
 proportionally to sample sizes of item pairs.}

@@ -1,5 +1,5 @@
 %% File Name: sim.rasch.dep.Rd
-%% File Version: 0.22
+%% File Version: 0.24
 
 \name{sim.rasch.dep}
 \alias{sim.rasch.dep}
@@ -24,7 +24,7 @@ Vector of item difficulties of length \eqn{I}
 }
   \item{itemcluster}{
 Vector of integers (including 0) of length \eqn{I}. Different integers 
-correpond to different itemclusters.
+correspond to different itemclusters.
 }
   \item{rho}{
 Vector of residual correlations. The length of vector must be equal
@@ -44,7 +44,7 @@ Alexander Robitzsch
 }
 \note{
 The specification of the simulation models follows a marginal interpretation
-of the latent trait. Local dependencies are only interpreted as nuissance
+of the latent trait. Local dependencies are only interpreted as nuisance
 and not of substantive interest. If local dependencies should be substantively 
 interpreted, a testlet model seems preferable 
 (see \code{\link{mcmc.3pno.testlet}}).

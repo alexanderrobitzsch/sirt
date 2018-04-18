@@ -1,5 +1,5 @@
 %% File Name: sirt-package.Rd
-%% File Version: 2.47
+%% File Version: 2.54
 
 \name{sirt-package}
 \alias{sirt-package}
@@ -79,7 +79,8 @@ with \code{\link{rasch.mirtlc}}.
 with \code{\link{rm.facets}}. A hierarchical rater model based on
 signal detection theory (DeCarlo, Kim & Johnson, 2011) can be conducted
 with \code{\link{rm.sdt}}. A simple latent class model for two exchangeable
-raters is implemented in \code{\link{lc.2raters}}.
+raters is implemented in \code{\link{lc.2raters}}. See Robitzsch and Steinfeld (2018)
+for more details.
 
 %% Grade of membership model
 \item The discrete grade of membership model (Erosheva, Fienberg & Joutard, 2007)
@@ -102,7 +103,7 @@ Fox & Verhagen, 2010) can be estimated with \code{\link{mcmc.2pno.ml}}.
     local dependence can be handled by imposing residual error structure
     or omitting item pairs within a dependent item cluster from the
     estimation. \cr    
-    The function \code{\link{rasch.evm.pcm}} estimates the mutiple group
+    The function \code{\link{rasch.evm.pcm}} estimates the multiple group
     partial credit model based on the pairwise eigenvector approach
     which avoids iterative estimation.
 
@@ -183,7 +184,7 @@ analysis and aims at obtaining approximate invariance.
 
 %% LSEM
 \item Local structural equation models (LSEM) can be estimated with the
-\code{\link{lsem.estimate}} function.
+\code{\link{lsem.estimate}} function (Hildebrandt et al., 2016).
 
 }
 
@@ -244,7 +245,7 @@ scores using structural equation modeling: An alternative to
 coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167. 
 
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
-from an item respone model through separate calibrations}. 
+from an item response model through separate calibrations}. 
 ETS Research Report ETS RR-09-40. Princeton, ETS.
 
 Hildebrandt, A., Luedtke, O., Robitzsch, A., Sommer, C., &
@@ -299,6 +300,10 @@ Renard, D., Molenberghs, G., & Geys, H. (2004). A pairwise likelihood
 approach to estimation in multilevel probit models. \emph{Computational Statistics
 & Data Analysis}, \bold{44}, 649-667.
 
+Robitzsch, A., & Steinfeld, J. (2018). Item response models for human ratings: Overview, 
+estimation methods, and implementation in R. 
+\emph{Psychological Test and Assessment Modeling, 60}(1), 101-139.
+
 Rossi, N., Wang, X. & Ramsay, J. O. (2002). Nonparametric item response function 
 estimates with the EM algorithm. 
 \emph{Journal of Educational and Behavioral Statistics}, 
@@ -351,7 +356,7 @@ Zwinderman, A. H. (1995). Pairwise parameter estimation in Rasch models.
 
 
 \seealso{
-For estimating multidimensional models for polytomous item resonses 
+For estimating multidimensional models for polytomous item responses 
 see the \pkg{mirt}, \pkg{flirt}
 (\url{http://faculty.psy.ohio-state.edu/jeon/lab/flirt.php}) and \pkg{TAM} packages. 
 

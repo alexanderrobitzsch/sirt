@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.37
+%% File Version: 1.39
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -201,7 +201,7 @@ Alexander Robitzsch
 \seealso{
 For IRT linking see also \code{\link{linking.haberman}}.
 
-For modelling random item effects for loadings and intercepts
+For modeling random item effects for loadings and intercepts
 see \code{\link{mcmc.2pno.ml}}.
 }
 

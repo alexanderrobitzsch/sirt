@@ -19,7 +19,7 @@ The CRAN version can be installed from within R using:
 utils::install.packages("sirt")
 ```
 
-#### GitHub version `sirt` 2.7-12 (2018-04-17)
+#### GitHub version `sirt` 2.7-21 (2018-04-18)
 
 The version hosted [here](https://github.com/alexanderrobitzsch/sirt) is the development version of `sirt`. 
 The GitHub version can be installed using `devtools` as:

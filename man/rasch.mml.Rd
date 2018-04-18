@@ -1,5 +1,5 @@
 %% File Name: rasch.mml.Rd
-%% File Version: 3.9904
+%% File Version: 3.9911
 
 \name{rasch.mml2}
 \alias{rasch.mml2}
@@ -240,7 +240,7 @@ Assumed trait distribution. The default is the normal
 distribution (\code{"normal"}). Log-linear smoothing of the 
 trait distribution is also possible (\code{"smooth2"},
 \code{"smooth3"} or \code{"smooth4"} for smoothing up to
-2, 3 or 4 moments repectively).
+2, 3 or 4 moments, respectively).
 }
   \item{Qmatrix}{
 The Q-matrix
@@ -389,7 +389,7 @@ A list with following entries
 \item{dat}{Original data frame}
 \item{item}{Estimated item parameters in the generalized
 	item response model}
-\item{item2}{Estimted item parameters for Ramsay's quotient model}
+\item{item2}{Estimated item parameters for Ramsay's quotient model}
 \item{trait.distr}{Discretized ability distribution points and probabilities}
 \item{mean.trait}{Estimated mean vector}
 \item{sd.trait}{Estimated standard deviations}
@@ -397,7 +397,7 @@ A list with following entries
 \item{deviance}{Deviance}
 \item{pjk}{Estimated probabilities of item correct evaluated at \code{theta.k}}
 \item{rprobs}{Item response probabilities like in \code{pjk}, but slightly
-extended to accomodate all categories}
+extended to accommodate all categories}
 \item{person}{Person parameter estimates: mode (\code{MAP}) and
 	mean (\code{EAP}) of the posterior distribution}
 \item{pid}{Person identifier}
@@ -423,7 +423,7 @@ extended to accomodate all categories}
 \item{reliability}{EAP reliability}
 \item{irtmodel}{Type of estimated item response model}
 \item{D}{Number of dimensions}
-\item{mu}{Mean vector (for multdimensional models)}
+\item{mu}{Mean vector (for multidimensional models)}
 \item{Sigma.cov}{Covariance matrix (for multdimensional models)}
 \item{theta.k}{Grid of discretized ability distributions}
 \item{trait.weights}{Fixed vector of probabilities for the ability distribution}

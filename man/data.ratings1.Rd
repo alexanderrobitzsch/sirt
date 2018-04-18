@@ -1,5 +1,5 @@
 %% File Name: data.ratings1.Rd
-%% File Version: 0.17
+%% File Version: 0.18
 
 \name{data.ratings}
 \alias{data.ratings}
@@ -43,7 +43,7 @@ Data frame with 274 observations containing 5 criteria (\code{k1}, ..., \code{k5
 Data from a 2009 Austrian survey of national educational
 standards for 8th graders in German language writing.
 Variables \code{k1} to \code{k5} denote several rating
-criteria of writing compentency. \cr
+criteria of writing competency. \cr
 
 \item Dataset \code{data.ratings2}: \cr
 

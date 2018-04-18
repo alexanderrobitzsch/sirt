@@ -1,5 +1,5 @@
 %% File Name: brm.sim.Rd
-%% File Version: 0.36
+%% File Version: 0.39
 
 \name{brm-Methods}
 \alias{brm.sim}
@@ -78,11 +78,11 @@ The item response function can also be formulated as
 	  ( n_{pi} - 1 )  \cdot \mathrm{log} [ 1- q( x_{pi} ) ]
 	  				}
 
-The item parameters can be reparametrized as 
+The item parameters can be reparameterized as 
 \eqn{ a_{i} = \mathrm{exp} \left[ ( - \delta_i + \tau_i ) / 2 \right]} and
 \eqn{ b_{i} = \mathrm{exp} \left[ ( \delta_i + \tau_i ) / 2 \right]}.
 
-Then, the original item parameters can be retreived by 
+Then, the original item parameters can be retrieved by 
 \eqn{\tau_i = \mathrm{log} ( a_i b_i)} and
 \eqn{\delta_i = \mathrm{log} ( b_i / a_i)}. 
 Using \eqn{ \gamma _p = \mathrm{exp} ( \theta_p / 2) }, we obtain

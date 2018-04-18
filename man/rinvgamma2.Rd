@@ -1,5 +1,5 @@
 %% File Name: rinvgamma2.Rd
-%% File Version: 0.11
+%% File Version: 0.13
 
 \name{rinvgamma2}
 \alias{rinvgamma2}
@@ -9,7 +9,7 @@
 Inverse Gamma Distribution in Prior Sample Size Parameterization
 }
 \description{
-Random draws and density of inverse gamma distribution parametrized
+Random draws and density of inverse gamma distribution parameterized
 in prior sample size \code{n0} and prior variance \code{var0}
 (see Gelman et al., 2014).
 }

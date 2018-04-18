@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.53
+%% File Version: 0.58
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -9,7 +9,7 @@
 Linking in the 2PL/Generalized Partial Credit Model
 }
 \description{
-This function does the linking of serval studies which are calibrated
+This function does the linking of several studies which are calibrated
 using the 2PL or the generalized item response model according to
 Haberman (2009). This method is a generalization of log-mean-mean
 linking from one study to several studies. The default \code{a_log=TRUE}
@@ -56,7 +56,7 @@ should be displayed.
 }
 \item{object}{Object of class \code{linking.haberman}.}
 \item{digits}{Number of digits after decimals for rounding in \code{summary}.}
-\item{file}{Optional file name if \code{summary} should be sinked into a file.}
+\item{file}{Optional file name if \code{summary} should be sunk into a file.}
 \item{\dots}{Further arguments to be passed}
 }
 
@@ -125,7 +125,7 @@ A list with following entries
   \item{b.orig}{Original \eqn{b_{it}} parameters} 
   \item{a.resid}{Residual \eqn{a_{it}} parameters (DIF parameters)}
   \item{b.resid}{Residual \eqn{b_{it}} parameters (DIF parameters}  
-  \item{personpars}{Tranformed person parameters}
+  \item{personpars}{Transformed person parameters}
   \item{es.invariance}{Effect size measures of invariance,
   	  separately for item slopes and intercepts.
   	  In the rows, \eqn{R^2} and \eqn{\sqrt{1-R^2}}

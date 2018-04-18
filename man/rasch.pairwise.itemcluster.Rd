@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.itemcluster.Rd
-%% File Version: 0.27
+%% File Version: 0.28
 
 \name{rasch.pairwise.itemcluster}
 \alias{rasch.pairwise.itemcluster}
@@ -67,7 +67,7 @@ Object of class \code{rasch.pairwise} with elements
     Vector of item difficulties
          }
  \item{item}{
-        Data frame of item paramters (\eqn{N}, \eqn{p} and item difficulty)
+        Data frame of item parameters (\eqn{N}, \eqn{p} and item difficulty)
             }
 }
 \references{

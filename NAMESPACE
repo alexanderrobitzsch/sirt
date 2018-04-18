@@ -106,7 +106,6 @@ importFrom(CDM, IRT.se)
 importFrom(CDM, modelfit.cor2)
 importFrom(CDM, numerical_Hessian)
 importFrom(CDM, osink)
-
 importFrom(TAM, IRT.drawPV)
 importFrom(TAM, IRT.informationCurves)
 importFrom(TAM, IRT.linearCFA)

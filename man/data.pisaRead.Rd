@@ -1,5 +1,5 @@
 %% File Name: data.pisaRead.Rd
-%% File Version: 0.06
+%% File Version: 0.07
 
 \name{data.pisaRead}
 \alias{data.pisaRead}
@@ -17,7 +17,7 @@ The dataset is a list. The list element \code{data}
 contains the dataset with the demographical variables 
 student ID (\code{idstud}), school ID (\code{idschool}), a dummy variable for female 
 students (\code{female}), socioeconomic status (\code{hisei})
-and migrational background (\code{migra}). The remaining 
+and migration background (\code{migra}). The remaining 
 variables (starting with \code{R} in the name) are
 the reading items. \cr
 The item metadata are included in the list element

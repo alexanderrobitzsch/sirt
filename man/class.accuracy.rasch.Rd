@@ -1,5 +1,5 @@
 %% File Name: class.accuracy.rasch.Rd
-%% File Version: 0.13
+%% File Version: 0.14
 
 \name{class.accuracy.rasch}
 \alias{class.accuracy.rasch}
@@ -44,7 +44,7 @@ which means that no simulation is performed.
 %}
 \value{
 A list with following entries:
-  \item{class.stats}{Data frame with classification accuracies. The 
+  \item{class.stats}{Data frame containing classification accuracy statistics. The 
   column \code{agree0} refers to absolute agreement, \code{agree1} to
   the agreement of at most a difference of one level.
      }

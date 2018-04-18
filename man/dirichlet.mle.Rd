@@ -1,5 +1,5 @@
 %% File Name: dirichlet.mle.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{dirichlet.mle}
 \alias{dirichlet.mle}
@@ -31,7 +31,7 @@ Convergence criterion
   \item{maxit}{
 Maximum number of iterations
 }
-\item{oldfac}{Covergence acceleration factor. It must be a parameter
+\item{oldfac}{Convergence acceleration factor. It must be a parameter
 between 0 and 1.}
   \item{progress}{
 Display iteration progress?

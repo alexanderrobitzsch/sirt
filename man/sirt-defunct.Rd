@@ -1,5 +1,5 @@
 %% File Name: sirt-defunct.Rd
-%% File Version: 0.04
+%% File Version: 0.05
 
 \name{sirt-defunct}
 \alias{sirt-defunct}
@@ -32,7 +32,7 @@ yen.q3(...)
 The \code{rasch.conquest} function has been replaced by
 \code{\link{R2conquest}}.	
 
-The \code{rasch.pml2} function has been superseeded by
+The \code{rasch.pml2} function has been superseded by
 \code{\link{rasch.pml3}}.
 
 The \code{testlet.yen.q3} function has been replaced by

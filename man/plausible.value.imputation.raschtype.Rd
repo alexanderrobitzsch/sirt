@@ -1,5 +1,5 @@
 %% File Name: plausible.value.imputation.raschtype.Rd
-%% File Version: 1.24
+%% File Version: 1.25
 
 \name{plausible.value.imputation.raschtype}
 \alias{plausible.value.imputation.raschtype}
@@ -86,7 +86,7 @@ Number of burn-in iterations for plausible value imputation
 Number of plausible values
 }
   \item{printprogress}{
-A logical indicated whether iteratiomn progress should be displayed
+A logical indicated whether iteration progress should be displayed
 at the console.
 }
 }

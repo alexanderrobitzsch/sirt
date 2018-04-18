@@ -1,5 +1,5 @@
 %% File Name: data.pisaPars.Rd
-%% File Version: 0.06
+%% File Version: 0.07
 
 \name{data.pisaPars}
 \alias{data.pisaPars}
@@ -19,7 +19,7 @@ data(data.pisaPars)
   A data frame with 25 observations on the following 4 variables. 
   \describe{
     \item{\code{item}}{Item names}
-    \item{\code{testlet}}{Items are arranged in corresonding testlets. These
+    \item{\code{testlet}}{Items are arranged in corresponding testlets. These
 		names are located in this column.}
     \item{\code{study1}}{Item difficulties of study 1}
     \item{\code{study2}}{Item difficulties of study 2}

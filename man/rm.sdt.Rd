@@ -1,5 +1,5 @@
 %% File Name: rm.sdt.Rd
-%% File Version: 1.28
+%% File Version: 1.34
 
 \name{rm.sdt}
 \alias{rm.sdt}
@@ -16,13 +16,13 @@
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Hierachical Rater Model Based on Signal Detection Theory (HRM-SDT)
+Hierarchical Rater Model Based on Signal Detection Theory (HRM-SDT)
 }
 
 \description{
 This function estimates a version of the hierarchical rater
 model (HRM) based on signal detection theory (HRM-SDT; DeCarlo, 2005; 
-DeCarlo, Kim & Johnson, 2011).
+DeCarlo, Kim & Johnson, 2011; Robitzsch & Steinfeld, 2018).
 }
 
 
@@ -87,7 +87,7 @@ Should item parameters \eqn{a_i} be estimated?
 Type of estimation for item-rater parameters \eqn{c_{ir}}
 in the signal detection model. Options are \code{'n'} (no estimation),
 \code{'e'} (set all parameters equal to each other), 
-\code{'i'} (item wise estmation), \code{'r'} (rater wise estimation)
+\code{'i'} (itemwise estimation), \code{'r'} (rater wise estimation)
 and \code{'a'} (all parameters are estimated independently
 from each other).
 }
@@ -185,7 +185,7 @@ of person \eqn{p} on item \eqn{i}
 exp( a_{i} q_{ik} \theta_p - \tau_{ik} ) }
 At the first level, the ratings \eqn{X_{pir}} for
 person \eqn{p} on item \eqn{i} and rater \eqn{r}
-are modelled as a signal detection model
+are modeled as a signal detection model
 \deqn{ P( X_{pir} \le k | \eta_{pi} ) =
 G( c_{irk} - d_{ir} \eta_{pi} )}
 where \eqn{G} is the logistic distribution function
@@ -210,7 +210,7 @@ A list with following entries:
 \item{deviance}{Deviance}
 \item{ic}{Information criteria and number of parameters}
 \item{item}{Data frame with item parameters. The columns
-\code{N} and \code{M} denote the number of oberved ratings and the
+\code{N} and \code{M} denote the number of observed ratings and the
 observed mean of all ratings, respectively. \cr
 In addition to item parameters \eqn{\tau_{ik}} and \eqn{a_i}, the mean
 for the latent response (\code{latM}) is computed as
@@ -275,6 +275,10 @@ A hierarchical rater model for constructed responses,
 with a signal detection rater model.
 \emph{Journal of Educational Measurement},
 \bold{48}, 333-356.
+
+Robitzsch, A., & Steinfeld, J. (2018). Item response models for human ratings: Overview, 
+estimation methods, and implementation in R. 
+\emph{Psychological Test and Assessment Modeling, 60}(1), 101-139.
 }
 
 

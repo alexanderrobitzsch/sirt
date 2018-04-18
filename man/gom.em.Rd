@@ -1,5 +1,5 @@
 %% File Name: gom.em.Rd
-%% File Version: 1.62
+%% File Version: 1.65
 
 \name{gom.em}
 \alias{gom.em}
@@ -113,7 +113,7 @@ of person \eqn{p} on item \eqn{i} is as follows (\code{model="GOM"})
                 }
 
 In most applications (e.g. Erosheva et al., 2007), the grade of
-memebership function \eqn{\{g_{pk}\}} is assumed to follow a Dirichlet
+membership function \eqn{\{g_{pk}\}} is assumed to follow a Dirichlet
 distribution. In our \code{gom.em} implementation             
 the membership function is assumed to be discretely represented 
 by a grid \eqn{u=(u_1 , \ldots , u_L)} with entries between 0 and 1
@@ -126,7 +126,7 @@ The grid \eqn{u} is specified by using the argument \code{problevels}.
 The Rasch grade of membership model (\code{model="GOMRasch"}) poses constraints 
 on probabilities \eqn{\lambda_{ik}} and membership functions \eqn{g_{pk}}. 
 The membership 
-function of person \eqn{p} is parametrized by a location parameter \eqn{\theta_p}
+function of person \eqn{p} is parameterized by a location parameter \eqn{\theta_p}
 and a variability parameter \eqn{\xi_p}. Each class \eqn{k} is represented by
 a location parameter \eqn{\tilde{\theta}_k}. The membership function is defined as
 \deqn{ g_{pk} \propto 
@@ -178,7 +178,7 @@ A list with following entries:
 	}
 \item{classdesc}{Descriptives for class membership}	
 \item{lambda}{Estimated response probabilities \eqn{\lambda_{ik}}}
-\item{se.lambda}{Standard error for stimated response probabilities 
+\item{se.lambda}{Standard error for estimated response probabilities 
 \eqn{\lambda_{ik}}}
 \item{mu}{Mean of the distribution of \eqn{(\theta_p , \xi_p)} 
 	(only applies for \code{model="GOMRasch"})}

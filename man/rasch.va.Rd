@@ -1,5 +1,5 @@
 %% File Name: rasch.va.Rd
-%% File Version: 0.10
+%% File Version: 0.11
 
 \name{rasch.va}
 \alias{rasch.va}
@@ -20,7 +20,7 @@ rasch.va(dat, globconv = 0.001, maxiter = 1000)
 Data frame with dichotomous item responses
 }
   \item{globconv}{
-Covergence criterion for item parameters
+Convergence criterion for item parameters
 }
   \item{maxiter}{
 Maximal number of iterations

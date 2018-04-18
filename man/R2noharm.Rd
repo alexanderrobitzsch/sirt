@@ -1,5 +1,5 @@
 %% File Name: R2noharm.Rd
-%% File Version: 2.22
+%% File Version: 2.23
 
 \name{R2noharm}
 \alias{R2noharm}
@@ -87,7 +87,7 @@ Display output?
   \item{object}{
 Object of class \code{R2noharm}
 }
-\item{logfile}{File name if the summary should be sinked into a file}
+\item{logfile}{File name if the summary should be sunk into a file}
 \item{\dots}{Further arguments to be passed}
 }
 

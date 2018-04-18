@@ -1,5 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.33
+%% File Version: 1.34
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -52,7 +52,7 @@ covariances are evaluated.
 }
 \item{object}{Object of class \code{conf.detect}}
 \item{digits}{Number of digits for rounding in \code{summary}}
-\item{file}{Optional file name to be sinked for \code{summary}}
+\item{file}{Optional file name to be sunk for \code{summary}}
 \item{\dots}{Further arguments to be passed}
 }
 \details{

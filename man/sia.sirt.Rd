@@ -1,5 +1,5 @@
 %% File Name: sia.sirt.Rd
-%% File Version: 0.13
+%% File Version: 0.16
 
 \name{sia.sirt}
 \alias{sia.sirt}
@@ -23,7 +23,7 @@ sia.sirt(dat, significance = 0.85)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{dat}{
-Data frame with dochotomous item responses
+Data frame with dichotomous item responses
 }
   \item{significance}{
 Minimum implicative probability for inclusion of an arrow in the graph.
@@ -46,7 +46,7 @@ A list with following entries
 
   \item{adj.matrix}{Adjacency matrix of the graph. Transitive and
   symmetric implications (arrows) have been removed.}
-  \item{adj.pot}{Adjacency matrix including all potencies, i.e. all direct and
+  \item{adj.pot}{Adjacency matrix including all powers, i.e. all direct and
   indirect paths from item \eqn{i} to item \eqn{j}.}
   \item{adj.matrix.trans}{Adjacency matrix including transitive arrows.}
   \item{desc}{List with descriptive statistics of the graph.}

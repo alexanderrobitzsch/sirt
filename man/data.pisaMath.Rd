@@ -1,5 +1,5 @@
 %% File Name: data.pisaMath.Rd
-%% File Version: 0.08
+%% File Version: 0.09
 
 \name{data.pisaMath}
 \alias{data.pisaMath}
@@ -21,7 +21,7 @@ The dataset is a list. The list element \code{data}
 contains the dataset with the demographical variables 
 student ID (\code{idstud}), school ID (\code{idschool}), a dummy variable for female 
 students (\code{female}), socioeconomic status (\code{hisei})
-and migrational background (\code{migra}). The remaining 
+and migration background (\code{migra}). The remaining 
 variables (starting with \code{M} in the name) are
 the mathematics items. \cr
 The item metadata are included in the list element
