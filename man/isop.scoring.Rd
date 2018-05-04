@@ -48,7 +48,7 @@ The modified percentile score \eqn{\rho_p}
 for subject \eqn{p} (\code{mpsc} in \code{person}) is 
 defined by
 \deqn{ \rho_p = \frac{1}{I} \sum_{i=1}^I 
-		\sum_{j=0}^K s_{ik} \mathbf{1}( X_{pi} = k ) }
+        \sum_{j=0}^K s_{ik} \mathbf{1}( X_{pi} = k ) }
 Note that for dichotomous items, the sum score is a
 sufficient statistic for \eqn{\rho_p} but this is 
 not the case for polytomous items. 
@@ -58,7 +58,7 @@ ranges between -1 and 1.
 The modified item P-score \eqn{\rho_i} (Scheiblechner, 2007, p. 52) is
 defined by
 \deqn{ \rho_i = \frac{1}{I-1} \cdot \sum_j \left[ P( X_j < X_i )
-		- P( X_j > X_i ) \right ] }
+        - P( X_j > X_i ) \right ] }
 }
 
 
@@ -71,14 +71,14 @@ A list with following entries:
   \item{person}{
   A data frame with person parameters. The modified
   percentile score \eqn{\rho_p} is denoted by \code{mpsc}.
-  	}
+      }
   \item{item}{Item statistics and scoring parameters.
     The item P-scores \eqn{\rho_i}
    are labeled as \code{pscore}.}
   \item{p.itemcat}{Frequencies for every item category}
   \item{score.itemcat}{
-  	  Scoring points for every item category
-  	  		}
+        Scoring points for every item category
+                }
   \item{distr.fct}{Empirical distribution function}
 }
 
@@ -91,7 +91,7 @@ A list with following entries:
 Scheiblechner, H. (1995). Isotonic ordinal
 probabilistic models (ISOP). \emph{Psychometrika},
 \bold{60}, 281-304.
-	
+    
 Scheiblechner, H. (2003). \emph{Nonparametric IRT:
 Scoring functions and ordinal parameter estimation
 of isotonic probabilistic models (ISOP)}.

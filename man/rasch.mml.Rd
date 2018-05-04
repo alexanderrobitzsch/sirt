@@ -1,5 +1,5 @@
 %% File Name: rasch.mml.Rd
-%% File Version: 3.9911
+%% File Version: 3.9914
 
 \name{rasch.mml2}
 \alias{rasch.mml2}
@@ -272,20 +272,20 @@ grid of \eqn{\theta} values is estimated.
 }
 
 \item{npirt.monotone}{Should nonparametrically estimated item response functions
-	be monotone? The default is \code{TRUE}. This function applies only
-	to \code{irtmodel='npirt'} and \code{npformula=NULL}.
+    be monotone? The default is \code{TRUE}. This function applies only
+    to \code{irtmodel='npirt'} and \code{npformula=NULL}.
 }
 \item{use.freqpatt}{A logical if frequencies of pattern should be used or not.
-	The default is \code{is.null(group)}. This means that for single
-	group analyses, frequency patterns are used but not for multiple
-	groups. If data processing times are large, then \code{use.freqpatt=FALSE}
-	is recommended.}
+    The default is \code{is.null(group)}. This means that for single
+    group analyses, frequency patterns are used but not for multiple
+    groups. If data processing times are large, then \code{use.freqpatt=FALSE}
+    is recommended.}
 \item{delta.miss}{Missingness parameter \eqn{\delta} quantifying the meaning
-	of responding to an item between the two extremes of ignoring
+    of responding to an item between the two extremes of ignoring
      missing responses and setting all missing responses to incorrect}
-\item{est.delta}{Vectow ith indices indicating the \eqn{\delta} parameters
-	to be estimated if \code{irtmodel="missing1"}.}     
-  \item{object}{  	  
+\item{est.delta}{Vector with indices indicating the \eqn{\delta} parameters
+    to be estimated if \code{irtmodel="missing1"}.}     
+  \item{object}{        
 Object of class \code{rasch.mml}
 }
 \item{x}{Object of class \code{rasch.mml}}
@@ -330,7 +330,7 @@ is estimated.
 Ramsay's quotient model (\code{irtmodel="qm.ramsay"}) uses 
 the item response function
 \deqn{P( X_{pi} = 1 | \theta_p ) = \frac{ \exp(\theta_p / b_i)}
-	{ K_i + \exp (\theta_p / b_i )} }
+    { K_i + \exp (\theta_p / b_i )} }
 
 Quite general unidimensional item response models can be estimated
 in a nonparametric framework (\code{irtmodel="npirt"}). The response
@@ -361,7 +361,7 @@ by \eqn{L}, the item response model for ability is defined as
 We also define a measurement model for response indicators \eqn{R_{pi}} which depends
 on the item response \eqn{X_{pi}} itself:
 \deqn{P( R_{pi} = 1 | X_{pi} = k , \theta_p , \xi_p ) = 
-	P( R_{pi} = 1 | X_{pi} = k , \xi_p ) =
+    P( R_{pi} = 1 | X_{pi} = k , \xi_p ) =
 L \left[  \xi_p -  \beta_i - k \delta _i  \right] \quad \mbox{ for }
 \quad k=0,1} 
 If \eqn{\delta _i=0}, then the probability of responding to an item is independent
@@ -388,7 +388,7 @@ missing not at random assumptions or can be estimated by choosing
 A list with following entries
 \item{dat}{Original data frame}
 \item{item}{Estimated item parameters in the generalized
-	item response model}
+    item response model}
 \item{item2}{Estimated item parameters for Ramsay's quotient model}
 \item{trait.distr}{Discretized ability distribution points and probabilities}
 \item{mean.trait}{Estimated mean vector}
@@ -399,7 +399,7 @@ A list with following entries
 \item{rprobs}{Item response probabilities like in \code{pjk}, but slightly
 extended to accommodate all categories}
 \item{person}{Person parameter estimates: mode (\code{MAP}) and
-	mean (\code{EAP}) of the posterior distribution}
+    mean (\code{EAP}) of the posterior distribution}
 \item{pid}{Person identifier}
 \item{ability.est.pattern}{Response pattern estimates}
 \item{f.qk.yi}{Individual posterior distribution}
@@ -408,16 +408,16 @@ extended to accommodate all categories}
 \item{fixed.c}{Estimated \eqn{c} parameters}
 \item{G}{Number of groups}
 \item{alpha1}{Estimated \eqn{\alpha_1} parameter in generalized logistic 
-	item response model}
+    item response model}
 \item{alpha2}{Estimated \eqn{\alpha_2} parameter in generalized logistic 
-	item response model}
+    item response model}
 \item{se.b}{Standard error of \eqn{b} parameter in generalized logistic model 
-	or Ramsay's quotient model}
+    or Ramsay's quotient model}
 \item{se.a}{Standard error of \eqn{a} parameter in generalized logistic model}
 \item{se.c}{Standard error of \eqn{c} parameter in generalized logistic model}
 \item{se.d}{Standard error of \eqn{d} parameter in generalized logistic model}
 \item{se.alpha}{Standard error of \eqn{\alpha} parameter in generalized 
-	logistic model}
+    logistic model}
 \item{se.K}{Standard error of \eqn{K} parameter in Ramsay's quotient model}
 \item{iter}{Number of iterations}
 \item{reliability}{EAP reliability}
@@ -430,7 +430,7 @@ extended to accommodate all categories}
 \item{pi.k}{Trait distribution}
 \item{ic}{Information criteria}
 \item{esttype}{Estimation type: \code{ll} (Log-Likelihood),
-	\code{pseudoll} (Pseudo-Log-Likelihood)
+    \code{pseudoll} (Pseudo-Log-Likelihood)
 }
 \item{\dots}{}
 }
@@ -444,7 +444,7 @@ Holman, R., & Glas, C. A. (2005). Modelling non-ignorable missing-data mechanism
 with item response theory models. 
 \emph{British Journal of Mathematical and Statistical Psychology}, 
 \bold{58}, 1-17.
-	
+    
 Loken, E., & Rulison, K. L. (2010). Estimation of a four-parameter 
 item response theory model. \emph{British Journal of Mathematical 
 and Statistical Psychology}, \bold{63}, 509-525.
@@ -477,9 +477,8 @@ process models for decision making and latent variable models for
 individual differences.
 \emph{Psychological Review}, \bold{318}, 339-356.
 }
-\author{
-Alexander Robitzsch
-}
+
+
 \note{
 Multiple group estimation is not possible for
 Ramsay's quotient model and multdimensional models.
@@ -547,14 +546,14 @@ summary(mod1c)
 # 2PL model
 mod2 <- sirt::rasch.mml2( dat , est.a = 1:I )
 summary(mod2)
-plot(mod2)	# plot 2PL item response curves
+plot(mod2)    # plot 2PL item response curves
 
 # extract individual likelihood
 llmod2 <- IRT.likelihood(mod2)
 str(llmod2)
 
 \dontrun{
-library(CDM)	
+library(CDM)    
 # model comparisons
 CDM::IRT.compareModels(mod1, mod1c, mod2 )
 anova(mod1,mod2)
@@ -562,7 +561,7 @@ anova(mod1,mod2)
 # assess model fit
 smod1 <- IRT.modelfit(mod1)
 smod2 <- IRT.modelfit(mod2)
-IRT.compareModels(smod1, smod2)	
+IRT.compareModels(smod1, smod2)    
 
 # set some bounds for a and b parameters 
 mod2a <- sirt::rasch.mml2( dat , est.a=1:I , min.a = .7 , max.a=2 , min.b = -2 )
@@ -715,9 +714,9 @@ set.seed(8765)
 N1 <- 1000     # N1=1000 persons in group 1
 N2 <- 500      # N2= 500 persons in group 2
 dat1 <- sirt::sim.raschtype( theta = stats::rnorm( N1 , sd = 1.5 )  , b = b , 
-			alpha1 = -0.3 , alpha2=0)
+            alpha1 = -0.3 , alpha2=0)
 dat2 <- sirt::sim.raschtype( theta = stats::rnorm( N2 , mean=-.5 , sd =.75)  , 
-			b = b , alpha1 = -0.3 , alpha2=0)
+            b = b , alpha1 = -0.3 , alpha2=0)
 dat1 <- rbind( dat1 , dat2 )
 group <- c( rep(1,N1) , rep(2,N2))
 

@@ -52,7 +52,7 @@ Alexander Robitzsch
 \dontrun{
 #############################################################################
 # EXAMPLE 1: MCMC estimation 2PNO dataset Reading
-#############################################################################	
+#############################################################################    
 
 data(data.read)
 # estimate 2PNO with MCMC with 3000 iterations and 500 burn-in iterations

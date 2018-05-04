@@ -9,9 +9,9 @@
 # Note that the entries must be nonnegative                 #
 rowProds <- function(matr)
 {
-	# INPUT:                                
-	# matrix with positive entries          
-	exp( rowSums( log(matr + 10^(-300) ) ) )
+    # INPUT:                                
+    # matrix with positive entries          
+    exp( rowSums( log(matr + 10^(-300) ) ) )
 }
 # for nonnegative entries use this function in combination      ##
 # with sign(matr)                                               ##
@@ -20,17 +20,17 @@ rowProds <- function(matr)
 # alternative to rowProds
 rowProds2 <- function(matr)
 {
-	y <- matr[,1]
-	for (ii in 2:dim(matr)[2]){
-		y <- y * matr[,ii] }
-	return(y)
+    y <- matr[,1]
+    for (ii in 2:dim(matr)[2]){
+        y <- y * matr[,ii] }
+    return(y)
 }
 #...................................................................
 
 # columnwise product
 colProds <- function(matr)
 { 
-	exp( colSums( log(matr + 10^(-300) ) ) )
+    exp( colSums( log(matr + 10^(-300) ) ) )
 }
 
 #---------------------------------------------------------------------
@@ -56,8 +56,8 @@ colMedians <- function(mat){ rowMedians( t(mat) ) }
 #-------------------------------------------------------------------
 rowVars <- function(mat , na.rm= FALSE )
 {
-	n <- rowSums( 1 - is.na(mat) ) 
-	( rowSums( mat^2 , na.rm= TRUE) - n * rowMeans( mat , na.rm = na.rm )^2 ) / ( n - 1 )
+    n <- rowSums( 1 - is.na(mat) ) 
+    ( rowSums( mat^2 , na.rm= TRUE) - n * rowMeans( mat , na.rm = na.rm )^2 ) / ( n - 1 )
 }
 #*****
 colVars <- function( mat , na.rm=FALSE){ rowVars( t(mat) , na.rm ) }
@@ -70,8 +70,8 @@ min.vec <- function(a,b){ifelse( a >= b , b , a ) }
 #*********************************
 rowMins2 <- function(matr)
 {
-	y <- do.call( pmin , as.data.frame(matr) )
-	return(y)
+    y <- do.call( pmin , as.data.frame(matr) )
+    return(y)
 }
 #------------------------------------------------------------------------#
 
@@ -114,16 +114,16 @@ whichcolMins <- function(mat){  whichcolMaxs( - mat ) }
 # rowwise cumsum operation on matrices                        #
 rowCumsums <- function( mat , multmat = NULL)
 {
-	if (is.null(multmat)){
-		m <- ncol(mat)
-		multmat <- matrix( 1 , ncol  = m , nrow= m ) 
-		multmat[ lower.tri( multmat )] <- 0
-	}    
-	mat %*% multmat
+    if (is.null(multmat)){
+        m <- ncol(mat)
+        multmat <- matrix( 1 , ncol  = m , nrow= m ) 
+        multmat[ lower.tri( multmat )] <- 0
+    }    
+    mat %*% multmat
 }
 #--------------------------------------------------------------#
 colCumsums <- function( mat  ){  
-	rowCumsums( t(mat) ) 
+    rowCumsums( t(mat) ) 
 }
 #--------------------------------------------------------------#
 
@@ -169,8 +169,8 @@ rowSums.colbundles <- function( mat , ind , multmat = NULL )
 # function for calculation of Cronbach's Alpha
 .cronbach <- function(matr)
 {
-	matr <- stats::na.omit(matr)
-	p <- ncol(matr)
-	p / ( p - 1 )* ( sum( matr ) - sum( diag( matr ) ) )/ sum(matr )
+    matr <- stats::na.omit(matr)
+    p <- ncol(matr)
+    p / ( p - 1 )* ( sum( matr ) - sum( diag( matr ) ) )/ sum(matr )
 }
 #..........................................................................

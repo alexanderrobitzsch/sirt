@@ -22,7 +22,7 @@ from the \pkg{coda} package.
 }
 
 \usage{
-## coefficients	
+## coefficients    
 mcmc_coef(mcmcobj, exclude = "deviance")
 
 ## covariance matrix 

@@ -42,7 +42,7 @@ A numeric matrix
 \item{K}{An integer indicating the number of smallest elements to be
 extracted}
 \item{break.ties}{A logical which indicates if ties are randomly
-	broken. The default is \code{TRUE}.
+    broken. The default is \code{TRUE}.
 }
 }
 
@@ -109,7 +109,7 @@ rowCumsums.sirt(M1)   # rowwise cumulative sum
 matr <- M1
 matr <- matr / rowSums( matr )
 matr <- sirt::rowCumsums.sirt( matr )
-rn <- runif(N1)	# generate random numbers
+rn <- runif(N1)    # generate random numbers
 rowIntervalIndex.sirt(matr,rn)
 
 # select the two smallest values

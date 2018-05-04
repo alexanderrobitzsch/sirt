@@ -38,8 +38,8 @@ A list with following entries:
   \item{mu.i}{Vector with individual means \eqn{\mu_i}}
 \item{sigma2.i}{Vector with individual variances \eqn{\sigma_i^2}}  
 %% ...
-%%	res <- list("sig" = sqrt(sig2) , 
-%%			"item"=item , "xsi.ij"=xsi.ij , "mu.i"=mu.i , "sigma2.i" = sigma2.i )
+%%    res <- list("sig" = sqrt(sig2) , 
+%%            "item"=item , "xsi.ij"=xsi.ij , "mu.i"=mu.i , "sigma2.i" = sigma2.i )
 }
 \references{
 Rijmen, F., & Vomlel, J. (2008). Assessing the performance of

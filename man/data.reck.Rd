@@ -155,9 +155,9 @@ New York: Springer.
 }
 
 \examples{
-\dontrun{	
+\dontrun{    
 #############################################################################
-# EXAMPLE 1: data.reck21 dataset, Table 2.1, p. 45	
+# EXAMPLE 1: data.reck21 dataset, Table 2.1, p. 45    
 #############################################################################
 data(data.reck21)
 
@@ -197,7 +197,7 @@ round( cbind( mod1$item$b , mod2$item$b.Dim1 / mod2$item$a.Dim1 , - c3[,2] / c3[
             data.reck21$pars$b ) , 2 )
             
 #############################################################################
-# EXAMPLE 2: data.reck61 dataset, Table 6.1, p. 153	
+# EXAMPLE 2: data.reck61 dataset, Table 6.1, p. 153    
 #############################################################################            
 
 data(data.reck61DAT1)

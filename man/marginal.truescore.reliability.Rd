@@ -1,5 +1,5 @@
 %% File Name: marginal.truescore.reliability.Rd
-%% File Version: 0.16
+%% File Version: 0.18
 
 \name{marginal.truescore.reliability}
 \alias{marginal.truescore.reliability}
@@ -63,7 +63,7 @@ for binary items as a function of their IRT parameters.
 
 May, K., & Nicewander, W. A. (1994). Reliability and information
 functions for percentile ranks. \emph{Journal of Educational
-Mesaurement}, \bold{31}, 313-325.
+Measurement}, \bold{31}, 313-325.
 }
 \author{
 Alexander Robitzsch

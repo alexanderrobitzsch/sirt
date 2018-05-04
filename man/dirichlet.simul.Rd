@@ -49,7 +49,7 @@ Alexander Robitzsch
 
 set.seed(789)
 N <- 2000
-probs <- c(.7 , .3)	# define (extremal) class probabilities
+probs <- c(.7 , .3)    # define (extremal) class probabilities
 
 #*** alpha0 = .2  -> nearly crisp latent classes
 alpha0 <- .2

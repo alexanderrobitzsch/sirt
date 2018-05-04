@@ -30,7 +30,7 @@ rasch.evm.pcm(dat, jackunits = 20, weights = NULL, pid = NULL ,
 
 \method{coef}{rasch.evm.pcm}(object,...)
 
-\method{vcov}{rasch.evm.pcm}(object,...)	
+\method{vcov}{rasch.evm.pcm}(object,...)    
 }
 
 
@@ -77,8 +77,8 @@ An optional logical indicating whether progress should be displayed
 A list with following entries
 
 \item{item}{Data frame with item parameters. The item parameter estimate
-	is denoted by \code{est} while a Jackknife bias-corrected estimate
-	is \code{est_jack}. The Jackknife standard error is \code{se}.
+    is denoted by \code{est} while a Jackknife bias-corrected estimate
+    is \code{est_jack}. The Jackknife standard error is \code{se}.
 }
 \item{b}{Item threshold parameters}
 \item{person}{Data frame with person parameters obtained (MLE)}
@@ -271,8 +271,8 @@ summary(mod1)
 
 # simulate some data
 set.seed(9776)
-N <- 1000	# number of persons
-I <- 10		# number of items
+N <- 1000    # number of persons
+I <- 10        # number of items
 # simulate data for first group
 b <- seq(-1.5,1.5,len=I)
 dat1 <- sirt::sim.raschtype( stats::rnorm(N) , b )

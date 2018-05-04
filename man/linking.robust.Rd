@@ -113,7 +113,7 @@ plot(res2)
 #############################################################################
 # EXAMPLE 3: Linking with simulated item parameters containing outliers 
 #############################################################################
-	
+    
 # simulate some parameters
 I <- 38
 set.seed(18785)

@@ -3,7 +3,7 @@
 
 rm_facets_string_part_extract <- function( x , split, part)
 {
-	vec <- strsplit( paste(x) , split=split )
-	vec <- unlist( lapply( vec, FUN = function(vv){ vv[part] } ) )
-	return(vec)
+    vec <- strsplit( paste(x) , split=split )
+    vec <- unlist( lapply( vec, FUN = function(vv){ vv[part] } ) )
+    return(vec)
 }

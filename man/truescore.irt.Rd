@@ -51,7 +51,7 @@ Numerical differentiation parameter
 In addition, the function \eqn{\pi(\theta)= \frac{1}{I} \cdot \tau( \theta)} 
 of the expected percent score is approximated by a logistic function
 \deqn{ \pi ( \theta ) \approx l + ( u - l ) \cdot invlogit ( a \theta + b )
-}	
+}    
 }
 
 \value{

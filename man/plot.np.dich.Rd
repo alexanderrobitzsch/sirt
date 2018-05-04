@@ -14,7 +14,7 @@ functions estimated with \code{dich.np}.
 \usage{
 \method{plot}{np.dich}(x, b, infit = NULL, outfit = NULL, 
     nsize = 100, askplot = TRUE, progress = TRUE, bands = FALSE, 
-    plot.b = FALSE, shade = FALSE, shadecol = "burlywood1" , ...)		
+    plot.b = FALSE, shade = FALSE, shadecol = "burlywood1" , ...)        
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

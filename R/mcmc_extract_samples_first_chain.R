@@ -3,10 +3,10 @@
 
 mcmc_extract_samples_first_chain <- function(mcmcobj)
 {
-	if ( ! is.matrix(mcmcobj) ){
-		dat.bugs <- mcmcobj[[1]]
-	} else {
-		dat.bugs <- mcmcobj
-	}
-	return(dat.bugs)
+    if ( ! is.matrix(mcmcobj) ){
+        dat.bugs <- mcmcobj[[1]]
+    } else {
+        dat.bugs <- mcmcobj
+    }
+    return(dat.bugs)
 }

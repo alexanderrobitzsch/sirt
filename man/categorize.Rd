@@ -36,7 +36,7 @@ Vector with variable names which should be converted into categories,
 beginning with integer \code{lowest}
 }
 \item{quant}{Vector with number of classes for each variables.
-	Variables are categorized among quantiles. The vector must
+    Variables are categorized among quantiles. The vector must
 have names containing variable names.}
   \item{lowest}{
 Lowest category index. Default is 0.
@@ -77,14 +77,14 @@ Alexander Robitzsch
 %}
 
 \examples{
-\dontrun{	
-library(mice)	
+\dontrun{    
+library(mice)    
 library(miceadds)
-	
+    
 #############################################################################
 # EXAMPLE 1: Categorize questionnaire data
-#############################################################################	
-	
+#############################################################################    
+    
 data(data.smallscale , package="miceadds")
 dat <- data.smallscale
 
@@ -106,7 +106,7 @@ dat3 <- mice::complete(imp,action=1)
 
 # (3) decategorize dataset
 dat3a <- sirt::decategorize( dat3 , categ_design = res$categ_design )
-	
+    
 #############################################################################
 # EXAMPLE 2: Categorize ordinal and continuous data
 #############################################################################

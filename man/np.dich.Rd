@@ -50,7 +50,7 @@ in the \pkg{sm} library.
 A list with following entries
 \item{dat}{Original data frame}
 \item{thetagrid}{Vector of theta values at which the item response 
-	functions are evaluated}
+    functions are evaluated}
 \item{theta}{Used theta values as person parameter estimates}
 \item{estimate}{Estimated item response functions}
 \item{\dots}{}

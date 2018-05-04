@@ -6,6 +6,6 @@
 tracemat <- function(A)
 { 
     res <- sum( diag(A) ) 
-	return(res)
+    return(res)
 } 
 ########################################

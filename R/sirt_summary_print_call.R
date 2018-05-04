@@ -3,6 +3,6 @@
 
 sirt_summary_print_call <- function(CALL)
 {
-	cat("Call:\n", paste(deparse(CALL), sep = "\n", collapse = "\n"), 
-				"\n\n", sep = "")
-}				
+    cat("Call:\n", paste(deparse(CALL), sep = "\n", collapse = "\n"), 
+                "\n\n", sep = "")
+}                

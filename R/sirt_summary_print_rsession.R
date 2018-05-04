@@ -4,6 +4,6 @@
 
 sirt_summary_print_rsession <- function()
 {
-	res <- TAM::tam_rsessinfo()
-	cat(res, "\n\n")
+    res <- TAM::tam_rsessinfo()
+    cat(res, "\n\n")
 }

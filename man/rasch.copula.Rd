@@ -145,8 +145,8 @@ Maximal change in the deviance. Default is \code{.2}.
 }
 \item{rho.init}{Initial value for off-diagonal elements in correlation matrix}
 \item{increment.factor}{A numeric value larger than one which controls the
-	size of increments in iterations. To stabilize convergence,
-	choose values 1.05 or 1.1 in some situations.}
+    size of increments in iterations. To stabilize convergence,
+    choose values 1.05 or 1.1 in some situations.}
   \item{object}{
 Object of class \code{rasch.copula2} or \code{rasch.copula3}
 }
@@ -284,12 +284,12 @@ summary(mod1)
 
 # both item clusters have Cook-Johnson copula as dependency
 mod1c <- sirt::rasch.copula2( dat , itemcluster = itemcluster ,
-			copula.type ="cook.johnson")
+            copula.type ="cook.johnson")
 summary(mod1c)
 
 # first item boundary mixture and second item Cook-Johnson copula
 mod1d <- sirt::rasch.copula2( dat , itemcluster = itemcluster ,
-			copula.type = c( "bound.mixt" , "cook.johnson" ) )
+            copula.type = c( "bound.mixt" , "cook.johnson" ) )
 summary(mod1d)
 
 # compare result with Rasch model estimation in rasch.copula2

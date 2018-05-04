@@ -62,8 +62,8 @@ item discrimination parameter of 1. \code{MLC2} allows for the
 estimation of item discriminations.
 }
 \item{dimensions}{
-	Vector of dimension integers which allocate items to dimensions.
-		}
+    Vector of dimension integers which allocate items to dimensions.
+        }
   \item{group}{
 A group identifier for multiple group estimation
 }
@@ -77,8 +77,8 @@ must be a vector, in the \eqn{D}-dimensional case it must
 be a matrix of dimension \eqn{D}.
 }
 \item{ref.item}{An optional vector of integers which indicate the items
-	whose intercept and slope are fixed at 0 and 1, respectively.
-	}
+    whose intercept and slope are fixed at 0 and 1, respectively.
+    }
 \item{distribution.trait}{A type of the assumed theta distribution can
 be specified. One alternative is \code{normal}
 for the normal distribution assumption.
@@ -117,8 +117,8 @@ can be specified. If the seed is negative, then
 the function will generate a random seed.
 }
 \item{nstarts}{
-	If a positive integer is provided, then a \code{nstarts}
-	starts with different starting values are conducted.
+    If a positive integer is provided, then a \code{nstarts}
+    starts with different starting values are conducted.
 }
 \item{fac.iter}{A parameter between 0 and 1 to control the maximum
 increment in each iteration. The larger the parameter the more increments
@@ -158,7 +158,7 @@ Lindsay et al., 1991; for a review see Formann, 2007).
 A list with following entries
 \item{pjk}{Item probabilities evaluated at discretized ability distribution}
 \item{rprobs}{Item response probabilities like in \code{pjk},
-	but for each item category}
+    but for each item category}
 \item{pi.k}{Estimated trait distribution}
 \item{theta.k}{Discretized ability distribution}
 \item{item}{Estimated item parameters}
@@ -167,7 +167,7 @@ A list with following entries
 \item{sd.trait}{Estimated standard deviation of ability distribution}
 \item{skewness.trait}{Estimated skewness of ability distribution}
 \item{cor.trait}{Estimated correlation between abilities (only applies for 
-	multidimensional models)}
+    multidimensional models)}
 \item{ic}{Information criteria}
 \item{D}{Number of dimensions}
 \item{G}{Number of groups}
@@ -176,7 +176,7 @@ A list with following entries
 \item{Nclasses}{Number of classes}
 \item{modeltype}{Used model type}
 \item{estep.res}{Result from E step: \code{f.qk.yi} is the individual posterior, 
-	\code{f.yi.qk} is the individual likelihood}
+    \code{f.yi.qk} is the individual likelihood}
 \item{dat}{Original data frame}
 \item{devL}{Vector of deviances if multiple random starts were conducted}
 \item{seedL}{Vector of seed if multiple random starts were conducted}
@@ -237,8 +237,8 @@ leading to memory overflow in \R.
 %% \link[CDM]{\code{gdm}}
 \seealso{
 See also the \code{\link[CDM:gdm]{CDM::gdm}} 
-function in the \pkg{CDM} package.	
-	
+function in the \pkg{CDM} package.    
+    
 For an assessment of global model fit see \code{\link{modelfit.sirt}}.
 
 The estimation of the multidimensional latent class item response

@@ -6,38 +6,38 @@
 #****************************
 # rowMaxs function
 rowMaxs.sirt <- function(matr){ 
-	rowMaxsCPP_source( matr )
+    rowMaxsCPP_source( matr )
 }
-#*****************************					
+#*****************************                    
 # rowMins function
 rowMins.sirt <- function(matr){
-	matr2 <- - matr
+    matr2 <- - matr
     res2 <- rowMaxs.sirt( matr2 )
     res <- list( "minval" = - res2$maxval ,
-					"minind" = res2$maxind )
-	return(res)
+                    "minind" = res2$maxind )
+    return(res)
 }
 ##########################################################################
 # rowwise cumulative sum
 rowCumsums.sirt <- function(matr){ 
-	rowCumsums2_source( matr )
-					}
+    rowCumsums2_source( matr )
+                    }
 # The C code was posted by Romain Francois at
 # http://lists.r-forge.r-project.org/pipermail/rcpp-devel/2010-October/001198.html
 
 ##########################################################################
 # rowwise cumulative sum
 colCumsums.sirt <- function(matr){ 
-	t( rowCumsums.sirt( t(matr) ) )
-					}
+    t( rowCumsums.sirt( t(matr) ) )
+                    }
 
 ##########################################################################
-#****					
+#****                    
 # 'interval_index' searches an index when a frequency is exceeded
 # -> used in plausible value imputation
 rowIntervalIndex.sirt <- function(matr,rn){ 
-	interval_index_C( matr , rn)
-					}	
+    interval_index_C( matr , rn)
+                    }    
 
 ##########################################################################
 # extract k smallest elements in a row of a matrix
@@ -50,10 +50,10 @@ rowKSmallest.sirt <- function( matr , K , break.ties=TRUE){
     # define integer matrix
     indexmatr <- matrix( 1:N2 , N1 , N2 , byrow=TRUE )
     # apply function for extracting k smallest elements
-	a1 <- rowKSmallest_C( matr , K , indexmatr , rM1)
-	## OUTPUT:					
-	## return List::create(_["smallval"]=SMALLVAL ,
-	##		              _["smallind"]=SMALLIND ) ;  					
+    a1 <- rowKSmallest_C( matr , K , indexmatr , rM1)
+    ## OUTPUT:                    
+    ## return List::create(_["smallval"]=SMALLVAL ,
+    ##                      _["smallind"]=SMALLIND ) ;                      
     return(a1)
 }
 ##########################################################################

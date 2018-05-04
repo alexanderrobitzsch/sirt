@@ -102,9 +102,9 @@ prmse.subscores.scales <- function( data , subscale ){
         mean.tot <- mean( rowSums(data) )
         var.tot <- var( rowSums( data ) )
          res <- list( "I" = I , "alpha" = alpha , 
-				"mean.tot" = mean.tot ,  "var.tot" = var.tot ,
-				"sample.size" = nrow(data) , 
-				"number.of.items" = I )
+                "mean.tot" = mean.tot ,  "var.tot" = var.tot ,
+                "sample.size" = nrow(data) , 
+                "number.of.items" = I )
         return(res)
             }
 

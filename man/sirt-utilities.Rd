@@ -30,7 +30,7 @@ Utility functions in \pkg{sirt}.
 \usage{
 # bounds entries in a vector
 bounds_parameters( pars , lower = NULL , upper = NULL)
-	
+    
 # improper density function which always returns a value of 1
 dimproper(x)
 
@@ -38,11 +38,11 @@ dimproper(x)
 ginverse_sym(A, eps= 1E-8)
 
 # hard thresholding function
-hard_thresholding(x, lambda)	
+hard_thresholding(x, lambda)    
 
 # soft thresholding function
 soft_thresholding(x, lambda)
-	
+    
 # power function x^a, like in Cpp
 pow(x, a)
 
@@ -76,12 +76,12 @@ sirt_summary_print_call(CALL)
 \item{pars}{Numeric vector}
 \item{lower}{Numeric vector}
 \item{upper}{Numeric vector}
-	\item{x}{Numeric vector or a matrix or a list}
-	\item{eps}{Numerical. Shrinkage parameter of eigenvalue in 
-	\code{ginverse_sym}}
-	\item{a}{Numeric vector}
-	\item{lambda}{Numeric value}
-	\item{A}{Matrix}
+    \item{x}{Numeric vector or a matrix or a list}
+    \item{eps}{Numerical. Shrinkage parameter of eigenvalue in 
+    \code{ginverse_sym}}
+    \item{a}{Numeric vector}
+    \item{lambda}{Numeric value}
+    \item{A}{Matrix}
     \item{y}{Matrix}
     \item{rho}{Numeric}
     \item{z}{Numeric}
@@ -103,12 +103,12 @@ sirt_summary_print_call(CALL)
 \examples{
 #############################################################################
 ## EXAMPLE 1: Trace of a matrix
-#############################################################################	
+#############################################################################    
 
 set.seed(86)
 A <- matrix( stats::runif(4) , 2 ,2 )
 tracemat(A)
-sum(diag(A))	# = sirt::tracemat(A)
+sum(diag(A))    # = sirt::tracemat(A)
 
 #############################################################################
 ## EXAMPLE 2: Power function
@@ -117,7 +117,7 @@ sum(diag(A))	# = sirt::tracemat(A)
 x <- 2.3
 a <- 1.7
 pow(x=x,a=a)
-x^a			# = sirt::pow(x,a)
+x^a            # = sirt::pow(x,a)
 
 #############################################################################
 ## EXAMPLE 3: Soft and hard thresholding function (e.g. in LASSO estimation)

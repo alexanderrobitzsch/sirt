@@ -2,7 +2,7 @@
 ## File Version: 0.14
 
 rasch.evm.pcm.dif <- function( b_evm , item , PARS_vcov , I , G , group.unique ,
-		dat , dat.resp ){
+        dat , dat.resp ){
    #********************************************************************
     difstats <- data.frame( "item" = colnames(dat) , "X2" = NA , "df" = NA , "p" = NA , "p.holm"=NA )  
    for (jj in 1:I){          
@@ -30,7 +30,7 @@ rasch.evm.pcm.dif <- function( b_evm , item , PARS_vcov , I , G , group.unique ,
         ivm <- solve( Rdesign.jj %*% varmat.jj %*% t(Rdesign.jj ) )
         difstats[jj,"X2"] <- ( t(d0) %*% ivm %*% d0 )[1,1]
         difstats[jj,"df"] <- nrow(Rdesign.jj)
-	
+    
     # compute item-wise DIF statistics
     difjj <- stats::aggregate( delta.jj , list( rep(1:G , each=nj) ) ,  mean )[,2]
     for (gg1 in 1:(G-1)){
@@ -39,8 +39,8 @@ rasch.evm.pcm.dif <- function( b_evm , item , PARS_vcov , I , G , group.unique ,
                             }
         }
 }
-	difstats$p <- 1 - stats::pchisq( difstats$X2 , df=difstats$df )
-	difstats$p.holm <- stats::p.adjust( difstats$p )               
-#	difstats$V <- sqrt( difstats$X2 / ( colSums( dat.resp ) * difstats$df ) )	
-	return(difstats)
+    difstats$p <- 1 - stats::pchisq( difstats$X2 , df=difstats$df )
+    difstats$p.holm <- stats::p.adjust( difstats$p )               
+#    difstats$V <- sqrt( difstats$X2 / ( colSums( dat.resp ) * difstats$df ) )    
+    return(difstats)
 }

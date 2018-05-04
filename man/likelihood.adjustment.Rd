@@ -82,7 +82,7 @@ Object of class \code{IRT.likelihood}.
 \references{
 Mislevy, R. (1990). Scaling procedures. In E. Johnson & R. Zwick (Eds.),
 \emph{Focusing the new design: The NAEP 1988 technical report} (ETS RR 19-20).
-Princeton, NJ: Educational Testing Service.	
+Princeton, NJ: Educational Testing Service.    
 }
 
 
@@ -105,7 +105,7 @@ Alexander Robitzsch
 \dontrun{
 #############################################################################
 # EXAMPLE 1: Adjustment of the likelihood | data.read
-#############################################################################	
+#############################################################################    
 
 library(CDM)
 library(TAM)

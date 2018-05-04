@@ -71,10 +71,10 @@ Maximum number of iterations
 Maximum parameter change of the optimization function
 }
 \item{fac.oldpar}{Convergence acceleration parameter between 0 and 1. 
-	This parameter defines the relative weight the previous parameter value
-	for the calculation of the parameter update.
-	The default is .85. But experiment with this value and study
-	the obtained results.
+    This parameter defines the relative weight the previous parameter value
+    for the calculation of the parameter update.
+    The default is .85. But experiment with this value and study
+    the obtained results.
 }
   \item{psi0.init}{
 An optional vector of initial \eqn{\psi_0} parameters
@@ -102,21 +102,21 @@ The alignment procedure searches means \eqn{\alpha_{g0}}
 and standard deviations \eqn{\psi_{g0}} using an alignment
 optimization function \eqn{F}. This function is defined as
 \deqn{F = \sum_i \sum_{ g_1 < g_2} w_{i,g1} w_{i,g2} 
-	f_\lambda( \lambda_{i g_1 ,1} - \lambda_{i g_2 ,1} )
-	+ \sum_i \sum_{ g_1 < g_2} w_{i,g1} w_{i,g2} 
+    f_\lambda( \lambda_{i g_1 ,1} - \lambda_{i g_2 ,1} )
+    + \sum_i \sum_{ g_1 < g_2} w_{i,g1} w_{i,g2} 
 f_\nu( \nu_{i g_1 ,1} - \nu_{i g_2 ,1} ) }
 where the aligned item parameters \eqn{\lambda_{i g ,1}}
 and \eqn{\nu_{i g ,1}} are defined such that
 
 \deqn{ \lambda_{i g ,1} = \lambda_{i g 0} / \psi_{g0} 
-	\qquad \mbox{and} \qquad 
-	\nu_{i g ,1} = \nu_{i g 0} -  \alpha_{g0} \lambda_{ig0} / \psi_{g0}
-			}
+    \qquad \mbox{and} \qquad 
+    \nu_{i g ,1} = \nu_{i g 0} -  \alpha_{g0} \lambda_{ig0} / \psi_{g0}
+            }
 and the optimization functions are defined as
 \deqn{ f_\lambda (x) = [ ( x/ a_\lambda )^2 + \varepsilon ]^{p_\lambda}
-	\qquad \mbox{and} \qquad
-	f_\nu (x) = [ ( x/ a_\nu )^2 + \varepsilon ]^{p_\nu}
-			}
+    \qquad \mbox{and} \qquad
+    f_\nu (x) = [ ( x/ a_\nu )^2 + \varepsilon ]^{p_\nu}
+            }
 using a small \eqn{ \varepsilon > 0} (e.g. .0001) to obtain
 a differentiable optimization function. 
 

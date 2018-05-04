@@ -6,20 +6,20 @@
 # Confirmatory DETECT analysis
 conf.detect <- function( data , score , itemcluster , bwscale = 1.1 , progress = TRUE ,
                             thetagrid = seq( -3,3,len=200)  ){
-	CALL <- match.call()
+    CALL <- match.call()
     cat("-----------------------------------------------------------\n" )
     cat("Confirmatory DETECT Analysis \n" ) ; flush.console()
     h1 <- is.matrix( score )
     if (h1){ 
-		PP <- ncol(score) 
-	}
-	is_one_score <- TRUE
+        PP <- ncol(score) 
+    }
+    is_one_score <- TRUE
     if (! h1  ){  
-		cat("Conditioning on 1 Score\n" )  
-	} else {
+        cat("Conditioning on 1 Score\n" )  
+    } else {
         cat(paste("Conditioning on ",PP, " Scores\n" , sep="") ) 
-		is_one_score <- FALSE
-	}
+        is_one_score <- FALSE
+    }
     cat(paste("Bandwidth Scale:" , bwscale , "\n" ) ) 
     utils::flush.console()
     if ( ! h1 ){
@@ -30,7 +30,7 @@ conf.detect <- function( data , score , itemcluster , bwscale = 1.1 , progress =
         ccovtable.list <- list()
         for (pp in 1:PP){
             cat( paste( "DETECT Calculation Score " , pp , "\n" , sep="") ) ; 
-			utils::flush.console()
+            utils::flush.console()
             ccovtable.list[[pp]] <- ccov.np( data , score = score[,pp], 
                                     bwscale = bwscale , progress= FALSE )
         }  
@@ -47,20 +47,20 @@ conf.detect <- function( data , score , itemcluster , bwscale = 1.1 , progress =
     }
     cat("-----------------------------------------------------------\n" )            
     if ( ! h1){   
-		res <- list(  "detect" = res , "ccovtable" = ccovtable , 
-					"detect.summary" = res ) 
-	} else {     
-		res <- list(  "detect" = detect.list , "ccovtable" = ccovtable.list , 
-			"detect.summary" = detect.summary ) 
-	}
-	res$is_one_score <- is_one_score
-	res$CALL <- CALL
-	res$bwscale <- bwscale
-	res$itemcluster <- itemcluster
-	#--- print
+        res <- list(  "detect" = res , "ccovtable" = ccovtable , 
+                    "detect.summary" = res ) 
+    } else {     
+        res <- list(  "detect" = detect.list , "ccovtable" = ccovtable.list , 
+            "detect.summary" = detect.summary ) 
+    }
+    res$is_one_score <- is_one_score
+    res$CALL <- CALL
+    res$bwscale <- bwscale
+    res$itemcluster <- itemcluster
+    #--- print
     print(round(res$detect.summary,3))
-	#--- return
-	class(res) <- "conf.detect"
+    #--- return
+    class(res) <- "conf.detect"
     return(res)
 }
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

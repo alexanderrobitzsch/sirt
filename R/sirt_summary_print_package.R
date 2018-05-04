@@ -3,5 +3,5 @@
 
 sirt_summary_print_package <- function(pack)
 {
-	cat( package_version_date(package=pack) , "\n" )
+    cat( package_version_date(package=pack) , "\n" )
 }

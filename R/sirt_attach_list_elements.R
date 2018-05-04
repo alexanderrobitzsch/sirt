@@ -3,8 +3,8 @@
 
 sirt_attach_list_elements <- function(x, envir)
 {
-	vars <- names(x)
-	for (vv in vars){
-		assign( vv , x[[ vv ]] , envir=envir )
-	}	
+    vars <- names(x)
+    for (vv in vars){
+        assign( vv , x[[ vv ]] , envir=envir )
+    }    
 }

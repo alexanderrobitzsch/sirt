@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.51
+%% File Version: 0.52
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -57,11 +57,11 @@ Specified SEM in \pkg{lavaan}. The function
 \code{\link[lavaan:sem]{lavaan::sem}} (\pkg{lavaan}) is used.
 }
 \item{type}{Type of estimated model. The default is \code{type="LSEM"} which means
-	that a local structural equation model is estimated.
-	A multiple group model with a discretized moderator as the 
-	grouping variable can be estimated with \code{type="MGM"}. In this
-	case, the breaks must be defined in \code{moderator.grid}.
-			}
+    that a local structural equation model is estimated.
+    A multiple group model with a discretized moderator as the 
+    grouping variable can be estimated with \code{type="MGM"}. In this
+    case, the breaks must be defined in \code{moderator.grid}.
+            }
   \item{h}{
 Bandwidth factor
 }
@@ -74,7 +74,7 @@ Vector with names of fit measures following the labels in \pkg{lavaan}
  standardized solution should be included as parameters in 
  the output using the
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution}}
-function. Standardized parameters are labelled as \code{std__}.
+function. Standardized parameters are labeled as \code{std__}.
 }
 \item{standardized_type}{Type of standardization if \code{standardized=TRUE}.
 The types are described in 
@@ -122,7 +122,7 @@ Further arguments to be passed to \code{\link[lavaan:sem]{lavaan::sem}} or
 \value{
 List with following entries
 \item{parameters}{Data frame with all parameters estimated at focal points of 
-	moderator}
+    moderator}
 \item{weights}{Data frame with weights at each focal point}
 \item{parameters_summary}{Summary table for estimated parameters}
 \item{parametersM}{Estimated parameters in matrix form. Parameters are in
@@ -148,8 +148,8 @@ residualization.}
 Hildebrandt, A., Luedtke, O., Robitzsch, A., Sommer, C., &
 Wilhelm, O. (2016). Exploring factor model parameters across continuous variables 
 with local structural equation models. 
-\emph{Multivariate Behavioral Research}, \bold{51}, 257-278.	
-	
+\emph{Multivariate Behavioral Research}, \bold{51}, 257-278.    
+    
 Hildebrandt, A., Wilhelm, O., & Robitzsch, A. (2009). Complementary and 
 competing factor analytic approaches for the investigation of measurement invariance. 
 \emph{Review of Psychology}, \bold{16}, 87-102.
@@ -177,8 +177,8 @@ Alexander Robitzsch, Oliver Luedtke, Andrea Hildebrandt
 \dontrun{
 #############################################################################
 # EXAMPLE 1: data.lsem01 | Age differentiation
-#############################################################################	
-	
+#############################################################################    
+    
 data(data.lsem01)
 dat <- data.lsem01
 
@@ -257,7 +257,7 @@ mod4 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.gr
 summary(mod4)
 # permutation test
 pmod1 <- sirt::lsem.permutationTest( mod4 , B=3 )    
-}	
+}    
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

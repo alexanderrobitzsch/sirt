@@ -4,7 +4,7 @@
 ###################################################################
 # computation of eigenvalues of many matrices
 eigenvalues.manymatrices <- function( Sigma.all , itermax=10 , maxconv=.001,
-	inverse=FALSE ){
+    inverse=FALSE ){
     D <- sqrt( ncol(Sigma.all) )
     N <- nrow( Sigma.all )
     lambda <- matrix( 0 , nrow=N , ncol=D )
@@ -24,18 +24,18 @@ eigenvalues.manymatrices <- function( Sigma.all , itermax=10 , maxconv=.001,
     # calculate determinant
     res$logdet <- rowSums( log( lambda ) )
     res$det <- exp( res$logdet )
-	# compute inverse matrix if required
-	if (inverse){
-		Sigma.inv <- 0*Sigma.all
-		for (dd in 1:D){
-		for (zz in 1:D){
-			#zz <- 1
-			#dd <- 1
-			z <- U[ , D*(dd-1) + 1:D  ]
-			Sigma.inv[ , D*(zz-1) + 1:D  ] <- Sigma.inv[ , D*(zz-1) + 1:D  ] + 1 / lambda[,dd] * z[,zz] * z
-						}}
-		res$Sigma.inv <- Sigma.inv
-			}
+    # compute inverse matrix if required
+    if (inverse){
+        Sigma.inv <- 0*Sigma.all
+        for (dd in 1:D){
+        for (zz in 1:D){
+            #zz <- 1
+            #dd <- 1
+            z <- U[ , D*(dd-1) + 1:D  ]
+            Sigma.inv[ , D*(zz-1) + 1:D  ] <- Sigma.inv[ , D*(zz-1) + 1:D  ] + 1 / lambda[,dd] * z[,zz] * z
+                        }}
+        res$Sigma.inv <- Sigma.inv
+            }
     return(res)
         }
 ###############################################################################

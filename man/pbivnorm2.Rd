@@ -32,7 +32,7 @@ Vector of correlations between random normal variates
 %%  ~~ If necessary, more details than the description above ~~
 %% }
 \value{
-Vector of probabilities	
+Vector of probabilities    
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}

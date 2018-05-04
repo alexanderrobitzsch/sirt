@@ -81,10 +81,10 @@ correlations.
 \item{pos.loading}{An optional logical indicating whether all entries in the
 loading matrix \eqn{\bold{F}} should be positive}
 \item{pos.variance}{An optional logical indicating whether all variances (i.e.
-	diagonal entries in \eqn{\bold{P}}) should be positive}
+    diagonal entries in \eqn{\bold{P}}) should be positive}
 \item{pos.residcorr}{An optional logical indicating whether all 
-	entries in the matrix of residual correlations \eqn{\bold{\Psi}} should
-	be positive}
+    entries in the matrix of residual correlations \eqn{\bold{\Psi}} should
+    be positive}
   \item{maxiter}{
 Maximum number of iterations
 }
@@ -106,7 +106,7 @@ are heavier penalized.
 %\item{what}{A character indicating whether the original estimates (\code{est})
 %or standardized estimates (\code{stand}) should be displayed.}
 %\item{efa.load.min}{Minimum absolute factor loading to be displayed in
-%	plot for exploratory factor analysis.
+%    plot for exploratory factor analysis.
 %}
 
 % For \code{plot.noharm.sirt},
@@ -212,8 +212,8 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-EAP person parameter estimates can be obtained by \code{\link{R2noharm.EAP}}.	
-	
+EAP person parameter estimates can be obtained by \code{\link{R2noharm.EAP}}.    
+    
 Model fit can be assessed by \code{\link{modelfit.sirt}}.
 
 See \code{\link{R2noharm}} for running the NOHARM software from within \R.
@@ -228,7 +228,7 @@ the link seems to be broken in the meanwhile).
 #############################################################################
 # EXAMPLE 1: Two-dimensional IRT model with 10 items
 #############################################################################
-		
+        
 #**** data simulation
 set.seed(9776)
 N <- 3400 # sample size
@@ -322,7 +322,7 @@ Ppatt <- Pval <- matrix(1,1,1)
 # estimate model
 mod1 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval )
 summary(mod1)
-plot(mod1)	# semPaths plot
+plot(mod1)    # semPaths plot
 
 #**** Model 2: Rasch model in which item pairs within a testlet are excluded
 wgtm <- matrix( 1 , I , I )

@@ -3,5 +3,5 @@
 
 sirt_colMaxs <- function(x)
 {
-	return( apply( x , 2 , max , na.rm=TRUE ) )
+    return( apply( x , 2 , max , na.rm=TRUE ) )
 }

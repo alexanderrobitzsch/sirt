@@ -22,9 +22,9 @@ data(data.noharm18)
 
 
 \format{
-	
-\itemize{	
-	
+    
+\itemize{    
+    
 \item  \code{data.noharmExC} \cr
 
 The format of this dataset is

@@ -61,9 +61,9 @@ A list with following entries
         in the list of arguments of this function.
         }
    \item{p.ia}{Matrix with expected item response, i.e.
-	the probabilities \eqn{P(X_{pi}=1|\theta_p ) = invlogit( \theta_p - b_i )}.
-			}
-   \item{wle}{WLE reliability (Adams, 2005)}			
+    the probabilities \eqn{P(X_{pi}=1|\theta_p ) = invlogit( \theta_p - b_i )}.
+            }
+   \item{wle}{WLE reliability (Adams, 2005)}            
 }
 
 

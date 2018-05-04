@@ -4,12 +4,12 @@
 #***************************************************************************************************
 # Equating (Linking) in the Rasch model
 equating.rasch <- function( x , y , theta = seq( -4 , 4 , len=100) ,
-		alpha1 = 0 , alpha2 = 0 ){
+        alpha1 = 0 , alpha2 = 0 ){
     # INPUT:
     # x ... data frame: 1st column Item labels group 1, 2nd column: item difficulties group 1
     # y ... data frame: 1st column Item labels group 2, 2nd column: item difficulties group 2
     # theta ... theta values where the test characteristic curves are evaluated
-	# alpha ... parameters for gernealized logistic distribution
+    # alpha ... parameters for gernealized logistic distribution
     #****************************
     # Data preparation 
     x[,1] <- gsub( " " , "" , paste( x[,1] ) )
@@ -20,31 +20,31 @@ equating.rasch <- function( x , y , theta = seq( -4 , 4 , len=100) ,
     #    b.xy <- b.xy[ rowSums( is.na( b.xy[,2:3] ) ) < 2 , ]
     # mean-mean method 
         B.mm <- mean(b.xy[,3]) - mean(b.xy[,2])
-	g1 <- .prob.raschtype.genlogis( theta = theta , b = b.xy[,2]  , alpha1 = 0 , alpha2 = 0 )
+    g1 <- .prob.raschtype.genlogis( theta = theta , b = b.xy[,2]  , alpha1 = 0 , alpha2 = 0 )
     # Haebara function
         ha <- function(B){
             sum( ( 1 / ( 1+  exp( outer( theta , b.xy[,2] , "-" )  ) ) - 1/ ( 1 + exp( outer( theta , b.xy[,3] - B , "-" ) ) ) )^2 )
             }
-		if ( abs( alpha1) + abs(alpha2) > 0 ){ 
-			ha <- function(B){ 
-				sum( ( .prob.raschtype.genlogis( theta = theta , b = b.xy[,2]  , alpha1 = alpha1 , alpha2 = alpha2 ) -
-						.prob.raschtype.genlogis( theta = theta , b = b.xy[,3] - B , alpha1 = alpha1 , alpha2 = alpha2 ) )^2 )
-											}
-								}
+        if ( abs( alpha1) + abs(alpha2) > 0 ){ 
+            ha <- function(B){ 
+                sum( ( .prob.raschtype.genlogis( theta = theta , b = b.xy[,2]  , alpha1 = alpha1 , alpha2 = alpha2 ) -
+                        .prob.raschtype.genlogis( theta = theta , b = b.xy[,3] - B , alpha1 = alpha1 , alpha2 = alpha2 ) )^2 )
+                                            }
+                                }
         B.ha <- stats::optimize(  ha , c(-4,4) )$minimum
     # Stocking and Lord Approach
         sl <- function(B){
             sum( ( rowSums( 1 / ( 1+  exp( outer( theta , b.xy[,2] , "-" )  ) )  - 
-							1/ ( 1 + exp( outer( theta , b.xy[,3] - B , "-" ) ) ) ) 
-											)^2 )
-							}
-		if ( abs( alpha1) + abs(alpha2) > 0 ){ 
-			sl <- function(B){ 
+                            1/ ( 1 + exp( outer( theta , b.xy[,3] - B , "-" ) ) ) ) 
+                                            )^2 )
+                            }
+        if ( abs( alpha1) + abs(alpha2) > 0 ){ 
+            sl <- function(B){ 
             sum( ( rowSums( .prob.raschtype.genlogis( theta = theta , b = b.xy[,2]  , alpha1 = alpha1 , alpha2 = alpha2 )   - 
-							.prob.raschtype.genlogis( theta = theta , b = b.xy[,3] - B , alpha1 = alpha1 , alpha2 = alpha2 ) 
-											) )^2 )
-											}
-								}						
+                            .prob.raschtype.genlogis( theta = theta , b = b.xy[,3] - B , alpha1 = alpha1 , alpha2 = alpha2 ) 
+                                            ) )^2 )
+                                            }
+                                }                        
         B.sl <- stats::optimize(  sl , c(-4,4) )$minimum
     # all parameter estimates    
     B.est <- data.frame( B.mm , B.ha , B.sl )
@@ -75,14 +75,14 @@ equating.rasch <- function( x , y , theta = seq( -4 , 4 , len=100) ,
 #-----------------------------------------------------------------------------------------------
 # Computation of linking error using Jackknife
 equating.rasch.jackknife <- function( pars.data , display = TRUE , se.linkerror = FALSE ,
-			alpha1=0 , alpha2 = 0 ){ 
+            alpha1=0 , alpha2 = 0 ){ 
         #.......................................................
-		# using generalized logistic model
-		#--------------------------------------------------------
+        # using generalized logistic model
+        #--------------------------------------------------------
         # first column: jackknife unit
         # second column: parameter first scale
         # third column: parameter second scale
-		# fourth column: item ?????
+        # fourth column: item ?????
         pars.data <- as.data.frame( stats::na.omit( pars.data ) )
         itemunits <- unique( pars.data[,1] )
         N.units <- length( itemunits )
@@ -90,7 +90,7 @@ equating.rasch.jackknife <- function( pars.data , display = TRUE , se.linkerror 
         pars.data[,4] <- paste("I" , 1:N.items,sep="")
         # display
         if (display == TRUE){ cat( paste( "Jackknife Equating Procedure (Stocking-Lord)\n" , 
-						N.items , " Items in ", N.units , " Units\n" , sep="") ) }
+                        N.items , " Items in ", N.units , " Units\n" , sep="") ) }
         # equating without jackknife
         mod1 <- equating.rasch( pars.data[ , c( 4 , 2) ] , pars.data[ , c(4, 3) ] )
         res1 <- data.frame( "unit" = itemunits , "shift" = 0 , "SD" = 0 , "linkerror" = 0)
@@ -111,7 +111,7 @@ equating.rasch.jackknife <- function( pars.data , display = TRUE , se.linkerror 
                                 #       ii <- itemunits.nn[1]
                                 pars.data1.ii <- pars.data1[ paste(pars.data1[,1]) != ii , ]           
                                 mod.ii <- equating.rasch( pars.data1.ii[ , c( 4 , 2) ] , pars.data1.ii[ , c(4, 3) ] ,
-											alpha1=alpha1 , alpha2=alpha2)
+                                            alpha1=alpha1 , alpha2=alpha2)
                                 l1 <- c(l1 , mod.ii$B.est$Stocking.Lord )
                                     }
                     res1[ nn , "linkerror"] <-  sqrt( ( N.units - 2 ) / ( N.units -1 ) * sum( ( l1 - res1[ nn , "shift" ]  )^2 ) )
@@ -119,7 +119,7 @@ equating.rasch.jackknife <- function( pars.data , display = TRUE , se.linkerror 
             # display progress
                 if (display == TRUE){
                     cat( paste( nn , " " , sep="" ) ) ; 
-					utils::flush.console()
+                    utils::flush.console()
                     if ( nn %% 10 == 0){ cat("\n") }
                                 }
                     }

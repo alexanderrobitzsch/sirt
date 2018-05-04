@@ -37,7 +37,7 @@ Display iteration progress?
 An optional vector of length \eqn{I} of item difficulties
 }
 \item{zerosum}{Optional logical indicating whether item difficulties
-	should be centered in each iteration. The default is that
+    should be centered in each iteration. The default is that
         no centering is conducted.}
   \item{object}{
 Object of class \code{rasch.pairwise}

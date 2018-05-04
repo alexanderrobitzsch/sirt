@@ -84,7 +84,7 @@ dat <- data.read
 mod <- sirt::rasch.mml2( dat )
 
 # estimate classification accuracy (3 levels)
-cutscores <- c( -1 , .3 )	# cut scores at theta=-1 and theta=.3
+cutscores <- c( -1 , .3 )    # cut scores at theta=-1 and theta=.3
 class.accuracy.rasch( cutscores=cutscores , b=mod$item$b , 
            meantheta=0 ,  sdtheta=mod$sd.trait ,
            theta.l=seq(-4,4,len=200 ) , n.sims=3000)

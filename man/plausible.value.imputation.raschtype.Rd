@@ -30,7 +30,7 @@ An optional matrix which contains the individual likelihood.
   \code{\link{rasch.copula2}}. The use of this argument allows the
   estimation of the latent regression model independent of the
   parameters of the used item response model.
-	}
+    }
 \item{X}{
 A matrix of individual covariates for the latent
 regression of \eqn{\theta} on \eqn{X}

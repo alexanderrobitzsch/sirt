@@ -111,7 +111,7 @@ dat <- data.read
 
 # calculate matrix of tetrachoric correlations
 dat.tetra <- psych::tetrachoric(dat)      # using tetrachoric from psych package
-dat.tetra2 <- sirt::tetrachoric2(dat)	   # using tetrachoric2 from sirt package
+dat.tetra2 <- sirt::tetrachoric2(dat)       # using tetrachoric2 from sirt package
 
 # perform parallel factor analysis
 fap <- psych::fa.parallel.poly(dat , n.iter = 1 )

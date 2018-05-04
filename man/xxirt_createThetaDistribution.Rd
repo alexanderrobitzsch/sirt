@@ -73,7 +73,7 @@ Alexander Robitzsch
 #############################################################################
 ## EXAMPLE 1: Definition of theta distribution
 #############################################################################
-	
+    
 #** theta grid
 Theta <- matrix( seq(-10,10,length=31) , ncol=1 )
 

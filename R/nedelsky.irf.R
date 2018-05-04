@@ -29,11 +29,11 @@ nedelsky.irf <- function( Theta , K , b , a , tau , combis ,
     combs <- combs / rowSums(combs)
     # calculate category probabilities
     probs <- prob.latclasses %*% combs
-	eps <- 1E-4
-	probs[ probs < 0 ] <- eps
-	probs[ probs > 1 ] <- 1 - eps 
-	probs <- probs + eps
-	probs <- probs / rowSums(probs )
+    eps <- 1E-4
+    probs[ probs < 0 ] <- eps
+    probs[ probs > 1 ] <- 1 - eps 
+    probs <- probs + eps
+    probs <- probs / rowSums(probs )
     res <- list("probs"=probs , "prob.latclasses"=prob.latclasses )
     return(res)
         }

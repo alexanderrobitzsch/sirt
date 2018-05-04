@@ -82,7 +82,7 @@ where \eqn{P( A_k = 1 | \theta )} are attribute response functions and
 \eqn{q_{ik}} are entries of the Q-matrix. Note that the multiplicative form
 can be rewritten by taking the logarithm
 \deqn{ \log P( X_i = 1  | \theta ) = 
-	\sum_{k=1}^K q_{ik} \log [ P( A_k = 1 | \theta ) ] }
+    \sum_{k=1}^K q_{ik} \log [ P( A_k = 1 | \theta ) ] }
 Evaluation item and attribute response functions on a grid of \eqn{\theta} values and 
 collecting these values in matrices \eqn{\bold{L}= \{ \log P( X_i = 1 ) | \theta ) \} }, 
 \eqn{\bold{Q}= \{ q_{ik} \} } and
@@ -136,7 +136,7 @@ functions are evaluated}
   
   Fischer, G. H. (1973). The linear logistic test model as an instrument 
   in educational research. \emph{Acta Psychologica}, \bold{37}, 359-374.
-	
+    
   Groemping, U. (2010). Inference with linear equality and inequality 
   constraints using \R: The package \pkg{ic.infer}.
   \emph{Journal of Statistical Software}, \bold{33(10)}, 1-31.  

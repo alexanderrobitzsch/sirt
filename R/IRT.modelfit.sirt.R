@@ -6,28 +6,28 @@
 # general model fit function for sirt objects
 IRT.modelfit.sirt <- function( object , mod ){
     res <- modelfit.sirt(object)
-	res$IRT.IC <- CDM::IRT.IC(object)
-	res$objname <- mod
-	class(res) <- paste0("IRT.modelfit." , class(object) )
-	return(res)
-		}
+    res$IRT.IC <- CDM::IRT.IC(object)
+    res$objname <- mod
+    class(res) <- paste0("IRT.modelfit." , class(object) )
+    return(res)
+        }
 ###########################################################
 # summary IRT.modelfit.xxx
 summary.IRT.modelfit.sirt <- function( object , ... ){
-	class(object) <- "modelfit.sirt"
-	summary(object)
-			}
-###########################################################			
+    class(object) <- "modelfit.sirt"
+    summary(object)
+            }
+###########################################################            
 
 ###########################################################
 # IRT.modelfit for objects of class rasch.mml
 IRT.modelfit.rasch.mml <- function( object , ... ){
-    cl <- paste(match.call())[2]	
+    cl <- paste(match.call())[2]    
     res <- IRT.modelfit.sirt( object , mod=cl )
-	return(res)	
-						}									
-summary.IRT.modelfit.rasch.mml <- summary.IRT.modelfit.sirt						
-###########################################################						
+    return(res)    
+                        }                                    
+summary.IRT.modelfit.rasch.mml <- summary.IRT.modelfit.sirt                        
+###########################################################                        
 # IRT.modelfit smirt
 IRT.modelfit.smirt <- IRT.modelfit.rasch.mml
 summary.IRT.modelfit.smirt <- summary.IRT.modelfit.sirt
@@ -45,30 +45,30 @@ summary.IRT.modelfit.gom <- summary.IRT.modelfit.sirt
 ###########################################################
 # summary IRT.modelfit2
 summary.IRT.modelfit.sirt2 <- function( object , ... ){
-	class(object) <- "tam.modelfit"
-	summary(object)
-			}
-###########################################################	
+    class(object) <- "tam.modelfit"
+    summary(object)
+            }
+###########################################################    
 
 ###########################################################
 # modelfit rm.facets
 IRT.modelfit.rm.facets <- function(object, ... ){
-	mod <- paste(match.call())[2]
-	data <- object$procdata$dat2.NA
-	probs <- object$probs
-	theta.k <- object$theta.k
-	f.qk.yi <- object$f.qk.yi
-	res <- modelfit.cor.poly( data , probs, theta.k , f.qk.yi )
-	res$IRT.IC <- CDM::IRT.IC(object)
-	res$objname <- mod
-	class(res) <- paste0("IRT.modelfit." , class(object) )
-	return(res)		
-		}
-summary.IRT.modelfit.rm.facets <- summary.IRT.modelfit.sirt2		
+    mod <- paste(match.call())[2]
+    data <- object$procdata$dat2.NA
+    probs <- object$probs
+    theta.k <- object$theta.k
+    f.qk.yi <- object$f.qk.yi
+    res <- modelfit.cor.poly( data , probs, theta.k , f.qk.yi )
+    res$IRT.IC <- CDM::IRT.IC(object)
+    res$objname <- mod
+    class(res) <- paste0("IRT.modelfit." , class(object) )
+    return(res)        
+        }
+summary.IRT.modelfit.rm.facets <- summary.IRT.modelfit.sirt2        
 ############################################################
-# model fit rm.sdt		
+# model fit rm.sdt        
 IRT.modelfit.rm.sdt <- IRT.modelfit.rm.facets
-summary.IRT.modelfit.rm.sdt <- summary.IRT.modelfit.sirt2		
+summary.IRT.modelfit.rm.sdt <- summary.IRT.modelfit.sirt2        
 ##########################################################
 
 
@@ -76,16 +76,16 @@ summary.IRT.modelfit.rm.sdt <- summary.IRT.modelfit.sirt2
 ###########################################################
 # modelfit xxirt
 IRT.modelfit.xxirt <- function(object, ... ){
-	mod <- paste(match.call())[2]
-	data <- as.matrix( object$dat )
-	probs <- object$probs_items
-	theta.k <- as.matrix(object$Theta)
-	f.qk.yi <- as.matrix(object$p.aj.xi)
-	res <- modelfit.cor.poly( data , probs, theta.k , f.qk.yi )
-	res$IRT.IC <- CDM::IRT.IC(object)
-	res$objname <- mod
-	class(res) <- paste0("IRT.modelfit." , class(object) )
-	return(res)		
-		}
-summary.IRT.modelfit.xxirt <- summary.IRT.modelfit.sirt2		
+    mod <- paste(match.call())[2]
+    data <- as.matrix( object$dat )
+    probs <- object$probs_items
+    theta.k <- as.matrix(object$Theta)
+    f.qk.yi <- as.matrix(object$p.aj.xi)
+    res <- modelfit.cor.poly( data , probs, theta.k , f.qk.yi )
+    res$IRT.IC <- CDM::IRT.IC(object)
+    res$objname <- mod
+    class(res) <- paste0("IRT.modelfit." , class(object) )
+    return(res)        
+        }
+summary.IRT.modelfit.xxirt <- summary.IRT.modelfit.sirt2        
 ############################################################

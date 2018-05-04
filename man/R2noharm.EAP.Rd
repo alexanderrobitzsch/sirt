@@ -35,7 +35,7 @@ A list with following entries
   their corresponding standard errors
     }
   \item{theta}{Grid of multidimensional theta values where the posterior is 
-  	evaluated.}
+      evaluated.}
   \item{posterior}{Individual posterior distribution evaluated at \code{theta}}
   \item{like}{Individual likelihood}
   \item{EAP.rel}{EAP reliabilities of all dimensions}

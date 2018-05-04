@@ -3,5 +3,5 @@
 
 sum0 <- function(x)
 {
-	sum(x, na.rm=TRUE)
+    sum(x, na.rm=TRUE)
 }

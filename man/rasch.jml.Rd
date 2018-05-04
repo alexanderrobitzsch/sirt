@@ -19,12 +19,12 @@ rasch.jml(dat, method = "MLE", b.init = NULL, constraints = NULL, weights = NULL
     bsteps = 4,thetasteps = 2, wle.adj = 0, jmliter = 100, prox = TRUE , 
     proxiter = 30, proxconv = 0.01, dp=NULL , theta.init = NULL , calc.fit=TRUE)
 
-\method{summary}{rasch.jml}(object,...)	    
+\method{summary}{rasch.jml}(object,...)        
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{dat}{An \eqn{N \times I} data frame of dichotomous item responses 
-  	where \eqn{N} indicates the number of persons
+      where \eqn{N} indicates the number of persons
 and \eqn{I} the number of items
 }
   \item{method}{
@@ -190,7 +190,7 @@ mod4 <- TAM::tam.jml2( resp=dat )
 library(mixRasch)
 mod5 <- mixRasch::mixRasch( dat, steps=1, n.c=1, max.iter=50)
 print(mod5)
-mod5$item.par	   # extract item parameters
+mod5$item.par       # extract item parameters
 
 #******
 # item parameter constraints in JML estimation

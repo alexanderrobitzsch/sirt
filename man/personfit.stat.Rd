@@ -54,11 +54,11 @@ and item \eqn{p} values}
 and item difficulties \code{b}}
 \item{U3}{Fit statistic \eqn{U_3}}
 }
-\references{	
+\references{    
 Karabatsos, G. (2003). Comparing the aberrant response detection performance 
 of thirty-six person-fit statistics. \emph{Applied Measurement in Education},
-\bold{16}, 277-298.	
-	
+\bold{16}, 277-298.    
+    
 Meijer, R. R., & Sijtsma, K. (2001). Methodology
 review: Evaluating person fit. \emph{Applied Psychological
 Measurement}, \bold{25}, 107-135.
@@ -74,8 +74,8 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See \code{\link{pcm.fit}} for person fit in the partial credit model.	
-	
+See \code{\link{pcm.fit}} for person fit in the partial credit model.    
+    
 See the \pkg{irtProb} and \pkg{PerFit} packages for person fit statistics
 and person response curves and functions included in other packages: 
 \code{\link[mirt:personfit]{mirt::personfit}},

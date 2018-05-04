@@ -40,7 +40,7 @@ An optional logical indicating whether the model
 should be estimated with \code{\link[mirt:mirt]{mirt::mirt}}
 }
 \item{poly.itemtype}{Item type for polytomous data. This can
-	be \code{gpcm} for the generalized partial credit model
+    be \code{gpcm} for the generalized partial credit model
       or \code{graded} for the graded response model.}
   \item{\dots}{
 Further arguments to be passed for estimation in
@@ -85,11 +85,11 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See \url{http://lavaan.ugent.be/} for \pkg{lavaan} resources.	
-	
+See \url{http://lavaan.ugent.be/} for \pkg{lavaan} resources.    
+    
 See \url{https://groups.google.com/forum/#!forum/lavaan}
-for discussion about the \pkg{lavaan} package. \cr	
-		
+for discussion about the \pkg{lavaan} package. \cr    
+        
 See \code{\link{mirt.wrapper}} for convenience wrapper functions
 for \code{\link[mirt:mirt]{mirt::mirt}} objects.
 
@@ -204,7 +204,7 @@ lavmodel <- "
      C4 | dg*t1
      B1 | 0*t1
      B3 | -1.4*t1   # fix item threshold of B3 to -1.4
-     A ~~ 1*A	    
+     A ~~ 1*A        
      B ~~ B         # estimate variance of B freely 
      C ~~ 1*C     
      A ~~ B         # estimate covariance between A and B
@@ -232,7 +232,7 @@ lavmodel <- "
      # fix item intercepts
      A1 | 0*t1
      A2 | -.4*t1
-     F ~ 1	# estimate mean of F
+     F ~ 1    # estimate mean of F
      F ~~ 1*F   # fix variance of F
             "
 # convert syntax and estimate model

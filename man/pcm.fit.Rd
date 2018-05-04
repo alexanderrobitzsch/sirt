@@ -79,10 +79,10 @@ parametrizations of the partial credit model.
 
 
 \examples{
-\dontrun{	
+\dontrun{    
 #############################################################################
 # EXAMPLE 1: Partial credit model
-#############################################################################	
+#############################################################################    
 
 data(data.Students,package="CDM")
 dat <- data.Students

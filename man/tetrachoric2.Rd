@@ -25,11 +25,11 @@ tetrachoric2(dat, method="Ol" , delta = 0.007, maxit = 1000000, cor.smooth=TRUE,
 A data frame of dichotomous response
 }
 \item{method}{Computation method for calculating the tetrachoric correlation.
-	The ML method is \code{method="Ol"} (which is the default), 
-	the Tucker method is \code{method="Tu"}, 
-	the Divgi method is \code{method="Di"}
-	the method of Bonett and 
-	Price (2005) is \code{method="Bo"}.}
+    The ML method is \code{method="Ol"} (which is the default), 
+    the Tucker method is \code{method="Tu"}, 
+    the Divgi method is \code{method="Di"}
+    the method of Bonett and 
+    Price (2005) is \code{method="Bo"}.}
   \item{delta}{
 The step parameter. It is set by default to \eqn{2^{-7}} 
 which is approximately .007.

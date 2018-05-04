@@ -21,8 +21,8 @@ mcmc.2pno(dat, weights=NULL , burnin = 500, iter = 1000, N.sampvalues = 1000,
 Data frame with dichotomous item responses
 }
 \item{weights}{
-	An optional vector with student sample weights
-		}
+    An optional vector with student sample weights
+        }
   \item{burnin}{
 Number of burnin iterations
 }
@@ -44,9 +44,9 @@ Should theta values be saved?
 The two-parameter normal ogive item response model with a probit link 
 function is defined by
 \deqn{ P(X_{pi} = 1 | \theta_p ) = \Phi ( a_i \theta_p - b_i )
-		\quad ,  \quad \theta_p \sim N(0,1) }
+        \quad ,  \quad \theta_p \sim N(0,1) }
 Note that in this implementation non-informative priors for the item
-parameters are chosen (Johnson & Albert, 1999, p. 195ff.).		
+parameters are chosen (Johnson & Albert, 1999, p. 195ff.).        
 }
 \value{
 A list of class \code{mcmc.sirt} with following entries:
@@ -64,8 +64,8 @@ A list of class \code{mcmc.sirt} with following entries:
   \item{deviance.chain}{Sampled values of Deviance values}  
   \item{EAP.rel}{EAP reliability}
   \item{person}{Data frame with EAP person parameter estimates for 
-  	  \eqn{\theta_p} and their corresponding posterior standard
-  	deviations}
+        \eqn{\theta_p} and their corresponding posterior standard
+      deviations}
   \item{dat}{Used data frame}
   \item{weights}{Used student weights}
   \item{\dots}{Further values}
@@ -95,7 +95,7 @@ A hierarchical version of this model can be estimated with
 \code{\link{mcmc.2pnoh}}.
 }
 \examples{
-\dontrun{	
+\dontrun{    
 #############################################################################
 # EXAMPLE 1: Dataset Reading
 #############################################################################

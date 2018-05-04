@@ -6,13 +6,13 @@
 #-----------------------------------------------------
 # nonparametric estimation of conditional covariance
 ccov.np <- function( data , score , bwscale = 1.1 , thetagrid = seq( -3,3,len=200) , 
-		progress=TRUE , scale_score = TRUE ){
+        progress=TRUE , scale_score = TRUE ){
             # number of Items I
             I <- ncol(data)
             # z-standardization of score
-			if ( scale_score ){
-				score <- scale( score )[,1]
-			}
+            if ( scale_score ){
+                score <- scale( score )[,1]
+            }
             # matrix of item response functions
             if (progress ){
                 cat("Pairwise Estimation of Conditional Covariances\n" )            
@@ -27,9 +27,9 @@ ccov.np <- function( data , score , bwscale = 1.1 , thetagrid = seq( -3,3,len=20
                 x <- score[ ! is.na( data[,ii] )  ]
                 y <- data[ ! is.na( data[,ii] ) , ii ]
                 icc.items[,ii] <- stats::ksmooth( x  , y , bandwidth = bwscale * length(x)^(-1/5)  , 
-							x.points = thetagrid , kernel="normal")$y
+                            x.points = thetagrid , kernel="normal")$y
                 if ( i < 20 ){ if ( ii == display[i] & progress ){ 
-							cat( paste( 5*i  , "% " , sep="" ) ) ; i <- i + 1 ; 
+                            cat( paste( 5*i  , "% " , sep="" ) ) ; i <- i + 1 ; 
                                                         if (i == 11){ cat("\n" ) }
                                                         utils::flush.console()} }
                 }
@@ -57,38 +57,38 @@ ccov.np <- function( data , score , bwscale = 1.1 , thetagrid = seq( -3,3,len=20
             ccor.matrix <- ccov.matrix <- prod.matrix <- matrix( 0 , nrow= length(thetagrid ) , ncol = FF )
             ii <- 1
             for (ff in 1:FF){
-				if (FF>20){
-					display <- seq( 1 , FF , floor( FF/20  ) )[ 2:20 ]
-				} else {
-					display <- seq(1,FF)
-				}
+                if (FF>20){
+                    display <- seq( 1 , FF , floor( FF/20  ) )[ 2:20 ]
+                } else {
+                    display <- seq(1,FF)
+                }
                 data.ff <- data[ , c( ccov.table[ff,1] , ccov.table[ff,2] ) ]
                 which.ff <- which( rowSums( is.na( data.ff ) ) == 0  )
                 data.ff <- data.ff[ which.ff , ]
 #                y <- data[ ! is.na( data[,ii] ) , ii ]     #       Bug: 2011-07-20
                 prod.matrix[,ff] <- stats::ksmooth( x = score[ which.ff]  , 
-										y = data.ff[,1]*data.ff[,2] , 
-										bandwidth = bwscale * length(which.ff)^(-1/5)  , 
-										x.points = thetagrid , kernel="normal")$y
+                                        y = data.ff[,1]*data.ff[,2] , 
+                                        bandwidth = bwscale * length(which.ff)^(-1/5)  , 
+                                        x.points = thetagrid , kernel="normal")$y
                 ccov.matrix[ , ff ] <- prod.matrix[,ff] -  icc.items[, ccov.table[ff,1] ] * 
-										icc.items[, ccov.table[ff,2] ]
+                                        icc.items[, ccov.table[ff,2] ]
                 if ( ii < 20 ){ 
-					if ( ff == display[ii] & progress ){ 
-						cat( paste( 5*ii  , "% " , sep="" ) )
-						ii <- ii + 1 
-						utils::flush.console()
+                    if ( ff == display[ii] & progress ){ 
+                        cat( paste( 5*ii  , "% " , sep="" ) )
+                        ii <- ii + 1 
+                        utils::flush.console()
                         if (ii == 11){ 
-							cat("\n" ) 
-						}
+                            cat("\n" ) 
+                        }
                     } 
-				}
+                }
             }
             # remove NAs from ccov.matrix
             ccov.matrix[ is.na( ccov.matrix) ] <- 0
             if ( progress ){ cat("\n") }
             # calculate (weighted) conditional covariance
             ccov.table$ccov <- apply( ccov.matrix , 2 , FUN = function(sp){ 
-						stats::weighted.mean( sp  , wgt.thetagrid ) } )
+                        stats::weighted.mean( sp  , wgt.thetagrid ) } )
             res <- list( "ccov.table" = ccov.table , "ccov.matrix" = ccov.matrix ,
                             "data" = data , "score" = score , "icc.items" = icc.items )
             return( res ) 

@@ -11,8 +11,8 @@ mirt_prodterms <- function (theta0, prodlist)
     for (i in 1L:length(prodlist)) {
         tmp <- prodlist[[i]]
         for (j in 1L:length(tmp)){
-			products[, i] <- products[, i] * theta0[, tmp[j]]
-		}
+            products[, i] <- products[, i] * theta0[, tmp[j]]
+        }
     }
     ret <- cbind(theta0, products)
     return(ret)

@@ -3,8 +3,8 @@
 
 sirt_summary_print_package_rsession <- function(pack)
 {
-    res <- TAM::tam_packageinfo(pack=pack)			
-	cat(res,"\n")
-	res <- TAM::tam_rsessinfo()
-	cat(res, "\n\n")
+    res <- TAM::tam_packageinfo(pack=pack)            
+    cat(res,"\n")
+    res <- TAM::tam_rsessinfo()
+    cat(res, "\n\n")
 }

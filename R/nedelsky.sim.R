@@ -32,7 +32,7 @@ nedelsky.sim <- function( theta , b , a=NULL , tau=NULL ){
         rn1 <- stats::runif(N)
         dat[,ii] <- rowIntervalIndex.sirt(matr=cprobs,rn=rn1) - 1
                     }
-	colnames(dat) <- paste0( "I" , 100+1:I )
+    colnames(dat) <- paste0( "I" , 100+1:I )
     return(dat)
         }
 ################################################################

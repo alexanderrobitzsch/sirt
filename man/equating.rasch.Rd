@@ -101,7 +101,7 @@ mod <- sirt::equating.rasch(x=pars[,c("item","study1")], y=pars[,c("item","study
 # The plink package is not available on CRAN anymore.
 # You can download the package with
 # utils::install.packages("plink", repos = "http://www2.uaem.mx/r-mirror")
-library(plink)	
+library(plink)    
 I <- nrow(pars)
 pm <- plink::as.poly.mod(I)
 # linking parameters

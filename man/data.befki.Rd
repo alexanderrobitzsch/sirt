@@ -29,7 +29,7 @@ data(data.befki_resp)
 
 
 \format{
-\itemize{	
+\itemize{    
 \item The dataset \code{data.befki} contains 11756 students, nested within
 581 classes.
 

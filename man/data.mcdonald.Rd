@@ -28,7 +28,7 @@ data(data.mcdonald.rape)
 
 
 \format{
-\itemize{	
+\itemize{    
 \item The format of the ACT15 data \code{data.mcdonald.act15} is: 
 
 \code{ num [1:15, 1:15] 0.49 0.44 0.38 0.3 0.29 0.13 0.23 0.16 0.16 0.23 ...} \cr
@@ -85,8 +85,8 @@ Psychology Press.
 \examples{
 \dontrun{
 #############################################################################
-# EXAMPLE 1: LSAT6 data	| Chapter 12 McDonald (1999)
-#############################################################################	
+# EXAMPLE 1: LSAT6 data    | Chapter 12 McDonald (1999)
+#############################################################################    
 data(data.mcdonald.act15)
 
 #************
@@ -151,8 +151,8 @@ mod1d <- sirt::smirt(dat, Qmatrix=F.pattern, est.a= matrix(1:I,I,1), c.init=rep(
 summary(mod1d)
 
 #############################################################################
-# EXAMPLE 2: ACT15 data	| Chapter 6 McDonald (1999)
-#############################################################################	
+# EXAMPLE 2: ACT15 data    | Chapter 6 McDonald (1999)
+#############################################################################    
 data(data.mcdonald.act15)
 pm <- data.mcdonald.act15
 
@@ -185,7 +185,7 @@ P.pattern <- matrix(0,3,3)
 P.init <- P.pattern
 diag(P.init) <- 1
 F.pattern <- matrix(0,15,3)
-F.pattern[,1] <- 1	# all items load on g factor
+F.pattern[,1] <- 1    # all items load on g factor
 F.pattern[ c(1:5,11:15),2] <- 1   # Items 1-5 and 11-15 load on first nested factor
 F.pattern[ c(6:10,11:15),3] <- 1  # Items 6-10 and 11-15 load on second nested factor
 F.init <- F.pattern

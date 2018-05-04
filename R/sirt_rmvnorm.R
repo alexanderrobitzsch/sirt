@@ -4,8 +4,8 @@
 
 sirt_rmvnorm <- function (n, mean=NULL, sigma, ...) 
 {
-	if (is.null(mean)){
-		mean <- rep(0,ncol(sigma) )
-	}	
-	CDM::CDM_rmvnorm( n=n, mean=mean, sigma = sigma )
+    if (is.null(mean)){
+        mean <- rep(0,ncol(sigma) )
+    }    
+    CDM::CDM_rmvnorm( n=n, mean=mean, sigma = sigma )
 }

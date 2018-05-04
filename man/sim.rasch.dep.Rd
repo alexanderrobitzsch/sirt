@@ -68,7 +68,7 @@ estimated with \code{\link{rasch.copula2}}, \code{\link{rasch.pairwise}} or
 #############################################################################
 # EXAMPLE 1: 11 Items: 2 itemclusters with 2 resp. 3 dependent items
 #             and 6 independent items
-#############################################################################	
+#############################################################################    
 
 set.seed(7654)
 I <- 11                             # number of items

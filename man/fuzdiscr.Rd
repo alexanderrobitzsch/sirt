@@ -44,7 +44,7 @@ In the present estimation problem of a discrete distribution,
 the parameters of interest are category probabilities
 \eqn{\theta_k = P( X = k)}. 
 
-The parameter estimation follows the evidential EM algorithm (Denoeux, 2013).	
+The parameter estimation follows the evidential EM algorithm (Denoeux, 2013).    
 }
 
 \value{
@@ -54,7 +54,7 @@ Vector of probabilities of the discrete distribution
 
 \references{
 Denoeux, T. (2011). Maximum likelihood estimation from fuzzy data using the 
-EM algorithm. \emph{Fuzzy Sets and Systems}, \bold{183}, 72-91.	
+EM algorithm. \emph{Fuzzy Sets and Systems}, \bold{183}, 72-91.    
 
 Denoeux, T. (2013). Maximum likelihood estimation from uncertain data 
 in the belief function framework. 

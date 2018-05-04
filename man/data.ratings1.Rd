@@ -24,8 +24,8 @@ data(data.ratings3)
 
 
 \format{
-	
-\itemize{	
+    
+\itemize{    
 \item Dataset \code{data.ratings1}: \cr
 
 Data frame with 274 observations containing 5 criteria (\code{k1}, ..., \code{k5}),
@@ -86,7 +86,7 @@ Data frame with 3169 observations containing 4 criteria (\code{crit2}, ..., \cod
 
 
 %\examples{
-%# include an example of rating data here	
-%}	
+%# include an example of rating data here    
+%}    
 
 \keyword{datasets}

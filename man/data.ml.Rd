@@ -19,7 +19,7 @@ data(data.ml1)
 data(data.ml2)
 }
 \format{
-\itemize{	
+\itemize{    
 \item  \code{data.ml1}
 
   A data frame with 2000 student observations in 100 classes on 17 variables.

@@ -25,7 +25,7 @@ data(data.bs07a)
 
 
 \format{
-\itemize{	
+\itemize{    
 \item The dataset \code{data.bs07a} contains the data 
 \emph{Gefechtsangst} (p. 130) and contains 8 of the original 9 items.
 The items are symptoms of anxiety in engagement. \cr
@@ -150,6 +150,6 @@ summary(mod7)
 
 #-- model comparison
 IRT.compareModels( mod1, mod2 , mod3 , mod4 , mod5 , mod6 , mod7 )
-}	
+}    
 }
 \keyword{datasets}

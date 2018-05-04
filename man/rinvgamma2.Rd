@@ -36,7 +36,7 @@ Prior variance
 %%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-A vector containing random draws or density values	
+A vector containing random draws or density values    
 }
 
 

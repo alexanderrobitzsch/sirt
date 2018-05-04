@@ -33,7 +33,7 @@ progress should be displayed.}
 A list with following entries
   \item{testlet.q3}{Data frame with average \eqn{Q_3} statistics within testlets}
   \item{testlet.q3.korr}{Matrix of average \eqn{Q_3} statistics within and 
-  	between testlets}
+      between testlets}
 }
 \references{
 Yen, W. M. (1984). Effects of local item dependence on the fit and equating 

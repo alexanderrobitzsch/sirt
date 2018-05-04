@@ -41,7 +41,7 @@ A data frame with following variables:
 
 \item{itemnr}{Numeric index of the item}
 \item{sortDIFindex}{Rank of item with respect to the uniform DIF
-	(from negative to positive values)
+    (from negative to positive values)
 }
 \item{item}{Item name}
 \item{N}{Sample size per item}
@@ -59,10 +59,10 @@ A data frame with following variables:
 \item{t.uniformDIF}{The \eqn{t} value for uniform DIF}
 \item{sig.uniformDIF}{Significance label for uniform DIF}
 \item{DIF.ETS}{DIF classification according to the ETS classification
-	system (see Details)
+    system (see Details)
 }
 \item{uniform.EBDIF}{Empirical Bayes estimate of uniform DIF (Longford,
-	Holland & Thayer, 1993) which takes degree of DIF standard error
+    Holland & Thayer, 1993) which takes degree of DIF standard error
         into account}
 \item{DIF.SD}{Value of the DIF standard deviation}
 \item{nonuniformDIF}{Nonuniform DIF estimate}
@@ -76,7 +76,7 @@ A data frame with following variables:
 Longford, N. T., Holland, P. W., & Thayer, D. T. (1993).
 Stability of the MH D-DIF statistics across populations.
 In P. W. Holland & H. Wainer (Eds.). \emph{Differential
-Item Functioning} (pp. 171-196). Hillsdale, NJ: Erlbaum.	
+Item Functioning} (pp. 171-196). Hillsdale, NJ: Erlbaum.    
 
 Monahan, P. O., McHorney, C. A., Stump, T. E., & Perkins, A. J. (2007). 
 Odds ratio, delta, ETS classification, and standardization measures of 

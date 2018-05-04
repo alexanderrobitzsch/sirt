@@ -30,7 +30,7 @@ rasch.pml3(dat, est.b = seq(1, ncol(dat)), est.a=rep(0,ncol(dat)) ,
     glob.conv = 10^(-6), conv1 = 10^(-4), pmliter = 300, progress = TRUE,
     use.maxincrement=TRUE )  
     
-\method{summary}{rasch.pml}(object,...)	    
+\method{summary}{rasch.pml}(object,...)        
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -87,17 +87,17 @@ to \code{NULL}.\cr
 If some error correlations are estimated, then no itempairs in
 \code{itemcluster} can be excluded from the pairwise modeling.
 }
-% 	err.constraintM=NULL , err.constraintV=NULL ,
+%     err.constraintM=NULL , err.constraintV=NULL ,
 \item{err.constraintM}{
 An optional \eqn{P \times L} matrix where \eqn{P} denotes
 the number of item pairs in pseudolikelihood estimation
 and \eqn{L} is the number of linear constraints for residual
 correlations (see Details). 
-		}
+        }
 \item{err.constraintV}{
 An optional \eqn{L \times 1} matrix with specified values
 for linear constraints on residual correlations (see Details).
-		}
+        }
   \item{glob.conv}{
 Global convergence criterion
 }
@@ -111,8 +111,8 @@ Maximum number of iterations
 Display progress?
 }
 \item{use.maxincrement}{Optional logical whether increments in 
-	slope parameters should be controlled in size in iterations.
-	The default is \code{TRUE}.
+    slope parameters should be controlled in size in iterations.
+    The default is \code{TRUE}.
 }
   \item{object}{
 Object of class \code{rasch.pml}
@@ -124,7 +124,7 @@ Further arguments to be passed
 \details{
 The probit item response model can be estimated with this function:
 \deqn{P(X_{pi}=1|\theta_p ) = \Phi( a_i  \theta_p - b_i ) \quad , \quad 
-	\theta_p \sim N ( 0 , \sigma^2 )}{%
+    \theta_p \sim N ( 0 , \sigma^2 )}{%
 P(X_pi=1|\theta_p ) = \Phi( a_i  \theta_p - b_i ) , \theta_p ~ N ( 0 , \sigma^2 )
     }
 where \eqn{\Phi} denotes the normal distribution function. This model can
@@ -163,13 +163,13 @@ information criterion \code{PLIC})}
 \item{itempairs}{Estimated statistics of item pairs}
 \item{error.corr}{Estimated error correlation matrix}
 \item{eps.corr}{
-	Vectorized error correlation matrix
-		}
+    Vectorized error correlation matrix
+        }
 \item{omega.rel}{
-	Reliability of the sum score according to Green and Yang (2009).
-	If some item pairs are excluded in the estimation, the residual
-	correlation for these item pairs is assumed to be zero.
-		}
+    Reliability of the sum score according to Green and Yang (2009).
+    If some item pairs are excluded in the estimation, the residual
+    correlation for these item pairs is assumed to be zero.
+        }
 
 \item{\dots}{}
 }
@@ -177,7 +177,7 @@ information criterion \code{PLIC})}
 Green, S. B., & Yang, Y. (2009). Reliability of summed item 
 scores using structural equation modeling: An alternative to 
 coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167.
-	
+    
 Neuhaus, W. (1996). Optimal estimation under
 linear constraints. \emph{Astin Bulletin}, \bold{26}, 233-245. 
 
@@ -318,9 +318,9 @@ mod3 <- sirt::rasch.pml3( dat , error.corr = error.corr )
 #**********
 # simulate some data
 set.seed(554)
-N <- 500	# persons
-I <- 10		# items
-theta <- stats::rnorm(N,sd=1.3 )	# trait SD of 1.3
+N <- 500    # persons
+I <- 10        # items
+theta <- stats::rnorm(N,sd=1.3 )    # trait SD of 1.3
 b <- seq(-2 , 2 , length=I) # item difficulties
 
 # simulate data from the Rasch model

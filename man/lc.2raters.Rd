@@ -101,7 +101,7 @@ in the presence of high agreement.
 
 Gwet, K. L. (2010). \emph{Handbook of Inter-Rater Reliability}.
 Advanced Analytics, Gaithersburg. \url{http://www.agreestat.com/}
-	
+    
 Uebersax, J. S., & Grove, W. M. (1990). Latent class analysis of diagnostic 
 agreement. \emph{Statistics in Medicine}, \bold{9}, 559-572.
 }
@@ -143,7 +143,7 @@ summary(mod2)
 
 #*** Model 3: one item with eight categories
 mod3 <- sirt::lc.2raters( data.si05$Ex3)
-summary(mod3)	
+summary(mod3)    
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

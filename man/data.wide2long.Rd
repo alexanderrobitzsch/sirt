@@ -23,10 +23,10 @@ Data frame with item responses and a person identifier if
 An optional string with the variable name of the person identifier.
 }
   \item{X}{Data frame with person covariates for inclusion in the
-  	  data frame of long format
+        data frame of long format
 }
   \item{Q}{Data frame with item predictors. Item labels must be included
-  	  as a column named by \code{"item"}.
+        as a column named by \code{"item"}.
 }
 }
 %\details{

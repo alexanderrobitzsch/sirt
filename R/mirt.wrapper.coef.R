@@ -13,7 +13,7 @@ mirt.wrapper.coef <- function (mirt.obj)
         for (ii in 1:I) {
             cii <- coefmirt[[ii]]
             # cii <- cii@par
-			cii <- cii["par",]
+            cii <- cii["par",]
             itempars <- unique(c(itempars, names(cii)))
         }
         itempars <- sort(itempars)
@@ -26,7 +26,7 @@ mirt.wrapper.coef <- function (mirt.obj)
         for (ii in 1:I) {
             cii <- coefmirt[[ii]]
             # cii <- cii@par
-			cii <- cii["par",]
+            cii <- cii["par",]
             dfr[ii, names(cii)] <- cii
         }
         rownames(dfr) <- NULL
@@ -37,12 +37,12 @@ mirt.wrapper.coef <- function (mirt.obj)
        #     dfr$u <- stats::plogis(dfr$u)
        # }
         # h1 <- mirt.obj@pars
-		h1 <- coef(mirt.obj)
+        h1 <- coef(mirt.obj)
         h1 <- h1[[I + 1]]
         # h2 <- h1@par
-		h2 <- h1["par",]
+        h2 <- h1["par",]
         # names(h2) <- names(h1@est)
-		# names(h2) <- 
+        # names(h2) <- 
         res <- list(coef = dfr, GroupPars = h2)
     }
     if (class(mirt.obj) == "MultipleGroupClass") {

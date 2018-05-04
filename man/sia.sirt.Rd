@@ -63,7 +63,7 @@ A list with following entries
   \item{graph.edges}{Vector containing all edges of the graph, e.g. for
   the \pkg{Rgraphviz} package.}
   \item{igraph.matr}{Matrix containing all arrows for the \pkg{igraph}
-  	package.}
+      package.}
   \item{igraph.obj}{An object of the graph for the \pkg{igraph} package.}
   
 }

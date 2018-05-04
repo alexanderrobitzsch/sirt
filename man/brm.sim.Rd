@@ -63,20 +63,20 @@ corresponding the transformed value in \eqn{[0,1]}, namely
 \eqn{ q (k) = 1/(2 \cdot K) , 1/(2 \cdot K) + 1/K , \ldots ,  1 - 1/(2 \cdot K) }.
 The item response model is defined as
 \deqn{ P( X_{pi}= x_{pi} | \theta_p)  \propto
-	  q( x_{pi} )^{ m_{pi} - 1 } [ 1- q( x_{pi} ) ]^{ n_{pi} - 1 } }
+      q( x_{pi} )^{ m_{pi} - 1 } [ 1- q( x_{pi} ) ]^{ n_{pi} - 1 } }
 This density is a discrete version of a Beta distribution with
 shape parameters \eqn{m_{pi}} and \eqn{n_{pi}}. These parameters are
 defined as
 \deqn{ m_{pi} = \mathrm{exp} \left[ ( \theta_p - \delta_i + \tau_i ) / 2 \right]
-	\qquad \mbox{and} \qquad
-	n_{pi} = \mathrm{exp} \left[ ( - \theta_p + \delta_i + \tau_i ) / 2 \right]
-				}
+    \qquad \mbox{and} \qquad
+    n_{pi} = \mathrm{exp} \left[ ( - \theta_p + \delta_i + \tau_i ) / 2 \right]
+                }
 
 The item response function can also be formulated as
 \deqn{ \mathrm{log} \left[ P( X_{pi}= x_{pi} | \theta_p) \right]  \propto
-	  ( m_{pi} - 1 ) \cdot \mathrm{log} [ q( x_{pi} ) ] +  
-	  ( n_{pi} - 1 )  \cdot \mathrm{log} [ 1- q( x_{pi} ) ]
-	  				}
+      ( m_{pi} - 1 ) \cdot \mathrm{log} [ q( x_{pi} ) ] +  
+      ( n_{pi} - 1 )  \cdot \mathrm{log} [ 1- q( x_{pi} ) ]
+                      }
 
 The item parameters can be reparameterized as 
 \eqn{ a_{i} = \mathrm{exp} \left[ ( - \delta_i + \tau_i ) / 2 \right]} and
@@ -88,16 +88,16 @@ Then, the original item parameters can be retrieved by
 Using \eqn{ \gamma _p = \mathrm{exp} ( \theta_p / 2) }, we obtain
 
 \deqn{ \mathrm{log} \left[ P( X_{pi}= x_{pi} | \theta_p) \right]  \propto
-	   a_{i} \gamma_p  \cdot \mathrm{log} [ q( x_{pi} ) ] +  
-	   b_i / \gamma_p   \cdot \mathrm{log} [ 1- q( x_{pi} ) ] -
-	  \left[ \mathrm{log} q( x_{pi} ) + \mathrm{log} [ 1- q( x_{pi} ) ] \right]
-	  				}	  				
+       a_{i} \gamma_p  \cdot \mathrm{log} [ q( x_{pi} ) ] +  
+       b_i / \gamma_p   \cdot \mathrm{log} [ 1- q( x_{pi} ) ] -
+      \left[ \mathrm{log} q( x_{pi} ) + \mathrm{log} [ 1- q( x_{pi} ) ] \right]
+                      }                      
 
 This formulation enables the specification of the Beta item response
 model as a structured latent class model 
 (see \code{\link[TAM:tam.mml.3pl]{TAM::tam.mml.3pl}};
 Example 1).
-	  				
+                      
 See Smithson and Verkuilen (2006) for motivations for treating
 continuous indicators not as normally distributed variables.
 }
@@ -112,11 +112,11 @@ A matrix of item response probabilities if \code{brm.irf} is applied.
 }
 
 
-\references{	
+\references{    
 Gruen, B., Kosmidis, I., & Zeileis, A. (2012). Extended Beta regression
 in \R: Shaken, stirred, mixed, and partitioned.
 \emph{Journal of Statistical Software}, \bold{48(11)}, 1-25.
-	
+    
 Noel, Y., & Dauvier, B. (2007). A beta item response model for continuous 
 bounded responses. \emph{Applied Psychological Measurement}, 
 \bold{31(1)}, 47-73.
@@ -146,12 +146,12 @@ regression models in \R (Gruen, Kosmidis & Zeileis, 2012).
 #############################################################################
 # EXAMPLE 1: Simulated data beta response model
 #############################################################################
-	
+    
 #*** (1) Simulation of the beta response model
 # Table 3 (p. 65) of Noel and Dauvier (2007)
 delta <- c( -.942 , -.649 , -.603 , -.398 , -.379 , .523 , .649 , .781 , .907 )
 tau <- c( .382 , .166 , 1.799 , .615 , 2.092, 1.988 , 1.899 , 1.439 , 1.057 )           
-K <- 5		# number of categories for discretization
+K <- 5        # number of categories for discretization
 N <- 500        # number of persons
 I <- length(delta) # number of items
 
@@ -208,7 +208,7 @@ summary(mod1)
 coef(mod1)
 # estimated coefficients and comparison with simulated data
 cbind( sirt::mirt.wrapper.coef( mod1 )$coef , delta , tau )
-mirt.wrapper.itemplot(mod1 ,ask=TRUE)	
+mirt.wrapper.itemplot(mod1 ,ask=TRUE)    
 
 #---------------------------
 # estimate beta item response model in TAM

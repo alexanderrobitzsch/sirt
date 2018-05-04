@@ -23,7 +23,7 @@ R2noharm(dat=NULL,pm=NULL , n=NULL , model.type, weights=NULL , dimensions = NUL
       P.pattern = NULL, P.init = NULL, digits.pm = 4, writename = NULL, 
       display.fit = 5,  dec = ".", display = TRUE)
 
-\method{summary}{R2noharm}(object, logfile=NULL , \dots)	    
+\method{summary}{R2noharm}(object, logfile=NULL , \dots)        
 }
 %- maybe also 'usage' for other objects documented here.
 
@@ -230,7 +230,7 @@ F.init <- 1 + 0*F.pattern       #
 mod <- sirt::R2noharm( dat = dat , model.type="CFA" ,  
            F.pattern = F.pattern , F.init = F.init , P.pattern = P.pattern ,
            P.init = P.init , writename = "ex1__1dim_1pl" , 
-	   noharm.path = noharm.path , dec ="," )
+       noharm.path = noharm.path , dec ="," )
 # summary
 summary(mod , logfile="ex1__1dim_1pl__SUMMARY")
 # jackknife
@@ -416,7 +416,7 @@ pm <- scan()
     0.547 0.474 0.347 0.233 0.132 0.563 0.524 0.579
     0.329 0.290 0.190 0.140 0.087 0.333 0.308 0.252 0.348
 
-I <- 9	# number of items
+I <- 9    # number of items
 # define loading matrix
 F.pattern <- matrix(0,I,2)
 F.pattern[1:5,1] <- 1

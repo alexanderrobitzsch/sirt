@@ -203,8 +203,8 @@ is defined by
 \deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i ) 
 \frac{ \exp \left( \sum_l ( a_{il}  q_{il} \theta_{pl} - b_{il} ) \right) }
 {  \mu_i \prod_l ( 1 + \exp ( a_{il}  q_{il} \theta_{pl} - b_{il} ) ) + 
-	( 1- \mu_i) ( 1 + \exp \left( \sum_l  ( a_{il}  q_{il} \theta_{pl} - b_{il} ) \right) ) 
-		} }
+    ( 1- \mu_i) ( 1 + \exp \left( \sum_l  ( a_{il}  q_{il} \theta_{pl} - b_{il} ) \right) ) 
+        } }
 with item parameters \eqn{\mu_i} indicating the degree of compensatory.
 \eqn{\mu_i=1} indicates a noncompensatory model while \eqn{\mu_i=0}
 indicates a (fully) compensatory model.
@@ -218,8 +218,8 @@ A list with following entries:
 \item{ic}{Information criteria}
 \item{item}{Data frame with item parameters}
 \item{person}{Data frame with person parameters. It includes
-	the person mean of all item responses (\code{M}; percentage correct
-	of all non-missing items), the
+    the person mean of all item responses (\code{M}; percentage correct
+    of all non-missing items), the
 EAP estimate and its corresponding standard error for all dimensions
 (\code{EAP} and \code{SE.EAP}) and the maximum likelihood estimate
 as well as the mode of the posterior distribution (\code{MLE} and \code{MAP}).}
@@ -260,12 +260,12 @@ Monte Carlo. \emph{Applied Psychological Measurement}, \bold{27}, 395-414.
 
 Gonzalez, J., Tuerlinckx, F., De Boeck, P., & Cools, R. (2006). 
 Numerical integration in logistic-normal models. 
-\emph{Computational Statistics & Data Analysis}, \bold{51}, 1535-1548.	
+\emph{Computational Statistics & Data Analysis}, \bold{51}, 1535-1548.    
 
 Pan, J., & Thompson, R. (2007). Quasi-Monte Carlo estimation in
 generalized linear mixed models. \emph{Computational Statistics &
 Data Analysis}, \bold{51}, 5765-5775.
-	
+    
 Reckase, M.D. (2009). \emph{Multidimensional Item Response Theory}.
 New York: Springer.
 
@@ -286,7 +286,7 @@ Alexander Robitzsch
 See the \code{\link[mirt:mirt]{mirt::mirt}} and 
 \code{itemtype="partcomp"} for estimating noncompensatory item response models
 using the \pkg{mirt} package. See also \code{\link[mirt:mixedmirt]{mirt::mixedmirt}}.
-	
+    
 Other multidimensional IRT models can also be estimated
 with \code{\link{rasch.mml2}} and \code{\link{rasch.mirtlc}}.
 
@@ -306,8 +306,8 @@ set.seed(997)
 #     item response model
 #   -> increase number of iterations in all models!
 
-N <- 1000	# number of persons
-I <- 10		# number of items
+N <- 1000    # number of persons
+I <- 10        # number of items
 theta0 <- rnorm( N , sd= 1 )
 theta1 <- theta0 + rnorm(N , sd = .7 )
 theta2 <- theta0 + rnorm(N , sd = .7 )
@@ -387,7 +387,7 @@ summary(mod7)
 
 #***
 # Model 8: Compensatory model with within item dimensionality
-# 		assuming zero correlation between dimensions
+#         assuming zero correlation between dimensions
 variance.fixed <- as.matrix( cbind( 1,2,0) )
 # set the covariance between the first and second dimension to zero
 mod8 <- sirt::smirt(dat,Qmatrix=Q , irtmodel="comp" , variance.fixed=variance.fixed ,
@@ -427,7 +427,7 @@ summary(mod9)
 # Model 10: Two-dimensional item response model with latent interaction
 #           between dimensions
 theta.k <- seq( - 6 , 6 , len=15 )
-theta.k <- expand.grid( theta.k , theta.k )	# expand theta to 2 dimensions
+theta.k <- expand.grid( theta.k , theta.k )    # expand theta to 2 dimensions
 # define design matrix
 theta.kDES <- cbind( theta.k , theta.k[,1]*theta.k[,2] )
 # define Q-matrix
@@ -510,7 +510,7 @@ summary(mod4)
 
 #**** simulate data
 set.seed(7656)
-I <- 10		 # number of items
+I <- 10         # number of items
 N <- 2000        # number of subjects
 Q <- matrix( 0 , 3*I,2)  # Q-matrix
 Q[1:I,1] <- 1

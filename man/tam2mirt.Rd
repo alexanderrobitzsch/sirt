@@ -77,7 +77,7 @@ syntax to \code{mirt} syntax.
 
 
 \examples{
-\dontrun{	
+\dontrun{    
 library(TAM)
 library(mirt)
 

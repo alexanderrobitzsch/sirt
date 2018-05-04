@@ -30,8 +30,8 @@ in the order: study name, item name, \eqn{a} parameter, \eqn{b} parameter.
 The fifth column is an optional weight for every item and every study.
 }
 \item{personpars}{A list with vectors (e.g. EAPs or WLEs) or data frames
-	(e.g. plausible values) containing person parameters which
-	should be transformed.
+    (e.g. plausible values) containing person parameters which
+    should be transformed.
 If a data frame in each list entry has \code{se} or \code{SE}
 (standard error) in a column name, then the corresponding
 column is only multiplied by \eqn{A_t}.
@@ -118,7 +118,7 @@ A list with following entries
   \item{transf.personpars}{Data frame with linear transformation functions
   for person parameters}  
   \item{joint.itempars}{Estimated joint item parameters \eqn{a_i} and \eqn{b_i}
-  	}
+      }
   \item{a.trans}{Transformed \eqn{a_{it}} parameters}
   \item{b.trans}{Transformed \eqn{b_{it}} parameters}
   \item{a.orig}{Original \eqn{a_{it}} parameters}
@@ -127,8 +127,8 @@ A list with following entries
   \item{b.resid}{Residual \eqn{b_{it}} parameters (DIF parameters}  
   \item{personpars}{Transformed person parameters}
   \item{es.invariance}{Effect size measures of invariance,
-  	  separately for item slopes and intercepts.
-  	  In the rows, \eqn{R^2} and \eqn{\sqrt{1-R^2}}
+        separately for item slopes and intercepts.
+        In the rows, \eqn{R^2} and \eqn{\sqrt{1-R^2}}
           are reported.}
   \item{es.robust}{Effect size measures of invariance based on
   robust estimation (if used).}
@@ -145,7 +145,7 @@ A list with following entries
 Asparouhov, T., & Muthen, B. (2014).
 Multiple-group factor analysis alignment.
 \emph{Structural Equation Modeling}, \bold{21}, 1-14.
-	
+    
 Battauz, M. (2016). Multiple equating of separate IRT calibrations. 
 \emph{Psychometrika, xx}, xxx-xxx.    
                                      
@@ -259,7 +259,7 @@ mod2 <- sirt::linking.haberman( itempars= itempartable )
 # EXAMPLE 3: 2 Studies - 1PL and 2PL linking 
 #############################################################################
 set.seed(789)
-I <- 20		# number of items
+I <- 20        # number of items
 N <- 2000       # number of persons
 # define item parameters
 b <- seq( -1.5 , 1.5 , length=I )

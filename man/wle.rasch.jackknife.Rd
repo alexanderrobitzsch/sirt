@@ -101,7 +101,7 @@ wle2 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh )
 wle3 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh , 
            testlet = substring( colnames(dat),1,1) )
   ## WLE Reliability = 0.572 
-		
+        
 # SE(WLE) for item strata A,B, C
 wle4 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh , 
              stratum = substring( colnames(dat),1,1) )
@@ -126,7 +126,7 @@ colnames(a2) <- c("wle" , "se.simple")
 a2$se.testlet <- stats::aggregate( wle3$wle$wle.jackse , list( wle3$wle$wle) , mean )[,2]
 a2$se.strata <- stats::aggregate( wle4$wle$wle.jackse , list( wle4$wle$wle) , mean )[,2]
 a2$se.finitepop.strata <- stats::aggregate( wle5$wle$wle.jackse , 
-	list( wle5$wle$wle) , mean )[,2]
+    list( wle5$wle$wle) , mean )[,2]
 round( a2 , 3 )
   ## > round( a2 , 3 )
   ##       wle se.simple se.testlet se.strata se.finitepop.strata

@@ -74,8 +74,8 @@ Should theta values be saved?
 The testlet response model for person \eqn{p} at item \eqn{i} 
 is defined as 
 \deqn{ P(X_{pi} = 1 ) = c_i + ( 1 - c_i ) 
-		\Phi ( a_i \theta_p + \gamma_{p,t(i)} + b_i	) \quad , \quad
-	\theta_p \sim N ( 0  ,1 ) , \gamma_{p,t(i)} \sim N( 0 , \sigma^2_t ) }
+        \Phi ( a_i \theta_p + \gamma_{p,t(i)} + b_i    ) \quad , \quad
+    \theta_p \sim N ( 0  ,1 ) , \gamma_{p,t(i)} \sim N( 0 , \sigma^2_t ) }
 
 In case of \code{est.slope=FALSE}, all item slopes \eqn{a_i} are set to 1. Then
 a variance \eqn{\sigma^2} of the \eqn{\theta_p} distribution is estimated
@@ -87,7 +87,7 @@ set to 0.
 After fitting the testlet model, marginal item parameters are calculated (integrating
 out testlet effects \eqn{\gamma_{p,t(i)}}) according the defining response equation
 \deqn{ P(X_{pi} = 1 ) = c_i + ( 1 - c_i ) 
-		\Phi ( a_i^\ast \theta_p + b_i^\ast	) }
+        \Phi ( a_i^\ast \theta_p + b_i^\ast    ) }
 
 }
 
@@ -112,8 +112,8 @@ A list of class \code{mcmc.sirt} with following entries:
   \item{deviance.chain}{Sampled values of deviance values}  
   \item{EAP.rel}{EAP reliability}
   \item{person}{Data frame with EAP person parameter estimates for 
-  	  \eqn{\theta_p} and their corresponding posterior standard
-  	deviations and for all testlet effects}  
+        \eqn{\theta_p} and their corresponding posterior standard
+      deviations and for all testlet effects}  
   \item{dat}{Used data frame}
   \item{weights}{Used student weights}
   \item{\dots}{Further values}
@@ -149,7 +149,7 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-S3 methods: \code{\link{summary.mcmc.sirt}}, \code{\link{plot.mcmc.sirt}}	
+S3 methods: \code{\link{summary.mcmc.sirt}}, \code{\link{plot.mcmc.sirt}}    
 }
 
 %For estimating testlet models using the \pkg{lme4} package see
@@ -159,7 +159,7 @@ S3 methods: \code{\link{summary.mcmc.sirt}}, \code{\link{plot.mcmc.sirt}}
 %% EXAMPLES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \examples{
-\dontrun{	
+\dontrun{    
 #############################################################################
 # EXAMPLE 1: Dataset Reading
 #############################################################################
@@ -223,7 +223,7 @@ for (tt in 1:TT){
 ut <- ut[ , rep(1:TT,each=I) ]
 # calculate response probability
 prob <- matrix( stats::pnorm( theta + ut + matrix( b , nrow=N , ncol=ITT , 
-		    byrow=TRUE ) ) , N, ITT)
+            byrow=TRUE ) ) , N, ITT)
 Y <- (matrix( stats::runif(N*ITT) , N , ITT) < prob )*1
 colMeans(Y)
 

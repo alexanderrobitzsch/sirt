@@ -1,5 +1,5 @@
 %% File Name: IRT.mle.Rd
-%% File Version: 0.13
+%% File Version: 0.15
 
 \name{IRT.mle}
 \alias{IRT.mle}
@@ -38,10 +38,10 @@ Initial ability estimate
 List of arguments for \code{irffct}.
 }
   \item{type}{Type of ability estimate. It can be \code{"MLE"} (the default),
-  	  \code{"WLE"} or \code{"MAP"}. 
+        \code{"WLE"} or \code{"MAP"}. 
 }
 \item{mu}{Mean of normal prior distribution (for \code{type="MAP"})}
-\item{sigma}{Standard deviation of normal prior distriubution (for \code{type="MAP"})}
+\item{sigma}{Standard deviation of normal prior distribution (for \code{type="MAP"})}
   \item{maxiter}{
 Maximum number of iterations
 }
@@ -76,8 +76,8 @@ Data frame with estimated abilities (\code{est}) and its standard error
 Penfield, R. D., & Bergeron, J. M. (2005). Applying a weighted 
 maximum likelihood latent trait estimator to the generalized 
 partial credit model. \emph{Applied Psychological Measurement},
-\bold{29}, 218-233.	
-	
+\bold{29}, 218-233.    
+    
 Warm, T. A. (1989). Weighted likelihood estimation of ability in item response theory.
 \emph{Psychometrika}, \bold{54}, 427-450.
 }
@@ -191,7 +191,7 @@ arg.list <- list( "b" = mod1$item2$b , "K"=mod1$item2$K )
 # estimate MLE
 res <- sirt::IRT.mle( data = dat , irffct=irffct , arg.list=arg.list , theta=theta0 ,
             maxval=20 , maxiter=50)
-}	
+}    
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

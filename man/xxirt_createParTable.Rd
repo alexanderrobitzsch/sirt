@@ -29,8 +29,8 @@ xxirt_modifyParTable( partable , parname , item = NULL , value=NULL ,
 
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{name}{Type of item response function}	
-\item{par}{Named vector of starting values of item parameters}	
+\item{name}{Type of item response function}    
+\item{par}{Named vector of starting values of item parameters}    
 \item{est}{Logical vector indicating which parameters should be estimated}
 \item{P}{Item response function}
 \item{lower}{Lower bounds}
@@ -83,7 +83,7 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{xxirt}}	
+\code{\link{xxirt}}    
 
 See \code{\link[mirt:createItem]{mirt::createItem}} for similar
 functionality.
@@ -93,7 +93,7 @@ functionality.
 #############################################################################
 ## EXAMPLE 1: Definition of item response functions
 #############################################################################
-	
+    
 data(data.read)
 dat <- data.read
 

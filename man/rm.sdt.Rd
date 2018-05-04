@@ -98,14 +98,14 @@ the same as in \code{est.c.rater}.
 \item{est.mean}{Optional logical indicating whether the mean of the 
 trait distribution should be estimated.}
 \item{skillspace}{Specified \eqn{\theta} distribution type. It can be
-	\code{"normal"} or \code{"discrete"}. In the latter case,
-	all probabilities of the distribution are separately
-       estimated.}	
+    \code{"normal"} or \code{"discrete"}. In the latter case,
+    all probabilities of the distribution are separately
+       estimated.}    
 \item{tau.item.fixed}{Optional matrix with three columns specifying
 fixed \eqn{\tau} parameters. The first two columns denote item and
 category indices, the third the fixed value. See Example 3.}
 \item{a.item.fixed}{Optional matrix with two columns specifying fixed
-	\eqn{a} parameters. First column: Item index. Second column:
+    \eqn{a} parameters. First column: Item index. Second column:
 Fixed \eqn{a} parameter.}
   \item{d.min}{
 Minimal \eqn{d} parameter to be estimated
@@ -127,9 +127,9 @@ Starting value for trait standard deviation
 }
 \item{d.prior}{Normal prior \eqn{N(M,S^2)} for \eqn{d} parameters}
 \item{c.prior}{Normal prior for \eqn{c} parameters. The prior for
-	parameter \eqn{c_{irk}} is defined as \eqn{M \cdot ( k - 0.5) }
-	where \eqn{M} is \code{c.prior[1]}. }
-\item{tau.prior}{Normal prior for \eqn{\tau} parameters}	
+    parameter \eqn{c_{irk}} is defined as \eqn{M \cdot ( k - 0.5) }
+    where \eqn{M} is \code{c.prior[1]}. }
+\item{tau.prior}{Normal prior for \eqn{\tau} parameters}    
 \item{a.prior}{Normal prior for \eqn{a} parameters}
   \item{max.increment}{
 Maximum increment of item parameters during estimation
@@ -153,7 +153,7 @@ Maximum number of iterations during an M step
 Convergence criterion in an M step
 }
 \item{fac_incr}{Factor for decreasing the increments in every iteration.
-	The factor should be smaller than 1, small values correspond
+    The factor should be smaller than 1, small values correspond
 to strong decreases in parameter changes in iterations.}
 \item{PEM}{Logical indicating whether the P-EM acceleration should be
 applied (Berlinet & Roland, 2012).}
@@ -242,7 +242,7 @@ errors}
   probabilities are calculated on the pseudo items \eqn{i \times r}, 
   i.e. the interaction of item and rater.}
 \item{prob.item}{Probabilities \eqn{P( \eta_i = \eta | \theta )} of 
-	latent item responses evaluated at theta grid \eqn{\theta_p}.
+    latent item responses evaluated at theta grid \eqn{\theta_p}.
 }
 \item{n.ik}{Expected counts}
 \item{pi.k}{Estimated trait distribution \eqn{P(\theta_p)}.
@@ -257,14 +257,14 @@ errors}
 %% REFERENCES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\references{	
+\references{    
 Berlinet, A. F., & Roland, C. (2012). 
 Acceleration of the EM algorithm: P-EM versus epsilon algorithm.
-\emph{Computational Statistics & Data Analysis}, \bold{56}(12), 4122-4137.		
-	
+\emph{Computational Statistics & Data Analysis}, \bold{56}(12), 4122-4137.        
+    
 DeCarlo, L. T. (2005). A model of rater behavior in essay grading 
 based on signal detection theory. 
-\emph{Journal of Educational Measurement}, \bold{42}, 53-76.	
+\emph{Journal of Educational Measurement}, \bold{42}, 53-76.    
 
 DeCarlo, L. T. (2010). \emph{Studies of a latent-class signal-detection model 
 for constructed response scoring II: Incomplete and hierarchical designs}.

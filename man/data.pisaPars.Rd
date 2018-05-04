@@ -20,10 +20,10 @@ data(data.pisaPars)
   \describe{
     \item{\code{item}}{Item names}
     \item{\code{testlet}}{Items are arranged in corresponding testlets. These
-		names are located in this column.}
+        names are located in this column.}
     \item{\code{study1}}{Item difficulties of study 1}
     \item{\code{study2}}{Item difficulties of study 2}
-		}
+        }
 }
 
 

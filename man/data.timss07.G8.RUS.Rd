@@ -23,7 +23,7 @@ data(data.timss07.G8.RUS)
 \format{
 The datasets contains raw responses (\code{raw}), scored responses
 (\code{scored}) and item informations (\code{iteminfo}).
-	
+    
 The format of the dataset is:
 
 \code{List of 3} \cr

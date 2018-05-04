@@ -40,8 +40,8 @@ row indexes in the data set.
 A list of lists with following entries:
 
 \item{partable}{
-	Data frame with parameters
-		}
+    Data frame with parameters
+        }
 \item{se.pars}{List of estimated standard errors for all parameter estimates:
     \code{tanaka.stat}, \code{rmsr.stat}, \code{rmsea.stat},
     \code{chisquare_df.stat}, \code{thresholds.stat}, \code{final.constants.stat},

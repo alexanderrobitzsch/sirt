@@ -175,15 +175,15 @@ A list with following entries:
 \item{person}{Data frame with person parameters}
 \item{EAP.rel}{EAP reliability (only applies for \code{model="GOMRasch"})}
 \item{MAP}{Maximum aposteriori estimate of the membership function 
-	}
-\item{classdesc}{Descriptives for class membership}	
+    }
+\item{classdesc}{Descriptives for class membership}    
 \item{lambda}{Estimated response probabilities \eqn{\lambda_{ik}}}
 \item{se.lambda}{Standard error for estimated response probabilities 
 \eqn{\lambda_{ik}}}
 \item{mu}{Mean of the distribution of \eqn{(\theta_p , \xi_p)} 
-	(only applies for \code{model="GOMRasch"})}
+    (only applies for \code{model="GOMRasch"})}
 \item{Sigma}{Covariance matrix of \eqn{(\theta_p , \xi_p)} 
-	(only applies for \code{model="GOMRasch"})}
+    (only applies for \code{model="GOMRasch"})}
 \item{b}{Estimated item difficulties (only applies for \code{model="GOMRasch"})}
 \item{se.b}{Standard error of estimated difficulties 
 (only applies for \code{model="GOMRasch"})}
@@ -201,8 +201,8 @@ A list with following entries:
 \references{
 Bingham, E., Kaban, A., & Fortelius, M. (2009). 
 The aspect Bernoulli model: multiple causes of presences and absences. 
-\emph{Pattern Analysis and Applications}, \bold{12(1)}, 55-78.	
-	
+\emph{Pattern Analysis and Applications}, \bold{12(1)}, 55-78.    
+    
 Erosheva, E. A. (2005). Comparing latent structures of the grade of membership, 
 Rasch, and latent class models. \emph{Psychometrika}, \bold{70}, 619-628.
 

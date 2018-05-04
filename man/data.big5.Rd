@@ -79,7 +79,7 @@ miceadds::library_install(packages)
 # EXAMPLE 1: Unidimensional models openness scale
 #############################################################################
 
-data(data.big5)	
+data(data.big5)    
 # extract first 10 openness items
 items <- which( substring( colnames(data.big5) , 1 , 1 ) == "O"  )[1:10]
 dat <- data.big5[ , items ]

@@ -33,13 +33,13 @@ Rcpp::NumericVector interval_index_C( Rcpp::NumericMatrix MATR, Rcpp::NumericVec
      IND.fill(0);  
        
      for (int nn=0;nn<NR;++nn){  
-      	for (int cc=0 ; cc < NC ; ++cc ){  
-     	    if ( MATR(nn,cc) > RN[nn] ){  
-     	    	    IND(nn) = cc + 1 ;  
-     	    	    break ;   
-     	    	           }  
-     		}  
-     	}  
+          for (int cc=0 ; cc < NC ; ++cc ){  
+             if ( MATR(nn,cc) > RN[nn] ){  
+                     IND(nn) = cc + 1 ;  
+                     break ;   
+                            }  
+             }  
+         }  
          
      ///////////////////////////////////////  
      /// OUTPUT                  
@@ -93,7 +93,7 @@ Rcpp::NumericMatrix rowCumsums2_source( Rcpp::NumericMatrix input )
 ///** rowKSmallest_C
 // [[Rcpp::export]]
 Rcpp::List rowKSmallest_C( Rcpp::NumericMatrix MATR, Rcpp::IntegerVector KK1, Rcpp::NumericMatrix INDEXMATR, 
-	 Rcpp::NumericMatrix RNMATR )
+     Rcpp::NumericMatrix RNMATR )
 {
   
      // define row and column numbers  
@@ -114,32 +114,32 @@ Rcpp::List rowKSmallest_C( Rcpp::NumericMatrix MATR, Rcpp::IntegerVector KK1, Rc
        
      for (int kk=0;kk<KK;++kk){ // begin for kk  [donors]
      for (int nn=0;nn<NR;++nn){ // begin for nn  [cases]
-          SMALLIND(nn,kk) = kk+1 ;	  
+          SMALLIND(nn,kk) = kk+1 ;      
           SMALLVAL(nn,kk) = MATRK( nn , kk ) ;  
-     	for (int cc=kk+1 ; cc < NC ; ++cc ){  
-     			// begin for cc [matrix columns]  
-     	    if ( ( MATRK(nn,cc) < SMALLVAL(nn,kk) ) ||  
-     	         (  ( MATRK(nn,cc) == SMALLVAL(nn,kk) ) && ( RNMATR(nn,cc)==1 ) )   
-     	    		){ // begin comparison  
-     	    	    tmp1 = SMALLVAL(nn,kk) ;  
-     	    	    SMALLVAL(nn,kk) = MATRK(nn,cc) ;  
-     	    	    MATRK(nn,kk) = MATRK( nn , cc );  
-     	    	    MATRK(nn,cc) = tmp1 ;  
-     	    	    tmp1 = SMALLIND(nn,kk) ;  
-     	    	    SMALLIND(nn,kk) = INDEXMATR(nn,cc) ;  
-     	    	    INDEXMATR(nn,kk) = INDEXMATR(nn,cc) ;  
-     	    	    INDEXMATR(nn,cc)=tmp1 ;  
-     	    	           } // end comparison  
-     		}  // end for cc  
-     	}   // end for nn  
+         for (int cc=kk+1 ; cc < NC ; ++cc ){  
+                 // begin for cc [matrix columns]  
+             if ( ( MATRK(nn,cc) < SMALLVAL(nn,kk) ) ||  
+                  (  ( MATRK(nn,cc) == SMALLVAL(nn,kk) ) && ( RNMATR(nn,cc)==1 ) )   
+                     ){ // begin comparison  
+                     tmp1 = SMALLVAL(nn,kk) ;  
+                     SMALLVAL(nn,kk) = MATRK(nn,cc) ;  
+                     MATRK(nn,kk) = MATRK( nn , cc );  
+                     MATRK(nn,cc) = tmp1 ;  
+                     tmp1 = SMALLIND(nn,kk) ;  
+                     SMALLIND(nn,kk) = INDEXMATR(nn,cc) ;  
+                     INDEXMATR(nn,kk) = INDEXMATR(nn,cc) ;  
+                     INDEXMATR(nn,cc)=tmp1 ;  
+                            } // end comparison  
+             }  // end for cc  
+         }   // end for nn  
        }  // end for kk  
          
      ///////////////////////////////////////  
      /// OUTPUT                       
      return Rcpp::List::create(
-     	      Rcpp::_["smallval"]=SMALLVAL ,
-     	      Rcpp::_["smallind"]=SMALLIND 
-     	      ) ;     
+               Rcpp::_["smallval"]=SMALLVAL ,
+               Rcpp::_["smallind"]=SMALLIND 
+               ) ;     
 }
 
 
@@ -164,20 +164,20 @@ Rcpp::List rowMaxsCPP_source(Rcpp::NumericMatrix MATR ){
        
      for (int nn=0;nn<NR;++nn){  
           MAXVAL[nn] = MATR( nn , 0 ) ;  
-     	for (int cc=1 ; cc < NC ; ++cc ){  
-     	    if ( MATR(nn,cc) > MAXVAL[nn] ){  
-     	    	    MAXVAL[nn] = MATR(nn,cc) ;  
-     	    	    MAXIND[nn] = cc + 1 ;  
-     	    	           }  
-     		}  
-     	}  
+         for (int cc=1 ; cc < NC ; ++cc ){  
+             if ( MATR(nn,cc) > MAXVAL[nn] ){  
+                     MAXVAL[nn] = MATR(nn,cc) ;  
+                     MAXIND[nn] = cc + 1 ;  
+                            }  
+             }  
+         }  
          
      ///////////////////////////////////////  
      /// OUTPUT                  
      // return( wrap(prob) );  
      return Rcpp::List::create(
-     	     	Rcpp::_["maxval"] = MAXVAL , 
-     	     	Rcpp::_["maxind"] = MAXIND ) ;     
+                  Rcpp::_["maxval"] = MAXVAL , 
+                  Rcpp::_["maxind"] = MAXIND ) ;     
 
 }
 
@@ -195,27 +195,27 @@ Rcpp::NumericMatrix rowmins2_bundle_C( Rcpp::NumericMatrix m1, Rcpp::NumericVect
      int L1= v1.size();  
      int N1=m1.nrow() ;  
        
-     //	m1min <- matrix( 0 , nrow=nrow(m1) , ncol= L1 )  
+     //    m1min <- matrix( 0 , nrow=nrow(m1) , ncol= L1 )  
      Rcpp::NumericMatrix m1min(N1, L1) ;  
      Rcpp::NumericMatrix v1min(L1, 2) ;  
        
-     //	v1min <- c(1 , cumsum(v1)[ - L1 ]+1 )  
-     //	v1max <- cumsum(v1)  
+     //    v1min <- c(1 , cumsum(v1)[ - L1 ]+1 )  
+     //    v1max <- cumsum(v1)  
      double t1=0 ;  
      v1min(0,0)=1 ;  
      for (int ll=0;ll<L1;ll++){  
-     	t1 += v1[ll] ;  
-     	v1min(ll,1) = t1 ;  
-     	if (ll < L1 - 1 ){  
-     		v1min(ll+1,0) = t1 + 1 ;  
-     			}  
-     	}  
+         t1 += v1[ll] ;  
+         v1min(ll,1) = t1 ;  
+         if (ll < L1 - 1 ){  
+             v1min(ll+1,0) = t1 + 1 ;  
+                 }  
+         }  
               
-     //	m1min[ , which(v1==1)] <- m1[ , v1min[ v1 == 1 ] ]  
-     //	for (ll in (1:L1)[ v1 > 1] ){  
-     //				m1min[,ll] <- rowMins2( m1[ , v1min[ll]:v1max[ll] ] )  
-     //						}  
-     //	m1min  
+     //    m1min[ , which(v1==1)] <- m1[ , v1min[ v1 == 1 ] ]  
+     //    for (ll in (1:L1)[ v1 > 1] ){  
+     //                m1min[,ll] <- rowMins2( m1[ , v1min[ll]:v1max[ll] ] )  
+     //                        }  
+     //    m1min  
        
      int cc1=0;  
      int cc2=0;  
@@ -225,19 +225,19 @@ Rcpp::NumericMatrix rowmins2_bundle_C( Rcpp::NumericMatrix m1, Rcpp::NumericVect
      cc1 = v1min(ll,0) - 1 ;  
        
      for (int nn = 0 ; nn < N1 ; nn++){ // begin nn   
-     	m1_vv = m1(nn , cc1 ) ;  
-     	cc2 = v1min(ll,1) - 1 ;  
-     	if (cc1 < cc2){  
-     		for (int cc=cc1+1;cc<cc2+1;cc++){	  
-     			if ( m1(nn,cc) < m1_vv ){  
-     				m1_vv = m1(nn,cc) ;  
-     						}  
-     				} // end for cc  
-     			} // end cc1 < cc2  
-     	  
-     	m1min(nn,ll) = m1_vv ;  
-     	}  // end nn  
-     	  
+         m1_vv = m1(nn , cc1 ) ;  
+         cc2 = v1min(ll,1) - 1 ;  
+         if (cc1 < cc2){  
+             for (int cc=cc1+1;cc<cc2+1;cc++){      
+                 if ( m1(nn,cc) < m1_vv ){  
+                     m1_vv = m1(nn,cc) ;  
+                             }  
+                     } // end for cc  
+                 } // end cc1 < cc2  
+           
+         m1min(nn,ll) = m1_vv ;  
+         }  // end nn  
+           
      } // end ll  
                
      return m1min  ;  
@@ -274,21 +274,21 @@ Rcpp::List calc_copula_itemcluster_C( Rcpp::NumericVector DD , Rcpp::NumericMatr
      // for (int rr1=0;rr1<RR;rr1++){  
      // res_patt[rr1] = 0 ;  
      // for (int cc=0;cc<D;cc++){  
-     //	res_patt[rr1] = res_patt[rr1] + res(rr1 , cc) * pow( 2 , D - cc - 1) ;   
-     //	}  
-     // }       	  
+     //    res_patt[rr1] = res_patt[rr1] + res(rr1 , cc) * pow( 2 , D - cc - 1) ;   
+     //    }  
+     // }             
      //        g1.rr <- ( (-1)^rowSums( res ))  
      for (int ii=0;ii<RR;ii++){  
         t1 = 0 ;  
         for ( int cc=0;cc<D ; cc++){  
-        	   t1 += res(ii,cc) ;  
-      	}  
+               t1 += res(ii,cc) ;  
+          }  
         rowsums_res[ii] = t1 ;  
         g1_rr[ii] = pow( -1.0 , rowsums_res[ii] ) ;  
     }  
        
        
-        		  
+                  
      for (int rr = 0 ; rr<RR;rr++){  
        
      // int rr = 2 ;  
@@ -302,17 +302,17 @@ Rcpp::List calc_copula_itemcluster_C( Rcpp::NumericVector DD , Rcpp::NumericMatr
      t2=3;  
      res_patt[zz]=0;  
      for ( int vv=0;vv<D ; vv++){
-//                  resp_patt[nn] += pow(2.0,(double)(I-ii) ) - 1;       	     
+//                  resp_patt[nn] += pow(2.0,(double)(I-ii) ) - 1;                
            res_rr( zz , vv ) = res(rr,vv) - res( zz , vv ) ;  
            res_patt[zz] = res_patt[zz] + res_rr(zz , vv) * pow( 2.0 , (double)(D - vv - 1) ) ;         
            if ( res_rr(zz,vv) < t2 ){     
-           		t2 = res_rr(zz,vv) ;   
-           				}   
-     			}  
+                   t2 = res_rr(zz,vv) ;   
+                           }   
+                 }  
            if ( t2 > -1 ){  
-           	      matr( rr , res_patt[zz] ) = g1_rr[zz] ;      	       
-           	      		}			  
-     		}  
+                     matr( rr , res_patt[zz] ) = g1_rr[zz] ;                 
+                             }              
+             }  
       }    
        
      ///////////////////////////////////////  
@@ -324,7 +324,7 @@ Rcpp::List calc_copula_itemcluster_C( Rcpp::NumericVector DD , Rcpp::NumericMatr
       Rcpp::_["res_rr"] = res_rr , 
       Rcpp::_["rowsums_res"] = rowsums_res ,  
       Rcpp::_["g1_rr"] = g1_rr , 
-      Rcpp::_["res_patt"] = res_patt	
+      Rcpp::_["res_patt"] = res_patt    
               ) ;  
 }
 //********************************************************************
@@ -402,7 +402,7 @@ Rcpp::List md_pattern_csource( Rcpp::NumericMatrix dat ){
          Rcpp::_["unique_resp_patt_firstobs"]=unique_resp_patt_firstobs ,              
          Rcpp::_["freq1"] = freq1 ,  
          Rcpp::_["freq0"] = freq0  
-            		) ;  
+                    ) ;  
      
 }
 //********************************************************************
@@ -424,7 +424,7 @@ Rcpp::List md_pattern_csource( Rcpp::NumericMatrix dat ){
 ///** md_pattern_csource
 // [[Rcpp::export]]
 Rcpp::NumericMatrix monoreg_rowwise_Cpp( Rcpp::NumericMatrix YM, 
-	Rcpp::NumericMatrix WM ){
+    Rcpp::NumericMatrix WM ){
   
      //********************************************  
      // Adapted code from fdrtool::monoreg function  
@@ -448,37 +448,37 @@ Rcpp::NumericMatrix monoreg_rowwise_Cpp( Rcpp::NumericMatrix YM,
      int j=0 ;  
        
      for (zz=0; zz < NR ; zz++){ // begin for zz  
-     	c=0 ;  
-     	j=0 ;	  
-     	nn = NC ;  
-     	k(zz,c) = 0;  
-     	gew(zz,c) = WM(zz,0);  
-     	ghat(zz,c) = YM(zz,0);  
-     	  
-     	//######  
-     	for (j=1; j < nn; j++){   // begin for j ...		  
-     	    c = c+1;  
-     	    k(zz,c) = j;  
-     	    gew(zz,c) = WM(zz,j);  
-     	    ghat(zz,c) = YM(zz,j);  
-     	    /* c is at least 1 as nn is > 1 */  
-     	    while (ghat(zz,c-1) >= ghat(zz,c))  
-     	    {  
-     	      neu = gew(zz,c)+gew(zz,c-1);  
-     	      ghat(zz,c-1) = ghat(zz,c-1)+(gew(zz,c)/neu)*(ghat(zz,c)-ghat(zz,c-1) );  
-     	      gew(zz,c-1) = neu;  
-     	      c = c-1;  
-     	      if (c==0) break;  
-     	    }  
-     	  }     // end for j ...  
-     	//##########    
-     	while (nn >= 1){  
-     	    for (j=k(zz,c); j < nn; j++){  
-     	      ghat(zz,j) = ghat(zz,c);  
-     	    		}  
-     	    nn = k(zz,c);  
-     	    c = c-1;  
-     	  }	  	    
+         c=0 ;  
+         j=0 ;      
+         nn = NC ;  
+         k(zz,c) = 0;  
+         gew(zz,c) = WM(zz,0);  
+         ghat(zz,c) = YM(zz,0);  
+           
+         //######  
+         for (j=1; j < nn; j++){   // begin for j ...          
+             c = c+1;  
+             k(zz,c) = j;  
+             gew(zz,c) = WM(zz,j);  
+             ghat(zz,c) = YM(zz,j);  
+             /* c is at least 1 as nn is > 1 */  
+             while (ghat(zz,c-1) >= ghat(zz,c))  
+             {  
+               neu = gew(zz,c)+gew(zz,c-1);  
+               ghat(zz,c-1) = ghat(zz,c-1)+(gew(zz,c)/neu)*(ghat(zz,c)-ghat(zz,c-1) );  
+               gew(zz,c-1) = neu;  
+               c = c-1;  
+               if (c==0) break;  
+             }  
+           }     // end for j ...  
+         //##########    
+         while (nn >= 1){  
+             for (j=k(zz,c); j < nn; j++){  
+               ghat(zz,j) = ghat(zz,c);  
+                     }  
+             nn = k(zz,c);  
+             c = c-1;  
+           }              
      } // end for zz  
          
      ///////////////////////////////////////  

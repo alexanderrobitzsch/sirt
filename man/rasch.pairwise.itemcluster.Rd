@@ -42,7 +42,7 @@ A logical which displays progress. Default is \code{TRUE}.
 Vector of initial item difficulty estimates. Default is \code{NULL}.
 }
 \item{zerosum}{Optional logical indicating whether item difficulties
-	should be centered in each iteration. The default is that
+    should be centered in each iteration. The default is that
         no centering is conducted.}
 
 }
@@ -115,7 +115,7 @@ For simulation of locally dependent data see \code{\link{sim.rasch.dep}}.
 #      12 Items: Cluster 1 -> Items 1,...,4
 #                Cluster 2 -> Items 6,...,9
 #                Cluster 3 -> Items 10,11,12
-#############################################################################	
+#############################################################################    
 
 set.seed(7896)
 I <- 12                             # number of items

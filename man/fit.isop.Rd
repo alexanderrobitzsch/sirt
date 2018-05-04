@@ -60,8 +60,8 @@ A list with following entries
   of deviations between observed and expected frequencies}
 \item{item.sc}{Estimated item parameters}
 \item{person.sc}{
-	Estimated person parameters
-			}
+    Estimated person parameters
+            }
 \item{ll}{Log-likelihood of the model}
 \item{freq.fitted}{Fitted frequencies in a long data frame}
 }

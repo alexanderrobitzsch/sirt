@@ -4,15 +4,15 @@
 ##############################################################
 # anova rasch.mml
 anova.rasch.mml <- function( object , ... ){
-	cl <- match.call()
-	model1 <- object
-	model2 <- list(object , ... )[[2]]
-	res <- IRT.anova.sirt( model1 , model2 )
-	cl <- paste(cl)[-1]
-	ind <- match( res$Model , c("model1" , "model2") )
-	res$Model <- cl[ind]
-    print(res)	
-	invisible(res)
+    cl <- match.call()
+    model1 <- object
+    model2 <- list(object , ... )[[2]]
+    res <- IRT.anova.sirt( model1 , model2 )
+    cl <- paste(cl)[-1]
+    ind <- match( res$Model , c("model1" , "model2") )
+    res$Model <- cl[ind]
+    print(res)    
+    invisible(res)
 }
 ##############################################################
 # anova smirt
@@ -82,31 +82,31 @@ IRT.anova.sirt <- function (object, ...){
 # Likelihood ratio test for rasch.copula2 objects
 anova.rasch.copula2 <- function( object , ... ){
     if (length(list(object, ...)) != 2){ 
-        stop("anova method can only be applied for comparison of two models.\n")		
-		}
-	objects <- list(object, ...)
-	model1 <- objects[[1]]
-	model2 <- objects[[2]]
+        stop("anova method can only be applied for comparison of two models.\n")        
+        }
+    objects <- list(object, ...)
+    model1 <- objects[[1]]
+    model2 <- objects[[2]]
 
-	# define some necessary parameters
-	model1$AIC <- model1$ic$AIC
-	model1$BIC <- model1$ic$BIC
+    # define some necessary parameters
+    model1$AIC <- model1$ic$AIC
+    model1$BIC <- model1$ic$BIC
     model1$loglike <- model1$deviance / (-2)
-	model1$Npars <- model1$ic$np
-	model2$AIC <- model2$ic$AIC
-	model2$BIC <- model2$ic$BIC
-    model2$loglike <- model2$deviance / (-2)	
-	model2$Npars <- model2$ic$np
-	# test
+    model1$Npars <- model1$ic$np
+    model2$AIC <- model2$ic$AIC
+    model2$BIC <- model2$ic$BIC
+    model2$loglike <- model2$deviance / (-2)    
+    model2$Npars <- model2$ic$np
+    # test
     dfr1 <- data.frame( "Model" = "Model 1" , 
-		"loglike" = model1$loglike , 
-		"Deviance" = -2*model1$loglike )
+        "loglike" = model1$loglike , 
+        "Deviance" = -2*model1$loglike )
     dfr1$Npars <- sum(model1$Npars)
     dfr1$AIC <- model1$AIC
     dfr1$BIC <- model1$BIC
     dfr2 <- data.frame( "Model" = "Model 2" , 
-		"loglike" = model2$loglike , 	
-		"Deviance" = -2*model2$loglike )
+        "loglike" = model2$loglike ,     
+        "Deviance" = -2*model2$loglike )
     dfr2$Npars <- sum(model2$Npars)
     dfr2$AIC <- model2$AIC
     dfr2$BIC <- model2$BIC
@@ -119,10 +119,10 @@ anova.rasch.copula2 <- function( object , ... ){
     dfr[1,"df"] <- abs( dfr[1,"Npars"] - dfr[2,"Npars"] )
     dfr[ 1, "p" ] <- round( 1 - stats::pchisq( dfr[1,"Chisq"] , df= dfr[1,"df"] ) , 5 )
     for ( vv in 2:( ncol(dfr))){
-		dfr[,vv] <- round( dfr[,vv] , 5 ) 
-	}
+        dfr[,vv] <- round( dfr[,vv] , 5 ) 
+    }
     print( dfr )
     invisible(dfr)
 }
-anova.rasch.copula3 <- anova.rasch.copula2			
+anova.rasch.copula3 <- anova.rasch.copula2            
 ##############################################################

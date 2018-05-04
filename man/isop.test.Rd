@@ -1,5 +1,5 @@
 %% File Name: isop.test.Rd
-%% File Version: 0.13
+%% File Version: 0.15
 
 \name{isop.test}
 \alias{isop.test}
@@ -53,8 +53,8 @@ A list with following entries
   The \eqn{W1_i} statistic is denoted as \code{est} while \code{se}
   is the corresponding standard error of the statistic.
   The sample size per item is \code{N} and \code{M} denotes the item mean.}
-  \item{Es}{Number of concordancies per item}
-  \item{Ed}{Number of disconcordancies per item}
+  \item{Es}{Number of concordances per item}
+  \item{Ed}{Number of disconcordances per item}
   
 The \eqn{W1_i} statistics are printed by the \code{summary} method.  
 }
@@ -89,7 +89,7 @@ See also the \pkg{ISOP} package at \emph{Rforge}: \emph{http://www.rforge.net/IS
 
 data(data.Students, package="CDM")
 dat <- data.Students[ , paste0("act",1:5) ]
-dat <- dat[1:300 , ]	# select first 300 students
+dat <- dat[1:300 , ]    # select first 300 students
 
 # perform the ISOP test
 mod <- sirt::isop.test(dat)

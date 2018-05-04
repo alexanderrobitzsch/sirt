@@ -29,7 +29,7 @@ Vector of length \eqn{I} of guessing parameters (must be positive)
 \details{
 Ramsay's quotient model (Ramsay, 1989) is defined by the equation 
 \deqn{P(X_{pi} = 1 | \theta_p ) = \frac{ \exp { ( \theta_p / b_i ) } }
-	{ K_i + \exp { ( \theta_p / b_i ) } }}
+    { K_i + \exp { ( \theta_p / b_i ) } }}
 }
 \value{
 An \eqn{N \times I}  data frame with dichotomous item responses.
@@ -73,7 +73,7 @@ the generalized logistic item response model.
 #############################################################################
 # EXAMPLE 1: Estimate Ramsay Quotient Model with rasch.mml2
 #############################################################################
-		
+        
 set.seed(657)
 # simulate data according to the Ramsay model
 N <- 1000       # persons

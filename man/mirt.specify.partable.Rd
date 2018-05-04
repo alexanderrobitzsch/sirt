@@ -55,7 +55,7 @@ Alexander Robitzsch, Phil Chalmers
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 %\seealso{
-%See \url{http://lavaan.ugent.be/} for \pkg{lavaan} resources.	
+%See \url{http://lavaan.ugent.be/} for \pkg{lavaan} resources.    
 %}
 
 \examples{

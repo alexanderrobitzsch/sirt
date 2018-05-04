@@ -31,7 +31,7 @@ data(data.eid.kap7)
 }
 
 \format{
-\itemize{	
+\itemize{    
 \item  \code{data.eid.kap4} is the dataset from Chapter 4.
 
 \code{'data.frame':   193 obs. of  11 variables:} \cr
@@ -110,7 +110,7 @@ Modelle mit \R}. Available at
 
 
 \examples{
-\dontrun{	
+\dontrun{    
 miceadds::library_install("foreign")
 #---- load some IRT packages in R
 miceadds::library_install("TAM")        # package (a)

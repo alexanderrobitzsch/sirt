@@ -22,7 +22,7 @@ An \eqn{N \times I} data frame of dichotomous item responses
 }
   \item{theta}{
 Vector of length \eqn{N} of person parameter estimates (e.g. obtained from 
-	\code{\link{wle.rasch}})
+    \code{\link{wle.rasch}})
 }
   \item{b}{
 Vector of length \eqn{I} (e.g. obtained from \code{\link{rasch.mml2}})
@@ -40,13 +40,13 @@ A list with following entries
 \item{q3.long}{Just the \code{q3.matrix} in long matrix format where every row
                   corresponds to an item pair}
 \item{expected}{An \eqn{N \times I} matrix of expected probabilities 
-	by the Rasch model}
+    by the Rasch model}
 \item{residual}{An \eqn{N \times I} matrix of residuals obtained after 
-	fitting the Rasch model}
+    fitting the Rasch model}
 \item{Q3.stat}{Vector with descriptive statistics of \eqn{Q_3}}
 %% ...
 %%        res <- list( "q3.matrix" = q3.matr , "q3.long" = q3.long ,
-%%		"expected" = expected , "residual" = residual )
+%%        "expected" = expected , "residual" = residual )
 }
 \references{
 Yen, W. M. (1984). Effects of local item dependence on the fit and equating 

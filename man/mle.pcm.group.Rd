@@ -1,5 +1,5 @@
 %% File Name: mle.pcm.group.Rd
-%% File Version: 0.16
+%% File Version: 0.17
 
 \name{mle.pcm.group}
 \alias{mle.pcm.group}
@@ -52,7 +52,7 @@ In case one estimates a person parameter \eqn{\theta_p},
 the log-likelihood is maximized and the following
 estimating equation results: (see Penfield & Bergeron, 2005):
 \deqn{ 0 = ( \log L )' = \sum_i a_i \cdot [ \tilde{x}_{pi} -
-	E(X_{pi} | \theta_p ) ] }
+    E(X_{pi} | \theta_p ) ] }
 where \eqn{E(X_{pi} | \theta_p )} denotes the expected item response
 conditionally on \eqn{\theta_p}.
 
@@ -71,7 +71,7 @@ model with item slope parameters different from 1.
 In case one estimates a group parameter \eqn{\theta_g},
 the following estimating equation is used:
 \deqn{ 0 = (\log L )' = \sum_p \sum_i a_i \cdot [ \tilde{x}_{pgi} -
-	E(X_{pgi} | \theta_g ) ] }
+    E(X_{pgi} | \theta_g ) ] }
 where persons \eqn{p} are nested within a group \eqn{g}. 
 The \eqn{\varepsilon}-adjustment is then performed at the
 group level, not at the individual level.
@@ -86,19 +86,18 @@ A list with following entries:
 \references{
 Bertoli-Barsotti, L., & Punzo, A. (2012). 
 Comparison of two bias reduction techniques for the Rasch model.
-\emph{Electronic Journal of Applied Statistical Analysis}, 
-\bold{5}, 360-366.
+\emph{Electronic Journal of Applied Statistical Analysis, 5}, 360-366.
 
 Bertoli-Barsotti, L., Lando, T., & Punzo, A. (2014). 
 Estimating a Rasch Model via fuzzy empirical probability functions.
 In D. Vicari, A. Okada, G. Ragozini &  C. Weihs (Eds.).
-\emph{Analysis and Modeling of Complex Data in Behavioural and Social Sciences},
+\emph{Analysis and Modeling of Complex Data in Behavioral and Social Sciences},
 Springer.
 
 Penfield, R. D., & Bergeron, J. M. (2005). Applying a weighted 
 maximum likelihood latent trait estimator to the generalized 
-partial credit model. \emph{Applied Psychological Measurement},
-\bold{29}, 218-233.
+partial credit model. \emph{Applied Psychological Measurement,
+29}, 218-233.
 }
 \author{
 Alexander Robitzsch

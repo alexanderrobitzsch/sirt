@@ -6,7 +6,7 @@
 # summary for LSDM function   
 summary.lsdm <- function( object , ... )
 {
-		lsdmobj <- object
+        lsdmobj <- object
         # generate sequence for display
         display.separate <- paste( rep("." , each=80 ) , collapse="" )
         # display progress

@@ -5,7 +5,7 @@
 ###############################################################################################
 # Jackknife standard error estimation of WLE
 wle.rasch.jackknife <- function( dat , b , itemweights = 1+0*b , pid = NULL , 
-			testlet = NULL , stratum = NULL ,
+            testlet = NULL , stratum = NULL ,
             size.itempop = NULL )
 { 
         # INPUT:
@@ -16,14 +16,14 @@ wle.rasch.jackknife <- function( dat , b , itemweights = 1+0*b , pid = NULL ,
         if( is.null(pid) ){ pid <- seq( 1 , nrow(dat)) }
         # WLE estimate
         wle <- wle.rasch( dat = dat , b = b , itemweights=itemweights )        
-		dat.resp <- 1-is.na( dat )
-		dfr <- est.bias <- NULL
-		
-		if ( ! is.null( size.itempop ) ){
-			if ( is.null( names( size.itempop ) ) ){
-					names(size.itempop) <- sort( unique( stratum ) )
-							}}
-		
+        dat.resp <- 1-is.na( dat )
+        dfr <- est.bias <- NULL
+        
+        if ( ! is.null( size.itempop ) ){
+            if ( is.null( names( size.itempop ) ) ){
+                    names(size.itempop) <- sort( unique( stratum ) )
+                            }}
+        
         cat("Jackknife standard of WLE\n") 
         #*********************************
         # stratified item sampling
@@ -71,13 +71,13 @@ wle.rasch.jackknife <- function( dat , b , itemweights = 1+0*b , pid = NULL ,
                     # finite sampling correction
                     if ( is.null(size.itempop[ss]) ){ fcs <- rep(1,nrow(dat)) } else
                                 { 
-									fcs <- 1 - N.wlejack / size.itempop[ss] 
-							cat( "\nStratum " , ss , "(Mean) Correction Factor" , round(mean(fcs),5) , "\n") 
-								}                    
+                                    fcs <- 1 - N.wlejack / size.itempop[ss] 
+                            cat( "\nStratum " , ss , "(Mean) Correction Factor" , round(mean(fcs),5) , "\n") 
+                                }                    
                     wlevarstrata[,ss] <- fcs * (N.wlejack -1 )/ N.wlejack  * i1
                     sk <- sk+1
                     cat(paste(sk , ".",sep="")) ; 
-					utils::flush.console() ; if( sk %% 10 == 0 | sk == S ){ cat("\n") }
+                    utils::flush.console() ; if( sk %% 10 == 0 | sk == S ){ cat("\n") }
                         }   # end loop strata
             jack.se <- sqrt( rowSums(wlevarstrata )   )
             jackunits <- NA
@@ -100,7 +100,7 @@ wle.rasch.jackknife <- function( dat , b , itemweights = 1+0*b , pid = NULL ,
                     testletcount <- testletcount + ( rowSums( wle$dat.resp[ , testlet == testlets[ii] ] ) > 0 )
                     testlet.ind[,ii] <- ( rowSums( wle$dat.resp[ , testlet == testlets[ii] ] ) > 0 )
                     cat(paste(ii , ".",sep="")) ; 
-					utils::flush.console() ; if( ii %% 10 == 0 | ii == I ){ cat("\n") }
+                    utils::flush.console() ; if( ii %% 10 == 0 | ii == I ){ cat("\n") }
                             }
                 # number of Jackknife units
                 jackunits <- testletcount
@@ -123,14 +123,14 @@ wle.rasch.jackknife <- function( dat , b , itemweights = 1+0*b , pid = NULL ,
                 wlejack[,ii] <- wle.rasch( dat=dat[ , -ii ] , b = b[-ii] , itemweights = itemweights[-ii] ,  
                             theta = wle$theta  )$theta
                 cat(paste(ii , ".",sep="")) ; 
-				utils::flush.console() ; if( ii %% 10 == 0 | ii == I ){ cat("\n") }
+                utils::flush.console() ; if( ii %% 10 == 0 | ii == I ){ cat("\n") }
                         }
-			# estimate WLE bias
-			dfr <- data.frame( "wle" = wle$theta )
-			UJ <- rowSums( dat.resp ) 
-			mean.jack <- rowSums( wlejack , na.rm=T ) / UJ
-			dfr$wle.jack <- UJ * wle$theta - (UJ-1)*mean.jack
-			est.bias <- dfr$est.bias <- - dfr$wle.jack + dfr$wle 
+            # estimate WLE bias
+            dfr <- data.frame( "wle" = wle$theta )
+            UJ <- rowSums( dat.resp ) 
+            mean.jack <- rowSums( wlejack , na.rm=T ) / UJ
+            dfr$wle.jack <- UJ * wle$theta - (UJ-1)*mean.jack
+            est.bias <- dfr$est.bias <- - dfr$wle.jack + dfr$wle 
             # number of Jackknife units
             jackunits <- rowSums( wle$dat.resp > 0 )
             # finite sampling correction
@@ -138,22 +138,22 @@ wle.rasch.jackknife <- function( dat , b , itemweights = 1+0*b , pid = NULL ,
                     { fcs <- 1 - jackunits / size.itempop }
             jack.se <- sqrt( fcs * (jackunits - 1) / jackunits * rowSums( ( wle$dat.resp>0)*( wlejack - outer( wle$theta , rep(1,I) ) )^2  ) )
                             }   # end simple random sampling
-		#*********************************
-		# calculate and print reliability
-		v1 <- stats::var(wle$theta)
-		v2 <- mean( jack.se^2	)
-		wle.rel <- 	( v1 - v2 ) / v1
-		cat("WLE Reliability =" , round(wle.rel,3) , "\n")
+        #*********************************
+        # calculate and print reliability
+        v1 <- stats::var(wle$theta)
+        v2 <- mean( jack.se^2    )
+        wle.rel <-     ( v1 - v2 ) / v1
+        cat("WLE Reliability =" , round(wle.rel,3) , "\n")
         #*********************************
         # collect results
         dfr <- data.frame( "pid" = pid , "N.jackunits" = jackunits , 
                             "sum.itemweights" = rowSums( wle$dat.resp)  , 
                             "score" = rowSums( dat , na.rm=T) , "max" = rowSums( 1 -is.na(dat) ) , 
                             "wle" = wle$theta , "wle.jackse" = jack.se ,
-							"wlejack" = wlejack , 
-							"est.bias" = ifelse( is.null( est.bias) , NA , est.bias )
-							)
-		res <- list( "wle" = dfr , "wle.rel" = wle.rel )
+                            "wlejack" = wlejack , 
+                            "est.bias" = ifelse( is.null( est.bias) , NA , est.bias )
+                            )
+        res <- list( "wle" = dfr , "wle.rel" = wle.rel )
         return(res)
 }
 ###############################################################################################

@@ -21,7 +21,7 @@ Nedelsky model in the \pkg{mirt} package.
 }
 
 \usage{
-# simulating the Nedelsky model	
+# simulating the Nedelsky model    
 nedelsky.sim(theta, b, a = NULL, tau = NULL)
 
 # creating latent responses of the Nedelsky model
@@ -121,7 +121,7 @@ Alexander Robitzsch
 
 
 \examples{
-\dontrun{	
+\dontrun{    
 #############################################################################
 # EXAMPLE 1: Simulated data according to the Nedelsky model
 #############################################################################

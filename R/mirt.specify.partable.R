@@ -44,10 +44,10 @@ mirt.specify.partable <- function(mirt.partable, parlist, verbose=TRUE) {
                     ind <- which((paste(mirt.partable0$item) == rownames(dfr.pp)[ii]) &
                                      (paste(mirt.partable0$name) == colnames(dfr.pp)[cc]) &
                                      mirt.partable0$group == gg) ####
-                    if (!is.na(dfr.pp[ii, cc])) {					
-						if(!length(ind))
-								warning(sprintf("Parameter \'%s\' is not relevant for item %s",
-														 colnames(dfr.pp)[cc], rownames(dfr.pp)[ii]))					
+                    if (!is.na(dfr.pp[ii, cc])) {                    
+                        if(!length(ind))
+                                warning(sprintf("Parameter \'%s\' is not relevant for item %s",
+                                                         colnames(dfr.pp)[cc], rownames(dfr.pp)[ii]))                    
                       if (par.pp != "prior.type") {
                         mirt.partable0[ind, par.pp] <- dfr.pp[ii, cc]
                       } else {
@@ -59,7 +59,7 @@ mirt.specify.partable <- function(mirt.partable, parlist, verbose=TRUE) {
             }
         }
     }
-	mirt.partable0$prior.type <- as.factor(mirt.partable0$prior.type)	
+    mirt.partable0$prior.type <- as.factor(mirt.partable0$prior.type)    
     if(!all(mirt.partable0$prior.type %in% c('none', 'norm', 'beta', 'lnorm'))) ####
         stop('Improper prior.type declared. Please only use the following:
              \'none\', \'norm\', \'beta\', \'lnorm\' ') ####

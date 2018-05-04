@@ -36,7 +36,7 @@ data(data.si06)
 
 \format{
 
-\itemize{	
+\itemize{    
 \item The format of the dataset \code{data.si01} is:
 
 \code{'data.frame':   1857 obs. of  3 variables:} \cr
@@ -148,7 +148,7 @@ Bartolucci, F., Montanari, G. E., & Pandolfi, S. (2012).
 Dimensionality of the latent structure and item selection via latent 
 class multidimensional IRT models. 
 \emph{Psychometrika}, \bold{77}, 782-802.
-	
+    
 Lindsay, B., Clogg, C. C., & Grego, J. (1991). 
 Semiparametric estimation in the Rasch model and related exponential response 
 models, including a simple latent class model for item analysis. 
@@ -157,7 +157,7 @@ models, including a simple latent class model for item analysis.
 
 
 \examples{
-\dontrun{	
+\dontrun{    
 #############################################################################
 # EXAMPLE 1: Nested logit model multiple choice dataset data.si06
 #############################################################################
@@ -185,7 +185,7 @@ ind <-  paste0( "d" , 0:9 )
 ind <- which( colnames(cmod2) \%in\% ind )
 h1 <- cmod2[ ,ind ]
 cmod2[,ind] <- t( apply( h1 , 1 , FUN = function(ll){ ll - mean(ll) } ) )
-cmod2[,-1] <- round( cmod2[,-1] , 3)	
-}	
+cmod2[,-1] <- round( cmod2[,-1] , 3)    
+}    
 }
 \keyword{datasets}

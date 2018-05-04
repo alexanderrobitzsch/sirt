@@ -5,10 +5,10 @@
 ###############################################################################
 # Exploratory DETECT analysis
 expl.detect <- function( data , score , nclusters , N.est = NULL , seed=NULL , 
-		bwscale = 1.1 ){
-	if ( ! is.null(seed) ){
-		set.seed(seed)
-	}
+        bwscale = 1.1 ){
+    if ( ! is.null(seed) ){
+        set.seed(seed)
+    }
     # number of items
     I <- ncol(data)
     # sample for estimation
@@ -39,7 +39,7 @@ expl.detect <- function( data , score , nclusters , N.est = NULL , seed=NULL ,
         detect.unweighted <- rbind( detect.unweighted , h1$unweighted )
         detect.weighted <- rbind( detect.weighted , h1$weighted )    
     }
-	parnames <- c( "DETECT" , "ASSI" , "RATIO" , "MADCOV100" , "MCOV100")
+    parnames <- c( "DETECT" , "ASSI" , "RATIO" , "MADCOV100" , "MCOV100")
     colnames(detect.unweighted) <- paste( parnames , ".est" , sep="")
     colnames(detect.weighted) <- paste( parnames , ".est" , sep="")
     dfr1 <- data.frame( "N.Cluster" = 2:nclusters )
@@ -52,36 +52,36 @@ expl.detect <- function( data , score , nclusters , N.est = NULL , seed=NULL ,
     #************************************
     # Validating DETECT index
     #************************************
-	if ( length(valsample) > 0 ){
-		cc <- ccov.np( data = data[ valsample,] , score = score[valsample] , 
-					bwscale = bwscale )
-		detect.unweighted <- detect.weighted <- NULL
-		for (k in 2:nclusters){ 
-			h1 <- detect.index( ccovtable=cc , itemcluster = itemcluster[,k] )
-			detect.unweighted <- rbind( detect.unweighted , h1$unweighted )
-			detect.weighted <- rbind( detect.weighted , h1$weighted )    
-					}
-		colnames(detect.unweighted) <- paste( parnames , ".val" , sep="")
-		colnames(detect.weighted) <- paste( parnames , ".val" , sep="")
-		detu <- data.frame( detu , detect.unweighted )
-		detw <- data.frame( detw , detect.weighted )
-			}
-	rownames(detect.unweighted) <- paste0("Cl" , 2:nclusters)
-	rownames(detect.weighted) <- rownames(detect.unweighted)
-	cat("\n\nDETECT (unweighted)\n\n")
-	clopt <- which.max( detu$DETECT.est ) + 1 
-	cat("Optimal Cluster Size is " , clopt , " (Maximum of DETECT Index)\n\n" )
-	detu1 <- detu
-	for (vv in 6:ncol(detu)){ detu1[,vv] <- round( detu1[,vv] , 3) }
+    if ( length(valsample) > 0 ){
+        cc <- ccov.np( data = data[ valsample,] , score = score[valsample] , 
+                    bwscale = bwscale )
+        detect.unweighted <- detect.weighted <- NULL
+        for (k in 2:nclusters){ 
+            h1 <- detect.index( ccovtable=cc , itemcluster = itemcluster[,k] )
+            detect.unweighted <- rbind( detect.unweighted , h1$unweighted )
+            detect.weighted <- rbind( detect.weighted , h1$weighted )    
+                    }
+        colnames(detect.unweighted) <- paste( parnames , ".val" , sep="")
+        colnames(detect.weighted) <- paste( parnames , ".val" , sep="")
+        detu <- data.frame( detu , detect.unweighted )
+        detw <- data.frame( detw , detect.weighted )
+            }
+    rownames(detect.unweighted) <- paste0("Cl" , 2:nclusters)
+    rownames(detect.weighted) <- rownames(detect.unweighted)
+    cat("\n\nDETECT (unweighted)\n\n")
+    clopt <- which.max( detu$DETECT.est ) + 1 
+    cat("Optimal Cluster Size is " , clopt , " (Maximum of DETECT Index)\n\n" )
+    detu1 <- detu
+    for (vv in 6:ncol(detu)){ detu1[,vv] <- round( detu1[,vv] , 3) }
     print(detu1)
     res <- list( "detect.unweighted" = detect.unweighted , "detect.weighted" = detect.weighted ,
                     "clusterfit" = clusterfit , "itemcluster" = itemcluster )
-	# plot cluster solution
-	graphics::plot( res$clusterfit , 
-			main = paste( "Cluster Dendogram with " , clopt , " Clusters" , sep="")
-					)
+    # plot cluster solution
+    graphics::plot( res$clusterfit , 
+            main = paste( "Cluster Dendogram with " , clopt , " Clusters" , sep="")
+                    )
     stats::rect.hclust(res$clusterfit, k=clopt, border="red")
-	class(res) <- "expl.detect"
-	return(res)
+    class(res) <- "expl.detect"
+    return(res)
 }
 ###############################################################################

@@ -12,10 +12,10 @@ function( noharmobj , theta.k =seq(-6,6,len=21) , print.output=TRUE ){
     dat <- mod$dat
     N <- nrow(dat)
     theta.k <- as.matrix( expand.grid( as.data.frame( matrix( rep( theta.k , D) , ncol = D ) ) ) )
-    TT <- nrow(theta.k)		
-	if ( TT > 1000 ){
-		theta.k <- qmc.nodes( snodes = 1000 , ndim=D )
-						}
+    TT <- nrow(theta.k)        
+    if ( TT > 1000 ){
+        theta.k <- qmc.nodes( snodes = 1000 , ndim=D )
+                        }
     TT <- nrow(theta.k) 
     #***
     # calculate probabilities
@@ -25,7 +25,7 @@ function( noharmobj , theta.k =seq(-6,6,len=21) , print.output=TRUE ){
         probs <- probs + outer( FL[,dd] , theta.k[,dd] )
                 }
     guessM <- matrix( mod$guess , nrow=I , ncol=TT )
-    upperM <- matrix( mod$upper , nrow=I , ncol=TT )	
+    upperM <- matrix( mod$upper , nrow=I , ncol=TT )    
     probs1 <- guessM + ( upperM - guessM) * stats::pnorm( probs )
     probs <- array( 0 , dim=c(I , TT , 2 ) )
     probs[,,1] <- 1-probs1
@@ -61,18 +61,18 @@ function( noharmobj , theta.k =seq(-6,6,len=21) , print.output=TRUE ){
         # calculate EAP reliability
         # EAP variance
         EAP.variance <- stats::weighted.mean( person$EAP^2 , pweights ) - 
-							( stats::weighted.mean( person$EAP , pweights ) )^2
+                            ( stats::weighted.mean( person$EAP , pweights ) )^2
         EAP.error <- stats::weighted.mean( person$SD.EAP^2 , pweights )
         EAP.rel[dd] <- EAP.variance / ( EAP.variance + EAP.error )    
         colnames(person)[ which( colnames(person) == "EAP" ) ] <- paste("EAP.Dim" , dd , sep="")
         colnames(person)[ which( colnames(person) == "SD.EAP" ) ] <- paste("SD.EAP.Dim" , dd , sep="")                
         }
     if ( print.output ){
-		cat("EAP Reliabilities:\n")
-		print( round (EAP.rel,3) )
-					}
+        cat("EAP Reliabilities:\n")
+        print( round (EAP.rel,3) )
+                    }
     res <- list( "person" = person , "theta"=theta.k , 
-			"posterior" = posterior , "like"= like , 
+            "posterior" = posterior , "like"= like , 
             "EAP.rel" = EAP.rel , "probs" = probs )
     return(res)
     }

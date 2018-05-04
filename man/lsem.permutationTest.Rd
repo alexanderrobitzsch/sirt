@@ -109,7 +109,7 @@ p values.}
 \item{parameters_summary_M}{Mean of each parameter in permutation sample.}
 \item{parameters_summary_SD}{Standard deviation (SD) statistic in permutation slope.}
 \item{parameters_summary_MAD}{Mean absolute deviation (MAD)
-	statistic in permutation sample.}
+    statistic in permutation sample.}
 \item{parameters_summary_MAD}{Linear slope parameter in permutation sample.}
 }
 

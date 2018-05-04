@@ -44,7 +44,7 @@ latent.regression.em.normal(y, X, sig.e, weights = rep(1, nrow(X)),
   \code{\link{rasch.copula2}}. The use of this argument allows the
   estimation of the latent regression model independent of the
   parameters of the used item response model.
-	}
+    }
   \item{X}{An \eqn{N \times K} matrix of \eqn{K} covariates in the latent 
     regression model. Note that the intercept (i.e. a vector of ones) 
     must be included in \code{X}.
@@ -92,7 +92,7 @@ Maximum number of iterations
 progress should be displayed.}
 \item{y}{Individual scores}
 \item{sig.e}{Standard errors for individual scores}
-  \item{object}{  	  
+  \item{object}{        
 Object of class \code{latent.regression}
 }
   \item{\dots}{
@@ -120,7 +120,7 @@ A list with following entries
   \item{summary.coef}{Summary of regression coefficients}
   \item{sigma}{Estimate of residual standard deviation}
   \item{vcov.simple}{Covariance parameters of estimated parameters 
-  	(simplified version)}
+      (simplified version)}
   \item{vcov.latent}{Covariance parameters of estimated parameters
                         which accounts for latent ability}  
 \item{post}{Individual posterior distribution}
@@ -245,8 +245,8 @@ summary( stats::lm( theta  ~ x + y , data = dfr ) )
 # upper asymptotes ( 1 minus slipping parameters)
 cI <- rep(.2, I)        # all items get a guessing parameter of .2
 cI[ c(7,9) ] <- .25     # 7th and 9th get a guessing parameter of .25
-dI <- rep( .95 , I )	# upper asymptote of .95
-dI[ c(7,11) ] <- 1		# 7th and 9th item have an asymptote of 1
+dI <- rep( .95 , I )    # upper asymptote of .95
+dI[ c(7,11) ] <- 1        # 7th and 9th item have an asymptote of 1
 
 # latent regression model
 mod1 <- sirt::latent.regression.em.raschtype( data = dat1 , X  = dfr[,-1] ,

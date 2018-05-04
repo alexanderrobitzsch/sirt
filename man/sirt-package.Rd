@@ -200,7 +200,7 @@ Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de> \cr \cr
 \references{
 Asparouhov, T., & Muthen, B. (2014).
 Multiple-group factor analysis alignment.
-\emph{Structural Equation Modeling}, \bold{21}, 1-14.	
+\emph{Structural Equation Modeling}, \bold{21}, 1-14.    
 
 Bartolucci, F. (2007). A class of multidimensional
 IRT models for testing unidimensionality and clustering

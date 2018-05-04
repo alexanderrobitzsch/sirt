@@ -39,7 +39,7 @@ rm.facets(dat, pid=NULL, rater=NULL, Qmatrix=NULL, theta.k=seq(-9, 9, len=30),
     maxdevchange=0.1, globconv=0.001, maxiter=1000, msteps=4, mstepconv=0.001, 
     PEM=FALSE, PEM_itermax=maxiter)
     
-\method{summary}{rm.facets}(object, file=NULL, ...)	  
+\method{summary}{rm.facets}(object, file=NULL, ...)      
 
 \method{anova}{rm.facets}(object,...)
 
@@ -99,13 +99,13 @@ parameters must be declared by \code{NA} values.}
 \item{b.rater.fixed}{Vector with fixed rater intercept parameters}
 \item{a.rater.fixed}{Vector with fixed rater discrimination parameters}
 \item{b.rater.center}{Centering method for rater intercept parameters. The
-	value \code{0} corresponds to no centering, the values \code{1} and
+    value \code{0} corresponds to no centering, the values \code{1} and
 \code{2} to different methods to ensure that they sum to zero.}
 \item{a.rater.center}{Centering method for rater discrimination parameters. The
-	value \code{0} corresponds to no centering, the values \code{1} and
+    value \code{0} corresponds to no centering, the values \code{1} and
 \code{2} to different methods to ensure that their product equals one.}
 \item{a.item.center}{Centering method for item discrimination parameters. The
-	value \code{0} corresponds to no centering, the values \code{1} and
+    value \code{0} corresponds to no centering, the values \code{1} and
 \code{2} to different methods to ensure that their product equals one.}  
 \item{a_lower}{Lower bound for \eqn{a} parameters}
 \item{a_upper}{Upper bound for \eqn{a} parameters}
@@ -149,10 +149,10 @@ Further arguments to be passed
 
 
 % \item{skillspace}{Type of skill space which is used to smooth the distribution
-%	on nodes \code{theta.k}. \code{skillspace="normal"} corresponds to
-%	a normal distribution, \code{skillspace="loglinear"} to log-linear
-%	modelling of the skill space distribution for which a design matrix \eqn{Z}
-%	has to be specified, and \code{skillspace="no"} corresponds to an
+%    on nodes \code{theta.k}. \code{skillspace="normal"} corresponds to
+%    a normal distribution, \code{skillspace="loglinear"} to log-linear
+%    modelling of the skill space distribution for which a design matrix \eqn{Z}
+%    has to be specified, and \code{skillspace="no"} corresponds to an
 % unsmoothed distribution.} 
 
 %\item{Z}{Design matrix for trait distribution if \code{skillspace="loglinear"}.
@@ -169,10 +169,10 @@ for person \eqn{p}, rater \eqn{r} and item \eqn{i}
 and category \eqn{k} (see also Robitzsch & Steinfeld, 2018; Uto & Ueno, 2010; Wu, 2017)
 \deqn{P( X_{pri} = k | \theta_p ) \propto
     exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r -   \tau_{ik} ) \quad , 
-	\quad \theta_p \sim N( 0 , \sigma^2 )}{%
+    \quad \theta_p \sim N( 0 , \sigma^2 )}{%
     P( X_{pri} = k | \theta_p ) \propto
     exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r - \tau_{ik} )    ,   
-    		\theta_p ~ N( 0 , \sigma^2 )}
+            \theta_p ~ N( 0 , \sigma^2 )}
 By default, the scores in the \eqn{Q} matrix are
 \eqn{q_{ik}=k}. Item slopes \eqn{a_i} and rater slopes
 \eqn{a_r} are standardized such that their product equals
@@ -190,7 +190,7 @@ A list with following entries:
 \item{item}{Data frame with item parameters}
 \item{rater}{Data frame with rater parameters}
 \item{person}{Data frame with person parameters: EAP and corresponding 
-	standard errors}
+    standard errors}
 \item{EAP.rel}{EAP reliability}
 \item{mu}{Mean of the trait distribution}
 \item{sigma}{Standard deviation of the trait distribution}
@@ -201,8 +201,8 @@ A list with following entries:
 \item{a.item}{Item slopes \eqn{a_i}}
 \item{se.a.item}{Standard error of item slopes \eqn{a_i}}
 \item{delta.item}{Delta item parameter. See 
-	\code{\link{pcm.conversion}}.
-	   }
+    \code{\link{pcm.conversion}}.
+       }
 \item{b.rater}{Rater severity parameter \eqn{b_r}}
 \item{se.b.rater}{Standard error of rater severity parameter \eqn{b_r}}
 \item{a.rater}{Rater slope parameter \eqn{a_r}}
@@ -225,8 +225,8 @@ A list with following entries:
 \references{
 Berlinet, A. F., & Roland, C. (2012). 
 Acceleration of the EM algorithm: P-EM versus epsilon algorithm.
-\emph{Computational Statistics & Data Analysis, 56}(12), 4122-4137.	
-	
+\emph{Computational Statistics & Data Analysis, 56}(12), 4122-4137.    
+    
 Linacre, J. M. (1994). \emph{Many-Facet Rasch Measurement}. 
 Chicago: MESA Press.
 

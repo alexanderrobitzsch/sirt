@@ -6,17 +6,17 @@
 # analytical bias correction of JML estimated Rasch model
 # rasch.jml.biascorr <- function( data , data.resp , theta , b , adjmin=.5 ){
 rasch.jml.biascorr <- function( jmlobj , itemfac = NULL # , adjmin=.5 
-				){
-	mod <- jmlobj
-	m1 <- mod$data.proc
-	data <- m1$data
-	data.resp <- m1$data.resp
-	theta <- m1$theta
-	b <- mod$item$itemdiff
+                ){
+    mod <- jmlobj
+    m1 <- mod$data.proc
+    data <- m1$data
+    data.resp <- m1$data.resp
+    theta <- m1$theta
+    b <- mod$item$itemdiff
 
     I <- length(b)
-	I1 <- mean( rowSums( data.resp ) )
-	if (! is.null( itemfac) ){ I1 <- itemfac }
+    I1 <- mean( rowSums( data.resp ) )
+    if (! is.null( itemfac) ){ I1 <- itemfac }
     N <- nrow(data)
     p_it <- stats::plogis( outer( theta , b , "-" ) )
     q_it <- 1 - p_it
@@ -85,12 +85,12 @@ rasch.jml.biascorr <- function( jmlobj , itemfac = NULL # , adjmin=.5
 #    b.analytcorr2b <- mean( ( b.analytcorr2a / b )[ind] )*b  
     
     dfr <- data.frame( "b.JML"=b , "b.JMLcorr" = (I1-1)/I1*b , 
-		b.analytcorr1 , # b.analytcorr1b ,
+        b.analytcorr1 , # b.analytcorr1b ,
         b.analytcorr2  #, b.analytcorr2b 
-		)
+        )
     
     res <- list( "b.biascorr" = dfr , "b.bias1" = b.bias1 , "b.bias2" = b.bias2 ,
-			"itemfac" = I1 )
+            "itemfac" = I1 )
     return(res)
         }
 #########################################################################################

@@ -37,8 +37,8 @@ mcmc.2pno.ml(dat, group, link="logit" , est.b.M = "h", est.b.Var = "n",
 Vector of group identifiers (e.g. classes, schools or countries)
 }
 \item{link}{Link function. Choices are \code{"logit"} for dichotomous data
-	and \code{"normal"} for data under normal distribution assumptions
-		}
+    and \code{"normal"} for data under normal distribution assumptions
+        }
   \item{est.b.M}{
 Estimation type of \eqn{b_i} parameters: \cr \code{n} - non-hierarchical prior
 distribution, i.e. \eqn{\omega_b} is set to a very high value and is not 
@@ -97,7 +97,7 @@ Prior for \eqn{\omega_b}
 Prior for \eqn{\omega_a}
 }
 \item{sigma.b.init}{
-Initial standard deviation for \eqn{\sigma_{b,i}} parameters	
+Initial standard deviation for \eqn{\sigma_{b,i}} parameters    
 }
 }
 
@@ -115,16 +115,16 @@ item \eqn{i}, the probability of a correct response is defined as
 \deqn{P( X_{pji} = 1 | \theta_{pj} ) = \Phi ( a_{ij} \theta_{pj} - b_{ij} )}
 The ability \eqn{\theta_{pj}} is decomposed into a Level 1 and a Level 2
 effect \deqn{\theta_{pj} = u_j + e_{pj} \quad , \quad 
-	u_j \sim N ( 0 , \sigma_{L2}^2 ) \quad , \quad
-	e_{pj} \sim N ( 0 , \sigma_{L1}^2 ) }
+    u_j \sim N ( 0 , \sigma_{L2}^2 ) \quad , \quad
+    e_{pj} \sim N ( 0 , \sigma_{L1}^2 ) }
 In a multilevel IRT model (or a random item model), item parameters are
 allowed to vary across groups:
 \deqn{ b_{ij} \sim N( b_i , \sigma^2_{b,i} ) \quad , \quad
-	a_{ij} \sim N( a_i , \sigma^2_{a,i} ) }
+    a_{ij} \sim N( a_i , \sigma^2_{a,i} ) }
 In a hierarchical IRT model, a hierarchical distribution of the (main)
 item parameters is assumed
 \deqn{ b_{i} \sim N( \mu_b , \omega^2_{b} ) \quad , \quad
-	a_{i} \sim N( 1 , \omega^2_{a} ) }
+    a_{i} \sim N( 1 , \omega^2_{a} ) }
 Note that for identification purposes, the mean of all item slopes \eqn{a_i}
 is set to one. Using the arguments \code{est.b.M}, \code{est.b.Var},
 \code{est.a.M} and \code{est.a.Var} defines which variance components 
@@ -157,8 +157,8 @@ A list of class \code{mcmc.sirt} with following entries:
   \item{deviance.chain}{Sampled values of Deviance values}  
   \item{EAP.rel}{EAP reliability}
   \item{person}{Data frame with EAP person parameter estimates for 
-  	  \eqn{\theta_pj} and their corresponding posterior standard
-  	deviations}  
+        \eqn{\theta_pj} and their corresponding posterior standard
+      deviations}  
   \item{dat}{Used data frame}
   \item{\dots}{Further values}
 }
@@ -171,12 +171,12 @@ A list of class \code{mcmc.sirt} with following entries:
 Asparouhov, T. & Muthen, B. (2012). General random effect latent variable 
 modeling: Random subjects, items, contexts, and parameters. 
 \url{http://www.statmodel.com/papers_date.shtml}.
-	
+    
 Chaimongkol, S., Huffer, F. W., & Kamata, A. (2007). 
 An explanatory differential item functioning (DIF) 
 model by the WinBUGS 1.4. 
-\emph{Songklanakarin Journal of Science and Technology}, \bold{29}, 449-458.	
-	
+\emph{Songklanakarin Journal of Science and Technology}, \bold{29}, 449-458.    
+    
 Fox, J.-P., & Verhagen, A.-J. (2010). Random item effects modeling for 
 cross-national survey data. 
 In E. Davidov, P. Schmidt, & J. Billiet (Eds.), 
@@ -206,10 +206,10 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-S3 methods: \code{\link{summary.mcmc.sirt}}, \code{\link{plot.mcmc.sirt}} 	
-	
+S3 methods: \code{\link{summary.mcmc.sirt}}, \code{\link{plot.mcmc.sirt}}     
+    
 For MCMC estimation of three-parameter (testlet) models see 
-\code{\link{mcmc.3pno.testlet}}.	
+\code{\link{mcmc.3pno.testlet}}.    
 
 See also the \pkg{MLIRT} package (http://www.jean-paulfox.com).
 
@@ -222,7 +222,7 @@ For more flexible estimation of multilevel IRT models see the
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \examples{
-\dontrun{	
+\dontrun{    
 #############################################################################
 # EXAMPLE 1: Dataset Multilevel data.ml1 - dichotomous items
 #############################################################################
@@ -235,7 +235,7 @@ burnin <- 50 ; iter <- 100
 #***
 # Model 1: 1PNO with no cluster item effects
 mod1 <- sirt::mcmc.2pno.ml( dat , group , est.b.Var="n" , burnin=burnin , iter=iter )
-summary(mod1)	# summary
+summary(mod1)    # summary
 plot(mod1,layout=2,ask=TRUE) # plot results
 # write results to coda file
 mcmclist2coda( mod1$mcmcobj , name = "data.ml1_mod1" )

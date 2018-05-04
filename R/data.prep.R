@@ -10,7 +10,7 @@
         #               default = TRUE
         #-------------------
         # should items being excluded?
-# a0 <- Sys.time()		
+# a0 <- Sys.time()        
         item.means <- colMeans( dat , na.rm=T )
         item.elim <- which( item.means %in% c(0,1))
         if ( length( item.elim ) > 0 ){
@@ -19,23 +19,23 @@
         if ( any( is.na( item.means )) ){ stop( "There are items which contains only missings!") }
          n <- nrow(dat)
         I <- ncol(dat)  
-		if( is.null(weights) ){  weights <- rep( 1 , n ) }
+        if( is.null(weights) ){  weights <- rep( 1 , n ) }
         # indicator for nonmissing response
         dat.9 <- dat
         dat.9[ is.na(dat) ] <- 9
          # pattern                           
-        if ( use.freqpatt ){ 		#		
-			freq.patt <- apply( dat.9 , 1 , FUN = function(ll){ paste(ll , collapse="" ) } )  #
-#		freq.patt <- dat.9[,1]
-#		for (ii in 2:I){ freq.patt <- paste0( freq.patt , dat.9[,ii] ) }	
+        if ( use.freqpatt ){         #        
+            freq.patt <- apply( dat.9 , 1 , FUN = function(ll){ paste(ll , collapse="" ) } )  #
+#        freq.patt <- dat.9[,1]
+#        for (ii in 2:I){ freq.patt <- paste0( freq.patt , dat.9[,ii] ) }    
         # frequency pattern with frequencies
-					dat1 <- data.frame( table( freq.patt ) )
-# cat("a220") ; a1 <- Sys.time(); print(a1-a0) ; a0 <- a1										
+                    dat1 <- data.frame( table( freq.patt ) )
+# cat("a220") ; a1 <- Sys.time(); print(a1-a0) ; a0 <- a1                                        
                         } else { 
-					freq.patt <- paste("FP" , 1000000 + 1:n , sep="")
-					dat1 <- data.frame( freq.patt )
-					colnames(dat1)[1] <- "freq.patt"
-							}
+                    freq.patt <- paste("FP" , 1000000 + 1:n , sep="")
+                    dat1 <- data.frame( freq.patt )
+                    colnames(dat1)[1] <- "freq.patt"
+                            }
          # weighting the frequencies if survey weights are supplied
         if( !is.null(weights) ){        
             # standardize weights
@@ -43,22 +43,22 @@
             if ( use.freqpatt ){ 
                     dat1[,2] <- stats::aggregate( weights , list( freq.patt) , sum )[,2]
                         } else { 
-					dat1[,"Freq"] <- weights 
-						}
-                    }	
+                    dat1[,"Freq"] <- weights 
+                        }
+                    }    
          # item pattern corresponding to frequency pattern
-		if ( use.freqpatt){ 
-			dat2 <- matrix( as.numeric( unlist( strsplit( paste(dat1[,1]) , "" ) ) ) , ncol= ncol(dat) , byrow=T)
-					} else { 
-					dat2 <- dat.9 }
+        if ( use.freqpatt){ 
+            dat2 <- matrix( as.numeric( unlist( strsplit( paste(dat1[,1]) , "" ) ) ) , ncol= ncol(dat) , byrow=T)
+                    } else { 
+                    dat2 <- dat.9 }
         dat2.resp <- 1 * ( dat2 !=9 )
-		dat2[ dat2 == 9 ] <- 0
+        dat2[ dat2 == 9 ] <- 0
          # mean right
         dat1$mean <- rowSums( dat2 * dat2.resp )  / rowSums( dat2.resp )     
         freq.patt <- data.frame(  freq.patt , rowMeans( dat , na.rm=TRUE ) , 1:n )
         colnames(freq.patt)[2:3] <- c("mean" , "index" )
         list( "dat" = dat , "dat2" = dat2 , "dat2.resp" = dat2.resp , "dat1" = dat1 , 
-				"freq.patt" = freq.patt  , "I" = I , "n" = n ,
+                "freq.patt" = freq.patt  , "I" = I , "n" = n ,
                 "dat9" = dat.9  )       
         }
     #*******************

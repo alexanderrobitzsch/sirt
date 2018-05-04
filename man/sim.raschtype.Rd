@@ -85,9 +85,9 @@ Alexander Robitzsch
 \examples{
 #############################################################################
 ## EXAMPLE 1: Simulation of data from a Rasch model (alpha_1 = alpha_2 = 0)
-#############################################################################	
+#############################################################################    
 
-set.seed(9765)	
+set.seed(9765)    
 N <- 500    # number of persons
 I <- 11     # number of items
 b <- seq( -2 , 2 , length=I )

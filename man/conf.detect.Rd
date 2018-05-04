@@ -100,8 +100,8 @@ and MCOV100}
 Bonifay, W. E., Reise, S. P., Scheines, R., & Meijer, R. R. (2015). 
 When are multidimensional data unidimensional enough for structural 
 equation modeling? An evaluation of the DETECT multidimensionality index. 
-\emph{Structural Equation Modeling}, \bold{22}, 504-516.	
-	
+\emph{Structural Equation Modeling}, \bold{22}, 504-516.    
+    
 Jang, E. E., & Roussos, L. (2007). An investigation into the dimensionality
 of TOEFL using conditional covariance-based nonparametric approach.
 \emph{Journal of Educational Measurement}, \bold{44}, 1-21.

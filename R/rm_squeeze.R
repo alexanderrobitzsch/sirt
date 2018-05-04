@@ -3,7 +3,7 @@
 
 rm_squeeze <- function(x, lower, upper )
 {
-	x[ x < lower ] <- lower
-	x[ x > upper ] <- upper
-	return(x)
+    x[ x < lower ] <- lower
+    x[ x > upper ] <- upper
+    return(x)
 }

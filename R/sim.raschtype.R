@@ -5,7 +5,7 @@
 #########################################################################
 # simulation of Rasch type models
 sim.raschtype <- function( theta , b , alpha1 = 0, alpha2 = 0 , fixed.a = NULL , 
-		fixed.c = NULL , fixed.d = NULL )
+        fixed.c = NULL , fixed.d = NULL )
 { 
     if ( is.null(fixed.a)){ fixed.a <- 1+0*b }
     if ( is.null(fixed.c)){ fixed.c <- 0*b }
@@ -22,11 +22,11 @@ sim.raschtype <- function( theta , b , alpha1 = 0, alpha2 = 0 , fixed.a = NULL ,
     expprob <- trlat
     # define response matrix
     dat.resp <- 1 * ( expprob > matrix( stats::runif( nrow(expprob)*ncol(expprob) ) , 
-							ncol= ncol(expprob )) )
-	I <- length(b)
-	pot <- max( 2 , floor(log10(I) + 1 ) )
-	colnames(dat.resp) <- paste( "I" , substring( 10^pot + 1:I,2) , sep="")
-	dat.resp <- as.data.frame(dat.resp)
+                            ncol= ncol(expprob )) )
+    I <- length(b)
+    pot <- max( 2 , floor(log10(I) + 1 ) )
+    colnames(dat.resp) <- paste( "I" , substring( 10^pot + 1:I,2) , sep="")
+    dat.resp <- as.data.frame(dat.resp)
     return(dat.resp)
 }
 #########################################################################

@@ -17,7 +17,7 @@ These functions have been removed or replaced in the \pkg{sirt}
 package. 
 }
 
-\usage{	
+\usage{    
 rasch.conquest(...)
 rasch.pml2(...)
 testlet.yen.q3(...)
@@ -25,12 +25,12 @@ yen.q3(...)
 }
 
 \arguments{
-	\item{\dots}{Arguments to be passed.}
+    \item{\dots}{Arguments to be passed.}
 }
 
 \details{
 The \code{rasch.conquest} function has been replaced by
-\code{\link{R2conquest}}.	
+\code{\link{R2conquest}}.    
 
 The \code{rasch.pml2} function has been superseded by
 \code{\link{rasch.pml3}}.

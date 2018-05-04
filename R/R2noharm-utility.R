@@ -32,13 +32,13 @@
         i1 <- grep( itemlevel.type , noharmout1 )
         VV <- floor(I/9)+1 * ( I/9 != floor( I/9) )
         uniquevar <- noharmout1[ seq( i1+5 , i1 + 5 + 4*(VV-1) , 4 ) ]
-		#*** addition ARb 2014-01-29
-			uniquevar <- uniquevar[ substring( uniquevar , 1 , 1 ) == " " ]
-		#***
+        #*** addition ARb 2014-01-29
+            uniquevar <- uniquevar[ substring( uniquevar , 1 , 1 ) == " " ]
+        #***
         uniquevar <- paste( uniquevar , collapse= "  " )
         uniquevar <- strsplit( uniquevar , split = " " )[[1]]
         uniquevar <- as.numeric( paste( uniquevar[ uniquevar != "" ] ) )
-		uniquevar <- uniquevar[1:I]
+        uniquevar <- uniquevar[1:I]
         names(uniquevar) <- colnames(dat)
         return( uniquevar )
         }
@@ -52,17 +52,17 @@
     i2 <- grep( type2 , noharmout1 )[1]
     rows <- seq( i1+2 , i2-4  )
     if ( ( dimensions == 1 ) & ( type1 == "Factor Loadings" ) ){
-		rows <- seq(i1+2 , i2-6 )
-			}
+        rows <- seq(i1+2 , i2-6 )
+            }
     r1 <- intersect( which( noharmout1 == "" ) , rows )
     VV <- length(r1)/2
     r2 <- stats::aggregate( r1 , list(rep( 1:VV , each=2 )) , mean )
     colnames(r2) <- c("index" , "index.row" )
     index.m <- data.frame( r2 , "begin" = r2[,2] + 2 , 
                     "end" = c( r2[,2][-1] - 2 , i2-4 ) )
-		if ( dimensions == 1 & type1 == "Factor Loadings"){
-				index.m$end <- i2 - 6
-					}
+        if ( dimensions == 1 & type1 == "Factor Loadings"){
+                index.m$end <- i2 - 6
+                    }
     loading.matrix <- matrix(0,I,dimensions)
     rownames(loading.matrix) <- colnames(dat)
     colnames(loading.matrix) <- paste( "F" , 1:dimensions, sep="")
@@ -76,7 +76,7 @@
                             ll1 <- strsplit( paste(ll) , split=" " )[[1]] 
                             as.numeric( ll1[ ll1 != ll1[1] ] )
                                                 } )
-		loading.vv <- as.matrix( loading.vv )
+        loading.vv <- as.matrix( loading.vv )
         ind.vv.row <- as.vector( loading.vv[1,] )
         loading.vv <-  loading.vv[-1,]
         loading.matrix[ ind.vv.row , ind.vv.col ] <- t(loading.vv) 
@@ -88,8 +88,8 @@
 #--------------------------------------------------------------------------
 # Function for extracting Factor Correlations                              
 .noharm.correlations <- function( noharmout1 , 
-						type1 = "Factor Correlations" , 
-						type2 = "Residual Matrix" ,
+                        type1 = "Factor Correlations" , 
+                        type2 = "Residual Matrix" ,
                                     dimensions=dimensions , dat = dat ){
     i1 <- grep( type1, noharmout1 )[1]
     i2 <- grep( type2 , noharmout1 )[1]
@@ -158,13 +158,13 @@
         resid.vv <- sapply( resid.vv , FUN = function(ll){
                             ll1 <- strsplit( paste(ll) , split=" " )[[1]] 
                             as.numeric( ll1[ ll1 != "" ] )
-                                                } )								
+                                                } )                                
     if (is.list( resid.vv)){ 
-			gh1 <- lapply( resid.vv , FUN = function(ll){ length(ll) } )
-			ind1 <- which (gh1 == 0)
-			if ( length(ind1) > 0 ){
-				for (ii in ind1 ){	resid.vv[[ii]] <- NULL }
-						}
+            gh1 <- lapply( resid.vv , FUN = function(ll){ length(ll) } )
+            ind1 <- which (gh1 == 0)
+            if ( length(ind1) > 0 ){
+                for (ii in ind1 ){    resid.vv[[ii]] <- NULL }
+                        }
             ind.vv.row <- as.vector(unlist( lapply( resid.vv , FUN = function(ll){ ll[1] } ) ))
             resid.vv <-  lapply( resid.vv , FUN = function(ll){ ll[-1] } ) 
                         } else {

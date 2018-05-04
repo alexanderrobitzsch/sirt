@@ -201,7 +201,7 @@ package for similar functionality.
 }
 
 \examples{
-\dontrun{	
+\dontrun{    
 #############################################################################
 ## EXAMPLE 1: Unidimensional item response functions
 #############################################################################
@@ -537,7 +537,7 @@ library(TAM)
 mod2b <- TAM::tam.mml( resp=dat[,items] , group = dat$female )
 summary(mod2b)
 IRT.compareModels(mod1, mod2, mod2b)
-}	
+}    
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -21,7 +21,7 @@ Some Functions for Wrapping with the \pkg{mirt} Package
 Some functions for wrapping with the \pkg{mirt} package.
 }
 \usage{
-# extract coefficients	
+# extract coefficients    
 mirt.wrapper.coef(mirt.obj)
 
 # extract posterior, likelihood, ...
@@ -44,7 +44,7 @@ mirt.wrapper.itemplot( mirt.obj , ask=TRUE , ...)
 A fitted model in \pkg{mirt} package
 }
 \item{object}{A fitted object in \pkg{mirt} package of class
-	\code{SingleGroupClass} or \code{MultipleGroupClass}.
+    \code{SingleGroupClass} or \code{MultipleGroupClass}.
 }
 \item{weights}{Optional vector of student weights}
 \item{ask}{Optional logical indicating whether each new plot should be
@@ -71,7 +71,7 @@ after each other.
 }
 
 \value{
-	
+    
 Function \code{mirt.wrapper.coef} -- List with entries
 
 \item{coef}{Data frame with item parameters}
@@ -90,7 +90,7 @@ Function \code{mirt.wrapper.posterior} -- List with entries
 Function \code{mirt.wrapper.fscores} -- List with entries  
 
 \item{person}{Data frame with person parameter estimates (factor scores)
-	EAP, MAP and MLE for all dimensions.
+    EAP, MAP and MLE for all dimensions.
 }
 \item{EAP.rel}{EAP reliabilities}
 }
@@ -118,7 +118,7 @@ and on GitHub \url{https://github.com/philchalmers/mirt}.
 % \href{https://github.com/philchalmers/mirt}{GitHub}
 
 See \url{https://groups.google.com/forum/#!forum/mirt-package}
-for discussion about the \pkg{mirt} package. \cr		
+for discussion about the \pkg{mirt} package. \cr        
 
 
 See for the main estimation functions in \pkg{mirt}:
