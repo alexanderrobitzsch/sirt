@@ -1,5 +1,5 @@
 %% File Name: tam2mirt.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{tam2mirt}
 \alias{tam2mirt}
@@ -77,7 +77,7 @@ syntax to \code{mirt} syntax.
 
 
 \examples{
-\dontrun{    
+\dontrun{
 library(TAM)
 library(mirt)
 
@@ -115,8 +115,8 @@ mirt::itemfit(mres)
 # person fit
 mirt::personfit(mres)
 # compute several types of factor scores (quite slow)
-f1 <- mirt::fscores(mres, method='WLE',response.pattern=dat[1:10,]) 
-     # method = MAP and EAP also possible 
+f1 <- mirt::fscores(mres, method='WLE',response.pattern=dat[1:10,])
+     # method = MAP and EAP also possible
 # item plot
 mirt::itemplot(mres,"A3")    # item A3
 mirt::itemplot(mres,4)       # fourth item
@@ -205,7 +205,7 @@ cat(res$lavaan.syntax.freed)
   ##   Dim03 ~~ Cov_33*Dim03
   ##   Dim01 ~~ Cov_12*Dim02
   ##   Dim01 ~~ Cov_13*Dim03
-  ##   Dim02 ~~ Cov_23*Dim03 
+  ##   Dim02 ~~ Cov_23*Dim03
 # model fit
 mirt::M2(mres)
 # residual statistics
@@ -239,7 +239,7 @@ mirt::itemfit(mres)
 
 # estimate mirt model by using the generated lavaan syntax with freed parameters
 res2 <- sirt::lavaan2mirt( dat , res$lavaan.syntax.freed ,
-            technical=list(NCYCLES=3) , verbose=TRUE)  
+            technical=list(NCYCLES=3) , verbose=TRUE)
                  # use only few cycles for illustrational purposes
 mirt.wrapper.coef(res2$mirt)
 summary(res2$mirt)

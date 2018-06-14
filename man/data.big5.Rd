@@ -1,5 +1,5 @@
 %% File Name: data.big5.Rd
-%% File Version: 0.42
+%% File Version: 0.43
 
 \name{data.big5}
 \alias{data.big5}
@@ -23,13 +23,13 @@ data(data.big5.qgraph)
 
 \format{
 \itemize{
-\item The format of \code{data.big5} is: \cr 
+\item The format of \code{data.big5} is: \cr
 \code{ num [1:500, 1:240] 1 0 0 0 0 1 1 2 0 1 ...} \cr
 \code{ - attr(*, "dimnames")=List of 2} \cr
 \code{  ..$ : NULL} \cr
 \code{  ..$ : chr [1:240] "N1" "E2" "O3" "A4" ...} \cr
 
-\item The format of \code{data.big5.qgraph} is: \cr  
+\item The format of \code{data.big5.qgraph} is: \cr
 
 \code{ num [1:500, 1:240] 2 3 4 4 5 2 2 1 4 2 ...} \cr
 \code{ - attr(*, "dimnames")=List of 2} \cr
@@ -41,8 +41,8 @@ data(data.big5.qgraph)
 
 \details{
 In these datasets, there exist 48 items for each dimension. The Big 5
-dimensions are Neuroticism (\code{N}), Extraversion (\code{E}), 
-Openness (\code{O}), Agreeableness (\code{A}) and 
+dimensions are Neuroticism (\code{N}), Extraversion (\code{E}),
+Openness (\code{O}), Agreeableness (\code{A}) and
 Conscientiousness (\code{C}). Note that the \code{data.big5} differs from
 \code{data.big5.qgraph} in a way that original items were recoded into
 three categories 0,1 and 2.
@@ -55,8 +55,8 @@ See \code{big5} in \pkg{qgraph} package.
 
 
 \references{
-Dolan, C. V., Oort, F. J., Stoel, R. D., & Wicherts, J. M. (2009). 
-Testing measurement invariance in the target rotates multigroup exploratory 
+Dolan, C. V., Oort, F. J., Stoel, R. D., & Wicherts, J. M. (2009).
+Testing measurement invariance in the target rotates multigroup exploratory
 factor model. \emph{Structural Equation Modeling}, \bold{16}, 295-314.
 }
 
@@ -71,15 +71,15 @@ factor model. \emph{Structural Equation Modeling}, \bold{16}, 295-314.
 packages <- scan(what="character")
      sirt   TAM   eRm   CDM   mirt  ltm   mokken  psychotools  psychomix
      psych
-   
-# load packages. make an installation if necessary     
+
+# load packages. make an installation if necessary
 miceadds::library_install(packages)
 
 #############################################################################
 # EXAMPLE 1: Unidimensional models openness scale
 #############################################################################
 
-data(data.big5)    
+data(data.big5)
 # extract first 10 openness items
 items <- which( substring( colnames(data.big5) , 1 , 1 ) == "O"  )[1:10]
 dat <- data.big5[ , items ]
@@ -89,7 +89,7 @@ summary(dat)
   ##    [1] "O3"  "O8"  "O13" "O18" "O23" "O28" "O33" "O38" "O43" "O48"
 # descriptive statistics
 psych::describe(dat)
-        
+
 #****************
 # Model 1: Partial credit model
 #****************
@@ -164,7 +164,7 @@ m3a <- sirt::isop.poly( dat )
 summary(m3a)
 plot(m3a)
 
-#-- M3b: Mokken scale analysis (in mokken) 
+#-- M3b: Mokken scale analysis (in mokken)
 # Scalability coefficients
 mokken::coefH(dat)
 # Assumption of monotonicity
@@ -174,7 +174,7 @@ plot(monotonicity.list)
 # Assumption of non-intersecting ISRFs using method restscore
 restscore.list <- mokken::check.restscore(dat)
 summary(restscore.list)
-plot(restscore.list) 
+plot(restscore.list)
 
 #****************
 # Model 4: Graded response model
@@ -187,11 +187,11 @@ mirt.wrapper.coef(m4a)
 
 #----  M4b: WLSMV estimation with cfa (in lavaan)
 lavmodel <- "F =~ O3__O48
-             F ~~ 1*F  
+             F ~~ 1*F
                 "
 # transform lavaan syntax with lavaanify.IRT
 lavmodel <- TAM::lavaanify.IRT( lavmodel , items=colnames(dat) )$lavaan.syntax
-mod4b <- lavaan::cfa( data= as.data.frame(dat) , model=lavmodel, std.lv = TRUE, 
+mod4b <- lavaan::cfa( data= as.data.frame(dat) , model=lavmodel, std.lv = TRUE,
                  ordered=colnames(dat) ,  parameterization="theta")
 summary(mod4b , standardized=TRUE , fit.measures=TRUE , rsquare=TRUE)
 coef(mod4b)
@@ -202,10 +202,10 @@ coef(mod4b)
 
 #----  M5a: cfa (in lavaan)
 lavmodel <- "F =~ O3__O48
-             F ~~ 1*F  
+             F ~~ 1*F
              F ~ 0*1
              O3__O48 ~ 1
-                "                               
+                "
 lavmodel <- TAM::lavaanify.IRT( lavmodel , items=colnames(dat) )$lavaan.syntax
 mod5a <- lavaan::cfa( data= as.data.frame(dat) , model=lavmodel, std.lv = TRUE ,
                  estimator="MLR" )
@@ -220,8 +220,8 @@ est <- c(TRUE, TRUE,FALSE)
 P.normal <- function(par,Theta,ncat){
      d <- par[1]
      a1 <- par[2]
-     vy <- par[3]     
-     psi <- vy - a1^2     
+     vy <- par[3]
+     psi <- vy - a1^2
      # expected values given Theta
      mui <- a1*Theta[,1] + d
      TP <- nrow(Theta)
@@ -230,28 +230,28 @@ P.normal <- function(par,Theta,ncat){
      for (cc in 1:ncat){
         probs[,cc] <- stats::dnorm( cc , mean = mui   , sd = sqrt( abs( psi + eps) ) )
                     }
-     psum <- matrix( rep(rowSums( probs ),each=ncat)  , nrow=TP , ncol=ncat , byrow=TRUE)    
+     psum <- matrix( rep(rowSums( probs ),each=ncat)  , nrow=TP , ncol=ncat , byrow=TRUE)
      probs <- probs / psum
-     return(probs)                    
+     return(probs)
 }
 
 # create item response function
 normal <- mirt::createItem(name, par=par, est=est, P=P.normal)
-customItems <- list("normal"=normal) 
+customItems <- list("normal"=normal)
 itemtype <- rep( "normal",I)
 # define parameters to be estimated
-mod5b.pars <- mirt::mirt(dat, 1, itemtype=itemtype , 
-                   customItems=customItems , pars = "values")                
+mod5b.pars <- mirt::mirt(dat, 1, itemtype=itemtype ,
+                   customItems=customItems , pars = "values")
 ind <- which( mod5b.pars$name == "vy")
-vy <- apply( dat , 2 , var , na.rm=TRUE ) 
+vy <- apply( dat , 2 , var , na.rm=TRUE )
 mod5b.pars[ ind , "value" ] <- vy
 ind <- which( mod5b.pars$name == "a1")
 mod5b.pars[ ind , "value" ] <- .5* sqrt(vy)
 ind <- which( mod5b.pars$name == "d")
 mod5b.pars[ ind , "value" ] <- colMeans( dat , na.rm=TRUE )
-                                                       
+
 # estimate model
-mod5b <- mirt::mirt(dat, 1, itemtype=itemtype , customItems=customItems ,  
+mod5b <- mirt::mirt(dat, 1, itemtype=itemtype , customItems=customItems ,
                  pars = mod5b.pars , verbose=TRUE    )
 sirt::mirt.wrapper.coef(mod5b)$coef
 
@@ -260,7 +260,7 @@ sirt::mirt.wrapper.coef(mod5b)$coef
 plot(mod5b, type = 'trace', layout = c(1,1))
     par(ask=FALSE)
 # Alternatively:
-sirt::mirt.wrapper.itemplot(mod5b) 
+sirt::mirt.wrapper.itemplot(mod5b)
 }
 }
 

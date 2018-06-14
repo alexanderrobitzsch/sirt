@@ -1,5 +1,5 @@
 %% File Name: brm.sim.Rd
-%% File Version: 0.39
+%% File Version: 0.40
 
 \name{brm-Methods}
 \alias{brm.sim}
@@ -58,7 +58,7 @@ which the item loads.}
 \details{
 The discrete version of the beta item response model is defined as follows.
 Assume that for item \eqn{i} there are \eqn{K} categories resulting in
-values \eqn{k=0,1,\dots,K-1}. Each value \eqn{k} is associated with a 
+values \eqn{k=0,1,\dots,K-1}. Each value \eqn{k} is associated with a
 corresponding the transformed value in \eqn{[0,1]}, namely
 \eqn{ q (k) = 1/(2 \cdot K) , 1/(2 \cdot K) + 1/K , \ldots ,  1 - 1/(2 \cdot K) }.
 The item response model is defined as
@@ -74,30 +74,30 @@ defined as
 
 The item response function can also be formulated as
 \deqn{ \mathrm{log} \left[ P( X_{pi}= x_{pi} | \theta_p) \right]  \propto
-      ( m_{pi} - 1 ) \cdot \mathrm{log} [ q( x_{pi} ) ] +  
+      ( m_{pi} - 1 ) \cdot \mathrm{log} [ q( x_{pi} ) ] +
       ( n_{pi} - 1 )  \cdot \mathrm{log} [ 1- q( x_{pi} ) ]
                       }
 
-The item parameters can be reparameterized as 
+The item parameters can be reparameterized as
 \eqn{ a_{i} = \mathrm{exp} \left[ ( - \delta_i + \tau_i ) / 2 \right]} and
 \eqn{ b_{i} = \mathrm{exp} \left[ ( \delta_i + \tau_i ) / 2 \right]}.
 
-Then, the original item parameters can be retrieved by 
+Then, the original item parameters can be retrieved by
 \eqn{\tau_i = \mathrm{log} ( a_i b_i)} and
-\eqn{\delta_i = \mathrm{log} ( b_i / a_i)}. 
+\eqn{\delta_i = \mathrm{log} ( b_i / a_i)}.
 Using \eqn{ \gamma _p = \mathrm{exp} ( \theta_p / 2) }, we obtain
 
 \deqn{ \mathrm{log} \left[ P( X_{pi}= x_{pi} | \theta_p) \right]  \propto
-       a_{i} \gamma_p  \cdot \mathrm{log} [ q( x_{pi} ) ] +  
+       a_{i} \gamma_p  \cdot \mathrm{log} [ q( x_{pi} ) ] +
        b_i / \gamma_p   \cdot \mathrm{log} [ 1- q( x_{pi} ) ] -
       \left[ \mathrm{log} q( x_{pi} ) + \mathrm{log} [ 1- q( x_{pi} ) ] \right]
-                      }                      
+                      }
 
 This formulation enables the specification of the Beta item response
-model as a structured latent class model 
+model as a structured latent class model
 (see \code{\link[TAM:tam.mml.3pl]{TAM::tam.mml.3pl}};
 Example 1).
-                      
+
 See Smithson and Verkuilen (2006) for motivations for treating
 continuous indicators not as normally distributed variables.
 }
@@ -112,17 +112,17 @@ A matrix of item response probabilities if \code{brm.irf} is applied.
 }
 
 
-\references{    
+\references{
 Gruen, B., Kosmidis, I., & Zeileis, A. (2012). Extended Beta regression
 in \R: Shaken, stirred, mixed, and partitioned.
 \emph{Journal of Statistical Software}, \bold{48(11)}, 1-25.
-    
-Noel, Y., & Dauvier, B. (2007). A beta item response model for continuous 
-bounded responses. \emph{Applied Psychological Measurement}, 
+
+Noel, Y., & Dauvier, B. (2007). A beta item response model for continuous
+bounded responses. \emph{Applied Psychological Measurement},
 \bold{31(1)}, 47-73.
 
-Smithson, M., & Verkuilen, J. (2006). A better lemon squeezer? 
-Maximum-likelihood regression with beta-distributed dependent variables. 
+Smithson, M., & Verkuilen, J. (2006). A better lemon squeezer?
+Maximum-likelihood regression with beta-distributed dependent variables.
 \emph{Psychological Methods}, \bold{11(1)}, 54-71.
 }
 
@@ -138,7 +138,7 @@ Alexander Robitzsch
 
 
 \seealso{
-See also the \pkg{betareg} package for fitting Beta regression 
+See also the \pkg{betareg} package for fitting Beta regression
 regression models in \R (Gruen, Kosmidis & Zeileis, 2012).
 }
 
@@ -146,11 +146,11 @@ regression models in \R (Gruen, Kosmidis & Zeileis, 2012).
 #############################################################################
 # EXAMPLE 1: Simulated data beta response model
 #############################################################################
-    
+
 #*** (1) Simulation of the beta response model
 # Table 3 (p. 65) of Noel and Dauvier (2007)
 delta <- c( -.942 , -.649 , -.603 , -.398 , -.379 , .523 , .649 , .781 , .907 )
-tau <- c( .382 , .166 , 1.799 , .615 , 2.092, 1.988 , 1.899 , 1.439 , 1.057 )           
+tau <- c( .382 , .166 , 1.799 , .615 , 2.092, 1.988 , 1.899 , 1.439 , 1.057 )
 K <- 5        # number of categories for discretization
 N <- 500        # number of persons
 I <- length(delta) # number of items
@@ -178,10 +178,10 @@ est <- c( TRUE , TRUE , FALSE )
 names(est) <- names(par)
 brm.icc <- function( par , Theta , ncat ){
      delta <- par[1]
-     tau <- par[2] 
+     tau <- par[2]
      thdim <- par[3]
      probs <- sirt::brm.irf( Theta=Theta , delta=delta , tau=tau ,  ncat=ncat ,
-            thdim=thdim)     
+            thdim=thdim)
      return(probs)
             }
 name <- "brm"
@@ -195,20 +195,20 @@ itemtype <- rep("brm" , I )
 customItems <- list("brm"= brm.itemfct)
 
 # define parameters to be estimated
-mod1.pars <- mirt::mirt(dat, mirtmodel , itemtype=itemtype , 
-                   customItems=customItems, pars = "values")                
+mod1.pars <- mirt::mirt(dat, mirtmodel , itemtype=itemtype ,
+                   customItems=customItems, pars = "values")
 
-\dontrun{                   
+\dontrun{
 #*** (3) estimate beta item response model in mirt
-mod1 <- mirt::mirt(dat,mirtmodel , itemtype=itemtype , customItems=customItems, 
+mod1 <- mirt::mirt(dat,mirtmodel , itemtype=itemtype , customItems=customItems,
                pars = mod1.pars , verbose=TRUE  )
 # model summaries
-print(mod1)                
+print(mod1)
 summary(mod1)
 coef(mod1)
 # estimated coefficients and comparison with simulated data
 cbind( sirt::mirt.wrapper.coef( mod1 )$coef , delta , tau )
-mirt.wrapper.itemplot(mod1 ,ask=TRUE)    
+mirt.wrapper.itemplot(mod1 ,ask=TRUE)
 
 #---------------------------
 # estimate beta item response model in TAM
@@ -226,7 +226,7 @@ delta.fixed <- cbind( 1 , 1 , 1 )
 # define design matrix E
 E <- array(0 , dim=c(I,K,TP,2*I + 1) )
 dimnames(E)[[1]] <- items <- colnames(dat)
-dimnames(E)[[4]] <- c( paste0( rep( items , each=2 ) , 
+dimnames(E)[[4]] <- c( paste0( rep( items , each=2 ) ,
         rep( c("_a","_b" ) , I) ) , "one" )
 for (ii in 1:I){
     for (kk in 1:K){
@@ -243,18 +243,18 @@ gammaslope.fixed <- cbind( 2*I+1 , 1 )
 gammaslope <- exp( rep(0,2*I+1) )
 
 # estimate model in TAM
-mod2 <- TAM::tam.mml.3pl(resp= dat , E=E ,control= list(maxiter=100) , 
+mod2 <- TAM::tam.mml.3pl(resp= dat , E=E ,control= list(maxiter=100) ,
               skillspace="discrete" , delta.designmatrix=delta.designmatrix ,
-              delta.fixed=delta.fixed , theta.k=theta.k , gammaslope = gammaslope, 
+              delta.fixed=delta.fixed , theta.k=theta.k , gammaslope = gammaslope,
               gammaslope.fixed = gammaslope.fixed , notA=TRUE )
-summary(mod2)         
+summary(mod2)
 
 # extract original tau and delta parameters
-m1 <- matrix( mod2$gammaslope[1:(2*I) ] , ncol=2 , byrow=TRUE ) 
+m1 <- matrix( mod2$gammaslope[1:(2*I) ] , ncol=2 , byrow=TRUE )
 m1 <- as.data.frame(m1)
 colnames(m1) <- c("a" ,"b")
-m1$delta.TAM <- log( m1$b / m1$a) 
-m1$tau.TAM <- log( m1$a * m1$b ) 
+m1$delta.TAM <- log( m1$b / m1$a)
+m1$tau.TAM <- log( m1$a * m1$b )
 
 # compare estimated parameter
 m2 <- cbind( sirt::mirt.wrapper.coef( mod1 )$coef , delta , tau )[,-1]

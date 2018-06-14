@@ -1,5 +1,5 @@
 %% File Name: mcmc_coef.Rd
-%% File Version: 0.04
+%% File Version: 0.05
 
 \name{mcmc_coef}
 \alias{mcmc_coef}
@@ -22,10 +22,10 @@ from the \pkg{coda} package.
 }
 
 \usage{
-## coefficients    
+## coefficients
 mcmc_coef(mcmcobj, exclude = "deviance")
 
-## covariance matrix 
+## covariance matrix
 mcmc_vcov(mcmcobj, exclude = "deviance")
 
 ## confidence interval
@@ -96,7 +96,7 @@ Alexander Robitzsch
 \examples{
 \dontrun{
 #############################################################################
-# EXAMPLE 1: Logistic regression in rcppbugs package 
+# EXAMPLE 1: Logistic regression in rcppbugs package
 #############################################################################
 
 
@@ -118,7 +118,7 @@ summary(mod)
 library(rcppbugs)
 b <- rcppbugs::mcmc.normal( stats::rnorm(3),mu=0,tau=0.0001)
 y.hat <- rcppbugs::deterministic( function(x1,x2,b){
-                stats::plogis( b[1] + b[2]*x1 + b[3]*x2 ) }, 
+                stats::plogis( b[1] + b[2]*x1 + b[3]*x2 ) },
                   x1 , x2 , b)
 y.lik <- rcppbugs::mcmc.bernoulli( y , p = y.hat, observed = TRUE)
 model <- rcppbugs::create.model(b, y.hat, y.lik)

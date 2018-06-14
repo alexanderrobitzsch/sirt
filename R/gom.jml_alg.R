@@ -1,5 +1,5 @@
 ## File Name: gom.jml_alg.R
-## File Version: 0.08
+## File Version: 0.09
 
 ###############################
 # attach objects in the local environment
@@ -7,7 +7,7 @@
 #    e1 <- environment()
     CC <- length(res)
     for (cc in 1:CC){
-        assign( names(res)[cc] , res[[cc]] , envir=envir )        
+        assign( names(res)[cc] , res[[cc]] , envir=envir )
                     }
             }
 #####################################
@@ -30,10 +30,10 @@
     if ( ! is.null(seed) ){
         g <- matrix( stats::runif( N*K ) , N , K )
         g <- g / rowSums( g)
-        lambda <- matrix( stats::runif(I*K) , nrow=I , ncol=K)        
+        lambda <- matrix( stats::runif(I*K) , nrow=I , ncol=K)
             }
-    
-    res <- list( "dat"=dat , "dat.resp"=dat.resp , "N"=N , "K"=K , 
+
+    res <- list( "dat"=dat , "dat.resp"=dat.resp , "N"=N , "K"=K ,
         "lambda"=lambda , "g"=g , "I"=I , "score" = score , "p.item"=p.item )
     return(res)
         }
@@ -47,15 +47,15 @@
     for (kk in 1:K){
         # kk <- 1
         lambda1.sum <- lambda1.sum + matrix( lambda[,kk] , N , I , byrow=T ) * g[,kk ]
-        lambda0.sum <- lambda0.sum + matrix( 1-lambda[,kk] , N , I , byrow=T ) * g[,kk ]    
+        lambda0.sum <- lambda0.sum + matrix( 1-lambda[,kk] , N , I , byrow=T ) * g[,kk ]
                     }
     for (kk in 1:K){
         # kk <- 1
-        lambda.kk <- matrix( lambda[,kk] , N , I , byrow=T ) 
+        lambda.kk <- matrix( lambda[,kk] , N , I , byrow=T )
         w1.kk <- lambda.kk * g[,kk] / lambda1.sum
         w0.kk <- ( 1 - lambda.kk ) * g[,kk]  / lambda0.sum
         g[,kk] <- rowSums( dat * dat.resp * w1.kk + ( 1- dat ) * dat.resp * w0.kk ) / rowSums( dat.resp )
-                }                        
+                }
     g[ g < min.g ] <- min.g
     g[ g > 1 - min.g ] <- 1 - min.g
     g <- g / rowSums(g)
@@ -68,19 +68,19 @@
     for (kk in 1:K){
         # kk <- 1
         lambda1.sum <- lambda1.sum + matrix( lambda[,kk] , N , I , byrow=T ) * g[,kk ]
-        lambda0.sum <- lambda0.sum + matrix( 1-lambda[,kk] , N , I , byrow=T ) * g[,kk ]    
-                    }                                        
+        lambda0.sum <- lambda0.sum + matrix( 1-lambda[,kk] , N , I , byrow=T ) * g[,kk ]
+                    }
     for (kk in 1:K){
         # kk <- 1
-        lambda.kk <- matrix( lambda[,kk] , N , I , byrow=T ) 
+        lambda.kk <- matrix( lambda[,kk] , N , I , byrow=T )
         w1.kk <- lambda.kk * g[,kk] / lambda1.sum
         w0.kk <- ( 1 - lambda.kk ) * g[,kk]  / lambda0.sum
         sum1 <- colSums( dat * dat.resp * w1.kk )
-        sum0 <- colSums( (1-dat) * dat.resp * w0.kk )        
+        sum0 <- colSums( (1-dat) * dat.resp * w0.kk )
         lambda[,kk] <- sum1 / ( sum1 + sum0 )
-                }                
-    lambda[ lambda < min.lambda ] <- min.lambda            
-    lambda[ lambda > 1 - min.lambda ] <- 1 - min.lambda    
+                }
+    lambda[ lambda < min.lambda ] <- min.lambda
+    lambda[ lambda > 1 - min.lambda ] <- 1 - min.lambda
     return(lambda)
         }
 ###############################################
@@ -110,18 +110,18 @@
                     }
             }
     gcut.distr[,1:4] <- 100*gcut.distr[,1:4] / rowSums( gcut.distr[,1:4] )
-    gcut.distr <- data.frame(gcut.distr)    
+    gcut.distr <- data.frame(gcut.distr)
     rownames(gcut.distr) <- paste0("Class",1:K)
     colnames(gcut.distr) <- c( paste0("PrGr" , seq(0,75,len=4) )     ,
                     paste0("MGr" , seq(0,75,len=4) )     )
     gcut.distr$cor.score <- NA
     for (kk in 1:K){
         gcut.distr$cor.score[kk] <- cor( g[,kk] , score )
-            }        
+            }
     g1 <- data.frame(g1)
     g1$pattern <- pattern
     g.mean <- colMeans(g)
     res <- list("g1"=g1 , "gcut.distr"=gcut.distr ,  "g.mean" = g.mean )
     return(res)
-                }            
+                }
 

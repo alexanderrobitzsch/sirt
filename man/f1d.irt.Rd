@@ -1,5 +1,5 @@
 %% File Name: f1d.irt.Rd
-%% File Version: 1.22
+%% File Version: 1.23
 
 \name{f1d.irt}
 \alias{f1d.irt}
@@ -15,7 +15,7 @@ item discriminations and intercepts of a pre-estimated multidimensional IRT
 model are provided as input.
 }
 \usage{
-f1d.irt(dat = NULL, nnormal = 1000, nfactors = 3, A = NULL, intercept = NULL, 
+f1d.irt(dat = NULL, nnormal = 1000, nfactors = 3, A = NULL, intercept = NULL,
     mu = NULL , Sigma = NULL , maxiter = 100, conv = 10^(-5), progress = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -31,7 +31,7 @@ normal distribution
 Number of dimensions to be estimated
 }
   \item{A}{
-Matrix of item discriminations (if the IRT model is already estimated) 
+Matrix of item discriminations (if the IRT model is already estimated)
 }
   \item{intercept}{
 Vector of item intercepts (if the IRT model is already estimated)
@@ -51,32 +51,32 @@ Display progress? The default is \code{TRUE}.
 }
 }
 \details{
-The functional unidimensional item response model (F1D model) 
+The functional unidimensional item response model (F1D model)
 for dichotomous item responses is based on a multidimensional model with a
 link function \eqn{g} (probit or logit):
-\deqn{ P( X_{pi}=1 | \bold{\theta}_p ) = 
+\deqn{ P( X_{pi}=1 | \bold{\theta}_p ) =
 g( \sum_d a_{id} \theta_{pd} - d_i ) }
 It is assumed that \eqn{\bold{\theta}_p} is multivariate normally
 distribution with a zero mean vector and identity covariance matrix.
 
 The F1D model estimates unidimensional item response functions
 such that
-\deqn{ P( X_{pi}=1 | \theta_p^\ast ) \approx 
+\deqn{ P( X_{pi}=1 | \theta_p^\ast ) \approx
 g \left( a_{i}^\ast \theta_{p}^\ast - d_i^\ast \right) }
 The optimization function \eqn{F} minimizes the deviations of
 the approximation equations
-\deqn{ a_{i}^\ast \theta_{p}^\ast - d_i^\ast 
+\deqn{ a_{i}^\ast \theta_{p}^\ast - d_i^\ast
 \approx \sum_d a_{id} \theta_{pd} - d_i }
 The optimization function \eqn{F} is defined by
-\deqn{ F( \{ a_i^\ast , d_i^\ast \}_i , \{ \theta_p^\ast \}_p )=     
-    \sum_p \sum_i w_p ( a_{id} \theta_{pd} - d_i- 
+\deqn{ F( \{ a_i^\ast , d_i^\ast \}_i , \{ \theta_p^\ast \}_p )=
+    \sum_p \sum_i w_p ( a_{id} \theta_{pd} - d_i-
 a_{i}^\ast \theta_{p}^\ast + d_i^\ast )^2 \rightarrow Min! }
 All items \eqn{i} are equally weighted whereas the ability
 distribution of persons \eqn{p} are weighted according to the
-multivariate normal distribution (using weights \eqn{w_p}). 
-The estimation is conducted using an alternating least squares algorithm 
-(see Ip et al. 2013 for a different algorithm). The ability distribution 
-\eqn{\theta_p^\ast} of the functional unidimensional model is assumed 
+multivariate normal distribution (using weights \eqn{w_p}).
+The estimation is conducted using an alternating least squares algorithm
+(see Ip et al. 2013 for a different algorithm). The ability distribution
+\eqn{\theta_p^\ast} of the functional unidimensional model is assumed
 to be standardized, i.e. does have a zero mean and a standard deviation of one.
 }
 
@@ -102,9 +102,9 @@ A list with following entries:
 
 
 \references{
-Ip, E. H., Molenberghs, G., Chen, S. H., Goegebeur, Y., & 
-De Boeck, P. (2013). Functionally unidimensional item 
-response models for multivariate binary data. 
+Ip, E. H., Molenberghs, G., Chen, S. H., Goegebeur, Y., &
+De Boeck, P. (2013). Functionally unidimensional item
+response models for multivariate binary data.
 \emph{Multivariate Behavioral Research}, \bold{48}, 534-562.
 }
 
@@ -123,12 +123,12 @@ For estimation of bifactor models and Green-Yang reliability
 based on tetrachoric correlations see \code{\link{greenyang.reliability}}.
 
 For estimation of bifactor models based on marginal maximum likelihood
-(i.e. full information maximum likelihood) see the 
+(i.e. full information maximum likelihood) see the
 \code{\link[TAM:tam.fa]{TAM::tam.fa}} function in the \pkg{TAM} package.
 }
 
 
-\examples{              
+\examples{
 #############################################################################
 # EXAMPLE 1: Dataset Mathematics data.math | Exploratory multidimensional model
 #############################################################################
@@ -168,7 +168,7 @@ I <- ncol(dat)
 Q <- matrix( 1, I,2 )
 Q[1,2] <- 0
 variance.fixed <- cbind( 1,2,0 )
-mod2a <- sirt::smirt( dat , Qmatrix=Q , irtmodel="comp" , est.a="2PL" , 
+mod2a <- sirt::smirt( dat , Qmatrix=Q , irtmodel="comp" , est.a="2PL" ,
                 variance.fixed=variance.fixed , maxiter=50)
 #++ (2) input estimated discriminations and intercepts for
 #       functional unidimensional model

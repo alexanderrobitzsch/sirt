@@ -1,5 +1,5 @@
 ## File Name: class.accuracy.rasch.R
-## File Version: 0.05
+## File Version: 0.06
 ############################################################
 # classification accuracy in the Rasch model
 class.accuracy.rasch <-
@@ -16,10 +16,10 @@ function( cutscores , b , meantheta , sdtheta , theta.l , n.sims=0 , seed=988){
     semle <- rasch.info.mle(dat=dat0, theta=theta.l , b=b )
     wgttheta <- stats::dnorm( theta.l , mean = meantheta , sd = sdtheta )
     wgttheta <- wgttheta / sum( wgttheta )
-    
+
     # distribution of estimated theta values
     m1 <- matrix( NA , nrow = L , ncol=L )
-    for (tt in 1:L ){ 
+    for (tt in 1:L ){
         # tt <- 1
         w.tt <- stats::dnorm( theta.l , mean= theta.l[tt]  , sd = semle[tt] )
         w.tt <- w.tt / sum( w.tt )
@@ -42,16 +42,16 @@ function( cutscores , b , meantheta , sdtheta , theta.l , n.sims=0 , seed=988){
             }
     stats <- data.frame( "agree0"= sum( diag(m2)) )
     stats$agree1 <- sum( m2 * ( abs( outer( 1:CC  , 1:CC , "-" ) ) <= 1 ) )
-    
+
     # calculate kappa calculation
     chance.prob <- rep(NA, CC)
-    for (cc in 1:CC){ 
+    for (cc in 1:CC){
         ind.cc <- which( ( theta.l >= cutscores.long[cc] ) & ( theta.l < cutscores.long[cc+1] ) )
         chance.prob[cc] <- sum( m0[ ind.cc , 1 ] )
                 }
     phi.c <- sum( chance.prob^2 )
     stats$kappa <- ( stats$agree0 - phi.c ) / ( 1 - phi.c )
-    rownames(stats) <- "analytical"    
+    rownames(stats) <- "analytical"
     #########################################
     # accuracy by simulation
     if ( n.sims > 0 ){
@@ -60,7 +60,7 @@ function( cutscores , b , meantheta , sdtheta , theta.l , n.sims=0 , seed=988){
         theta.sim$true.class <- as.numeric( paste( cut( theta0 , breaks= cutscores.long , labels=1:CC) ))
         theta.sim$random.class <- sample( theta.sim$true.class )
         dat.sim <- sim.raschtype( theta=theta0 , b=b )
-        dat.sim2 <- sim.raschtype( theta=theta0 , b=b )        
+        dat.sim2 <- sim.raschtype( theta=theta0 , b=b )
         wle1 <- wle.rasch( dat.sim , b = b )
         theta.sim$WLE <- wle1$theta
         theta.sim$WLE.class <- as.numeric( paste( cut( theta.sim$WLE , breaks= cutscores.long , labels=1:CC )) )
@@ -78,7 +78,7 @@ function( cutscores , b , meantheta , sdtheta , theta.l , n.sims=0 , seed=988){
         stats2$kappa <- ( stats$agree0 - phi.c ) / ( 1 - phi.c )
         stats <- round( rbind( stats , stats2 ) , 3 )
         cat("\nWLE reliability (by simulation) =" , round( wle.rel , 3) , "\n" )
-        stats[2,"consistency"] <- mean( theta.sim$WLE2.class == theta.sim$WLE.class )    
+        stats[2,"consistency"] <- mean( theta.sim$WLE2.class == theta.sim$WLE.class )
         cat("WLE consistency (correlation between two parallel forms) = " )
         cat( round( stats::cor( theta.sim$WLE , theta.sim$WLE2 ) , 3 ), "\n")
                     }

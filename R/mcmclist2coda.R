@@ -1,5 +1,5 @@
 ## File Name: mcmclist2coda.R
-## File Version: 0.04
+## File Version: 0.05
 
 ##############################################################
 # write elements from mcmcmlist into code file
@@ -9,7 +9,7 @@ mcmclist2coda <- function( mcmclist , name , coda.digits=5 ){
     #--- create codaIndex file
     BB <- nrow(m1)
     VV <- length(vars)
-    c1 <- paste( vars , seq( 1 , BB*VV , BB ) , 
+    c1 <- paste( vars , seq( 1 , BB*VV , BB ) ,
                         seq( BB , BB*VV , BB ) )
     writeLines( c1 , paste0( name , "_codaIndex.txt" ) )
     #--- create coda file

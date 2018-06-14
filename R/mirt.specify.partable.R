@@ -1,8 +1,8 @@
 ## File Name: mirt.specify.partable.R
-## File Version: 0.03
+## File Version: 0.04
 
 
-####################################################################### 
+#######################################################################
 ##   function parameter table specification
 mirt.specify.partable <- function(mirt.partable, parlist, verbose=TRUE) {
     mirt.partable0 <- mirt.partable
@@ -14,7 +14,7 @@ mirt.specify.partable <- function(mirt.partable, parlist, verbose=TRUE) {
     if(!all(gnames %in% unique(mirt.partable$group))) ####
         stop('Defined group variable names in parlist do not match mirt.partable') ####
     #@@@
-    items <- paste0( mirt.partable$item )        
+    items <- paste0( mirt.partable$item )
     for(gg in gnames){ ####
         parlist <- parlistfull[[gg]] ####
         LP <- length(parlist) ####  moved this down from first line
@@ -25,15 +25,15 @@ mirt.specify.partable <- function(mirt.partable, parlist, verbose=TRUE) {
             dfr.pp <- parlist[[pp]]
             #@@ check item names
             g1 <- sort(setdiff( rownames(dfr.pp)  , items ) )
-            dfr.pp <- dfr.pp[ intersect( rownames(dfr.pp) , items ) , , drop=FALSE]      
+            dfr.pp <- dfr.pp[ intersect( rownames(dfr.pp) , items ) , , drop=FALSE]
             #@@@
             if (verbose){
-                cat("*** Process group " , gg , " - parameter " , par.pp , "\n")                                                
+                cat("*** Process group " , gg , " - parameter " , par.pp , "\n")
                 if ( length(g1) > 0 ){
-                    cat("  - Following items do not exist in parameter table: " , paste0( g1 , collapse=" " ) , "\n")                
+                    cat("  - Following items do not exist in parameter table: " , paste0( g1 , collapse=" " ) , "\n")
                                 }
-                           }            
-                           
+                           }
+
             # loop through items and parameters
             NI.pp <- nrow(dfr.pp)
             NP.pp <- ncol(dfr.pp)
@@ -44,10 +44,10 @@ mirt.specify.partable <- function(mirt.partable, parlist, verbose=TRUE) {
                     ind <- which((paste(mirt.partable0$item) == rownames(dfr.pp)[ii]) &
                                      (paste(mirt.partable0$name) == colnames(dfr.pp)[cc]) &
                                      mirt.partable0$group == gg) ####
-                    if (!is.na(dfr.pp[ii, cc])) {                    
+                    if (!is.na(dfr.pp[ii, cc])) {
                         if(!length(ind))
                                 warning(sprintf("Parameter \'%s\' is not relevant for item %s",
-                                                         colnames(dfr.pp)[cc], rownames(dfr.pp)[ii]))                    
+                                                         colnames(dfr.pp)[cc], rownames(dfr.pp)[ii]))
                       if (par.pp != "prior.type") {
                         mirt.partable0[ind, par.pp] <- dfr.pp[ii, cc]
                       } else {
@@ -59,7 +59,7 @@ mirt.specify.partable <- function(mirt.partable, parlist, verbose=TRUE) {
             }
         }
     }
-    mirt.partable0$prior.type <- as.factor(mirt.partable0$prior.type)    
+    mirt.partable0$prior.type <- as.factor(mirt.partable0$prior.type)
     if(!all(mirt.partable0$prior.type %in% c('none', 'norm', 'beta', 'lnorm'))) ####
         stop('Improper prior.type declared. Please only use the following:
              \'none\', \'norm\', \'beta\', \'lnorm\' ') ####

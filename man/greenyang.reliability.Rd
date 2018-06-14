@@ -1,11 +1,11 @@
 %% File Name: greenyang.reliability.Rd
-%% File Version: 1.22
+%% File Version: 1.23
 
 \name{greenyang.reliability}
 \alias{greenyang.reliability}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Reliability for Dichotomous Item Response Data 
+Reliability for Dichotomous Item Response Data
 Using the Method of Green and Yang (2009)
 }
 \description{
@@ -14,7 +14,7 @@ of dichotomous data using the Green & Yang (2009) method.
 The underlying factor model is \eqn{D}-dimensional where
 the dimension \eqn{D} is specified by the argument
 \code{nfactors}. The factor solution is subject to the
-application of the Schmid-Leiman transformation (see Reise, 2012; 
+application of the Schmid-Leiman transformation (see Reise, 2012;
 Reise, Bonifay, & Haviland, 2013; Reise, Moore, & Haviland, 2010).
 }
 
@@ -28,10 +28,10 @@ greenyang.reliability(object.tetra, nfactors)
 \item{object.tetra}{
 Object as the output of the function \code{tetrachoric}, the
 \code{fa.parallel.poly} from the \pkg{psych} package or the
-\code{tetrachoric2} function (from \pkg{sirt}). 
+\code{tetrachoric2} function (from \pkg{sirt}).
 This object can also be created
 as a list by the user where the tetrachoric correlation
-must must be in the list entry \code{rho} and the thresholds must 
+must must be in the list entry \code{rho} and the thresholds must
 be in the list entry \code{thresh}.
 }
   \item{nfactors}{
@@ -43,11 +43,11 @@ Number of factors (dimensions)
 %}
 \value{
 A data frame with columns:
-\item{coefficient}{Name of the reliability measure. \code{omega_1} (Omega) 
-is the reliability estimate for the total score for dichotomous data 
-based on a one-factor model, \code{omega_t} (Omega Total) is the 
+\item{coefficient}{Name of the reliability measure. \code{omega_1} (Omega)
+is the reliability estimate for the total score for dichotomous data
+based on a one-factor model, \code{omega_t} (Omega Total) is the
 estimate for a \eqn{D}-dimensional model. For the nested factor model,
-\code{omega_h} (Omega Asymptotic) is the reliability of the general factor model, 
+\code{omega_h} (Omega Asymptotic) is the reliability of the general factor model,
 \code{omega_ha} (Omega Hierarchical Asymptotic) eliminates item-specific
 variance. The explained common variance (\code{ECV}) explained by the
 common factor is based on the \eqn{D}-dimensional but does not take
@@ -55,27 +55,27 @@ item thresholds into account. The amount of explained
 variance \code{ExplVar} is defined as the quotient of the first
 eigenvalue of the tetrachoric correlation matrix to the
 sum of all eigenvalues. The statistic \code{EigenvalRatio}
-is the ratio of the first and second eigenvalue. 
+is the ratio of the first and second eigenvalue.
 }
 \item{dimensions}{Number of dimensions}
 \item{estimate}{Reliability estimate}
 }
 \references{
-Green, S. B., & Yang, Y. (2009). Reliability of summed item 
-scores using structural equation modeling: An alternative to 
-coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167. 
+Green, S. B., & Yang, Y. (2009). Reliability of summed item
+scores using structural equation modeling: An alternative to
+coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167.
 
-Reise, S. P. (2012). The rediscovery of bifactor measurement models. 
+Reise, S. P. (2012). The rediscovery of bifactor measurement models.
 \emph{Multivariate Behavioral Research}, \bold{47}, 667-696.
 
-Reise, S. P., Bonifay, W. E., & Haviland, M. G. (2013). 
-Scoring and modeling psychological measures in the presence of 
-multidimensionality. \emph{Journal of Personality Assessment}, 
+Reise, S. P., Bonifay, W. E., & Haviland, M. G. (2013).
+Scoring and modeling psychological measures in the presence of
+multidimensionality. \emph{Journal of Personality Assessment},
 \bold{95}, 129-140.
 
 Reise, S. P., Moore, T. M., & Haviland, M. G.  (2010).
-Bifactor models and rotations: Exploring the extent to which 
-multidimensional data yield univocal scale scores, 
+Bifactor models and rotations: Exploring the extent to which
+multidimensional data yield univocal scale scores,
 \emph{Journal of Personality Assessment}, \bold{92}, 544-559.
 }
 
@@ -115,14 +115,14 @@ dat.tetra2 <- sirt::tetrachoric2(dat)       # using tetrachoric2 from sirt packa
 
 # perform parallel factor analysis
 fap <- psych::fa.parallel.poly(dat , n.iter = 1 )
-  ##   Parallel analysis suggests that the number of factors =  3  
-  ##   and the number of components =  2 
+  ##   Parallel analysis suggests that the number of factors =  3
+  ##   and the number of components =  2
 
-# parallel factor analysis based on tetrachoric correlation matrix 
+# parallel factor analysis based on tetrachoric correlation matrix
 ##       (tetrachoric2)
 fap2 <- psych::fa.parallel(dat.tetra2$rho , n.obs=nrow(dat) ,  n.iter = 1 )
-  ## Parallel analysis suggests that the number of factors =  6  
-  ## and the number of components =  2 
+  ## Parallel analysis suggests that the number of factors =  6
+  ## and the number of components =  2
   ## Note that in this analysis, uncertainty with respect to thresholds is ignored.
 
 # calculate reliability using a model with 4 factors

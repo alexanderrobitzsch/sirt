@@ -1,5 +1,5 @@
 ## File Name: xxirt_coef.R
-## File Version: 0.05
+## File Version: 0.06
 
 ##########################################
 # coef S3 method for xxirt objects
@@ -10,4 +10,4 @@ coef.xxirt <- function(object,...)
     par <- c(par1 , par2)
     return(par)
 }
-##########################################        
+##########################################

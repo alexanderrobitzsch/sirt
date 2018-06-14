@@ -1,5 +1,5 @@
 ## File Name: read.fwf2.R
-## File Version: 1.02
+## File Version: 1.03
 
 
 
@@ -12,12 +12,12 @@ read.fwf2 <- function( file , format , variables = NULL){
     I <- length(format)
     n <- length( ff )
     dfr <- data.frame( matrix(0 , nrow= n , ncol=I ) )
-    for (ii in 1:I){  
-        dfr[,ii ] <- as.numeric( substring( ff , ind.ff1[ii] , ind.ff2[ii] )  ) 
+    for (ii in 1:I){
+        dfr[,ii ] <- as.numeric( substring( ff , ind.ff1[ii] , ind.ff2[ii] )  )
                     }
-    if (!is.null(variables)){ 
-        colnames(dfr) <- variables 
+    if (!is.null(variables)){
+        colnames(dfr) <- variables
             }
     return(dfr)
-    } 
+    }
 ############################################################################

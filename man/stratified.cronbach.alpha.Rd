@@ -1,5 +1,5 @@
 %% File Name: stratified.cronbach.alpha.Rd
-%% File Version: 0.18
+%% File Version: 0.19
 
 \name{stratified.cronbach.alpha}
 \alias{stratified.cronbach.alpha}
@@ -39,12 +39,12 @@ for the whole scale.
 %% ...
 %}
 \references{
-Cronbach, L.J., Schoenemann, P., & McKie, D. (1965). 
-Alpha coefficient for stratified-parallel tests. 
-\emph{Educational and Psychological Measurement}, 
+Cronbach, L.J., Schoenemann, P., & McKie, D. (1965).
+Alpha coefficient for stratified-parallel tests.
+\emph{Educational and Psychological Measurement},
 \bold{25}, 291-312.
 
-Meyer, P. (2010). \emph{Reliability}. Cambridge: 
+Meyer, P. (2010). \emph{Reliability}. Cambridge:
 Oxford University Press.
 }
 \author{
@@ -88,14 +88,14 @@ library(psych)
 psych::alpha( dat )
 # McDonald's omega
 psych::omega(dat , nfactors=1)     # 1 factor
-  ##   Alpha:                 0.69 
-  ##   Omega Total            0.69 
+  ##   Alpha:                 0.69
+  ##   Omega Total            0.69
 ##  => Note that alpha in this function is the standardized Cronbach's
 ##     alpha, i.e. alpha computed for standardized variables.
 psych::omega(dat , nfactors=2)     # 2 factors
-  ##   Omega Total            0.72 
-psych::omega(dat , nfactors=3)     # 3 factors  
-  ##   Omega Total            0.74 
+  ##   Omega Total            0.72
+psych::omega(dat , nfactors=3)     # 3 factors
+  ##   Omega Total            0.74
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

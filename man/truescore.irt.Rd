@@ -1,5 +1,5 @@
 %% File Name: truescore.irt.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{truescore.irt}
 \alias{truescore.irt}
@@ -9,13 +9,13 @@ Conversion of Trait Scores \eqn{\theta} into
 True Scores \eqn{\tau ( \theta )}
 }
 \description{
-This function computes the true score 
+This function computes the true score
 \eqn{\tau=\tau(\theta) = \sum_{i=1}^I P_i(\theta)}
 in a unidimensional item response model with \eqn{I} items. In addition, it also
 transforms conditional standard errors if they are provided.
 }
 \usage{
-truescore.irt(A, B, c = NULL, d = NULL, theta = seq(-3, 3, len = 21), 
+truescore.irt(A, B, c = NULL, d = NULL, theta = seq(-3, 3, len = 21),
     error = NULL, pid = NULL, h = 0.001)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -48,10 +48,10 @@ Numerical differentiation parameter
 }
 
 \details{
-In addition, the function \eqn{\pi(\theta)= \frac{1}{I} \cdot \tau( \theta)} 
+In addition, the function \eqn{\pi(\theta)= \frac{1}{I} \cdot \tau( \theta)}
 of the expected percent score is approximated by a logistic function
 \deqn{ \pi ( \theta ) \approx l + ( u - l ) \cdot invlogit ( a \theta + b )
-}    
+}
 }
 
 \value{
@@ -114,7 +114,7 @@ plot( theta , dfr$truescore , pch=16 , cex=.6 , xlab=expression(theta) , type="l
     ylab=expression(paste( tau , "(",theta , ")" ))  , main="True Score Transformation" )
 plot( theta , dfr$percscore , pch=16 , cex=.6 , xlab=expression(theta) , type="l",
     ylab=expression(paste( pi , "(",theta , ")" ))  , main="Percent Score Transformation" )
-points( theta , dfr$lower + (dfr$upper-dfr$lower)* 
+points( theta , dfr$lower + (dfr$upper-dfr$lower)*
                 stats::plogis(dfr$a*theta+dfr$b) , col=2 , lty=2)
 plot( theta , error , pch=16 , cex=.6 , xlab=expression(theta) , type="l",
     ylab=expression(paste("SE(",theta , ")" ))  , main="Standard Error Theta" )

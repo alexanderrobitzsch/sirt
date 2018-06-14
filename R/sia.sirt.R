@@ -1,5 +1,5 @@
 ## File Name: sia.sirt.R
-## File Version: 0.16
+## File Version: 0.17
 
 ###################################################
 # statistical implicative analysis
@@ -8,14 +8,14 @@ sia.sirt <- function(dat , significance=.85 ){
     TAM::require_namespace_msg("igraph")
     dat1 <- dat
     # order items
-    dat1 <- dat1[ , order( colMeans(dat1 , na.rm=TRUE ) ) ]    
+    dat1 <- dat1[ , order( colMeans(dat1 , na.rm=TRUE ) ) ]
     p <- colMeans(dat1 , na.rm=TRUE )
-        
+
     # handle missing responses
     dat1.resp <- 1*(1-is.na(dat1) )
     dat1[ is.na(dat1) ] <- 0
     I <- ncol(dat1)
-    
+
     # total sample size
     ntot <- crossprod( dat1.resp )
     # n10
@@ -46,7 +46,7 @@ sia.sirt <- function(dat , significance=.85 ){
 
     #***
     # compute arrows: remove symmetric and transitive paths
-    I1 <- impl_significance 
+    I1 <- impl_significance
     # remove symmetric implications
 #    I1[ ( I1 == t(I1) ) & ( I1 == 1 ) ] <- 0
     for (ii in 1:(I-1) ){
@@ -55,18 +55,18 @@ sia.sirt <- function(dat , significance=.85 ){
                if (l2 == 2 ){
                     if (impl_int[ii,jj] > impl_int[jj,ii] ){
                             I1[jj,ii] <- 0 } else { I1[ii,jj] <- 0 }
-               
+
                             } # end l2 = 2
-               
+
                             }
-                        }        
-                        
+                        }
+
     # remove transitive relations
-    I1 <- .sia.remove.transitive(I1)    
-    
+    I1 <- .sia.remove.transitive(I1)
+
     # calculate potencies to look for connected graphs
     I1.pot <- I1
-    
+
     # calculate matrix potence
     IS <- IS0 <- I1
     pp <- 2
@@ -81,27 +81,27 @@ sia.sirt <- function(dat , significance=.85 ){
         dev <- sum ( abs( IS - IS.old ) )
 #        cat( "Iteration " , pp , "dev " , dev , "\n")
                     }
-    
+
     # descriptives
     desc <- list( "nodes" = I  )
-    # unconnected nodes    
+    # unconnected nodes
     ind.uc <- intersect( which( rowSums(I1) == 0 ) , which( colSums(I1) == 0 ) )
     UC <- length( ind.uc )
     vars.uc <- rownames(I1)[ ind.uc ]
     if (  UC > 0 ){
         desc$nodes.unconnected <- UC
                     }
-    desc$edges <- sum(I1)                    
-    desc$sign.implications <- sum( impl_significance , na.rm=TRUE)     
+    desc$edges <- sum(I1)
+    desc$sign.implications <- sum( impl_significance , na.rm=TRUE)
     # descriptives on item level
-    desc.item <- data.frame( "item" = colnames(dat1) , "p" = p )                        
+    desc.item <- data.frame( "item" = colnames(dat1) , "p" = p )
     desc.item$level <- g1 <- apply( I1.pot , 1 , max )
-# cat("\nc100")                
+# cat("\nc100")
     #****
     # recalculate levels
-    g0 <- g1    
+    g0 <- g1
     g0 <- sort( g0 , decreasing = TRUE )
-    g1 <- g0    
+    g1 <- g0
     for (ii in 1:(I-1) ){
         # ii <- 1
         vii <- names(g1)[ii]
@@ -113,18 +113,18 @@ sia.sirt <- function(dat , significance=.85 ){
                             }
                     }
     desc.item[ names(g1) , "level" ]  <- g1
-    if (UC > 0 ){ 
-#        desc.item$level[ind.uc] <- NA 
+    if (UC > 0 ){
+#        desc.item$level[ind.uc] <- NA
 #        g1[ind.uc] <- -1
-        desc.item[vars.uc,"level"] <- NA 
+        desc.item[vars.uc,"level"] <- NA
         g1[vars.uc] <- -1
             }
     # from objects and to objects
     desc.item$from <- colSums(I1)
     desc.item$to <- rowSums(I1)
-    desc.item <- desc.item[ order( desc.item$level , decreasing = TRUE ) , ]                    
-#    rownames(desc.item) <- NULL    
-    
+    desc.item <- desc.item[ order( desc.item$level , decreasing = TRUE ) , ]
+#    rownames(desc.item) <- NULL
+
     # create graph matrix
     dfr <- NULL
     dfr2 <- NULL
@@ -132,13 +132,13 @@ sia.sirt <- function(dat , significance=.85 ){
     CI1 <- paste0( colnames(I1) , "\n(L" , g1 , ")")
     CI2 <- colnames(I1)
     for (ii in 1:I){
-        # ii <- 1    
+        # ii <- 1
         v1 <- which( I1[ii, ] > 0 )
         if ( length(v1) > 0 ){
             dfr.ii <- cbind( CI1[ii] , CI1[ v1] )
             dfr <- rbind( dfr , dfr.ii )
             dfr2.ii <- cbind( CI2[ii] , CI2[ v1] )
-            dfr2 <- rbind( dfr2 , dfr2.ii )            
+            dfr2 <- rbind( dfr2 , dfr2.ii )
                         }
                 }
     if (UC > 0 ){
@@ -146,27 +146,27 @@ sia.sirt <- function(dat , significance=.85 ){
             dfr.ii <- cbind( CI1[v1] , CI1[ v1] )
             dfr <- rbind( dfr , dfr.ii )
             dfr2.ii <- cbind( CI2[v1] , CI2[ v1] )
-            dfr2 <- rbind( dfr2 , dfr2.ii )            
+            dfr2 <- rbind( dfr2 , dfr2.ii )
                     }
-                    
+
     # create igraph object
     igraph.obj <-  igraph::graph.edgelist(dfr)
     # create Rgraphviz object
-            
+
     #*****
     # OUTPUT
-    res <- list( "adj.matrix" = I1 , 
-        "adj.pot" = I1.pot , 
-        "adj.matrix.trans" = IS , 
+    res <- list( "adj.matrix" = I1 ,
+        "adj.pot" = I1.pot ,
+        "adj.matrix.trans" = IS ,
         "desc" = desc , "desc.item" = desc.item ,
-        "impl.int" = impl_int , "impl.t" = impl_int_t , 
-        "impl.significance" = impl_significance , 
-        "conf.loev" = conf_loev , 
-        "graph.matr" = dfr2 , 
+        "impl.int" = impl_int , "impl.t" = impl_int_t ,
+        "impl.significance" = impl_significance ,
+        "conf.loev" = conf_loev ,
+        "graph.matr" = dfr2 ,
         "graph.edges" = unique( c( dfr2[,1] , dfr2[,2]  ) ) ,
         "igraph.matr" = dfr , "igraph.obj" = igraph.obj)
     return(res)
-        
+
         }
 ##################################################################
 
@@ -174,8 +174,8 @@ sia.sirt <- function(dat , significance=.85 ){
 ####################################################################
 # remove transitive relations
 .sia.remove.transitive <- function(I1){
-    I <- ncol(I1)    
-    diag(I1) <- 0    
+    I <- ncol(I1)
+    diag(I1) <- 0
     BB <- 1
     IS <- I1
     iter <- 0
@@ -185,7 +185,7 @@ sia.sirt <- function(dat , significance=.85 ){
         for (ii in 1:I ){
             for (jj in 1:I){
                 if (ii!= jj ){
-                    if ( sum( IS[ii,] * IS[,jj] ) > 0 ){ 
+                    if ( sum( IS[ii,] * IS[,jj] ) > 0 ){
                             I1[ii,jj] <- 0
                     }
                 }
@@ -194,7 +194,7 @@ sia.sirt <- function(dat , significance=.85 ){
         IS <- IS + IS %*% I1
         IS <- 1*(IS > 0 )
         BB <- sum( abs( I0 - IS ) )
-    }        
+    }
     return(I1)
 }
 ####################################################################

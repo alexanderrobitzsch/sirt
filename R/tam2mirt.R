@@ -1,5 +1,5 @@
 ## File Name: tam2mirt.R
-## File Version: 0.25
+## File Version: 0.26
 
 ##########################################################
 # convert a fitted tam object into a mirt object
@@ -18,22 +18,22 @@ tam2mirt <- function( tamobj )
     # extract data
     dat <- tamobj$resp
     # factors
-    if (D==1){ 
-        factors <- "F1" 
+    if (D==1){
+        factors <- "F1"
     }
-    if (D>1){ 
-        factors <- dimnames(tamobj$B)[[3]] 
+    if (D>1){
+        factors <- dimnames(tamobj$B)[[3]]
     }
     # lavaan syntax with fixed values
-    lavsyn <- tam2mirt_fix( D=D, factors=factors, B=B, dat=dat, AXsi=AXsi, 
-                    mean.trait=mean.trait, cov.trait=cov.trait, tamobj=tamobj ) 
+    lavsyn <- tam2mirt_fix( D=D, factors=factors, B=B, dat=dat, AXsi=AXsi,
+                    mean.trait=mean.trait, cov.trait=cov.trait, tamobj=tamobj )
     # lavaan syntax with freed values
-    lavsyn.freed <- tam2mirt_freed( D=D, factors=factors, B=B, dat=dat, 
-            AXsi=AXsi, mean.trait=mean.trait, cov.trait=cov.trait, tamobj=tamobj ) 
+    lavsyn.freed <- tam2mirt_freed( D=D, factors=factors, B=B, dat=dat,
+            AXsi=AXsi, mean.trait=mean.trait, cov.trait=cov.trait, tamobj=tamobj )
     # pseudo-estimate model in mirt: just create mirt object structure
     res <- lavaan2mirt( dat=dat, lavmodel=lavsyn, est.mirt=TRUE )
     #--- include parameters in mirt object
-    res$mirt@Model$nest <- as.integer(tamobj$ic$np ) # number of estimated parameters    
+    res$mirt@Model$nest <- as.integer(tamobj$ic$np ) # number of estimated parameters
     # recalculate AIC, BIC, AICc and SABIC
     res$mirt@Fit$AIC <- tamobj$ic$AIC
     res$mirt@Fit$BIC <- tamobj$ic$BIC

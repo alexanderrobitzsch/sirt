@@ -1,5 +1,5 @@
 %% File Name: automatic.recode.Rd
-%% File Version: 0.12
+%% File Version: 0.13
 
 \name{automatic.recode}
 \alias{automatic.recode}
@@ -10,11 +10,11 @@ Automatic Method of Finding Keys in a Dataset with Raw Item Responses
 \description{
 This function calculates keys of a dataset with raw item responses.
 It starts with setting the most frequent category of an item to 1.
-Then, in each iteration keys are changed such that the highest 
+Then, in each iteration keys are changed such that the highest
 item discrimination is found.
 }
 \usage{
-automatic.recode(data, exclude = NULL, pstart.min = 0.6, allocate = 200, 
+automatic.recode(data, exclude = NULL, pstart.min = 0.6, allocate = 200,
     maxiter = 20, progress = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -23,7 +23,7 @@ automatic.recode(data, exclude = NULL, pstart.min = 0.6, allocate = 200,
 Dataset with raw item responses
 }
   \item{exclude}{
-Vector with categories to be excluded for searching the key 
+Vector with categories to be excluded for searching the key
 }
   \item{pstart.min}{
 Minimum probability for an initial solution of keys.
@@ -46,7 +46,7 @@ A logical which indicates if iteration progress should be displayed
 A list with following entries
 \item{item.stat}{Data frame with item name, p value, item discrimination
 and the calculated key}
-\item{data.scored}{Scored data frame using calculated keys 
+\item{data.scored}{Scored data frame using calculated keys
 in \code{item.stat}
 }
 \item{categ.stats}{Data frame with statistics for all categories

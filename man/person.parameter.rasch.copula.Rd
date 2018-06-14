@@ -1,5 +1,5 @@
 %% File Name: person.parameter.rasch.copula.Rd
-%% File Version: 1.12
+%% File Version: 1.13
 
 \name{person.parameter.rasch.copula}
 \alias{person.parameter.rasch.copula}
@@ -12,8 +12,8 @@ Ability estimates as maximum likelihood estimates (MLE)
 are provided by the Rasch copula model.
 }
 \usage{
-person.parameter.rasch.copula(raschcopula.object, numdiff.parm = 0.001, 
-    conv.parm = 0.001, maxiter = 20, stepwidth = 1, 
+person.parameter.rasch.copula(raschcopula.object, numdiff.parm = 0.001,
+    conv.parm = 0.001, maxiter = 20, stepwidth = 1,
     print.summary = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -113,7 +113,7 @@ rho <- c( .35 , .25 , .30 )
 dat <- sirt::sim.rasch.dep( theta , b , itemcluster , rho )
 colnames(dat) <- paste("I" , seq(1,ncol(dat)) , sep="")
 
-# estimate Rasch copula model 
+# estimate Rasch copula model
 mod1 <- sirt::rasch.copula2( dat , itemcluster = itemcluster )
 summary(mod1)
 
@@ -121,7 +121,7 @@ summary(mod1)
 pmod1 <- sirt::person.parameter.rasch.copula(raschcopula.object = mod1 )
   ## Mean percentage standard error inflation
   ##   missing.pattern Mperc.seinflat
-  ## 1               1          10.48 
+  ## 1               1          10.48
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

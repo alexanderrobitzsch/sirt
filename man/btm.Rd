@@ -1,5 +1,5 @@
 %% File Name: btm.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{btm}
 \alias{btm}
@@ -13,10 +13,10 @@ Estimates an extended Bradley-Terry model (Hunter, 2004; see Details).
 }
 
 \usage{
-btm(data, ignore.ties = FALSE, fix.eta = NULL, fix.delta = NULL, fix.theta = NULL, 
+btm(data, ignore.ties = FALSE, fix.eta = NULL, fix.delta = NULL, fix.theta = NULL,
        maxiter = 100, conv = 1e-04, eps = 0.3)
 
-\method{summary}{btm}(object, file=NULL, digits=4,...)        
+\method{summary}{btm}(object, file=NULL, digits=4,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -80,12 +80,12 @@ List with following entries
 }
 
 \references{
-Bertoli-Barsotti, L., & Punzo, A. (2012). 
+Bertoli-Barsotti, L., & Punzo, A. (2012).
 Comparison of two bias reduction techniques for the Rasch model.
-\emph{Electronic Journal of Applied Statistical Analysis}, 
+\emph{Electronic Journal of Applied Statistical Analysis},
 \bold{5}, 360-366.
 
-Hunter, D. R. (2004). MM algorithms for generalized Bradley-Terry models. 
+Hunter, D. R. (2004). MM algorithms for generalized Bradley-Terry models.
 \emph{Annals of Statistics}, \bold{32}, 384-406.
 }
 
@@ -147,7 +147,7 @@ mod5 <- sirt::btm( dat , ignore.ties=TRUE , fix.eta = 0 , eps=0)
 summary(mod5)
 
 #############################################################################
-# EXAMPLE 2: Venice chess data 
+# EXAMPLE 2: Venice chess data
 #############################################################################
 
 # See http://www.rasch.org/rmt/rmt113o.htm
@@ -167,7 +167,7 @@ chessdata <- scan( what="character")
     ............................DD0DDD0D........0........0.........1.. Bobotsov
     ....................................D00D00001.........1.........1. Cosulich
     .............................................0D000D0D10..........1 Westerinen
-    .......................................................00D1D010000 Zichichi 
+    .......................................................00D1D010000 Zichichi
 
 L <- length(chessdata) / 2
 games <- matrix( chessdata , nrow=L , ncol=2 , byrow=TRUE )
@@ -180,7 +180,7 @@ for (gg in 1:G){
     results[gg , 1:2 ] <- games[ ind.gg , 2]
     results[gg, 3 ] <- games.gg[ ind.gg[1] ]
             }
-results <- as.data.frame(results)            
+results <- as.data.frame(results)
 results[,3] <- paste(results[,3] )
 results[ results[,3] == "D" , 3] <- 1/2
 results[,3] <- as.numeric( results[,3] )

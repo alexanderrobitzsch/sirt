@@ -1,5 +1,5 @@
 %% File Name: R2noharm.jackknife.Rd
-%% File Version: 1.11
+%% File Version: 1.12
 
 \name{R2noharm.jackknife}
 \alias{R2noharm.jackknife}
@@ -49,8 +49,8 @@ A list of lists with following entries:
     \code{loadings.theta.stat}
     }
 \item{jackknife.pars}{List with obtained results by jackknifing for all parameters:
-    \code{j.tanaka}, \code{j.rmsr}, \code{rmsea}, \code{chisquare_df}, 
-    \code{j.pm}, \code{j.thresholds}, \code{j.factor.cor}, 
+    \code{j.tanaka}, \code{j.rmsr}, \code{rmsea}, \code{chisquare_df},
+    \code{j.pm}, \code{j.thresholds}, \code{j.factor.cor},
     \code{j.loadings}, \code{j.loadings.theta}
         }
 \item{u.jacknunits}{Unique jackknife elements}
@@ -58,7 +58,7 @@ A list of lists with following entries:
 
 
 \references{
-Christoffersson, A. (1977). Two-step weighted least squares factor analysis of 
+Christoffersson, A. (1977). Two-step weighted least squares factor analysis of
 dichotomized variables. \emph{Psychometrika}, \bold{42}, 433-438.
 }
 \author{

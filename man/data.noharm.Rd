@@ -1,5 +1,5 @@
 %% File Name: data.noharm.Rd
-%% File Version: 2.08
+%% File Version: 2.09
 
 \name{data.noharm}
 
@@ -22,9 +22,9 @@ data(data.noharm18)
 
 
 \format{
-    
-\itemize{    
-    
+
+\itemize{
+
 \item  \code{data.noharmExC} \cr
 
 The format of this dataset is
@@ -40,11 +40,11 @@ The format of this dataset is
 \code{ $ C8: int  1 0 1 0 1 0 1 0 1 1 ...} \cr
 
 
-\item \code{data.noharm18} \cr  
+\item \code{data.noharm18} \cr
 
-A data frame with 200 observations on the following 18 variables \code{I01}, 
+A data frame with 200 observations on the following 18 variables \code{I01},
   ..., \code{I18}. The format is
-  
+
 \code{'data.frame':   200 obs. of  18 variables:} \cr
 \code{ $ I01: int  1 1 1 1 1 0 1 1 0 1 ...} \cr
 \code{ $ I02: int  1 1 0 1 1 0 1 1 1 1 ...} \cr
@@ -63,7 +63,7 @@ A data frame with 200 observations on the following 18 variables \code{I01},
 \code{ $ I15: int  1 1 1 0 0 1 1 1 0 1 ...} \cr
 \code{ $ I16: int  1 1 0 1 1 0 1 0 1 1 ...} \cr
 \code{ $ I17: int  0 1 0 0 0 0 1 1 0 1 ...} \cr
-\code{ $ I18: int  0 0 0 0 0 0 0 0 1 0 ...} \cr 
+\code{ $ I18: int  0 0 0 0 0 0 0 0 1 0 ...} \cr
 }
 }
 %\details{

@@ -1,5 +1,5 @@
 %% File Name: data.pisaRead.Rd
-%% File Version: 0.07
+%% File Version: 0.08
 
 \name{data.pisaRead}
 \alias{data.pisaRead}
@@ -14,16 +14,16 @@ dataset contains 623 students on 12 items.
 \usage{data(data.pisaRead)}
 \format{
 The dataset is a list. The list element \code{data}
-contains the dataset with the demographical variables 
-student ID (\code{idstud}), school ID (\code{idschool}), a dummy variable for female 
+contains the dataset with the demographical variables
+student ID (\code{idstud}), school ID (\code{idschool}), a dummy variable for female
 students (\code{female}), socioeconomic status (\code{hisei})
-and migration background (\code{migra}). The remaining 
+and migration background (\code{migra}). The remaining
 variables (starting with \code{R} in the name) are
 the reading items. \cr
 The item metadata are included in the list element
 \code{item} which contains item name (\code{item}),
 testlet label (\code{testlet}), item format (\code{ItemFormat}),
-text type (\code{TextType}) and text aspect (\code{Aspect}). 
+text type (\code{TextType}) and text aspect (\code{Aspect}).
 
 The format is:
 

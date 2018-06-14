@@ -1,5 +1,5 @@
 ## File Name: prior_extract_density.R
-## File Version: 0.06
+## File Version: 0.07
 
 
 ###########################################################
@@ -18,7 +18,7 @@ prior_extract_density <- function( prior ){
             for (vv in 2:NV){
                 # vv <- 2
                 h1 <- names(v2)[vv]
-                if ( ! is.null(h1) ){    
+                if ( ! is.null(h1) ){
                     if ( ! is.na(h1) ){
                         if ( !(  h1 %in% c("NA","") ) ){
                             v_pp <- paste0( v_pp , h1 , "=" )
@@ -26,8 +26,8 @@ prior_extract_density <- function( prior ){
                     }
                 }
                 v_pp <- paste0( v_pp , v2[vv])
-                if (vv < NV){ 
-                    v_pp <- paste0( v_pp , "," ) 
+                if (vv < NV){
+                    v_pp <- paste0( v_pp , "," )
                 }
             }
         }

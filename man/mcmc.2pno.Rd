@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pno.Rd
-%% File Version: 1.24
+%% File Version: 1.25
 
 \name{mcmc.2pno}
 \alias{mcmc.2pno}
@@ -8,11 +8,11 @@
 MCMC Estimation of the Two-Parameter Normal Ogive Item Response Model
 }
 \description{
-This function estimates the Two-Parameter normal ogive item response model 
+This function estimates the Two-Parameter normal ogive item response model
 by MCMC sampling (Johnson & Albert, 1999, p. 195ff.).
 }
 \usage{
-mcmc.2pno(dat, weights=NULL , burnin = 500, iter = 1000, N.sampvalues = 1000, 
+mcmc.2pno(dat, weights=NULL , burnin = 500, iter = 1000, N.sampvalues = 1000,
       progress.iter = 50, save.theta = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -41,12 +41,12 @@ Should theta values be saved?
 }
 }
 \details{
-The two-parameter normal ogive item response model with a probit link 
+The two-parameter normal ogive item response model with a probit link
 function is defined by
 \deqn{ P(X_{pi} = 1 | \theta_p ) = \Phi ( a_i \theta_p - b_i )
         \quad ,  \quad \theta_p \sim N(0,1) }
 Note that in this implementation non-informative priors for the item
-parameters are chosen (Johnson & Albert, 1999, p. 195ff.).        
+parameters are chosen (Johnson & Albert, 1999, p. 195ff.).
 }
 \value{
 A list of class \code{mcmc.sirt} with following entries:
@@ -61,16 +61,16 @@ A list of class \code{mcmc.sirt} with following entries:
   \item{a.chain}{Sampled values of \eqn{a_i} parameters}
   \item{b.chain}{Sampled values of \eqn{b_i} parameters}
   \item{theta.chain}{Sampled values of \eqn{\theta_p} parameters}
-  \item{deviance.chain}{Sampled values of Deviance values}  
+  \item{deviance.chain}{Sampled values of Deviance values}
   \item{EAP.rel}{EAP reliability}
-  \item{person}{Data frame with EAP person parameter estimates for 
+  \item{person}{Data frame with EAP person parameter estimates for
         \eqn{\theta_p} and their corresponding posterior standard
       deviations}
   \item{dat}{Used data frame}
   \item{weights}{Used student weights}
   \item{\dots}{Further values}
 }
-% "EAP.rel" = EAP.rel , "dat" = dat0 , "weights" = weights , 
+% "EAP.rel" = EAP.rel , "dat" = dat0 , "weights" = weights ,
 
 \references{
 Johnson, V. E., & Albert, J. H. (1999). \emph{Ordinal Data Modeling}.
@@ -95,7 +95,7 @@ A hierarchical version of this model can be estimated with
 \code{\link{mcmc.2pnoh}}.
 }
 \examples{
-\dontrun{    
+\dontrun{
 #############################################################################
 # EXAMPLE 1: Dataset Reading
 #############################################################################

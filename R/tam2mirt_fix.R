@@ -1,5 +1,5 @@
 ## File Name: tam2mirt_fix.R
-## File Version: 0.07
+## File Version: 0.08
 
 
 
@@ -14,7 +14,7 @@ tam2mirt_fix <- function( D , factors , B , dat , AXsi ,
         # dd <- 1
         fac.dd <- factors[dd]
         # create terms for loadings
-        B2.dd <- round( B[,2,dd] , 4) 
+        B2.dd <- round( B[,2,dd] , 4)
         syn0 <- paste0( paste0( B2.dd[ B2.dd!=0] , "*" , colnames(dat)[ B2.dd!=0] ) , collapse="+" )
         syn0 <- paste0( fac.dd , " =~ " , syn0 , "\n")
         lavsyn <- paste0( lavsyn , syn0 )
@@ -48,7 +48,7 @@ tam2mirt_fix <- function( D , factors , B , dat , AXsi ,
     if (D>1){
         for (dd in 1:(D-1)){
             for (ee in (dd+1):D ){
-                syn0 <- paste0( factors[dd] , " ~~ " , 
+                syn0 <- paste0( factors[dd] , " ~~ " ,
                             round( cov.trait[dd,ee] ,4)  , "*" ,factors[ee]  )
                 syn0 <- paste0( syn0 , collapse="\n")
                 lavsyn <- paste0( lavsyn , "\n" , syn0 )

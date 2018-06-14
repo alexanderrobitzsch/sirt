@@ -1,5 +1,5 @@
 %% File Name: isop.test.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{isop.test}
 \alias{isop.test}
@@ -17,7 +17,7 @@ are obtained by Jackknife.
 \usage{
 isop.test(data, jackunits = 20, weights = rep(1, nrow(data)))
 
-\method{summary}{isop.test}(object,...)   
+\method{summary}{isop.test}(object,...)
 }
 
 
@@ -55,8 +55,8 @@ A list with following entries
   The sample size per item is \code{N} and \code{M} denotes the item mean.}
   \item{Es}{Number of concordances per item}
   \item{Ed}{Number of disconcordances per item}
-  
-The \eqn{W1_i} statistics are printed by the \code{summary} method.  
+
+The \eqn{W1_i} statistics are printed by the \code{summary} method.
 }
 
 \references{
@@ -78,7 +78,7 @@ Alexander Robitzsch
 \seealso{
 Fit the ISOP model with \code{\link{isop.dich}} or \code{\link{isop.poly}}.
 
-See also the \pkg{ISOP} package at \emph{Rforge}: \emph{http://www.rforge.net/ISOP/}. 
+See also the \pkg{ISOP} package at \emph{Rforge}: \emph{http://www.rforge.net/ISOP/}.
 }
 
 

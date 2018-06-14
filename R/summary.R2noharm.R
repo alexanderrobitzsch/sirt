@@ -1,5 +1,5 @@
 ## File Name: summary.R2noharm.R
-## File Version: 0.07
+## File Version: 0.08
 
 #..........................................................
 # R2Noharm summary function
@@ -10,41 +10,41 @@ summary.R2noharm <- function( object , logfile=NULL , ...){
     #**********************
     # global summary
     if ( ! is.null(logfile) ){ sink( paste0(logfile,".Rout") , split=TRUE ) }
-    cat( paste( "-------------------------------------------------") , "\n" )    
-    cat( paste( "NOHARM4 " , object$systime , sep="") , "\n" )    
+    cat( paste( "-------------------------------------------------") , "\n" )
+    cat( paste( "NOHARM4 " , object$systime , sep="") , "\n" )
     d <- utils::packageDescription("sirt")
     cat(paste(d$Package," " , d$Version," (",d$Date,")",sep=""))
-    cat( paste( "\n-------------------------------------------------") , "\n\n" )    
+    cat( paste( "\n-------------------------------------------------") , "\n\n" )
     #**********************
     # model type
     if (object$modtype == 2){ cat( "Multidimensional Exploratory Factor Analysis\n\n") }
     if (object$modtype == 3){ cat( "Multidimensional Confirmatory Factor Analysis\n\n") }
-    if (object$modtype == 4){ cat( "Unidimensional Confirmatory Factor Analysis\n\n") }    
+    if (object$modtype == 4){ cat( "Unidimensional Confirmatory Factor Analysis\n\n") }
     #*********************
     # descriptives
-    cat( paste( "Number of Observations: " , object$Nobs , sep="") , "\n" )    
-    cat( paste( "Number of Items       : " , object$Nitems , sep="") , "\n" )        
-    cat( paste( "Number of Dimensions  : " , object$dimensions , sep="") , "\n" )        
+    cat( paste( "Number of Observations: " , object$Nobs , sep="") , "\n" )
+    cat( paste( "Number of Items       : " , object$Nitems , sep="") , "\n" )
+    cat( paste( "Number of Dimensions  : " , object$dimensions , sep="") , "\n" )
     cat( paste( "Tanaka Index          : " , round(object$tanaka,object$display.fit) , sep="") , "\n" )
     cat( paste( "RMSR                  : " , round(object$rmsr,object$display.fit) , sep="") , "\n\n" )
-    
+
     # chi square statistic
     if (object$modtype %in% 2:4){
         cat("Chi Square Statistic of Gessaroli & De Champlain (1996)\n\n")
-        cat( paste( "Number of Estimated Parameters : " , object$Nestpars , sep="") , "\n" )            
-        cat( paste( "Chi2                           : " , round(object$chisquare,3) , sep="") , "\n" )            
-        cat( paste( "Degrees of Freedom (df)        : " , object$df , sep="") , "\n" )        
-        cat( paste( "p(Chi2,df)                     : " , round(object$p.chisquare,3) , sep="") , "\n" )            
-        cat( paste( "Chi2 / df                      : " , round(object$chisquare / object$df,3) , sep="") , "\n" )            
-        cat( paste( "RMSEA                          : " , round(object$rmsea,3) , sep="") , "\n\n" )                
+        cat( paste( "Number of Estimated Parameters : " , object$Nestpars , sep="") , "\n" )
+        cat( paste( "Chi2                           : " , round(object$chisquare,3) , sep="") , "\n" )
+        cat( paste( "Degrees of Freedom (df)        : " , object$df , sep="") , "\n" )
+        cat( paste( "p(Chi2,df)                     : " , round(object$p.chisquare,3) , sep="") , "\n" )
+        cat( paste( "Chi2 / df                      : " , round(object$chisquare / object$df,3) , sep="") , "\n" )
+        cat( paste( "RMSEA                          : " , round(object$rmsea,3) , sep="") , "\n\n" )
                         }
-    if ( object$modtype %in% 2:4){ 
+    if ( object$modtype %in% 2:4){
         #***
         # factor correlation
-        cat( "Factor Covariance Matrix\n")                
+        cat( "Factor Covariance Matrix\n")
         print( object$factor.cor )
-        if ( object$modtype %in% 3){ 
-            cat( "\nFactor Correlation Matrix\n")                
+        if ( object$modtype %in% 3){
+            cat( "\nFactor Correlation Matrix\n")
             print( round( stats::cov2cor(object$factor.cor) , 3 ))
                                     }
                                 }
@@ -63,19 +63,19 @@ summary.R2noharm <- function( object , logfile=NULL , ...){
         l1 <- object$loadings
         cat("\nItem Parameters - Common Factor Parametrization\n",
             "Loadings, Thresholds, Uniquenesses and Guessing Parameters\n\n")
-        l1 <- data.frame( l1 , "threshold" = object$thresholds , "uniqueness" = object$uniquenesses , 
-                        "guess" = object$guesses )        
+        l1 <- data.frame( l1 , "threshold" = object$thresholds , "uniqueness" = object$uniquenesses ,
+                        "guess" = object$guesses )
         print( l1 )
-        res[["itempars.faparm" ]] <- l1 
+        res[["itempars.faparm" ]] <- l1
         #***
         # Lord's parametrization for unidimensional models
         if (object$modtype == 4){
             cat("\nItem Parameters - Lord's Parametrization\n",
-                "Difficulty and Discrimination\n\n")        
-            l1 <- data.frame( "difficulty" = object$difficulties , 
+                "Difficulty and Discrimination\n\n")
+            l1 <- data.frame( "difficulty" = object$difficulties ,
                                "discrimination" = object$discriminations )
             print(l1)
-        res[["itempars.lord" ]] <- l1 
+        res[["itempars.lord" ]] <- l1
                     }
             }
     if ( object$modtype %in% 2){
@@ -84,12 +84,12 @@ summary.R2noharm <- function( object , logfile=NULL , ...){
         cat("\nItem Parameters - Promax Rotated Parameters\n",
                 "Loadings, Constants, Guessing Parameters and Descriptives\n\n")
         l1 <- object$promax.theta
-        l1 <- data.frame( l1 , "final.constants" = object$final.constants , 
+        l1 <- data.frame( l1 , "final.constants" = object$final.constants ,
                     "guess" = object$guesses , "N" = diag(object$N.itempair) , "p" = diag(object$pm) )
         print( l1 )
         res <- list( "itempars.promax" = l1 )
                 }
-    if ( ! is.null(logfile) ){ sink() }                
+    if ( ! is.null(logfile) ){ sink() }
         invisible(res)
     }
 #--------------------------------------------------------------------------------------

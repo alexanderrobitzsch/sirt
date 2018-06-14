@@ -1,5 +1,5 @@
 %% File Name: data.reck.Rd
-%% File Version: 0.20
+%% File Version: 0.21
 
 \name{data.reck}
 
@@ -150,14 +150,14 @@ Simulated datasets
 
 
 \references{
-Reckase, M. (2009). \emph{Multidimensional item response theory}. 
+Reckase, M. (2009). \emph{Multidimensional item response theory}.
 New York: Springer.
 }
 
 \examples{
-\dontrun{    
+\dontrun{
 #############################################################################
-# EXAMPLE 1: data.reck21 dataset, Table 2.1, p. 45    
+# EXAMPLE 1: data.reck21 dataset, Table 2.1, p. 45
 #############################################################################
 data(data.reck21)
 
@@ -193,12 +193,12 @@ c3 <- matrix( c3 , I , 4 , byrow=TRUE )
 # compare estimates of rasch.mml2, smirt and true parameters
 round( cbind( mod1$item$c , mod2$item$c ,c3[,3]  ,data.reck21$pars$c ) , 2 )
 round( cbind( mod1$item$a , mod2$item$a.Dim1 ,c3[,1], data.reck21$pars$a ) , 2 )
-round( cbind( mod1$item$b , mod2$item$b.Dim1 / mod2$item$a.Dim1 , - c3[,2] / c3[,1] , 
+round( cbind( mod1$item$b , mod2$item$b.Dim1 / mod2$item$a.Dim1 , - c3[,2] / c3[,1] ,
             data.reck21$pars$b ) , 2 )
-            
+
 #############################################################################
-# EXAMPLE 2: data.reck61 dataset, Table 6.1, p. 153    
-#############################################################################            
+# EXAMPLE 2: data.reck61 dataset, Table 6.1, p. 153
+#############################################################################
 
 data(data.reck61DAT1)
 dat <- data.reck61DAT1$data
@@ -213,7 +213,7 @@ mod1a <- TAM::tam.fa( dat , irtmodel="efa" , nfactors=3 )
 varimax(mod1a$B.stand)
 
 # Model 1b: EFA in NOHARM (Promax rotation)
-mod1b <- sirt::R2noharm( dat = dat , model.type="EFA" ,  dimensions = 3 , 
+mod1b <- sirt::R2noharm( dat = dat , model.type="EFA" ,  dimensions = 3 ,
               writename = "reck61__3dim_efa", noharm.path = "c:/NOHARM" ,dec = ",")
 summary(mod1b)
 
@@ -234,7 +234,7 @@ plot(mod1d , efa.load.min=.2)   # plot loadings of at least .20
 dims <- c( rep(1,10) , rep(3,10) , rep(2,10)  )
 Qmatrix <- matrix( 0 , nrow=30 , ncol=3 )
 Qmatrix[ cbind( 1:30 , dims) ] <- 1
-mod2a <- TAM::tam.mml.2pl( dat ,Q=Qmatrix , 
+mod2a <- TAM::tam.mml.2pl( dat ,Q=Qmatrix ,
             control=list( snodes=1000, QMC=TRUE , maxiter=200) )
 summary(mod2a)
 
@@ -243,7 +243,7 @@ mod2b <- sirt::smirt( dat ,Qmatrix =Qmatrix , est.a="2PL" , maxiter=20 , qmcnode
 summary(mod2b)
 
 #-- Model 2c: rasch.mml2 in sirt
-mod2c <- sirt::rasch.mml2( dat ,Qmatrix =Qmatrix , est.a= 1:30 , 
+mod2c <- sirt::rasch.mml2( dat ,Qmatrix =Qmatrix , est.a= 1:30 ,
                 mmliter =200 , theta.k = seq(-5,5,len=11) )
 summary(mod2c)
 
@@ -270,19 +270,19 @@ F.pattern[21:30,2] <- 1
 F.pattern[11:20,3] <- 1
 F.init <- F.pattern
 # estimate model
-mod2e <- sirt::R2noharm( dat = dat , model.type="CFA" , P.pattern=P.pattern, 
+mod2e <- sirt::R2noharm( dat = dat , model.type="CFA" , P.pattern=P.pattern,
             P.init=P.init , F.pattern=F.pattern, F.init=F.init ,
             writename = "reck61__3dim_cfa", noharm.path = "c:/NOHARM" ,dec = ",")
 summary(mod2e)
 
 #-- Model 2f: CFA with noharm.sirt
 mod2f <- sirt::noharm.sirt( dat = dat , Fval=F.init , Fpatt = F.pattern ,
-                 Pval=P.init , Ppatt = P.pattern )                      
+                 Pval=P.init , Ppatt = P.pattern )
 summary(mod2f)
 
 #############################################################################
 # EXAMPLE 3: DETECT analysis data.reck78ExA and data.reck79ExB
-############################################################################# 
+#############################################################################
 
 data(data.reck78ExA)
 data(data.reck79ExB)
@@ -346,7 +346,7 @@ detectB <- sirt::conf.detect( data = dat , score = score , itemcluster = itemclu
 #- exploratory DETECT analysis
 detect_explB <- sirt::expl.detect(data=dat, score, nclusters=10, N.est = nrow(dat)/2  )
   ##   Optimal Cluster Size is  4  (Maximum of DETECT Index)
-  ##   
+  ##
   ##     N.Cluster N.items N.est N.val         size.cluster DETECT.est ASSI.est
   ##   1         2      50  1250  1250                30-20      0.665    0.546
   ##   2         3      50  1250  1250             10-20-20      0.686    0.585

@@ -1,5 +1,5 @@
 %% File Name: rasch.evm.pcm.Rd
-%% File Version: 0.33
+%% File Version: 0.34
 
 \name{rasch.evm.pcm}
 \alias{rasch.evm.pcm}
@@ -17,9 +17,9 @@ Estimation of the Partial Credit Model using the Eigenvector Method
 This function performs the eigenvector approach to estimate item
 parameters which is based on a pairwise estimation approach
 (Gardner & Engelhard, 2002). No assumption about person parameters
-is required for item parameter estimation. Statistical inference is performed by 
+is required for item parameter estimation. Statistical inference is performed by
 Jackknifing. If a group identifier is provided, tests for differential item
-functioning are performed. 
+functioning are performed.
 }
 
 \usage{
@@ -30,14 +30,14 @@ rasch.evm.pcm(dat, jackunits = 20, weights = NULL, pid = NULL ,
 
 \method{coef}{rasch.evm.pcm}(object,...)
 
-\method{vcov}{rasch.evm.pcm}(object,...)    
+\method{vcov}{rasch.evm.pcm}(object,...)
 }
 
 
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{dat}{
-Data frame with dichotomous or polytomous item responses 
+Data frame with dichotomous or polytomous item responses
 }
 \item{jackunits}{
 A number of Jackknife units (if an integer is provided as the argument
@@ -101,8 +101,8 @@ is provided as an argument}
 Choppin, B. (1985). A fully conditional estimation procedure for Rasch Model
 parameters. \emph{Evaluation in Education}, \bold{9}, 29-42.
 
-Garner, M., & Engelhard, G. J. (2002). An eigenvector method for 
-estimating item parameters of the dichotomous and polytomous Rasch models. 
+Garner, M., & Engelhard, G. J. (2002). An eigenvector method for
+estimating item parameters of the dichotomous and polytomous Rasch models.
 \emph{Journal of Applied Measurement}, \bold{3}, 107-128.
 
 Wang, J., & Engelhard, G. (2014). A pairwise algorithm in \R for rater-mediated
@@ -173,7 +173,7 @@ eRm::plotPImap(mod3)     # plot person-item maps
 #############################################################################
 
 dat <- scan()
-   1 0 1 1   1 1 0 0   1 0 0 0   0 1 1 1   1 1 1 0   
+   1 0 1 1   1 1 0 0   1 0 0 0   0 1 1 1   1 1 1 0
    1 1 0 1   1 1 1 1   1 0 1 0   1 1 1 1   1 1 0 0
 
 dat <- matrix( dat , 10 , 4 , byrow=TRUE)
@@ -195,7 +195,7 @@ mod1$B
 #############################################################################
 
 dat <- scan()
-   2 2 1 1 1   2 1 2 0 0   1 0 0 0 0   0 1 1 2 0   1 2 2 1 1   
+   2 2 1 1 1   2 1 2 0 0   1 0 0 0 0   0 1 1 2 0   1 2 2 1 1
    2 2 0 2 1   2 2 1 1 0   1 0 1 0 0   2 1 2 2 2   2 1 0 0 1
 
 dat <- matrix( dat , 10 , 5 , byrow=TRUE)

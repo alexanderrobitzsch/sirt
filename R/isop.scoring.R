@@ -1,5 +1,5 @@
 ## File Name: isop.scoring.R
-## File Version: 1.04
+## File Version: 1.05
 #################################################
 # scoring students and items according to the
 # Scheiblechner's ISOP model
@@ -17,12 +17,12 @@ isop.scoring <- function( dat , score.itemcat=NULL){
     colnames(p.itemcat) <- paste0( "p.Cat" , 0:K )
     for (kk in 0:K){
         p.itemcat[,kk+1] <- colMeans( dat==kk , na.rm=TRUE )
-                }                
-    #**************************************                
+                }
+    #**************************************
     if ( is.null( score.itemcat )){
-        score.itemcat <- 0*p.itemcat                    
-        colnames(score.itemcat) <- paste0( "score.Cat" , 0:K )    
-        # score itemcat 
+        score.itemcat <- 0*p.itemcat
+        colnames(score.itemcat) <- paste0( "score.Cat" , 0:K )
+        # score itemcat
         for (kk in 0:K){
             if (kk>0){
                 v1 <- apply( p.itemcat[ , 1+seq( 0 , kk -1 , 1 ) , drop=FALSE] ,
@@ -31,22 +31,22 @@ isop.scoring <- function( dat , score.itemcat=NULL){
             if (kk<K){
                 v2 <- apply( p.itemcat[ , 1+seq( kk+1 , K , 1 ) , drop=FALSE] ,
                             1 , sum , na.rm=TRUE )
-                    } else { v2 <- 0 }    
+                    } else { v2 <- 0 }
             score.itemcat[,kk+1] <- v1-v2
                     }
                 }  # end score itemcat
-      #*************************                                
+      #*************************
       dat <- dat[ , rownames(score.itemcat) ]
       # scoring table
       score.dat <- 0*dat
       for (kk in 0:K){
-        score.dat <- score.dat + matrix( score.itemcat[,kk+1] , nrow=nrow(dat) , 
-                        ncol=I , byrow=TRUE ) * ( dat == kk ) 
+        score.dat <- score.dat + matrix( score.itemcat[,kk+1] , nrow=nrow(dat) ,
+                        ncol=I , byrow=TRUE ) * ( dat == kk )
                     }
       # score persons
       person <- data.frame( "pid" = 1:nrow(dat) ,
                     "score" = rowSums( dat , na.rm=TRUE ) ,
-                    "max" = rowSums( dat.resp ) , 
+                    "max" = rowSums( dat.resp ) ,
                     "M" = rowMeans( dat , na.rm=TRUE ) ,
                     "mpsc" = rowMeans( score.dat , na.rm=TRUE )
                             )
@@ -65,11 +65,11 @@ isop.scoring <- function( dat , score.itemcat=NULL){
       item <- cbind( item , p.itemcat ,  score.itemcat )
       # calculate distribution function
       distr.fct <- t(apply( p.itemcat , 1 , FUN = function(ll){
-                    cumsum( ll ) } ) )                                    
+                    cumsum( ll ) } ) )
 #      colnames(item)[-c(1:2)] <- colnames( score.itemcat )[-1]
       #***
       # collect results
-      res <- list( "person"=person , "item"=item , 
+      res <- list( "person"=person , "item"=item ,
             "p.itemcat"=p.itemcat , "score.itemcat"=score.itemcat ,
             "distr.fct"=distr.fct)
       return(res)

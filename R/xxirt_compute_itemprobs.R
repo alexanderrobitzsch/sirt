@@ -1,5 +1,5 @@
 ## File Name: xxirt_compute_itemprobs.R
-## File Version: 0.11
+## File Version: 0.12
 
 
 ##############################################################
@@ -9,13 +9,13 @@ xxirt_compute_itemprobs <- function( item_list , items , Theta , ncat ,
 {
     TP <- nrow(Theta)
     maxK <- max(ncat)
-    if ( is.null(item_index) ){ 
+    if ( is.null(item_index) ){
         I <- length(items)
         item_index <- 1:I
-    }            
-    I <- length(item_index)        
+    }
+    I <- length(item_index)
     # compute item probabilities as a function of theta
-    probs <- array( 0 , dim=c(I,maxK,TP) )         
+    probs <- array( 0 , dim=c(I,maxK,TP) )
     for (jj in 1:I){
         ii <- item_index[jj]
         item_ii <- item_list[[ii]]
@@ -24,6 +24,6 @@ xxirt_compute_itemprobs <- function( item_list , items , Theta , ncat ,
         probs_ii <- do.call( item_ii$P , arg_ii )
         probs[ jj, 1:ncat[ii] ,] <- t(probs_ii)
     }
-    return(probs)                    
+    return(probs)
 }
-#############################################################################                        
+#############################################################################

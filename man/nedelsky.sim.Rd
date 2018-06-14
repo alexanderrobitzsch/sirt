@@ -1,5 +1,5 @@
 %% File Name: nedelsky.sim.Rd
-%% File Version: 0.16
+%% File Version: 0.17
 
 \name{nedelsky-methods}
 
@@ -21,7 +21,7 @@ Nedelsky model in the \pkg{mirt} package.
 }
 
 \usage{
-# simulating the Nedelsky model    
+# simulating the Nedelsky model
 nedelsky.sim(theta, b, a = NULL, tau = NULL)
 
 # creating latent responses of the Nedelsky model
@@ -42,7 +42,7 @@ Matrix of category difficulties
 Vector of item discriminations
 }
   \item{tau}{
-Category attractivity parameters \eqn{\tau} (see Bechger et al., 2005) 
+Category attractivity parameters \eqn{\tau} (see Bechger et al., 2005)
 }
 \item{K}{(Maximum) Number of distractors of the used multiple choice items}
   \item{Theta}{
@@ -67,7 +67,7 @@ are defined which indicate whether alternative \eqn{k} has been correctly
 identified as a distractor. By definition, the correct alternative is never
 been judged as wrong by the respondent.
 
-Formally, the Nedelsky model assumes a 2PL model for eliminating each of the 
+Formally, the Nedelsky model assumes a 2PL model for eliminating each of the
 distractors
 \deqn{P(S_{ik}=1 | \theta ) = invlogit[ a_i ( \theta - b_{ik} ) ] }
 where \eqn{\theta} is the person ability and \eqn{b_{ik}} are
@@ -93,15 +93,15 @@ are set to 1.
 
 
 \references{
-Bechger, T. M., Maris, G., Verstralen, H. H. F. M., & Verhelst, N. D. (2003). 
-\emph{The Nedelsky model for multiple-choice items}. 
+Bechger, T. M., Maris, G., Verstralen, H. H. F. M., & Verhelst, N. D. (2003).
+\emph{The Nedelsky model for multiple-choice items}.
 CITO Research Report, 2003-5.
 
-Bechger, T. M., Maris, G., Verstralen, H. H. F. M., & Verhelst, N. D. (2005). 
-The Nedelsky model for multiple-choice items. 
+Bechger, T. M., Maris, G., Verstralen, H. H. F. M., & Verhelst, N. D. (2005).
+The Nedelsky model for multiple-choice items.
 In L. van der Ark, M. Croon, & Sijtsma, K. (Eds.).
-\emph{New developments in categorical data analysis for the social and behavioral 
-sciences}, pp. 187-206. Mahwah, Lawrence Erlbaum. 
+\emph{New developments in categorical data analysis for the social and behavioral
+sciences}, pp. 187-206. Mahwah, Lawrence Erlbaum.
 }
 
 
@@ -121,7 +121,7 @@ Alexander Robitzsch
 
 
 \examples{
-\dontrun{    
+\dontrun{
 #############################################################################
 # EXAMPLE 1: Simulated data according to the Nedelsky model
 #############################################################################
@@ -153,7 +153,7 @@ nedelsky.icc <- function( par , Theta , ncat ){
      a <- par[ K+2]
      tau <- par[1:(K+1) + (K+2) ]
      thdim <- par[ K+2+K+1 +1 ]
-     probs <- sirt::nedelsky.irf( Theta , K=K , b=b , a=a , tau=tau , combis , 
+     probs <- sirt::nedelsky.irf( Theta , K=K , b=b , a=a , tau=tau , combis ,
                     thdim=thdim  )$probs
      return(probs)
 }
@@ -173,13 +173,13 @@ mirtmodel <- mirt::mirt.model("
 itemtype <- rep("nedelsky" , I )
 customItems <- list("nedelsky"= nedelsky.itemfct)
 # define parameters to be estimated
-mod1.pars <- mirt::mirt(dat, mirtmodel , itemtype=itemtype , 
-                   customItems=customItems, pars = "values")                
+mod1.pars <- mirt::mirt(dat, mirtmodel , itemtype=itemtype ,
+                   customItems=customItems, pars = "values")
 # estimate model
-mod1 <- mirt::mirt(dat,mirtmodel , itemtype=itemtype , customItems=customItems, 
+mod1 <- mirt::mirt(dat,mirtmodel , itemtype=itemtype , customItems=customItems,
                pars = mod1.pars , verbose=TRUE  )
 # model summaries
-print(mod1)                
+print(mod1)
 summary(mod1)
 mirt.wrapper.coef( mod1 )$coef
 mirt.wrapper.itemplot(mod1 ,ask=TRUE)
@@ -188,10 +188,10 @@ mirt.wrapper.itemplot(mod1 ,ask=TRUE)
 # fit Nedelsky model with xxirt function in sirt
 
 # define item class for xxirt
-item_nedelsky <- sirt::xxirt_createDiscItem( name = "nedelsky" , par = par , 
+item_nedelsky <- sirt::xxirt_createDiscItem( name = "nedelsky" , par = par ,
                 est = est , P = nedelsky.icc ,
-                prior = c( b1="dnorm" , b2 = "dnorm" , b3 = "dnorm" ) , 
-                prior_par1 = c( b1 = -1 , b2=-1 , b3=-1) , 
+                prior = c( b1="dnorm" , b2 = "dnorm" , b3 = "dnorm" ) ,
+                prior_par1 = c( b1 = -1 , b2=-1 , b3=-1) ,
                 prior_par2 = c(b1=2, b2=2 , b3=2) )
 customItems <- list( item_nedelsky )
 
@@ -210,8 +210,8 @@ P_Theta1 <- function( par , Theta , G){
     return(pi_Theta)
 }
 #** create distribution class
-par_Theta <- c( "mu"=0, "sigma" = 1 )  
-customTheta <- sirt::xxirt_createThetaDistribution( par=par_Theta, est=c(FALSE,TRUE), 
+par_Theta <- c( "mu"=0, "sigma" = 1 )
+customTheta <- sirt::xxirt_createThetaDistribution( par=par_Theta, est=c(FALSE,TRUE),
                    P=P_Theta1 )
 
 #-- create parameter table
@@ -248,7 +248,7 @@ nedelsky.icc <- function( par , Theta , ncat ){
      a <- par[ K+2]
      tau <- par[1:(K+1) + (K+2) ]
      thdim <- par[ K+2+K+1 +1 ]
-     probs <- sirt::nedelsky.irf( Theta , K=K , b=b , a=a , tau=tau , combis , 
+     probs <- sirt::nedelsky.irf( Theta , K=K , b=b , a=a , tau=tau , combis ,
                     thdim=thdim  )$probs
      return(probs)
 }
@@ -267,14 +267,14 @@ mirtmodel <- mirt::mirt.model("
 itemtype <- rep("nedelsky" , I )
 customItems <- list("nedelsky"= nedelsky.itemfct)
 # define parameters to be estimated
-mod1.pars <- mirt::mirt(dat, mirtmodel , itemtype=itemtype , 
-                   customItems=customItems, pars = "values")                
+mod1.pars <- mirt::mirt(dat, mirtmodel , itemtype=itemtype ,
+                   customItems=customItems, pars = "values")
 
 #*** estimate model
-mod1 <- mirt::mirt(dat,mirtmodel , itemtype=itemtype , customItems=customItems, 
+mod1 <- mirt::mirt(dat,mirtmodel , itemtype=itemtype , customItems=customItems,
                pars = mod1.pars , verbose=TRUE )
-#*** summaries                
-print(mod1)                
+#*** summaries
+print(mod1)
 summary(mod1)
 mirt.wrapper.coef( mod1 )$coef
 mirt.wrapper.itemplot(mod1 ,ask=TRUE)

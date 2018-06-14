@@ -1,5 +1,5 @@
 ## File Name: IRT.modelfit.sirt.R
-## File Version: 0.15
+## File Version: 0.16
 
 
 ###########################################################
@@ -17,17 +17,17 @@ summary.IRT.modelfit.sirt <- function( object , ... ){
     class(object) <- "modelfit.sirt"
     summary(object)
             }
-###########################################################            
+###########################################################
 
 ###########################################################
 # IRT.modelfit for objects of class rasch.mml
 IRT.modelfit.rasch.mml <- function( object , ... ){
-    cl <- paste(match.call())[2]    
+    cl <- paste(match.call())[2]
     res <- IRT.modelfit.sirt( object , mod=cl )
-    return(res)    
-                        }                                    
-summary.IRT.modelfit.rasch.mml <- summary.IRT.modelfit.sirt                        
-###########################################################                        
+    return(res)
+                        }
+summary.IRT.modelfit.rasch.mml <- summary.IRT.modelfit.sirt
+###########################################################
 # IRT.modelfit smirt
 IRT.modelfit.smirt <- IRT.modelfit.rasch.mml
 summary.IRT.modelfit.smirt <- summary.IRT.modelfit.sirt
@@ -48,7 +48,7 @@ summary.IRT.modelfit.sirt2 <- function( object , ... ){
     class(object) <- "tam.modelfit"
     summary(object)
             }
-###########################################################    
+###########################################################
 
 ###########################################################
 # modelfit rm.facets
@@ -62,13 +62,13 @@ IRT.modelfit.rm.facets <- function(object, ... ){
     res$IRT.IC <- CDM::IRT.IC(object)
     res$objname <- mod
     class(res) <- paste0("IRT.modelfit." , class(object) )
-    return(res)        
+    return(res)
         }
-summary.IRT.modelfit.rm.facets <- summary.IRT.modelfit.sirt2        
+summary.IRT.modelfit.rm.facets <- summary.IRT.modelfit.sirt2
 ############################################################
-# model fit rm.sdt        
+# model fit rm.sdt
 IRT.modelfit.rm.sdt <- IRT.modelfit.rm.facets
-summary.IRT.modelfit.rm.sdt <- summary.IRT.modelfit.sirt2        
+summary.IRT.modelfit.rm.sdt <- summary.IRT.modelfit.sirt2
 ##########################################################
 
 
@@ -85,7 +85,7 @@ IRT.modelfit.xxirt <- function(object, ... ){
     res$IRT.IC <- CDM::IRT.IC(object)
     res$objname <- mod
     class(res) <- paste0("IRT.modelfit." , class(object) )
-    return(res)        
+    return(res)
         }
-summary.IRT.modelfit.xxirt <- summary.IRT.modelfit.sirt2        
+summary.IRT.modelfit.xxirt <- summary.IRT.modelfit.sirt2
 ############################################################

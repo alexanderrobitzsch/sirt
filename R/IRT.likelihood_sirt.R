@@ -1,5 +1,5 @@
 ## File Name: IRT.likelihood_sirt.R
-## File Version: 0.12
+## File Version: 0.13
 
 
 ################################################
@@ -20,37 +20,37 @@
 
 ########################################################
 # likelihood rasch.copula2
-IRT.likelihood.rasch.copula2 <- function( object , ... ){    
+IRT.likelihood.rasch.copula2 <- function( object , ... ){
     ll <- object$f.yi.qk
     attr(ll,"theta") <- vec2mat.sirt( object$theta.k )
     attr(ll,"prob.theta") <- object$pi.k
     attr(ll,"G") <- 1
     return(ll)
         }
-IRT.likelihood.rasch.copula3 <- IRT.likelihood.rasch.copula2        
-##########################################################        
+IRT.likelihood.rasch.copula3 <- IRT.likelihood.rasch.copula2
+##########################################################
 
 
 
 ##########################################################
 # likelihood rasch.mml2
-IRT.likelihood.rasch.mml <- function( object , ... ){    
+IRT.likelihood.rasch.mml <- function( object , ... ){
     ll <- object$f.yi.qk
     attr(ll,"theta") <- vec2mat.sirt( object$theta.k )
     attr(ll,"prob.theta") <- object$pi.k
     attr(ll,"G") <- object$G
     return(ll)
         }
-##########################################################        
+##########################################################
 # smirt
 IRT.likelihood.smirt <- IRT.likelihood.rasch.mml
-##########################################################        
+##########################################################
 # gom.em
 IRT.likelihood.gom <- IRT.likelihood.rasch.mml
-##########################################################        
+##########################################################
 # rm.facets
 IRT.likelihood.rm.facets <- IRT.likelihood.rasch.mml
-##########################################################    
+##########################################################
 # rm.sdt
 IRT.likelihood.rm.sdt <- IRT.likelihood.rasch.mml
 ##########################################################
@@ -60,20 +60,20 @@ IRT.likelihood.prob.guttman <- IRT.likelihood.rasch.mml
 
 ##########################################################
 # likelihood rasch.mirtlc
-IRT.likelihood.rasch.mirtlc <- function( object , ... ){    
+IRT.likelihood.rasch.mirtlc <- function( object , ... ){
     ll <- object$estep.res$f.yi.qk
     attr(ll,"theta") <- vec2mat.sirt( object$theta.k )
     attr(ll,"prob.theta") <- object$pi.k
     attr(ll,"G") <- object$G
     return(ll)
         }
-##########################################################        
+##########################################################
 # likelihood xxirt
-IRT.likelihood.xxirt <- function( object , ... ){    
+IRT.likelihood.xxirt <- function( object , ... ){
     ll <- object$p.xi.aj
     attr(ll,"theta") <- object$Theta
     attr(ll,"prob.theta") <- object$probs_Theta
-    attr(ll,"G") <- object$G    
+    attr(ll,"G") <- object$G
     return(ll)
         }
-##########################################################        
+##########################################################

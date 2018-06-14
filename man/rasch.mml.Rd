@@ -1,5 +1,5 @@
 %% File Name: rasch.mml.Rd
-%% File Version: 3.9914
+%% File Version: 3.9915
 
 \name{rasch.mml2}
 \alias{rasch.mml2}
@@ -15,50 +15,50 @@
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Estimation of the Generalized Logistic Item Response Model, 
-Ramsay's Quotient Model, Nonparametric Item Response Model, 
+Estimation of the Generalized Logistic Item Response Model,
+Ramsay's Quotient Model, Nonparametric Item Response Model,
 Pseudo-Likelihood Estimation and a Missing Data Item Response Model
 }
 \description{
 This function employs marginal maximum likelihood estimation
-of item response models for dichotomous data. 
+of item response models for dichotomous data.
 First, the Rasch type model (generalized
 item response model) can be estimated. The generalized logistic
 link function (Stukel, 1988) can be estimated or fixed for conducting
 IRT with different link functions than the logistic one. The Four-Parameter
-logistic item response model is a special case of this model 
+logistic item response model is a special case of this model
 (Loken & Rulison, 2010). Second, Ramsay's quotient model (Ramsay, 1989)
-can be estimated by specifying \code{irtmodel="ramsay.qm"}. 
+can be estimated by specifying \code{irtmodel="ramsay.qm"}.
 Third, quite general item response functions can be estimated
 in a nonparametric framework (Rossi, Wang & Ramsay, 2002).
-Fourth, pseudo-likelihood estimation for fractional item responses can be 
+Fourth, pseudo-likelihood estimation for fractional item responses can be
 conducted for Rasch type models. Fifth, a simple two-dimensional
-missing data item response model (\code{irtmodel='missing1'}; 
+missing data item response model (\code{irtmodel='missing1'};
 Mislevy & Wu, 1996) can be estimated.
 
-See Details for more explanations.  
+See Details for more explanations.
 }
 \usage{
-rasch.mml2( dat , theta.k=seq(-6,6,len=21) , group=NULL , weights=NULL ,  
-   constraints=NULL , glob.conv=10^(-5) , parm.conv=10^(-4) , mitermax=4 , 
-   mmliter=1000 , progress=TRUE ,  fixed.a=rep(1,ncol(dat)) , 
-   fixed.c=rep(0,ncol(dat)) , fixed.d=rep(1,ncol(dat)) , 
-   fixed.K=rep(3,ncol(dat)) , b.init=NULL , est.a=NULL , est.b=NULL , 
-   est.c=NULL , est.d=NULL , min.b=-99 , max.b=99 , min.a=-99 , max.a = 99 , 
+rasch.mml2( dat , theta.k=seq(-6,6,len=21) , group=NULL , weights=NULL ,
+   constraints=NULL , glob.conv=10^(-5) , parm.conv=10^(-4) , mitermax=4 ,
+   mmliter=1000 , progress=TRUE ,  fixed.a=rep(1,ncol(dat)) ,
+   fixed.c=rep(0,ncol(dat)) , fixed.d=rep(1,ncol(dat)) ,
+   fixed.K=rep(3,ncol(dat)) , b.init=NULL , est.a=NULL , est.b=NULL ,
+   est.c=NULL , est.d=NULL , min.b=-99 , max.b=99 , min.a=-99 , max.a = 99 ,
    min.c=0 , max.c=1 , min.d=0 , max.d=1 , est.K=NULL , min.K=1 , max.K=20 ,
    beta.init = NULL , min.beta = -8 ,  pid=1:(nrow(dat)) , trait.weights=NULL ,
-   center.trait=TRUE , center.b=FALSE ,alpha1=0 , alpha2=0 ,est.alpha=FALSE , 
+   center.trait=TRUE , center.b=FALSE ,alpha1=0 , alpha2=0 ,est.alpha=FALSE ,
    equal.alpha=FALSE , designmatrix=NULL , alpha.conv=parm.conv , numdiff.parm=0.00001 ,
-   numdiff.alpha.parm= numdiff.parm , distribution.trait="normal" , Qmatrix=NULL , 
-   variance.fixed=NULL , variance.init=NULL , 
+   numdiff.alpha.parm= numdiff.parm , distribution.trait="normal" , Qmatrix=NULL ,
+   variance.fixed=NULL , variance.init=NULL ,
    mu.fixed=cbind(seq(1,ncol(Qmatrix)),rep(0,ncol(Qmatrix))) ,
    irtmodel="raschtype" , npformula=NULL , npirt.monotone=TRUE ,
-   use.freqpatt = is.null(group)  , delta.miss=0 , est.delta=rep(NA,ncol(dat)) , 
+   use.freqpatt = is.null(group)  , delta.miss=0 , est.delta=rep(NA,ncol(dat)) ,
    ... )
-   
+
 \method{summary}{rasch.mml}(object,...)
 
-\method{plot}{rasch.mml}(x,items=NULL, xlim=NULL, main=NULL, ...) 
+\method{plot}{rasch.mml}(x,items=NULL, xlim=NULL, main=NULL, ...)
 
 \method{anova}{rasch.mml}(object,...)
 
@@ -103,7 +103,7 @@ The multiple group does not work for \code{irtmodel="missing1"}.
 Optional vector of person weights (sample weights).
 }
   \item{constraints}{
-Constraints on \code{b} parameters (item difficulties). It must be 
+Constraints on \code{b} parameters (item difficulties). It must be
 a matrix with two columns: the first column contains item names, the
 second column fixed parameter values.
 }
@@ -237,7 +237,7 @@ parameter
 }
   \item{distribution.trait}{
 Assumed trait distribution. The default is the normal
-distribution (\code{"normal"}). Log-linear smoothing of the 
+distribution (\code{"normal"}). Log-linear smoothing of the
 trait distribution is also possible (\code{"smooth2"},
 \code{"smooth3"} or \code{"smooth4"} for smoothing up to
 2, 3 or 4 moments, respectively).
@@ -257,7 +257,7 @@ Matrix for fixing mean vector (See Examples)
 Specify estimable IRT models: \code{raschtype} (Rasch type model),
 \code{ramsay.qm} (Ramsay's quotient model), \code{npirt} (Nonparametric
 item response model). If \code{npirt} is used as the argument
-for \code{irtmodel}, the argument \code{npformula} 
+for \code{irtmodel}, the argument \code{npformula}
 specifies different item response functions in the
 \R formula framework (like \code{"y~I(theta^2)"}; see Examples).
 For estimating the missing data item response model, use
@@ -284,8 +284,8 @@ grid of \eqn{\theta} values is estimated.
     of responding to an item between the two extremes of ignoring
      missing responses and setting all missing responses to incorrect}
 \item{est.delta}{Vector with indices indicating the \eqn{\delta} parameters
-    to be estimated if \code{irtmodel="missing1"}.}     
-  \item{object}{        
+    to be estimated if \code{irtmodel="missing1"}.}
+  \item{object}{
 Object of class \code{rasch.mml}
 }
 \item{x}{Object of class \code{rasch.mml}}
@@ -304,30 +304,30 @@ Further arguments to be passed
 \details{
 The item response function of the generalized item response model
 (\code{irtmodel="raschtype"}; Stukel, 1988) can be written as
-\deqn{P( X_{pi} = 1 | \theta_{pd} ) = c_i + (d_i - c_i ) g_{\alpha_1 , \alpha_2} 
+\deqn{P( X_{pi} = 1 | \theta_{pd} ) = c_i + (d_i - c_i ) g_{\alpha_1 , \alpha_2}
 [ a_i ( \theta_{pd} - b_i ) ] }
 where \eqn{g} is the generalized logistic link function depending
-on parameters \eqn{\alpha_1} and \eqn{\alpha_2}. 
+on parameters \eqn{\alpha_1} and \eqn{\alpha_2}.
 
 For the most important link functions the specifications are (Stukel, 1988):
 
-logistic link function: \eqn{\alpha_1=0} and \eqn{\alpha_2=0} \cr 
+logistic link function: \eqn{\alpha_1=0} and \eqn{\alpha_2=0} \cr
 probit link function: \eqn{\alpha_1=0.165} and \eqn{\alpha_2=0.165} \cr
 loglog link function: \eqn{\alpha_1=-0.037} and \eqn{\alpha_2=0.62} \cr
-cloglog link function: \eqn{\alpha_1=0.62} and \eqn{\alpha_2=-0.037} 
+cloglog link function: \eqn{\alpha_1=0.62} and \eqn{\alpha_2=-0.037}
 
 See \code{\link{pgenlogis}} for exact transformation formulas of
 the mentioned link functions. \cr
 
-A \eqn{D}-dimensional model can also be specified 
-but only allows for between item dimensionality 
-(one item loads on one and only dimension). 
+A \eqn{D}-dimensional model can also be specified
+but only allows for between item dimensionality
+(one item loads on one and only dimension).
 Setting \eqn{c_i=0}, \eqn{d_i=1} and  \eqn{a_i=1} for all items \eqn{i},
 an additive item response model
 \deqn{P( X_{pi} = 1 | \theta_p ) = g_{\alpha_1 , \alpha_2} ( \theta_p - b_i  ) }
-is estimated. 
+is estimated.
 
-Ramsay's quotient model (\code{irtmodel="qm.ramsay"}) uses 
+Ramsay's quotient model (\code{irtmodel="qm.ramsay"}) uses
 the item response function
 \deqn{P( X_{pi} = 1 | \theta_p ) = \frac{ \exp(\theta_p / b_i)}
     { K_i + \exp (\theta_p / b_i )} }
@@ -338,39 +338,39 @@ functions are a linear combination of transformed \eqn{\theta}
 values
 \deqn{logit[ P( X_{pi} = 1 | \theta_p ) ] = Y_\theta \beta }
 Where \eqn{Y_\theta} is a design matrix of \eqn{\theta} and
-\eqn{\beta} are item parameters to be estimated. 
+\eqn{\beta} are item parameters to be estimated.
 The formula \eqn{Y_\theta \beta} can be specified in the \R formula
 framework (see Example 3, Model 3c).
 
-Pseudo-likelihood estimation can be conducted for fractional item response data 
-as input (i.e. some item response \eqn{x_{pi}} do have values 
+Pseudo-likelihood estimation can be conducted for fractional item response data
+as input (i.e. some item response \eqn{x_{pi}} do have values
 between 0 and 1). Then the pseudo-likelihood \eqn{L_p} for person \eqn{p} is defined as
 \deqn{ L_p = \prod_i P_i ( \theta_p )^{x_{pi}} [1-P_i ( \theta_p )]^{(1-x_{pi})}}
 Note that for dichotomous responses this term corresponds to the ordinary
 likelihood. See Example 7.
 
-A special two-dimensional missing data item response model (\code{irtmodel="missing1"}) 
-is implemented according to Mislevy and Wu (1996). 
+A special two-dimensional missing data item response model (\code{irtmodel="missing1"})
+is implemented according to Mislevy and Wu (1996).
 Besides an unidimensional ability \eqn{\theta_p},
 an individual response propensity \eqn{\xi_p} is proposed. We define
 item responses \eqn{X_{pi}} and response indicators \eqn{R_{pi}} indicating whether
 item responses \eqn{X_{pi}} are observed or not. Denoting the logistic function
 by \eqn{L}, the item response model for ability is defined as
-\deqn{ P( X_{pi} = 1  | \theta_p , \xi_p ) = P( X_{pi} = 1 | \theta_p ) 
+\deqn{ P( X_{pi} = 1  | \theta_p , \xi_p ) = P( X_{pi} = 1 | \theta_p )
 = L( \theta_p - b_i )}
 We also define a measurement model for response indicators \eqn{R_{pi}} which depends
 on the item response \eqn{X_{pi}} itself:
-\deqn{P( R_{pi} = 1 | X_{pi} = k , \theta_p , \xi_p ) = 
+\deqn{P( R_{pi} = 1 | X_{pi} = k , \theta_p , \xi_p ) =
     P( R_{pi} = 1 | X_{pi} = k , \xi_p ) =
 L \left[  \xi_p -  \beta_i - k \delta _i  \right] \quad \mbox{ for }
-\quad k=0,1} 
+\quad k=0,1}
 If \eqn{\delta _i=0}, then the probability of responding to an item is independent
 of the incompletely observed item \eqn{X_{pi}} which is an
 item response model with nonignorable missings (Holman & Glas, 2005;
 see also Pohl, Graefe & Rose, 2014).
 If \eqn{\delta _i} is a large negative number (e.g. \eqn{\delta=-100}), then
-it follows \eqn{P( R_{pi} = 1 | X_{pi} = 1 , \theta_p , \xi_p ) =1} 
-and as a consequence it holds that \eqn{P(X_{pi}=1 | R_{pi} = 0 , \theta_p , \xi_p) = 0}, 
+it follows \eqn{P( R_{pi} = 1 | X_{pi} = 1 , \theta_p , \xi_p ) =1}
+and as a consequence it holds that \eqn{P(X_{pi}=1 | R_{pi} = 0 , \theta_p , \xi_p) = 0},
 which is equivalent to treating
 all missing item responses as incorrect. The missingness parameter
 \eqn{\delta} can be specified
@@ -407,16 +407,16 @@ extended to accommodate all categories}
 \item{fixed.a}{Estimated \eqn{a} parameters}
 \item{fixed.c}{Estimated \eqn{c} parameters}
 \item{G}{Number of groups}
-\item{alpha1}{Estimated \eqn{\alpha_1} parameter in generalized logistic 
+\item{alpha1}{Estimated \eqn{\alpha_1} parameter in generalized logistic
     item response model}
-\item{alpha2}{Estimated \eqn{\alpha_2} parameter in generalized logistic 
+\item{alpha2}{Estimated \eqn{\alpha_2} parameter in generalized logistic
     item response model}
-\item{se.b}{Standard error of \eqn{b} parameter in generalized logistic model 
+\item{se.b}{Standard error of \eqn{b} parameter in generalized logistic model
     or Ramsay's quotient model}
 \item{se.a}{Standard error of \eqn{a} parameter in generalized logistic model}
 \item{se.c}{Standard error of \eqn{c} parameter in generalized logistic model}
 \item{se.d}{Standard error of \eqn{d} parameter in generalized logistic model}
-\item{se.alpha}{Standard error of \eqn{\alpha} parameter in generalized 
+\item{se.alpha}{Standard error of \eqn{\alpha} parameter in generalized
     logistic model}
 \item{se.K}{Standard error of \eqn{K} parameter in Ramsay's quotient model}
 \item{iter}{Number of iterations}
@@ -440,40 +440,40 @@ extended to accommodate all categories}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \references{
-Holman, R., & Glas, C. A. (2005). Modelling non-ignorable missing-data mechanisms 
-with item response theory models. 
-\emph{British Journal of Mathematical and Statistical Psychology}, 
+Holman, R., & Glas, C. A. (2005). Modelling non-ignorable missing-data mechanisms
+with item response theory models.
+\emph{British Journal of Mathematical and Statistical Psychology},
 \bold{58}, 1-17.
-    
-Loken, E., & Rulison, K. L. (2010). Estimation of a four-parameter 
-item response theory model. \emph{British Journal of Mathematical 
+
+Loken, E., & Rulison, K. L. (2010). Estimation of a four-parameter
+item response theory model. \emph{British Journal of Mathematical
 and Statistical Psychology}, \bold{63}, 509-525.
 
-Mislevy, R. J., & Wu, P. K. (1996). \emph{Missing Responses and IRT Ability 
-Estimation: Omits, Choice, Time Limits, and Adaptive Testing}. 
-ETS Research Report ETS RR-96-30. 
+Mislevy, R. J., & Wu, P. K. (1996). \emph{Missing Responses and IRT Ability
+Estimation: Omits, Choice, Time Limits, and Adaptive Testing}.
+ETS Research Report ETS RR-96-30.
 Princeton, ETS.
 
-Pohl, S., Graefe, L., & Rose, N. (2014). Dealing with omitted and 
-not-reached items in competence tests evaluating approaches accounting for 
-missing responses in item response theory models. 
+Pohl, S., Graefe, L., & Rose, N. (2014). Dealing with omitted and
+not-reached items in competence tests evaluating approaches accounting for
+missing responses in item response theory models.
 \emph{Educational and Psychological Measurement}, \bold{74}, 423-452.
 
-Ramsay, J. O. (1989). A comparison of three simple test theory models. 
+Ramsay, J. O. (1989). A comparison of three simple test theory models.
 \emph{Psychometrika}, \bold{54}, 487-499.
 
-Rossi, N., Wang, X., & Ramsay, J. O. (2002). Nonparametric item response 
-function estimates with the EM algorithm. 
-\emph{Journal of Educational and Behavioral Statistics}, \bold{27}, 291-317. 
+Rossi, N., Wang, X., & Ramsay, J. O. (2002). Nonparametric item response
+function estimates with the EM algorithm.
+\emph{Journal of Educational and Behavioral Statistics}, \bold{27}, 291-317.
 
-Stukel, T. A. (1988). Generalized logistic models. 
+Stukel, T. A. (1988). Generalized logistic models.
 \emph{Journal of the American Statistical Association},
 \bold{83}, 426-431.
 
-van der Maas, H. J. L., Molenaar, D., Maris, G., Kievit, R. A., & 
+van der Maas, H. J. L., Molenaar, D., Maris, G., Kievit, R. A., &
 Borsboom, D. (2011).
-Cognitive psychology meets psychometric theory: On the relation between 
-process models for decision making and latent variable models for 
+Cognitive psychology meets psychometric theory: On the relation between
+process models for decision making and latent variable models for
 individual differences.
 \emph{Psychological Review}, \bold{318}, 339-356.
 }
@@ -553,7 +553,7 @@ llmod2 <- IRT.likelihood(mod2)
 str(llmod2)
 
 \dontrun{
-library(CDM)    
+library(CDM)
 # model comparisons
 CDM::IRT.compareModels(mod1, mod1c, mod2 )
 anova(mod1,mod2)
@@ -561,14 +561,14 @@ anova(mod1,mod2)
 # assess model fit
 smod1 <- IRT.modelfit(mod1)
 smod2 <- IRT.modelfit(mod2)
-IRT.compareModels(smod1, smod2)    
+IRT.compareModels(smod1, smod2)
 
-# set some bounds for a and b parameters 
+# set some bounds for a and b parameters
 mod2a <- sirt::rasch.mml2( dat , est.a=1:I , min.a = .7 , max.a=2 , min.b = -2 )
 summary(mod2a)
 
 # 3PL model
-mod3 <- sirt::rasch.mml2( dat , est.a = 1:I , est.c = 1:I , 
+mod3 <- sirt::rasch.mml2( dat , est.a = 1:I , est.c = 1:I ,
               mmliter = 400 # maximal 400 iterations
                  )
 summary(mod3)
@@ -587,7 +587,7 @@ summary(mod6)
 
 # 4PL model
 mod7 <- sirt::rasch.mml2( dat , est.a = 1:I , est.c=1:I , est.d = 1:I  ,
-            min.d = .95 , max.c = .25)  
+            min.d = .95 , max.c = .25)
         # set minimal d and maximal c parameter to .95 and .25
 summary(mod7)
 
@@ -617,8 +617,8 @@ Qmatrix[1:6,1] <- 1 # T1 items
 Qmatrix[7:12,2] <- 1    # T2 items
 
 # define restrictions on item difficulties
-est.b <- c(1,2,3,4,5,6,   3,4,5,6,7,8) 
-mu.fixed <- cbind(1,0) 
+est.b <- c(1,2,3,4,5,6,   3,4,5,6,7,8)
+mu.fixed <- cbind(1,0)
     # set first mean to 0 for identification reasons
 
 # Model 1: 2-dimensional Rasch model
@@ -671,32 +671,32 @@ plot(mod2b)
 mod3a <- sirt::rasch.mml2( dat , irtmodel ="npirt" , mmliter =100 ,
             theta.k = seq( -3 , 3 , len=10) ) # evaluations at 10 theta grid points
 # nonparametric ICC of first 4 items
-round( t(mod3a$pjk)[1:4,] , 3 ) 
+round( t(mod3a$pjk)[1:4,] , 3 )
 summary(mod3a)
 plot(mod3a)
 
 # nonparametric IRT estimation without monotonicity assumption
 mod3b <- sirt::rasch.mml2( dat , irtmodel ="npirt" , mmliter =10 ,
-            theta.k = seq( -3 , 3 , len=10) , npirt.monotone=FALSE) 
+            theta.k = seq( -3 , 3 , len=10) , npirt.monotone=FALSE)
 plot(mod3b)
-            
+
 # B-Spline estimation of ICCs
 library(splines)
-mod3c <- sirt::rasch.mml2( dat , irtmodel ="npirt" , 
+mod3c <- sirt::rasch.mml2( dat , irtmodel ="npirt" ,
              npformula = "y~bs(theta,df=3)" , theta.k = seq(-3,3,len=15) )
 summary(mod3c)
 round( t(mod3c$pjk)[1:6,] , 3 )
 plot(mod3c)
 
-# estimation of quadratic item response functions: ~ theta + I( theta^2) 
-mod3d <- sirt::rasch.mml2( dat , irtmodel ="npirt" , 
+# estimation of quadratic item response functions: ~ theta + I( theta^2)
+mod3d <- sirt::rasch.mml2( dat , irtmodel ="npirt" ,
              npformula = "y~theta + I(theta^2)" )
 summary(mod3d)
 plot(mod3d)
 
 # estimation of a stepwise ICC function
 # ICCs are constant on the theta domains: [-Inf,-1], [-1,1], [1,Inf]
-mod3e <- sirt::rasch.mml2( dat , irtmodel ="npirt" , 
+mod3e <- sirt::rasch.mml2( dat , irtmodel ="npirt" ,
              npformula = "y~I(theta>-1 )+I(theta>1)" )
 summary(mod3e)
 plot(mod3e , xlim=c(-2.5,2.5) )
@@ -713,9 +713,9 @@ summary(mod4)
 set.seed(8765)
 N1 <- 1000     # N1=1000 persons in group 1
 N2 <- 500      # N2= 500 persons in group 2
-dat1 <- sirt::sim.raschtype( theta = stats::rnorm( N1 , sd = 1.5 )  , b = b , 
+dat1 <- sirt::sim.raschtype( theta = stats::rnorm( N1 , sd = 1.5 )  , b = b ,
             alpha1 = -0.3 , alpha2=0)
-dat2 <- sirt::sim.raschtype( theta = stats::rnorm( N2 , mean=-.5 , sd =.75)  , 
+dat2 <- sirt::sim.raschtype( theta = stats::rnorm( N2 , mean=-.5 , sd =.75)  ,
             b = b , alpha1 = -0.3 , alpha2=0)
 dat1 <- rbind( dat1 , dat2 )
 group <- c( rep(1,N1) , rep(2,N2))
@@ -757,28 +757,28 @@ mod1 <- sirt::rasch.mml2( dat , Qmatrix=Qmatrix )
 summary(mod1)
 
 # 2-dimensional 2PL model
-mod2 <- sirt::rasch.mml2( dat , Qmatrix=Qmatrix , est.a = 1:(2*I) )               
+mod2 <- sirt::rasch.mml2( dat , Qmatrix=Qmatrix , est.a = 1:(2*I) )
 summary(mod2)
 
 # estimation with some fixed variances and covariances
-# set variance of 1st dimension to 1 and 
+# set variance of 1st dimension to 1 and
 #  covariance to zero
-variance.fixed <- matrix( cbind(c(1,1) , c(1,2) , c(1,0)) , 
+variance.fixed <- matrix( cbind(c(1,1) , c(1,2) , c(1,0)) ,
              byrow=FALSE , ncol= 3 )
 mod3 <- sirt::rasch.mml2( dat , Qmatrix=Qmatrix , variance.fixed = variance.fixed )
 summary(mod3)
 
 # constraints on item difficulties
 #  useful for example in longitudinal linking
-est.b <- c( 1:I , 1:I )     
+est.b <- c( 1:I , 1:I )
     # equal indices correspond to equally estimated item parameters
 mu.fixed <- cbind( 1 , 0 )
 mod4 <- sirt::rasch.mml2( dat, Qmatrix=Qmatrix, est.b = est.b , mu.fixed = mu.fixed )
-summary(mod4) 
+summary(mod4)
 
 #############################################################################
-# EXAMPLE 6: Two booklets with same items but with item context effects. 
-# Therefore, item slopes and item difficulties are assumed to be shifted in the 
+# EXAMPLE 6: Two booklets with same items but with item context effects.
+# Therefore, item slopes and item difficulties are assumed to be shifted in the
 # second design group.
 #############################################################################
 
@@ -845,8 +845,8 @@ dat1[ dat1 == 9 ] <- NA
 # estimate Rasch model
 mod1 <- sirt::rasch.mml2( dat1[,items] , weights= dat$studwgt , group=dat$country )
 summary(mod1)
-##   Mean= 0 0.341 -0.134 0.219 
-##   SD= 1.142 1.166 1.197 0.959 
+##   Mean= 0 0.341 -0.134 0.219
+##   SD= 1.142 1.166 1.197 0.959
 
 #****
 # Model 2: recode missing responses as wrong
@@ -857,11 +857,11 @@ dat2[ dat2 == 9 ] <- 0
 # estimate Rasch model
 mod2 <- sirt::rasch.mml2( dat2[,items] , weights= dat$studwgt , group=dat$country )
 summary(mod2)
-  ##   Mean= 0 0.413 -0.172 0.446 
-  ##   SD= 1.199 1.263 1.32 0.996 
+  ##   Mean= 0 0.413 -0.172 0.446
+  ##   SD= 1.199 1.263 1.32 0.996
 
 #****
-# Model 3: recode missing responses as rho * P_i( theta ) and 
+# Model 3: recode missing responses as rho * P_i( theta ) and
 #          apply pseudo-log-likelihood estimation
 # Missing item responses are predicted by the model implied probability
 # P_i( theta ) where theta is the ability estimate when ignoring missings (Model 1)
@@ -881,8 +881,8 @@ for (ii in items){
 # estimate Rasch model
 mod3 <- sirt::rasch.mml2( dat3[,items] , weights= dat$studwgt , group=dat$country )
 summary(mod3)
-  ##   Mean= 0 0.392 -0.153 0.38 
-  ##   SD= 1.154 1.209 1.246 0.973 
+  ##   Mean= 0 0.392 -0.153 0.38
+  ##   SD= 1.154 1.209 1.246 0.973
 
 #****
 # Model 4: simulate missing responses as rho * P_i( theta )
@@ -898,14 +898,14 @@ rho <- .3   # define a rho parameter value of .3
 for (ii in items){
     ind <- which( dat[,ii] == 9 )
     p3 <- rho*stats::plogis( theta[ind] - mod1$item$b[ which( items == ii ) ] )
-    dat4[ ind , ii ] <- 1*( stats::runif( length(ind) , 0 , 1 ) < p3)    
+    dat4[ ind , ii ] <- 1*( stats::runif( length(ind) , 0 , 1 ) < p3)
                 }
 
 # estimate Rasch model
 mod4 <- sirt::rasch.mml2( dat4[,items] , weights= dat$studwgt , group=dat$country )
 summary(mod4)
-  ##   Mean= 0 0.396 -0.156 0.382 
-  ##   SD= 1.16 1.216 1.253 0.979 
+  ##   Mean= 0 0.396 -0.156 0.382
+  ##   SD= 1.16 1.216 1.253 0.979
 
 #****
 # Model 5: recode missing responses for multiple choice items with four alternatives
@@ -928,8 +928,8 @@ for (ii in items_cr){
 # estimate Rasch model
 mod5 <- sirt::rasch.mml2( dat5[,items] , weights= dat$studwgt , group=dat$country )
 summary(mod5)
-  ##   Mean= 0 0.411 -0.165 0.435 
-  ##   SD= 1.19 1.245 1.293 0.995 
+  ##   Mean= 0 0.411 -0.165 0.435
+  ##   SD= 1.19 1.245 1.293 0.995
 
 #*** For the following analyses, we ignore sample weights and the
 #    country grouping.
@@ -958,48 +958,48 @@ summary(mod8)
 #*** Model 9: estimate missing data model 'missing1' assuming a missingness
 #       parameter delta.miss of zero
 dat2 <-  dat[,items]    # note that missing item responses must be defined by 9
-mod9 <- sirt::rasch.mml2( dat2 , constraints=constraints , irtmodel="missing1" , 
-            theta.k=seq(-5,5,len=10) , delta.miss= 0 , mitermax= 4 , mmliter=200 , 
-            mu.fixed=NULL )        
+mod9 <- sirt::rasch.mml2( dat2 , constraints=constraints , irtmodel="missing1" ,
+            theta.k=seq(-5,5,len=10) , delta.miss= 0 , mitermax= 4 , mmliter=200 ,
+            mu.fixed=NULL )
 summary(mod9)
 
 #*** Model 10: estimate missing data model with a large negative missing delta parameter
 #       => This model is equivalent to treating missing responses as wrong
-mod10 <- sirt::rasch.mml2( dat2 , constraints=constraints , irtmodel="missing1" , 
-             theta.k=seq(-5 , 5 , len=10) , delta.miss= -10 , mitermax= 4 , mmliter=200 , 
-             mu.fixed=NULL )        
+mod10 <- sirt::rasch.mml2( dat2 , constraints=constraints , irtmodel="missing1" ,
+             theta.k=seq(-5 , 5 , len=10) , delta.miss= -10 , mitermax= 4 , mmliter=200 ,
+             mu.fixed=NULL )
 summary(mod10)
 
 #*** Model 11: choose a missingness delta parameter of -1
-mod11 <- sirt::rasch.mml2( dat2 , constraints=constraints , irtmodel="missing1" , 
-             theta.k=seq(-5 , 5 , len=10) , delta.miss= -1 , mitermax= 4 , 
-             mmliter=200 , mu.fixed=NULL )        
+mod11 <- sirt::rasch.mml2( dat2 , constraints=constraints , irtmodel="missing1" ,
+             theta.k=seq(-5 , 5 , len=10) , delta.miss= -1 , mitermax= 4 ,
+             mmliter=200 , mu.fixed=NULL )
 summary(mod11)
 
 #*** Model 12: estimate joint delta parameter
-mod12 <- sirt::rasch.mml2( dat2 , irtmodel="missing1" , mu.fixed = cbind( c(1,2) , 0 ), 
-             theta.k=seq(-8 , 8 , len=10) , delta.miss= 0 , mitermax= 4 , 
-             mmliter=30 , est.delta=rep(1,I)  )        
+mod12 <- sirt::rasch.mml2( dat2 , irtmodel="missing1" , mu.fixed = cbind( c(1,2) , 0 ),
+             theta.k=seq(-8 , 8 , len=10) , delta.miss= 0 , mitermax= 4 ,
+             mmliter=30 , est.delta=rep(1,I)  )
 summary(mod12)
 
 #*** Model 13: estimate delta parameter in item groups defined by item format
 est.delta <- 1 + 1 * ( substring( colnames(dat2),7,7 ) == "M" )
 mod13 <- sirt::rasch.mml2( dat2 , irtmodel="missing1" , mu.fixed = cbind( c(1,2) , 0 ),
-             theta.k=seq(-8 , 8 , len=10) , delta.miss= 0 , mitermax= 4 , 
-             mmliter=30 , est.delta=est.delta  )        
+             theta.k=seq(-8 , 8 , len=10) , delta.miss= 0 , mitermax= 4 ,
+             mmliter=30 , est.delta=est.delta  )
 summary(mod13)
 
 #*** Model 14: estimate item specific delta parameter
 mod14 <- sirt::rasch.mml2( dat2 , irtmodel="missing1" , mu.fixed = cbind( c(1,2) , 0 ) ,
-             theta.k=seq(-8 , 8 , len=10) , delta.miss= 0 , mitermax= 4 ,               
-             mmliter=30 , est.delta= 1:I  )        
+             theta.k=seq(-8 , 8 , len=10) , delta.miss= 0 , mitermax= 4 ,
+             mmliter=30 , est.delta= 1:I  )
 summary(mod14)
 
 #############################################################################
 # EXAMPLE 8: Comparison of different models for polytomous data
 #############################################################################
 
-data(data.Students, package="CDM") 
+data(data.Students, package="CDM")
 head(data.Students)
 dat <- data.Students[ , paste0("act",1:5) ]
 I <- ncol(dat)

@@ -1,5 +1,5 @@
 %% File Name: detect.index.Rd
-%% File Version: 0.12
+%% File Version: 0.13
 
 \name{detect.index}
 \alias{detect.index}
@@ -8,8 +8,8 @@
 Calculation of the DETECT and polyDETECT Index
 }
 \description{
-This function calculated the DETECT and polyDETECT index (Stout, Habing, Douglas 
-& Kim, 1996; Zhang & Stout, 1999a; Zhang, 2007). At first, 
+This function calculated the DETECT and polyDETECT index (Stout, Habing, Douglas
+& Kim, 1996; Zhang & Stout, 1999a; Zhang, 2007). At first,
 conditional covariances have to be estimated
 using the \code{\link{ccov.np}} function.
 }
@@ -37,17 +37,17 @@ to the columns in \code{data} (submitted to \code{\link{ccov.np}}).
 %% ...
 %}
 \references{
-Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996). 
-Conditional covariance-based nonparametric multidimensionality assessment. 
+Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996).
+Conditional covariance-based nonparametric multidimensionality assessment.
 \emph{Applied Psychological Measurement}, \bold{20}, 331-354.
 
-Zhang, J., & Stout, W. (1999a). Conditional covariance structure 
-of generalized compensatory multidimensional items. 
+Zhang, J., & Stout, W. (1999a). Conditional covariance structure
+of generalized compensatory multidimensional items.
 \emph{Psychometrika}, \bold{64}, 129-152.
 
-Zhang, J., & Stout, W. (1999b). The theoretical DETECT index of 
-dimensionality and its application to approximate simple structure. 
-\emph{Psychometrika}, \bold{64}, 213-249. 
+Zhang, J., & Stout, W. (1999b). The theoretical DETECT index of
+dimensionality and its application to approximate simple structure.
+\emph{Psychometrika}, \bold{64}, 213-249.
 
 Zhang, J. (2007). Conditional covariance theory and DETECT for
 polytomous items. \emph{Psychometrika}, \bold{72}, 69-91.

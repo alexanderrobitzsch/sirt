@@ -1,11 +1,11 @@
 ## File Name: tracemat.R
-## File Version: 0.03
+## File Version: 0.04
 
 ########################################
 # trace of a matrix
 tracemat <- function(A)
-{ 
-    res <- sum( diag(A) ) 
+{
+    res <- sum( diag(A) )
     return(res)
-} 
+}
 ########################################

@@ -1,5 +1,5 @@
 %% File Name: md.pattern.sirt.Rd
-%% File Version: 0.13
+%% File Version: 0.14
 
 \name{md.pattern.sirt}
 \alias{md.pattern.sirt}
@@ -33,7 +33,7 @@ A list with following entries:
 \item{resp_patt}{Vector of response patterns}
 \item{unique_resp_patt}{Unique response patterns}
 \item{unique_resp_patt_freq}{Frequencies of unique response patterns}
-\item{unique_resp_patt_firstobs}{First observation in original dataset 
+\item{unique_resp_patt_firstobs}{First observation in original dataset
     \code{dat} of a unique response pattern}
 \item{freq1}{Frequencies of 1's}
 \item{freq0}{Frequencies of 0's}

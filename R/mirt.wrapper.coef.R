@@ -1,7 +1,7 @@
 ## File Name: mirt.wrapper.coef.R
-## File Version: 3.02
+## File Version: 3.03
 
-mirt.wrapper.coef <- function (mirt.obj) 
+mirt.wrapper.coef <- function (mirt.obj)
 {
     coefmirt <- coef(mirt.obj)
     items <- colnames(mirt.obj@Data$data)
@@ -42,7 +42,7 @@ mirt.wrapper.coef <- function (mirt.obj)
         # h2 <- h1@par
         h2 <- h1["par",]
         # names(h2) <- names(h1@est)
-        # names(h2) <- 
+        # names(h2) <-
         res <- list(coef = dfr, GroupPars = h2)
     }
     if (class(mirt.obj) == "MultipleGroupClass") {

@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_als_residual_weights.R
-## File Version: 0.06
+## File Version: 0.07
 
 
 linking_haberman_als_residual_weights <- function( logaj , logaAt ,
@@ -15,6 +15,6 @@ linking_haberman_als_residual_weights <- function( logaj , logaAt ,
         wgtM <- wgtM0 * wgt_adj + eps
     }
     res <- list(loga_resid = loga_resid, wgt_adj = wgt_adj , wgtM = wgtM )
-    return(res)        
+    return(res)
 }
-        
+

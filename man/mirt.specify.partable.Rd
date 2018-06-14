@@ -1,5 +1,5 @@
 %% File Name: mirt.specify.partable.Rd
-%% File Version: 0.03
+%% File Version: 0.04
 
 \name{mirt.specify.partable}
 \alias{mirt.specify.partable}
@@ -14,7 +14,7 @@ Specify or modify a parameter table in \pkg{mirt}.
 }
 
 \usage{
-mirt.specify.partable(mirt.partable, parlist, verbose=TRUE) 
+mirt.specify.partable(mirt.partable, parlist, verbose=TRUE)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -55,12 +55,12 @@ Alexander Robitzsch, Phil Chalmers
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 %\seealso{
-%See \url{http://lavaan.ugent.be/} for \pkg{lavaan} resources.    
+%See \url{http://lavaan.ugent.be/} for \pkg{lavaan} resources.
 %}
 
 \examples{
 #############################################################################
-# EXAMPLE 1: Modifying a parameter table for single group 
+# EXAMPLE 1: Modifying a parameter table for single group
 #############################################################################
 
 library(mirt)
@@ -69,7 +69,7 @@ data <- mirt::expand.table(LSAT7)
 
 mirt.partable <- mirt::mirt(data, 1, pars = "values")
 colnames(mirt.partable)
-## > colnames(mirt.partable) [1] 'group' 'item' 'class' 'name' 'parnum' 'value' 
+## > colnames(mirt.partable) [1] 'group' 'item' 'class' 'name' 'parnum' 'value'
 ##   'lbound' 'ubound' 'est' 'prior.type' 'prior_1' 'prior_2'
 
 # specify some values of item parameters
@@ -97,7 +97,7 @@ rownames(prior_2)[c(3,2)] <- c("A" , "B")
 rownames(est1)[2] <- c("B")
 
 # define complete list with parameter specification
-parlist <- list(value = value, est = est1, est = est2, prior.type = prior.type, 
+parlist <- list(value = value, est = est1, est = est2, prior.type = prior.type,
       prior_1 = prior_1, prior_2 = prior_2)
 
 # modify parameter table

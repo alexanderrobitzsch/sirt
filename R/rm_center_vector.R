@@ -1,5 +1,5 @@
 ## File Name: rm_center_vector.R
-## File Version: 0.04
+## File Version: 0.05
 
 rm_center_vector <- function( vec, center_type, do_log=FALSE )
 {
@@ -19,7 +19,7 @@ rm_center_vector <- function( vec, center_type, do_log=FALSE )
     # reconvert to exp metric
     if (do_log){
         vec <- exp(vec)
-    }    
+    }
     #--- output
     return(vec)
 }

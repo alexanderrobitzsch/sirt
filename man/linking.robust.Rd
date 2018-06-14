@@ -1,5 +1,5 @@
 %% File Name: linking.robust.Rd
-%% File Version: 0.18
+%% File Version: 0.19
 
 \name{linking.robust}
 \alias{linking.robust}
@@ -80,22 +80,22 @@ See also the \pkg{plink} package.
 
 \examples{
 #############################################################################
-# EXAMPLE 1: Linking data.si03 
+# EXAMPLE 1: Linking data.si03
 #############################################################################
 
 data(data.si03)
 res1 <- sirt::linking.robust( itempars=data.si03 )
 summary(res1)
   ##   Number of items = 27
-  ##   Optimal trimming parameter k = 8 |  non-robust parameter k = 0 
-  ##   Linking constant = -0.0345 |  non-robust estimate = -0.056 
-  ##   Standard error = 0.0186 |  non-robust estimate = 0.027 
-  ##   DIF SD: MAD = 0.0771 (robust) | SD = 0.1405 (non-robust) 
+  ##   Optimal trimming parameter k = 8 |  non-robust parameter k = 0
+  ##   Linking constant = -0.0345 |  non-robust estimate = -0.056
+  ##   Standard error = 0.0186 |  non-robust estimate = 0.027
+  ##   DIF SD: MAD = 0.0771 (robust) | SD = 0.1405 (non-robust)
 plot(res1)
 
 \dontrun{
 #############################################################################
-# EXAMPLE 2: Linking PISA item parameters data.pisaPars 
+# EXAMPLE 2: Linking PISA item parameters data.pisaPars
 #############################################################################
 
 data(data.pisaPars)
@@ -103,17 +103,17 @@ data(data.pisaPars)
 # Linking with items
 res2 <- sirt::linking.robust( data.pisaPars[ , c(1,3,4)] )
 summary(res2)
-  ##   Optimal trimming parameter k = 0 |  non-robust parameter k = 0 
-  ##   Linking constant = -0.0883 |  non-robust estimate = -0.0883 
-  ##   Standard error = 0.0297 |  non-robust estimate = 0.0297   
-  ##   DIF SD: MAD = 0.1824 (robust) | SD = 0.1487 (non-robust) 
+  ##   Optimal trimming parameter k = 0 |  non-robust parameter k = 0
+  ##   Linking constant = -0.0883 |  non-robust estimate = -0.0883
+  ##   Standard error = 0.0297 |  non-robust estimate = 0.0297
+  ##   DIF SD: MAD = 0.1824 (robust) | SD = 0.1487 (non-robust)
 ##  -> no trimming is necessary for reducing the standard error
 plot(res2)
 
 #############################################################################
-# EXAMPLE 3: Linking with simulated item parameters containing outliers 
+# EXAMPLE 3: Linking with simulated item parameters containing outliers
 #############################################################################
-    
+
 # simulate some parameters
 I <- 38
 set.seed(18785)
@@ -127,11 +127,11 @@ itempars$study2 <- itempars$study1 + bdif
 res <- sirt::linking.robust( itempars )
 summary(res)
   ##   Number of items = 38
-  ##   Optimal trimming parameter k = 12 |  non-robust parameter k = 0 
-  ##   Linking constant = -0.4285 |  non-robust estimate = -0.5727 
-  ##   Standard error = 0.0218 |  non-robust estimate = 0.0913 
+  ##   Optimal trimming parameter k = 12 |  non-robust parameter k = 0
+  ##   Linking constant = -0.4285 |  non-robust estimate = -0.5727
+  ##   Standard error = 0.0218 |  non-robust estimate = 0.0913
   ##   DIF SD: MAD = 0.1186 (robust) | SD = 0.5628 (non-robust)
-## -> substantial differences of estimated linking constants in this case of 
+## -> substantial differences of estimated linking constants in this case of
 ##    deviations from normality of item parameters
 plot(res)
 }

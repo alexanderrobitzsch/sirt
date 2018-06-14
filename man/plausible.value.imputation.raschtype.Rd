@@ -1,11 +1,11 @@
 %% File Name: plausible.value.imputation.raschtype.Rd
-%% File Version: 1.25
+%% File Version: 1.26
 
 \name{plausible.value.imputation.raschtype}
 \alias{plausible.value.imputation.raschtype}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Plausible Value Imputation in Generalized Logistic Item 
+Plausible Value Imputation in Generalized Logistic Item
 Response Model
 }
 \description{
@@ -13,10 +13,10 @@ This function performs unidimensional plausible value imputation
 (Adams & Wu, 2007; Mislevy, 1991).
 }
 \usage{
-plausible.value.imputation.raschtype(data=NULL, f.yi.qk=NULL, X, 
-   Z=NULL, beta0=rep(0, ncol(X)), sig0=1, b=rep(1, ncol(X)), 
-   a=rep(1, length(b)), c=rep(0, length(b)), d=1+0*b, 
-   alpha1=0, alpha2=0, theta.list=seq(-5, 5, len=50), 
+plausible.value.imputation.raschtype(data=NULL, f.yi.qk=NULL, X,
+   Z=NULL, beta0=rep(0, ncol(X)), sig0=1, b=rep(1, ncol(X)),
+   a=rep(1, length(b)), c=rep(0, length(b)), d=1+0*b,
+   alpha1=0, alpha2=0, theta.list=seq(-5, 5, len=50),
    cluster=NULL, iter, burnin, nplausible=1, printprogress=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -73,7 +73,7 @@ Vector of theta values at which the ability
 distribution should be evaluated
 }
   \item{cluster}{
-Cluster identifier (e.g. schools or classes) 
+Cluster identifier (e.g. schools or classes)
 for including theta means in the plausible imputation.
 }
   \item{iter}{
@@ -100,23 +100,23 @@ heterogeneous variances:
 \value{
 A list with following entries:
 \item{coefs.X}{Sampled regression coefficients for covariates \eqn{X}}
-\item{coefs.Z}{Sampled coefficients for modeling variance heterogeneity 
+\item{coefs.Z}{Sampled coefficients for modeling variance heterogeneity
 for covariates \eqn{Z}}
 \item{pvdraws}{Matrix with drawn plausible values}
 \item{posterior}{Posterior distribution from last iteration}
 \item{EAP}{Individual EAP estimate}
 \item{SE.EAP}{Standard error of the EAP estimate}
-\item{pv.indexes}{Index of iterations for which plausible 
+\item{pv.indexes}{Index of iterations for which plausible
 values were drawn}
 }
 \references{
-Adams, R., & Wu. M. (2007). The mixed-coefficients multinomial 
-logit model: A generalized form of the Rasch model. 
+Adams, R., & Wu. M. (2007). The mixed-coefficients multinomial
+logit model: A generalized form of the Rasch model.
 In M. von Davier & C. H. Carstensen: \emph{Multivariate and Mixture
-Distribution Rasch Models: Extensions and Applications} (pp. 57-76). 
+Distribution Rasch Models: Extensions and Applications} (pp. 57-76).
 New York: Springer.
 
-Mislevy, R. J. (1991). Randomization-based inference about latent 
+Mislevy, R. J. (1991). Randomization-based inference about latent
 variables from complex samples. \emph{Psychometrika}, \bold{56}, 177-196.
 }
 \author{
@@ -157,7 +157,7 @@ pv1 <- sirt::plausible.value.imputation.raschtype(data=dat1 , X=dfr[,-1] , b = b
 # estimate linear regression based on first plausible value
 mod1 <- stats::lm( pv1$pvdraws[,1] ~ x+y )
 summary(mod1)
-  ##               Estimate Std. Error t value Pr(>|t|)    
+  ##               Estimate Std. Error t value Pr(>|t|)
   ##   (Intercept) -0.27755    0.02121  -13.09   <2e-16 ***
   ##   x            0.40483    0.01640   24.69   <2e-16 ***
   ##   y            0.20307    0.01822   11.15   <2e-16 ***
@@ -165,7 +165,7 @@ summary(mod1)
 # true regression estimate
 summary( stats::lm( theta ~ x + y ) )
   ## Coefficients:
-  ##             Estimate Std. Error t value Pr(>|t|)    
+  ##             Estimate Std. Error t value Pr(>|t|)
   ## (Intercept) -0.27821    0.01984  -14.02   <2e-16 ***
   ## x            0.40747    0.01534   26.56   <2e-16 ***
   ## y            0.18189    0.01704   10.67   <2e-16 ***
@@ -192,22 +192,22 @@ f.yi.qk <- stats::dnorm( outer( theta_obs , theta.list , "-" ) / sig.e )
 f.yi.qk <- f.yi.qk / rowSums(f.yi.qk)
 # define covariates
 X <- cbind( 1 , x , y )
-# draw plausible values        
-mod2 <- sirt::plausible.value.imputation.raschtype( f.yi.qk =f.yi.qk , 
+# draw plausible values
+mod2 <- sirt::plausible.value.imputation.raschtype( f.yi.qk =f.yi.qk ,
                   theta.list=theta.list , X=X , iter=10 , burnin=5)
 
 # linear regression
 mod1 <- stats::lm( mod2$pvdraws[,1] ~ x+y )
 summary(mod1)
-  ##             Estimate Std. Error t value Pr(>|t|)    
-  ## (Intercept) -0.01393    0.02655  -0.525      0.6    
+  ##             Estimate Std. Error t value Pr(>|t|)
+  ## (Intercept) -0.01393    0.02655  -0.525      0.6
   ## x            0.35686    0.03739   9.544   <2e-16 ***
   ## y            0.53759    0.01872  28.718   <2e-16 ***
 
 # true regression model
 summary( stats::lm( theta ~ x + y ) )
-  ##             Estimate Std. Error t value Pr(>|t|)    
-  ## (Intercept) 0.002931   0.026171   0.112    0.911    
+  ##             Estimate Std. Error t value Pr(>|t|)
+  ## (Intercept) 0.002931   0.026171   0.112    0.911
   ## x           0.359954   0.036864   9.764   <2e-16 ***
   ## y           0.509073   0.018456  27.584   <2e-16 ***
 
@@ -233,11 +233,11 @@ f.yi.qk <- f.yi.qk / rowSums(f.yi.qk)
 # define covariates
 X <- cbind( 1 , x , y )
 # draw plausible values (assuming variance homogeneity)
-mod3a <- sirt::plausible.value.imputation.raschtype( f.yi.qk =f.yi.qk , 
+mod3a <- sirt::plausible.value.imputation.raschtype( f.yi.qk =f.yi.qk ,
                   theta.list=theta.list , X=X , iter=10 , burnin=5)
 # draw plausible values (assuming variance heterogeneity)
 #  -> include predictor Z
-mod3b <- sirt::plausible.value.imputation.raschtype( f.yi.qk =f.yi.qk , 
+mod3b <- sirt::plausible.value.imputation.raschtype( f.yi.qk =f.yi.qk ,
                   theta.list=theta.list , X=X , Z=X , iter=10 , burnin=5)
 
 # investigate variance of theta conditional on x
@@ -245,7 +245,7 @@ res3 <- sapply( 0:1 , FUN = function(vv){
         c( stats::var(theta[x==vv]), stats::var(mod3b$pvdraw[x==vv,1]),
               stats::var(mod3a$pvdraw[x==vv,1]))})
 rownames(res3) <- c("true" , "pv(hetero)" , "pv(homog)" )
-colnames(res3) <- c("x=0","x=1")     
+colnames(res3) <- c("x=0","x=1")
   ## > round( res3 , 2 )
   ##             x=0  x=1
   ## true       1.30 0.58

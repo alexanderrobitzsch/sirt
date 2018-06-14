@@ -1,5 +1,5 @@
 %% File Name: data.inv4gr.Rd
-%% File Version: 0.05
+%% File Version: 0.06
 
 \name{data.inv4gr}
 \alias{data.inv4gr}
@@ -16,7 +16,7 @@ data(data.inv4gr)
 
 \format{
   A data frame with 4000 observations on the following 12 variables.
-  The first variable is a group identifier, the other variables are items. 
+  The first variable is a group identifier, the other variables are items.
   \describe{
     \item{\code{group}}{A group identifier}
     \item{\code{I01}}{a numeric vector}

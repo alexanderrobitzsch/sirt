@@ -1,11 +1,11 @@
 ## File Name: nedelsky.irf.R
-## File Version: 0.06
+## File Version: 0.07
 
 
 
 #####################################################################
 # Item response function for the Nedelsky model
-nedelsky.irf <- function( Theta , K , b , a , tau , combis , 
+nedelsky.irf <- function( Theta , K , b , a , tau , combis ,
         thdim=1  ){
     # probabilities for category response function
     C1 <- nrow(combis)
@@ -31,7 +31,7 @@ nedelsky.irf <- function( Theta , K , b , a , tau , combis ,
     probs <- prob.latclasses %*% combs
     eps <- 1E-4
     probs[ probs < 0 ] <- eps
-    probs[ probs > 1 ] <- 1 - eps 
+    probs[ probs > 1 ] <- 1 - eps
     probs <- probs + eps
     probs <- probs / rowSums(probs )
     res <- list("probs"=probs , "prob.latclasses"=prob.latclasses )

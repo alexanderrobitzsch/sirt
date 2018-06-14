@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.jackknife1.Rd
-%% File Version: 2.12
+%% File Version: 2.13
 
 \name{rasch.jml.jackknife1}
 \alias{rasch.jml.jackknife1}
@@ -20,9 +20,9 @@ Output of \code{rasch.jml}
 }
 }
 \details{
-Note that items are used for jackknifing (Hahn & Newey, 2004). 
-By default, all \eqn{I} items in the data frame are used as 
-jackknife units. 
+Note that items are used for jackknifing (Hahn & Newey, 2004).
+By default, all \eqn{I} items in the data frame are used as
+jackknife units.
 }
 \value{
 A list with following entries
@@ -30,21 +30,21 @@ A list with following entries
         A data frame with item parameters
         \itemize{
             \item \code{b.JML}: {Item difficulty from JML estimation}
-            \item \code{b.JMLcorr}: {Item difficulty from JML estimation by 
+            \item \code{b.JMLcorr}: {Item difficulty from JML estimation by
                     applying the correction factor \eqn{(I-1)/I}}
             \item \code{b.jack}: {Item difficulty from Jackknife estimation}
-            \item \code{b.jackse}: {Standard error of Jackknife estimation 
+            \item \code{b.jackse}: {Standard error of Jackknife estimation
                         for item difficulties.
-                        Note that this parameter refer to the standard error 
+                        Note that this parameter refer to the standard error
                     with respect to item sampling}
-            \item \code{b.JMLse}: {Standard error for item difficulties 
+            \item \code{b.JMLse}: {Standard error for item difficulties
                     obtained from JML estimation}
                 }
-            }        
+            }
   \item{jack.itemdiff}{A matrix containing all item difficulties obtained by Jackknife}
 }
 \references{
-Hahn, J., & Newey, W. (2004). Jackknife and analytical bias reduction for 
+Hahn, J., & Newey, W. (2004). Jackknife and analytical bias reduction for
 nonlinear panel models. \emph{Econometrica}, \bold{72}, 1295-1319.
 }
 \author{
@@ -73,13 +73,13 @@ summary(mod)
 
 # re-estimate the Rasch model using Jackknife
 mod2 <- sirt::rasch.jml.jackknife1( mod )
-  ##   
-  ##   Joint Maximum Likelihood Estimation 
+  ##
+  ##   Joint Maximum Likelihood Estimation
   ##   Jackknife Estimation
   ##   11 Jackknife Units are used
-  ##   |--------------------PROGRESS--------------------| 
+  ##   |--------------------PROGRESS--------------------|
   ##   |------------------------------------------------|
-  ##   
+  ##
   ##          N     p  b.JML b.JMLcorr b.jack b.jackse b.JMLse
   ##   I1  4929 0.853 -2.345    -2.131 -2.078    0.079   0.045
   ##   I2  4929 0.786 -1.749    -1.590 -1.541    0.075   0.039

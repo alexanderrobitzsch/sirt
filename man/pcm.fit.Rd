@@ -1,5 +1,5 @@
 %% File Name: pcm.fit.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{pcm.fit}
 \alias{pcm.fit}
@@ -9,8 +9,8 @@ Item and Person Fit Statistics for the Partial Credit Model
 }
 
 \description{
-Computes item and person fit statistics in the 
-partial credit model (Wright & Masters, 1990). 
+Computes item and person fit statistics in the
+partial credit model (Wright & Masters, 1990).
 The rating scale model is accommodated as a particular partial
 credit model (see Example 3).
 }
@@ -21,7 +21,7 @@ pcm.fit(b, theta, dat)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{b}{
-Matrix with item category parameters (see Examples) 
+Matrix with item category parameters (see Examples)
 }
   \item{theta}{
 Vector with estimated person parameters
@@ -61,33 +61,33 @@ See also \code{personfit.stat} for person fit statistics for dichotomous
 item responses. See also the \pkg{PerFit} package for further person
 fit statistics.
 
-Item fit in other \R packages: 
+Item fit in other \R packages:
 \code{eRm::itemfit},
 \code{\link[TAM:tam.fit]{TAM::tam.fit}},
 \code{\link[mirt:itemfit]{mirt::itemfit}},
 \code{ltm::item.fit},
 
-Person fit in other \R packages: 
+Person fit in other \R packages:
 \code{eRm::itemfit},
 \code{\link[mirt:itemfit]{mirt::itemfit}},
 \code{ltm::person.fit},
 
-See \code{\link{pcm.conversion}} for conversions of different 
+See \code{\link{pcm.conversion}} for conversions of different
 parametrizations of the partial credit model.
 }
 
 
 
 \examples{
-\dontrun{    
+\dontrun{
 #############################################################################
 # EXAMPLE 1: Partial credit model
-#############################################################################    
+#############################################################################
 
 data(data.Students,package="CDM")
 dat <- data.Students
 # select items
-items <- c(paste0("sc" , 1:4 ) , paste0("mj" , 1:4 ) ) 
+items <- c(paste0("sc" , 1:4 ) , paste0("mj" , 1:4 ) )
 dat <- dat[,items]
 dat <- dat[ rowSums( 1 - is.na(dat) ) > 0 , ]
 
@@ -112,7 +112,7 @@ fit1a$item
 
 #############################################################################
 # EXAMPLE 2: Rasch model
-#############################################################################   
+#############################################################################
 
 data(data.read)
 dat <- data.read
@@ -135,7 +135,7 @@ fit1a$item
 
 data(data.Students,package="CDM")
 dat <- data.Students
-items <- paste0("sc" , 1:4 ) 
+items <- paste0("sc" , 1:4 )
 dat <- dat[,items]
 dat <- dat[ rowSums( 1 - is.na(dat) ) > 0 , ]
 

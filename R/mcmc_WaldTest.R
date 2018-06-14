@@ -1,5 +1,5 @@
 ## File Name: mcmc_WaldTest.R
-## File Version: 0.12
+## File Version: 0.13
 
 ##########################################################
 # Wald Test for a set of hypotheses
@@ -20,14 +20,14 @@ mcmc_WaldTest <- function( mcmcobj , hypotheses )
     eps <- 1E-10
     NH <- sum( v1_svd$d > eps )
     W <- t(c1) %*% v1a %*% c1
-    stat <- c( "chi2" = W , "df" = NH)    
+    stat <- c( "chi2" = W , "df" = NH)
     stat["p"] <- 1 - stats::pchisq( W , df = stat["df"])
     res <- list( hypotheses_summary = s1, chisq_stat = stat)
     class(res) <- "mcmc_WaldTest"
-    return(res)    
+    return(res)
 }
 
-##############################################################        
+##############################################################
 # summary of Wald Test based on MCMC output
 summary.mcmc_WaldTest <- function( object , digits = 3 , ... )
 {
@@ -35,11 +35,11 @@ summary.mcmc_WaldTest <- function( object , digits = 3 , ... )
     W1 <- sprintf( paste0("%." , digits , "f" ) , object$chisq_stat["chi2"] )
 
     v1 <- paste0("Chi^2 = " ,  W1 , ", df = " , object$chisq_stat["df"])
-    v1 <- paste0( v1 , ", p = " , sprintf( paste0("%." , digits , "f" ) , 
+    v1 <- paste0( v1 , ", p = " , sprintf( paste0("%." , digits , "f" ) ,
                     object$chisq_stat["p"] ) )
     cat(v1)
 
-    cat("\n\nSummary Hypotheses\n")    
+    cat("\n\nSummary Hypotheses\n")
     obji <- object$hypotheses_summary
     vars <- c("parameter","MAP","SD", "Q2.5", "Q97.5" , "Rhat","SERatio",
                     "effSize" )
@@ -48,4 +48,4 @@ summary.mcmc_WaldTest <- function( object , digits = 3 , ... )
     obji[,NO] <- round(obji[,NO])
     sirt_summary_print_objects(obji=obji, digits=digits, from=2)
 }
-##################################################################            
+##################################################################

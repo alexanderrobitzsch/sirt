@@ -1,5 +1,5 @@
 %% File Name: data.ratings1.Rd
-%% File Version: 0.18
+%% File Version: 0.19
 
 \name{data.ratings}
 \alias{data.ratings}
@@ -24,13 +24,13 @@ data(data.ratings3)
 
 
 \format{
-    
-\itemize{    
+
+\itemize{
 \item Dataset \code{data.ratings1}: \cr
 
 Data frame with 274 observations containing 5 criteria (\code{k1}, ..., \code{k5}),
 135 students and 7 raters.
-  
+
 \code{'data.frame':   274 obs. of  7 variables:} \cr
 \code{ $ idstud: int  100020106 100020106 100070101 100070101 100100109  ...} \cr
 \code{ $ rater : Factor w/ 16 levels "db01","db02",..: 3 15 5 10 2 1 5 4 1 5 ...} \cr
@@ -86,7 +86,7 @@ Data frame with 3169 observations containing 4 criteria (\code{crit2}, ..., \cod
 
 
 %\examples{
-%# include an example of rating data here    
-%}    
+%# include an example of rating data here
+%}
 
 \keyword{datasets}

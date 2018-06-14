@@ -1,19 +1,19 @@
 ## File Name: rasch.pml.R
-## File Version: 2.16
+## File Version: 2.17
 
 
 #####################################################
 # Pairwise marginal likelihood (PML) estimation
 ##NS export(rasch.pml)
-rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) , 
-            est.a = rep( 0 , ncol(dat) ) , 
+rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
+            est.a = rep( 0 , ncol(dat) ) ,
             est.sigma = TRUE ,
-            itemcluster = NULL , 
-#            Q=NULL ,        
-#            zero.corrs= NULL , 
-            weight = rep(1,nrow(dat)) ,  
-            numdiff.parm=.001 , b.init = NULL , 
-            a.init=NULL , sigma.init = NULL , 
+            itemcluster = NULL ,
+#            Q=NULL ,
+#            zero.corrs= NULL ,
+            weight = rep(1,nrow(dat)) ,
+            numdiff.parm=.001 , b.init = NULL ,
+            a.init=NULL , sigma.init = NULL ,
             error.corr = 0*diag( 1 , ncol(dat) ) ,
             glob.conv=.001 , conv1 = .001 , pmliter = 100 ,
             progress = TRUE  ){
@@ -34,7 +34,7 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
         if ( progress  ){
         cat("---------------------------------------------------------------------------------------------------------- \n")
         cat("Pairwise Marginal Likelihood Estimation \n")
-        cat(paste( "Raschtype Model with" , link , "link" ) , "\n") 
+        cat(paste( "Raschtype Model with" , link , "link" ) , "\n")
         cat("---------------------------------------------------------------------------------------------------------- \n")
         flush.console()
       }
@@ -61,24 +61,24 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
     # p01
     p10 <- t(( dat == 0 )*WM) %*% (( dat == 0 )*WM )
     itempairs$f00 <- p10[ upper.tri(p10) ]
-    
+
     # error correlations
     est.eps.corr <- itempairs$est.eps.corr <- error.corr[ upper.tri( error.corr ) ]
     est.corrs <- FALSE
     if ( any( itempairs$est.eps.corr != 0 ) ){ est.corrs <- TRUE }
     if ( link == "logit" ){ est.corrs <- FALSE }
     eps.corr <- 0.2 * ( itempairs$est.eps.corr != 0 )
-    
+
     #*********
     # exclude some item pairs from calculation because they are
     # located in the same itemclusters (local dependence)
-    # if error calculations are estimated, then no itemclusters 
+    # if error calculations are estimated, then no itemclusters
     # can be selected
     if ( sum( error.corr) > 0 ){ itemcluster <- NULL }
-    
+
     itemclusters <- unique( itemcluster[ itemcluster != 0 ] )
     IC <- length( itemclusters)
-    for ( cc in itemclusters ){    
+    for ( cc in itemclusters ){
     #    cc <- 1
         icc <- which( itemcluster == cc )
         elim <- intersect( which( itempairs[ , "item1" ] %in% icc ) , which( itempairs[ , "item2" ] %in% icc ) )
@@ -89,7 +89,7 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
                             }
     #*******
     # evaluate pairwise likelihood
-    if ( is.null(b.init)){ 
+    if ( is.null(b.init)){
         b <- b0 <- - stats::qnorm( colMeans( dat0 , na.rm=T) )
      if ( sum( est.b !=     seq( 1 , ncol(dat) ))>0 ){
         b <- 0*b
@@ -102,10 +102,10 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
     if ( sum(est.a) >0 ){ a <- rep(.5,I) } else { a <- rep(1,I) }
     a1s <- a1b <- a1a <- 0
     if ( ! is.null( b.init) ){ b <- b0 <- b.init }
-    if ( ! is.null( a.init) ){ a <- a0 <- a.init }    
+    if ( ! is.null( a.init) ){ a <- a0 <- a.init }
     if ( is.null(sigma.init)){ sigma <- 1 } else { sigma <- sigma.init }
     #******
-                D <- 1 
+                D <- 1
 #                }
     IP <- nrow(itempairs )
     itempairs$p1.item2 <- itempairs$p1.item1 <- rep(0,IP)
@@ -113,19 +113,19 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
     iter <- 0
     #**********************************
     # BEGIN MARGINAL MAXIMUM LIKELIHOOD ESTIMATION
-    dev <- 1 ; par.change <- dev.change <- 1000 
-    while ( ( dev.change > glob.conv | par.change > conv1  ) & ( iter < pmliter )    ){        
+    dev <- 1 ; par.change <- dev.change <- 1000
+    while ( ( dev.change > glob.conv | par.change > conv1  ) & ( iter < pmliter )    ){
         cat( paste(rep("-" , 70), collapse="") , "\n")
         k1 <- floor( log10(iter+1) )
-        x1 <- "        |" 
+        x1 <- "        |"
         x1 <- substring( x1 , k1+1 )
         s1c <- Sys.time()
         cat( paste( paste( "PML EM Iter." , iter + 1 ) , x1 , paste( rep( "*" , 10  ) , collapse="") , "|  " ,
                         s1c  , "  " ,
-                        if ( iter > 0 ){ paste( round(difftime(s1c ,s1b , units='secs' ),4) , "secs" ) } , 
-                        "\n" ,sep="") ) # 
+                        if ( iter > 0 ){ paste( round(difftime(s1c ,s1b , units='secs' ),4) , "secs" ) } ,
+                        "\n" ,sep="") ) #
         s1b <- Sys.time()
-        h <- numdiff.parm 
+        h <- numdiff.parm
         dev0 <- dev
         #************************************
         # estimation of b parameters
@@ -140,33 +140,33 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
             # bb <- bG[1]
 #            est.bb <- est.b * (est.b == bb )
             est.bb <- 1*(est.b == bb )
-                if (bb == 1 ){ 
-                    respml0 <- .ll.rasch.pml.probit( b ,a ,  sigma , Q , 
+                if (bb == 1 ){
+                    respml0 <- .ll.rasch.pml.probit( b ,a ,  sigma , Q ,
                             eps.corr ,itempairs  , IP , eps=10^(-14) )
                     ll0 <- respml0$ll
-                                }                            
-                 respml <- .update.ll.rasch.pml.probit( respml0 , b0 + h*est.bb , a , sigma , 
+                                }
+                 respml <- .update.ll.rasch.pml.probit( respml0 , b0 + h*est.bb , a , sigma ,
                             Q , eps.corr ,itempairs  , IP , eps=10^(-14) )
                  ll1 <- respml$ll
-                 respml <- .update.ll.rasch.pml.probit( respml0 , b0 - h*est.bb , a , sigma , 
+                 respml <- .update.ll.rasch.pml.probit( respml0 , b0 - h*est.bb , a , sigma ,
                                 Q , eps.corr ,itempairs  , IP , eps=10^(-14) )
-                 ll2 <- respml$ll                           
-            d1 <- ( ll1 - ll2  ) / ( 2 * h )    
+                 ll2 <- respml$ll
+            d1 <- ( ll1 - ll2  ) / ( 2 * h )
             # second order derivative
             # f(x+h)+f(x-h) = 2*f(x) + f''(x)*h^2
-            d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2               
+            d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2
             if ( abs(d2) < 10^(-20) ){ d2 <- 10^20 }
             b.change <- - d1 / d2
-            b.change <- ifelse( abs( b.change ) > .5 , .5*sign(b.change) , b.change )             
+            b.change <- ifelse( abs( b.change ) > .5 , .5*sign(b.change) , b.change )
             b.change <- b.change * est.bb
             b <- b + b.change
-#           cat( bb , " ") ; 
+#           cat( bb , " ") ;
             cat( paste( rep( "-" , prbar[match(bb,bG)] ), collapse="") )
-            flush.console()             
+            flush.console()
                     }
         a1b <- max( abs( b - b0 ) )
         cat("|     max. parm. change" , round( a1b , 5),"\n")
-        
+
 
         #************************************
         # estimation of a parameters
@@ -180,88 +180,88 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
             cat(" Estimation of a:     |")
             for (aa in aG){
                 # bb <- bG[1]
-                est.aa <- 1*(est.a == aa )      
-                  respml0 <- .ll.rasch.pml.probit( b , a , sigma , 
+                est.aa <- 1*(est.a == aa )
+                  respml0 <- .ll.rasch.pml.probit( b , a , sigma ,
                     Q , eps.corr , itempairs  , IP , eps=10^(-14) )
                   ll0 <- respml0$ll
-                  respml0 <- .ll.rasch.pml.probit( b , a+h*est.aa , sigma  , 
+                  respml0 <- .ll.rasch.pml.probit( b , a+h*est.aa , sigma  ,
                         Q , eps.corr , itempairs  , IP , eps=10^(-14) )
                   ll1 <- respml0$ll
-                  respml0 <- .ll.rasch.pml.probit( b , a-h*est.aa , sigma , 
+                  respml0 <- .ll.rasch.pml.probit( b , a-h*est.aa , sigma ,
                         Q , eps.corr , itempairs  , IP , eps=10^(-14) )
-                  ll2 <- respml0$ll                             
-                d1 <- ( ll1 - ll2  ) / ( 2 * h )    
+                  ll2 <- respml0$ll
+                d1 <- ( ll1 - ll2  ) / ( 2 * h )
                 # second order derivative
                 # f(x+h)+f(x-h) = 2*f(x) + f''(x)*h^2
-                d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2               
+                d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2
                 if ( abs(d2) < 10^(-20) ){ d2 <- 10^20 }
                 a.change <- - d1 / d2
-                a.change <- ifelse( abs( a.change ) > .2 , .2*sign(a.change) , a.change )             
+                a.change <- ifelse( abs( a.change ) > .2 , .2*sign(a.change) , a.change )
                 a.change <- a.change * est.aa
                 a <- a + a.change
                 a[ a < .01 ] <- .01
                 cat( paste( rep( "-" , prbar[match(aa,aG)] ), collapse="") )
-                flush.console()             
+                flush.console()
                         }
             a1a <- max( abs( a - a0 ) )
-            cat("|     max. parm. change" , round( a1a , 5),"\n")        
-                    }        
+            cat("|     max. parm. change" , round( a1a , 5),"\n")
+                    }
         ######################################
         # estimation sigma
         sigma0 <- sigma
-        cat(" Estimation of sigma: |")    
+        cat(" Estimation of sigma: |")
         if (est.sigma & is.null(Q) ){
-                  respml0 <- .ll.rasch.pml.probit( b , a , sigma , 
+                  respml0 <- .ll.rasch.pml.probit( b , a , sigma ,
                                 Q , eps.corr , itempairs  , IP , eps=10^(-14) )
                   ll0 <- respml0$ll
-                  respml0 <- .ll.rasch.pml.probit( b , a , sigma + h , 
+                  respml0 <- .ll.rasch.pml.probit( b , a , sigma + h ,
                                 Q , eps.corr , itempairs  , IP , eps=10^(-14) )
                   ll1 <- respml0$ll
-                  respml0 <- .ll.rasch.pml.probit( b , a , sigma - h, 
+                  respml0 <- .ll.rasch.pml.probit( b , a , sigma - h,
                             Q , eps.corr , itempairs  , IP , eps=10^(-14) )
-                  ll2 <- respml0$ll        
-            d1 <- ( ll1 - ll2  ) / ( 2 * h )    
+                  ll2 <- respml0$ll
+            d1 <- ( ll1 - ll2  ) / ( 2 * h )
             # second order derivative
             # f(x+h)+f(x-h) = 2*f(x) + f''(x)*h^2
-            d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2        
+            d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2
             alpha.change <- - d1 / d2
-            a1k2 <- alpha.change <- ifelse( abs( alpha.change ) > .2 , .2*sign(alpha.change) , alpha.change )              
+            a1k2 <- alpha.change <- ifelse( abs( alpha.change ) > .2 , .2*sign(alpha.change) , alpha.change )
             sigma <- sigma + alpha.change
                                 }
-            prbar <- 10 
-            flush.console()    
+            prbar <- 10
+            flush.console()
         if (est.sigma & (!is.null(Q)) ){
             for ( zz in seq(1,nrow(combs)) ){
                 ii <- combs[zz,1]
                 jj <- combs[zz,2]
                 sigma.hh <- 0*sigma
                 sigma.hh[ii,jj] <- sigma.hh[jj,ii] <- 1
-                  respml0 <- .ll.rasch.pml.probit( b , a , sigma , 
+                  respml0 <- .ll.rasch.pml.probit( b , a , sigma ,
                                 Q , eps.corr , itempairs  , IP , eps=10^(-14) )
                   ll0 <- respml0$ll
-                  respml0 <- .ll.rasch.pml.probit( b , a , sigma + h*sigma.hh , 
+                  respml0 <- .ll.rasch.pml.probit( b , a , sigma + h*sigma.hh ,
                                 Q , eps.corr , itempairs  , IP , eps=10^(-14) )
                   ll1 <- respml0$ll
-                  respml0 <- .ll.rasch.pml.probit( b , a , sigma - h*sigma.hh, 
+                  respml0 <- .ll.rasch.pml.probit( b , a , sigma - h*sigma.hh,
                             Q , eps.corr , itempairs  , IP , eps=10^(-14) )
-                  ll2 <- respml0$ll        
-            d1 <- ( ll1 - ll2  ) / ( 2 * h )    
+                  ll2 <- respml0$ll
+            d1 <- ( ll1 - ll2  ) / ( 2 * h )
             # second order derivative
             # f(x+h)+f(x-h) = 2*f(x) + f''(x)*h^2
             d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2
             alpha.change <- - d1 / d2
-            a1k2 <- alpha.change <- ifelse( abs( alpha.change ) > .12 , .12*sign(alpha.change) , alpha.change ) 
+            a1k2 <- alpha.change <- ifelse( abs( alpha.change ) > .12 , .12*sign(alpha.change) , alpha.change )
             alpha.change <- alpha.change*sigma.hh
-        
+
             sigma <- sigma + alpha.change
                                     }
         diag(sigma)[ diag(sigma) < .001 ] <- .0001
-                                }                
+                                }
         cat( paste( rep( "-" , prbar), collapse="") )
         a1s <- max( abs( c( sigma - sigma0 )) )
         cat("|     max. parm. change" , round( a1s , 5),"\n")
-    
-        
+
+
         #************************************
         # estimation of error correlation parameters
         a1e <- 0
@@ -278,28 +278,28 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
                 # bb <- bG[1]
     #            est.bb <- est.b * (est.b == bb )
                 est.ee <- 1*(est.eps.corr == ee )
-                    respml0 <- .ll.rasch.pml.probit( b , a , sigma , 
+                    respml0 <- .ll.rasch.pml.probit( b , a , sigma ,
                                 Q , eps.corr , itempairs  , IP , eps=10^(-14) )
                     ll0 <- respml0$ll
-                    respml <- .ll.rasch.pml.probit( b , a , sigma , 
+                    respml <- .ll.rasch.pml.probit( b , a , sigma ,
                                 Q,eps.corr + h*est.ee , itempairs  , IP , eps=10^(-14) )
                      ll1 <- respml$ll
-                     respml <- .ll.rasch.pml.probit( b , a , sigma , 
+                     respml <- .ll.rasch.pml.probit( b , a , sigma ,
                             Q , eps.corr - h*est.ee , itempairs  , IP , eps=10^(-14) )
-                     ll2 <- respml$ll                           
-                d1 <- ( ll1 - ll2  ) / ( 2 * h )    
+                     ll2 <- respml$ll
+                d1 <- ( ll1 - ll2  ) / ( 2 * h )
                 # second order derivative
                 # f(x+h)+f(x-h) = 2*f(x) + f''(x)*h^2
-                d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2               
+                d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2
                 if ( abs(d2) < 10^(-20) ){ d2 <- 10^20 }
                 eps.change <- - d1 / d2
-                eps.change <- ifelse( abs( eps.change ) > .35 , .35*sign(eps.change) , eps.change )             
+                eps.change <- ifelse( abs( eps.change ) > .35 , .35*sign(eps.change) , eps.change )
                 eps.change <- eps.change * est.ee
                 eps.corr <- eps.corr + eps.change
                 eps.corr[ eps.corr < h & est.eps.corr != 0] <- 2*h
                 eps.corr[ eps.corr > 1-h & est.eps.corr != 0 ] <- 1 - 2*h
                 cat( paste( rep( "-" , prbar[match(ee,epsG)]), collapse="") )
-                flush.console()             
+                flush.console()
                         }
             a1e <- max( abs( eps.corr - eps.corr0 ) )
             cat("|     max. parm. change" , round( a1e , 5),"\n")
@@ -307,10 +307,10 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
         ######################################
         # convergence display
         a1 <- stats::aggregate( b , list( est.b) , mean )
-        a1aa <- stats::aggregate( a , list( est.a) , mean )        
+        a1aa <- stats::aggregate( a , list( est.a) , mean )
 #        cat("   b parameters: " , paste( round( a1[,2] , 3 ) , collapse= " " ) , "\n" )
 #        cat("   a parameters: " , paste( round( a1aa[,2] , 3 ) , collapse= " " ) , "\n" )
-#        if ( D== 1){         
+#        if ( D== 1){
 #            cat("   sigma parameter:  " , paste( round( sigma, 3 ) , collapse= " " ) , "\n" )
 #                }
         if (D>1){
@@ -318,18 +318,18 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
                     }
 #        if (est.corrs){
 #            a1 <- aggregate( eps.corr , list( est.eps.corr) , mean )
-#            cat("   eps parameters: " , paste( round( a1[,2] , 3 ) , collapse= " " ) , "\n" )        
+#            cat("   eps parameters: " , paste( round( a1[,2] , 3 ) , collapse= " " ) , "\n" )
 #                    }
         #******************************************************************************
-        iter <- iter + 1 
+        iter <- iter + 1
         dev <- -2*ll0
         dev.change <- abs( ( dev - dev0)/ dev0 )
 #        par.change <- max( a1a , a1b , a1d , a1k , a1m , a1s)
         par.change <- max( a1b , a1s , a1e , a1a )
-        cat( "Pseudolikelihood Objective Function = "  ,   round( dev , 5 ) , "| max. parm. change = " , 
-                                        round( par.change , 6 ) ,  " \n"   )  
+        cat( "Pseudolikelihood Objective Function = "  ,   round( dev , 5 ) , "| max. parm. change = " ,
+                                        round( par.change , 6 ) ,  " \n"   )
         if ( ( dev > dev0 ) & ( iter > 4 ) ){ cat("   Objective Function has increased! Convergence Problems?\n") }
-        flush.console()        
+        flush.console()
                 }
         #********************************************************
     # information criteria
@@ -343,16 +343,16 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
         # BIC
     #    ic$BIC <- dev + ( log(ic$n) )*ic$np
         # CAIC
-     #   ic$CAIC <- dev + ( log(ic$n) + 1 )*ic$np    
+     #   ic$CAIC <- dev + ( log(ic$n) + 1 )*ic$np
     #**********************************************************************************
-    # results item parameters            
-    item <- data.frame( "item" = colnames(dat0) , 
-                "N" = colSums(!is.na(dat0)) , 
-                "sumWeights" = colSums( ( !is.na(dat0)) * WM ) , 
-                "p" = colMeans( dat0 , na.rm=TRUE ), 
-                "b" = b , "est.b"= est.b , 
+    # results item parameters
+    item <- data.frame( "item" = colnames(dat0) ,
+                "N" = colSums(!is.na(dat0)) ,
+                "sumWeights" = colSums( ( !is.na(dat0)) * WM ) ,
+                "p" = colMeans( dat0 , na.rm=TRUE ),
+                "b" = b , "est.b"= est.b ,
                 "a" = a , "est.a" = est.a )
-    if (D==1){ item$sigma <- sigma }                            
+    if (D==1){ item$sigma <- sigma }
     item$est.sigma = 1*est.sigma
 #    item$link" = link
     if ( ! is.null( itemcluster) ){ item$itemcluster <- itemcluster }
@@ -368,7 +368,7 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
     cat( " Estimated" , length(bG) , "Item Parameters\n\n")
     .pr( item , digits=3 )        # print item statistics
     cat("---------------------------------------------------------------------------------------------------------- \n")
- 
+
     #....................................................................
     # print Trait parameter summary
 #    cat("Trait Distribution Summary\n")
@@ -376,7 +376,7 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
     cat("Trait SD (Probit Link): ")
     cat( round(sigma , 3 ) , "\n")
     cat("Trait SD (Logit Link) : ")
-    cat( round( item$sigma[1] * 1.701 , 3 ) , "\n")    
+    cat( round( item$sigma[1] * 1.701 , 3 ) , "\n")
     if (D>1){
         cat("\nCorrelation Matrix\n")
         print( cov2cor(sigma) , digits=3 )
@@ -399,26 +399,26 @@ rasch.pml <- function( dat , est.b = seq( 1 , ncol(dat) ) ,
             }
         # computational time
         s2 <- Sys.time()
-        if (progress){ 
+        if (progress){
                 cat("---------------------------------------------------------------------------------------------------------- \n")
                 cat("Start:" , paste( s1) , "\n")
                 cat("End:" , paste(s2) , "\n")
                 cat("Difference:" , print(s2 -s1), "\n")
                 cat("---------------------------------------------------------------------------------------------------------- \n")
-                    }  
+                    }
     res <- list( "item" = item , "iter" = iter , "deviance" = dev ,
-                    "b" = b , "sigma" = sigma , 
-                    "dat" = dat    ,  "ic" = ic    , 
+                    "b" = b , "sigma" = sigma ,
+                    "dat" = dat    ,  "ic" = ic    ,
                     "link" =link , "itempairs" = itempairs ,
                     "error.corr" = error.corr0         ,
                     "bG" = bG , "aG" = aG , "epsG" = epsG , "est.corrs" = est.corrs ,
-                    "Q"=Q , "D"=D)    
-    if (est.corrs){ 
-            res$eps.corr <- eps.corr 
+                    "Q"=Q , "D"=D)
+    if (est.corrs){
+            res$eps.corr <- eps.corr
             res$eps.corrM <- error.corr
                 }
     class(res) <- "rasch.pml"
-    return(res)                    
+    return(res)
                }
-########################################################################## 
-                
+##########################################################################
+

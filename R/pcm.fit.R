@@ -1,5 +1,5 @@
 ## File Name: pcm.fit.R
-## File Version: 0.16
+## File Version: 0.17
 
 #############################################
 # fit partial credit (or Rasch model)
@@ -19,7 +19,7 @@ pcm.fit <- function( b , theta , dat )
     rprobs <- array( 0 , dim = c( N , K +1 , I ) )
     score_vec <- 0:K
     M0 <- TAM::tam_outer( theta , score_vec )
-    for (ii in 1:I){    
+    for (ii in 1:I){
         M1 <- M0
         M1[,-1] <- M1[,-1] - TAM::tam_matrix2( b[ii,], nrow=N )
         M1_max <- rowMaxs.sirt(matr=M1)$maxval
@@ -35,7 +35,7 @@ pcm.fit <- function( b , theta , dat )
     M2 <- TAM::tam_matrix2( 0:K , nrow=N)
     for (ii in 1:I){
         Eni[,ii] <- rowSums( M2*rprobs[,,ii]  )
-    }                
+    }
     # calculate residuals
     Yni <- dat - Eni
     # calculate variances
@@ -52,7 +52,7 @@ pcm.fit <- function( b , theta , dat )
     zni <- Yni / sqrt( Wni )
     #************************************
     # item fit statistics
-    N.item <- colSums( dat.ind )    
+    N.item <- colSums( dat.ind )
     #--- Outfit
     outfit <- colSums( zni^2 * dat.ind ) / N.item
     itemfit <- data.frame( "item" = colnames(dat) , "outfit" = outfit )
@@ -64,8 +64,8 @@ pcm.fit <- function( b , theta , dat )
     itemfit$infit.t <- ( itemfit$infit^(1/3) - 1 ) * ( 3 / qi ) + qi / 3
     itemfit0 <- itemfit
     #************************************
-    # person fit statistics                
-    N.item <- rowSums( dat.ind )    
+    # person fit statistics
+    N.item <- rowSums( dat.ind )
     #--- Outfit
     outfit <- rowSums( zni^2 * dat.ind ) / N.item
     personfit <- data.frame( "person" = 1:N , "outfit" = outfit )
@@ -79,4 +79,4 @@ pcm.fit <- function( b , theta , dat )
     res <- list("itemfit"=itemfit , "personfit"=personfit)
     return(res)
 }
-#############################################################        
+#############################################################

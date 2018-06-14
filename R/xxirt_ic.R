@@ -1,5 +1,5 @@
 ## File Name: xxirt_ic.R
-## File Version: 0.09
+## File Version: 0.10
 
 
 ###################################################################
@@ -20,7 +20,7 @@ xxirt_ic <- function( dev , N , par_items , par_Theta , I ,
     # CAIC (consistent AIC)
     ic$CAIC <- dev + ( log_n + 1 )*ic$np
     # corrected AIC
-    ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )        
-    return(ic)    
-}    
-###################################################################        
+    ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )
+    return(ic)
+}
+###################################################################

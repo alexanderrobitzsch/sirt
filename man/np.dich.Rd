@@ -1,5 +1,5 @@
 %% File Name: np.dich.Rd
-%% File Version: 0.13
+%% File Version: 0.14
 
 \name{np.dich}
 \alias{np.dich}
@@ -22,7 +22,7 @@ An \eqn{N \times I} data frame of dichotomous
 item responses
 }
   \item{theta}{
-Estimated theta values, for example weighted likelihood 
+Estimated theta values, for example weighted likelihood
 estimates from \code{\link{wle.rasch}}
 }
   \item{thetagrid}{
@@ -33,7 +33,7 @@ response functions shall be evaluated.
 Display progress?
 }
   \item{bwscale}{
-The bandwidth parameter \eqn{h} is calculated by 
+The bandwidth parameter \eqn{h} is calculated by
 the formula \eqn{h=}\code{bwscale}\eqn{\cdot N^{-1/5}}
 }
   \item{method}{
@@ -49,7 +49,7 @@ in the \pkg{sm} library.
 \value{
 A list with following entries
 \item{dat}{Original data frame}
-\item{thetagrid}{Vector of theta values at which the item response 
+\item{thetagrid}{Vector of theta values at which the item response
     functions are evaluated}
 \item{theta}{Used theta values as person parameter estimates}
 \item{estimate}{Estimated item response functions}

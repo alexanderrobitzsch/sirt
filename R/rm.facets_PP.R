@@ -1,9 +1,9 @@
 ## File Name: rm.facets_PP.R
-## File Version: 0.07
+## File Version: 0.08
 
 #############################################################
 # person parameter estimation in partial credit model
-rm.facets.mle <- function( data , a , b , theta , WLE=FALSE , 
+rm.facets.mle <- function( data , a , b , theta , WLE=FALSE ,
     maxiter=20 , maxincr=3 , h = .001 , convP = .0001 , maxval=9.99 ,
     progress=TRUE )
 {
@@ -14,49 +14,49 @@ rm.facets.mle <- function( data , a , b , theta , WLE=FALSE ,
     iter <- 1
 
     #-------- begin algorithm
-    while ( ( conv > convP ) & (  iter <= maxiter  ) ){    
-        
+    while ( ( conv > convP ) & (  iter <= maxiter  ) ){
+
         theta0 <- theta
-        
+
         ll0  <- rm.calc.ll.theta( data , a , b , theta )
         llP1 <- rm.calc.ll.theta( data , a , b , theta+h )
         llM1 <- rm.calc.ll.theta( data , a , b , theta-h )
-        
+
         if (WLE){
             llP2 <- rm.calc.ll.theta( data , a , b , theta+2*h )
-            llM2 <- rm.calc.ll.theta( data , a , b , theta-2*h )           
+            llM2 <- rm.calc.ll.theta( data , a , b , theta-2*h )
                 }
-        
+
         ll1 <- (llP1 - llM1) / (2*h )
         ll2 <- (llP1 - 2*ll0 + llM1) / h^2
-                
+
         incr <- - ll1 / ll2
-        if (WLE){        
-            ll3 <- ( llP2 - 2*llP1 + 2*llM1 - llM2 ) / (2*h^3 )    
+        if (WLE){
+            ll3 <- ( llP2 - 2*llP1 + 2*llM1 - llM2 ) / (2*h^3 )
             incr <- - ll1 / ll2 - ll3 / ( 2*ll2^2 )
                 }
 
         maxincr <- maxincr / 1.05
         incr <- ifelse( abs(incr) > maxincr , sign(incr)*maxincr , incr )
-        theta <- theta + incr    
+        theta <- theta + incr
         theta <- ifelse( abs(theta) > maxval , sign(theta)*maxval , theta )
         conv <- max( abs( theta - theta0) )
         if (progress){
             cat("* Iteration" , iter , ":" , "maximum parameter change" ,
-                round( conv, 5 ) , "\n") 
+                round( conv, 5 ) , "\n")
             utils::flush.console();
-        }    
-        iter <- iter + 1                    
+        }
+        iter <- iter + 1
     }
 
-    
+
     # output
     se <- sqrt( abs( - 1 / ll2 ) )
-    se <-   ifelse( abs(theta) == maxval , NA , se )        
+    se <-   ifelse( abs(theta) == maxval , NA , se )
     theta <- ifelse( theta == maxval , Inf , theta )
     theta <- ifelse( theta == - maxval , -Inf , theta )
-    res <- data.frame( "est" = theta , "se" = se )    
-    return(res)    
+    res <- data.frame( "est" = theta , "se" = se )
+    return(res)
 }
 #############################################################
 
@@ -71,7 +71,7 @@ calc.pcm <- function( theta , a , b , ii )
     matrK <- matrix( 0:K , nrow=N , ncol=K+1 , byrow=TRUE)
     eta <- a[ii] * theta * matrK - matrix( c(0,b[ii,]) , nrow=N , ncol=K+1 , byrow=TRUE)
     eta <- exp(eta)
-    probs <- eta / rowSums(eta, na.rm=TRUE)    
+    probs <- eta / rowSums(eta, na.rm=TRUE)
     return(probs)
 }
 #####################################################
@@ -99,8 +99,8 @@ rm.calc.ll <- function( probs , data , ii )
     eps <- 1E-20
     probs <- log(probs)
     m1 <- cbind( 1:N , data[,ii] + 1 )
-    h1 <- probs[ m1 ] 
+    h1 <- probs[ m1 ]
     h1[ is.na(h1) ] <- 0
     return(h1)
 }
-################################################        
+################################################

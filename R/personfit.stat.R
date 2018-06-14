@@ -1,13 +1,13 @@
 ## File Name: personfit.stat.R
-## File Version: 0.04
+## File Version: 0.05
 personfit.stat <-
 function( dat , abil , b ){
     dfr <- data.frame( "case" = seq( 1 , nrow(dat)) )
-    dfr$NItems <- rowSums( 1 - is.na(dat)) 
-    dfr$mean <- rowMeans( dat , na.rm=TRUE )    
-    dfr$abil <- abil    
+    dfr$NItems <- rowSums( 1 - is.na(dat))
+    dfr$mean <- rowMeans( dat , na.rm=TRUE )
+    dfr$abil <- abil
     # person fit statistics
-    pval <- colMeans( dat , na.rm=TRUE )    
+    pval <- colMeans( dat , na.rm=TRUE )
     dfr$caution <- pf.caution( data=dat , pval = pval )
     dfr$depend <- pf.dependability( data=dat , pval = pval )
     h1 <- pf.eci(data=dat, pval=pval, wle=abil, itemdiff=b)

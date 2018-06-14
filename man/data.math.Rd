@@ -1,5 +1,5 @@
 %% File Name: data.math.Rd
-%% File Version: 0.09
+%% File Version: 0.10
 
 \name{data.math}
 \alias{data.math}
@@ -14,15 +14,15 @@ dataset contains 664 students on 30 items.
 \usage{data(data.math)}
 \format{
 The dataset is a list. The list element \code{data}
-contains the dataset with the demographical variables 
+contains the dataset with the demographical variables
 student ID (\code{idstud}) and a dummy variable
-for female students (\code{female}). The remaining 
+for female students (\code{female}). The remaining
 variables (starting with \code{M} in the name) are
 the mathematics items. \cr
 The item metadata are included in the list element
 \code{item} which contains item name (\code{item}) and the
 testlet label (\code{testlet}). An item not included
-in a testlet is indicated by \code{NA}. 
+in a testlet is indicated by \code{NA}.
 Each item is allocated to one and only competence domain (\code{domain}).
 \cr
 

@@ -1,5 +1,5 @@
 %% File Name: lc.2raters.Rd
-%% File Version: 0.13
+%% File Version: 0.14
 
 \name{lc.2raters}
 \alias{lc.2raters}
@@ -61,16 +61,16 @@ conditional item probabilities \eqn{p_{x|c}}.
 \value{
 A list with following entries
 
-\item{classprob.1rater.like}{Classification probability \eqn{P(c|x)} of latent 
+\item{classprob.1rater.like}{Classification probability \eqn{P(c|x)} of latent
 category \eqn{c} given a manifest rating \eqn{x} (estimated by maximum likelihood)}
-\item{classprob.1rater.post}{Classification probability \eqn{P(c|x)} of latent 
-category \eqn{c} given a manifest rating \eqn{x} (estimated by the posterior 
+\item{classprob.1rater.post}{Classification probability \eqn{P(c|x)} of latent
+category \eqn{c} given a manifest rating \eqn{x} (estimated by the posterior
 distribution)}
-\item{classprob.2rater.like}{Classification probability \eqn{P(c|(x,y))} 
-of latent category \eqn{c} given two manifest ratings \eqn{x} and \eqn{y} 
+\item{classprob.2rater.like}{Classification probability \eqn{P(c|(x,y))}
+of latent category \eqn{c} given two manifest ratings \eqn{x} and \eqn{y}
 (estimated by maximum likelihood)}
-\item{classprob.2rater.post}{Classification probability \eqn{P(c|(x,y))} 
-of latent category \eqn{c} given two manifest ratings \eqn{x} and \eqn{y} 
+\item{classprob.2rater.post}{Classification probability \eqn{P(c|(x,y))}
+of latent category \eqn{c} given two manifest ratings \eqn{x} and \eqn{y}
 (estimated by posterior distribution)}
 \item{f.yi.qk}{Likelihood of each pair of ratings}
 \item{f.qk.yi}{Posterior of each pair of ratings}
@@ -79,7 +79,7 @@ of latent category \eqn{c} given two manifest ratings \eqn{x} and \eqn{y}
 \item{pi.k.obs}{Observed manifest class proportions}
 \item{freq.long}{Frequency table of ratings in long format}
 \item{freq.table}{Symmetrized frequency table of ratings}
-\item{agree.stats}{Measures of rater agreement. These measures include 
+\item{agree.stats}{Measures of rater agreement. These measures include
 percentage agreement (\code{agree0}, \code{agree1}), Cohen's kappa and weighted
 Cohen's kappa (\code{kappa}, \code{wtd.kappa.linear}),
 Gwet's AC1 agreement measures (\code{AC1}; Gwet, 2008, 2010) and
@@ -90,19 +90,19 @@ Aickin's alpha (\code{alpha.aickin}; Aickin, 1990).
 }
 
 \references{
-Aickin, M. (1990). Maximum likelihood estimation of agreement in the constant 
-predictive probability model, and its relation to Cohen's kappa. 
+Aickin, M. (1990). Maximum likelihood estimation of agreement in the constant
+predictive probability model, and its relation to Cohen's kappa.
 \emph{Biometrics}, \bold{46}, 293-302.
 
-Gwet, K. L. (2008). Computing inter-rater reliability and its variance 
-in the presence of high agreement. 
+Gwet, K. L. (2008). Computing inter-rater reliability and its variance
+in the presence of high agreement.
 \emph{British Journal of Mathematical and Statistical Psychology},
 \bold{61}, 29-48.
 
 Gwet, K. L. (2010). \emph{Handbook of Inter-Rater Reliability}.
 Advanced Analytics, Gaithersburg. \url{http://www.agreestat.com/}
-    
-Uebersax, J. S., & Grove, W. M. (1990). Latent class analysis of diagnostic 
+
+Uebersax, J. S., & Grove, W. M. (1990). Latent class analysis of diagnostic
 agreement. \emph{Statistics in Medicine}, \bold{9}, 559-572.
 }
 
@@ -143,7 +143,7 @@ summary(mod2)
 
 #*** Model 3: one item with eight categories
 mod3 <- sirt::lc.2raters( data.si05$Ex3)
-summary(mod3)    
+summary(mod3)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

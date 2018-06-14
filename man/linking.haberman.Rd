@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.58
+%% File Version: 0.59
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -14,13 +14,13 @@ using the 2PL or the generalized item response model according to
 Haberman (2009). This method is a generalization of log-mean-mean
 linking from one study to several studies. The default \code{a_log=TRUE}
 logarithmizes item slopes for linking while otherwise an additive regression
-model is assumed for the original item loadings (see Details; Battauz, xxxx) 
+model is assumed for the original item loadings (see Details; Battauz, xxxx)
 }
 \usage{
 linking.haberman(itempars, personpars, a_trim = Inf, b_trim = Inf, a_log=TRUE,
     conv = 1e-05, maxiter = 1000, progress = TRUE)
-    
-\method{summary}{linking.haberman}(object, digits = 3, file = NULL, ...)    
+
+\method{summary}{linking.haberman}(object, digits = 3, file = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -77,15 +77,15 @@ while for polytomous responses the generalized partial credit model holds
 = a_i ( \theta_p - b_i + d_{ik} ) }
 
 The parameters \eqn{ \{ a_{it} , b_{it} \}} of all items and studies are
-linearly transformed using equations \eqn{a_{it} \approx a_i / A_t} 
-(if \code{a_log=TRUE}) or \eqn{a_{it} \approx a_i + A_t} 
+linearly transformed using equations \eqn{a_{it} \approx a_i / A_t}
+(if \code{a_log=TRUE}) or \eqn{a_{it} \approx a_i + A_t}
 (if \code{a_log=FALSE}) and
 \eqn{b_{it} \cdot A_t \approx B_t + b_i}. For identification reasons
 we define \eqn{A_1=1} and \eqn{B_1} = 0.
 
 The optimization function (which is a least squares criterion;
-see Haberman 2009) seeks the transformation parameters \eqn{A_t} and 
-\eqn{B_t} with an alternating least squares 
+see Haberman 2009) seeks the transformation parameters \eqn{A_t} and
+\eqn{B_t} with an alternating least squares
 method. Note that every item \eqn{i} and every study \eqn{t} can
 be weighted (specified in the fifth column of \code{itempars}).
 Alternatively, a robust regression method can be employed for linking
@@ -116,15 +116,15 @@ A list with following entries
 \eqn{A_t} and \eqn{B_t}
   }
   \item{transf.personpars}{Data frame with linear transformation functions
-  for person parameters}  
+  for person parameters}
   \item{joint.itempars}{Estimated joint item parameters \eqn{a_i} and \eqn{b_i}
       }
   \item{a.trans}{Transformed \eqn{a_{it}} parameters}
   \item{b.trans}{Transformed \eqn{b_{it}} parameters}
   \item{a.orig}{Original \eqn{a_{it}} parameters}
-  \item{b.orig}{Original \eqn{b_{it}} parameters} 
+  \item{b.orig}{Original \eqn{b_{it}} parameters}
   \item{a.resid}{Residual \eqn{a_{it}} parameters (DIF parameters)}
-  \item{b.resid}{Residual \eqn{b_{it}} parameters (DIF parameters}  
+  \item{b.resid}{Residual \eqn{b_{it}} parameters (DIF parameters}
   \item{personpars}{Transformed person parameters}
   \item{es.invariance}{Effect size measures of invariance,
         separately for item slopes and intercepts.
@@ -145,12 +145,12 @@ A list with following entries
 Asparouhov, T., & Muthen, B. (2014).
 Multiple-group factor analysis alignment.
 \emph{Structural Equation Modeling}, \bold{21}, 1-14.
-    
-Battauz, M. (2016). Multiple equating of separate IRT calibrations. 
-\emph{Psychometrika, xx}, xxx-xxx.    
-                                     
+
+Battauz, M. (2016). Multiple equating of separate IRT calibrations.
+\emph{Psychometrika, xx}, xxx-xxx.
+
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
-from an item response model through separate calibrations}. 
+from an item response model through separate calibrations}.
 ETS Research Report ETS RR-09-40. Princeton, ETS.
 }
 
@@ -169,7 +169,7 @@ Alexander Robitzsch
 See the \pkg{plink} package for a wide diversity of linking methods.
 
 Mean-mean linking, Stocking-Lord and Haebara linking in the generalized
-logistic item response model can be conducted with 
+logistic item response model can be conducted with
 \code{\link{equating.rasch}}.
 
 For more general linking functions than the Haberman method
@@ -210,7 +210,7 @@ data(data.pars1.2pl)
 mod2 <- sirt::linking.haberman( itempars=data.pars1.2pl )
 summary(mod2)
 
-# additive model instaed of logarithmic model for item slopes 
+# additive model instaed of logarithmic model for item slopes
 mod2b <- sirt::linking.haberman( itempars=data.pars1.2pl, a_log=FALSE )
 summary(mod2b)
 
@@ -256,7 +256,7 @@ itempartable[,2] <- substring( itempartable[,2] , 1, 2 )
 mod2 <- sirt::linking.haberman( itempars= itempartable )
 
 #############################################################################
-# EXAMPLE 3: 2 Studies - 1PL and 2PL linking 
+# EXAMPLE 3: 2 Studies - 1PL and 2PL linking
 #############################################################################
 set.seed(789)
 I <- 20        # number of items
@@ -287,17 +287,17 @@ linkhab1 <- sirt::linking.haberman(itempars=itempars)
   ##    study    At     Bt
   ## 1 study1 1.000  0.000
   ## 2 study2 1.465 -0.512
-  ## 
+  ##
   ## Linear transformation for item parameters a and b
   ##    study   A_a   A_b    B_b
   ## 1 study1 1.000 1.000  0.000
   ## 2 study2 0.682 1.465 -0.512
-  ## 
+  ##
   ## Linear transformation for person parameters theta
   ##    study A_theta B_theta
   ## 1 study1   1.000   0.000
   ## 2 study2   1.465   0.512
-  ## 
+  ##
   ## R-Squared Measures of Invariance
   ##        slopes intercepts
   ## R2          1     0.9979
@@ -323,24 +323,24 @@ linkhab2 <- sirt::linking.haberman(itempars=itempars)
   ##    study    At     Bt
   ## 1 study1 1.000  0.000
   ## 2 study2 1.468 -0.515
-  ## 
+  ##
   ## Linear transformation for item parameters a and b
   ##    study   A_a   A_b    B_b
   ## 1 study1 1.000 1.000  0.000
   ## 2 study2 0.681 1.468 -0.515
-  ## 
+  ##
   ## Linear transformation for person parameters theta
   ##    study A_theta B_theta
   ## 1 study1   1.000   0.000
   ## 2 study2   1.468   0.515
-  ## 
+  ##
   ## R-Squared Measures of Invariance
   ##        slopes intercepts
   ## R2     0.9984     0.9980
   ## sqrtU2 0.0397     0.0443
 
 #############################################################################
-# EXAMPLE 4: 3 Studies - 1PL and 2PL linking 
+# EXAMPLE 4: 3 Studies - 1PL and 2PL linking
 #############################################################################
 set.seed(789)
 I <- 20         # number of items
@@ -353,7 +353,7 @@ dat2 <- sirt::sim.raschtype( stats::rnorm( N , mean=0.5,sd=1.50 ) , b=b )
 dat3 <- sirt::sim.raschtype( stats::rnorm( N , mean=-.2,sd=.8 ) , b=b )
 # set some items to non-administered
 dat3 <- dat3[ , -c(1,4) ]
-dat2 <- dat2[ , -c(1,2,3) ] 
+dat2 <- dat2[ , -c(1,2,3) ]
 
 #*** Model 1: 1PL in sirt
 # 1PL Study 1
@@ -436,9 +436,9 @@ linkhab2 <- sirt::linking.haberman(itempars=itempars,personpars=personpars)
 personpars.trans <- linkhab2$personpars
 
 #############################################################################
-# EXAMPLE 5: Linking with simulated item parameters containing outliers 
+# EXAMPLE 5: Linking with simulated item parameters containing outliers
 #############################################################################
-    
+
 # simulate some parameters
 I <- 38
 set.seed(18785)
@@ -446,14 +446,14 @@ b <- stats::rnorm( I , mean = .3 , sd =1.4 )
 # simulate DIF effects plus some outliers
 bdif <- stats::rnorm(I,mean=.4,sd=.09)+( stats::runif(I)>.9 )* rep( 1*c(-1,1)+.4 , each=I/2 )
 # create item parameter table
-itempars <- data.frame( "study" = paste0("study",rep(1:2, each=I)) , 
+itempars <- data.frame( "study" = paste0("study",rep(1:2, each=I)) ,
                 "item" = paste0( "I" , 100 + rep(1:I,2) ) , "a" = 1 ,
                  "b" = c( b , b + bdif  )  )
-                            
+
 #*** Model 1: Haberman linking with least squares regression
 mod1 <- sirt::linking.haberman( itempars = itempars )
 summary(mod1)
-     
+
 #*** Model 2: Haberman linking with robust bisquare regression
 mod2 <- sirt::linking.haberman( itempars = itempars2 , b_trim = .4, maxiter=20)
 summary(mod2)

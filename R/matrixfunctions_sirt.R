@@ -1,14 +1,14 @@
 ## File Name: matrixfunctions_sirt.R
-## File Version: 0.11
+## File Version: 0.12
 
 ##########################################################################
 # rowwise maximum and minimum function
 #****************************
 # rowMaxs function
-rowMaxs.sirt <- function(matr){ 
+rowMaxs.sirt <- function(matr){
     rowMaxsCPP_source( matr )
 }
-#*****************************                    
+#*****************************
 # rowMins function
 rowMins.sirt <- function(matr){
     matr2 <- - matr
@@ -19,7 +19,7 @@ rowMins.sirt <- function(matr){
 }
 ##########################################################################
 # rowwise cumulative sum
-rowCumsums.sirt <- function(matr){ 
+rowCumsums.sirt <- function(matr){
     rowCumsums2_source( matr )
                     }
 # The C code was posted by Romain Francois at
@@ -27,17 +27,17 @@ rowCumsums.sirt <- function(matr){
 
 ##########################################################################
 # rowwise cumulative sum
-colCumsums.sirt <- function(matr){ 
+colCumsums.sirt <- function(matr){
     t( rowCumsums.sirt( t(matr) ) )
                     }
 
 ##########################################################################
-#****                    
+#****
 # 'interval_index' searches an index when a frequency is exceeded
 # -> used in plausible value imputation
-rowIntervalIndex.sirt <- function(matr,rn){ 
+rowIntervalIndex.sirt <- function(matr,rn){
     interval_index_C( matr , rn)
-                    }    
+                    }
 
 ##########################################################################
 # extract k smallest elements in a row of a matrix
@@ -51,9 +51,9 @@ rowKSmallest.sirt <- function( matr , K , break.ties=TRUE){
     indexmatr <- matrix( 1:N2 , N1 , N2 , byrow=TRUE )
     # apply function for extracting k smallest elements
     a1 <- rowKSmallest_C( matr , K , indexmatr , rM1)
-    ## OUTPUT:                    
+    ## OUTPUT:
     ## return List::create(_["smallval"]=SMALLVAL ,
-    ##                      _["smallind"]=SMALLIND ) ;                      
+    ##                      _["smallind"]=SMALLIND ) ;
     return(a1)
 }
 ##########################################################################
@@ -67,13 +67,13 @@ rowKSmallest2.sirt <- function(matr , K ){
     smallval <- donor.ind <- matrix( 0 , nrow=Nmis , ncol=donors )
     res1 <- rowMins.sirt(matr=disty)
     donor.ind[,1] <- res1$minind
-    smallval[,1] <- res1$minval    
+    smallval[,1] <- res1$minval
     for (ii in 2:donors){
         disty[ cbind(indvec , donor.ind[,ii-1] ) ] <- M1
         res1 <- rowMins.sirt(matr=disty)
         donor.ind[,ii] <- res1$minind
-        smallval[,ii] <- res1$minval    
-                        }          
+        smallval[,ii] <- res1$minval
+                        }
     res <- list( "smallval"=smallval , "smallind" = donor.ind )
     return(res)
     }

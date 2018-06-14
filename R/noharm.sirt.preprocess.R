@@ -1,14 +1,14 @@
 ## File Name: noharm.sirt.preprocess.R
-## File Version: 0.14
+## File Version: 0.15
 
 
-# e1 <- environment()    
+# e1 <- environment()
 # .attach.environment( res , envir=e1 )
 
 
 ############################################################
 # data preprocessing noharm.sirt
-.noharm.sirt.preproc <- function( dat , weights , Fpatt , Fval , 
+.noharm.sirt.preproc <- function( dat , weights , Fpatt , Fval ,
     Ppatt , Pval , Psipatt , Psival , wgtm , dimensions ){
 
     res <- NULL
@@ -33,7 +33,7 @@
     res$pm0 <- pm
     res$ss <- ss
     # CFA or EFA?
-    if ( is.null(dimensions) ){ 
+    if ( is.null(dimensions) ){
         model.type <- "CFA"
         modtype <- 3    # 3 - multidimensional CFA
             } else {
@@ -43,35 +43,35 @@
         Pval <- diag(D)
         Ppatt <- 0*diag(D)
         Fpatt <- matrix(1,nrow=I,ncol=D)
-        if (D>1){        
+        if (D>1){
             for (dd in 2:D){  Fpatt[dd,1:(dd-1)] <- 0 }
                     }
-        Fval <- .5*(Fpatt>0)        
+        Fval <- .5*(Fpatt>0)
         if ( D == 1 ){     # 1 dimension
-                model.type <- "CFA" 
+                model.type <- "CFA"
                 modtype <- 3
-                        }        
+                        }
                     }
-                    
+
     res$model.type <- model.type
     res$modtype  <- modtype
     # initial values if they are not provided
     if ( is.null(Psival) ){ Psival <- 0*diag(res$I) }
     if ( is.null(Psipatt) ){ Psipatt <- 0*diag(res$I) }
-    if ( is.null(Fval) ){ Fval <- .5*(Fpatt>0) }    
-    if ( is.null(Pval) ){ 
+    if ( is.null(Fval) ){ Fval <- .5*(Fpatt>0) }
+    if ( is.null(Pval) ){
         Pval <- diag( ncol(Ppatt) )
-            }        
+            }
     # weight matrix
     wgtm.default <- FALSE
-    if ( is.null(wgtm) ){ 
-        wgtm <- matrix(1,I,I) 
+    if ( is.null(wgtm) ){
+        wgtm <- matrix(1,I,I)
         wgtm.default <- TRUE
                     }
-    diag(wgtm) <- 0                    
+    diag(wgtm) <- 0
     wgtm <- wgtm * ( ss > 0 )
-    res$wgtm <- wgtm        
-    res$sumwgtm <- ( sum( wgtm > 0 ) - sum( diag(wgtm) > 0 ) ) / 2    
+    res$wgtm <- wgtm
+    res$sumwgtm <- ( sum( wgtm > 0 ) - sum( diag(wgtm) > 0 ) ) / 2
     #***
     # column names
     D <- ncol(Ppatt)
@@ -79,21 +79,21 @@
     if (is.null(colnames(Fpatt) ) ){
         colnames(Fpatt) <- cn }
     if (is.null(colnames(Fval) ) ){
-        colnames(Fval) <- colnames(Fpatt) 
-                    }        
-    
-    if (is.null(colnames(Pval))){ 
-            colnames(Pval) <- colnames(Ppatt) 
+        colnames(Fval) <- colnames(Fpatt)
                     }
-    if (is.null(colnames(Pval))){ 
-            colnames(Pval) <- colnames(Fval) 
+
+    if (is.null(colnames(Pval))){
+            colnames(Pval) <- colnames(Ppatt)
+                    }
+    if (is.null(colnames(Pval))){
+            colnames(Pval) <- colnames(Fval)
                     }
     rownames(Pval) <- colnames(Pval)
-    
+
     #*****
     # matrix conversion
     #****
-    res$Fpatt <- as.matrix(Fpatt) 
+    res$Fpatt <- as.matrix(Fpatt)
     res$Fval <- as.matrix(Fval)
     res$Ppatt <- as.matrix(Ppatt)
     res$Pval <- as.matrix(Pval)
@@ -109,4 +109,4 @@
     return(res)
     }
 
-######################################################################        
+######################################################################

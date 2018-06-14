@@ -1,5 +1,5 @@
 %% File Name: wle.rasch.Rd
-%% File Version: 1.10
+%% File Version: 1.11
 
 \name{wle.rasch}
 \alias{wle.rasch}
@@ -12,13 +12,13 @@ This function computes weighted likelihood estimates for dichotomous responses b
 on the Rasch model (Warm, 1989).
 }
 \usage{
-wle.rasch(dat, dat.resp = NULL, b, itemweights = 1 + 0 * b, 
-    theta = rep(0, nrow(dat)), conv = 0.001, maxit = 200, 
+wle.rasch(dat, dat.resp = NULL, b, itemweights = 1 + 0 * b,
+    theta = rep(0, nrow(dat)), conv = 0.001, maxit = 200,
     wle.adj=0 , progress=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{dat}{ An \eqn{N \times I} data frame of 
+  \item{dat}{ An \eqn{N \times I} data frame of
   dichotomous item responses
 }
   \item{dat.resp}{
@@ -63,12 +63,12 @@ A list with following entries
    \item{p.ia}{Matrix with expected item response, i.e.
     the probabilities \eqn{P(X_{pi}=1|\theta_p ) = invlogit( \theta_p - b_i )}.
             }
-   \item{wle}{WLE reliability (Adams, 2005)}            
+   \item{wle}{WLE reliability (Adams, 2005)}
 }
 
 
 \references{
-Adams, R. J. (2005). Reliability as a measurement design effect. 
+Adams, R. J. (2005). Reliability as a measurement design effect.
 \emph{Studies in Educational Evaluation}, \bold{31}, 162-172.
 
 Warm, T. A. (1989). Weighted likelihood estimation of ability in item response theory.

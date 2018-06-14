@@ -1,10 +1,10 @@
 ## File Name: fuzcluster.R
-## File Version: 0.08
+## File Version: 0.09
 
 #*********************************************
 # Clustering for continuous fuzzy data
-fuzcluster <- function(dat_m , dat_s , K=2 , nstarts= 7 , 
-        seed = NULL , maxiter=100 , parmconv=.001 , 
+fuzcluster <- function(dat_m , dat_s , K=2 , nstarts= 7 ,
+        seed = NULL , maxiter=100 , parmconv=.001 ,
         fac.oldxsi=0.75 , progress=TRUE ){
     s1 <- Sys.time()
     dev0 <- 10^(200)
@@ -14,8 +14,8 @@ fuzcluster <- function(dat_m , dat_s , K=2 , nstarts= 7 ,
         res1 <- fuzcluster_estimate(K , dat_m , dat_s , dat_resp ,
             maxiter=maxiter , parmconv=parmconv , progress=progress ,
             seed= seed , fac.oldxsi=fac.oldxsi)
-        if ( res1$deviance < dev0 ){ 
-            res <- res1 
+        if ( res1$deviance < dev0 ){
+            res <- res1
             dev0 <- res1$deviance
             }
             }
@@ -33,7 +33,7 @@ fuzcluster <- function(dat_m , dat_s , K=2 , nstarts= 7 ,
         # CAIC (conistent AIC)
         ic$CAIC <- dev + ( log(ic$n) + 1 )*ic$np
         # corrected AIC
-        ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )        
+        ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )
     res$ic <- ic
     res$K <- K
     res$s1 <- s1
@@ -41,5 +41,5 @@ fuzcluster <- function(dat_m , dat_s , K=2 , nstarts= 7 ,
     res$nstarts <- nstarts
     class(res) <- "fuzcluster"
     ###
-    return(res)    
+    return(res)
     }

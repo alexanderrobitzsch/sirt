@@ -1,5 +1,5 @@
 %% File Name: mcmclist2coda.Rd
-%% File Version: 0.10
+%% File Version: 0.11
 
 \name{mcmclist2coda}
 \alias{mcmclist2coda}
@@ -9,7 +9,7 @@ Write Coda File from an Object of Class \code{mcmc.list}
 }
 \description{
 This function  writes a coda file from an object of class \code{mcmc.list}.
-Note that only first entry (i.e. one chain) will be processed. 
+Note that only first entry (i.e. one chain) will be processed.
 }
 \usage{
 mcmclist2coda(mcmclist, name, coda.digits = 5)
@@ -52,7 +52,7 @@ Alexander Robitzsch
 \dontrun{
 #############################################################################
 # EXAMPLE 1: MCMC estimation 2PNO dataset Reading
-#############################################################################    
+#############################################################################
 
 data(data.read)
 # estimate 2PNO with MCMC with 3000 iterations and 500 burn-in iterations
@@ -60,7 +60,7 @@ mod <- sirt::mcmc.2pno( dat=data.read , iter=3000 , burnin=500 )
 # plot MCMC chains
 plot( mod$mcmcobj , ask=TRUE )
 # write sampled chains into codafile
-mcmclist2coda( mod$mcmcobj , name = "dataread_2pl" ) 
+mcmclist2coda( mod$mcmcobj , name = "dataread_2pl" )
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

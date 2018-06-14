@@ -1,5 +1,5 @@
 %% File Name: data.wide2long.Rd
-%% File Version: 0.16
+%% File Version: 0.17
 
 \name{data.wide2long}
 \alias{data.wide2long}
@@ -57,8 +57,8 @@ Alexander Robitzsch
 #############################################################################
 miceadds::library_install("lme4")
 
-data(data.pisaRead) 
-dat <- data.pisaRead$data 
+data(data.pisaRead)
+dat <- data.pisaRead$data
 Q <- data.pisaRead$item   # item predictors
 
 # define items
@@ -84,7 +84,7 @@ summary(mod2)
 
 #***
 # Model 3: LLTM
-mod3 <- lme4::glmer(resp ~ (1|idstud) + as.factor(ItemFormat) + as.factor(TextType), 
+mod3 <- lme4::glmer(resp ~ (1|idstud) + as.factor(ItemFormat) + as.factor(TextType),
             data = dat.long , family="binomial" , verbose=TRUE)
 summary(mod3)
 
@@ -106,11 +106,11 @@ mod1 <- lme4::glmer( resp ~ 0 + as.factor( item ) + ( 1 | id_index) , data = dat
 summary(mod1)
   ##   Random effects:
   ##    Groups   Name        Variance Std.Dev.
-  ##    id_index (Intercept) 1.454    1.206   
+  ##    id_index (Intercept) 1.454    1.206
   ##   Number of obs: 10000, groups: id_index, 1000
-  ##   
+  ##
   ##   Fixed effects:
-  ##                        Estimate Std. Error z value Pr(>|z|)    
+  ##                        Estimate Std. Error z value Pr(>|z|)
   ##   as.factor(item)I0001  2.16365    0.10541  20.527  < 2e-16 ***
   ##   as.factor(item)I0002  1.66437    0.09400  17.706  < 2e-16 ***
   ##   as.factor(item)I0003  1.21816    0.08700  14.002  < 2e-16 ***

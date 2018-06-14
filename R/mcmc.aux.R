@@ -1,5 +1,5 @@
 ## File Name: mcmc.aux.R
-## File Version: 0.04
+## File Version: 0.05
 
 ###################################################################
 # draw variances from inverse chi square distribution
@@ -11,6 +11,6 @@
     # n ... empirical sample size
     # sig2 ... empirical variance
     res <- 1/ stats::rgamma( N , (w0+n) / 2 , 0.5 * ( w0*sig02 + n*sig2 ) )
-    return(res) 
+    return(res)
         }
 #####################################################################

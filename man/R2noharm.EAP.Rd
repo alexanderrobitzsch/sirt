@@ -1,5 +1,5 @@
 %% File Name: R2noharm.EAP.Rd
-%% File Version: 0.10
+%% File Version: 0.11
 
 \name{R2noharm.EAP}
 \alias{R2noharm.EAP}
@@ -34,7 +34,7 @@ A list with following entries
   \item{person}{Data frame of person parameter EAP estimates and
   their corresponding standard errors
     }
-  \item{theta}{Grid of multidimensional theta values where the posterior is 
+  \item{theta}{Grid of multidimensional theta values where the posterior is
       evaluated.}
   \item{posterior}{Individual posterior distribution evaluated at \code{theta}}
   \item{like}{Individual likelihood}

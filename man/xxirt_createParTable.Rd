@@ -1,5 +1,5 @@
 %% File Name: xxirt_createParTable.Rd
-%% File Version: 1.08
+%% File Version: 1.09
 
 \name{xxirt_createParTable}
 \alias{xxirt_createParTable}
@@ -15,10 +15,10 @@ Create item response functions and item parameter table
 }
 
 \usage{
-xxirt_createDiscItem( name , par , est , P , lower=-Inf , upper=Inf , 
+xxirt_createDiscItem( name , par , est , P , lower=-Inf , upper=Inf ,
      prior=NULL , prior_par1=NULL , prior_par2 = NULL)
-     
-xxirt_createParTable(dat, itemtype, customItems = NULL) 
+
+xxirt_createParTable(dat, itemtype, customItems = NULL)
 
 xxirt_modifyParTable( partable , parname , item = NULL , value=NULL ,
      est = NULL , parlabel = NULL , parindex = NULL , lower=NULL ,
@@ -29,8 +29,8 @@ xxirt_modifyParTable( partable , parname , item = NULL , value=NULL ,
 
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{name}{Type of item response function}    
-\item{par}{Named vector of starting values of item parameters}    
+\item{name}{Type of item response function}
+\item{par}{Named vector of starting values of item parameters}
 \item{est}{Logical vector indicating which parameters should be estimated}
 \item{P}{Item response function}
 \item{lower}{Lower bounds}
@@ -83,7 +83,7 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{xxirt}}    
+\code{\link{xxirt}}
 
 See \code{\link[mirt:createItem]{mirt::createItem}} for similar
 functionality.
@@ -93,7 +93,7 @@ functionality.
 #############################################################################
 ## EXAMPLE 1: Definition of item response functions
 #############################################################################
-    
+
 data(data.read)
 dat <- data.read
 
@@ -101,47 +101,47 @@ dat <- data.read
 #*** IRF 2PL
 P_2PL <- function( par, Theta , ncat){
     a <- par[1]
-    b <- par[2]    
+    b <- par[2]
     TP <- nrow(Theta)
     P <- matrix( NA , nrow=TP , ncol=ncat)
     P[,1] <- 1
     for (cc in 2:ncat){
         P[,cc] <- exp( (cc-1) * a * Theta[,1] - b )
     }
-    P <- P / rowSums(P)    
+    P <- P / rowSums(P)
     return(P)
 }
 
 #*** IRF 1PL
 P_1PL <- function( par, Theta , ncat){
-    b <- par[1]    
+    b <- par[1]
     TP <- nrow(Theta)
     par0 <- c(1,b)
-    P <- P_2PL( par = par0 , Theta = Theta , ncat=ncat)   
+    P <- P_2PL( par = par0 , Theta = Theta , ncat=ncat)
     return(P)
 }
 
 #** created item classes of 1PL and 2PL models
 par <- c( "a"= 1 , "b" = 0 )
 # define some slightly informative prior of 2PL
-item_2PL <- sirt::xxirt_createDiscItem( name = "2PL", par = par, est = c(TRUE,TRUE), 
+item_2PL <- sirt::xxirt_createDiscItem( name = "2PL", par = par, est = c(TRUE,TRUE),
                 P = P_2PL, prior = c( a="dlnorm"), prior_par1 = c(a=0),
-                prior_par2 = c(a=5) )                   
-item_1PL <- sirt::xxirt_createDiscItem( name = "1PL", par = par[2], est = c(TRUE), 
+                prior_par2 = c(a=5) )
+item_1PL <- sirt::xxirt_createDiscItem( name = "1PL", par = par[2], est = c(TRUE),
                 P = P_1PL )
-# list of item classes in customItems                
+# list of item classes in customItems
 customItems <- list( item_1PL ,  item_2PL )
 
 #-- create parameter table
 itemtype <- rep( "1PL" , 12 )
 partable <- sirt::xxirt_createParTable(dat, itemtype = itemtype, customItems = customItems)
 # privide starting values
-partable1 <- sirt::xxirt_modifyParTable( partable , parname = "b" , 
+partable1 <- sirt::xxirt_modifyParTable( partable , parname = "b" ,
                    value = - stats::qlogis( colMeans(dat) ) )
-# equality constraint of parameters and definition of lower bounds                   
+# equality constraint of parameters and definition of lower bounds
 partable1 <- sirt::xxirt_modifyParTable( partable1 , item = c("A1","A2") ,
                 parname = "b" , parindex = 110 , lower = -1 , value = 0)
-print(partable1)                
+print(partable1)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

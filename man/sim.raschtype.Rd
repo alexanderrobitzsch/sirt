@@ -1,5 +1,5 @@
 %% File Name: sim.raschtype.Rd
-%% File Version: 0.16
+%% File Version: 0.17
 
 \name{sim.raschtype}
 \alias{sim.raschtype}
@@ -15,7 +15,7 @@ The four-parameter logistic item response model
 for more details.
 }
 \usage{
-sim.raschtype(theta, b, alpha1 = 0, alpha2 = 0, fixed.a = NULL, 
+sim.raschtype(theta, b, alpha1 = 0, alpha2 = 0, fixed.a = NULL,
     fixed.c = NULL, fixed.d = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -42,10 +42,10 @@ Vector of lower item asymptotes \eqn{d}
 }
 }
 \details{
-The class of generalized logistic link functions contain 
+The class of generalized logistic link functions contain
 the most important link functions using the specifications (Stukel, 1988):
 
-logistic link function: \eqn{\alpha_1=0} and \eqn{\alpha_2=0} \cr 
+logistic link function: \eqn{\alpha_1=0} and \eqn{\alpha_2=0} \cr
 probit link function: \eqn{\alpha_1=0.165} and \eqn{\alpha_2=0.165} \cr
 loglog link function: \eqn{\alpha_1=-0.037} and \eqn{\alpha_2=0.62} \cr
 cloglog link function: \eqn{\alpha_1=0.62} and \eqn{\alpha_2=-0.037} \cr
@@ -61,11 +61,11 @@ the mentioned link functions.
 %% ...
 %}
 \references{
-Loken, E., & Rulison, K. L. (2010). Estimation of a four-parameter 
-item response theory model. \emph{British Journal of Mathematical 
+Loken, E., & Rulison, K. L. (2010). Estimation of a four-parameter
+item response theory model. \emph{British Journal of Mathematical
 and Statistical Psychology}, \bold{63}, 509-525.
 
-Stukel, T. A. (1988). Generalized logistic models. 
+Stukel, T. A. (1988). Generalized logistic models.
 \emph{Journal of the American Statistical Association},
 \bold{83}, 426-431.
 }
@@ -85,9 +85,9 @@ Alexander Robitzsch
 \examples{
 #############################################################################
 ## EXAMPLE 1: Simulation of data from a Rasch model (alpha_1 = alpha_2 = 0)
-#############################################################################    
+#############################################################################
 
-set.seed(9765)    
+set.seed(9765)
 N <- 500    # number of persons
 I <- 11     # number of items
 b <- seq( -2 , 2 , length=I )

@@ -1,5 +1,5 @@
 %% File Name: data.timss07.G8.RUS.Rd
-%% File Version: 0.03
+%% File Version: 0.04
 
 \name{data.timss07.G8.RUS}
 \alias{data.timss07.G8.RUS}
@@ -23,7 +23,7 @@ data(data.timss07.G8.RUS)
 \format{
 The datasets contains raw responses (\code{raw}), scored responses
 (\code{scored}) and item informations (\code{iteminfo}).
-    
+
 The format of the dataset is:
 
 \code{List of 3} \cr
@@ -54,7 +54,7 @@ The format of the dataset is:
 \code{  ..$ key       : Factor w/ 7 levels "-"," -","A","B",..: 6 1 6 7 1 5 5 4 6 1 ...} \cr
 \code{  ..$ max.points: int [1:442] 1 1 1 1 1 1 1 1 1 2 ...} \cr
 \code{  ..$ item.label: Factor w/ 432 levels "1 teacher for every 12 students ",..: 58 351 ...} \cr
-  
+
 }
 
 %\details{

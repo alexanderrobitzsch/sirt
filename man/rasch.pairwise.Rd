@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.Rd
-%% File Version: 0.20
+%% File Version: 0.21
 
 \name{rasch.pairwise}
 \alias{rasch.pairwise}
@@ -14,10 +14,10 @@ square estimation method (cited in Fischer, 2007, p. 544)
 which is a pairwise conditional likelihood estimation approach.
 }
 \usage{
-rasch.pairwise(dat, conv = 1e-04, maxiter = 3000, progress = TRUE, 
+rasch.pairwise(dat, conv = 1e-04, maxiter = 3000, progress = TRUE,
         b.init = NULL, zerosum = FALSE)
 
-\method{summary}{rasch.pairwise}(object,...)        
+\method{summary}{rasch.pairwise}(object,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -101,15 +101,15 @@ summary(mod2)
 mod2$item$b   # extract item difficulties
 
 # Bootstrap for item difficulties
-boot_pw <- function(data, indices ){   
+boot_pw <- function(data, indices ){
         dd <- data[ indices , ] # bootstrap of indices
         mod <- sirt::rasch.pairwise( dd , zerosum=TRUE , progress=FALSE)
-        mod$item$b   
+        mod$item$b
     }
 set.seed(986)
 library(boot)
 dat <- data.read
-bmod2 <- boot::boot( dat , boot_pw , R =999 ) 
+bmod2 <- boot::boot( dat , boot_pw , R =999 )
 bmod2
 summary(bmod2)
 # quantiles for bootstrap sample (and confidence interval)

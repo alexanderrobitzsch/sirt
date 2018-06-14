@@ -1,5 +1,5 @@
 %% File Name: mcmc.list.descriptives.Rd
-%% File Version: 0.20
+%% File Version: 0.21
 
 \name{mcmc.list.descriptives}
 \alias{mcmc.list.descriptives}
@@ -10,9 +10,9 @@ Computation of Descriptive Statistics for a \code{mcmc.list} Object
 \description{
 Computation of descriptive statistics, Rhat convergence statistic
 and MAP for a \code{mcmc.list} object. The Rhat statistic
-is computed by splitting one Monte Carlo chain into three segments of equal 
-length. The MAP is the mode estimate of the posterior distribution which is 
-approximated by the mode of the kernel density estimate. 
+is computed by splitting one Monte Carlo chain into three segments of equal
+length. The MAP is the mode estimate of the posterior distribution which is
+approximated by the mode of the kernel density estimate.
 }
 \usage{
 mcmc.list.descriptives( mcmcobj , quantiles=c(.025,.05,.1,.5,.9,.95,.975) )
@@ -54,7 +54,7 @@ miceadds::library_install("coda")
 miceadds::library_install("R2WinBUGS")
 
 #############################################################################
-# EXAMPLE 1: Logistic regression 
+# EXAMPLE 1: Logistic regression
 #############################################################################
 
 #***************************************
@@ -73,7 +73,7 @@ summary(mod)
 #***************************************
 # (3) estimate model with rcppbugs package
 b <- rcppbugs::mcmc.normal( stats::rnorm(3),mu=0,tau=0.0001)
-y.hat <- rcppbugs::deterministic(function(x1,x2,b) { 
+y.hat <- rcppbugs::deterministic(function(x1,x2,b) {
              stats::plogis( b[1] + b[2]*x1 + b[3]*x2 ) }, x1 , x2 , b)
 y.lik <- rcppbugs::mcmc.bernoulli( y , p = y.hat, observed = TRUE)
 m <- rcppbugs::create.model(b, y.hat, y.lik)

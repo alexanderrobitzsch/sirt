@@ -1,5 +1,5 @@
 %% File Name: R2conquest.Rd
-%% File Version: 3.13
+%% File Version: 3.14
 
 \name{R2conquest}
 \alias{R2conquest}
@@ -19,26 +19,26 @@ Running ConQuest From Within \R
 }
 
 \description{
-The function \code{R2conquest} runs the IRT software ConQuest 
+The function \code{R2conquest} runs the IRT software ConQuest
 (Wu, Adams, Wilson & Haldane, 2007) from within \R.
 
 Other functions are utility functions for reading item parameters, plausible
 values or person-item maps.
 }
 \usage{
-R2conquest(dat, path.conquest, conquest.name="console", converge=0.001, 
+R2conquest(dat, path.conquest, conquest.name="console", converge=0.001,
     deviancechange=1e-04, iter=800, nodes=20, minnode=-6 , maxnode=6,
-    show.conquestoutput=FALSE, name="rasch", pid=1:(nrow(dat)), wgt=NULL, X=NULL, 
-    set.constraints=NULL, model="item", regression=NULL, 
-    itemcodes=seq(0,max(dat,na.rm=TRUE)), constraints=NULL, digits=5, onlysyntax=FALSE, 
-    qmatrix=NULL, import.regression=NULL, anchor.regression=NULL, 
-    anchor.covariance=NULL, pv=TRUE, designmatrix=NULL, only.calibration=FALSE, 
-    init_parameters=NULL, n_plausible=10,  persons.elim=TRUE, est.wle=TRUE, 
+    show.conquestoutput=FALSE, name="rasch", pid=1:(nrow(dat)), wgt=NULL, X=NULL,
+    set.constraints=NULL, model="item", regression=NULL,
+    itemcodes=seq(0,max(dat,na.rm=TRUE)), constraints=NULL, digits=5, onlysyntax=FALSE,
+    qmatrix=NULL, import.regression=NULL, anchor.regression=NULL,
+    anchor.covariance=NULL, pv=TRUE, designmatrix=NULL, only.calibration=FALSE,
+    init_parameters=NULL, n_plausible=10,  persons.elim=TRUE, est.wle=TRUE,
     save.bat=TRUE , use.bat=FALSE , read.output=TRUE , ignore.pid=FALSE)
 
-\method{summary}{R2conquest}(object, \dots)    
- 
-# read all terms in a show file or only some terms 
+\method{summary}{R2conquest}(object, \dots)
+
+# read all terms in a show file or only some terms
 read.show(showfile)
 read.show.term(showfile, term)
 
@@ -91,7 +91,7 @@ Person identifier
 Vector of person weights
 }
   \item{X}{
-Matrix of covariates for the latent regression model 
+Matrix of covariates for the latent regression model
 (e.g. gender, socioeconomic status, ..) or
 for the item design (e.g. raters, booklets, ...)
 }
@@ -246,7 +246,7 @@ items <- colnames(dat)[ which( substring( colnames(dat) , 1 , 1)=="M" ) ]
 
 #***
 # Model 11: Rasch model
-mod11 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest , 
+mod11 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
              pid=dat$idstud , name="mod11")
 summary(mod11)
 # read show file
@@ -256,26 +256,26 @@ pi11 <- sirt::read.pimap(showfile="mod11.shw")
 
 #***
 # Model 12: Rasch model with fixed item difficulties (from Model 1)
-mod12 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest , 
+mod12 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
              pid=dat$idstud , constraints = mod11$item[ , c("item","itemdiff")] ,
              name="mod12")
 summary(mod12)
 
 #***
 # Model 13: Latent regression model with predictors female, hisei and migra
-mod13a <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest , 
+mod13a <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
              pid=dat$idstud , X = dat[ , c("female" , "hisei" , "migra") ] ,
              name="mod13a")
 summary(mod13a)
 
 # latent regression with a subset of predictors
-mod13b <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest , 
+mod13b <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
              pid=dat$idstud , X = dat[ , c("female" , "hisei" , "migra") ] ,
              regression= "hisei migra" , name="mod13b")
 
 #***
 # Model 14: Differential item functioning (female)
-mod14 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest , 
+mod14 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
              pid=dat$idstud , X = dat[ , c("female") , drop=FALSE] ,
              model="item+female+item*female" ,  regression="" ,  name="mod14")
 
@@ -291,12 +291,12 @@ items <- grep.vec( "act" , colnames(dat) )$x
 
 #***
 # Model 21: Partial credit model
-mod21 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest , 
+mod21 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
               model="item+item*step" ,  name="mod21")
 
 #***
 # Model 22: Rating scale model
-mod22 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest , 
+mod22 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
               model="item+step" , name="mod22")
 
 #***
@@ -305,7 +305,7 @@ items <- grep.vec( c("act" , "sc" ) , colnames(dat) ,  "OR" )$x
 qmatrix <- matrix( 0 , nrow=length(items) , 2 )
 qmatrix[1:5,1] <- 1
 qmatrix[6:9,2] <- 1
-mod23 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest , 
+mod23 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
             model="item+item*step" , qmatrix=qmatrix , name="mod23")
 
 #############################################################################
@@ -322,17 +322,17 @@ raters <- as.numeric( substring( paste( dat$rater ) , 3 ) )
 
 #***
 # Model 31: Rater model 'item+item*step+rater'
-mod31 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest , 
-              itemcodes= 0:3 , model="item+item*step+rater" , 
-              pid=dat$idstud , X=data.frame("rater"=raters)  , 
+mod31 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
+              itemcodes= 0:3 , model="item+item*step+rater" ,
+              pid=dat$idstud , X=data.frame("rater"=raters)  ,
               regression="" , name="mod31")
 
 #***
 # Model 32: Rater model 'item+item*step+rater+item*rater'
-mod32 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest , 
-              model="item+item*step+rater+item*rater" , 
-              pid=dat$idstud , X=data.frame("rater"=raters)  , 
-              regression="" , name="mod32")      
+mod32 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
+              model="item+item*step+rater+item*rater" ,
+              pid=dat$idstud , X=data.frame("rater"=raters)  ,
+              regression="" , name="mod32")
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

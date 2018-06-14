@@ -1,5 +1,5 @@
 %% File Name: personfit.stat.Rd
-%% File Version: 0.17
+%% File Version: 0.18
 
 \name{personfit.stat}
 \alias{personfit.stat}
@@ -8,7 +8,7 @@
 Person Fit Statistics for the Rasch Model
 }
 \description{
-This function collects some person fit statistics 
+This function collects some person fit statistics
 for the Rasch model (Karabatsos, 2003; Meijer & Sijtsma, 2001).
 }
 \usage{
@@ -17,7 +17,7 @@ personfit.stat(dat, abil, b)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{dat}{
-An \eqn{N \times I} data frame of dichotomous item 
+An \eqn{N \times I} data frame of dichotomous item
 responses
 }
   \item{abil}{
@@ -48,17 +48,17 @@ for a review of different person fit statistics):
 \item{lz}{Fit statistic \eqn{l_z}}
 \item{outfit}{Person outfit statistic}
 \item{infit}{Person infit statistic}
-\item{rpbis}{Point biserial correlation of item responses 
+\item{rpbis}{Point biserial correlation of item responses
 and item \eqn{p} values}
-\item{rpbis.itemdiff}{Point biserial correlation of item responses 
+\item{rpbis.itemdiff}{Point biserial correlation of item responses
 and item difficulties \code{b}}
 \item{U3}{Fit statistic \eqn{U_3}}
 }
-\references{    
-Karabatsos, G. (2003). Comparing the aberrant response detection performance 
+\references{
+Karabatsos, G. (2003). Comparing the aberrant response detection performance
 of thirty-six person-fit statistics. \emph{Applied Measurement in Education},
-\bold{16}, 277-298.    
-    
+\bold{16}, 277-298.
+
 Meijer, R. R., & Sijtsma, K. (2001). Methodology
 review: Evaluating person fit. \emph{Applied Psychological
 Measurement}, \bold{25}, 107-135.
@@ -74,10 +74,10 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See \code{\link{pcm.fit}} for person fit in the partial credit model.    
-    
+See \code{\link{pcm.fit}} for person fit in the partial credit model.
+
 See the \pkg{irtProb} and \pkg{PerFit} packages for person fit statistics
-and person response curves and functions included in other packages: 
+and person response curves and functions included in other packages:
 \code{\link[mirt:personfit]{mirt::personfit}},
 \code{eRm::personfit} and
 \code{ltm::person.fit}.
@@ -108,22 +108,22 @@ x0 <- stats::na.omit(pf1[ , -c(1:3) ] )
 stats::factanal( x=x0 , factors=2 , rotation="promax" )
   ## Loadings:
   ##                Factor1 Factor2
-  ## caution         0.914         
-  ## depend          0.293   0.750 
-  ## ECI1            0.869   0.160 
-  ## ECI2            0.869   0.162 
-  ## ECI3            1.011         
-  ## ECI4            1.159  -0.269 
-  ## ECI5            1.012         
-  ## ECI6            0.879   0.130 
-  ## l0              0.409  -1.255 
-  ## lz             -0.504  -0.529 
-  ## outfit          0.297   0.702 
-  ## infit           0.362   0.695 
-  ## rpbis          -1.014         
-  ## rpbis.itemdiff  1.032         
-  ## U3              0.735   0.309 
-  ## 
+  ## caution         0.914
+  ## depend          0.293   0.750
+  ## ECI1            0.869   0.160
+  ## ECI2            0.869   0.162
+  ## ECI3            1.011
+  ## ECI4            1.159  -0.269
+  ## ECI5            1.012
+  ## ECI6            0.879   0.130
+  ## l0              0.409  -1.255
+  ## lz             -0.504  -0.529
+  ## outfit          0.297   0.702
+  ## infit           0.362   0.695
+  ## rpbis          -1.014
+  ## rpbis.itemdiff  1.032
+  ## U3              0.735   0.309
+  ##
   ## Factor Correlations:
   ##         Factor1 Factor2
   ## Factor1   1.000  -0.727

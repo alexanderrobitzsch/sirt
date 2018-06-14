@@ -1,5 +1,5 @@
 %% File Name: marginal.truescore.reliability.Rd
-%% File Version: 0.18
+%% File Version: 0.19
 
 \name{marginal.truescore.reliability}
 \alias{marginal.truescore.reliability}
@@ -9,7 +9,7 @@ True-Score Reliability for Dichotomous Data
 }
 \description{
 This function computes the marginal true-score reliability for
-dichotomous data (Dimitrov, 2003; May & Nicewander, 1994) for 
+dichotomous data (Dimitrov, 2003; May & Nicewander, 1994) for
 the four-parameter logistic item response model
 (see \code{\link{rasch.mml2}} for details regarding this IRT model).
 }
@@ -91,7 +91,7 @@ b <- c( -2.554,-2.161,-1.551,-1.226,-0.127,-0.855,-0.568,-0.277,-0.017,
     0.294,0.532,0.773,1.004,1.250,1.562,1.385,2.312,2.650,2.712,3.000 )
 
 marginal.truescore.reliability( b=b , a =a )
-  ##   Reliability= 0.606 
+  ##   Reliability= 0.606
 
 #############################################################################
 # EXAMPLE 2: Dimitrov (2003) Table 2
@@ -104,7 +104,7 @@ b <- c(0.468,-1.541,-0.042,0.698 )
 c <- c(0.159,0.211,0.197,0.177 )
 
 res <- sirt::marginal.truescore.reliability( b=b , a =a , c=c)
-  ##   Reliability= 0.403 
+  ##   Reliability= 0.403
   ##   > round( res$item , 3 )
   ##     item    pi sig2.tau sig2.error rel.item
   ##   1    1 0.463    0.063      0.186    0.252
@@ -121,13 +121,13 @@ data( data.read)
 # Model 1: 1PL
 mod <- sirt::rasch.mml2( data.read )
 marginal.truescore.reliability( b=mod$item$b )
-  ##   Reliability= 0.653 
+  ##   Reliability= 0.653
 
 #***
 # Model 2: 2PL
 mod <- sirt::rasch.mml2( data.read , est.a=1:12 )
 marginal.truescore.reliability( b=mod$item$b , a=mod$item$a)
-  ##   Reliability= 0.696 
+  ##   Reliability= 0.696
 
 \dontrun{
 # compare results with Cronbach's alpha and McDonald's omega
@@ -135,16 +135,16 @@ marginal.truescore.reliability( b=mod$item$b , a=mod$item$a)
 library(psych)
 psych::omega(dat , nfactors=1)     # 1 factor
   ##  Omega_h for 1 factor is not meaningful, just omega_t
-  ##   Omega 
+  ##   Omega
   ##   Call: omega(m = dat, nfactors = 1)
-  ##   Alpha:                 0.69 
-  ##   G.6:                   0.7 
-  ##   Omega Hierarchical:    0.66 
-  ##   Omega H asymptotic:    0.95 
-  ##   Omega Total            0.69 
+  ##   Alpha:                 0.69
+  ##   G.6:                   0.7
+  ##   Omega Hierarchical:    0.66
+  ##   Omega H asymptotic:    0.95
+  ##   Omega Total            0.69
 
-##! Note that alpha in psych is the standardized one. 
-} 
+##! Note that alpha in psych is the standardized one.
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

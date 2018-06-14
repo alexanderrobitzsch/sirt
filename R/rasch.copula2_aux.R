@@ -1,5 +1,5 @@
 ## File Name: rasch.copula2_aux.R
-## File Version: 1.13
+## File Version: 1.14
 
 
 
@@ -15,9 +15,9 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
 .calc.copula.itemcluster <- function(D){
     res <- sirt_permutations(n=2, r=D, v=0:1, repeats.allowed=TRUE)
     rownames(res) <- apply( res , 1 , FUN = function(ll){ paste("P" , paste( ll ,collapse="") ,sep="") } )
-    RR <- nrow(res) 
+    RR <- nrow(res)
     matr <- matrix( 0 , RR , RR )
-    rownames(matr) <- colnames(matr) <- rownames(res) 
+    rownames(matr) <- colnames(matr) <- rownames(res)
     colnames(matr) <- gsub( "P" , "F" , colnames(matr) )
     vec <- 1:RR
     for (rr in vec){
@@ -41,11 +41,11 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
 .calc.copula.itemcluster2 <- function(D){
     res <- sirt_permutations(n=2, r=D, v=0:1, repeats.allowed=TRUE)
     rownames(res) <- apply( res , 1 , FUN = function(ll){ paste("P" , paste( ll ,collapse="") ,sep="") } )
-    RR <- nrow(res) 
+    RR <- nrow(res)
     matr <- matrix( 0 , RR , RR )
-    rownames(matr) <- colnames(matr) <- rownames(res) 
+    rownames(matr) <- colnames(matr) <- rownames(res)
     colnames(matr) <- gsub( "P" , "F" , colnames(matr) )
-    matr <-  calc_copula_itemcluster_C( D , res )$matr    
+    matr <-  calc_copula_itemcluster_C( D , res )$matr
     res1 <- list( "patt" = res , "calc" = matr )
     return(res1)
 }
@@ -55,15 +55,15 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
 
 
 #----------------------------------------------------------------------------------------------
-.update.ll.rasch.copula21 <- function( theta.k , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 
-        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , wgt.theta , I , 
+.update.ll.rasch.copula21 <- function( theta.k , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 ,
+        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , wgt.theta , I ,
         bdat2.li , bdat2.li.resp , rescopula , itemcluster , pattern , GG , copula.type , ... ){
         #-------------------------------------------------------
         # use this function for log likelihood calculation
         # look for items which change parameters for necessary update
         G <- GG
         # calculation of terms of independent itemclusters?
-        calc.ind <- length(itemcluster0) > 0    
+        calc.ind <- length(itemcluster0) > 0
         eps1 <- 1E-14
         # calculate necessary updates
         ind.b <- which( b != rescopula$b )
@@ -72,17 +72,17 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
         ind.alpha1 <- ( alpha1 != rescopula$alpha1 )    + ( alpha2 != rescopula$alpha2 )
         if (ind.alpha1 > 0){ ind.alpha <- seq(1 , ncol(dat2.ld) ) } else { ind.alpha <- NULL }
         itemset <- union( ind.b , ind.a )
-        itemset <- union( itemset , ind.alpha )    
+        itemset <- union( itemset , ind.alpha )
         # update term local independence
         li.update <- 1 * ( sum( itemcluster0 %in% itemset ) > 0 )
         # update terms item dependence parameters
-        ld.update <- sapply( 1:CC , FUN = function(cc){ 
+        ld.update <- sapply( 1:CC , FUN = function(cc){
                 g1 <- intersect( which( itemcluster == cc )  , itemset )
                 if ( length(g1)){ v1 <- cc } else { v1 <- NULL }
                 v1
                     } )
         ld.update <- unique( union( ind.delta , unlist( ld.update) ) )
-# cat("    ---- ld.update") ; vv1 <- Sys.time(); print(vv1-vv0) ; vv0 <- vv1        
+# cat("    ---- ld.update") ; vv1 <- Sys.time(); print(vv1-vv0) ; vv0 <- vv1
         ###########################################################################
         ndat2 <- nrow(dat2.ld)
         M1 <- rep(1,ndat2)
@@ -90,49 +90,49 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
         M2 <- rep( 1, ntheta)
         pjk.theta.k <- .prob.raschtype.genlogis( theta.k , b  , alpha1 , alpha2 , a)
         pjk.theta.k01 <- cbind( pjk.theta.k , 1 - pjk.theta.k , 1  )
-        #.............................................        
+        #.............................................
         # probabilities for indepedent items
         if ( calc.ind ){
             pjk.theta.k0 <- pjk.theta.k01[ , c( itemcluster0 , itemcluster0 + I ) ]
                                 } else  {
             pjk.theta.k0 <- NULL
                                 }
-# cat("    ---- probs independence") ; vv1 <- Sys.time(); print(vv1-vv0) ; vv0 <- vv1                                        
+# cat("    ---- probs independence") ; vv1 <- Sys.time(); print(vv1-vv0) ; vv0 <- vv1
         # probabilities for dependent items
         pjk.theta.kCC <- rescopula$pjk.theta.kCC
         for (cc in ld.update){
 # cat("     ***" , 'cc=' , cc )
-# hh0 <- Sys.time()        
+# hh0 <- Sys.time()
             # cc <- 2    # itemcluster cc
             dp.ld.cc <- dp.ld[[cc]]
-            m1.cc <- pjk.theta.k01[ , dp.ld.cc$independent$items ]        
+            m1.cc <- pjk.theta.k01[ , dp.ld.cc$independent$items ]
             v1.cc <- dp.ld.cc$independent$N.Index1
-# cat("    ---- cc begin probs") ; hh1 <- Sys.time(); print(hh1-hh0) ; hh0 <- hh1                                                    
+# cat("    ---- cc begin probs") ; hh1 <- Sys.time(); print(hh1-hh0) ; hh0 <- hh1
             #--------------------------------------------
             # Boundary Mixture Copula (Braeken, 2011)
-            if (copula.type[cc] == "bound.mixt" ){            
-                # likelihood under independence                
+            if (copula.type[cc] == "bound.mixt" ){
+                # likelihood under independence
                 F0pjk.cc <- .rowProds2.bundle( m1 = m1.cc , v1 = v1.cc)
                 # likelihood under dependence
-                m1.cc <- pjk.theta.k01[ , dp.ld.cc$dependent$items ]        
+                m1.cc <- pjk.theta.k01[ , dp.ld.cc$dependent$items ]
                 v1.cc <- dp.ld.cc$dependent$N.Index1
 
-#cat("    ---- cc before bundle") ; hh1 <- Sys.time(); print(hh1-hh0) ; hh0 <- hh1                
-                                            
+#cat("    ---- cc before bundle") ; hh1 <- Sys.time(); print(hh1-hh0) ; hh0 <- hh1
+
                 pjk.cc <- .rowMins2cpp.bundle( m1 = m1.cc , v1 = v1.cc)
-#cat("    ---- cc after bundle") ; hh1 <- Sys.time(); print(hh1-hh0) ; hh0 <- hh1                
+#cat("    ---- cc after bundle") ; hh1 <- Sys.time(); print(hh1-hh0) ; hh0 <- hh1
 
 # This function is most time consuming!!!!
 #                F1pjk.cc <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
-                # t( A * t(B) ) = B * t(A) 
-                F1pjk.cc <- tcrossprod(  pjk.cc ,  dp.ld.cc$calc  ) 
+                # t( A * t(B) ) = B * t(A)
+                F1pjk.cc <- tcrossprod(  pjk.cc ,  dp.ld.cc$calc  )
                 pjk.theta.kCC[[cc]] <- ( 1 - delta[cc] ) * F0pjk.cc + delta[cc] * F1pjk.cc
-# cat("    ---- cc clac pjk.theta.kCC") ; hh1 <- Sys.time(); print(hh1-hh0) ; hh0 <- hh1                                                                                                            
+# cat("    ---- cc clac pjk.theta.kCC") ; hh1 <- Sys.time(); print(hh1-hh0) ; hh0 <- hh1
                                         }
 
             #-----------------------------------------------
             # Cook-Johnson Copula
-            if (copula.type[cc] == "cook.johnson" ){            
+            if (copula.type[cc] == "cook.johnson" ){
                 F.Xr <-  1- pjk.theta.k[ , dp.ld.cc$items ]
                 R <- ncol(F.Xr)
                 delta.cc <- delta[cc]
@@ -140,18 +140,18 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                 pjk.cc  <- matrix( 0 , nrow=ntheta , ncol= nrow(patt.cc) )
                 for (pp in 1:( nrow(patt.cc) ) ){
                     ppcc <- 1 - patt.cc[pp,]
-                    pjk.cc[ , pp ] <- ( rowSums( 
+                    pjk.cc[ , pp ] <- ( rowSums(
                         ( F.Xr^(-delta.cc))^( outer( rep(1,ntheta) , ppcc )) )     - R + 1 )^(-1/delta.cc)
-        #            temp1 <- t( dp.ld.cc$calc %*% t( pjk.cc ) )        
+        #            temp1 <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
                     temp1 <- tcrossprod( pjk.cc , dp.ld.cc$calc )
-                    temp1[ temp1 < 0 ] <- eps1                    
+                    temp1[ temp1 < 0 ] <- eps1
                     pjk.theta.kCC[[cc]]    <- temp1
-                    
+
                                 }
                             }
             #******************************************
             # Frank copula
-            if (copula.type[cc] == "frank" ){            
+            if (copula.type[cc] == "frank" ){
                 F.Xr <-  1- pjk.theta.k[ , dp.ld.cc$items ]
                 R <- ncol(F.Xr)
                 delta.cc <- delta[cc]
@@ -161,37 +161,37 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                 for (pp in 1:( nrow(patt.cc) ) ){
                     ppcc <- 1 - patt.cc[pp,]
                     g1 <- rowProds2( ( 1 - exp( - delta.cc * F.Xr^( outer( rep(1,ntheta) , ppcc ))  ) ) )
-                    pjk.cc[,pp] <- - log( 1 - g1 / prod.delta ) / delta.cc                                        
+                    pjk.cc[,pp] <- - log( 1 - g1 / prod.delta ) / delta.cc
                                 }
 #                    temp1 <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
                     temp1 <- tcrossprod( pjk.cc , dp.ld.cc$calc )
-                    temp1[ temp1 < 0 ] <- eps1                    
+                    temp1[ temp1 < 0 ] <- eps1
                     pjk.theta.kCC[[cc]]    <- temp1
                             } # end Frank copula
-                        }                            
+                        }
         #---------------------------------------------------------------
-# cat("    ---- probs dependence") ; vv1 <- Sys.time(); print(vv1-vv0) ; vv0 <- vv1                                        
-        
+# cat("    ---- probs dependence") ; vv1 <- Sys.time(); print(vv1-vv0) ; vv0 <- vv1
+
         #####################################
         # rearrange output
                 res <- list( "pjk.theta.kCC"=pjk.theta.kCC , "pjk.theta.k0" = pjk.theta.k0  )
                 return(res)
                 }
-#----------------------------------------------------------------------------------------------                
+#----------------------------------------------------------------------------------------------
 
 
 
 #----------------------------------------------------------------------------------------------
-.update.ll.rasch.copula20 <- function( theta.k , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 
-        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , wgt.theta , I , 
+.update.ll.rasch.copula20 <- function( theta.k , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 ,
+        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , wgt.theta , I ,
         bdat2.li , bdat2.li.resp , rescopula , itemcluster , pattern , GG , copula.type , ... ){
         #-------------------------------------------------------
         # use this function for log likelihood calculation
         # look for items which change parameters for necessary update
         G <- GG
         # calculation of terms of independent itemclusters?
-        calc.ind <- length(itemcluster0) > 0    
-        eps1 <- 10^(-14)        
+        calc.ind <- length(itemcluster0) > 0
+        eps1 <- 10^(-14)
         # calculate necessary updates
         ind.b <- which( b != rescopula$b )
         ind.a <- which( a != rescopula$a )
@@ -199,11 +199,11 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
         ind.alpha1 <- ( alpha1 != rescopula$alpha1 )    + ( alpha2 != rescopula$alpha2 )
         if (ind.alpha1 > 0){ ind.alpha <- seq(1 , ncol(dat2.ld) ) } else { ind.alpha <- NULL }
         itemset <- union( ind.b , ind.a )
-        itemset <- union( itemset , ind.alpha )    
+        itemset <- union( itemset , ind.alpha )
         # update term local independence
         li.update <- 1 * ( sum( itemcluster0 %in% itemset ) > 0 )
         # update terms item dependence parameters
-        ld.update <- sapply( 1:CC , FUN = function(cc){ 
+        ld.update <- sapply( 1:CC , FUN = function(cc){
                 g1 <- intersect( which( itemcluster == cc )  , itemset )
                 if ( length(g1)){ v1 <- cc } else { v1 <- NULL }
                 v1
@@ -216,7 +216,7 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
         M2 <- rep( 1, ntheta)
         pjk.theta.k <- .prob.raschtype.genlogis( theta.k , b  , alpha1 , alpha2 , a)
         pjk.theta.k01 <- cbind( pjk.theta.k , 1 - pjk.theta.k , 1  )
-        #.............................................        
+        #.............................................
         # probabilities for indepedent items
         if ( calc.ind ){
             pjk.theta.k0 <- pjk.theta.k01[ , c( itemcluster0 , itemcluster0 + I ) ]
@@ -228,15 +228,15 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
         for (cc in ld.update){
             # cc <- 2    # itemcluster cc
             dp.ld.cc <- dp.ld[[cc]]
-            m1.cc <- pjk.theta.k01[ , dp.ld.cc$independent$items ]        
+            m1.cc <- pjk.theta.k01[ , dp.ld.cc$independent$items ]
             v1.cc <- dp.ld.cc$independent$N.Index1
             #--------------------------------------------
             # Boundary Mixture Copula (Braeken, 2011)
-            if (copula.type[cc] == "bound.mixt" ){            
-                # likelihood under independence                
+            if (copula.type[cc] == "bound.mixt" ){
+                # likelihood under independence
                 F0pjk.cc <- .rowProds2.bundle( m1 = m1.cc , v1 = v1.cc)
                 # likelihood under dependence
-                m1.cc <- pjk.theta.k01[ , dp.ld.cc$dependent$items ]        
+                m1.cc <- pjk.theta.k01[ , dp.ld.cc$dependent$items ]
                 v1.cc <- dp.ld.cc$dependent$N.Index1
                 pjk.cc <- .rowMins2cpp.bundle( m1 = m1.cc , v1 = v1.cc)
 #                F1pjk.cc <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
@@ -245,7 +245,7 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                                         }
             #-----------------------------------------------
             # Cook-Johnson Copula
-            if (copula.type[cc] == "cook.johnson" ){            
+            if (copula.type[cc] == "cook.johnson" ){
                 F.Xr <-  1- pjk.theta.k[ , dp.ld.cc$items ]
                 R <- ncol(F.Xr)
                 delta.cc <- delta[cc]
@@ -253,18 +253,18 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                 pjk.cc  <- matrix( 0 , nrow=ntheta , ncol= nrow(patt.cc) )
                 for (pp in 1:( nrow(patt.cc) ) ){
                     ppcc <- 1 - patt.cc[pp,]
-                    pjk.cc[ , pp ] <- ( rowSums( ( F.Xr^(-delta.cc))^( outer( rep(1,ntheta) , ppcc )) ) 
+                    pjk.cc[ , pp ] <- ( rowSums( ( F.Xr^(-delta.cc))^( outer( rep(1,ntheta) , ppcc )) )
                                                     - R + 1 )^(-1/delta.cc)
-#                    temp1 <- t( dp.ld.cc$calc %*% t( pjk.cc ) )                                                
+#                    temp1 <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
                     temp1 <- tcrossprod( pjk.cc , dp.ld.cc$calc )
-                    temp1[ temp1 < 0 ] <- eps1                    
+                    temp1[ temp1 < 0 ] <- eps1
                     pjk.theta.kCC[[cc]]    <- temp1
-                    
+
                                 }
                             }
             #******************************************
             # Frank copula
-            if (copula.type[cc] == "frank" ){            
+            if (copula.type[cc] == "frank" ){
                 F.Xr <-  1- pjk.theta.k[ , dp.ld.cc$items ]
                 R <- ncol(F.Xr)
                 delta.cc <- delta[cc]
@@ -274,14 +274,14 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                 for (pp in 1:( nrow(patt.cc) ) ){
                     ppcc <- 1 - patt.cc[pp,]
                     g1 <- rowProds2( ( 1 - exp( - delta.cc * F.Xr^( outer( rep(1,ntheta) , ppcc ))  ) ) )
-                    pjk.cc[,pp] <- - log( 1 - g1 / prod.delta ) / delta.cc                                        
+                    pjk.cc[,pp] <- - log( 1 - g1 / prod.delta ) / delta.cc
                                 }
 #                    temp1 <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
                     temp1 <- tcrossprod( pjk.cc , dp.ld.cc$calc )
-                    temp1[ temp1 < 0 ] <- eps1                    
+                    temp1[ temp1 < 0 ] <- eps1
                     pjk.theta.kCC[[cc]]    <- temp1
                             } # end Frank copula
-                        }                            
+                        }
         #---------------------------------------------------------------
         # calculate log likelihood
         rjk0.1 <- rescopula$rjk0.1
@@ -289,15 +289,15 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
         rjkCC <- rescopula$rjkCC
         #.......................
         # one group
-        if (G == 1){ 
-            ll0 <-     sum( rescopula$nk * log(rescopula$pik) )            
+        if (G == 1){
+            ll0 <-     sum( rescopula$nk * log(rescopula$pik) )
              # likelihood part from independent items
-             if ( calc.ind ){    
-                if ( nrow( rjk0.1) == 1 ){ 
+             if ( calc.ind ){
+                if ( nrow( rjk0.1) == 1 ){
                     rjk.temp <- cbind( t( rjk0.1) , t(rjk0.0) )
                             } else {
                     rjk.temp <- cbind( rjk0.1 , rjk0.0 )
-                                }             
+                                }
                     ll0 <- ll0 + sum( log(pjk.theta.k0) * rjk.temp )
                             }
              # likelihood part from dependent items
@@ -308,23 +308,23 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                                 }
 #                    }
         #.......................
-        # multiple groups 
-        #    ... to do    ...        
-            lli <- ll0        
-        
+        # multiple groups
+        #    ... to do    ...
+            lli <- ll0
+
         #####################################
         # rearrange output
                 res <- list( "ll" = ll0 , "lli" = lli )
                 return(res)
                 }
-#----------------------------------------------------------------------------------------------                
+#----------------------------------------------------------------------------------------------
 
 
 
 
 #----------------------------------------------------------------------------------------------
-.ll.rasch.copula20 <- function( theta.k , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 
-        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , wgt.theta , I , 
+.ll.rasch.copula20 <- function( theta.k , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 ,
+        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , wgt.theta , I ,
         bdat2.li , bdat2.li.resp , pattern , GG , copula.type , Ncat.ld , ... ){
         #-------------------------------------------------------
         # use this function for log likelihood calculation
@@ -338,11 +338,11 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
         M2 <- rep( 1, ntheta)
          pjk.theta.k <- .prob.raschtype.genlogis( theta.k , b  , alpha1 , alpha2 , a)
         pjk.theta.k01 <- cbind( pjk.theta.k , 1 - pjk.theta.k , 1  )
-        
+
         ################################################
         # E step
         ################################################
-        #.............................................        
+        #.............................................
         # probabilities for indepedent items
         if ( calc.ind ){
             pjk.theta.k0 <- pjk.theta.k01[ , c( itemcluster0 , itemcluster0 + I ) ]
@@ -351,19 +351,19 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                                 }
         # probabilities for dependent items
         pjk.theta.kCC <- as.list( 1:CC )
-    
+
         for (cc in 1:CC){
             # cc <- 2    # itemcluster cc
             dp.ld.cc <- dp.ld[[cc]]
-            m1.cc <- pjk.theta.k01[ , dp.ld.cc$independent$items ]        
+            m1.cc <- pjk.theta.k01[ , dp.ld.cc$independent$items ]
             v1.cc <- dp.ld.cc$independent$N.Index1
             #--------------------------------------------
             # Boundary Mixture Copula (Braeken, 2011)
             if (copula.type[cc] == "bound.mixt" ){
-                # likelihood under independence                
+                # likelihood under independence
                 F0pjk.cc <- .rowProds2.bundle( m1 = m1.cc , v1 = v1.cc)
                 # likelihood under dependence
-                m1.cc <- pjk.theta.k01[ , dp.ld.cc$dependent$items ]        
+                m1.cc <- pjk.theta.k01[ , dp.ld.cc$dependent$items ]
                 v1.cc <- dp.ld.cc$dependent$N.Index1
                 pjk.cc <- .rowMins2cpp.bundle( m1 = m1.cc , v1 = v1.cc)
 #                F1pjk.cc <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
@@ -373,7 +373,7 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
             #-----------------------------------------------
             # include other Copula models here
             # Cook-Johnson copula (Braeken et al., 2007)
-            if (copula.type[cc] == "cook.johnson" ){            
+            if (copula.type[cc] == "cook.johnson" ){
                 F.Xr <-  1- pjk.theta.k[ , dp.ld.cc$items ]
                 R <- ncol(F.Xr)
                 delta.cc <- delta[cc]
@@ -381,18 +381,18 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                 pjk.cc  <- matrix( 0 , nrow=ntheta , ncol= nrow(patt.cc) )
                 for (pp in 1:( nrow(patt.cc) ) ){
                     ppcc <- 1 - patt.cc[pp,]
-                    pjk.cc[ , pp ] <- ( rowSums( ( F.Xr^(-delta.cc))^( outer( rep(1,ntheta) , ppcc )) ) 
-                                                    - R + 1 )^(-1/delta.cc)                                            
+                    pjk.cc[ , pp ] <- ( rowSums( ( F.Xr^(-delta.cc))^( outer( rep(1,ntheta) , ppcc )) )
+                                                    - R + 1 )^(-1/delta.cc)
                                 }
 #                    pjk.theta.kCC[[cc]] <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
-#                    temp1 <- t( dp.ld.cc$calc %*% t( pjk.cc ) )                                                
+#                    temp1 <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
                     temp1 <- tcrossprod( pjk.cc , dp.ld.cc$calc )
-                    temp1[ temp1 < 0 ] <- eps1                    
-                    pjk.theta.kCC[[cc]]    <- temp1                    
+                    temp1[ temp1 < 0 ] <- eps1
+                    pjk.theta.kCC[[cc]]    <- temp1
                             }
             #******************************************
             # Frank copula
-            if (copula.type[cc] == "frank" ){            
+            if (copula.type[cc] == "frank" ){
                 F.Xr <-  1- pjk.theta.k[ , dp.ld.cc$items ]
                 R <- ncol(F.Xr)
                 delta.cc <- delta[cc]
@@ -402,31 +402,31 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                 for (pp in 1:( nrow(patt.cc) ) ){
                     ppcc <- 1 - patt.cc[pp,]
                     g1 <- rowProds2( ( 1 - exp( - delta.cc * F.Xr^( outer( rep(1,ntheta) , ppcc ))  ) ) )
-                    pjk.cc[,pp] <- - log( 1 - g1 / prod.delta ) / delta.cc                                        
+                    pjk.cc[,pp] <- - log( 1 - g1 / prod.delta ) / delta.cc
                                 }
-#                    pjk.theta.kCC[[cc]] <- t( dp.ld.cc$calc %*% t( pjk.cc ) )    
-#                    temp1 <- t( dp.ld.cc$calc %*% t( pjk.cc ) )                                                
+#                    pjk.theta.kCC[[cc]] <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
+#                    temp1 <- t( dp.ld.cc$calc %*% t( pjk.cc ) )
                     temp1 <- tcrossprod( pjk.cc , dp.ld.cc$calc )
-                    temp1[ temp1 < 0 ] <- eps1                    
-                    pjk.theta.kCC[[cc]]    <- temp1                    
+                    temp1[ temp1 < 0 ] <- eps1
+                    pjk.theta.kCC[[cc]]    <- temp1
                             }  # end Frank copula
                         }
-                                
-#print( str(pjk.theta.kCC))                
-# cat( "\n probabilities \n" ) ; aa1 <- Sys.time() ; print(aa1-aa0) ; aa0 <- aa1    
-                        
+
+#print( str(pjk.theta.kCC))
+# cat( "\n probabilities \n" ) ; aa1 <- Sys.time() ; print(aa1-aa0) ; aa0 <- aa1
+
         #.............................................
-        # Calculate posterior distribution    
+        # Calculate posterior distribution
 #        post0 <- matrix( 1 , nrow=ndat2 , ncol=ntheta )
         # posterior distribution independent items
-#        if ( length(itemcluster0) > 0){ 
-#            post0 <- sapply( 1:ntheta , FUN = function(tt){ 
+#        if ( length(itemcluster0) > 0){
+#            post0 <- sapply( 1:ntheta , FUN = function(tt){
 #                    # tt <- 11
 #                    g1 <- outer( M1 , pjk.theta.k0[ tt , ] )
 #                    rowProds2( g1^( bdat2.li * bdat2.li.resp ) )
 #                        } )
 #                            }
-                            
+
         #****
         post0 <- matrix( 1 , nrow=ndat2 , ncol=ntheta )
         I0 <- length(itemcluster0)
@@ -439,10 +439,10 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                 ind.ii <- which( bdat2.li.resp[,ii] == 1 )
                 post0[ind.ii,] <- post0[ind.ii,] * pjkL[ bdat2.li[ind.ii,ii]+1 , ,ii]
                         }
-                        }    
-                    
+                        }
+
         # posterior distribution dependent items
-#        post2 <- sapply( 1:ntheta , FUN = function(tt){         
+#        post2 <- sapply( 1:ntheta , FUN = function(tt){
                 # tt <- 11
 #                h1 <- 1
 #                for (cc in 1:CC){
@@ -451,29 +451,29 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
 #                    h1 <- h1 * ( (pcc[tt,])[ dat2.ld[,cc] ] )^( dat2.ld.resp[,cc] )
 #                                }
 #                    h1
-#                            } )                                
+#                            } )
         #****
         post2 <- matrix( 1 , nrow=ndat2 , ncol=ntheta )
         pjkL <- array( NA , dim=c(Ncat.ld , length(theta.k) , CC ) )
         for (cc in 1:CC){
             #    cc <- 1
-            p1.cc <- t( pjk.theta.kCC[[cc]] )    
+            p1.cc <- t( pjk.theta.kCC[[cc]] )
             pjkL[ seq( 1 , nrow(p1.cc) )  ,, cc ] <- p1.cc
                         }
         for (cc in 1:CC ){
             ind.ii <- which( dat2.ld.resp[,cc] == 1 )
             post2[ind.ii,] <- post2[ind.ii,] * pjkL[ dat2.ld[ind.ii,cc] , ,cc]
-                    }                        
-                        
-                
+                    }
+
+
         post <- post0 * post2        # product of independent and dependent parts
-        post.unnorm <-  post         
-        post <- post * outer( M1 , wgt.theta )        
+        post.unnorm <-  post
+        post <- post * outer( M1 , wgt.theta )
         post <- post / rowSums( post)    # standardization of posterior distribution
 
-# cat( "\n posterior\n" ) ; aa1 <- Sys.time() ; print(aa1-aa0) ; aa0 <- aa1            
+# cat( "\n posterior\n" ) ; aa1 <- Sys.time() ; print(aa1-aa0) ; aa0 <- aa1
 
-    
+
         #....................................................
         # Calculate expected counts
         # expected counts independent item responses
@@ -487,8 +487,8 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
 #                        colSums( FW1 * dat2.li.resp * outer( post[,tt] , rep( 1 , ncol(dat2.li.resp) ) ) )
 #                            } )    )
 #            njk0 <- t( post ) %*% ( pattern[,gg+1] * dat2.li.resp )
-            njk0 <- crossprod( post , pattern[,gg+1] * dat2.li.resp )            
-            
+            njk0 <- crossprod( post , pattern[,gg+1] * dat2.li.resp )
+
             # how many students solved correctly items
 #            rjk0.1 <- t( sapply( 1:ntheta , FUN = function(tt){
 #                        colSums( dat2.li * FW1 * dat2.li.resp * outer( post[,tt] , rep( 1 , ncol(dat2.li.resp) ) ) )
@@ -498,54 +498,54 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
             rjk0.0 <- njk0 - rjk0.1
                                     }
         # use loops in case of multiple groups !!!
-                
-        
+
+
         #*****************
         # expected counts dependent items
         rjkCC <- as.list( 1:CC )
-        gg <- 1        
-        for ( cc in 1:CC){    
-            #    cc <- 1        
+        gg <- 1
+        for ( cc in 1:CC){
+            #    cc <- 1
 #            rjkCC[[cc]] <- t(post) %*% ( pattern[,gg+1] * dat3.ld[[cc]] * dat2.ld.resp[,cc] )
             rjkCC[[cc]] <- crossprod( post ,  pattern[,gg+1] * dat3.ld[[cc]] * dat2.ld.resp[,cc] )
                     }
-                    
+
         # total counts
         gg <- 1
         tc <- outer( pattern[,gg+1] , rep( 1 , ntheta ) )
         nk <- colSums( tc * post)
         pik <- nk / sum(nk)
 
-# cat( "\n expected counts \n" ) ; aa1 <- Sys.time() ; print(aa1-aa0) ; aa0 <- aa1            
-        
+# cat( "\n expected counts \n" ) ; aa1 <- Sys.time() ; print(aa1-aa0) ; aa0 <- aa1
+
         #---------------------------------------------------------------
         # calculate log likelihood
         #.......................
         # one group
-        if (G == 1){ 
-             ll0 <- sum( nk * log(pik) )                    
-#             ll0 <- sum( nk * log(wgt.theta) )                    
+        if (G == 1){
+             ll0 <- sum( nk * log(pik) )
+#             ll0 <- sum( nk * log(wgt.theta) )
              # likelihood part from independent items
-             if ( calc.ind ){    
-                if ( nrow( rjk0.1) == 1 ){ 
+             if ( calc.ind ){
+                if ( nrow( rjk0.1) == 1 ){
                     rjk.temp <- cbind( t( rjk0.1) , t(rjk0.0) )
                             } else {
                     rjk.temp <- cbind( rjk0.1 , rjk0.0 )
                                 }
                     ll0 <- ll0 + sum( log(pjk.theta.k0) * rjk.temp )
-                            }                    
+                            }
              # likelihood part from dependent items
             for (cc in 1:CC){
                 ll0 <- ll0 + sum( rjkCC[[cc]] * log( pjk.theta.kCC[[cc]] + 10^(-15) ) )
                                 }
-                                
+
                     }
-# cat( "\n Likelihood \n" ) ; aa1 <- Sys.time() ; print(aa1-aa0) ; aa0 <- aa1    
-                
+# cat( "\n Likelihood \n" ) ; aa1 <- Sys.time() ; print(aa1-aa0) ; aa0 <- aa1
+
         #.......................
-        # multiple groups 
+        # multiple groups
         #    ... to do    ...
-            
+
             lli <- ll0
         ################################
         # arrange output
@@ -554,7 +554,7 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                         "post" = post , "post.unnorm" = post.unnorm ,
                         "rjk0.1" = rjk0.1 ,
                         "rjk0.0" = rjk0.0 , "rjkCC" = rjkCC ,
-                        "pjk.theta.kCC" = pjk.theta.kCC , 
+                        "pjk.theta.kCC" = pjk.theta.kCC ,
                         "pjk.theta.k0" = pjk.theta.k0 ,
                         "nk" = nk , "pik" = pik ,"calc.ind" = calc.ind
                                                     )
@@ -567,14 +567,14 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
         #                                    "exp.theta.post" = exp.theta.post
         #                                            )
                 }
-#----------------------------------------------------------------------------------------------                
+#----------------------------------------------------------------------------------------------
 
 
 
 ###############################################################################################
 # auxiliary function: person parameter estimation
-.likelihood.rasch.copula <- function( theta.k , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 
-        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I , 
+.likelihood.rasch.copula <- function( theta.k , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 ,
+        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I ,
         bdat2.li , bdat2.li.resp , eps=10^(-20) , ... ){
         pjk.theta.k.tt <- .prob.raschtype.genlogis( theta.k , b  , alpha1 , alpha2   , a)
         g1 <- matrix( 0 , nrow(pjk.theta.k.tt) , CC + 1 )
@@ -586,50 +586,50 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
                 # likelihood for independent items at theta tt
                 ll.tt <- ( pqjk.theta.k.tt0 ^ bdat2.li )^bdat2.li.resp
                 g1[,1] <- rowProds2( ll.tt )        } else { g1[,1] <- 1 }
- 
-            g1i <- g1    
+
+            g1i <- g1
             # likelihood for dependent items
             for (cc in 1:CC){
                 #                cc <- 2
-                dat3.ld.cc <- dat3.ld[[cc]] 
+                dat3.ld.cc <- dat3.ld[[cc]]
                 dp.ld.cc <- dp.ld[[cc]]
                 m1.cc <- pqjk.theta.k.tt[ , dp.ld.cc$independent$items ]
                 v1.cc <- dp.ld.cc$independent$N.Index1
-                # product under independence                
+                # product under independence
                 Fpjk.cc <- .rowProds2.bundle( m1 = m1.cc , v1 = v1.cc)
                 # evaluate likelihood
                 g1i[,cc+1] <- g1.tt <- ( rowSums(Fpjk.cc * dat3.ld.cc ) )^dat2.ld.resp[  ,cc]
-                # product under dependence  
-                m1.cc <-  pqjk.theta.k.tt[ , dp.ld.cc$dependent$items ] 
+                # product under dependence
+                m1.cc <-  pqjk.theta.k.tt[ , dp.ld.cc$dependent$items ]
                 v1.cc <- dp.ld.cc$dependent$N.Index1
                 F0pjk.cc <- .rowMins2cpp.bundle( m1 = m1.cc , v1 = v1.cc)
 #                F1pjk.cc <- F0pjk.cc %*% t(dp.ld.cc$calc)
                 F1pjk.cc <- tcrossprod( F0pjk.cc , dp.ld.cc$calc )
                 g2.tt <- ( rowSums(F1pjk.cc * dat3.ld.cc) )^dat2.ld.resp[ ,cc]
-                g3.tt <- ( 1 - delta[cc] ) * g1.tt + delta[cc] * g2.tt               
+                g3.tt <- ( 1 - delta[cc] ) * g1.tt + delta[cc] * g2.tt
                 g1[,cc+1] <- g3.tt
                             }
-                res <- g1   
+                res <- g1
                 g1 <- rowProds2( g1 )
-                g1i <- rowProds2( g1i ) 
+                g1i <- rowProds2( g1i )
                 # calculate log likelihood
                 g1[ g1 < eps] <- eps
-                g1i[ g1i < eps] <- eps                
+                g1i[ g1i < eps] <- eps
                 g1 <- log( g1 )
                 g1i <- log( g1i )
                 res <- list( "loglike.dep" = g1 , "loglike.ind" = g1i )
                 return(res)
-                    }                
+                    }
 ###############################################################################################
 
 
 
 ##################################################################
 # function for person parameter estimation in rasch copula models
-person.parameter.rasch.copula <- function( raschcopula.object , numdiff.parm = .001 , 
-                    conv.parm = .001 , maxiter = 20 , stepwidth = 1 , 
+person.parameter.rasch.copula <- function( raschcopula.object , numdiff.parm = .001 ,
+                    conv.parm = .001 , maxiter = 20 , stepwidth = 1 ,
                     print.summary = TRUE ,                     ... ){
-        dat2.li <- NULL                    
+        dat2.li <- NULL
         dat2 <- raschcopula.object$datalist$dat2
         dat2.resp <- raschcopula.object$datalist$dat2.resp
         dat2.ld <- raschcopula.object$datalist$dat2.ld
@@ -657,7 +657,7 @@ person.parameter.rasch.copula <- function( raschcopula.object , numdiff.parm = .
             mp <- paste( mp , dat2.resp[,vv] , sep="")
                     }
         # initial estimate of theta
-#        theta0 <- rowMeans( dat2 * dat2.resp  ) 
+#        theta0 <- rowMeans( dat2 * dat2.resp  )
         dat20 <- dat2 * dat2.resp
         dat20[ dat2.resp == 0 ] <- NA
         theta0 <- rowMeans( dat20 , na.rm=T )
@@ -671,37 +671,37 @@ person.parameter.rasch.copula <- function( raschcopula.object , numdiff.parm = .
         a1m <- 990
         while( a1m > conv.parm & ii < maxiter ){
             # evaluation of likelihood at theta0
-            rescop0 <- .likelihood.rasch.copula( theta.k = theta0 , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 
-                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I , 
+            rescop0 <- .likelihood.rasch.copula( theta.k = theta0 , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 ,
+                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I ,
                         bdat2.li , bdat2.li.resp  )
-            rescop1 <- .likelihood.rasch.copula( theta.k = theta0 + h, b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 
-                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I , 
+            rescop1 <- .likelihood.rasch.copula( theta.k = theta0 + h, b , alpha1 , alpha2 , a , dat2.li , itemcluster0 ,
+                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I ,
                         bdat2.li , bdat2.li.resp  )
-            rescop2 <- .likelihood.rasch.copula( theta.k = theta0 - h, b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 
-                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I , 
+            rescop2 <- .likelihood.rasch.copula( theta.k = theta0 - h, b , alpha1 , alpha2 , a , dat2.li , itemcluster0 ,
+                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I ,
                         bdat2.li , bdat2.li.resp  )
-            rescop0i <- .likelihood.rasch.copula( theta.k = theta0i , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 
-                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I , 
+            rescop0i <- .likelihood.rasch.copula( theta.k = theta0i , b , alpha1 , alpha2 , a , dat2.li , itemcluster0 ,
+                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I ,
                         bdat2.li , bdat2.li.resp  )
-            rescop1i <- .likelihood.rasch.copula( theta.k = theta0i + h, b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 
-                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I , 
+            rescop1i <- .likelihood.rasch.copula( theta.k = theta0i + h, b , alpha1 , alpha2 , a , dat2.li , itemcluster0 ,
+                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I ,
                         bdat2.li , bdat2.li.resp  )
-            rescop2i <- .likelihood.rasch.copula( theta.k = theta0i - h, b , alpha1 , alpha2 , a , dat2.li , itemcluster0 , 
-                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I , 
-                        bdat2.li , bdat2.li.resp  )                        
+            rescop2i <- .likelihood.rasch.copula( theta.k = theta0i - h, b , alpha1 , alpha2 , a , dat2.li , itemcluster0 ,
+                        CC , dp.ld , dat2.ld , dat3.ld , dat2.ld.resp , dat2.li.resp , delta , I ,
+                        bdat2.li , bdat2.li.resp  )
             #******
             # estimation assuming dependence
             ll1 <- rescop1$loglike.dep
             ll2 <- rescop2$loglike.dep
-            ll0 <- rescop0$loglike.dep            
-            d1 <- ( ll1 - ll2  ) / ( 2 * h )    
+            ll0 <- rescop0$loglike.dep
+            d1 <- ( ll1 - ll2  ) / ( 2 * h )
             # second order derivative
             # f(x+h)+f(x-h) = 2*f(x) + f''(x)*h^2
-            d2d <- d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2       
+            d2d <- d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2
             theta.change <- - d1 / d2
             theta.change[ abs( theta.init ) == 9999 ] <- 0
             theta.change[ is.na( theta.change ) ] <- 0
-            a1t1 <- theta.change <- ifelse( abs( theta.change ) > stepwidth , stepwidth*sign(theta.change) , theta.change )                        
+            a1t1 <- theta.change <- ifelse( abs( theta.change ) > stepwidth , stepwidth*sign(theta.change) , theta.change )
             theta0 <- theta0 + theta.change
             ind1 <- ( abs( theta.change ) < conv.parm )
 
@@ -709,15 +709,15 @@ person.parameter.rasch.copula <- function( raschcopula.object , numdiff.parm = .
             # estimation assuming independence
             ll1 <- rescop1i$loglike.ind
             ll2 <- rescop2i$loglike.ind
-            ll0 <- rescop0i$loglike.ind            
-            d1 <- ( ll1 - ll2  ) / ( 2 * h )    
+            ll0 <- rescop0i$loglike.ind
+            d1 <- ( ll1 - ll2  ) / ( 2 * h )
             # second order derivative
             # f(x+h)+f(x-h) = 2*f(x) + f''(x)*h^2
-            d2i <- d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2       
+            d2i <- d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2
             theta.change <- - d1 / d2
             theta.change[ abs( theta.init ) == 9999 ] <- 0
             theta.change[ is.na( theta.change ) ] <- 0
-            a1t2 <- theta.change <- ifelse( abs( theta.change ) > stepwidth , stepwidth*sign(theta.change) , theta.change )                        
+            a1t2 <- theta.change <- ifelse( abs( theta.change ) > stepwidth , stepwidth*sign(theta.change) , theta.change )
             theta0i <- theta0i + theta.change
             a1m <- max( abs(a1t1) , abs(a1t2) )
             ii <- ii+1
@@ -728,69 +728,69 @@ person.parameter.rasch.copula <- function( raschcopula.object , numdiff.parm = .
                     }
         theta0[ abs( theta.init  ) == 9999 ] <- NA
         theta0i[ abs( theta.init  ) == 9999 ] <- NA
-        res <- data.frame( "pattern" = pattern[,1] , 
-                    "missing.pattern" = match( mp , unique(mp) ) , 
-                    "freqwgt" = pattern$freqwgt , 
-                    "converged" = 1*(ind1 == 1) , 
-                "score" = rowSums(dat2) , "max" = rowSums( dat2.resp) , 
-                 "theta.dep" = theta0 , "theta.ind" = theta0i )        
+        res <- data.frame( "pattern" = pattern[,1] ,
+                    "missing.pattern" = match( mp , unique(mp) ) ,
+                    "freqwgt" = pattern$freqwgt ,
+                    "converged" = 1*(ind1 == 1) ,
+                "score" = rowSums(dat2) , "max" = rowSums( dat2.resp) ,
+                 "theta.dep" = theta0 , "theta.ind" = theta0i )
         res$setheta.dep <- sqrt( - 1 / d2d )
         res$setheta.ind <- sqrt( - 1 / d2i )
         res$setheta.dep[ is.na(theta0i) ] <- NA
         res$setheta.ind[ is.na(theta0i) ] <- NA
         res$seinflat <- res$setheta.dep / res$setheta.ind
         res[ is.na(res$theta.dep) , "converged" ] <- NA
-        x1 <- seq( grep( "theta" , colnames(res) )[1] , ncol(res) ) 
-        for (vv in x1){ 
-                res[ paste(res$converged) == 0, vv] <- NA 
-                        }    
+        x1 <- seq( grep( "theta" , colnames(res) )[1] , ncol(res) )
+        for (vv in x1){
+                res[ paste(res$converged) == 0, vv] <- NA
+                        }
         res0 <- res <- res[ order( paste( 10000+ res$missing.pattern , 10000+ res$score)) , ]
         # calculate a summary
         index <- rep( seq(1,nrow(res0)) , res$freqwgt )
         res <- res[ index , ]
         a1 <- stats::aggregate( res[ , c("theta.dep" , "theta.ind")] , list( res$missing.pattern ,  res$score , res$max) , mean , na.rm=T )
         colnames(a1) <- c("missing.pattern" , "score" , "max" , "M.theta.dep" , "M.theta.ind" )
-        a1$N <- stats::aggregate( 1+0*res[ , c("theta.dep")] , list( res$missing.pattern ,res$score, res$max) , sum  , na.rm=T )[,4]    
+        a1$N <- stats::aggregate( 1+0*res[ , c("theta.dep")] , list( res$missing.pattern ,res$score, res$max) , sum  , na.rm=T )[,4]
         a1 <- a1[ , c(1:3,6,4,5) ]
-        a1$SD.theta.dep <- stats::aggregate( res[ , c("theta.dep")] , 
-                list( res$missing.pattern ,res$score, res$max) , stats::sd  , na.rm=T)[,4]        
-        a1$Min.theta.dep <- stats::aggregate( res[ , c("theta.dep")] , 
+        a1$SD.theta.dep <- stats::aggregate( res[ , c("theta.dep")] ,
+                list( res$missing.pattern ,res$score, res$max) , stats::sd  , na.rm=T)[,4]
+        a1$Min.theta.dep <- stats::aggregate( res[ , c("theta.dep")] ,
                 list( res$missing.pattern ,res$score, res$max) , min  , na.rm=T)[,4]
-        a1$Max.theta.dep <- stats::aggregate( res[ , c("theta.dep" )] , 
+        a1$Max.theta.dep <- stats::aggregate( res[ , c("theta.dep" )] ,
                 list( res$missing.pattern ,res$score, res$max) , max , na.rm=T )[,4]
         if ( abs(alpha1) + abs( alpha2) > 0 ){
-            a1$SD.theta.ind <- stats::aggregate( res[ , c("theta.ind")] , 
-                    list( res$missing.pattern ,res$score, res$max) , stats::sd  , na.rm=T)[,4]        
-            a1$Min.theta.ind <- stats::aggregate( res[ , c("theta.ind")] , 
+            a1$SD.theta.ind <- stats::aggregate( res[ , c("theta.ind")] ,
+                    list( res$missing.pattern ,res$score, res$max) , stats::sd  , na.rm=T)[,4]
+            a1$Min.theta.ind <- stats::aggregate( res[ , c("theta.ind")] ,
                         list( res$missing.pattern ,res$score, res$max) , min  , na.rm=T )[,4]
-            a1$Max.theta.ind <- stats::aggregate( res[ , c("theta.ind" )] , 
+            a1$Max.theta.ind <- stats::aggregate( res[ , c("theta.ind" )] ,
                         list( res$missing.pattern ,res$score, res$max) , max  , na.rm=T)[,4]
-                    }        
-        a1$M.seinflat <- stats::aggregate( res[ , c("seinflat")] , 
+                    }
+        a1$M.seinflat <- stats::aggregate( res[ , c("seinflat")] ,
                 list( res$missing.pattern ,res$score, res$max) , mean  , na.rm=T)[,4]
-        a1$M.setheta.dep <- stats::aggregate( res[ , c("setheta.dep" )] , 
-                    list( res$missing.pattern ,res$score, res$max) , mean , na.rm=T )[,4]        
-        a1$M.setheta.ind <- stats::aggregate( res[ , c("setheta.ind" )] , 
-                    list( res$missing.pattern ,res$score, res$max) , mean  , na.rm=T)[,4]        
+        a1$M.setheta.dep <- stats::aggregate( res[ , c("setheta.dep" )] ,
+                    list( res$missing.pattern ,res$score, res$max) , mean , na.rm=T )[,4]
+        a1$M.setheta.ind <- stats::aggregate( res[ , c("setheta.ind" )] ,
+                    list( res$missing.pattern ,res$score, res$max) , mean  , na.rm=T)[,4]
         if (print.summary){
             cat("\n..................................................................\n")
             cat("Mean percentage standard error inflation\n\n")
             a4 <- stats::aggregate( res[,"seinflat"] , list( res$missing.pattern) , mean , na.rm=T)
             a4[,2] <- round( 100*(a4[,2] - 1) , 2 )
             colnames(a4) <- c("missing.pattern" , "Mperc.seinflat")
-            print(a4)    
+            print(a4)
             cat("\n..................................................................\n")
             cat("Summary theta estimation\n\n")
             a1b <- a1
             a1b[,seq(5,ncol(a1))] <- round( a1[ , seq(5,ncol(a1)) ] , 4 )
             print(a1b)
                 }
-        # person parameter estimates        
-                
-        ind <- match( raschcopula.object$datalist$pattern.in.data , res0$pattern )        
- 
-        # results        
-        res <- list( "person" = res0[ ind , ] , "se.inflat" = a4 , 
+        # person parameter estimates
+
+        ind <- match( raschcopula.object$datalist$pattern.in.data , res0$pattern )
+
+        # results
+        res <- list( "person" = res0[ ind , ] , "se.inflat" = a4 ,
                         "theta.table" = res0 , "pattern.in.data" = raschcopula.object$datalist$pattern.in.data ,
                         "summary.theta.table" = a1)
         return(res)
@@ -799,7 +799,7 @@ person.parameter.rasch.copula <- function( raschcopula.object , numdiff.parm = .
 
 
 
-                                
+
 ##################################################################################
 # product of rows in a matrix m1 | bundlewise calculated by a vector v1
 .rowProds.bundle <- function( m1 , v1 ){
@@ -808,7 +808,7 @@ person.parameter.rasch.copula <- function( raschcopula.object , numdiff.parm = .
     v1min <- c(1 , cumsum(v1)[ - L1 ]+1 )
     v1max <- cumsum(v1)
     for (ll in 1:L1){
-        if (v1[ll] > 1 ){ 
+        if (v1[ll] > 1 ){
                 m1prod[,ll] <- rowProds( m1[ , v1min[ll]:v1max[ll] ] )
                     } else { m1prod[ll] <- m1[ , v1min[ll] ] }
                         }
@@ -821,7 +821,7 @@ person.parameter.rasch.copula <- function( raschcopula.object , numdiff.parm = .
     v1min <- c(1 , cumsum(v1)[ - L1 ]+1 )
     v1max <- cumsum(v1)
     for (ll in 1:L1){
-        if (v1[ll] > 1 ){ 
+        if (v1[ll] > 1 ){
                 m1prod[,ll] <- rowProds2( m1[ , v1min[ll]:v1max[ll] ] )
                     } else { m1prod[ll] <- m1[ , v1min[ll] ] }
                         }
@@ -851,7 +851,7 @@ person.parameter.rasch.copula <- function( raschcopula.object , numdiff.parm = .
 
 
 #************************************************************************
-# Function rowProds2 
+# Function rowProds2
 rowProds2 <- function(matr){
     y <- matr[,1]
     for (ii in 2:dim(matr)[2]){

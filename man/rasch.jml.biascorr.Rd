@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.biascorr.Rd
-%% File Version: 0.16
+%% File Version: 0.17
 
 \name{rasch.jml.biascorr}
 \alias{rasch.jml.biascorr}
@@ -31,7 +31,7 @@ By default it is the average number of item responses per person.
 A list with following entries
 \item{b.biascorr}{Matrix of item difficulty estimates. The column
 \code{b.analytcorr1} contains item difficulties by analytical bias
-correction of Method 1 in Arellano and Hahn (2007) whereas \code{b.analytcorr2} 
+correction of Method 1 in Arellano and Hahn (2007) whereas \code{b.analytcorr2}
 corresponds to Method 2.}
 \item{b.bias1}{Estimated bias by Method 1}
 \item{b.bias2}{Estimated bias by Method 2}
@@ -39,7 +39,7 @@ corresponds to Method 2.}
     correction}
 }
 \references{
-Arellano, M., & Hahn, J. (2007). Understanding bias in nonlinear panel 
+Arellano, M., & Hahn, J. (2007). Understanding bias in nonlinear panel
 models: Some recent developments. In R. Blundell, W. Newey &
 T. Persson (Eds.): \emph{Advances in Economics and
 Econometrics, Ninth World Congress}, Cambridge University Press.

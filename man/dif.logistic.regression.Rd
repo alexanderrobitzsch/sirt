@@ -1,5 +1,5 @@
 %% File Name: dif.logistic.regression.Rd
-%% File Version: 0.24
+%% File Version: 0.25
 
 \name{dif.logistic.regression}
 \alias{dif.logistic.regression}
@@ -9,7 +9,7 @@ Differential Item Functioning using Logistic Regression Analysis
 \description{
 This function estimates differential item
 functioning using a logistic regression analysis
-(Zumbo, 1999). 
+(Zumbo, 1999).
 }
 \usage{
 dif.logistic.regression(dat, group, score,quant=1.645)
@@ -24,12 +24,12 @@ Group identifier
   \item{score}{
 Ability estimate, e.g. the WLE.
 }
-\item{quant}{Used quantile of the normal distribution 
+\item{quant}{Used quantile of the normal distribution
 for assessing statistical significance}
 }
 
 \details{
-Items are classified into A (negligible DIF), B (moderate DIF) and 
+Items are classified into A (negligible DIF), B (moderate DIF) and
 C (large DIF) levels according to the
 ETS classification system (Longford, Holland & Thayer, 1993, p. 175).
 See also Monahan et al. (2007) for further DIF effect size
@@ -76,18 +76,18 @@ A data frame with following variables:
 Longford, N. T., Holland, P. W., & Thayer, D. T. (1993).
 Stability of the MH D-DIF statistics across populations.
 In P. W. Holland & H. Wainer (Eds.). \emph{Differential
-Item Functioning} (pp. 171-196). Hillsdale, NJ: Erlbaum.    
+Item Functioning} (pp. 171-196). Hillsdale, NJ: Erlbaum.
 
-Monahan, P. O., McHorney, C. A., Stump, T. E., & Perkins, A. J. (2007). 
-Odds ratio, delta, ETS classification, and standardization measures of 
-DIF magnitude for binary logistic regression. 
+Monahan, P. O., McHorney, C. A., Stump, T. E., & Perkins, A. J. (2007).
+Odds ratio, delta, ETS classification, and standardization measures of
+DIF magnitude for binary logistic regression.
 \emph{Journal of Educational and Behavioral Statistics}, \bold{32}, 92-109.
 
-Zumbo, B. D. (1999). \emph{A handbook on the theory and methods of differential 
-item functioning (DIF): Logistic regression modeling as a unitary framework 
-for binary and Likert-type (ordinal) item scores}. 
-Ottawa ON: Directorate of Human Resources Research and Evaluation, 
-Department of National Defense. 
+Zumbo, B. D. (1999). \emph{A handbook on the theory and methods of differential
+item functioning (DIF): Logistic regression modeling as a unitary framework
+for binary and Likert-type (ordinal) item scores}.
+Ottawa ON: Directorate of Human Resources Research and Evaluation,
+Department of National Defense.
 }
 \author{
 Alexander Robitzsch
@@ -102,7 +102,7 @@ functioning in the partial credit model.
 See the \pkg{difR} package for a large collection of DIF detection
 methods.
 
-For a download of the free \emph{DIF-Pack} software (SIBTEST, ...) see  
+For a download of the free \emph{DIF-Pack} software (SIBTEST, ...) see
 \url{http://psychometrictools.measuredprogress.org/home}.
 
 }
@@ -146,7 +146,7 @@ summary(res)
 lrres <- eRm::LRtest(res, splitcr = dat$female)
 summary(lrres)
 # graphical model test
-eRm::plotGOF(lrres) 
+eRm::plotGOF(lrres)
 
 #############################################################################
 # EXAMPLE 2: Comparison with Mantel-Haenszel test
@@ -175,7 +175,7 @@ dat2 <- sirt::sim.raschtype( theta = stats::rnorm(N , mean=mu2 , sd = sd2 ) , b 
 dat <- rbind( dat1 , dat2 )
 group <- rep( c(1,2) , each=N ) # define group indicator
 
-#*** (2) scale data 
+#*** (2) scale data
 mod <- TAM::tam.mml( dat , group=group )
 summary(mod)
 
@@ -193,38 +193,38 @@ dif2 <- sirt::dif.logistic.regression( dat=dat , score= mod_eap , group= group)
 # Model 3: assess DIF by Mantel-Haenszel statistic
 dif3 <- difR::difMH(Data=dat, group=group, focal.name="1" ,  purify=FALSE )
 print(dif3)
-  ##  Mantel-Haenszel Chi-square statistic: 
-  ##   
-  ##        Stat.    P-value     
+  ##  Mantel-Haenszel Chi-square statistic:
+  ##
+  ##        Stat.    P-value
   ##  I0001  14.5655   0.0001 ***
   ##  I0002 300.3225   0.0000 ***
-  ##  I0003   2.7160   0.0993 .  
+  ##  I0003   2.7160   0.0993 .
   ##  I0004 191.6925   0.0000 ***
-  ##  I0005   0.0011   0.9740    
+  ##  I0005   0.0011   0.9740
   ##  [...]
-  ##  Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1  
+  ##  Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
   ##  Detection threshold: 3.8415 (significance level: 0.05)
   ##
-  ##  Effect size (ETS Delta scale): 
-  ##   
-  ##  Effect size code: 
-  ##   'A': negligible effect 
-  ##   'B': moderate effect 
-  ##   'C': large effect 
-  ##   
-  ##        alphaMH deltaMH  
+  ##  Effect size (ETS Delta scale):
+  ##
+  ##  Effect size code:
+  ##   'A': negligible effect
+  ##   'B': moderate effect
+  ##   'C': large effect
+  ##
+  ##        alphaMH deltaMH
   ##  I0001  1.3908 -0.7752 A
   ##  I0002  0.2339  3.4147 C
   ##  I0003  1.1407 -0.3093 A
   ##  I0004  2.8515 -2.4625 C
   ##  I0005  1.0050 -0.0118 A
   ##  [...]
-  ##  
-  ##  Effect size codes: 0 'A' 1.0 'B' 1.5 'C' 
-  ##   (for absolute values of 'deltaMH') 
+  ##
+  ##  Effect size codes: 0 'A' 1.0 'B' 1.5 'C'
+  ##   (for absolute values of 'deltaMH')
 
 # recompute DIF parameter from alphaMH
-uniformDIF3 <- log(dif3$alphaMH) 
+uniformDIF3 <- log(dif3$alphaMH)
 
 # compare different DIF statistics
 dfr <- data.frame( "bdif"=  bdif , "LR_wle" = dif1$uniformDIF ,
@@ -237,8 +237,8 @@ round( dfr , 3 )
   ##  4   0.957  1.048  0.938  1.048
   ##  [...]
 colMeans( abs( dfr[,-1] - bdif ))
-  ##      LR_wle     LR_eap         MH 
-  ##  0.07759187 0.19085743 0.07501708 
+  ##      LR_wle     LR_eap         MH
+  ##  0.07759187 0.19085743 0.07501708
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

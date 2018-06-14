@@ -1,5 +1,5 @@
 ## File Name: summary_round_helper.R
-## File Version: 0.02
+## File Version: 0.03
 
 summary_round_helper <- function( obji , digits , exclude = NULL, print=TRUE){
     NC <- ncol(obji)
@@ -11,5 +11,5 @@ summary_round_helper <- function( obji , digits , exclude = NULL, print=TRUE){
     obji[,ind] <- round( obji[,ind] , digits )
     rownames(obji) <- NULL
     print(obji)
-    invisible(obji)    
+    invisible(obji)
 }

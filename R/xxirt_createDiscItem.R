@@ -1,7 +1,7 @@
 ## File Name: xxirt_createDiscItem.R
-## File Version: 0.08
+## File Version: 0.09
 
-xxirt_createDiscItem <- function( name , par , est , P , lower=-Inf , 
+xxirt_createDiscItem <- function( name , par , est , P , lower=-Inf ,
             upper=Inf , prior=NULL , prior_par1=NULL ,
             prior_par2 = NULL)
 {

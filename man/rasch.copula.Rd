@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.61
+%% File Version: 1.62
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -20,9 +20,9 @@
 Multidimensional IRT Copula Model
 }
 \description{
-This function handles local dependence by specifying 
+This function handles local dependence by specifying
 copulas for residuals in multidimensional item response
-models for dichotomous item responses 
+models for dichotomous item responses
 (Braeken, 2011; Braeken, Tuerlinckx & de Boeck, 2007;
 Schroeders, Robitzsch & Schipolowski, 2014).
 Estimation is allowed for item difficulties, item slopes and
@@ -33,21 +33,21 @@ models while \code{rasch.copula2} only handles unidimensional models.
 }
 \usage{
 rasch.copula2(dat, itemcluster, copula.type ="bound.mixt" ,
-    progress = TRUE, mmliter = 1000, delta = NULL, 
-    theta.k = seq(-4, 4, len = 21), alpha1 = 0, alpha2 = 0, 
-    numdiff.parm = 1e-06,  est.b = seq(1, ncol(dat)), 
-    est.a = rep(1, ncol(dat)), est.delta = NULL, b.init = NULL , a.init = NULL ,  
+    progress = TRUE, mmliter = 1000, delta = NULL,
+    theta.k = seq(-4, 4, len = 21), alpha1 = 0, alpha2 = 0,
+    numdiff.parm = 1e-06,  est.b = seq(1, ncol(dat)),
+    est.a = rep(1, ncol(dat)), est.delta = NULL, b.init = NULL , a.init = NULL ,
     est.alpha = FALSE, glob.conv = 0.0001, alpha.conv = 1e-04, conv1 = 0.001,
-    dev.crit=.2 , increment.factor=1.01) 
+    dev.crit=.2 , increment.factor=1.01)
 
 rasch.copula3(dat, itemcluster, dims=NULL , copula.type ="bound.mixt" ,
-    progress = TRUE, mmliter = 1000, delta = NULL, 
-    theta.k = seq(-4, 4, len = 21), alpha1 = 0, alpha2 = 0, 
-    numdiff.parm = 1e-06,  est.b = seq(1, ncol(dat)), 
-    est.a = rep(1, ncol(dat)), est.delta = NULL, b.init = NULL , a.init = NULL ,  
+    progress = TRUE, mmliter = 1000, delta = NULL,
+    theta.k = seq(-4, 4, len = 21), alpha1 = 0, alpha2 = 0,
+    numdiff.parm = 1e-06,  est.b = seq(1, ncol(dat)),
+    est.a = rep(1, ncol(dat)), est.delta = NULL, b.init = NULL , a.init = NULL ,
     est.alpha = FALSE, glob.conv = 0.0001, alpha.conv = 1e-04, conv1 = 0.001,
-    dev.crit=.2 , rho.init=.5 , increment.factor=1.01) 
-    
+    dev.crit=.2 , rho.init=.5 , increment.factor=1.01)
+
 \method{summary}{rasch.copula2}(object,...)
 \method{summary}{rasch.copula3}(object,...)
 
@@ -71,7 +71,7 @@ are removed from the analysis.
 }
   \item{itemcluster}{
 An integer vector of length \eqn{I} (number of items). Items with
-the same integers define a joint item cluster of (positively) locally 
+the same integers define a joint item cluster of (positively) locally
 dependent items. Values of zero indicate that the corresponding item
 is not included in any item cluster of dependent responses.
 }
@@ -81,7 +81,7 @@ The default is that all items load on the first dimension.
 }
 \item{copula.type}{
 A character or a vector containing one of the following copula
-types: \code{bound.mixt} (boundary mixture copula), 
+types: \code{bound.mixt} (boundary mixture copula),
 \code{cook.johnson} (Cook-Johnson copula) or \code{frank} (Frank copula)
 (see Braeken, 2011).
 The vector \code{copula.type} must match the number of different
@@ -101,8 +101,8 @@ An optional vector of starting values for the dependency parameter \code{delta}.
 Discretized trait distribution
 }
   \item{alpha1}{
-\code{alpha1} parameter in the generalized logistic item response model 
-(Stukel, 1988). The default is 0 which leads together with \code{alpha2=0} 
+\code{alpha1} parameter in the generalized logistic item response model
+(Stukel, 1988). The default is 0 which leads together with \code{alpha2=0}
 to the logistic link function.
 }
   \item{alpha2}{
@@ -119,7 +119,7 @@ Integer vector of item discriminations to be estimated
 }
   \item{est.delta}{
 Integer vector of length \code{length(itemcluster)}. Nonzero integers
-correspond to \code{delta} parameters which are estimated. 
+correspond to \code{delta} parameters which are estimated.
 Equal integers indicate parameter equality constraints.
 }
   \item{b.init}{
@@ -186,22 +186,22 @@ distribution}
 \item{\dots}{}
 }
 \references{
-    Braeken, J. (2011). A boundary mixture approach to violations 
+    Braeken, J. (2011). A boundary mixture approach to violations
     of conditional independence. \emph{Psychometrika}, \bold{76}, 57-76.
 
-Braeken, J., & Tuerlinckx, F. (2009). Investigating latent constructs with item 
-response models: A MATLAB IRTm toolbox. 
-\emph{Behavior Research Methods}, \bold{41}, 1127-1137.    
-    
-    Braeken, J., Tuerlinckx, F., & De Boeck, P. (2007). 
-    Copulas for residual dependencies. 
+Braeken, J., & Tuerlinckx, F. (2009). Investigating latent constructs with item
+response models: A MATLAB IRTm toolbox.
+\emph{Behavior Research Methods}, \bold{41}, 1127-1137.
+
+    Braeken, J., Tuerlinckx, F., & De Boeck, P. (2007).
+    Copulas for residual dependencies.
     \emph{Psychometrika}, \bold{72}, 393-411.
 
-Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014). A comparison of different 
-psychometric approaches to modeling testlet structures: An example with C-tests. 
+Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014). A comparison of different
+psychometric approaches to modeling testlet structures: An example with C-tests.
 \emph{Journal of Educational Measurement, 51}(4), 400-418.
 
-    Stukel, T. A. (1988). Generalized logistic models. 
+    Stukel, T. A. (1988). Generalized logistic models.
     \emph{Journal of the American Statistical Association},
     \bold{83}, 426-431.
 }
@@ -251,7 +251,7 @@ itemcluster <- rep( 1:3 , each=4 )
 mod1 <- sirt::rasch.copula2( dat=dat , itemcluster=itemcluster)
 
 # estimate Rasch model
-mod2 <- sirt::rasch.copula2( dat=dat , itemcluster=itemcluster , 
+mod2 <- sirt::rasch.copula2( dat=dat , itemcluster=itemcluster ,
         delta=rep(0,3) , est.delta=rep(0,3 ) )
 summary(mod1)
 summary(mod2)
@@ -321,7 +321,7 @@ rho <- c( .35 , .25 , .30 )
 dat <- sirt::sim.rasch.dep( theta , b , itemcluster , rho )
 colnames(dat) <- paste("I" , seq(1,ncol(dat)) , sep="")
 
-# estimate Rasch copula model 
+# estimate Rasch copula model
 mod1 <- sirt::rasch.copula2( dat , itemcluster = itemcluster )
 summary(mod1)
 
@@ -329,10 +329,10 @@ summary(mod1)
 pmod1 <- sirt::person.parameter.rasch.copula(raschcopula.object = mod1 )
 
 # Rasch model estimation
-mod2 <- sirt::rasch.copula2( dat , itemcluster = itemcluster , 
+mod2 <- sirt::rasch.copula2( dat , itemcluster = itemcluster ,
              delta = rep(0,3) , est.delta = rep(0,3) )
 summary(mod1)
-summary(mod2) 
+summary(mod2)
 
 #############################################################################
 # EXAMPLE 4: Two-dimensional copula model
@@ -390,7 +390,7 @@ mod1 <- sirt::rasch.copula3( dat , itemcluster=itemcluster , dims=dims , est.a=d
 summary(mod1)
 
 #############################################################################
-# EXAMPLE 5: Subset of data Example 2 
+# EXAMPLE 5: Subset of data Example 2
 #############################################################################
 
 set.seed(5698)
@@ -417,7 +417,7 @@ dat1 <- dat[,item.sel]
 #*** Model 1a: estimate Copula model in sirt
 itemcluster <- rep(0,8)
 itemcluster[c(7,8)] <- 1
-mod1a <- sirt::rasch.copula2( dat3 , itemcluster=itemcluster )        
+mod1a <- sirt::rasch.copula2( dat3 , itemcluster=itemcluster )
 summary(mod1a)
 
 #******************
@@ -448,7 +448,7 @@ P.copula2 <- function(par,Theta, ncat){
      # define vector-wise minimum function
      minf2 <- function( x1 , x2 ){
          ifelse( x1 < x2 , x1 , x2 )
-                                }     
+                                }
      # distribution under independence
      F00 <- Q1*Q2
      F10 <- Q1*Q2 + P1*Q2
@@ -462,51 +462,51 @@ P.copula2 <- function(par,Theta, ncat){
      F11 <- 1+0*Q1          # = minf2(1,1)
      F_dep <- c(F00,F10,F01,F11)
      # compute mixture distribution
-     delta <- stats::plogis(ldelta)     
+     delta <- stats::plogis(ldelta)
      F_tot <- (1-delta)*F_ind + delta * F_dep
      # recalculate probabilities of mixture distribution
      L1 <- length(Q1)
      v1 <- 1:L1
      F00 <- F_tot[v1]
      F10 <- F_tot[v1+L1]
-     F01 <- F_tot[v1+2*L1]     
-     F11 <- F_tot[v1+3*L1]          
+     F01 <- F_tot[v1+2*L1]
+     F11 <- F_tot[v1+3*L1]
      P00 <- F00
      P10 <- F10 - F00
      P01 <- F01 - F00
-     P11 <- 1 - F10 - F01 + F00                  
+     P11 <- 1 - F10 - F01 + F00
      prob_tot <- c( P00 , P10 , P01 , P11 )
      return(prob_tot)
         }
 # create item
-copula2 <- mirt::createItem(name="copula2", par=c(b1 = 0 , b2 = 0.2 , a1=1 , ldelta=0) , 
+copula2 <- mirt::createItem(name="copula2", par=c(b1 = 0 , b2 = 0.2 , a1=1 , ldelta=0) ,
                 est=c(TRUE,TRUE,TRUE,TRUE) , P=P.copula2 ,
                 lbound=c(-Inf,-Inf,0,-Inf) , ubound=c(Inf,Inf,Inf,Inf) )
 # define item types
 itemtype <- c( rep("2PL",6), "copula2" )
 customItems <- list("copula2"=copula2)
 # parameter table
-mod.pars <- mirt::mirt(dat2, 1, itemtype=itemtype, 
+mod.pars <- mirt::mirt(dat2, 1, itemtype=itemtype,
                 customItems=customItems, pars = 'values')
 # estimate model
-mod1b <- mirt::mirt(dat2, mirtmodel , itemtype=itemtype , customItems=customItems, 
-                verbose = TRUE , pars=mod.pars , 
-                technical=list(customTheta=as.matrix(seq(-4,4,len=21)) ) )                
+mod1b <- mirt::mirt(dat2, mirtmodel , itemtype=itemtype , customItems=customItems,
+                verbose = TRUE , pars=mod.pars ,
+                technical=list(customTheta=as.matrix(seq(-4,4,len=21)) ) )
 # estimated coefficients
 cmod <- sirt::mirt.wrapper.coef(mod)$coef
 
 # compare common item discrimination
 round( c("sirt"=mod1a$item$a[1] , "mirt"=cmod$a1[1] ) , 4 )
-  ##     sirt   mirt 
-  ##   1.2845 1.2862 
+  ##     sirt   mirt
+  ##   1.2845 1.2862
 # compare delta parameter
 round( c("sirt"=mod1a$item$delta[7] , "mirt"= stats::plogis( cmod$ldelta[7] ) ) , 4 )
-  ##     sirt   mirt 
-  ##   0.6298 0.6297 
+  ##     sirt   mirt
+  ##   0.6298 0.6297
 # compare thresholds a*b
 dfr <- cbind( "sirt"=mod1a$item$thresh ,
                "mirt"= c(- cmod$d[-7],cmod$b1[7]*cmod$a1[1]  , cmod$b2[7]*cmod$a1[1]))
-round(dfr,4)         
+round(dfr,4)
   ##           sirt    mirt
   ##   [1,] -1.9236 -1.9231
   ##   [2,] -0.0565 -0.0562

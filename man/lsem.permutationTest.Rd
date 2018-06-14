@@ -1,5 +1,5 @@
 %% File Name: lsem.permutationTest.Rd
-%% File Version: 0.18
+%% File Version: 0.19
 
 \name{lsem.permutationTest}
 \alias{lsem.permutationTest}
@@ -23,10 +23,10 @@ lsem.permutationTest(lsem.object, B = 1000, residualize = TRUE, verbose = TRUE)
 
 \method{summary}{lsem.permutationTest}(object, file=NULL, digits=3, ...)
 
-\method{plot}{lsem.permutationTest}(x, type = "global", stattype = "SD", 
-    parindex = NULL, sig_add = TRUE, sig_level = 0.05, sig_pch=17, nonsig_pch=2, 
-    sig_cex = 1, sig_lab = "p value",  stat_lab = "Test statistic", 
-    moderator_lab = NULL, digits = 3, title = NULL, parlabels = NULL, 
+\method{plot}{lsem.permutationTest}(x, type = "global", stattype = "SD",
+    parindex = NULL, sig_add = TRUE, sig_level = 0.05, sig_pch=17, nonsig_pch=2,
+    sig_cex = 1, sig_lab = "p value",  stat_lab = "Test statistic",
+    moderator_lab = NULL, digits = 3, title = NULL, parlabels = NULL,
     ask = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -39,7 +39,7 @@ Number of permutation samples
 }
   \item{residualize}{
 Optional logical indicating whether residualization of the moderator
-should be performed for each permutation sample. 
+should be performed for each permutation sample.
 }
   \item{verbose}{
 Optional logical printing information about computation progress.
@@ -53,15 +53,15 @@ Object of class \code{lsem}
 }
   \item{type}{
 Type of the statistic to be plotted. If \code{type="global"}, a global
-test will be displayed. If \code{type="pointwise"} for each value at the 
+test will be displayed. If \code{type="pointwise"} for each value at the
 focal point (defined in \code{moderator.grid}) are calculated.
 }
   \item{stattype}{
-Type of test statistics. Can be \code{MAD} (mean absolute deviation), 
-\code{SD} (standard deviation) or \code{lin_slo} (linear slope). 
+Type of test statistics. Can be \code{MAD} (mean absolute deviation),
+\code{SD} (standard deviation) or \code{lin_slo} (linear slope).
 }
   \item{parindex}{
-Vector of indices of selected parameters. 
+Vector of indices of selected parameters.
 }
   \item{sig_add}{
 Logical indicating whether significance values (p values) should
@@ -119,8 +119,8 @@ p values.}
 
 
 \references{
-Hildebrandt, A., Wilhelm, O., & Robitzsch, A. (2009). Complementary and 
-competing factor analytic approaches for the investigation of measurement invariance. 
+Hildebrandt, A., Wilhelm, O., & Robitzsch, A. (2009). Complementary and
+competing factor analytic approaches for the investigation of measurement invariance.
 \emph{Review of Psychology}, \bold{16}, 87-102.
 }
 

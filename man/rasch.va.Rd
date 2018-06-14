@@ -1,5 +1,5 @@
 %% File Name: rasch.va.Rd
-%% File Version: 0.11
+%% File Version: 0.12
 
 \name{rasch.va}
 \alias{rasch.va}
@@ -36,9 +36,9 @@ A list with following entries:
   \item{item}{Data frame with item parameters}
   \item{xsi.ij}{Data frame with variational parameters \eqn{\xi_{ij}}}
   \item{mu.i}{Vector with individual means \eqn{\mu_i}}
-\item{sigma2.i}{Vector with individual variances \eqn{\sigma_i^2}}  
+\item{sigma2.i}{Vector with individual variances \eqn{\sigma_i^2}}
 %% ...
-%%    res <- list("sig" = sqrt(sig2) , 
+%%    res <- list("sig" = sqrt(sig2) ,
 %%            "item"=item , "xsi.ij"=xsi.ij , "mu.i"=mu.i , "sigma2.i" = sigma2.i )
 }
 \references{

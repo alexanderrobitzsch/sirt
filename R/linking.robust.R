@@ -1,5 +1,5 @@
 ## File Name: linking.robust.R
-## File Version: 1.12
+## File Version: 1.13
 
 
 #############################################################################
@@ -9,7 +9,7 @@ linking.robust <- function(  itempars ){
     itempars0 <- itempars
     itempars <- na.omit(itempars)
     pars <- itempars[,2] - itempars[,3]
-    items <- paste(itempars[,1])    
+    items <- paste(itempars[,1])
     names(pars) <- items
     I <- length(pars)
 
@@ -33,7 +33,7 @@ linking.robust <- function(  itempars ){
         meanpars[kk] <- trim.mean
         se[kk] <- se.trimmean
                 }
-            
+
         v1 <- paste0("k" , 0:KK)
         meanpars <- c( mean(x) , meanpars )
         se <- c( stats::sd(x) / sqrt(I) , se )
@@ -47,7 +47,7 @@ linking.robust <- function(  itempars ){
     res1$meanpars.kopt <- meanpars[ ind.kopt ]
     res1$se.kopt <- se[ ind.kopt ]
     res1$meanpars <- meanpars
-    res1$se <- se    
+    res1$se <- se
     res1$sd <- stats::sd(x)
     res1$mad <- stats::mad(x)
     res1$k.robust <- c(0,kvec  )
@@ -61,18 +61,18 @@ linking.robust <- function(  itempars ){
 plot.linking.robust <- function( x ,  ... ){
         graphics::par( mfrow=c(2,1))
     KK <- length(x$k.robust)
-    graphics::plot( x$k.robust , x$meanpars[1:KK] , type="l" , xlab="k" , 
+    graphics::plot( x$k.robust , x$meanpars[1:KK] , type="l" , xlab="k" ,
         ylab="Linking constant" ,
         main="Linking constant")
-    graphics::points( 0 , x$meanpars[1] , pch=16 , col=3 , cex=1.4 )                  
-    graphics::points( x$kopt , x$meanpars.kopt , pch=17 , col=2 , cex=1.4 )                  
+    graphics::points( 0 , x$meanpars[1] , pch=16 , col=3 , cex=1.4 )
+    graphics::points( x$kopt , x$meanpars.kopt , pch=17 , col=2 , cex=1.4 )
     #****
-    graphics::plot( x$k.robust , x$se[1:KK] , type="l" , 
+    graphics::plot( x$k.robust , x$se[1:KK] , type="l" ,
             main= paste0( "Standard error of linking constant (k_opt = " , round(x$kopt , 3 ),")" ) ,
             xlab="k" , ylab="Standard error")
-    graphics::points( 0 , x$se[1] , pch=16 , col=3 , cex=1.4 ) 
-    graphics::points( x$kopt , x$se.kopt , pch=17 , col=2 , cex=1.4 )      
-        graphics::par( mfrow=c(1,1) )          
+    graphics::points( 0 , x$se[1] , pch=16 , col=3 , cex=1.4 )
+    graphics::points( x$kopt , x$se.kopt , pch=17 , col=2 , cex=1.4 )
+        graphics::par( mfrow=c(1,1) )
         }
 #################################################################################
 # S3 summary method
@@ -81,13 +81,13 @@ summary.linking.robust <- function( object , ... ){
     cat("Robust linking with trimmed mean\n\n")
     cat( paste0("Number of items = " , object$I , "\n" ) )
 #    cat( paste0("Number of jackknife units = " , object$JJ , "\n\n" ) )
-    cat(paste0( "Optimal trimming parameter k = " , round( object$kopt , 4 ) , " | "))    
+    cat(paste0( "Optimal trimming parameter k = " , round( object$kopt , 4 ) , " | "))
     cat(paste0( " non-robust parameter k = " , 0 , " \n"))
     cat(paste0( "Linking constant = " , round( object$meanpars.kopt , 4 ) , " | "))
     cat(paste0( " non-robust estimate = " , round( object$meanpars[ 1 ] , 4 ) , " \n"))
     cat(paste0( "Standard error = " , round( object$se.kopt , 4 ) , " | "))
     cat(paste0( " non-robust estimate = " , round( object$se[1] , 4 ) , " \n"))
     cat(paste0( "DIF SD: MAD = " , round( object$mad , 4 ) , " (robust) | "))
-    cat(paste0( "SD = " , round( object$sd , 4 ) , " (non-robust) \n"))    
-#    cat(paste0( " non-robust estimate = " , round( object$sumweight[ kmax ] , 4 ) , " \n"))    
+    cat(paste0( "SD = " , round( object$sd , 4 ) , " (non-robust) \n"))
+#    cat(paste0( " non-robust estimate = " , round( object$sumweight[ kmax ] , 4 ) , " \n"))
         }

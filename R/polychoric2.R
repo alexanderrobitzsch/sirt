@@ -1,5 +1,5 @@
 ## File Name: polychoric2.R
-## File Version: 0.09
+## File Version: 0.10
 
 ################################################
 # estimating polychoric correlation using the Olsson method
@@ -18,20 +18,20 @@ polychoric2 <- function( dat , maxiter = 100 , cor.smooth = TRUE ){
     tau[ tau == 99 ] <- Inf
     rho <- res0$rho
     rownames(rho) <- colnames(rho) <- colnames(dat1)
-    if ( maxK > 1 ){ 
+    if ( maxK > 1 ){
         rownames(tau) <- rownames(rho)
         colnames(tau) <- paste0("Cat" , 1:maxK)
                 }
     if ( maxK == 1 ){
-        names(tau) <- rownames(rho) 
-                    }                
+        names(tau) <- rownames(rho)
+                    }
     # handling missing entries in rho
-    rho[ res0$Nobs == 0 ] <- NA 
+    rho[ res0$Nobs == 0 ] <- NA
     diag(rho) <- 1
     if ( sum( is.na(rho) > 0 ) ){ cor.smooth <- FALSE }
-    if (cor.smooth){ 
+    if (cor.smooth){
         TAM::require_namespace_msg("psych")
-        rho <- psych::cor.smooth(rho) 
+        rho <- psych::cor.smooth(rho)
     }
     # output list
     res <- list("tau"=tau , "rho"= rho , "Nobs"=res0$Nobs , "maxcat" = res0$maxcat )

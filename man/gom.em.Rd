@@ -1,5 +1,5 @@
 %% File Name: gom.em.Rd
-%% File Version: 1.65
+%% File Version: 1.66
 
 \name{gom.em}
 \alias{gom.em}
@@ -19,12 +19,12 @@ Discrete (Rasch) Grade of Membership Model
 }
 \description{
 This function estimates the grade of membership model (Erosheva, Fienberg
-& Joutard, 2007; also called mixed membership model) by the EM algorithm 
+& Joutard, 2007; also called mixed membership model) by the EM algorithm
 assuming a discrete membership score distribution.
 }
 \usage{
-gom.em(dat, K=NULL, problevels=NULL, model="GOM", theta0.k=seq(-5, 5, len=15), 
-    xsi0.k=exp(seq(-6, 3, len=15)), max.increment=0.3, numdiff.parm=0.001, 
+gom.em(dat, K=NULL, problevels=NULL, model="GOM", theta0.k=seq(-5, 5, len=15),
+    xsi0.k=exp(seq(-6, 3, len=15)), max.increment=0.3, numdiff.parm=0.001,
     maxdevchange=10^(-5), globconv=0.001, maxiter=1000, msteps=4, mstepconv=0.001,
     progress=TRUE)
 
@@ -53,13 +53,13 @@ Data frame with dichotomous responses
 Number of classes (only applies for \code{model="GOM"})
 }
   \item{problevels}{
-Vector containing probability levels for membership functions 
+Vector containing probability levels for membership functions
 (only applies for \code{model="GOM"}). If a specific space of probability
 levels should be estimated, then a matrix can be supplied (see Example 1,
 Model 2a).
 }
   \item{model}{
-The type of grade of membership model. The default \code{"GOM"} 
+The type of grade of membership model. The default \code{"GOM"}
 is the nonparametric grade of membership model. The probabilities and membership
 functions specifications described in Details are called via \code{"GOMRasch"}.
 }
@@ -101,38 +101,38 @@ Further arguments to be passed
 }
 }
 \details{
-The item response model of the grade of membership model 
-(Erosheva, Fienberg & Junker, 2002; 
+The item response model of the grade of membership model
+(Erosheva, Fienberg & Junker, 2002;
 Erosheva, Fienberg & Joutard, 2007) with \eqn{K} classes
 for dichotomous correct responses \eqn{X_{pi}}
 of person \eqn{p} on item \eqn{i} is as follows (\code{model="GOM"})
 \deqn{
     P(X_{pi}=1 | g_{p1}, \ldots , g_{pK} ) = \sum_k \lambda_{ik} g_{pk}
 \quad , \quad \sum_{k=1}^K g_{pk} = 1
-\quad , \quad 0 \leq g_{pk} \leq 1 
+\quad , \quad 0 \leq g_{pk} \leq 1
                 }
 
 In most applications (e.g. Erosheva et al., 2007), the grade of
 membership function \eqn{\{g_{pk}\}} is assumed to follow a Dirichlet
-distribution. In our \code{gom.em} implementation             
-the membership function is assumed to be discretely represented 
+distribution. In our \code{gom.em} implementation
+the membership function is assumed to be discretely represented
 by a grid \eqn{u=(u_1 , \ldots , u_L)} with entries between 0 and 1
-(e.g. \code{seq(0,1,length=5)} with \eqn{L=5}). 
+(e.g. \code{seq(0,1,length=5)} with \eqn{L=5}).
 The values \eqn{g_{pk}} of the membership function can then
 only take values in \eqn{\{ u_1 , \ldots , u_L \}} with the restriction
-\eqn{\sum_k g_{pk} \sum_l \bold{1}(g_{pk} = u_l ) = 1}. 
+\eqn{\sum_k g_{pk} \sum_l \bold{1}(g_{pk} = u_l ) = 1}.
 The grid \eqn{u} is specified by using the argument \code{problevels}.
-           
-The Rasch grade of membership model (\code{model="GOMRasch"}) poses constraints 
-on probabilities \eqn{\lambda_{ik}} and membership functions \eqn{g_{pk}}. 
-The membership 
+
+The Rasch grade of membership model (\code{model="GOMRasch"}) poses constraints
+on probabilities \eqn{\lambda_{ik}} and membership functions \eqn{g_{pk}}.
+The membership
 function of person \eqn{p} is parameterized by a location parameter \eqn{\theta_p}
 and a variability parameter \eqn{\xi_p}. Each class \eqn{k} is represented by
 a location parameter \eqn{\tilde{\theta}_k}. The membership function is defined as
-\deqn{ g_{pk} \propto 
+\deqn{ g_{pk} \propto
 \exp \left[ - \frac{ (\theta_p - \tilde{\theta}_k)^2 }{2 \xi_p^2 } \right]
 }
-   
+
 The person parameter \eqn{\theta_p} indicates the usual 'ability', while
 \eqn{\xi_p} describes the individual tendency to change between classes
 \eqn{1,\ldots,K} and their corresponding locations
@@ -154,12 +154,12 @@ In the extreme case of a very small \eqn{\xi_p = \varepsilon > 0} and
 
 \deqn{
     P(X_{pi}=1 | \theta_p , \xi_p  ) =
-    P(X_{pi}=1 | \theta_0 , \varepsilon  )  =  
+    P(X_{pi}=1 | \theta_0 , \varepsilon  )  =
         \frac{ \exp( \theta_0 - b_i ) }{ 1 + \exp( \theta_0 - b_i ) }
                 }
 
 See Erosheva et al. (2002), Erosheva (2005, 2006) or Galyart (2015)
-for a comparison of grade of membership models with latent trait models 
+for a comparison of grade of membership models with latent trait models
 and latent class models.
 
 The grade of membership model is also published under the name
@@ -174,18 +174,18 @@ A list with following entries:
 \item{item}{Data frame with item parameters}
 \item{person}{Data frame with person parameters}
 \item{EAP.rel}{EAP reliability (only applies for \code{model="GOMRasch"})}
-\item{MAP}{Maximum aposteriori estimate of the membership function 
+\item{MAP}{Maximum aposteriori estimate of the membership function
     }
-\item{classdesc}{Descriptives for class membership}    
+\item{classdesc}{Descriptives for class membership}
 \item{lambda}{Estimated response probabilities \eqn{\lambda_{ik}}}
-\item{se.lambda}{Standard error for estimated response probabilities 
+\item{se.lambda}{Standard error for estimated response probabilities
 \eqn{\lambda_{ik}}}
-\item{mu}{Mean of the distribution of \eqn{(\theta_p , \xi_p)} 
+\item{mu}{Mean of the distribution of \eqn{(\theta_p , \xi_p)}
     (only applies for \code{model="GOMRasch"})}
-\item{Sigma}{Covariance matrix of \eqn{(\theta_p , \xi_p)} 
+\item{Sigma}{Covariance matrix of \eqn{(\theta_p , \xi_p)}
     (only applies for \code{model="GOMRasch"})}
 \item{b}{Estimated item difficulties (only applies for \code{model="GOMRasch"})}
-\item{se.b}{Standard error of estimated difficulties 
+\item{se.b}{Standard error of estimated difficulties
 (only applies for \code{model="GOMRasch"})}
 \item{f.yi.qk}{Individual likelihood}
 \item{f.qk.yi}{Individual posterior}
@@ -199,29 +199,29 @@ A list with following entries:
 \item{\dots}{Further values}
 }
 \references{
-Bingham, E., Kaban, A., & Fortelius, M. (2009). 
-The aspect Bernoulli model: multiple causes of presences and absences. 
-\emph{Pattern Analysis and Applications}, \bold{12(1)}, 55-78.    
-    
-Erosheva, E. A. (2005). Comparing latent structures of the grade of membership, 
+Bingham, E., Kaban, A., & Fortelius, M. (2009).
+The aspect Bernoulli model: multiple causes of presences and absences.
+\emph{Pattern Analysis and Applications}, \bold{12(1)}, 55-78.
+
+Erosheva, E. A. (2005). Comparing latent structures of the grade of membership,
 Rasch, and latent class models. \emph{Psychometrika}, \bold{70}, 619-628.
 
-Erosheva, E. A. (2006). \emph{Latent class representation of the grade of membership 
+Erosheva, E. A. (2006). \emph{Latent class representation of the grade of membership
 model}. Seattle: University of Washington.
 
-Erosheva, E. A., Fienberg, S. E., & Junker, B. W. (2002). 
-Alternative statistical models and representations for large sparse 
-multi-dimensional contingency tables. 
+Erosheva, E. A., Fienberg, S. E., & Junker, B. W. (2002).
+Alternative statistical models and representations for large sparse
+multi-dimensional contingency tables.
 \emph{Annales-Faculte Des Sciences Toulouse Mathematiques}, \bold{11},
 485-505.
 
 Erosheva, E. A., Fienberg, S. E., & Joutard, C. (2007).
-Describing disability through individual-level mixture models 
+Describing disability through individual-level mixture models
 for multivariate binary data. \emph{Annals of Applied Statistics},
 \bold{1}, 502-537.
 
-Galyardt, A. (2015). 
-Interpreting mixed membership models: Implications of Erosheva's representation 
+Galyardt, A. (2015).
+Interpreting mixed membership models: Implications of Erosheva's representation
 theorem. In E. M. Airoldi, D. Blei, E. A. Erosheva, & S. E. Fienberg (Eds.).
 \emph{Handbook of Mixed Membership Models} (pp. 39-65). Chapman & Hall.
 }
@@ -263,14 +263,14 @@ dat <- dat[ , grep("M" , colnames(dat)) ]
 #***
 # Model 1: Discrete GOM with 3 classes and 5 probability levels
 problevels <- seq( 0 , 1 , len=5 )
-mod1 <- sirt::gom.em( dat , K=3 , problevels ,  model="GOM"  )            
+mod1 <- sirt::gom.em( dat , K=3 , problevels ,  model="GOM"  )
 summary(mod1)
 
 \dontrun{
 #***
 # Model 2: Discrete GOM with 4 classes and 5 probability levels
 problevels <- seq( 0 , 1 , len=5 )
-mod2 <- sirt::gom.em( dat , K=4 , problevels ,  model="GOM"  )            
+mod2 <- sirt::gom.em( dat , K=4 , problevels ,  model="GOM"  )
 summary(mod2)
 
 # model comparison
@@ -291,7 +291,7 @@ problevels <- scan()
  0  0  0  1
 
 problevels <- matrix( problevels, ncol=4 , byrow=TRUE)
-mod2a <- sirt::gom.em( dat , K=4 , problevels ,  model="GOM" )            
+mod2a <- sirt::gom.em( dat , K=4 , problevels ,  model="GOM" )
 # probability distribution for latent classes
 cbind( mod2a$theta.k , mod2a$pi.k )
   ##        [,1] [,2] [,3] [,4]       [,5]
@@ -306,7 +306,7 @@ cbind( mod2a$theta.k , mod2a$pi.k )
 
 #***
 # Model 3: Rasch GOM
-mod3 <- sirt::gom.em( dat , model="GOMRasch" , maxiter=20 )            
+mod3 <- sirt::gom.em( dat , model="GOMRasch" , maxiter=20 )
 summary(mod3)
 
 #***
@@ -327,17 +327,17 @@ prob.class1 <- stats::runif( I , 0 , .35 )
 prob.class2 <- stats::runif( I , .70 , .95 )
 probs <- cbind( prob.class1 , prob.class2 )
 
-# define classes 
+# define classes
 N <- 1000
 latent.class <- c( rep( 1 , 1/4*N ) , rep( 2,3/4*N ) )
 
 # simulate item responses
 dat <- matrix( NA , nrow=N , ncol=I )
-for (ii in 1:I){    
+for (ii in 1:I){
     dat[,ii] <- probs[ ii , latent.class ]
     dat[,ii] <- 1 * ( stats::runif(N) < dat[,ii] )
         }
-colnames(dat) <- paste0( "I" , 1:I) 
+colnames(dat) <- paste0( "I" , 1:I)
 
 # Model 1: estimate latent class model
 mod1 <- sirt::gom.em(dat, K=2, problevels= c(0,1) , model="GOM" )
@@ -360,7 +360,7 @@ prob.class1 <- stats::runif( I , 0 , .35 )
 prob.class2 <- stats::runif( I , .70 , .95 )
 prob.class3 <- .5*prob.class1+.5*prob.class2  # probabilities for 'fuzzy class'
 probs <- cbind( prob.class1 , prob.class2 , prob.class3)
-# define classes 
+# define classes
 N <- 1000
 latent.class <- c( rep(1,round(1/3*N)),rep(2,round(1/2*N)),rep(3,round(1/6*N)))
 # simulate item responses
@@ -369,7 +369,7 @@ for (ii in 1:I){
     dat[,ii] <- probs[ ii , latent.class ]
     dat[,ii] <- 1 * ( stats::runif(N) < dat[,ii] )
         }
-colnames(dat) <- paste0( "I" , 1:I) 
+colnames(dat) <- paste0( "I" , 1:I)
 
 #** Model 1: estimate latent class model
 mod1 <- sirt::gom.em(dat, K=2, problevels= c(0,1) , model="GOM" )
@@ -389,10 +389,10 @@ cbind( mod2$theta.k , mod2$pi.k )
 # Model2m: estimate discrete GOM in mirt
 # define latent classes
 Theta <- scan( nlines=1)
-   1 0   .5 .5    0 1 
+   1 0   .5 .5    0 1
 Theta <- matrix( Theta , nrow=3 , ncol=2,byrow=TRUE)
 # define mirt model
-I <- ncol(dat) 
+I <- ncol(dat)
 #*** create customized item response function for mirt model
 name <- 'gom'
 par <- c("a1" = -1 , "a2" = 1 )
@@ -400,8 +400,8 @@ est <- c(TRUE, TRUE)
 P.gom <- function(par,Theta,ncat){
     # GOM for two extremal classes
     pext1 <- stats::plogis(par[1])
-    pext2 <- stats::plogis(par[2]) 
-    P1 <- Theta[,1]*pext1 + Theta[,2]*pext2     
+    pext2 <- stats::plogis(par[2])
+    P1 <- Theta[,1]*pext1 + Theta[,2]*pext2
     cbind(1-P1, P1)
 }
 # create item response function
@@ -411,20 +411,20 @@ lca_prior <- function(Theta,Etable){
   # number of latent Theta classes
   TP <- nrow(Theta)
   # prior in initial iteration
-  if ( is.null(Etable) ){ prior <- rep( 1/TP , TP ) }    
+  if ( is.null(Etable) ){ prior <- rep( 1/TP , TP ) }
   # process Etable (this is correct for datasets without missing data)
-  if ( ! is.null(Etable) ){  
-    # sum over correct and incorrect expected responses 
+  if ( ! is.null(Etable) ){
+    # sum over correct and incorrect expected responses
     prior <- ( rowSums(Etable[ , seq(1,2*I,2)]) + rowSums(Etable[,seq(2,2*I,2)]) )/I
                  }
-  prior <- prior / sum(prior)  
+  prior <- prior / sum(prior)
   return(prior)
 }
 #*** estimate discrete GOM in mirt package
-mod2m <- mirt::mirt(dat, 1, rep( "icc_gom",I) , customItems=list("icc_gom"=icc_gom), 
+mod2m <- mirt::mirt(dat, 1, rep( "icc_gom",I) , customItems=list("icc_gom"=icc_gom),
            technical = list( customTheta=Theta , customPriorFun = lca_prior)  )
 # correct number of estimated parameters
-mod2m@nest <- as.integer(sum(mod.pars$est) + nrow(Theta)-1 ) 
+mod2m@nest <- as.integer(sum(mod.pars$est) + nrow(Theta)-1 )
 # extract log-likelihood and compute AIC and BIC
 mod2m@logLik
 ( AIC <- -2*mod2m@logLik+2*mod2m@nest )

@@ -1,5 +1,5 @@
 %% File Name: gom.jml.Rd
-%% File Version: 0.13
+%% File Version: 0.14
 
 \name{gom.jml}
 \alias{gom.jml}
@@ -19,7 +19,7 @@ method (Erosheva, 2002; p. 23ff.).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usage{
-gom.jml(dat, K=2, seed=NULL, globconv=0.001, maxdevchange=0.001, 
+gom.jml(dat, K=2, seed=NULL, globconv=0.001, maxdevchange=0.001,
         maxiter=600, min.lambda=0.001, min.g=0.001)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -62,10 +62,10 @@ for dichotomous correct responses \eqn{X_{pi}}
 of person \eqn{p} on item \eqn{i} is
 \deqn{
     P(X_{pi}=1 | g_{p1}, \ldots , g_{pK} ) = \sum_k \lambda_{ik} g_{pk}
-\quad , \quad \sum_k g_{pk} = 1 
+\quad , \quad \sum_k g_{pk} = 1
                 }{%
     P(X_{pi}=1 | g_{p1}, \ldots , g_{pK} ) = \sum_k \lambda_{ik} g_{pk}
-    ,    \sum_k g_{pk} = 1 
+    ,    \sum_k g_{pk} = 1
             }
 }
 
@@ -99,8 +99,8 @@ A list with following entries:
 
 
 \references{
-Erosheva, E. A. (2002). \emph{Grade of membership 
-and latent structure models with application to 
+Erosheva, E. A. (2002). \emph{Grade of membership
+and latent structure models with application to
 disability survey data}.
 PhD thesis, Carnegie Mellon University, Department
 of Statistics.
@@ -131,7 +131,7 @@ S3 method \code{\link{summary.gom}}
 #############################################################################
 
 data( data.timss)
-dat <- data.timss$data[ , grep("M" , colnames(data.timss$data) ) ] 
+dat <- data.timss$data[ , grep("M" , colnames(data.timss$data) ) ]
 
 # 2 Classes (deterministic starting values)
 m2 <- sirt::gom.jml(dat,K=2 , maxiter=10 )
@@ -140,7 +140,7 @@ summary(m2)
 \dontrun{
 # 3 Classes with fixed seed and maximum number of iterations
 m3 <- sirt::gom.jml(dat,K=3 , maxiter=50,seed=89)
-summary(m3) 
+summary(m3)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

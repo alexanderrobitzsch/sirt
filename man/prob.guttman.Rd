@@ -1,5 +1,5 @@
 %% File Name: prob.guttman.Rd
-%% File Version: 1.18
+%% File Version: 1.19
 
 \name{prob.guttman}
 \alias{prob.guttman}
@@ -20,9 +20,9 @@ is a special case of an ordered latent trait model (Hanson, 2000;
 Proctor, 1970).
 }
 \usage{
-prob.guttman(dat, pid = NULL, guess.equal = FALSE,  slip.equal = FALSE, 
+prob.guttman(dat, pid = NULL, guess.equal = FALSE,  slip.equal = FALSE,
     itemlevel = NULL, conv1 = 0.001, glob.conv = 0.001, mmliter = 500)
-    
+
 \method{summary}{prob.guttman}(object,...)
 
 \method{anova}{prob.guttman}(object,...)
@@ -88,10 +88,10 @@ An object of class \code{prob.guttman}
 \item{itemdesign}{Specified allocation of items to trait levels}
 }
 \references{
-Hanson, B. (2000). \emph{IRT parameter estimation using the EM algorithm}. 
+Hanson, B. (2000). \emph{IRT parameter estimation using the EM algorithm}.
 Technical Report.
 
-Proctor, C. H. (1970). A probabilistic formulation and statistical analysis 
+Proctor, C. H. (1970). A probabilistic formulation and statistical analysis
 for Guttman scaling. \emph{Psychometrika}, \bold{35}, 73-78.
 }
 \author{
@@ -140,7 +140,7 @@ summary(mod3)
 library(mirt)
 # define four ordered latent classes
 Theta <- scan(nlines=1)
-   0 0 0    1 0 0   1 1 0   1 1 1    
+   0 0 0    1 0 0   1 1 0   1 1 1
 Theta <- matrix( Theta , nrow=4 , ncol=3,byrow=TRUE)
 
 # define mirt model
@@ -148,7 +148,7 @@ I <- ncol(dat)  # I = 12
 mirtmodel <- mirt::mirt.model("
         # specify factors for each item level
         C1 = 1,7,9,11
-        C2 = 2,5,8,10,12 
+        C2 = 2,5,8,10,12
         C3 = 3,4,6
         ")
 # get initial parameter values
@@ -162,20 +162,20 @@ lca_prior <- function(Theta,Etable){
   # number of latent Theta classes
   TP <- nrow(Theta)
   # prior in initial iteration
-  if ( is.null(Etable) ){ prior <- rep( 1/TP , TP ) }    
+  if ( is.null(Etable) ){ prior <- rep( 1/TP , TP ) }
   # process Etable (this is correct for datasets without missing data)
-  if ( ! is.null(Etable) ){  
-    # sum over correct and incorrect expected responses 
+  if ( ! is.null(Etable) ){
+    # sum over correct and incorrect expected responses
     prior <- ( rowSums(Etable[ , seq(1,2*I,2)]) + rowSums(Etable[,seq(2,2*I,2)]) )/I
                  }
-  prior <- prior / sum(prior)  
+  prior <- prior / sum(prior)
   return(prior)
 }
 # estimate model in mirt
-mod3m <- mirt::mirt(dat, mirtmodel , pars = mod.pars , verbose=TRUE , 
+mod3m <- mirt::mirt(dat, mirtmodel , pars = mod.pars , verbose=TRUE ,
             technical = list( customTheta=Theta , customPriorFun = lca_prior) )
 # correct number of estimated parameters
-mod3m@nest <- as.integer(sum(mod.pars$est) + nrow(Theta)-1 ) 
+mod3m@nest <- as.integer(sum(mod.pars$est) + nrow(Theta)-1 )
 # extract log-likelihood and compute AIC and BIC
 mod3m@logLik
 ( AIC <- -2*mod3m@logLik+2*mod3m@nest )
@@ -194,7 +194,7 @@ round( cbind( "sirt"  = mod3$trait$prob , "mirt" = mod3m@Prior[[1]] ) , 5 )
   ##   [3,] 0.15239 0.15085
   ##   [4,] 0.40786 0.40846
 # compare estimated item parameters
-ipars <- data.frame( "guess.sirt" = mod3$item$guess , 
+ipars <- data.frame( "guess.sirt" = mod3$item$guess ,
                      "guess.mirt" = plogis( cmod3m$coef$d ) )
 ipars$slip.sirt <- mod3$item$slip
 ipars$slip.mirt <- 1-plogis( rowSums(cmod3m$coef[ , c("a1","a2","a3","d") ] ) )
@@ -214,14 +214,14 @@ round( ipars , 4 )
 
 # define four ordered latent classes
 Theta <- scan(nlines=1)
-   0 0 0    1 0 0   1 1 0   1 1 1    
+   0 0 0    1 0 0   1 1 0   1 1 1
 Theta <- matrix( Theta , nrow=4 , ncol=3,byrow=TRUE)
 
 # define mirt model
 I <- ncol(dat)  # I = 12
 mirtmodel <- mirt::mirt.model("
         # specify factors for each item level
-        C1 = 1-12  
+        C1 = 1-12
         C2 = 1-12
         C3 = 1-12
         ")
@@ -234,16 +234,16 @@ mod.pars[ mod.pars$name \%in\% paste0("a",1:3) & mod.pars$est    ,"value" ]  <- 
 mod.pars[ mod.pars$name \%in\% paste0("a",1:3)     ,"lbound" ]  <- 0
 mod.pars
 # estimate model in mirt
-mod4 <- mirt::mirt(dat, mirtmodel , pars = mod.pars , verbose=TRUE , 
+mod4 <- mirt::mirt(dat, mirtmodel , pars = mod.pars , verbose=TRUE ,
             technical = list( customTheta=Theta , customPriorFun = lca_prior) )
 # correct number of estimated parameters
-mod4@nest <- as.integer(sum(mod.pars$est) + nrow(Theta)-1 ) 
+mod4@nest <- as.integer(sum(mod.pars$est) + nrow(Theta)-1 )
 # extract coefficients
 cmod4 <- sirt::mirt.wrapper.coef(mod4)
 cmod4
 # compute item response functions
 cmod4c <- cmod4$coef[ , c("d" , "a1" , "a2" , "a3" ) ]
-probs4 <- t( apply( cmod4c , 1 , FUN = function(ll){ 
+probs4 <- t( apply( cmod4c , 1 , FUN = function(ll){
                  plogis(cumsum(as.numeric(ll))) } ) )
 matplot( 1:4 ,  t(probs4) , type="b" , pch=1:I)
 }

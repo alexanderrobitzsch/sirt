@@ -1,17 +1,17 @@
 ## File Name: mirt.wrapper.fscores.R
-## File Version: 0.03
+## File Version: 0.04
 
 ##################################################################
 # calculation of factor scores (EAP, MAP and MLE) in mirt
 # Note that MAP and MLE are evaluated at the discrete grid
 mirt.wrapper.fscores <- function( mirt.obj , weights=NULL ){
     # posterior distribution of mirt object
-    mirt.post <- mirt.wrapper.posterior(mirt.obj , weights=weights)    
+    mirt.post <- mirt.wrapper.posterior(mirt.obj , weights=weights)
     data <- mirt.post$data
     D <- ncol(mirt.post$theta.k)
     theta.k <- mirt.post$theta.k
-    if ( is.null(weights) ){ 
-        N <- nrow(data) 
+    if ( is.null(weights) ){
+        N <- nrow(data)
         weights <- rep(1,N)
                 }
     p.xi.aj <- mirt.post$f.yi.qk
@@ -20,4 +20,4 @@ mirt.wrapper.fscores <- function( mirt.obj , weights=NULL ){
            p.xi.aj , p.aj.xi , weights=weights )
     return(res)
     }
-##################################################################    
+##################################################################

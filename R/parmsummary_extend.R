@@ -1,9 +1,9 @@
 ## File Name: parmsummary_extend.R
-## File Version: 0.05
+## File Version: 0.06
 
 ####################################################
 # extend parameter summary
-parmsummary_extend <- function( dfr , level = .95 , 
+parmsummary_extend <- function( dfr , level = .95 ,
         est_label = "est" , se_label ="se" ,df_label = "df" )
 {
     dfr <- as.data.frame(dfr)

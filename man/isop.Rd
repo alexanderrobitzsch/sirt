@@ -1,5 +1,5 @@
 %% File Name: isop.Rd
-%% File Version: 3.22
+%% File Version: 3.23
 
 \name{isop}
 \alias{isop.dich}
@@ -9,7 +9,7 @@
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Fit Unidimensional ISOP and ADISOP Model to Dichotomous 
+Fit Unidimensional ISOP and ADISOP Model to Dichotomous
 and Polytomous Item Responses
 }
 \description{
@@ -23,12 +23,12 @@ polytomous data it is necessary that all items do have the
 same number of categories.
 }
 \usage{
-isop.dich(dat, score.breaks = NULL, merge.extreme = TRUE, 
+isop.dich(dat, score.breaks = NULL, merge.extreme = TRUE,
      conv = .0001, maxit = 1000, epsilon = .025, progress = TRUE)
 
-isop.poly( dat , score.breaks=seq(0,1,len=10 ) , 
+isop.poly( dat , score.breaks=seq(0,1,len=10 ) ,
      conv = .0001, maxit = 1000 , epsilon = .025 , progress=TRUE )
-            
+
 \method{summary}{isop}(object,...)
 
 \method{plot}{isop}(x,ask=TRUE,...)
@@ -41,7 +41,7 @@ Data frame with dichotomous or polytomous item responses
 \item{score.breaks}{
 Vector with breaks to define score groups. For dichotomous
 data, the person score grouping is applied for the mean
-person score, for polytomous data it is applied to 
+person score, for polytomous data it is applied to
 the modified percentile score.
 }
   \item{merge.extreme}{
@@ -78,28 +78,28 @@ Display progress?
 The ISOP model for dichotomous data was firstly proposed
 by Irtel and Schmalhofer (1982). Consider person groups
 \eqn{p} (ordered from low to high scores)
-and items \eqn{i} (ordered from difficult to easy items). 
+and items \eqn{i} (ordered from difficult to easy items).
 Here, \eqn{F(p,i)} denotes
 the proportion correct for item \eqn{i}  in score group
 \eqn{p}, while \eqn{n_{pi}} denotes the number of persons
-in group \eqn{p} and on item \eqn{i}. The isotonic 
+in group \eqn{p} and on item \eqn{i}. The isotonic
 probabilistic model (Scheiblechner, 1995) monotonically
 smooths this distribution function \eqn{F} such that
 \deqn{ P( X_{pi} = 1 | p , i ) = F^\ast( p , i ) }
 where the two-dimensional distribution function
 \eqn{F^\ast} is isotonic in \eqn{p} and \eqn{i}. Model fit is
 assessed by the square root of weighted squares of deviations
-\deqn{Fit = \sqrt{ \frac{1}{I} \sum_{p,i} w_{pi} \left(  F(p , i) - 
+\deqn{Fit = \sqrt{ \frac{1}{I} \sum_{p,i} w_{pi} \left(  F(p , i) -
     F^\ast(p,i ) \right )^2 }}
-with frequency weights \eqn{w_{pi}} and 
+with frequency weights \eqn{w_{pi}} and
 \eqn{\sum_p w_{pi} =1} for every item \eqn{i}.
 The additive isotonic model (ADISOP; Scheiblechner, 1999)
 assumes the existence of person parameters \eqn{\theta_p}
 and item parameters \eqn{\delta_i} such that
 \deqn{ P( X_{pi} = 1 | p ) = g( \theta_p + \delta_i )}
 and \eqn{g} is a nonparametrically estimated isotonic
-function. The functions \code{isop.dich} and \code{isop.poly} uses \eqn{F^\ast} 
-from the ISOP models and estimates person and item parameters of the 
+function. The functions \code{isop.dich} and \code{isop.poly} uses \eqn{F^\ast}
+from the ISOP models and estimates person and item parameters of the
 ADISOP model. For comparison, \code{isop.dich} also fits a model with
 the logistic function \eqn{g} which results in the Rasch
 model.
@@ -107,15 +107,15 @@ model.
 For polytomous data, the starting point is the empirical
 distribution function
 \deqn{ P( X_i \le k | p  ) = F( k ; p , i )  } which is increasing
-in the argument \eqn{k} (the item categories). 
-The ISOP model is defined to be antitonic in \eqn{p} and \eqn{i} 
-while items are ordered with respect to item P-scores and persons are ordered 
-according to modified percentile scores (Scheiblechner, 2007). 
+in the argument \eqn{k} (the item categories).
+The ISOP model is defined to be antitonic in \eqn{p} and \eqn{i}
+while items are ordered with respect to item P-scores and persons are ordered
+according to modified percentile scores (Scheiblechner, 2007).
 The estimated ISOP model results in a distribution
 function \eqn{F^\ast}. Using this function, the additive
 isotonic probabilistic model (ADISOP) aims at estimating
 a distribution function
-\deqn{P( X_i \le k ; p  ) = F^{\ast \ast} ( k ; p , i ) = F^{ \ast \ast } 
+\deqn{P( X_i \le k ; p  ) = F^{\ast \ast} ( k ; p , i ) = F^{ \ast \ast }
     ( k , \theta_p + \delta_i ) }
 which is antitonic in \eqn{k} and in \eqn{\theta_p + \delta_i}.
 Due to this additive relation, the ADISOP scale values
@@ -125,16 +125,16 @@ The ADISOP model is compared to the graded response model which is
 defined by the response equation
 \deqn{P( X_i \le k ; p  ) = g( \theta_p + \delta_i + \gamma_k ) }
 where \eqn{g} denotes the logistic function.
-Estimated parameters are in the value \code{fit.grm}: 
-person parameters \eqn{\theta_p} (\code{person.sc}), 
+Estimated parameters are in the value \code{fit.grm}:
+person parameters \eqn{\theta_p} (\code{person.sc}),
 item parameters \eqn{\delta_i} (\code{item.sc}) and
 category parameters \eqn{\gamma_k} (\code{cat.sc}).
 
 The calculation of person and item scores is explained
 in \code{\link{isop.scoring}}.
 
-For an application of the ISOP and ADISOP model 
-see Scheiblechner and Lutz (2009).    
+For an application of the ISOP and ADISOP model
+see Scheiblechner and Lutz (2009).
 }
 
 
@@ -168,15 +168,15 @@ A list with following entries:
 \item{prob.grm}{
     Fitted frequencies of the graded response model
     (only for \code{isop.poly})
-        }        
-\item{ll}{List with log-likelihood values}        
+        }
+\item{ll}{List with log-likelihood values}
 \item{fit}{Vector of fit statistics}
 \item{person}{Data frame of person parameters}
 \item{item}{Data frame of item parameters}
 \item{p.itemcat}{Frequencies for every item category}
 \item{score.itemcat}{
         Scoring points for every item category
-                }  
+                }
 \item{fit.isop}{Values of fitting the ISOP model
 (see \code{\link{fit.isop}}) }
 \item{fit.isop}{Values of fitting the ADISOP model
@@ -184,7 +184,7 @@ A list with following entries:
 \item{fit.logistic}{Values of fitting the logistic model
  (only for \code{isop.dich}) }
 \item{fit.grm}{Values of fitting the graded response model
- (only for \code{isop.poly}) } 
+ (only for \code{isop.poly}) }
 \item{\dots}{Further values}
 }
 
@@ -200,7 +200,7 @@ Psychodiagnostik auf Ordinalskalenniveau:
 Messtheoretische Grundlagen, Modelltest und
 Parameterschaetzung. \emph{Archiv fuer Psychologie},
 \bold{134}, 197-218.
-    
+
 Scheiblechner, H. (1995). Isotonic ordinal
 probabilistic models (ISOP). \emph{Psychometrika},
 \bold{60}, 281-304.
@@ -235,12 +235,12 @@ Alexander Robitzsch
 This function uses \code{\link{isop.scoring}},
 \code{\link{fit.isop}} and \code{\link{fit.adisop}}.
 
-Tests of the W1 axiom of the ISOP model (Scheiblechner, 1995) can be performed with 
+Tests of the W1 axiom of the ISOP model (Scheiblechner, 1995) can be performed with
 \code{\link{isop.test}}.
 
-See also the \pkg{ISOP} package at \emph{Rforge}: \emph{http://www.rforge.net/ISOP/}. 
+See also the \pkg{ISOP} package at \emph{Rforge}: \emph{http://www.rforge.net/ISOP/}.
 
-Install this package using 
+Install this package using
 
 \code{install.packages("ISOP",repos="http://www.rforge.net/")}
 }
@@ -267,7 +267,7 @@ plot(mod1)
 
 \dontrun{
 # Model 2: ISOP Model (5 score groups)
-score.breaks <- seq( -.005 , 1.005 , len=5+1 ) 
+score.breaks <- seq( -.005 , 1.005 , len=5+1 )
 mod2 <- sirt::isop.dich( dat , score.breaks=score.breaks)
 summary(mod2)
 

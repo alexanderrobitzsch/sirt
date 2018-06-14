@@ -1,10 +1,10 @@
 ## File Name: lsdm.R
-## File Version: 1.16
+## File Version: 1.17
 
 #.......................................................................................................................#
-# LSDM - Least Squares Distance Method 
-# LSDM -- Least Squares Distance Method of Cognitive Validation                           
-# Reference: Dimitrov, D. (2007) Applied Psychological Measurement, 31, 367-387.         
+# LSDM - Least Squares Distance Method
+# LSDM -- Least Squares Distance Method of Cognitive Validation
+# Reference: Dimitrov, D. (2007) Applied Psychological Measurement, 31, 367-387.
 lsdm <- function( data , Qmatrix , theta = qnorm(seq(.0005,.9995,len=100)) , quant.list = c( .5 , .65 , .8 ) ,
             b = NULL , a = rep( 1 , nrow(Qmatrix) ), c = rep(0, nrow(Qmatrix) ) )
 {
@@ -27,12 +27,12 @@ lsdm <- function( data , Qmatrix , theta = qnorm(seq(.0005,.9995,len=100)) , qua
     cat( display.separate , "\n" )
     cat( "LSDM -- Least Squares Distance Method of Cognitive Validation \n")
     cat("Reference: Dimitrov, D. (2007) Applied Psychological Measurement, 31, 367-387.\n")
-    cat( display.separate , "\n" ) 
-    if (! is.null(b) ){ 
+    cat( display.separate , "\n" )
+    if (! is.null(b) ){
         eins <- rep(1, length(theta) )
-        data <- outer(c,eins) + ( 1 - outer(c,eins) )* 
-                        plogis(  outer( a , eins ) * ( outer( rep(1,nrow(Qmatrix)) , theta ) - 
-                        outer( b , eins ) ) )   
+        data <- outer(c,eins) + ( 1 - outer(c,eins) )*
+                        plogis(  outer( a , eins ) * ( outer( rep(1,nrow(Qmatrix)) , theta ) -
+                        outer( b , eins ) ) )
     }
     Qmatrix <- as.matrix(Qmatrix)
     # print Q matrix
@@ -42,7 +42,7 @@ lsdm <- function( data , Qmatrix , theta = qnorm(seq(.0005,.9995,len=100)) , qua
     print(Qmatrix) ; cat("\n")
     d1 <- det( t(Qmatrix)%*% Qmatrix )
     # warning for singular Q matrices
-    if (abs(d1) < 1E-8){ stop("You inputted a singular Q matrix. LSDM cannot be computed.\n") }    
+    if (abs(d1) < 1E-8){ stop("You inputted a singular Q matrix. LSDM cannot be computed.\n") }
     est.icc <- T
     I <- nrow(data)
     L <- ncol(data)
@@ -53,7 +53,7 @@ lsdm <- function( data , Qmatrix , theta = qnorm(seq(.0005,.9995,len=100)) , qua
     logdata <- log( data1 + .001)
     # estimate item parameter and item quantiles
     cat("Estimation of Item Parameters \n") ; flush.console()
-    icc.pars <- est.logist.quant( probcurves = data , theta = theta , 
+    icc.pars <- est.logist.quant( probcurves = data , theta = theta ,
                     quantiles = quant.list , est.icc = est.icc)
     cat( display.separate , "\n" )
     #******************************************
@@ -73,7 +73,7 @@ lsdm <- function( data , Qmatrix , theta = qnorm(seq(.0005,.9995,len=100)) , qua
             # mod2.tt <- ic.infer::orlm.lm( mod1.tt , index = 1:K , ui )
             mod2.tt <- ic.infer::orlm( mod1.tt , index = 1:K , ui )
             mod2.tt$b.restr
-        } )    
+        } )
     #*******************************************
     # estimate "ordinary" LLTM
     lltm.res1 <- stats::lm( as.numeric(icc.pars$b.1PL) ~ 0 + as.matrix(Qmatrix ) )
@@ -85,11 +85,11 @@ lsdm <- function( data , Qmatrix , theta = qnorm(seq(.0005,.9995,len=100)) , qua
     data.lltm <- outer( lltm.res1$fitted , theta , FUN = function(x1,x2){ plogis( x2 - x1  )  } )
     rownames(arc0) <- colnames(Qmatrix)
     # estimate attribute parameter and attribute quantiles
-    arc0.pars <- est.logist.quant( probcurves = arc0 , theta = theta , 
+    arc0.pars <- est.logist.quant( probcurves = arc0 , theta = theta ,
                 quantiles = quant.list , est.icc = est.icc )
     arc0.pars$eta.LLTM <- coef(lltm.res1)
     arc0.pars$se.LLTM <- slltm.res1[[4]][ ,2]
-    arc0.pars$pval.LLTM <- slltm.res1[[4]][ ,4]        
+    arc0.pars$pval.LLTM <- slltm.res1[[4]][ ,4]
     W <- matrix( NA , nrow=I , ncol=K )
     for (ii in 1:I){
         index.ii <- which( Qmatrix[ii,] > 0 )
@@ -97,7 +97,7 @@ lsdm <- function( data , Qmatrix , theta = qnorm(seq(.0005,.9995,len=100)) , qua
         x.ii <- t( log.arc0[ index.ii , ] )
         x.ii <- matrix( x.ii , ncol = length(index.ii) )
         y.ii <- as.numeric(logdata[ii,])
-        mod1.ii <- stats::lm( y.ii ~ 0 + x.ii )    
+        mod1.ii <- stats::lm( y.ii ~ 0 + x.ii )
         W[ii,index.ii] <- coef( mod1.ii )
     }
     #***************************
@@ -106,19 +106,19 @@ lsdm <- function( data , Qmatrix , theta = qnorm(seq(.0005,.9995,len=100)) , qua
     rownames(data.lltm) <- rownames(data0.fitted) <- rownames(data)
     # MAD for original model (Dimitrov)
     mad0 <- rowMeans( abs( data - data0.fitted ) )
-    md0 <- rowMeans( ( data - data0.fitted ) )        
+    md0 <- rowMeans( ( data - data0.fitted ) )
     mm0 <- mean(mad0)
     mad.lltm <- rowMeans( abs( data - data.lltm ) )
     md.lltm <- rowMeans( ( data - data.lltm ) )
     mm.lltm <- mean(mad.lltm)
     # Model Fit LSDM
-    cat(paste( "Model Fit LSDM   -  Mean MAD:" , formatC( round( mm0 , 3 ),digits=3 , width=6) , 
+    cat(paste( "Model Fit LSDM   -  Mean MAD:" , formatC( round( mm0 , 3 ),digits=3 , width=6) ,
                 "    Median MAD:" , formatC( round( median(mad0) , 3 ),digits=3 , width=6)     , "\n") )
-    cat(paste( "Model Fit LLTM   -  Mean MAD:" , formatC( round( mm.lltm , 3 ),digits=3, width=6) , 
+    cat(paste( "Model Fit LLTM   -  Mean MAD:" , formatC( round( mm.lltm , 3 ),digits=3, width=6) ,
                     "    Median MAD:" , formatC( round( median(mad.lltm) , 3 ),digits=3 , width=6) ,
                     "   R^2=" , format( round( slltm.res1$r.squared , 3 ),digits=3) ,   "\n") )
-    item <- data.frame( "N.skills" = rowSums( Qmatrix ) , "mad.lsdm" = mad0 , 
-                        "mad.lltm" = mad.lltm , "md.lsdm" = md0 , "md.lltm" = md.lltm , icc.pars ) 
+    item <- data.frame( "N.skills" = rowSums( Qmatrix ) , "mad.lsdm" = mad0 ,
+                        "mad.lltm" = mad.lltm , "md.lsdm" = md0 , "md.lltm" = md.lltm , icc.pars )
     colnames(W) <- colnames(Qmatrix)
     rownames(W) <- rownames(Qmatrix)
     res <- list( mean.mad.lsdm0 = mm0 ,  mean.mad.lltm = mm.lltm , attr.curves = arc0 ,

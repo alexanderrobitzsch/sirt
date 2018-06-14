@@ -1,5 +1,5 @@
 %% File Name: sia.sirt.Rd
-%% File Version: 0.16
+%% File Version: 0.17
 
 \name{sia.sirt}
 \alias{sia.sirt}
@@ -54,7 +54,7 @@ A list with following entries
   \item{impl.int}{Implication intensity (probability) as the basis
   for deciding the significance of an arrow}
   \item{impl.t}{Corresponding \eqn{t} values of \code{impl.int}}
-   \item{impl.significance}{Corresponding \eqn{p} values (significancies) 
+   \item{impl.significance}{Corresponding \eqn{p} values (significancies)
    of \code{impl.int}}
   \item{conf.loev}{Confidence according to Loevinger (see Gras & Kuntz, 2008).
   This values are just conditional probabilities \eqn{P( X_j=1|X_i=1)}.}
@@ -65,17 +65,17 @@ A list with following entries
   \item{igraph.matr}{Matrix containing all arrows for the \pkg{igraph}
       package.}
   \item{igraph.obj}{An object of the graph for the \pkg{igraph} package.}
-  
+
 }
 
 %  \item{comp1 }{xx}
 %  \item{comp2 }{xx}
- 
+
 
 \references{
-Gras, R., & Kuntz, P. (2008). An overview of the statistical implicative analysis 
+Gras, R., & Kuntz, P. (2008). An overview of the statistical implicative analysis
 (SIA) development. In R. Gras, E. Suzuki, F. Guillet, & F. Spagnolo (Eds.).
-\emph{Statistical Implicative Analysis} (pp. 11-40). 
+\emph{Statistical Implicative Analysis} (pp. 11-40).
 Springer, Berlin Heidelberg.
 }
 
@@ -86,7 +86,7 @@ Alexander Robitzsch
 
 
 \note{
-For an implementation of statistical implicative analysis in the 
+For an implementation of statistical implicative analysis in the
 C.H.I.C. (Classification Hierarchique, Implicative et Cohesitive)
 software.
 
@@ -135,7 +135,7 @@ res.graph <- new("graphNEL", nodes= res$graph.edges , edgemode="directed")
 RR <- nrow(grmatrix)
 for (rr in 1:RR){
     res.graph <- Rgraphviz::addEdge(grmatrix[rr,1], grmatrix[rr,2], res.graph , 1)
-                    }                                                          
+                    }
 # define cex sizes and shapes
 V <- length(res$graph.edges)
 size2 <- rep(16,V)

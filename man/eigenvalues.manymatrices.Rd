@@ -1,5 +1,5 @@
 %% File Name: eigenvalues.manymatrices.Rd
-%% File Version: 0.10
+%% File Version: 0.11
 
 \name{eigenvalues.manymatrices}
 \alias{eigenvalues.manymatrices}
@@ -71,7 +71,7 @@ Sigma[ lower.tri(Sigma) ] <- Sigma[ upper.tri(Sigma) ] <- c(.2,.1,.99 )
 Sigma2 <- Sigma
 
 # collect matrices in a "super-matrix"
-Sigma.all <- rbind( matrix( Sigma1 , nrow=1 , byrow=TRUE) , 
+Sigma.all <- rbind( matrix( Sigma1 , nrow=1 , byrow=TRUE) ,
                 matrix( Sigma2 , nrow=1 , byrow=TRUE) )
 Sigma.all <- Sigma.all[ c(1,1,2,2,1 ) , ]
 

@@ -1,5 +1,5 @@
 %% File Name: data.ess2005.Rd
-%% File Version: 0.06
+%% File Version: 0.07
 
 \name{data.ess2005}
 \alias{data.ess2005}
@@ -19,7 +19,7 @@ data(data.ess2005)
 
 \format{
 The format of the dataset is:
-  
+
 \code{List of 2} \cr
 \code{ $ lambda: num [1:26, 1:4] 0.688 0.721 0.72 0.687 0.625 ...} \cr
 \code{  ..- attr(*, "dimnames")=List of 2} \cr

@@ -1,9 +1,9 @@
 ## File Name: rm_proc_fixed_values_reference_rater.R
-## File Version: 0.03
+## File Version: 0.04
 
 rm_proc_fixed_values_reference_rater <- function( rater.index1, b.rater.fixed, a.rater.fixed, rater_item_int,
         reference_rater, est.b.rater, est.a.rater )
-{    
+{
     if ( ! is.null(reference_rater) ){
         #----- no item-rater-interactions
         if ( ! rater_item_int ){
@@ -23,8 +23,8 @@ rm_proc_fixed_values_reference_rater <- function( rater.index1, b.rater.fixed, a
                     a.rater.fixed <- rep(NA, RR)
                     a.rater.fixed[ rater.index1[ paste(rater.index1$rater) == reference_rater , "rater.id" ] ] <- val
                 }
-            }        
-            
+            }
+
         }
         #---- item-rater-interactions
         if ( rater_item_int ){
@@ -34,7 +34,7 @@ rm_proc_fixed_values_reference_rater <- function( rater.index1, b.rater.fixed, a
             if (est.b.rater){
                 val <- 0
                 if ( is.null(b.rater.fixed) ){
-                    b.rater.fixed <- rep(NA, RR)                    
+                    b.rater.fixed <- rep(NA, RR)
                     b.rater.fixed[ ind ] <- val
                 }
             }
@@ -45,7 +45,7 @@ rm_proc_fixed_values_reference_rater <- function( rater.index1, b.rater.fixed, a
                     a.rater.fixed <- rep(NA, RR)
                     a.rater.fixed[ ind ] <- val
                 }
-            }        
+            }
         }
     }
     #--- output

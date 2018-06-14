@@ -1,5 +1,5 @@
 %% File Name: rinvgamma2.Rd
-%% File Version: 0.13
+%% File Version: 0.14
 
 \name{rinvgamma2}
 \alias{rinvgamma2}
@@ -36,7 +36,7 @@ Prior variance
 %%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-A vector containing random draws or density values    
+A vector containing random draws or density values
 }
 
 
@@ -48,8 +48,8 @@ A vector containing random draws or density values
 
 
 \references{
-Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A., 
-& Rubin, D. B. (2014). 
+Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A.,
+& Rubin, D. B. (2014).
 \emph{Bayesian data analysis} (Vol. 3). Boca Raton, FL, USA: Chapman & Hall/CRC.
 }
 
@@ -71,7 +71,7 @@ Alexander Robitzsch
 }
 \examples{
 #############################################################################
-# EXAMPLE 1: Inverse gamma distribution 
+# EXAMPLE 1: Inverse gamma distribution
 #############################################################################
 
 # prior sample size of 100 and prior variance of 1.5

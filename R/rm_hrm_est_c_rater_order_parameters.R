@@ -1,5 +1,5 @@
 ## File Name: rm_hrm_est_c_rater_order_parameters.R
-## File Version: 0.01
+## File Version: 0.02
 
 rm_hrm_est_c_rater_order_parameters <- function(c.rater, K)
 {
@@ -15,4 +15,4 @@ rm_hrm_est_c_rater_order_parameters <- function(c.rater, K)
     }
     return(c.rater)
 }
-    
+

@@ -1,5 +1,5 @@
 ## File Name: nedelsky.sim.R
-## File Version: 0.06
+## File Version: 0.07
 
 
 ################################################################
@@ -14,7 +14,7 @@ nedelsky.sim <- function( theta , b , a=NULL , tau=NULL ){
     if ( is.null(a) ){
         a <- rep(1,I)
                 }
-    combis <- as.matrix( expand.grid( as.data.frame( matrix( rep(nodes, ndim) , 
+    combis <- as.matrix( expand.grid( as.data.frame( matrix( rep(nodes, ndim) ,
             ncol = ndim ) ) ) )
     if ( is.null(tau) ){
         tau <- matrix( 1 , nrow=I , ncol=K+1 )

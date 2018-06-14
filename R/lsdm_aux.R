@@ -1,5 +1,5 @@
 ## File Name: lsdm_aux.R
-## File Version: 0.03
+## File Version: 0.04
 
 
 #...........................................................................................##
@@ -26,20 +26,20 @@ est.logist.quant <- function( probcurves , theta , quantiles , est.icc = TRUE ){
                     }
             }
     # quantiles of Item Response Curves (Logistic Functions)
-    probcurves.quant <- sapply( quantiles , FUN = function( ql ){ 
-            sapply( 1:I , FUN = function(kk){ 
+    probcurves.quant <- sapply( quantiles , FUN = function( ql ){
+            sapply( 1:I , FUN = function(kk){
                     .extract.probquantile( vec = probcurves[kk,] , theta = theta  , quant = ql )
                             } )
             } )
     probcurves.quant <- as.data.frame( probcurves.quant)
     colnames(probcurves.quant) <- paste( "Q" , 100*quantiles , sep="")
     rownames(probcurves.quant) <- rownames(probcurves)
-    if (est.icc == TRUE ){    pars.probcurves <- cbind( probcurves.quant , pars.probcurves ) } else 
+    if (est.icc == TRUE ){    pars.probcurves <- cbind( probcurves.quant , pars.probcurves ) } else
                             { pars.probcurves <- probcurves.quant }
     for (vv in 1:( length(quantiles) )    ){   pars.probcurves[,vv] <- as.numeric( pars.probcurves[,vv] ) }
     return( pars.probcurves )
     }
-#...........................................................................................##  
+#...........................................................................................##
 #...........................................................................................##
 # auxiliary function for estimating a logistic item response curve with                     ##
 # slope and intercept parameter                                                             ##
@@ -48,7 +48,7 @@ est.logist.quant <- function( probcurves , theta , quantiles , est.icc = TRUE ){
     # y ... vector of y values (probabilities)
     # theta ... vector of theta values
     y <- as.numeric(y)
-    objfct <- function( x ){ 
+    objfct <- function( x ){
         mean( ( y - (1 + exp(  - x[2] * ( theta - x[1] )) )^(-1) )^2 )
         }
     res <- stats::optim( c(0,1) , objfct )
@@ -63,7 +63,7 @@ est.logist.quant <- function( probcurves , theta , quantiles , est.icc = TRUE ){
     # y ... vector of y values (probabilities)
     # theta ... vector of theta values
     y <- as.numeric(y)
-    objfct <- function( x ){ 
+    objfct <- function( x ){
         mean( ( y - (1 + exp(  - 1 * ( theta - x )) )^(-1) )^2 )
         }
     res <- stats::optimize( objfct , lower = -10 , upper = 10 )
@@ -79,7 +79,7 @@ est.logist.quant <- function( probcurves , theta , quantiles , est.icc = TRUE ){
     # quant ... Quantile which has to be calculated
     x2 <- theta[ vec >= quant ][1]
     x1 <- sort( theta[ vec < quant ] , decreasing=T)[1]
-    value <- - Inf 
+    value <- - Inf
     if ( (1-is.na(x2)) * (1-is.na(x1)) ==1 ){
         y1 <- vec[ theta == x1]
         y2 <- vec[ theta == x2]

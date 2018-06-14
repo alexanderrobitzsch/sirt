@@ -1,5 +1,5 @@
 %% File Name: plot.mcmc.sirt.Rd
-%% File Version: 0.08
+%% File Version: 0.09
 
 \name{plot.mcmc.sirt}
 \alias{plot.mcmc.sirt}
@@ -9,12 +9,12 @@ Plot Function for Objects of Class \code{mcmc.sirt}
 }
 \description{
 Plot function for objects of class \code{mcmc.sirt}. These objects are generated
-by: \code{\link{mcmc.2pno}}, \code{\link{mcmc.2pnoh}}, 
+by: \code{\link{mcmc.2pno}}, \code{\link{mcmc.2pnoh}},
 \code{\link{mcmc.3pno.testlet}}, \code{\link{mcmc.2pno.ml}}
 }
 \usage{
-\method{plot}{mcmc.sirt}( x, layout = 1, conflevel = 0.9, round.summ = 3, 
-   lag.max = .1 , col.smooth = "red", lwd.smooth = 2, col.ci = "orange", 
+\method{plot}{mcmc.sirt}( x, layout = 1, conflevel = 0.9, round.summ = 3,
+   lag.max = .1 , col.smooth = "red", lwd.smooth = 2, col.ci = "orange",
    cex.summ = 1, ask = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -24,7 +24,7 @@ Object of class \code{mcmc.sirt}
 }
   \item{layout}{
 Layout type. \code{layout=1} is the standard coda plot output,
-\code{layout=2} gives a slightly different display. 
+\code{layout=2} gives a slightly different display.
 }
   \item{conflevel}{
 Confidence level (only applies to \code{layout=2})
@@ -78,7 +78,7 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{mcmc.2pno}}, \code{\link{mcmc.2pnoh}}, 
+\code{\link{mcmc.2pno}}, \code{\link{mcmc.2pnoh}},
 \code{\link{mcmc.3pno.testlet}}, \code{\link{mcmc.2pno.ml}}
 }
 %\examples{

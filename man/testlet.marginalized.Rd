@@ -1,5 +1,5 @@
 %% File Name: testlet.marginalized.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{testlet.marginalized}
 \alias{testlet.marginalized}
@@ -16,7 +16,7 @@ provided as an input (see Details).
 
 
 \usage{
-testlet.marginalized(tam.fa.obj=NULL ,a1=NULL, d1=NULL, testlet=NULL, 
+testlet.marginalized(tam.fa.obj=NULL ,a1=NULL, d1=NULL, testlet=NULL,
       a.testlet=NULL, var.testlet=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -31,7 +31,7 @@ Vector of item discriminations of general factor
 Vector of item intercepts of general factor
 }
   \item{testlet}{
-Integer vector of testlet (bifactor) identifiers (must be integers 
+Integer vector of testlet (bifactor) identifiers (must be integers
 between 1 to \eqn{T}).
 }
   \item{a.testlet}{
@@ -58,7 +58,7 @@ Calculation details can be found in Ip (2010).
 
 \value{
 A data frame containing all input item parameters and
-marginal item intercept \eqn{d_i^\ast} (\code{d1_marg}) and 
+marginal item intercept \eqn{d_i^\ast} (\code{d1_marg}) and
 marginal item slope \eqn{a_i^\ast} (\code{a1_marg}).
 }
 
@@ -99,7 +99,7 @@ a.testlet <- rep( 1 , 9 )  # item slopes testlets
 var.testlet <- c( .8 , .2 , 0 )  # testlet variances
 
 # apply function
-res <- sirt::testlet.marginalized( a1=a1 , d1=d1 , testlet=testlet , 
+res <- sirt::testlet.marginalized( a1=a1 , d1=d1 , testlet=testlet ,
             a.testlet=a.testlet , var.testlet=var.testlet )
 round( res , 2 )
   ##    item testlet a1    d1 a.testlet var.testlet a1_marg d1_marg
@@ -125,7 +125,7 @@ maxiter <-  100
 
 # Model 1: Rasch testlet model with 3 testlets
 dims <- substring( colnames(resp),1,1 )  # define dimensions
-mod1 <- TAM::tam.fa( resp=resp , irtmodel="bifactor1" , dims=dims , 
+mod1 <- TAM::tam.fa( resp=resp , irtmodel="bifactor1" , dims=dims ,
                control=list(maxiter=maxiter) )
 # marginal item parameters
 res1 <- sirt::testlet.marginalized( mod1 )
@@ -135,8 +135,8 @@ res1 <- sirt::testlet.marginalized( mod1 )
 #           specific factors
 dims1 <- dims
 dims1[c(3,5)] <- NA
-mod2 <- TAM::tam.fa( resp=resp , irtmodel="bifactor2" , dims=dims1 , 
-              control=list(maxiter=maxiter) ) 
+mod2 <- TAM::tam.fa( resp=resp , irtmodel="bifactor2" , dims=dims1 ,
+              control=list(maxiter=maxiter) )
 res2 <- sirt::testlet.marginalized( mod2 )
 res2
 }

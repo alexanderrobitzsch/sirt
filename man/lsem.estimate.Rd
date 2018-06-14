@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.52
+%% File Version: 0.53
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -18,27 +18,27 @@ which are evaluated for each value of a pre-defined moderator variable
 Like in nonparametric regression models, observations near a focal point - at
 which the model is evaluated - obtain higher weights, far distant observations
 obtain lower weights. The LSEM can be specified by making use of \pkg{lavaan} syntax.
-It is also possible to specify a discretized version of LSEM in which 
+It is also possible to specify a discretized version of LSEM in which
 values of the moderator are grouped and a multiple group SEM is specified.
 The LSEM can be tested by employing a permutation test, see
 \code{\link{lsem.permutationTest}}.
 The function \code{lsem.MGM.stepfunctions} outputs stepwise functions
-for a multiple group model evaluated at a grid of focal points of the 
+for a multiple group model evaluated at a grid of focal points of the
 moderator, specified in \code{moderator.grid}.
 }
 \usage{
-lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h = 1.1, 
-    residualize=TRUE, fit_measures = c("rmsea", "cfi", "tli", "gfi", "srmr"), 
-    standardized=FALSE, standardized_type = "std.all", 
+lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h = 1.1,
+    residualize=TRUE, fit_measures = c("rmsea", "cfi", "tli", "gfi", "srmr"),
+    standardized=FALSE, standardized_type = "std.all",
     lavaan_fct = "sem", sufficient_statistics=FALSE, eps = 1e-08, verbose = TRUE, ...)
-    
+
 \method{summary}{lsem}(object, file=NULL, digits=3, ...)
 
-\method{plot}{lsem}(x , parindex=NULL , ask=TRUE , ci = TRUE , lintrend = TRUE , 
-       parsummary = TRUE , ylim=NULL , xlab=NULL,  ylab=NULL , main=NULL , 
+\method{plot}{lsem}(x , parindex=NULL , ask=TRUE , ci = TRUE , lintrend = TRUE ,
+       parsummary = TRUE , ylim=NULL , xlab=NULL,  ylab=NULL , main=NULL ,
        digits=3, ...)
-       
-lsem.MGM.stepfunctions( object , moderator.grid )       
+
+lsem.MGM.stepfunctions( object , moderator.grid )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -53,34 +53,34 @@ Focal points at which the LSEM should be evaluated. If \code{type="MGM"},
 breaks are defined in this vector.
 }
   \item{lavmodel}{
-Specified SEM in \pkg{lavaan}. The function 
+Specified SEM in \pkg{lavaan}. The function
 \code{\link[lavaan:sem]{lavaan::sem}} (\pkg{lavaan}) is used.
 }
 \item{type}{Type of estimated model. The default is \code{type="LSEM"} which means
     that a local structural equation model is estimated.
-    A multiple group model with a discretized moderator as the 
+    A multiple group model with a discretized moderator as the
     grouping variable can be estimated with \code{type="MGM"}. In this
     case, the breaks must be defined in \code{moderator.grid}.
             }
   \item{h}{
 Bandwidth factor
 }
-\item{residualize}{Logical indicating whether a residualization 
+\item{residualize}{Logical indicating whether a residualization
     should be applied. }
   \item{fit_measures}{
 Vector with names of fit measures following the labels in \pkg{lavaan}
 }
 \item{standardized}{Optional logical indicating whether
- standardized solution should be included as parameters in 
+ standardized solution should be included as parameters in
  the output using the
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution}}
 function. Standardized parameters are labeled as \code{std__}.
 }
 \item{standardized_type}{Type of standardization if \code{standardized=TRUE}.
-The types are described in 
+The types are described in
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution}}.
 }
-\item{lavaan_fct}{String whether 
+\item{lavaan_fct}{String whether
 \code{\link[lavaan:lavaan]{lavaan::lavaan}} (\code{lavaan_fct="lavaan"}) or
 \code{\link[lavaan:sem]{lavaan::sem}} (\code{lavaan_fct="sem"})
 should be used.
@@ -121,7 +121,7 @@ Further arguments to be passed to \code{\link[lavaan:sem]{lavaan::sem}} or
 
 \value{
 List with following entries
-\item{parameters}{Data frame with all parameters estimated at focal points of 
+\item{parameters}{Data frame with all parameters estimated at focal points of
     moderator}
 \item{weights}{Data frame with weights at each focal point}
 \item{parameters_summary}{Summary table for estimated parameters}
@@ -130,7 +130,7 @@ columns and values of the grid of the moderator are in rows.}
 \item{bw}{Used bandwidth}
 \item{h}{Used bandwidth factor}
 \item{N}{Sample size}
-\item{moderator.density}{Estimated frequencies and effective sample size for 
+\item{moderator.density}{Estimated frequencies and effective sample size for
     moderator at focal points}
 \item{moderator.stat}{Descriptive statistics for moderator}
 \item{moderator}{Variable name of moderator}
@@ -146,12 +146,12 @@ residualization.}
 
 \references{
 Hildebrandt, A., Luedtke, O., Robitzsch, A., Sommer, C., &
-Wilhelm, O. (2016). Exploring factor model parameters across continuous variables 
-with local structural equation models. 
-\emph{Multivariate Behavioral Research}, \bold{51}, 257-278.    
-    
-Hildebrandt, A., Wilhelm, O., & Robitzsch, A. (2009). Complementary and 
-competing factor analytic approaches for the investigation of measurement invariance. 
+Wilhelm, O. (2016). Exploring factor model parameters across continuous variables
+with local structural equation models.
+\emph{Multivariate Behavioral Research}, \bold{51}, 257-278.
+
+Hildebrandt, A., Wilhelm, O., & Robitzsch, A. (2009). Complementary and
+competing factor analytic approaches for the investigation of measurement invariance.
 \emph{Review of Psychology}, \bold{16}, 87-102.
 }
 
@@ -177,8 +177,8 @@ Alexander Robitzsch, Oliver Luedtke, Andrea Hildebrandt
 \dontrun{
 #############################################################################
 # EXAMPLE 1: data.lsem01 | Age differentiation
-#############################################################################    
-    
+#############################################################################
+
 data(data.lsem01)
 dat <- data.lsem01
 
@@ -186,26 +186,26 @@ dat <- data.lsem01
 lavmodel <- "
         F =~ v1+v2+v3+v4+v5
         F ~~ 1*F"
-        
+
 # define grid of moderator variable age
 moderator.grid <- seq(4,23,1)
 
 #********************************
 #*** Model 1: estimate LSEM with bandwidth 2
-mod1 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid , 
+mod1 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid ,
                lavmodel=lavmodel , h=2 , std.lv=TRUE)
 summary(mod1)
 plot(mod1 , parindex=1:5)
 
 # perform permutation test for Model 1
-pmod1 <- sirt::lsem.permutationTest( mod1 , B=10 )    
-          # only for illustrative purposes the number of permutations B is set 
+pmod1 <- sirt::lsem.permutationTest( mod1 , B=10 )
+          # only for illustrative purposes the number of permutations B is set
           # to a low number of 10
 summary(pmod1)
 plot(pmod1, type="global")
 
 #** estimate Model 1 based on sufficient statistics
-mod1b <- sirt::lsem.estimate( dat, moderator="age" , moderator.grid=moderator.grid , 
+mod1b <- sirt::lsem.estimate( dat, moderator="age" , moderator.grid=moderator.grid ,
                lavmodel=lavmodel, h=2, std.lv=TRUE, sufficient_statistics = TRUE )
 summary(mod1b)
 
@@ -213,9 +213,9 @@ summary(mod1b)
 #*** Model 2: estimate multiple group model with 4 age groups
 
 # define breaks for age groups
-moderator.grid <- seq( 3.5 , 23.5 , len=5) # 4 groups 
+moderator.grid <- seq( 3.5 , 23.5 , len=5) # 4 groups
 # estimate model
-mod2 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid , 
+mod2 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid ,
            lavmodel=lavmodel , type="MGM" , std.lv=TRUE)
 summary(mod2)
 
@@ -232,16 +232,16 @@ lavmodel <- "
         v1 ~~ s1*v1
         v2 ~~ s2*v2
         v3 ~~ s3*v3
-        v4 ~~ s4*v4                                
+        v4 ~~ s4*v4
         F ~~ 1*F
         # standardized loadings
         l1 := a1 / sqrt(a1^2 + s1 )
         l2 := a2 / sqrt(a2^2 + s2 )
         l3 := a3 / sqrt(a3^2 + s3 )
-        l4 := a4 / sqrt(a4^2 + s4 )                        
-        "        
+        l4 := a4 / sqrt(a4^2 + s4 )
+        "
 # estimate model
-mod3 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid , 
+mod3 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid ,
                lavmodel=lavmodel , h=2 , std.lv=TRUE)
 summary(mod3)
 plot(mod3)
@@ -252,12 +252,12 @@ plot(mod3)
 lavmodel <- "
         F =~ 1*v1+v2+v3+v4
         F ~~ F"
-mod4 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid , 
+mod4 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid ,
                lavmodel=lavmodel , h=2 , standardized=TRUE)
 summary(mod4)
 # permutation test
-pmod1 <- sirt::lsem.permutationTest( mod4 , B=3 )    
-}    
+pmod1 <- sirt::lsem.permutationTest( mod4 , B=3 )
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

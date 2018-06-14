@@ -1,5 +1,5 @@
 %% File Name: pbivnorm2.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{pbivnorm2}
 \alias{pbivnorm2}
@@ -8,7 +8,7 @@
 Cumulative Function for the Bivariate Normal Distribution
 }
 \description{
-This function evaluates the bivariate normal distribution 
+This function evaluates the bivariate normal distribution
 \eqn{\Phi_2 ( x , y ; \rho )}
 assuming zero means and unit variances. It uses a simple approximation
 by Cox and Wermuth (1991) with corrected formulas in Hong (1999).
@@ -32,7 +32,7 @@ Vector of correlations between random normal variates
 %%  ~~ If necessary, more details than the description above ~~
 %% }
 \value{
-Vector of probabilities    
+Vector of probabilities
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
@@ -41,7 +41,7 @@ Vector of probabilities
 }
 \references{
 Cox, D. R., & Wermuth, N. (1991). A simple approximation for bivariate and
-trivariate normal integrals. 
+trivariate normal integrals.
 \emph{International Statistical Review}, \bold{59}, 263-269.
 
 Hong, H. P. (1999). An approximation to bivariate and trivariate normal
@@ -57,7 +57,7 @@ The function is less precise for correlations near 1 or -1.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See also the 
+See also the
 \code{\link[pbivnorm:pbivnorm]{pbivnorm::pbivnorm}}
 function in the \pkg{pbivnorm} package.
 }

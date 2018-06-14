@@ -1,5 +1,5 @@
 %% File Name: smirt.Rd
-%% File Version: 2.29
+%% File Version: 2.30
 
 \name{smirt}
 \alias{smirt}
@@ -24,15 +24,15 @@ the partially compensatory item response model (Spray et al., 1990)
 for dichotomous data.
 }
 \usage{
-smirt(dat, Qmatrix, irtmodel="noncomp" , est.b = NULL, est.a = NULL, 
-     est.c = NULL, est.d = NULL, est.mu.i=NULL , b.init = NULL, a.init = NULL, 
-     c.init = NULL, d.init=NULL, mu.i.init=NULL , Sigma.init=NULL , 
-     b.lower=-Inf, b.upper = Inf, a.lower= -Inf, a.upper=Inf, 
-     c.lower=-Inf, c.upper = Inf, d.lower= -Inf, d.upper=Inf,     
-     theta.k=seq(-6,6,len=20), theta.kDES=NULL, 
-     qmcnodes=0 , mu.fixed = NULL, variance.fixed = NULL,  est.corr = FALSE, 
-     max.increment = 1, increment.factor=1, numdiff.parm = 0.0001, 
-     maxdevchange = 0.1, globconv = 0.001, maxiter = 1000, msteps = 4, 
+smirt(dat, Qmatrix, irtmodel="noncomp" , est.b = NULL, est.a = NULL,
+     est.c = NULL, est.d = NULL, est.mu.i=NULL , b.init = NULL, a.init = NULL,
+     c.init = NULL, d.init=NULL, mu.i.init=NULL , Sigma.init=NULL ,
+     b.lower=-Inf, b.upper = Inf, a.lower= -Inf, a.upper=Inf,
+     c.lower=-Inf, c.upper = Inf, d.lower= -Inf, d.upper=Inf,
+     theta.k=seq(-6,6,len=20), theta.kDES=NULL,
+     qmcnodes=0 , mu.fixed = NULL, variance.fixed = NULL,  est.corr = FALSE,
+     max.increment = 1, increment.factor=1, numdiff.parm = 0.0001,
+     maxdevchange = 0.1, globconv = 0.001, maxiter = 1000, msteps = 4,
      mstepconv = 0.001)
 
 \method{summary}{smirt}(object,...)
@@ -62,15 +62,15 @@ The Q-matrix which specifies the loadings to be estimated
   \item{irtmodel}{
 The item response model. Options are the noncompensatory model (\code{"noncomp"}),
 the compensatory model (\code{"comp"}) and
-the partially compensatory model (\code{"partcomp"}). 
+the partially compensatory model (\code{"partcomp"}).
 See Details for more explanations.
 }
   \item{est.b}{
-An integer matrix (if \code{irtmodel="noncomp"}) or integer vector 
+An integer matrix (if \code{irtmodel="noncomp"}) or integer vector
 (if \code{irtmodel="comp"}) for \eqn{b} parameters to be estimated
 }
   \item{est.a}{
-An integer matrix for \eqn{a} parameters to be estimated. 
+An integer matrix for \eqn{a} parameters to be estimated.
 If \code{est.a="2PL"}, then all item loadings will be estimated and the
 variances are set to one (and therefore \code{est.corr=TRUE}).
 }
@@ -112,8 +112,8 @@ Initial covariance matrix \eqn{\Sigma}
 \item{d.upper}{Upper bound for \eqn{d} parameter}
   \item{theta.k}{
 Vector of discretized trait distribution. This vector is expanded in all
-dimensions by using the \code{\link[base:expand.grid]{base::expand.grid}}  
-function. If a user specifies a design matrix \code{theta.kDES} of transformed 
+dimensions by using the \code{\link[base:expand.grid]{base::expand.grid}}
+function. If a user specifies a design matrix \code{theta.kDES} of transformed
 \eqn{\bold{\theta}_p}
 values (see Details and Examples), then \code{theta.k} must be a matrix, too.
 }
@@ -122,10 +122,10 @@ An optional design matrix. This matrix will differ from the ordinary
 theta grid in case of nonlinear item response models.
 }
   \item{qmcnodes}{
-Number of integration nodes for quasi Monte Carlo integration (see Pan & 
-Thompson, 2007; Gonzales et al., 2006). Integration points are obtained by using 
-the function \code{\link{qmc.nodes}}. Note that when using quasi Monte Carlo nodes, 
-no theta design matrix \code{theta.kDES} can be specified. 
+Number of integration nodes for quasi Monte Carlo integration (see Pan &
+Thompson, 2007; Gonzales et al., 2006). Integration points are obtained by using
+the function \code{\link{qmc.nodes}}. Note that when using quasi Monte Carlo nodes,
+no theta design matrix \code{theta.kDES} can be specified.
 See Example 1, Model 11.
 }
   \item{mu.fixed}{
@@ -133,9 +133,9 @@ Matrix with fixed entries in the mean vector. By default, all means
 are set to zero.
 }
   \item{variance.fixed}{
-Matrix (with rows and three columns) with fixed entries in the covariance matrix 
+Matrix (with rows and three columns) with fixed entries in the covariance matrix
 (see Examples). The entry \eqn{c_{kd}} of the covariance between dimensions
-  \eqn{k} and \eqn{d} is set to \eqn{c_0} iff \code{variance.fixed} has a row with 
+  \eqn{k} and \eqn{d} is set to \eqn{c_0} iff \code{variance.fixed} has a row with
   a \eqn{k} in the first column, a \eqn{d} in the second column and the value
   \eqn{c_0} in the third column.
 }
@@ -182,28 +182,28 @@ Further arguments to be passed
 \details{
 The noncompensatory item response model (\code{irtmodel="noncomp"};
 e.g. Bolt & Lall, 2003) is defined as
-\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i ) 
+\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i )
 \prod_l invlogit( a_{il} q_{il}  \theta_{pl} - b_{il} ) }
-where \eqn{i}, \eqn{p}, \eqn{l} denote items, persons and dimensions 
-respectively. 
+where \eqn{i}, \eqn{p}, \eqn{l} denote items, persons and dimensions
+respectively.
 
 The compensatory item response model (\code{irtmodel="comp"}) is defined by
-\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i ) 
+\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i )
 invlogit( \sum_l  a_{il}  q_{il} \theta_{pl} - b_{i} ) }
 Using a design matrix \code{theta.kDES} the model can be made even more general
 in a model which is linear in item parameters
-\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i ) 
+\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i )
 invlogit( \sum_l  a_{il}  q_{il} t_l ( \bold{ \theta_{p} } )   - b_{i} ) }
 with known functions \eqn{t_l} of the trait vector \eqn{\bold{\theta}_p}.
-Fixed values of the functions \eqn{t_l} are specified in the 
+Fixed values of the functions \eqn{t_l} are specified in the
 \eqn{\bold{\theta}_p} design matrix \code{theta.kDES}.
 
-The partially compensatory item response model (\code{irtmodel="partcomp"}) 
+The partially compensatory item response model (\code{irtmodel="partcomp"})
 is defined by
-\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i ) 
+\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i )
 \frac{ \exp \left( \sum_l ( a_{il}  q_{il} \theta_{pl} - b_{il} ) \right) }
-{  \mu_i \prod_l ( 1 + \exp ( a_{il}  q_{il} \theta_{pl} - b_{il} ) ) + 
-    ( 1- \mu_i) ( 1 + \exp \left( \sum_l  ( a_{il}  q_{il} \theta_{pl} - b_{il} ) \right) ) 
+{  \mu_i \prod_l ( 1 + \exp ( a_{il}  q_{il} \theta_{pl} - b_{il} ) ) +
+    ( 1- \mu_i) ( 1 + \exp \left( \sum_l  ( a_{il}  q_{il} \theta_{pl} - b_{il} ) \right) )
         } }
 with item parameters \eqn{\mu_i} indicating the degree of compensatory.
 \eqn{\mu_i=1} indicates a noncompensatory model while \eqn{\mu_i=0}
@@ -254,22 +254,22 @@ as well as the mode of the posterior distribution (\code{MLE} and \code{MAP}).}
 \item{Qmatrix}{Used Q-matrix}
 }
 \references{
-Bolt, D. M., & Lall, V. F. (2003). Estimation of compensatory and 
-noncompensatory multidimensional item response models using Markov chain 
+Bolt, D. M., & Lall, V. F. (2003). Estimation of compensatory and
+noncompensatory multidimensional item response models using Markov chain
 Monte Carlo. \emph{Applied Psychological Measurement}, \bold{27}, 395-414.
 
-Gonzalez, J., Tuerlinckx, F., De Boeck, P., & Cools, R. (2006). 
-Numerical integration in logistic-normal models. 
-\emph{Computational Statistics & Data Analysis}, \bold{51}, 1535-1548.    
+Gonzalez, J., Tuerlinckx, F., De Boeck, P., & Cools, R. (2006).
+Numerical integration in logistic-normal models.
+\emph{Computational Statistics & Data Analysis}, \bold{51}, 1535-1548.
 
 Pan, J., & Thompson, R. (2007). Quasi-Monte Carlo estimation in
 generalized linear mixed models. \emph{Computational Statistics &
 Data Analysis}, \bold{51}, 5765-5775.
-    
+
 Reckase, M.D. (2009). \emph{Multidimensional Item Response Theory}.
 New York: Springer.
 
-Spray, J. A., Davey, T. C., Reckase, M. D., Ackerman, T. A., & Carlson, J. E. (1990). 
+Spray, J. A., Davey, T. C., Reckase, M. D., Ackerman, T. A., & Carlson, J. E. (1990).
 \emph{Comparison of two logistic multidimensional item response theory models}.
 ACT Research Report No. ACT-RR-ONR-90-8.
 }
@@ -283,10 +283,10 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See the \code{\link[mirt:mirt]{mirt::mirt}} and 
+See the \code{\link[mirt:mirt]{mirt::mirt}} and
 \code{itemtype="partcomp"} for estimating noncompensatory item response models
 using the \pkg{mirt} package. See also \code{\link[mirt:mixedmirt]{mirt::mixedmirt}}.
-    
+
 Other multidimensional IRT models can also be estimated
 with \code{\link{rasch.mml2}} and \code{\link{rasch.mirtlc}}.
 
@@ -317,7 +317,7 @@ Q[ I,1] <- 0
 b <- matrix( rnorm( I*2 ) , I , 2 )
 a <- matrix( 1 , I  , 2 )
 
-# simulate data                                     
+# simulate data
 prob <- dat <- matrix(0 , nrow=N , ncol=I )
 for (ii in 1:I){
 prob[,ii] <- ( stats::plogis( theta1 - b[ii,1]  ) )^Q[ii,1]
@@ -400,10 +400,10 @@ b.init <- rep(0,10)  # set all item difficulties initially to zero
 # b.init <- NULL
 a.init <- Q       # initialize a.init with Q-matrix
 # provide starting values for slopes of first three items on Dimension 1
-a.init[1:3,1] <- c( .55 , .32 , 1.3)   
+a.init[1:3,1] <- c( .55 , .32 , 1.3)
 
 mod8b <- sirt::smirt(dat,Qmatrix=Q , irtmodel="comp" , variance.fixed=variance.fixed ,
-              b.init=b.init , a.init=a.init , maxiter=20 , est.a="2PL" )              
+              b.init=b.init , a.init=a.init , maxiter=20 , est.a="2PL" )
 summary(mod8b)
 
 #***
@@ -419,8 +419,8 @@ Qmatrix[,1] <- 1
 Qmatrix[ c(3,6,7) , 2 ] <- 1
 colnames(Qmatrix) <- c("F1" , "F1sq" )
 # estimate model
-mod9 <- sirt::smirt(dat,Qmatrix=Qmatrix , maxiter=50 , irtmodel="comp" , 
-           theta.k=theta.k , theta.kDES=theta.kDES , est.a="2PL" )           
+mod9 <- sirt::smirt(dat,Qmatrix=Qmatrix , maxiter=50 , irtmodel="comp" ,
+           theta.k=theta.k , theta.kDES=theta.kDES , est.a="2PL" )
 summary(mod9)
 
 #***
@@ -436,8 +436,8 @@ Qmatrix[,1] <- 1
 Qmatrix[ 6:10 , c(2,3) ] <- 1
 colnames(Qmatrix) <- c("F1" , "F2" , "F1iF2" )
 # estimate model
-mod10 <- sirt::smirt(dat,Qmatrix=Qmatrix ,irtmodel="comp" , theta.k=theta.k , 
-            theta.kDES= theta.kDES , est.a="2PL" )           
+mod10 <- sirt::smirt(dat,Qmatrix=Qmatrix ,irtmodel="comp" , theta.k=theta.k ,
+            theta.kDES= theta.kDES , est.a="2PL" )
 summary(mod10)
 
 #****
@@ -471,7 +471,7 @@ summary(mod1)
 
 #***
 # Model 2: 3-dimensional Rasch model
-mod2 <- sirt::smirt( dat , Qmatrix=Qmatrix , irtmodel="comp" , 
+mod2 <- sirt::smirt( dat , Qmatrix=Qmatrix , irtmodel="comp" ,
               qmcnodes=1000 , maxiter=20)
 summary(mod2)
 
@@ -482,7 +482,7 @@ variance.fixed <- cbind( c(1,1,2) , c(2,3,3) , 0 )
 # set the following covariances to zero: cov[1,2]=cov[1,3]=cov[2,3]=0
 
 # estimate model
-mod3 <- sirt::smirt( dat , Qmatrix=Qmatrix , irtmodel="comp" , est.a="2PL" , 
+mod3 <- sirt::smirt( dat , Qmatrix=Qmatrix , irtmodel="comp" , est.a="2PL" ,
              variance.fixed=variance.fixed , qmcnodes=1000 , maxiter=20)
 summary(mod3)
 
@@ -496,11 +496,11 @@ Qmatrix1 <- cbind( 1 , Qmatrix )
 variance.fixed <- cbind( c(1,1,1,2,2,3) , c(2,3,4,3,4,4) , 0 )
 # The first dimension refers to the general factors while the other
 # dimensions refer to the specific factors.
-# The specification means that: 
-# Cov[1,2]=Cov[1,3]=Cov[1,4]=Cov[2,3]=Cov[2,4]=Cov[3,4]=0 
+# The specification means that:
+# Cov[1,2]=Cov[1,3]=Cov[1,4]=Cov[2,3]=Cov[2,4]=Cov[3,4]=0
 
 # estimate model
-mod4 <- sirt::smirt( dat , Qmatrix=Qmatrix1 , irtmodel="comp" , est.a="2PL" , 
+mod4 <- sirt::smirt( dat , Qmatrix=Qmatrix1 , irtmodel="comp" , est.a="2PL" ,
              variance.fixed=variance.fixed , qmcnodes=1000 , maxiter=20)
 summary(mod4)
 
@@ -531,9 +531,9 @@ for (ii in 1:(3*I)){
     # define probability
     tmp1 <- exp( theta[,1] * Q[ii,1] - b[ii,1] +  theta[,2] * Q[ii,2] - b[ii,2] )
     # non-compensatory model
-    nco1 <- ( 1 + exp( theta[,1] * Q[ii,1] - b[ii,1] ) ) * 
+    nco1 <- ( 1 + exp( theta[,1] * Q[ii,1] - b[ii,1] ) ) *
                   ( 1 + exp( theta[,2] * Q[ii,2] - b[ii,2] ) )
-    co1 <- ( 1 + tmp1 )  
+    co1 <- ( 1 + tmp1 )
     p1 <- tmp1 / ( mui[ii] * nco1 + ( 1 - mui[ii] )*co1 )
     dat[,ii] <- 1 * ( stats::runif(N) < p1 )
 }

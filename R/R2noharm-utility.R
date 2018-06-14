@@ -1,5 +1,5 @@
 ## File Name: R2noharm-utility.R
-## File Version: 1.07
+## File Version: 1.08
 
 
 
@@ -8,7 +8,7 @@
 # utility functions for R2noharm
 
 #---------------------------------------------------------------
-# Read Tanaka Index                                             
+# Read Tanaka Index
 .noharm.tanaka <- function( noharmout1 ){
     i1 <- grep( "Tanaka" , noharmout1 )
     tanaka <- as.numeric( strsplit( paste(noharmout1[i1]) , split = "=" )[[1]][2] )
@@ -46,7 +46,7 @@
 
 
 #-------------------------------------------------------------------
-# Function for extracting factor loadings                           
+# Function for extracting factor loadings
 .noharm.loadings <- function( noharmout1 , type1 , type2 , dimensions=dimensions , I=I , dat = dat){
     i1 <- grep( type1 , noharmout1 )[1]
     i2 <- grep( type2 , noharmout1 )[1]
@@ -58,7 +58,7 @@
     VV <- length(r1)/2
     r2 <- stats::aggregate( r1 , list(rep( 1:VV , each=2 )) , mean )
     colnames(r2) <- c("index" , "index.row" )
-    index.m <- data.frame( r2 , "begin" = r2[,2] + 2 , 
+    index.m <- data.frame( r2 , "begin" = r2[,2] + 2 ,
                     "end" = c( r2[,2][-1] - 2 , i2-4 ) )
         if ( dimensions == 1 & type1 == "Factor Loadings"){
                 index.m$end <- i2 - 6
@@ -73,22 +73,22 @@
         ind.vv <- seq( index.m$begin[vv]  , index.m$end[vv] )
         loading.vv <- noharmout1[ ind.vv ]
         loading.vv <- sapply( loading.vv , FUN = function(ll){
-                            ll1 <- strsplit( paste(ll) , split=" " )[[1]] 
+                            ll1 <- strsplit( paste(ll) , split=" " )[[1]]
                             as.numeric( ll1[ ll1 != ll1[1] ] )
                                                 } )
         loading.vv <- as.matrix( loading.vv )
         ind.vv.row <- as.vector( loading.vv[1,] )
         loading.vv <-  loading.vv[-1,]
-        loading.matrix[ ind.vv.row , ind.vv.col ] <- t(loading.vv) 
-        }  
+        loading.matrix[ ind.vv.row , ind.vv.col ] <- t(loading.vv)
+        }
         return( loading.matrix )
         }
 #--------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------
-# Function for extracting Factor Correlations                              
-.noharm.correlations <- function( noharmout1 , 
-                        type1 = "Factor Correlations" , 
+# Function for extracting Factor Correlations
+.noharm.correlations <- function( noharmout1 ,
+                        type1 = "Factor Correlations" ,
                         type2 = "Residual Matrix" ,
                                     dimensions=dimensions , dat = dat ){
     i1 <- grep( type1, noharmout1 )[1]
@@ -98,7 +98,7 @@
     VV <- length(r1)/2
     r2 <- stats::aggregate( r1 , list(rep( 1:VV , each=2 )) , mean )
     colnames(r2) <- c("index" , "index.row" )
-    index.m <- data.frame( r2 , "begin" = r2[,2] + 2 , 
+    index.m <- data.frame( r2 , "begin" = r2[,2] + 2 ,
                     "end" = c( r2[,2][-1] - 2 , i2-4 ) )
     correlation.matrix <- matrix(NA,dimensions,dimensions)
     rownames(correlation.matrix) <- colnames(correlation.matrix) <- paste( "F" , 1:dimensions, sep="")
@@ -109,12 +109,12 @@
         ind.vv <- seq( index.m$begin[vv]  , index.m$end[vv] )
         correlation.vv <- noharmout1[ ind.vv ]
         correlation.vv <- sapply( correlation.vv , FUN = function(ll){
-                            ll1 <- strsplit( paste(ll) , split=" " )[[1]] 
+                            ll1 <- strsplit( paste(ll) , split=" " )[[1]]
                             as.vector( as.numeric( ll1[ ll1 != "" ] ))
                                                 } )
-        if ( is.list( correlation.vv ) ){ 
+        if ( is.list( correlation.vv ) ){
             ind.vv.row <- as.vector(unlist( lapply( correlation.vv , FUN = function(ll){ ll[1] } ) ))
-            correlation.vv <-  lapply( correlation.vv , FUN = function(ll){ ll[-1] } ) 
+            correlation.vv <-  lapply( correlation.vv , FUN = function(ll){ ll[-1] } )
             } else {
             correlation.vv <- as.vector( correlation.vv )
             ind.vv.row <- correlation.vv[1]
@@ -124,14 +124,14 @@
         for (rvv in 1:RVV){
             correlation.vv.rvv <- correlation.vv[[rvv]]
             i1.rvv <- ind.vv.row[rvv]
-            i2.rvv <- ind.vv.col[ seq( 1 , length(correlation.vv.rvv)) ]              
+            i2.rvv <- ind.vv.col[ seq( 1 , length(correlation.vv.rvv)) ]
             correlation.matrix[ i2.rvv , i1.rvv ] <- correlation.matrix[ i1.rvv , i2.rvv ] <- correlation.vv.rvv
                 }
-        }  
-    correlation.matrix 
+        }
+    correlation.matrix
         }
 #---------------------------------------------------------------------------------------------
-        
+
 
 
 #--------------------------------------------------------------------------#
@@ -144,7 +144,7 @@
     VV <- length(r1)/2
     r2 <- stats::aggregate( r1 , list(rep( 1:VV , each=2 )) , mean )
     colnames(r2) <- c("index" , "index.row" )
-    index.m <- data.frame( r2 , "begin" = r2[,2] + 2 , 
+    index.m <- data.frame( r2 , "begin" = r2[,2] + 2 ,
 #                    "end" = c( r2[,2][-1] - 2 , i2-4 ) )
                     "end" = c( r2[,2][-1] - 2 , i2-3 ) )
     resid.matrix <- matrix(0,I,I)
@@ -156,17 +156,17 @@
         ind.vv <- seq( index.m$begin[vv]  , index.m$end[vv] )
         resid.vv <- noharmout1[ ind.vv ]
         resid.vv <- sapply( resid.vv , FUN = function(ll){
-                            ll1 <- strsplit( paste(ll) , split=" " )[[1]] 
+                            ll1 <- strsplit( paste(ll) , split=" " )[[1]]
                             as.numeric( ll1[ ll1 != "" ] )
-                                                } )                                
-    if (is.list( resid.vv)){ 
+                                                } )
+    if (is.list( resid.vv)){
             gh1 <- lapply( resid.vv , FUN = function(ll){ length(ll) } )
             ind1 <- which (gh1 == 0)
             if ( length(ind1) > 0 ){
                 for (ii in ind1 ){    resid.vv[[ii]] <- NULL }
                         }
             ind.vv.row <- as.vector(unlist( lapply( resid.vv , FUN = function(ll){ ll[1] } ) ))
-            resid.vv <-  lapply( resid.vv , FUN = function(ll){ ll[-1] } ) 
+            resid.vv <-  lapply( resid.vv , FUN = function(ll){ ll[-1] } )
                         } else {
                         resid.vv <- as.vector(resid.vv)
                         ind.vv.row <- resid.vv[1]
@@ -176,10 +176,10 @@
         for (rvv in 1:RVV){
             resid.vv.rvv <- resid.vv[[rvv]]
             i1.rvv <- ind.vv.row[rvv]
-            i2.rvv <- ind.vv.col[ seq( 1 , length(resid.vv.rvv)) ]              
+            i2.rvv <- ind.vv.col[ seq( 1 , length(resid.vv.rvv)) ]
             resid.matrix[ i2.rvv , i1.rvv ] <- resid.matrix[ i1.rvv , i2.rvv ] <- resid.vv.rvv
                 }
-        }  
+        }
         return( resid.matrix )
         }
 #-------------------------------------------------------------------------------------

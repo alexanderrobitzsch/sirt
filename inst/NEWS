@@ -36,11 +36,13 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.7  |  2018-05-04  |  Last: sirt 2.7-24
+VERSIONS sirt 2.7  |  2018-06-14  |  Last: sirt 2.7-27
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in tam2mirt() for models with polytomous data which
         do not contain any dichotomous item (thanks to Sarah Anne Aretz)
+FIXED * fixed an incorrect subject order in outfit/infit statistics
+        in btm() (thanks to Stephen Holmes)
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---

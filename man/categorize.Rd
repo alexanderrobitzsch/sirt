@@ -1,5 +1,5 @@
 %% File Name: categorize.Rd
-%% File Version: 0.10
+%% File Version: 0.11
 
 \name{categorize}
 \alias{categorize}
@@ -42,7 +42,7 @@ have names containing variable names.}
 Lowest category index. Default is 0.
 }
 \item{categ_design}{Data frame containing informations about
-categorization which is the output of \code{categorize}.} 
+categorization which is the output of \code{categorize}.}
 }
 
 %\details{
@@ -77,14 +77,14 @@ Alexander Robitzsch
 %}
 
 \examples{
-\dontrun{    
-library(mice)    
+\dontrun{
+library(mice)
 library(miceadds)
-    
+
 #############################################################################
 # EXAMPLE 1: Categorize questionnaire data
-#############################################################################    
-    
+#############################################################################
+
 data(data.smallscale , package="miceadds")
 dat <- data.smallscale
 
@@ -106,7 +106,7 @@ dat3 <- mice::complete(imp,action=1)
 
 # (3) decategorize dataset
 dat3a <- sirt::decategorize( dat3 , categ_design = res$categ_design )
-    
+
 #############################################################################
 # EXAMPLE 2: Categorize ordinal and continuous data
 #############################################################################

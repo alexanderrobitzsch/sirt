@@ -1,5 +1,5 @@
 %% File Name: ccov.np.Rd
-%% File Version: 0.11
+%% File Version: 0.12
 
 \name{ccov.np}
 \alias{ccov.np}
@@ -13,7 +13,7 @@ This function estimates conditional covariances of itempairs
 1999a). The function is used for the estimation of the DETECT index.
 }
 \usage{
-ccov.np(data, score, bwscale = 1.1, thetagrid = seq(-3, 3, len = 200), 
+ccov.np(data, score, bwscale = 1.1, thetagrid = seq(-3, 3, len = 200),
     progress = TRUE, scale_score = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -30,7 +30,7 @@ Bandwidth factor for calculation of conditional covariance. The bandwidth
 used in the estimation is \code{bwscale} times \eqn{N^{-1/5}}.
 }
   \item{thetagrid}{
-A vector which contains theta values where conditional 
+A vector which contains theta values where conditional
 covariances are evaluated.
 }
   \item{progress}{
@@ -42,12 +42,12 @@ conditional covariances}
 }
 
 \references{
-Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996). 
-Conditional covariance-based nonparametric multidimensionality assessment. 
+Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996).
+Conditional covariance-based nonparametric multidimensionality assessment.
 \emph{Applied Psychological Measurement}, \bold{20}, 331-354.
 
-Zhang, J., & Stout, W. (1999). Conditional covariance structure 
-of generalized compensatory multidimensional items, 
+Zhang, J., & Stout, W. (1999). Conditional covariance structure
+of generalized compensatory multidimensional items,
 \emph{Psychometrika}, \bold{64}, 129-152.
 }
 \author{

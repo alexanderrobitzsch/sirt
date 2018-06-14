@@ -1,5 +1,5 @@
 %% File Name: matrixfunctions.sirt.Rd
-%% File Version: 1.11
+%% File Version: 1.12
 
 \name{matrixfunctions.sirt}
 
@@ -48,7 +48,7 @@ extracted}
 
 \details{
 The function \code{rowIntervalIndex.sirt} searches for all rows \code{n}
-the first index \code{i} for which \code{matr(n,i) > rn(n)} holds. 
+the first index \code{i} for which \code{matr(n,i) > rn(n)} holds.
 
 The functions \code{rowKSmallest.sirt} and \code{rowKSmallest2.sirt}
 extract the \eqn{K} smallest entries in a matrix row. For small
@@ -59,7 +59,7 @@ the faster one.
 \value{
 The output of \code{rowMaxs.sirt} is a list with the elements
 \code{maxval} (rowwise maximum values) and \code{maxind} (rowwise
-maximum indices). The output of \code{rowMins.sirt} contains 
+maximum indices). The output of \code{rowMins.sirt} contains
 corresponding minimum values with entries \code{minval} and
 \code{minind}.
 
@@ -78,7 +78,7 @@ The output of \code{rowKSmallest.sirt} are two matrices:
 Alexander Robitzsch
 
 The \pkg{Rcpp} code for \code{rowCumsums.sirt} is copied from code of
-Romain Francois 
+Romain Francois
 (\url{http://lists.r-forge.r-project.org/pipermail/rcpp-devel/2010-October/001198.html}).
 }
 
@@ -105,7 +105,7 @@ rowMaxs.sirt(M1)      # rowwise maximum
 rowMins.sirt(M1)      # rowwise minimum
 rowCumsums.sirt(M1)   # rowwise cumulative sum
 
-# row index for exceeding a certain threshold value  
+# row index for exceeding a certain threshold value
 matr <- M1
 matr <- matr / rowSums( matr )
 matr <- sirt::rowCumsums.sirt( matr )

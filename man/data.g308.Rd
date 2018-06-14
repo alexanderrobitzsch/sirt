@@ -1,5 +1,5 @@
 %% File Name: data.g308.Rd
-%% File Version: 0.11
+%% File Version: 0.12
 
 \name{data.g308}
 \alias{data.g308}
@@ -57,8 +57,8 @@ structures: An example with C-tests.
 \dontrun{
 #############################################################################
 # EXAMPLE 1: Dataset G308 from Schroeders et al. (2014)
-#############################################################################    
-    
+#############################################################################
+
 data(data.g308)
 dat <- data.g308
 
@@ -74,7 +74,7 @@ testlet <- c(1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 4, 5, 5, 6, 6, 6)
 mod1 <- TAM::tam.mml(resp = dat[,-1], pid = dat[,1],
        control = list(maxiter = 300 , snodes = 1500))
 summary(mod1)
-    
+
 #****************************************
 #*** Model 2: Rasch testlet model
 

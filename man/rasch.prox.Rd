@@ -1,5 +1,5 @@
 %% File Name: rasch.prox.Rd
-%% File Version: 1.10
+%% File Version: 1.11
 
 \name{rasch.prox}
 \alias{rasch.prox}
@@ -8,17 +8,17 @@
 PROX Estimation Method for the Rasch Model
 }
 \description{
-This function estimates the Rasch model using the PROX algorithm 
+This function estimates the Rasch model using the PROX algorithm
 (cited in Wright & Stone, 1999).
 }
 \usage{
-rasch.prox(dat, dat.resp = 1 - is.na(dat), freq=rep(1,nrow(dat)) , 
+rasch.prox(dat, dat.resp = 1 - is.na(dat), freq=rep(1,nrow(dat)) ,
     conv = 0.001, maxiter = 30, progress = FALSE)
 }
 \arguments{
   \item{dat}{
-An \eqn{N \times I} data frame of dichotomous response data. \code{NA}s 
-are not allowed and must be indicated by zero entries in the 
+An \eqn{N \times I} data frame of dichotomous response data. \code{NA}s
+are not allowed and must be indicated by zero entries in the
 response indicator matrix \code{dat.resp}.
 }
   \item{dat.resp}{

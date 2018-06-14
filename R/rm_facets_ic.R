@@ -1,11 +1,11 @@
 ## File Name: rm_facets_ic.R
-## File Version: 0.13
+## File Version: 0.14
 
 #########################################################################
 # computation information criteria
 rm_facets_ic <- function( dev , dat2 , VV , RR , maxK , a.item.center,
         est.a.item , est.b.rater , est.a.rater , est.mean ,
-        b.rater.center , a.rater.center , b.rater.fixed , 
+        b.rater.center , a.rater.center , b.rater.fixed ,
         a.rater.fixed , tau.item.fixed_val , a.item.fixed
         )
 {
@@ -23,18 +23,18 @@ rm_facets_ic <- function( dev , dat2 , VV , RR , maxK , a.item.center,
     b1 <- VV-a.item.center
     if ( ! is.null(a.item.fixed) ){
         b1 <- b1 - sum( ! is.na( a.item.fixed ) )
-    }    
+    }
     ic$np.item <- ic$np.item + est.a.item*b1
     #****
     #-- rater parameters
-    ic$np.rater <- 0    
+    ic$np.rater <- 0
     # b.rater
     b1 <- RR-b.rater.center
     if ( ! is.null(b.rater.fixed) ){
         b1 <- b1 - sum( ! is.na( b.rater.fixed ) )
     }
     ic$np.rater <- est.b.rater*b1
-    # a.rater    
+    # a.rater
     b1 <- RR-a.rater.center
     if ( ! is.null(a.rater.fixed) ){
         b1 <- b1 - sum( ! is.na( a.rater.fixed ) )
@@ -44,9 +44,9 @@ rm_facets_ic <- function( dev , dat2 , VV , RR , maxK , a.item.center,
     ic$np.trait <- 1 + est.mean
     # estimated parameters
     ic$np <- ic$np.trait + ic$np.item + ic$np.rater
-    
+
     #-- compute information criteria
-    ic <- rm_ic_criteria(ic=ic)        
+    ic <- rm_ic_criteria(ic=ic)
     return(ic)
 }
-#########################################################################    
+#########################################################################

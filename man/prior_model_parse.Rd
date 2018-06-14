@@ -1,5 +1,5 @@
 %% File Name: prior_model_parse.Rd
-%% File Version: 0.05
+%% File Version: 0.06
 
 \name{prior_model_parse}
 \alias{prior_model_parse}
@@ -62,7 +62,7 @@ prior_model <- "
   sig1 ~ dunif(NA,0 , max=10)
       "
 
-#*** convert priors into a list  
+#*** convert priors into a list
 res <- sirt::prior_model_parse( prior_model )
 str(res)
   ##  List of 3

@@ -1,5 +1,5 @@
 ## File Name: sirt_rbind_fill.R
-## File Version: 0.01
+## File Version: 0.02
 
 ## reimplementation of plyr::rbind.fill
 
@@ -12,6 +12,6 @@ sirt_rbind_fill <- function( x , y )
     colnames(z) <- vars
     z <- as.data.frame(z)
     z[ 1:nx , colnames(x) ] <- x
-    z[ nx + 1:ny , colnames(y) ] <- y    
+    z[ nx + 1:ny , colnames(y) ] <- y
     return(z)
 }

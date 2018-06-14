@@ -1,11 +1,11 @@
 %% File Name: reliability.nonlinearSEM.Rd
-%% File Version: 0.13
+%% File Version: 0.14
 
 \name{reliability.nonlinearSEM}
 \alias{reliability.nonlinearSEM}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Estimation of Reliability for Confirmatory Factor Analyses 
+Estimation of Reliability for Confirmatory Factor Analyses
 Based on Dichotomous Data
 }
 \description{
@@ -25,7 +25,7 @@ Vector of thresholds
 }
 \item{resid.cov}{Matrix of residual covariances}
   \item{cor.factors}{
-Optional matrix of covariances (correlations) between factors. The 
+Optional matrix of covariances (correlations) between factors. The
 default is a diagonal matrix with variances of 1.
 }
 }
@@ -37,9 +37,9 @@ A list. The reliability is the list element \code{omega.rel}
 }
 
 \references{
-Green, S. B., & Yang, Y. (2009). Reliability of summed item 
-scores using structural equation modeling: An alternative to 
-coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167. 
+Green, S. B., & Yang, Y. (2009). Reliability of summed item
+scores using structural equation modeling: An alternative to
+coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167.
 }
 \author{
 Alexander Robitzsch
@@ -79,12 +79,12 @@ A <- matrix( mod1$item$a * mod1$item$sigma , I , 1 )
 corM <- mod1$eps.corrM
 # compute standardized factor loadings
 facA <- 1 / sqrt( A^2 + 1 )
-resvar <- 1 - facA^2 
+resvar <- 1 - facA^2
 covM <- outer( sqrt(resvar[,1]) , sqrt(resvar[,1] ) ) * corM
 facloadings <- A *facA
 
 # estimate reliability
-rel1 <- sirt::reliability.nonlinearSEM( facloadings =facloadings , thresh =thresh , 
+rel1 <- sirt::reliability.nonlinearSEM( facloadings =facloadings , thresh =thresh ,
            resid.cov=covM)
 rel1$omega.rel
 }

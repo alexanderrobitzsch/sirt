@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.itemcluster.Rd
-%% File Version: 0.28
+%% File Version: 0.29
 
 \name{rasch.pairwise.itemcluster}
 \alias{rasch.pairwise.itemcluster}
@@ -17,7 +17,7 @@ rasch.pairwise.itemcluster(dat, itemcluster = NULL, b.fixed=NULL ,
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{dat}{An \eqn{N \times I} data frame. 
+  \item{dat}{An \eqn{N \times I} data frame.
   Missing responses are allowed and must be recoded as \code{NA}.
 }
   \item{itemcluster}{
@@ -47,16 +47,16 @@ Vector of initial item difficulty estimates. Default is \code{NULL}.
 
 }
 \details{
-This is an adaptation of the algorithm of van der Linden and Eggen (1986). Only item pairs 
-of different item clusters are taken into account for item difficulty estimation. 
-Therefore, the problem of locally dependent items within each itemcluster is (almost) 
+This is an adaptation of the algorithm of van der Linden and Eggen (1986). Only item pairs
+of different item clusters are taken into account for item difficulty estimation.
+Therefore, the problem of locally dependent items within each itemcluster is (almost)
 eliminated (see Examples below) because contributions of local dependencies
 do not appear in the pairwise likelihood terms. In detail, the estimation rests
-on observed frequency tables of items \eqn{i} and \eqn{j} and therefore on conditional 
-probabilities 
+on observed frequency tables of items \eqn{i} and \eqn{j} and therefore on conditional
+probabilities
 \deqn{ \frac{P(X_i = x , X_j=y)}{P(X_i + X_j = 1 )} \quad \mbox{with}
 \quad x,y=0,1 \quad \mbox{and} \quad x+y=1 }
-If for some item pair \eqn{(i,j)} a higher positive (or negative) correlation 
+If for some item pair \eqn{(i,j)} a higher positive (or negative) correlation
 is expected (i.e. deviation from local dependence), then this pair is
 removed from estimation. Clearly, there is a loss in precision but item
 parameters can be less biased.
@@ -88,21 +88,21 @@ Alexander Robitzsch
 }
 \note{
 No standard errors are provided by this function. Use resampling
-methods for conducting statistical inference. 
+methods for conducting statistical inference.
 
-Formulas for asymptotic standard errors of this pairwise estimation method are 
+Formulas for asymptotic standard errors of this pairwise estimation method are
 described in Zwinderman (1995).
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{rasch.pairwise}}, \code{\link{summary.rasch.pairwise}}, 
+\code{\link{rasch.pairwise}}, \code{\link{summary.rasch.pairwise}},
 
 Pairwise marginal likelihood estimation (also labeled as pseudolikelihood
 estimation) can be conducted with \code{\link{rasch.pml3}}.
 
-Other estimation methods are implemented in \code{\link{rasch.copula2}} or  
+Other estimation methods are implemented in \code{\link{rasch.copula2}} or
 \code{\link{rasch.mml2}}.
 
 For simulation of locally dependent data see \code{\link{sim.rasch.dep}}.
@@ -115,7 +115,7 @@ For simulation of locally dependent data see \code{\link{sim.rasch.dep}}.
 #      12 Items: Cluster 1 -> Items 1,...,4
 #                Cluster 2 -> Items 6,...,9
 #                Cluster 3 -> Items 10,11,12
-#############################################################################    
+#############################################################################
 
 set.seed(7896)
 I <- 12                             # number of items
@@ -154,9 +154,9 @@ summary(mod5)
 
 # compare different item parameter estimates
 M1 <- cbind( "true.b"=bsamp ,  "b.rasch" = mod4$item$b ,
-        "b.rasch.copula" =  mod5$item$thresh , 
+        "b.rasch.copula" =  mod5$item$thresh ,
         "b.rasch.pairwise" = mod3$b  ,
-        "b.rasch.pairwise.cluster" = mod$b 
+        "b.rasch.pairwise.cluster" = mod$b
       )
 # center item difficulties
 M1 <- scale( M1  , scale=FALSE )
@@ -183,14 +183,14 @@ round( apply( M1 , 2 , stats::sd ) , 3 )
   ##   I11  0.182   0.241          0.226            0.109                    0.232
   ##   I12  2.000   2.155          2.039            2.154                    2.026
   ##   > round( apply( M1 , 2 , sd ) , 3 )
-  ##                     true.b                  b.rasch           b.rasch.copula       
-  ##                      1.311                    1.398                    1.310   
-  ##      b.rasch.pairwise    b.rasch.pairwise.cluster 
+  ##                     true.b                  b.rasch           b.rasch.copula
+  ##                      1.311                    1.398                    1.310
+  ##      b.rasch.pairwise    b.rasch.pairwise.cluster
   ##                 1.373                       1.310   }
 
 # set item parameters of first item to 0 and of second item to -0.7
 b.fixed <- cbind( c(1,2) , c(0,-.7) )
-mod5 <- sirt::rasch.pairwise.itemcluster( dat = dat , b.fixed=b.fixed, 
+mod5 <- sirt::rasch.pairwise.itemcluster( dat = dat , b.fixed=b.fixed,
              itemcluster = itemcluster )
 # difference between estimations 'mod' and 'mod5'
 dfr <- cbind( mod5$item$b , mod$item$b )

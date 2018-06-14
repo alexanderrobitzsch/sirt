@@ -1,5 +1,5 @@
 ## File Name: weighted_stats_extend_wgt.R
-## File Version: 0.03
+## File Version: 0.04
 
 weighted_stats_extend_wgt <- function( wgt , mat )
 {
@@ -9,7 +9,7 @@ weighted_stats_extend_wgt <- function( wgt , mat )
         wgt <- rep( 1 , N1 )
     }
     if ( is.vector(wgt) ){
-        wgt <- matrix( wgt , nrow = N1 , ncol= N2 )    
-    }    
+        wgt <- matrix( wgt , nrow = N1 , ncol= N2 )
+    }
     return(wgt)
 }

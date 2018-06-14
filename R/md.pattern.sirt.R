@@ -1,5 +1,5 @@
 ## File Name: md.pattern.sirt.R
-## File Version: 0.06
+## File Version: 0.07
 
 ###########################################
 # Function for analyzing response patterns
@@ -10,14 +10,14 @@ md.pattern.sirt <- function(dat){
     }
     res <- md_pattern_rcpp( dat_=dat )
     rp_unique <- unique(res$unique_resp_patt)
-    res$unique_resp_patt <- match( res$unique_resp_patt , rp_unique )    
+    res$unique_resp_patt <- match( res$unique_resp_patt , rp_unique )
     res$resp_patt <- match( res$resp_patt , rp_unique )
     res$dat.ordered <- res$dat[ order( res$resp_patt ) , ]
     return(res)
 }
-#*******************************************            
+#*******************************************
 # calling the Rcpp function
-md_pattern_rcpp <- function (dat_){ 
+md_pattern_rcpp <- function (dat_){
     md_pattern_csource( dat_ )
-}            
-#*******************************************                    
+}
+#*******************************************

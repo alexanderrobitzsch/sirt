@@ -1,5 +1,5 @@
 %% File Name: IRT.mle.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{IRT.mle}
 \alias{IRT.mle}
@@ -8,16 +8,16 @@
 Person Parameter Estimation
 }
 \description{
-Computes the maximum likelihood estimate (MLE), 
+Computes the maximum likelihood estimate (MLE),
 weighted likelihood estimate (WLE) and maximum aposterior
-estimate (MAP) of ability in unidimensional item response models 
-(Penfield & Bergeron, 2005; Warm, 1989). Item response functions can be 
+estimate (MAP) of ability in unidimensional item response models
+(Penfield & Bergeron, 2005; Warm, 1989). Item response functions can be
 defined by the user.
 }
 
 \usage{
-IRT.mle(data, irffct, arg.list, theta=rep(0,nrow(data)), type = "MLE", 
-     mu=0, sigma=1, maxiter = 20, maxincr = 3, h = 0.001, convP = 1e-04, 
+IRT.mle(data, irffct, arg.list, theta=rep(0,nrow(data)), type = "MLE",
+     mu=0, sigma=1, maxiter = 20, maxincr = 3, h = 0.001, convP = 1e-04,
      maxval = 9, progress = TRUE)
 }
 
@@ -38,7 +38,7 @@ Initial ability estimate
 List of arguments for \code{irffct}.
 }
   \item{type}{Type of ability estimate. It can be \code{"MLE"} (the default),
-        \code{"WLE"} or \code{"MAP"}. 
+        \code{"WLE"} or \code{"MAP"}.
 }
 \item{mu}{Mean of normal prior distribution (for \code{type="MAP"})}
 \item{sigma}{Standard deviation of normal prior distribution (for \code{type="MAP"})}
@@ -73,11 +73,11 @@ Data frame with estimated abilities (\code{est}) and its standard error
 }
 
 \references{
-Penfield, R. D., & Bergeron, J. M. (2005). Applying a weighted 
-maximum likelihood latent trait estimator to the generalized 
+Penfield, R. D., & Bergeron, J. M. (2005). Applying a weighted
+maximum likelihood latent trait estimator to the generalized
 partial credit model. \emph{Applied Psychological Measurement},
-\bold{29}, 218-233.    
-    
+\bold{29}, 218-233.
+
 Warm, T. A. (1989). Weighted likelihood estimation of ability in item response theory.
 \emph{Psychometrika}, \bold{54}, 427-450.
 }
@@ -107,7 +107,7 @@ data(data.ratings1)
 dat <- data.ratings1
 
 # estimate model
-mod1 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ], rater=dat$rater, 
+mod1 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ], rater=dat$rater,
              pid=dat$idstud  , maxiter=15)
 # extract dataset and item parameters
 data <- mod1$procdata$dat2.NA
@@ -121,7 +121,7 @@ calc.pcm <- function( theta , a , b , ii ){
     matrK <- matrix( 0:K , nrow=N , ncol=K+1 , byrow=TRUE)
     eta <- a[ii] * theta * matrK - matrix( c(0,b[ii,]), nrow=N, ncol=K+1, byrow=TRUE)
     eta <- exp(eta)
-    probs <- eta / rowSums(eta, na.rm=TRUE)    
+    probs <- eta / rowSums(eta, na.rm=TRUE)
     return(probs)
 }
 arg.list <- list("a"=a , "b"=b )
@@ -133,7 +133,7 @@ str(abil1)
 abil2 <- sirt::IRT.mle( data, irffct=calc.pcm, theta=theta0, arg.list=arg.list, type="WLE")
 str(abil2)
 # MAP with prior distribution N(.2, 1.3)
-abil3 <- sirt::IRT.mle( data, irffct=calc.pcm, theta=theta0, arg.list=arg.list, 
+abil3 <- sirt::IRT.mle( data, irffct=calc.pcm, theta=theta0, arg.list=arg.list,
               type="MAP", mu=.2, sigma=1.3 )
 str(abil3)
 
@@ -161,7 +161,7 @@ theta0 <- mod1$person$EAP
 arg.list <- list( "b" = mod1$item$b  )
 
 # estimate WLE
-abil <- sirt::IRT.mle( data = dat , irffct=irffct , arg.list=arg.list , 
+abil <- sirt::IRT.mle( data = dat , irffct=irffct , arg.list=arg.list ,
             theta=theta0, type="WLE")
 # compare with wle.rasch function
 theta <- sirt::wle.rasch( dat , b= mod1$item$b )
@@ -191,7 +191,7 @@ arg.list <- list( "b" = mod1$item2$b , "K"=mod1$item2$K )
 # estimate MLE
 res <- sirt::IRT.mle( data = dat , irffct=irffct , arg.list=arg.list , theta=theta0 ,
             maxval=20 , maxiter=50)
-}    
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

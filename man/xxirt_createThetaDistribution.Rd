@@ -1,5 +1,5 @@
 %% File Name: xxirt_createThetaDistribution.Rd
-%% File Version: 0.06
+%% File Version: 0.07
 
 \name{xxirt_createThetaDistribution}
 \alias{xxirt_createThetaDistribution}
@@ -13,7 +13,7 @@ Creates a user defined theta distribution.
 }
 
 \usage{
-xxirt_createThetaDistribution(par, est, P, prior = NULL, prior_par1 = NULL, 
+xxirt_createThetaDistribution(par, est, P, prior = NULL, prior_par1 = NULL,
        prior_par2 = NULL)
 }
 
@@ -23,10 +23,10 @@ xxirt_createThetaDistribution(par, est, P, prior = NULL, prior_par1 = NULL,
 Parameter vector with starting values
 }
   \item{est}{
-Vector of logicals indicating which parameters should be estimated 
+Vector of logicals indicating which parameters should be estimated
 }
   \item{P}{
-Distribution function for \eqn{\bold{\theta}} 
+Distribution function for \eqn{\bold{\theta}}
 }
   \item{prior}{
 Prior distribution
@@ -73,7 +73,7 @@ Alexander Robitzsch
 #############################################################################
 ## EXAMPLE 1: Definition of theta distribution
 #############################################################################
-    
+
 #** theta grid
 Theta <- matrix( seq(-10,10,length=31) , ncol=1 )
 
@@ -89,8 +89,8 @@ P_Theta1 <- function( par , Theta , G){
     return(pi_Theta)
                 }
 #** create distribution class
-par_Theta <- c( "mu"=0, "sigma" = 1 )  
-customTheta  <- sirt::xxirt_createThetaDistribution( par=par_Theta , 
+par_Theta <- c( "mu"=0, "sigma" = 1 )
+customTheta  <- sirt::xxirt_createThetaDistribution( par=par_Theta ,
                        est=c(FALSE,TRUE), P=P_Theta1 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

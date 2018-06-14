@@ -1,5 +1,5 @@
 ## File Name: lc.2raters.aux.R
-## File Version: 0.03
+## File Version: 0.04
 
 #########################################
 # data preparation exchanegable raters
@@ -56,7 +56,7 @@ lc2.agreement <- function( m1 ){
     pek <- sum( pk*(1-pk) ) / ( K - 1 )
     pa <- sum( diag(p1))
     res$AC1 <- ( pa - pek) / ( 1 - pek )
-    res$alpha.aickin <- alpha.aickin(m1)    
+    res$alpha.aickin <- alpha.aickin(m1)
     res <- unlist(res)
     }
 ################################################################
@@ -71,14 +71,14 @@ alpha.aickin <- function(m1){
     pek <- sum( pk^2 )
     pa <- sum( diag(p1) )
     ckappa <- ( pa - pek ) / ( 1 - pek )
-    Q <- ncol(m1)    
+    Q <- ncol(m1)
     alpha <- ckappa
     pkH <- pk
     pet <- sum( pkH^2 )
     conv <- .001
     iter <- 0
     maxit <- 100
-    par.change <- 1    
+    par.change <- 1
     while( ( par.change > conv ) & ( iter < maxit ) ){
         alpha0 <- alpha
         pkH0 <- pkH

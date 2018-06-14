@@ -1,9 +1,9 @@
 ## File Name: rasch.mml2.missing1.R
-## File Version: 1.14
+## File Version: 1.15
 
 ####################################################################
 # calculation of probabilities in the missing data IRT model
-.calcprob.missing1 <- function( theta.k , b , beta , delta.miss , pjk ){    
+.calcprob.missing1 <- function( theta.k , b , beta , delta.miss , pjk ){
     M1 <- t( stats::plogis( outer( theta.k[,1] , b , "-" ) ))
     # probability of a response for incorrect item responses
     M2a <- t( stats::plogis( outer( theta.k[,2] , beta , "-" ) ))
@@ -19,35 +19,35 @@
     return(pjk)
     }
 
-#######################################################################    
-# E step missing data IRT model            
+#######################################################################
+# E step missing data IRT model
 .e.step.missing1 <- function( dat2 , dat2.resp , theta.k , b , beta , delta.miss , I , CC ,
         TP , group_ , pi.k , pjk  , weights ){
-# zz0 <- Sys.time()        
+# zz0 <- Sys.time()
     #********************
     # calculate probability
     # probability correct response
-    pjk <- .calcprob.missing1( theta.k , b , beta , delta.miss , pjk )    
-#  cat("-- calcprob missing1") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1    
-    
+    pjk <- .calcprob.missing1( theta.k , b , beta , delta.miss , pjk )
+#  cat("-- calcprob missing1") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1
+
     #******
     # calculate likelihood
-    # SEXP probs_pcm_groups_C( SEXP dat_, SEXP dat_resp_, SEXP group_, SEXP probs_, 
+    # SEXP probs_pcm_groups_C( SEXP dat_, SEXP dat_resp_, SEXP group_, SEXP probs_,
     #     SEXP CC_, SEXP TP_ ){
     probs_ <- as.matrix( array( pjk , dim=c(I ,CC*TP) ) )
-    #         // probs ( ii , cc , tt , gg ) =   
-    #         // probs_C(ii ,  cc + tt*CC + gg * CC*TP ) 
+    #         // probs ( ii , cc , tt , gg ) =
+    #         // probs_C(ii ,  cc + tt*CC + gg * CC*TP )
     m1 <- probs_pcm_groups_C( dat2 , dat2.resp , group_ , probs_ , CC , TP )
-    f.yi.qk <- m1$fyiqk    
-# cat("-- likelihood") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1        
+    f.yi.qk <- m1$fyiqk
+# cat("-- likelihood") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1
 # likelihood purely written in R is much slower
     #****
     # calculate expected counts
-    # SEXP calccounts_pcm_groups_C( SEXP dat_, SEXP dat_resp_, SEXP group_, SEXP fyiqk_, 
+    # SEXP calccounts_pcm_groups_C( SEXP dat_, SEXP dat_resp_, SEXP group_, SEXP fyiqk_,
     #     SEXP pik_, SEXP CC_, SEXP weights_ ){
-    e1 <- calccounts_pcm_groups_C( 
+    e1 <- calccounts_pcm_groups_C(
                     dat2 , dat2.resp , group_, f.yi.qk , pi.k , CC , weights )
-# cat("-- posterior and counts") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1                            
+# cat("-- posterior and counts") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1
     e1$f.yi.qk <- f.yi.qk
     v1 <- array( e1$nik , dim=c(I,CC,TP) )
     e1$pjk <- pjk
@@ -64,8 +64,8 @@
 ####################################################################
 # general function for numerical differentiation
 # diffindex aggregates across super items
-.mml2.numdiff.index <- function( pjk , pjk1 , pjk2 , n.ik , diffindex , 
-        max.increment , numdiff.parm , eps=10^(-80) ){                    
+.mml2.numdiff.index <- function( pjk , pjk1 , pjk2 , n.ik , diffindex ,
+        max.increment , numdiff.parm , eps=10^(-80) ){
     h <- numdiff.parm
     an.ik <- n.ik
     ll0 <- rowSums( an.ik * log(pjk+eps) )
@@ -82,32 +82,32 @@
     d2[ abs(d2) < 10^(-10) ] <- 10^(-10)
     increment <- - d1 / d2
     ci <- ceiling( abs(increment) / ( abs( max.increment) + 10^(-10) ) )
-    increment <- ifelse( abs( increment) > abs(max.increment)  , 
-                                 increment/(2*ci) , increment )    
-#    increment <- ifelse( abs( increment) > max.increment , 
-#            max.increment*sign(increment) , increment ) 
+    increment <- ifelse( abs( increment) > abs(max.increment)  ,
+                                 increment/(2*ci) , increment )
+#    increment <- ifelse( abs( increment) > max.increment ,
+#            max.increment*sign(increment) , increment )
     res <- list("increment"=increment , "d2"=d2 , "ll0"=ll0)
     return(res)
         }
 ########################################################
 ########################################################
-# M-step for missing data model            
-.mstep.mml.missing1 <- function( theta.k , n.ik , mitermax , conv1 , 
+# M-step for missing data model
+.mstep.mml.missing1 <- function( theta.k , n.ik , mitermax , conv1 ,
         b , beta , delta.miss , pjk , numdiff.parm ,
         constraints , est.delta , min.beta , est_delta ){
     h <- numdiff.parm
     se.delta <- 0
-    miter <- 0 
+    miter <- 0
     diffindex <- seq( 1 , length(b) )
-    
-    
+
+
     diffindex1 <- est.delta
-    
+
     # diffindex1 <- rep( 1 , length(b) )
     # diffindex1 <- seq( 1 , length(b) )
-    
+
     # est_delta <- sum( 1 - is.na( est.delta) ) > 0
-    
+
 #    Q0 <- 0 * c.rater
     max_incr_b <- 1
     max_incr_beta <- 1
@@ -116,54 +116,54 @@
     while( ( miterchange > conv1 ) & ( miter < mitermax ) ){
         #--- update b
         b0 <- b
-        pjk <- .calcprob.missing1( theta.k , b , beta , delta.miss , pjk )                
-        pjk1 <- .calcprob.missing1( theta.k , b+h , beta, delta.miss , pjk )                
-        pjk2 <- .calcprob.missing1( theta.k , b-h , beta, delta.miss , pjk )                
-        # numerical differentiation            
-        res <- .mml2.numdiff.index( pjk , pjk1 , pjk2 , n.ik , diffindex , 
-                max.increment= max_incr_b , numdiff.parm )            
+        pjk <- .calcprob.missing1( theta.k , b , beta , delta.miss , pjk )
+        pjk1 <- .calcprob.missing1( theta.k , b+h , beta, delta.miss , pjk )
+        pjk2 <- .calcprob.missing1( theta.k , b-h , beta, delta.miss , pjk )
+        # numerical differentiation
+        res <- .mml2.numdiff.index( pjk , pjk1 , pjk2 , n.ik , diffindex ,
+                max.increment= max_incr_b , numdiff.parm )
         b <- b0 + res$increment
-        max_incr_b <- max( abs( res$increment ) )        
+        max_incr_b <- max( abs( res$increment ) )
         se.b <- sqrt( abs( 1 / res$d2 ) )
-        if ( ! is.null( constraints) ){   
-            b[ constraints[,1] ] <- constraints[,2] 
-                    }        
+        if ( ! is.null( constraints) ){
+            b[ constraints[,1] ] <- constraints[,2]
+                    }
 
         #--- update beta
         beta0 <- beta
-        pjk <- .calcprob.missing1( theta.k , b , beta , delta.miss , pjk )                
-        pjk1 <- .calcprob.missing1( theta.k , b , beta+h, delta.miss , pjk )                
-        pjk2 <- .calcprob.missing1( theta.k , b , beta-h, delta.miss , pjk )                
-        # numerical differentiation            
-        res <- .mml2.numdiff.index( pjk , pjk1 , pjk2 , n.ik , diffindex , 
-                       max.increment= max_incr_beta , numdiff.parm )                                    
-        beta <- beta0 + res$increment        
+        pjk <- .calcprob.missing1( theta.k , b , beta , delta.miss , pjk )
+        pjk1 <- .calcprob.missing1( theta.k , b , beta+h, delta.miss , pjk )
+        pjk2 <- .calcprob.missing1( theta.k , b , beta-h, delta.miss , pjk )
+        # numerical differentiation
+        res <- .mml2.numdiff.index( pjk , pjk1 , pjk2 , n.ik , diffindex ,
+                       max.increment= max_incr_beta , numdiff.parm )
+        beta <- beta0 + res$increment
         max_incr_beta <- max( abs( res$increment ) )
         se.beta <- sqrt( abs( 1 / res$d2 ) )
 
         #--- update delta
         if (est_delta ){
             delta0 <- delta.miss
-            pjk <- .calcprob.missing1( theta.k , b , beta , delta.miss , pjk )                
-            pjk1 <- .calcprob.missing1( theta.k , b , beta, delta.miss+h , pjk )                
-            pjk2 <- .calcprob.missing1( theta.k , b , beta, delta.miss-h , pjk )                
-            # numerical differentiation            
-            res <- .mml2.numdiff.index( pjk , pjk1 , pjk2 , n.ik , diffindex1 , 
-                            max.increment= max_incr_delta , numdiff.parm )                                
+            pjk <- .calcprob.missing1( theta.k , b , beta , delta.miss , pjk )
+            pjk1 <- .calcprob.missing1( theta.k , b , beta, delta.miss+h , pjk )
+            pjk2 <- .calcprob.missing1( theta.k , b , beta, delta.miss-h , pjk )
+            # numerical differentiation
+            res <- .mml2.numdiff.index( pjk , pjk1 , pjk2 , n.ik , diffindex1 ,
+                            max.increment= max_incr_delta , numdiff.parm )
             incr <- res$increment
             d2 <- res$d2
             d2 <- d2[ est.delta ]
-            d2[ is.na(incr) ] <- 1E10    
+            d2[ is.na(incr) ] <- 1E10
             incr <- incr[ est.delta ]
             incr[ is.na(incr) ] <- 0
-                    
+
             delta.miss <- delta0 + incr
-            
-            
+
+
             max_incr_delta <- max( abs( incr ) )
-            se.delta <- sqrt( abs( 1 / d2 ) )        
+            se.delta <- sqrt( abs( 1 / d2 ) )
                 }
-        
+
         miter <- miter + 1
                 }
       res <- list("b"=b , "se.b"=b , "beta" = beta , "se.beta"=se.beta ,

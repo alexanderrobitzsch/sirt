@@ -1,12 +1,12 @@
 %% File Name: mcmc_Rhat.Rd
-%% File Version: 0.05
+%% File Version: 0.06
 
 \name{mcmc_Rhat}
 \alias{mcmc_Rhat}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Computation of the Rhat Statistic from a Single MCMC Chain 
+Computation of the Rhat Statistic from a Single MCMC Chain
 }
 \description{
 Computes the Rhat statistic from a single MCMC chain.

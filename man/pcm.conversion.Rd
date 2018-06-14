@@ -1,5 +1,5 @@
 %% File Name: pcm.conversion.Rd
-%% File Version: 0.11
+%% File Version: 0.12
 
 \name{pcm.conversion}
 \alias{pcm.conversion}
@@ -63,7 +63,7 @@ Alexander Robitzsch
 
 
 \examples{
-\dontrun{    
+\dontrun{
 #############################################################################
 # EXAMPLE 1: Transformation PCM for data.mg
 #############################################################################

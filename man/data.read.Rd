@@ -1,5 +1,5 @@
 %% File Name: data.read.Rd
-%% File Version: 1.992
+%% File Version: 1.993
 
 \name{data.read}
 \alias{data.read}
@@ -8,24 +8,24 @@
 Dataset Reading
 }
 \description{
-This dataset contains \eqn{N=328} students and \eqn{I=12} items measuring reading 
-competence. All 12 items are arranged into 3 testlets (items with common 
-text stimulus) labeled as 
-A, B and C. The allocation of items to testlets is indicated by their 
+This dataset contains \eqn{N=328} students and \eqn{I=12} items measuring reading
+competence. All 12 items are arranged into 3 testlets (items with common
+text stimulus) labeled as
+A, B and C. The allocation of items to testlets is indicated by their
 variable names.
 }
 \usage{data(data.read)}
 \format{
   A data frame with 328 persons on the following 12 variables.
-  Rows correspond to persons and columns to items. The following items are 
+  Rows correspond to persons and columns to items. The following items are
   included in \code{data.read}:
-  
-  Testlet A: \code{A1}, \code{A2}, \code{A3}, \code{A4} 
-  
-  Testlet B: \code{B1}, \code{B2}, \code{B3}, \code{B4} 
-  
-  Testlet C: \code{C1}, \code{C2}, \code{C3}, \code{C4} 
-  
+
+  Testlet A: \code{A1}, \code{A2}, \code{A3}, \code{A4}
+
+  Testlet B: \code{B1}, \code{B2}, \code{B3}, \code{B4}
+
+  Testlet C: \code{C1}, \code{C2}, \code{C3}, \code{C4}
+
 }
 
 
@@ -38,10 +38,10 @@ I <- ncol(dat)
 
 # list of needed packages for the following examples
 packages <- scan(what="character")
-     eRm  ltm  TAM mRm  CDM  mirt psychotools  IsingFit  igraph  qgraph  pcalg 
+     eRm  ltm  TAM mRm  CDM  mirt psychotools  IsingFit  igraph  qgraph  pcalg
      poLCA  randomLCA psychomix MplusAutomation lavaan
-        
-# load packages. make an installation if necessary     
+
+# load packages. make an installation if necessary
 miceadds::library_install(packages)
 
 #*****************************************************
@@ -66,7 +66,7 @@ summary(mod1c)
 mod1d <- TAM::tam.mml( resp=dat )
 summary(mod1d)
 
-#----  M1e: RM (in eRm) 
+#----  M1e: RM (in eRm)
 mod1e <- eRm::RM( dat )
   # eRm uses Conditional Maximum Likelihood (CML) as the estimation method.
 summary(mod1e)
@@ -82,7 +82,7 @@ print(mod1g)
 summary(mod1g)
 coef(mod1g)
     # arrange coefficients in nicer layout
-sirt::mirt.wrapper.coef(mod1g)$coef  
+sirt::mirt.wrapper.coef(mod1g)$coef
 
 #----  M1h: rasch (in ltm)
 mod1h <- ltm::rasch( dat  , control=list(verbose=TRUE ) )
@@ -100,9 +100,9 @@ Fval <- 1 + 0*Fpatt
 Ppatt <- Pval <- matrix(1,1,1)
 mod1j <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt, Fpatt=Fpatt, Fval=Fval, Pval=Pval)
 summary(mod1j)
-  #   Normal-ogive model, multiply item discriminations with constant D=1.7. 
+  #   Normal-ogive model, multiply item discriminations with constant D=1.7.
   #   The same holds for other examples with noharm.sirt and R2noharm.
-plot(mod1j) 
+plot(mod1j)
 
 #----  M1k: rasch.pml3 (in sirt)
 mod1k <- sirt::rasch.pml3( dat=dat)
@@ -114,8 +114,8 @@ mplus_path <- "c:/Mplus7/Mplus.exe"    # locate Mplus executable
 #****************
   # specify Mplus object
 mplusmod <- MplusAutomation::mplusObject(
-    TITLE = "1PL in Mplus ;" , 
-    VARIABLE = paste0( "CATEGORICAL ARE " , paste0(colnames(dat),collapse=" ") ) , 
+    TITLE = "1PL in Mplus ;" ,
+    VARIABLE = paste0( "CATEGORICAL ARE " , paste0(colnames(dat),collapse=" ") ) ,
     MODEL = "
        ! fix all item loadings to 1
        F1 BY A1@1 A2@1 A3@1 A4@1 ;
@@ -124,16 +124,16 @@ mplusmod <- MplusAutomation::mplusObject(
        ! estimate variance
        F1 ;
             ",
-    ANALYSIS = "ESTIMATOR=MLR;" , 
+    ANALYSIS = "ESTIMATOR=MLR;" ,
     OUTPUT = "stand;" ,
     usevariables = colnames(dat)  ,  rdata = dat )
 #****************
-    
+
   # write Mplus syntax
 filename <- "mod1u"   # specify file name
   # create Mplus syntaxes
-res2 <- MplusAutomation::mplusModeler(object = mplusmod , dataout = paste0(filename,".dat") , 
-               modelout= paste0(filename,".inp"), run = 0 )         
+res2 <- MplusAutomation::mplusModeler(object = mplusmod , dataout = paste0(filename,".dat") ,
+               modelout= paste0(filename,".inp"), run = 0 )
   # run Mplus model
 MplusAutomation::runModels( filefilter = paste0(filename,".inp"), Mplus_command = mplus_path)
   # alternatively, the system() command can also be used
@@ -185,13 +185,13 @@ P.init[1,1] <- 1
 F.pattern <- matrix(1,I,1)
 F.init <- F.pattern
   # estimate model
-mod2g <- sirt::R2noharm( dat = dat , model.type="CFA" , F.pattern = F.pattern , 
-             F.init = F.init , P.pattern = P.pattern , P.init = P.init , 
+mod2g <- sirt::R2noharm( dat = dat , model.type="CFA" , F.pattern = F.pattern ,
+             F.init = F.init , P.pattern = P.pattern , P.init = P.init ,
              writename = "ex2g" , noharm.path = noharm.path  , dec ="," )
 summary(mod2g)
 
 #----  M2h: noharm.sirt (in sirt)
-mod2h <- sirt::noharm.sirt( dat=dat , Ppatt=P.pattern,Fpatt=F.pattern , 
+mod2h <- sirt::noharm.sirt( dat=dat , Ppatt=P.pattern,Fpatt=F.pattern ,
               Fval=F.init , Pval=P.init )
 summary(mod2h)
 plot(mod2h)
@@ -277,7 +277,7 @@ mod4b <- sirt::rasch.mml2(dat,Q=Q,theta.k=theta.k , mmliter=30)
 summary(mod4b)
 
 #----  M4c: gdm (in CDM)
-mod4c <- CDM::gdm( dat , irtmodel="1PL" , theta.k=theta.k , skillspace="normal" , 
+mod4c <- CDM::gdm( dat , irtmodel="1PL" , theta.k=theta.k , skillspace="normal" ,
             Qmatrix=Q , maxiter=30 , centered.latent=TRUE )
 summary(mod4c)
 
@@ -295,19 +295,19 @@ diag(P.init) <- 1
 F.pattern <- 0*Q
 F.init <- Q
   # estimate model
-mod4e <- sirt::R2noharm( dat = dat , model.type="CFA" , F.pattern = F.pattern , 
-    F.init = F.init , P.pattern = P.pattern , P.init = P.init , 
+mod4e <- sirt::R2noharm( dat = dat , model.type="CFA" , F.pattern = F.pattern ,
+    F.init = F.init , P.pattern = P.pattern , P.init = P.init ,
     writename = "ex4e" , noharm.path = noharm.path  , dec ="," )
 summary(mod4e)
 
 #----  M4f: mirt (in mirt)
 cmodel <- mirt::mirt.model("
      F1 = 1-4
-     F2 = 5-8 
+     F2 = 5-8
      F3 = 9-12
      # equal item slopes correspond to the Rasch model
      CONSTRAIN = (1-4, a1), (5-8, a2) , (9-12,a3)
-     COV = F1*F2, F1*F3 , F2*F3 
+     COV = F1*F2, F1*F3 , F2*F3
      " )
 mod4f <- mirt::mirt(dat, cmodel , verbose=TRUE)
 summary(mod4f)
@@ -317,7 +317,7 @@ summary(mod4f)
 #*****************************************************
 
 #----  M5a: smirt (in sirt)
-mod5a <- sirt::smirt(dat,Qmatrix=Q,irtmodel="comp" , est.a="2PL" , theta.k=theta.k , 
+mod5a <- sirt::smirt(dat,Qmatrix=Q,irtmodel="comp" , est.a="2PL" , theta.k=theta.k ,
                  maxiter=30)
 summary(mod5a)
 
@@ -326,7 +326,7 @@ mod5b <- sirt::rasch.mml2(dat,Q=Q,theta.k=theta.k ,est.a=1:12, mmliter=30)
 summary(mod5b)
 
 #----  M5c: gdm (in CDM)
-mod5c <- CDM::gdm( dat , irtmodel="2PL" , theta.k=theta.k , skillspace="loglinear" , 
+mod5c <- CDM::gdm( dat , irtmodel="2PL" , theta.k=theta.k , skillspace="loglinear" ,
             Qmatrix=Q , maxiter=30 , centered.latent=TRUE ,
             standardized.latent=TRUE)
 summary(mod5c)
@@ -346,8 +346,8 @@ diag(P.init) <- 1
 F.pattern <- Q
 F.init <- Q
   # estimate model
-mod5e <- sirt::R2noharm( dat = dat , model.type="CFA" , F.pattern = F.pattern , 
-    F.init = F.init , P.pattern = P.pattern , P.init = P.init , 
+mod5e <- sirt::R2noharm( dat = dat , model.type="CFA" , F.pattern = F.pattern ,
+    F.init = F.init , P.pattern = P.pattern , P.init = P.init ,
     writename = "ex5e" , noharm.path = noharm.path  , dec ="," )
 summary(mod5e)
 
@@ -356,7 +356,7 @@ cmodel <- mirt::mirt.model("
    F1 = 1-4
    F2 = 5-8
    F3 = 9-12
-   COV = F1*F2, F1*F3 , F2*F3 
+   COV = F1*F2, F1*F3 , F2*F3
    "  )
 mod5f <- mirt::mirt(dat, cmodel , verbose=TRUE)
 summary(mod5f)
@@ -369,16 +369,16 @@ summary(mod5f)
 #        - fit Ising model using the "OR rule" (AND=FALSE)
 mod6a <- IsingFit::IsingFit(x=dat, family="binomial" , AND=FALSE)
 summary(mod6a)
-##           Network Density:                 0.29 
-##    Gamma:                  0.25 
-##    Rule used:              Or-rule 
+##           Network Density:                 0.29
+##    Gamma:                  0.25
+##    Rule used:              Or-rule
 # plot results
 qgraph::qgraph(mod6a$weiadj,fade = FALSE)
 
 #**-- graph estimation using pcalg package
 
 # some packages from Bioconductor must be downloaded at first (if not yet done)
-if (FALSE){  # set 'if (TRUE)' if packages should be downloaded 
+if (FALSE){  # set 'if (TRUE)' if packages should be downloaded
      source("http://bioconductor.org/biocLite.R")
      biocLite("RBGL")
      biocLite("Rgraphviz")
@@ -419,7 +419,7 @@ summary(mod7a)
 plot(mod7a,type="l" , xlab="Item")
 
 #----  M7b: rasch.mirtlc (in sirt)
-mod7b <- sirt::rasch.mirtlc( dat , Nclasses = 3 ,seed= -30 ,  nstarts=2 )   
+mod7b <- sirt::rasch.mirtlc( dat , Nclasses = 3 ,seed= -30 ,  nstarts=2 )
 summary(mod7b)
 matplot( t(mod7b$pjk) , type="l" , xlab="Item" )
 
@@ -430,9 +430,9 @@ dat1 <- as.data.frame( dat + 1 ) # poLCA needs integer values from 1,2,..
 mod7c <- poLCA::poLCA( stats::as.formula(f7c),dat1,nclass=3 , verbose=TRUE)
 plot(mod7c)
 
-#----  M7d: gom.em (in sirt) 
+#----  M7d: gom.em (in sirt)
   #    - the latent class model is a special grade of membership model
-mod7d <- sirt::gom.em( dat , K=3 , problevels=c(0,1) ,  model="GOM"  )            
+mod7d <- sirt::gom.em( dat , K=3 , problevels=c(0,1) ,  model="GOM"  )
 summary(mod7d)
 
 #---- - M7e: mirt (in mirt)
@@ -442,11 +442,11 @@ Theta <- diag(3)
 I <- ncol(dat)  # I = 12
 mirtmodel <- mirt::mirt.model("
         C1 = 1-12
-        C2 = 1-12 
+        C2 = 1-12
         C3 = 1-12
         ")
   # get initial parameter values
-mod.pars <- mirt::mirt(dat, model=mirtmodel ,  pars = "values")   
+mod.pars <- mirt::mirt(dat, model=mirtmodel ,  pars = "values")
   # modify parameters: only slopes refer to item-class probabilities
 set.seed(9976)
   # set starting values for class specific item probabilities
@@ -462,19 +462,19 @@ lca_prior <- function(Theta,Etable){
   # number of latent Theta classes
   TP <- nrow(Theta)
   # prior in initial iteration
-  if ( is.null(Etable) ){ 
-    prior <- rep( 1/TP , TP ) 
-  }    
+  if ( is.null(Etable) ){
+    prior <- rep( 1/TP , TP )
+  }
   # process Etable (this is correct for datasets without missing data)
-  if ( ! is.null(Etable) ){  
-    # sum over correct and incorrect expected responses 
+  if ( ! is.null(Etable) ){
+    # sum over correct and incorrect expected responses
     prior <- ( rowSums(Etable[ , seq(1,2*I,2)]) + rowSums(Etable[,seq(2,2*I,2)]) )/I
   }
-  prior <- prior / sum(prior)  
+  prior <- prior / sum(prior)
   return(prior)
 }
   #** estimate model
-mod7e <- mirt::mirt(dat, mirtmodel , pars = mod.pars , verbose=TRUE , 
+mod7e <- mirt::mirt(dat, mirtmodel , pars = mod.pars , verbose=TRUE ,
             technical = list( customTheta=Theta , customPriorFun = lca_prior) )
   # compare estimated results
 print(mod7e)
@@ -488,7 +488,7 @@ mod7e@logLik
 ( AIC <- -2*mod7e@logLik+2*mod7e@nest )
 ( BIC <- -2*mod7e@logLik+log(mod7e@Data$N)*mod7e@nest )
   # RMSEA and SRMSR fit statistic
-mirt::M2(mod7e)     # TLI and CFI does not make sense in this example            
+mirt::M2(mod7e)     # TLI and CFI does not make sense in this example
   #** extract item parameters
 sirt::mirt.wrapper.coef(mod7e)
   #** extract class-specific item-probabilities
@@ -530,7 +530,7 @@ mirtmodel <- mirt::mirt.model("
         CONSTRAIN = (1-12,a1),(1-12,a3)
         ")
   # get initial parameter values
-mod.pars <- mirt::mirt(dat, model=mirtmodel ,  pars = "values")   
+mod.pars <- mirt::mirt(dat, model=mirtmodel ,  pars = "values")
   # set starting values for class specific item probabilities
 mod.pars[ mod.pars$name == "d" ,"value" ]  <- 0
 mod.pars[ mod.pars$name == "d" ,"est" ]  <- FALSE
@@ -545,28 +545,28 @@ mixed_prior <- function(Theta,Etable){
   NC <- 2   # number of theta classes
   TP <- nrow(Theta) / NC
   prior1 <- stats::dnorm( Theta[1:TP,1] )
-  prior1 <- prior1 / sum(prior1) 
+  prior1 <- prior1 / sum(prior1)
   if ( is.null(Etable) ){   prior <- c( prior1 , prior1 ) }
-  if ( ! is.null(Etable) ){  
-    prior <- ( rowSums( Etable[ , seq(1,2*I,2)] ) + 
+  if ( ! is.null(Etable) ){
+    prior <- ( rowSums( Etable[ , seq(1,2*I,2)] ) +
                    rowSums( Etable[,seq(2,2*I,2)]) )/I
     a1 <- stats::aggregate( prior , list( rep(1:NC , each=TP) ) , sum )
     a1[,2] <- a1[,2] / sum( a1[,2])
     # print some information during estimation
-    cat( paste0( " Class proportions: " , 
+    cat( paste0( " Class proportions: " ,
               paste0( round(a1[,2] , 3 ) , collapse= " " ) ) , "\n")
     a1 <- rep( a1[,2] , each=TP )
     # specify mixture of two normal distributions
     prior <- a1*c(prior1,prior1)
-  }  
-  prior <- prior / sum(prior)  
+  }
+  prior <- prior / sum(prior)
   return(prior)
 }
   #* estimate model
 mod8c <- mirt::mirt(dat, mirtmodel , pars=mod.pars , verbose=TRUE ,
         technical = list(  customTheta=Theta , customPriorFun = mixed_prior ) )
   # Like in Model 7e, the number of estimated parameters must be included.
-mod8c@nest <- as.integer(sum(mod.pars$est) + 1)  
+mod8c@nest <- as.integer(sum(mod.pars$est) + 1)
       # two class proportions and therefore one probability is freely estimated.
   #* extract item parameters
 sirt::mirt.wrapper.coef(mod8c)
@@ -586,7 +586,7 @@ LAVAAN MODEL:
   F ~~ F
 ITEM TYPE:
   ALL(Rasch);
-    "    
+    "
 mod8d <- TAM::tamaan( tammodel , resp=dat )
 summary(mod8d)
 # plot item parameters
@@ -613,7 +613,7 @@ LAVAAN MODEL:
   F ~~ F
 ITEM TYPE:
   ALL(2PL);
-    "       
+    "
 mod9a <- TAM::tamaan( tammodel , resp=dat )
 summary(mod9a)
 
@@ -629,11 +629,11 @@ summary(mod10a)
 
 #----  M10b: mirt (in mirt)
 cmodel <- mirt::mirt.model("
-        G = 1-12 
+        G = 1-12
         A = 1-4
         B = 5-8
         C = 9-12
-        CONSTRAIN = (1-12,a1), (1-4, a2), (5-8, a3) , (9-12,a4)    
+        CONSTRAIN = (1-12,a1), (1-4, a2), (5-8, a3) , (9-12,a4)
       ")
 mod10b <- mirt::mirt(dat, model=cmodel , verbose=TRUE)
 summary(mod10b)
@@ -686,7 +686,7 @@ Qmatrix[ cbind( 1:12 , match( dims , unique(dims)) +1 ) ]  <- 1
   # uncorrelated factors
 variance.fixed <- cbind( c(1,1,1,2,2,3) , c(2,3,4,3,4,4) , 0 )
   # estimate model
-mod11c <- sirt::smirt( dat , Qmatrix=Qmatrix , irtmodel="comp" , est.a="2PL" ,  
+mod11c <- sirt::smirt( dat , Qmatrix=Qmatrix , irtmodel="comp" , est.a="2PL" ,
                 variance.fixed=variance.fixed , qmcnodes=1000 , maxiter=60)
 summary(mod11c)
 
@@ -719,17 +719,17 @@ Theta <- diag(3)
 I <- ncol(dat)  # I = 12
 mirtmodel <- mirt::mirt.model("
         C1 = 1-12
-        C2 = 1-12 
+        C2 = 1-12
         C3 = 1-12
         CONSTRAIN = (1-12,a1),(1-12,a2),(1-12,a3)
         ")
   # get parameters
-mod.pars <- mirt(dat, model=mirtmodel ,  pars = "values")   
+mod.pars <- mirt(dat, model=mirtmodel ,  pars = "values")
  # set starting values for class specific item probabilities
 mod.pars[ mod.pars$name == "d" ,"value" ]  <- stats::qlogis( colMeans(dat,na.rm=TRUE) )
   # set item difficulty of reference item to zero
-ind <- which( ( paste(mod.pars$item) == items[ref.item] ) & 
-               ( ( paste(mod.pars$name) == "d" ) ) )                        
+ind <- which( ( paste(mod.pars$item) == items[ref.item] ) &
+               ( ( paste(mod.pars$name) == "d" ) ) )
 mod.pars[ ind ,"value" ]  <- 0
 mod.pars[ ind ,"est" ]  <- FALSE
   # initial values for a1, a2 and a3
@@ -742,13 +742,13 @@ lca_prior <- function(Theta,Etable){
   # prior in initial iteration
   if ( is.null(Etable) ){
     prior <- rep( 1/TP , TP )
-              }    
+              }
   # process Etable (this is correct for datasets without missing data)
-  if ( ! is.null(Etable) ){  
-    # sum over correct and incorrect expected responses 
+  if ( ! is.null(Etable) ){
+    # sum over correct and incorrect expected responses
     prior <- ( rowSums( Etable[ , seq(1,2*I,2)] ) + rowSums( Etable[ , seq(2,2*I,2)] ) )/I
             }
-  prior <- prior / sum(prior)  
+  prior <- prior / sum(prior)
   return(prior)
    }
  #* estimate model
@@ -756,7 +756,7 @@ mod12c <- mirt(dat, mirtmodel , technical = list(
             customTheta=Theta , customPriorFun = lca_prior) ,
             pars = mod.pars , verbose=TRUE )
   # estimated parameters from the user customized  prior distribution.
-mod12c@nest <- as.integer(sum(mod.pars$est) + 2)            
+mod12c@nest <- as.integer(sum(mod.pars$est) + 2)
   #* extract item parameters
 coef1 <- sirt::mirt.wrapper.coef(mod12c)
   #* inspect estimated distribution
@@ -798,7 +798,7 @@ mirtmodel <- mirt::mirt.model("
         F3 = 9-12
         ")
   # get parameters
-mod.pars <- mirt(dat, model=mirtmodel ,  pars = "values")   
+mod.pars <- mirt(dat, model=mirtmodel ,  pars = "values")
 # starting values d parameters (transformed guessing parameters)
 ind <- which(  mod.pars$name == "d"  )
 mod.pars[ind,"value"] <- stats::qlogis(.2)
@@ -812,11 +812,11 @@ lca_prior <- function(Theta,Etable){
   TP <- nrow(Theta)
   if ( is.null(Etable) ){
     prior <- rep( 1/TP , TP )
-              }    
-  if ( ! is.null(Etable) ){  
+              }
+  if ( ! is.null(Etable) ){
     prior <- ( rowSums( Etable[ , seq(1,2*I,2)] ) + rowSums( Etable[ , seq(2,2*I,2)] ) )/I
             }
-  prior <- prior / sum(prior)  
+  prior <- prior / sum(prior)
   return(prior)
 }
  #* estimate model
@@ -824,7 +824,7 @@ mod13c <- mirt(dat, mirtmodel , technical = list(
             customTheta=Theta , customPriorFun = lca_prior) ,
             pars = mod.pars , verbose=TRUE )
   # estimated parameters from the user customized  prior distribution.
-mod13c@nest <- as.integer(sum(mod.pars$est) + 2)            
+mod13c@nest <- as.integer(sum(mod.pars$est) + 2)
   #* extract item parameters
 coef13c <- sirt::mirt.wrapper.coef(mod13c)$coef
   #* inspect estimated distribution
@@ -870,7 +870,7 @@ round(dfr,3)
   ##   5       1       1       0 0.011 0.011 0.011
   ##   6       1       0       1 0.017 0.042 0.037
   ##   7       0       1       1 0.042 0.008 0.016
-  ##   8       1       1       1 0.480 0.465 0.467   
+  ##   8       1       1       1 0.480 0.465 0.467
 
 #*****************************************************
 # Model 14: DINA model with two skills
@@ -901,10 +901,10 @@ mirtmodel <- mirt::mirt.model("
         F1 = 1-4
         F2 = 5-8
         (F1*F2) = 9-12
-        ")    
+        ")
 #-> constructions like (F1*F2*F3) are also allowed in mirt.model
   # get parameters
-mod.pars <- mirt(dat, model=mirtmodel ,  pars = "values")   
+mod.pars <- mirt(dat, model=mirtmodel ,  pars = "values")
 # starting values d parameters (transformed guessing parameters)
 ind <- which(  mod.pars$name == "d"  )
 mod.pars[ind,"value"] <- stats::qlogis(.2)
@@ -919,7 +919,7 @@ mod14b <- mirt(dat, mirtmodel , technical = list(
             customTheta=Theta , customPriorFun = lca_prior) ,
             pars = mod.pars , verbose=TRUE )
   # estimated parameters from the user customized  prior distribution.
-mod14b@nest <- as.integer(sum(mod.pars$est) + 2)            
+mod14b@nest <- as.integer(sum(mod.pars$est) + 2)
   #* extract item parameters
 coef14b <- sirt::mirt.wrapper.coef(mod14b)$coef
 
@@ -955,16 +955,16 @@ round(dfr,3)
   ##   1       0       0 0.357 0.369
   ##   2       1       0 0.044 0.049
   ##   3       0       1 0.047 0.031
-  ##   4       1       1 0.553 0.551  
-  
+  ##   4       1       1 0.553 0.551
+
 #*****************************************************
 # Model 15: Rasch model with non-normal distribution
 #*****************************************************
 
 # A non-normal theta distributed is specified by log-linear smoothing
 # the distribution as described in
-# Xu, X., & von Davier, M. (2008). Fitting the structured general diagnostic model 
-# to NAEP data. ETS Research Report ETS RR-08-27. Princeton, ETS. 
+# Xu, X., & von Davier, M. (2008). Fitting the structured general diagnostic model
+# to NAEP data. ETS Research Report ETS RR-08-27. Princeton, ETS.
 
 # define theta grid
 theta.k <- matrix( seq(-4,4,len=15) , ncol=1 )
@@ -974,7 +974,7 @@ delta.designmatrix <- cbind( 1 , theta.k , theta.k^2 , theta.k^3 )
 b.constraint <- matrix( c(5,1,0) , ncol=3 )
 
 #----  Model 15a: gdm (in CDM)
-mod15a <- CDM::gdm( dat , irtmodel="1PL" , theta.k=theta.k , 
+mod15a <- CDM::gdm( dat , irtmodel="1PL" , theta.k=theta.k ,
                b.constraint=b.constraint  )
 summary(mod15a)
  # plot estimated distribution
@@ -985,7 +985,7 @@ graphics::barplot( mod15a$pi.k[,1] , space=0 , names.arg = round(theta.k[,1],2) 
  # define mirt model
 mirtmodel <- mirt::mirt.model("
     F = 1-12
-    ")   
+    ")
  # get parameters
 mod.pars <- mirt::mirt(dat, model=mirtmodel , pars = "values" , itemtype="Rasch")
   # fix variance (just for correct counting of parameters)
@@ -1018,7 +1018,7 @@ loglinear_prior <- function(Theta,Etable){
 #* estimate model
 mod15b <- mirt::mirt(dat, mirtmodel , technical = list(
                 customTheta= theta.k , customPriorFun = loglinear_prior ) ,
-                pars = mod.pars , verbose=TRUE )                                              
+                pars = mod.pars , verbose=TRUE )
 # estimated parameters from the user customized prior distribution.
 mod15b@nest <- as.integer(sum(mod.pars$est) + 3)
 #* extract item parameters

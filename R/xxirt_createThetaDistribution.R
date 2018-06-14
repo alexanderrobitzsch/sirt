@@ -1,5 +1,5 @@
 ## File Name: xxirt_createThetaDistribution.R
-## File Version: 0.08
+## File Version: 0.09
 
 ######################################################################
 xxirt_createThetaDistribution <- function( par , est , P , prior=NULL,
@@ -16,4 +16,4 @@ xxirt_createThetaDistribution <- function( par , est , P , prior=NULL,
     class(res) <- "ThetaDistribution"
     return(res)
 }
-######################################################################                
+######################################################################

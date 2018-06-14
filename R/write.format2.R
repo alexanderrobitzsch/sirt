@@ -1,5 +1,5 @@
 ## File Name: write.format2.R
-## File Version: 1.02
+## File Version: 1.03
 
 
 
@@ -9,7 +9,7 @@ write.format2 <- function( vec1 , ff , fr ){
     if (fr == 0){
         vec2 <- round( vec1 , fr )
         blank.vv <- paste( rep( " " , ff ) , collapse="" )
-        vec2 <- paste( substring( blank.vv , 1 , ff - nchar(vec2) ) , vec2 , sep="")    
+        vec2 <- paste( substring( blank.vv , 1 , ff - nchar(vec2) ) , vec2 , sep="")
             } else {
         d.vv <- round( vec1  , fr ) + 10^(-(fr+1))
         # generate blank

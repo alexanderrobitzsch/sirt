@@ -1,5 +1,5 @@
 %% File Name: fuzdiscr.Rd
-%% File Version: 0.12
+%% File Version: 0.13
 
 \name{fuzdiscr}
 \alias{fuzdiscr}
@@ -19,7 +19,7 @@ fuzdiscr(X, theta0 = NULL, maxiter = 200, conv = 1e-04)
 \arguments{
   \item{X}{
 Matrix with fuzzy data. Rows corresponds to subjects and columns to
-values of the membership function 
+values of the membership function
 }
   \item{theta0}{
 Initial vector of parameter estimates
@@ -42,9 +42,9 @@ basis of precise (crisp) data if they would be observed.
 
 In the present estimation problem of a discrete distribution,
 the parameters of interest are category probabilities
-\eqn{\theta_k = P( X = k)}. 
+\eqn{\theta_k = P( X = k)}.
 
-The parameter estimation follows the evidential EM algorithm (Denoeux, 2013).    
+The parameter estimation follows the evidential EM algorithm (Denoeux, 2013).
 }
 
 \value{
@@ -53,11 +53,11 @@ Vector of probabilities of the discrete distribution
 
 
 \references{
-Denoeux, T. (2011). Maximum likelihood estimation from fuzzy data using the 
-EM algorithm. \emph{Fuzzy Sets and Systems}, \bold{183}, 72-91.    
+Denoeux, T. (2011). Maximum likelihood estimation from fuzzy data using the
+EM algorithm. \emph{Fuzzy Sets and Systems}, \bold{183}, 72-91.
 
-Denoeux, T. (2013). Maximum likelihood estimation from uncertain data 
-in the belief function framework. 
+Denoeux, T. (2013). Maximum likelihood estimation from uncertain data
+in the belief function framework.
 \emph{IEEE Transactions on Knowledge and Data Engineering}, \bold{25}, 119-130.
 }
 
@@ -118,7 +118,7 @@ colMeans( X )
 # plot parameter estimates as function of alpha
 alpha <- seq( 0 , 1 , len=100 )
 res <- sapply( alpha , FUN = function(aa){
-             X <- X_alpha( alpha=aa ) 
+             X <- X_alpha( alpha=aa )
              c( sirt::fuzdiscr( X )[1] , colMeans( X )[1] )
                     } )
 # plot
@@ -141,10 +141,10 @@ X_alpha <- function( alpha ){
 X <- X_alpha( alpha=.5 )
 alpha <- seq( 0 , 1 , len=100 )
 res <- sapply( alpha , FUN = function(aa){
-           X <- X_alpha( alpha=aa ) 
+           X <- X_alpha( alpha=aa )
            c( sirt::fuzdiscr( X )[1] , colMeans( X )[1] )
                     } )
-# plot                    
+# plot
 plot( alpha , res[1,] , xlab = expression(alpha) , ylab=expression( theta[alpha] ) , type="l" ,
         main="Comparison Belief Function and Pseudo-Likelihood (Example 2)")
 lines( alpha , res[2,] , lty=2 , col=2)

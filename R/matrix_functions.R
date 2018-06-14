@@ -1,5 +1,5 @@
 ## File Name: matrix_functions.R
-## File Version: 0.11
+## File Version: 0.12
 
 
 #############################################################
@@ -9,8 +9,8 @@
 # Note that the entries must be nonnegative                 #
 rowProds <- function(matr)
 {
-    # INPUT:                                
-    # matrix with positive entries          
+    # INPUT:
+    # matrix with positive entries
     exp( rowSums( log(matr + 10^(-300) ) ) )
 }
 # for nonnegative entries use this function in combination      ##
@@ -29,7 +29,7 @@ rowProds2 <- function(matr)
 
 # columnwise product
 colProds <- function(matr)
-{ 
+{
     exp( colSums( log(matr + 10^(-300) ) ) )
 }
 
@@ -56,7 +56,7 @@ colMedians <- function(mat){ rowMedians( t(mat) ) }
 #-------------------------------------------------------------------
 rowVars <- function(mat , na.rm= FALSE )
 {
-    n <- rowSums( 1 - is.na(mat) ) 
+    n <- rowSums( 1 - is.na(mat) )
     ( rowSums( mat^2 , na.rm= TRUE) - n * rowMeans( mat , na.rm = na.rm )^2 ) / ( n - 1 )
 }
 #*****
@@ -97,7 +97,7 @@ whichrowMaxs <- function(mat)
     dfr <- data.frame( x , rep(1:n, p) , rep( 1:p ,each= n ) )
     ind <- order(rep(1:n, p), x)
     arg <- matrix(  dfr[ ind , 3]  , p , n )[p,]
-    x <- matrix(x[ind], p, n)   
+    x <- matrix(x[ind], p, n)
     val <- x[p , ]
     return( list( "val" =val , "arg" = arg ) )
 }
@@ -116,14 +116,14 @@ rowCumsums <- function( mat , multmat = NULL)
 {
     if (is.null(multmat)){
         m <- ncol(mat)
-        multmat <- matrix( 1 , ncol  = m , nrow= m ) 
+        multmat <- matrix( 1 , ncol  = m , nrow= m )
         multmat[ lower.tri( multmat )] <- 0
-    }    
+    }
     mat %*% multmat
 }
 #--------------------------------------------------------------#
-colCumsums <- function( mat  ){  
-    rowCumsums( t(mat) ) 
+colCumsums <- function( mat  ){
+    rowCumsums( t(mat) )
 }
 #--------------------------------------------------------------#
 

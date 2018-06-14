@@ -1,5 +1,5 @@
 %% File Name: prmse.subscores.scales.Rd
-%% File Version: 0.21
+%% File Version: 0.22
 
 \name{prmse.subscores.scales}
 \alias{prmse.subscores.scales}
@@ -36,8 +36,8 @@ the whole scale (see also in the Examples section for the structure of
 this matrix).
 }
 \references{
-Haberman, S. J. (2008). When can subscores have value? 
-\emph{Journal of Educational and Behavioral Statistics}, 
+Haberman, S. J. (2008). When can subscores have value?
+\emph{Journal of Educational and Behavioral Statistics},
 \bold{33}, 204-229.
 
 Haberman, S., Sinharay, S., & Puhan, G. (2008).
@@ -45,8 +45,8 @@ Reporting subscores for institutions.
 \emph{British Journal of Mathematical and Statistical Psychology},
 \bold{62}, 79-95.
 
-Meijer, R. R., Boeve, A. J., Tendeiro, J. N., Bosker, R. J., & Albers, C. J. (2017). 
-The use of subscores in higher education: When is this useful?. 
+Meijer, R. R., Boeve, A. J., Tendeiro, J. N., Bosker, R. J., & Albers, C. J. (2017).
+The use of subscores in higher education: When is this useful?.
 \emph{Frontiers in Psychology | Educational Psychology, 8}.
 }
 
@@ -68,10 +68,10 @@ especially \code{subscore::CTTsub}.
 \examples{
 #############################################################################
 # EXAMPLE 1: PRMSE Reading data data.read
-#############################################################################    
+#############################################################################
 
 data( data.read )
-p1 <- sirt::prmse.subscores.scales(data=data.read, 
+p1 <- sirt::prmse.subscores.scales(data=data.read,
          subscale = substring( colnames(data.read) , 1 ,1 ) )
 print( p1 , digits= 3 )
   ##                 A       B       C

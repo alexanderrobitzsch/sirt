@@ -1,5 +1,5 @@
 %% File Name: isop.scoring.Rd
-%% File Version: 1.18
+%% File Version: 1.19
 
 \name{isop.scoring}
 \alias{isop.scoring}
@@ -11,7 +11,7 @@ Scoring Persons and Items in the ISOP Model
 This function does the scoring in the isotonic probabilistic
 model (Scheiblechner, 1995, 2003, 2007).
 Person parameters are ordinally scaled but the ISOP
-model also allows \emph{specific objective} (ordinal) comparisons 
+model also allows \emph{specific objective} (ordinal) comparisons
 for persons (Scheiblechner, 1995).
 }
 \usage{
@@ -36,23 +36,23 @@ every category (see Example 2).
 \details{
 This function extracts the scoring rule of the ISOP model
 (if \code{score.itemcat != NULL}) and calculates the
-modified percentile score for every person. The score 
-\eqn{s_{ik}} for item \eqn{i} and category \eqn{k} 
+modified percentile score for every person. The score
+\eqn{s_{ik}} for item \eqn{i} and category \eqn{k}
 is calculated as
-\deqn{ s_{ik} = \sum_{j=0}^{k-1} f_{ij} - 
-\sum_{j=k+1}^K f_{ij} = P( X_i < k  ) 
+\deqn{ s_{ik} = \sum_{j=0}^{k-1} f_{ij} -
+\sum_{j=k+1}^K f_{ij} = P( X_i < k  )
 - P( X_i > k ) }
 where \eqn{f_{ik}} is the relative frequency of item \eqn{i}
 in category \eqn{k} and \eqn{K} is the maximum category.
-The modified percentile score \eqn{\rho_p} 
-for subject \eqn{p} (\code{mpsc} in \code{person}) is 
+The modified percentile score \eqn{\rho_p}
+for subject \eqn{p} (\code{mpsc} in \code{person}) is
 defined by
-\deqn{ \rho_p = \frac{1}{I} \sum_{i=1}^I 
+\deqn{ \rho_p = \frac{1}{I} \sum_{i=1}^I
         \sum_{j=0}^K s_{ik} \mathbf{1}( X_{pi} = k ) }
 Note that for dichotomous items, the sum score is a
-sufficient statistic for \eqn{\rho_p} but this is 
-not the case for polytomous items. 
-The modified percentile score \eqn{\rho_p}  
+sufficient statistic for \eqn{\rho_p} but this is
+not the case for polytomous items.
+The modified percentile score \eqn{\rho_p}
 ranges between -1 and 1.
 
 The modified item P-score \eqn{\rho_i} (Scheiblechner, 2007, p. 52) is
@@ -91,7 +91,7 @@ A list with following entries:
 Scheiblechner, H. (1995). Isotonic ordinal
 probabilistic models (ISOP). \emph{Psychometrika},
 \bold{60}, 281-304.
-    
+
 Scheiblechner, H. (2003). \emph{Nonparametric IRT:
 Scoring functions and ordinal parameter estimation
 of isotonic probabilistic models (ISOP)}.

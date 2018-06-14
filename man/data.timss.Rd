@@ -1,5 +1,5 @@
 %% File Name: data.timss.Rd
-%% File Version: 0.06
+%% File Version: 0.07
 
 \name{data.timss}
 \alias{data.timss}
@@ -9,7 +9,7 @@ Dataset TIMSS Mathematics
 }
 \description{
 This datasets contains TIMSS mathematics data from 345 students
-on 25 items. 
+on 25 items.
 }
 \usage{data(data.timss)}
 \format{
@@ -18,7 +18,7 @@ student ID (\code{idstud}), a dummy variable for female (\code{girl})
 and student age (\code{age}). The following variables (starting with
 \code{M} in the variable name are items.
 
-The format is: 
+The format is:
 
 \code{List of 2} \cr
 \code{ $ data:'data.frame':} \cr

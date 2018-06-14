@@ -1,5 +1,5 @@
 ## File Name: modelfit.sirt.R
-## File Version: 1.03
+## File Version: 1.04
 
 
 # model fit in sirt
@@ -36,13 +36,13 @@ modelfit.sirt <- function( object )
         probs[ , 2 , ] <- t(prob1)
         probs[ , 1 , ] <- 1 - t(prob1)
         dat <- object$dat
-    }    
+    }
     #******
     # rasch.pml
     if ( class(object) !="rasch.pml"){ pmlobject <- NULL } else {
-        data <- NULL ; posterior <- NULL ; probs <- NULL ; pmlobject <- object }    
+        data <- NULL ; posterior <- NULL ; probs <- NULL ; pmlobject <- object }
     #*******
-    # smirt    
+    # smirt
     if (class(object) == "smirt"){
         # note that for polytomous response data some adaptations are
         # necessary: see modelfit in the CDM package
@@ -52,13 +52,13 @@ modelfit.sirt <- function( object )
         dat <- mod$dat
     }
     #*******
-    # smirt    
+    # smirt
     if (class(object) == "gom"){
         mod <- object
         probs <- mod$probs
         posterior <- mod$f.qk.yi
         dat <- mod$dat
-    }                    
+    }
     #*******
     # rm.facets
 #    if (class(object) %in% c("rm.facets") ){
@@ -66,17 +66,17 @@ modelfit.sirt <- function( object )
 #        probs <- mod$probs
 #        posterior <- mod$f.qk.yi
 #        dat <- mod$procdata$dat2.NA
-#    }                        
-                    
+#    }
+
     #*******
-    # mirt    
+    # mirt
     if (class(object) == "ConfirmatoryClass" | class(object)=="ExploratoryClass" ){
         mod <- object
-        mod <- mirt.wrapper.posterior(mod)        
+        mod <- mirt.wrapper.posterior(mod)
         probs <- mod$probs
         posterior <- mod$f.qk.yi
         dat <- mod$dat
-    }                    
+    }
     #******
     # R2noharm, noharm.sirt
     if ( class(object) %in% c("R2noharm","noharm.sirt") ){
@@ -94,7 +94,7 @@ modelfit.sirt <- function( object )
                 print.output=FALSE )
         probs <- aperm( mod$probs , c(1,3,2) )
         posterior <- mod$posterior
-        dat <- object$dat                    
+        dat <- object$dat
     }
     # calculate modelfit.cor
     if ( class(object) == "rasch.pml" ){
@@ -103,7 +103,7 @@ modelfit.sirt <- function( object )
     } else {
         res <- CDM::modelfit.cor2( data = dat , posterior =posterior , probs = probs )
     }
-    class(res) <- "modelfit.sirt"    
+    class(res) <- "modelfit.sirt"
     return(res)
 }
 ################################################################################

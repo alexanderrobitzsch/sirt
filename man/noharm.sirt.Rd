@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.35
+%% File Version: 0.36
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -12,7 +12,7 @@ NOHARM Model in \R
 }
 
 \description{
-The function is an \R implementation of the normal ogive harmonic analysis 
+The function is an \R implementation of the normal ogive harmonic analysis
 robust method (the NOHARM model; McDonald, 1997). Exploratory and confirmatory
 multidimensional item response models for dichotomous data using the
 probit link function can be estimated. Lower asymptotes (guessing parameters)
@@ -21,13 +21,13 @@ fixed values.
 }
 
 \usage{
-noharm.sirt(dat, weights = NULL, Fval = NULL, Fpatt = NULL, Pval = NULL, 
-   Ppatt = NULL, Psival = NULL, Psipatt = NULL, dimensions = NULL, 
+noharm.sirt(dat, weights = NULL, Fval = NULL, Fpatt = NULL, Pval = NULL,
+   Ppatt = NULL, Psival = NULL, Psipatt = NULL, dimensions = NULL,
    lower = rep(0, ncol(dat)), upper = rep(1, ncol(dat)), wgtm = NULL, modesttype=1,
-   pos.loading=FALSE , pos.variance = FALSE ,  pos.residcorr = FALSE ,       
+   pos.loading=FALSE , pos.variance = FALSE ,  pos.residcorr = FALSE ,
    maxiter = 1000, conv = 10^(-6), increment.factor = 1.01, reliability=TRUE)
 
-\method{summary}{noharm.sirt}(object, file=NULL , \dots) 
+\method{summary}{noharm.sirt}(object, file=NULL , \dots)
 }
 
 %% \method{plot}{noharm.sirt}(x, what="est", efa.load.min=.3, ...)
@@ -70,19 +70,19 @@ Fixed vector of lower asymptotes \eqn{c_i}.
 Fixed vector of upper asymptotes \eqn{d_i}.
 }
   \item{wgtm}{
-Matrix with positive entries which indicates by a positive entry which 
-item pairs should be used for estimation. 
+Matrix with positive entries which indicates by a positive entry which
+item pairs should be used for estimation.
 }
 \item{modesttype}{
 Estimation type. \code{modesttype=1} refers to the NOHARM approximation,
-while \code{modesttype=2} refers to the estimation based on tetrachoric 
+while \code{modesttype=2} refers to the estimation based on tetrachoric
 correlations.
 }
 \item{pos.loading}{An optional logical indicating whether all entries in the
 loading matrix \eqn{\bold{F}} should be positive}
 \item{pos.variance}{An optional logical indicating whether all variances (i.e.
     diagonal entries in \eqn{\bold{P}}) should be positive}
-\item{pos.residcorr}{An optional logical indicating whether all 
+\item{pos.residcorr}{An optional logical indicating whether all
     entries in the matrix of residual correlations \eqn{\bold{\Psi}} should
     be positive}
   \item{maxiter}{
@@ -110,25 +110,25 @@ are heavier penalized.
 %}
 
 % For \code{plot.noharm.sirt},
-% additional arguments for \code{\link[semPlot:semPaths]{semPlot::semPaths}} (from 
-%\pkg{semPlot} package) can be specified. 
+% additional arguments for \code{\link[semPlot:semPaths]{semPlot::semPaths}} (from
+%\pkg{semPlot} package) can be specified.
 
 \details{
 The NOHARM item response model follows the response equation
-\deqn{P( X_{pi} = 1 | \bold{\theta}_p ) = c_i + ( d_i - c_i ) 
+\deqn{P( X_{pi} = 1 | \bold{\theta}_p ) = c_i + ( d_i - c_i )
 \Phi( f_{i0} + f_{i1} \theta_{p1} + ... +
 f_{iD} \theta_{pD} ) }
 for item responses \eqn{X_{pi}} of person \eqn{p} on
 item \eqn{i}, \eqn{\bold{F}=(f_{id})} is a loading matrix and \eqn{\bold{P}}
 the covariance matrix of \eqn{\bold{\theta}_p}. The lower
-asymptotes \eqn{c_i} and upper asymptotes \eqn{d_i} must be 
+asymptotes \eqn{c_i} and upper asymptotes \eqn{d_i} must be
 provided as fixed values.
 The response equation can be equivalently written by introducing a latent
 continuous item response \eqn{X_{pi}^\ast}
 \deqn{ X_{pi}^\ast = f_{i0} + f_{i1} \theta_{p1} + ... +
 f_{iD} \theta_{pD} + e_{pi} }
 with a standard normally distributed residual \eqn{e_{pi}}. These residuals
-have a correlation matrix \eqn{\bold{\Psi}} with ones in the diagonal. 
+have a correlation matrix \eqn{\bold{\Psi}} with ones in the diagonal.
 In this \R implementation of the NOHARM model, correlations between residuals
 are allowed.
 
@@ -175,25 +175,25 @@ A list. The most important entries are
 
 
 \references{
-Fraser, C., & McDonald, R. P. (1988). NOHARM: Least squares item factor analysis. 
+Fraser, C., & McDonald, R. P. (1988). NOHARM: Least squares item factor analysis.
 \emph{Multivariate Behavioral Research}, \bold{23}, 267-269.
 
-Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}. 
+Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}.
 {http://noharm.niagararesearch.ca/nh4man/nhman.html}.
 
-Green, S. B., & Yang, Y. (2009). Reliability of summed item 
-scores using structural equation modeling: An alternative to 
-coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167. 
+Green, S. B., & Yang, Y. (2009). Reliability of summed item
+scores using structural equation modeling: An alternative to
+coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167.
 
-McDonald, R. P. (1982a). Linear versus models in item response theory. 
+McDonald, R. P. (1982a). Linear versus models in item response theory.
 \emph{Applied Psychological Measurement}, \bold{6}, 379-396.
 
-McDonald, R. P. (1982b). \emph{Unidimensional and multidimensional models for 
+McDonald, R. P. (1982b). \emph{Unidimensional and multidimensional models for
 item response theory}. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings.
 
-McDonald, R. P. (1997). Normal-ogive multidimensional model. 
+McDonald, R. P. (1997). Normal-ogive multidimensional model.
 In W. van der Linden & R. K. Hambleton (1997):
-\emph{Handbook of modern item response theory} (pp. 257-269). 
+\emph{Handbook of modern item response theory} (pp. 257-269).
 New York: Springer.
 }
 
@@ -212,8 +212,8 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-EAP person parameter estimates can be obtained by \code{\link{R2noharm.EAP}}.    
-    
+EAP person parameter estimates can be obtained by \code{\link{R2noharm.EAP}}.
+
 Model fit can be assessed by \code{\link{modelfit.sirt}}.
 
 See \code{\link{R2noharm}} for running the NOHARM software from within \R.
@@ -228,7 +228,7 @@ the link seems to be broken in the meanwhile).
 #############################################################################
 # EXAMPLE 1: Two-dimensional IRT model with 10 items
 #############################################################################
-        
+
 #**** data simulation
 set.seed(9776)
 N <- 3400 # sample size
@@ -252,7 +252,7 @@ for (ii in 1:I){ # ii <- 1
         }
 colnames(dat) <- paste0("I" , 1:I)
 
-#**** Model 1: Two-dimensional CFA with estimated item loadings 
+#**** Model 1: Two-dimensional CFA with estimated item loadings
 # define pattern matrices
 Pval <- .3+0*Pval
 Ppatt <- 1*(Pval>0)
@@ -269,7 +269,7 @@ pmod1 <- sirt::R2noharm.EAP(mod1 , theta.k = seq(-4,4,len=10) )
 summary( sirt::modelfit.sirt( mod1 ))
 
 # estimate model based on tetrachoric correlations
-mod1b <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval , 
+mod1b <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval ,
             modesttype=2)
 summary(mod1b)
 
@@ -301,9 +301,9 @@ summary( sirt::modelfit.sirt( mod3 ))
 noharm.path <- "c:/NOHARM"
 P.pattern <- Ppatt ; P.init <- Pval
 F.pattern <- Fpatt ; F.init <- Fval
-mod3b <- sirt::R2noharm( dat = dat , model.type="CFA" ,  
+mod3b <- sirt::R2noharm( dat = dat , model.type="CFA" ,
              F.pattern = F.pattern , F.init = F.init , P.pattern = P.pattern ,
-             P.init = P.init , writename = "example_sim_2dim_rasch" , 
+             P.init = P.init , writename = "example_sim_2dim_rasch" ,
              noharm.path = noharm.path  , dec = "," )
 summary(mod3b)
 
@@ -363,7 +363,7 @@ summary(mod4b)
 Fval <- matrix( 0 , I , 4 )
 Fval[,1] <- Fval[1:4,2] <- Fval[5:8,3] <- Fval[9:12,4 ] <- .6
 Fpatt <- 1 * ( Fval > 0 )
-Pval <- diag(4) 
+Pval <- diag(4)
 Ppatt <- 0*Pval
 colnames(Ppatt) <- c("g" , "A", "B","C")
 # estimation
@@ -371,7 +371,7 @@ mod5 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=
 summary(mod5)
 # allow only positive loadings
 mod5b <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval ,
-              pos.loading=TRUE )                        
+              pos.loading=TRUE )
 summary(mod5b)
 summary( sirt::modelfit.sirt(mod5b))
 
@@ -379,7 +379,7 @@ summary( sirt::modelfit.sirt(mod5b))
 Fval <- matrix( 0 , I , 3 )
 Fval[1:4,1] <- Fval[5:8,2] <- Fval[9:12,3 ] <- 1
 Fpatt <- 0*Fval
-Pval <- .6*diag(3) 
+Pval <- .6*diag(3)
 diag(Pval) <- 1
 Ppatt <- 1+0*Pval
 colnames(Ppatt) <- c("A", "B","C")
@@ -392,7 +392,7 @@ summary( sirt::modelfit.sirt(mod6) )  # model fit
 Fval <- matrix( 0 , I , 3 )
 Fval[1:4,1] <- Fval[5:8,2] <- Fval[9:12,3 ] <- 1
 Fpatt <- Fval
-Pval <- .6*diag(3) 
+Pval <- .6*diag(3)
 diag(Pval) <- 1
 Ppatt <- 1+0*Pval
 diag(Ppatt) <- 0
@@ -409,9 +409,9 @@ summary(mod8)
 }
 }
 
-% plot(mod8)   
+% plot(mod8)
 % # plot only standardized loadings larger than .40
-% plot(mod8 , efa.load.min=.4 ) 
+% plot(mod8 , efa.load.min=.4 )
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

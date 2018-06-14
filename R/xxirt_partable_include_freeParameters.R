@@ -1,5 +1,5 @@
 ## File Name: xxirt_partable_include_freeParameters.R
-## File Version: 0.06
+## File Version: 0.07
 
 
 
@@ -10,4 +10,4 @@ xxirt_partable_include_freeParameters <- function( partable , x ){
         partable$value <- vals
         return(partable)
 }
-        
+

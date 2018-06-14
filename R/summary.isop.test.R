@@ -1,5 +1,5 @@
 ## File Name: summary.isop.test.R
-## File Version: 0.01
+## File Version: 0.02
 
 ####################################################
 # summary for ISOP test
@@ -8,7 +8,7 @@ summary.isop.test <- function( object , ... ){
     VV <- ncol(obji)
     cat("*** Test for the W1 Axiom in the ISOP Model **** \n\n")
     for (vv in 2:VV){
-        obji[,vv] <- round( obji[,vv],3) 
+        obji[,vv] <- round( obji[,vv],3)
     }
     print(obji)
     cat(paste0("\n-- Statistical inference is based on ", object$JJ ,

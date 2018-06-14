@@ -1,5 +1,5 @@
 ## File Name: prmse.subscores.R
-## File Version: 0.07
+## File Version: 0.08
 
 #--------------------------------------------------------------------------
 # calculation of PRMSE for Subscores according to Haberman (2007)
@@ -9,7 +9,7 @@ prmse.subscores <- function( data.X , data.Z){
     if (length(ind) > 0){
         data.X <- data.X[ - ind , ]
         data.Z <- data.Z[ - ind , ]
-                    }    
+                    }
     aX <- .cronbach.alpha( data.X )
     aZ <- .cronbach.alpha( data.Z )
     res <- list( "N" = aX$sample.size ,  "nX" = aX$number.of.items )
@@ -30,12 +30,12 @@ prmse.subscores <- function( data.X , data.Z){
     res$Var.EZ <- res$Var.Z * ( 1 - res$alpha.Z )
     res$cor.X_Z <- stats::cor( score.X , score.Z )
     res$cor.X_Y <- stats::cor( score.X , score.Z - score.X )
-    res$cor.TX_TY <- res$cor.X_Y / sqrt( res$alpha.X ) / 
+    res$cor.TX_TY <- res$cor.X_Y / sqrt( res$alpha.X ) /
                 sqrt( .cronbach.alpha( data.Z[ , setdiff( colnames(data.Z) , colnames(data.X) ) ] )$alpha )
     res$Var.TX <- res$Var.X - res$Var.EX
     res$Var.TZ <- res$Var.Z - res$Var.EZ
-    
-    res$cor.TX_TZ <- res$cor.X_Z / sqrt( res$alpha.X * res$alpha.Z ) - 
+
+    res$cor.TX_TZ <- res$cor.X_Z / sqrt( res$alpha.X * res$alpha.Z ) -
                         res$Var.EX / sqrt( res$Var.TX * res$Var.Z )
     res$cor.TX_Z <- res$cor.TX_TZ * sqrt( res$alpha.Z )
     # RMSE based on subscores (Kelley formula)
@@ -57,7 +57,7 @@ prmse.subscores <- function( data.X , data.Z){
     regr[ "Mod.XZ" , "Int" ] <- res$M.X - regr[ "Mod.X" , "beta.X" ] * res$M.X - regr[ "Mod.Z" , "beta.Z" ] * res$M.Z
     # calculation of RMSE of the regression on both subscores and total score
     pcor <- (( res$cor.TX_Z - sqrt( res$alpha.X) * res$cor.X_Z ) /
-                    sqrt( 1 - res$alpha.X ) / sqrt( 1 - res$cor.X_Z^2 ) ) 
+                    sqrt( 1 - res$alpha.X ) / sqrt( 1 - res$cor.X_Z^2 ) )
     res$rmse.XZ <- res$rmse.X * sqrt( 1 - pcor^2)
     res$prmse.X <- res$alpha.X
     res$prmse.Z <- res$cor.TX_Z^2
@@ -70,7 +70,7 @@ prmse.subscores <- function( data.X , data.Z){
 
 #--------------------------------------------------------------------------------
 # calculation of PRMSE for a number of subscales
-prmse.subscores.scales <- function( data , subscale ){ 
+prmse.subscores.scales <- function( data , subscale ){
         # data ... original data frame
         # scales ... classification of items in data into scales
         scales <- sort( unique( subscale ) )
@@ -89,7 +89,7 @@ prmse.subscores.scales <- function( data , subscale ){
 
 
 # aux function for Cronbach's Alpha
-    .cronbach.alpha <- function( data ){ 
+    .cronbach.alpha <- function( data ){
         # covariance
         c1 <- stats::cov( data , use = "pairwise.complete.obs" )
         # mean covariance
@@ -101,9 +101,9 @@ prmse.subscores.scales <- function( data , subscale ){
         alpha <- I * mc / ( mv + (I-1) *mc )
         mean.tot <- mean( rowSums(data) )
         var.tot <- var( rowSums( data ) )
-         res <- list( "I" = I , "alpha" = alpha , 
+         res <- list( "I" = I , "alpha" = alpha ,
                 "mean.tot" = mean.tot ,  "var.tot" = var.tot ,
-                "sample.size" = nrow(data) , 
+                "sample.size" = nrow(data) ,
                 "number.of.items" = I )
         return(res)
             }

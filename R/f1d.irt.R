@@ -1,12 +1,12 @@
 ## File Name: f1d.irt.R
-## File Version: 1.14
+## File Version: 1.15
 
 #########################################################
 # Functional Unidimensional Model (Ip et al., 2013)
 f1d.irt <- function( dat=NULL , nnormal=1000 , nfactors=3 ,
             A=NULL , intercept=NULL , mu=NULL , Sigma = NULL , maxiter=100 ,
             conv=10^(-5) , progress=TRUE ){
-    if ( ! is.null(dat) ){        
+    if ( ! is.null(dat) ){
         TAM::require_namespace_msg("psych")
         # estimate tetrachoric correlation matrix
         if (progress){
@@ -32,17 +32,17 @@ f1d.irt <- function( dat=NULL , nnormal=1000 , nfactors=3 ,
         names.dat <- names(intercept)
         tetra <- NULL
     }
-                        
+
     #***************************************
     # approximation of normal distribution using quasi Monte Carlo integration nodes
     theta <- qmc.nodes( nnormal , nfactors )
     if ( is.null(mu) ){
         mu <- rep(0,nfactors)
-                        }    
+                        }
     if ( is.null(Sigma) ){
         Sigma <- diag(1,nfactors)
                         }
-    
+
     wgt_theta <- mvtnorm::dmvnorm(x=theta, mean= mu, sigma= Sigma )
     wgt_theta <- wgt_theta / sum( wgt_theta )
 
@@ -72,7 +72,7 @@ f1d.irt <- function( dat=NULL , nnormal=1000 , nfactors=3 ,
     #*****************************************
     # begin algorithm
     while( ( iter < maxiter ) & ( parchange > conv ) ){
-    
+
         thetaast0 <- thetaast
         aiast0 <- aiast
         diast0 <- diast
@@ -88,10 +88,10 @@ f1d.irt <- function( dat=NULL , nnormal=1000 , nfactors=3 ,
         X <- cbind( 1 , thetaast )
         c1 <- solve( crossprod( X , W1 ) %*% X , crossprod( X , W1 ) %*% Zpi )
         diast <- c1[1,]
-        aiast <- c1[2,]            
+        aiast <- c1[2,]
 
         # compute approximation error
-        errpi <- Zpi - thetaast * matrix(aiast,TP , I , byrow=TRUE )  - 
+        errpi <- Zpi - thetaast * matrix(aiast,TP , I , byrow=TRUE )  -
                  matrix(diast,TP , I , byrow=TRUE )
         approx.error <- sum( errpi^2 * wgt_theta ) / I
         # parameter change
@@ -99,7 +99,7 @@ f1d.irt <- function( dat=NULL , nnormal=1000 , nfactors=3 ,
 
         iter <- iter + 1
         if (progress){
-            cat( paste0( "Iteration " , iter , 
+            cat( paste0( "Iteration " , iter ,
                 " | Approximation error = " , round( approx.error , 5 ) ,
                 " | Max. parameter change = " , round( parchange , 5) ,
                  "\n") )
@@ -107,7 +107,7 @@ f1d.irt <- function( dat=NULL , nnormal=1000 , nfactors=3 ,
                     }
         }
     #**************************************************
-    
+
 
     if ( ! is.null(dat) ){
         # unstandardized loadings 1 factor model
@@ -121,15 +121,15 @@ f1d.irt <- function( dat=NULL , nnormal=1000 , nfactors=3 ,
                 }
 
     item <- data.frame(  "item" = names.dat )
-    item$ai.ast <- aiast 
-    item$ai0 <- a0 
-    item$di.ast <- diast  
-    item$di0 <- d0 
+    item$ai.ast <- aiast
+    item$ai0 <- a0
+    item$di.ast <- diast
+    item$di0 <- d0
 
     person <- data.frame( "theta.ast" = thetaast ,
             "wgt" = wgt_theta )
 
-    res <- list( "item" = item , "person"=person , 
+    res <- list( "item" = item , "person"=person ,
                 "A"=A , "intercept"=intercept ,
                 "dat"=dat , "tetra" = tetra )
     return(res)

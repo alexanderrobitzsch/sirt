@@ -1,10 +1,10 @@
 ## File Name: mcmc_rename_define_symbols.R
-## File Version: 0.01
+## File Version: 0.02
 
 mcmc_rename_define_symbols <- function()
 {
     trans <- c("X", "Z", "M")
-    orig <- c("[", "]" , ",")    
+    orig <- c("[", "]" , ",")
     res <- list(trans=trans, orig=orig)
     return(res)
 }

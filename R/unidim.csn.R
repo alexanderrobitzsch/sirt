@@ -1,5 +1,5 @@
 ## File Name: unidim.csn.R
-## File Version: 0.11
+## File Version: 0.12
 
 #############################################################
 unidim.test.csn <- function( dat , RR=400 , prop.perm=.75 ,
@@ -31,8 +31,8 @@ unidim.test.csn <- function( dat , RR=400 , prop.perm=.75 ,
 #    res <- gooijer_csn_table( dat , dat_perm , RR=RR , NS=0 , progress , progress_vec ,
 #                as.matrix(score_index) )
 # extern "C" {
-# SEXP gooijer_csn_table( SEXP dat_, SEXP dat_perm_, 
-# SEXP RR_, SEXP NS_, SEXP progress_, SEXP progress_vec_, 
+# SEXP gooijer_csn_table( SEXP dat_, SEXP dat_perm_,
+# SEXP RR_, SEXP NS_, SEXP progress_, SEXP progress_vec_,
 # SEXP score_index_) ;
 # }
     if (progress==1){    cat("|**********|\n")  }
@@ -43,7 +43,7 @@ unidim.test.csn <- function( dat , RR=400 , prop.perm=.75 ,
     res$H0_quantiles <- stats::quantile(res$stat_perm , c(.05 , .25 , .50 , .75 , .95 , .99 , .999 ) )
     if ( progress == 1 ){
         cat( paste0("CSN Statistic = " , round( res$stat , 5) ) )
-        cat( " , p =" , round( res$p , 5 ) , "\n")        
+        cat( " , p =" , round( res$p , 5 ) , "\n")
         }
     return(res)
     }

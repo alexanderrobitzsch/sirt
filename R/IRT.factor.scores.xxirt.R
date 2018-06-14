@@ -1,5 +1,5 @@
 ## File Name: IRT.factor.scores.xxirt.R
-## File Version: 0.02
+## File Version: 0.03
 
 
 ###########################################################
@@ -8,7 +8,7 @@ IRT.factor.scores.xxirt <- function( object , type="EAP" , ... ){
     if ( ! ( type %in% c("EAP") ) ){
         stop("Requested type is not supported!\n")
                     }
-    # EAP                    
+    # EAP
     if ( type=="EAP"){
         ll <- object$EAP
                     }

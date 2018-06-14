@@ -1,5 +1,5 @@
 %% File Name: wle.rasch.jackknife.Rd
-%% File Version: 1.16
+%% File Version: 1.17
 
 \name{wle.rasch.jackknife}
 \alias{wle.rasch.jackknife}
@@ -8,12 +8,12 @@
 Standard Error Estimation of WLE by Jackknifing
 }
 \description{
-This function calculates standard errors of WLEs (Warm, 1989) for 
-stratified item designs and item designs with testlets for the 
+This function calculates standard errors of WLEs (Warm, 1989) for
+stratified item designs and item designs with testlets for the
 Rasch model.
 }
 \usage{
-wle.rasch.jackknife(dat, b, itemweights = 1 + 0 * b, pid = NULL, 
+wle.rasch.jackknife(dat, b, itemweights = 1 + 0 * b, pid = NULL,
     testlet = NULL, stratum = NULL, size.itempop = NULL)
 }
 \arguments{
@@ -30,7 +30,7 @@ Weights for items, i.e. fixed item discriminations
 Person identifier
 }
   \item{testlet}{
-A vector of length \eqn{I} which defines which item 
+A vector of length \eqn{I} which defines which item
 belongs to which testlet. If some items
 does not belong to any testlet, then define separate
 testlet labels for these single items.
@@ -55,14 +55,14 @@ A list with following entries:
   \item{wle.rel}{WLE reliability (Adams, 2005)}
 }
 \references{
-Adams, R. J. (2005). Reliability as a measurement design effect. 
+Adams, R. J. (2005). Reliability as a measurement design effect.
 \emph{Studies in Educational Evaluation}, \bold{31}, 162-172.
 
-Gershunskaya, J., Jiang, J., & Lahiri, P. (2009). Resampling methods in surveys. 
+Gershunskaya, J., Jiang, J., & Lahiri, P. (2009). Resampling methods in surveys.
 In D. Pfeffermann and C.R. Rao (Eds.). \emph{Handbook of Statistics 29B; Sample
 Surveys: Inference and Analysis} (pp. 121-151). Amsterdam: North Holland.
 
-Wainer, H., & Wright, B. D. (1980). Robust estimation of ability in the Rasch 
+Wainer, H., & Wright, B. D. (1980). Robust estimation of ability in the Rasch
 model. \emph{Psychometrika}, \bold{45}, 373-391.
 
 Warm, T. A. (1989). Weighted likelihood estimation of ability in item response theory.
@@ -95,37 +95,37 @@ wle1 <- sirt::wle.rasch(dat, b = res$item$thresh )
 
 # simple jackknife WLE estimation
 wle2 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh )
-  ## WLE Reliability = 0.651 
+  ## WLE Reliability = 0.651
 
 # SE(WLE) for testlets A, B and C
-wle3 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh , 
+wle3 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh ,
            testlet = substring( colnames(dat),1,1) )
-  ## WLE Reliability = 0.572 
-        
+  ## WLE Reliability = 0.572
+
 # SE(WLE) for item strata A,B, C
-wle4 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh , 
+wle4 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh ,
              stratum = substring( colnames(dat),1,1) )
-  ## WLE Reliability = 0.683 
+  ## WLE Reliability = 0.683
 
 # SE (WLE) for finite item strata
 # A (10 items) , B (7 items) , C (4 items -> no sampling error)
 # in every stratum 4 items were sampled
 size.itempop <- c(10,7,4)
 names(size.itempop) <- c("A","B","C")
-wle5 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh , 
+wle5 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh ,
              stratum = substring( colnames(dat),1,1) ,
              size.itempop = size.itempop )
-  ## Stratum  A (Mean) Correction Factor 0.6 
-  ## Stratum  B (Mean) Correction Factor 0.42857 
-  ## Stratum  C (Mean) Correction Factor 0 
-  ## WLE Reliability = 0.876 
-         
+  ## Stratum  A (Mean) Correction Factor 0.6
+  ## Stratum  B (Mean) Correction Factor 0.42857
+  ## Stratum  C (Mean) Correction Factor 0
+  ## WLE Reliability = 0.876
+
 # compare different estimated standard errors
 a2 <- stats::aggregate( wle2$wle$wle.jackse , list( wle2$wle$wle) , mean )
 colnames(a2) <- c("wle" , "se.simple")
 a2$se.testlet <- stats::aggregate( wle3$wle$wle.jackse , list( wle3$wle$wle) , mean )[,2]
 a2$se.strata <- stats::aggregate( wle4$wle$wle.jackse , list( wle4$wle$wle) , mean )[,2]
-a2$se.finitepop.strata <- stats::aggregate( wle5$wle$wle.jackse , 
+a2$se.finitepop.strata <- stats::aggregate( wle5$wle$wle.jackse ,
     list( wle5$wle$wle) , mean )[,2]
 round( a2 , 3 )
   ## > round( a2 , 3 )

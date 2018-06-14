@@ -1,5 +1,5 @@
 %% File Name: monoreg.rowwise.Rd
-%% File Version: 0.10
+%% File Version: 0.11
 
 \name{monoreg.rowwise}
 \alias{monoreg.rowwise}
@@ -53,7 +53,7 @@ package is simply extended to handle matrix input.
 }
 
 \note{
-This function is used for fitting the ISOP model 
+This function is used for fitting the ISOP model
 (see \code{\link{isop.dich}}).
 }
 

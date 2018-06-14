@@ -1,5 +1,5 @@
 %% File Name: tetrachoric2.Rd
-%% File Version: 1.27
+%% File Version: 1.28
 
 \name{tetrachoric2}
 \alias{tetrachoric2}
@@ -9,7 +9,7 @@ Tetrachoric Correlation Matrix
 }
 \description{
 This function estimates a tetrachoric correlation matrix according to
-the maximum likelihood estimation of Olsson (Olsson, 1979; \code{method="Ol"}), 
+the maximum likelihood estimation of Olsson (Olsson, 1979; \code{method="Ol"}),
 the Tucker method (Method 2 of Froemel, 1971; \code{method="Tu"}) and
 Divgi (1979, \code{method="Di"}).
 In addition, an alternative non-iterative approximation of
@@ -25,13 +25,13 @@ tetrachoric2(dat, method="Ol" , delta = 0.007, maxit = 1000000, cor.smooth=TRUE,
 A data frame of dichotomous response
 }
 \item{method}{Computation method for calculating the tetrachoric correlation.
-    The ML method is \code{method="Ol"} (which is the default), 
-    the Tucker method is \code{method="Tu"}, 
+    The ML method is \code{method="Ol"} (which is the default),
+    the Tucker method is \code{method="Tu"},
     the Divgi method is \code{method="Di"}
-    the method of Bonett and 
+    the method of Bonett and
     Price (2005) is \code{method="Bo"}.}
   \item{delta}{
-The step parameter. It is set by default to \eqn{2^{-7}} 
+The step parameter. It is set by default to \eqn{2^{-7}}
 which is approximately .007.
 }
   \item{maxit}{
@@ -57,18 +57,18 @@ A list with following entries
 
 
 \references{
-Bonett, D. G., & Price, R. M. (2005). Inferential methods for the tetrachoric 
+Bonett, D. G., & Price, R. M. (2005). Inferential methods for the tetrachoric
 correlation coefficient. \emph{Journal of Educational and Behavioral Statistics},
 \bold{30}, 213-225.
 
-Divgi, D. R. (1979). Calculation of the tetrachoric correlation coefficient. 
+Divgi, D. R. (1979). Calculation of the tetrachoric correlation coefficient.
 \emph{Psychometrika}, \bold{44}, 169-172.
 
-Froemel, E. C. (1971). A comparison of computer routines for the 
+Froemel, E. C. (1971). A comparison of computer routines for the
 calculation of the tetrachoric correlation coefficient.
 \emph{Psychometrika}, \bold{36}, 165-174.
 
-Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation 
+Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation
 coefficient. \emph{Psychometrika}, \bold{44}, 443-460.
 }
 
@@ -76,7 +76,7 @@ coefficient. \emph{Psychometrika}, \bold{44}, 443-460.
 \author{
 Alexander Robitzsch
 
-The code is adapted from an \R script of Cengiz Zopluoglu. 
+The code is adapted from an \R script of Cengiz Zopluoglu.
 See \url{http://sites.education.miami.edu/zopluoglu/software-programs/}.
 }
 %\note{
@@ -86,10 +86,10 @@ See \url{http://sites.education.miami.edu/zopluoglu/software-programs/}.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See also the \code{\link[psych:tetrachoric]{psych::tetrachoric}}  
+See also the \code{\link[psych:tetrachoric]{psych::tetrachoric}}
 function in the \pkg{psych} package
  and the function \code{tet} in the \pkg{irtoys} package.
- 
+
 See \code{\link{polychoric2}} for estimating polychoric correlations.
 }
 \examples{

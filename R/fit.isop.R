@@ -1,9 +1,9 @@
 ## File Name: fit.isop.R
-## File Version: 2.07
+## File Version: 2.08
 
 ############################################################
 # Fit ISOP Model
-fit.isop <- function( freq.correct , wgt , conv = .0001 , 
+fit.isop <- function( freq.correct , wgt , conv = .0001 ,
               maxit=100 , progress=TRUE , calc.ll=TRUE){
     #****
     # initializations
@@ -11,7 +11,7 @@ fit.isop <- function( freq.correct , wgt , conv = .0001 ,
     M1 <- as.matrix(freq.correct)
     I <- ncol(M1)
     PP <- nrow(M1)
-    wgt <- as.matrix(wgt)    
+    wgt <- as.matrix(wgt)
     # isotonic row regression
     res <- fit.isotonic.rows(X=M1 , wgt=wgt )
     RX <- res$RX
@@ -19,19 +19,19 @@ fit.isop <- function( freq.correct , wgt , conv = .0001 ,
     # isotonic column regression
     res <- fit.isotonic.cols(X=RX , wgt=wgt )
     CX <- res$CX
-    IC <- res$IC    
+    IC <- res$IC
     X <- M1
     deviation <- 1
     iter <- 0
     if (progress){ cat("\n*******ISOP Model***********\n") }
     #****
     # ISOP algorithm
-    while( ( iter < maxit) & ( deviation > conv ) ){    
+    while( ( iter < maxit) & ( deviation > conv ) ){
         Xold <- X
         # isotonic rows
         res <- fit.isotonic.rows(X=X-IC , wgt=wgt )
         RX <- res$RX
-        IR <- res$IR    
+        IR <- res$IR
         # isotonic columns
         res <- fit.isotonic.cols(X=X-IR , wgt=wgt )
         CX <- res$CX
@@ -41,25 +41,25 @@ fit.isop <- function( freq.correct , wgt , conv = .0001 ,
         # calculate deviation
         deviation <- sum( ( X - Xold )^2*wgt )
         iter <- iter + 1
-        if (progress){ 
+        if (progress){
             cat( "Iteration" , iter , "- Deviation =" ,  round( deviation , 6 ) , "\n")
-            utils::flush.console()            
+            utils::flush.console()
                     }
-                    }  # end algorithm                    
+                    }  # end algorithm
     ###############################################
     RR <- nrow(freq.correct)
     CC <- ncol(freq.correct)
-    if ( calc.ll ){ 
+    if ( calc.ll ){
         CX[ CX > 1 ] <- 1
         CX[ CX < 0 ] <- 0
                 }
-    dfr0 <- data.frame( "stud.index" = rep(1:RR , CC) , 
-                "item.index" = rep(1:CC ,each=RR) , 
+    dfr0 <- data.frame( "stud.index" = rep(1:RR , CC) ,
+                "item.index" = rep(1:CC ,each=RR) ,
                 "wgt" = matrix( as.matrix( wgt ) , RR*CC , 1 ),
                 "freq" = matrix( as.matrix(freq.correct ) , RR*CC , 1 ) ,
                 "freq.fitted" = matrix( as.matrix( CX ) , RR*CC , 1 )
                         )
-    dfr0 <- dfr0[ order( dfr0$stud.index * 1000 + dfr0$item.index ) , ]                        
+    dfr0 <- dfr0[ order( dfr0$stud.index * 1000 + dfr0$item.index ) , ]
     # deviation criterion
     wgt1 <- ( wgt / colSums( wgt ) ) / ncol(wgt)
     fit <- sqrt( sum( ( M1-CX  )^2 * wgt1  ) )
@@ -67,13 +67,13 @@ fit.isop <- function( freq.correct , wgt , conv = .0001 ,
     # calculate likelihood
     ll <- NULL
     if (calc.ll){
-        ll <- list( 
-            "ll.ind" = .calc.ll.isop( freq.correct , wgt , irtfitted =freq.correct )    
+        ll <- list(
+            "ll.ind" = .calc.ll.isop( freq.correct , wgt , irtfitted =freq.correct )
                         )
         ll$ll.isop <- .calc.ll.isop( freq.correct , wgt , irtfitted =CX )
         NW <- mean( colSums(wgt) )
-        ll$llcase.ind <- ll$ll.ind /NW    
-        ll$llcase.isop <- ll$ll.isop /NW    
+        ll$llcase.ind <- ll$ll.ind /NW
+        ll$llcase.isop <- ll$ll.isop /NW
         }
     # collect item and person scores
     item.sc <- ( seq( 0 , I-1 ) + .5 ) / I
@@ -108,7 +108,7 @@ fit.isotonic.rows <- function( X , wgt ){
     res <- list( "X" = X , "RX"  = RX , "IR" = IX )
     return(res)
         }
-        
+
 #****************************************
 # fit isotonic columns
 fit.isotonic.cols <- function( X , wgt ){
@@ -122,5 +122,5 @@ fit.isotonic.cols <- function( X , wgt ){
     IX <- X - RX
     res <- list( "X" = X , "CX"  = RX , "IC" = IX )
     return(res)
-        }        
+        }
 #******************************************

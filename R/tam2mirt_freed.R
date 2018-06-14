@@ -1,5 +1,5 @@
 ## File Name: tam2mirt_freed.R
-## File Version: 0.07
+## File Version: 0.08
 
 
 
@@ -15,7 +15,7 @@ tam2mirt_freed <- function( D , factors , B , dat , AXsi ,
     for (dd in 1:D){
         fac.dd <- factors[dd]
         # create terms for loadings
-        B2.dd <- round( B[,2,dd] , 4) 
+        B2.dd <- round( B[,2,dd] , 4)
         if (class(tamobj)=="tam.mml"){
             syn0 <- paste0( paste0( B2.dd[ B2.dd!=0] , "*" , colnames(dat)[ B2.dd!=0] ) , collapse="+" )
             syn0 <- paste0( fac.dd , " =~ " , syn0 , "\n")
@@ -23,13 +23,13 @@ tam2mirt_freed <- function( D , factors , B , dat , AXsi ,
         if (class(tamobj)=="tam.mml.2pl"){
             d4 <- paste0( B2.dd[ B2.dd!=0] )
             d4 <- paste0( "a" , dd , "_" , seq(1,length(d4) ) )
-            syn0 <- paste0( paste0( d4 , "*" , colnames(dat)[ B2.dd!=0] ) , 
+            syn0 <- paste0( paste0( d4 , "*" , colnames(dat)[ B2.dd!=0] ) ,
                             collapse="+" )
             syn0 <- paste0( fac.dd , " =~ " , syn0 , "\n")
         }
         lavsyn <- paste0( lavsyn , syn0 )
-    } 
-    # create syntax for intercepts    
+    }
+    # create syntax for intercepts
     maxK <- ncol(AXsi) - 1
     for (kk in 1:maxK){
         t1 <- round( AXsi[,kk+1] , 4 )
@@ -60,10 +60,10 @@ tam2mirt_freed <- function( D , factors , B , dat , AXsi ,
     if (D>1){
         for (dd in 1:(D-1)){
             for (ee in (dd+1):(D)){
-                syn0 <- paste0( factors[dd] , " ~~ " , 
+                syn0 <- paste0( factors[dd] , " ~~ " ,
                             paste0("Cov_" ,dd ,ee)  , "*" ,factors[ee]  )
                 syn0 <- paste0( syn0 , collapse="\n")
-                lavsyn <- paste0( lavsyn , "\n" , syn0 )    
+                lavsyn <- paste0( lavsyn , "\n" , syn0 )
             }
         }
     }

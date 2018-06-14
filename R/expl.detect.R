@@ -1,10 +1,10 @@
 ## File Name: expl.detect.R
-## File Version: 1.10
+## File Version: 1.11
 
 
 ###############################################################################
 # Exploratory DETECT analysis
-expl.detect <- function( data , score , nclusters , N.est = NULL , seed=NULL , 
+expl.detect <- function( data , score , nclusters , N.est = NULL , seed=NULL ,
         bwscale = 1.1 ){
     if ( ! is.null(seed) ){
         set.seed(seed)
@@ -33,11 +33,11 @@ expl.detect <- function( data , score , nclusters , N.est = NULL , seed=NULL ,
     itemcluster[,1] <- colnames(data)
     colnames(itemcluster) <- c( "item" , paste( "cluster" , 2:nclusters , sep="") )
     detect.unweighted <- detect.weighted <- NULL
-    for (k in 2:nclusters){ 
-        itemcluster[,k] <- stats::cutree( fit , k=k ) 
+    for (k in 2:nclusters){
+        itemcluster[,k] <- stats::cutree( fit , k=k )
         h1 <- detect.index( ccovtable=cc , itemcluster = itemcluster[,k] )
         detect.unweighted <- rbind( detect.unweighted , h1$unweighted )
-        detect.weighted <- rbind( detect.weighted , h1$weighted )    
+        detect.weighted <- rbind( detect.weighted , h1$weighted )
     }
     parnames <- c( "DETECT" , "ASSI" , "RATIO" , "MADCOV100" , "MCOV100")
     colnames(detect.unweighted) <- paste( parnames , ".est" , sep="")
@@ -53,13 +53,13 @@ expl.detect <- function( data , score , nclusters , N.est = NULL , seed=NULL ,
     # Validating DETECT index
     #************************************
     if ( length(valsample) > 0 ){
-        cc <- ccov.np( data = data[ valsample,] , score = score[valsample] , 
+        cc <- ccov.np( data = data[ valsample,] , score = score[valsample] ,
                     bwscale = bwscale )
         detect.unweighted <- detect.weighted <- NULL
-        for (k in 2:nclusters){ 
+        for (k in 2:nclusters){
             h1 <- detect.index( ccovtable=cc , itemcluster = itemcluster[,k] )
             detect.unweighted <- rbind( detect.unweighted , h1$unweighted )
-            detect.weighted <- rbind( detect.weighted , h1$weighted )    
+            detect.weighted <- rbind( detect.weighted , h1$weighted )
                     }
         colnames(detect.unweighted) <- paste( parnames , ".val" , sep="")
         colnames(detect.weighted) <- paste( parnames , ".val" , sep="")
@@ -69,7 +69,7 @@ expl.detect <- function( data , score , nclusters , N.est = NULL , seed=NULL ,
     rownames(detect.unweighted) <- paste0("Cl" , 2:nclusters)
     rownames(detect.weighted) <- rownames(detect.unweighted)
     cat("\n\nDETECT (unweighted)\n\n")
-    clopt <- which.max( detu$DETECT.est ) + 1 
+    clopt <- which.max( detu$DETECT.est ) + 1
     cat("Optimal Cluster Size is " , clopt , " (Maximum of DETECT Index)\n\n" )
     detu1 <- detu
     for (vv in 6:ncol(detu)){ detu1[,vv] <- round( detu1[,vv] , 3) }
@@ -77,7 +77,7 @@ expl.detect <- function( data , score , nclusters , N.est = NULL , seed=NULL ,
     res <- list( "detect.unweighted" = detect.unweighted , "detect.weighted" = detect.weighted ,
                     "clusterfit" = clusterfit , "itemcluster" = itemcluster )
     # plot cluster solution
-    graphics::plot( res$clusterfit , 
+    graphics::plot( res$clusterfit ,
             main = paste( "Cluster Dendogram with " , clopt , " Clusters" , sep="")
                     )
     stats::rect.hclust(res$clusterfit, k=clopt, border="red")

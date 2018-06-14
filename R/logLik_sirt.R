@@ -1,12 +1,12 @@
 ## File Name: logLik_sirt.R
-## File Version: 0.10
+## File Version: 0.11
 
 
 ###############################################################
 # log-likelihood function rasch.copula2
 logLik.rasch.copula2 <- function (object, ...) {
     # extract log-likelihood
-    out <- - object$ic$deviance / 2 
+    out <- - object$ic$deviance / 2
     # number of parameters
     attr(out, "df") <- object$ic$np
     # extract number of observations
@@ -14,7 +14,7 @@ logLik.rasch.copula2 <- function (object, ...) {
     class(out) <- "logLik"
     return(out)
 }
-logLik.rasch.copula3 <- logLik.rasch.copula2 
+logLik.rasch.copula3 <- logLik.rasch.copula2
 ################################################################
 
 #####################################################

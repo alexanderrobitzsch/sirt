@@ -1,6 +1,6 @@
 ## File Name: personfit.R
-## File Version: 1.20
- 
+## File Version: 1.21
+
 
 
 #----------------------------------------------------------------------------------
@@ -15,8 +15,8 @@ pf.logist.regression <- function( data , itemdiff , perc = seq(5,100,5) ){
         mod.pp <- stats::glm( y1 ~ itemdiff , family = "binomial")
         fits[pp] <- stats::coef(mod.pp)[2]
         ind.pp <- which( convdis[,1] %in% pp )
-        if (length(ind.pp) > 0){ cat("\n" ,paste(convdis[ind.pp,2], "%" , sep="") ) ; 
-        utils::flush.console()} 
+        if (length(ind.pp) > 0){ cat("\n" ,paste(convdis[ind.pp,2], "%" , sep="") ) ;
+        utils::flush.console()}
             }
         cat("\n")
     return( fits)
@@ -24,7 +24,7 @@ pf.logist.regression <- function( data , itemdiff , perc = seq(5,100,5) ){
 #...........................................................................
 # display convergence progress
 .display.conv <- function( maxiter , perc =  seq( 5 , 100 , 5 ) , P=P ){
-    h1 <- 100 * seq( 1 , P ) / P 
+    h1 <- 100 * seq( 1 , P ) / P
     h2 <- sapply( perc , FUN = function(perc.pp){
             # perc.pp <- perc[1]
             which.min( abs( h1 - perc.pp ) )[1]
@@ -36,7 +36,7 @@ pf.logist.regression <- function( data , itemdiff , perc = seq(5,100,5) ){
 ##NS export(pf.reisefit)
 # pf.reisefit <- function( data , itemdiff ){
 #    dat1 <- data
-#    a1 <- data.frame( "y" = matrix(  t(dat1) , ncol= 1 , byrow=T) , 
+#    a1 <- data.frame( "y" = matrix(  t(dat1) , ncol= 1 , byrow=T) ,
 #                    "person" = rep(  seq( 1 , nrow(dat1) ) , each=I ) ,
 #                    "itemdiff" = rep( itemdiff , nrow(dat1) )
 #                        )
@@ -47,15 +47,15 @@ pf.logist.regression <- function( data , itemdiff , perc = seq(5,100,5) ){
 #-----------------------------------------------------------------------------------------
 # calculate l0 and lz likelihood based statistic
 ##NS export(pf.l0)
-pf.l0 <- function( data , wle , itemdiff ){ 
-    dat1 <- data 
+pf.l0 <- function( data , wle , itemdiff ){
+    dat1 <- data
     dat1.resp <- 1 - is.na(dat1)
-    dat1[ is.na(dat1) ] <- 0        
+    dat1[ is.na(dat1) ] <- 0
     # I <- ncol(dat1)
     Iresp <- rowSums( dat1.resp )
     pmatrix <- stats::plogis( outer( wle , itemdiff , "-" ) )
     # l0
-    l0 <- rowSums( ( dat1 * log( pmatrix ) + ( 1 - dat1) * log( 1 - pmatrix ) )*dat1.resp / 
+    l0 <- rowSums( ( dat1 * log( pmatrix ) + ( 1 - dat1) * log( 1 - pmatrix ) )*dat1.resp /
                 Iresp )
     # standardized l0
     E.l0 <- rowSums( dat1.resp*( pmatrix * log( pmatrix ) + ( 1 - pmatrix) * log( 1 - pmatrix ) )  )
@@ -67,29 +67,29 @@ pf.l0 <- function( data , wle , itemdiff ){
 #-----------------------------------------------------------------------------------
 # Infit and Outfit (Rasch model)
 ##NS export(pf.outfit.infit)
-pf.outfit.infit <- function( data , wle , itemdiff ){ 
-    dat1 <- data 
+pf.outfit.infit <- function( data , wle , itemdiff ){
+    dat1 <- data
     # I <- ncol(dat1)
     pmatrix <- stats::plogis( outer( wle , itemdiff , "-" ) )
-    
+
     dat1.resp <- 1 - is.na(dat1)
     dat1[ is.na(dat1) ] <- 0
-    
+
     Iresp <- rowSums(dat1.resp)
-    
+
     # Outfit (unweighted fit)
     U <- rowSums(  ( ( dat1 - pmatrix )^2 / Iresp / pmatrix / ( 1 - pmatrix ) ) * dat1.resp )
     # Infit (weighted fit)
-    W <- rowSums(  dat1.resp * ( dat1 - pmatrix )^2  ) / 
+    W <- rowSums(  dat1.resp * ( dat1 - pmatrix )^2  ) /
                     rowSums(  dat1.resp * pmatrix * ( 1 - pmatrix ) )
     list( "Outfit" = U , "Infit" = W )
         }
-########################################################################        
-        
-        
+########################################################################
+
+
 #.......................................
-# U3 statistic                      
-##NS export(pf.U3) 
+# U3 statistic
+##NS export(pf.U3)
 pf.U3 <- function( data , pval ){
     dat1 <- data
     # data processing
@@ -98,17 +98,17 @@ pf.U3 <- function( data , pval ){
     P <- nrow(dat1)
     I <- ncol(dat1)
     # calculate A_i
-    pmatrix <- outer( rep(1,P) , data.proc$pval ) 
+    pmatrix <- outer( rep(1,P) , data.proc$pval )
     pmatrix <- log( pmatrix / ( 1 - pmatrix ) )
     T1 <- rowSums( data.proc$data.guttman * pmatrix)
-    T2 <- rowSums( data.proc$data * pmatrix) 
+    T2 <- rowSums( data.proc$data * pmatrix)
     T3 <- rowSums( data.proc2$data.inverse.guttman  * pmatrix )
     GI <- ( T1 - T2 ) / ( T1 - T3 )
-    GI 
+    GI
         }
 #.......................................
-# Caution Index            
-##NS export(pf.caution)             
+# Caution Index
+##NS export(pf.caution)
 pf.caution <- function( data , pval ){
     dat1 <- data
     # data processing
@@ -117,49 +117,49 @@ pf.caution <- function( data , pval ){
     P <- nrow(dat1)
     I <- ncol(dat1)
     # calculate caution index
-    pmatrix <- outer( rep(1,P) , data.proc$pval ) 
+    pmatrix <- outer( rep(1,P) , data.proc$pval )
     T1 <- rowSums( data.proc$data.guttman * pmatrix)
-    T2 <- rowSums( data.proc$data * pmatrix) 
+    T2 <- rowSums( data.proc$data * pmatrix)
     T3 <- rowSums( data.proc2$data.inverse.guttman  * pmatrix )
     GI <- ( T1 - T2 ) / ( T1 - T3 )
-    GI 
+    GI
         }
 #----------------------------------------------------------------
-# Correlation Index  
-##NS export(pf.rbis)                                            
-pf.rpbis <- function( data , pval ){ 
+# Correlation Index
+##NS export(pf.rbis)
+pf.rpbis <- function( data , pval ){
     I <- ncol(data)
     P <- nrow(data)
     cor.rowwise( data , outer( rep(1,P) , pval ) )
-    }  
-# Correlation Index 
-##NS export(pf.rpbis.itemdiff)                                             
-pf.rpbis.itemdiff <- function( data , itemdiff ){ 
+    }
+# Correlation Index
+##NS export(pf.rpbis.itemdiff)
+pf.rpbis.itemdiff <- function( data , itemdiff ){
     I <- ncol(data)
     P <- nrow(data)
     cor.rowwise( data , outer( rep(1,P) , itemdiff ) )
-    }  
+    }
 #----------------------------------------------------------------
 # Disagreement index
 ##NS export(pf.dependability)
-pf.dependability <- function( data , pval ){ 
+pf.dependability <- function( data , pval ){
     dat1 <- data
     # data processing
     data.proc <- .guttman.data.frame( data = dat1 , pval = pval )
     P <- nrow(dat1)
     I <- ncol(dat1)
     # calculate A_i
-    pmatrix <- outer( rep(1,P) , data.proc$pval ) 
+    pmatrix <- outer( rep(1,P) , data.proc$pval )
     A.max <- rowSums( data.proc$data.guttman * pmatrix) / I
     A.i <- rowSums( data.proc$data * pmatrix) / I
     # disagreement index
     DI <- A.max - A.i
-    DI 
+    DI
     }
 #...................................................................
 # ECI indexes
 ##NS export(pf.ECI)
-pf.eci <- function( data , pval , wle , itemdiff){ 
+pf.eci <- function( data , pval , wle , itemdiff){
     dat1 <- data
     # data processing
     data.proc <- .guttman.data.frame( data = dat1 , pval = pval )
@@ -168,7 +168,7 @@ pf.eci <- function( data , pval , wle , itemdiff){
     I <- ncol(dat1)
     # calculate matrices
     P.matr <- stats::plogis( outer( wle , itemdiff2 , "-")  )
-    X.matr <- data.proc$data 
+    X.matr <- data.proc$data
     n.matr <- outer( rep( 1 , P) , data.proc$pval )
     G.matr <- outer( rep(1,P) , colMeans( P.matr )  )
     # indices
@@ -184,7 +184,7 @@ pf.eci <- function( data , pval , wle , itemdiff){
     }
 #..................................................................
 # calculate covariance rowwise for matrices
-cov.rowwise <- function( m1 , m2 ){ 
+cov.rowwise <- function( m1 , m2 ){
     I <- ncol(m1)
     ( rowSums( m1 * m2 ) - I * rowMeans(m1) * rowMeans(m2) ) / ( I - 1 )
     }
@@ -208,10 +208,10 @@ cor.rowwise <- function(m1,m2){
     # create Guttman pattern data matrix data.guttman
     score <- rowSums( data1 )
     data.guttman <- 0*data1
-    for (ii in 1:I){ 
-            data.guttman[,ii] <- 1*( score >= ii ) 
+    for (ii in 1:I){
+            data.guttman[,ii] <- 1*( score >= ii )
                     }
-    res <- list( data = data1 , pval = pval1 , data.guttman = data.guttman , index = data.sort$index )                    
+    res <- list( data = data1 , pval = pval1 , data.guttman = data.guttman , index = data.sort$index )
     return( res )
         }
 #.........................................................................
@@ -233,7 +233,7 @@ cor.rowwise <- function(m1,m2){
 .sort.items <- function( data , pval ){
     l1 <- sort( pval , decreasing=TRUE , index.return=TRUE    )
     dat1 <- data[ , l1$ix ]
-    pval1 <- pval[ l1$ix ]    
+    pval1 <- pval[ l1$ix ]
     return( list( data = dat1 , pval = pval1 , index = l1$ix) )
         }
 #........................................................................

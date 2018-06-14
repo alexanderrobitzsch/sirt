@@ -1,11 +1,11 @@
 ## File Name: mcmc_rename_parameter_names.R
-## File Version: 0.07
+## File Version: 0.08
 
 mcmc_rename_parameter_names <- function( vec, orig, trans)
 {
     NO <- length(orig)
-    for (oo in 1:NO){        
-        trans_oo <- mcmc_rename_helper( string=trans[oo] )        
+    for (oo in 1:NO){
+        trans_oo <- mcmc_rename_helper( string=trans[oo] )
         trans_oo <- gsub( " ", "", trans_oo)
         vec <- gsub( orig[oo] , trans_oo , vec , fixed=TRUE)
     }

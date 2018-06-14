@@ -1,5 +1,5 @@
 %% File Name: data.long.Rd
-%% File Version: 0.22
+%% File Version: 0.23
 
 \name{data.long}
 \alias{data.long}
@@ -69,7 +69,7 @@ mod1a <- sirt::rasch.mml2(dat, Q=Q , est.b=itemnr , mu.fixed=mu.fixed)
 summary(mod1a)
 
 #--- M1b: smirt (in sirt)
-mod1b <- sirt::smirt(dat, Qmatrix=Q , irtmodel="comp" , est.b= itemnr , 
+mod1b <- sirt::smirt(dat, Qmatrix=Q , irtmodel="comp" , est.b= itemnr ,
                   mu.fixed=mu.fixed )
 
 #--- M1c: tam.mml (in TAM)
@@ -136,7 +136,7 @@ name <- "4PLbw"
 par <- c("low"=0,"upp"=1,"a"=1,"d"=0 ,"dimItem"=1)
 est <- c(TRUE, TRUE,TRUE,TRUE,FALSE)
 # item response function
-irf <- function(par,Theta,ncat){    
+irf <- function(par,Theta,ncat){
      low <- par[1]
      upp <- par[2]
      a <- par[3]
@@ -157,23 +157,23 @@ mirtsyn <- "
      COV = T1*T2,,T2*T2
      MEAN = T1
      CONSTRAIN = (I3T1,I3T2,d),(I4T1,I4T2,d),(I5T1,I5T2,d),(I6T1,I6T2,d),
-                 (I3T1,I3T2,a),(I4T1,I4T2,a),(I5T1,I5T2,a),(I6T1,I6T2,a)     
+                 (I3T1,I3T2,a),(I4T1,I4T2,a),(I5T1,I5T2,a),(I6T1,I6T2,a)
         "
 # create mirt model
-mirtmodel <- mirt::mirt.model( mirtsyn , itemnames=colnames(dat) )        
+mirtmodel <- mirt::mirt.model( mirtsyn , itemnames=colnames(dat) )
 # define parameters to be estimated
-mod3.pars <- mirt::mirt(dat, mirtmodel$model, rep( "4PLbw",I) , 
-                   customItems=list("4PLbw"=fourPLbetw), pars = "values")                
+mod3.pars <- mirt::mirt(dat, mirtmodel$model, rep( "4PLbw",I) ,
+                   customItems=list("4PLbw"=fourPLbetw), pars = "values")
 # select dimensions
 ind <- intersect( grep("T2",mod3.pars$item) , which( mod3.pars$name == "dimItem" ) )
 mod3.pars[ind,"value"] <- 2
 # set item parameters low and upp to non-estimated
-ind <- which( mod3.pars$name \%in\% c("low","upp") ) 
+ind <- which( mod3.pars$name \%in\% c("low","upp") )
 mod3.pars[ind,"est"] <- FALSE
 
 # estimate 2PL model
-mod3 <- mirt::mirt(dat, mirtmodel$model, itemtype=rep( "4PLbw",I) , 
-                customItems=list("4PLbw"=fourPLbetw), pars = mod3.pars , verbose=TRUE , 
+mod3 <- mirt::mirt(dat, mirtmodel$model, itemtype=rep( "4PLbw",I) ,
+                customItems=list("4PLbw"=fourPLbetw), pars = mod3.pars , verbose=TRUE ,
                 technical = list(NCYCLES=50)  )
 mirt.wrapper.coef(mod3)
 
@@ -188,15 +188,15 @@ lavmodel <- "
              I5T1 | b5*t1 ; I6T1 | b6*t1
              F1 ~~ 1*F1
              #**** T2
-             F2 =~ a3*I3T2+a4*I4T2+a5*I5T2+a6*I6T2+a7*I7T2+a8*I8T2             
+             F2 =~ a3*I3T2+a4*I4T2+a5*I5T2+a6*I6T2+a7*I7T2+a8*I8T2
              I3T2 | b3*t1 ; I4T2 | b4*t1 ; I5T2 | b5*t1 ; I6T2 | b6*t1
-             I7T2 | b7*t1 ; I8T2 | b8*t1 
+             I7T2 | b7*t1 ; I8T2 | b8*t1
              F2 ~~ NA*F2
-             F2 ~ 1 
+             F2 ~ 1
              #*** covariance
-             F1 ~~ F2                          
-                "                       
-# estimate model using theta parameterization                        
+             F1 ~~ F2
+                "
+# estimate model using theta parameterization
 mod3lav <- lavaan::cfa( data=dat , model=lavmodel,
             std.lv = TRUE , ordered=colnames(dat) , parameterization="theta")
 summary(mod3lav , standardized=TRUE , fit.measures=TRUE , rsquare=TRUE)
@@ -215,11 +215,11 @@ dat2 <- dat[ , grep( "T2" , colnames(dat) ) ]
 colnames(dat2) <- gsub("T2","" , colnames(dat2) )
 
 # 2PL model with slope groups T1
-mod1 <- sirt::rasch.mml2( dat1 , est.a = c( rep(1,2) , rep(2,4) ) ) 
+mod1 <- sirt::rasch.mml2( dat1 , est.a = c( rep(1,2) , rep(2,4) ) )
 summary(mod1)
 
 # 2PL model with slope groups T2
-mod2 <- sirt::rasch.mml2( dat2 , est.a = c( rep(1,4) , rep(2,2) ) ) 
+mod2 <- sirt::rasch.mml2( dat2 , est.a = c( rep(1,4) , rep(2,2) ) )
 summary(mod2)
 
 #------- Link 1: Haberman Linking

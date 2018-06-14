@@ -1,5 +1,5 @@
 ## File Name: pgenlogis.R
-## File Version: 1.03
+## File Version: 1.04
 
 #............................................................
 # generalized logistic distribution
@@ -31,7 +31,7 @@ pgenlogis <- function( x , alpha1 = 0 , alpha2 = 0 ){
 genlogis.moments <- function( alpha1 , alpha2){
     x0 <- seq(-30,30 , len= 30000 )
     y0 <- pgenlogis( x=x0 , alpha1 = alpha1 , alpha2 = alpha2 )
-    wgt <- y0[-1] - y0[ - length(y0) ] 
+    wgt <- y0[-1] - y0[ - length(y0) ]
     wgt <- wgt / sum(wgt)
     out <- ( x0[ -1 ] + x0[ - length(x0) ] ) / 2
     M <- sum( wgt * out )

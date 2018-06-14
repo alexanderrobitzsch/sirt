@@ -1,5 +1,5 @@
 ## File Name: eigenvalues.manymatrices.R
-## File Version: 0.04
+## File Version: 0.05
 
 ###################################################################
 # computation of eigenvalues of many matrices
@@ -51,7 +51,7 @@ eigenvalues.manymatrices <- function( Sigma.all , itermax=10 , maxconv=.001,
         while ( ( ii < itermax ) & ( conv > maxconv) ){
             for (dd in 1:D){ #        dd <- 1
                 z[,dd] <- rowSums( Sigma.all[ , D*(dd-1) + 1:D ] * z0 )
-                        }         
+                        }
             v1 <- sqrt(rowSums( z^2 ))
             z <- z / v1
             res <- .rowmax.matrix( abs(z) )
@@ -59,9 +59,9 @@ eigenvalues.manymatrices <- function( Sigma.all , itermax=10 , maxconv=.001,
             si <- sign( z[ ind ] / z0[ind] )
             z <- si*z
             lambda <- si*v1
-            conv <- max( abs( z - z0 ) )     
+            conv <- max( abs( z - z0 ) )
             z0 <- z
-            ii <- ii+1    
+            ii <- ii+1
                         }
         res <- list( "lambda" = lambda , "z" = z )
         return(res)
@@ -73,7 +73,7 @@ eigenvalues.manymatrices <- function( Sigma.all , itermax=10 , maxconv=.001,
     v1 <- matr[,1]
     for (dd in 2:( ncol(matr) ) ){
         ind <- ifelse( matr[,dd] > v1 , dd , ind )
-        v1 <- ifelse( matr[,dd] > v1 , matr[,dd] , v1 )        
+        v1 <- ifelse( matr[,dd] > v1 , matr[,dd] , v1 )
                             }
     return(ind)
         }

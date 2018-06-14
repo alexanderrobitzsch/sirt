@@ -1,5 +1,5 @@
 %% File Name: data.liking.science.Rd
-%% File Version: 0.05
+%% File Version: 0.06
 
 \name{data.liking.science}
 \alias{data.liking.science}
@@ -37,7 +37,7 @@ The format is:
 
 
 \references{
-Wright, B. D., & Masters, G. N. (1982). \emph{Rating scale analysis}. 
+Wright, B. D., & Masters, G. N. (1982). \emph{Rating scale analysis}.
 Chicago: MESA Press.
 }
 %\examples{

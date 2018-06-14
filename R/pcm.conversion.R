@@ -1,11 +1,11 @@
 ## File Name: pcm.conversion.R
-## File Version: 0.03
+## File Version: 0.04
 ###############################################
-# conversion of the partial credit parametrization 
+# conversion of the partial credit parametrization
 pcm.conversion <- function( b ){
     maxK <- rowSums( 1 - is.na(b) )
     I <- nrow(b)
-    # define delta 
+    # define delta
     delta <- b[ cbind( 1:I , maxK ) ] / maxK
     # define tau
     tau <- matrix( NA , nrow=I , ncol= ncol(b) )
@@ -14,9 +14,9 @@ pcm.conversion <- function( b ){
     if ( maxK[kk] == 1 ){
     tau[kk,1] <- 0
             }
-    if ( maxK[kk] > 1){   
-    # kk <- 4     
-        for (vv in 1:maxK[kk] ){        
+    if ( maxK[kk] > 1){
+    # kk <- 4
+        for (vv in 1:maxK[kk] ){
         # vv <- 1
         t1 <- 0
         if (vv > 1){ t1 <- sum( tau[kk,seq(1,vv-1)] )  }

@@ -1,5 +1,5 @@
 %% File Name: fit.isop.Rd
-%% File Version: 1.12
+%% File Version: 1.13
 
 \name{fit.isop}
 \alias{fit.isop}
@@ -16,11 +16,11 @@ model (ADISOP; Scheiblechner, 1999).
 }
 
 \usage{
-fit.isop(freq.correct, wgt, conv = 1e-04, maxit = 100, 
+fit.isop(freq.correct, wgt, conv = 1e-04, maxit = 100,
       progress = TRUE, calc.ll=TRUE)
 
-fit.adisop(freq.correct, wgt, conv = 1e-04, maxit = 100, 
-      epsilon = 0.01, progress = TRUE, calc.ll=TRUE)       
+fit.adisop(freq.correct, wgt, conv = 1e-04, maxit = 100,
+      epsilon = 0.01, progress = TRUE, calc.ll=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -131,14 +131,14 @@ wgt <- a1[,-1]
 
 #***
 # (2) Fit ISOP model
-res.isop <- sirt::fit.isop( freq.correct , wgt )   
+res.isop <- sirt::fit.isop( freq.correct , wgt )
 # fitted frequency table
 res.isop$fX
 
 #***
 # (3) Fit ADISOP model
 # use monotonely smoothed frequency table from ISOP model
-res.adisop <- sirt::fit.adisop( freq.correct=res.isop$fX , wgt )   
+res.adisop <- sirt::fit.adisop( freq.correct=res.isop$fX , wgt )
 # fitted frequency table
 res.adisop$fX
 }

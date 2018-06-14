@@ -1,5 +1,5 @@
 ## File Name: fuzcluster_alg.R
-## File Version: 0.17
+## File Version: 0.18
 
 fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
     maxiter=1000 , parmconv=.0001 , progress=TRUE , seed=NULL ,    fac.oldxsi=0)
@@ -9,18 +9,18 @@ fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
     # inits
     m1 <- colMeans( dat_m , na.rm=TRUE)
     s1 <- apply( dat_m , 2 , stats::sd , na.rm=TRUE )
-    
+
     # items
     I <- ncol(dat_m)
     N <- nrow(dat_m)
-    if ( ! is.null(seed) ){ 
+    if ( ! is.null(seed) ){
         set.seed( seed )
-    }    
+    }
     # initial mu estimate
     mu_est <- sirt_rmvnorm( K , mean=m1 , sigma = 1.0*diag(s1) )
 
     # initial SD estimate
-    sd_est <- t(sapply( 1:K , FUN = function(kk){ 
+    sd_est <- t(sapply( 1:K , FUN = function(kk){
                 stats::runif( I , 1.05*s1 , 2*s1 ) } ))
     # initial pi estimate
     pi_est <- stats::runif(K)
@@ -30,7 +30,7 @@ fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
     iter <- 0
     eps <- 10^(-10)
     parmchange <- 1
-    
+
     mu_estmin <- mu_est
     sd_estmin <- sd_est
     pi_estmin <- pi_est
@@ -43,10 +43,10 @@ fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
     # begin algorithm
     while ( ( iter < maxiter ) & ( parmchange > parmconv) ){
         mu_est0 <- mu_est
-        sd_est0 <- sd_est    
+        sd_est0 <- sd_est
         pi_est0 <- pi_est
         dev0 <- dev
-        
+
         #*** E-step
 
         # matrix inits
@@ -98,13 +98,13 @@ fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
             # kk <- 1
             mu_k <- matrix( mu_est[kk,] , nrow=N , ncol=I , byrow=TRUE )
             h1 <- colSums( t_ik[,kk] * ( xi_ik[,,kk] - 2*mu_k*mu_ik[,,kk] + mu_k^2 ) ) / sum_tik[kk]
-            h1 <- ifelse( h1 < eps , eps , sqrt(h1) )    
+            h1 <- ifelse( h1 < eps , eps , sqrt(h1) )
             sd_est[kk,] <- h1
                         }
         sd_est[ sd_est < .01 ] <- .01
         # calculate deviance
         dev <- sum( colSums( t_ik ) * log( pi_est +eps) )
-        dev <- dev - N*I / 2 * log(2*pi) 
+        dev <- dev - N*I / 2 * log(2*pi)
         for (kk in 1:K){
             dev <- dev - sum( t_ik[,kk] * sum( log( sd_est[kk,] + eps) ) )
                 }
@@ -122,9 +122,9 @@ fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
            cat("............ seed =" , seed , " | Iteration",iter , ".............\n")
            cat(paste("Deviance =", round( dev,3) ))
            cat(paste(" | Deviance Change =" , round(devchange1,3) , "\n"))
-           cat("Class Probabilities =", paste(round( pi_est,4) ))           
+           cat("Class Probabilities =", paste(round( pi_est,4) ))
            cat(paste(" | Maximum Parameter Change =" , round(parmchange,3) ,"\n"))
-           utils::flush.console()    
+           utils::flush.console()
                 }
         if ( dev < dev_min){
             t_ikmin <- t_ik
@@ -133,12 +133,12 @@ fuzcluster_estimate <- function(K , dat_m , dat_s , dat_resp ,
             pi_estmin <- pi_est
             itermin <- iter
             dev_min <- dev
-            }            
+            }
     }
     #*************** end algorithm
     res <- list( "deviance" = dev_min , "iter" = itermin , "pi_est" = pi_estmin ,
         "mu_est"=mu_estmin , "sd_est" = sd_estmin , "posterior" = t_ikmin ,
-        "seed"=seed 
+        "seed"=seed
          )
     return(res)
 }

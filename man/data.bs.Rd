@@ -1,5 +1,5 @@
 %% File Name: data.bs.Rd
-%% File Version: 0.07
+%% File Version: 0.08
 
 
 \name{data.bs}
@@ -10,7 +10,7 @@
 
 
 \title{
-Datasets from Borg and Staufenbiel (2007) 
+Datasets from Borg and Staufenbiel (2007)
 }
 
 \description{
@@ -25,17 +25,17 @@ data(data.bs07a)
 
 
 \format{
-\itemize{    
-\item The dataset \code{data.bs07a} contains the data 
+\itemize{
+\item The dataset \code{data.bs07a} contains the data
 \emph{Gefechtsangst} (p. 130) and contains 8 of the original 9 items.
 The items are symptoms of anxiety in engagement. \cr
 \code{GF1}: starkes Herzklopfen, \code{GF2}: flaues Gefuehl in der
 Magengegend, \code{GF3}: Schwaechegefuehl, \code{GF4}: Uebelkeitsgefuehl,
 \code{GF5}: Erbrechen, \code{GF6}: Schuettelfrost,
-\code{GF7}: in die Hose urinieren/einkoten, \code{GF9}: Gefuehl der 
-Gelaehmtheit 
+\code{GF7}: in die Hose urinieren/einkoten, \code{GF9}: Gefuehl der
+Gelaehmtheit
 
-The format is 
+The format is
 
 \code{'data.frame':   100 obs. of  9 variables:} \cr
 \code{ $ idpatt: int  44 29 1 3 28 50 50 36 37 25 ...} \cr
@@ -100,7 +100,7 @@ ANALYSIS:
   NSTARTS(5,10)
 LAVAAN MODEL:
   F =~ GF1__GF9
-  "  
+  "
 mod3 <- TAM::tamaan( tammodel , dat )
 summary(mod3)
 
@@ -113,7 +113,7 @@ ANALYSIS:
   NSTARTS(5,10)
 LAVAAN MODEL:
   F =~ GF1__GF9
-  "  
+  "
 mod4 <- TAM::tamaan( tammodel , dat )
 summary(mod4)
 
@@ -125,8 +125,8 @@ ANALYSIS:
   NCLASSES(2)
   NSTARTS(5,10)
 LAVAAN MODEL:
-  F =~ GF1__GF9 
-  "  
+  F =~ GF1__GF9
+  "
 mod5 <- TAM::tamaan( tammodel , dat )
 summary(mod5)
 
@@ -138,8 +138,8 @@ ANALYSIS:
   NCLASSES(3)
   NSTARTS(5,10)
 LAVAAN MODEL:
-  F =~ GF1__GF9 
-  "  
+  F =~ GF1__GF9
+  "
 mod6 <- TAM::tamaan( tammodel , dat )
 summary(mod6)
 
@@ -150,6 +150,6 @@ summary(mod7)
 
 #-- model comparison
 IRT.compareModels( mod1, mod2 , mod3 , mod4 , mod5 , mod6 , mod7 )
-}    
+}
 }
 \keyword{datasets}

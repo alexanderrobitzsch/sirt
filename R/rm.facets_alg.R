@@ -1,5 +1,5 @@
 ## File Name: rm.facets_alg.R
-## File Version: 4.23
+## File Version: 4.24
 
 #######################################################
 # parameters expanded dataset
@@ -8,7 +8,7 @@ rm.facets.itempar.expanded <- function( b.item , b.rater , Qmatrix , tau.item ,
         theta.k , RR )
 {
     b <- tau.item[ item.index , ]
-    b0 <- ( matrix( b.rater , nrow= RR , ncol=K) )[ rater.index , ] *     Qmatrix[ item.index ,]             
+    b0 <- ( matrix( b.rater , nrow= RR , ncol=K) )[ rater.index , ] *     Qmatrix[ item.index ,]
     b <- b + b0
     # a parameter
     a <- a.item[ item.index ] * a.rater[ rater.index ]
@@ -23,7 +23,7 @@ rm.facets.itempar.expanded <- function( b.item , b.rater , Qmatrix , tau.item ,
 # calculation of probabilities in the partial credit model
 .rm.pcm.calcprobs <- function( a , b , Qmatrix , theta.k , I , K , TP )
 {
-    probs <- array( 0 , dim=c(I,K+1,TP) )   # categories 0 , ... , K    
+    probs <- array( 0 , dim=c(I,K+1,TP) )   # categories 0 , ... , K
     for (kk in 1:K){
         l0 <- matrix( - b[,kk] , nrow=I,ncol=TP)
         l0 <- l0 + outer( a * Qmatrix[ , kk] , theta.k )
@@ -31,11 +31,11 @@ rm.facets.itempar.expanded <- function( b.item , b.rater , Qmatrix , tau.item ,
     }
     probs <- exp( probs )
     probs1 <- probs[,1,]
-    for (kk in 2:(K+1)){ 
-        probs1 <- probs1 + probs[,kk,] 
+    for (kk in 2:(K+1)){
+        probs1 <- probs1 + probs[,kk,]
     }
-    for (kk in 1:(K+1)){ 
-        probs[,kk,] <- probs[,kk,] / probs1 
+    for (kk in 1:(K+1)){
+        probs[,kk,] <- probs[,kk,] / probs1
     }
    return(probs)
 }
@@ -58,7 +58,7 @@ sumtau <- function(tau.item)
         theta.k , RR )
 {
     b <- tau.item[ item.index , ]
-    b0 <- ( matrix( b.rater , nrow= RR , ncol=K) )[ rater.index , ] * Qmatrix[ item.index ,]             
+    b0 <- ( matrix( b.rater , nrow= RR , ncol=K) )[ rater.index , ] * Qmatrix[ item.index ,]
     b <- b + b0
     # a parameter
     a <- a.item[ item.index ] * a.rater[ rater.index ]

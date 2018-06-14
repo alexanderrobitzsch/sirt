@@ -1,6 +1,6 @@
 ## File Name: dif.variance.R
-## File Version: 0.10
- 
+## File Version: 0.11
+
 
 #-------------------------------------------------------------------------#
 # Routine for calculating DIF variance   (Camilli & Penfield, 1997)      #
@@ -17,12 +17,12 @@ dif.variance <- function( dif , se.dif , items = paste("item",1:length(dif),sep=
         unweighted.tauq <- sum( ( dif - md )^2 - se.dif^2 ) / ( length(items) - 1 )
         # calculation of variances v_i
         vi <- weighted.tauq + se.dif^2
-        weighted.tauq[ weighted.tauq < 0 ] <- 0            
+        weighted.tauq[ weighted.tauq < 0 ] <- 0
         unweighted.tauq[ unweighted.tauq < 0 ] <- 0
         # Empirical Bayes DIF estimate
         lambda.i <- weighted.tauq / vi
-        eb.dif <- lambda.i * ( dif - md ) + ( 1 - lambda.i) *md 
-        list( weighted.DIFSD = sqrt(weighted.tauq) , 
+        eb.dif <- lambda.i * ( dif - md ) + ( 1 - lambda.i) *md
+        list( weighted.DIFSD = sqrt(weighted.tauq) ,
                 unweighted.DIFSD = sqrt(unweighted.tauq) ,
                 mean.se.dif = sqrt( mean( se.dif^2 ) ) , eb.dif = eb.dif  )
         }
@@ -30,7 +30,7 @@ dif.variance <- function( dif , se.dif , items = paste("item",1:length(dif),sep=
 
 
 #################################################################################
-dif.strata.variance <- function( dif , se.dif , itemcluster ){ 
+dif.strata.variance <- function( dif , se.dif , itemcluster ){
     # stratified dif variance
     # means in differential item functioning
     # itemcluster is a vector of strata corresponding to items
@@ -50,9 +50,9 @@ dif.strata.variance <- function( dif , se.dif , itemcluster ){
                 }
         stratadif[ is.na(stratadif ) ] <- 0
     res <- list( "stratadif" = stratadif ,
-                "weighted.DIFSD" = sum( stratadif$N.Items /  sum( stratadif$N.Items ) * 
+                "weighted.DIFSD" = sum( stratadif$N.Items /  sum( stratadif$N.Items ) *
                             stratadif$weighted.tau ) ,
-                "unweighted.DIFSD" = sum( 
+                "unweighted.DIFSD" = sum(
                     ( stratadif$N.Items -1 )/  ( sum( stratadif$N.Items ) - 1) *  stratadif$unweighted.tau )
                         )
     return(res)

@@ -1,5 +1,5 @@
 %% File Name: data.eid.Rd
-%% File Version: 0.23
+%% File Version: 0.24
 
 \name{data.eid}
 \alias{data.eid}
@@ -31,7 +31,7 @@ data(data.eid.kap7)
 }
 
 \format{
-\itemize{    
+\itemize{
 \item  \code{data.eid.kap4} is the dataset from Chapter 4.
 
 \code{'data.frame':   193 obs. of  11 variables:} \cr
@@ -104,13 +104,13 @@ Eid, M., & Schmidt, K. (2014). \emph{Testtheorie und Testkonstruktion}.
 Goettingen, Hogrefe.
 
 Hosoya, G. (2014). \emph{Einfuehrung in die Analyse testtheoretischer
-Modelle mit \R}. Available at 
+Modelle mit \R}. Available at
 \emph{http://www.hogrefe.de/buecher/lehrbuecher/psychlehrbuchplus/lehrbuecher/testtheorie-und-testkonstruktion/zusatzmaterial/}.
 }
 
 
 \examples{
-\dontrun{    
+\dontrun{
 miceadds::library_install("foreign")
 #---- load some IRT packages in R
 miceadds::library_install("TAM")        # package (a)
@@ -309,7 +309,7 @@ plot(mod2e)
 #-----------
 #-- 3a: estimation with TAM package
 
-# avoid "_" in column names if the "__" operator is used in 
+# avoid "_" in column names if the "__" operator is used in
 # the tamaan syntax
 dat1 <- dat
 colnames(dat1) <- gsub("_" , "" , colnames(dat1) )
@@ -324,7 +324,7 @@ LAVAAN MODEL:
   F ~~ F
 ITEM TYPE:
   ALL(Rasch);
-    "    
+    "
 mod3a <- TAM::tamaan( tammodel , resp=dat1 )
 summary(mod3a)
 # extract item parameters

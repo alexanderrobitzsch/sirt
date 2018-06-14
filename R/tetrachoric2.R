@@ -1,5 +1,5 @@
 ## File Name: tetrachoric2.R
-## File Version: 1.18
+## File Version: 1.19
 
 tetrachoric2 <- function( dat , method="Ol" ,  delta=.007 , maxit = 1000000 ,
     cor.smooth=TRUE , progress=TRUE){
@@ -7,9 +7,9 @@ tetrachoric2 <- function( dat , method="Ol" ,  delta=.007 , maxit = 1000000 ,
     dat <- as.matrix(dat)
     if (method == "Ol"){
         res <- polychoric2( dat=dat , cor.smooth=cor.smooth , maxiter=100)
-                        }        
+                        }
     if ( method != "Ol" ){
-    
+
         # calculate tau
         tau <- - stats::qnorm( colMeans(dat,na.rm=TRUE ) )
         dat.resp <- 1 - is.na(dat)
@@ -28,26 +28,26 @@ tetrachoric2 <- function( dat , method="Ol" ,  delta=.007 , maxit = 1000000 ,
     #       dfr0 <- dfr
     #       dfr0$ftot <- dfr$f11 + dfr$f10 + dfr$f01 + dfr$f00
     #       dfr$f00 <- dfr0$f00 / ( 1 - guess[dfr$item1 ] ) /  ( 1 - guess[dfr$item2 ] )
-    #       dfr$f01 <- ( (1 - guess[dfr$item2 ])* dfr0$f01 - guess[dfr$item2] * dfr0$f00 ) / 
-    #                        ( 1 - guess[dfr$item1 ] ) /  ( 1 - guess[dfr$item2 ] )    
-    #       dfr$f10 <- ( (1 - guess[dfr$item1 ])* dfr0$f10 - guess[dfr$item1] * dfr0$f00 ) / 
-    #                        ( 1 - guess[dfr$item1 ] ) /  ( 1 - guess[dfr$item2 ] )    
-    #       dfr$f11 <- dfr0$ftot - dfr$f00 - dfr$f01 - dfr$f10 - dfr$f11                
+    #       dfr$f01 <- ( (1 - guess[dfr$item2 ])* dfr0$f01 - guess[dfr$item2] * dfr0$f00 ) /
+    #                        ( 1 - guess[dfr$item1 ] ) /  ( 1 - guess[dfr$item2 ] )
+    #       dfr$f10 <- ( (1 - guess[dfr$item1 ])* dfr0$f10 - guess[dfr$item1] * dfr0$f00 ) /
+    #                        ( 1 - guess[dfr$item1 ] ) /  ( 1 - guess[dfr$item2 ] )
+    #       dfr$f11 <- dfr0$ftot - dfr$f00 - dfr$f01 - dfr$f10 - dfr$f11
     #        }
-            
+
         dfr$ftot <- dfr$f11 + dfr$f10 + dfr$f01 + dfr$f00
         dfr$p11 <- dfr$f11 / dfr$ftot
         dfr$pi1 <- ( dfr$f11 + dfr$f10 - 1 ) / dfr$ftot
         dfr$pi2 <- ( dfr$f11 + dfr$f01 - 1) / dfr$ftot
         # subdata of dfr
         dfr <- dfr[ dfr$item1 > dfr$item2 , ]
-        dfr <- dfr[ dfr$ftot > 0 , ]    
-        
+        dfr <- dfr[ dfr$ftot > 0 , ]
+
         dfr$qi1 <- stats::qnorm( dfr$pi1)
         dfr$qi2 <- stats::qnorm( dfr$pi2)
         #******************
         # method of Bonett
-        if ( method %in% c("Bo","Di") ){ 
+        if ( method %in% c("Bo","Di") ){
             dfr$pmin <- ifelse( dfr$pi1 < dfr$pi2 , dfr$pi1 , dfr$pi2 )
             dfr$c <- ( 1 - abs( dfr$pi1 - dfr$pi2 ) / 5 - ( 0.5 - dfr$pmin)^2  ) / 2
             dfr$omega <- ( dfr$f00 * dfr$f11 ) / ( dfr$f01 * dfr$f10)
@@ -55,21 +55,21 @@ tetrachoric2 <- function( dat , method="Ol" ,  delta=.007 , maxit = 1000000 ,
                         }
         #*****
         # method of Divgi
-        if ( method == "Di"){    
+        if ( method == "Di"){
             dfr2 <- as.matrix(dfr)
             numdiffparm <- .000001
-            maxiter <- 100    
-            dfr$r0 <- tetrachoric2_rcpp_aux(  dfr2 , numdiffparm , maxiter )    
-                }                    
-        #******************    
+            maxiter <- 100
+            dfr$r0 <- tetrachoric2_rcpp_aux(  dfr2 , numdiffparm , maxiter )
+                }
+        #******************
         # method of Tucker
         if ( method=="Tu"){
-            
-            # functions defined by Cengiz Zopluoglu   
+
+            # functions defined by Cengiz Zopluoglu
         #    L <- function(r,h,k) {(1/(2*pi*sqrt(1-r^2)))*exp(-((h^2-2*h*k*r+k^2)/(2*(1-r^2))))}
             L <- function(r,h,k) {(1/(2*pi*sqrt(1-r^2)))*exp(-((h^2-2*h*k*r+k^2)/(2*(1-r^2))))}
             S <- function(x,r,h,k) { x-(L(r,h,k)*delta) }
-            A0 <- dfr$A0 <- dfr$p11 - dfr$pi1 * dfr$pi2 
+            A0 <- dfr$A0 <- dfr$p11 - dfr$pi1 * dfr$pi2
             dfr$r0 <- delta / 2
             dfr$iter <- 0
 
@@ -88,7 +88,7 @@ tetrachoric2 <- function( dat , method="Ol" ,  delta=.007 , maxit = 1000000 ,
                 dfr$r0 <- dfr$r0 + delta
                 dfr$iter <- ii
                 ind <- which( dfr$A0 < 0 )
-                if ( length(ind) > 0 ){ 
+                if ( length(ind) > 0 ){
                     h1 <- dfr$r0 - delta/2 + dfr$A0 / L( dfr0$r0 , dfr$qi1 , dfr$qi2 )
                     dfr$r0[ind] <- h1[ind]
                     dfr$conv[ind] <- 1
@@ -97,23 +97,23 @@ tetrachoric2 <- function( dat , method="Ol" ,  delta=.007 , maxit = 1000000 ,
                 if (length(i2) > 0){    dfr[ i2 , vars] <- dfr0[ i2 , vars] }
                 if (progress){
                     if (ii %% 100 == 0 ){ cat(".") ; utils::flush.console() }
-                    if (ii %% 1000 == 0 ){ cat("\n" ,ii, ": ") }    
+                    if (ii %% 1000 == 0 ){ cat("\n" ,ii, ": ") }
                             }
                     }
-        #******************            
+        #******************
             cat("\n")
             }
         TC <- matrix(NA , I , I )
         diag(TC) <- 1
         TC[ as.matrix(dfr[ , c("item1","item2") ] ) ] <- dfr$r0
         TC[ as.matrix(dfr[ , c("item2","item1") ] ) ] <- dfr$r0
-        if (cor.smooth){ 
+        if (cor.smooth){
             TAM::require_namespace_msg("psych")
-            TC <- psych::cor.smooth(TC) 
+            TC <- psych::cor.smooth(TC)
         }
         rownames(TC) <- colnames(TC) <- colnames(dat)
         res <- list("tau"=tau , "rho" = TC )
-        
-        }   # method != "Ol"        
+
+        }   # method != "Ol"
     return(res)
     }

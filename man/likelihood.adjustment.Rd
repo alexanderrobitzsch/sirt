@@ -1,5 +1,5 @@
 %% File Name: likelihood.adjustment.Rd
-%% File Version: 0.06
+%% File Version: 0.07
 
 \name{likelihood.adjustment}
 \alias{likelihood.adjustment}
@@ -10,20 +10,20 @@ Adjustment and Approximation of Individual Likelihood Functions
 }
 
 \description{
-Approximates individual likelihood functions \eqn{L(\bold{X}_p | \theta)} 
+Approximates individual likelihood functions \eqn{L(\bold{X}_p | \theta)}
 by normal distributions (see Mislevy, 1990). Extreme response patterns
 are handled by adding pseudo-observations of items with extreme item
 difficulties (see argument \code{extreme.item}. The individual standard
-deviations of the likelihood, used in the normal approximation, can be 
+deviations of the likelihood, used in the normal approximation, can be
 modified by individual adjustment factors which are specified in \code{adjfac}.
 In addition, a reliability of the adjusted likelihood can be specified
 in \code{target.EAP.rel}.
 }
 
 \usage{
-likelihood.adjustment(likelihood, theta = NULL, prob.theta = NULL, 
-     adjfac = rep(1, nrow(likelihood)), extreme.item = 5, target.EAP.rel = NULL, 
-     min_tuning = 0.2, max_tuning = 3, maxiter = 100, conv = 1e-04, 
+likelihood.adjustment(likelihood, theta = NULL, prob.theta = NULL,
+     adjfac = rep(1, nrow(likelihood)), extreme.item = 5, target.EAP.rel = NULL,
+     min_tuning = 0.2, max_tuning = 3, maxiter = 100, conv = 1e-04,
      trait.normal = TRUE)
 }
 
@@ -82,7 +82,7 @@ Object of class \code{IRT.likelihood}.
 \references{
 Mislevy, R. (1990). Scaling procedures. In E. Johnson & R. Zwick (Eds.),
 \emph{Focusing the new design: The NAEP 1988 technical report} (ETS RR 19-20).
-Princeton, NJ: Educational Testing Service.    
+Princeton, NJ: Educational Testing Service.
 }
 
 
@@ -105,7 +105,7 @@ Alexander Robitzsch
 \dontrun{
 #############################################################################
 # EXAMPLE 1: Adjustment of the likelihood | data.read
-#############################################################################    
+#############################################################################
 
 library(CDM)
 library(TAM)
