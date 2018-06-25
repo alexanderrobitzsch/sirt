@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.jackknife1.Rd
-%% File Version: 2.13
+%% File Version: 2.14
 
 \name{rasch.jml.jackknife1}
 \alias{rasch.jml.jackknife1}
@@ -63,9 +63,9 @@ For analytical bias correction methods see \code{\link{rasch.jml.biascorr}}.
 set.seed(7655)
 N <- 5000    # number of persons
 I <- 11      # number of items
-b <- seq( -2 , 2 , length=I )
-dat <- sirt::sim.raschtype( rnorm( N ) , b )
-colnames(dat) <- paste( "I" , 1:I , sep="")
+b <- seq( -2, 2, length=I )
+dat <- sirt::sim.raschtype( rnorm( N ), b )
+colnames(dat) <- paste( "I", 1:I, sep="")
 
 # estimate the Rasch model with JML
 mod <- sirt::rasch.jml( dat  )

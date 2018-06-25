@@ -1,20 +1,20 @@
 ## File Name: lc.2raters.aux.R
-## File Version: 0.04
+## File Version: 0.08
 
 #########################################
 # data preparation exchanegable raters
 lc2.data.prep <- function(data){
     maxK <- max( data )
-    m1 <- matrix( NA , maxK+1 , maxK+1 )
-    rownames(m1) <- colnames(m1) <- paste0("Cat" , 0:maxK)
+    m1 <- matrix( NA, maxK+1, maxK+1 )
+    rownames(m1) <- colnames(m1) <- paste0("Cat", 0:maxK)
     for (kk1 in 0:maxK){
     for (kk2 in 0:maxK){
-        m1[kk1+1,kk2+1] <- sum( ( data[,1] == kk1 ) * ( data[,2] == kk2 ) )
+        m1[kk1+1,kk2+1] <- sum( ( data[,1]==kk1 ) * ( data[,2]==kk2 ) )
                         }
                 }
     m1 <- m1+t(m1)
     m1 <- m1/2
-    res <- list("m1"=m1 , "maxK" = maxK)
+    res <- list("m1"=m1, "maxK"=maxK)
     return(res)
     }
 ###############################################
@@ -25,9 +25,9 @@ lc2.agreement <- function( m1 ){
     # agreement and kappa measures
     #***
     # agreement
-    res <- list( "agree0" = sum( diag( m1 ) ) / sum( m1 ) )
+    res <- list( "agree0"=sum( diag( m1 ) ) / sum( m1 ) )
     K <- ncol(m1)
-    qk <- outer( 1:K , 1:K  , "-")
+    qk <- outer( 1:K, 1:K, "-")
     res$agree1 <- sum( m1 * ( abs(qk) <=1 ) ) / sum(m1)
     p1 <- m1 / sum(m1)
     #***
@@ -43,12 +43,12 @@ lc2.agreement <- function( m1 ){
     # define weights
     wgt <- 1 - abs( qk ) / ( K - 1 )
     pa <- sum( wgt * p1 )
-    pek <- sum( outer( pk , pk )*wgt )
+    pek <- sum( outer( pk, pk )*wgt )
     res$wtd.kappa.linear <- ( pa - pek) / ( 1 - pek )
 
     wgt <- 1 - qk^2 / ( K - 1 )^2
     pa <- sum( wgt * p1 )
-    pek <- sum( outer( pk , pk )*wgt )
+    pek <- sum( outer( pk, pk )*wgt )
     res$wtd.kappa.quadratic <- ( pa - pek) / ( 1 - pek )
 
     #***
@@ -87,7 +87,7 @@ alpha.aickin <- function(m1){
         # update alpha
         pet <- sum( pkH^2 )
         alpha <- ( pa - pet ) / ( 1 - pet )
-        par.change <- max( abs( c( alpha - alpha0 , pkH - pkH0 ) ) )
+        par.change <- max( abs( c( alpha - alpha0, pkH - pkH0 ) ) )
         iter <- iter + 1
 #        print( par.change )
                 }

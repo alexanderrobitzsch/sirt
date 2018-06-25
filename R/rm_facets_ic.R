@@ -1,16 +1,16 @@
 ## File Name: rm_facets_ic.R
-## File Version: 0.14
+## File Version: 0.18
 
 #########################################################################
 # computation information criteria
-rm_facets_ic <- function( dev , dat2 , VV , RR , maxK , a.item.center,
-        est.a.item , est.b.rater , est.a.rater , est.mean ,
-        b.rater.center , a.rater.center , b.rater.fixed ,
-        a.rater.fixed , tau.item.fixed_val , a.item.fixed
+rm_facets_ic <- function( dev, dat2, VV, RR, maxK, a.item.center,
+        est.a.item, est.b.rater, est.a.rater, est.mean,
+        b.rater.center, a.rater.center, b.rater.fixed,
+        a.rater.fixed, tau.item.fixed_val, a.item.fixed
         )
 {
     # Information criteria
-    ic <- list( "deviance" = dev , "n" = nrow(dat2) )
+    ic <- list( "deviance"=dev, "n"=nrow(dat2) )
     ic$VV <- VV
     ic$RR <- RR
     # item parameters

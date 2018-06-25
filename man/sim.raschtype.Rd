@@ -1,5 +1,5 @@
 %% File Name: sim.raschtype.Rd
-%% File Version: 0.17
+%% File Version: 0.20
 
 \name{sim.raschtype}
 \alias{sim.raschtype}
@@ -15,8 +15,8 @@ The four-parameter logistic item response model
 for more details.
 }
 \usage{
-sim.raschtype(theta, b, alpha1 = 0, alpha2 = 0, fixed.a = NULL,
-    fixed.c = NULL, fixed.d = NULL)
+sim.raschtype(theta, b, alpha1=0, alpha2=0, fixed.a=NULL,
+    fixed.c=NULL, fixed.d=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -84,15 +84,15 @@ Alexander Robitzsch
 
 \examples{
 #############################################################################
-## EXAMPLE 1: Simulation of data from a Rasch model (alpha_1 = alpha_2 = 0)
+## EXAMPLE 1: Simulation of data from a Rasch model (alpha_1=alpha_2=0)
 #############################################################################
 
 set.seed(9765)
 N <- 500    # number of persons
 I <- 11     # number of items
-b <- seq( -2 , 2 , length=I )
-dat <- sirt::sim.raschtype( stats::rnorm( N ) , b )
-colnames(dat) <- paste0( "I" , 1:I )
+b <- seq( -2, 2, length=I )
+dat <- sirt::sim.raschtype( stats::rnorm( N ), b )
+colnames(dat) <- paste0( "I", 1:I )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

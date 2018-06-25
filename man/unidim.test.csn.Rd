@@ -1,5 +1,5 @@
 %% File Name: unidim.test.csn.Rd
-%% File Version: 1.16
+%% File Version: 1.19
 
 \name{unidim.test.csn}
 \alias{unidim.test.csn}
@@ -13,13 +13,13 @@ Test for Unidimensionality of CSN
 This function tests whether item covariances given the sum
 score are non-positive (CSN; see Junker 1993),
 i.e. for items \eqn{i} and \eqn{j} it holds that
-\deqn{ Cov( X_i , X_j | X^+ ) \le 0 }
+\deqn{ Cov( X_i, X_j | X^+ ) \le 0 }
 Note that this function only works for dichotomous data.
 }
 
 
 \usage{
-unidim.test.csn(dat, RR = 400, prop.perm = 0.75, progress = TRUE)
+unidim.test.csn(dat, RR=400, prop.perm=0.75, progress=TRUE)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -45,7 +45,7 @@ should be displayed
 For each item pair \eqn{(i,j)} and a each sum score group \eqn{k}
 a conditional covariance \eqn{r(i,j|k)} is calculated. Then,
 the test statistic for CSN is
-\deqn{ h = \sum_{k=1}^{I-1} \frac{n_k}{n} \max_{i,j} r(i,j|k) }
+\deqn{ h=\sum_{k=1}^{I-1} \frac{n_k}{n} \max_{i,j} r(i,j|k) }
 where \eqn{n_k} is the number of persons in score group \eqn{k}.
 "'Large values"' of \eqn{h} are not in agreement with the null
 hypothesis of non-positivity of conditional covariances.
@@ -103,7 +103,7 @@ data(data.read)
 dat <- data.read
 set.seed(778)
 res <- sirt::unidim.test.csn( dat )
-  ##  CSN Statistic = 0.04737 , p = 0.02
+  ##  CSN Statistic=0.04737, p=0.02
 
 \dontrun{
 #############################################################################
@@ -117,11 +117,11 @@ rho <- .60   # correlation between 2 dimensions
 t0 <- stats::rnorm(N)
 t1 <- sqrt(rho)*t0 + sqrt(1-rho)*stats::rnorm(N)
 t2 <- sqrt(rho)*t0 + sqrt(1-rho)*stats::rnorm(N)
-dat1 <- sirt::sim.raschtype(t1 , b=seq(-1.5,1.5,length=I/2) )
-dat2 <- sirt::sim.raschtype(t2 , b=seq(-1.5,1.5,length=I/2) )
-dat <- as.matrix(cbind( dat1 , dat2) )
+dat1 <- sirt::sim.raschtype(t1, b=seq(-1.5,1.5,length=I/2) )
+dat2 <- sirt::sim.raschtype(t2, b=seq(-1.5,1.5,length=I/2) )
+dat <- as.matrix(cbind( dat1, dat2) )
 res <- sirt::unidim.test.csn( dat )
-  ##  CSN Statistic = 0.06056 , p = 0.02
+  ##  CSN Statistic=0.06056, p=0.02
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

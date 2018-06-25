@@ -1,5 +1,5 @@
 %% File Name: prmse.subscores.scales.Rd
-%% File Version: 0.22
+%% File Version: 0.26
 
 \name{prmse.subscores.scales}
 \alias{prmse.subscores.scales}
@@ -72,8 +72,8 @@ especially \code{subscore::CTTsub}.
 
 data( data.read )
 p1 <- sirt::prmse.subscores.scales(data=data.read,
-         subscale = substring( colnames(data.read) , 1 ,1 ) )
-print( p1 , digits= 3 )
+         subscale=substring( colnames(data.read), 1,1 ) )
+print( p1, digits=3 )
   ##                 A       B       C
   ## N         328.000 328.000 328.000
   ## nX          4.000   4.000   4.000

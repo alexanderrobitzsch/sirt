@@ -1,5 +1,5 @@
 %% File Name: lsem.permutationTest.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{lsem.permutationTest}
 \alias{lsem.permutationTest}
@@ -19,15 +19,15 @@ Wilhelm, & Robitzsch, 2009).
 
 
 \usage{
-lsem.permutationTest(lsem.object, B = 1000, residualize = TRUE, verbose = TRUE)
+lsem.permutationTest(lsem.object, B=1000, residualize=TRUE, verbose=TRUE)
 
 \method{summary}{lsem.permutationTest}(object, file=NULL, digits=3, ...)
 
-\method{plot}{lsem.permutationTest}(x, type = "global", stattype = "SD",
-    parindex = NULL, sig_add = TRUE, sig_level = 0.05, sig_pch=17, nonsig_pch=2,
-    sig_cex = 1, sig_lab = "p value",  stat_lab = "Test statistic",
-    moderator_lab = NULL, digits = 3, title = NULL, parlabels = NULL,
-    ask = TRUE, ...)
+\method{plot}{lsem.permutationTest}(x, type="global", stattype="SD",
+    parindex=NULL, sig_add=TRUE, sig_level=0.05, sig_pch=17, nonsig_pch=2,
+    sig_cex=1, sig_lab="p value",  stat_lab="Test statistic",
+    moderator_lab=NULL, digits=3, title=NULL, parlabels=NULL,
+    ask=TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

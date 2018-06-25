@@ -1,5 +1,5 @@
 %% File Name: dirichlet.mle.Rd
-%% File Version: 0.17
+%% File Version: 0.20
 
 \name{dirichlet.mle}
 \alias{dirichlet.mle}
@@ -12,8 +12,8 @@ Maximum likelihood estimation of the parameters of the Dirichlet
 distribution
 }
 \usage{
-dirichlet.mle(x, weights=NULL , eps = 10^(-5), convcrit = 1e-05 , maxit=1000,
-     oldfac = .3 , progress=FALSE)
+dirichlet.mle(x, weights=NULL, eps=10^(-5), convcrit=1e-05, maxit=1000,
+     oldfac=.3, progress=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -43,8 +43,8 @@ Display iteration progress?
 \value{
 A list with following entries
   \item{alpha}{Vector of \eqn{\alpha} parameters}
-  \item{alpha0}{The concentration parameter \eqn{\alpha_0 = \sum_k \alpha_k} }
-  \item{xsi}{Vector of proportions \eqn{\xi_k = \alpha_k / \alpha_0} }
+  \item{alpha0}{The concentration parameter \eqn{\alpha_0=\sum_k \alpha_k} }
+  \item{xsi}{Vector of proportions \eqn{\xi_k=\alpha_k / \alpha_0} }
 }
 \references{
 Minka, T. P. (2012). \emph{Estimating a Dirichlet distribution}.
@@ -77,10 +77,10 @@ see the \pkg{DirichletReg} package.
 # (1) simulate data
 set.seed(789)
 N <- 200
-probs <- c(.5 , .3 , .2 )
+probs <- c(.5, .3, .2 )
 alpha0 <- .5
 alpha <- alpha0*probs
-alpha <- matrix( alpha , nrow=N , ncol=length(alpha) , byrow=TRUE  )
+alpha <- matrix( alpha, nrow=N, ncol=length(alpha), byrow=TRUE  )
 x <- sirt::dirichlet.simul( alpha )
 
 # (2) estimate Dirichlet parameters
@@ -100,7 +100,7 @@ dirichlet.mle(x)
 # define observed data
 x <- scan( nlines=1)
     1 0   0 1   .5 .5
-x <- matrix( x , nrow=3 , ncol=2 , byrow=TRUE)
+x <- matrix( x, nrow=3, ncol=2, byrow=TRUE)
 
 # transform observations x into (0,1)
 eps <- .01
@@ -110,13 +110,13 @@ x <- ( x + eps ) / ( 1 + 2 * eps )
 miceadds::library_install("maxLik")
 # define likelihood function
 dirichlet.ll <- function(param) {
-    ll <- sum( weights * log( ddirichlet( x , param ) ) )
+    ll <- sum( weights * log( ddirichlet( x, param ) ) )
     ll
 }
 
 #*** weights 10-10-1
-weights <- c(10, 10 , 1 )
-mod1a <- sirt::dirichlet.mle( x , weights= weights )
+weights <- c(10, 10, 1 )
+mod1a <- sirt::dirichlet.mle( x, weights=weights )
 mod1a
 # estimation in maxLik
 mod1b <- maxLik::maxLik(loglik, start=c(.5,.5))
@@ -124,8 +124,8 @@ print( mod1b )
 coef( mod1b )
 
 #*** weights 10-10-10
-weights <- c(10, 10 , 10 )
-mod2a <- sirt::dirichlet.mle( x , weights= weights )
+weights <- c(10, 10, 10 )
+mod2a <- sirt::dirichlet.mle( x, weights=weights )
 mod2a
 # estimation in maxLik
 mod2b <- maxLik::maxLik(loglik, start=c(.5,.5))
@@ -133,8 +133,8 @@ print( mod2b )
 coef( mod2b )
 
 #*** weights 30-10-2
-weights <- c(30, 10 , 2 )
-mod3a <- sirt::dirichlet.mle( x , weights= weights )
+weights <- c(30, 10, 2 )
+mod3a <- sirt::dirichlet.mle( x, weights=weights )
 mod3a
 # estimation in maxLik
 mod3b <- maxLik::maxLik(loglik, start=c(.25,.25))

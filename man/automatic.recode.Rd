@@ -1,5 +1,5 @@
 %% File Name: automatic.recode.Rd
-%% File Version: 0.13
+%% File Version: 0.16
 
 \name{automatic.recode}
 \alias{automatic.recode}
@@ -14,8 +14,8 @@ Then, in each iteration keys are changed such that the highest
 item discrimination is found.
 }
 \usage{
-automatic.recode(data, exclude = NULL, pstart.min = 0.6, allocate = 200,
-    maxiter = 20, progress = TRUE)
+automatic.recode(data, exclude=NULL, pstart.min=0.6, allocate=200,
+    maxiter=20, progress=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -76,7 +76,7 @@ data(data.raw1)
 
 # recode data.raw1 and exclude keys 8 and 9 (missing codes) and
 # start with initially setting all categories larger than 50 % frequency to 1
-res1 <- sirt::automatic.recode( data.raw1 , exclude=c(8,9) , pstart.min=.50 )
+res1 <- sirt::automatic.recode( data.raw1, exclude=c(8,9), pstart.min=.50 )
 # inspect calculated keys
 res1$item.stat
 

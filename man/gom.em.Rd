@@ -1,5 +1,5 @@
 %% File Name: gom.em.Rd
-%% File Version: 1.66
+%% File Version: 1.71
 
 \name{gom.em}
 \alias{gom.em}
@@ -107,20 +107,20 @@ Erosheva, Fienberg & Joutard, 2007) with \eqn{K} classes
 for dichotomous correct responses \eqn{X_{pi}}
 of person \eqn{p} on item \eqn{i} is as follows (\code{model="GOM"})
 \deqn{
-    P(X_{pi}=1 | g_{p1}, \ldots , g_{pK} ) = \sum_k \lambda_{ik} g_{pk}
-\quad , \quad \sum_{k=1}^K g_{pk} = 1
-\quad , \quad 0 \leq g_{pk} \leq 1
+    P(X_{pi}=1 | g_{p1}, \ldots, g_{pK} )=\sum_k \lambda_{ik} g_{pk}
+\quad, \quad \sum_{k=1}^K g_{pk}=1
+\quad, \quad 0 \leq g_{pk} \leq 1
                 }
 
 In most applications (e.g. Erosheva et al., 2007), the grade of
 membership function \eqn{\{g_{pk}\}} is assumed to follow a Dirichlet
 distribution. In our \code{gom.em} implementation
 the membership function is assumed to be discretely represented
-by a grid \eqn{u=(u_1 , \ldots , u_L)} with entries between 0 and 1
+by a grid \eqn{u=(u_1, \ldots, u_L)} with entries between 0 and 1
 (e.g. \code{seq(0,1,length=5)} with \eqn{L=5}).
 The values \eqn{g_{pk}} of the membership function can then
-only take values in \eqn{\{ u_1 , \ldots , u_L \}} with the restriction
-\eqn{\sum_k g_{pk} \sum_l \bold{1}(g_{pk} = u_l ) = 1}.
+only take values in \eqn{\{ u_1, \ldots, u_L \}} with the restriction
+\eqn{\sum_k g_{pk} \sum_l \bold{1}(g_{pk}=u_l )=1}.
 The grid \eqn{u} is specified by using the argument \code{problevels}.
 
 The Rasch grade of membership model (\code{model="GOMRasch"}) poses constraints
@@ -136,25 +136,25 @@ a location parameter \eqn{\tilde{\theta}_k}. The membership function is defined 
 The person parameter \eqn{\theta_p} indicates the usual 'ability', while
 \eqn{\xi_p} describes the individual tendency to change between classes
 \eqn{1,\ldots,K} and their corresponding locations
-\eqn{\tilde{\theta}_1 , \ldots ,\tilde{\theta}_K}.
+\eqn{\tilde{\theta}_1, \ldots,\tilde{\theta}_K}.
 The extremal class probabilities \eqn{\lambda_{ik}} follow the Rasch model
-\deqn{ \lambda_{ik} = invlogit( \tilde{\theta}_k - b_i  ) =
+\deqn{ \lambda_{ik}=invlogit( \tilde{\theta}_k - b_i  )=
 \frac{ \exp( \tilde{\theta}_k - b_i ) }{ 1 + \exp( \tilde{\theta}_k - b_i ) }}
 
 Putting these assumptions together leads to the model equation
 \deqn{
-    P(X_{pi}=1 | g_{p1}, \ldots , g_{pK} ) =
-    P(X_{pi}=1 | \theta_p , \xi_p  ) =
+    P(X_{pi}=1 | g_{p1}, \ldots, g_{pK} )=
+    P(X_{pi}=1 | \theta_p, \xi_p  )=
         \sum_k \frac{ \exp( \tilde{\theta}_k - b_i ) }{ 1 + \exp(\tilde{\theta}_k - b_i ) }
         \cdot \exp \left[ - \frac{ (\theta_p - \tilde{\theta}_k)^2 }{2 \xi_p^2 } \right]
                 }
 
-In the extreme case of a very small \eqn{\xi_p = \varepsilon > 0} and
-\eqn{\theta_p = \theta_0}, the Rasch model is obtained
+In the extreme case of a very small \eqn{\xi_p=\varepsilon > 0} and
+\eqn{\theta_p=\theta_0}, the Rasch model is obtained
 
 \deqn{
-    P(X_{pi}=1 | \theta_p , \xi_p  ) =
-    P(X_{pi}=1 | \theta_0 , \varepsilon  )  =
+    P(X_{pi}=1 | \theta_p, \xi_p  )=
+    P(X_{pi}=1 | \theta_0, \varepsilon  )=
         \frac{ \exp( \theta_0 - b_i ) }{ 1 + \exp( \theta_0 - b_i ) }
                 }
 
@@ -180,9 +180,9 @@ A list with following entries:
 \item{lambda}{Estimated response probabilities \eqn{\lambda_{ik}}}
 \item{se.lambda}{Standard error for estimated response probabilities
 \eqn{\lambda_{ik}}}
-\item{mu}{Mean of the distribution of \eqn{(\theta_p , \xi_p)}
+\item{mu}{Mean of the distribution of \eqn{(\theta_p, \xi_p)}
     (only applies for \code{model="GOMRasch"})}
-\item{Sigma}{Covariance matrix of \eqn{(\theta_p , \xi_p)}
+\item{Sigma}{Covariance matrix of \eqn{(\theta_p, \xi_p)}
     (only applies for \code{model="GOMRasch"})}
 \item{b}{Estimated item difficulties (only applies for \code{model="GOMRasch"})}
 \item{se.b}{Standard error of estimated difficulties
@@ -258,19 +258,19 @@ Fortelius (2009).
 
 data(data.pisaMath)
 dat <- data.pisaMath$data
-dat <- dat[ , grep("M" , colnames(dat)) ]
+dat <- dat[, grep("M", colnames(dat)) ]
 
 #***
 # Model 1: Discrete GOM with 3 classes and 5 probability levels
-problevels <- seq( 0 , 1 , len=5 )
-mod1 <- sirt::gom.em( dat , K=3 , problevels ,  model="GOM"  )
+problevels <- seq( 0, 1, len=5 )
+mod1 <- sirt::gom.em( dat, K=3, problevels,  model="GOM"  )
 summary(mod1)
 
 \dontrun{
 #***
 # Model 2: Discrete GOM with 4 classes and 5 probability levels
-problevels <- seq( 0 , 1 , len=5 )
-mod2 <- sirt::gom.em( dat , K=4 , problevels ,  model="GOM"  )
+problevels <- seq( 0, 1, len=5 )
+mod2 <- sirt::gom.em( dat, K=4, problevels,  model="GOM"  )
 summary(mod2)
 
 # model comparison
@@ -290,10 +290,10 @@ problevels <- scan()
  0  0 .5 .5
  0  0  0  1
 
-problevels <- matrix( problevels, ncol=4 , byrow=TRUE)
-mod2a <- sirt::gom.em( dat , K=4 , problevels ,  model="GOM" )
+problevels <- matrix( problevels, ncol=4, byrow=TRUE)
+mod2a <- sirt::gom.em( dat, K=4, problevels,  model="GOM" )
 # probability distribution for latent classes
-cbind( mod2a$theta.k , mod2a$pi.k )
+cbind( mod2a$theta.k, mod2a$pi.k )
   ##        [,1] [,2] [,3] [,4]       [,5]
   ##   [1,]  1.0  0.0  0.0  0.0 0.17214630
   ##   [2,]  0.5  0.5  0.0  0.0 0.04965676
@@ -306,7 +306,7 @@ cbind( mod2a$theta.k , mod2a$pi.k )
 
 #***
 # Model 3: Rasch GOM
-mod3 <- sirt::gom.em( dat , model="GOMRasch" , maxiter=20 )
+mod3 <- sirt::gom.em( dat, model="GOMRasch", maxiter=20 )
 summary(mod3)
 
 #***
@@ -323,30 +323,30 @@ summary(mod4)
 # define an ordinary 2 latent class model
 set.seed(8765)
 I <- 10
-prob.class1 <- stats::runif( I , 0 , .35 )
-prob.class2 <- stats::runif( I , .70 , .95 )
-probs <- cbind( prob.class1 , prob.class2 )
+prob.class1 <- stats::runif( I, 0, .35 )
+prob.class2 <- stats::runif( I, .70, .95 )
+probs <- cbind( prob.class1, prob.class2 )
 
 # define classes
 N <- 1000
-latent.class <- c( rep( 1 , 1/4*N ) , rep( 2,3/4*N ) )
+latent.class <- c( rep( 1, 1/4*N ), rep( 2,3/4*N ) )
 
 # simulate item responses
-dat <- matrix( NA , nrow=N , ncol=I )
+dat <- matrix( NA, nrow=N, ncol=I )
 for (ii in 1:I){
-    dat[,ii] <- probs[ ii , latent.class ]
+    dat[,ii] <- probs[ ii, latent.class ]
     dat[,ii] <- 1 * ( stats::runif(N) < dat[,ii] )
         }
-colnames(dat) <- paste0( "I" , 1:I)
+colnames(dat) <- paste0( "I", 1:I)
 
 # Model 1: estimate latent class model
-mod1 <- sirt::gom.em(dat, K=2, problevels= c(0,1) , model="GOM" )
+mod1 <- sirt::gom.em(dat, K=2, problevels=c(0,1), model="GOM" )
 summary(mod1)
 # Model 2: estimate GOM
-mod2 <- sirt::gom.em(dat, K=2, problevels= seq(0,1,0.5) , model="GOM" )
+mod2 <- sirt::gom.em(dat, K=2, problevels=seq(0,1,0.5), model="GOM" )
 summary(mod2)
 # estimated distribution
-cbind( mod2$theta.k , mod2$pi.k )
+cbind( mod2$theta.k, mod2$pi.k )
   ##       [,1] [,2]        [,3]
   ##  [1,]  1.0  0.0 0.243925644
   ##  [2,]  0.5  0.5 0.006534278
@@ -356,30 +356,30 @@ cbind( mod2$theta.k , mod2$pi.k )
 # define a 2-class model with graded membership
 set.seed(8765)
 I <- 10
-prob.class1 <- stats::runif( I , 0 , .35 )
-prob.class2 <- stats::runif( I , .70 , .95 )
+prob.class1 <- stats::runif( I, 0, .35 )
+prob.class2 <- stats::runif( I, .70, .95 )
 prob.class3 <- .5*prob.class1+.5*prob.class2  # probabilities for 'fuzzy class'
-probs <- cbind( prob.class1 , prob.class2 , prob.class3)
+probs <- cbind( prob.class1, prob.class2, prob.class3)
 # define classes
 N <- 1000
 latent.class <- c( rep(1,round(1/3*N)),rep(2,round(1/2*N)),rep(3,round(1/6*N)))
 # simulate item responses
-dat <- matrix( NA , nrow=N , ncol=I )
+dat <- matrix( NA, nrow=N, ncol=I )
 for (ii in 1:I){
-    dat[,ii] <- probs[ ii , latent.class ]
+    dat[,ii] <- probs[ ii, latent.class ]
     dat[,ii] <- 1 * ( stats::runif(N) < dat[,ii] )
         }
-colnames(dat) <- paste0( "I" , 1:I)
+colnames(dat) <- paste0( "I", 1:I)
 
 #** Model 1: estimate latent class model
-mod1 <- sirt::gom.em(dat, K=2, problevels= c(0,1) , model="GOM" )
+mod1 <- sirt::gom.em(dat, K=2, problevels=c(0,1), model="GOM" )
 summary(mod1)
 
 #** Model 2: estimate GOM
-mod2 <- sirt::gom.em(dat, K=2, problevels= seq(0,1,0.5) , model="GOM" )
+mod2 <- sirt::gom.em(dat, K=2, problevels=seq(0,1,0.5), model="GOM" )
 summary(mod2)
 # inspect distribution
-cbind( mod2$theta.k , mod2$pi.k )
+cbind( mod2$theta.k, mod2$pi.k )
   ##       [,1] [,2]      [,3]
   ##  [1,]  1.0  0.0 0.3335666
   ##  [2,]  0.5  0.5 0.1810114
@@ -390,12 +390,12 @@ cbind( mod2$theta.k , mod2$pi.k )
 # define latent classes
 Theta <- scan( nlines=1)
    1 0   .5 .5    0 1
-Theta <- matrix( Theta , nrow=3 , ncol=2,byrow=TRUE)
+Theta <- matrix( Theta, nrow=3, ncol=2,byrow=TRUE)
 # define mirt model
 I <- ncol(dat)
 #*** create customized item response function for mirt model
 name <- 'gom'
-par <- c("a1" = -1 , "a2" = 1 )
+par <- c("a1"=-1, "a2"=1 )
 est <- c(TRUE, TRUE)
 P.gom <- function(par,Theta,ncat){
     # GOM for two extremal classes
@@ -411,18 +411,18 @@ lca_prior <- function(Theta,Etable){
   # number of latent Theta classes
   TP <- nrow(Theta)
   # prior in initial iteration
-  if ( is.null(Etable) ){ prior <- rep( 1/TP , TP ) }
+  if ( is.null(Etable) ){ prior <- rep( 1/TP, TP ) }
   # process Etable (this is correct for datasets without missing data)
   if ( ! is.null(Etable) ){
     # sum over correct and incorrect expected responses
-    prior <- ( rowSums(Etable[ , seq(1,2*I,2)]) + rowSums(Etable[,seq(2,2*I,2)]) )/I
+    prior <- ( rowSums(Etable[, seq(1,2*I,2)]) + rowSums(Etable[,seq(2,2*I,2)]) )/I
                  }
   prior <- prior / sum(prior)
   return(prior)
 }
 #*** estimate discrete GOM in mirt package
-mod2m <- mirt::mirt(dat, 1, rep( "icc_gom",I) , customItems=list("icc_gom"=icc_gom),
-           technical = list( customTheta=Theta , customPriorFun = lca_prior)  )
+mod2m <- mirt::mirt(dat, 1, rep( "icc_gom",I), customItems=list("icc_gom"=icc_gom),
+           technical=list( customTheta=Theta, customPriorFun=lca_prior)  )
 # correct number of estimated parameters
 mod2m@nest <- as.integer(sum(mod.pars$est) + nrow(Theta)-1 )
 # extract log-likelihood and compute AIC and BIC
@@ -432,14 +432,14 @@ mod2m@logLik
 # extract coefficients
 ( cmod2m <- sirt::mirt.wrapper.coef(mod2m) )
 # compare estimated distributions
-round( cbind( "sirt"  = mod2$pi.k , "mirt" = mod2m@Prior[[1]] ) , 5 )
+round( cbind( "sirt"=mod2$pi.k, "mirt"=mod2m@Prior[[1]] ), 5 )
   ##           sirt    mirt
   ##   [1,] 0.33357 0.33627
   ##   [2,] 0.18101 0.17789
   ##   [3,] 0.48542 0.48584
 # compare estimated item parameters
-dfr <- data.frame( "sirt" = mod2$item[,4:5] )
-dfr$mirt <- apply(cmod2m$coef[ , c("a1" , "a2") ] , 2 , stats::plogis )
+dfr <- data.frame( "sirt"=mod2$item[,4:5] )
+dfr$mirt <- apply(cmod2m$coef[, c("a1", "a2") ], 2, stats::plogis )
 round(dfr,4)
   ##      sirt.lam.Cl1 sirt.lam.Cl2 mirt.a1 mirt.a2
   ##   1        0.1157       0.8935  0.1177  0.8934

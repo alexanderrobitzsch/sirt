@@ -1,5 +1,5 @@
 %% File Name: sim.qm.ramsay.Rd
-%% File Version: 0.31
+%% File Version: 0.35
 
 \name{sim.qm.ramsay}
 \alias{sim.qm.ramsay}
@@ -28,7 +28,7 @@ Vector of length \eqn{I} of guessing parameters (must be positive)
 }
 \details{
 Ramsay's quotient model (Ramsay, 1989) is defined by the equation
-\deqn{P(X_{pi} = 1 | \theta_p ) = \frac{ \exp { ( \theta_p / b_i ) } }
+\deqn{P(X_{pi}=1 | \theta_p )=\frac{ \exp { ( \theta_p / b_i ) } }
     { K_i + \exp { ( \theta_p / b_i ) } }}
 }
 \value{
@@ -80,31 +80,31 @@ N <- 1000       # persons
 I <- 11         # items
 theta <- exp( stats::rnorm( N ) )  # person ability
 b <- exp( seq(-2,2,len=I))  # item difficulty
-K <- rep( 3 , I )           # K parameter (=> guessing)
+K <- rep( 3, I )           # K parameter (=> guessing)
 
 # apply simulation function
-dat <- sirt::sim.qm.ramsay( theta , b , K )
+dat <- sirt::sim.qm.ramsay( theta, b, K )
 
 #***
 # analysis
 mmliter <- 50       # maximum number of iterations
 I <- ncol(dat)
-fixed.K <- rep( 3 , I )
+fixed.K <- rep( 3, I )
 
 # Ramsay QM with fixed K parameter (K=3 in fixed.K specification)
-mod1 <- sirt::rasch.mml2( dat , mmliter = mmliter , irtmodel = "ramsay.qm",
-              fixed.K = fixed.K )
+mod1 <- sirt::rasch.mml2( dat, mmliter=mmliter, irtmodel="ramsay.qm",
+              fixed.K=fixed.K )
 summary(mod1)
 
 # Ramsay QM with joint estimated K parameters
-mod2 <- sirt::rasch.mml2( dat , mmliter = mmliter , irtmodel = "ramsay.qm" ,
-             est.K = rep(1,I)  )
+mod2 <- sirt::rasch.mml2( dat, mmliter=mmliter, irtmodel="ramsay.qm",
+             est.K=rep(1,I)  )
 summary(mod2)
 
 \dontrun{
 # Ramsay QM with itemwise estimated K parameters
-mod3 <- sirt::rasch.mml2( dat , mmliter = mmliter , irtmodel = "ramsay.qm" ,
-              est.K = 1:I  )
+mod3 <- sirt::rasch.mml2( dat, mmliter=mmliter, irtmodel="ramsay.qm",
+              est.K=1:I  )
 summary(mod3)
 
 # Rasch model
@@ -112,26 +112,26 @@ mod4 <- sirt::rasch.mml2( dat )
 summary(mod4)
 
 # generalized logistic model
-mod5 <- sirt::rasch.mml2( dat , est.alpha = TRUE , mmliter=mmliter)
+mod5 <- sirt::rasch.mml2( dat, est.alpha=TRUE, mmliter=mmliter)
 summary(mod5)
 
 # 2PL model
-mod6 <- sirt::rasch.mml2( dat , est.a = rep(1,I) )
+mod6 <- sirt::rasch.mml2( dat, est.a=rep(1,I) )
 summary(mod6)
 
 # Difficulty + Guessing (b+c) Model
-mod7 <- sirt::rasch.mml2( dat , est.c = rep(1,I) )
+mod7 <- sirt::rasch.mml2( dat, est.c=rep(1,I) )
 summary(mod7)
 
 # estimate separate guessing (c) parameters
-mod8 <- sirt::rasch.mml2( dat , est.c = 1:I  )
+mod8 <- sirt::rasch.mml2( dat, est.c=1:I  )
 summary(mod8)
 
 #*** estimate Model 1 with user defined function in mirt package
 
 # create user defined function for Ramsay's quotient model
 name <- 'ramsayqm'
-par <- c("K" = 3 , "b" = 1 )
+par <- c("K"=3, "b"=1 )
 est <- c(TRUE, TRUE)
 P.ramsay <- function(par,Theta){
      eps <- .01
@@ -147,23 +147,23 @@ P.ramsay <- function(par,Theta){
 # create item response function
 ramsayqm <- mirt::createItem(name, par=par, est=est, P=P.ramsay)
 # define parameters to be estimated
-mod1m.pars <- mirt::mirt(dat, 1, rep( "ramsayqm",I) ,
-                   customItems=list("ramsayqm"=ramsayqm), pars = "values")
-mod1m.pars[ mod1m.pars$name == "K" , "est" ] <- FALSE
+mod1m.pars <- mirt::mirt(dat, 1, rep( "ramsayqm",I),
+                   customItems=list("ramsayqm"=ramsayqm), pars="values")
+mod1m.pars[ mod1m.pars$name=="K", "est" ] <- FALSE
 # define Theta design matrix
-Theta <- matrix( seq(-3,3,len=10) , ncol=1)
+Theta <- matrix( seq(-3,3,len=10), ncol=1)
 # estimate model
-mod1m <- mirt::mirt(dat, 1, rep( "ramsayqm",I) , customItems=list("ramsayqm"=ramsayqm),
-               pars = mod1m.pars , verbose=TRUE ,
-               technical = list( customTheta=Theta , NCYCLES=50)
+mod1m <- mirt::mirt(dat, 1, rep( "ramsayqm",I), customItems=list("ramsayqm"=ramsayqm),
+               pars=mod1m.pars, verbose=TRUE,
+               technical=list( customTheta=Theta, NCYCLES=50)
                 )
 print(mod1m)
 summary(mod1m)
 cmod1m <- sirt::mirt.wrapper.coef( mod1m )$coef
 # compare simulated and estimated values
-dfr <- cbind( b , cmod1m$b , exp(mod1$item$b ) )
-colnames(dfr) <- c("simulated" , "mirt" , "sirt_rasch.mml2")
-round( dfr , 2 )
+dfr <- cbind( b, cmod1m$b, exp(mod1$item$b ) )
+colnames(dfr) <- c("simulated", "mirt", "sirt_rasch.mml2")
+round( dfr, 2 )
   ##      simulated mirt sirt_rasch.mml2
   ## [1,]      0.14 0.11            0.11
   ## [2,]      0.20 0.17            0.18

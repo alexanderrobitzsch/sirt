@@ -1,5 +1,5 @@
 %% File Name: monoreg.rowwise.Rd
-%% File Version: 0.11
+%% File Version: 0.12
 
 \name{monoreg.rowwise}
 \alias{monoreg.rowwise}
@@ -66,22 +66,22 @@ package.
 
 
 \examples{
-y <- c(22.5 , 23.33 , 20.83 , 24.25 )
+y <- c(22.5, 23.33, 20.83, 24.25 )
 w <- c( 3,3,3,2)
 # define matrix input
-yM <- matrix( 0 , nrow=2 , ncol=4 )
+yM <- matrix( 0, nrow=2, ncol=4 )
 wM <- yM
 yM[1,] <- yM[2,] <- y
 wM[1,] <- w
 wM[2,] <- c(1,3,4, 3 )
 
 # fit rowwise monotone regression
-monoreg.rowwise( yM , wM )
+monoreg.rowwise( yM, wM )
 # compare results with monoreg function from fdrtool package
 \dontrun{
 miceadds::library_install("fdrtool")
-fdrtool::monoreg(x=yM[1,] , w=wM[1,])$yf
-fdrtool::monoreg(x=yM[2,] , w=wM[2,])$yf
+fdrtool::monoreg(x=yM[1,], w=wM[1,])$yf
+fdrtool::monoreg(x=yM[2,], w=wM[2,])$yf
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

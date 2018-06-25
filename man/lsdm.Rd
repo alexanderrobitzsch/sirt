@@ -1,5 +1,5 @@
 %% File Name: lsdm.Rd
-%% File Version: 2.09
+%% File Version: 2.13
 
 
 \name{lsdm}
@@ -74,19 +74,19 @@ Further arguments to be passed
 
 \details{
 The least squares distance method (LSDM; Dimitrov 2007) is based on the
-assumption that estimated item response functions \eqn{P(X_i = 1 | \theta)}
+assumption that estimated item response functions \eqn{P(X_i=1 | \theta)}
 can be decomposed in a multiplicative way (in the implemented
 conjunctive model):
-\deqn{ P( X_i = 1  | \theta ) = \prod_{k=1}^K [ P( A_k = 1 | \theta ) ]^{q_{ik}} }
-where \eqn{P( A_k = 1 | \theta )} are attribute response functions and
+\deqn{ P( X_i=1  | \theta )=\prod_{k=1}^K [ P( A_k=1 | \theta ) ]^{q_{ik}} }
+where \eqn{P( A_k=1 | \theta )} are attribute response functions and
 \eqn{q_{ik}} are entries of the Q-matrix. Note that the multiplicative form
 can be rewritten by taking the logarithm
-\deqn{ \log P( X_i = 1  | \theta ) =
-    \sum_{k=1}^K q_{ik} \log [ P( A_k = 1 | \theta ) ] }
+\deqn{ \log P( X_i=1  | \theta )=
+    \sum_{k=1}^K q_{ik} \log [ P( A_k=1 | \theta ) ] }
 Evaluation item and attribute response functions on a grid of \eqn{\theta} values and
-collecting these values in matrices \eqn{\bold{L}= \{ \log P( X_i = 1 ) | \theta ) \} },
-\eqn{\bold{Q}= \{ q_{ik} \} } and
-\eqn{\bold{X}= \{ \log P( A_k = 1  | \theta ) \} } leads to a least squares
+collecting these values in matrices \eqn{\bold{L}=\{ \log P( X_i=1 ) | \theta ) \} },
+\eqn{\bold{Q}=\{ q_{ik} \} } and
+\eqn{\bold{X}=\{ \log P( A_k=1  | \theta ) \} } leads to a least squares
 problem of the form \eqn{ \bold{L} \approx \bold{Q} \bold{X}} with the
 restriction of positive \bold{X} matrix entries. This least squares problem
 is a linear inequality constrained model which is solved by making use of
@@ -95,8 +95,8 @@ the \pkg{ic.infer} package (Groemping, 2010).
 After fitting the attribute response functions, empirical item-attribute
 discriminations \eqn{w_{ik}} are calculated as the approximation of the following
 equation
-\deqn{ \log P( X_i = 1  | \theta ) =
-\sum_{k=1}^K w_{ik} q_{ik} \log [ P( A_k = 1 | \theta ) ] }
+\deqn{ \log P( X_i=1  | \theta )=
+\sum_{k=1}^K w_{ik} q_{ik} \log [ P( A_k=1 | \theta ) ] }
 }
 
 
@@ -186,16 +186,16 @@ Qmatrix <- c( 1,1,0,1,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,
     0,1,0,0,0,1,0,1,1,1,0,1,0,1,0,1,1,0,0,1,0,1,0,0,1,1,0,0,1,0,0,0,
     1,0,0,1,1,0,0,0,1,1,0,1,0,0,0,0,1,0,1,1,0,0,0,0,1,0,1,1,0,1,0,0,
     1,1,0,1,0,0,0,0,1,0,1,1,1,1,0,0 )
-Qmatrix <- matrix( Qmatrix , nrow=29, byrow=TRUE )
+Qmatrix <- matrix( Qmatrix, nrow=29, byrow=TRUE )
 colnames(Qmatrix) <- paste("A",1:8,sep="")
 rownames(Qmatrix) <- paste("Item",1:29,sep="")
 
 # Perform a LSDM analysis
-lsdm.res <- sirt::lsdm( b = b, Qmatrix = Qmatrix )
+lsdm.res <- sirt::lsdm( b=b, Qmatrix=Qmatrix )
 summary(lsdm.res)
   ## Model Fit
   ## Model Fit LSDM   -  Mean MAD:  0.071     Median MAD:   0.07
-  ## Model Fit LLTM   -  Mean MAD:  0.079     Median MAD:  0.063    R^2= 0.615
+  ## Model Fit LLTM   -  Mean MAD:  0.079     Median MAD:  0.063    R^2=0.615
   ## ................................................................................
   ## Attribute Parameters
   ##    N.Items  b.2PL a.2PL  b.1PL eta.LLTM se.LLTM pval.LLTM
@@ -220,15 +220,15 @@ a <- c(0.6,0.81,0.75,0.81,0.62,0.75,0.54,0.65,0.75,0.54)
 # define Q-matrix
 Qmatrix <- c(1,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,1,0,0,0,0,1,1,0,0,
     0,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,0,0,1,1,1,0,1,0,0 )
-Qmatrix <- matrix( Qmatrix , nrow=10, byrow=TRUE )
+Qmatrix <- matrix( Qmatrix, nrow=10, byrow=TRUE )
 colnames(Qmatrix) <- paste("A",1:5,sep="")
 rownames(Qmatrix) <- paste("Item",1:10,sep="")
 
 # LSDM analysis
-lsdm.res <- sirt::lsdm( b = b, a=a , Qmatrix = Qmatrix )
+lsdm.res <- sirt::lsdm( b=b, a=a, Qmatrix=Qmatrix )
 summary(lsdm.res)
   ## Model Fit LSDM   -  Mean MAD:  0.061     Median MAD:   0.06
-  ## Model Fit LLTM   -  Mean MAD:  0.069     Median MAD:  0.069    R^2= 0.902
+  ## Model Fit LLTM   -  Mean MAD:  0.069     Median MAD:  0.069    R^2=0.902
   ## ................................................................................
   ## Attribute Parameters
   ##    N.Items  b.2PL a.2PL  b.1PL eta.LLTM se.LLTM pval.LLTM
@@ -262,24 +262,24 @@ summary(lsdm.res)
 data(data.pisaRead)
 # response data
 dat <- data.pisaRead$data
-dat <- dat[ , substring( colnames(dat),1,1)=="R" ]
+dat <- dat[, substring( colnames(dat),1,1)=="R" ]
 # define Q-matrix
 pars <- data.pisaRead$item
-Qmatrix <- data.frame(  "A0" = 1*(pars$ItemFormat=="MC" ) ,
-                  "A1" = 1*(pars$ItemFormat=="CR" ) )
+Qmatrix <- data.frame(  "A0"=1*(pars$ItemFormat=="MC" ),
+                  "A1"=1*(pars$ItemFormat=="CR" ) )
 
 # start with estimating the 1PL in order to get person parameters
 mod <- sirt::rasch.mml2( dat )
-theta <- sirt::wle.rasch( dat=dat ,b = mod$item$b )$theta
+theta <- sirt::wle.rasch( dat=dat,b=mod$item$b )$theta
 # Nonparametric estimation of item response functions
-mod2 <- sirt::np.dich( dat=dat , theta=theta , thetagrid = seq(-3,3,len=100) )
+mod2 <- sirt::np.dich( dat=dat, theta=theta, thetagrid=seq(-3,3,len=100) )
 
 # LSDM analysis
-lsdm.res <- sirt::lsdm( data=mod2$estimate , Qmatrix=Qmatrix , theta=mod2$thetagrid)
+lsdm.res <- sirt::lsdm( data=mod2$estimate, Qmatrix=Qmatrix, theta=mod2$thetagrid)
 summary(lsdm.res)
   ## Model Fit
   ## Model Fit LSDM   -  Mean MAD:  0.215     Median MAD:  0.151
-  ## Model Fit LLTM   -  Mean MAD:  0.193     Median MAD:  0.119    R^2= 0.285
+  ## Model Fit LLTM   -  Mean MAD:  0.193     Median MAD:  0.119    R^2=0.285
   ## ................................................................................
   ## Attribute Parameter
   ##    N.Items  b.2PL a.2PL  b.1PL eta.LLTM se.LLTM pval.LLTM
@@ -290,20 +290,20 @@ summary(lsdm.res)
 # EXAMPLE 4: Fraction subtraction dataset
 #############################################################################
 
-data( data.fraction1 , package="CDM")
+data( data.fraction1, package="CDM")
 data <- data.fraction1$data
 q.matrix <- data.fraction1$q.matrix
 
 #****
 # Model 1: 2PL estimation
-mod1 <- sirt::rasch.mml2( data , est.a=1:nrow(q.matrix) )
+mod1 <- sirt::rasch.mml2( data, est.a=1:nrow(q.matrix) )
 
 # LSDM analysis
-lsdm.res1 <- sirt::lsdm( b=mod1$item$b , a=mod1$item$a , Qmatrix=q.matrix )
+lsdm.res1 <- sirt::lsdm( b=mod1$item$b, a=mod1$item$a, Qmatrix=q.matrix )
 summary(lsdm.res1)
   ##
   ##   Model Fit LSDM   -  Mean MAD:  0.076     Median MAD:  0.055
-  ##   Model Fit LLTM   -  Mean MAD:  0.153     Median MAD:  0.155    R^2= 0.801
+  ##   Model Fit LLTM   -  Mean MAD:  0.153     Median MAD:  0.155    R^2=0.801
   ##   ................................................................................
   ##   Attribute Parameter
   ##       N.Items   b.2PL a.2PL  b.1PL eta.LLTM se.LLTM pval.LLTM
@@ -318,11 +318,11 @@ summary(lsdm.res1)
 mod2 <- sirt::rasch.mml2( data  )
 
 # LSDM analysis
-lsdm.res2 <- sirt::lsdm( b=mod1$item$b , Qmatrix=q.matrix )
+lsdm.res2 <- sirt::lsdm( b=mod1$item$b, Qmatrix=q.matrix )
 summary(lsdm.res2)
   ##
   ##   Model Fit LSDM   -  Mean MAD:  0.046     Median MAD:   0.03
-  ##   Model Fit LLTM   -  Mean MAD:  0.041     Median MAD:  0.042    R^2= 0.772
+  ##   Model Fit LLTM   -  Mean MAD:  0.041     Median MAD:  0.042    R^2=0.772
 
 #############################################################################
 # EXAMPLE 5: Dataset LLTM Sonnleitner Reading Comprehension (Sonnleitner, 2008)
@@ -333,7 +333,7 @@ b <- c(-1.0189,1.6754,-1.0842,-.4457,-1.9419,-1.1513,2.0871,2.4874,-1.659,-1.197
     2.1537,.3301,-.5181,-1.3024,-.8248,-.0278,1.3279,2.1454,-1.55,1.4277,.3301)
 b <- b[-21] # remove Item 21
 
-# Q-matrix Table 9 , p. 357 (Sonnleitner, 2008)
+# Q-matrix Table 9, p. 357 (Sonnleitner, 2008)
 Qmatrix <- scan()
    1 0 0 0 0 0 0 7 4 0 0 0   0 1 0 0 0 0 0 5 1 0 0 0   1 1 0 1 0 0 0 9 1 0 1 0
    1 1 1 0 0 0 0 5 2 0 1 0   1 1 0 0 1 0 0 7 5 1 1 0   1 1 0 0 0 0 0 7 3 0 0 0
@@ -343,18 +343,18 @@ Qmatrix <- scan()
    0 0 0 1 0 0 1 7 5 0 0 1   0 1 0 0 0 0 1 2 2 0 0 1   0 1 1 0 0 0 1 4 1 0 0 1
    0 1 0 0 1 0 0 5 1 0 0 1   0 1 0 0 0 0 1 7 2 0 0 1   0 0 0 0 0 1 0 5 1 0 0 1
 
-Qmatrix <- matrix( as.numeric(Qmatrix) , nrow=21 , ncol=12 , byrow=TRUE )
-colnames(Qmatrix) <- scan( what="character" , nlines=1)
+Qmatrix <- matrix( as.numeric(Qmatrix), nrow=21, ncol=12, byrow=TRUE )
+colnames(Qmatrix) <- scan( what="character", nlines=1)
    pc ic ier inc iui igc ch nro ncro td a t
 
 # divide Q-matrix entries by maximum in each column
-Qmatrix <- round(Qmatrix / matrix(apply(Qmatrix,2,max),21,12,byrow=TRUE) ,3)
+Qmatrix <- round(Qmatrix / matrix(apply(Qmatrix,2,max),21,12,byrow=TRUE),3)
 # LSDM analysis
-res <- sirt::lsdm( b=b , Qmatrix=Qmatrix )
+res <- sirt::lsdm( b=b, Qmatrix=Qmatrix )
 summary(res)
   ##
   ##   Model Fit LSDM   -  Mean MAD:  0.217     Median MAD:  0.178
-  ##   Model Fit LLTM   -  Mean MAD:  0.087     Median MAD:  0.062    R^2= 0.785
+  ##   Model Fit LLTM   -  Mean MAD:  0.087     Median MAD:  0.062    R^2=0.785
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

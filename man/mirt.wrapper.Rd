@@ -1,5 +1,5 @@
 %% File Name: mirt.wrapper.Rd
-%% File Version: 1.77
+%% File Version: 1.81
 
 \name{mirt.wrapper}
 \alias{mirt.wrapper}
@@ -36,7 +36,7 @@ mirt.wrapper.posterior(mirt.obj,weights=NULL)
 mirt.wrapper.fscores(mirt.obj,weights=NULL)
 
 # convenience function for itemplot
-mirt.wrapper.itemplot( mirt.obj , ask=TRUE , ...)
+mirt.wrapper.itemplot( mirt.obj, ask=TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -227,7 +227,7 @@ data(LSAT7, package="mirt")
 data <- mirt::expand.table(LSAT7)
 
 #*** Model 1: 3PL model for item 5 only, other items 2PL
-mod1 <- mirt::mirt(data, 1, itemtype=c("2PL","2PL","2PL","2PL","3PL") , verbose=TRUE)
+mod1 <- mirt::mirt(data, 1, itemtype=c("2PL","2PL","2PL","2PL","3PL"), verbose=TRUE)
 print(mod1)
 summary(mod1)
 # extracting coefficients
@@ -249,10 +249,10 @@ str(postmod1)
 
 #*** Model 2: Confirmatory model with two factors
 cmodel <- mirt::mirt.model("
-        F1 = 1,4,5
-        F2 = 2,3
+        F1=1,4,5
+        F2=2,3
         ")
-mod2 <- mirt::mirt(data, cmodel , verbose=TRUE)
+mod2 <- mirt::mirt(data, cmodel, verbose=TRUE)
 print(mod2)
 summary(mod2)
 # extract coefficients
@@ -272,7 +272,7 @@ psych::describe(Science)
 
 # modify dataset
 dat <- Science
-dat[ dat[,1] > 3 ,1] <- 3
+dat[ dat[,1] > 3,1] <- 3
 psych::describe(dat)
 
 # estimate generalized partial credit model
@@ -298,34 +298,34 @@ sigma <- matrix(c(1.21,.297,1.232,.297,.81,.252,1.232,.252,1.96),3,3)
 itemtype <- rep("dich", nrow(a))
 N <- 1000
 dataset1 <- mirt::simdata(a, d, N, itemtype)
-dataset2 <- mirt::simdata(a, d, N, itemtype, mu = mu, sigma = sigma)
+dataset2 <- mirt::simdata(a, d, N, itemtype, mu=mu, sigma=sigma)
 dat <- rbind(dataset1, dataset2)
 group <- c(rep("D1", N), rep("D2", N))
 
 #group models
 model <- mirt::mirt.model("
-   F1 = 1-5
-   F2 = 6-10
-   F3 = 11-15
+   F1=1-5
+   F2=6-10
+   F3=11-15
       ")
 
 # separate analysis
-mod_configural <- mirt::multipleGroup(dat, model, group = group , verbose=TRUE)
+mod_configural <- mirt::multipleGroup(dat, model, group=group, verbose=TRUE)
 mirt.wrapper.coef(mod_configural)
 
 # equal slopes (metric invariance)
-mod_metric <- mirt::multipleGroup(dat, model, group = group, invariance=c("slopes") ,
+mod_metric <- mirt::multipleGroup(dat, model, group=group, invariance=c("slopes"),
                 verbose=TRUE)
 mirt.wrapper.coef(mod_metric)
 
 # equal slopes and intercepts (scalar invariance)
-mod_scalar <- mirt::multipleGroup(dat, model, group = group,
+mod_scalar <- mirt::multipleGroup(dat, model, group=group,
           invariance=c("slopes","intercepts","free_means","free_varcov"), verbose=TRUE)
 mirt.wrapper.coef(mod_scalar)
 
 # full constraint
-mod_fullconstrain <- mirt::multipleGroup(dat, model, group = group,
-             invariance=c("slopes", "intercepts") , verbose=TRUE )
+mod_fullconstrain <- mirt::multipleGroup(dat, model, group=group,
+             invariance=c("slopes", "intercepts"), verbose=TRUE )
 mirt.wrapper.coef(mod_fullconstrain)
 
 #############################################################################
@@ -336,15 +336,15 @@ data(data.read)
 dat <- data.read
 # specify mirt model with some interactions
 mirtmodel <- mirt.model("
-   A = 1-4
-   B = 5-8
-   C = 9-12
-   (A*B) = 4,8
-   (C*C) = 9
-   (A*B*C) = 12
+   A=1-4
+   B=5-8
+   C=9-12
+   (A*B)=4,8
+   (C*C)=9
+   (A*B*C)=12
    " )
 # estimate model
-res <- mirt::mirt( dat , mirtmodel , verbose=TRUE , technical=list(NCYCLES=3) )
+res <- mirt::mirt( dat, mirtmodel, verbose=TRUE, technical=list(NCYCLES=3) )
 # look at estimated parameters
 mirt.wrapper.coef(res)
 coef(res)
@@ -374,7 +374,7 @@ lavmodel <- "
     A ~ .5*1                      # set mean of A to .5
     B ~ 1                         # estimate mean of B
     "
-res <- sirt::lavaan2mirt( dat , lavmodel , verbose=TRUE , technical=list(NCYCLES=3) )
+res <- sirt::lavaan2mirt( dat, lavmodel, verbose=TRUE, technical=list(NCYCLES=3) )
 # estimated coefficients
 mirt.wrapper.coef(res$mirt)
 # extract factor scores

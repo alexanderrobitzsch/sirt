@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.biascorr.Rd
-%% File Version: 0.17
+%% File Version: 0.19
 
 \name{rasch.jml.biascorr}
 \alias{rasch.jml.biascorr}
@@ -73,7 +73,7 @@ mod <- sirt::rasch.jml( data.read  )
 
 # JML with analytical bias correction
 res1 <- sirt::rasch.jml.biascorr( jmlobj=mod  )
-print( res1$b.biascorr , digits= 3 )
+print( res1$b.biascorr, digits=3 )
   ##        b.JML b.JMLcorr b.analytcorr1 b.analytcorr2
   ##   1  -2.0086   -1.8412        -1.908        -1.922
   ##   2  -1.1121   -1.0194        -1.078        -1.088

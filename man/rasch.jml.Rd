@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.Rd
-%% File Version: 1.32
+%% File Version: 1.36
 
 \name{rasch.jml}
 \alias{rasch.jml}
@@ -14,10 +14,10 @@ estimation (Lincare, 1994). The PROX algorithm (Lincare, 1994) is used
 for the generation of starting values of item parameters.
 }
 \usage{
-rasch.jml(dat, method = "MLE", b.init = NULL, constraints = NULL, weights = NULL,
-    glob.conv = 10^(-6),   conv1 = 1e-05, conv2 = 0.001, progress = TRUE,
-    bsteps = 4,thetasteps = 2, wle.adj = 0, jmliter = 100, prox = TRUE ,
-    proxiter = 30, proxconv = 0.01, dp=NULL , theta.init = NULL , calc.fit=TRUE)
+rasch.jml(dat, method="MLE", b.init=NULL, constraints=NULL, weights=NULL,
+    glob.conv=10^(-6),   conv1=1e-05, conv2=0.001, progress=TRUE,
+    bsteps=4,thetasteps=2, wle.adj=0, jmliter=100, prox=TRUE,
+    proxiter=30, proxconv=0.01, dp=NULL, theta.init=NULL, calc.fit=TRUE)
 
 \method{summary}{rasch.jml}(object,...)
 }
@@ -59,7 +59,7 @@ Convergence criterion for estimation of person parameters
   \item{progress}{
 Display progress? Default is \code{TRUE}
 }
-%% bsteps = 4,thetasteps = 2, wle.adj = 0,
+%% bsteps=4,thetasteps=2, wle.adj=0,
   \item{bsteps}{
 Number of steps for b parameter estimation
 }
@@ -165,9 +165,9 @@ or the \R package \pkg{ltm}.
 set.seed(789)
 N <- 500    # number of persons
 I <- 11     # number of items
-b <- seq( -2 , 2 , length=I )
-dat <- sirt::sim.raschtype( stats::rnorm( N ) , b )
-colnames(dat) <- paste( "I" , 1:I , sep="")
+b <- seq( -2, 2, length=I )
+dat <- sirt::sim.raschtype( stats::rnorm( N ), b )
+colnames(dat) <- paste( "I", 1:I, sep="")
 
 # JML estimation of the Rasch model
 mod1 <- sirt::rasch.jml( dat )
@@ -194,11 +194,11 @@ mod5$item.par       # extract item parameters
 
 #******
 # item parameter constraints in JML estimation
-# fix item difficulties: b[4]=-.76 and b[6]= .10
-constraints <- matrix( cbind( 4 , -.76 ,
-                              6 , .10 ) ,
-                  ncol=2 , byrow=TRUE )
-mod6 <- sirt::rasch.jml( dat , constraints = constraints )
+# fix item difficulties: b[4]=-.76 and b[6]=.10
+constraints <- matrix( cbind( 4, -.76,
+                              6, .10 ),
+                  ncol=2, byrow=TRUE )
+mod6 <- sirt::rasch.jml( dat, constraints=constraints )
 summary(mod6)
   # For constrained item parameters, it this not obvious
   # how to calculate a 'right correction' of item parameter bias

@@ -1,5 +1,5 @@
 %% File Name: Q3.testlet.Rd
-%% File Version: 1.08
+%% File Version: 1.11
 
 \name{Q3.testlet}
 \alias{Q3.testlet}
@@ -62,14 +62,14 @@ mod <- sirt::rasch.mml2( data.read)
 mod$item
 
 # estmate WLEs
-mod.wle <- sirt::wle.rasch( dat = data.read , b = mod$item$b )
+mod.wle <- sirt::wle.rasch( dat=data.read, b=mod$item$b )
 
 # Yen's Q3 statistic
-mod.q3 <- sirt::Q3( dat = data.read , theta = mod.wle$theta , b = mod$item$b )
+mod.q3 <- sirt::Q3( dat=data.read, theta=mod.wle$theta, b=mod$item$b )
 
 # Yen's Q3 statistic with testlets
 items <- colnames(data.read)
-testlet.matrix <- cbind( substring(  items,1,1) , items )
+testlet.matrix <- cbind( substring(  items,1,1), items )
 mod.testletq3 <- sirt::Q3.testlet( q3.res=mod.q3,testlet.matrix=testlet.matrix)
 mod.testletq3
 }

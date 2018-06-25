@@ -1,11 +1,11 @@
 ## File Name: soft_thresholding.R
-## File Version: 0.03
+## File Version: 0.04
 
 
-soft_thresholding <- function( x , lambda )
+soft_thresholding <- function( x, lambda )
 {
     x_abs <- abs(x)
-    x <- ifelse( x_abs > lambda , x - sign(x) * lambda , 0 )
+    x <- ifelse( x_abs > lambda, x - sign(x) * lambda, 0 )
     return(x)
 }
 

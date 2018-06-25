@@ -1,13 +1,13 @@
 ## File Name: mle.reliability.R
-## File Version: 0.05
+## File Version: 0.06
 
 
 #########################################################
 # MLE reliability
 mle.reliability <- function(meas, se.meas ){
         meas[ abs(meas) > 1E10 ] <- NA
-        v1 <- stats::var(meas , na.rm=TRUE)
-        v2 <- mean( se.meas^2 , na.rm=TRUE )
+        v1 <- stats::var(meas, na.rm=TRUE)
+        v2 <- mean( se.meas^2, na.rm=TRUE )
         rel <- ( v1 - v2 ) / v1
         return(rel)
             }
@@ -17,8 +17,8 @@ mle.reliability <- function(meas, se.meas ){
 # EAP reliability
 eap.reliability <- function(meas, se.meas ){
         meas[ abs(meas) > 1E10 ] <- NA
-        v1 <- stats::var(meas , na.rm=TRUE)
-        v2 <- mean( se.meas^2 , na.rm=TRUE )
+        v1 <- stats::var(meas, na.rm=TRUE)
+        v2 <- mean( se.meas^2, na.rm=TRUE )
         rel <- v1  / ( v1 + v2 )
         return(rel)
             }

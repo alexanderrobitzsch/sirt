@@ -1,5 +1,5 @@
 %% File Name: wle.rasch.jackknife.Rd
-%% File Version: 1.17
+%% File Version: 1.21
 
 \name{wle.rasch.jackknife}
 \alias{wle.rasch.jackknife}
@@ -13,8 +13,8 @@ stratified item designs and item designs with testlets for the
 Rasch model.
 }
 \usage{
-wle.rasch.jackknife(dat, b, itemweights = 1 + 0 * b, pid = NULL,
-    testlet = NULL, stratum = NULL, size.itempop = NULL)
+wle.rasch.jackknife(dat, b, itemweights=1 + 0 * b, pid=NULL,
+    testlet=NULL, stratum=NULL, size.itempop=NULL)
 }
 \arguments{
   \item{dat}{
@@ -88,47 +88,47 @@ data(data.read)
 dat <- data.read
 
 # estimation of the Rasch model
-res <- sirt::rasch.mml2( dat , parm.conv = .001)
+res <- sirt::rasch.mml2( dat, parm.conv=.001)
 
 # WLE estimation
-wle1 <- sirt::wle.rasch(dat, b = res$item$thresh )
+wle1 <- sirt::wle.rasch(dat, b=res$item$thresh )
 
 # simple jackknife WLE estimation
-wle2 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh )
-  ## WLE Reliability = 0.651
+wle2 <- sirt::wle.rasch.jackknife(dat, b=res$item$thresh )
+  ## WLE Reliability=0.651
 
 # SE(WLE) for testlets A, B and C
-wle3 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh ,
-           testlet = substring( colnames(dat),1,1) )
-  ## WLE Reliability = 0.572
+wle3 <- sirt::wle.rasch.jackknife(dat, b=res$item$thresh,
+           testlet=substring( colnames(dat),1,1) )
+  ## WLE Reliability=0.572
 
 # SE(WLE) for item strata A,B, C
-wle4 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh ,
-             stratum = substring( colnames(dat),1,1) )
-  ## WLE Reliability = 0.683
+wle4 <- sirt::wle.rasch.jackknife(dat, b=res$item$thresh,
+             stratum=substring( colnames(dat),1,1) )
+  ## WLE Reliability=0.683
 
 # SE (WLE) for finite item strata
-# A (10 items) , B (7 items) , C (4 items -> no sampling error)
+# A (10 items), B (7 items), C (4 items -> no sampling error)
 # in every stratum 4 items were sampled
 size.itempop <- c(10,7,4)
 names(size.itempop) <- c("A","B","C")
-wle5 <- sirt::wle.rasch.jackknife(dat, b =res$item$thresh ,
-             stratum = substring( colnames(dat),1,1) ,
-             size.itempop = size.itempop )
+wle5 <- sirt::wle.rasch.jackknife(dat, b=res$item$thresh,
+             stratum=substring( colnames(dat),1,1),
+             size.itempop=size.itempop )
   ## Stratum  A (Mean) Correction Factor 0.6
   ## Stratum  B (Mean) Correction Factor 0.42857
   ## Stratum  C (Mean) Correction Factor 0
-  ## WLE Reliability = 0.876
+  ## WLE Reliability=0.876
 
 # compare different estimated standard errors
-a2 <- stats::aggregate( wle2$wle$wle.jackse , list( wle2$wle$wle) , mean )
-colnames(a2) <- c("wle" , "se.simple")
-a2$se.testlet <- stats::aggregate( wle3$wle$wle.jackse , list( wle3$wle$wle) , mean )[,2]
-a2$se.strata <- stats::aggregate( wle4$wle$wle.jackse , list( wle4$wle$wle) , mean )[,2]
-a2$se.finitepop.strata <- stats::aggregate( wle5$wle$wle.jackse ,
-    list( wle5$wle$wle) , mean )[,2]
-round( a2 , 3 )
-  ## > round( a2 , 3 )
+a2 <- stats::aggregate( wle2$wle$wle.jackse, list( wle2$wle$wle), mean )
+colnames(a2) <- c("wle", "se.simple")
+a2$se.testlet <- stats::aggregate( wle3$wle$wle.jackse, list( wle3$wle$wle), mean )[,2]
+a2$se.strata <- stats::aggregate( wle4$wle$wle.jackse, list( wle4$wle$wle), mean )[,2]
+a2$se.finitepop.strata <- stats::aggregate( wle5$wle$wle.jackse,
+    list( wle5$wle$wle), mean )[,2]
+round( a2, 3 )
+  ## > round( a2, 3 )
   ##       wle se.simple se.testlet se.strata se.finitepop.strata
   ## 1  -5.085     0.440      0.649     0.331               0.138
   ## 2  -3.114     0.865      1.519     0.632               0.379

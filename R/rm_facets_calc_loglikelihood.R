@@ -1,13 +1,13 @@
 ## File Name: rm_facets_calc_loglikelihood.R
-## File Version: 0.07
+## File Version: 0.10
 
 rm_facets_calc_loglikelihood <- function( tau.item, a.rater, Qmatrix, b.item, VV, K, I, TP, a.item,
             b.rater, item.index, rater.index, theta.k, RR, dat2, dat2.resp, pi.k=NULL, dat2.ind.resp,
-            mu=NULL, sigma=NULL, b.rater.center , a.rater.center, a.item.center, a_lower, a_upper )
+            mu=NULL, sigma=NULL, b.rater.center, a.rater.center, a.item.center, a_lower, a_upper )
 {
     #--- adjust pi.k probabilities
     if ( ( ! is.null(mu) ) | ( ! is.null(sigma) ) ){
-        pi.k <- sirt_dnorm_discrete( x = theta.k, mean=mu, sd = sigma )
+        pi.k <- sirt_dnorm_discrete( x=theta.k, mean=mu, sd=sigma )
     }
     #--- center parameters
     a.item <- rm_squeeze(x=a.item, lower=a_lower, upper=a_upper )

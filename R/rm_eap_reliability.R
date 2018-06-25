@@ -1,7 +1,7 @@
 ## File Name: rm_eap_reliability.R
-## File Version: 0.02
+## File Version: 0.03
 
-rm_eap_reliability <- function( EAP , SE_EAP )
+rm_eap_reliability <- function( EAP, SE_EAP )
 {
     EAP.rel <- 1 - mean( SE_EAP^2 ) / ( mean( SE_EAP^2 ) + stats::var( EAP ) )
     return(EAP.rel)

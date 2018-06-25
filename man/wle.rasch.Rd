@@ -1,5 +1,5 @@
 %% File Name: wle.rasch.Rd
-%% File Version: 1.11
+%% File Version: 1.14
 
 \name{wle.rasch}
 \alias{wle.rasch}
@@ -12,9 +12,9 @@ This function computes weighted likelihood estimates for dichotomous responses b
 on the Rasch model (Warm, 1989).
 }
 \usage{
-wle.rasch(dat, dat.resp = NULL, b, itemweights = 1 + 0 * b,
-    theta = rep(0, nrow(dat)), conv = 0.001, maxit = 200,
-    wle.adj=0 , progress=FALSE)
+wle.rasch(dat, dat.resp=NULL, b, itemweights=1 + 0 * b,
+    theta=rep(0, nrow(dat)), conv=0.001, maxit=200,
+    wle.adj=0, progress=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -61,7 +61,7 @@ A list with following entries
         in the list of arguments of this function.
         }
    \item{p.ia}{Matrix with expected item response, i.e.
-    the probabilities \eqn{P(X_{pi}=1|\theta_p ) = invlogit( \theta_p - b_i )}.
+    the probabilities \eqn{P(X_{pi}=1|\theta_p )=invlogit( \theta_p - b_i )}.
             }
    \item{wle}{WLE reliability (Adams, 2005)}
 }
@@ -105,7 +105,7 @@ mod <- sirt::rasch.mml2(data.read)
 mod$item
 
 # estmate WLEs
-mod.wle <- sirt::wle.rasch( dat = data.read , b = mod$item$b )
+mod.wle <- sirt::wle.rasch( dat=data.read, b=mod$item$b )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

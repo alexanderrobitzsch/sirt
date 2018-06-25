@@ -1,5 +1,5 @@
 //// File Name: invariance_alignment_rcpp.cpp
-//// File Version: 1.06
+//// File Version: 1.09
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -20,14 +20,14 @@ Rcpp::NumericVector ia_optim_lambda( Rcpp::NumericMatrix lambda, Rcpp::NumericVe
     Rcpp::NumericVector psi0b, double align_scale, double align_pow,
     Rcpp::NumericMatrix wgt, double eps, Rcpp::NumericMatrix group_combis )
 {
-    int I = lambda.ncol() ;
-    int G = lambda.nrow() ;
+    int I = lambda.ncol();
+    int G = lambda.nrow();
     Rcpp::NumericMatrix lambda1(G,I);
     Rcpp::NumericMatrix lambda1b(G,I);
     for (int ii=0;ii<I;ii++){
         for (int gg=0;gg<G;gg++){
-            lambda1(gg,ii) = lambda(gg,ii) / psi0[gg] ;
-            lambda1b(gg,ii) = lambda(gg,ii) / psi0b[gg] ;
+            lambda1(gg,ii) = lambda(gg,ii) / psi0[gg];
+            lambda1b(gg,ii) = lambda(gg,ii) / psi0b[gg];
         }
     }
 
@@ -37,18 +37,18 @@ Rcpp::NumericVector ia_optim_lambda( Rcpp::NumericMatrix lambda, Rcpp::NumericVe
 
     for (int ii=0;ii<I;ii++){
         for (int cc=0;cc<GC;cc++){
-            fopt1[cc] = pow( lambda1( group_combis(cc,0) , ii) - lambda1b( group_combis(cc,1) , ii) , 2.0 ) ;
-            fopt[cc] += wgt( group_combis(cc,0) , ii) * wgt( group_combis(cc,1) , ii) *
-                            pow( fopt1[cc] / ( align_scale*align_scale ) + eps , align_pow ) ;
+            fopt1[cc] = pow( lambda1( group_combis(cc,0), ii) - lambda1b( group_combis(cc,1), ii), 2.0 );
+            fopt[cc] += wgt( group_combis(cc,0), ii) * wgt( group_combis(cc,1), ii) *
+                            pow( fopt1[cc] / ( align_scale*align_scale ) + eps, align_pow );
         }
     }
 
     // sum over the same indices
     Rcpp::NumericVector res(G);
     for (int cc=0;cc<GC;cc++){
-        res[ group_combis(cc,0) ] += fopt[cc] ;
+        res[ group_combis(cc,0) ] += fopt[cc];
     }
-    return res ;
+    return res;
 }
 
 
@@ -58,11 +58,11 @@ Rcpp::NumericVector ia_optim_lambda( Rcpp::NumericMatrix lambda, Rcpp::NumericVe
 // [[Rcpp::export]]
 Rcpp::NumericVector ia_optim_nu( Rcpp::NumericMatrix lambda, Rcpp::NumericMatrix nu,
     Rcpp::NumericVector psi0_, Rcpp::NumericVector psi0b, Rcpp::NumericVector alpha0,
-    Rcpp::NumericVector alpha0b, double align_scale , double align_pow ,
+    Rcpp::NumericVector alpha0b, double align_scale, double align_pow,
     Rcpp::NumericMatrix wgt, double eps, Rcpp::NumericMatrix group_combis )
 {
-    int I = lambda.ncol() ;
-    int G = lambda.nrow() ;
+    int I = lambda.ncol();
+    int G = lambda.nrow();
     Rcpp::NumericMatrix nu1(G,I);
     Rcpp::NumericMatrix nu1b(G,I);
 
@@ -79,16 +79,16 @@ Rcpp::NumericVector ia_optim_nu( Rcpp::NumericMatrix lambda, Rcpp::NumericMatrix
 
     for (int ii=0;ii<I;ii++){
         for (int cc=0;cc<GC;cc++){
-            fopt1[cc] = pow( nu1( group_combis(cc,0) , ii) - nu1b( group_combis(cc,1) , ii) , 2.0 ) ;
-            fopt[cc] += wgt( group_combis(cc,0) , ii) * wgt( group_combis(cc,1) , ii) *
-                            pow( fopt1[cc] / ( align_scale*align_scale ) + eps , align_pow ) ;
+            fopt1[cc] = pow( nu1( group_combis(cc,0), ii) - nu1b( group_combis(cc,1), ii), 2.0 );
+            fopt[cc] += wgt( group_combis(cc,0), ii) * wgt( group_combis(cc,1), ii) *
+                            pow( fopt1[cc] / ( align_scale*align_scale ) + eps, align_pow );
         }
     }
 
     // sum over the same indices
     Rcpp::NumericVector res(G);
     for (int cc=0;cc<GC;cc++){
-        res[ group_combis(cc,0) ] += fopt[cc] ;
+        res[ group_combis(cc,0) ] += fopt[cc];
     }
     return res;
 }

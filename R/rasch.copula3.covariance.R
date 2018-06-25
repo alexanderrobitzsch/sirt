@@ -1,16 +1,16 @@
 ## File Name: rasch.copula3.covariance.R
-## File Version: 0.09
+## File Version: 0.13
 
 
 ######################################
 # estimation of covariance
-rasch.copula3.covariance <- function( f.qk.yi , Sigma , theta.k , N ,
-        mu.fixed , variance.fixed , D , est.corr , irtmodel ,
+rasch.copula3.covariance <- function( f.qk.yi, Sigma, theta.k, N,
+        mu.fixed, variance.fixed, D, est.corr, irtmodel,
         freqwgt ){
         Sigma.cov <- Sigma
         delta.theta <- 1
-        indD <- rep( 1:nrow(f.qk.yi) , freqwgt )
-        hwt <- f.qk.yi[ indD , ]
+        indD <- rep( 1:nrow(f.qk.yi), freqwgt )
+        hwt <- f.qk.yi[ indD, ]
         N <- sum( freqwgt)
 #        if (qmcnodes){
 #            hwt <- hwt / nrow(theta.k)
@@ -27,8 +27,8 @@ rasch.copula3.covariance <- function( f.qk.yi , Sigma , theta.k , N ,
 #                                    }
 #                            }
         # calculation of the covariance matrix
-#        theta.k.adj <- theta.k - matrix( mu , nrow=nrow(theta.k) ,
-#                                    ncol=ncol(theta.k) , byrow=TRUE)
+#        theta.k.adj <- theta.k - matrix( mu, nrow=nrow(theta.k),
+#                                    ncol=ncol(theta.k), byrow=TRUE)
         theta.k.adj <- theta.k
         for (dd1 in 1:D){
             for (dd2 in dd1:D){
@@ -50,9 +50,9 @@ rasch.copula3.covariance <- function( f.qk.yi , Sigma , theta.k , N ,
         diag(Sigma.cov) <- diag(Sigma.cov) + 10^(-10)
 
 
-        pi.k <- matrix( mvtnorm::dmvnorm( theta.k , mean = mu , sigma = Sigma.cov )    , ncol=1 )
+        pi.k <- matrix( mvtnorm::dmvnorm( theta.k, mean=mu, sigma=Sigma.cov )    , ncol=1 )
         pi.k <- pi.k / sum( pi.k )
-        res <- list( "mu"=mu , "Sigma"=Sigma.cov , "pi.k"= pi.k ,
-            "Sigma0" = Sigma.cov0)
+        res <- list( "mu"=mu, "Sigma"=Sigma.cov, "pi.k"=pi.k,
+            "Sigma0"=Sigma.cov0)
         return(res)
                     }

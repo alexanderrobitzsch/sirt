@@ -1,13 +1,13 @@
 ## File Name: rm_facets_est_tau_item.R
-## File Version: 0.14
+## File Version: 0.18
 
 
 #####################################################
 # estimation of tau.item parameters
-rm_facets_est_tau_item <- function( b.item , b.rater , Qmatrix , tau.item ,
-        VV , K , I , TP , a.item , a.rater , item.index , rater.index ,
-        n.ik , numdiff.parm=.001 , max.b.increment=1,theta.k , msteps ,
-        mstepconv , tau.item.fixed , tau.item.fixed_val )
+rm_facets_est_tau_item <- function( b.item, b.rater, Qmatrix, tau.item,
+        VV, K, I, TP, a.item, a.rater, item.index, rater.index,
+        n.ik, numdiff.parm=.001, max.b.increment=1,theta.k, msteps,
+        mstepconv, tau.item.fixed, tau.item.fixed_val )
 {
 
     h <- numdiff.parm
@@ -38,7 +38,7 @@ rm_facets_est_tau_item <- function( b.item , b.rater , Qmatrix , tau.item ,
             #-- compute increments
             res <- rm_numdiff_index( pjk=pjk, pjk1=pjk1, pjk2=pjk2, n.ik=n.ik, diffindex=diffindex,
                         max.increment=max.b.increment, numdiff.parm=numdiff.parm )
-            increment <- Q1*matrix( res$increment , nrow=VV , ncol=K)
+            increment <- Q1*matrix( res$increment, nrow=VV, ncol=K)
             tau.item <- tau.item + increment
             se.tau.item[,kk] <- sqrt(abs(-1/res$d2)    )
         }
@@ -48,7 +48,7 @@ rm_facets_est_tau_item <- function( b.item , b.rater , Qmatrix , tau.item ,
             for ( kk in 1:MK){
                 ind <- which( ! is.na( tau.item.fixed_val[,kk]) )
                 if ( length(ind) > 0 ){
-                    tau.item[ ind , kk] <- tau.item.fixed_val[ ind , kk]
+                    tau.item[ ind, kk] <- tau.item.fixed_val[ ind, kk]
                 }
             }
         }
@@ -59,9 +59,9 @@ rm_facets_est_tau_item <- function( b.item , b.rater , Qmatrix , tau.item ,
             tau.item[ tau.item.fixed[,1:2,drop=FALSE] ] <- tau.item.fixed[,3]
         }
     }
-    cat(" " , it , "Step(s) \n")
+    cat(" ", it, "Step(s) \n")
     #-- output
-    res <- list(tau.item = tau.item , se.tau.item = se.tau.item , ll = sum(res$ll0) )
+    res <- list(tau.item=tau.item, se.tau.item=se.tau.item, ll=sum(res$ll0) )
     return(res)
 }
 

@@ -1,5 +1,5 @@
 %% File Name: Q3.Rd
-%% File Version: 1.13
+%% File Version: 1.17
 
 \name{Q3}
 \alias{Q3}
@@ -45,8 +45,8 @@ A list with following entries
     fitting the Rasch model}
 \item{Q3.stat}{Vector with descriptive statistics of \eqn{Q_3}}
 %% ...
-%%        res <- list( "q3.matrix" = q3.matr , "q3.long" = q3.long ,
-%%        "expected" = expected , "residual" = residual )
+%%        res <- list( "q3.matrix"=q3.matr, "q3.long"=q3.long,
+%%        "expected"=expected, "residual"=residual )
 }
 \references{
 Yen, W. M. (1984). Effects of local item dependence on the fit and equating
@@ -81,9 +81,9 @@ data(data.read)
 # estimate the Rasch model
 mod <- sirt::rasch.mml2( data.read)
 # estmate WLEs
-mod.wle <- sirt::wle.rasch( dat = data.read , b = mod$item$b )
+mod.wle <- sirt::wle.rasch( dat=data.read, b=mod$item$b )
 # calculate Yen's Q3 statistic
-mod.q3 <- sirt::Q3( dat = data.read , theta = mod.wle$theta , b = mod$item$b )
+mod.q3 <- sirt::Q3( dat=data.read, theta=mod.wle$theta, b=mod$item$b )
   ##   Yen's Q3 Statistic based on an estimated theta score
   ##   *** 12 Items | 66 item pairs
   ##   *** Q3 Descriptives
@@ -92,8 +92,8 @@ mod.q3 <- sirt::Q3( dat = data.read , theta = mod.wle$theta , b = mod$item$b )
 
 # plot Q3 statistics
 I <- ncol(data.read)
-image( 1:I , 1:I , mod.q3$q3.matrix , col=gray( 1 - (0:32)/32) ,
-        xlab="Item" , ylab="Item")
+image( 1:I, 1:I, mod.q3$q3.matrix, col=gray( 1 - (0:32)/32),
+        xlab="Item", ylab="Item")
 abline(v=c(5,9)) # borders for testlets
 abline(h=c(5,9))
 

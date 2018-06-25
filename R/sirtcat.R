@@ -1,11 +1,11 @@
 ## File Name: sirtcat.R
-## File Version: 0.05
+## File Version: 0.06
 
 ######################################################
-sirtcat <- function( label , time0 , active ){
+sirtcat <- function( label, time0, active ){
     if (active){
         z0 <- time0
-        cat( label , "  " )
+        cat( label, "  " )
         z1 <- Sys.time()
         print(z1-z0)
         z0 <- z1

@@ -1,5 +1,5 @@
 ## File Name: modelfit.sirt.R
-## File Version: 1.04
+## File Version: 1.08
 
 
 # model fit in sirt
@@ -13,7 +13,7 @@ modelfit.sirt <- function( object )
         posterior <- mod$hwt
         probs <- mod$rprobs
         dat <- mod$resp
-        dat[ mod$resp.ind == 0 ] <- NA
+        dat[ mod$resp.ind==0 ] <- NA
     }
     #*****
     # rasch.mml
@@ -21,9 +21,9 @@ modelfit.sirt <- function( object )
         mod <- object
         posterior <- mod$f.qk.yi
         prob1 <- mod$pjk
-        probs <- array( NA , dim=c( ncol(prob1) , 2 , nrow(prob1)) )
-        probs[ , 2 , ] <- t(prob1)
-        probs[ , 1 , ] <- 1 - t(prob1)
+        probs <- array( NA, dim=c( ncol(prob1), 2, nrow(prob1)) )
+        probs[, 2, ] <- t(prob1)
+        probs[, 1, ] <- 1 - t(prob1)
         dat <- mod$dat
     }
     #*****
@@ -32,9 +32,9 @@ modelfit.sirt <- function( object )
         mod <- object$estep.res
         posterior <- mod$f.qk.yi
         prob1 <- mod$pjk
-        probs <- array( NA , dim=c( ncol(prob1) , 2 , nrow(prob1)) )
-        probs[ , 2 , ] <- t(prob1)
-        probs[ , 1 , ] <- 1 - t(prob1)
+        probs <- array( NA, dim=c( ncol(prob1), 2, nrow(prob1)) )
+        probs[, 2, ] <- t(prob1)
+        probs[, 1, ] <- 1 - t(prob1)
         dat <- object$dat
     }
     #******
@@ -43,7 +43,7 @@ modelfit.sirt <- function( object )
         data <- NULL ; posterior <- NULL ; probs <- NULL ; pmlobject <- object }
     #*******
     # smirt
-    if (class(object) == "smirt"){
+    if (class(object)=="smirt"){
         # note that for polytomous response data some adaptations are
         # necessary: see modelfit in the CDM package
         mod <- object
@@ -53,7 +53,7 @@ modelfit.sirt <- function( object )
     }
     #*******
     # smirt
-    if (class(object) == "gom"){
+    if (class(object)=="gom"){
         mod <- object
         probs <- mod$probs
         posterior <- mod$f.qk.yi
@@ -70,7 +70,7 @@ modelfit.sirt <- function( object )
 
     #*******
     # mirt
-    if (class(object) == "ConfirmatoryClass" | class(object)=="ExploratoryClass" ){
+    if (class(object)=="ConfirmatoryClass" | class(object)=="ExploratoryClass" ){
         mod <- object
         mod <- mirt.wrapper.posterior(mod)
         probs <- mod$probs
@@ -81,7 +81,7 @@ modelfit.sirt <- function( object )
     # R2noharm, noharm.sirt
     if ( class(object) %in% c("R2noharm","noharm.sirt") ){
         # exclusion criteria for noharm.sirt
-        if ( class(object) == "noharm.sirt") {
+        if ( class(object)=="noharm.sirt") {
             if ( object$estpars$estPsi > 0 ){
                 stop("Model fit cannot be calculated because of correlated residuals")
             }
@@ -90,18 +90,18 @@ modelfit.sirt <- function( object )
             }
         }
         # evaluation of posterior
-        mod <- R2noharm.EAP(noharmobj=object, theta.k = seq(-6, 6, len = 15 ) ,
+        mod <- R2noharm.EAP(noharmobj=object, theta.k=seq(-6, 6, len=15 ),
                 print.output=FALSE )
-        probs <- aperm( mod$probs , c(1,3,2) )
+        probs <- aperm( mod$probs, c(1,3,2) )
         posterior <- mod$posterior
         dat <- object$dat
     }
     # calculate modelfit.cor
-    if ( class(object) == "rasch.pml" ){
-        res <- modelfit.cor.sirt.pml( data = dat , posterior =posterior , probs = probs ,
+    if ( class(object)=="rasch.pml" ){
+        res <- modelfit.cor.sirt.pml( data=dat, posterior=posterior, probs=probs,
                         pmlobject=pmlobject)
     } else {
-        res <- CDM::modelfit.cor2( data = dat , posterior =posterior , probs = probs )
+        res <- CDM::modelfit.cor2( data=dat, posterior=posterior, probs=probs )
     }
     class(res) <- "modelfit.sirt"
     return(res)

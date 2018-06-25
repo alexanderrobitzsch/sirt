@@ -1,9 +1,9 @@
 ## File Name: xxirt_createDiscItem.R
-## File Version: 0.09
+## File Version: 0.13
 
-xxirt_createDiscItem <- function( name , par , est , P , lower=-Inf ,
-            upper=Inf , prior=NULL , prior_par1=NULL ,
-            prior_par2 = NULL)
+xxirt_createDiscItem <- function( name, par, est, P, lower=-Inf,
+            upper=Inf, prior=NULL, prior_par1=NULL,
+            prior_par2=NULL)
 {
     res <- list()
     res$name <- name

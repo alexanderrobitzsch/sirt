@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pnoh.Rd
-%% File Version: 0.20
+%% File Version: 0.24
 
 \name{mcmc.2pnoh}
 \alias{mcmc.2pnoh}
@@ -14,9 +14,9 @@ measurement which is based on a two-parameter normal ogive response
 function (Janssen, Tuerlinckx, Meulders & de Boeck, 2000).
 }
 \usage{
-mcmc.2pnoh(dat, itemgroups , prob.mastery=c(.5,.8) , weights=NULL ,
-      burnin = 500, iter = 1000, N.sampvalues = 1000,
-      progress.iter = 50, prior.variance=c(1,1) , save.theta = FALSE)
+mcmc.2pnoh(dat, itemgroups, prob.mastery=c(.5,.8), weights=NULL,
+      burnin=500, iter=1000, N.sampvalues=1000,
+      progress.iter=50, prior.variance=c(1,1), save.theta=FALSE)
 }
 
 \arguments{
@@ -55,20 +55,20 @@ Should theta values be saved?
 The hierarchical IRT model for criterion-referenced measurement
 (Janssen et al., 2000) assumes that every item \eqn{i} intends
 to measure a criterion \eqn{k}. The item response function is defined as
-\deqn{ P(X_{pik} = 1 | \theta_p ) =
+\deqn{ P(X_{pik}=1 | \theta_p )=
         \Phi [ \alpha_{ik} ( \theta_p - \beta_{ik} ) ]
-        \quad ,  \quad \theta_p \sim N(0,1) }
+        \quad,  \quad \theta_p \sim N(0,1) }
 Item parameters \eqn{(\alpha_{ik},\beta_{ik})} are hierarchically modeled, i.e.
-\deqn{ \beta_{ik} \sim N( \xi_k , \sigma^2 ) \quad \mbox{and} \quad
-    \alpha_{ik} \sim N( \omega_k , \nu^2 ) }
+\deqn{ \beta_{ik} \sim N( \xi_k, \sigma^2 ) \quad \mbox{and} \quad
+    \alpha_{ik} \sim N( \omega_k, \nu^2 ) }
 In the \code{mcmc.list} output object, also the derived parameters
-\eqn{d_{ik}= \alpha_{ik} \beta_{ik}} and \eqn{\tau_k = \xi_k \omega_k} are
+\eqn{d_{ik}=\alpha_{ik} \beta_{ik}} and \eqn{\tau_k=\xi_k \omega_k} are
 calculated.
 Mastery and nonmastery probabilities are based on a reference item \eqn{Y_{k}}
 of criterion \eqn{k} and a response function
-\deqn{ P(Y_{pk} = 1 | \theta_p ) =
+\deqn{ P(Y_{pk}=1 | \theta_p )=
         \Phi [ \omega_{k} ( \theta_p - \xi_{k} ) ]
-        \quad ,  \quad \theta_p \sim N(0,1) }
+        \quad,  \quad \theta_p \sim N(0,1) }
 With known item parameters and person parameters, response probabilities of
 criterion \eqn{k} are calculated. If a response probability of criterion \eqn{k}
 is larger than \code{prob.mastery[2]}, then a student is defined as a
@@ -77,8 +77,8 @@ a student is a nonmaster. In all other cases, students are in a transition
 stage.
 
 In the \code{mcmcobj} output object, the parameters \code{d[i]} are defined by
-\eqn{d_{ik} = \alpha_{ik} \cdot \beta_{ik}} while \code{tau[k]} are defined by
-\eqn{ \tau_k = \xi_k \cdot \omega_k }.
+\eqn{d_{ik}=\alpha_{ik} \cdot \beta_{ik}} while \code{tau[k]} are defined by
+\eqn{ \tau_k=\xi_k \cdot \omega_k }.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% VALUE
@@ -143,8 +143,8 @@ The two-parameter normal ogive model can be estimated with
 
 N <- 1000
 Ik <- c(4,6,8,5,9,6,8,6,5)
-xi.k <- c( -.89 , -1.13 , -1.23 , .06 , -1.41 , -.66 , -1.09 , .57 , -2.44)
-omega.k <- c(.98 , .91 , .76 , .74 , .71 , .80 , .79 , .82 , .54)
+xi.k <- c( -.89, -1.13, -1.23, .06, -1.41, -.66, -1.09, .57, -2.44)
+omega.k <- c(.98, .91, .76, .74, .71, .80, .79, .82, .54)
 
 # select 4 attributes
 K <- 4
@@ -152,22 +152,22 @@ Ik <- Ik[1:K] ; xi.k <- xi.k[1:K] ; omega.k <- omega.k[1:K]
 sig2 <- 3.02
 nu2 <- .09
 I <- sum(Ik)
-b <- rep( xi.k , Ik ) + stats::rnorm(I , sd = sqrt(sig2) )
-a <- rep( omega.k , Ik ) + stats::rnorm(I , sd = sqrt(nu2) )
+b <- rep( xi.k, Ik ) + stats::rnorm(I, sd=sqrt(sig2) )
+a <- rep( omega.k, Ik ) + stats::rnorm(I, sd=sqrt(nu2) )
 theta1 <- stats::rnorm(N)
 t1 <- rep(1,N)
 p1 <- stats::pnorm( outer(t1,a) * ( theta1 - outer(t1,b) ) )
 dat <- 1  * ( p1 > stats::runif(N*I)  )
-itemgroups <- rep( paste0("A" , 1:K ) , Ik )
+itemgroups <- rep( paste0("A", 1:K ), Ik )
 
 # estimate model
-mod <- sirt::mcmc.2pnoh(dat  , itemgroups , burnin=200 , iter=1000 )
+mod <- sirt::mcmc.2pnoh(dat, itemgroups, burnin=200, iter=1000 )
 # summary
 summary(mod)
 # plot
-plot(mod$mcmcobj , ask=TRUE)
+plot(mod$mcmcobj, ask=TRUE)
 # write coda files
-mcmclist2coda( mod$mcmcobj , name = "simul_2pnoh" )
+mcmclist2coda( mod$mcmcobj, name="simul_2pnoh" )
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

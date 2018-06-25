@@ -1,15 +1,15 @@
 ## File Name: rm_numdiff_index.R
-## File Version: 0.17
+## File Version: 0.21
 
 
 ####################################################################
 # general function for numerical differentiation
 # diffindex aggregates across super items
-rm_numdiff_index <- function( pjk , pjk1 , pjk2 , n.ik , diffindex ,
-        max.increment , numdiff.parm , eps=1E-80, eps2=1E-10, prior=NULL, value=NULL )
+rm_numdiff_index <- function( pjk, pjk1, pjk2, n.ik, diffindex,
+        max.increment, numdiff.parm, eps=1E-80, eps2=1E-10, prior=NULL, value=NULL )
 {
     h <- numdiff.parm
-    an.ik <- aperm( n.ik , c(2,3,1) )
+    an.ik <- aperm( n.ik, c(2,3,1) )
     # str("pjk")
     # [items, categories, nodes]
 
@@ -24,9 +24,9 @@ rm_numdiff_index <- function( pjk , pjk1 , pjk2 , n.ik , diffindex ,
         }
         M <- prior[1]
         SD <- sqrt(prior[2])
-        ll0 <- ll0 + stats::dnorm( value, mean=M, sd = SD , log=TRUE)
-        ll1 <- ll1 + stats::dnorm( value+h, mean=M, sd = SD , log=TRUE)
-        ll2 <- ll2 + stats::dnorm( value-h, mean=M, sd = SD , log=TRUE)
+        ll0 <- ll0 + stats::dnorm( value, mean=M, sd=SD, log=TRUE)
+        ll1 <- ll1 + stats::dnorm( value+h, mean=M, sd=SD, log=TRUE)
+        ll2 <- ll2 + stats::dnorm( value-h, mean=M, sd=SD, log=TRUE)
     }
 
     #-- discrete differences
@@ -42,7 +42,7 @@ rm_numdiff_index <- function( pjk , pjk1 , pjk2 , n.ik , diffindex ,
     #-- trim increment
     increment <- rm_numdiff_trim_increment( increment=increment, max.increment=max.increment, eps2=eps2 )
     #--- output
-    res <- list(increment=increment , d1=d1, d2=d2 , ll0=ll0, h=h)
+    res <- list(increment=increment, d1=d1, d2=d2, ll0=ll0, h=h)
     return(res)
 }
 

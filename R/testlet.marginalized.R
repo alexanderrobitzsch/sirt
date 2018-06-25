@@ -1,7 +1,7 @@
 ## File Name: testlet.marginalized.R
-## File Version: 0.06
+## File Version: 0.09
 testlet.marginalized <-
-function( tam.fa.obj=NULL , a1=NULL, d1=NULL, testlet=NULL, a.testlet=NULL, var.testlet=NULL){
+function( tam.fa.obj=NULL, a1=NULL, d1=NULL, testlet=NULL, a.testlet=NULL, var.testlet=NULL){
 
     if ( ! is.null(a1) ){
         itemlabel <- rep(1:length(a1))
@@ -10,21 +10,21 @@ function( tam.fa.obj=NULL , a1=NULL, d1=NULL, testlet=NULL, a.testlet=NULL, var.
         mod1 <- tam.fa.obj
         a1 <- mod1$B[,2,1]
         d1 <- mod1$AXsi_[,2]
-        testlets <- apply( mod1$B[,2,-1] , 1 , FUN =function(zz){
+        testlets <- apply( mod1$B[,2,-1], 1, FUN=function(zz){
             l1 <- which(zz > 0 )
-            if (length(l1) == 0 ){ l1 <- NA }
+            if (length(l1)==0 ){ l1 <- NA }
             l1
                 }
                 )
-        a.testlet <- mod1$B[ , 2 ,  - 1]
-        a.testlet <- a.testlet[ cbind( seq(1,length(testlets) ) , testlets ) ]
+        a.testlet <- mod1$B[, 2,  - 1]
+        a.testlet <- a.testlet[ cbind( seq(1,length(testlets) ), testlets ) ]
         var.testlet <- diag( mod1$variance )[-1]
         testlet <- testlets
         itemlabel <- colnames(mod1$resp)
                         }
     # compute marginalized item intercepts and item slopes
     k <- 16*sqrt(3) / ( 15*pi )     # multiplication constant
-            # 1 / k = 1.700
+            # 1 / k=1.700
     # compute lambda_logit
     multfac <- 1 - is.na(testlet)
     testlet1 <- testlet
@@ -32,7 +32,7 @@ function( tam.fa.obj=NULL , a1=NULL, d1=NULL, testlet=NULL, a.testlet=NULL, var.
     a.testlet[ is.na(testlet) ] <- 0
     lambda.logit <- 1 / sqrt( 1 + k^2 * multfac * a.testlet[ testlet1 ]^2 * var.testlet[ testlet1 ] )
     # compute item parameters
-    dfr <- data.frame("item" = itemlabel )
+    dfr <- data.frame("item"=itemlabel )
     dfr$testlet <- testlet
     dfr$a1 <- a1
     dfr$d1 <- d1

@@ -1,5 +1,5 @@
 %% File Name: lc.2raters.Rd
-%% File Version: 0.14
+%% File Version: 0.17
 
 \name{lc.2raters}
 \alias{lc.2raters}
@@ -18,7 +18,7 @@ several measures of rater agreement are computed (see e.g. Gwet, 2010).
 }
 
 \usage{
-lc.2raters(data, conv = 0.001, maxiter = 1000, progress = TRUE)
+lc.2raters(data, conv=0.001, maxiter=1000, progress=TRUE)
 
 \method{summary}{lc.2raters}(object,...)
 }
@@ -48,11 +48,11 @@ An optional logical indicating whether iteration progress should be displayed.
 \details{
 For two exchangeable raters which provide ratings on an item, a latent
 class model with \eqn{K+1} classes (if there are \eqn{K+1} item categories
-\eqn{0,...,K}) is defined. Where \eqn{P(X = x, Y=y | c)} denotes
+\eqn{0,...,K}) is defined. Where \eqn{P(X=x, Y=y | c)} denotes
 the probability that the first rating is \eqn{x} and the second rating is
 \eqn{y} given the true but unknown item category (class) \eqn{c}. Ratings are
 assumed to be locally independent, i.e.
-\deqn{ P(X=x , Y=y | c ) = P( X =x | c) \cdot P(Y=y | c ) = p_{x|c} \cdot p_{y|c}}
+\deqn{ P(X=x, Y=y | c )=P( X=x | c) \cdot P(Y=y | c )=p_{x|c} \cdot p_{y|c}}
 Note that \eqn{P(X=x|c)=P(Y=x|c)=p_{x|c}} holds due to the exchangeability of raters.
 The latent class model estimates true class proportions \eqn{\pi_c} and
 conditional item probabilities \eqn{p_{x|c}}.

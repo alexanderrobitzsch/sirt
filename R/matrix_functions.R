@@ -1,5 +1,5 @@
 ## File Name: matrix_functions.R
-## File Version: 0.12
+## File Version: 0.17
 
 
 #############################################################
@@ -37,7 +37,7 @@ colProds <- function(matr)
 # Function of D. Rizoupoulos                                         #
 rowMedians <- function(mat)
 {
-    stopifnot(is.matrix(mat), typeof(mat) == "double")
+    stopifnot(is.matrix(mat), typeof(mat)=="double")
     if (any(is.na(mat)))
         stop("'mat' should not contain NAs")
     n <- nrow(mat)
@@ -54,23 +54,23 @@ colMedians <- function(mat){ rowMedians( t(mat) ) }
 
 
 #-------------------------------------------------------------------
-rowVars <- function(mat , na.rm= FALSE )
+rowVars <- function(mat, na.rm=FALSE )
 {
     n <- rowSums( 1 - is.na(mat) )
-    ( rowSums( mat^2 , na.rm= TRUE) - n * rowMeans( mat , na.rm = na.rm )^2 ) / ( n - 1 )
+    ( rowSums( mat^2, na.rm=TRUE) - n * rowMeans( mat, na.rm=na.rm )^2 ) / ( n - 1 )
 }
 #*****
-colVars <- function( mat , na.rm=FALSE){ rowVars( t(mat) , na.rm ) }
+colVars <- function( mat, na.rm=FALSE){ rowVars( t(mat), na.rm ) }
 #*****
-rowSds <- function( mat , na.rm=FALSE){ sqrt(rowVars( mat , na.rm ) ) }
+rowSds <- function( mat, na.rm=FALSE){ sqrt(rowVars( mat, na.rm ) ) }
 #*****
-colSds <- function( mat , na.rm=FALSE){ sqrt(colVars( mat , na.rm ) ) }
+colSds <- function( mat, na.rm=FALSE){ sqrt(colVars( mat, na.rm ) ) }
 #-------------------------------------------------------------------
-min.vec <- function(a,b){ifelse( a >= b , b , a ) }
+min.vec <- function(a,b){ifelse( a >=b, b, a ) }
 #*********************************
 rowMins2 <- function(matr)
 {
-    y <- do.call( pmin , as.data.frame(matr) )
+    y <- do.call( pmin, as.data.frame(matr) )
     return(y)
 }
 #------------------------------------------------------------------------#
@@ -82,7 +82,7 @@ rowMaxs <- function(mat)
     p <- ncol(mat)
     x <- as.vector(mat)
     x <- matrix(x[order(rep(1:n, p), x)], p, n)
-    x[p , ]
+    x[p, ]
 }
 #------------------------------------------------------------------------#
 colMaxs <- function(mat){ t( rowMaxs( mat ) ) }
@@ -94,12 +94,12 @@ whichrowMaxs <- function(mat)
     n <- nrow(mat)
     p <- ncol(mat)
     x <- as.vector(mat)
-    dfr <- data.frame( x , rep(1:n, p) , rep( 1:p ,each= n ) )
+    dfr <- data.frame( x, rep(1:n, p), rep( 1:p,each=n ) )
     ind <- order(rep(1:n, p), x)
-    arg <- matrix(  dfr[ ind , 3]  , p , n )[p,]
+    arg <- matrix(  dfr[ ind, 3], p, n )[p,]
     x <- matrix(x[ind], p, n)
-    val <- x[p , ]
-    return( list( "val" =val , "arg" = arg ) )
+    val <- x[p, ]
+    return( list( "val"=val, "arg"=arg ) )
 }
 #------------------------------------------------------------------------#
 whichcolMaxs <- function(mat){ t( whichrowMaxs( mat ) ) }
@@ -112,11 +112,11 @@ whichcolMins <- function(mat){  whichcolMaxs( - mat ) }
 
 #--------------------------------------------------------------
 # rowwise cumsum operation on matrices                        #
-rowCumsums <- function( mat , multmat = NULL)
+rowCumsums <- function( mat, multmat=NULL)
 {
     if (is.null(multmat)){
         m <- ncol(mat)
-        multmat <- matrix( 1 , ncol  = m , nrow= m )
+        multmat <- matrix( 1, ncol=m, nrow=m )
         multmat[ lower.tri( multmat )] <- 0
     }
     mat %*% multmat
@@ -130,12 +130,12 @@ colCumsums <- function( mat  ){
 
 #-------------------------------------------------------------------------------
 # compute column-bundlewise rowSums of a matrix
-rowCumsums.colbundles <- function( mat , ind , multmat = NULL )
+rowCumsums.colbundles <- function( mat, ind, multmat=NULL )
 {
     TAM::require_namespace_msg("Matrix")
     if (is.null(multmat)){  matlist <- as.list( rep(1,length(ind)))
         for (ii in 1:( length(ind) )){
-            mat1 <- matrix( 1 , nrow=ind[ii] , ncol=ind[ii] )
+            mat1 <- matrix( 1, nrow=ind[ii], ncol=ind[ii] )
             mat1[ lower.tri( mat1 ) ] <- 0
             matlist[[ii]] <- mat1
                 }
@@ -148,13 +148,13 @@ rowCumsums.colbundles <- function( mat , ind , multmat = NULL )
 
 #-------------------------------------------------------------------------------
 # compute column-bundlewise rowSums of a matrix
-rowSums.colbundles <- function( mat , ind , multmat = NULL )
+rowSums.colbundles <- function( mat, ind, multmat=NULL )
 {
     TAM::require_namespace_msg("Matrix")
     if (is.null(multmat)){
         matlist <- as.list( rep(1,length(ind)))
         for (ii in 1:( length(ind) )){
-            mat1 <- matrix( 1 , nrow=ind[ii] , ncol=ind[ii] )
+            mat1 <- matrix( 1, nrow=ind[ii], ncol=ind[ii] )
             matlist[[ii]] <- mat1
                 }
         multmat <- Matrix::bdiag(lapply(matlist, as.matrix))

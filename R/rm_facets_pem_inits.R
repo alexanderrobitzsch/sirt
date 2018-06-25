@@ -1,5 +1,5 @@
 ## File Name: rm_facets_pem_inits.R
-## File Version: 0.04
+## File Version: 0.06
 
 rm_facets_pem_inits <- function( tau.item, a.item, a.rater, b.rater, skillspace, PEM,
         a.item.fixed, est.a.item)
@@ -10,7 +10,7 @@ rm_facets_pem_inits <- function( tau.item, a.item, a.rater, b.rater, skillspace,
     pem_parameter_sequence <- list()
     center_log_a <- ( ! is.null( a.item.fixed ) ) & ( est.a.item )
     pem_pars <- c("b.rater","a.rater","a.item","tau.item","mu","sigma")
-    if ( skillspace == "discrete" ){
+    if ( skillspace=="discrete" ){
         PEM <- FALSE
     }
     #--- output

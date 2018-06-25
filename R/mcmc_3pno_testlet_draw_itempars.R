@@ -1,14 +1,14 @@
 ## File Name: mcmc_3pno_testlet_draw_itempars.R
-## File Version: 0.03
+## File Version: 0.06
 
 
 ##########################################
 # draw item parameters a and b
-mcmc_3pno_testlet_draw_itempars <- function( theta , Z , I , N , weights ,
-    gamma.testlet , testletgroups , param , TT , a.testletM)
+mcmc_3pno_testlet_draw_itempars <- function( theta, Z, I, N, weights,
+    gamma.testlet, testletgroups, param, TT, a.testletM)
 {
     # define adjusted Z values
-    gamma.testletM <- gamma.testlet[ , testletgroups ]
+    gamma.testletM <- gamma.testlet[, testletgroups ]
     if (param==1){ Z <- Z - gamma.testletM }
     if (param==3){ Z <- Z - a.testletM*gamma.testletM }
     if (param==2){ # Z <- Z
@@ -24,11 +24,11 @@ mcmc_3pno_testlet_draw_itempars <- function( theta , Z , I , N , weights ,
     if ( (param==1) | (param==3) ){
         #--------------
         # sampling without weights
-        Xast <- as.matrix( cbind( theta , 1 ) )
+        Xast <- as.matrix( cbind( theta, 1 ) )
         if ( is.null(weights) ){
             Sigma <- solve( crossprod(Xast) )
             # calculate mean
-            mj <- Sigma %*% crossprod( Xast , Z )
+            mj <- Sigma %*% crossprod( Xast, Z )
             mj <- as.matrix( t(mj))
         }
         #--------------
@@ -43,13 +43,13 @@ mcmc_3pno_testlet_draw_itempars <- function( theta , Z , I , N , weights ,
             Xastinv11 <- Xast22 / Xastdet
             Xastinv22 <- Xast11 / Xastdet
             Xastinv12 <- - Xast12 / Xastdet
-            Sigma <- matrix( c(Xastinv11 , Xastinv12 , Xastinv12 , Xastinv22) , 2 ,2 )
-            mj <- Sigma %*% crossprod( Xast * weights , Z )
+            Sigma <- matrix( c(Xastinv11, Xastinv12, Xastinv12, Xastinv22), 2,2 )
+            mj <- Sigma %*% crossprod( Xast * weights, Z )
             mj <- as.matrix( t(mj))
         }
         #--------------
         # draw item parameters
-        ipars <- sirt_rmvnorm( I , sigma=Sigma ) + mj
+        ipars <- sirt_rmvnorm( I, sigma=Sigma ) + mj
         a <- ipars[,1]
         b <- ipars[,2]
     }
@@ -59,23 +59,23 @@ mcmc_3pno_testlet_draw_itempars <- function( theta , Z , I , N , weights ,
         a <- rep(NA,I)
         b <- rep(NA,I)
         TTT <- TT
-        if ( sum( testletgroups== TT+1 ) > 0 ){
+        if ( sum( testletgroups==TT+1 ) > 0 ){
                 TTT <- TT + 1 }
         for (tt in 1:TTT){
             #tt <- 1
             theta <- theta0
             Z <- Z0
-            ind.tt <- which( testletgroups== tt)
+            ind.tt <- which( testletgroups==tt)
             Itt <- length(ind.tt)
-            theta <- theta0 + gamma.testlet[ , tt]
-            Z <- Z[ , ind.tt , drop=FALSE]
+            theta <- theta0 + gamma.testlet[, tt]
+            Z <- Z[, ind.tt, drop=FALSE]
             #--------------
             # sampling without weights
-            Xast <- as.matrix( cbind( theta , 1 ) )
+            Xast <- as.matrix( cbind( theta, 1 ) )
             if ( is.null(weights) ){
                 Sigma <- solve( crossprod(Xast) )
                 # calculate mean
-                mj <- Sigma %*% crossprod(Xast , Z )
+                mj <- Sigma %*% crossprod(Xast, Z )
                 mj <- as.matrix( t(mj))
                                 }
             #--------------
@@ -90,20 +90,20 @@ mcmc_3pno_testlet_draw_itempars <- function( theta , Z , I , N , weights ,
                 Xastinv11 <- Xast22 / Xastdet
                 Xastinv22 <- Xast11 / Xastdet
                 Xastinv12 <- - Xast12 / Xastdet
-                Sigma <- matrix( c(Xastinv11 , Xastinv12 , Xastinv12 , Xastinv22) , 2 ,2 )
+                Sigma <- matrix( c(Xastinv11, Xastinv12, Xastinv12, Xastinv22), 2,2 )
                 # compute t(Xast) %*% Z (weighted)
-                mj <- Sigma %*% crossprod( Xast * weights , Z )
+                mj <- Sigma %*% crossprod( Xast * weights, Z )
                 mj <- as.matrix( t(mj))
                     }
             #--------------
             # draw item parameters
-            ipars <- sirt_rmvnorm( Itt , sigma=Sigma ) + mj
+            ipars <- sirt_rmvnorm( Itt, sigma=Sigma ) + mj
             a[ind.tt] <- ipars[,1]
             b[ind.tt] <- ipars[,2]
         }            # end testlet tt
     } # end param=2
     #******************************
-    res <- list( "a"=a , "b"=b)
+    res <- list( "a"=a, "b"=b)
     return(res)
 }
 ############################################################

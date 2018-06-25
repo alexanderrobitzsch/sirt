@@ -1,5 +1,5 @@
 %% File Name: data.eid.Rd
-%% File Version: 0.24
+%% File Version: 0.28
 
 \name{data.eid}
 \alias{data.eid}
@@ -128,7 +128,7 @@ data(data.eid.kap4)
 data0 <- data.eid.kap4
 
 # load data
-data0 <- foreign::read.spss( linkname , to.data.frame=TRUE , use.value.labels=FALSE)
+data0 <- foreign::read.spss( linkname, to.data.frame=TRUE, use.value.labels=FALSE)
 # extract items
 dat <- data0[,2:11]
 
@@ -161,12 +161,12 @@ summary(modf1a)
 #-- 1b: estimation with mirt package
 
 # estimation with mirt
-mod1b <- mirt::mirt( dat , 1 , itemtype="Rasch")
+mod1b <- mirt::mirt( dat, 1, itemtype="Rasch")
 summary(mod1b)
 print(mod1b)
 
 # person parameters
-pp1b <- mirt::fscores(mod1b , method="WLE")
+pp1b <- mirt::fscores(mod1b, method="WLE")
 
 # extract coefficients
 sirt::mirt.wrapper.coef(mod1b)
@@ -194,7 +194,7 @@ summary(mod1c)
 pp1c <- mod1c$person
 
 # plot item response functions
-plot(mod1c , ask=TRUE )
+plot(mod1c, ask=TRUE )
 
 # model fit
 modf1c <- sirt::modelfit.sirt(mod1c)
@@ -262,7 +262,7 @@ modf2a <- TAM::tam.modelfit(mod2a)
 summary(modf2a)
 
 # item response functions
-plot(mod2a , export=FALSE , ask=TRUE)
+plot(mod2a, export=FALSE, ask=TRUE)
 
 # model comparison
 anova(mod1a,mod2a)
@@ -312,7 +312,7 @@ plot(mod2e)
 # avoid "_" in column names if the "__" operator is used in
 # the tamaan syntax
 dat1 <- dat
-colnames(dat1) <- gsub("_" , "" , colnames(dat1) )
+colnames(dat1) <- gsub("_", "", colnames(dat1) )
 # define tamaan model
 tammodel <- "
 ANALYSIS:
@@ -320,25 +320,25 @@ ANALYSIS:
   NCLASSES(2);
   NSTARTS(20,25);   # 20 random starts with 25 initial iterations each
 LAVAAN MODEL:
-  F =~ Freude1__Freude2
+  F=~ Freude1__Freude2
   F ~~ F
 ITEM TYPE:
   ALL(Rasch);
     "
-mod3a <- TAM::tamaan( tammodel , resp=dat1 )
+mod3a <- TAM::tamaan( tammodel, resp=dat1 )
 summary(mod3a)
 # extract item parameters
-ipars <- mod2$itempartable_MIXTURE[ 1:10 , ]
-plot( 1:10 , ipars[,3] , type="o" , ylim= range( ipars[,3:4] ) , pch=16 ,
-        xlab="Item" , ylab="Item difficulty")
-lines( 1:10 , ipars[,4] , type="l", col=2 , lty=2)
-points( 1:10 , ipars[,4] ,  col=2 , pch=2)
+ipars <- mod2$itempartable_MIXTURE[ 1:10, ]
+plot( 1:10, ipars[,3], type="o", ylim=range( ipars[,3:4] ), pch=16,
+        xlab="Item", ylab="Item difficulty")
+lines( 1:10, ipars[,4], type="l", col=2, lty=2)
+points( 1:10, ipars[,4],  col=2, pch=2)
 
 #-----------
 #-- 3f: estimation with psychomix package
 
 # estimation
-mod3f <- psychomix::raschmix( as.matrix(dat) , k=2 , scores="meanvar")
+mod3f <- psychomix::raschmix( as.matrix(dat), k=2, scores="meanvar")
 summary(mod3f)
 # plot class-specific item difficulties
 plot(mod3f)
@@ -381,7 +381,7 @@ summary(modf1a)
 #-- 1b: estimation with mirt package
 
 # estimation with tam.mml
-mod1b <- mirt::mirt( dat , 1 , itemtype="Rasch")
+mod1b <- mirt::mirt( dat, 1, itemtype="Rasch")
 summary(mod1b)
 print(mod1b)
 sirt::mirt.wrapper.coef(mod1b)
@@ -446,7 +446,7 @@ summary(modf2a)
 #-- 2b: estimation with mirt package
 
 # estimation
-mod2b <- mirt::mirt( dat , 1 , itemtype="gpcm")
+mod2b <- mirt::mirt( dat, 1, itemtype="gpcm")
 summary(mod2b)
 print(mod2b)
 sirt::mirt.wrapper.coef(mod2b)
@@ -455,7 +455,7 @@ sirt::mirt.wrapper.coef(mod2b)
 #-- 2c: estimation with sirt package
 
 # estimation with rm.facets
-mod2c <- sirt::rm.facets(dat , est.a.item=TRUE)
+mod2c <- sirt::rm.facets(dat, est.a.item=TRUE)
 summary(mod2c)
 
 #-----------

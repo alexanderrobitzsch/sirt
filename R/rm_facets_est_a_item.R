@@ -1,13 +1,13 @@
 ## File Name: rm_facets_est_a_item.R
-## File Version: 0.13
+## File Version: 0.17
 
 
 #####################################################
 # estimation of slope parameter for items
-rm_facets_est_a_item <- function( b.item , b.rater , Qmatrix , tau.item ,
-        VV , K , I , TP , a.item , a.rater , item.index , rater.index ,
-        n.ik , numdiff.parm=.001 , max.b.increment=1,theta.k , msteps ,
-        mstepconv , a.item.center , a.item.fixed , a_lower = .05 , a_upper = 10 )
+rm_facets_est_a_item <- function( b.item, b.rater, Qmatrix, tau.item,
+        VV, K, I, TP, a.item, a.rater, item.index, rater.index,
+        n.ik, numdiff.parm=.001, max.b.increment=1,theta.k, msteps,
+        mstepconv, a.item.center, a.item.fixed, a_lower=.05, a_upper=10 )
 {
     h <- numdiff.parm
     diffindex <- item.index
@@ -45,9 +45,9 @@ rm_facets_est_a_item <- function( b.item , b.rater , Qmatrix , tau.item ,
         it <- it+1
         cat("-")
     }
-    cat(" " , it , "Step(s) \n")
+    cat(" ", it, "Step(s) \n")
     #--- output
-    res <- list(a.item = a.item , se.a.item = sqrt( abs(-1/res$d2 )), ll = sum(res$ll0) )
+    res <- list(a.item=a.item, se.a.item=sqrt( abs(-1/res$d2 )), ll=sum(res$ll0) )
     return(res)
 }
 

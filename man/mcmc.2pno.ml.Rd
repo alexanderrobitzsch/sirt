@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pno.ml.Rd
-%% File Version: 0.35
+%% File Version: 0.41
 
 \name{mcmc.2pno.ml}
 \alias{mcmc.2pno.ml}
@@ -18,11 +18,11 @@ See Details for a description of the implemented item
 response models.
 }
 \usage{
-mcmc.2pno.ml(dat, group, link="logit" , est.b.M = "h", est.b.Var = "n",
-    est.a.M = "f", est.a.Var = "n", burnin = 500, iter = 1000,
-    N.sampvalues = 1000, progress.iter = 50, prior.sigma2 = c(1, 0.4),
-    prior.sigma.b = c(1, 1), prior.sigma.a = c(1, 1), prior.omega.b = c(1, 1),
-    prior.omega.a = c(1, 0.4) , sigma.b.init=.3 )
+mcmc.2pno.ml(dat, group, link="logit", est.b.M="h", est.b.Var="n",
+    est.a.M="f", est.a.Var="n", burnin=500, iter=1000,
+    N.sampvalues=1000, progress.iter=50, prior.sigma2=c(1, 0.4),
+    prior.sigma.b=c(1, 1), prior.sigma.a=c(1, 1), prior.omega.b=c(1, 1),
+    prior.omega.a=c(1, 0.4), sigma.b.init=.3 )
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -51,13 +51,13 @@ Estimation type of standard deviations of item difficulties \eqn{b_i}. \cr
 assumed to be zero \cr
 \code{i} -- item-specific standard deviation of item difficulties \cr
 \code{j} -- a joint standard deviation of all item difficulties is estimated,
-i.e. \eqn{\sigma_{b,1} = \ldots  = \sigma_{b,I} = \sigma_b}
+i.e. \eqn{\sigma_{b,1}=\ldots=\sigma_{b,I}=\sigma_b}
 }
 \item{est.a.M}{
 Estimation type of \eqn{a_i} parameters: \cr
 \code{f} - no estimation of item slopes, i.e all item slopes \eqn{a_i} are
 fixed at one \cr
-\code{n} - non-hierarchical prior distribution, i.e. \eqn{\omega_a =0} \cr
+\code{n} - non-hierarchical prior distribution, i.e. \eqn{\omega_a=0} \cr
 \code{h} - hierarchical prior distribution with estimated
 distribution parameter \eqn{\omega_a}
 }
@@ -66,7 +66,7 @@ Estimation type of standard deviations of item slopes \eqn{a_i}. \cr
 \code{n} -- no estimation of the item variance \cr
 \code{i} -- item-specific standard deviation of item slopes \cr
 \code{j} -- a joint standard deviation of all item slopes is estimated,
-i.e. \eqn{\sigma_{a,1} = \ldots  = \sigma_{a,I} = \sigma_a}
+i.e. \eqn{\sigma_{a,1}=\ldots=\sigma_{a,I}=\sigma_a}
 }
   \item{burnin}{
 Number of burnin iterations
@@ -112,19 +112,19 @@ Initial standard deviation for \eqn{\sigma_{b,i}} parameters
 For dichotomous item responses (\code{link="logit"}) of persons \eqn{p} in
 group \eqn{j} on
 item \eqn{i}, the probability of a correct response is defined as
-\deqn{P( X_{pji} = 1 | \theta_{pj} ) = \Phi ( a_{ij} \theta_{pj} - b_{ij} )}
+\deqn{P( X_{pji}=1 | \theta_{pj} )=\Phi ( a_{ij} \theta_{pj} - b_{ij} )}
 The ability \eqn{\theta_{pj}} is decomposed into a Level 1 and a Level 2
-effect \deqn{\theta_{pj} = u_j + e_{pj} \quad , \quad
-    u_j \sim N ( 0 , \sigma_{L2}^2 ) \quad , \quad
-    e_{pj} \sim N ( 0 , \sigma_{L1}^2 ) }
+effect \deqn{\theta_{pj}=u_j + e_{pj} \quad, \quad
+    u_j \sim N ( 0, \sigma_{L2}^2 ) \quad, \quad
+    e_{pj} \sim N ( 0, \sigma_{L1}^2 ) }
 In a multilevel IRT model (or a random item model), item parameters are
 allowed to vary across groups:
-\deqn{ b_{ij} \sim N( b_i , \sigma^2_{b,i} ) \quad , \quad
-    a_{ij} \sim N( a_i , \sigma^2_{a,i} ) }
+\deqn{ b_{ij} \sim N( b_i, \sigma^2_{b,i} ) \quad, \quad
+    a_{ij} \sim N( a_i, \sigma^2_{a,i} ) }
 In a hierarchical IRT model, a hierarchical distribution of the (main)
 item parameters is assumed
-\deqn{ b_{i} \sim N( \mu_b , \omega^2_{b} ) \quad , \quad
-    a_{i} \sim N( 1 , \omega^2_{a} ) }
+\deqn{ b_{i} \sim N( \mu_b, \omega^2_{b} ) \quad, \quad
+    a_{i} \sim N( 1, \omega^2_{a} ) }
 Note that for identification purposes, the mean of all item slopes \eqn{a_i}
 is set to one. Using the arguments \code{est.b.M}, \code{est.b.Var},
 \code{est.a.M} and \code{est.a.Var} defines which variance components
@@ -132,8 +132,8 @@ should be estimated.
 
 For normally distributed item responses (\code{link="normal"}), the model
 equations remain the same except the item response model which is now written as
-\deqn{ X_{pji} = a_{ij} \theta_{pj} - b_{ij} + \varepsilon_{pji} \quad ,
-\quad \varepsilon_{pji} \sim N( 0 , \sigma^2_{res,i} ) }
+\deqn{ X_{pji}=a_{ij} \theta_{pj} - b_{ij} + \varepsilon_{pji} \quad,
+\quad \varepsilon_{pji} \sim N( 0, \sigma^2_{res,i} ) }
 }
 
 
@@ -234,30 +234,30 @@ burnin <- 50 ; iter <- 100
 
 #***
 # Model 1: 1PNO with no cluster item effects
-mod1 <- sirt::mcmc.2pno.ml( dat , group , est.b.Var="n" , burnin=burnin , iter=iter )
+mod1 <- sirt::mcmc.2pno.ml( dat, group, est.b.Var="n", burnin=burnin, iter=iter )
 summary(mod1)    # summary
 plot(mod1,layout=2,ask=TRUE) # plot results
 # write results to coda file
-mcmclist2coda( mod1$mcmcobj , name = "data.ml1_mod1" )
+mcmclist2coda( mod1$mcmcobj, name="data.ml1_mod1" )
 
 #***
 # Model 2: 1PNO with cluster item effects of item difficulties
-mod2 <- sirt::mcmc.2pno.ml( dat , group , est.b.Var="i" , burnin=burnin , iter=iter )
+mod2 <- sirt::mcmc.2pno.ml( dat, group, est.b.Var="i", burnin=burnin, iter=iter )
 summary(mod2)
-plot(mod2, ask=TRUE , layout=2 )
+plot(mod2, ask=TRUE, layout=2 )
 
 #***
 # Model 3: 2PNO with cluster item effects of item difficulties but
 #          joint item slopes
-mod3 <- sirt::mcmc.2pno.ml( dat , group , est.b.Var="i" , est.a.M="h" ,
-              burnin=burnin , iter=iter )
+mod3 <- sirt::mcmc.2pno.ml( dat, group, est.b.Var="i", est.a.M="h",
+              burnin=burnin, iter=iter )
 summary(mod3)
 
 #***
 # Model 4: 2PNO with cluster item effects of item difficulties and
 #          cluster item effects with a jointly estimated SD
-mod4 <- sirt::mcmc.2pno.ml( dat , group , est.b.Var="i" , est.a.M="h" ,
-                est.a.Var="j" , burnin=burnin , iter=iter )
+mod4 <- sirt::mcmc.2pno.ml( dat, group, est.b.Var="i", est.a.M="h",
+                est.a.Var="j", burnin=burnin, iter=iter )
 summary(mod4)
 
 #############################################################################
@@ -272,28 +272,28 @@ burnin <- 100 ; iter <- 500
 
 #***
 # Model 1: no intercept variance, no slopes
-mod1 <- sirt::mcmc.2pno.ml( dat=dat , group=group , est.b.Var="n" ,
-             burnin=burnin , iter=iter , link="normal" ,  progress.iter=20  )
+mod1 <- sirt::mcmc.2pno.ml( dat=dat, group=group, est.b.Var="n",
+             burnin=burnin, iter=iter, link="normal",  progress.iter=20  )
 summary(mod1)
 
 #***
 # Model 2a: itemwise intercept variance, no slopes
-mod2a <- sirt::mcmc.2pno.ml( dat=dat , group=group , est.b.Var="i" ,
-            burnin=burnin , iter=iter ,link="normal" ,  progress.iter=20  )
+mod2a <- sirt::mcmc.2pno.ml( dat=dat, group=group, est.b.Var="i",
+            burnin=burnin, iter=iter,link="normal",  progress.iter=20  )
 summary(mod2a)
 
 #***
 # Model 2b: homogeneous intercept variance, no slopes
-mod2b <- sirt::mcmc.2pno.ml( dat=dat , group=group , est.b.Var="j" ,
-              burnin=burnin , iter=iter ,link="normal" ,  progress.iter=20  )
+mod2b <- sirt::mcmc.2pno.ml( dat=dat, group=group, est.b.Var="j",
+              burnin=burnin, iter=iter,link="normal",  progress.iter=20  )
 summary(mod2b)
 
 #***
 # Model 3: intercept variance and slope variances
 #          hierarchical item and slope parameters
-mod3 <- sirt::mcmc.2pno.ml( dat=dat , group=group ,
-               est.b.M="h" , est.b.Var="i" , est.a.M="h" , est.a.Var="i" ,
-               burnin=burnin , iter=iter ,link="normal" ,  progress.iter=20  )
+mod3 <- sirt::mcmc.2pno.ml( dat=dat, group=group,
+               est.b.M="h", est.b.Var="i", est.a.M="h", est.a.Var="i",
+               burnin=burnin, iter=iter,link="normal",  progress.iter=20  )
 summary(mod3)
 
 #############################################################################
@@ -308,29 +308,29 @@ G <- 100            # number of groups
 n <- 20             # number of persons within a group
 I <- 12             # number of items
 #*** simuate theta
-theta2 <- stats::rnorm( G , sd = sqrt(sig2.lev2) )
-theta1 <- stats::rnorm( n*G , sd =  sqrt(sig2.lev1) )
-theta  <- theta1 + rep( theta2 , each=n )
+theta2 <- stats::rnorm( G, sd=sqrt(sig2.lev2) )
+theta1 <- stats::rnorm( n*G, sd=sqrt(sig2.lev1) )
+theta  <- theta1 + rep( theta2, each=n )
 #*** item difficulties
-b <- seq( -2 , 2 , len=I )
+b <- seq( -2, 2, len=I )
 #*** define group identifier
-group <- 1000 + rep(1:G , each=n )
+group <- 1000 + rep(1:G, each=n )
 #*** SD of group specific difficulties for items 3 and 5
 sigma.item <- rep(0,I)
 sigma.item[c(3,5)] <- 1
 #*** simulate group specific item difficulties
-b.class <- sapply( sigma.item , FUN = function(sii){ stats::rnorm( G , sd = sii ) } )
-b.class <- b.class[ rep( 1:G ,each=n ) , ]
-b <- matrix( b , n*G , I , byrow=TRUE ) + b.class
+b.class <- sapply( sigma.item, FUN=function(sii){ stats::rnorm( G, sd=sii ) } )
+b.class <- b.class[ rep( 1:G,each=n ), ]
+b <- matrix( b, n*G, I, byrow=TRUE ) + b.class
 #*** simulate item responses
 m1 <- stats::pnorm( theta - b )
-dat <- 1 * ( m1 > matrix( stats::runif( n*G*I ) , n*G , I ) )
+dat <- 1 * ( m1 > matrix( stats::runif( n*G*I ), n*G, I ) )
 
 #*** estimate model
-mod <- sirt::mcmc.2pno.ml( dat , group=group , burnin=burnin , iter=iter ,
-            est.b.M="n" , est.b.Var="i" , progress.iter=20)
+mod <- sirt::mcmc.2pno.ml( dat, group=group, burnin=burnin, iter=iter,
+            est.b.M="n", est.b.Var="i", progress.iter=20)
 summary(mod)
-plot(mod , layout=2 , ask=TRUE )
+plot(mod, layout=2, ask=TRUE )
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

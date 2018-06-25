@@ -1,5 +1,5 @@
 ## File Name: rm_facets_center_value_aggregate.R
-## File Version: 0.01
+## File Version: 0.04
 
 rm_facets_center_value_aggregate <- function(x, index, value=0)
 {
@@ -8,8 +8,8 @@ rm_facets_center_value_aggregate <- function(x, index, value=0)
     NI <- length(index_unique)
     for (ii in 1:NI){
         index_ii <- index_unique[ii]
-        ind_ii <- which( index == index_ii )
-        y[ind_ii] <- rm_facets_center_value(x=x[ind_ii] , value=value)
+        ind_ii <- which( index==index_ii )
+        y[ind_ii] <- rm_facets_center_value(x=x[ind_ii], value=value)
     }
     return(y)
 }

@@ -1,5 +1,5 @@
 %% File Name: data.pirlsmissing.Rd
-%% File Version: 0.08
+%% File Version: 0.09
 
 \name{data.pirlsmissing}
 \alias{data.pirlsmissing}
@@ -52,7 +52,7 @@ The format is:
 \examples{
 data(data.pirlsmissing)
 # inspect missing rates
-round( colMeans( data.pirlsmissing==9 ) , 3 )
+round( colMeans( data.pirlsmissing==9 ), 3 )
   ##    idstud  country  studwgt  R31G01M  R31G02C  R31G03M  R31G04C  R31G05M
   ##     0.000    0.000    0.000    0.009    0.076    0.012    0.203    0.018
   ##   R31G06M  R31G07M R31G08CZ R31G08CA R31G08CB  R31G09M  R31G10C  R31G11M

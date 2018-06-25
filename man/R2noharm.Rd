@@ -1,5 +1,5 @@
 %% File Name: R2noharm.Rd
-%% File Version: 2.24
+%% File Version: 2.28
 
 \name{R2noharm}
 \alias{R2noharm}
@@ -18,12 +18,12 @@ the rules of the NOHARM manual (see Fraser & McDonald, 2012).
 
 
 \usage{
-R2noharm(dat=NULL,pm=NULL , n=NULL , model.type, weights=NULL , dimensions = NULL,
-      guesses = NULL , noharm.path, F.pattern = NULL, F.init = NULL,
-      P.pattern = NULL, P.init = NULL, digits.pm = 4, writename = NULL,
-      display.fit = 5,  dec = ".", display = TRUE)
+R2noharm(dat=NULL,pm=NULL, n=NULL, model.type, weights=NULL, dimensions=NULL,
+      guesses=NULL, noharm.path, F.pattern=NULL, F.init=NULL,
+      P.pattern=NULL, P.init=NULL, digits.pm=4, writename=NULL,
+      display.fit=5,  dec=".", display=TRUE)
 
-\method{summary}{R2noharm}(object, logfile=NULL , \dots)
+\method{summary}{R2noharm}(object, logfile=NULL, \dots)
 }
 %- maybe also 'usage' for other objects documented here.
 
@@ -100,7 +100,7 @@ NOHARM estimates a multidimensional compensatory
 item response model with the probit link function \eqn{\Phi}.
 For item responses \eqn{X_{pi}} of person \eqn{p} on
 item \eqn{i} the model equation is defined as
-\deqn{P( X_{pi} = 1 | \bold{\theta}_p ) = c_i + ( 1 - c_i )
+\deqn{P( X_{pi}=1 | \bold{\theta}_p )=c_i + ( 1 - c_i )
 \Phi( f_{i0} + f_{i1} \theta_{p1} + ... +
 f_{iD} \theta_{pD} ) }
 where \eqn{F=(f_{id})} is a loading matrix and \eqn{P}
@@ -221,20 +221,20 @@ noharm.path <- "c:/NOHARM"
 # Model 1: 1-dimensional Rasch model (1-PL model)
 
 # estimate one factor variance
-P.pattern <- matrix( 1 , ncol=1 , nrow=1 )
+P.pattern <- matrix( 1, ncol=1, nrow=1 )
 P.init <- P.pattern
 # fix all entries in the loading matrix to 1
-F.pattern <- matrix( 0 , nrow=I , ncol=1 )
+F.pattern <- matrix( 0, nrow=I, ncol=1 )
 F.init <- 1 + 0*F.pattern       #
 # estimate model
-mod <- sirt::R2noharm( dat = dat , model.type="CFA" ,
-           F.pattern = F.pattern , F.init = F.init , P.pattern = P.pattern ,
-           P.init = P.init , writename = "ex1__1dim_1pl" ,
-       noharm.path = noharm.path , dec ="," )
+mod <- sirt::R2noharm( dat=dat, model.type="CFA",
+           F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
+           P.init=P.init, writename="ex1__1dim_1pl",
+       noharm.path=noharm.path, dec="," )
 # summary
-summary(mod , logfile="ex1__1dim_1pl__SUMMARY")
+summary(mod, logfile="ex1__1dim_1pl__SUMMARY")
 # jackknife
-jmod <- sirt::R2noharm.jackknife( mod , jackunits = 20 )
+jmod <- sirt::R2noharm.jackknife( mod, jackunits=20 )
 summary(jmod, logfile="ex1__1dim_1pl__JACKKNIFE")
 # compute factor scores (EAPs)
 emod <- sirt::R2noharm.EAP(mod)
@@ -242,73 +242,73 @@ emod <- sirt::R2noharm.EAP(mod)
 #*****-----
 # Model 1b: Include student weights in estimation
 N <- nrow(dat)
-weights <- stats::runif( N , 1 , 5 )
-mod1b <- sirt::R2noharm( dat = dat , model.type="CFA" ,  weights=weights ,
-            F.pattern = F.pattern , F.init = F.init , P.pattern = P.pattern ,
-            P.init = P.init , writename = "ex1__1dim_1pl_w" ,
-            noharm.path = noharm.path , dec ="," )
+weights <- stats::runif( N, 1, 5 )
+mod1b <- sirt::R2noharm( dat=dat, model.type="CFA",  weights=weights,
+            F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
+            P.init=P.init, writename="ex1__1dim_1pl_w",
+            noharm.path=noharm.path, dec="," )
 summary(mod1b)
 
 #****************************************
 # Model 2: 1-dimensional 2PL Model
 
 # set trait variance equal to 1
-P.pattern <- matrix( 0 , ncol=1 , nrow=1 )
+P.pattern <- matrix( 0, ncol=1, nrow=1 )
 P.init <- 1+0*P.pattern
 # loading matrix
-F.pattern <- matrix( 1 , nrow=I , ncol=1 )
+F.pattern <- matrix( 1, nrow=I, ncol=1 )
 F.init <- 1 + 0*F.pattern
 
-mod <- sirt::R2noharm( dat = dat , model.type="CFA" ,
-            F.pattern = F.pattern , F.init = F.init , P.pattern = P.pattern ,
-            P.init = P.init , writename = "ex2__1dim_2pl" ,
-            noharm.path = noharm.path , dec = "," )
+mod <- sirt::R2noharm( dat=dat, model.type="CFA",
+            F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
+            P.init=P.init, writename="ex2__1dim_2pl",
+            noharm.path=noharm.path, dec="," )
 
 summary(mod)
-jmod <- sirt::R2noharm.jackknife( mod , jackunits = 20 )
+jmod <- sirt::R2noharm.jackknife( mod, jackunits=20 )
 summary(jmod)
 
 #****************************************
 # Model 3: 1-dimensional 3PL Model with fixed guessing parameters
 
 # set trait variance equal to 1
-P.pattern <- matrix( 0 , ncol=1 , nrow=1 )
+P.pattern <- matrix( 0, ncol=1, nrow=1 )
 P.init <- 1+0*P.pattern
 # loading matrix
-F.pattern <- matrix( 1 , nrow=I , ncol=1 )
+F.pattern <- matrix( 1, nrow=I, ncol=1 )
 F.init <- 1 + 0*F.pattern       #
 # fix guessing parameters equal to .2 (for all items)
-guesses <- rep( .1 , I )
+guesses <- rep( .1, I )
 
-mod <- sirt::R2noharm( dat = dat , model.type="CFA" ,
-          F.pattern = F.pattern , F.init = F.init , P.pattern = P.pattern ,
-          P.init = P.init , guesses = guesses ,
-          writename = "ex3__1dim_3pl" , noharm.path = noharm.path , dec=","  )
+mod <- sirt::R2noharm( dat=dat, model.type="CFA",
+          F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
+          P.init=P.init, guesses=guesses,
+          writename="ex3__1dim_3pl", noharm.path=noharm.path, dec=","  )
 summary(mod)
-jmod <- sirt::R2noharm.jackknife( mod , jackunits = 20 )
+jmod <- sirt::R2noharm.jackknife( mod, jackunits=20 )
 summary(jmod)
 
 #****************************************
 # Model 4: 3-dimensional Rasch model
 
 # estimate one factor variance
-P.pattern <- matrix( 1 , ncol=3 , nrow=3 )
+P.pattern <- matrix( 1, ncol=3, nrow=3 )
 P.init <- .8*P.pattern
 diag(P.init) <- 1
 # fix all entries in the loading matrix to 1
-F.init <- F.pattern <- matrix( 0 , nrow=I , ncol=3 )
+F.init <- F.pattern <- matrix( 0, nrow=I, ncol=3 )
 F.init[1:6,1] <- 1
 F.init[7:12,2] <- 1
 F.init[13:18,3] <- 1
 
-mod <- sirt::R2noharm( dat = dat , model.type="CFA" ,
-          F.pattern = F.pattern , F.init = F.init , P.pattern = P.pattern ,
-          P.init = P.init , writename = "ex4__3dim_1pl" ,
-          noharm.path = noharm.path  , dec ="," )
+mod <- sirt::R2noharm( dat=dat, model.type="CFA",
+          F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
+          P.init=P.init, writename="ex4__3dim_1pl",
+          noharm.path=noharm.path, dec="," )
 # write output from R console in a file
-summary(mod , logfile="ex4__3dim_1pl__SUMMARY.Rout")
+summary(mod, logfile="ex4__3dim_1pl__SUMMARY.Rout")
 
-jmod <- sirt::R2noharm.jackknife( mod , jackunits = 20 )
+jmod <- sirt::R2noharm.jackknife( mod, jackunits=20 )
 summary(jmod)
 
 # extract factor scores
@@ -318,33 +318,33 @@ emod <- sirt::R2noharm.EAP(mod)
 # Model 5: 3-dimensional 2PL model
 
 # estimate one factor variance
-P.pattern <- matrix( 1 , ncol=3 , nrow=3 )
+P.pattern <- matrix( 1, ncol=3, nrow=3 )
 P.init <- .8*P.pattern
 diag(P.init) <- 0
 # fix all entries in the loading matrix to 1
-F.pattern <- matrix( 0 , nrow=I , ncol=3 )
+F.pattern <- matrix( 0, nrow=I, ncol=3 )
 F.pattern[1:6,1] <- 1
 F.pattern[7:12,2] <- 1
 F.pattern[13:18,3] <- 1
 F.init <- F.pattern
 
-mod <- sirt::R2noharm( dat = dat , model.type="CFA" ,
-          F.pattern = F.pattern , F.init = F.init , P.pattern = P.pattern ,
-          P.init = P.init , writename = "ex5__3dim_2pl" ,
-          noharm.path = noharm.path  , dec = "," )
+mod <- sirt::R2noharm( dat=dat, model.type="CFA",
+          F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
+          P.init=P.init, writename="ex5__3dim_2pl",
+          noharm.path=noharm.path, dec="," )
 summary(mod)
 # use 50 jackknife units with 4 persons within a unit
-jmod <- sirt::R2noharm.jackknife( mod , jackunits = seq( 1:50 , each = 4 ) )
+jmod <- sirt::R2noharm.jackknife( mod, jackunits=seq( 1:50, each=4 ) )
 summary(jmod)
 
 #****************************************
 # Model 6: Exploratory Factor Analysis with 3 factors
 
-mod <- sirt::R2noharm( dat = dat , model.type="EFA" ,  dimensions = 3 ,
-           writename = "ex6__3dim_efa", noharm.path = noharm.path ,dec = ",")
+mod <- sirt::R2noharm( dat=dat, model.type="EFA",  dimensions=3,
+           writename="ex6__3dim_efa", noharm.path=noharm.path,dec=",")
 summary(mod)
 
-jmod <- sirt::R2noharm.jackknife( mod , jackunits = 20 )
+jmod <- sirt::R2noharm.jackknife( mod, jackunits=20 )
 
 #############################################################################
 # EXAMPLE 2: NOHARM manual Example A
@@ -360,7 +360,7 @@ jmod <- sirt::R2noharm.jackknife( mod , jackunits = 20 )
 # Our hypothesis is for a 2-dimensional model with no guessing,
 # i.e., all guesses are equal to zero. However, because we are unsure of any
 # particular pattern for matrix F, we wish to prescribe an exploratory analysis, i.e.,
-# set EX = 1. Also, we will content ourselves with letting the program supply all
+# set EX=1. Also, we will content ourselves with letting the program supply all
 # initial values.
 #
 # We would like both the sample product-moment matrix and the residual matrix to
@@ -378,8 +378,8 @@ pm <- scan()
      0.7549 0.1878 0.6236 0.7465 0.4505 0.7590 0.2756 0.8442
      0.6191 0.1588 0.5131 0.6116 0.3845 0.6302 0.2454 0.6129 0.6879
 
-ex2 <- sirt::R2noharm( pm= pm , n =200 , model.type="EFA" , dimensions=2 ,
-         noharm.path=noharm.path , writename="ex2_noharmExA" , dec=",")
+ex2 <- sirt::R2noharm( pm=pm, n=200, model.type="EFA", dimensions=2,
+         noharm.path=noharm.path, writename="ex2_noharmExA", dec=",")
 summary(ex2)
 
 #############################################################################
@@ -427,10 +427,10 @@ P.pattern <- matrix(1,2,2)
 diag(P.pattern) <- 0
 P.init <- 1+P.pattern
 
-ex3 <- sirt::R2noharm( pm=pm , n=125, , model.type="CFA" ,
-           F.pattern = F.pattern , F.init = F.init , P.pattern = P.pattern ,
-           P.init = P.init , writename = "ex3_noharmExB" ,
-           noharm.path = noharm.path , dec ="," )
+ex3 <- sirt::R2noharm( pm=pm, n=125,, model.type="CFA",
+           F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
+           P.init=P.init, writename="ex3_noharmExB",
+           noharm.path=noharm.path, dec="," )
 summary(ex3)
 
 #############################################################################
@@ -461,27 +461,27 @@ F.init[5:8,1] <- .6
 P.pattern <- matrix(0,1,1)
 P.init <- 1 + 0 * P.pattern
 
-ex4 <- sirt::R2noharm( dat=data.noharmExC , , model.type="CFA" ,
-           guesses=guesses , F.pattern = F.pattern , F.init = F.init ,
-           P.pattern = P.pattern, P.init = P.init , writename = "ex3_noharmExC" ,
-           noharm.path = noharm.path , dec ="," )
+ex4 <- sirt::R2noharm( dat=data.noharmExC,, model.type="CFA",
+           guesses=guesses, F.pattern=F.pattern, F.init=F.init,
+           P.pattern=P.pattern, P.init=P.init, writename="ex3_noharmExC",
+           noharm.path=noharm.path, dec="," )
 summary(ex4)
 
 # modify F pattern matrix
-# f11 = f51 (since both have equal pattern values of 2),
-# f21 = f61 (since both have equal pattern values of 3),
-# f31 = f71 (since both have equal pattern values of 4),
-# f41 = f81 (since both have equal pattern values of 5).
+# f11=f51 (since both have equal pattern values of 2),
+# f21=f61 (since both have equal pattern values of 3),
+# f31=f71 (since both have equal pattern values of 4),
+# f41=f81 (since both have equal pattern values of 5).
 F.pattern[ c(1,5) ] <- 2
 F.pattern[ c(2,6) ] <- 3
 F.pattern[ c(3,7) ] <- 4
 F.pattern[ c(4,8) ] <- 5
 F.init <- .5+0*F.init
 
-ex4a <- sirt::R2noharm( dat=data.noharmExC , , model.type="CFA" ,
-           guesses=guesses , F.pattern = F.pattern , F.init = F.init ,
-           P.pattern = P.pattern, P.init = P.init , writename = "ex3_noharmExC1" ,
-           noharm.path = noharm.path , dec ="," )
+ex4a <- sirt::R2noharm( dat=data.noharmExC,, model.type="CFA",
+           guesses=guesses, F.pattern=F.pattern, F.init=F.init,
+           P.pattern=P.pattern, P.init=P.init, writename="ex3_noharmExC1",
+           noharm.path=noharm.path, dec="," )
 summary(ex4a)
 }
 }

@@ -1,5 +1,5 @@
 %% File Name: data.befki.Rd
-%% File Version: 0.08
+%% File Version: 0.10
 
 \name{data.befki}
 \alias{data.befki}
@@ -14,7 +14,7 @@ BEFKI Dataset (Schroeders, Schipolowski, & Wilhelm, 2015)
 \description{
 The synthetic dataset is based on the standardization sample of the Berlin
 Test of Fluid and Crystallized Intelligence (BEFKI, Wilhelm, Schroeders, &
-Schipolowski, 2014). The underlying sample consists of N = 11,756 students
+Schipolowski, 2014). The underlying sample consists of N=11,756 students
 from all German federal states (except for the smallest one) and all school
 types of the general educational system attending Grades 5 to 12. A
 detailed description of the study, the sample, and the measure is given in

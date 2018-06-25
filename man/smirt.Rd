@@ -1,5 +1,5 @@
 %% File Name: smirt.Rd
-%% File Version: 2.30
+%% File Version: 2.35
 
 \name{smirt}
 \alias{smirt}
@@ -24,16 +24,16 @@ the partially compensatory item response model (Spray et al., 1990)
 for dichotomous data.
 }
 \usage{
-smirt(dat, Qmatrix, irtmodel="noncomp" , est.b = NULL, est.a = NULL,
-     est.c = NULL, est.d = NULL, est.mu.i=NULL , b.init = NULL, a.init = NULL,
-     c.init = NULL, d.init=NULL, mu.i.init=NULL , Sigma.init=NULL ,
-     b.lower=-Inf, b.upper = Inf, a.lower= -Inf, a.upper=Inf,
-     c.lower=-Inf, c.upper = Inf, d.lower= -Inf, d.upper=Inf,
+smirt(dat, Qmatrix, irtmodel="noncomp", est.b=NULL, est.a=NULL,
+     est.c=NULL, est.d=NULL, est.mu.i=NULL, b.init=NULL, a.init=NULL,
+     c.init=NULL, d.init=NULL, mu.i.init=NULL, Sigma.init=NULL,
+     b.lower=-Inf, b.upper=Inf, a.lower=-Inf, a.upper=Inf,
+     c.lower=-Inf, c.upper=Inf, d.lower=-Inf, d.upper=Inf,
      theta.k=seq(-6,6,len=20), theta.kDES=NULL,
-     qmcnodes=0 , mu.fixed = NULL, variance.fixed = NULL,  est.corr = FALSE,
-     max.increment = 1, increment.factor=1, numdiff.parm = 0.0001,
-     maxdevchange = 0.1, globconv = 0.001, maxiter = 1000, msteps = 4,
-     mstepconv = 0.001)
+     qmcnodes=0, mu.fixed=NULL, variance.fixed=NULL,  est.corr=FALSE,
+     max.increment=1, increment.factor=1, numdiff.parm=0.0001,
+     maxdevchange=0.1, globconv=0.001, maxiter=1000, msteps=4,
+     mstepconv=0.001)
 
 \method{summary}{smirt}(object,...)
 
@@ -182,17 +182,17 @@ Further arguments to be passed
 \details{
 The noncompensatory item response model (\code{irtmodel="noncomp"};
 e.g. Bolt & Lall, 2003) is defined as
-\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i )
+\deqn{P(X_{pi}=1 | \bold{\theta}_p )=c_i + (d_i - c_i )
 \prod_l invlogit( a_{il} q_{il}  \theta_{pl} - b_{il} ) }
 where \eqn{i}, \eqn{p}, \eqn{l} denote items, persons and dimensions
 respectively.
 
 The compensatory item response model (\code{irtmodel="comp"}) is defined by
-\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i )
+\deqn{P(X_{pi}=1 | \bold{\theta}_p )=c_i + (d_i - c_i )
 invlogit( \sum_l  a_{il}  q_{il} \theta_{pl} - b_{i} ) }
 Using a design matrix \code{theta.kDES} the model can be made even more general
 in a model which is linear in item parameters
-\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i )
+\deqn{P(X_{pi}=1 | \bold{\theta}_p )=c_i + (d_i - c_i )
 invlogit( \sum_l  a_{il}  q_{il} t_l ( \bold{ \theta_{p} } )   - b_{i} ) }
 with known functions \eqn{t_l} of the trait vector \eqn{\bold{\theta}_p}.
 Fixed values of the functions \eqn{t_l} are specified in the
@@ -200,7 +200,7 @@ Fixed values of the functions \eqn{t_l} are specified in the
 
 The partially compensatory item response model (\code{irtmodel="partcomp"})
 is defined by
-\deqn{P(X_{pi}=1 | \bold{\theta}_p ) = c_i + (d_i - c_i )
+\deqn{P(X_{pi}=1 | \bold{\theta}_p )=c_i + (d_i - c_i )
 \frac{ \exp \left( \sum_l ( a_{il}  q_{il} \theta_{pl} - b_{il} ) \right) }
 {  \mu_i \prod_l ( 1 + \exp ( a_{il}  q_{il} \theta_{pl} - b_{il} ) ) +
     ( 1- \mu_i) ( 1 + \exp \left( \sum_l  ( a_{il}  q_{il} \theta_{pl} - b_{il} ) \right) )
@@ -308,17 +308,17 @@ set.seed(997)
 
 N <- 1000    # number of persons
 I <- 10        # number of items
-theta0 <- rnorm( N , sd= 1 )
-theta1 <- theta0 + rnorm(N , sd = .7 )
-theta2 <- theta0 + rnorm(N , sd = .7 )
-Q <- matrix( 1 , nrow=I,ncol=2 )
-Q[ 1:(I/2) , 2 ] <- 0
+theta0 <- rnorm( N, sd=1 )
+theta1 <- theta0 + rnorm(N, sd=.7 )
+theta2 <- theta0 + rnorm(N, sd=.7 )
+Q <- matrix( 1, nrow=I,ncol=2 )
+Q[ 1:(I/2), 2 ] <- 0
 Q[ I,1] <- 0
-b <- matrix( rnorm( I*2 ) , I , 2 )
-a <- matrix( 1 , I  , 2 )
+b <- matrix( rnorm( I*2 ), I, 2 )
+a <- matrix( 1, I, 2 )
 
 # simulate data
-prob <- dat <- matrix(0 , nrow=N , ncol=I )
+prob <- dat <- matrix(0, nrow=N, ncol=I )
 for (ii in 1:I){
 prob[,ii] <- ( stats::plogis( theta1 - b[ii,1]  ) )^Q[ii,1]
 prob[,ii] <- prob[,ii] * ( stats::plogis( theta2 - b[ii,2]  ) )^Q[ii,2]
@@ -328,17 +328,17 @@ colnames(dat) <- paste0("I",1:I)
 
 #***
 # Model 1: Noncompensatory 1PL model
-mod1 <- sirt::smirt(dat, Qmatrix=Q , maxiter=10 ) # change number of iterations
+mod1 <- sirt::smirt(dat, Qmatrix=Q, maxiter=10 ) # change number of iterations
 summary(mod1)
 
 \dontrun{
 #***
 # Model 2: Noncompensatory 2PL model
-mod2 <- sirt::smirt(dat,Qmatrix=Q , est.a="2PL" , maxiter=15 )
+mod2 <- sirt::smirt(dat,Qmatrix=Q, est.a="2PL", maxiter=15 )
 summary(mod2)
 
 # Model 2a: avoid convergence problems with increment.factor
-mod2a <- sirt::smirt(dat,Qmatrix=Q , est.a="2PL" , maxiter=30 , increment.factor=1.03)
+mod2a <- sirt::smirt(dat,Qmatrix=Q, est.a="2PL", maxiter=30, increment.factor=1.03)
 summary(mod2a)
 
 #***
@@ -347,7 +347,7 @@ c.init <- rep(0,I)
 c.init[ c(3,7)] <- .2
 d.init <- rep(1,I)
 d.init[c(4,8)] <- .95
-mod3 <- sirt::smirt( dat , Qmatrix=Q , c.init=c.init , d.init=d.init )
+mod3 <- sirt::smirt( dat, Qmatrix=Q, c.init=c.init, d.init=d.init )
 summary(mod3)
 
 #***
@@ -361,19 +361,19 @@ d.init <- rep(1,I)
 d.estpars <- c(6,9)
 d.init[ d.estpars ] <- .95
 est.d[ d.estpars ] <- d.estpars   # different d parameters
-mod4 <- sirt::smirt(dat,Qmatrix=Q , est.c=est.c , c.init=c.init ,
-            est.d=est.d , d.init=d.init  )
+mod4 <- sirt::smirt(dat,Qmatrix=Q, est.c=est.c, c.init=c.init,
+            est.d=est.d, d.init=d.init  )
 summary(mod4)
 
 #***
 # Model 5: Unidimensional 1PL model
-Qmatrix <- matrix( 1 , nrow=I , ncol=1 )
-mod5 <- sirt::smirt( dat , Qmatrix=Qmatrix )
+Qmatrix <- matrix( 1, nrow=I, ncol=1 )
+mod5 <- sirt::smirt( dat, Qmatrix=Qmatrix )
 summary(mod5)
 
 #***
 # Model 6: Unidimensional 2PL model
-mod6 <- sirt::smirt( dat , Qmatrix=Qmatrix , est.a="2PL" )
+mod6 <- sirt::smirt( dat, Qmatrix=Qmatrix, est.a="2PL" )
 summary(mod6)
 
 #***
@@ -381,8 +381,8 @@ summary(mod6)
 # Note that the data is simulated under the noncompensatory condition
 # Therefore Model 7 should have a worse model fit than Model 1
 Q1 <- Q
-Q1[ 6:10 , 1] <- 0
-mod7 <- sirt::smirt(dat,Qmatrix=Q1 , irtmodel="comp" , maxiter=30)
+Q1[ 6:10, 1] <- 0
+mod7 <- sirt::smirt(dat,Qmatrix=Q1, irtmodel="comp", maxiter=30)
 summary(mod7)
 
 #***
@@ -390,7 +390,7 @@ summary(mod7)
 #         assuming zero correlation between dimensions
 variance.fixed <- as.matrix( cbind( 1,2,0) )
 # set the covariance between the first and second dimension to zero
-mod8 <- sirt::smirt(dat,Qmatrix=Q , irtmodel="comp" , variance.fixed=variance.fixed ,
+mod8 <- sirt::smirt(dat,Qmatrix=Q, irtmodel="comp", variance.fixed=variance.fixed,
             maxiter=30)
 summary(mod8)
 
@@ -400,50 +400,50 @@ b.init <- rep(0,10)  # set all item difficulties initially to zero
 # b.init <- NULL
 a.init <- Q       # initialize a.init with Q-matrix
 # provide starting values for slopes of first three items on Dimension 1
-a.init[1:3,1] <- c( .55 , .32 , 1.3)
+a.init[1:3,1] <- c( .55, .32, 1.3)
 
-mod8b <- sirt::smirt(dat,Qmatrix=Q , irtmodel="comp" , variance.fixed=variance.fixed ,
-              b.init=b.init , a.init=a.init , maxiter=20 , est.a="2PL" )
+mod8b <- sirt::smirt(dat,Qmatrix=Q, irtmodel="comp", variance.fixed=variance.fixed,
+              b.init=b.init, a.init=a.init, maxiter=20, est.a="2PL" )
 summary(mod8b)
 
 #***
 # Model 9: Unidimensional model with quadratic item response functions
 # define theta
-theta.k <- seq( - 6 , 6 , len=15 )
-theta.k <- as.matrix( theta.k , ncol=1 )
+theta.k <- seq( - 6, 6, len=15 )
+theta.k <- as.matrix( theta.k, ncol=1 )
 # define design matrix
-theta.kDES <- cbind( theta.k[,1] , theta.k[,1]^2 )
+theta.kDES <- cbind( theta.k[,1], theta.k[,1]^2 )
 # define Q-matrix
-Qmatrix <- matrix( 0 , I , 2 )
+Qmatrix <- matrix( 0, I, 2 )
 Qmatrix[,1] <- 1
-Qmatrix[ c(3,6,7) , 2 ] <- 1
-colnames(Qmatrix) <- c("F1" , "F1sq" )
+Qmatrix[ c(3,6,7), 2 ] <- 1
+colnames(Qmatrix) <- c("F1", "F1sq" )
 # estimate model
-mod9 <- sirt::smirt(dat,Qmatrix=Qmatrix , maxiter=50 , irtmodel="comp" ,
-           theta.k=theta.k , theta.kDES=theta.kDES , est.a="2PL" )
+mod9 <- sirt::smirt(dat,Qmatrix=Qmatrix, maxiter=50, irtmodel="comp",
+           theta.k=theta.k, theta.kDES=theta.kDES, est.a="2PL" )
 summary(mod9)
 
 #***
 # Model 10: Two-dimensional item response model with latent interaction
 #           between dimensions
-theta.k <- seq( - 6 , 6 , len=15 )
-theta.k <- expand.grid( theta.k , theta.k )    # expand theta to 2 dimensions
+theta.k <- seq( - 6, 6, len=15 )
+theta.k <- expand.grid( theta.k, theta.k )    # expand theta to 2 dimensions
 # define design matrix
-theta.kDES <- cbind( theta.k , theta.k[,1]*theta.k[,2] )
+theta.kDES <- cbind( theta.k, theta.k[,1]*theta.k[,2] )
 # define Q-matrix
-Qmatrix <- matrix( 0 , I , 3 )
+Qmatrix <- matrix( 0, I, 3 )
 Qmatrix[,1] <- 1
-Qmatrix[ 6:10 , c(2,3) ] <- 1
-colnames(Qmatrix) <- c("F1" , "F2" , "F1iF2" )
+Qmatrix[ 6:10, c(2,3) ] <- 1
+colnames(Qmatrix) <- c("F1", "F2", "F1iF2" )
 # estimate model
-mod10 <- sirt::smirt(dat,Qmatrix=Qmatrix ,irtmodel="comp" , theta.k=theta.k ,
-            theta.kDES= theta.kDES , est.a="2PL" )
+mod10 <- sirt::smirt(dat,Qmatrix=Qmatrix,irtmodel="comp", theta.k=theta.k,
+            theta.kDES=theta.kDES, est.a="2PL" )
 summary(mod10)
 
 #****
 # Model 11: Example Quasi Monte Carlo integration
-Qmatrix <- matrix( 1 , I , 1 )
-mod11 <- sirt::smirt( dat , irtmodel="comp" , Qmatrix=Qmatrix , qmcnodes=1000 )
+Qmatrix <- matrix( 1, I, 1 )
+mod11 <- sirt::smirt( dat, irtmodel="comp", Qmatrix=Qmatrix, qmcnodes=1000 )
 summary(mod11)
 
 #############################################################################
@@ -465,25 +465,25 @@ Qmatrix[5:8,2] <- 1
 Qmatrix[9:12,3] <- 1
 
 # estimate model
-mod1 <- sirt::smirt( dat , Qmatrix=Qmatrix , irtmodel="comp" , est.a="2PL" ,
-            qmcnodes=1000 , maxiter=20)
+mod1 <- sirt::smirt( dat, Qmatrix=Qmatrix, irtmodel="comp", est.a="2PL",
+            qmcnodes=1000, maxiter=20)
 summary(mod1)
 
 #***
 # Model 2: 3-dimensional Rasch model
-mod2 <- sirt::smirt( dat , Qmatrix=Qmatrix , irtmodel="comp" ,
-              qmcnodes=1000 , maxiter=20)
+mod2 <- sirt::smirt( dat, Qmatrix=Qmatrix, irtmodel="comp",
+              qmcnodes=1000, maxiter=20)
 summary(mod2)
 
 #***
 # Model 3: 3-dimensional 2PL model with uncorrelated dimensions
 # fix entries in variance matrix
-variance.fixed <- cbind( c(1,1,2) , c(2,3,3) , 0 )
+variance.fixed <- cbind( c(1,1,2), c(2,3,3), 0 )
 # set the following covariances to zero: cov[1,2]=cov[1,3]=cov[2,3]=0
 
 # estimate model
-mod3 <- sirt::smirt( dat , Qmatrix=Qmatrix , irtmodel="comp" , est.a="2PL" ,
-             variance.fixed=variance.fixed , qmcnodes=1000 , maxiter=20)
+mod3 <- sirt::smirt( dat, Qmatrix=Qmatrix, irtmodel="comp", est.a="2PL",
+             variance.fixed=variance.fixed, qmcnodes=1000, maxiter=20)
 summary(mod3)
 
 #***
@@ -491,17 +491,17 @@ summary(mod3)
 #          uncorrelated specific factors
 
 # define a new Q-matrix
-Qmatrix1 <- cbind( 1 , Qmatrix )
+Qmatrix1 <- cbind( 1, Qmatrix )
 # uncorrelated factors
-variance.fixed <- cbind( c(1,1,1,2,2,3) , c(2,3,4,3,4,4) , 0 )
+variance.fixed <- cbind( c(1,1,1,2,2,3), c(2,3,4,3,4,4), 0 )
 # The first dimension refers to the general factors while the other
 # dimensions refer to the specific factors.
 # The specification means that:
 # Cov[1,2]=Cov[1,3]=Cov[1,4]=Cov[2,3]=Cov[2,4]=Cov[3,4]=0
 
 # estimate model
-mod4 <- sirt::smirt( dat , Qmatrix=Qmatrix1 , irtmodel="comp" , est.a="2PL" ,
-             variance.fixed=variance.fixed , qmcnodes=1000 , maxiter=20)
+mod4 <- sirt::smirt( dat, Qmatrix=Qmatrix1, irtmodel="comp", est.a="2PL",
+             variance.fixed=variance.fixed, qmcnodes=1000, maxiter=20)
 summary(mod4)
 
 #############################################################################
@@ -512,21 +512,21 @@ summary(mod4)
 set.seed(7656)
 I <- 10         # number of items
 N <- 2000        # number of subjects
-Q <- matrix( 0 , 3*I,2)  # Q-matrix
+Q <- matrix( 0, 3*I,2)  # Q-matrix
 Q[1:I,1] <- 1
-Q[1:I + I ,2] <- 1
-Q[1:I + 2*I ,1:2] <- 1
-b <- matrix( stats::runif( 3*I *2, -2 , 2 ) , nrow=3*I , 2 )
+Q[1:I + I,2] <- 1
+Q[1:I + 2*I,1:2] <- 1
+b <- matrix( stats::runif( 3*I *2, -2, 2 ), nrow=3*I, 2 )
 b <- b*Q
-b <- round( b , 2 )
+b <- round( b, 2 )
 mui <- rep(0,3*I)
-mui[ seq(2*I+1 , 3*I) ] <- 0.65
+mui[ seq(2*I+1, 3*I) ] <- 0.65
 # generate data
-dat <- matrix( NA , N , 3*I )
-colnames(dat) <- paste0("It" , 1:(3*I) )
+dat <- matrix( NA, N, 3*I )
+colnames(dat) <- paste0("It", 1:(3*I) )
 # simulate item responses
 library(mvtnorm)
-theta <- mvtnorm::rmvnorm(N , mean=c(0,0) , sigma = matrix( c( 1.2 , .6,.6,1.6)  ,2 , 2 ) )
+theta <- mvtnorm::rmvnorm(N, mean=c(0,0), sigma=matrix( c( 1.2, .6,.6,1.6),2, 2 ) )
 for (ii in 1:(3*I)){
     # define probability
     tmp1 <- exp( theta[,1] * Q[ii,1] - b[ii,1] +  theta[,2] * Q[ii,2] - b[ii,2] )
@@ -541,12 +541,12 @@ for (ii in 1:(3*I)){
 #*** Model 1: Joint mu.i parameter for all items
 est.mu.i <- rep(0,3*I)
 est.mu.i[ seq(2*I+1,3*I)] <- 1
-mod1 <- sirt::smirt( dat , Qmatrix = Q , irtmodel = "partcomp" , est.mu.i=est.mu.i)
+mod1 <- sirt::smirt( dat, Qmatrix=Q, irtmodel="partcomp", est.mu.i=est.mu.i)
 summary(mod1)
 
 #*** Model 2: Separate mu.i parameter for all items
 est.mu.i[ seq(2*I+1,3*I)] <- 1:I
-mod2 <- sirt::smirt( dat , Qmatrix = Q , irtmodel = "partcomp" , est.mu.i=est.mu.i)
+mod2 <- sirt::smirt( dat, Qmatrix=Q, irtmodel="partcomp", est.mu.i=est.mu.i)
 summary(mod2)
 }
 }

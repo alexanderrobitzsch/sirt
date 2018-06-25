@@ -1,9 +1,9 @@
 ## File Name: rasch.evm.pcm.R
-## File Version: 1.27
+## File Version: 1.32
 #####################################################################
 # estimation of the partial credit model employing the eigenvector method
-rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
-    pid = NULL  , group=NULL , powB=2 , adj_eps=.3 , progress = TRUE ){
+rasch.evm.pcm <- function( dat, jackunits=20, weights=NULL,
+    pid=NULL, group=NULL, powB=2, adj_eps=.3, progress=TRUE ){
     #.......................................
     dat0 <- dat <- as.matrix(dat)
     if ( is.null(weights) ){ weights <- rep(1,nrow(dat) ) }
@@ -13,18 +13,18 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
         jackunits <- ( 1:(nrow(dat) ) ) %% jackunits
                             }
     JJ <- length( unique( jackunits) )
-    maxK <- apply( dat , 2 , max )
+    maxK <- apply( dat, 2, max )
     I <- ncol(dat)
     # row indices of B
     dfr <- NULL
     for (ii in 1:I){
-        dfr <- rbind( dfr , cbind( ii-1 , 1:maxK[ii] )    )
+        dfr <- rbind( dfr, cbind( ii-1, 1:maxK[ii] )    )
             }
     row_index <- as.matrix( dfr )
     # column indices of B
     dfr <- NULL
     for (ii in 1:I){
-        dfr <- rbind( dfr , cbind( ii-1 , 1:maxK[ii] - 1)    )
+        dfr <- rbind( dfr, cbind( ii-1, 1:maxK[ii] - 1)    )
             }
     col_index <- as.matrix(dfr)
     powD <- powB
@@ -37,7 +37,7 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
     if ( ! is.null(group) ){
         group0 <- group
         group.unique <- sort(unique(group))
-        group <- match( group , group.unique)
+        group <- match( group, group.unique)
         G <- length(group.unique)
         nogroup <- FALSE
                 }
@@ -45,7 +45,7 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
     # descriptives
     if (nogroup){
         group.unique <- NULL
-        desc <- data.frame( "Nobs" = nrow(dat) , "G"=1 )
+        desc <- data.frame( "Nobs"=nrow(dat), "G"=1 )
         desc$N.items <- ncol(dat)
         desc$N.pars <- nrow(dfr)
         desc$sum.weights <- sum( weights )
@@ -56,10 +56,10 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
         desc$max.Nitems <- max(m1)
         }
     if (!nogroup){
-        desc <- data.frame( "Nobs" = as.numeric(table(group)) , "G"=G )
+        desc <- data.frame( "Nobs"=as.numeric(table(group)), "G"=G )
         desc$N.items <- ncol(dat)
         desc$N.pars <- nrow(dfr)
-        desc$sum.weights <- stats::aggregate( weights , list( group) , sum)[,2]
+        desc$sum.weights <- stats::aggregate( weights, list( group), sum)[,2]
         m1 <- rowSums( dat.resp )
         desc$M.Nitems <- mean(m1)
         desc$SD.Nitems <- stats::sd(m1)
@@ -71,31 +71,31 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
 
     # no group
     if ( nogroup ){
-        res1 <- evm_comp_matrix_poly_R( dat , dat.resp , weights , JJ , jackunits , powD ,  progress ,
-                    row_index , col_index )
+        res1 <- evm_comp_matrix_poly_R( dat, dat.resp, weights, JJ, jackunits, powD,  progress,
+                    row_index, col_index )
                     }  else {
     # groups
         res1 <- as.list(1:G)
         for (gg in 1:G){
-            if (progress){    cat("\n------- Group" , group.unique[gg] , " ------\n") }
-            ind.gg <- which( group == gg )
-            res1[[gg]] <- evm_comp_matrix_poly_R( dat[ind.gg,] , dat.resp[ind.gg,] ,
-                weights[ind.gg] , JJ , jackunits , powD ,  progress ,
-                        row_index , col_index )
+            if (progress){    cat("\n------- Group", group.unique[gg], " ------\n") }
+            ind.gg <- which( group==gg )
+            res1[[gg]] <- evm_comp_matrix_poly_R( dat[ind.gg,], dat.resp[ind.gg,],
+                weights[ind.gg], JJ, jackunits, powD,  progress,
+                        row_index, col_index )
                         }
                             }
     #************************
     # collect item parameters
-    ri <- paste0( colnames(dat)[ row_index[,1]+1 ] , "_Cat" , row_index[,2]  )
+    ri <- paste0( colnames(dat)[ row_index[,1]+1 ], "_Cat", row_index[,2]  )
     # item parameters
     if (nogroup){
         PP <- nrow(res1$PARS_vcov) - 2
             } else {
         PP <- nrow(res1[[1]]$PARS_vcov) - 2
                     }
-    item <- data.frame("parmlabel" = ri , "item" = row_index[,1]+1 ,
-            "itemlabel"= colnames(dat)[ row_index[,1]+1 ] ,
-            "category" = row_index[,2] )
+    item <- data.frame("parmlabel"=ri, "item"=row_index[,1]+1,
+            "itemlabel"=colnames(dat)[ row_index[,1]+1 ],
+            "category"=row_index[,2] )
     item$parmindex <- seq(1,PP)
     if ( nogroup){
         b_evm <- res1$b_evm
@@ -113,7 +113,7 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
         # jackknife bias corrected estimation
             # http://statweb.stanford.edu/~susan/courses/s208/node16.html
         item$est_jack <- item$est - (res1$JJadj - 1 ) * ( res1$PARS_means[1:PP] - item$est )
-        PARS_vcov <- res1$PARS_vcov[ 1:PP , 1:PP ]
+        PARS_vcov <- res1$PARS_vcov[ 1:PP, 1:PP ]
                 }
     rownames(item) <- NULL
     #*************************
@@ -123,14 +123,14 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
     person <- NULL
     if ( nogroup){   # no groups
         row_index[,1] <- row_index[,1] + 1
-        b <- matrix( NA , nrow=I , ncol=max( maxK) )
+        b <- matrix( NA, nrow=I, ncol=max( maxK) )
         rownames(b) <- colnames(dat)
-        colnames(b) <- paste0("Cat" , 1:max(maxK) )
+        colnames(b) <- paste0("Cat", 1:max(maxK) )
         b[ row_index ] <- item$est
         #****
         # estimation subroutine
-        person <- mle.pcm.group(dat, b, a = rep(1, ncol(dat)), pid= pid ,
-                          adj_eps =  adj_eps , conv = 1e-04, maxiter = 30)$person
+        person <- mle.pcm.group(dat, b, a=rep(1, ncol(dat)), pid=pid,
+                          adj_eps=adj_eps, conv=1e-04, maxiter=30)$person
 
         B <- res1$B
         D <- res1$D
@@ -142,9 +142,9 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
         row_index[,1] <- row_index[,1] + 1
         b0 <- as.list(1:G)
         for (gg in 1:G){
-            b <- matrix( NA , nrow=I , ncol=max( maxK) )
+            b <- matrix( NA, nrow=I, ncol=max( maxK) )
             rownames(b) <- colnames(dat)
-            colnames(b) <- paste0("Cat" , 1:max(maxK) )
+            colnames(b) <- paste0("Cat", 1:max(maxK) )
             b[ row_index ] <- item[,paste0("est.Gr",group.unique[gg])]
             b0[[gg]] <- b
                         }
@@ -155,7 +155,7 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
             rgg <- res1[[gg]]
             B[[gg]] <- rgg$B
             D[[gg]] <- rgg$D
-            PARS_vcov[[gg]] <- rgg$PARS_vcov[ 1:PP , 1:PP ]
+            PARS_vcov[[gg]] <- rgg$PARS_vcov[ 1:PP, 1:PP ]
             JJadj[[gg]] <- rgg$JJadj
             b_evm[[gg]] <- rgg$b_evm
                         }
@@ -164,8 +164,8 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
     # differential item functioning
     difstats <- NULL
     if ( ! nogroup ){
-        difstats <- rasch.evm.pcm.dif( b_evm , item , PARS_vcov , I , G ,
-            group.unique , dat , dat.resp )
+        difstats <- rasch.evm.pcm.dif( b_evm, item, PARS_vcov, I, G,
+            group.unique, dat, dat.resp )
                 }
 
     # collect coefficients in case one group and multiple groups
@@ -174,13 +174,13 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
     if (G>1){
         ni <- nrow(item)
         Npars <- ni*G
-        coeff <- rep( NA , Npars )
-        pcov <- matrix( 0 , nrow=Npars , ncol=Npars )
+        coeff <- rep( NA, Npars )
+        pcov <- matrix( 0, nrow=Npars, ncol=Npars )
         for (gg in 1:G){
             # gg <- 1
             ind.gg <- (gg-1)*ni + 1:ni
-            coeff[ ind.gg  ] <- item[ , paste0("est.Gr" , group.unique[gg] ) ]
-            names(coeff)[ind.gg] <- paste0( item$parmlabel , "_Gr" , group.unique[gg] )
+            coeff[ ind.gg  ] <- item[, paste0("est.Gr", group.unique[gg] ) ]
+            names(coeff)[ind.gg] <- paste0( item$parmlabel, "_Gr", group.unique[gg] )
             pcov[ind.gg,ind.gg ] <- PARS_vcov[[gg]]
                       }
         rownames(pcov) <- colnames(pcov) <- names(coeff)
@@ -192,12 +192,12 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
                     }
     #*************************
     # output
-    res <- list( "item" = item , "b"=b ,  "person"=person ,
-        "B" = B , "D" = D , "coef"=coeff ,  "vcov" = PARS_vcov ,
-        "JJ"=JJ , "JJadj"= JJadj ,
-        "powB"=powB , "maxK"=maxK , "G" = G , "desc"=desc ,
-        "difstats" = difstats ,
-        "b_evm"=b_evm , "I"=I , "group.unique"=group.unique ,
+    res <- list( "item"=item, "b"=b,  "person"=person,
+        "B"=B, "D"=D, "coef"=coeff,  "vcov"=PARS_vcov,
+        "JJ"=JJ, "JJadj"=JJadj,
+        "powB"=powB, "maxK"=maxK, "G"=G, "desc"=desc,
+        "difstats"=difstats,
+        "b_evm"=b_evm, "I"=I, "group.unique"=group.unique,
         "dat"=dat0)
     class(res) <- "rasch.evm.pcm"
     return(res)
@@ -206,10 +206,10 @@ rasch.evm.pcm <- function( dat , jackunits=20 , weights=NULL ,
 ########################################################################
 # SEXP evm_comp_matrix_poly( SEXP dat_, SEXP dat_resp_, SEXP weights_, SEXP JJ_,
 #    SEXP jackunits_, SEXP powD_, SEXP progress__, SEXP row_index_, SEXP col_index_) ;
-evm_comp_matrix_poly_R <- function( dat , dat.resp , weights , JJ , jackunits , powD ,  progress ,
-                row_index , col_index ){
+evm_comp_matrix_poly_R <- function( dat, dat.resp, weights, JJ, jackunits, powD,  progress,
+                row_index, col_index ){
     res <- evm_comp_matrix_poly(
              dat, dat.resp, weights, JJ,
-            jackunits, powD, progress , row_index, col_index )
+            jackunits, powD, progress, row_index, col_index )
     return(res)
         }

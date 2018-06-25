@@ -1,5 +1,5 @@
 %% File Name: latent.regression.em.raschtype.Rd
-%% File Version: 1.33
+%% File Version: 1.38
 
 \name{latent.regression.em.raschtype}
 \alias{latent.regression.em.raschtype}
@@ -20,16 +20,16 @@ Item parameters are treated as fixed in the estimation.
 }
 
 \usage{
-latent.regression.em.raschtype(data=NULL, f.yi.qk=NULL , X ,
+latent.regression.em.raschtype(data=NULL, f.yi.qk=NULL, X,
     weights=rep(1, nrow(X)), beta.init=rep(0,ncol(X)),
     sigma.init=1, b=rep(0,ncol(X)), a=rep(1,length(b)),
     c=rep(0, length(b)), d=rep(1, length(b)), alpha1=0, alpha2=0,
     max.parchange=1e-04, theta.list=seq(-5, 5, len=20),
-    maxiter=300 , progress=TRUE )
+    maxiter=300, progress=TRUE )
 
-latent.regression.em.normal(y, X, sig.e, weights = rep(1, nrow(X)),
-    beta.init = rep(0, ncol(X)), sigma.init = 1, max.parchange = 1e-04,
-    maxiter = 300, progress = TRUE)
+latent.regression.em.normal(y, X, sig.e, weights=rep(1, nrow(X)),
+    beta.init=rep(0, ncol(X)), sigma.init=1, max.parchange=1e-04,
+    maxiter=300, progress=TRUE)
 
 \method{summary}{latent.regression}(object,...)
 }
@@ -166,35 +166,35 @@ item type models.
 
 data( data.pisaRead)
 dat <- data.pisaRead$data
-items <- grep("R" , colnames(dat))
+items <- grep("R", colnames(dat))
 # define matrix of covariates
-X <- cbind( 1 , dat[ , c("female","hisei","migra" ) ] )
+X <- cbind( 1, dat[, c("female","hisei","migra" ) ] )
 
 #***
 # Model 1: Latent regression model in the Rasch model
 # estimate Rasch model
 mod1 <- sirt::rasch.mml2( dat[,items] )
 # latent regression model
-lm1 <- sirt::latent.regression.em.raschtype( data=dat[,items ], X = X , b = mod1$item$b )
+lm1 <- sirt::latent.regression.em.raschtype( data=dat[,items ], X=X, b=mod1$item$b )
 
 \dontrun{
 #***
 # Model 2: Latent regression with generalized link function
 # estimate alpha parameters for link function
-mod2 <- sirt::rasch.mml2( dat[,items] , est.alpha=TRUE)
+mod2 <- sirt::rasch.mml2( dat[,items], est.alpha=TRUE)
 # use model estimated likelihood for latent regression model
-lm2 <- sirt::latent.regression.em.raschtype( f.yi.qk=mod2$f.yi.qk ,
-            X = X , theta.list=mod2$theta.k)
+lm2 <- sirt::latent.regression.em.raschtype( f.yi.qk=mod2$f.yi.qk,
+            X=X, theta.list=mod2$theta.k)
 
 #***
 # Model 3: Latent regression model based on Rasch copula model
 testlets <- paste( data.pisaRead$item$testlet)
-itemclusters <- match( testlets , unique(testlets) )
+itemclusters <- match( testlets, unique(testlets) )
 # estimate Rasch copula model
-mod3 <- sirt::rasch.copula2( dat[,items] , itemcluster=itemclusters )
+mod3 <- sirt::rasch.copula2( dat[,items], itemcluster=itemclusters )
 # use model estimated likelihood for latent regression model
-lm3 <- sirt::latent.regression.em.raschtype( f.yi.qk=mod3$f.yi.qk ,
-                X = X , theta.list=mod3$theta.k)
+lm3 <- sirt::latent.regression.em.raschtype( f.yi.qk=mod3$f.yi.qk,
+                X=X, theta.list=mod3$theta.k)
 
 #############################################################################
 # EXAMPLE 2: Simulated data according to the Rasch model
@@ -207,15 +207,15 @@ n <- 2000       # number of students
 
 # simulate theta and covariates
 theta <- stats::rnorm( n )
-x <- .7 * theta + stats::rnorm( n , .5 )
-y <- .2 * x+ .3*theta + stats::rnorm( n , .4 )
-dfr <- data.frame( theta , 1 , x , y )
+x <- .7 * theta + stats::rnorm( n, .5 )
+y <- .2 * x+ .3*theta + stats::rnorm( n, .4 )
+dfr <- data.frame( theta, 1, x, y )
 
 # simulate Rasch model
-dat1 <- sirt::sim.raschtype( theta = theta , b = b )
+dat1 <- sirt::sim.raschtype( theta=theta, b=b )
 
 # estimate latent regression
-mod <- sirt::latent.regression.em.raschtype( data = dat1 , X  = dfr[,-1] , b = b )
+mod <- sirt::latent.regression.em.raschtype( data=dat1, X=dfr[,-1], b=b )
   ## Regression Parameters
   ##
   ##        est se.simple     se        t p   beta    fmi N.simple pseudoN.latent
@@ -223,13 +223,13 @@ mod <- sirt::latent.regression.em.raschtype( data = dat1 , X  = dfr[,-1] , b = b
   ## x   0.4113    0.0161 0.0193  21.3037 0 0.4956 0.3052     2000       1411.322
   ## y   0.1715    0.0179 0.0213   8.0438 0 0.1860 0.2972     2000       1411.322
   ##
-  ## Residual Variance  = 0.685
-  ## Explained Variance = 0.3639
-  ## Total Variance     = 1.049
-  ##                 R2 = 0.3469
+  ## Residual Variance=0.685
+  ## Explained Variance=0.3639
+  ## Total Variance   =1.049
+  ##                 R2=0.3469
 
 # compare with linear model (based on true scores)
-summary( stats::lm( theta  ~ x + y , data = dfr ) )
+summary( stats::lm( theta  ~ x + y, data=dfr ) )
   ## Coefficients:
   ##             Estimate Std. Error t value Pr(>|t|)
   ## (Intercept) -0.27821    0.01984  -14.02   <2e-16 ***
@@ -245,12 +245,12 @@ summary( stats::lm( theta  ~ x + y , data = dfr ) )
 # upper asymptotes ( 1 minus slipping parameters)
 cI <- rep(.2, I)        # all items get a guessing parameter of .2
 cI[ c(7,9) ] <- .25     # 7th and 9th get a guessing parameter of .25
-dI <- rep( .95 , I )    # upper asymptote of .95
+dI <- rep( .95, I )    # upper asymptote of .95
 dI[ c(7,11) ] <- 1        # 7th and 9th item have an asymptote of 1
 
 # latent regression model
-mod1 <- sirt::latent.regression.em.raschtype( data = dat1 , X  = dfr[,-1] ,
-           b = b , c = cI , d = dI    )
+mod1 <- sirt::latent.regression.em.raschtype( data=dat1, X=dfr[,-1],
+           b=b, c=cI, d=dI    )
   ## Regression Parameters
   ##
   ##        est se.simple     se        t p   beta    fmi N.simple pseudoN.latent
@@ -258,10 +258,10 @@ mod1 <- sirt::latent.regression.em.raschtype( data = dat1 , X  = dfr[,-1] ,
   ## x   0.5025    0.0188 0.0241  20.8273 0 0.5093 0.3936     2000       1247.306
   ## y   0.2149    0.0209 0.0266   8.0850 0 0.1960 0.3831     2000       1247.306
   ##
-  ## Residual Variance  = 0.9338
-  ## Explained Variance = 0.5487
-  ## Total Variance     = 1.4825
-  ##                 R2 = 0.3701
+  ## Residual Variance=0.9338
+  ## Explained Variance=0.5487
+  ## Total Variance   =1.4825
+  ##                 R2=0.3701
 
 #############################################################################
 # EXAMPLE 3: Measurement error in dependent variable
@@ -272,23 +272,23 @@ N <- 4000       # number of persons
 X <- stats::rnorm(N)           # independent variable
 Z <- stats::rnorm(N)           # independent variable
 y <- .45 * X + .25 * Z + stats::rnorm(N)   # dependent variable true score
-sig.e <- stats::runif( N , .5 , .6 )       # measurement error standard deviation
-yast <- y + stats::rnorm( N , sd = sig.e ) # dependent variable measured with error
+sig.e <- stats::runif( N, .5, .6 )       # measurement error standard deviation
+yast <- y + stats::rnorm( N, sd=sig.e ) # dependent variable measured with error
 
 #****
 # Model 1: Estimation with latent.regression.em.raschtype using
 #          individual likelihood
 # define theta grid for evaluation of density
-theta.list <- mean(yast) + stats::sd(yast) * seq( - 5 , 5 , length=21)
+theta.list <- mean(yast) + stats::sd(yast) * seq( - 5, 5, length=21)
 # compute individual likelihood
-f.yi.qk <- stats::dnorm( outer( yast , theta.list , "-" ) / sig.e )
+f.yi.qk <- stats::dnorm( outer( yast, theta.list, "-" ) / sig.e )
 f.yi.qk <- f.yi.qk / rowSums(f.yi.qk)
 # define predictor matrix
-X1 <- as.matrix(data.frame( "intercept"=1 , "X"=X , "Z"=Z ))
+X1 <- as.matrix(data.frame( "intercept"=1, "X"=X, "Z"=Z ))
 
 # latent regression model
-res <- sirt::latent.regression.em.raschtype( f.yi.qk=f.yi.qk ,
-                    X= X1 , theta.list=theta.list)
+res <- sirt::latent.regression.em.raschtype( f.yi.qk=f.yi.qk,
+                    X=X1, theta.list=theta.list)
   ##   Regression Parameters
   ##
   ##                est se.simple     se       t      p   beta    fmi N.simple pseudoN.latent
@@ -296,14 +296,14 @@ res <- sirt::latent.regression.em.raschtype( f.yi.qk=f.yi.qk ,
   ##   X         0.4275    0.0157 0.0180 23.7926 0.0000 0.3868 0.2350     4000       3061.998
   ##   Z         0.2314    0.0156 0.0178 12.9868 0.0000 0.2111 0.2349     4000       3061.998
   ##
-  ##   Residual Variance  = 0.9877
-  ##   Explained Variance = 0.2343
-  ##   Total Variance     = 1.222
-  ##                   R2 = 0.1917
+  ##   Residual Variance=0.9877
+  ##   Explained Variance=0.2343
+  ##   Total Variance   =1.222
+  ##                   R2=0.1917
 
 #****
 # Model 2: Estimation with latent.regression.em.normal
-res2 <- sirt::latent.regression.em.normal( y = yast , sig.e = sig.e , X = X1)
+res2 <- sirt::latent.regression.em.normal( y=yast, sig.e=sig.e, X=X1)
   ##   Regression Parameters
   ##
   ##                est se.simple     se       t      p   beta    fmi N.simple pseudoN.latent
@@ -311,10 +311,10 @@ res2 <- sirt::latent.regression.em.normal( y = yast , sig.e = sig.e , X = X1)
   ##   X         0.4275    0.0157 0.0180 23.7927 0.0000 0.3868 0.2350     4000       3062.041
   ##   Z         0.2314    0.0156 0.0178 12.9870 0.0000 0.2111 0.2349     4000       3062.041
   ##
-  ##   Residual Variance  = 0.9877
-  ##   Explained Variance = 0.2343
-  ##   Total Variance     = 1.222
-  ##                   R2 = 0.1917
+  ##   Residual Variance=0.9877
+  ##   Explained Variance=0.2343
+  ##   Total Variance   =1.222
+  ##                   R2=0.1917
 
   ## -> Results between Model 1 and Model 2 are identical because they use
   ##    the same input.

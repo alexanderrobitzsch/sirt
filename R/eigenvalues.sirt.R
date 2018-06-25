@@ -1,10 +1,10 @@
 ## File Name: eigenvalues.sirt.R
-## File Version: 0.08
+## File Version: 0.09
 
 
 ################################################
 # calculation of first D eigenvalues
-eigenvalues.sirt <- function (X,D, maxit=200 , conv=10^(-6) ){
+eigenvalues.sirt <- function (X,D, maxit=200, conv=10^(-6) ){
     eigenvaluesDsirt( X,D,maxit,conv)
 }
 # extern "C" {

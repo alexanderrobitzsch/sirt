@@ -1,5 +1,5 @@
 %% File Name: rasch.va.Rd
-%% File Version: 0.12
+%% File Version: 0.16
 
 \name{rasch.va}
 \alias{rasch.va}
@@ -12,7 +12,7 @@ This function estimates the Rasch model by the estimation method
 of variational approximation (Rijmen & Vomlel, 2008).
 }
 \usage{
-rasch.va(dat, globconv = 0.001, maxiter = 1000)
+rasch.va(dat, globconv=0.001, maxiter=1000)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -38,8 +38,8 @@ A list with following entries:
   \item{mu.i}{Vector with individual means \eqn{\mu_i}}
 \item{sigma2.i}{Vector with individual variances \eqn{\sigma_i^2}}
 %% ...
-%%    res <- list("sig" = sqrt(sig2) ,
-%%            "item"=item , "xsi.ij"=xsi.ij , "mu.i"=mu.i , "sigma2.i" = sigma2.i )
+%%    res <- list("sig"=sqrt(sig2),
+%%            "item"=item, "xsi.ij"=xsi.ij, "mu.i"=mu.i, "sigma2.i"=sigma2.i )
 }
 \references{
 Rijmen, F., & Vomlel, J. (2008). Assessing the performance of
@@ -66,7 +66,7 @@ Alexander Robitzsch
 set.seed(8706)
 N <- 5000
 I <- 20
-dat <- sirt::sim.raschtype( stats::rnorm(N,sd=1.3) , b= seq(-2,2,len=I) )
+dat <- sirt::sim.raschtype( stats::rnorm(N,sd=1.3), b=seq(-2,2,len=I) )
 
 # estimation via variational approximation
 mod1 <- sirt::rasch.va(dat)
@@ -78,11 +78,11 @@ mod2 <- sirt::rasch.mml2(dat)
 mod3 <- sirt::rasch.jml(dat)
 
 # compare sigma
-round( c( mod1$sig , mod2$sd.trait ) , 3 )
+round( c( mod1$sig, mod2$sd.trait ), 3 )
 ## [1] 1.222 1.314
 
 # compare b
-round( cbind( mod1$item$b , mod2$item$b , mod3$item$itemdiff) , 3 )
+round( cbind( mod1$item$b, mod2$item$b, mod3$item$itemdiff), 3 )
 ##         [,1]   [,2]   [,3]
 ##  [1,] -1.898 -1.967 -2.090
 ##  [2,] -1.776 -1.841 -1.954

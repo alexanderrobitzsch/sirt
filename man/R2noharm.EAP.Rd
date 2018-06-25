@@ -1,5 +1,5 @@
 %% File Name: R2noharm.EAP.Rd
-%% File Version: 0.11
+%% File Version: 0.14
 
 \name{R2noharm.EAP}
 \alias{R2noharm.EAP}
@@ -12,7 +12,7 @@ This function performs EAP factor score estimation of
 an item response model estimated with NOHARM.
 }
 \usage{
-R2noharm.EAP(noharmobj, theta.k = seq(-6, 6, len = 21) , print.output=TRUE)
+R2noharm.EAP(noharmobj, theta.k=seq(-6, 6, len=21), print.output=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

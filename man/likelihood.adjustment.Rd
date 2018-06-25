@@ -1,5 +1,5 @@
 %% File Name: likelihood.adjustment.Rd
-%% File Version: 0.07
+%% File Version: 0.10
 
 \name{likelihood.adjustment}
 \alias{likelihood.adjustment}
@@ -21,10 +21,10 @@ in \code{target.EAP.rel}.
 }
 
 \usage{
-likelihood.adjustment(likelihood, theta = NULL, prob.theta = NULL,
-     adjfac = rep(1, nrow(likelihood)), extreme.item = 5, target.EAP.rel = NULL,
-     min_tuning = 0.2, max_tuning = 3, maxiter = 100, conv = 1e-04,
-     trait.normal = TRUE)
+likelihood.adjustment(likelihood, theta=NULL, prob.theta=NULL,
+     adjfac=rep(1, nrow(likelihood)), extreme.item=5, target.EAP.rel=NULL,
+     min_tuning=0.2, max_tuning=3, maxiter=100, conv=1e-04,
+     trait.normal=TRUE)
 }
 
 
@@ -116,16 +116,16 @@ dat <- data.read
 theta.k <- seq(-6,6,len=41)
 
 #*** Model 1: fit Rasch model in TAM
-mod1 <- TAM::tam.mml( dat , control=list( nodes=theta.k) )
+mod1 <- TAM::tam.mml( dat, control=list( nodes=theta.k) )
 summary(mod1)
 
 #*** Model 2: fit Rasch copula model
-testlets <- substring( colnames(dat) , 1 , 1 )
-mod2 <- sirt::rasch.copula2( dat , itemcluster=testlets , theta.k=theta.k)
+testlets <- substring( colnames(dat), 1, 1 )
+mod2 <- sirt::rasch.copula2( dat, itemcluster=testlets, theta.k=theta.k)
 summary(mod2)
 
 # model comparison
-IRT.compareModels( mod1 , mod2 )
+IRT.compareModels( mod1, mod2 )
 
 # extract EAP reliabilities
 rel1 <- mod1$EAP.rel
@@ -138,11 +138,11 @@ vif <- (1-rel2) / (1-rel1)
 # extract individual likelihood
 like1 <- IRT.likelihood( mod1 )
 # adjust likelihood from Model 1 to obtain a target EAP reliability of .599
-like1b <- sirt::likelihood.adjustment( like1 , target.EAP.rel = .599 )
+like1b <- sirt::likelihood.adjustment( like1, target.EAP.rel=.599 )
 
 # compare estimated latent regressions
-lmod1a <- TAM::tam.latreg( like1 , Y = NULL )
-lmod1b <- TAM::tam.latreg( like1b , Y = NULL )
+lmod1a <- TAM::tam.latreg( like1, Y=NULL )
+lmod1b <- TAM::tam.latreg( like1b, Y=NULL )
 summary(lmod1a)
 summary(lmod1b)
 }

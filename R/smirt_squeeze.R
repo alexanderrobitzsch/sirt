@@ -1,7 +1,7 @@
 ## File Name: smirt_squeeze.R
-## File Version: 0.03
+## File Version: 0.06
 
-smirt_squeeze <- function( val , lower , upper, est)
+smirt_squeeze <- function( val, lower, upper, est)
 {
     D <- 1
     is_matrix <- FALSE
@@ -12,14 +12,14 @@ smirt_squeeze <- function( val , lower , upper, est)
     if( ! is.matrix(val) ){
         val <- matrix(val, ncol=1)
     }
-    est <- matrix( est , ncol=D)
+    est <- matrix( est, ncol=D)
     val0 <- val
     for (dd in 1:D){
-        val[,dd] <- ifelse( val[,dd] < lower , lower , val[,dd] )
-        val[,dd] <- ifelse( val[,dd] > upper , upper , val[,dd] )
-        ind_dd <- which(est[,dd] == 0)
+        val[,dd] <- ifelse( val[,dd] < lower, lower, val[,dd] )
+        val[,dd] <- ifelse( val[,dd] > upper, upper, val[,dd] )
+        ind_dd <- which(est[,dd]==0)
         if ( length(ind_dd) > 0 ){
-            val[ ind_dd , dd] <- val0[ ind_dd,dd]
+            val[ ind_dd, dd] <- val0[ ind_dd,dd]
         }
     }
     if ( ! is_matrix){

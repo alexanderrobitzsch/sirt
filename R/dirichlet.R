@@ -1,5 +1,5 @@
 ## File Name: dirichlet.R
-## File Version: 1.08
+## File Version: 1.11
 
 ###########################################
 # simulate from a Dirichlet distribution
@@ -10,7 +10,7 @@ dirichlet.simul <- function( alpha ){
     K <- ncol(alpha)
     ygamma <- 0*alpha
     for (ii in 1:K){   # ii <- 1
-        ygamma[,ii] <- stats::rgamma( n=N , shape=alpha[,ii] )
+        ygamma[,ii] <- stats::rgamma( n=N, shape=alpha[,ii] )
                 }
     x <- ygamma / rowSums(ygamma)
     return(x)
@@ -22,8 +22,8 @@ digamma1 <- function(x,h=.001){
                 }
 ##################################################
 # Maximum likelihood estimation of distribution parameters
-dirichlet.mle <- function( x ,  weights=NULL , eps=10^(-5),convcrit=.00001 , maxit=1000,
-        oldfac = .3 , progress=FALSE){
+dirichlet.mle <- function( x,  weights=NULL, eps=10^(-5),convcrit=.00001, maxit=1000,
+        oldfac=.3, progress=FALSE){
 
     #***
     N <- nrow(x)
@@ -55,17 +55,17 @@ dirichlet.mle <- function( x ,  weights=NULL , eps=10^(-5),convcrit=.00001 , max
         g <- N * digamma( sum(alpha ) ) - N * digamma(alpha) + N * log.pbar
         z <- N * digamma1( sum(alpha ))
         H <- diag( -N*digamma1( alpha ) ) + z
-        alpha <- alpha0 - solve(H , g )
+        alpha <- alpha0 - solve(H, g )
         alpha[ alpha < 0 ] <- 10^(-10)
         alpha <- alpha0 + oldfac*( alpha - alpha0 )
         conv <- max( abs( alpha0 - alpha ) )
-        if (progress){     print( paste( iter , sum(alpha) , conv) ) }
+        if (progress){     print( paste( iter, sum(alpha), conv) ) }
         iter <- iter+1
         utils::flush.console()
                 }
     alpha0 <- sum(alpha)
     xsi <- alpha / alpha0
-    res <- list( "alpha"=alpha , "alpha0" = alpha0 , "xsi" = xsi )
+    res <- list( "alpha"=alpha, "alpha0"=alpha0, "xsi"=xsi )
     return(res)
         }
 ##############################################################

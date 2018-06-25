@@ -1,5 +1,5 @@
 %% File Name: rasch.prox.Rd
-%% File Version: 1.11
+%% File Version: 1.14
 
 \name{rasch.prox}
 \alias{rasch.prox}
@@ -12,8 +12,8 @@ This function estimates the Rasch model using the PROX algorithm
 (cited in Wright & Stone, 1999).
 }
 \usage{
-rasch.prox(dat, dat.resp = 1 - is.na(dat), freq=rep(1,nrow(dat)) ,
-    conv = 0.001, maxiter = 30, progress = FALSE)
+rasch.prox(dat, dat.resp=1 - is.na(dat), freq=rep(1,nrow(dat)),
+    conv=0.001, maxiter=30, progress=FALSE)
 }
 \arguments{
   \item{dat}{

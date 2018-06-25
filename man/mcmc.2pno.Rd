@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pno.Rd
-%% File Version: 1.25
+%% File Version: 1.29
 
 \name{mcmc.2pno}
 \alias{mcmc.2pno}
@@ -12,8 +12,8 @@ This function estimates the Two-Parameter normal ogive item response model
 by MCMC sampling (Johnson & Albert, 1999, p. 195ff.).
 }
 \usage{
-mcmc.2pno(dat, weights=NULL , burnin = 500, iter = 1000, N.sampvalues = 1000,
-      progress.iter = 50, save.theta = FALSE)
+mcmc.2pno(dat, weights=NULL, burnin=500, iter=1000, N.sampvalues=1000,
+      progress.iter=50, save.theta=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -43,8 +43,8 @@ Should theta values be saved?
 \details{
 The two-parameter normal ogive item response model with a probit link
 function is defined by
-\deqn{ P(X_{pi} = 1 | \theta_p ) = \Phi ( a_i \theta_p - b_i )
-        \quad ,  \quad \theta_p \sim N(0,1) }
+\deqn{ P(X_{pi}=1 | \theta_p )=\Phi ( a_i \theta_p - b_i )
+        \quad,  \quad \theta_p \sim N(0,1) }
 Note that in this implementation non-informative priors for the item
 parameters are chosen (Johnson & Albert, 1999, p. 195ff.).
 }
@@ -70,7 +70,7 @@ A list of class \code{mcmc.sirt} with following entries:
   \item{weights}{Used student weights}
   \item{\dots}{Further values}
 }
-% "EAP.rel" = EAP.rel , "dat" = dat0 , "weights" = weights ,
+% "EAP.rel"=EAP.rel, "dat"=dat0, "weights"=weights,
 
 \references{
 Johnson, V. E., & Albert, J. H. (1999). \emph{Ordinal Data Modeling}.
@@ -101,11 +101,11 @@ A hierarchical version of this model can be estimated with
 #############################################################################
 data(data.read)
 # estimate 2PNO with MCMC with 3000 iterations and 500 burn-in iterations
-mod <- sirt::mcmc.2pno( dat=data.read , iter=3000 , burnin=500 )
+mod <- sirt::mcmc.2pno( dat=data.read, iter=3000, burnin=500 )
 # plot MCMC chains
-plot( mod$mcmcobj , ask=TRUE )
+plot( mod$mcmcobj, ask=TRUE )
 # write sampled chains into codafile
-mcmclist2coda( mod$mcmcobj , name = "dataread_2pno" )
+mcmclist2coda( mod$mcmcobj, name="dataread_2pno" )
 # summary
 summary(mod)
 
@@ -115,22 +115,22 @@ summary(mod)
 # simulate data
 N <- 1000
 I <- 10
-b <- seq( -1.5 , 1.5 , len=I )
-a <- rep( c(1,2) , I/2 )
+b <- seq( -1.5, 1.5, len=I )
+a <- rep( c(1,2), I/2 )
 theta1 <- stats::rnorm(N)
-dat <- sirt::sim.raschtype( theta=theta1 , fixed.a =a , b=b )
+dat <- sirt::sim.raschtype( theta=theta1, fixed.a=a, b=b )
 
 #***
 # Model 1: estimate model without weights
-mod1 <- sirt::mcmc.2pno( dat , iter= 1500 , burnin=500)
+mod1 <- sirt::mcmc.2pno( dat, iter=1500, burnin=500)
 mod1$summary.mcmcobj
-plot( mod1$mcmcobj , ask=TRUE )
+plot( mod1$mcmcobj, ask=TRUE )
 
 #***
 # Model 2: estimate model with weights
 # define weights
-weights <- c( rep( 5 , N/4 ) , rep( .2 , 3/4*N ) )
-mod2 <- sirt::mcmc.2pno( dat , weights=weights , iter= 1500 , burnin=500)
+weights <- c( rep( 5, N/4 ), rep( .2, 3/4*N ) )
+mod2 <- sirt::mcmc.2pno( dat, weights=weights, iter=1500, burnin=500)
 mod1$summary.mcmcobj
 }
 }

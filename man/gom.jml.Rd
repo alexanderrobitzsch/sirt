@@ -1,5 +1,5 @@
 %% File Name: gom.jml.Rd
-%% File Version: 0.14
+%% File Version: 0.20
 
 \name{gom.jml}
 \alias{gom.jml}
@@ -61,11 +61,11 @@ The item response model of the grade of membership model with \eqn{K} classes
 for dichotomous correct responses \eqn{X_{pi}}
 of person \eqn{p} on item \eqn{i} is
 \deqn{
-    P(X_{pi}=1 | g_{p1}, \ldots , g_{pK} ) = \sum_k \lambda_{ik} g_{pk}
-\quad , \quad \sum_k g_{pk} = 1
+    P(X_{pi}=1 | g_{p1}, \ldots, g_{pK} )=\sum_k \lambda_{ik} g_{pk}
+\quad, \quad \sum_k g_{pk}=1
                 }{%
-    P(X_{pi}=1 | g_{p1}, \ldots , g_{pK} ) = \sum_k \lambda_{ik} g_{pk}
-    ,    \sum_k g_{pk} = 1
+    P(X_{pi}=1 | g_{p1}, \ldots, g_{pK} )=\sum_k \lambda_{ik} g_{pk}
+,    \sum_k g_{pk}=1
             }
 }
 
@@ -131,15 +131,15 @@ S3 method \code{\link{summary.gom}}
 #############################################################################
 
 data( data.timss)
-dat <- data.timss$data[ , grep("M" , colnames(data.timss$data) ) ]
+dat <- data.timss$data[, grep("M", colnames(data.timss$data) ) ]
 
 # 2 Classes (deterministic starting values)
-m2 <- sirt::gom.jml(dat,K=2 , maxiter=10 )
+m2 <- sirt::gom.jml(dat,K=2, maxiter=10 )
 summary(m2)
 
 \dontrun{
 # 3 Classes with fixed seed and maximum number of iterations
-m3 <- sirt::gom.jml(dat,K=3 , maxiter=50,seed=89)
+m3 <- sirt::gom.jml(dat,K=3, maxiter=50,seed=89)
 summary(m3)
 }
 }

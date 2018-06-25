@@ -1,5 +1,5 @@
 %% File Name: mle.pcm.group.Rd
-%% File Version: 0.18
+%% File Version: 0.22
 
 \name{mle.pcm.group}
 \alias{mle.pcm.group}
@@ -13,8 +13,8 @@ This function estimates person or group parameters in the
 partial credit model (see Details).
 }
 \usage{
-mle.pcm.group(dat, b, a = rep(1, ncol(dat)), group = NULL,
-    pid = NULL, adj_eps = 0.3, conv = 1e-04, maxiter = 30)
+mle.pcm.group(dat, b, a=rep(1, ncol(dat)), group=NULL,
+    pid=NULL, adj_eps=0.3, conv=1e-04, maxiter=30)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -51,7 +51,7 @@ It is assumed that the generalized partial credit model holds.
 In case one estimates a person parameter \eqn{\theta_p},
 the log-likelihood is maximized and the following
 estimating equation results: (see Penfield & Bergeron, 2005):
-\deqn{ 0 = ( \log L )' = \sum_i a_i \cdot [ \tilde{x}_{pi} -
+\deqn{ 0=( \log L )'=\sum_i a_i \cdot [ \tilde{x}_{pi} -
     E(X_{pi} | \theta_p ) ] }
 where \eqn{E(X_{pi} | \theta_p )} denotes the expected item response
 conditionally on \eqn{\theta_p}.
@@ -63,14 +63,14 @@ no perfect scores arise and bias is reduced. If \eqn{S_p}
 is the sum score of person \eqn{p} and \eqn{M_p} the maximum
 score of this person, then the transformed sum scores \eqn{\tilde{S}_p}
 are
-\deqn{ \tilde{S}_p = \varepsilon + \frac{M_p - 2 \varepsilon}{M_p} S_p}
+\deqn{ \tilde{S}_p=\varepsilon + \frac{M_p - 2 \varepsilon}{M_p} S_p}
 However, the adjustment is directly conducted on item responses
 to also handle the case of the generalized partial credit
 model with item slope parameters different from 1.
 
 In case one estimates a group parameter \eqn{\theta_g},
 the following estimating equation is used:
-\deqn{ 0 = (\log L )' = \sum_p \sum_i a_i \cdot [ \tilde{x}_{pgi} -
+\deqn{ 0=(\log L )'=\sum_p \sum_i a_i \cdot [ \tilde{x}_{pgi} -
     E(X_{pgi} | \theta_g ) ] }
 where persons \eqn{p} are nested within a group \eqn{g}.
 The \eqn{\varepsilon}-adjustment is then performed at the
@@ -121,13 +121,13 @@ data(data.si01)
 dat <- data.si01
 # item parameter estimation (partial credit model) in TAM
 library(TAM)
-mod <- TAM::tam.mml( dat[,2:3] , irtmodel="PCM")
+mod <- TAM::tam.mml( dat[,2:3], irtmodel="PCM")
 # extract item difficulties
-b <- matrix( mod$xsi$xsi , nrow=2 , byrow=TRUE )
+b <- matrix( mod$xsi$xsi, nrow=2, byrow=TRUE )
 # groupwise estimation
-res1 <- sirt::mle.pcm.group( dat[,2:3] , b=b , group=dat$idgroup )
+res1 <- sirt::mle.pcm.group( dat[,2:3], b=b, group=dat$idgroup )
 # individual estimation
-res2 <- sirt::mle.pcm.group( dat[,2:3] , b=b  )
+res2 <- sirt::mle.pcm.group( dat[,2:3], b=b  )
 
 #############################################################################
 # EXAMPLE 2: Data Reading data.read
@@ -137,20 +137,20 @@ data(data.read)
 # estimate Rasch model
 mod <- sirt::rasch.mml2( data.read )
 score <- rowSums( data.read )
-data.read <- data.read[ order(score) , ]
+data.read <- data.read[ order(score), ]
 score <- score[ order(score) ]
 # compare different epsilon-adjustments
-res30 <- sirt::mle.pcm.group( data.read , b = matrix( mod$item$b , 12 , 1 ) ,
+res30 <- sirt::mle.pcm.group( data.read, b=matrix( mod$item$b, 12, 1 ),
                adj_eps=.3 )$person
-res10 <- sirt::mle.pcm.group( data.read , b = matrix( mod$item$b , 12 , 1 ) ,
+res10 <- sirt::mle.pcm.group( data.read, b=matrix( mod$item$b, 12, 1 ),
              adj_eps=.1 )$person
-res05 <- sirt::mle.pcm.group( data.read , b = matrix( mod$item$b , 12 , 1 ) ,
+res05 <- sirt::mle.pcm.group( data.read, b=matrix( mod$item$b, 12, 1 ),
               adj_eps=.05 )$person
 # plot different scorings
-plot( score , res05$theta , type="l" , xlab="Raw score" , ylab=expression(theta[epsilon]),
+plot( score, res05$theta, type="l", xlab="Raw score", ylab=expression(theta[epsilon]),
          main="Scoring with different epsilon-adjustments")
-lines( score , res10$theta , col=2 , lty=2 )
-lines( score , res30$theta , col=4 , lty=3 )
+lines( score, res10$theta, col=2, lty=2 )
+lines( score, res30$theta, col=4, lty=3 )
 }
 }
 

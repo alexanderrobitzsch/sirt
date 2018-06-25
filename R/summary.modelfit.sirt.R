@@ -1,10 +1,10 @@
 ## File Name: summary.modelfit.sirt.R
-## File Version: 1.04
+## File Version: 1.05
 
 
 ##############################################################
 # summary modelfit.sirt
-summary.modelfit.sirt <- function( object , ... )
+summary.modelfit.sirt <- function( object, ... )
 {
     cat("Test of Global Model Fit\n")
     sirt_summary_print_objects(obji=object$modelfit.test, digits=5, from=2)

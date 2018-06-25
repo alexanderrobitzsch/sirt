@@ -1,19 +1,19 @@
 ## File Name: IRT.factor.scores.sirt.R
-## File Version: 0.06
+## File Version: 0.10
 
 
 ########################################################################
 # rm.facets
-IRT.factor.scores.rm.facets <- function( object , type="EAP" , ... ){
+IRT.factor.scores.rm.facets <- function( object, type="EAP", ... ){
     # admissible factor score types
     x1 <- c("EAP","MLE","WLE")
     if ( ! ( type %in% x1 ) ){
         stop("Requested type is not supported!\n")
                     }
     #**** EAP
-    if ( type == "EAP"){
+    if ( type=="EAP"){
         res <- object$person
-        res <- res[ , c("pid" , "EAP" , "SE.EAP") ]
+        res <- res[, c("pid", "EAP", "SE.EAP") ]
         attr(res,"type") <- type
         attr(res,"reliability") <- object$EAP.rel
                         }
@@ -23,13 +23,13 @@ IRT.factor.scores.rm.facets <- function( object , type="EAP" , ... ){
         a <- object$ipars.dat2$a
         b <- object$ipars.dat2$b
         theta0 <- object$person$EAP
-        WLE <- if( type == "WLE"){ TRUE } else {FALSE }
-        res <- rm.facets.mle( data , a , b , theta= theta0 ,  WLE=WLE ,
-                    maxiter=20 , maxincr=3 , h = .001 , convP = .001 , maxval=9.99 ,
+        WLE <- if( type=="WLE"){ TRUE } else {FALSE }
+        res <- rm.facets.mle( data, a, b, theta=theta0,  WLE=WLE,
+                    maxiter=20, maxincr=3, h=.001, convP=.001, maxval=9.99,
                     progress=TRUE )
-        res <- data.frame("pid"=object$person$pid , res )
+        res <- data.frame("pid"=object$person$pid, res )
         attr(res,"type") <- type
-        attr(res,"reliability") <- mle.reliability( meas=res$est , se.meas = res$se )
+        attr(res,"reliability") <- mle.reliability( meas=res$est, se.meas=res$se )
                     }
 
     return(res)

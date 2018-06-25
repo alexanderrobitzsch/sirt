@@ -1,5 +1,5 @@
 %% File Name: polychoric2.Rd
-%% File Version: 0.11
+%% File Version: 0.14
 
 \name{polychoric2}
 \alias{polychoric2}
@@ -12,7 +12,7 @@ This function estimates the polychoric correlation coefficient
 using maximum likelihood estimation (Olsson, 1979).
 }
 \usage{
-polychoric2(dat, maxiter = 100, cor.smooth = TRUE)
+polychoric2(dat, maxiter=100, cor.smooth=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -71,7 +71,7 @@ For estimating tetrachoric correlations see \code{\link{tetrachoric2}}.
 #############################################################################
 
 data(data.Students, package="CDM")
-dat <- data.Students[ , paste0("act" , 1:5 ) ]
+dat <- data.Students[, paste0("act", 1:5 ) ]
 
 # tetrachoric correlation from psych package
 library(psych)

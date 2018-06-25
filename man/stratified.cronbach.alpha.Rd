@@ -1,5 +1,5 @@
 %% File Name: stratified.cronbach.alpha.Rd
-%% File Version: 0.19
+%% File Version: 0.23
 
 \name{stratified.cronbach.alpha}
 \alias{stratified.cronbach.alpha}
@@ -72,8 +72,8 @@ I <- ncol(dat)
 stratified.cronbach.alpha( data.read  )
 
 # define item strata
-itemstrata <- cbind( colnames(dat) , substring( colnames(dat) , 1 ,1 ) )
-stratified.cronbach.alpha( data.read , itemstrata=itemstrata )
+itemstrata <- cbind( colnames(dat), substring( colnames(dat), 1,1 ) )
+stratified.cronbach.alpha( data.read, itemstrata=itemstrata )
   ##   scale  I alpha mean.tot var.tot alpha.stratified
   ## 1 total 12 0.677    8.680   5.668            0.703
   ## 2     A  4 0.545    2.616   1.381               NA
@@ -87,14 +87,14 @@ library(psych)
 # Cronbach's alpha and item discriminations
 psych::alpha( dat )
 # McDonald's omega
-psych::omega(dat , nfactors=1)     # 1 factor
+psych::omega(dat, nfactors=1)     # 1 factor
   ##   Alpha:                 0.69
   ##   Omega Total            0.69
-##  => Note that alpha in this function is the standardized Cronbach's
+##=> Note that alpha in this function is the standardized Cronbach's
 ##     alpha, i.e. alpha computed for standardized variables.
-psych::omega(dat , nfactors=2)     # 2 factors
+psych::omega(dat, nfactors=2)     # 2 factors
   ##   Omega Total            0.72
-psych::omega(dat , nfactors=3)     # 3 factors
+psych::omega(dat, nfactors=3)     # 3 factors
   ##   Omega Total            0.74
 }
 }

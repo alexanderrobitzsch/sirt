@@ -1,5 +1,5 @@
 %% File Name: rm.sdt.Rd
-%% File Version: 1.35
+%% File Version: 1.48
 
 \name{rm.sdt}
 \alias{rm.sdt}
@@ -23,6 +23,8 @@ Hierarchical Rater Model Based on Signal Detection Theory (HRM-SDT)
 This function estimates a version of the hierarchical rater
 model (HRM) based on signal detection theory (HRM-SDT; DeCarlo, 2005;
 DeCarlo, Kim & Johnson, 2011; Robitzsch & Steinfeld, 2018).
+The model is estimated by means of an EM algorithm adapted from
+multilevel latent class analysis (Vermunt, 2008).
 }
 
 
@@ -31,14 +33,13 @@ DeCarlo, Kim & Johnson, 2011; Robitzsch & Steinfeld, 2018).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usage{
-rm.sdt(dat, pid, rater, Qmatrix = NULL, theta.k = seq(-9, 9, len = 30),
-    est.a.item = FALSE, est.c.rater = "n", est.d.rater = "n", est.mean=FALSE ,
-    skillspace="normal" , tau.item.fixed = NULL , a.item.fixed = NULL ,
-    d.min = 0.5, d.max = 100, d.start = 3, c.start=NULL, tau.start=NULL, sd.start=1,
-    d.prior = c(3,100), c.prior=c(3,100), tau.prior=c(0,1000), a.prior=c(1,100),
-    max.increment = 1, numdiff.parm = 0.00001, maxdevchange = 0.1, globconv = .001,
-    maxiter = 1000, msteps = 4, mstepconv = 0.001, fac_incr=.99,
-    PEM=FALSE, PEM_itermax=maxiter )
+rm.sdt(dat, pid, rater, Qmatrix=NULL, theta.k=seq(-9, 9, len=30),
+    est.a.item=FALSE, est.c.rater="n", est.d.rater="n", est.mean=FALSE, est.sigma=TRUE,
+    skillspace="normal", tau.item.fixed=NULL, a.item.fixed=NULL,
+    d.min=0.5, d.max=100, d.start=3, c.start=NULL, tau.start=NULL, sd.start=1,
+    d.prior=c(3,100), c.prior=c(3,100), tau.prior=c(0,1000), a.prior=c(1,100),
+    link_item="GPCM", max.increment=1, numdiff.parm=0.00001, maxdevchange=0.1,
+    globconv=.001, maxiter=1000, msteps=4, mstepconv=0.001, optimizer="nlminb" )
 
 \method{summary}{rm.sdt}(object, file=NULL, ...)
 
@@ -97,6 +98,8 @@ the same as in \code{est.c.rater}.
 }
 \item{est.mean}{Optional logical indicating whether the mean of the
 trait distribution should be estimated.}
+\item{est.sigma}{Optional logical indicating whether the standard deviation of the
+trait distribution should be estimated.}
 \item{skillspace}{Specified \eqn{\theta} distribution type. It can be
     \code{"normal"} or \code{"discrete"}. In the latter case,
     all probabilities of the distribution are separately
@@ -131,6 +134,10 @@ Starting value for trait standard deviation
     where \eqn{M} is \code{c.prior[1]}. }
 \item{tau.prior}{Normal prior for \eqn{\tau} parameters}
 \item{a.prior}{Normal prior for \eqn{a} parameters}
+\item{link_item}{Type of item response function for latent responses.
+Can be \code{"GPCM"} for the generalized partial credit model or
+\code{"GRM"} for the graded response model.
+}
   \item{max.increment}{
 Maximum increment of item parameters during estimation
 }
@@ -152,13 +159,10 @@ Maximum number of iterations during an M step
   \item{mstepconv}{
 Convergence criterion in an M step
 }
-\item{fac_incr}{Factor for decreasing the increments in every iteration.
-    The factor should be smaller than 1, small values correspond
-to strong decreases in parameter changes in iterations.}
-\item{PEM}{Logical indicating whether the P-EM acceleration should be
-applied (Berlinet & Roland, 2012).}
-\item{PEM_itermax}{Number of iterations in which the P-EM method should be
-applied.}
+\item{optimizer}{Choice of optimization function in M-step for
+item parameters. Options are \code{"nlminb"} for \code{\link[stats:nlminb]{stats::nlminb}}
+and \code{"optim"} for \code{\link[stats:optim]{stats::optim}}.
+}
   \item{object}{
 Object of class \code{rm.sdt}
 }
@@ -179,25 +183,29 @@ Further arguments to be passed
 
 \details{
 The specification of the model follows DeCarlo et al. (2011).
-The second level models the ideal rating (latent response) \eqn{\eta =0, ...,K}
-of person \eqn{p} on item \eqn{i}
-\deqn{ P( \eta_{pi} = \eta | \theta_p ) \propto
-exp( a_{i} q_{ik} \theta_p - \tau_{ik} ) }
+The second level models the ideal rating (latent response) \eqn{\eta=0, ...,K}
+of person \eqn{p} on item \eqn{i}. The option \code{link_item='GPCM'} follows the
+generalized partial credit model
+\deqn{ P( \eta_{pi}=\eta | \theta_p ) \propto
+exp( a_{i} q_{i \eta } \theta_p - \tau_{i \eta } ) }. The option \code{link_item='GRM'} employs the
+graded response model   \deqn{ P( \eta_{pi}=\eta | \theta_p )=
+\Psi( \tau_{i,\eta + 1} - a_i \theta_p ) - \Psi( \tau_{i,\eta} - a_i \theta_p ) }
+
 At the first level, the ratings \eqn{X_{pir}} for
 person \eqn{p} on item \eqn{i} and rater \eqn{r}
 are modeled as a signal detection model
-\deqn{ P( X_{pir} \le k | \eta_{pi} ) =
+\deqn{ P( X_{pir} \le k | \eta_{pi} )=
 G( c_{irk} - d_{ir} \eta_{pi} )}
 where \eqn{G} is the logistic distribution function
-and the categories are \eqn{k=1,\ldots , K+1}.
+and the categories are \eqn{k=1,\ldots, K+1}.
 Note that the item response model can be equivalently written
-as \deqn{ P( X_{pir} \ge k | \eta_{pi} ) =
+as \deqn{ P( X_{pir} \ge k | \eta_{pi} )=
 G(   d_{ir} \eta_{pi} - c_{irk})}
 
 The thresholds \eqn{c_{irk}} can be further restricted to
-\eqn{c_{irk} = c_{k}} (\code{est.c.rater='e'}),
-\eqn{c_{irk} = c_{ik}} (\code{est.c.rater='i'}) or
-\eqn{c_{irk} = c_{ir}} (\code{est.c.rater='r'}). The same
+\eqn{c_{irk}=c_{k}} (\code{est.c.rater='e'}),
+\eqn{c_{irk}=c_{ik}} (\code{est.c.rater='i'}) or
+\eqn{c_{irk}=c_{ir}} (\code{est.c.rater='r'}). The same
 holds for rater precision parameters \eqn{d_{ir}}.
 }
 
@@ -214,7 +222,7 @@ A list with following entries:
 observed mean of all ratings, respectively. \cr
 In addition to item parameters \eqn{\tau_{ik}} and \eqn{a_i}, the mean
 for the latent response (\code{latM}) is computed as
-\eqn{E( \eta_i ) = \sum_p P( \theta_p ) q_{ik} P( \eta_i = k | \theta_p ) }
+\eqn{E( \eta_i )=\sum_p P( \theta_p ) q_{ik} P( \eta_i=k | \theta_p ) }
 which provides an item parameter at the original metric of ratings. The latent standard
 deviation (\code{latSD}) is computed in the same manner.
 }
@@ -241,7 +249,7 @@ errors}
 \item{probs}{Item probabilities at grid \code{theta.k}. Note that these
   probabilities are calculated on the pseudo items \eqn{i \times r},
   i.e. the interaction of item and rater.}
-\item{prob.item}{Probabilities \eqn{P( \eta_i = \eta | \theta )} of
+\item{prob.item}{Probabilities \eqn{P( \eta_i=\eta | \theta )} of
     latent item responses evaluated at theta grid \eqn{\theta_p}.
 }
 \item{n.ik}{Expected counts}
@@ -258,10 +266,6 @@ errors}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \references{
-Berlinet, A. F., & Roland, C. (2012).
-Acceleration of the EM algorithm: P-EM versus epsilon algorithm.
-\emph{Computational Statistics & Data Analysis}, \bold{56}(12), 4122-4137.
-
 DeCarlo, L. T. (2005). A model of rater behavior in essay grading
 based on signal detection theory.
 \emph{Journal of Educational Measurement}, \bold{42}, 53-76.
@@ -279,6 +283,9 @@ with a signal detection rater model.
 Robitzsch, A., & Steinfeld, J. (2018). Item response models for human ratings: Overview,
 estimation methods, and implementation in R.
 \emph{Psychological Test and Assessment Modeling, 60}(1), 101-139.
+
+Vermunt, J. K. (2008). Latent class and finite mixture models for
+multilevel data sets. \emph{Statistical Methods in Medical Research, 17}, 33-51.
 }
 
 
@@ -310,24 +317,24 @@ dat <- data.ratings1
 
 \dontrun{
 # Model 1: Partial Credit Model: no rater effects
-mod1 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
-            pid=dat$idstud , est.c.rater="n", d.start=100,  est.d.rater="n" )
+mod1 <- sirt::rm.sdt( dat[, paste0( "k",1:5) ], rater=dat$rater,
+            pid=dat$idstud, est.c.rater="n", d.start=100,  est.d.rater="n" )
 summary(mod1)
 
 # Model 2: Generalized Partial Credit Model: no rater effects
-mod2 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
-            pid=dat$idstud , est.c.rater="n" , est.d.rater="n" ,
-            est.a.item =TRUE , d.start=100)
+mod2 <- sirt::rm.sdt( dat[, paste0( "k",1:5) ], rater=dat$rater,
+            pid=dat$idstud, est.c.rater="n", est.d.rater="n",
+            est.a.item=TRUE, d.start=100)
 summary(mod2)
 
 # Model 3: Equal effects in SDT
-mod3 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
-            pid=dat$idstud , est.c.rater="e" , est.d.rater="e")
+mod3 <- sirt::rm.sdt( dat[, paste0( "k",1:5) ], rater=dat$rater,
+            pid=dat$idstud, est.c.rater="e", est.d.rater="e")
 summary(mod3)
 
 # Model 4: Rater effects in SDT
-mod4 <- sirt::rm.sdt( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
-            pid=dat$idstud , est.c.rater="r" , est.d.rater="r")
+mod4 <- sirt::rm.sdt( dat[, paste0( "k",1:5) ], rater=dat$rater,
+            pid=dat$idstud, est.c.rater="r", est.d.rater="r")
 summary(mod4)
 
 #############################################################################
@@ -336,18 +343,18 @@ summary(mod4)
 
 data(data.ratings3)
 dat <- data.ratings3
-dat <- dat[ dat$rater < 814 , ]
+dat <- dat[ dat$rater < 814, ]
 psych::describe(dat)
 
 # Model 1: item- and rater-specific effects
-mod1 <- sirt::rm.sdt( dat[ , paste0( "crit",c(2:4)) ] , rater=dat$rater ,
-            pid=dat$idstud , est.c.rater="a" , est.d.rater="a" )
+mod1 <- sirt::rm.sdt( dat[, paste0( "crit",c(2:4)) ], rater=dat$rater,
+            pid=dat$idstud, est.c.rater="a", est.d.rater="a" )
 summary(mod1)
 plot(mod1)
 
 # Model 2: Differing number of categories per variable
-mod2 <- sirt::rm.sdt( dat[ , paste0( "crit",c(2:4,6)) ] , rater=dat$rater ,
-            pid=dat$idstud , est.c.rater="a" , est.d.rater="a")
+mod2 <- sirt::rm.sdt( dat[, paste0( "crit",c(2:4,6)) ], rater=dat$rater,
+            pid=dat$idstud, est.c.rater="a", est.d.rater="a")
 summary(mod2)
 plot(mod2)
 
@@ -357,12 +364,12 @@ plot(mod2)
 
 data(data.ratings3)
 dat <- data.ratings3
-dat <- dat[ dat$rater < 814 , ]
+dat <- dat[ dat$rater < 814, ]
 psych::describe(dat)
 
 # Model 1: Discrete theta skill space with values of 0,1,2 and 3
-mod1 <- sirt::rm.sdt( dat[ , paste0( "crit",c(2:4)) ] , theta.k = 0:3 , rater=dat$rater ,
-            pid=dat$idstud , est.c.rater="a" , est.d.rater="a" , skillspace="discrete" )
+mod1 <- sirt::rm.sdt( dat[, paste0( "crit",c(2:4)) ], theta.k=0:3, rater=dat$rater,
+            pid=dat$idstud, est.c.rater="a", est.d.rater="a", skillspace="discrete" )
 summary(mod1)
 plot(mod1)
 
@@ -373,8 +380,8 @@ plot(mod1)
 tau.item.fixed <- cbind( 1, 1:3,  100*cumsum( c( 0.5, 1.5, 2.5)) )
 a.item.fixed <- cbind( 1, 100 )
 # fit HRM-SDT
-mod2 <- sirt::rm.sdt( dat[ , "crit2" , drop=FALSE] , theta.k = 0:3 , rater=dat$rater ,
-            tau.item.fixed=tau.item.fixed ,a.item.fixed=a.item.fixed, pid=dat$idstud,
+mod2 <- sirt::rm.sdt( dat[, "crit2", drop=FALSE], theta.k=0:3, rater=dat$rater,
+            tau.item.fixed=tau.item.fixed,a.item.fixed=a.item.fixed, pid=dat$idstud,
             est.c.rater="a", est.d.rater="a", skillspace="discrete" )
 summary(mod2)
 plot(mod2)

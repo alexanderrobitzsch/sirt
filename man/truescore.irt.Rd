@@ -1,5 +1,5 @@
 %% File Name: truescore.irt.Rd
-%% File Version: 0.15
+%% File Version: 0.19
 
 \name{truescore.irt}
 \alias{truescore.irt}
@@ -10,13 +10,13 @@ True Scores \eqn{\tau ( \theta )}
 }
 \description{
 This function computes the true score
-\eqn{\tau=\tau(\theta) = \sum_{i=1}^I P_i(\theta)}
+\eqn{\tau=\tau(\theta)=\sum_{i=1}^I P_i(\theta)}
 in a unidimensional item response model with \eqn{I} items. In addition, it also
 transforms conditional standard errors if they are provided.
 }
 \usage{
-truescore.irt(A, B, c = NULL, d = NULL, theta = seq(-3, 3, len = 21),
-    error = NULL, pid = NULL, h = 0.001)
+truescore.irt(A, B, c=NULL, d=NULL, theta=seq(-3, 3, len=21),
+    error=NULL, pid=NULL, h=0.001)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -48,7 +48,7 @@ Numerical differentiation parameter
 }
 
 \details{
-In addition, the function \eqn{\pi(\theta)= \frac{1}{I} \cdot \tau( \theta)}
+In addition, the function \eqn{\pi(\theta)=\frac{1}{I} \cdot \tau( \theta)}
 of the expected percent score is approximated by a logistic function
 \deqn{ \pi ( \theta ) \approx l + ( u - l ) \cdot invlogit ( a \theta + b )
 }
@@ -56,7 +56,7 @@ of the expected percent score is approximated by a logistic function
 
 \value{
 A data frame with following columns:
-\item{truescore}{True scores \eqn{\tau = \tau ( \theta )}}
+\item{truescore}{True scores \eqn{\tau=\tau ( \theta )}}
 \item{truescore.error}{Standard errors of true scores}
 \item{percscore}{Expected correct scores which is \eqn{\tau}
 divided by the maximum true score}
@@ -97,7 +97,7 @@ library(TAM)
 mod1 <- TAM::tam.mml( dat )
 # estimate person parameter estimates
 wmod1 <- TAM::tam.wle( mod1 )
-wmod1 <- wmod1[ order(wmod1$theta) , ]
+wmod1 <- wmod1[ order(wmod1$theta), ]
 # extract item parameters
 A <- mod1$B[,-1,1]
 B <- mod1$AXsi[,-1]
@@ -106,27 +106,27 @@ theta <- wmod1$theta
 error <- wmod1$error
 
 # estimate true score transformation
-dfr <- sirt::truescore.irt( A=A , B=B , theta=theta , error=error )
+dfr <- sirt::truescore.irt( A=A, B=B, theta=theta, error=error )
 
 # plot different person parameter estimates and standard errors
 par(mfrow=c(2,2))
-plot( theta , dfr$truescore , pch=16 , cex=.6 , xlab=expression(theta) , type="l",
-    ylab=expression(paste( tau , "(",theta , ")" ))  , main="True Score Transformation" )
-plot( theta , dfr$percscore , pch=16 , cex=.6 , xlab=expression(theta) , type="l",
-    ylab=expression(paste( pi , "(",theta , ")" ))  , main="Percent Score Transformation" )
-points( theta , dfr$lower + (dfr$upper-dfr$lower)*
-                stats::plogis(dfr$a*theta+dfr$b) , col=2 , lty=2)
-plot( theta , error , pch=16 , cex=.6 , xlab=expression(theta) , type="l",
-    ylab=expression(paste("SE(",theta , ")" ))  , main="Standard Error Theta" )
-plot( dfr$truescore , dfr$truescore.error , pch=16 , cex=.6 , xlab=expression(tau) ,
-    ylab=expression(paste("SE(",tau , ")" ) ) , main="Standard Error True Score Tau" ,
+plot( theta, dfr$truescore, pch=16, cex=.6, xlab=expression(theta), type="l",
+    ylab=expression(paste( tau, "(",theta, ")" )), main="True Score Transformation" )
+plot( theta, dfr$percscore, pch=16, cex=.6, xlab=expression(theta), type="l",
+    ylab=expression(paste( pi, "(",theta, ")" )), main="Percent Score Transformation" )
+points( theta, dfr$lower + (dfr$upper-dfr$lower)*
+                stats::plogis(dfr$a*theta+dfr$b), col=2, lty=2)
+plot( theta, error, pch=16, cex=.6, xlab=expression(theta), type="l",
+    ylab=expression(paste("SE(",theta, ")" )), main="Standard Error Theta" )
+plot( dfr$truescore, dfr$truescore.error, pch=16, cex=.6, xlab=expression(tau),
+    ylab=expression(paste("SE(",tau, ")" ) ), main="Standard Error True Score Tau",
     type="l")
 par(mfrow=c(1,1))
 
 \dontrun{
 #****
 # Model 2: Generalized partial credit model
-mod2 <- TAM::tam.mml.2pl( dat , irtmodel="GPCM")
+mod2 <- TAM::tam.mml.2pl( dat, irtmodel="GPCM")
 # estimate person parameter estimates
 wmod2 <- TAM::tam.wle( mod2 )
 # extract item parameters
@@ -136,7 +136,7 @@ B <- mod2$AXsi[,-1]
 theta <- wmod2$theta
 error <- wmod2$error
 # estimate true score transformation
-dfr <- sirt::truescore.irt( A=A , B=B , theta=theta , error=error )
+dfr <- sirt::truescore.irt( A=A, B=B, theta=theta, error=error )
 
 #############################################################################
 # EXAMPLE 2: Dataset Reading data.read
@@ -145,8 +145,8 @@ data(data.read)
 
 #****
 # Model 1: estimate difficulty + guessing model
-mod1 <- sirt::rasch.mml2( data.read , fixed.c = rep(.25,12) )
-mod1$person <- mod1$person[ order( mod1$person$EAP) , ]
+mod1 <- sirt::rasch.mml2( data.read, fixed.c=rep(.25,12) )
+mod1$person <- mod1$person[ order( mod1$person$EAP), ]
 # person parameters and standard errors
 theta <- mod1$person$EAP
 error <- mod1$person$SE.EAP
@@ -154,12 +154,12 @@ A <- rep(1,12)
 B <- - mod1$item$b
 c <- rep(.25,12)
 # estimate true score transformation
-dfr <- sirt::truescore.irt( A=A , B=B , theta=theta , error=error ,c=c)
+dfr <- sirt::truescore.irt( A=A, B=B, theta=theta, error=error,c=c)
 
-plot( theta , dfr$percscore , pch=16 , cex=.6 , xlab=expression(theta) , type="l",
-    ylab=expression(paste( pi , "(",theta , ")" ))  , main="Percent Score Transformation" )
-points( theta , dfr$lower + (dfr$upper-dfr$lower)*
-             stats::plogis(dfr$a*theta+dfr$b) , col=2 , lty=2)
+plot( theta, dfr$percscore, pch=16, cex=.6, xlab=expression(theta), type="l",
+    ylab=expression(paste( pi, "(",theta, ")" )), main="Percent Score Transformation" )
+points( theta, dfr$lower + (dfr$upper-dfr$lower)*
+             stats::plogis(dfr$a*theta+dfr$b), col=2, lty=2)
 
 #****
 # Model 2: Rasch model
@@ -170,7 +170,7 @@ error <- mod2$person$SE.EAP
 A <- rep(1,12)
 B <- - mod2$item$b
 # estimate true score transformation
-dfr <- sirt::truescore.irt( A=A , B=B , theta=theta , error=error )
+dfr <- sirt::truescore.irt( A=A, B=B, theta=theta, error=error )
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

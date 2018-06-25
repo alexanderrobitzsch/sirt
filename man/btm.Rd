@@ -1,5 +1,5 @@
 %% File Name: btm.Rd
-%% File Version: 0.16
+%% File Version: 0.19
 
 \name{btm}
 \alias{btm}
@@ -13,8 +13,8 @@ Estimates an extended Bradley-Terry model (Hunter, 2004; see Details).
 }
 
 \usage{
-btm(data, ignore.ties = FALSE, fix.eta = NULL, fix.delta = NULL, fix.theta = NULL,
-       maxiter = 100, conv = 1e-04, eps = 0.3)
+btm(data, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL, fix.theta=NULL,
+       maxiter=100, conv=1e-04, eps=0.3)
 
 \method{summary}{btm}(object, file=NULL, digits=4,...)
 }
@@ -59,9 +59,9 @@ extreme scores are removed from the pairwise comparison.
 \details{
 The extended Bradley-Terry model for the comparison of individuals
 \eqn{i} and \eqn{j} is defined as
-\deqn{P(X_{ij} = 1 ) \propto \exp( \eta + \theta_i ) }
-\deqn{P(X_{ij} = 0 ) \propto \exp(  \theta_j ) }
-\deqn{P(X_{ij} = 0.5) \propto \exp( \delta + ( \eta  + \theta_i +\theta_j )/2 ) }
+\deqn{P(X_{ij}=1 ) \propto \exp( \eta + \theta_i ) }
+\deqn{P(X_{ij}=0 ) \propto \exp(  \theta_j ) }
+\deqn{P(X_{ij}=0.5) \propto \exp( \delta + ( \eta  + \theta_i +\theta_j )/2 ) }
 The parameters \eqn{\theta_i} denote the abilities, \eqn{\delta} is the
 tendency of the occurrence of ties and \eqn{\eta} is the home-advantage
 effect.
@@ -113,11 +113,11 @@ See also the \R packages \pkg{BradleyTerry2}, \pkg{psychotools},
 data(data.pw01)
 
 dat <- data.pw01
-dat <- dat[ , c("home_team" , "away_team" , "result") ]
+dat <- dat[, c("home_team", "away_team", "result") ]
 
 # recode results according to needed input
-dat$result[ dat$result == 0 ] <- 1/2   # code for ties
-dat$result[ dat$result == 2 ] <- 0     # code for victory of away team
+dat$result[ dat$result==0 ] <- 1/2   # code for ties
+dat$result[ dat$result==2 ] <- 0     # code for victory of away team
 
 #********************
 # Model 1: Estimation with ties and home advantage
@@ -127,23 +127,23 @@ summary(mod1)
 \dontrun{
 #********************
 # Model 2: Estimation with ties, no epsilon adjustment
-mod2 <- sirt::btm( dat , eps=0 , fix.eta=0)
+mod2 <- sirt::btm( dat, eps=0, fix.eta=0)
 summary(mod2)
 
 #********************
 # Model 3: Some fixed abilities
-fix.theta <- c("Anhalt Dessau" = -1 )
-mod3 <- sirt::btm( dat , eps=0, fix.theta=fix.theta)
+fix.theta <- c("Anhalt Dessau"=-1 )
+mod3 <- sirt::btm( dat, eps=0, fix.theta=fix.theta)
 summary(mod3)
 
 #********************
 # Model 4: Ignoring ties, no home advantage effect
-mod4 <- sirt::btm( dat , ignore.ties=TRUE , fix.eta = 0)
+mod4 <- sirt::btm( dat, ignore.ties=TRUE, fix.eta=0)
 summary(mod4)
 
 #********************
 # Model 5: Ignoring ties, no home advantage effect (JML approach -> eps=0)
-mod5 <- sirt::btm( dat , ignore.ties=TRUE , fix.eta = 0 , eps=0)
+mod5 <- sirt::btm( dat, ignore.ties=TRUE, fix.eta=0, eps=0)
 summary(mod5)
 
 #############################################################################
@@ -170,27 +170,27 @@ chessdata <- scan( what="character")
     .......................................................00D1D010000 Zichichi
 
 L <- length(chessdata) / 2
-games <- matrix( chessdata , nrow=L , ncol=2 , byrow=TRUE )
+games <- matrix( chessdata, nrow=L, ncol=2, byrow=TRUE )
 G <- nchar(games[1,1])
 # create matrix with results
-results <- matrix( NA , nrow=G , ncol=3 )
+results <- matrix( NA, nrow=G, ncol=3 )
 for (gg in 1:G){
-    games.gg <- substring( games[,1] , gg , gg )
-    ind.gg <- which( games.gg != "." )
-    results[gg , 1:2 ] <- games[ ind.gg , 2]
+    games.gg <- substring( games[,1], gg, gg )
+    ind.gg <- which( games.gg !="." )
+    results[gg, 1:2 ] <- games[ ind.gg, 2]
     results[gg, 3 ] <- games.gg[ ind.gg[1] ]
             }
 results <- as.data.frame(results)
 results[,3] <- paste(results[,3] )
-results[ results[,3] == "D" , 3] <- 1/2
+results[ results[,3]=="D", 3] <- 1/2
 results[,3] <- as.numeric( results[,3] )
 
 # fit model ignoring draws
-mod1 <- sirt::btm( results , ignore.ties=TRUE , fix.eta = 0 , eps=0 )
+mod1 <- sirt::btm( results, ignore.ties=TRUE, fix.eta=0, eps=0 )
 summary(mod1)
 
 # fit model with draws
-mod2 <- sirt::btm( results , fix.eta = 0 , eps=0 )
+mod2 <- sirt::btm( results, fix.eta=0, eps=0 )
 summary(mod2)
 }
 }

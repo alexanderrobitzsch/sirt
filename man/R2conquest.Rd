@@ -1,5 +1,5 @@
 %% File Name: R2conquest.Rd
-%% File Version: 3.14
+%% File Version: 3.19
 
 \name{R2conquest}
 \alias{R2conquest}
@@ -27,14 +27,14 @@ values or person-item maps.
 }
 \usage{
 R2conquest(dat, path.conquest, conquest.name="console", converge=0.001,
-    deviancechange=1e-04, iter=800, nodes=20, minnode=-6 , maxnode=6,
+    deviancechange=1e-04, iter=800, nodes=20, minnode=-6, maxnode=6,
     show.conquestoutput=FALSE, name="rasch", pid=1:(nrow(dat)), wgt=NULL, X=NULL,
     set.constraints=NULL, model="item", regression=NULL,
     itemcodes=seq(0,max(dat,na.rm=TRUE)), constraints=NULL, digits=5, onlysyntax=FALSE,
     qmatrix=NULL, import.regression=NULL, anchor.regression=NULL,
     anchor.covariance=NULL, pv=TRUE, designmatrix=NULL, only.calibration=FALSE,
     init_parameters=NULL, n_plausible=10,  persons.elim=TRUE, est.wle=TRUE,
-    save.bat=TRUE , use.bat=FALSE , read.output=TRUE , ignore.pid=FALSE)
+    save.bat=TRUE, use.bat=FALSE, read.output=TRUE, ignore.pid=FALSE)
 
 \method{summary}{R2conquest}(object, \dots)
 
@@ -46,9 +46,9 @@ read.show.term(showfile, term)
 read.show.regression(showfile)
 
 # read unidimensional plausible values form a pv file
-read.pv(pvfile, npv = 5)
+read.pv(pvfile, npv=5)
 # read multidimensional plausible values
-read.multidimpv(pvfile, ndim, npv = 5)
+read.multidimpv(pvfile, ndim, npv=5)
 
 # read person-item map
 read.pimap(showfile)
@@ -242,12 +242,12 @@ data(data.pisaMath)
 dat <- data.pisaMath$data
 
 # select items
-items <- colnames(dat)[ which( substring( colnames(dat) , 1 , 1)=="M" ) ]
+items <- colnames(dat)[ which( substring( colnames(dat), 1, 1)=="M" ) ]
 
 #***
 # Model 11: Rasch model
-mod11 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
-             pid=dat$idstud , name="mod11")
+mod11 <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
+             pid=dat$idstud, name="mod11")
 summary(mod11)
 # read show file
 shw11 <- sirt::read.show( "mod11.shw" )
@@ -256,28 +256,28 @@ pi11 <- sirt::read.pimap(showfile="mod11.shw")
 
 #***
 # Model 12: Rasch model with fixed item difficulties (from Model 1)
-mod12 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
-             pid=dat$idstud , constraints = mod11$item[ , c("item","itemdiff")] ,
+mod12 <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
+             pid=dat$idstud, constraints=mod11$item[, c("item","itemdiff")],
              name="mod12")
 summary(mod12)
 
 #***
 # Model 13: Latent regression model with predictors female, hisei and migra
-mod13a <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
-             pid=dat$idstud , X = dat[ , c("female" , "hisei" , "migra") ] ,
+mod13a <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
+             pid=dat$idstud, X=dat[, c("female", "hisei", "migra") ],
              name="mod13a")
 summary(mod13a)
 
 # latent regression with a subset of predictors
-mod13b <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
-             pid=dat$idstud , X = dat[ , c("female" , "hisei" , "migra") ] ,
-             regression= "hisei migra" , name="mod13b")
+mod13b <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
+             pid=dat$idstud, X=dat[, c("female", "hisei", "migra") ],
+             regression="hisei migra", name="mod13b")
 
 #***
 # Model 14: Differential item functioning (female)
-mod14 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
-             pid=dat$idstud , X = dat[ , c("female") , drop=FALSE] ,
-             model="item+female+item*female" ,  regression="" ,  name="mod14")
+mod14 <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
+             pid=dat$idstud, X=dat[, c("female"), drop=FALSE],
+             model="item+female+item*female",  regression="",  name="mod14")
 
 #############################################################################
 # EXAMPLE 2: Polytomous data (data.Students)
@@ -287,26 +287,26 @@ data(data.Students)
 dat <- data.Students
 
 # select items
-items <- grep.vec( "act" , colnames(dat) )$x
+items <- grep.vec( "act", colnames(dat) )$x
 
 #***
 # Model 21: Partial credit model
-mod21 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
-              model="item+item*step" ,  name="mod21")
+mod21 <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
+              model="item+item*step",  name="mod21")
 
 #***
 # Model 22: Rating scale model
-mod22 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
-              model="item+step" , name="mod22")
+mod22 <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
+              model="item+step", name="mod22")
 
 #***
 # Model 23: Multidimensional model
-items <- grep.vec( c("act" , "sc" ) , colnames(dat) ,  "OR" )$x
-qmatrix <- matrix( 0 , nrow=length(items) , 2 )
+items <- grep.vec( c("act", "sc" ), colnames(dat),  "OR" )$x
+qmatrix <- matrix( 0, nrow=length(items), 2 )
 qmatrix[1:5,1] <- 1
 qmatrix[6:9,2] <- 1
-mod23 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
-            model="item+item*step" , qmatrix=qmatrix , name="mod23")
+mod23 <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
+            model="item+item*step", qmatrix=qmatrix, name="mod23")
 
 #############################################################################
 # EXAMPLE 3: Multi facet models (data.ratings1)
@@ -318,21 +318,21 @@ dat <- data.ratings1
 items <- paste0("k",1:5)
 
 # use numeric rater ID's
-raters <- as.numeric( substring( paste( dat$rater ) , 3 ) )
+raters <- as.numeric( substring( paste( dat$rater ), 3 ) )
 
 #***
 # Model 31: Rater model 'item+item*step+rater'
-mod31 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
-              itemcodes= 0:3 , model="item+item*step+rater" ,
-              pid=dat$idstud , X=data.frame("rater"=raters)  ,
-              regression="" , name="mod31")
+mod31 <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
+              itemcodes=0:3, model="item+item*step+rater",
+              pid=dat$idstud, X=data.frame("rater"=raters),
+              regression="", name="mod31")
 
 #***
 # Model 32: Rater model 'item+item*step+rater+item*rater'
-mod32 <- sirt::R2conquest(dat=dat[,items] , path.conquest=path.conquest ,
-              model="item+item*step+rater+item*rater" ,
-              pid=dat$idstud , X=data.frame("rater"=raters)  ,
-              regression="" , name="mod32")
+mod32 <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
+              model="item+item*step+rater+item*rater",
+              pid=dat$idstud, X=data.frame("rater"=raters),
+              regression="", name="mod32")
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

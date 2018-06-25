@@ -1,8 +1,8 @@
 ## File Name: rm_facets_print_progress.R
-## File Version: 0.05
+## File Version: 0.06
 
 rm_facets_print_progress <- function(dev, dev0, b.rater, b.rater0, a.rater, a.rater0,
-        tau.item, tau.item0, a.item, a.item0 , mu , sigma, iter,
+        tau.item, tau.item0, a.item, a.item0, mu, sigma, iter,
         digits_parm=6, digits_trait=3, digits_deviance=4)
 {
     #--- print deviance

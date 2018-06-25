@@ -1,5 +1,5 @@
 %% File Name: mcmc_coef.Rd
-%% File Version: 0.05
+%% File Version: 0.09
 
 \name{mcmc_coef}
 \alias{mcmc_coef}
@@ -23,25 +23,25 @@ from the \pkg{coda} package.
 
 \usage{
 ## coefficients
-mcmc_coef(mcmcobj, exclude = "deviance")
+mcmc_coef(mcmcobj, exclude="deviance")
 
 ## covariance matrix
-mcmc_vcov(mcmcobj, exclude = "deviance")
+mcmc_vcov(mcmcobj, exclude="deviance")
 
 ## confidence interval
-mcmc_confint( mcmcobj, parm, level = .95, exclude="deviance" )
+mcmc_confint( mcmcobj, parm, level=.95, exclude="deviance" )
 
 ## summary function
-mcmc_summary( mcmcobj , quantiles=c(.025,.05,.50,.95,.975) )
+mcmc_summary( mcmcobj, quantiles=c(.025,.05,.50,.95,.975) )
 
 ## plot function
 mcmc_plot(mcmcobj, ...)
 
 ## inclusion of derived parameters in mcmc object
-mcmc_derivedPars( mcmcobj , derivedPars )
+mcmc_derivedPars( mcmcobj, derivedPars )
 
 ## Wald test for parameters
-mcmc_WaldTest( mcmcobj , hypotheses )
+mcmc_WaldTest( mcmcobj, hypotheses )
 
 \method{summary}{mcmc_WaldTest}(object, digits=3, ...)
 }
@@ -110,7 +110,7 @@ y <- 1*( stats::plogis( -.6 + .7*x1 + 1.1 *x2 ) > stats::runif(N) )
 
 #***************************************
 # (2) estimate logistic regression with glm
-mod <- stats::glm( y ~ x1 + x2 , family="binomial" )
+mod <- stats::glm( y ~ x1 + x2, family="binomial" )
 summary(mod)
 
 #***************************************
@@ -119,13 +119,13 @@ library(rcppbugs)
 b <- rcppbugs::mcmc.normal( stats::rnorm(3),mu=0,tau=0.0001)
 y.hat <- rcppbugs::deterministic( function(x1,x2,b){
                 stats::plogis( b[1] + b[2]*x1 + b[3]*x2 ) },
-                  x1 , x2 , b)
-y.lik <- rcppbugs::mcmc.bernoulli( y , p = y.hat, observed = TRUE)
+                  x1, x2, b)
+y.lik <- rcppbugs::mcmc.bernoulli( y, p=y.hat, observed=TRUE)
 model <- rcppbugs::create.model(b, y.hat, y.lik)
 
 #*** estimate model in rcppbugs; 5000 iterations, 1000 burnin iterations
 n.burnin <- 500 ; n.iter <- 2000 ; thin <- 2
-ans <- rcppbugs::run.model(model , iterations=n.iter, burn=n.burnin, adapt=200, thin=thin)
+ans <- rcppbugs::run.model(model, iterations=n.iter, burn=n.burnin, adapt=200, thin=thin)
 print(rcppbugs::get.ar(ans)) # get acceptance rate
 print(apply(ans[["b"]],2,mean)) # get means of posterior
 
@@ -134,28 +134,28 @@ mcmcobj <- data.frame( ans$b )
 colnames(mcmcobj) <- paste0("b",1:3)
 mcmcobj <- as.matrix(mcmcobj)
 class(mcmcobj) <- "mcmc"
-attr(mcmcobj, "mcpar") <- c( n.burnin+1 , n.iter , thin )
+attr(mcmcobj, "mcpar") <- c( n.burnin+1, n.iter, thin )
 mcmcobj <- coda::mcmc( mcmcobj )
 
 # coefficients, variance covariance matrix and confidence interval
 mcmc_coef(mcmcobj)
 mcmc_vcov(mcmcobj)
-mcmc_confint( mcmcobj , level = .90 )
+mcmc_confint( mcmcobj, level=.90 )
 
 # summary and plot
 mcmc_summary(mcmcobj)
 mcmc_plot(mcmcobj, ask=TRUE)
 
 # include derived parameters in mcmc object
-derivedPars <- list( "diff12" = ~ I(b2-b1) , "diff13" = ~ I(b3-b1) )
-mcmcobj2 <- sirt::mcmc_derivedPars(mcmcobj , derivedPars = derivedPars )
+derivedPars <- list( "diff12"=~ I(b2-b1), "diff13"=~ I(b3-b1) )
+mcmcobj2 <- sirt::mcmc_derivedPars(mcmcobj, derivedPars=derivedPars )
 mcmc_summary(mcmcobj2)
 
 #*** Wald test for parameters
- # hyp1: b2 - 0.5 = 0
- # hyp2: b2 * b3 = 0
-hypotheses <- list( "hyp1" = ~ I( b2 - .5 )  , "hyp2" = ~ I( b2*b3 ) )
-test1 <- sirt::mcmc_WaldTest( mcmcobj , hypotheses=hypotheses )
+ # hyp1: b2 - 0.5=0
+ # hyp2: b2 * b3=0
+hypotheses <- list( "hyp1"=~ I( b2 - .5 ), "hyp2"=~ I( b2*b3 ) )
+test1 <- sirt::mcmc_WaldTest( mcmcobj, hypotheses=hypotheses )
 summary(test1)
 }
 }

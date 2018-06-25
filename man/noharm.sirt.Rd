@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.36
+%% File Version: 0.40
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -21,13 +21,13 @@ fixed values.
 }
 
 \usage{
-noharm.sirt(dat, weights = NULL, Fval = NULL, Fpatt = NULL, Pval = NULL,
-   Ppatt = NULL, Psival = NULL, Psipatt = NULL, dimensions = NULL,
-   lower = rep(0, ncol(dat)), upper = rep(1, ncol(dat)), wgtm = NULL, modesttype=1,
-   pos.loading=FALSE , pos.variance = FALSE ,  pos.residcorr = FALSE ,
-   maxiter = 1000, conv = 10^(-6), increment.factor = 1.01, reliability=TRUE)
+noharm.sirt(dat, weights=NULL, Fval=NULL, Fpatt=NULL, Pval=NULL,
+   Ppatt=NULL, Psival=NULL, Psipatt=NULL, dimensions=NULL,
+   lower=rep(0, ncol(dat)), upper=rep(1, ncol(dat)), wgtm=NULL, modesttype=1,
+   pos.loading=FALSE, pos.variance=FALSE,  pos.residcorr=FALSE,
+   maxiter=1000, conv=10^(-6), increment.factor=1.01, reliability=TRUE)
 
-\method{summary}{noharm.sirt}(object, file=NULL , \dots)
+\method{summary}{noharm.sirt}(object, file=NULL, \dots)
 }
 
 %% \method{plot}{noharm.sirt}(x, what="est", efa.load.min=.3, ...)
@@ -115,7 +115,7 @@ are heavier penalized.
 
 \details{
 The NOHARM item response model follows the response equation
-\deqn{P( X_{pi} = 1 | \bold{\theta}_p ) = c_i + ( d_i - c_i )
+\deqn{P( X_{pi}=1 | \bold{\theta}_p )=c_i + ( d_i - c_i )
 \Phi( f_{i0} + f_{i1} \theta_{p1} + ... +
 f_{iD} \theta_{pD} ) }
 for item responses \eqn{X_{pi}} of person \eqn{p} on
@@ -125,7 +125,7 @@ asymptotes \eqn{c_i} and upper asymptotes \eqn{d_i} must be
 provided as fixed values.
 The response equation can be equivalently written by introducing a latent
 continuous item response \eqn{X_{pi}^\ast}
-\deqn{ X_{pi}^\ast = f_{i0} + f_{i1} \theta_{p1} + ... +
+\deqn{ X_{pi}^\ast=f_{i0} + f_{i1} \theta_{p1} + ... +
 f_{iD} \theta_{pD} + e_{pi} }
 with a standard normally distributed residual \eqn{e_{pi}}. These residuals
 have a correlation matrix \eqn{\bold{\Psi}} with ones in the diagonal.
@@ -233,24 +233,24 @@ the link seems to be broken in the meanwhile).
 set.seed(9776)
 N <- 3400 # sample size
 # define difficulties
-f0 <- c( .5 , .25 , -.25 , -.5 , 0 , -.5 , -.25 , .25 , .5 , 0 )
+f0 <- c( .5, .25, -.25, -.5, 0, -.5, -.25, .25, .5, 0 )
 I <- length(f0)
 # define loadings
-f1 <- matrix( 0 , I , 2 )
-f1[ 1:5,1] <- c(.8,.7,.6,.5 , .5)
-f1[ 6:10 ,2] <- c(.8,.7,.6,.5 , .5 )
+f1 <- matrix( 0, I, 2 )
+f1[ 1:5,1] <- c(.8,.7,.6,.5, .5)
+f1[ 6:10,2] <- c(.8,.7,.6,.5, .5 )
 # covariance matrix
-Pval <- matrix( c(1,.5,.5,1) , 2 , 2 )
+Pval <- matrix( c(1,.5,.5,1), 2, 2 )
 # simulate theta
 library(mvtnorm)
-theta <- mvtnorm::rmvnorm(N , mean=c(0,0) , sigma = Pval )
+theta <- mvtnorm::rmvnorm(N, mean=c(0,0), sigma=Pval )
 # simulate item responses
-dat <- matrix( NA , N , I )
+dat <- matrix( NA, N, I )
 for (ii in 1:I){ # ii <- 1
     dat[,ii] <- 1*( stats::pnorm(f0[ii]+theta[,1]*f1[ii,1]+theta[,2]*f1[ii,2])>
                      stats::runif(N) )
         }
-colnames(dat) <- paste0("I" , 1:I)
+colnames(dat) <- paste0("I", 1:I)
 
 #**** Model 1: Two-dimensional CFA with estimated item loadings
 # define pattern matrices
@@ -261,15 +261,15 @@ diag(Pval) <- 1
 Fval <- .7 * ( f1>0)
 Fpatt <- 1 * ( Fval > 0 )
 # estimate model
-mod1 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval )
+mod1 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval )
 summary(mod1)
 # EAP ability estimates
-pmod1 <- sirt::R2noharm.EAP(mod1 , theta.k = seq(-4,4,len=10) )
+pmod1 <- sirt::R2noharm.EAP(mod1, theta.k=seq(-4,4,len=10) )
 # model fit
 summary( sirt::modelfit.sirt( mod1 ))
 
 # estimate model based on tetrachoric correlations
-mod1b <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval ,
+mod1b <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval,
             modesttype=2)
 summary(mod1b)
 
@@ -280,8 +280,8 @@ Psipatt <- 0*diag(I)
 Psipatt[1,2] <- 1
 Psival <- 0*Psipatt
 # estimate model
-mod2 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval ,
-            Psival=Psival , Psipatt=Psipatt )
+mod2 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval,
+            Psival=Psival, Psipatt=Psipatt )
 summary(mod2)
 
 #**** Model 3: Two-dimensional Rasch model
@@ -292,7 +292,7 @@ Fpatt <- 0*Fval
 Ppatt <- Pval <- matrix(1,2,2)
 Pval[1,2] <- Pval[2,1] <- 0
 # estimate model
-mod3 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval )
+mod3 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval )
 summary(mod3)
 # model fit
 summary( sirt::modelfit.sirt( mod3 ))
@@ -301,10 +301,10 @@ summary( sirt::modelfit.sirt( mod3 ))
 noharm.path <- "c:/NOHARM"
 P.pattern <- Ppatt ; P.init <- Pval
 F.pattern <- Fpatt ; F.init <- Fval
-mod3b <- sirt::R2noharm( dat = dat , model.type="CFA" ,
-             F.pattern = F.pattern , F.init = F.init , P.pattern = P.pattern ,
-             P.init = P.init , writename = "example_sim_2dim_rasch" ,
-             noharm.path = noharm.path  , dec = "," )
+mod3b <- sirt::R2noharm( dat=dat, model.type="CFA",
+             F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
+             P.init=P.init, writename="example_sim_2dim_rasch",
+             noharm.path=noharm.path, dec="," )
 summary(mod3b)
 
 #############################################################################
@@ -316,16 +316,16 @@ dat <- data.read
 I <- ncol(dat)
 
 #**** Model 1: Unidimensional Rasch model
-Fpatt <- matrix( 0 , I , 1 )
+Fpatt <- matrix( 0, I, 1 )
 Fval <- 1 + 0*Fpatt
 Ppatt <- Pval <- matrix(1,1,1)
 # estimate model
-mod1 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval )
+mod1 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval )
 summary(mod1)
 plot(mod1)    # semPaths plot
 
 #**** Model 2: Rasch model in which item pairs within a testlet are excluded
-wgtm <- matrix( 1 , I , I )
+wgtm <- matrix( 1, I, I )
 wgtm[1:4,1:4] <- wgtm[5:8,5:8] <- wgtm[ 9:12, 9:12] <- 0
 # estimation
 mod2 <- sirt::noharm.sirt(dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval, wgtm=wgtm)
@@ -337,46 +337,46 @@ Psipatt[1:4,1:4] <- Psipatt[5:8,5:8] <- Psipatt[ 9:12, 9:12] <- 1
 diag(Psipatt) <- 0
 Psival <- .6*(Psipatt>0)
 # estimation
-mod3 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval ,
-            Psival=Psival , Psipatt=Psipatt )
+mod3 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval,
+            Psival=Psival, Psipatt=Psipatt )
 summary(mod3)
 # allow only positive residual correlations
-mod3b <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt, Fpatt=Fpatt, Fval=Fval , Pval=Pval ,
-            Psival=Psival , Psipatt=Psipatt , pos.residcorr=TRUE)
+mod3b <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt, Fpatt=Fpatt, Fval=Fval, Pval=Pval,
+            Psival=Psival, Psipatt=Psipatt, pos.residcorr=TRUE)
 summary(mod3b)
 
 #**** Model 4: Rasch testlet model
-Fval <- Fpatt <- matrix( 0 , I , 4 )
+Fval <- Fpatt <- matrix( 0, I, 4 )
 Fval[,1] <- Fval[1:4,2] <- Fval[5:8,3] <- Fval[9:12,4 ] <- 1
 Ppatt <- Pval <- diag(4)
-colnames(Ppatt) <- c("g" , "A", "B","C")
+colnames(Ppatt) <- c("g", "A", "B","C")
 Pval <- .5*Pval
 # estimation
-mod4 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval  )
+mod4 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval  )
 summary(mod4)
 # allow only positive variance entries
-mod4b <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval ,
+mod4b <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval,
                pos.variance=TRUE )
 summary(mod4b)
 
 #**** Model 5: Bifactor model
-Fval <- matrix( 0 , I , 4 )
+Fval <- matrix( 0, I, 4 )
 Fval[,1] <- Fval[1:4,2] <- Fval[5:8,3] <- Fval[9:12,4 ] <- .6
 Fpatt <- 1 * ( Fval > 0 )
 Pval <- diag(4)
 Ppatt <- 0*Pval
-colnames(Ppatt) <- c("g" , "A", "B","C")
+colnames(Ppatt) <- c("g", "A", "B","C")
 # estimation
-mod5 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval  )
+mod5 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval  )
 summary(mod5)
 # allow only positive loadings
-mod5b <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval ,
+mod5b <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval,
               pos.loading=TRUE )
 summary(mod5b)
 summary( sirt::modelfit.sirt(mod5b))
 
 #**** Model 6: 3-dimensional Rasch model
-Fval <- matrix( 0 , I , 3 )
+Fval <- matrix( 0, I, 3 )
 Fval[1:4,1] <- Fval[5:8,2] <- Fval[9:12,3 ] <- 1
 Fpatt <- 0*Fval
 Pval <- .6*diag(3)
@@ -384,12 +384,12 @@ diag(Pval) <- 1
 Ppatt <- 1+0*Pval
 colnames(Ppatt) <- c("A", "B","C")
 # estimation
-mod6 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval  )
+mod6 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval  )
 summary(mod6)
 summary( sirt::modelfit.sirt(mod6) )  # model fit
 
 #**** Model 7: 3-dimensional 2PL model
-Fval <- matrix( 0 , I , 3 )
+Fval <- matrix( 0, I, 3 )
 Fval[1:4,1] <- Fval[5:8,2] <- Fval[9:12,3 ] <- 1
 Fpatt <- Fval
 Pval <- .6*diag(3)
@@ -398,20 +398,20 @@ Ppatt <- 1+0*Pval
 diag(Ppatt) <- 0
 colnames(Ppatt) <- c("A", "B","C")
 # estimation
-mod7 <- sirt::noharm.sirt( dat=dat , Ppatt=Ppatt,Fpatt=Fpatt , Fval=Fval , Pval=Pval  )
+mod7 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval  )
 summary(mod7)
 summary( sirt::modelfit.sirt(mod7) )
 
 #**** Model 8: Exploratory factor analysis with 3 dimensions
 # estimation
-mod8 <- sirt::noharm.sirt( dat=dat , dimensions=3  )
+mod8 <- sirt::noharm.sirt( dat=dat, dimensions=3  )
 summary(mod8)
 }
 }
 
 % plot(mod8)
 % # plot only standardized loadings larger than .40
-% plot(mod8 , efa.load.min=.4 )
+% plot(mod8, efa.load.min=.4 )
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

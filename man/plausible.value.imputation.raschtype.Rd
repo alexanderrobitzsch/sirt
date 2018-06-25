@@ -1,5 +1,5 @@
 %% File Name: plausible.value.imputation.raschtype.Rd
-%% File Version: 1.26
+%% File Version: 1.30
 
 \name{plausible.value.imputation.raschtype}
 \alias{plausible.value.imputation.raschtype}
@@ -93,9 +93,9 @@ at the console.
 \details{
 Plausible values are drawn from the latent regression model with
 heterogeneous variances:
-\deqn{\theta_p = X_p \beta + \epsilon_p  \quad , \quad
-\epsilon_p \sim N( 0 , \sigma_p^2 ) \quad , \quad
-\log( \sigma_p ) = Z_p \gamma + \nu_p }
+\deqn{\theta_p=X_p \beta + \epsilon_p  \quad, \quad
+\epsilon_p \sim N( 0, \sigma_p^2 ) \quad, \quad
+\log( \sigma_p )=Z_p \gamma + \nu_p }
 }
 \value{
 A list with following entries:
@@ -144,16 +144,16 @@ n <- 2000       # number of students
 
 # simulate theta and covariates
 theta <- stats::rnorm( n )
-x <- .7 * theta + stats::rnorm( n , .5 )
-y <- .2 * x+ .3*theta + stats::rnorm( n , .4 )
-dfr <- data.frame( theta , 1 , x , y )
+x <- .7 * theta + stats::rnorm( n, .5 )
+y <- .2 * x+ .3*theta + stats::rnorm( n, .4 )
+dfr <- data.frame( theta, 1, x, y )
 
 # simulate Rasch model
-dat1 <- sirt::sim.raschtype( theta = theta , b = b )
+dat1 <- sirt::sim.raschtype( theta=theta, b=b )
 
 # Plausible value draws
-pv1 <- sirt::plausible.value.imputation.raschtype(data=dat1 , X=dfr[,-1] , b = b ,
-            nplausible=3 , iter=10 , burnin=5)
+pv1 <- sirt::plausible.value.imputation.raschtype(data=dat1, X=dfr[,-1], b=b,
+            nplausible=3, iter=10, burnin=5)
 # estimate linear regression based on first plausible value
 mod1 <- stats::lm( pv1$pvdraws[,1] ~ x+y )
 summary(mod1)
@@ -177,24 +177,24 @@ summary( stats::lm( theta ~ x + y ) )
 
 set.seed(899)
 n <- 3000       # number of students
-x <- round( stats::runif( n , 0 ,1 ) )
+x <- round( stats::runif( n, 0,1 ) )
 y <- stats::rnorm(n)
 # simulate true score theta
 theta <- .4*x + .5 * y + stats::rnorm(n)
 # simulate observed score by adding measurement error
-sig.e <- rep( sqrt(.40) , n )
-theta_obs <- theta + stats::rnorm( n , sd=sig.e)
+sig.e <- rep( sqrt(.40), n )
+theta_obs <- theta + stats::rnorm( n, sd=sig.e)
 
 # define theta grid for evaluation of density
-theta.list <- mean(theta_obs) + stats::sd(theta_obs) * seq( - 5 , 5 , length=21)
+theta.list <- mean(theta_obs) + stats::sd(theta_obs) * seq( - 5, 5, length=21)
 # compute individual likelihood
-f.yi.qk <- stats::dnorm( outer( theta_obs , theta.list , "-" ) / sig.e )
+f.yi.qk <- stats::dnorm( outer( theta_obs, theta.list, "-" ) / sig.e )
 f.yi.qk <- f.yi.qk / rowSums(f.yi.qk)
 # define covariates
-X <- cbind( 1 , x , y )
+X <- cbind( 1, x, y )
 # draw plausible values
-mod2 <- sirt::plausible.value.imputation.raschtype( f.yi.qk =f.yi.qk ,
-                  theta.list=theta.list , X=X , iter=10 , burnin=5)
+mod2 <- sirt::plausible.value.imputation.raschtype( f.yi.qk=f.yi.qk,
+                  theta.list=theta.list, X=X, iter=10, burnin=5)
 
 # linear regression
 mod1 <- stats::lm( mod2$pvdraws[,1] ~ x+y )
@@ -217,36 +217,36 @@ summary( stats::lm( theta ~ x + y ) )
 
 set.seed(899)
 n <- 5000       # number of students
-x <- round( stats::runif( n , 0 ,1 ) )
+x <- round( stats::runif( n, 0,1 ) )
 y <- stats::rnorm(n)
 # simulate true score theta
 theta <- .4*x + .5 * y + stats::rnorm(n) * ( 1 - .4 * x )
 # simulate observed score by adding measurement error
-sig.e <- rep( sqrt(.40) , n )
-theta_obs <- theta + stats::rnorm( n , sd=sig.e)
+sig.e <- rep( sqrt(.40), n )
+theta_obs <- theta + stats::rnorm( n, sd=sig.e)
 
 # define theta grid for evaluation of density
-theta.list <- mean(theta_obs) + stats::sd(theta_obs) * seq( - 5 , 5 , length=21)
+theta.list <- mean(theta_obs) + stats::sd(theta_obs) * seq( - 5, 5, length=21)
 # compute individual likelihood
-f.yi.qk <- stats::dnorm( outer( theta_obs , theta.list , "-" ) / sig.e )
+f.yi.qk <- stats::dnorm( outer( theta_obs, theta.list, "-" ) / sig.e )
 f.yi.qk <- f.yi.qk / rowSums(f.yi.qk)
 # define covariates
-X <- cbind( 1 , x , y )
+X <- cbind( 1, x, y )
 # draw plausible values (assuming variance homogeneity)
-mod3a <- sirt::plausible.value.imputation.raschtype( f.yi.qk =f.yi.qk ,
-                  theta.list=theta.list , X=X , iter=10 , burnin=5)
+mod3a <- sirt::plausible.value.imputation.raschtype( f.yi.qk=f.yi.qk,
+                  theta.list=theta.list, X=X, iter=10, burnin=5)
 # draw plausible values (assuming variance heterogeneity)
 #  -> include predictor Z
-mod3b <- sirt::plausible.value.imputation.raschtype( f.yi.qk =f.yi.qk ,
-                  theta.list=theta.list , X=X , Z=X , iter=10 , burnin=5)
+mod3b <- sirt::plausible.value.imputation.raschtype( f.yi.qk=f.yi.qk,
+                  theta.list=theta.list, X=X, Z=X, iter=10, burnin=5)
 
 # investigate variance of theta conditional on x
-res3 <- sapply( 0:1 , FUN = function(vv){
+res3 <- sapply( 0:1, FUN=function(vv){
         c( stats::var(theta[x==vv]), stats::var(mod3b$pvdraw[x==vv,1]),
               stats::var(mod3a$pvdraw[x==vv,1]))})
-rownames(res3) <- c("true" , "pv(hetero)" , "pv(homog)" )
+rownames(res3) <- c("true", "pv(hetero)", "pv(homog)" )
 colnames(res3) <- c("x=0","x=1")
-  ## > round( res3 , 2 )
+  ## > round( res3, 2 )
   ##             x=0  x=1
   ## true       1.30 0.58
   ## pv(hetero) 1.29 0.55

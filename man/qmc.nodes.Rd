@@ -1,5 +1,5 @@
 %% File Name: qmc.nodes.Rd
-%% File Version: 0.12
+%% File Version: 0.14
 
 \name{qmc.nodes}
 \alias{qmc.nodes}
@@ -62,7 +62,7 @@ the \pkg{sfsmisc} package.
 ## some toy examples
 
 # 5 nodes on one dimension
-qmc.nodes( snodes=5 , ndim=1 )
+qmc.nodes( snodes=5, ndim=1 )
   ##            [,1]
   ## [1,]  0.0000000
   ## [2,] -0.3863753
@@ -71,7 +71,7 @@ qmc.nodes( snodes=5 , ndim=1 )
   ## [5,]  0.3850568
 
 # 7 nodes on two dimensions
-qmc.nodes( snodes =7 , ndim=2 )
+qmc.nodes( snodes=7, ndim=2 )
   ##             [,1]        [,2]
   ## [1,]  0.00000000 -0.43072730
   ## [2,] -0.38637529  0.79736332

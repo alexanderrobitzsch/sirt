@@ -1,5 +1,5 @@
 %% File Name: class.accuracy.rasch.Rd
-%% File Version: 0.15
+%% File Version: 0.19
 
 \name{class.accuracy.rasch}
 \alias{class.accuracy.rasch}
@@ -77,22 +77,22 @@ can be obtained with the \R package \pkg{cacIRT}.
 #############################################################################
 # EXAMPLE 1: Reading dataset
 #############################################################################
-data( data.read , package="sirt")
+data( data.read, package="sirt")
 dat <- data.read
 
 # estimate the Rasch model
 mod <- sirt::rasch.mml2( dat )
 
 # estimate classification accuracy (3 levels)
-cutscores <- c( -1 , .3 )    # cut scores at theta=-1 and theta=.3
-class.accuracy.rasch( cutscores=cutscores , b=mod$item$b ,
-           meantheta=0 ,  sdtheta=mod$sd.trait ,
-           theta.l=seq(-4,4,len=200 ) , n.sims=3000)
+cutscores <- c( -1, .3 )    # cut scores at theta=-1 and theta=.3
+class.accuracy.rasch( cutscores=cutscores, b=mod$item$b,
+           meantheta=0,  sdtheta=mod$sd.trait,
+           theta.l=seq(-4,4,len=200 ), n.sims=3000)
   ##   Cut Scores
   ##   [1] -1.0  0.3
   ##
-  ##   WLE reliability (by simulation) = 0.671
-  ##   WLE consistency (correlation between two parallel forms) = 0.649
+  ##   WLE reliability (by simulation)=0.671
+  ##   WLE consistency (correlation between two parallel forms)=0.649
   ##
   ##   Classification accuracy and consistency
   ##              agree0 agree1 kappa consistency

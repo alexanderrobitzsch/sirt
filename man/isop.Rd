@@ -1,5 +1,5 @@
 %% File Name: isop.Rd
-%% File Version: 3.23
+%% File Version: 3.27
 
 \name{isop}
 \alias{isop.dich}
@@ -23,11 +23,11 @@ polytomous data it is necessary that all items do have the
 same number of categories.
 }
 \usage{
-isop.dich(dat, score.breaks = NULL, merge.extreme = TRUE,
-     conv = .0001, maxit = 1000, epsilon = .025, progress = TRUE)
+isop.dich(dat, score.breaks=NULL, merge.extreme=TRUE,
+     conv=.0001, maxit=1000, epsilon=.025, progress=TRUE)
 
-isop.poly( dat , score.breaks=seq(0,1,len=10 ) ,
-     conv = .0001, maxit = 1000 , epsilon = .025 , progress=TRUE )
+isop.poly( dat, score.breaks=seq(0,1,len=10 ),
+     conv=.0001, maxit=1000, epsilon=.025, progress=TRUE )
 
 \method{summary}{isop}(object,...)
 
@@ -85,18 +85,18 @@ the proportion correct for item \eqn{i}  in score group
 in group \eqn{p} and on item \eqn{i}. The isotonic
 probabilistic model (Scheiblechner, 1995) monotonically
 smooths this distribution function \eqn{F} such that
-\deqn{ P( X_{pi} = 1 | p , i ) = F^\ast( p , i ) }
+\deqn{ P( X_{pi}=1 | p, i )=F^\ast( p, i ) }
 where the two-dimensional distribution function
 \eqn{F^\ast} is isotonic in \eqn{p} and \eqn{i}. Model fit is
 assessed by the square root of weighted squares of deviations
-\deqn{Fit = \sqrt{ \frac{1}{I} \sum_{p,i} w_{pi} \left(  F(p , i) -
+\deqn{Fit=\sqrt{ \frac{1}{I} \sum_{p,i} w_{pi} \left(  F(p, i) -
     F^\ast(p,i ) \right )^2 }}
 with frequency weights \eqn{w_{pi}} and
-\eqn{\sum_p w_{pi} =1} for every item \eqn{i}.
+\eqn{\sum_p w_{pi}=1} for every item \eqn{i}.
 The additive isotonic model (ADISOP; Scheiblechner, 1999)
 assumes the existence of person parameters \eqn{\theta_p}
 and item parameters \eqn{\delta_i} such that
-\deqn{ P( X_{pi} = 1 | p ) = g( \theta_p + \delta_i )}
+\deqn{ P( X_{pi}=1 | p )=g( \theta_p + \delta_i )}
 and \eqn{g} is a nonparametrically estimated isotonic
 function. The functions \code{isop.dich} and \code{isop.poly} uses \eqn{F^\ast}
 from the ISOP models and estimates person and item parameters of the
@@ -106,7 +106,7 @@ model.
 
 For polytomous data, the starting point is the empirical
 distribution function
-\deqn{ P( X_i \le k | p  ) = F( k ; p , i )  } which is increasing
+\deqn{ P( X_i \le k | p  )=F( k ; p, i )  } which is increasing
 in the argument \eqn{k} (the item categories).
 The ISOP model is defined to be antitonic in \eqn{p} and \eqn{i}
 while items are ordered with respect to item P-scores and persons are ordered
@@ -115,15 +115,15 @@ The estimated ISOP model results in a distribution
 function \eqn{F^\ast}. Using this function, the additive
 isotonic probabilistic model (ADISOP) aims at estimating
 a distribution function
-\deqn{P( X_i \le k ; p  ) = F^{\ast \ast} ( k ; p , i ) = F^{ \ast \ast }
-    ( k , \theta_p + \delta_i ) }
+\deqn{P( X_i \le k ; p  )=F^{\ast \ast} ( k ; p, i )=F^{ \ast \ast }
+    ( k, \theta_p + \delta_i ) }
 which is antitonic in \eqn{k} and in \eqn{\theta_p + \delta_i}.
 Due to this additive relation, the ADISOP scale values
 are claimed to be measured at interval scale level (Scheiblechner, 1999).
 
 The ADISOP model is compared to the graded response model which is
 defined by the response equation
-\deqn{P( X_i \le k ; p  ) = g( \theta_p + \delta_i + \gamma_k ) }
+\deqn{P( X_i \le k ; p  )=g( \theta_p + \delta_i + \gamma_k ) }
 where \eqn{g} denotes the logistic function.
 Estimated parameters are in the value \code{fit.grm}:
 person parameters \eqn{\theta_p} (\code{person.sc}),
@@ -267,8 +267,8 @@ plot(mod1)
 
 \dontrun{
 # Model 2: ISOP Model (5 score groups)
-score.breaks <- seq( -.005 , 1.005 , len=5+1 )
-mod2 <- sirt::isop.dich( dat , score.breaks=score.breaks)
+score.breaks <- seq( -.005, 1.005, len=5+1 )
+mod2 <- sirt::isop.dich( dat, score.breaks=score.breaks)
 summary(mod2)
 
 #############################################################################
@@ -277,12 +277,12 @@ summary(mod2)
 
 data(data.pisaMath)
 dat <- data.pisaMath$data
-dat <- dat[ , grep("M" , colnames(dat) ) ]
+dat <- dat[, grep("M", colnames(dat) ) ]
 
 # fit ISOP model
 # Note that for this model many iterations are needed
 #   to reach convergence for ADISOP
-mod1 <- sirt::isop.dich( dat , maxit=4000)
+mod1 <- sirt::isop.dich( dat, maxit=4000)
 summary(mod1)
 }
 
@@ -292,8 +292,8 @@ summary(mod1)
 
 # Dataset students: scale cultural activities
 library(CDM)
-data(data.Students , package="CDM")
-dat <- stats::na.omit( data.Students[ , paste0("act",1:4) ] )
+data(data.Students, package="CDM")
+dat <- stats::na.omit( data.Students[, paste0("act",1:4) ] )
 
 # fit models
 mod1 <- sirt::isop.poly( dat )

@@ -1,5 +1,5 @@
 %% File Name: sia.sirt.Rd
-%% File Version: 0.17
+%% File Version: 0.20
 
 \name{sia.sirt}
 \alias{sia.sirt}
@@ -18,7 +18,7 @@ solving item \eqn{j}.
 }
 
 \usage{
-sia.sirt(dat, significance = 0.85)
+sia.sirt(dat, significance=0.85)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -110,11 +110,11 @@ dichotomous item responses using the Ising model.
 data(data.read)
 dat <- data.read
 
-res <- sirt::sia.sirt(dat , significance=.85 )
+res <- sirt::sia.sirt(dat, significance=.85 )
 
 #*** plot results with igraph package
 library(igraph)
-plot( res$igraph.obj ) # , vertex.shape="rectangle" , vertex.size=30 )
+plot( res$igraph.obj ) #, vertex.shape="rectangle", vertex.size=30 )
 
 \dontrun{
 #*** plot results with qgraph package
@@ -130,19 +130,19 @@ if (FALSE){
             }
 # define graph
 grmatrix <- res$graph.matr
-res.graph <- new("graphNEL", nodes= res$graph.edges , edgemode="directed")
+res.graph <- new("graphNEL", nodes=res$graph.edges, edgemode="directed")
 # add edges
 RR <- nrow(grmatrix)
 for (rr in 1:RR){
-    res.graph <- Rgraphviz::addEdge(grmatrix[rr,1], grmatrix[rr,2], res.graph , 1)
+    res.graph <- Rgraphviz::addEdge(grmatrix[rr,1], grmatrix[rr,2], res.graph, 1)
                     }
 # define cex sizes and shapes
 V <- length(res$graph.edges)
 size2 <- rep(16,V)
-shape2 <- rep("rectangle" , V )
+shape2 <- rep("rectangle", V )
 names(shape2) <- names(size2) <- res$graph.edges
 # plot graph
-Rgraphviz::plot( res.graph, nodeAttrs =list("fontsize" = size2 , "shape" = shape2) )
+Rgraphviz::plot( res.graph, nodeAttrs=list("fontsize"=size2, "shape"=shape2) )
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

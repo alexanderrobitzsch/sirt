@@ -1,5 +1,5 @@
 %% File Name: matrixfunctions.sirt.Rd
-%% File Version: 1.12
+%% File Version: 1.13
 
 \name{matrixfunctions.sirt}
 
@@ -30,8 +30,8 @@ colCumsums.sirt(matr)   # columnwise cumulative sum
 
 rowIntervalIndex.sirt(matr,rn) # first index in row nn when matr(nn,zz) > rn(nn)
 
-rowKSmallest.sirt(matr , K , break.ties=TRUE) # k smallest elements in a row
-rowKSmallest2.sirt(matr , K )
+rowKSmallest.sirt(matr, K, break.ties=TRUE) # k smallest elements in a row
+rowKSmallest2.sirt(matr, K )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -99,7 +99,7 @@ For other matrix functions see the \pkg{matrixStats} package.
 #############################################################################
 set.seed(789)
 N1 <- 10 ; N2 <- 4
-M1 <- round( matrix( runif(N1*N2) , nrow=N1 , ncol=N2) , 1 )
+M1 <- round( matrix( runif(N1*N2), nrow=N1, ncol=N2), 1 )
 
 rowMaxs.sirt(M1)      # rowwise maximum
 rowMins.sirt(M1)      # rowwise minimum
@@ -113,8 +113,8 @@ rn <- runif(N1)    # generate random numbers
 rowIntervalIndex.sirt(matr,rn)
 
 # select the two smallest values
-rowKSmallest.sirt(matr=M1 , K=2)
-rowKSmallest2.sirt(matr=M1 , K=2)
+rowKSmallest.sirt(matr=M1, K=2)
+rowKSmallest2.sirt(matr=M1, K=2)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -1,9 +1,9 @@
 ## File Name: rasch.va.R
-## File Version: 0.05
+## File Version: 0.09
 
 #################################################
 # estimating the Rasch model with variational approximation
-rasch.va <- function( dat , globconv=.001 , maxiter=1000){
+rasch.va <- function( dat, globconv=.001, maxiter=1000){
     #********************
     # data preparation
     N <- nrow(dat)
@@ -12,11 +12,11 @@ rasch.va <- function( dat , globconv=.001 , maxiter=1000){
     dat2.resp <- 1 - is.na(dat)
     dat2[ dat2.resp==0 ] <- 0
     # initial values
-    b <- - stats::qlogis( colMeans( dat , na.rm=T ) )
+    b <- - stats::qlogis( colMeans( dat, na.rm=T ) )
     sig2 <- 1
     mu.i <- rep(0,N)
     mu.i <- .8*stats::qnorm( rowMeans( ( dat + .1 ) / 1.2 ) )
-    sigma2.i <- rep( sig2 , N )
+    sigma2.i <- rep( sig2, N )
     disp <- "...........................................................\n"
     iter <- 0
     conv <- 1000
@@ -25,11 +25,11 @@ rasch.va <- function( dat , globconv=.001 , maxiter=1000){
     # begin algorithm
     while( (globconv < conv)  &    ( iter < maxiter )    ){
         cat(disp)
-        cat("Iteration" , iter+1 , "   " , paste( Sys.time() ) , "\n" )
+        cat("Iteration", iter+1, "   ", paste( Sys.time() ), "\n" )
         b0 <- b
         # compute xsi.ij: formula (18)
-        xsi.ij <- matrix( b^2 , N , I , byrow=T) -       # (x'beta)^2
-                    2 * matrix( b , N , I , byrow=T ) * mu.i +  # 2nd term
+        xsi.ij <- matrix( b^2, N, I, byrow=T) -       # (x'beta)^2
+                    2 * matrix( b, N, I, byrow=T ) * mu.i +  # 2nd term
                     mu.i^2 + sigma2.i
         xsi.ij <- sqrt( xsi.ij )
         lam.xsi.ij <- tanh( xsi.ij / 2 ) / ( 4*xsi.ij )
@@ -41,19 +41,19 @@ rasch.va <- function( dat , globconv=.001 , maxiter=1000){
         # update sigma2.i
         sigma2.i <- 1 / ( 2 * rowSums( lam.xsi.ij ) + 1 / sig2  )
         # update mu.i
-        mu.i <- rowSums( ( dat2 - 1/2 + 2*lam.xsi.ij * matrix( b , N , I , byrow=TRUE ) )
+        mu.i <- rowSums( ( dat2 - 1/2 + 2*lam.xsi.ij * matrix( b, N, I, byrow=TRUE ) )
                                 * dat2.resp  ) * sigma2.i
         # display progress
         conv <- max( abs(b-b0))
         iter <- iter+1
-        cat( paste( "    Maximum b parameter change = " ,
-                paste( round(max(abs(b-b0)) ,6) , collapse=" " ) , "\n" , sep=""))
-        cat( paste( "    SD Trait = " ,
-                paste( round(sqrt(sig2) ,3) , collapse=" " ) , "\n" , sep=""))
+        cat( paste( "    Maximum b parameter change=",
+                paste( round(max(abs(b-b0)),6), collapse=" " ), "\n", sep=""))
+        cat( paste( "    SD Trait=",
+                paste( round(sqrt(sig2),3), collapse=" " ), "\n", sep=""))
         utils::flush.console()
     }
-    item <- data.frame("item"=colnames(dat) , "b"=b )
-    res <- list("sig" = sqrt(sig2) ,
-            "item"=item , "xsi.ij"=xsi.ij , "mu.i"=mu.i , "sigma2.i" = sigma2.i )
+    item <- data.frame("item"=colnames(dat), "b"=b )
+    res <- list("sig"=sqrt(sig2),
+            "item"=item, "xsi.ij"=xsi.ij, "mu.i"=mu.i, "sigma2.i"=sigma2.i )
     return(res)
         }

@@ -1,5 +1,5 @@
 %% File Name: personfit.stat.Rd
-%% File Version: 0.18
+%% File Version: 0.21
 
 \name{personfit.stat}
 \alias{personfit.stat}
@@ -100,12 +100,12 @@ wle1 <- sirt::wle.rasch( dat,b=mod$item$b )$theta
 b <- mod$item$b # item difficulty
 
 # evaluate person fit
-pf1 <- sirt::personfit.stat( dat = dat , abil=wle1 , b=b)
+pf1 <- sirt::personfit.stat( dat=dat, abil=wle1, b=b)
 
 \dontrun{
 # dimensional analysis of person fit statistics
-x0 <- stats::na.omit(pf1[ , -c(1:3) ] )
-stats::factanal( x=x0 , factors=2 , rotation="promax" )
+x0 <- stats::na.omit(pf1[, -c(1:3) ] )
+stats::factanal( x=x0, factors=2, rotation="promax" )
   ## Loadings:
   ##                Factor1 Factor2
   ## caution         0.914

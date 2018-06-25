@@ -1,5 +1,5 @@
 %% File Name: mcmc.list.descriptives.Rd
-%% File Version: 0.21
+%% File Version: 0.24
 
 \name{mcmc.list.descriptives}
 \alias{mcmc.list.descriptives}
@@ -15,7 +15,7 @@ length. The MAP is the mode estimate of the posterior distribution which is
 approximated by the mode of the kernel density estimate.
 }
 \usage{
-mcmc.list.descriptives( mcmcobj , quantiles=c(.025,.05,.1,.5,.9,.95,.975) )
+mcmc.list.descriptives( mcmcobj, quantiles=c(.025,.05,.1,.5,.9,.95,.975) )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -67,15 +67,15 @@ y <- 1*( stats::plogis( -.6 + .7*x1 + 1.1 *x2 ) > stats::runif(N) )
 
 #***************************************
 # (2) estimate logistic regression with glm
-mod <- stats::glm( y ~ x1 + x2 , family="binomial" )
+mod <- stats::glm( y ~ x1 + x2, family="binomial" )
 summary(mod)
 
 #***************************************
 # (3) estimate model with rcppbugs package
 b <- rcppbugs::mcmc.normal( stats::rnorm(3),mu=0,tau=0.0001)
 y.hat <- rcppbugs::deterministic(function(x1,x2,b) {
-             stats::plogis( b[1] + b[2]*x1 + b[3]*x2 ) }, x1 , x2 , b)
-y.lik <- rcppbugs::mcmc.bernoulli( y , p = y.hat, observed = TRUE)
+             stats::plogis( b[1] + b[2]*x1 + b[3]*x2 ) }, x1, x2, b)
+y.lik <- rcppbugs::mcmc.bernoulli( y, p=y.hat, observed=TRUE)
 m <- rcppbugs::create.model(b, y.hat, y.lik)
 
 #*** estimate model in rcppbugs; 5000 iterations, 1000 burnin iterations
@@ -88,7 +88,7 @@ mcmcobj <- data.frame( ans$b  )
 colnames(mcmcobj) <- paste0("b",1:3)
 mcmcobj <- as.matrix(mcmcobj)
 class(mcmcobj) <- "mcmc"
-attr(mcmcobj, "mcpar") <- c( 1 , nrow(mcmcobj) , 1 )
+attr(mcmcobj, "mcpar") <- c( 1, nrow(mcmcobj), 1 )
 mcmcobj <- coda::as.mcmc.list( mcmcobj )
 
 # plot results

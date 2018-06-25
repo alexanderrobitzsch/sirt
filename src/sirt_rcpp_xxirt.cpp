@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_xxirt.cpp
-//// File Version: 0.23
+//// File Version: 0.25
 
 
 
@@ -30,7 +30,7 @@ Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_posterior_expected_counts(
             val=0;
             for (int nn=0;nn<N;nn++){
                 if ( dat1_resp_gg(nn,ii) ){
-                    val +=  p_aj_xi_gg(nn,tt) ;
+                    val +=  p_aj_xi_gg(nn,tt);
                 }
             }  // end nn
             nij(ii,tt) = val;
@@ -38,7 +38,7 @@ Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_posterior_expected_counts(
     }   // end ii
 
     //--- OUTPUT
-    return nij ;
+    return nij;
 }
 ///********************************************************************
 
@@ -55,19 +55,19 @@ Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_likelihood(
 
     for (int nn=0;nn<N;nn++){
         for (int tt=0;tt<TP;tt++){
-            p_xi_aj(nn,tt) = 1 ;
+            p_xi_aj(nn,tt) = 1;
         }
         for (int ii=0;ii<I;ii++){
             if ( dat_resp_bool(nn,ii) ){
                 for (int tt=0;tt<TP;tt++){
-                    p_xi_aj(nn,tt) = p_xi_aj(nn,tt) * probs(ii , dat(nn,ii) + tt*maxK );
+                    p_xi_aj(nn,tt) = p_xi_aj(nn,tt) * probs(ii, dat(nn,ii) + tt*maxK );
                 }
             }
         }
     }
 
     //---- OUTPUT
-    return p_xi_aj ;
+    return p_xi_aj;
 }
 ///********************************************************************
 

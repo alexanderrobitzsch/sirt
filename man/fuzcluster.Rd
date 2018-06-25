@@ -1,5 +1,5 @@
 %% File Name: fuzcluster.Rd
-%% File Version: 0.16
+%% File Version: 0.19
 
 \name{fuzcluster}
 \alias{fuzcluster}
@@ -15,8 +15,8 @@ for which membership functions are assumed to be Gaussian
 (conditionally cluster membership) independent.
 }
 \usage{
-fuzcluster(dat_m, dat_s, K = 2, nstarts = 7, seed = NULL, maxiter = 100,
-     parmconv = 0.001, fac.oldxsi=0.75, progress = TRUE)
+fuzcluster(dat_m, dat_s, K=2, nstarts=7, seed=NULL, maxiter=100,
+     parmconv=0.001, fac.oldxsi=0.75, progress=TRUE)
 
 \method{summary}{fuzcluster}(object,...)
 }
@@ -108,7 +108,7 @@ set.seed(876)
 library(mvtnorm)
 Ntot <- 1000  # number of subjects
 # define SDs for simulating uncertainty
-sd_uncertain <- c( .2 , 1 , 2 )
+sd_uncertain <- c( .2, 1, 2 )
 
 dat_m <- NULL   # data frame containing mean of membership function
 dat_s <- NULL   # data frame containing SD of membership function
@@ -119,32 +119,32 @@ Nclass <- Ntot * pi_class
 mu <- c(3,1,0)
 Sigma <- diag(3)
 # simulate data
-dat_m1 <- mvtnorm::rmvnorm( Nclass , mean=mu , sigma = Sigma )
-dat_s1 <- matrix( stats::runif( Nclass * 3 ) , nrow=Nclass )
+dat_m1 <- mvtnorm::rmvnorm( Nclass, mean=mu, sigma=Sigma )
+dat_s1 <- matrix( stats::runif( Nclass * 3 ), nrow=Nclass )
 for ( ii in 1:3){ dat_s1[,ii] <- dat_s1[,ii] * sd_uncertain[ii] }
-dat_m <- rbind( dat_m , dat_m1 )
-dat_s <- rbind( dat_s , dat_s1 )
+dat_m <- rbind( dat_m, dat_m1 )
+dat_s <- rbind( dat_s, dat_s1 )
 
 # *** Class 2
 pi_class <- .4
 Nclass <- Ntot * pi_class
 mu <- c(0,-2,0.4)
-Sigma <- diag(c(0.5 , 2 , 2 ) )
+Sigma <- diag(c(0.5, 2, 2 ) )
 # simulate data
-dat_m1 <- mvtnorm::rmvnorm( Nclass , mean=mu , sigma = Sigma )
-dat_s1 <- matrix( stats::runif( Nclass * 3 ) , nrow=Nclass )
+dat_m1 <- mvtnorm::rmvnorm( Nclass, mean=mu, sigma=Sigma )
+dat_s1 <- matrix( stats::runif( Nclass * 3 ), nrow=Nclass )
 for ( ii in 1:3){ dat_s1[,ii] <- dat_s1[,ii] * sd_uncertain[ii] }
-dat_m <- rbind( dat_m , dat_m1 )
-dat_s <- rbind( dat_s , dat_s1 )
-colnames(dat_s) <- colnames(dat_m) <- paste0("I" , 1:3 )
+dat_m <- rbind( dat_m, dat_m1 )
+dat_s <- rbind( dat_s, dat_s1 )
+colnames(dat_s) <- colnames(dat_m) <- paste0("I", 1:3 )
 
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 # estimation
 
 #*** Model 1: Clustering with 8 random starts
-res1 <- sirt::fuzcluster(K=2,dat_m , dat_s , nstarts = 8 , maxiter=25)
+res1 <- sirt::fuzcluster(K=2,dat_m, dat_s, nstarts=8, maxiter=25)
 summary(res1)
-  ##  Number of iterations = 22 (Seed = 5090 )
+  ##  Number of iterations=22 (Seed=5090 )
   ##  ---------------------------------------------------
   ##  Class probabilities (2 Classes)
   ##  [1] 0.4083 0.5917
@@ -160,12 +160,12 @@ summary(res1)
   ##  [2,] 0.9740 0.8500 0.7523
 
 #*** Model 2: Clustering with one start with seed 4550
-res2 <- sirt::fuzcluster(K=2,dat_m , dat_s , nstarts = 1 , seed= 5090 )
+res2 <- sirt::fuzcluster(K=2,dat_m, dat_s, nstarts=1, seed=5090 )
 summary(res2)
 
 #*** Model 3: Clustering for crisp data
-#             (assuming no uncertainty, i.e. dat_s = 0)
-res3 <- sirt::fuzcluster(K=2,dat_m , dat_s=0*dat_s , nstarts = 30 , maxiter=25)
+#             (assuming no uncertainty, i.e. dat_s=0)
+res3 <- sirt::fuzcluster(K=2,dat_m, dat_s=0*dat_s, nstarts=30, maxiter=25)
 summary(res3)
   ##  Class probabilities (2 Classes)
   ##  [1] 0.3645 0.6355
@@ -181,7 +181,7 @@ summary(res3)
   ##  [2,] 0.9933 0.9592 0.9535
 
 #*** Model 4: kmeans cluster analysis
-res4 <- stats::kmeans( dat_m , centers = 2 )
+res4 <- stats::kmeans( dat_m, centers=2 )
   ##   K-means clustering with 2 clusters of sizes 607, 393
   ##   Cluster means:
   ##             I1        I2          I3

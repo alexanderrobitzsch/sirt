@@ -1,5 +1,5 @@
 %% File Name: dif.logistic.regression.Rd
-%% File Version: 0.25
+%% File Version: 0.30
 
 \name{dif.logistic.regression}
 \alias{dif.logistic.regression}
@@ -113,25 +113,25 @@ For a download of the free \emph{DIF-Pack} software (SIBTEST, ...) see
 
 data( data.math )
 dat <- data.math$data
-items <- grep( "M" , colnames(dat))
+items <- grep( "M", colnames(dat))
 
 # estimate item parameters and WLEs
 mod <- sirt::rasch.mml2( dat[,items] )
-wle <- sirt::wle.rasch( dat[,items] , b=mod$item$b )$theta
+wle <- sirt::wle.rasch( dat[,items], b=mod$item$b )$theta
 
 # assess DIF by logistic regression
-mod1 <- sirt::dif.logistic.regression( dat=dat[,items] , score=wle , group=dat$female)
+mod1 <- sirt::dif.logistic.regression( dat=dat[,items], score=wle, group=dat$female)
 
 # calculate DIF variance
-dif1 <- sirt::dif.variance( dif=mod1$uniformDIF , se.dif = mod1$se.uniformDIF )
+dif1 <- sirt::dif.variance( dif=mod1$uniformDIF, se.dif=mod1$se.uniformDIF )
 dif1$unweighted.DIFSD
   ## > dif1$unweighted.DIFSD
   ## [1] 0.1963958
 
 # calculate stratified DIF variance
 # stratification based on domains
-dif2 <- sirt::dif.strata.variance( dif=mod1$uniformDIF , se.dif = mod1$se.uniformDIF ,
-              itemcluster = data.math$item$domain )
+dif2 <- sirt::dif.strata.variance( dif=mod1$uniformDIF, se.dif=mod1$se.uniformDIF,
+              itemcluster=data.math$item$domain )
   ## $unweighted.DIFSD
   ## [1] 0.1455916
 
@@ -143,7 +143,7 @@ miceadds::library_install("eRm")
 res <- eRm::RM( dat[,items] )
 summary(res)
 # LR-test with respect to female
-lrres <- eRm::LRtest(res, splitcr = dat$female)
+lrres <- eRm::LRtest(res, splitcr=dat$female)
 summary(lrres)
 # graphical model test
 eRm::plotGOF(lrres)
@@ -163,20 +163,20 @@ mu2 <- .5   # impact (group difference)
 sd2 <- 1.3  # standard deviation group 2
 
 # define item difficulties
-b <- seq( -1.5 , 1.5 , length=I)
+b <- seq( -1.5, 1.5, length=I)
 # simulate DIF effects
-bdif <- scale( stats::rnorm(I , sd = .6 ) , scale=FALSE )[,1]
+bdif <- scale( stats::rnorm(I, sd=.6 ), scale=FALSE )[,1]
 # item difficulties per group
 b1 <- b + 1/2 * bdif
 b2 <- b - 1/2 * bdif
 # simulate item responses
-dat1 <- sirt::sim.raschtype( theta = stats::rnorm(N , mean=0 , sd =1 ) , b = b1 )
-dat2 <- sirt::sim.raschtype( theta = stats::rnorm(N , mean=mu2 , sd = sd2 ) , b = b2 )
-dat <- rbind( dat1 , dat2 )
-group <- rep( c(1,2) , each=N ) # define group indicator
+dat1 <- sirt::sim.raschtype( theta=stats::rnorm(N, mean=0, sd=1 ), b=b1 )
+dat2 <- sirt::sim.raschtype( theta=stats::rnorm(N, mean=mu2, sd=sd2 ), b=b2 )
+dat <- rbind( dat1, dat2 )
+group <- rep( c(1,2), each=N ) # define group indicator
 
 #*** (2) scale data
-mod <- TAM::tam.mml( dat , group=group )
+mod <- TAM::tam.mml( dat, group=group )
 summary(mod)
 
 #*** (3) extract person parameter estimates
@@ -187,11 +187,11 @@ mod_wle <- tam.wle( mod )$theta
 # (4) techniques for assessing differential item functioning
 
 # Model 1: assess DIF by logistic regression and WLEs
-dif1 <- sirt::dif.logistic.regression( dat=dat , score= mod_wle , group= group)
+dif1 <- sirt::dif.logistic.regression( dat=dat, score=mod_wle, group=group)
 # Model 2: assess DIF by logistic regression and EAPs
-dif2 <- sirt::dif.logistic.regression( dat=dat , score= mod_eap , group= group)
+dif2 <- sirt::dif.logistic.regression( dat=dat, score=mod_eap, group=group)
 # Model 3: assess DIF by Mantel-Haenszel statistic
-dif3 <- difR::difMH(Data=dat, group=group, focal.name="1" ,  purify=FALSE )
+dif3 <- difR::difMH(Data=dat, group=group, focal.name="1",  purify=FALSE )
 print(dif3)
   ##  Mantel-Haenszel Chi-square statistic:
   ##
@@ -227,9 +227,9 @@ print(dif3)
 uniformDIF3 <- log(dif3$alphaMH)
 
 # compare different DIF statistics
-dfr <- data.frame( "bdif"=  bdif , "LR_wle" = dif1$uniformDIF ,
-        "LR_eap" = dif2$uniformDIF , "MH" = uniformDIF3 )
-round( dfr , 3 )
+dfr <- data.frame( "bdif"=bdif, "LR_wle"=dif1$uniformDIF,
+        "LR_eap"=dif2$uniformDIF, "MH"=uniformDIF3 )
+round( dfr, 3 )
   ##       bdif LR_wle LR_eap     MH
   ##  1   0.236  0.319  0.278  0.330
   ##  2  -1.149 -1.473 -1.523 -1.453

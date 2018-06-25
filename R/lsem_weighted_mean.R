@@ -1,7 +1,7 @@
 ## File Name: lsem_weighted_mean.R
-## File Version: 0.04
+## File Version: 0.07
 
-lsem_weighted_mean <- function( x , weights )
+lsem_weighted_mean <- function( x, weights )
 {
     x <- as.matrix(x)
     x_resp <- 1 - is.na(x)
@@ -9,6 +9,6 @@ lsem_weighted_mean <- function( x , weights )
     x[ is.na(x) ] <- 0
     weightsN <- colSums(weights_m)
     wm <- colSums( x * weights_m ) / ( weightsN - 1 )
-    res <- list( weightsN = weightsN , mean=wm )
+    res <- list( weightsN=weightsN, mean=wm )
     return(res)
 }

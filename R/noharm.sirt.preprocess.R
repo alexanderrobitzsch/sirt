@@ -1,15 +1,15 @@
 ## File Name: noharm.sirt.preprocess.R
-## File Version: 0.15
+## File Version: 0.19
 
 
 # e1 <- environment()
-# .attach.environment( res , envir=e1 )
+# .attach.environment( res, envir=e1 )
 
 
 ############################################################
 # data preprocessing noharm.sirt
-.noharm.sirt.preproc <- function( dat , weights , Fpatt , Fval ,
-    Ppatt , Pval , Psipatt , Psival , wgtm , dimensions ){
+.noharm.sirt.preproc <- function( dat, weights, Fpatt, Fval,
+    Ppatt, Pval, Psipatt, Psival, wgtm, dimensions ){
 
     res <- NULL
     res$dat0 <- dat
@@ -47,7 +47,7 @@
             for (dd in 2:D){  Fpatt[dd,1:(dd-1)] <- 0 }
                     }
         Fval <- .5*(Fpatt>0)
-        if ( D == 1 ){     # 1 dimension
+        if ( D==1 ){     # 1 dimension
                 model.type <- "CFA"
                 modtype <- 3
                         }

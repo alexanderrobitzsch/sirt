@@ -1,8 +1,8 @@
 ## File Name: btm_trim_increment.R
-## File Version: 0.01
+## File Version: 0.02
 
 btm_trim_increment <- function(incr, maxincr )
 {
-    res <- ifelse( abs(incr) > maxincr , maxincr*sign(incr) , incr )
+    res <- ifelse( abs(incr) > maxincr, maxincr*sign(incr), incr )
     return(res)
 }

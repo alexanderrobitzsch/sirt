@@ -1,5 +1,5 @@
 ## File Name: mirt_prodterms.R
-## File Version: 0.03
+## File Version: 0.05
 
 
 ##########################################################################
@@ -7,7 +7,7 @@
 # This function is not exported and hence redefined in sirt
 mirt_prodterms <- function (theta0, prodlist)
 {
-    products <- matrix(1, ncol = length(prodlist), nrow = nrow(theta0))
+    products <- matrix(1, ncol=length(prodlist), nrow=nrow(theta0))
     for (i in 1L:length(prodlist)) {
         tmp <- prodlist[[i]]
         for (j in 1L:length(tmp)){

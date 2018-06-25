@@ -1,5 +1,5 @@
 %% File Name: R2noharm.jackknife.Rd
-%% File Version: 1.12
+%% File Version: 1.15
 
 \name{R2noharm.jackknife}
 \alias{R2noharm.jackknife}
@@ -13,9 +13,9 @@ This function performs a jackknife estimation of NOHARM analysis
 to get standard errors based on a replication method (see Christoffersson, 1977).
 }
 \usage{
-R2noharm.jackknife(object, jackunits = NULL)
+R2noharm.jackknife(object, jackunits=NULL)
 
-\method{summary}{R2noharm.jackknife}(object, logfile=NULL , \dots)
+\method{summary}{R2noharm.jackknife}(object, logfile=NULL, \dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

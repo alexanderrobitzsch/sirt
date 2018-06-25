@@ -1,5 +1,5 @@
 %% File Name: sim.rasch.dep.Rd
-%% File Version: 0.25
+%% File Version: 0.29
 
 \name{sim.rasch.dep}
 \alias{sim.rasch.dep}
@@ -74,26 +74,26 @@ set.seed(7654)
 I <- 11                             # number of items
 n <- 1500                           # number of persons
 b <- seq(-2,2, len=I)               # item difficulties
-theta <- stats::rnorm( n , sd = 1 )        # person abilities
+theta <- stats::rnorm( n, sd=1 )        # person abilities
 # itemcluster
 itemcluster <- rep(0,I)
 itemcluster[ c(3,5)] <- 1
 itemcluster[c(2,4,9)] <- 2
 # residual correlations
-rho <- c( .7 , .5 )
+rho <- c( .7, .5 )
 
 # simulate data
-dat <- sirt::sim.rasch.dep( theta , b , itemcluster , rho )
-colnames(dat) <- paste("I" , seq(1,ncol(dat)) , sep="")
+dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
+colnames(dat) <- paste("I", seq(1,ncol(dat)), sep="")
 
 # estimate Rasch copula model
-mod1 <- sirt::rasch.copula2( dat , itemcluster = itemcluster )
+mod1 <- sirt::rasch.copula2( dat, itemcluster=itemcluster )
 summary(mod1)
 
 # compare result with Rasch model estimation in rasch.copula
 # delta must be set to zero
-mod2 <- sirt::rasch.copula2( dat , itemcluster = itemcluster , delta = c(0,0) ,
-            est.delta = c(0,0)  )
+mod2 <- sirt::rasch.copula2( dat, itemcluster=itemcluster, delta=c(0,0),
+            est.delta=c(0,0)  )
 summary(mod2)
 
 # estimate Rasch model with rasch.mml2 function
@@ -111,26 +111,26 @@ I <- 12                             # number of items
 n <- 450                            # number of persons
 b <- seq(-2,2, len=I)               # item difficulties
 b <- sample(b)                      # sample item difficulties
-theta <- stats::rnorm( n , sd = 1 )        # person abilities
+theta <- stats::rnorm( n, sd=1 )        # person abilities
 # itemcluster
 itemcluster <- rep(0,I)
 itemcluster[ 1:4 ] <- 1
 itemcluster[ 6:9 ] <- 2
 itemcluster[ 10:12 ] <- 3
 # residual correlations
-rho <- c( .55 , .25 , .45 )
+rho <- c( .55, .25, .45 )
 
 # simulate data
-dat <- sirt::sim.rasch.dep( theta , b , itemcluster , rho )
-colnames(dat) <- paste("I" , seq(1,ncol(dat)) , sep="")
+dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
+colnames(dat) <- paste("I", seq(1,ncol(dat)), sep="")
 
 # estimate Rasch copula model
-mod1 <- sirt::rasch.copula2( dat , itemcluster = itemcluster , numdiff.parm = .001 )
+mod1 <- sirt::rasch.copula2( dat, itemcluster=itemcluster, numdiff.parm=.001 )
 summary(mod1)
 
 # Rasch model estimation
-mod2 <- sirt::rasch.copula2( dat , itemcluster = itemcluster ,
-            delta = rep(0,3) , est.delta = rep(0,3) )
+mod2 <- sirt::rasch.copula2( dat, itemcluster=itemcluster,
+            delta=rep(0,3), est.delta=rep(0,3) )
 summary(mod2)
 
 # estimation with pairwise Rasch model

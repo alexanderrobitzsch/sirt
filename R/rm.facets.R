@@ -1,16 +1,16 @@
 ## File Name: rm.facets.R
-## File Version: 4.633
+## File Version: 4.637
 
 #################################################################
 # Facets Model for Raters:
 # MML estimation
-rm.facets <- function( dat , pid=NULL , rater=NULL ,
-    Qmatrix=NULL , theta.k=seq(-9,9,len=30) ,
-    est.b.rater=TRUE , est.a.item=FALSE , est.a.rater=FALSE , rater_item_int = FALSE,
-    est.mean = FALSE , tau.item.fixed=NULL , a.item.fixed=NULL , b.rater.fixed=NULL , a.rater.fixed=NULL ,
-    b.rater.center = 2, a.rater.center=2, a.item.center=2,  a_lower=.05, a_upper=10,
-    reference_rater = NULL, max.b.increment=1 , numdiff.parm=.00001 , maxdevchange=.10 ,
-    globconv=.001 , maxiter=1000 , msteps=4 , mstepconv=.001, PEM=FALSE, PEM_itermax=maxiter)
+rm.facets <- function( dat, pid=NULL, rater=NULL,
+    Qmatrix=NULL, theta.k=seq(-9,9,len=30),
+    est.b.rater=TRUE, est.a.item=FALSE, est.a.rater=FALSE, rater_item_int=FALSE,
+    est.mean=FALSE, tau.item.fixed=NULL, a.item.fixed=NULL, b.rater.fixed=NULL, a.rater.fixed=NULL,
+    b.rater.center=2, a.rater.center=2, a.item.center=2,  a_lower=.05, a_upper=10,
+    reference_rater=NULL, max.b.increment=1, numdiff.parm=.00001, maxdevchange=.10,
+    globconv=.001, maxiter=1000, msteps=4, mstepconv=.001, PEM=FALSE, PEM_itermax=maxiter)
 {
 
     CALL <- match.call()
@@ -32,7 +32,7 @@ rm.facets <- function( dat , pid=NULL , rater=NULL ,
     pi.k <- sirt_dnorm_discrete(x=theta.k, mean=0, sd=1)
 
     # process data
-    res <- rm_proc_data( dat=dat , rater=rater , pid=pid, rater_item_int=rater_item_int,
+    res <- rm_proc_data( dat=dat, rater=rater, pid=pid, rater_item_int=rater_item_int,
                             reference_rater=reference_rater)
     procdata <- res
     dat2 <- as.matrix(res$dat2)
@@ -64,7 +64,7 @@ rm.facets <- function( dat , pid=NULL , rater=NULL ,
 
     K <- max( maxK )
     if ( is.null(Qmatrix) ){
-        Qmatrix <- matrix( 1:K , nrow=VV , ncol=K , byrow=TRUE)
+        Qmatrix <- matrix( 1:K, nrow=VV, ncol=K, byrow=TRUE)
     }
     TP <- length(theta.k)
     I <- VV*RR
@@ -80,7 +80,7 @@ rm.facets <- function( dat , pid=NULL , rater=NULL ,
         a.item.center <- 0
     }
 
-    if ( skillspace == "loglinear" ){
+    if ( skillspace=="loglinear" ){
         est.mean <- TRUE
     }
 
@@ -93,19 +93,19 @@ rm.facets <- function( dat , pid=NULL , rater=NULL ,
     }
 
     # starting values for item difficulties
-    b.item <- - stats::qlogis( colMeans( dat , na.rm=TRUE ) / maxK  )
+    b.item <- - stats::qlogis( colMeans( dat, na.rm=TRUE ) / maxK  )
     if ( ! pcm.param ){
         b.item <- 0*b.item
     }
     #--- tau parameters
-    tau.item <- matrix( 0 , nrow=VV , ncol=K )
+    tau.item <- matrix( 0, nrow=VV, ncol=K )
     rownames(tau.item) <- colnames(dat)
-    tau.item <- matrix( seq( -2 , 2 , len=K ) , nrow=VV , ncol=K , byrow=TRUE )
+    tau.item <- matrix( seq( -2, 2, len=K ), nrow=VV, ncol=K, byrow=TRUE )
     #--- rater parameters
     M1 <- colSums( dat2 ) / colSums( dat2.resp )
     N <- colSums( dat2.resp )
-    N <- stats::aggregate( N , list( rater.index ) , sum, na.rm=TRUE )[,2]
-    M1 <- stats::aggregate( M1 , list( rater.index ) , mean, na.rm=TRUE )[,2]
+    N <- stats::aggregate( N, list( rater.index ), sum, na.rm=TRUE )[,2]
+    M1 <- stats::aggregate( M1, list( rater.index ), mean, na.rm=TRUE )[,2]
     b.rater <- - stats::qlogis( M1 / K )
     b.rater <- b.rater - mean( b.rater )
     a.item <- rep(1,VV)
@@ -148,7 +148,7 @@ active <- FALSE
     while( ( ( maxdevchange < devchange ) | (globconv < conv) ) &
             ( iter < maxiter )    ){
         cat(disp)
-        cat("Iteration" , iter+1 , "   " , paste( Sys.time() ) , "\n" )
+        cat("Iteration", iter+1, "   ", paste( Sys.time() ), "\n" )
 
         # previous values
         b.item0 <- b.item
@@ -257,7 +257,7 @@ active <- FALSE
 
 
         #-- convergence criteria
-        conv <- max( abs(b.rater-b.rater0) , abs( a.rater-a.rater0), abs( tau.item0-tau.item) , abs( a.item - a.item0 ) )
+        conv <- max( abs(b.rater-b.rater0), abs( a.rater-a.rater0), abs( tau.item0-tau.item), abs( a.item - a.item0 ) )
         iter <- iter+1
         devchange <- abs( ( dev - dev0 ) / dev0  )
 
@@ -290,11 +290,11 @@ active <- FALSE
         tau.item[ tau.item.fixed[,1:2,drop=FALSE] ] <- NA
         se.tau.item[ tau.item.fixed[,1:2,drop=FALSE] ] <- NA
     }
-    item <- data.frame( "item" = colnames(dat) ,
-            "N" = colSums( 1-is.na(dat)) ,
-            "M" = colMeans( dat , na.rm=TRUE ) )
+    item <- data.frame( "item"=colnames(dat),
+            "N"=colSums( 1-is.na(dat)),
+            "M"=colMeans( dat, na.rm=TRUE ) )
     for (kk in 1:K){
-        item[ , paste0("tau.Cat",kk) ] <- tau.item[,kk]
+        item[, paste0("tau.Cat",kk) ] <- tau.item[,kk]
     }
     item$a <- a.item
 
@@ -325,7 +325,7 @@ active <- FALSE
     sirt_summary_print_objects(obji=rater, digits=3, from=2)
 
     cat("*********************************\n")
-    cat("EAP Reliability = " , round(EAP.rel,3) , "\n")
+    cat("EAP Reliability=", round(EAP.rel,3), "\n")
 
     s2 <- Sys.time()
     res <-  list( deviance=dev, ic=ic, item=item, rater=rater, person=person, EAP.rel=EAP.rel, mu=mu,

@@ -1,5 +1,5 @@
 %% File Name: plot.mcmc.sirt.Rd
-%% File Version: 0.09
+%% File Version: 0.12
 
 \name{plot.mcmc.sirt}
 \alias{plot.mcmc.sirt}
@@ -13,9 +13,9 @@ by: \code{\link{mcmc.2pno}}, \code{\link{mcmc.2pnoh}},
 \code{\link{mcmc.3pno.testlet}}, \code{\link{mcmc.2pno.ml}}
 }
 \usage{
-\method{plot}{mcmc.sirt}( x, layout = 1, conflevel = 0.9, round.summ = 3,
-   lag.max = .1 , col.smooth = "red", lwd.smooth = 2, col.ci = "orange",
-   cex.summ = 1, ask = FALSE, ...)
+\method{plot}{mcmc.sirt}( x, layout=1, conflevel=0.9, round.summ=3,
+   lag.max=.1, col.smooth="red", lwd.smooth=2, col.ci="orange",
+   cex.summ=1, ask=FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

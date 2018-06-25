@@ -1,5 +1,5 @@
 ## File Name: sirt_pem_create_parameter_index.R
-## File Version: 0.06
+## File Version: 0.07
 
 
 sirt_pem_create_parameter_index <- function( parmlist )
@@ -15,7 +15,7 @@ sirt_pem_create_parameter_index <- function( parmlist )
         parm_index_names[pp] <- parmlist_names[pp]
         x_dim <- sirt_pem_extract_dimension(x=x)
         NX <- prod(x_dim)
-        x_index <- last_index + seq( 1 , NX )
+        x_index <- last_index + seq( 1, NX )
         x_pp$index <- x_index
         last_index <- max(x_index)
         x_pp$dim <- x_dim

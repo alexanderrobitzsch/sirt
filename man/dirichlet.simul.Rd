@@ -1,5 +1,5 @@
 %% File Name: dirichlet.simul.Rd
-%% File Version: 0.10
+%% File Version: 0.13
 
 \name{dirichlet.simul}
 \alias{dirichlet.simul}
@@ -49,23 +49,23 @@ Alexander Robitzsch
 
 set.seed(789)
 N <- 2000
-probs <- c(.7 , .3)    # define (extremal) class probabilities
+probs <- c(.7, .3)    # define (extremal) class probabilities
 
-#*** alpha0 = .2  -> nearly crisp latent classes
+#*** alpha0=.2  -> nearly crisp latent classes
 alpha0 <- .2
 alpha <- alpha0*probs
-alpha <- matrix( alpha , nrow=N , ncol=length(alpha) , byrow=TRUE  )
+alpha <- matrix( alpha, nrow=N, ncol=length(alpha), byrow=TRUE  )
 x <- sirt::dirichlet.simul( alpha )
-htitle <- expression(paste( alpha[0], "=.2, ", p[1] , "=.7"   ) )
-hist( x[,1] , breaks = seq(0,1,len=20) , main=htitle)
+htitle <- expression(paste( alpha[0], "=.2, ", p[1], "=.7"   ) )
+hist( x[,1], breaks=seq(0,1,len=20), main=htitle)
 
-#*** alpha0 = 3 -> strong deviation from crisp membership
+#*** alpha0=3 -> strong deviation from crisp membership
 alpha0 <- 3
 alpha <- alpha0*probs
-alpha <- matrix( alpha , nrow=N , ncol=length(alpha) , byrow=TRUE  )
+alpha <- matrix( alpha, nrow=N, ncol=length(alpha), byrow=TRUE  )
 x <- sirt::dirichlet.simul( alpha )
-htitle <- expression(paste( alpha[0], "=3, ", p[1] , "=.7"   ) )
-hist( x[,1] , breaks = seq(0,1,len=20) , main=htitle)
+htitle <- expression(paste( alpha[0], "=3, ", p[1], "=.7"   ) )
+hist( x[,1], breaks=seq(0,1,len=20), main=htitle)
 
 \dontrun{
 #############################################################################
@@ -74,24 +74,24 @@ hist( x[,1] , breaks = seq(0,1,len=20) , main=htitle)
 
 set.seed(986)
 N <- 2000
-probs <- c( .5 , .35 , .15 )
+probs <- c( .5, .35, .15 )
 
-#*** alpha0 = .2
+#*** alpha0=.2
 alpha0 <- .2
 alpha <- alpha0*probs
-alpha <- matrix( alpha , nrow=N , ncol=length(alpha) , byrow=TRUE  )
+alpha <- matrix( alpha, nrow=N, ncol=length(alpha), byrow=TRUE  )
 x <- sirt::dirichlet.simul( alpha )
-htitle <- expression(paste( alpha[0], "=.2, ", p[1] , "=.7"   ) )
+htitle <- expression(paste( alpha[0], "=.2, ", p[1], "=.7"   ) )
 miceadds::library_install("ade4")
-ade4::triangle.plot(x, label=NULL , clabel = 1)
+ade4::triangle.plot(x, label=NULL, clabel=1)
 
-#*** alpha0 = 3
+#*** alpha0=3
 alpha0 <- 3
 alpha <- alpha0*probs
-alpha <- matrix( alpha , nrow=N , ncol=length(alpha) , byrow=TRUE  )
+alpha <- matrix( alpha, nrow=N, ncol=length(alpha), byrow=TRUE  )
 x <- sirt::dirichlet.simul( alpha )
-htitle <- expression(paste( alpha[0], "=3, ", p[1] , "=.7"   ) )
-ade4::triangle.plot(x, label=NULL , clabel = 1)
+htitle <- expression(paste( alpha[0], "=3, ", p[1], "=.7"   ) )
+ade4::triangle.plot(x, label=NULL, clabel=1)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

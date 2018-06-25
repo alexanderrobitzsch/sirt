@@ -1,5 +1,5 @@
 %% File Name: tetrachoric2.Rd
-%% File Version: 1.28
+%% File Version: 1.31
 
 \name{tetrachoric2}
 \alias{tetrachoric2}
@@ -16,7 +16,7 @@ In addition, an alternative non-iterative approximation of
 Bonett and Price (2005; \code{method="Bo"}) is provided.
 }
 \usage{
-tetrachoric2(dat, method="Ol" , delta = 0.007, maxit = 1000000, cor.smooth=TRUE,
+tetrachoric2(dat, method="Ol", delta=0.007, maxit=1000000, cor.smooth=TRUE,
    progress=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -105,11 +105,11 @@ t0 <- psych::tetrachoric( data.read )$rho
 # Olsson method (maximum likelihood estimation)
 t1 <- sirt::tetrachoric2( data.read )$rho
 # Divgi method
-t2 <- sirt::tetrachoric2( data.read , method="Di"  )$rho
+t2 <- sirt::tetrachoric2( data.read, method="Di"  )$rho
 # Tucker method
-t3 <- sirt::tetrachoric2( data.read , method="Tu" )$rho
+t3 <- sirt::tetrachoric2( data.read, method="Tu" )$rho
 # Bonett method
-t4 <- sirt::tetrachoric2( data.read , method="Bo" )$rho
+t4 <- sirt::tetrachoric2( data.read, method="Bo" )$rho
 
 # maximum absolute deviation ML method
 max( abs( t0 - t1 ) )

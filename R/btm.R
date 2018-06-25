@@ -1,10 +1,10 @@
 ## File Name: btm.R
-## File Version: 1.37
+## File Version: 1.41
 
 ###############################################
 # Bradley-Terry model in sirt
-btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL ,
-            fix.theta = NULL ,     maxiter=100 , conv = .0001 , eps=.3)
+btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
+            fix.theta=NULL,     maxiter=100, conv=.0001, eps=.3)
 {
 
     s1 <- Sys.time()
@@ -25,29 +25,29 @@ btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL 
         delta <- -99
         est.delta <- FALSE
     }
-    data <- data[ ! is.na( data[,3] ) , ]
-    data <- data[ data[,3] %in% admiss , ]
+    data <- data[ ! is.na( data[,3] ), ]
+    data <- data[ data[,3] %in% admiss, ]
     dat0 <- dat <- data
 
     # teams
-    teams <- unique( sort( c( paste(dat[,1] ) , paste(dat[,2] ) ) ) )
-    dat0[,1] <- match( paste( dat0[,1] ) , teams )
-    dat0[,2] <- match( paste( dat0[,2] ) , teams )
+    teams <- unique( sort( c( paste(dat[,1] ), paste(dat[,2] ) ) ) )
+    dat0[,1] <- match( paste( dat0[,1] ), teams )
+    dat0[,2] <- match( paste( dat0[,2] ), teams )
 
-    dfr <- data.frame( "res1" = 1 * ( dat0[,3] == 1 ),
-                "res0" = 1 * ( dat0[,3] == 0 ) ,
-                "resD" = 1 * ( dat0[,3] == 1/2 ) )
+    dfr <- data.frame( "res1"=1 * ( dat0[,3]==1 ),
+                "res0"=1 * ( dat0[,3]==0 ),
+                "resD"=1 * ( dat0[,3]==1/2 ) )
 
     # calculate scores for each team
     TP <- length(teams)
-    r1 <- rowsum( dfr , dat0[,1] )
+    r1 <- rowsum( dfr, dat0[,1] )
     ind1 <- as.numeric(rownames(r1))
-    r2 <- rowsum( dfr , dat0[,2] )
+    r2 <- rowsum( dfr, dat0[,2] )
     ind2 <- as.numeric(rownames(r2))
     r2 <- r2[, c(2,1,3) ]
-    r0 <- as.data.frame( matrix( 0 , nrow=TP , ncol=3 ))
-    r0[ ind1 , ] <- r0[ ind1,] + r1
-    r0[ ind2 , ] <- r0[ ind2,] + r2
+    r0 <- as.data.frame( matrix( 0, nrow=TP, ncol=3 ))
+    r0[ ind1, ] <- r0[ ind1,] + r1
+    r0[ ind2, ] <- r0[ ind2,] + r2
     r3 <- r0
     colnames(r3) <- colnames(dfr)
     score <- r3[,1]*1 + r3[,3]*1/2
@@ -73,15 +73,15 @@ btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL 
         # comparisons which are excluded
         indicator_elim <- dat0
         indicator_elim[,3] <- 0
-        indicator_elim[ indicator_elim[,1] %in% elim_persons_index , 3 ] <- 1
-        indicator_elim[ indicator_elim[,2] %in% elim_persons_index , 3 ] <- 1
+        indicator_elim[ indicator_elim[,1] %in% elim_persons_index, 3 ] <- 1
+        indicator_elim[ indicator_elim[,2] %in% elim_persons_index, 3 ] <- 1
     }
 
     some.fixed.theta <- FALSE
     if ( ! is.null( fix.theta) ){
-        fix.theta.index <- match( names(fix.theta) , teams )
+        fix.theta.index <- match( names(fix.theta), teams )
         if ( sum( is.na( fix.theta.index ) ) > 0 ){
-            stop( paste0( "Cannot find all individuals with fixed values\n" ,
+            stop( paste0( "Cannot find all individuals with fixed values\n",
                     "  in 'fixed.theta'\n") )
         }
         some.fixed.theta <- TRUE
@@ -103,7 +103,7 @@ btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL 
         delta0 <- delta
         eta0 <- eta
 
-        M1 <- matrix(0 , nrow=ND , ncol=3)
+        M1 <- matrix(0, nrow=ND, ncol=3)
         M1[,1] <- theta[ dat0[,1] ] + eta
         M1[,2] <- theta[ dat0[,2] ]
         M1[,3] <- delta + ( theta[ dat0[,1] ] + theta[ dat0[,2] ] + eta ) / 2
@@ -112,7 +112,7 @@ btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL 
         M1 <- M1 / rowSums(M1)
 
         if ( elim_persons ){
-            M1[ indicator_elim[,3] == 1 , ] <- 0
+            M1[ indicator_elim[,3]==1, ] <- 0
         }
 
         maxincr <- maxincr * incrfac
@@ -146,10 +146,10 @@ btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL 
         deriv_theta_i1 <- fac1
         fac2 <-  M1[,2] + M1[,3]/2
         deriv_theta_i2 <- fac2
-        # d1a <- ( rowsum( deriv_theta_i1 , dat0[,1] )[,1] +
-        #             rowsum( deriv_theta_i2 , dat0[,2] )[,1] )
-        h1 <- rowsum( deriv_theta_i1 , dat0[,1] )
-        h2 <- rowsum( deriv_theta_i2 , dat0[,2] )
+        # d1a <- ( rowsum( deriv_theta_i1, dat0[,1] )[,1] +
+        #             rowsum( deriv_theta_i2, dat0[,2] )[,1] )
+        h1 <- rowsum( deriv_theta_i1, dat0[,1] )
+        h2 <- rowsum( deriv_theta_i2, dat0[,2] )
         d1a <- rep(0,TP)
         d1a[ ind1 ] <- d1a[ ind1 ] + h1
         d1a[ ind2 ] <- d1a[ ind2 ] + h2
@@ -160,8 +160,8 @@ btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL 
         d2b <- M1[,2]  * (1 - M1[,2] - M1[,3] / 2 ) +
                             M1[,3]/2 * (1/2 - M1[,2] - M1[,3] / 2 )
 
-        h1 <- rowsum( d2a , dat0[,1] )
-        h2 <- rowsum( d2b , dat0[,2] )
+        h1 <- rowsum( d2a, dat0[,1] )
+        h2 <- rowsum( d2b, dat0[,2] )
         d2 <- rep(1E-20,TP)
         d2[ ind1 ] <- d2[ ind1 ] + h1
         d2[ ind2 ] <- d2[ ind2 ] + h2
@@ -178,7 +178,7 @@ btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL 
         }
 
         if (center.theta){
-            theta <- theta - mean(theta2 , na.rm=TRUE)
+            theta <- theta - mean(theta2, na.rm=TRUE)
         }
 
         if (some.fixed.theta){
@@ -191,29 +191,29 @@ btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL 
         theta_ch <- abs( theta - theta0 )
 
         if (elim_persons){
-            theta_ch <- ifelse( theta_ch == Inf , NA , theta_ch )
+            theta_ch <- ifelse( theta_ch==Inf, NA, theta_ch )
         }
 
-        theta.change <- max( theta_ch , na.rm=TRUE)
+        theta.change <- max( theta_ch, na.rm=TRUE)
         delta.change <- max( abs( delta - delta0 ))
         eta.change <- max( abs( eta - eta0 ))
         max.change <- max( c(theta.change,delta.change, eta.change) )
 
-        cat( paste0("**** Iteration " , iter ,
-                        " | Maximum parameter change = " , round(max.change , 7) , "\n") )
+        cat( paste0("**** Iteration ", iter,
+                        " | Maximum parameter change=", round(max.change, 7), "\n") )
         utils::flush.console()
 
     }  #---- end algorithm
 
     # arrange output
-    pars <- data.frame("parlabel" = c("Ties" , "Home") ,
-                        "par" = c("delta" , "eta") )
-    pars$est <- c( delta , eta )
-    pars$se <- c( se.delta , se.eta )
+    pars <- data.frame("parlabel"=c("Ties", "Home"),
+                        "par"=c("delta", "eta") )
+    pars$est <- c( delta, eta )
+    pars$se <- c( se.delta, se.eta )
 
     # estimated individual effect
-    effects <- data.frame( "individual" = teams ,
-                            "id" = seq( 1 , length(teams) ) )
+    effects <- data.frame( "individual"=teams,
+                            "id"=seq( 1, length(teams) ) )
     effects$Ntot <- rowSums(r3)
     effects$N1 <- r3[,1]
     effects$ND <- r3[,3]
@@ -222,21 +222,21 @@ btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL 
     effects$propscore <- propscore
     effects$theta <- theta
     effects$se.theta <- se.theta
-    # effects <- effects[ order( effects$theta , decreasing=TRUE) , ]
+    # effects <- effects[ order( effects$theta, decreasing=TRUE), ]
     rownames(effects) <- NULL
     # summary of effects parameters
     theta2 <- theta
     theta2[ abs(theta) %in% Inf ] <- NA
     summary.effects <- data.frame(
-                    "M" = mean(theta2,na.rm=TRUE) ,
-                    "median" = stats::median(theta) ,
-                    "SD" = stats::sd(theta2,na.rm=TRUE) ,
-                    "min" = min(theta) ,
-                    "max" = max(theta) )
+                    "M"=mean(theta2,na.rm=TRUE),
+                    "median"=stats::median(theta),
+                    "SD"=stats::sd(theta2,na.rm=TRUE),
+                    "min"=min(theta),
+                    "max"=max(theta) )
 
     # probabilities
     probs <- M1
-    colnames(probs) <- c("p1" , "p0" , "pD")
+    colnames(probs) <- c("p1", "p0", "pD")
 
     # fit statistics
     res0 <- btm_fit( probs=probs, dat0=dat0, ind1=ind1, ind2=ind2, TP=TP )
@@ -249,12 +249,12 @@ btm <- function( data ,    ignore.ties = FALSE  , fix.eta=NULL , fix.delta=NULL 
     mle.rel <- 1 - v2 / v0
     sep.rel <- sqrt( v0 / v2 )
     # output list
-    res <- list( effects = effects , pars=pars , summary.effects=summary.effects,
-                        mle.rel = mle.rel , sepG = sep.rel ,
-                        probs=probs , data = dat0 )
+    res <- list( effects=effects, pars=pars, summary.effects=summary.effects,
+                        mle.rel=mle.rel, sepG=sep.rel,
+                        probs=probs, data=dat0 )
     res$CALL <- CALL
     res$iter <- iter
-    ic <- list( "n" = length(teams) , "D" = nrow(dat0) )
+    ic <- list( "n"=length(teams), "D"=nrow(dat0) )
     res$ic <- ic
     s2 <- Sys.time()
     res$s1 <- s1

@@ -1,5 +1,5 @@
 %% File Name: greenyang.reliability.Rd
-%% File Version: 1.23
+%% File Version: 1.27
 
 \name{greenyang.reliability}
 \alias{greenyang.reliability}
@@ -114,19 +114,19 @@ dat.tetra <- psych::tetrachoric(dat)      # using tetrachoric from psych package
 dat.tetra2 <- sirt::tetrachoric2(dat)       # using tetrachoric2 from sirt package
 
 # perform parallel factor analysis
-fap <- psych::fa.parallel.poly(dat , n.iter = 1 )
-  ##   Parallel analysis suggests that the number of factors =  3
-  ##   and the number of components =  2
+fap <- psych::fa.parallel.poly(dat, n.iter=1 )
+  ##   Parallel analysis suggests that the number of factors=3
+  ##   and the number of components=2
 
 # parallel factor analysis based on tetrachoric correlation matrix
 ##       (tetrachoric2)
-fap2 <- psych::fa.parallel(dat.tetra2$rho , n.obs=nrow(dat) ,  n.iter = 1 )
-  ## Parallel analysis suggests that the number of factors =  6
-  ## and the number of components =  2
+fap2 <- psych::fa.parallel(dat.tetra2$rho, n.obs=nrow(dat),  n.iter=1 )
+  ## Parallel analysis suggests that the number of factors=6
+  ## and the number of components=2
   ## Note that in this analysis, uncertainty with respect to thresholds is ignored.
 
 # calculate reliability using a model with 4 factors
-greenyang.reliability( object.tetra = dat.tetra , nfactors =4 )
+greenyang.reliability( object.tetra=dat.tetra, nfactors=4 )
   ##                                            coefficient dimensions estimate
   ## Omega Total (1D)                               omega_1          1    0.771
   ## Omega Total (4D)                               omega_t          4    0.844
@@ -138,10 +138,10 @@ greenyang.reliability( object.tetra = dat.tetra , nfactors =4 )
 
 # calculation of Green-Yang-Reliability based on tetrachoric correlations
 #   obtained by tetrachoric2
-greenyang.reliability( object.tetra = dat.tetra2 , nfactors =4 )
+greenyang.reliability( object.tetra=dat.tetra2, nfactors=4 )
 
 # The same result will be obtained by using fap as the input
-greenyang.reliability( object.tetra = fap , nfactors =4 ) }
+greenyang.reliability( object.tetra=fap, nfactors=4 ) }
 }
 \keyword{Reliability}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

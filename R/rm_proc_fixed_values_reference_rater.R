@@ -1,5 +1,5 @@
 ## File Name: rm_proc_fixed_values_reference_rater.R
-## File Version: 0.04
+## File Version: 0.07
 
 rm_proc_fixed_values_reference_rater <- function( rater.index1, b.rater.fixed, a.rater.fixed, rater_item_int,
         reference_rater, est.b.rater, est.a.rater )
@@ -13,7 +13,7 @@ rm_proc_fixed_values_reference_rater <- function( rater.index1, b.rater.fixed, a
                 if ( is.null(b.rater.fixed) ){
                     val <- 0
                     b.rater.fixed <- rep(NA, RR)
-                    b.rater.fixed[ rater.index1[ paste(rater.index1$rater) == reference_rater , "rater.id" ] ] <- val
+                    b.rater.fixed[ rater.index1[ paste(rater.index1$rater)==reference_rater, "rater.id" ] ] <- val
                 }
             }
             #** a parameters
@@ -21,7 +21,7 @@ rm_proc_fixed_values_reference_rater <- function( rater.index1, b.rater.fixed, a
                 if ( is.null(a.rater.fixed) ){
                     val <- 1
                     a.rater.fixed <- rep(NA, RR)
-                    a.rater.fixed[ rater.index1[ paste(rater.index1$rater) == reference_rater , "rater.id" ] ] <- val
+                    a.rater.fixed[ rater.index1[ paste(rater.index1$rater)==reference_rater, "rater.id" ] ] <- val
                 }
             }
 

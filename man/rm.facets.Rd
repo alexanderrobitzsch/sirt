@@ -1,5 +1,5 @@
 %% File Name: rm.facets.Rd
-%% File Version: 0.74
+%% File Version: 0.79
 
 \name{rm.facets}
 \alias{rm.facets}
@@ -35,7 +35,7 @@ rm.facets(dat, pid=NULL, rater=NULL, Qmatrix=NULL, theta.k=seq(-9, 9, len=30),
     est.b.rater=TRUE, est.a.item=FALSE, est.a.rater=FALSE, rater_item_int=FALSE,
     est.mean=FALSE, tau.item.fixed=NULL, a.item.fixed=NULL, b.rater.fixed=NULL,
     a.rater.fixed=NULL, b.rater.center=2, a.rater.center=2, a.item.center=2, a_lower=.05,
-    a_upper=10, reference_rater = NULL, max.b.increment=1, numdiff.parm=0.00001,
+    a_upper=10, reference_rater=NULL, max.b.increment=1, numdiff.parm=0.00001,
     maxdevchange=0.1, globconv=0.001, maxiter=1000, msteps=4, mstepconv=0.001,
     PEM=FALSE, PEM_itermax=maxiter)
 
@@ -167,16 +167,16 @@ Further arguments to be passed
 This function models ratings \eqn{X_{pri}}
 for person \eqn{p}, rater \eqn{r} and item \eqn{i}
 and category \eqn{k} (see also Robitzsch & Steinfeld, 2018; Uto & Ueno, 2010; Wu, 2017)
-\deqn{P( X_{pri} = k | \theta_p ) \propto
-    exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r -   \tau_{ik} ) \quad ,
-    \quad \theta_p \sim N( 0 , \sigma^2 )}{%
-    P( X_{pri} = k | \theta_p ) \propto
-    exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r - \tau_{ik} )    ,
-            \theta_p ~ N( 0 , \sigma^2 )}
+\deqn{P( X_{pri}=k | \theta_p ) \propto
+    exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r -   \tau_{ik} ) \quad,
+    \quad \theta_p \sim N( 0, \sigma^2 )}{%
+    P( X_{pri}=k | \theta_p ) \propto
+    exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r - \tau_{ik} )  ,
+            \theta_p ~ N( 0, \sigma^2 )}
 By default, the scores in the \eqn{Q} matrix are
 \eqn{q_{ik}=k}. Item slopes \eqn{a_i} and rater slopes
 \eqn{a_r} are standardized such that their product equals
-one, i.e. \eqn{ \prod_i a_i = \prod_r a_r = 1}.
+one, i.e. \eqn{ \prod_i a_i=\prod_r a_r=1}.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -275,13 +275,13 @@ data(data.ratings1)
 dat <- data.ratings1
 
 # select rater db01
-dat <- dat[ paste(dat$rater) == "db01" , ]
+dat <- dat[ paste(dat$rater)=="db01", ]
 
 #****  Model 1: Partial Credit Model
-mod1 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , pid=dat$idstud )
+mod1 <- sirt::rm.facets( dat[, paste0( "k",1:5) ], pid=dat$idstud )
 
 #****  Model 2: Generalized Partial Credit Model
-mod2 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ],  pid=dat$idstud, est.a.item=TRUE)
+mod2 <- sirt::rm.facets( dat[, paste0( "k",1:5) ],  pid=dat$idstud, est.a.item=TRUE)
 
 summary(mod1)
 summary(mod2)
@@ -295,11 +295,11 @@ data(data.ratings1)
 dat <- data.ratings1
 
 #****  Model 1: Partial Credit Model: no rater effects
-mod1 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
-             pid=dat$idstud  , est.b.rater=FALSE )
+mod1 <- sirt::rm.facets( dat[, paste0( "k",1:5) ], rater=dat$rater,
+             pid=dat$idstud, est.b.rater=FALSE )
 
 #****  Model 2: Partial Credit Model: intercept rater effects
-mod2 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ], rater=dat$rater, pid=dat$idstud)
+mod2 <- sirt::rm.facets( dat[, paste0( "k",1:5) ], rater=dat$rater, pid=dat$idstud)
 
 # extract individual likelihood
 lmod1 <- IRT.likelihood(mod1)
@@ -316,41 +316,41 @@ smod1 <- IRT.modelfit(mod1)
 summary(smod1)
 smod2 <- IRT.modelfit(mod2)
 summary(smod2)
-IRT.compareModels( smod1 , smod2 )
+IRT.compareModels( smod1, smod2 )
 # extract factor scores (EAP is the default)
 IRT.factor.scores(mod2)
 # extract WLEs
-IRT.factor.scores(mod2 , type="WLE")
+IRT.factor.scores(mod2, type="WLE")
 
 #****  Model 2a: compare results with TAM package
 #   Results should be similar to Model 2
 library(TAM)
-mod2a <- TAM::tam.mml.mfr( resp= dat[ , paste0( "k",1:5) ] ,
-             facets= dat[ , "rater" , drop=FALSE] ,
-             pid= dat$pid , formulaA = ~ item*step + rater )
+mod2a <- TAM::tam.mml.mfr( resp=dat[, paste0( "k",1:5) ],
+             facets=dat[, "rater", drop=FALSE],
+             pid=dat$pid, formulaA=~ item*step + rater )
 
 #****  Model 2b: Partial Credit Model: some fixed parameters
 # fix rater parameters for raters 1, 4 and 5
 b.rater.fixed <- rep(NA,7)
 b.rater.fixed[ c(1,4,5) ] <- c(1,-.8,0)  # fixed parameters
 # fix item parameters of first and second item
-tau.item.fixed <- round( mod2$tau.item , 1 )    # use parameters from mod2
-tau.item.fixed[ 3:5 , ] <- NA    # free item parameters of items 3, 4 and 5
-mod2b <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater  ,
-             b.rater.fixed=b.rater.fixed , tau.item.fixed=tau.item.fixed ,
-             est.mean = TRUE , pid=dat$idstud)
+tau.item.fixed <- round( mod2$tau.item, 1 )    # use parameters from mod2
+tau.item.fixed[ 3:5, ] <- NA    # free item parameters of items 3, 4 and 5
+mod2b <- sirt::rm.facets( dat[, paste0( "k",1:5) ], rater=dat$rater,
+             b.rater.fixed=b.rater.fixed, tau.item.fixed=tau.item.fixed,
+             est.mean=TRUE, pid=dat$idstud)
 summary(mod2b)
 
 #****  Model 3: estimated rater slopes
-mod3 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
+mod3 <- sirt::rm.facets( dat[, paste0( "k",1:5) ], rater=dat$rater,
             est.a.rater=TRUE)
 
 #****  Model 4: estimated item slopes
-mod4 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
+mod4 <- sirt::rm.facets( dat[, paste0( "k",1:5) ], rater=dat$rater,
              pid=dat$idstud, est.a.item=TRUE)
 
 #****  Model 5: estimated rater and item slopes
-mod5 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ], rater=dat$rater ,
+mod5 <- sirt::rm.facets( dat[, paste0( "k",1:5) ], rater=dat$rater,
              pid=dat$idstud, est.a.rater=TRUE, est.a.item=TRUE)
 summary(mod1)
 summary(mod2)
@@ -367,13 +367,13 @@ b.rater.fixed[ c(1,4,5) ] <- c(1,-.8,0)
 a.rater.fixed <- rep(NA,7)
 a.rater.fixed[ c(1,2,3,4) ] <- c(1.1,0.9,.85,1)
 # fix item b parameters of first item
-tau.item.fixed <- matrix( NA , nrow=5 , ncol=3 )
-tau.item.fixed[ 1 , ] <- c(-2,-1.5 , 1 )
+tau.item.fixed <- matrix( NA, nrow=5, ncol=3 )
+tau.item.fixed[ 1, ] <- c(-2,-1.5, 1 )
 # fix item a parameters
 a.item.fixed <- rep(NA,5)
 a.item.fixed[ 1:4 ] <- 1
 # estimate model
-mod5a <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
+mod5a <- sirt::rm.facets( dat[, paste0( "k",1:5) ], rater=dat$rater,
              pid=dat$idstud, est.a.rater=TRUE, est.a.item=TRUE,
              tau.item.fixed=tau.item.fixed, b.rater.fixed=b.rater.fixed,
              a.rater.fixed=a.rater.fixed, a.item.fixed=a.item.fixed,
@@ -381,12 +381,12 @@ mod5a <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater ,
 summary(mod5a)
 
 #****  Model 6: Estimate rater model with reference rater 'db03'
-mod6 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ], rater=dat$rater, est.a.item=TRUE,
+mod6 <- sirt::rm.facets( dat[, paste0( "k",1:5) ], rater=dat$rater, est.a.item=TRUE,
              est.a.rater=TRUE, pid=dat$idstud, reference_rater="db03" )
 summary(mod6)
 
 #**** Model 7: Modelling rater-item-interactions
-mod7 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ] , rater=dat$rater, est.a.item=FALSE,
+mod7 <- sirt::rm.facets( dat[, paste0( "k",1:5) ], rater=dat$rater, est.a.item=FALSE,
              est.a.rater=TRUE, pid=dat$idstud, reference_rater="db03",
              rater_item_int=TRUE)
 summary(mod7)

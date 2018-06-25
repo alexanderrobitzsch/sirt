@@ -1,9 +1,9 @@
 ## File Name: mirt.wrapper.posterior.R
-## File Version: 0.25
+## File Version: 0.29
 
 #############################################################
 # calculation of posterior
-mirt.wrapper.posterior <- function( mirt.obj , weights=NULL ){
+mirt.wrapper.posterior <- function( mirt.obj, weights=NULL ){
     # adapt function for multiple groups
     # ****
     mobj <- mirt.obj
@@ -37,14 +37,14 @@ mirt.wrapper.posterior <- function( mirt.obj , weights=NULL ){
     # compute individual posterior
     N <- nrow( fulldata )
     TP <- length(pi.k)
-    piM <- matrix( pi.k , nrow=N , ncol=TP , byrow=TRUE )
+    piM <- matrix( pi.k, nrow=N, ncol=TP, byrow=TRUE )
     f.qk.yi <- f.yi.qk * piM
-    f.qk.yi <- f.qk.yi / matrix( rowSums( f.qk.yi ) , nrow=N , ncol=TP , byrow=FALSE )
+    f.qk.yi <- f.qk.yi / matrix( rowSums( f.qk.yi ), nrow=N, ncol=TP, byrow=FALSE )
     # maximum category
-    maxK <- apply( mobj@Data$data , 2 , max , na.rm=TRUE)+1
+    maxK <- apply( mobj@Data$data, 2, max, na.rm=TRUE)+1
     resp.ind <- 1 - is.na(mobj@Data$data)
     resp <- mobj@Data$data
-    resp[ resp.ind == 0 ] <- 0
+    resp[ resp.ind==0 ] <- 0
     # calc counts
     group <- NULL    # only applies to single groups for now
     if (is.null(weights) ){
@@ -53,17 +53,17 @@ mirt.wrapper.posterior <- function( mirt.obj , weights=NULL ){
         pweights <- weights
     }
     # Theta is only used for calculating dimension size
-    n.ik <- mirt.wrapper.calc.counts( resp, theta=Theta , resp.ind=resp.ind ,
-                group=group , maxK=max(maxK) , pweights=pweights , hwt=f.qk.yi )
+    n.ik <- mirt.wrapper.calc.counts( resp, theta=Theta, resp.ind=resp.ind,
+                group=group, maxK=max(maxK), pweights=pweights, hwt=f.qk.yi )
     probs <- traces
-    probs <- array( probs , dim = c(TP,max(maxK),I) )
-    probs <- aperm( probs , c(3,2,1) )
+    probs <- array( probs, dim=c(TP,max(maxK),I) )
+    probs <- aperm( probs, c(3,2,1) )
     # result list
-    res <- list( "theta.k" = Theta , "pi.k" = pi.k ,
-            "f.yi.qk" = f.yi.qk , "f.qk.yi" = f.qk.yi ,
-            "n.ik"=n.ik , "probs" = probs ,
-            "N"= N , "TP"=TP , "I" = I , "data" = mobj@Data$data ,
-            "maxK" = maxK )
+    res <- list( "theta.k"=Theta, "pi.k"=pi.k,
+            "f.yi.qk"=f.yi.qk, "f.qk.yi"=f.qk.yi,
+            "n.ik"=n.ik, "probs"=probs,
+            "N"=N, "TP"=TP, "I"=I, "data"=mobj@Data$data,
+            "maxK"=maxK )
     class(res) <- "mirt"
     return(res)
 }

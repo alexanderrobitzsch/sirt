@@ -1,5 +1,5 @@
 %% File Name: linking.robust.Rd
-%% File Version: 0.19
+%% File Version: 0.22
 
 \name{linking.robust}
 \alias{linking.robust}
@@ -86,11 +86,11 @@ See also the \pkg{plink} package.
 data(data.si03)
 res1 <- sirt::linking.robust( itempars=data.si03 )
 summary(res1)
-  ##   Number of items = 27
-  ##   Optimal trimming parameter k = 8 |  non-robust parameter k = 0
-  ##   Linking constant = -0.0345 |  non-robust estimate = -0.056
-  ##   Standard error = 0.0186 |  non-robust estimate = 0.027
-  ##   DIF SD: MAD = 0.0771 (robust) | SD = 0.1405 (non-robust)
+  ##   Number of items=27
+  ##   Optimal trimming parameter k=8 |  non-robust parameter k=0
+  ##   Linking constant=-0.0345 |  non-robust estimate=-0.056
+  ##   Standard error=0.0186 |  non-robust estimate=0.027
+  ##   DIF SD: MAD=0.0771 (robust) | SD=0.1405 (non-robust)
 plot(res1)
 
 \dontrun{
@@ -101,12 +101,12 @@ plot(res1)
 data(data.pisaPars)
 
 # Linking with items
-res2 <- sirt::linking.robust( data.pisaPars[ , c(1,3,4)] )
+res2 <- sirt::linking.robust( data.pisaPars[, c(1,3,4)] )
 summary(res2)
-  ##   Optimal trimming parameter k = 0 |  non-robust parameter k = 0
-  ##   Linking constant = -0.0883 |  non-robust estimate = -0.0883
-  ##   Standard error = 0.0297 |  non-robust estimate = 0.0297
-  ##   DIF SD: MAD = 0.1824 (robust) | SD = 0.1487 (non-robust)
+  ##   Optimal trimming parameter k=0 |  non-robust parameter k=0
+  ##   Linking constant=-0.0883 |  non-robust estimate=-0.0883
+  ##   Standard error=0.0297 |  non-robust estimate=0.0297
+  ##   DIF SD: MAD=0.1824 (robust) | SD=0.1487 (non-robust)
 ##  -> no trimming is necessary for reducing the standard error
 plot(res2)
 
@@ -117,20 +117,20 @@ plot(res2)
 # simulate some parameters
 I <- 38
 set.seed(18785)
-itempars <- data.frame("item" = paste0("I",1:I) )
-itempars$study1 <- stats::rnorm( I , mean = .3 , sd =1.4 )
+itempars <- data.frame("item"=paste0("I",1:I) )
+itempars$study1 <- stats::rnorm( I, mean=.3, sd=1.4 )
 # simulate DIF effects plus some outliers
-bdif <- stats::rnorm(I,mean=.4,sd=.09)+( stats::runif(I)>.9 )* rep( 1*c(-1,1)+.4 , each=I/2 )
+bdif <- stats::rnorm(I,mean=.4,sd=.09)+( stats::runif(I)>.9 )* rep( 1*c(-1,1)+.4, each=I/2 )
 itempars$study2 <- itempars$study1 + bdif
 
 # robust linking
 res <- sirt::linking.robust( itempars )
 summary(res)
-  ##   Number of items = 38
-  ##   Optimal trimming parameter k = 12 |  non-robust parameter k = 0
-  ##   Linking constant = -0.4285 |  non-robust estimate = -0.5727
-  ##   Standard error = 0.0218 |  non-robust estimate = 0.0913
-  ##   DIF SD: MAD = 0.1186 (robust) | SD = 0.5628 (non-robust)
+  ##   Number of items=38
+  ##   Optimal trimming parameter k=12 |  non-robust parameter k=0
+  ##   Linking constant=-0.4285 |  non-robust estimate=-0.5727
+  ##   Standard error=0.0218 |  non-robust estimate=0.0913
+  ##   DIF SD: MAD=0.1186 (robust) | SD=0.5628 (non-robust)
 ## -> substantial differences of estimated linking constants in this case of
 ##    deviations from normality of item parameters
 plot(res)

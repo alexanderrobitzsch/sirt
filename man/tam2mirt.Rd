@@ -1,5 +1,5 @@
 %% File Name: tam2mirt.Rd
-%% File Version: 0.15
+%% File Version: 0.19
 
 \name{tam2mirt}
 \alias{tam2mirt}
@@ -108,15 +108,15 @@ mirt::mod2values(mres)
 # model fit
 mirt::M2(mres)
 # residual statistics
-mirt::residuals(mres , type="Q3")
-mirt::residuals(mres , type="LD")
+mirt::residuals(mres, type="Q3")
+mirt::residuals(mres, type="LD")
 # item fit
 mirt::itemfit(mres)
 # person fit
 mirt::personfit(mres)
 # compute several types of factor scores (quite slow)
 f1 <- mirt::fscores(mres, method='WLE',response.pattern=dat[1:10,])
-     # method = MAP and EAP also possible
+     # method=MAP and EAP also possible
 # item plot
 mirt::itemplot(mres,"A3")    # item A3
 mirt::itemplot(mres,4)       # fourth item
@@ -153,8 +153,8 @@ plot(mres,type="trace")
 # model fit
 mirt::M2(mres)
 # residual statistics
-mirt::residuals(mres , type="Q3")
-mirt::residuals(mres , type="LD")
+mirt::residuals(mres, type="Q3")
+mirt::residuals(mres, type="LD")
 # item fit
 mirt::itemfit(mres)
 
@@ -163,12 +163,12 @@ mirt::itemfit(mres)
 #**************************************
 
 # define Q-matrix
-Q <- matrix( 0 , nrow=12 , ncol=3 )
-Q[ cbind(1:12 , rep(1:3,each=4) ) ] <- 1
+Q <- matrix( 0, nrow=12, ncol=3 )
+Q[ cbind(1:12, rep(1:3,each=4) ) ] <- 1
 rownames(Q) <- colnames(dat)
 colnames(Q) <- c("A","B","C")
 # estimation in TAM
-mod <- TAM::tam.mml( resp=dat , Q=Q , control=list(snodes=1000,maxiter=30) )
+mod <- TAM::tam.mml( resp=dat, Q=Q, control=list(snodes=1000,maxiter=30) )
 summary(mod)
 # mirt conversion
 res <- sirt::tam2mirt(mod)
@@ -178,13 +178,13 @@ cat(res$mirt.syntax)
   ##   Dim01=1,2,3,4
   ##   Dim02=5,6,7,8
   ##   Dim03=9,10,11,12
-  ##   COV = Dim01*Dim01,Dim02*Dim02,Dim03*Dim03,Dim01*Dim02,Dim01*Dim03,Dim02*Dim03
-  ##   MEAN = Dim01,Dim02,Dim03
+  ##   COV=Dim01*Dim01,Dim02*Dim02,Dim03*Dim03,Dim01*Dim02,Dim01*Dim03,Dim02*Dim03
+  ##   MEAN=Dim01,Dim02,Dim03
 # lavaan syntax
 cat(res$lavaan.syntax.freed)
-  ##   Dim01 =~ 1*A1+1*A2+1*A3+1*A4
-  ##   Dim02 =~ 1*B1+1*B2+1*B3+1*B4
-  ##   Dim03 =~ 1*C1+1*C2+1*C3+1*C4
+  ##   Dim01=~ 1*A1+1*A2+1*A3+1*A4
+  ##   Dim02=~ 1*B1+1*B2+1*B3+1*B4
+  ##   Dim03=~ 1*C1+1*C2+1*C3+1*C4
   ##   A1 | t1_1*t1
   ##   A2 | t1_2*t1
   ##   A3 | t1_3*t1
@@ -218,7 +218,7 @@ mirt::itemfit(mres)
 #**************************************
 
 # estimation in TAM
-mod <- TAM::tam.mml.2pl( resp=dat , Q=Q , control=list(snodes=1000,maxiter=30) )
+mod <- TAM::tam.mml.2pl( resp=dat, Q=Q, control=list(snodes=1000,maxiter=30) )
 summary(mod)
 # mirt conversion
 res <- sirt::tam2mirt(mod)
@@ -227,7 +227,7 @@ mres <- res$mirt
 cat(res$lavaan.syntax.fixed)
 cat(res$lavaan.syntax.freed)
 # write lavaan syntax on disk
-  sink( "mod4_lav_freed.txt" , split=TRUE )
+  sink( "mod4_lav_freed.txt", split=TRUE )
 cat(res$lavaan.syntax.freed)
   sink()
 # some statistics from mirt
@@ -238,8 +238,8 @@ mirt::residuals(mres)
 mirt::itemfit(mres)
 
 # estimate mirt model by using the generated lavaan syntax with freed parameters
-res2 <- sirt::lavaan2mirt( dat , res$lavaan.syntax.freed ,
-            technical=list(NCYCLES=3) , verbose=TRUE)
+res2 <- sirt::lavaan2mirt( dat, res$lavaan.syntax.freed,
+            technical=list(NCYCLES=3), verbose=TRUE)
                  # use only few cycles for illustrational purposes
 mirt.wrapper.coef(res2$mirt)
 summary(res2$mirt)
@@ -251,10 +251,10 @@ print(res2$mirt)
 
 data(data.big5)
 # select some items
-items <- c( grep( "O" , colnames(data.big5) , value=TRUE )[1:6] ,
-     grep( "N" , colnames(data.big5) , value=TRUE )[1:4] )
+items <- c( grep( "O", colnames(data.big5), value=TRUE )[1:6],
+     grep( "N", colnames(data.big5), value=TRUE )[1:4] )
 # O3 O8 O13 O18 O23 O28 N1 N6 N11 N16
-dat <- data.big5[ , items ]
+dat <- data.big5[, items ]
 library(psych)
 psych::describe(dat)
 
@@ -275,12 +275,12 @@ mirt::M2(rmod1)
 mirt::itemfit(rmod1)
 # plots
 plot(rmod1,type="trace")
-plot(rmod1, type = "trace", which.items = 1:4 )
+plot(rmod1, type="trace", which.items=1:4 )
 mirt::itemplot(rmod1,"O3")
 
 #******************
 #*** Model 2: Generalized partial credit model in TAM
-mod2 <- TAM::tam.mml.2pl( dat[,1:6] , irtmodel="GPCM" )
+mod2 <- TAM::tam.mml.2pl( dat[,1:6], irtmodel="GPCM" )
 summary(mod2)
 # convert to mirt object
 mmod2 <- sirt::tam2mirt( mod2 )

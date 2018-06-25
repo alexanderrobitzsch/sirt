@@ -1,9 +1,11 @@
 //// File Name: rm_smirt_mml2_rcpp.cpp
-//// File Version: 5.22
+//// File Version: 5.29
+
+
 // [[Rcpp::depends(RcppArmadillo)]]
 
 #include <RcppArmadillo.h>
-#include <Rcpp.h>
+// #include <Rcpp.h>
 
 using namespace Rcpp;
 using namespace arma;
@@ -19,22 +21,22 @@ using namespace arma;
 //**********************************************************************
 
 ///********************************************************************
-///** probs_pcm_nogroups_C
+///** sirt_rcpp_array_mult
 // [[Rcpp::export]]
-Rcpp::NumericMatrix rm_arraymult1( Rcpp::NumericMatrix AA,
+Rcpp::NumericMatrix sirt_rcpp_array_mult( Rcpp::NumericMatrix AA,
     Rcpp::NumericVector dimAA, Rcpp::NumericMatrix BB,
     Rcpp::NumericVector dimBB )
 {
-    Rcpp::NumericMatrix CC( dimAA[0]*dimAA[1] , dimBB[2] ) ;
+    Rcpp::NumericMatrix CC( dimAA[0]*dimAA[1], dimBB[2] );
     int a1 = dimAA[0];
     int a2 = dimAA[1];
     int a3 = dimAA[2];
     int b3 = dimBB[2];
-    for (int zz=0 ; zz < a2 ; ++zz){
-        for (int ii=0 ; ii < a1 ; ++ii ){
-            for (int hh=0 ; hh < b3 ; ++hh){ // loop over columns
-                for (int kk=0 ; kk < a3 ; ++kk){
-                    CC(ii+zz*a1,hh) += AA(ii+zz*a1,kk)*BB(ii+a1*kk,hh)  ; // *BB(kk,hh) ;
+    for (int zz=0; zz < a2; ++zz){
+        for (int ii=0; ii < a1; ++ii ){
+            for (int hh=0; hh < b3; ++hh){ // loop over columns
+                for (int kk=0; kk < a3; ++kk){
+                    CC(ii+zz*a1,hh) += AA(ii+zz*a1,kk)*BB(ii+a1*kk,hh); // *BB(kk,hh);
                 }
             }
         }
@@ -66,17 +68,17 @@ Rcpp::List RM_CALCPOST( Rcpp::NumericMatrix DAT2,
     int N=DAT2.nrow();
     int I=DAT2.ncol();
     int TP=PROBS.ncol();
-    int KKK = KK[0] + 1 ;
+    int KKK = KK[0] + 1;
 
     //*****
     // calculate individual likelihood
-    Rcpp::NumericMatrix fyiqk (N,TP) ;
+    Rcpp::NumericMatrix fyiqk (N,TP);
     fyiqk.fill(1);
     for (int ii=0;ii<I;++ii){
         for (int nn=0;nn<N;++nn){
             if ( DAT2RESP(nn,ii)>0){
                 for (int tt=0;tt<TP;++tt){
-                    fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( KKK*ii + DAT2(nn,ii) , tt ) ;
+                    fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( KKK*ii + DAT2(nn,ii), tt );
                 }
             }
         }
@@ -101,7 +103,7 @@ Rcpp::List RM_CALCPOST( Rcpp::NumericMatrix DAT2,
 ///** rm_probraterfct1
 // [[Rcpp::export]]
 Rcpp::List rm_probraterfct1( Rcpp::NumericMatrix CRA,
-    Rcpp::NumericVector DRA , Rcpp::IntegerVector dimAA,
+    Rcpp::NumericVector DRA, Rcpp::IntegerVector dimAA,
     Rcpp::NumericMatrix BB, Rcpp::IntegerVector dimBB )
 {
 
@@ -114,19 +116,19 @@ Rcpp::List rm_probraterfct1( Rcpp::NumericMatrix CRA,
       // array B (I,K+1,TP)
       // Rcpp::NumericMatrix BB(B);
       // Rcpp::IntegerVector dimBB(dimB);
-      Rcpp::NumericMatrix CC( dimAA[0]*dimAA[1] , dimBB[2] ) ;
+      Rcpp::NumericMatrix CC( dimAA[0]*dimAA[1], dimBB[2] );
 
       ////////////////////////////////////////////
 
       //*********************
       // create h1 matrix
-      Rcpp::NumericMatrix h1(I*(K+1),K) ;
+      Rcpp::NumericMatrix h1(I*(K+1),K);
       int nrh1 = h1.nrow();
 
       for (int kk=0;kk<(K+1);++kk){
           for (int ii=0;ii<I;++ii){
               for (int jj=0;jj<K;++jj){
-                  h1(ii+I*kk,jj) = CRA( ii , jj )  - DRA[ii]*kk ;
+                  h1(ii+I*kk,jj) = CRA( ii, jj )  - DRA[ii]*kk;
                                      }
                                  }
                           }
@@ -135,54 +137,54 @@ Rcpp::List rm_probraterfct1( Rcpp::NumericMatrix CRA,
       // compute logistic distribution
       // for (int kk=0; kk<K; ++kk){
       for (int kk=0;kk<K;++kk){
-          Rcpp::NumericVector inpv =h1(_,kk) ;
-          Rcpp::NumericVector res0=plogis(inpv) ;
+          Rcpp::NumericVector inpv =h1(_,kk);
+          Rcpp::NumericVector res0=plogis(inpv);
           for (int ii=0;ii<nrh1;++ii){
-              h1(ii,kk) = res0[ii] ;
+              h1(ii,kk) = res0[ii];
                                }
                       }
 
       //***********************************
       // compute matrix with rater probabilities
 
-      // P(X=0) ;
-      Rcpp::NumericMatrix PRA(I*(K+1),K+1) ;
+      // P(X=0);
+      Rcpp::NumericMatrix PRA(I*(K+1),K+1);
       for (int jj=0;jj<(K+1);++jj){
           for (int ii=0;ii<I;++ii){
-              PRA(ii,jj) = h1(ii+I*jj, 0 ) ;
+              PRA(ii,jj) = h1(ii+I*jj, 0 );
                       }
                   }
       // other categories
       for (int cc=1;cc<K;++cc){
       for (int jj=0;jj<(K+1);++jj){
           for (int ii=0;ii<I;++ii){
-              PRA(ii+I*cc,jj) = h1(ii+I*jj, cc ) - h1(ii+I*jj, cc-1 ) ;
+              PRA(ii+I*cc,jj) = h1(ii+I*jj, cc ) - h1(ii+I*jj, cc-1 );
                       }
                   }
               }
       // last category
-      int cc=K ;
+      int cc=K;
       for (int jj=0;jj<(K+1);++jj){
           for (int ii=0;ii<I;++ii){
-              PRA(ii+I*cc,jj) = 1 - h1(ii+I*jj, cc-1 ) ;
+              PRA(ii+I*cc,jj) = 1 - h1(ii+I*jj, cc-1 );
                       }
                   }
 
       //**************************
       // multiplication
-      Rcpp::NumericMatrix AA=PRA ;
+      Rcpp::NumericMatrix AA=PRA;
       int a1 = dimAA[0];
       int a2 = dimAA[1];
       int a3 = dimAA[2];
       int b3 = dimBB[2];
 
       // ii -> loop within a matrix
-      //for (int ii=0 ; ii < a1 ; ++ii ){
-      for (int zz=0 ; zz < a2 ; ++zz){
-          for (int ii=0 ; ii < a1 ; ++ii ){
-              for (int hh=0 ; hh < b3 ; ++hh){ // loop over columns
-                  for (int kk=0 ; kk < a3 ; ++kk){
-                      CC(ii+zz*a1,hh) += AA(ii+zz*a1,kk)*BB(ii+a1*kk,hh)  ; // *BB(kk,hh) ;
+      //for (int ii=0; ii < a1; ++ii ){
+      for (int zz=0; zz < a2; ++zz){
+          for (int ii=0; ii < a1; ++ii ){
+              for (int hh=0; hh < b3; ++hh){ // loop over columns
+                  for (int kk=0; kk < a3; ++kk){
+                      CC(ii+zz*a1,hh) += AA(ii+zz*a1,kk)*BB(ii+a1*kk,hh); // *BB(kk,hh);
                               }
                           }
                       }
@@ -191,7 +193,7 @@ Rcpp::List rm_probraterfct1( Rcpp::NumericMatrix CRA,
       ///////////////////////////////////////////////////////
       ///////////// O U T P U T   ///////////////////////////
       return Rcpp::List::create(
-         Rcpp::_["PRA"] = PRA ,
+         Rcpp::_["PRA"] = PRA,
          Rcpp::_["probtotal"] = CC
                     );
 
@@ -222,63 +224,63 @@ Rcpp::NumericMatrix rm_facets_calcprobs_cpp( Rcpp::NumericVector b_item,
 {
 
      // int RR = as<int>(RR_);
-     //    probs <- .rm.facets.calcprobs( b.item , b.rater , Qmatrix , tau.item ,
-     //           VV , K , I , TP , a.item , a.rater , item.index , rater.index ,
-     //           theta.k ,RR )
+     //    probs <- .rm.facets.calcprobs( b.item, b.rater, Qmatrix, tau.item,
+     //           VV, K, I, TP, a.item, a.rater, item.index, rater.index,
+     //           theta.k,RR )
 
      //***** calculate b
-     // b <- tau.item[ item.index , ]
-     Rcpp::NumericMatrix b(I,K) ;
-     // b0 <- ( matrix( b.rater , nrow= RR , ncol=K) )[ rater.index , ] *     Qmatrix[ item.index ,]
+     // b <- tau.item[ item.index, ]
+     Rcpp::NumericMatrix b(I,K);
+     // b0 <- ( matrix( b.rater, nrow= RR, ncol=K) )[ rater.index, ] *     Qmatrix[ item.index,]
      // b <- b + b0
-     for (int ii=0; ii<I ; ii++){
-        b.row(ii) = tau_item.row( item_index[ii] ) ;
+     for (int ii=0; ii<I; ii++){
+        b.row(ii) = tau_item.row( item_index[ii] );
         for (int kk=0;kk<K;kk++){
-         b(ii,kk) = b(ii,kk) + b_rater[ rater_index[ii] ] * Qmatrix( item_index[ii] , kk ) ;
+         b(ii,kk) = b(ii,kk) + b_rater[ rater_index[ii] ] * Qmatrix( item_index[ii], kk );
                      }
                  }
 
      //****** calculate a
      // a <- a.item[ item.index ] * a.rater[ rater.index ]
-     Rcpp::NumericVector a(I) ;
+     Rcpp::NumericVector a(I);
      for (int ii=0;ii<I;ii++){
-         a[ii] = a_item[ item_index[ii] ] * a_rater[ rater_index[ii] ] ;
+         a[ii] = a_item[ item_index[ii] ] * a_rater[ rater_index[ii] ];
                  }
      //******* calculate modified Q-matrix
      // Qmatrix=Qmatrix[item.index,]
-     Rcpp::NumericMatrix Q(I,K) ;
+     Rcpp::NumericMatrix Q(I,K);
      for (int ii=0;ii<I;ii++){
-         Q.row(ii) = Qmatrix.row( item_index[ii] ) ;
+         Q.row(ii) = Qmatrix.row( item_index[ii] );
                  }
 
      ///**************************
      // compute response probabilities according to the generalized partial credit model
 
-     //     probs <- array( 0 , dim=c(I,K+1,TP) )   # categories 0 , ... , K
-     Rcpp::NumericMatrix probs(I,(K+1)*TP) ;
+     //     probs <- array( 0, dim=c(I,K+1,TP) )   # categories 0, ..., K
+     Rcpp::NumericMatrix probs(I,(K+1)*TP);
      //    for (kk in 1:K){
-     //        l0 <- matrix( - b[,kk] , nrow=I,ncol=TP)
-     //        l0 <- l0 + outer( a * Qmatrix[ , kk] , theta.k )
+     //        l0 <- matrix( - b[,kk], nrow=I,ncol=TP)
+     //        l0 <- l0 + outer( a * Qmatrix[, kk], theta.k )
      //        probs[,kk+1,] <- l0
      //                }
-     // probs(ii , kk , tt ) ~ probs( ii , kk + tt * (K+1) )
-     double tmp1 = 0 ;
+     // probs(ii, kk, tt ) ~ probs( ii, kk + tt * (K+1) )
+     double tmp1 = 0;
 
      for (int tt=0;tt<TP;tt++){
      for (int ii=0;ii<I;ii++){
-         tmp1 = 1 ;
-         probs( ii , tt*(K+1) ) = 1 ;
+         tmp1 = 1;
+         probs( ii, tt*(K+1) ) = 1;
          for (int kk=0;kk<K;kk++){
-             probs( ii , kk+1 + tt*(K+1) ) = exp( - b(ii,kk) + a[ii] * Q(ii,kk) * theta_k[tt] );
-             tmp1 += probs( ii , kk+1 + tt*(K+1) ) ;
+             probs( ii, kk+1 + tt*(K+1) ) = exp( - b(ii,kk) + a[ii] * Q(ii,kk) * theta_k[tt] );
+             tmp1 += probs( ii, kk+1 + tt*(K+1) );
                      }
          for (int kk=0;kk<K+1;kk++){
-             probs( ii , kk + tt*(K+1) ) = probs( ii , kk + tt*(K+1) ) / tmp1 ;
+             probs( ii, kk + tt*(K+1) ) = probs( ii, kk + tt*(K+1) ) / tmp1;
                      }
              }   // end ii
          } // end tt
 
-     return probs ;
+     return probs;
 }
 
 
@@ -305,17 +307,17 @@ Rcpp::List SMIRT_CALCPOST( Rcpp::IntegerMatrix DAT2,
      int N=DAT2.nrow();
      int I=DAT2.ncol();
      int TP=PROBS.ncol();
-     int KK=KK1[0] ;
+     int KK=KK1[0];
 
      //*****
      // calculate individual likelihood
-     Rcpp::NumericMatrix fyiqk (N,TP) ;
+     Rcpp::NumericMatrix fyiqk (N,TP);
      fyiqk.fill(1);
      for (int ii=0;ii<I;++ii){
      for (int nn=0;nn<N;++nn){
          if ( DAT2RESP(nn,ii)>0){
          for (int tt=0;tt<TP;++tt){
-             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii) , tt ) ;
+             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
                          }
                      }
                  }
@@ -323,37 +325,37 @@ Rcpp::List SMIRT_CALCPOST( Rcpp::IntegerMatrix DAT2,
 
      //****
      // calculate posterior
-     Rcpp::NumericMatrix fqkyi (N,TP) ;
+     Rcpp::NumericMatrix fqkyi (N,TP);
      for (int nn=0;nn<N;++nn){
          double total = 0;
          for (int tt=0;tt<TP;++tt){
-             fqkyi(nn,tt) = fyiqk(nn,tt)*PIK[tt] ;
-             total += fqkyi(nn,tt) ;
+             fqkyi(nn,tt) = fyiqk(nn,tt)*PIK[tt];
+             total += fqkyi(nn,tt);
                  }
          for (int tt=0;tt<TP;++tt){
-             fqkyi(nn,tt) = fqkyi(nn,tt)/total ;
+             fqkyi(nn,tt) = fqkyi(nn,tt)/total;
                  }
              }
      //*****
      // calculate counts
-     for (int tt=0;tt<TP ;++tt){
-         PIK[tt] = 0 ;
+     for (int tt=0;tt<TP;++tt){
+         PIK[tt] = 0;
          for (int nn=0;nn<N;++nn){
-             PIK[tt] += fqkyi(nn,tt) ;
+             PIK[tt] += fqkyi(nn,tt);
                      }
-         PIK[tt] = PIK[tt] / N ;
+         PIK[tt] = PIK[tt] / N;
                  }
 
-     Rcpp::NumericMatrix nik (TP, I*(KK+1)) ;
-     Rcpp::NumericMatrix NIK (TP, I) ;
+     Rcpp::NumericMatrix nik (TP, I*(KK+1));
+     Rcpp::NumericMatrix NIK (TP, I);
      for (int tt=0;tt<TP;++tt){
-     for (int ii=0; ii < I ; ++ii){
+     for (int ii=0; ii < I; ++ii){
      for (int kk=0;kk<KK+1;++kk){
          for (int nn=0;nn<N;++nn){
-     //            nik( tt , ii + kk*I  ) += DAT2RESP(nn,ii)*(DAT2(nn,ii)==kk)*fqkyi(nn,tt)  ;
-                 nik( tt , ii + kk*I  ) += DAT2IND(nn,ii+kk*I) *fqkyi(nn,tt)  ;
+     //            nik( tt, ii + kk*I  ) += DAT2RESP(nn,ii)*(DAT2(nn,ii)==kk)*fqkyi(nn,tt);
+                 nik( tt, ii + kk*I  ) += DAT2IND(nn,ii+kk*I) *fqkyi(nn,tt);
                      }  // end nn
-             NIK(tt,ii) += nik(tt,ii+kk*I ) ;
+             NIK(tt,ii) += nik(tt,ii+kk*I );
                  } // end kk
              }  // end ii
          }  // end tt
@@ -361,10 +363,10 @@ Rcpp::List SMIRT_CALCPOST( Rcpp::IntegerMatrix DAT2,
      ///////////////////////////////////////////////////////
      ///////////// O U T P U T   ///////////////////////////
      return Rcpp::List::create(
-        Rcpp::_["fyiqk"] = fyiqk ,
-        Rcpp::_["f.qk.yi"]=fqkyi ,
-         Rcpp::_["pi.k"] = PIK ,
-        Rcpp::_["n.ik"] = nik ,
+        Rcpp::_["fyiqk"] = fyiqk,
+        Rcpp::_["f.qk.yi"]=fqkyi,
+         Rcpp::_["pi.k"] = PIK,
+        Rcpp::_["n.ik"] = nik,
         Rcpp::_["N.ik"]=NIK
                  );
 
@@ -393,33 +395,33 @@ Rcpp::NumericMatrix SMIRT_CALCPROB_COMP( Rcpp::NumericMatrix A,
     int TP=THETA.nrow();
 
     // create matrix of probabilities
-    Rcpp::NumericMatrix prob (I,TP) ;
+    Rcpp::NumericMatrix prob (I,TP);
     prob.fill(1);
     Rcpp::NumericVector yy (TP);
 
     for (int ii=0;ii<I;++ii){
             for (int tt=0; tt<TP; ++tt){
-            yy[tt] = - B[ii] ;
+            yy[tt] = - B[ii];
            for (int dd=0;dd<D;++dd){
-                   yy[tt] += A(ii,dd)*QQ(ii,dd)*THETA(tt,dd)  ;
+                   yy[tt] += A(ii,dd)*QQ(ii,dd)*THETA(tt,dd);
                     } // end dd
                         }   // end tt
-            Rcpp::NumericVector p1=plogis(yy) ;
+            Rcpp::NumericVector p1=plogis(yy);
             for (int tt=0; tt<TP; ++tt){
-                prob(ii,tt)= p1[tt] ;
+                prob(ii,tt)= p1[tt];
                   }  // end tt
     //***
     // include guessing and slipping parameters
      if ( ( CC[ii] > 0 ) || ( DD[ii] < 1 ) ){
         for (int tt=0;tt<TP;++tt){
-            prob(ii,tt) = CC[ii] + ( DD[ii]-CC[ii] )* prob(ii,tt) ;
+            prob(ii,tt) = CC[ii] + ( DD[ii]-CC[ii] )* prob(ii,tt);
                     }   // end tt
                 } // end if condition for guessing or slipping
         }       // end ii
 
     ///////////////////////////////////////
     /// OUTPUT
-    return prob ;
+    return prob;
 }
 
 
@@ -446,7 +448,7 @@ Rcpp::NumericMatrix SMIRT_CALCPROB_NONCOMP( Rcpp::NumericMatrix A,
      int TP=THETA.nrow();
 
      // create matrix of probabilities
-     Rcpp::NumericMatrix prob (I,TP) ;
+     Rcpp::NumericMatrix prob (I,TP);
      prob.fill(1);
      Rcpp::NumericVector yy (TP);
 
@@ -454,11 +456,11 @@ Rcpp::NumericMatrix SMIRT_CALCPROB_NONCOMP( Rcpp::NumericMatrix A,
      for (int dd=0;dd<D;++dd){
          if ( QQ(ii,dd)>0 ){
              for (int tt=0; tt<TP; ++tt){
-                    yy[tt] =  A(ii,dd)*QQ(ii,dd)*THETA(tt,dd)-B(ii,dd)   ;
+                    yy[tt] =  A(ii,dd)*QQ(ii,dd)*THETA(tt,dd)-B(ii,dd) ;
                          }   // end tt
-             Rcpp::NumericVector p1=plogis(yy) ;
+             Rcpp::NumericVector p1=plogis(yy);
              for (int tt=0; tt<TP; ++tt){
-                 prob(ii,tt)=prob(ii,tt)*p1[tt] ;
+                 prob(ii,tt)=prob(ii,tt)*p1[tt];
                    }  // end tt
                  }       // end if Q(ii,dd)>0
              }          // end dd
@@ -466,14 +468,14 @@ Rcpp::NumericMatrix SMIRT_CALCPROB_NONCOMP( Rcpp::NumericMatrix A,
      // include guessing and slipping parameters
       if ( ( CC[ii] > 0 ) || ( DD[ii] < 1 ) ){
          for (int tt=0;tt<TP;++tt){
-             prob(ii,tt) = CC[ii] + ( DD[ii]-CC[ii] )* prob(ii,tt) ;
+             prob(ii,tt) = CC[ii] + ( DD[ii]-CC[ii] )* prob(ii,tt);
                      }   // end tt
                  } // end if condition for guessing or slipping
          }       // end ii
 
      ///////////////////////////////////////
      /// OUTPUT
-     return prob ;
+     return prob;
 }
 
 
@@ -491,45 +493,45 @@ Rcpp::NumericMatrix SMIRT_CALCPROB_NONCOMP( Rcpp::NumericMatrix A,
 Rcpp::NumericMatrix SMIRT_CALCPROB_PARTCOMP( Rcpp::NumericMatrix A,
     Rcpp::NumericMatrix B, Rcpp::NumericMatrix QQ,
     Rcpp::NumericMatrix THETA, Rcpp::NumericVector CC,
-    Rcpp::NumericVector DD , Rcpp::NumericVector MUI )
+    Rcpp::NumericVector DD, Rcpp::NumericVector MUI )
 {
 
      int I=A.nrow();
      int D=A.ncol();
      int TP=THETA.nrow();
      // create matrix of probabilities
-     Rcpp::NumericMatrix prob (I,TP) ;
+     Rcpp::NumericMatrix prob (I,TP);
      prob.fill(1);
      Rcpp::NumericVector yy1 (1);
      Rcpp::NumericVector yy2 (1);
      Rcpp::NumericVector yy3 (1);
-     double tmp1 ;
+     double tmp1;
 
      for (int ii=0;ii<I;++ii){
      for (int tt=0; tt<TP; ++tt){
-             yy1[0] = 0 ;
-            yy2[0] = 1 ;
+             yy1[0] = 0;
+            yy2[0] = 1;
      for (int dd=0;dd<D;++dd){
          if ( QQ(ii,dd)>0 ){
-             tmp1 = A(ii,dd)*QQ(ii,dd)*THETA(tt,dd)-B(ii,dd) ;
-             yy1[0] = yy1[0] + tmp1  ;
-             yy2[0] = yy2[0] * ( 1 + exp( tmp1 ) ) ;
+             tmp1 = A(ii,dd)*QQ(ii,dd)*THETA(tt,dd)-B(ii,dd);
+             yy1[0] = yy1[0] + tmp1;
+             yy2[0] = yy2[0] * ( 1 + exp( tmp1 ) );
                  }       // end if Q(ii,dd)>0
-             yy3[0] = exp( yy1[0] ) ;
+             yy3[0] = exp( yy1[0] );
                  }          // end dd
-          prob(ii,tt) = yy3[0]/(  MUI[ii] * yy2[0] + (1-MUI[ii])*(1+yy3[0]) ) ;
+          prob(ii,tt) = yy3[0]/(  MUI[ii] * yy2[0] + (1-MUI[ii])*(1+yy3[0]) );
 
      //***
      // include guessing and slipping parameters
       if ( ( CC[ii] > 0 ) || ( DD[ii] < 1 ) ){
-             prob(ii,tt) = CC[ii] + ( DD[ii]-CC[ii] )* prob(ii,tt) ;
+             prob(ii,tt) = CC[ii] + ( DD[ii]-CC[ii] )* prob(ii,tt);
                  } // end if condition for guessing or slipping
              } // end tt
          }       // end ii
 
      ///////////////////////////////////////
      /// OUTPUT
-     return prob ;
+     return prob;
 }
 
 
@@ -556,24 +558,24 @@ Rcpp::List MML2_RASCHTYPE_COUNTS( Rcpp::NumericMatrix DAT2,
      NK.fill(0);
      for (int tt=0;tt<TP;++tt){
          for (int nn=0;nn<N;++nn){
-     //        NK[tt] = NK[tt] + FQKYI(nn,tt)*DAT1[nn] ;
-               NK[tt] += FQKYI(nn,tt)*DAT1[nn] ;
+     //        NK[tt] = NK[tt] + FQKYI(nn,tt)*DAT1[nn];
+               NK[tt] += FQKYI(nn,tt)*DAT1[nn];
                          } // end nn
                      }  // end tt
 
      //**********************************
      // calculate n.jk and r.jk
-     Rcpp::NumericMatrix NJK (I,TP) ;
-     Rcpp::NumericMatrix RJK (I,TP) ;
-     NJK.fill(0) ;
-     RJK.fill(0) ;
+     Rcpp::NumericMatrix NJK (I,TP);
+     Rcpp::NumericMatrix RJK (I,TP);
+     NJK.fill(0);
+     RJK.fill(0);
 
      for (int ii=0;ii<I;++ii){
      for (int tt=0;tt<TP;++tt){
          for (int nn=0;nn<N;++nn){
              if (DAT2RESP(nn,ii)>0){
-                 NJK(ii,tt) += DAT1[nn] * FQKYI(nn,tt) ;
-                 RJK(ii,tt) += DAT1[nn] * FQKYI(nn,tt) * DAT2(nn,ii) ;
+                 NJK(ii,tt) += DAT1[nn] * FQKYI(nn,tt);
+                 RJK(ii,tt) += DAT1[nn] * FQKYI(nn,tt) * DAT2(nn,ii);
                              }       // end if ...
              }           //     end nn
          } // end tt
@@ -583,21 +585,21 @@ Rcpp::List MML2_RASCHTYPE_COUNTS( Rcpp::NumericMatrix DAT2,
      // calculate loglikelihood
      double LL=0;
      //        ll[gg] <- sum( dat1[group==gg,2] * log( rowSums( f.yi.qk[group==gg,] *
-     //                    outer( rep(1,nrow(f.yi.qk[group==gg,])) , pi.k[,gg] ) ) ) )
+     //                    outer( rep(1,nrow(f.yi.qk[group==gg,])), pi.k[,gg] ) ) ) )
      for (int nn=0;nn<N;++nn){
          double total = 0;
          for (int tt=0;tt<TP;++tt){
-               total += FYIQK(nn,tt) * PIK[tt] ;
+               total += FYIQK(nn,tt) * PIK[tt];
                              } // end tt
-         LL += log( total )*DAT1[nn] ;
+         LL += log( total )*DAT1[nn];
                  }  // end nn
 
      ///////////////////////////////////////////////////////
      ///////////// O U T P U T   ///////////////////////////
      return Rcpp::List::create(
-         Rcpp::_["nk"] = NK ,
-         Rcpp::_["njk"] = NJK ,
-         Rcpp::_["rjk"] = RJK ,
+         Rcpp::_["nk"] = NK,
+         Rcpp::_["njk"] = NJK,
+         Rcpp::_["rjk"] = RJK,
          Rcpp::_["ll"] = LL
                  );
 }
@@ -621,13 +623,13 @@ Rcpp::List MML2_CALCPOST_V1( Rcpp::NumericMatrix DAT2,
 
      //*****
      // calculate individual likelihood
-     Rcpp::NumericMatrix fyiqk (N,TP) ;
+     Rcpp::NumericMatrix fyiqk (N,TP);
      fyiqk.fill(1);
      for (int ii=0;ii<I;++ii){
      for (int nn=0;nn<N;++nn){
          if ( DAT2RESP(nn,ii)>0){
          for (int tt=0;tt<TP;++tt){
-             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii) , tt ) ;
+             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
                          }
                      }
                  }
@@ -659,18 +661,18 @@ Rcpp::List MML2_CALCPOST_V2( Rcpp::NumericMatrix DAT2,
      int TP=PROBS.ncol();
      //*****
      // calculate individual likelihood
-     Rcpp::NumericMatrix fyiqk (N,TP) ;
+     Rcpp::NumericMatrix fyiqk (N,TP);
      fyiqk.fill(1);
      for (int ii=0;ii<I;++ii){
      for (int nn=0;nn<N;++nn){
          if ( DAT2RESP(nn,ii)>0){
          for (int tt=0;tt<TP;++tt){
-//             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii) , tt ) ;
+//             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
     if ( ( DAT2(nn,ii) < 1 ) & ( DAT2(nn,ii) > 0 ) ){
              fyiqk(nn,tt) = fyiqk(nn,tt) * pow( PROBS(2*ii+1,tt),DAT2(nn,ii) )*
-                    pow( PROBS( 2*ii  , tt ) , 1 - DAT2(nn,ii) ) ;
+                    pow( PROBS( 2*ii, tt ), 1 - DAT2(nn,ii) );
          } else {
-             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii) , tt ) ;
+             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
                         }
                          }
                      }
@@ -704,18 +706,18 @@ Rcpp::List MML2_CALCPOST_V3( Rcpp::NumericMatrix DAT2,
      int TP=PROBS.ncol();
      //*****
      // calculate individual likelihood
-     Rcpp::NumericMatrix fyiqk (N,TP) ;
+     Rcpp::NumericMatrix fyiqk (N,TP);
      fyiqk.fill(1);
      for (int ii=0;ii<I;++ii){
      for (int nn=0;nn<N;++nn){
          if ( DAT2RESP(nn,ii)>0){
          for (int tt=0;tt<TP;++tt){
-//             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii) , tt ) ;
+//             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
     if ( ( DAT2(nn,ii) < 1 ) & ( DAT2(nn,ii) > 0 ) ){
              fyiqk(nn,tt) = fyiqk(nn,tt) *
-              (PROBS(2*ii+1,tt) * DAT2(nn,ii) + (PROBS( 2*ii , tt ) *(1-DAT2(nn,ii))) );
+              (PROBS(2*ii+1,tt) * DAT2(nn,ii) + (PROBS( 2*ii, tt ) *(1-DAT2(nn,ii))) );
                         } else {
-             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii) , tt ) ;
+             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
                         }
                          }
                      }

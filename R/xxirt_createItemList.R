@@ -1,9 +1,9 @@
 ## File Name: xxirt_createItemList.R
-## File Version: 0.07
+## File Version: 0.11
 
 #########################################################
 # create item list
-xxirt_createItemList <- function( customItems , itemtype ,items, partable )
+xxirt_createItemList <- function( customItems, itemtype,items, partable )
 {
     #*** list with customized items
     I <- length(items)
@@ -13,9 +13,9 @@ xxirt_createItemList <- function( customItems , itemtype ,items, partable )
     for (ii in 1:I){
         itemtype_ii <- itemtype[ii]
         item_list[[ii]] <- NA
-        partable_ii <- partable[ partable$itemnr == ii , ]
+        partable_ii <- partable[ partable$itemnr==ii, ]
         for (vv in 1:CI){
-            if ( paste(customItems[[vv]]$name) == itemtype_ii ){
+            if ( paste(customItems[[vv]]$name)==itemtype_ii ){
                 item_list[[ii]] <- customItems[[vv]]
             }  # end if
         } # end vv

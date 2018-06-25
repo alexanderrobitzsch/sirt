@@ -1,5 +1,5 @@
 %% File Name: data.wide2long.Rd
-%% File Version: 0.17
+%% File Version: 0.21
 
 \name{data.wide2long}
 \alias{data.wide2long}
@@ -11,13 +11,13 @@ Converting a Data Frame from Wide Format in a Long Format
 Converts a data frame in wide format into long format.
 }
 \usage{
-data.wide2long(dat, id = NULL, X = NULL, Q = NULL)
+data.wide2long(dat, id=NULL, X=NULL, Q=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{dat}{
 Data frame with item responses and a person identifier if
-\code{id != NULL}.
+\code{id !=NULL}.
 }
   \item{id}{
 An optional string with the variable name of the person identifier.
@@ -62,30 +62,30 @@ dat <- data.pisaRead$data
 Q <- data.pisaRead$item   # item predictors
 
 # define items
-items <- colnames(dat)[ substring( colnames(dat) , 1 , 1 ) == "R" ]
-dat1 <- dat[ , c( "idstud" , items ) ]
+items <- colnames(dat)[ substring( colnames(dat), 1, 1 )=="R" ]
+dat1 <- dat[, c( "idstud", items ) ]
 # matrix with person predictors
-X <- dat[ , c("idschool" , "hisei" , "female" , "migra") ]
+X <- dat[, c("idschool", "hisei", "female", "migra") ]
 
 # create dataset in long format
-dat.long <- sirt::data.wide2long( dat=dat1 , id="idstud" , X=X , Q=Q )
+dat.long <- sirt::data.wide2long( dat=dat1, id="idstud", X=X, Q=Q )
 
 #***
 # Model 1: Rasch model
-mod1 <- lme4::glmer( resp ~ 0 + ( 1 | idstud ) + as.factor(item) , data = dat.long ,
-            family="binomial" , verbose=TRUE)
+mod1 <- lme4::glmer( resp ~ 0 + ( 1 | idstud ) + as.factor(item), data=dat.long,
+            family="binomial", verbose=TRUE)
 summary(mod1)
 
 #***
 # Model 2: Rasch model and inclusion of person predictors
 mod2 <- lme4::glmer( resp ~ 0 + ( 1 | idstud ) + as.factor(item) + female + hisei + migra,
-           data = dat.long , family="binomial" , verbose=TRUE)
+           data=dat.long, family="binomial", verbose=TRUE)
 summary(mod2)
 
 #***
 # Model 3: LLTM
 mod3 <- lme4::glmer(resp ~ (1|idstud) + as.factor(ItemFormat) + as.factor(TextType),
-            data = dat.long , family="binomial" , verbose=TRUE)
+            data=dat.long, family="binomial", verbose=TRUE)
 summary(mod3)
 
 #############################################################################
@@ -96,13 +96,13 @@ set.seed(765)
 N <- 1000  # number of persons
 I <- 10    # number of items
 b <- seq(-2,2,length=I)
-dat <- sirt::sim.raschtype( stats::rnorm(N,sd=1.2) , b=b )
+dat <- sirt::sim.raschtype( stats::rnorm(N,sd=1.2), b=b )
 dat.long <- sirt::data.wide2long( dat=dat )
 #***
 # estimate Rasch model with lmer
 library(lme4)
-mod1 <- lme4::glmer( resp ~ 0 + as.factor( item ) + ( 1 | id_index) , data = dat.long ,
-             verbose=TRUE , family="binomial")
+mod1 <- lme4::glmer( resp ~ 0 + as.factor( item ) + ( 1 | id_index), data=dat.long,
+             verbose=TRUE, family="binomial")
 summary(mod1)
   ##   Random effects:
   ##    Groups   Name        Variance Std.Dev.

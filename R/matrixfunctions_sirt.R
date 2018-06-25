@@ -1,5 +1,5 @@
 ## File Name: matrixfunctions_sirt.R
-## File Version: 0.12
+## File Version: 0.16
 
 ##########################################################################
 # rowwise maximum and minimum function
@@ -13,8 +13,8 @@ rowMaxs.sirt <- function(matr){
 rowMins.sirt <- function(matr){
     matr2 <- - matr
     res2 <- rowMaxs.sirt( matr2 )
-    res <- list( "minval" = - res2$maxval ,
-                    "minind" = res2$maxind )
+    res <- list( "minval"=- res2$maxval,
+                    "minind"=res2$maxind )
     return(res)
 }
 ##########################################################################
@@ -36,44 +36,44 @@ colCumsums.sirt <- function(matr){
 # 'interval_index' searches an index when a frequency is exceeded
 # -> used in plausible value imputation
 rowIntervalIndex.sirt <- function(matr,rn){
-    interval_index_C( matr , rn)
+    interval_index_C( matr, rn)
                     }
 
 ##########################################################################
 # extract k smallest elements in a row of a matrix
-rowKSmallest.sirt <- function( matr , K , break.ties=TRUE){
+rowKSmallest.sirt <- function( matr, K, break.ties=TRUE){
     M1 <- matr
     N1 <- dim(M1)[1] ; N2 <- dim(M1)[2]
     # generate random number matrix
-    rM1 <- matrix( round( stats::runif( N1*N2 ) ) , N1 , N2 )
+    rM1 <- matrix( round( stats::runif( N1*N2 ) ), N1, N2 )
     if ( ! break.ties ){ rM1 <- 0*rM1 }
     # define integer matrix
-    indexmatr <- matrix( 1:N2 , N1 , N2 , byrow=TRUE )
+    indexmatr <- matrix( 1:N2, N1, N2, byrow=TRUE )
     # apply function for extracting k smallest elements
-    a1 <- rowKSmallest_C( matr , K , indexmatr , rM1)
+    a1 <- rowKSmallest_C( matr, K, indexmatr, rM1)
     ## OUTPUT:
-    ## return List::create(_["smallval"]=SMALLVAL ,
+    ## return List::create(_["smallval"]=SMALLVAL,
     ##                      _["smallind"]=SMALLIND ) ;
     return(a1)
 }
 ##########################################################################
 # Ksmallest -> different implementation
-rowKSmallest2.sirt <- function(matr , K ){
+rowKSmallest2.sirt <- function(matr, K ){
     Nmis <- nrow(matr)
     disty <- matr
     donors <- K
     indvec <- 1:Nmis
     M1 <- max(disty)+1
-    smallval <- donor.ind <- matrix( 0 , nrow=Nmis , ncol=donors )
+    smallval <- donor.ind <- matrix( 0, nrow=Nmis, ncol=donors )
     res1 <- rowMins.sirt(matr=disty)
     donor.ind[,1] <- res1$minind
     smallval[,1] <- res1$minval
     for (ii in 2:donors){
-        disty[ cbind(indvec , donor.ind[,ii-1] ) ] <- M1
+        disty[ cbind(indvec, donor.ind[,ii-1] ) ] <- M1
         res1 <- rowMins.sirt(matr=disty)
         donor.ind[,ii] <- res1$minind
         smallval[,ii] <- res1$minval
                         }
-    res <- list( "smallval"=smallval , "smallind" = donor.ind )
+    res <- list( "smallval"=smallval, "smallind"=donor.ind )
     return(res)
     }

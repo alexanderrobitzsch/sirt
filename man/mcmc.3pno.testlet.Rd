@@ -1,5 +1,5 @@
 %% File Name: mcmc.3pno.testlet.Rd
-%% File Version: 1.18
+%% File Version: 1.23
 
 \name{mcmc.3pno.testlet}
 \alias{mcmc.3pno.testlet}
@@ -12,10 +12,10 @@ This function estimates the 3PNO testlet model (Wang, Bradlow & Wainer, 2002, 20
 by Markov Chain Monte Carlo methods (Glas, 2012).
 }
 \usage{
-mcmc.3pno.testlet(dat, testlets = rep(NA, ncol(dat)),
-   weights = NULL, est.slope = TRUE, est.guess = TRUE, guess.prior = NULL,
-   testlet.variance.prior = c(1, 0.2), burnin = 500, iter = 1000,
-   N.sampvalues = 1000, progress.iter = 50, save.theta = FALSE)
+mcmc.3pno.testlet(dat, testlets=rep(NA, ncol(dat)),
+   weights=NULL, est.slope=TRUE, est.guess=TRUE, guess.prior=NULL,
+   testlet.variance.prior=c(1, 0.2), burnin=500, iter=1000,
+   N.sampvalues=1000, progress.iter=50, save.theta=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -73,9 +73,9 @@ Should theta values be saved?
 \details{
 The testlet response model for person \eqn{p} at item \eqn{i}
 is defined as
-\deqn{ P(X_{pi} = 1 ) = c_i + ( 1 - c_i )
-        \Phi ( a_i \theta_p + \gamma_{p,t(i)} + b_i    ) \quad , \quad
-    \theta_p \sim N ( 0  ,1 ) , \gamma_{p,t(i)} \sim N( 0 , \sigma^2_t ) }
+\deqn{ P(X_{pi}=1 )=c_i + ( 1 - c_i )
+        \Phi ( a_i \theta_p + \gamma_{p,t(i)} + b_i    ) \quad, \quad
+    \theta_p \sim N ( 0,1 ), \gamma_{p,t(i)} \sim N( 0, \sigma^2_t ) }
 
 In case of \code{est.slope=FALSE}, all item slopes \eqn{a_i} are set to 1. Then
 a variance \eqn{\sigma^2} of the \eqn{\theta_p} distribution is estimated
@@ -86,7 +86,7 @@ set to 0.
 
 After fitting the testlet model, marginal item parameters are calculated (integrating
 out testlet effects \eqn{\gamma_{p,t(i)}}) according the defining response equation
-\deqn{ P(X_{pi} = 1 ) = c_i + ( 1 - c_i )
+\deqn{ P(X_{pi}=1 )=c_i + ( 1 - c_i )
         \Phi ( a_i^\ast \theta_p + b_i^\ast    ) }
 
 }
@@ -173,28 +173,28 @@ iter <- 500
 
 #***
 # Model 1: 1PNO model
-mod1 <- sirt::mcmc.3pno.testlet( dat ,  est.slope=FALSE , est.guess=FALSE ,
+mod1 <- sirt::mcmc.3pno.testlet( dat,  est.slope=FALSE, est.guess=FALSE,
             burnin=burnin, iter=iter )
 summary(mod1)
 plot(mod1,ask=TRUE) # plot MCMC chains in coda style
-plot(mod1,ask=TRUE , layout=2) # plot MCMC output in different layout
+plot(mod1,ask=TRUE, layout=2) # plot MCMC output in different layout
 
 #***
 # Model 2: 3PNO model with Beta(5,17) prior for guessing parameters
-mod2 <- sirt::mcmc.3pno.testlet( dat ,  guess.prior=c(5,17) ,
+mod2 <- sirt::mcmc.3pno.testlet( dat,  guess.prior=c(5,17),
                burnin=burnin, iter=iter )
 summary(mod2)
 
 #***
 # Model 3: Rasch (1PNO) testlet model
-testlets <- substring( colnames(dat) , 1 , 1 )
-mod3 <- sirt::mcmc.3pno.testlet( dat ,  testlets=testlets ,  est.slope=FALSE ,
-           est.guess=FALSE , burnin=burnin, iter=iter )
+testlets <- substring( colnames(dat), 1, 1 )
+mod3 <- sirt::mcmc.3pno.testlet( dat,  testlets=testlets,  est.slope=FALSE,
+           est.guess=FALSE, burnin=burnin, iter=iter )
 summary(mod3)
 
 #***
 # Model 4: 3PNO testlet model with (almost) fixed guessing parameters .25
-mod4 <- sirt::mcmc.3pno.testlet( dat ,  guess.prior=1000*c(25,75) , testlets=testlets ,
+mod4 <- sirt::mcmc.3pno.testlet( dat,  guess.prior=1000*c(25,75), testlets=testlets,
               burnin=burnin, iter=iter )
 summary(mod4)
 plot(mod4, ask=TRUE, layout=2)
@@ -209,55 +209,55 @@ I <- 4      # number of items per testlet
 TT <- 3     # number of testlets
 
 ITT <- I*TT
-b <- round( stats::rnorm( ITT , mean=0 , sd = 1 ) , 2 )
+b <- round( stats::rnorm( ITT, mean=0, sd=1 ), 2 )
 sd0 <- 1 # sd trait
-sdt <- seq( 0 , 2 , len=TT ) # sd testlets
+sdt <- seq( 0, 2, len=TT ) # sd testlets
 
 # simulate theta
-theta <- stats::rnorm( N , sd = sd0 )
+theta <- stats::rnorm( N, sd=sd0 )
 # simulate testlets
-ut <- matrix(0,nrow=N , ncol=TT )
+ut <- matrix(0,nrow=N, ncol=TT )
 for (tt in 1:TT){
-    ut[,tt] <- stats::rnorm( N , sd = sdt[tt] )
+    ut[,tt] <- stats::rnorm( N, sd=sdt[tt] )
 }
-ut <- ut[ , rep(1:TT,each=I) ]
+ut <- ut[, rep(1:TT,each=I) ]
 # calculate response probability
-prob <- matrix( stats::pnorm( theta + ut + matrix( b , nrow=N , ncol=ITT ,
-            byrow=TRUE ) ) , N, ITT)
-Y <- (matrix( stats::runif(N*ITT) , N , ITT) < prob )*1
+prob <- matrix( stats::pnorm( theta + ut + matrix( b, nrow=N, ncol=ITT,
+            byrow=TRUE ) ), N, ITT)
+Y <- (matrix( stats::runif(N*ITT), N, ITT) < prob )*1
 colMeans(Y)
 
 # define testlets
-testlets <- rep(1:TT , each=I )
+testlets <- rep(1:TT, each=I )
 
 burnin <- 300
 iter <- 1000
 
 #***
 # Model 1: 1PNO model (without testlet structure)
-mod1 <- sirt::mcmc.3pno.testlet( dat=Y ,  est.slope=FALSE , est.guess=FALSE ,
-            burnin=burnin, iter=iter , testlets= testlets )
+mod1 <- sirt::mcmc.3pno.testlet( dat=Y,  est.slope=FALSE, est.guess=FALSE,
+            burnin=burnin, iter=iter, testlets=testlets )
 summary(mod1)
 
 summ1 <- mod1$summary.mcmcobj
 # compare item parameters
-cbind( b , summ1[ grep("b" , summ1$parameter ) , "Mean" ] )
+cbind( b, summ1[ grep("b", summ1$parameter ), "Mean" ] )
 # Testlet standard deviations
-cbind( sdt , summ1[ grep("sigma\\.testlet" , summ1$parameter ) , "Mean" ] )
+cbind( sdt, summ1[ grep("sigma\\.testlet", summ1$parameter ), "Mean" ] )
 
 #***
 # Model 2: 1PNO model (without testlet structure)
-mod2 <- sirt::mcmc.3pno.testlet( dat=Y ,  est.slope=TRUE , est.guess=FALSE ,
-           burnin=burnin, iter=iter , testlets= testlets )
+mod2 <- sirt::mcmc.3pno.testlet( dat=Y,  est.slope=TRUE, est.guess=FALSE,
+           burnin=burnin, iter=iter, testlets=testlets )
 summary(mod2)
 
 summ2 <- mod2$summary.mcmcobj
 # compare item parameters
-cbind( b , summ2[ grep("b\\[" , summ2$parameter ) , "Mean" ] )
+cbind( b, summ2[ grep("b\\[", summ2$parameter ), "Mean" ] )
 # item discriminations
-cbind( sd0 , summ2[ grep("a\\[" , summ2$parameter ) , "Mean" ] )
+cbind( sd0, summ2[ grep("a\\[", summ2$parameter ), "Mean" ] )
 # Testlet standard deviations
-cbind( sdt , summ2[ grep("sigma\\.testlet" , summ2$parameter ) , "Mean" ] )
+cbind( sdt, summ2[ grep("sigma\\.testlet", summ2$parameter ), "Mean" ] )
 
 #############################################################################
 # EXAMPLE 3: Simulated data according to the 2PNO testlet model
@@ -269,45 +269,45 @@ I <- 3      # number of items per testlet
 TT <- 5    # number of testlets
 
 ITT <- I*TT
-b <- round( stats::rnorm( ITT , mean=0 , sd = 1 ) , 2 )
-a <- round( stats::runif( ITT , 0.5 , 2 ) ,2)
-sdt <- seq( 0 , 2 , len=TT ) # sd testlets
+b <- round( stats::rnorm( ITT, mean=0, sd=1 ), 2 )
+a <- round( stats::runif( ITT, 0.5, 2 ),2)
+sdt <- seq( 0, 2, len=TT ) # sd testlets
 sd0 <- 1
 
 # simulate theta
-theta <- stats::rnorm( N , sd = sd0 )
+theta <- stats::rnorm( N, sd=sd0 )
 # simulate testlets
-ut <- matrix(0,nrow=N , ncol=TT )
+ut <- matrix(0,nrow=N, ncol=TT )
 for (tt in 1:TT){
-   ut[,tt] <- stats::rnorm( N , sd = sdt[tt] )
+   ut[,tt] <- stats::rnorm( N, sd=sdt[tt] )
 }
-ut <- ut[ , rep(1:TT,each=I) ]
+ut <- ut[, rep(1:TT,each=I) ]
 # calculate response probability
-bM <- matrix( b , nrow=N , ncol=ITT , byrow=TRUE )
-aM <- matrix( a , nrow=N , ncol=ITT , byrow=TRUE )
-prob <- matrix( stats::pnorm( aM*theta + ut + bM ) , N, ITT)
-Y <- (matrix( stats::runif(N*ITT) , N , ITT) < prob )*1
+bM <- matrix( b, nrow=N, ncol=ITT, byrow=TRUE )
+aM <- matrix( a, nrow=N, ncol=ITT, byrow=TRUE )
+prob <- matrix( stats::pnorm( aM*theta + ut + bM ), N, ITT)
+Y <- (matrix( stats::runif(N*ITT), N, ITT) < prob )*1
 colMeans(Y)
 
 # define testlets
-testlets <- rep(1:TT , each=I )
+testlets <- rep(1:TT, each=I )
 
 burnin <- 500
 iter <- 1500
 
 #***
 # Model 1: 2PNO model
-mod1 <- sirt::mcmc.3pno.testlet( dat=Y ,  est.slope=TRUE , est.guess=FALSE ,
-             burnin=burnin, iter=iter , testlets= testlets )
+mod1 <- sirt::mcmc.3pno.testlet( dat=Y,  est.slope=TRUE, est.guess=FALSE,
+             burnin=burnin, iter=iter, testlets=testlets )
 summary(mod1)
 
 summ1 <- mod1$summary.mcmcobj
 # compare item parameters
-cbind( b , summ1[ grep("b\\[" , summ1$parameter ) , "Mean" ] )
+cbind( b, summ1[ grep("b\\[", summ1$parameter ), "Mean" ] )
 # item discriminations
-cbind( a , summ1[ grep("a\\[" , summ1$parameter ) , "Mean" ] )
+cbind( a, summ1[ grep("a\\[", summ1$parameter ), "Mean" ] )
 # Testlet standard deviations
-cbind( sdt , summ1[ grep("sigma\\.testlet" , summ1$parameter ) , "Mean" ] )
+cbind( sdt, summ1[ grep("sigma\\.testlet", summ1$parameter ), "Mean" ] )
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

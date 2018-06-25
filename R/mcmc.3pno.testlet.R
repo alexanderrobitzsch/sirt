@@ -1,12 +1,12 @@
 ## File Name: mcmc.3pno.testlet.R
-## File Version: 4.15
+## File Version: 4.19
 ######################################################
 # MCMC estimation 2PNO model
-mcmc.3pno.testlet <- function(dat , testlets=rep(NA , ncol(dat)) ,
-        weights=NULL , est.slope =TRUE , est.guess = TRUE , guess.prior = NULL ,
-        testlet.variance.prior = c( 1 , .2 ) ,
-        burnin=500 , iter=1000 , N.sampvalues = 1000 ,
-        progress.iter=50 , save.theta=FALSE )
+mcmc.3pno.testlet <- function(dat, testlets=rep(NA, ncol(dat)),
+        weights=NULL, est.slope=TRUE, est.guess=TRUE, guess.prior=NULL,
+        testlet.variance.prior=c( 1, .2 ),
+        burnin=500, iter=1000, N.sampvalues=1000,
+        progress.iter=50, save.theta=FALSE )
 {
     s1 <- Sys.time()
     param <- 1
@@ -19,9 +19,9 @@ mcmc.3pno.testlet <- function(dat , testlets=rep(NA , ncol(dat)) ,
     I <- ncol(dat)
     eps <- 1E-10
     # testlet groups
-    testlets.u <- setdiff( unique( testlets ) , c(NA) )
+    testlets.u <- setdiff( unique( testlets ), c(NA) )
     TT <- length(testlets.u)
-    testletgroups <- match( testlets , testlets.u )
+    testletgroups <- match( testlets, testlets.u )
     testletgroups[ is.na(testletgroups ) ] <- TT+1
     N.items <- table( testletgroups )
 
@@ -32,31 +32,31 @@ mcmc.3pno.testlet <- function(dat , testlets=rep(NA , ncol(dat)) ,
     # set initial values
 #    a.testlet <- a <- rep(.6,I)
     a.testlet <- a <- rep(1,I)
-    b <- stats::qnorm( (colMeans(dat0 , na.rm=TRUE) + .01 )/1.02 )
+    b <- stats::qnorm( (colMeans(dat0, na.rm=TRUE) + .01 )/1.02 )
     # guessing parameters
     if ( is.null(guess.prior) ){
-        guess.prior <- matrix( c(1,1) , nrow=I , ncol=2 , byrow=TRUE )
-        guess <- rep( .4 , I )
+        guess.prior <- matrix( c(1,1), nrow=I, ncol=2, byrow=TRUE )
+        guess <- rep( .4, I )
     } else {
         if ( is.vector( guess.prior) ){
-            guess.prior <- matrix( guess.prior , nrow=I , ncol=2 , byrow=TRUE )
+            guess.prior <- matrix( guess.prior, nrow=I, ncol=2, byrow=TRUE )
         }
         guess <- guess.prior[,1] / rowSums( guess.prior )
     }
     if ( ! est.guess ){ guess <- rep(0,I) }
     # item parameters in matrix form
-    a.testletM <- aM <- matrix( a , nrow=N , ncol=I , byrow=TRUE)
-    bM <- matrix( b , nrow=N , ncol=I , byrow=TRUE)
+    a.testletM <- aM <- matrix( a, nrow=N, ncol=I, byrow=TRUE)
+    bM <- matrix( b, nrow=N, ncol=I, byrow=TRUE)
     # theta effects
     theta <- stats::qnorm( ( rowMeans( dat0,na.rm=TRUE ) + .01 ) / 1.02 )
     theta <- theta - mean(theta)
     mu <- 0
     sigma <- 1
     # testlet effects
-    gamma.testlet <- matrix( rnorm( N*(TT+1) , sd = .4 ) , N , TT+1 )
+    gamma.testlet <- matrix( rnorm( N*(TT+1), sd=.4 ), N, TT+1 )
     gamma.testlet[,TT+1] <- 0
     # testlet variances
-    sigma.testlet <- rep( .4 , TT )
+    sigma.testlet <- rep( .4, TT )
     if (param==3){ sigma.testlet <- rep(1,TT) }
     # define lower and upper thresholds
     ZZ <- 1000
@@ -66,15 +66,15 @@ mcmc.3pno.testlet <- function(dat , testlets=rep(NA , ncol(dat)) ,
     threshupp[ is.na(dat0) ] <- ZZ
     W <- dat
     # saved values
-    SV <- min( N.sampvalues  , iter - burnin )
-    svindex <- round( seq( burnin , iter , len=SV )     )
-    a.chain <- matrix( NA , SV , I )
+    SV <- min( N.sampvalues, iter - burnin )
+    svindex <- round( seq( burnin, iter, len=SV )     )
+    a.chain <- matrix( NA, SV, I )
     a.testlet.chain <- matrix(NA,SV,I)
-    sigma.testlet.chain <- matrix(NA , SV , TT )
-    c.chain <- b.chain <- matrix( NA , SV , I )
-    theta.chain <- matrix( NA , SV , N )
+    sigma.testlet.chain <- matrix(NA, SV, TT )
+    c.chain <- b.chain <- matrix( NA, SV, I )
+    theta.chain <- matrix( NA, SV, N )
     sigma.chain <- deviance.chain <- rep(NA, SV)
-    gamma.testlet.chain <- matrix(NA, SV , N*(TT+1) )
+    gamma.testlet.chain <- matrix(NA, SV, N*(TT+1) )
     zz <- 0
 
 
@@ -84,42 +84,42 @@ mcmc.3pno.testlet <- function(dat , testlets=rep(NA , ncol(dat)) ,
     for (ii in 1:iter){
 
         #************
-        # param = 1
-        # tau_{ni} = a_i \theta_n + \gamma_{nt} + b_i
-        # param = 2
-        # tau_{ni} = a_i \theta_n + a_i \gamma_{nt} + b_i
+        # param=1
+        # tau_{ni}=a_i \theta_n + \gamma_{nt} + b_i
+        # param=2
+        # tau_{ni}=a_i \theta_n + a_i \gamma_{nt} + b_i
         # define some intermediate parameters
-        gamma.testletM <- gamma.testlet[ , testletgroups ]
+        gamma.testletM <- gamma.testlet[, testletgroups ]
         if (param==1){ tau.ni <- aM * theta + gamma.testletM + bM }
         if (param==2){ tau.ni <- aM * theta + aM * gamma.testletM + bM }
         if (param==3){ tau.ni <- aM * theta + a.testletM * gamma.testletM + bM }
         #***
         # draw latent data W
         if (est.guess){
-            W <- .draw.W.3pno.testlet( aM , bM, theta , gamma.testlet ,
-                    N , I , threshlow , threshupp , testletgroups , param , dat ,
-                    guess , tau.ni)
+            W <- .draw.W.3pno.testlet( aM, bM, theta, gamma.testlet,
+                    N, I, threshlow, threshupp, testletgroups, param, dat,
+                    guess, tau.ni)
         }
         #****
         # draw latent data Z
-        Z <- .draw.Z.3pno.testlet( aM , bM, theta , gamma.testlet ,
-                N , I , threshlow , threshupp , testletgroups , param , W ,
-                dat.resp , tau.ni)
+        Z <- .draw.Z.3pno.testlet( aM, bM, theta, gamma.testlet,
+                N, I, threshlow, threshupp, testletgroups, param, W,
+                dat.resp, tau.ni)
         #***
         # draw latent traits theta
-        theta <- .draw.theta.3pno.testlet( aM , bM , N , I , Z , param , gamma.testletM ,
-                 sigma ,  a.testletM)
+        theta <- .draw.theta.3pno.testlet( aM, bM, N, I, Z, param, gamma.testletM,
+                 sigma,  a.testletM)
 
         # draw theta SD
         if ( ! est.slope ){
-            sigma <- .draw.theta.variance.3pno.testlet( theta , weights , N )
+            sigma <- .draw.theta.variance.3pno.testlet( theta, weights, N )
         }
         #***
         # draw testlet effects
         if (TT>0){
-            gamma.testlet <- .draw.gamma.3pno.testlet( aM , bM , N , I , Z , param ,
-                theta , testletgroups , TT , N.items , gamma.testlet ,
-                sigma.testlet , a.testletM)
+            gamma.testlet <- .draw.gamma.3pno.testlet( aM, bM, N, I, Z, param,
+                theta, testletgroups, TT, N.items, gamma.testlet,
+                sigma.testlet, a.testletM)
         }
 
         #***
@@ -134,53 +134,53 @@ mcmc.3pno.testlet <- function(dat , testlets=rep(NA , ncol(dat)) ,
 
         # draw only b item parameters
         if ( ! est.slope ){
-            b <- .draw.est.b.3pno.testlet( aM , bM , N , I , Z , param ,
-                    gamma.testletM , sigma , weights , theta )
+            b <- .draw.est.b.3pno.testlet( aM, bM, N, I, Z, param,
+                    gamma.testletM, sigma, weights, theta )
         }
 
         #***
         # draw guessing parameter
         if (est.guess){
-            guess <- .draw.guess.3pno.testlet( guess.prior , W ,
-                    dat , dat.resp , weights , I )
+            guess <- .draw.guess.3pno.testlet( guess.prior, W,
+                    dat, dat.resp, weights, I )
         }
         # draw testlet standard deviations
         if ( (TT>0) & (param!=3) ){
-            sigma.testlet <- .draw.testlet.variance.3pno.testlet( gamma.testlet , N ,
-                       sigma.testlet , testlet.variance.prior , weights , TT)
+            sigma.testlet <- .draw.testlet.variance.3pno.testlet( gamma.testlet, N,
+                       sigma.testlet, testlet.variance.prior, weights, TT)
         }
         # draw testlet slope
         if (param==3){
-            a.testlet <- .draw.est.a.testlet.3pno.testlet( aM , bM , N , I , Z , param ,
-                    gamma.testletM , sigma , weights , theta , testletgroups ,
-                    gamma.testlet , TT    )
+            a.testlet <- .draw.est.a.testlet.3pno.testlet( aM, bM, N, I, Z, param,
+                    gamma.testletM, sigma, weights, theta, testletgroups,
+                    gamma.testlet, TT    )
         }
 
         # define item parameters in matrix form
-        aM <- matrix( a , nrow=N , ncol=I , byrow=TRUE)
-        bM <- matrix( b , nrow=N , ncol=I , byrow=TRUE)
-        if (param==3){ a.testletM <- matrix( a.testlet , nrow=N , ncol=I , byrow=TRUE) }
+        aM <- matrix( a, nrow=N, ncol=I, byrow=TRUE)
+        bM <- matrix( b, nrow=N, ncol=I, byrow=TRUE)
+        if (param==3){ a.testletM <- matrix( a.testlet, nrow=N, ncol=I, byrow=TRUE) }
 
         # save parameters
         if ( ii %in% svindex ){
             zz <- zz+1
-            a.chain[ zz , ] <- a
-            b.chain[ zz , ] <- b
-            c.chain[ zz , ] <- guess
+            a.chain[ zz, ] <- a
+            b.chain[ zz, ] <- b
+            c.chain[ zz, ] <- guess
             if (param==3){
                 a.testlet.chain[zz,] <- a.testlet
             }
             sigma.testlet.chain[zz,] <- sigma.testlet
-            theta.chain[ zz , ] <- theta
+            theta.chain[ zz, ] <- theta
             sigma.chain[ zz ] <- sigma
-            gamma.testlet.chain[zz , ] <- matrix(gamma.testlet , ncol=N*(TT+1) , nrow=1 )
-            deviance.chain[zz] <- .mcmc.deviance.3pno.testlet( aM , bM ,
-                    a.testletM , theta , guess ,    gamma.testlet , testletgroups ,
-                    dat , dat.resp , weights , eps , param )
+            gamma.testlet.chain[zz, ] <- matrix(gamma.testlet, ncol=N*(TT+1), nrow=1 )
+            deviance.chain[zz] <- .mcmc.deviance.3pno.testlet( aM, bM,
+                    a.testletM, theta, guess,    gamma.testlet, testletgroups,
+                    dat, dat.resp, weights, eps, param )
         }
         # print progress
-        if ( ( ii %% progress.iter ) == 0 ){
-            cat( "Iteration" , ii , " | " , paste(Sys.time()) , "\n")
+        if ( ( ii %% progress.iter )==0 ){
+            cat( "Iteration", ii, " | ", paste(Sys.time()), "\n")
             utils::flush.console()
         }
     }   # end MCMC iterations
@@ -188,24 +188,24 @@ mcmc.3pno.testlet <- function(dat , testlets=rep(NA , ncol(dat)) ,
     # output
 
     # EAP reliability and person parameter estimates
-    res <- .mcmc.person.3pno.testlet( theta.chain , weights ,
+    res <- .mcmc.person.3pno.testlet( theta.chain, weights,
                 gamma.testlet.chain )
     EAP.rel <- res$EAP.rel
     person <- res$person
 
     #----
     # calculate information criteria
-    ic <- .mcmc.ic.3pno.testlet( a.chain , b.chain , a.testlet.chain , N , I ,
-        theta.chain , c.chain , gamma.testlet.chain , TT ,
-        testletgroups , dat , dat.resp , weights , eps , param ,
+    ic <- .mcmc.ic.3pno.testlet( a.chain, b.chain, a.testlet.chain, N, I,
+        theta.chain, c.chain, gamma.testlet.chain, TT,
+        testletgroups, dat, dat.resp, weights, eps, param,
         deviance.chain )
 
     #-----
     # create MCMC object
-    res <- .mcmc.list.3pno.testlet( a.chain , b.chain , a.testlet.chain ,
-                I , deviance.chain , est.slope , c.chain , sigma.chain ,
-                est.guess , theta.chain , sigma.testlet.chain , TT ,
-                burnin , SV , save.theta , testletgroups , param )
+    res <- .mcmc.list.3pno.testlet( a.chain, b.chain, a.testlet.chain,
+                I, deviance.chain, est.slope, c.chain, sigma.chain,
+                est.guess, theta.chain, sigma.testlet.chain, TT,
+                burnin, SV, save.theta, testletgroups, param )
     mcmcobj <- res$mcmcobj
     theta <- res$theta
 
@@ -215,12 +215,12 @@ mcmc.3pno.testlet <- function(dat , testlets=rep(NA , ncol(dat)) ,
 
     #****
     # description
-    description <- .mcmc.description.3pno.testlet( TT , param , est.guess , est.slope )
+    description <- .mcmc.description.3pno.testlet( TT, param, est.guess, est.slope )
 
     #***
     # time
     s2 <- Sys.time()
-    time <- list( "start"=s1 , "end"=s2 , "timediff"= s2-s1 )
+    time <- list( "start"=s1, "end"=s2, "timediff"=s2-s1 )
     #----
     # result list
     res <- list( mcmcobj=mcmcobj, summary.mcmcobj=summary.mcmcobj, ic=ic, burnin=burnin,

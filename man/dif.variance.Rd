@@ -1,5 +1,5 @@
 %% File Name: dif.variance.Rd
-%% File Version: 0.08
+%% File Version: 0.10
 
 \name{dif.variance}
 \alias{dif.variance}
@@ -12,7 +12,7 @@ This function calculates the variance of DIF effects, the so called
 DIF variance (Longford, Holland & Thayer, 1993).
 }
 \usage{
-dif.variance(dif, se.dif, items = paste("item", 1:length(dif), sep = "") )
+dif.variance(dif, se.dif, items=paste("item", 1:length(dif), sep="") )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

@@ -1,5 +1,5 @@
 %% File Name: isop.test.Rd
-%% File Version: 0.16
+%% File Version: 0.19
 
 \name{isop.test}
 \alias{isop.test}
@@ -15,7 +15,7 @@ are obtained by Jackknife.
 }
 
 \usage{
-isop.test(data, jackunits = 20, weights = rep(1, nrow(data)))
+isop.test(data, jackunits=20, weights=rep(1, nrow(data)))
 
 \method{summary}{isop.test}(object,...)
 }
@@ -88,8 +88,8 @@ See also the \pkg{ISOP} package at \emph{Rforge}: \emph{http://www.rforge.net/IS
 #############################################################################
 
 data(data.Students, package="CDM")
-dat <- data.Students[ , paste0("act",1:5) ]
-dat <- dat[1:300 , ]    # select first 300 students
+dat <- data.Students[, paste0("act",1:5) ]
+dat <- dat[1:300, ]    # select first 300 students
 
 # perform the ISOP test
 mod <- sirt::isop.test(dat)

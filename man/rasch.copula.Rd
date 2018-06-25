@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.62
+%% File Version: 1.66
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -32,21 +32,21 @@ The function \code{rasch.copula3} allows the estimation of multidimensional
 models while \code{rasch.copula2} only handles unidimensional models.
 }
 \usage{
-rasch.copula2(dat, itemcluster, copula.type ="bound.mixt" ,
-    progress = TRUE, mmliter = 1000, delta = NULL,
-    theta.k = seq(-4, 4, len = 21), alpha1 = 0, alpha2 = 0,
-    numdiff.parm = 1e-06,  est.b = seq(1, ncol(dat)),
-    est.a = rep(1, ncol(dat)), est.delta = NULL, b.init = NULL , a.init = NULL ,
-    est.alpha = FALSE, glob.conv = 0.0001, alpha.conv = 1e-04, conv1 = 0.001,
-    dev.crit=.2 , increment.factor=1.01)
+rasch.copula2(dat, itemcluster, copula.type="bound.mixt",
+    progress=TRUE, mmliter=1000, delta=NULL,
+    theta.k=seq(-4, 4, len=21), alpha1=0, alpha2=0,
+    numdiff.parm=1e-06,  est.b=seq(1, ncol(dat)),
+    est.a=rep(1, ncol(dat)), est.delta=NULL, b.init=NULL, a.init=NULL,
+    est.alpha=FALSE, glob.conv=0.0001, alpha.conv=1e-04, conv1=0.001,
+    dev.crit=.2, increment.factor=1.01)
 
-rasch.copula3(dat, itemcluster, dims=NULL , copula.type ="bound.mixt" ,
-    progress = TRUE, mmliter = 1000, delta = NULL,
-    theta.k = seq(-4, 4, len = 21), alpha1 = 0, alpha2 = 0,
-    numdiff.parm = 1e-06,  est.b = seq(1, ncol(dat)),
-    est.a = rep(1, ncol(dat)), est.delta = NULL, b.init = NULL , a.init = NULL ,
-    est.alpha = FALSE, glob.conv = 0.0001, alpha.conv = 1e-04, conv1 = 0.001,
-    dev.crit=.2 , rho.init=.5 , increment.factor=1.01)
+rasch.copula3(dat, itemcluster, dims=NULL, copula.type="bound.mixt",
+    progress=TRUE, mmliter=1000, delta=NULL,
+    theta.k=seq(-4, 4, len=21), alpha1=0, alpha2=0,
+    numdiff.parm=1e-06,  est.b=seq(1, ncol(dat)),
+    est.a=rep(1, ncol(dat)), est.delta=NULL, b.init=NULL, a.init=NULL,
+    est.alpha=FALSE, glob.conv=0.0001, alpha.conv=1e-04, conv1=0.001,
+    dev.crit=.2, rho.init=.5, increment.factor=1.01)
 
 \method{summary}{rasch.copula2}(object,...)
 \method{summary}{rasch.copula3}(object,...)
@@ -245,14 +245,14 @@ data(data.read)
 dat <- data.read
 
 # define item clusters
-itemcluster <- rep( 1:3 , each=4 )
+itemcluster <- rep( 1:3, each=4 )
 
 # estimate Copula model
-mod1 <- sirt::rasch.copula2( dat=dat , itemcluster=itemcluster)
+mod1 <- sirt::rasch.copula2( dat=dat, itemcluster=itemcluster)
 
 # estimate Rasch model
-mod2 <- sirt::rasch.copula2( dat=dat , itemcluster=itemcluster ,
-        delta=rep(0,3) , est.delta=rep(0,3 ) )
+mod2 <- sirt::rasch.copula2( dat=dat, itemcluster=itemcluster,
+        delta=rep(0,3), est.delta=rep(0,3 ) )
 summary(mod1)
 summary(mod2)
 
@@ -266,36 +266,36 @@ set.seed(5698)
 I <- 11                             # number of items
 n <- 3000                           # number of persons
 b <- seq(-2,2, len=I)               # item difficulties
-theta <- stats::rnorm( n , sd = 1 ) # person abilities
+theta <- stats::rnorm( n, sd=1 ) # person abilities
 # define item clusters
 itemcluster <- rep(0,I)
 itemcluster[ c(3,5 )] <- 1
 itemcluster[c(2,4,9)] <- 2
 # residual correlations
-rho <- c( .7 , .5 )
+rho <- c( .7, .5 )
 
 # simulate data
-dat <- sirt::sim.rasch.dep( theta , b , itemcluster , rho )
-colnames(dat) <- paste("I" , seq(1,ncol(dat)) , sep="")
+dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
+colnames(dat) <- paste("I", seq(1,ncol(dat)), sep="")
 
 # estimate Rasch copula model
-mod1 <- sirt::rasch.copula2( dat , itemcluster = itemcluster )
+mod1 <- sirt::rasch.copula2( dat, itemcluster=itemcluster )
 summary(mod1)
 
 # both item clusters have Cook-Johnson copula as dependency
-mod1c <- sirt::rasch.copula2( dat , itemcluster = itemcluster ,
-            copula.type ="cook.johnson")
+mod1c <- sirt::rasch.copula2( dat, itemcluster=itemcluster,
+            copula.type="cook.johnson")
 summary(mod1c)
 
 # first item boundary mixture and second item Cook-Johnson copula
-mod1d <- sirt::rasch.copula2( dat , itemcluster = itemcluster ,
-            copula.type = c( "bound.mixt" , "cook.johnson" ) )
+mod1d <- sirt::rasch.copula2( dat, itemcluster=itemcluster,
+            copula.type=c( "bound.mixt", "cook.johnson" ) )
 summary(mod1d)
 
 # compare result with Rasch model estimation in rasch.copula2
 # delta must be set to zero
-mod2 <- sirt::rasch.copula2( dat , itemcluster = itemcluster , delta = c(0,0) ,
-            est.delta = c(0,0) )
+mod2 <- sirt::rasch.copula2( dat, itemcluster=itemcluster, delta=c(0,0),
+            est.delta=c(0,0) )
 summary(mod2)
 
 #############################################################################
@@ -308,29 +308,29 @@ I <- 12                             # number of items
 n <- 450                            # number of persons
 b <- seq(-2,2, len=I)               # item difficulties
 b <- sample(b)                      # sample item difficulties
-theta <- stats::rnorm( n , sd = 1 ) # person abilities
+theta <- stats::rnorm( n, sd=1 ) # person abilities
 # itemcluster
 itemcluster <- rep(0,I)
 itemcluster[ 1:4 ] <- 1
 itemcluster[ 6:9 ] <- 2
 itemcluster[ 10:12 ] <- 3
 # residual correlations
-rho <- c( .35 , .25 , .30 )
+rho <- c( .35, .25, .30 )
 
 # simulate data
-dat <- sirt::sim.rasch.dep( theta , b , itemcluster , rho )
-colnames(dat) <- paste("I" , seq(1,ncol(dat)) , sep="")
+dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
+colnames(dat) <- paste("I", seq(1,ncol(dat)), sep="")
 
 # estimate Rasch copula model
-mod1 <- sirt::rasch.copula2( dat , itemcluster = itemcluster )
+mod1 <- sirt::rasch.copula2( dat, itemcluster=itemcluster )
 summary(mod1)
 
 # person parameter estimation assuming the Rasch copula model
-pmod1 <- sirt::person.parameter.rasch.copula(raschcopula.object = mod1 )
+pmod1 <- sirt::person.parameter.rasch.copula(raschcopula.object=mod1 )
 
 # Rasch model estimation
-mod2 <- sirt::rasch.copula2( dat , itemcluster = itemcluster ,
-             delta = rep(0,3) , est.delta = rep(0,3) )
+mod2 <- sirt::rasch.copula2( dat, itemcluster=itemcluster,
+             delta=rep(0,3), est.delta=rep(0,3) )
 summary(mod1)
 summary(mod2)
 
@@ -342,27 +342,27 @@ set.seed(5698)
 I <- 9
 n <- 1500                           # number of persons
 b <- seq(-2,2, len=I)               # item difficulties
-theta0 <- stats::rnorm( n , sd = sqrt( .6 ) )
+theta0 <- stats::rnorm( n, sd=sqrt( .6 ) )
 
 #*** Dimension 1
-theta <- theta0 + stats::rnorm( n , sd = sqrt( .4 ) )   # person abilities
+theta <- theta0 + stats::rnorm( n, sd=sqrt( .4 ) )   # person abilities
 # itemcluster
 itemcluster <- rep(0,I)
 itemcluster[ c(3,5 )] <- 1
 itemcluster[c(2,4,9)] <- 2
 itemcluster1 <- itemcluster
 # residual correlations
-rho <- c( .7 , .5 )
+rho <- c( .7, .5 )
 # simulate data
-dat <- sirt::sim.rasch.dep( theta , b , itemcluster , rho )
-colnames(dat) <- paste("A" , seq(1,ncol(dat)) , sep="")
+dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
+colnames(dat) <- paste("A", seq(1,ncol(dat)), sep="")
 dat1 <- dat
 # estimate model of dimension 1
-mod0a <- sirt::rasch.copula2( dat1 , itemcluster = itemcluster1)
+mod0a <- sirt::rasch.copula2( dat1, itemcluster=itemcluster1)
 summary(mod0a)
 
 #*** Dimension 2
-theta <- theta0 + stats::rnorm( n , sd = sqrt( .8 ) )        # person abilities
+theta <- theta0 + stats::rnorm( n, sd=sqrt( .8 ) )        # person abilities
 # itemcluster
 itemcluster <- rep(0,I)
 itemcluster[ c(3,7,8 )] <- 1
@@ -371,22 +371,22 @@ itemcluster2 <- itemcluster
 # residual correlations
 rho <- c( .2, .4 )
 # simulate data
-dat <- sirt::sim.rasch.dep( theta , b , itemcluster , rho )
-colnames(dat) <- paste("B" , seq(1,ncol(dat)) , sep="")
+dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
+colnames(dat) <- paste("B", seq(1,ncol(dat)), sep="")
 dat2 <- dat
 # estimate model of dimension 2
-mod0b <- sirt::rasch.copula2( dat2 , itemcluster = itemcluster2)
+mod0b <- sirt::rasch.copula2( dat2, itemcluster=itemcluster2)
 summary(mod0b)
 
 # both dimensions
-dat <- cbind( dat1 , dat2 )
-itemcluster2 <- ifelse( itemcluster2 > 0 , itemcluster2 +2 , 0 )
-itemcluster <- c( itemcluster1 , itemcluster2 )
-dims <- rep( 1:2 , each=I)
+dat <- cbind( dat1, dat2 )
+itemcluster2 <- ifelse( itemcluster2 > 0, itemcluster2 +2, 0 )
+itemcluster <- c( itemcluster1, itemcluster2 )
+dims <- rep( 1:2, each=I)
 
 # estimate two-dimensional copula model
-mod1 <- sirt::rasch.copula3( dat , itemcluster=itemcluster , dims=dims , est.a=dims ,
-            theta.k = seq(-5,5,len=15) )
+mod1 <- sirt::rasch.copula3( dat, itemcluster=itemcluster, dims=dims, est.a=dims,
+            theta.k=seq(-5,5,len=15) )
 summary(mod1)
 
 #############################################################################
@@ -403,13 +403,13 @@ itemcluster <- rep(0,I)
 itemcluster[ c(3,5)] <- 1
 itemcluster[c(2,4,9)] <- 2
 # residual correlations
-rho <- c( .7 , .5 )
+rho <- c( .7, .5 )
 # simulate data
-dat <- sirt::sim.rasch.dep( theta , b , itemcluster , rho )
-colnames(dat) <- paste("I" , seq(1,ncol(dat)) , sep="")
+dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
+colnames(dat) <- paste("I", seq(1,ncol(dat)), sep="")
 
 # select subdataset with only one dependent item cluster
-item.sel <- scan( what="character" , nlines=1 )
+item.sel <- scan( what="character", nlines=1 )
     I1 I6 I7 I8 I10 I11 I3 I5
 dat1 <- dat[,item.sel]
 
@@ -417,22 +417,22 @@ dat1 <- dat[,item.sel]
 #*** Model 1a: estimate Copula model in sirt
 itemcluster <- rep(0,8)
 itemcluster[c(7,8)] <- 1
-mod1a <- sirt::rasch.copula2( dat3 , itemcluster=itemcluster )
+mod1a <- sirt::rasch.copula2( dat3, itemcluster=itemcluster )
 summary(mod1a)
 
 #******************
 #*** Model 1b: estimate Copula model in mirt
 library(mirt)
 #*** redefine dataset for estimation in mirt
-dat2 <- dat1[ , itemcluster == 0 ]
+dat2 <- dat1[, itemcluster==0 ]
 dat2 <- as.data.frame(dat2)
 # combine items 3 and 5
 dat2$C35 <- dat1[,"I3"] + 2*dat1[,"I5"]
-table( dat2$C35 , paste0( dat1[,"I3"],dat1[,"I5"]) )
+table( dat2$C35, paste0( dat1[,"I3"],dat1[,"I5"]) )
 #* define mirt model
 mirtmodel <- mirt::mirt.model("
-      F = 1-7
-      CONSTRAIN = (1-7,a1)
+      F=1-7
+      CONSTRAIN=(1-7,a1)
       " )
 #-- Copula function with two dependent items
 # define item category function for pseudo-items like C35
@@ -446,8 +446,8 @@ P.copula2 <- function(par,Theta, ncat){
      Q1 <- 1-P1
      Q2 <- 1-P2
      # define vector-wise minimum function
-     minf2 <- function( x1 , x2 ){
-         ifelse( x1 < x2 , x1 , x2 )
+     minf2 <- function( x1, x2 ){
+         ifelse( x1 < x2, x1, x2 )
                                 }
      # distribution under independence
      F00 <- Q1*Q2
@@ -457,9 +457,9 @@ P.copula2 <- function(par,Theta, ncat){
      F_ind <- c(F00,F10,F01,F11)
      # distribution under maximal dependence
      F00 <- minf2(Q1,Q2)
-     F10 <- Q2              # = minf2(1,Q2)
-     F01 <- Q1              # = minf2(Q1,1)
-     F11 <- 1+0*Q1          # = minf2(1,1)
+     F10 <- Q2              #=minf2(1,Q2)
+     F01 <- Q1              #=minf2(Q1,1)
+     F11 <- 1+0*Q1          #=minf2(1,1)
      F_dep <- c(F00,F10,F01,F11)
      # compute mixture distribution
      delta <- stats::plogis(ldelta)
@@ -475,37 +475,37 @@ P.copula2 <- function(par,Theta, ncat){
      P10 <- F10 - F00
      P01 <- F01 - F00
      P11 <- 1 - F10 - F01 + F00
-     prob_tot <- c( P00 , P10 , P01 , P11 )
+     prob_tot <- c( P00, P10, P01, P11 )
      return(prob_tot)
         }
 # create item
-copula2 <- mirt::createItem(name="copula2", par=c(b1 = 0 , b2 = 0.2 , a1=1 , ldelta=0) ,
-                est=c(TRUE,TRUE,TRUE,TRUE) , P=P.copula2 ,
-                lbound=c(-Inf,-Inf,0,-Inf) , ubound=c(Inf,Inf,Inf,Inf) )
+copula2 <- mirt::createItem(name="copula2", par=c(b1=0, b2=0.2, a1=1, ldelta=0),
+                est=c(TRUE,TRUE,TRUE,TRUE), P=P.copula2,
+                lbound=c(-Inf,-Inf,0,-Inf), ubound=c(Inf,Inf,Inf,Inf) )
 # define item types
 itemtype <- c( rep("2PL",6), "copula2" )
 customItems <- list("copula2"=copula2)
 # parameter table
 mod.pars <- mirt::mirt(dat2, 1, itemtype=itemtype,
-                customItems=customItems, pars = 'values')
+                customItems=customItems, pars='values')
 # estimate model
-mod1b <- mirt::mirt(dat2, mirtmodel , itemtype=itemtype , customItems=customItems,
-                verbose = TRUE , pars=mod.pars ,
+mod1b <- mirt::mirt(dat2, mirtmodel, itemtype=itemtype, customItems=customItems,
+                verbose=TRUE, pars=mod.pars,
                 technical=list(customTheta=as.matrix(seq(-4,4,len=21)) ) )
 # estimated coefficients
 cmod <- sirt::mirt.wrapper.coef(mod)$coef
 
 # compare common item discrimination
-round( c("sirt"=mod1a$item$a[1] , "mirt"=cmod$a1[1] ) , 4 )
+round( c("sirt"=mod1a$item$a[1], "mirt"=cmod$a1[1] ), 4 )
   ##     sirt   mirt
   ##   1.2845 1.2862
 # compare delta parameter
-round( c("sirt"=mod1a$item$delta[7] , "mirt"= stats::plogis( cmod$ldelta[7] ) ) , 4 )
+round( c("sirt"=mod1a$item$delta[7], "mirt"=stats::plogis( cmod$ldelta[7] ) ), 4 )
   ##     sirt   mirt
   ##   0.6298 0.6297
 # compare thresholds a*b
-dfr <- cbind( "sirt"=mod1a$item$thresh ,
-               "mirt"= c(- cmod$d[-7],cmod$b1[7]*cmod$a1[1]  , cmod$b2[7]*cmod$a1[1]))
+dfr <- cbind( "sirt"=mod1a$item$thresh,
+               "mirt"=c(- cmod$d[-7],cmod$b1[7]*cmod$a1[1], cmod$b2[7]*cmod$a1[1]))
 round(dfr,4)
   ##           sirt    mirt
   ##   [1,] -1.9236 -1.9231

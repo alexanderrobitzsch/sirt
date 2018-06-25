@@ -1,5 +1,5 @@
 ## File Name: sirt_summary_print_objects.R
-## File Version: 0.06
+## File Version: 0.09
 
 sirt_summary_print_objects <- function(obji, from=NULL, to=NULL,
         digits=3, rownames_null=TRUE)
@@ -12,7 +12,7 @@ sirt_summary_print_objects <- function(obji, from=NULL, to=NULL,
         if (is.null(to)){
             to <- ncol(obji)
         }
-        if ( length(digits) == 1){
+        if ( length(digits)==1){
             rvars <- seq( from, to)
             digits <- sirt_vector_with_names(value=digits, names=colnames(obji)[rvars] )
         }
@@ -20,7 +20,7 @@ sirt_summary_print_objects <- function(obji, from=NULL, to=NULL,
             rvars <- names(digits)
         }
         for (vv in rvars ){
-            obji[,vv] <- sirt_round_vector(x=obji[,vv] , digits=digits[vv])
+            obji[,vv] <- sirt_round_vector(x=obji[,vv], digits=digits[vv])
         }
         if (rownames_null){
             rownames(obji) <- NULL

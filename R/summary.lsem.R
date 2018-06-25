@@ -1,9 +1,9 @@
 ## File Name: summary.lsem.R
-## File Version: 0.24
+## File Version: 0.28
 
 #############################################
 # summary lsem
-summary.lsem <- function( object , file=NULL , digits=3 , ... ){
+summary.lsem <- function( object, file=NULL, digits=3, ... ){
 
     # open sink for a file
     sirt_osink( file=file  )
@@ -18,7 +18,7 @@ summary.lsem <- function( object , file=NULL , digits=3 , ... ){
     cat("\n")
     sirt_summary_print_rsession()
 
-    cat(paste0("Function 'sirt::lsem.estimate', type='" , object$type,"'") , "\n\n")
+    cat(paste0("Function 'sirt::lsem.estimate', type='", object$type,"'"), "\n\n")
 
     #- print call
     sirt_summary_print_call(CALL=object$CALL)
@@ -26,17 +26,17 @@ summary.lsem <- function( object , file=NULL , digits=3 , ... ){
     #-- print computation time
     sirt_summary_print_computation_time_s1(object=object)
 
-    cat( paste0( "Number of observations = " , round(object$N,digits) ) , "\n")
-    if ( object$type == "LSEM"){
-        cat( paste0( "Bandwidth factor = " , round(object$h,digits) ) , "\n")
-        cat( paste0( "Bandwidth = " , round(object$bw,digits) ) , "\n")
-        cat( paste0( "Number of focal points for moderator = " ,
-                            length(object$moderator.grid ) ) , "\n")
+    cat( paste0( "Number of observations=", round(object$N,digits) ), "\n")
+    if ( object$type=="LSEM"){
+        cat( paste0( "Bandwidth factor=", round(object$h,digits) ), "\n")
+        cat( paste0( "Bandwidth=", round(object$bw,digits) ), "\n")
+        cat( paste0( "Number of focal points for moderator=",
+                            length(object$moderator.grid ) ), "\n")
     }
 
-    if ( object$type == "MGM"){
-        cat( paste0( "Number of groups for moderator = " ,
-                            length(object$moderator.grid ) ) , "\n")
+    if ( object$type=="MGM"){
+        cat( paste0( "Number of groups for moderator=",
+                            length(object$moderator.grid ) ), "\n")
     }
 
     cat("\nlavaan Model\n")

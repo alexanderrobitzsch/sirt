@@ -1,5 +1,5 @@
 %% File Name: isop.scoring.Rd
-%% File Version: 1.19
+%% File Version: 1.22
 
 \name{isop.scoring}
 \alias{isop.scoring}
@@ -35,20 +35,20 @@ every category (see Example 2).
 
 \details{
 This function extracts the scoring rule of the ISOP model
-(if \code{score.itemcat != NULL}) and calculates the
+(if \code{score.itemcat !=NULL}) and calculates the
 modified percentile score for every person. The score
 \eqn{s_{ik}} for item \eqn{i} and category \eqn{k}
 is calculated as
-\deqn{ s_{ik} = \sum_{j=0}^{k-1} f_{ij} -
-\sum_{j=k+1}^K f_{ij} = P( X_i < k  )
+\deqn{ s_{ik}=\sum_{j=0}^{k-1} f_{ij} -
+\sum_{j=k+1}^K f_{ij}=P( X_i < k  )
 - P( X_i > k ) }
 where \eqn{f_{ik}} is the relative frequency of item \eqn{i}
 in category \eqn{k} and \eqn{K} is the maximum category.
 The modified percentile score \eqn{\rho_p}
 for subject \eqn{p} (\code{mpsc} in \code{person}) is
 defined by
-\deqn{ \rho_p = \frac{1}{I} \sum_{i=1}^I
-        \sum_{j=0}^K s_{ik} \mathbf{1}( X_{pi} = k ) }
+\deqn{ \rho_p=\frac{1}{I} \sum_{i=1}^I
+        \sum_{j=0}^K s_{ik} \mathbf{1}( X_{pi}=k ) }
 Note that for dichotomous items, the sum score is a
 sufficient statistic for \eqn{\rho_p} but this is
 not the case for polytomous items.
@@ -57,7 +57,7 @@ ranges between -1 and 1.
 
 The modified item P-score \eqn{\rho_i} (Scheiblechner, 2007, p. 52) is
 defined by
-\deqn{ \rho_i = \frac{1}{I-1} \cdot \sum_j \left[ P( X_j < X_i )
+\deqn{ \rho_i=\frac{1}{I-1} \cdot \sum_j \left[ P( X_j < X_i )
         - P( X_j > X_i ) \right ] }
 }
 
@@ -140,8 +140,8 @@ boxplot( msc$person$mpsc ~ msc$person$score )
 #############################################################################
 
 library("CDM")
-data( data.Students , package="CDM")
-dat <- stats::na.omit(data.Students[ , -c(1:2) ])
+data( data.Students, package="CDM")
+dat <- stats::na.omit(data.Students[, -c(1:2) ])
 
 # Scoring according to the ISOP model
 msc <- sirt::isop.scoring( dat )
@@ -149,10 +149,10 @@ msc <- sirt::isop.scoring( dat )
 boxplot( msc$person$mpsc ~ msc$person$score )
 
 # scoring with known scoring rule for activity items
-items <- paste0( "act" , 1:5 )
+items <- paste0( "act", 1:5 )
 score.itemcat <- msc$score.itemcat
-score.itemcat <- score.itemcat[ items , ]
-msc2 <- sirt::isop.scoring( dat[,items] , score.itemcat=score.itemcat )
+score.itemcat <- score.itemcat[ items, ]
+msc2 <- sirt::isop.scoring( dat[,items], score.itemcat=score.itemcat )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -1,5 +1,5 @@
 %% File Name: ccov.np.Rd
-%% File Version: 0.12
+%% File Version: 0.14
 
 \name{ccov.np}
 \alias{ccov.np}
@@ -13,8 +13,8 @@ This function estimates conditional covariances of itempairs
 1999a). The function is used for the estimation of the DETECT index.
 }
 \usage{
-ccov.np(data, score, bwscale = 1.1, thetagrid = seq(-3, 3, len = 200),
-    progress = TRUE, scale_score = TRUE)
+ccov.np(data, score, bwscale=1.1, thetagrid=seq(-3, 3, len=200),
+    progress=TRUE, scale_score=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

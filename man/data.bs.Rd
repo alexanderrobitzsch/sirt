@@ -1,5 +1,5 @@
 %% File Name: data.bs.Rd
-%% File Version: 0.08
+%% File Version: 0.11
 
 
 \name{data.bs}
@@ -78,7 +78,7 @@ Bern: Hogrefe.
 
 data(data.bs07a)
 dat <- data.bs07a
-items <- grep( "GF" , colnames(dat)  , value=TRUE )
+items <- grep( "GF", colnames(dat), value=TRUE )
 
 #************************
 # Model 1: Rasch model
@@ -99,9 +99,9 @@ ANALYSIS:
   NCLASSES(2)
   NSTARTS(5,10)
 LAVAAN MODEL:
-  F =~ GF1__GF9
+  F=~ GF1__GF9
   "
-mod3 <- TAM::tamaan( tammodel , dat )
+mod3 <- TAM::tamaan( tammodel, dat )
 summary(mod3)
 
 #************************
@@ -112,9 +112,9 @@ ANALYSIS:
   NCLASSES(3)
   NSTARTS(5,10)
 LAVAAN MODEL:
-  F =~ GF1__GF9
+  F=~ GF1__GF9
   "
-mod4 <- TAM::tamaan( tammodel , dat )
+mod4 <- TAM::tamaan( tammodel, dat )
 summary(mod4)
 
 #************************
@@ -125,9 +125,9 @@ ANALYSIS:
   NCLASSES(2)
   NSTARTS(5,10)
 LAVAAN MODEL:
-  F =~ GF1__GF9
+  F=~ GF1__GF9
   "
-mod5 <- TAM::tamaan( tammodel , dat )
+mod5 <- TAM::tamaan( tammodel, dat )
 summary(mod5)
 
 #************************
@@ -138,9 +138,9 @@ ANALYSIS:
   NCLASSES(3)
   NSTARTS(5,10)
 LAVAAN MODEL:
-  F =~ GF1__GF9
+  F=~ GF1__GF9
   "
-mod6 <- TAM::tamaan( tammodel , dat )
+mod6 <- TAM::tamaan( tammodel, dat )
 summary(mod6)
 
 #************************
@@ -149,7 +149,7 @@ mod7 <- sirt::prob.guttman( dat[,items] )
 summary(mod7)
 
 #-- model comparison
-IRT.compareModels( mod1, mod2 , mod3 , mod4 , mod5 , mod6 , mod7 )
+IRT.compareModels( mod1, mod2, mod3, mod4, mod5, mod6, mod7 )
 }
 }
 \keyword{datasets}

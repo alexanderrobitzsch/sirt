@@ -1,5 +1,5 @@
 %% File Name: pcm.conversion.Rd
-%% File Version: 0.12
+%% File Version: 0.15
 
 \name{pcm.conversion}
 \alias{pcm.conversion}
@@ -26,14 +26,14 @@ Matrix of item-category-wise intercepts \eqn{b_{ik}} (see Details).
 Assume that the input matrix \code{b} containing parameters \eqn{b_{ik}}
 is defined according to the following parametrization of the partial credit
 model
-\deqn{ P( X_{pi} = k | \theta_p ) \propto exp ( k \theta_p - b_{ik} ) }
+\deqn{ P( X_{pi}=k | \theta_p ) \propto exp ( k \theta_p - b_{ik} ) }
 if item \eqn{i} possesses \eqn{K_i} categories.
 The transformed parameterization is defined as
-\deqn{b_{ik} = k \delta_i + \sum_{v=1}^{k} \tau_{iv} \quad
-\mbox{with} \quad \sum_{k=1}^{K_i} \tau_{ik} = 0 }
+\deqn{b_{ik}=k \delta_i + \sum_{v=1}^{k} \tau_{iv} \quad
+\mbox{with} \quad \sum_{k=1}^{K_i} \tau_{ik}=0 }
 The function \code{pcm.conversion} has the \eqn{\delta} and \eqn{\tau}
 parameters as values. The \eqn{\delta} parameter is simply
-\eqn{\delta_i = b_{iK_i} / K_i}.
+\eqn{\delta_i=b_{iK_i} / K_i}.
 }
 
 
@@ -70,17 +70,17 @@ Alexander Robitzsch
 
 library(CDM)
 data(data.mg,package="CDM")
-dat <- data.mg[ 1:1000 , paste0("I",1:11) ]
+dat <- data.mg[ 1:1000, paste0("I",1:11) ]
 
 #*** Model 1: estimate partial credit model in parameterization "PCM"
-mod1a <- TAM::tam.mml( dat , irtmodel="PCM")
+mod1a <- TAM::tam.mml( dat, irtmodel="PCM")
 # use parameterization "PCM2"
-mod1b <- TAM::tam.mml( dat , irtmodel="PCM2")
+mod1b <- TAM::tam.mml( dat, irtmodel="PCM2")
 summary(mod1a)
 summary(mod1b)
 
 # convert parameterization of Model 1a into parameterization of Model 1b
-b <- mod1a$item[ , c("AXsi_.Cat1","AXsi_.Cat2","AXsi_.Cat3") ]
+b <- mod1a$item[, c("AXsi_.Cat1","AXsi_.Cat2","AXsi_.Cat3") ]
 # compare results
 pcm.conversion(b)
 mod1b$xsi

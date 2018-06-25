@@ -1,5 +1,5 @@
 %% File Name: data.reck.Rd
-%% File Version: 0.21
+%% File Version: 0.26
 
 \name{data.reck}
 
@@ -164,37 +164,37 @@ data(data.reck21)
 dat <- data.reck21$dat      # extract dataset
 
 # items with zero guessing parameters
-guess0 <- c( 1 , 2 , 3 , 9 ,11 ,27 ,30 ,35 ,45 ,49 ,50 )
+guess0 <- c( 1, 2, 3, 9,11,27,30,35,45,49,50 )
 I <- ncol(dat)
 
 #***
 # Model 1: 3PL estimation using rasch.mml2
 est.c <- est.a <- 1:I
 est.c[ guess0 ] <- 0
-mod1 <- sirt::rasch.mml2( dat , est.a=est.a , est.c=est.c , mmliter= 300 )
+mod1 <- sirt::rasch.mml2( dat, est.a=est.a, est.c=est.c, mmliter=300 )
 summary(mod1)
 
 #***
 # Model 2: 3PL estimation using smirt
 Q <- matrix(1,I,1)
-mod2 <- sirt::smirt( dat , Qmatrix=Q , est.a= "2PL"  , est.c=est.c , increment.factor=1.01)
+mod2 <- sirt::smirt( dat, Qmatrix=Q, est.a="2PL", est.c=est.c, increment.factor=1.01)
 summary(mod2)
 
 #***
 # Model 3: estimation in mirt package
 library(mirt)
-itemtype <- rep("3PL" , I )
+itemtype <- rep("3PL", I )
 itemtype[ guess0 ] <- "2PL"
-mod3 <- mirt::mirt(dat, 1, itemtype = itemtype , verbose=TRUE)
+mod3 <- mirt::mirt(dat, 1, itemtype=itemtype, verbose=TRUE)
 summary(mod3)
 
 c3 <- unlist( coef(mod3) )[ 1:(4*I) ]
-c3 <- matrix( c3 , I , 4 , byrow=TRUE )
+c3 <- matrix( c3, I, 4, byrow=TRUE )
 # compare estimates of rasch.mml2, smirt and true parameters
-round( cbind( mod1$item$c , mod2$item$c ,c3[,3]  ,data.reck21$pars$c ) , 2 )
-round( cbind( mod1$item$a , mod2$item$a.Dim1 ,c3[,1], data.reck21$pars$a ) , 2 )
-round( cbind( mod1$item$b , mod2$item$b.Dim1 / mod2$item$a.Dim1 , - c3[,2] / c3[,1] ,
-            data.reck21$pars$b ) , 2 )
+round( cbind( mod1$item$c, mod2$item$c,c3[,3],data.reck21$pars$c ), 2 )
+round( cbind( mod1$item$a, mod2$item$a.Dim1,c3[,1], data.reck21$pars$a ), 2 )
+round( cbind( mod1$item$b, mod2$item$b.Dim1 / mod2$item$a.Dim1, - c3[,2] / c3[,1],
+            data.reck21$pars$b ), 2 )
 
 #############################################################################
 # EXAMPLE 2: data.reck61 dataset, Table 6.1, p. 153
@@ -208,76 +208,76 @@ dat <- data.reck61DAT1$data
 
 #-- Model 1a: tam.fa in TAM
 library(TAM)
-mod1a <- TAM::tam.fa( dat , irtmodel="efa" , nfactors=3 )
+mod1a <- TAM::tam.fa( dat, irtmodel="efa", nfactors=3 )
 # varimax rotation
 varimax(mod1a$B.stand)
 
 # Model 1b: EFA in NOHARM (Promax rotation)
-mod1b <- sirt::R2noharm( dat = dat , model.type="EFA" ,  dimensions = 3 ,
-              writename = "reck61__3dim_efa", noharm.path = "c:/NOHARM" ,dec = ",")
+mod1b <- sirt::R2noharm( dat=dat, model.type="EFA",  dimensions=3,
+              writename="reck61__3dim_efa", noharm.path="c:/NOHARM",dec=",")
 summary(mod1b)
 
 # Model 1c: EFA with noharm.sirt
-mod1c <- sirt::noharm.sirt( dat=dat , dimensions=3  )
+mod1c <- sirt::noharm.sirt( dat=dat, dimensions=3  )
 summary(mod1c)
 plot(mod1c)
 
 # Model 1d: EFA with 2 dimensions in noharm.sirt
-mod1d <- sirt::noharm.sirt( dat=dat , dimensions=2  )
+mod1d <- sirt::noharm.sirt( dat=dat, dimensions=2  )
 summary(mod1d)
-plot(mod1d , efa.load.min=.2)   # plot loadings of at least .20
+plot(mod1d, efa.load.min=.2)   # plot loadings of at least .20
 
 #***
 # Model 2: Confirmatory factor analysis
 
 #-- Model 2a: tam.fa in TAM
-dims <- c( rep(1,10) , rep(3,10) , rep(2,10)  )
-Qmatrix <- matrix( 0 , nrow=30 , ncol=3 )
-Qmatrix[ cbind( 1:30 , dims) ] <- 1
-mod2a <- TAM::tam.mml.2pl( dat ,Q=Qmatrix ,
-            control=list( snodes=1000, QMC=TRUE , maxiter=200) )
+dims <- c( rep(1,10), rep(3,10), rep(2,10)  )
+Qmatrix <- matrix( 0, nrow=30, ncol=3 )
+Qmatrix[ cbind( 1:30, dims) ] <- 1
+mod2a <- TAM::tam.mml.2pl( dat,Q=Qmatrix,
+            control=list( snodes=1000, QMC=TRUE, maxiter=200) )
 summary(mod2a)
 
 #-- Model 2b: smirt in sirt
-mod2b <- sirt::smirt( dat ,Qmatrix =Qmatrix , est.a="2PL" , maxiter=20 , qmcnodes=1000 )
+mod2b <- sirt::smirt( dat,Qmatrix=Qmatrix, est.a="2PL", maxiter=20, qmcnodes=1000 )
 summary(mod2b)
 
 #-- Model 2c: rasch.mml2 in sirt
-mod2c <- sirt::rasch.mml2( dat ,Qmatrix =Qmatrix , est.a= 1:30 ,
-                mmliter =200 , theta.k = seq(-5,5,len=11) )
+mod2c <- sirt::rasch.mml2( dat,Qmatrix=Qmatrix, est.a=1:30,
+                mmliter=200, theta.k=seq(-5,5,len=11) )
 summary(mod2c)
 
 #-- Model 2d: mirt in mirt
 cmodel <- mirt::mirt.model("
-     F1 = 1-10
-     F2 = 21-30
-     F3 = 11-20
-     COV = F1*F2, F1*F3 , F2*F3 " )
-mod2d <- mirt::mirt(dat, cmodel , verbose=TRUE)
+     F1=1-10
+     F2=21-30
+     F3=11-20
+     COV=F1*F2, F1*F3, F2*F3 " )
+mod2d <- mirt::mirt(dat, cmodel, verbose=TRUE)
 summary(mod2d)
 coef(mod2d)
 
 #-- Model 2e: CFA in NOHARM
 # specify covariance pattern
-P.pattern <- matrix( 1 , ncol=3 , nrow=3 )
+P.pattern <- matrix( 1, ncol=3, nrow=3 )
 P.init <- .4*P.pattern
 diag(P.pattern) <- 0
 diag(P.init) <- 1
 # fix all entries in the loading matrix to 1
-F.pattern <- matrix( 0 , nrow=30 , ncol=3 )
+F.pattern <- matrix( 0, nrow=30, ncol=3 )
 F.pattern[1:10,1] <- 1
 F.pattern[21:30,2] <- 1
 F.pattern[11:20,3] <- 1
 F.init <- F.pattern
 # estimate model
-mod2e <- sirt::R2noharm( dat = dat , model.type="CFA" , P.pattern=P.pattern,
-            P.init=P.init , F.pattern=F.pattern, F.init=F.init ,
-            writename = "reck61__3dim_cfa", noharm.path = "c:/NOHARM" ,dec = ",")
+mod2e <- sirt::R2noharm( dat=dat, model.type="CFA", P.pattern=P.pattern,
+            P.init=P.init, F.pattern=F.pattern, F.init=F.init,
+            writename="reck61__3dim_cfa", noharm.path="c:/NOHARM",dec=",")
 summary(mod2e)
 
 #-- Model 2f: CFA with noharm.sirt
-mod2f <- sirt::noharm.sirt( dat = dat , Fval=F.init , Fpatt = F.pattern ,
-                 Pval=P.init , Ppatt = P.pattern )
+mod2f <- sirt::noharm.sirt( dat=dat, Fval=F.init, Fpatt=F.pattern,
+                 Pval=P.init, Ppatt=P.pattern )
 summary(mod2f)
 
 #############################################################################
@@ -293,16 +293,16 @@ dat <- data.reck78ExA$data
 #- estimate person score
 score <- stats::qnorm( ( rowMeans( dat )+.5 )  / ( ncol(dat) + 1 ) )
 #- extract item cluster
-itemcluster <- substring( colnames(dat) , 1 , 1 )
+itemcluster <- substring( colnames(dat), 1, 1 )
 #- confirmatory DETECT Item cluster
-detectA <- sirt::conf.detect( data = dat , score = score , itemcluster = itemcluster )
+detectA <- sirt::conf.detect( data=dat, score=score, itemcluster=itemcluster )
   ##          unweighted weighted
   ##   DETECT      0.571    0.571
   ##   ASSI        0.523    0.523
   ##   RATIO       0.757    0.757
 
 #- exploratory DETECT analysis
-detect_explA <- sirt::expl.detect(data=dat, score, nclusters=10, N.est = nrow(dat)/2  )
+detect_explA <- sirt::expl.detect(data=dat, score, nclusters=10, N.est=nrow(dat)/2  )
   ##  Optimal Cluster Size is  5  (Maximum of DETECT Index)
   ##     N.Cluster N.items N.est N.val         size.cluster DETECT.est ASSI.est
   ##   1         2      50  1250  1250                31-19      0.531    0.404
@@ -318,14 +318,14 @@ detect_explA <- sirt::expl.detect(data=dat, score, nclusters=10, N.est = nrow(da
 # cluster membership
 cluster_membership <- detect_explA$itemcluster$cluster3
 # Cluster 1:
-colnames(dat)[ cluster_membership == 1 ]
+colnames(dat)[ cluster_membership==1 ]
   ##   [1] "A01" "A02" "A03" "A04" "A05" "A06" "A07" "A08" "A09" "A10"
 # Cluster 2:
-colnames(dat)[ cluster_membership == 2 ]
+colnames(dat)[ cluster_membership==2 ]
   ##    [1] "B11" "B12" "B13" "B14" "B15" "B16" "B17" "B18" "B19" "B20" "B21" "B22"
   ##   [13] "B23" "B25" "B26" "B27" "B28" "B29" "B30"
 # Cluster 3:
-colnames(dat)[ cluster_membership == 3 ]
+colnames(dat)[ cluster_membership==3 ]
   ##    [1] "B24" "C31" "C32" "C33" "C34" "C35" "C36" "C37" "C38" "C39" "C40" "C41"
   ##   [13] "C42" "C43" "C44" "C45" "C46" "C47" "C48" "C49" "C50"
 
@@ -335,16 +335,16 @@ dat <- data.reck79ExB$data
 #- estimate person score
 score <- stats::qnorm( ( rowMeans( dat )+.5 )  / ( ncol(dat) + 1 ) )
 #- extract item cluster
-itemcluster <- substring( colnames(dat) , 1 , 1 )
+itemcluster <- substring( colnames(dat), 1, 1 )
 #- confirmatory DETECT Item cluster
-detectB <- sirt::conf.detect( data = dat , score = score , itemcluster = itemcluster )
+detectB <- sirt::conf.detect( data=dat, score=score, itemcluster=itemcluster )
   ##          unweighted weighted
   ##   DETECT      0.715    0.715
   ##   ASSI        0.624    0.624
   ##   RATIO       0.855    0.855
 
 #- exploratory DETECT analysis
-detect_explB <- sirt::expl.detect(data=dat, score, nclusters=10, N.est = nrow(dat)/2  )
+detect_explB <- sirt::expl.detect(data=dat, score, nclusters=10, N.est=nrow(dat)/2  )
   ##   Optimal Cluster Size is  4  (Maximum of DETECT Index)
   ##
   ##     N.Cluster N.items N.est N.val         size.cluster DETECT.est ASSI.est

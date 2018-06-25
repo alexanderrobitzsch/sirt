@@ -1,5 +1,5 @@
 %% File Name: IRT.mle.Rd
-%% File Version: 0.16
+%% File Version: 0.20
 
 \name{IRT.mle}
 \alias{IRT.mle}
@@ -16,9 +16,9 @@ defined by the user.
 }
 
 \usage{
-IRT.mle(data, irffct, arg.list, theta=rep(0,nrow(data)), type = "MLE",
-     mu=0, sigma=1, maxiter = 20, maxincr = 3, h = 0.001, convP = 1e-04,
-     maxval = 9, progress = TRUE)
+IRT.mle(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
+     mu=0, sigma=1, maxiter=20, maxincr=3, h=0.001, convP=1e-04,
+     maxval=9, progress=TRUE)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -107,24 +107,24 @@ data(data.ratings1)
 dat <- data.ratings1
 
 # estimate model
-mod1 <- sirt::rm.facets( dat[ , paste0( "k",1:5) ], rater=dat$rater,
-             pid=dat$idstud  , maxiter=15)
+mod1 <- sirt::rm.facets( dat[, paste0( "k",1:5) ], rater=dat$rater,
+             pid=dat$idstud, maxiter=15)
 # extract dataset and item parameters
 data <- mod1$procdata$dat2.NA
 a <- mod1$ipars.dat2$a
 b <- mod1$ipars.dat2$b
 theta0 <- mod1$person$EAP
 # define item response function for item ii
-calc.pcm <- function( theta , a , b , ii ){
+calc.pcm <- function( theta, a, b, ii ){
     K <- ncol(b)
     N <- length(theta)
-    matrK <- matrix( 0:K , nrow=N , ncol=K+1 , byrow=TRUE)
+    matrK <- matrix( 0:K, nrow=N, ncol=K+1, byrow=TRUE)
     eta <- a[ii] * theta * matrK - matrix( c(0,b[ii,]), nrow=N, ncol=K+1, byrow=TRUE)
     eta <- exp(eta)
     probs <- eta / rowSums(eta, na.rm=TRUE)
     return(probs)
 }
-arg.list <- list("a"=a , "b"=b )
+arg.list <- list("a"=a, "b"=b )
 
 # MLE
 abil1 <- sirt::IRT.mle( data, irffct=calc.pcm, theta=theta0, arg.list=arg.list )
@@ -150,22 +150,22 @@ mod1 <- sirt::rasch.mml2( dat )
 summary(mod1)
 
 # define item response function
-irffct <- function( theta, b , ii){
+irffct <- function( theta, b, ii){
     eta <- exp( theta - b[ii] )
     probs <- eta / ( 1 + eta )
-    probs <- cbind( 1 - probs , probs )
+    probs <- cbind( 1 - probs, probs )
     return(probs)
 }
 # initial person parameters and item parameters
 theta0 <- mod1$person$EAP
-arg.list <- list( "b" = mod1$item$b  )
+arg.list <- list( "b"=mod1$item$b  )
 
 # estimate WLE
-abil <- sirt::IRT.mle( data = dat , irffct=irffct , arg.list=arg.list ,
+abil <- sirt::IRT.mle( data=dat, irffct=irffct, arg.list=arg.list,
             theta=theta0, type="WLE")
 # compare with wle.rasch function
-theta <- sirt::wle.rasch( dat , b= mod1$item$b )
-cbind( abil[,1] , theta$theta , abil[,2] , theta$se.theta )
+theta <- sirt::wle.rasch( dat, b=mod1$item$b )
+cbind( abil[,1], theta$theta, abil[,2], theta$se.theta )
 
 #############################################################################
 # EXAMPLE 3: Ramsay quotient model
@@ -176,21 +176,21 @@ dat <- data.read
 I <- ncol(dat)
 
 # estimate Ramsay model
-mod1 <- sirt::rasch.mml2( dat , irtmodel ="ramsay.qm" )
+mod1 <- sirt::rasch.mml2( dat, irtmodel="ramsay.qm" )
 summary(mod1)
 # define item response function
-irffct <- function( theta, b , K , ii){
+irffct <- function( theta, b, K, ii){
     eta <- exp( theta / b[ii] )
     probs <- eta / ( K[ii] + eta )
-    probs <- cbind( 1 - probs , probs )
+    probs <- cbind( 1 - probs, probs )
     return(probs)
 }
 # initial person parameters and item parameters
 theta0 <- exp( mod1$person$EAP )
-arg.list <- list( "b" = mod1$item2$b , "K"=mod1$item2$K )
+arg.list <- list( "b"=mod1$item2$b, "K"=mod1$item2$K )
 # estimate MLE
-res <- sirt::IRT.mle( data = dat , irffct=irffct , arg.list=arg.list , theta=theta0 ,
-            maxval=20 , maxiter=50)
+res <- sirt::IRT.mle( data=dat, irffct=irffct, arg.list=arg.list, theta=theta0,
+            maxval=20, maxiter=50)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

@@ -1,5 +1,5 @@
 %% File Name: data.big5.Rd
-%% File Version: 0.43
+%% File Version: 0.48
 
 \name{data.big5}
 \alias{data.big5}
@@ -81,8 +81,8 @@ miceadds::library_install(packages)
 
 data(data.big5)
 # extract first 10 openness items
-items <- which( substring( colnames(data.big5) , 1 , 1 ) == "O"  )[1:10]
-dat <- data.big5[ , items ]
+items <- which( substring( colnames(data.big5), 1, 1 )=="O"  )[1:10]
+dat <- data.big5[, items ]
 I <- ncol(dat)
 summary(dat)
   ##   > colnames(dat)
@@ -104,10 +104,10 @@ summary(m1b)
 
 #-- M1c: gdm (in CDM)
 theta.k <- seq(-6,6,len=21)
-m1c <- CDM::gdm( dat , irtmodel="1PL" ,theta.k=theta.k , skillspace="normal")
+m1c <- CDM::gdm( dat, irtmodel="1PL",theta.k=theta.k, skillspace="normal")
 summary(m1c)
 # compare results with loglinear skillspace
-m1c2 <- CDM::gdm( dat , irtmodel="1PL" ,theta.k=theta.k , skillspace="loglinear")
+m1c2 <- CDM::gdm( dat, irtmodel="1PL",theta.k=theta.k, skillspace="loglinear")
 summary(m1c2)
 
 #-- M1d: PCM (in eRm)
@@ -115,11 +115,11 @@ m1d <- eRm::PCM( dat )
 summary(m1d)
 
 #-- M1e: gpcm (in ltm)
-m1e <- ltm::gpcm( dat , constraint = "1PL" , control=list(verbose=TRUE))
+m1e <- ltm::gpcm( dat, constraint="1PL", control=list(verbose=TRUE))
 summary(m1e)
 
 #-- M1f: mirt (in mirt)
-m1f <- mirt::mirt( dat , model=1 , itemtype="1PL" , verbose=TRUE)
+m1f <- mirt::mirt( dat, model=1, itemtype="1PL", verbose=TRUE)
 summary(m1f)
 coef(m1f)
 
@@ -133,25 +133,25 @@ plot(mod1g)
 #****************
 
 #-- M2a: rm.facets (in sirt)
-m2a <- sirt::rm.facets( dat , est.a.item=TRUE)
+m2a <- sirt::rm.facets( dat, est.a.item=TRUE)
 summary(m2a)
 # Note that in rm.facets the mean of item discriminations is fixed to 1
 
 #-- M2b: tam.mml.2pl (in TAM)
-m2b <- TAM::tam.mml.2pl( resp=dat , irtmodel="GPCM")
+m2b <- TAM::tam.mml.2pl( resp=dat, irtmodel="GPCM")
 summary(m2b)
 
 #-- M2c: gdm (in CDM)
-m2c <- CDM::gdm( dat , irtmodel="2PL" ,theta.k=seq(-6,6,len=21) ,
-                   skillspace="normal" , standardized.latent=TRUE)
+m2c <- CDM::gdm( dat, irtmodel="2PL",theta.k=seq(-6,6,len=21),
+                   skillspace="normal", standardized.latent=TRUE)
 summary(m2c)
 
 #-- M2d: gpcm (in ltm)
-m2d <- ltm::gpcm( dat , control=list(verbose=TRUE))
+m2d <- ltm::gpcm( dat, control=list(verbose=TRUE))
 summary(m2d)
 
 #-- M2e: mirt (in mirt)
-m2e <- mirt::mirt( dat , model=1 ,  itemtype="GPCM" , verbose=TRUE)
+m2e <- mirt::mirt( dat, model=1,  itemtype="GPCM", verbose=TRUE)
 summary(m2e)
 coef(m2e)
 
@@ -181,19 +181,19 @@ plot(restscore.list)
 #****************
 
 #-- M4a: mirt (in mirt)
-m4a <- mirt::mirt( dat , model=1 ,  itemtype="graded" , verbose=TRUE)
+m4a <- mirt::mirt( dat, model=1,  itemtype="graded", verbose=TRUE)
 print(m4a)
 mirt.wrapper.coef(m4a)
 
 #----  M4b: WLSMV estimation with cfa (in lavaan)
-lavmodel <- "F =~ O3__O48
+lavmodel <- "F=~ O3__O48
              F ~~ 1*F
                 "
 # transform lavaan syntax with lavaanify.IRT
-lavmodel <- TAM::lavaanify.IRT( lavmodel , items=colnames(dat) )$lavaan.syntax
-mod4b <- lavaan::cfa( data= as.data.frame(dat) , model=lavmodel, std.lv = TRUE,
-                 ordered=colnames(dat) ,  parameterization="theta")
-summary(mod4b , standardized=TRUE , fit.measures=TRUE , rsquare=TRUE)
+lavmodel <- TAM::lavaanify.IRT( lavmodel, items=colnames(dat) )$lavaan.syntax
+mod4b <- lavaan::cfa( data=as.data.frame(dat), model=lavmodel, std.lv=TRUE,
+                 ordered=colnames(dat),  parameterization="theta")
+summary(mod4b, standardized=TRUE, fit.measures=TRUE, rsquare=TRUE)
 coef(mod4b)
 
 #****************
@@ -201,21 +201,21 @@ coef(mod4b)
 #****************
 
 #----  M5a: cfa (in lavaan)
-lavmodel <- "F =~ O3__O48
+lavmodel <- "F=~ O3__O48
              F ~~ 1*F
              F ~ 0*1
              O3__O48 ~ 1
                 "
-lavmodel <- TAM::lavaanify.IRT( lavmodel , items=colnames(dat) )$lavaan.syntax
-mod5a <- lavaan::cfa( data= as.data.frame(dat) , model=lavmodel, std.lv = TRUE ,
+lavmodel <- TAM::lavaanify.IRT( lavmodel, items=colnames(dat) )$lavaan.syntax
+mod5a <- lavaan::cfa( data=as.data.frame(dat), model=lavmodel, std.lv=TRUE,
                  estimator="MLR" )
-summary(mod5a , standardized=TRUE , fit.measures=TRUE , rsquare=TRUE)
+summary(mod5a, standardized=TRUE, fit.measures=TRUE, rsquare=TRUE)
 
 #----  M5b: mirt (in mirt)
 
 # create user defined function
 name <- 'normal'
-par <- c("d" = 1 , "a1" = 0.8 , "vy" = 1)
+par <- c("d"=1, "a1"=0.8, "vy"=1)
 est <- c(TRUE, TRUE,FALSE)
 P.normal <- function(par,Theta,ncat){
      d <- par[1]
@@ -225,12 +225,12 @@ P.normal <- function(par,Theta,ncat){
      # expected values given Theta
      mui <- a1*Theta[,1] + d
      TP <- nrow(Theta)
-     probs <- matrix( NA , nrow=TP, ncol= ncat )
+     probs <- matrix( NA, nrow=TP, ncol=ncat )
      eps <- .01
      for (cc in 1:ncat){
-        probs[,cc] <- stats::dnorm( cc , mean = mui   , sd = sqrt( abs( psi + eps) ) )
+        probs[,cc] <- stats::dnorm( cc, mean=mui, sd=sqrt( abs( psi + eps) ) )
                     }
-     psum <- matrix( rep(rowSums( probs ),each=ncat)  , nrow=TP , ncol=ncat , byrow=TRUE)
+     psum <- matrix( rep(rowSums( probs ),each=ncat), nrow=TP, ncol=ncat, byrow=TRUE)
      probs <- probs / psum
      return(probs)
 }
@@ -240,24 +240,24 @@ normal <- mirt::createItem(name, par=par, est=est, P=P.normal)
 customItems <- list("normal"=normal)
 itemtype <- rep( "normal",I)
 # define parameters to be estimated
-mod5b.pars <- mirt::mirt(dat, 1, itemtype=itemtype ,
-                   customItems=customItems , pars = "values")
-ind <- which( mod5b.pars$name == "vy")
-vy <- apply( dat , 2 , var , na.rm=TRUE )
-mod5b.pars[ ind , "value" ] <- vy
-ind <- which( mod5b.pars$name == "a1")
-mod5b.pars[ ind , "value" ] <- .5* sqrt(vy)
-ind <- which( mod5b.pars$name == "d")
-mod5b.pars[ ind , "value" ] <- colMeans( dat , na.rm=TRUE )
+mod5b.pars <- mirt::mirt(dat, 1, itemtype=itemtype,
+                   customItems=customItems, pars="values")
+ind <- which( mod5b.pars$name=="vy")
+vy <- apply( dat, 2, var, na.rm=TRUE )
+mod5b.pars[ ind, "value" ] <- vy
+ind <- which( mod5b.pars$name=="a1")
+mod5b.pars[ ind, "value" ] <- .5* sqrt(vy)
+ind <- which( mod5b.pars$name=="d")
+mod5b.pars[ ind, "value" ] <- colMeans( dat, na.rm=TRUE )
 
 # estimate model
-mod5b <- mirt::mirt(dat, 1, itemtype=itemtype , customItems=customItems ,
-                 pars = mod5b.pars , verbose=TRUE    )
+mod5b <- mirt::mirt(dat, 1, itemtype=itemtype, customItems=customItems,
+                 pars=mod5b.pars, verbose=TRUE    )
 sirt::mirt.wrapper.coef(mod5b)$coef
 
 # some item plots
     par(ask=TRUE)
-plot(mod5b, type = 'trace', layout = c(1,1))
+plot(mod5b, type='trace', layout=c(1,1))
     par(ask=FALSE)
 # Alternatively:
 sirt::mirt.wrapper.itemplot(mod5b)

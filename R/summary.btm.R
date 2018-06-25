@@ -1,14 +1,14 @@
 ## File Name: summary.btm.R
-## File Version: 0.17
+## File Version: 0.21
 
 
 
 #*******************************************************
 # summary.btm
-summary.btm <- function( object , file=NULL , digits=4,... )
+summary.btm <- function( object, file=NULL, digits=4,... )
 {
     # open sink
-    sirt_osink( file = file )
+    sirt_osink( file=file )
 
     res <- object
 
@@ -26,12 +26,12 @@ summary.btm <- function( object , file=NULL , digits=4,... )
     cat("Bradley-Terry Model with Ties and Home Advantage Parameters\n")
 
     cat("------------------------------------------------------------\n")
-    cat( "Number of iterations =" , object$iter , "\n" )
-    #    cat( "Deviance = " , round( object$deviance , 2 ) , " | " )
-    #    cat( "Log Likelihood = " , round( -object$deviance/2 , 2 ) , "\n" )
-    cat( "Number of individuals = " , object$ic$n , "\n" )
-    cat( "Number of pairwise comparisons = " , object$ic$D , "\n" )
-    #    cat( "Number of estimated parameters = " , object$ic$np , "\n" )
+    cat( "Number of iterations=", object$iter, "\n" )
+    #    cat( "Deviance=", round( object$deviance, 2 ), " | " )
+    #    cat( "Log Likelihood=", round( -object$deviance/2, 2 ), "\n" )
+    cat( "Number of individuals=", object$ic$n, "\n" )
+    cat( "Number of pairwise comparisons=", object$ic$D, "\n" )
+    #    cat( "Number of estimated parameters=", object$ic$np, "\n" )
 
     cat("------------------------------------------------------------\n")
     cat("Ties and Home advantage parameters\n")
@@ -45,8 +45,8 @@ summary.btm <- function( object , file=NULL , digits=4,... )
 
     cat("------------------------------------------------------------\n")
     cat("MLE reliability (separation reliability)\n")
-    cat(paste0("MLE Rel = " , round( res$mle.rel , digits )  , "\n") )
-    cat(paste0("Separation index = " , round( res$sepG , digits )  , "\n") )
+    cat(paste0("MLE Rel=", round( res$mle.rel, digits ), "\n") )
+    cat(paste0("Separation index=", round( res$sepG, digits ), "\n") )
 
     cat("------------------------------------------------------------\n")
     cat("Individual effects parameters\n")
@@ -54,7 +54,7 @@ summary.btm <- function( object , file=NULL , digits=4,... )
     sirt_summary_print_objects(obji=obji, digits=digits, from=3)
 
     # close sink
-    sirt_csink( file = file )
+    sirt_csink( file=file )
 }
 #*******************************************************
 

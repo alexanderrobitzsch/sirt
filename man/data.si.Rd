@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.26
+%% File Version: 0.30
 
 \name{data.sirt}
 
@@ -167,25 +167,25 @@ dat <- data.si06
 
 #** estimate 2PL nested logit model
 library(mirt)
-mod1 <- mirt::mirt( dat , model=1 , itemtype="2PLNRM" , key=rep(0,ncol(dat) ) ,
+mod1 <- mirt::mirt( dat, model=1, itemtype="2PLNRM", key=rep(0,ncol(dat) ),
             verbose=TRUE  )
 summary(mod1)
 cmod1 <- sirt::mirt.wrapper.coef(mod1)$coef
-cmod1[,-1] <- round( cmod1[,-1] , 3)
+cmod1[,-1] <- round( cmod1[,-1], 3)
 
 #** normalize item parameters according Suh and Bolt (2010)
 cmod2 <- cmod1
 
 # slope parameters
 ind <-  grep("ak",colnames(cmod2))
-h1 <- cmod2[ ,ind ]
-cmod2[,ind] <- t( apply( h1 , 1 , FUN = function(ll){ ll - mean(ll) } ) )
+h1 <- cmod2[,ind ]
+cmod2[,ind] <- t( apply( h1, 1, FUN=function(ll){ ll - mean(ll) } ) )
 # item intercepts
-ind <-  paste0( "d" , 0:9 )
+ind <-  paste0( "d", 0:9 )
 ind <- which( colnames(cmod2) \%in\% ind )
-h1 <- cmod2[ ,ind ]
-cmod2[,ind] <- t( apply( h1 , 1 , FUN = function(ll){ ll - mean(ll) } ) )
-cmod2[,-1] <- round( cmod2[,-1] , 3)
+h1 <- cmod2[,ind ]
+cmod2[,ind] <- t( apply( h1, 1, FUN=function(ll){ ll - mean(ll) } ) )
+cmod2[,-1] <- round( cmod2[,-1], 3)
 }
 }
 \keyword{datasets}

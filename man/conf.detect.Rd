@@ -1,5 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.35
+%% File Version: 1.40
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -21,10 +21,10 @@ An exploratory DETECT analysis can be conducted using the
 \code{\link{expl.detect}} function.
 }
 \usage{
-conf.detect(data, score, itemcluster, bwscale = 1.1, progress = TRUE,
-        thetagrid = seq(-3, 3, len = 200))
+conf.detect(data, score, itemcluster, bwscale=1.1, progress=TRUE,
+        thetagrid=seq(-3, 3, len=200))
 
-\method{summary}{conf.detect}(object, digits = 3, file = NULL, ...)
+\method{summary}{conf.detect}(object, digits=3, file=NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -149,17 +149,17 @@ data(data.timss)
 
 # extract data
 dat <- data.timss$data
-dat <- dat[ , substring( colnames(dat),1,1) == "M" ]
+dat <- dat[, substring( colnames(dat),1,1)=="M" ]
 # extract item informations
 iteminfo <- data.timss$item
 # estimate Rasch model
 mod1 <- sirt::rasch.mml2( dat )
 # estimate WLEs
-wle1 <- sirt::wle.rasch( dat , b = mod1$item$b )$theta
+wle1 <- sirt::wle.rasch( dat, b=mod1$item$b )$theta
 
 # DETECT for content domains
-detect1 <- sirt::conf.detect( data = dat , score = wle1 ,
-                    itemcluster = iteminfo$Content.Domain )
+detect1 <- sirt::conf.detect( data=dat, score=wle1,
+                    itemcluster=iteminfo$Content.Domain )
   ##          unweighted weighted
   ##   DETECT      0.316    0.316
   ##   ASSI        0.273    0.273
@@ -167,34 +167,34 @@ detect1 <- sirt::conf.detect( data = dat , score = wle1 ,
 
 \dontrun{
 # DETECT cognitive domains
-detect2 <- sirt::conf.detect( data = dat , score = wle1 ,
-                    itemcluster = iteminfo$Cognitive.Domain )
+detect2 <- sirt::conf.detect( data=dat, score=wle1,
+                    itemcluster=iteminfo$Cognitive.Domain )
   ##          unweighted weighted
   ##   DETECT      0.251    0.251
   ##   ASSI        0.227    0.227
   ##   RATIO       0.282    0.282
 
 # DETECT for item format
-detect3 <- sirt::conf.detect( data = dat , score = wle1 ,
-                    itemcluster = iteminfo$Format )
+detect3 <- sirt::conf.detect( data=dat, score=wle1,
+                    itemcluster=iteminfo$Format )
   ##          unweighted weighted
   ##   DETECT      0.056    0.056
   ##   ASSI        0.060    0.060
   ##   RATIO       0.062    0.062
 
 # DETECT for item blocks
-detect4 <- sirt::conf.detect( data = dat , score = wle1 ,
-                    itemcluster = iteminfo$Block )
+detect4 <- sirt::conf.detect( data=dat, score=wle1,
+                    itemcluster=iteminfo$Block )
   ##          unweighted weighted
   ##   DETECT      0.301    0.301
   ##   ASSI        0.193    0.193
   ##   RATIO       0.339    0.339 }
 
 # Exploratory DETECT: Application of a cluster analysis employing the Ward method
-detect5 <- sirt::expl.detect( data = dat , score = wle1  ,
-                nclusters = 10 , N.est = nrow(dat)  )
+detect5 <- sirt::expl.detect( data=dat, score=wle1,
+                nclusters=10, N.est=nrow(dat)  )
 # Plot cluster solution
-pl <- graphics::plot( detect5$clusterfit , main = "Cluster solution" )
+pl <- graphics::plot( detect5$clusterfit, main="Cluster solution" )
 stats::rect.hclust(detect5$clusterfit, k=4, border="red")
 
 \dontrun{
@@ -213,18 +213,18 @@ dat <- dat[, 1:30]
 score <- stats::qnorm( ( rowMeans( dat )+.5 )  / ( 30 + 1 ) )
 
 # extract item cluster (Big 5 dimensions)
-itemcluster <- substring( colnames(dat) , 1 , 1 )
+itemcluster <- substring( colnames(dat), 1, 1 )
 
 # DETECT Item cluster
-detect1 <- sirt::conf.detect( data = dat , score = score , itemcluster = itemcluster )
+detect1 <- sirt::conf.detect( data=dat, score=score, itemcluster=itemcluster )
   ##        unweighted weighted
   ## DETECT      1.256    1.256
   ## ASSI        0.384    0.384
   ## RATIO       0.597    0.597
 
 # Exploratory DETECT
-detect5 <- sirt::expl.detect( data = dat , score = score  ,
-                     nclusters = 9 , N.est = nrow(dat)  )
+detect5 <- sirt::expl.detect( data=dat, score=score,
+                     nclusters=9, N.est=nrow(dat)  )
   ## DETECT (unweighted)
   ## Optimal Cluster Size is  6  (Maximum of DETECT Index)
   ##   N.Cluster N.items N.est N.val      size.cluster DETECT.est ASSI.est RATIO.est
@@ -238,7 +238,7 @@ detect5 <- sirt::expl.detect( data = dat , score = score  ,
   ## 8         9      30   500     0 6-3-3-2-3-5-3-3-2      1.522    0.444     0.724
 
 # Plot Cluster solution
-pl <- graphics::plot( detect5$clusterfit , main = "Cluster solution" )
+pl <- graphics::plot( detect5$clusterfit, main="Cluster solution" )
 stats::rect.hclust(detect5$clusterfit, k=6, border="red")
 
 #############################################################################
@@ -248,15 +248,15 @@ stats::rect.hclust(detect5$clusterfit, k=6, border="red")
 set.seed(976)
 N <- 1000
 I <- 20
-b <- sample( seq( -2 , 2 , len=I) )
-dat <- sirt::sim.raschtype( stats::rnorm(N) , b = b )
+b <- sample( seq( -2, 2, len=I) )
+dat <- sirt::sim.raschtype( stats::rnorm(N), b=b )
 
 # estimate Rasch model and corresponding WLEs
 mod1 <- TAM::tam.mml( dat )
 wmod1 <- TAM::tam.wle(mod1)$theta
 
 # define item cluster
-itemcluster <- c( rep(1,5) , rep(2,I-5) )
+itemcluster <- c( rep(1,5), rep(2,I-5) )
 
 # compute DETECT statistic
 detect1 <- sirt::conf.detect( data=dat, score=wmod1, itemcluster=itemcluster)

@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.53
+%% File Version: 0.57
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -27,18 +27,18 @@ for a multiple group model evaluated at a grid of focal points of the
 moderator, specified in \code{moderator.grid}.
 }
 \usage{
-lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h = 1.1,
-    residualize=TRUE, fit_measures = c("rmsea", "cfi", "tli", "gfi", "srmr"),
-    standardized=FALSE, standardized_type = "std.all",
-    lavaan_fct = "sem", sufficient_statistics=FALSE, eps = 1e-08, verbose = TRUE, ...)
+lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1,
+    residualize=TRUE, fit_measures=c("rmsea", "cfi", "tli", "gfi", "srmr"),
+    standardized=FALSE, standardized_type="std.all",
+    lavaan_fct="sem", sufficient_statistics=FALSE, eps=1e-08, verbose=TRUE, ...)
 
 \method{summary}{lsem}(object, file=NULL, digits=3, ...)
 
-\method{plot}{lsem}(x , parindex=NULL , ask=TRUE , ci = TRUE , lintrend = TRUE ,
-       parsummary = TRUE , ylim=NULL , xlab=NULL,  ylab=NULL , main=NULL ,
+\method{plot}{lsem}(x, parindex=NULL, ask=TRUE, ci=TRUE, lintrend=TRUE,
+       parsummary=TRUE, ylim=NULL, xlab=NULL,  ylab=NULL, main=NULL,
        digits=3, ...)
 
-lsem.MGM.stepfunctions( object , moderator.grid )
+lsem.MGM.stepfunctions( object, moderator.grid )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -184,7 +184,7 @@ dat <- data.lsem01
 
 # specify lavaan model
 lavmodel <- "
-        F =~ v1+v2+v3+v4+v5
+        F=~ v1+v2+v3+v4+v5
         F ~~ 1*F"
 
 # define grid of moderator variable age
@@ -192,35 +192,35 @@ moderator.grid <- seq(4,23,1)
 
 #********************************
 #*** Model 1: estimate LSEM with bandwidth 2
-mod1 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid ,
-               lavmodel=lavmodel , h=2 , std.lv=TRUE)
+mod1 <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+               lavmodel=lavmodel, h=2, std.lv=TRUE)
 summary(mod1)
-plot(mod1 , parindex=1:5)
+plot(mod1, parindex=1:5)
 
 # perform permutation test for Model 1
-pmod1 <- sirt::lsem.permutationTest( mod1 , B=10 )
+pmod1 <- sirt::lsem.permutationTest( mod1, B=10 )
           # only for illustrative purposes the number of permutations B is set
           # to a low number of 10
 summary(pmod1)
 plot(pmod1, type="global")
 
 #** estimate Model 1 based on sufficient statistics
-mod1b <- sirt::lsem.estimate( dat, moderator="age" , moderator.grid=moderator.grid ,
-               lavmodel=lavmodel, h=2, std.lv=TRUE, sufficient_statistics = TRUE )
+mod1b <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+               lavmodel=lavmodel, h=2, std.lv=TRUE, sufficient_statistics=TRUE )
 summary(mod1b)
 
 #********************************
 #*** Model 2: estimate multiple group model with 4 age groups
 
 # define breaks for age groups
-moderator.grid <- seq( 3.5 , 23.5 , len=5) # 4 groups
+moderator.grid <- seq( 3.5, 23.5, len=5) # 4 groups
 # estimate model
-mod2 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid ,
-           lavmodel=lavmodel , type="MGM" , std.lv=TRUE)
+mod2 <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+           lavmodel=lavmodel, type="MGM", std.lv=TRUE)
 summary(mod2)
 
 # output step functions
-smod2 <- sirt::lsem.MGM.stepfunctions( object=mod2 , moderator.grid=seq(4,23,1) )
+smod2 <- sirt::lsem.MGM.stepfunctions( object=mod2, moderator.grid=seq(4,23,1) )
 str(smod2)
 
 #********************************
@@ -228,21 +228,21 @@ str(smod2)
 
 # specify lavaan model
 lavmodel <- "
-        F =~ a1*v1+a2*v2+a3*v3+a4*v4
+        F=~ a1*v1+a2*v2+a3*v3+a4*v4
         v1 ~~ s1*v1
         v2 ~~ s2*v2
         v3 ~~ s3*v3
         v4 ~~ s4*v4
         F ~~ 1*F
         # standardized loadings
-        l1 := a1 / sqrt(a1^2 + s1 )
-        l2 := a2 / sqrt(a2^2 + s2 )
-        l3 := a3 / sqrt(a3^2 + s3 )
-        l4 := a4 / sqrt(a4^2 + s4 )
+        l1 :=a1 / sqrt(a1^2 + s1 )
+        l2 :=a2 / sqrt(a2^2 + s2 )
+        l3 :=a3 / sqrt(a3^2 + s3 )
+        l4 :=a4 / sqrt(a4^2 + s4 )
         "
 # estimate model
-mod3 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid ,
-               lavmodel=lavmodel , h=2 , std.lv=TRUE)
+mod3 <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+               lavmodel=lavmodel, h=2, std.lv=TRUE)
 summary(mod3)
 plot(mod3)
 
@@ -250,13 +250,13 @@ plot(mod3)
 #*** Model 4: estimate LSEM and automatically include standardized solutions
 
 lavmodel <- "
-        F =~ 1*v1+v2+v3+v4
+        F=~ 1*v1+v2+v3+v4
         F ~~ F"
-mod4 <- sirt::lsem.estimate( dat , moderator="age" , moderator.grid=moderator.grid ,
-               lavmodel=lavmodel , h=2 , standardized=TRUE)
+mod4 <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+               lavmodel=lavmodel, h=2, standardized=TRUE)
 summary(mod4)
 # permutation test
-pmod1 <- sirt::lsem.permutationTest( mod4 , B=3 )
+pmod1 <- sirt::lsem.permutationTest( mod4, B=3 )
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

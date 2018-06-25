@@ -1,5 +1,5 @@
 //// File Name: noharm_sirt_rcpp.cpp
-//// File Version: 3.32
+//// File Version: 3.36
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -60,10 +60,10 @@ Rcpp::NumericVector noharm_compute_dj(Rcpp::NumericMatrix Fval, Rcpp::NumericMat
     for ( int jj = 0; jj <I;jj++){
         for( int dd1 = 0; dd1<D;dd1++){
             for( int dd2 = 0; dd2<D;dd2++){
-                dj[jj] += Fval(jj,dd1) * Pval(dd1,dd2) * Fval(jj,dd2) ;
+                dj[jj] += Fval(jj,dd1) * Pval(dd1,dd2) * Fval(jj,dd2);
             }
         }
-        dj[jj] = sqrt( dj[jj] ) ;
+        dj[jj] = sqrt( dj[jj] );
     }
     return dj;
 }
@@ -74,23 +74,23 @@ Rcpp::NumericVector noharm_compute_dj(Rcpp::NumericMatrix Fval, Rcpp::NumericMat
 // [[Rcpp::export]]
 Rcpp::List noharm_compute_ej(Rcpp::NumericVector dj, int I)
 {
-    Rcpp::NumericVector ej(I) ;
-    Rcpp::NumericMatrix ej_ek(I,I) ;
-    for( int jj = 0 ; jj<I;jj++){
-        ej[jj] = sqrt( 1 + pow( dj[jj] , 2.0) ) ;
+    Rcpp::NumericVector ej(I);
+    Rcpp::NumericMatrix ej_ek(I,I);
+    for( int jj = 0; jj<I;jj++){
+        ej[jj] = sqrt( 1 + pow( dj[jj], 2.0) );
     }
-    for ( int jj = 0 ; jj<I;jj++){
+    for ( int jj = 0; jj<I;jj++){
         for (int kk=0;kk<I;kk++){
             if ( jj != kk){
-                ej_ek(jj,kk) = 1/( ej[jj] * ej[kk] ) ;
+                ej_ek(jj,kk) = 1/( ej[jj] * ej[kk] );
             }
         }
     }
     //--- output
     return Rcpp::List::create(
-            Rcpp::Named("ej") = ej ,
+            Rcpp::Named("ej") = ej,
             Rcpp::Named("ej_ek") = ej_ek
-        ) ;
+        );
 }
 
 
@@ -110,12 +110,12 @@ Rcpp::List noharm_compute_vjk(Rcpp::NumericMatrix b0jk, Rcpp::NumericMatrix b1jk
         v0jk(_,ii) = b0jk(_,ii);
     }
 
-    for( int jj=0; jj < I ; jj ++ ){
-        for( int kk=0; kk < I ; kk ++ ){
+    for( int jj=0; jj < I; jj ++ ){
+        for( int kk=0; kk < I; kk ++ ){
             if (modtype != 2){
-                v1jk(jj,kk) = b1jk(jj,kk) * ej_ek(jj,kk) ;
-                v2jk(jj,kk) = b2jk(jj,kk) * pow( ej_ek(jj,kk) ,2.0);
-                v3jk(jj,kk) = b3jk(jj,kk) * pow( ej_ek(jj,kk) ,3.0);
+                v1jk(jj,kk) = b1jk(jj,kk) * ej_ek(jj,kk);
+                v2jk(jj,kk) = b2jk(jj,kk) * pow( ej_ek(jj,kk),2.0);
+                v3jk(jj,kk) = b3jk(jj,kk) * pow( ej_ek(jj,kk),3.0);
             } else {
                 v0jk(jj,kk)=0;
                 v1jk(jj,kk)=1;
@@ -127,11 +127,11 @@ Rcpp::List noharm_compute_vjk(Rcpp::NumericMatrix b0jk, Rcpp::NumericMatrix b1jk
 
     //--- output
     return Rcpp::List::create(
-            Rcpp::Named("v0jk") = v0jk ,
-            Rcpp::Named("v1jk") = v1jk ,
-            Rcpp::Named("v2jk") = v2jk ,
+            Rcpp::Named("v0jk") = v0jk,
+            Rcpp::Named("v1jk") = v1jk,
+            Rcpp::Named("v2jk") = v2jk,
             Rcpp::Named("v3jk") = v3jk
-            ) ;
+            );
 }
 
 
@@ -147,21 +147,21 @@ Rcpp::List noharm_compute_gammajk(Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix 
     Rcpp::NumericMatrix gammajk3(I,I);
     for (int jj=0;jj<I;jj++){
         for (int kk=0;kk<I;kk++){
-            for( int dd1 = 0 ; dd1<D;dd1++){
-                for( int dd2 = 0 ; dd2<D;dd2++){
-                    gammajk(jj,kk) += Fval(jj,dd1) * Pval(dd1,dd2) * Fval(kk,dd2) + Psival(jj,kk) ;
+            for( int dd1 = 0; dd1<D;dd1++){
+                for( int dd2 = 0; dd2<D;dd2++){
+                    gammajk(jj,kk) += Fval(jj,dd1) * Pval(dd1,dd2) * Fval(kk,dd2) + Psival(jj,kk);
                 }
             }
-            gammajk2(jj,kk) = gammajk(jj,kk)*gammajk(jj,kk) ;
-            gammajk3(jj,kk) = gammajk2(jj,kk)*gammajk(jj,kk) ;
+            gammajk2(jj,kk) = gammajk(jj,kk)*gammajk(jj,kk);
+            gammajk3(jj,kk) = gammajk2(jj,kk)*gammajk(jj,kk);
         }
     }
     //--- output
     return Rcpp::List::create(
-            Rcpp::Named("gammajk") = gammajk ,
-            Rcpp::Named("gammajk2") = gammajk2 ,
+            Rcpp::Named("gammajk") = gammajk,
+            Rcpp::Named("gammajk2") = gammajk2,
             Rcpp::Named("gammajk3") = gammajk3
-            ) ;
+            );
 }
 
 
@@ -173,19 +173,19 @@ Rcpp::List noharm_compute_pdfk(Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pva
 {
     Rcpp::NumericMatrix pdfk(I,D);
     Rcpp::NumericMatrix pdfk2(I,D);
-    for (int jj=0 ;jj<I;jj++){
-        for (int dd=0 ;dd<D;dd++){
+    for (int jj=0;jj<I;jj++){
+        for (int dd=0;dd<D;dd++){
             for (int ee=0;ee<D;ee++){
-                pdfk(jj,dd) += Fval(jj,ee)*Pval(ee,dd) ;
+                pdfk(jj,dd) += Fval(jj,ee)*Pval(ee,dd);
             }
-            pdfk2(jj,dd) = pdfk(jj,dd)*pdfk(jj,dd) ;
+            pdfk2(jj,dd) = pdfk(jj,dd)*pdfk(jj,dd);
         }
     }
     //--- output
     return Rcpp::List::create(
-            Rcpp::Named("pdfk") = pdfk ,
+            Rcpp::Named("pdfk") = pdfk,
             Rcpp::Named("pdfk2") = pdfk2
-            ) ;
+            );
 }
 
 
@@ -199,7 +199,7 @@ Rcpp::List noharm_compute_pdfk(Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pva
 Rcpp::List noharm_estFcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, Rcpp::NumericMatrix Fpatt,
     Rcpp::NumericMatrix Ppatt, int I, int D, Rcpp::NumericMatrix b0jk, Rcpp::NumericMatrix b1jk,
     Rcpp::NumericMatrix b2jk, Rcpp::NumericMatrix b3jk, Rcpp::NumericMatrix wgtm, Rcpp::NumericMatrix pm,
-    Rcpp::NumericMatrix Psival, Rcpp::NumericMatrix Psipatt, double maxincrement , int modtype )
+    Rcpp::NumericMatrix Psival, Rcpp::NumericMatrix Psipatt, double maxincrement, int modtype )
 {
 
     int FR = Fval.nrow();
@@ -211,11 +211,11 @@ Rcpp::List noharm_estFcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, R
 
     //*************** calculate dj
     // dj <- sqrt( diag( Fval_ %*% Pval %*% t(Fval_) ) )
-    Rcpp::NumericVector dj = noharm_compute_dj( Fval_, Pval , I, D );
+    Rcpp::NumericVector dj = noharm_compute_dj( Fval_, Pval, I, D );
 
     //*************** calculate ej
     //     ej <- sqrt( 1 + dj^2 )
-    //     ej.ek <- 1 / outer( ej , ej )
+    //     ej.ek <- 1 / outer( ej, ej )
     //     diag( ej.ek ) <- 0
     Rcpp::List res1 = noharm_compute_ej( dj, I);
     Rcpp::NumericVector ej = res1["ej"];
@@ -253,7 +253,7 @@ Rcpp::List noharm_estFcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, R
     double eps1 = 1e-7;
 
     for (int jj=0;jj<I;jj++){
-        for (int dd=0 ;dd<D;dd++){
+        for (int dd=0;dd<D;dd++){
             if ( Fpatt(jj,dd) > 0 ){
                 f1jj=0;
                 f2jj=0;
@@ -263,41 +263,41 @@ Rcpp::List noharm_estFcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, R
                     //        v3.jk[jj,]*gamma.jk[jj,]^3 ) )
                     eps0jj[kk] =  pm(jj,kk) - v0jk(jj,kk) -
                             v1jk(jj,kk) * gammajk(jj,kk) - v2jk(jj,kk) * gammajk2(jj,kk) -
-                            v3jk(jj,kk) * gammajk3(jj,kk) ;
-                    eps0jj[kk] = wgtm(jj,kk)* eps0jj[kk] ;
+                            v3jk(jj,kk) * gammajk3(jj,kk);
+                    eps0jj[kk] = wgtm(jj,kk)* eps0jj[kk];
                     //  eps1.jj <- - ( v1.jk[jj,]  * pd.fk[,dd] ) -
-                    //    2 * ( v2.jk[jj,]  * gamma.jk[jj,]  * pd.fk[ , dd] ) -
-                    //    3 * ( v3.jk[jj,]  * gamma.jk[jj,]^2  * pd.fk[ , dd] )
+                    //    2 * ( v2.jk[jj,]  * gamma.jk[jj,]  * pd.fk[, dd] ) -
+                    //    3 * ( v3.jk[jj,]  * gamma.jk[jj,]^2  * pd.fk[, dd] )
                     eps1jj[kk] = - v1jk(jj,kk) * pdfk(kk,dd) -
                             2*v2jk(jj,kk) * gammajk(jj,kk)*pdfk(kk,dd) -
-                            3*v3jk(jj,kk) * gammajk2(jj,kk)*pdfk(kk,dd) ;
-                    eps1jj[kk] = wgtm(jj,kk)* eps1jj[kk] ;
-                    //  eps2.jj <- - 2 * ( v2.jk[jj,]  * pd.fk[ , dd]^2 ) -
-                    //    6 * ( v3.jk[jj,]  * gamma.jk[jj,]  * pd.fk[ , dd]^2 )
+                            3*v3jk(jj,kk) * gammajk2(jj,kk)*pdfk(kk,dd);
+                    eps1jj[kk] = wgtm(jj,kk)* eps1jj[kk];
+                    //  eps2.jj <- - 2 * ( v2.jk[jj,]  * pd.fk[, dd]^2 ) -
+                    //    6 * ( v3.jk[jj,]  * gamma.jk[jj,]  * pd.fk[, dd]^2 )
                     eps2jj[kk] = - 2*v2jk(jj,kk) * pdfk2(kk,dd) -
-                            6*v3jk(jj,kk) * gammajk(jj,kk) * pdfk2(kk,dd) ;
-                    eps2jj[kk] = wgtm(jj,kk)* eps2jj[kk] ;
+                            6*v3jk(jj,kk) * gammajk(jj,kk) * pdfk2(kk,dd);
+                    eps2jj[kk] = wgtm(jj,kk)* eps2jj[kk];
                     // f1.jj <- 2* eps0.jj * eps1.jj
-                    f1jj += 2 * eps0jj[kk] * eps1jj[kk] ;
+                    f1jj += 2 * eps0jj[kk] * eps1jj[kk];
                     // f2.jj <- 2* eps1.jj^2 + 2*eps0.jj * eps2.jj
-                    f2jj += 2 * eps1jj[kk] * eps1jj[kk] + 2*eps0jj[kk]* eps2jj[kk] ;
+                    f2jj += 2 * eps1jj[kk] * eps1jj[kk] + 2*eps0jj[kk]* eps2jj[kk];
                 }
-                increment = - f1jj / noharm_avoid_zero( f2jj, eps1) ;
+                increment = - f1jj / noharm_avoid_zero( f2jj, eps1);
                 // trim increment
                 increment = noharm_trim_increment( increment, maxincrement);
                 // absolute value
                 aincr = noharm_abs( increment );
-                if ( aincr > parchange ){ parchange = aincr ; }
-                Fval_(jj,dd) = Fval_(jj,dd) + increment ;
+                if ( aincr > parchange ){ parchange = aincr; }
+                Fval_(jj,dd) = Fval_(jj,dd) + increment;
             }
         }
     }
     //*************************************************
     // OUTPUT
     return Rcpp::List::create(
-            Rcpp::Named("Fval_") = Fval_ ,
+            Rcpp::Named("Fval_") = Fval_,
             Rcpp::Named("change") = parchange
-        ) ;
+        );
 }
 
 
@@ -310,7 +310,7 @@ Rcpp::List noharm_estFcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, R
 Rcpp::List noharm_estPcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, Rcpp::NumericMatrix Fpatt,
     Rcpp::NumericMatrix Ppatt, int I, int D, Rcpp::NumericMatrix b0jk, Rcpp::NumericMatrix b1jk,
     Rcpp::NumericMatrix b2jk, Rcpp::NumericMatrix b3jk, Rcpp::NumericMatrix wgtm, Rcpp::NumericMatrix pm,
-    Rcpp::NumericMatrix Psival, Rcpp::NumericMatrix Psipatt, double maxincrement , int modtype )
+    Rcpp::NumericMatrix Psival, Rcpp::NumericMatrix Psipatt, double maxincrement, int modtype )
 {
     int FR = Pval.nrow();
     int FC = Pval.ncol();
@@ -321,11 +321,11 @@ Rcpp::List noharm_estPcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, R
 
      //*************** calculate dj
      //     dj <- sqrt( diag( Fval %*% Pval_ %*% t(Fval) ) )
-    Rcpp::NumericVector dj = noharm_compute_dj( Fval, Pval , I, D );
+    Rcpp::NumericVector dj = noharm_compute_dj( Fval, Pval, I, D );
 
      //*************** calculate ej
      //     ej <- sqrt( 1 + dj^2 )
-     //     ej.ek <- 1 / outer( ej , ej )
+     //     ej.ek <- 1 / outer( ej, ej )
      //     diag( ej.ek ) <- 0
     Rcpp::List res1 = noharm_compute_ej( dj, I);
     Rcpp::NumericVector ej = res1["ej"];
@@ -365,7 +365,7 @@ Rcpp::List noharm_estPcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, R
      double eps1 = 1e-7;
 
      for ( int dd=0;dd<D;dd++){
-     for (int ee=0 ;ee<D;ee++){
+     for (int ee=0;ee<D;ee++){
 
      if (dd >= ee ){
       if ( Ppatt(dd,ee) > 0 ){
@@ -375,47 +375,47 @@ Rcpp::List noharm_estPcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, R
      for (int jj=0;jj<I;jj++){
      for (int kk=0;kk<I;kk++){
 
-     // gammajk1 <- outer( Fval[ ,dd] , Fval[ ,ee] )
-     gammajk1 = Fval(jj,dd) * Fval( kk,ee) ;
-     if (dd==ee){ gammajk1 = 2*gammajk1 ; }
-     gammajk12 = gammajk1 * gammajk1 ;
+     // gammajk1 <- outer( Fval[,dd], Fval[,ee] )
+     gammajk1 = Fval(jj,dd) * Fval( kk,ee);
+     if (dd==ee){ gammajk1 = 2*gammajk1; }
+     gammajk12 = gammajk1 * gammajk1;
      // eps0.jj <- ( wgtm * ( pm - v0.jk - v1.jk*gamma.jk -
      //     v2.jk*gamma.jk^2 - v3.jk*gamma.jk^3 ) )
          eps0jj(jj,kk) =  pm(jj,kk) - v0jk(jj,kk) -
              v1jk(jj,kk) * gammajk(jj,kk) - v2jk(jj,kk) * gammajk2(jj,kk) -
-             v3jk(jj,kk) * gammajk3(jj,kk) ;
-         eps0jj(jj,kk) = wgtm(jj,kk)* eps0jj(jj,kk) ;
+             v3jk(jj,kk) * gammajk3(jj,kk);
+         eps0jj(jj,kk) = wgtm(jj,kk)* eps0jj(jj,kk);
      //    eps1.jj <- - ( v1.jk  * gammajk1 ) -
      //        2 * ( v2.jk  * gamma.jk  * gammajk1 ) -
      //            3 * ( v3.jk  * gamma.jk^2  * gammajk1 )
          eps1jj(jj,kk) = - v1jk(jj,kk) * gammajk1 -
              2*v2jk(jj,kk) * gammajk(jj,kk)*gammajk1 -
-             3*v3jk(jj,kk) * gammajk2(jj,kk)*gammajk1 ;
-         eps1jj(jj,kk) = wgtm(jj,kk)* eps1jj(jj,kk) ;
+             3*v3jk(jj,kk) * gammajk2(jj,kk)*gammajk1;
+         eps1jj(jj,kk) = wgtm(jj,kk)* eps1jj(jj,kk);
      //    eps2.jj <- - 2 * ( v2.jk  * gammajk1^2 ) -
      //            6 * ( v3.jk  * gamma.jk  * gammajk1^2 )
          eps2jj(jj,kk) = - 2*v2jk(jj,kk) * gammajk12 -
-             6*v3jk(jj,kk) * gammajk(jj,kk) * gammajk12 ;
-         eps2jj(jj,kk) = wgtm(jj,kk)* eps2jj(jj,kk) ;
+             6*v3jk(jj,kk) * gammajk(jj,kk) * gammajk12;
+         eps2jj(jj,kk) = wgtm(jj,kk)* eps2jj(jj,kk);
          // f1.jj <- 2* eps0.jj * eps1.jj
-         f1jj += 2 * eps0jj(jj,kk) * eps1jj(jj,kk) ;
+         f1jj += 2 * eps0jj(jj,kk) * eps1jj(jj,kk);
          // f2.jj <- 2* eps1.jj^2 + 2*eps0.jj * eps2.jj
          f2jj += 2 * eps1jj(jj,kk) * eps1jj(jj,kk) +
-             2*eps0jj(jj,kk)* eps2jj(jj,kk) ;
+             2*eps0jj(jj,kk)* eps2jj(jj,kk);
      }
      }
 
-                increment = - f1jj / noharm_avoid_zero( f2jj, eps1) ;
+                increment = - f1jj / noharm_avoid_zero( f2jj, eps1);
                 // trim increment
                 increment = noharm_trim_increment( increment, maxincrement);
                 // absolute value
                 aincr = noharm_abs( increment );
-     if ( aincr > parchange ){ parchange = aincr ; }
+     if ( aincr > parchange ){ parchange = aincr; }
 
      //   Pval_[dd,ee] <- Pval_[ dd,ee] + increment
      //   if ( dd > ee ){ Pval_[ee,dd] <- Pval_[dd,ee] }
-     Pval_(dd,ee) = Pval_(dd,ee) + increment ;
-     if (dd>ee){ Pval_(ee,dd)=Pval_(dd,ee) ; }
+     Pval_(dd,ee) = Pval_(dd,ee) + increment;
+     if (dd>ee){ Pval_(ee,dd)=Pval_(dd,ee); }
 
       }
      }
@@ -425,10 +425,10 @@ Rcpp::List noharm_estPcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, R
      //*************************************************
      // OUTPUT
      return Rcpp::List::create(
-         Rcpp::_["Pval_"] = Pval_ ,
-         Rcpp::_["change"] = parchange ,
+         Rcpp::_["Pval_"] = Pval_,
+         Rcpp::_["change"] = parchange,
          Rcpp::_["residuals"] = eps0jj
-         ) ;
+         );
 }
 
 
@@ -443,7 +443,7 @@ Rcpp::List noharm_estPcpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, R
 Rcpp::List noharm_estPsicpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval, Rcpp::NumericMatrix Fpatt,
     Rcpp::NumericMatrix Ppatt, int I, int D, Rcpp::NumericMatrix b0jk, Rcpp::NumericMatrix b1jk,
     Rcpp::NumericMatrix b2jk, Rcpp::NumericMatrix b3jk, Rcpp::NumericMatrix wgtm, Rcpp::NumericMatrix pm,
-    Rcpp::NumericMatrix Psival, Rcpp::NumericMatrix Psipatt, double maxincrement , int modtype )
+    Rcpp::NumericMatrix Psival, Rcpp::NumericMatrix Psipatt, double maxincrement, int modtype )
 {
 
     int FR = Psival.nrow();
@@ -455,11 +455,11 @@ Rcpp::List noharm_estPsicpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval,
 
      //*************** calculate dj
      //     dj <- sqrt( diag( Fval %*% Pval %*% t(Fval) ) )
-    Rcpp::NumericVector dj = noharm_compute_dj( Fval, Pval , I, D );
+    Rcpp::NumericVector dj = noharm_compute_dj( Fval, Pval, I, D );
 
      //*************** calculate ej
      //     ej <- sqrt( 1 + dj^2 )
-     //     ej.ek <- 1 / outer( ej , ej )
+     //     ej.ek <- 1 / outer( ej, ej )
      //     diag( ej.ek ) <- 0
     Rcpp::List res1 = noharm_compute_ej( dj, I);
     Rcpp::NumericVector ej = res1["ej"];
@@ -497,7 +497,7 @@ Rcpp::List noharm_estPsicpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval,
      double eps1 = 1e-7;
 
      for (int jj=0;jj<I;jj++){
-     for (int kk=0 ;kk<I;kk++){
+     for (int kk=0;kk<I;kk++){
 
      if ( Psipatt(jj,kk) > 0 ){
      if (jj>kk){
@@ -507,31 +507,31 @@ Rcpp::List noharm_estPsicpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval,
          //        v3.jk[jj,]*gamma.jk[jj,]^3 ) )
          eps0jj(jj,kk) =  pm(jj,kk) - v0jk(jj,kk) -
              v1jk(jj,kk) * gammajk(jj,kk) - v2jk(jj,kk) * gammajk2(jj,kk) -
-             v3jk(jj,kk) * gammajk3(jj,kk)  ;
-         eps0jj(jj,kk) = wgtm(jj,kk)* eps0jj(jj,kk) ;
+             v3jk(jj,kk) * gammajk3(jj,kk);
+         eps0jj(jj,kk) = wgtm(jj,kk)* eps0jj(jj,kk);
          //  eps1.jj <- - ( v1.jk[jj,]  * pd.fk[,dd] ) -
-         //    2 * ( v2.jk[jj,]  * gamma.jk[jj,]  * pd.fk[ , dd] ) -
-         //    3 * ( v3.jk[jj,]  * gamma.jk[jj,]^2  * pd.fk[ , dd] )
+         //    2 * ( v2.jk[jj,]  * gamma.jk[jj,]  * pd.fk[, dd] ) -
+         //    3 * ( v3.jk[jj,]  * gamma.jk[jj,]^2  * pd.fk[, dd] )
          eps1jj(jj,kk) = - v1jk(jj,kk)  -
              2*v2jk(jj,kk) * gammajk(jj,kk) -
-             3*v3jk(jj,kk) * gammajk2(jj,kk) ;
-         eps1jj(jj,kk) = wgtm(jj,kk)* eps1jj(jj,kk) ;
-         //  eps2.jj <- - 2 * ( v2.jk[jj,]  * pd.fk[ , dd]^2 ) -
-         //    6 * ( v3.jk[jj,]  * gamma.jk[jj,]  * pd.fk[ , dd]^2 )
-         eps2jj(jj,kk) = 0 ;
+             3*v3jk(jj,kk) * gammajk2(jj,kk);
+         eps1jj(jj,kk) = wgtm(jj,kk)* eps1jj(jj,kk);
+         //  eps2.jj <- - 2 * ( v2.jk[jj,]  * pd.fk[, dd]^2 ) -
+         //    6 * ( v3.jk[jj,]  * gamma.jk[jj,]  * pd.fk[, dd]^2 )
+         eps2jj(jj,kk) = 0;
          // f1.jj <- 2* eps0.jj * eps1.jj
-         f1jj = 2 * eps0jj(jj,kk) * eps1jj(jj,kk) ;
+         f1jj = 2 * eps0jj(jj,kk) * eps1jj(jj,kk);
          // f2.jj <- 2* eps1.jj^2 + 2*eps0.jj * eps2.jj
-         f2jj = 2 * eps1jj(jj,kk) * eps1jj(jj,kk) + 2*eps0jj(jj,kk)* eps2jj(jj,kk) ;
-        increment = - f1jj / noharm_avoid_zero( f2jj, eps1) ;
+         f2jj = 2 * eps1jj(jj,kk) * eps1jj(jj,kk) + 2*eps0jj(jj,kk)* eps2jj(jj,kk);
+        increment = - f1jj / noharm_avoid_zero( f2jj, eps1);
         // trim increment
         increment = noharm_trim_increment( increment, maxincrement);
         // absolute value
         aincr = noharm_abs( increment );
-        if ( aincr > parchange ){ parchange = aincr ; }
+        if ( aincr > parchange ){ parchange = aincr; }
 
-        Psival_(jj,kk) = Psival_(jj,kk) + increment ;
-        Psival_(kk,jj) = Psival_(jj,kk) ;
+        Psival_(jj,kk) = Psival_(jj,kk) + increment;
+        Psival_(kk,jj) = Psival_(jj,kk);
      }
      }
      }
@@ -540,9 +540,9 @@ Rcpp::List noharm_estPsicpp( Rcpp::NumericMatrix Fval, Rcpp::NumericMatrix Pval,
      //*************************************************
      // OUTPUT
      return Rcpp::List::create(
-         Rcpp::_["Psival_"] = Psival_ ,
+         Rcpp::_["Psival_"] = Psival_,
          Rcpp::_["change"] = parchange
-         ) ;
+         );
 }
 
 

@@ -1,5 +1,5 @@
 %% File Name: eigenvalues.sirt.Rd
-%% File Version: 0.06
+%% File Version: 0.09
 
 \name{eigenvalues.sirt}
 \alias{eigenvalues.sirt}
@@ -13,11 +13,11 @@ symmetric positive definite matrices. The eigenvalues are computed
 by the Rayleigh quotient method (Lange, 2010, p. 120).
 }
 \usage{
-eigenvalues.sirt( X , D , maxit=200 , conv=10^(-6) )
+eigenvalues.sirt( X, D, maxit=200, conv=10^(-6) )
 }
 
 %% eigenvalues.sirt <- function (X,D,maxit,conv){
-%%    .Call("eigenvalues_sirt", X,D,maxit,conv, PACKAGE = "sirt")
+%%    .Call("eigenvalues_sirt", X,D,maxit,conv, PACKAGE="sirt")
 %%                    }
 
 %- maybe also 'usage' for other objects documented here.

@@ -1,5 +1,5 @@
 %% File Name: pbivnorm2.Rd
-%% File Version: 0.16
+%% File Version: 0.20
 
 \name{pbivnorm2}
 \alias{pbivnorm2}
@@ -9,7 +9,7 @@ Cumulative Function for the Bivariate Normal Distribution
 }
 \description{
 This function evaluates the bivariate normal distribution
-\eqn{\Phi_2 ( x , y ; \rho )}
+\eqn{\Phi_2 ( x, y ; \rho )}
 assuming zero means and unit variances. It uses a simple approximation
 by Cox and Wermuth (1991) with corrected formulas in Hong (1999).
 }
@@ -64,15 +64,15 @@ function in the \pkg{pbivnorm} package.
 \examples{
 library(pbivnorm)
 # define input
-x <- c(0 , 0 ,  .5 , 1  , 1  )
-y <- c( 0 , -.5 ,  1 , 3 , .5 )
-rho <- c( .2 , .8 , -.4 , .6 , .5 )
+x <- c(0, 0,  .5, 1, 1  )
+y <- c( 0, -.5,  1, 3, .5 )
+rho <- c( .2, .8, -.4, .6, .5 )
 # compare pbivnorm2 and pbivnorm functions
-pbiv2 <- sirt::pbivnorm2( x = x , y = y , rho = rho )
-pbiv <- pbivnorm::pbivnorm(  x ,  y , rho = rho )
+pbiv2 <- sirt::pbivnorm2( x=x, y=y, rho=rho )
+pbiv <- pbivnorm::pbivnorm(  x,  y, rho=rho )
 max( abs(pbiv-pbiv2))
   ## [1] 0.0030626
-round( cbind( x , y , rho ,pbiv, pbiv2 ) , 4 )
+round( cbind( x, y, rho,pbiv, pbiv2 ), 4 )
   ##          x    y  rho   pbiv  pbiv2
   ##   [1,] 0.0  0.0  0.2 0.2820 0.2821
   ##   [2,] 0.0 -0.5  0.8 0.2778 0.2747

@@ -1,5 +1,5 @@
 %% File Name: plot.np.dich.Rd
-%% File Version: 0.12
+%% File Version: 0.15
 
 \name{plot.np.dich}
 \alias{plot.np.dich}
@@ -12,9 +12,9 @@ This function plots nonparametric item response
 functions estimated with \code{dich.np}.
 }
 \usage{
-\method{plot}{np.dich}(x, b, infit = NULL, outfit = NULL,
-    nsize = 100, askplot = TRUE, progress = TRUE, bands = FALSE,
-    plot.b = FALSE, shade = FALSE, shadecol = "burlywood1" , ...)
+\method{plot}{np.dich}(x, b, infit=NULL, outfit=NULL,
+    nsize=100, askplot=TRUE, progress=TRUE, bands=FALSE,
+    plot.b=FALSE, shade=FALSE, shadecol="burlywood1", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

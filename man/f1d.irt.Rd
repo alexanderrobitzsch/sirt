@@ -1,5 +1,5 @@
 %% File Name: f1d.irt.Rd
-%% File Version: 1.23
+%% File Version: 1.27
 
 \name{f1d.irt}
 \alias{f1d.irt}
@@ -15,8 +15,8 @@ item discriminations and intercepts of a pre-estimated multidimensional IRT
 model are provided as input.
 }
 \usage{
-f1d.irt(dat = NULL, nnormal = 1000, nfactors = 3, A = NULL, intercept = NULL,
-    mu = NULL , Sigma = NULL , maxiter = 100, conv = 10^(-5), progress = TRUE)
+f1d.irt(dat=NULL, nnormal=1000, nfactors=3, A=NULL, intercept=NULL,
+    mu=NULL, Sigma=NULL, maxiter=100, conv=10^(-5), progress=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -54,7 +54,7 @@ Display progress? The default is \code{TRUE}.
 The functional unidimensional item response model (F1D model)
 for dichotomous item responses is based on a multidimensional model with a
 link function \eqn{g} (probit or logit):
-\deqn{ P( X_{pi}=1 | \bold{\theta}_p ) =
+\deqn{ P( X_{pi}=1 | \bold{\theta}_p )=
 g( \sum_d a_{id} \theta_{pd} - d_i ) }
 It is assumed that \eqn{\bold{\theta}_p} is multivariate normally
 distribution with a zero mean vector and identity covariance matrix.
@@ -68,7 +68,7 @@ the approximation equations
 \deqn{ a_{i}^\ast \theta_{p}^\ast - d_i^\ast
 \approx \sum_d a_{id} \theta_{pd} - d_i }
 The optimization function \eqn{F} is defined by
-\deqn{ F( \{ a_i^\ast , d_i^\ast \}_i , \{ \theta_p^\ast \}_p )=
+\deqn{ F( \{ a_i^\ast, d_i^\ast \}_i, \{ \theta_p^\ast \}_p )=
     \sum_p \sum_i w_p ( a_{id} \theta_{pd} - d_i-
 a_{i}^\ast \theta_{p}^\ast + d_i^\ast )^2 \rightarrow Min! }
 All items \eqn{i} are equally weighted whereas the ability
@@ -133,30 +133,30 @@ For estimation of bifactor models based on marginal maximum likelihood
 # EXAMPLE 1: Dataset Mathematics data.math | Exploratory multidimensional model
 #############################################################################
 data(data.math)
-dat <- ( data.math$data )[ , -c(1,2) ] # select Mathematics items
+dat <- ( data.math$data )[, -c(1,2) ] # select Mathematics items
 
 #****
 # Model 1: Functional unidimensional model based on original data
 
 #++ (1) estimate model with 3 factors
-mod1 <- sirt::f1d.irt( dat =dat , nfactors=3)
+mod1 <- sirt::f1d.irt( dat=dat, nfactors=3)
 
 #++ (2) plot results
      par(mfrow=c(1,2))
 # Intercepts
-plot( mod1$item$di0 , mod1$item$di.ast , pch=16 , main="Item Intercepts" ,
-        xlab= expression( paste( d[i] , " (Unidimensional Model)" )) ,
-        ylab= expression( paste( d[i] , " (Functional Unidimensional Model)" )))
-abline( lm(mod1$item$di.ast ~ mod1$item$di0) , col=2 , lty=2 )
+plot( mod1$item$di0, mod1$item$di.ast, pch=16, main="Item Intercepts",
+        xlab=expression( paste( d[i], " (Unidimensional Model)" )),
+        ylab=expression( paste( d[i], " (Functional Unidimensional Model)" )))
+abline( lm(mod1$item$di.ast ~ mod1$item$di0), col=2, lty=2 )
 # Discriminations
-plot( mod1$item$ai0 , mod1$item$ai.ast , pch=16 , main="Item Discriminations" ,
-        xlab= expression( paste( a[i] , " (Unidimensional Model)" )) ,
-        ylab= expression( paste( a[i] , " (Functional Unidimensional Model)" )))
-abline( lm(mod1$item$ai.ast ~ mod1$item$ai0) , col=2 , lty=2 )
+plot( mod1$item$ai0, mod1$item$ai.ast, pch=16, main="Item Discriminations",
+        xlab=expression( paste( a[i], " (Unidimensional Model)" )),
+        ylab=expression( paste( a[i], " (Functional Unidimensional Model)" )))
+abline( lm(mod1$item$ai.ast ~ mod1$item$ai0), col=2, lty=2 )
      par(mfrow=c(1,1))
 
 #++ (3) estimate bifactor model and Green-Yang reliability
-gy1 <- sirt::greenyang.reliability( mod1$tetra , nfactors = 3 )
+gy1 <- sirt::greenyang.reliability( mod1$tetra, nfactors=3 )
 
 \dontrun{
 #****
@@ -168,11 +168,11 @@ I <- ncol(dat)
 Q <- matrix( 1, I,2 )
 Q[1,2] <- 0
 variance.fixed <- cbind( 1,2,0 )
-mod2a <- sirt::smirt( dat , Qmatrix=Q , irtmodel="comp" , est.a="2PL" ,
-                variance.fixed=variance.fixed , maxiter=50)
+mod2a <- sirt::smirt( dat, Qmatrix=Q, irtmodel="comp", est.a="2PL",
+                variance.fixed=variance.fixed, maxiter=50)
 #++ (2) input estimated discriminations and intercepts for
 #       functional unidimensional model
-mod2b <- sirt::f1d.irt( A = mod2a$a , intercept = mod2a$b )
+mod2b <- sirt::f1d.irt( A=mod2a$a, intercept=mod2a$b )
 
 #############################################################################
 # EXAMPLE 2: Dataset Mathematics data.math | Confirmatory multidimensional model
@@ -183,24 +183,24 @@ library(TAM)
 
 # dataset
 dat <- data.math$data
-dat <- dat[ , grep("M" , colnames(dat) ) ]
+dat <- dat[, grep("M", colnames(dat) ) ]
 # extract item informations
 iteminfo <- data.math$item
 I <- ncol(dat)
 # define Q-matrix
-Q <- matrix( 0 , nrow=I , ncol=3 )
-Q[ grep( "arith" , iteminfo$domain ) , 1 ] <- 1
-Q[ grep( "Meas" , iteminfo$domain ) , 2 ] <- 1
-Q[ grep( "geom" , iteminfo$domain ) , 3 ] <- 1
+Q <- matrix( 0, nrow=I, ncol=3 )
+Q[ grep( "arith", iteminfo$domain ), 1 ] <- 1
+Q[ grep( "Meas", iteminfo$domain ), 2 ] <- 1
+Q[ grep( "geom", iteminfo$domain ), 3 ] <- 1
 
 # fit three-dimensional model in TAM
-mod1 <- TAM::tam.mml.2pl(  dat , Q=Q , control=list(maxiter=40 , snodes=1000) )
+mod1 <- TAM::tam.mml.2pl(  dat, Q=Q, control=list(maxiter=40, snodes=1000) )
 summary(mod1)
 
 # specify functional unidimensional model
-intercept <- mod1$xsi[ , c("xsi") ]
+intercept <- mod1$xsi[, c("xsi") ]
 names(intercept) <- rownames(mod1$xsi)
-fumod1 <- sirt::f1d.irt( A = mod1$B[,2,] , intercept=intercept , Sigma= mod1$variance)
+fumod1 <- sirt::f1d.irt( A=mod1$B[,2,], intercept=intercept, Sigma=mod1$variance)
 fumod1$item
 }
 }

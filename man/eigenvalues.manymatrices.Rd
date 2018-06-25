@@ -1,5 +1,5 @@
 %% File Name: eigenvalues.manymatrices.Rd
-%% File Version: 0.11
+%% File Version: 0.15
 
 \name{eigenvalues.manymatrices}
 \alias{eigenvalues.manymatrices}
@@ -14,7 +14,7 @@ by the Rayleigh quotient method (Lange, 2010, p. 120). In addition,
 the inverse matrix can be calculated.
 }
 \usage{
-eigenvalues.manymatrices(Sigma.all, itermax = 10, maxconv = 0.001,
+eigenvalues.manymatrices(Sigma.all, itermax=10, maxconv=0.001,
     inverse=FALSE )
 }
 %- maybe also 'usage' for other objects documented here.
@@ -71,9 +71,9 @@ Sigma[ lower.tri(Sigma) ] <- Sigma[ upper.tri(Sigma) ] <- c(.2,.1,.99 )
 Sigma2 <- Sigma
 
 # collect matrices in a "super-matrix"
-Sigma.all <- rbind( matrix( Sigma1 , nrow=1 , byrow=TRUE) ,
-                matrix( Sigma2 , nrow=1 , byrow=TRUE) )
-Sigma.all <- Sigma.all[ c(1,1,2,2,1 ) , ]
+Sigma.all <- rbind( matrix( Sigma1, nrow=1, byrow=TRUE),
+                matrix( Sigma2, nrow=1, byrow=TRUE) )
+Sigma.all <- Sigma.all[ c(1,1,2,2,1 ), ]
 
 # eigenvalue decomposition
 m1 <- sirt::eigenvalues.manymatrices( Sigma.all )

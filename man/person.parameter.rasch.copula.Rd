@@ -1,5 +1,5 @@
 %% File Name: person.parameter.rasch.copula.Rd
-%% File Version: 1.13
+%% File Version: 1.16
 
 \name{person.parameter.rasch.copula}
 \alias{person.parameter.rasch.copula}
@@ -12,9 +12,9 @@ Ability estimates as maximum likelihood estimates (MLE)
 are provided by the Rasch copula model.
 }
 \usage{
-person.parameter.rasch.copula(raschcopula.object, numdiff.parm = 0.001,
-    conv.parm = 0.001, maxiter = 20, stepwidth = 1,
-    print.summary = TRUE, ...)
+person.parameter.rasch.copula(raschcopula.object, numdiff.parm=0.001,
+    conv.parm=0.001, maxiter=20, stepwidth=1,
+    print.summary=TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -79,12 +79,12 @@ data(data.read)
 dat <- data.read
 
 # define item cluster
-itemcluster <- rep( 1:3 , each = 4 )
-mod1 <- sirt::rasch.copula2( dat , itemcluster = itemcluster )
+itemcluster <- rep( 1:3, each=4 )
+mod1 <- sirt::rasch.copula2( dat, itemcluster=itemcluster )
 summary(mod1)
 
 # person parameter estimation under the Rasch copula model
-pmod1 <- sirt::person.parameter.rasch.copula(raschcopula.object = mod1 )
+pmod1 <- sirt::person.parameter.rasch.copula(raschcopula.object=mod1 )
 ## Mean percentage standard error inflation
 ##   missing.pattern Mperc.seinflat
 ## 1               1           6.35
@@ -100,25 +100,25 @@ I <- 12                             # number of items
 n <- 450                            # number of persons
 b <- seq(-2,2, len=I)               # item difficulties
 b <- sample(b)                      # sample item difficulties
-theta <- stats::rnorm( n , sd = 1 ) # person abilities
+theta <- stats::rnorm( n, sd=1 ) # person abilities
 # itemcluster
 itemcluster <- rep(0,I)
 itemcluster[ 1:4 ] <- 1
 itemcluster[ 6:9 ] <- 2
 itemcluster[ 10:12 ] <- 3
 # residual correlations
-rho <- c( .35 , .25 , .30 )
+rho <- c( .35, .25, .30 )
 
 # simulate data
-dat <- sirt::sim.rasch.dep( theta , b , itemcluster , rho )
-colnames(dat) <- paste("I" , seq(1,ncol(dat)) , sep="")
+dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
+colnames(dat) <- paste("I", seq(1,ncol(dat)), sep="")
 
 # estimate Rasch copula model
-mod1 <- sirt::rasch.copula2( dat , itemcluster = itemcluster )
+mod1 <- sirt::rasch.copula2( dat, itemcluster=itemcluster )
 summary(mod1)
 
 # person parameter estimation under the Rasch copula model
-pmod1 <- sirt::person.parameter.rasch.copula(raschcopula.object = mod1 )
+pmod1 <- sirt::person.parameter.rasch.copula(raschcopula.object=mod1 )
   ## Mean percentage standard error inflation
   ##   missing.pattern Mperc.seinflat
   ## 1               1          10.48

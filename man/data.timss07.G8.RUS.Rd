@@ -1,5 +1,5 @@
 %% File Name: data.timss07.G8.RUS.Rd
-%% File Version: 0.04
+%% File Version: 0.05
 
 \name{data.timss07.G8.RUS}
 \alias{data.timss07.G8.RUS}
@@ -30,15 +30,15 @@ The format of the dataset is:
 \code{ $ raw     :'data.frame':} \cr
 \code{  ..$ idstud  : num [1:4472] 3010101 3010102 3010104 3010105 3010106 ...} \cr
 \code{  ..$ M022043 : atomic [1:4472] NA 1 4 NA NA NA NA NA NA NA ...} \cr
-\code{  .. ..- attr(*, "value.labels")= Named num [1:7] 9 6 5 4 3 2 1} \cr
-\code{  .. .. ..- attr(*, "names")= chr [1:7] "OMITTED" "NOT REACHED" "E" "D*" ...} \cr
+\code{  .. ..- attr(*, "value.labels")=Named num [1:7] 9 6 5 4 3 2 1} \cr
+\code{  .. .. ..- attr(*, "names")=chr [1:7] "OMITTED" "NOT REACHED" "E" "D*" ...} \cr
 \code{  [...]} \cr
 \code{  ..$ M032698 : atomic [1:4472] NA NA NA NA NA NA NA 2 1 NA ...} \cr
-\code{  .. ..- attr(*, "value.labels")= Named num [1:6] 9 6 4 3 2 1} \cr
-\code{  .. .. ..- attr(*, "names")= chr [1:6] "OMITTED" "NOT REACHED" "D" "C" ...} \cr
+\code{  .. ..- attr(*, "value.labels")=Named num [1:6] 9 6 4 3 2 1} \cr
+\code{  .. .. ..- attr(*, "names")=chr [1:6] "OMITTED" "NOT REACHED" "D" "C" ...} \cr
 \code{  ..$ M032097 : atomic [1:4472] NA NA NA NA NA NA NA 2 3 NA ...} \cr
-\code{  .. ..- attr(*, "value.labels")= Named num [1:6] 9 6 4 3 2 1} \cr
-\code{  .. .. ..- attr(*, "names")= chr [1:6] "OMITTED" "NOT REACHED" "D" "C*" ...} \cr
+\code{  .. ..- attr(*, "value.labels")=Named num [1:6] 9 6 4 3 2 1} \cr
+\code{  .. .. ..- attr(*, "names")=chr [1:6] "OMITTED" "NOT REACHED" "D" "C*" ...} \cr
 \code{  .. [list output truncated]} \cr
 \code{ $ scored  : num [1:4472, 1:443] 3010101 3010102 3010104 3010105 3010106 ...} \cr
 \code{  ..- attr(*, "dimnames")=List of 2} \cr

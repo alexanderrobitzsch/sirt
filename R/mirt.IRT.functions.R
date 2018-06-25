@@ -1,5 +1,5 @@
 ## File Name: mirt.IRT.functions.R
-## File Version: 0.05
+## File Version: 0.06
 
 ###############################################
 # mirt IRT functions
@@ -8,7 +8,7 @@
 
 ########################################################
 # likelihood
-IRT.likelihood.mirt <- function( object , ... ){
+IRT.likelihood.mirt <- function( object, ... ){
     object0 <- object
     object <- mirt.wrapper.posterior(object)
     ll <- object$f.yi.qk
@@ -25,7 +25,7 @@ IRT.likelihood.SingleGroupClass <- IRT.likelihood.mirt
 
 ########################################################
 # posterior
-IRT.posterior.mirt <- function( object , ... ){
+IRT.posterior.mirt <- function( object, ... ){
     object0 <- object
     object <- mirt.wrapper.posterior(object)
     ll <- object$f.qk.yi
@@ -42,7 +42,7 @@ IRT.posterior.SingleGroupClass <- IRT.posterior.mirt
 
 ########################################################
 # irfprob
-IRT.irfprob.mirt <- function( object , ... ){
+IRT.irfprob.mirt <- function( object, ... ){
     object0 <- object
     object <- mirt.wrapper.posterior(object)
     ll <- object$probs

@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_rm_proc_data.cpp
-//// File Version: 0.24
+//// File Version: 0.25
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -24,7 +24,7 @@ Rcpp::List sirt_rcpp_rm_proc_datasets_na_indicators(Rcpp::NumericMatrix dat, int
     dat2.fill(0);
 
     int K1 = K + 1;
-    int NR = N * I * K1 ;
+    int NR = N * I * K1;
     int NI = N * I;
     Rcpp::NumericVector dat2_ind_resp(NR);
 
@@ -43,7 +43,7 @@ Rcpp::List sirt_rcpp_rm_proc_datasets_na_indicators(Rcpp::NumericMatrix dat, int
                 Rcpp::Named("dat2") = dat2,
                 Rcpp::Named("dat_resp") = dat_resp,
                 Rcpp::Named("dat2_ind_resp") = dat2_ind_resp
-            ) ;
+            );
 }
 ///********************************************************************
 

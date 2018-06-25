@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_pem_acceleration.R
-## File Version: 0.10
+## File Version: 0.12
 
 rm_sdt_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter_sequence,
         c.rater, Qmatrix, tau.item, VV, K, I, TP, a.item, d.rater, item.index, rater.index, theta.k, RR,
@@ -15,7 +15,7 @@ rm_sdt_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter_se
     pem_parameter_sequence <- sirt_pem_parameter_sequence_initial_iterations( pem_parm=pem_parm,
                                             pem_parameter_sequence=pem_parameter_sequence, iter=iter )
 
-    if ( ( iter %% 2 == 0 ) & ( iter > 0 ) & ( iter < PEM_itermax ) ){
+    if ( ( iter %% 2==0 ) & ( iter > 0 ) & ( iter < PEM_itermax ) ){
         pem_parameter_sequence$P2 <- pem_parm
 
         #-- extract parameters
@@ -27,7 +27,7 @@ rm_sdt_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter_se
         #** baseline likelihood
         ll_args <- sirt_pem_include_ll_args( ll_args=ll_args, pem_parm=pem_parm, pem_pars=pem_pars,
                             pem_parameter_index=pem_parameter_index )
-        res <- do.call( what=rm_sdt_calc_loglikelihood, args = ll_args )
+        res <- do.call( what=rm_sdt_calc_loglikelihood, args=ll_args )
         ll0 <- ll <- res$ll
 
         P0 <- pem_parameter_sequence$P0
@@ -44,7 +44,7 @@ rm_sdt_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter_se
             Pnew <- sirt_pem_algorithm_compute_Pnew( tt=tt, P0=P0, P1=P1, P2=P2 )
             ll_args <- sirt_pem_include_ll_args( ll_args=ll_args, pem_parm=Pnew, pem_pars=pem_pars,
                             pem_parameter_index=pem_parameter_index )
-            res <- do.call( what=rm_sdt_calc_loglikelihood, args = ll_args )
+            res <- do.call( what=rm_sdt_calc_loglikelihood, args=ll_args )
             ll <- res$ll
             if (is.na(ll)){
                 ll <- -Inf

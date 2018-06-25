@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_pem_inits.R
-## File Version: 0.02
+## File Version: 0.04
 
 rm_sdt_pem_inits <- function( tau.item, a.item, c.rater, d.rater, est.a.item, a.item.fixed, skillspace, PEM )
 {
@@ -8,7 +8,7 @@ rm_sdt_pem_inits <- function( tau.item, a.item, c.rater, d.rater, est.a.item, a.
     pem_parameter_sequence <- list()
     center_log_a <- ( ! is.null( a.item.fixed ) ) & ( est.a.item )
     pem_pars <- c("c.rater","d.rater","a.item","tau.item","mu","sigma")
-    if ( skillspace == "discrete" ){
+    if ( skillspace=="discrete" ){
         PEM <- FALSE
     }
     #--- output

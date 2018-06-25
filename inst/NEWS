@@ -36,7 +36,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.7  |  2018-06-14  |  Last: sirt 2.7-28
+VERSIONS sirt 2.7  |  2018-06-25  |  Last: sirt 2.7-46
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in tam2mirt() for models with polytomous data which
@@ -45,6 +45,13 @@ FIXED * fixed an incorrect subject order in outfit/infit statistics
         in btm() (thanks to Stephen Holmes)
 FIXED * fixed a bug in btm() with 'eps=0' for persons with extreme scores
         (thanks to SanVerhavert)
+FIXED * completely rewritten estimation algorithm of rm.sdt() which 
+        produced biased estimates in previous sirt versions (pointed out
+        by Jonathan Lehrfeld, Kyosuke Bunij, Satoshi Usami).
+NOTE  * added graded response model at item level for signal detection
+        model for rating data in rm.sdt()
+        (suggested by Jonathan Lehrfeld)
+NOTE  * included utility function sirt_optimizer()
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
