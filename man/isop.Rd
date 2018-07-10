@@ -1,5 +1,5 @@
 %% File Name: isop.Rd
-%% File Version: 3.27
+%% File Version: 3.28
 
 \name{isop}
 \alias{isop.dich}
@@ -198,25 +198,25 @@ A list with following entries:
 Irtel, H., & Schmalhofer, F. (1982).
 Psychodiagnostik auf Ordinalskalenniveau:
 Messtheoretische Grundlagen, Modelltest und
-Parameterschaetzung. \emph{Archiv fuer Psychologie},
-\bold{134}, 197-218.
+Parameterschaetzung. \emph{Archiv fuer Psychologie,
+134}, 197-218.
 
 Scheiblechner, H. (1995). Isotonic ordinal
-probabilistic models (ISOP). \emph{Psychometrika},
-\bold{60}, 281-304.
+probabilistic models (ISOP). \emph{Psychometrika,
+60}, 281-304.
 
 Scheiblechner, H. (1999). Additive conjoint isotonic
-probabilistic models (ADISOP). \emph{Psychometrika},
-\bold{64}, 295-316.
+probabilistic models (ADISOP). \emph{Psychometrika,
+64}, 295-316.
 
 Scheiblechner, H. (2007). A unified nonparametric IRT model for
 d-dimensional psychological test data (d-ISOP).
-\emph{Psychometrika}, \bold{72}, 43-67.
+\emph{Psychometrika, 72}, 43-67.
 
 Scheiblechner, H., & Lutz, R. (2009).
 Die Konstruktion eines optimalen eindimensionalen
 Tests mittels nichtparametrischer Testtheorie (NIRT)
-am Beispiel des MR SOC. \emph{Diagnostica}, \bold{55},
+am Beispiel des MR SOC. \emph{Diagnostica, 55},
 41-54.
 }
 

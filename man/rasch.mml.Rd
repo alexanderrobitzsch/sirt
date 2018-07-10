@@ -1,5 +1,5 @@
 %% File Name: rasch.mml.Rd
-%% File Version: 3.9922
+%% File Version: 3.99242
 
 \name{rasch.mml2}
 \alias{rasch.mml2}
@@ -442,12 +442,12 @@ extended to accommodate all categories}
 \references{
 Holman, R., & Glas, C. A. (2005). Modelling non-ignorable missing-data mechanisms
 with item response theory models.
-\emph{British Journal of Mathematical and Statistical Psychology},
-\bold{58}, 1-17.
+\emph{British Journal of Mathematical and Statistical Psychology,
+58}, 1-17.
 
 Loken, E., & Rulison, K. L. (2010). Estimation of a four-parameter
 item response theory model. \emph{British Journal of Mathematical
-and Statistical Psychology}, \bold{63}, 509-525.
+and Statistical Psychology, 63}, 509-525.
 
 Mislevy, R. J., & Wu, P. K. (1996). \emph{Missing Responses and IRT Ability
 Estimation: Omits, Choice, Time Limits, and Adaptive Testing}.
@@ -457,25 +457,25 @@ Princeton, ETS.
 Pohl, S., Graefe, L., & Rose, N. (2014). Dealing with omitted and
 not-reached items in competence tests evaluating approaches accounting for
 missing responses in item response theory models.
-\emph{Educational and Psychological Measurement}, \bold{74}, 423-452.
+\emph{Educational and Psychological Measurement, 74}, 423-452.
 
 Ramsay, J. O. (1989). A comparison of three simple test theory models.
-\emph{Psychometrika}, \bold{54}, 487-499.
+\emph{Psychometrika, 54}, 487-499.
 
 Rossi, N., Wang, X., & Ramsay, J. O. (2002). Nonparametric item response
 function estimates with the EM algorithm.
-\emph{Journal of Educational and Behavioral Statistics}, \bold{27}, 291-317.
+\emph{Journal of Educational and Behavioral Statistics, 27}, 291-317.
 
 Stukel, T. A. (1988). Generalized logistic models.
-\emph{Journal of the American Statistical Association},
-\bold{83}, 426-431.
+\emph{Journal of the American Statistical Association,
+83}, 426-431.
 
 van der Maas, H. J. L., Molenaar, D., Maris, G., Kievit, R. A., &
 Borsboom, D. (2011).
 Cognitive psychology meets psychometric theory: On the relation between
 process models for decision making and latent variable models for
 individual differences.
-\emph{Psychological Review}, \bold{318}, 339-356.
+\emph{Psychological Review, 318}, 339-356.
 }
 
 
@@ -964,7 +964,7 @@ mod9 <- sirt::rasch.mml2( dat2, constraints=constraints, irtmodel="missing1",
 summary(mod9)
 
 #*** Model 10: estimate missing data model with a large negative missing delta parameter
-#     => This model is equivalent to treating missing responses as wrong
+#    => This model is equivalent to treating missing responses as wrong
 mod10 <- sirt::rasch.mml2( dat2, constraints=constraints, irtmodel="missing1",
              theta.k=seq(-5, 5, len=10), delta.miss=-10, mitermax=4, mmliter=200,
              mu.fixed=NULL )

@@ -1,5 +1,5 @@
 %% File Name: fuzdiscr.Rd
-%% File Version: 0.17
+%% File Version: 0.18
 
 \name{fuzdiscr}
 \alias{fuzdiscr}
@@ -54,11 +54,11 @@ Vector of probabilities of the discrete distribution
 
 \references{
 Denoeux, T. (2011). Maximum likelihood estimation from fuzzy data using the
-EM algorithm. \emph{Fuzzy Sets and Systems}, \bold{183}, 72-91.
+EM algorithm. \emph{Fuzzy Sets and Systems, 183}, 72-91.
 
 Denoeux, T. (2013). Maximum likelihood estimation from uncertain data
 in the belief function framework.
-\emph{IEEE Transactions on Knowledge and Data Engineering}, \bold{25}, 119-130.
+\emph{IEEE Transactions on Knowledge and Data Engineering, 25}, 119-130.
 }
 
 \author{

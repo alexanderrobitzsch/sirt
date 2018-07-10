@@ -1,5 +1,5 @@
 %% File Name: pcm.fit.Rd
-%% File Version: 0.17
+%% File Version: 0.18
 
 \name{pcm.fit}
 \alias{pcm.fit}
@@ -43,7 +43,7 @@ A list with entries
 
 \references{
 Wright, B. D., & Masters, G. N. (1990). Computation of outfit and
-infit statistics. \emph{Rasch Measurement Transactions}, \bold{3:4}, 84-85.
+infit statistics. \emph{Rasch Measurement Transactions, 3}:4, 84-85.
 }
 
 %\author{

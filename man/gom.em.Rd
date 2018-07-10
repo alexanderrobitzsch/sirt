@@ -1,5 +1,5 @@
 %% File Name: gom.em.Rd
-%% File Version: 1.71
+%% File Version: 1.73
 
 \name{gom.em}
 \alias{gom.em}
@@ -201,10 +201,10 @@ A list with following entries:
 \references{
 Bingham, E., Kaban, A., & Fortelius, M. (2009).
 The aspect Bernoulli model: multiple causes of presences and absences.
-\emph{Pattern Analysis and Applications}, \bold{12(1)}, 55-78.
+\emph{Pattern Analysis and Applications, 12}(1), 55-78.
 
 Erosheva, E. A. (2005). Comparing latent structures of the grade of membership,
-Rasch, and latent class models. \emph{Psychometrika}, \bold{70}, 619-628.
+Rasch, and latent class models. \emph{Psychometrika, 70}, 619-628.
 
 Erosheva, E. A. (2006). \emph{Latent class representation of the grade of membership
 model}. Seattle: University of Washington.
@@ -212,22 +212,25 @@ model}. Seattle: University of Washington.
 Erosheva, E. A., Fienberg, S. E., & Junker, B. W. (2002).
 Alternative statistical models and representations for large sparse
 multi-dimensional contingency tables.
-\emph{Annales-Faculte Des Sciences Toulouse Mathematiques}, \bold{11},
+\emph{Annales-Faculte Des Sciences Toulouse Mathematiques, 11},
 485-505.
 
 Erosheva, E. A., Fienberg, S. E., & Joutard, C. (2007).
 Describing disability through individual-level mixture models
-for multivariate binary data. \emph{Annals of Applied Statistics},
-\bold{1}, 502-537.
+for multivariate binary data. \emph{Annals of Applied Statistics,
+1}, 502-537.
 
 Galyardt, A. (2015).
 Interpreting mixed membership models: Implications of Erosheva's representation
 theorem. In E. M. Airoldi, D. Blei, E. A. Erosheva, & S. E. Fienberg (Eds.).
 \emph{Handbook of Mixed Membership Models} (pp. 39-65). Chapman & Hall.
 }
+
 \author{
 Alexander Robitzsch
 }
+
+
 %%\note{
 %%  ~~further notes~~
 %%}
@@ -242,12 +245,12 @@ See also the \pkg{mixedMem} package for estimating mixed membership
 models by a variational EM algorithm.
 
 The C code of Erosheva et al. (2007) can be downloaded from
-\url{http://projecteuclid.org/euclid.aoas/1196438029#supplemental}.
+\emph{http://projecteuclid.org/euclid.aoas/1196438029#supplemental}.
 
 Code from Manrique-Vallier can be downloaded from
-\url{http://pages.iu.edu/~dmanriqu/software.html}.
+\emph{http://pages.iu.edu/~dmanriqu/software.html}.
 
-See \url{http://users.ics.aalto.fi/ella/publications/aspect_bernoulli.m}
+See \emph{http://users.ics.aalto.fi/ella/publications/aspect_bernoulli.m}
 for a Matlab implementation of the algorithm in Bingham, Kaban and
 Fortelius (2009).
 }

@@ -1,5 +1,5 @@
 %% File Name: pgenlogis.Rd
-%% File Version: 0.23
+%% File Version: 0.24
 
 \name{pgenlogis}
 \alias{pgenlogis}
@@ -64,11 +64,13 @@ the most important link functions using the specifications (Stukel, 1988):
 \value{
 Vector of probabilities or moments
 }
+
 \references{
 Stukel, T. A. (1988). Generalized logistic models.
-\emph{Journal of the American Statistical Association},
-\bold{83}, 426-431.
+\emph{Journal of the American Statistical Association,
+83}, 426-431.
 }
+
 \author{
 Alexander Robitzsch
 }

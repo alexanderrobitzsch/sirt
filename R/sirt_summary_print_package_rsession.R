@@ -1,5 +1,5 @@
 ## File Name: sirt_summary_print_package_rsession.R
-## File Version: 0.02
+## File Version: 0.03
 
 sirt_summary_print_package_rsession <- function(pack)
 {

@@ -1,5 +1,5 @@
 %% File Name: np.dich.Rd
-%% File Version: 0.17
+%% File Version: 0.18
 
 \name{np.dich}
 \alias{np.dich}
@@ -58,7 +58,7 @@ A list with following entries
 \references{
 Ramsay, J. O. (1991). Kernel smoothing approaches to
 nonparametric item characteristic curve estimation.
-\emph{Psychometrika}, \bold{56}, 611-630.
+\emph{Psychometrika, 56}, 611-630.
 }
 \author{
 Alexander Robitzsch

@@ -1,5 +1,5 @@
 ## File Name: confint.xxirt.R
-## File Version: 0.08
+## File Version: 0.09
 
 ###########################################
 # confidence interval
@@ -20,6 +20,6 @@ confint.xxirt <- function( object, parm, level=.95,  ... )
     colnames(res)[1] <- paste0( round( 100*q1,1 ), " %")
     colnames(res)[2] <- paste0( round( 100*q2,1 ), " %")
     rownames(res) <- names(c1)
-     return(res)
+    return(res)
 }
 ###############################################

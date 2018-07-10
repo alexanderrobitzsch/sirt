@@ -1,5 +1,5 @@
 %% File Name: data.g308.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{data.g308}
 \alias{data.g308}
@@ -50,7 +50,7 @@ following format \cr
 Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014).
 A comparison of different psychometric approaches to modeling testlet
 structures: An example with C-tests.
-\emph{Journal of Educational Measurement}, \bold{51(4)}, 400-418.
+\emph{Journal of Educational Measurement, 51}(4), 400-418.
 }
 
 \examples{

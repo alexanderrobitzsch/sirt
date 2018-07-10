@@ -1,5 +1,5 @@
 ## File Name: latent.regression.em.normal.R
-## File Version: 2.14
+## File Version: 2.15
 
 
 #----------------------------------------------------------------------------
@@ -105,7 +105,7 @@ latent.regression.em.normal <- function( y, X, sig.e,
         .prnum(scoefs,4)        # print results
         cat( paste( "\nResidual Variance=", round( sigma^2, 4 ) ), "\n" )
         cat( paste( "Explained Variance=", round( explvar, 4 ) ), "\n" )
-        cat( paste( "Total Variance   =", round( totalvar, 4 ) ), "\n" )
+        cat( paste( "Total Variance  =", round( totalvar, 4 ) ), "\n" )
         cat( paste( "            R2=", round( rsquared, 4 ) ), "\n" )
                 }
     #********

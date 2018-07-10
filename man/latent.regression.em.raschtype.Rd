@@ -1,5 +1,5 @@
 %% File Name: latent.regression.em.raschtype.Rd
-%% File Version: 1.38
+%% File Version: 1.41
 
 \name{latent.regression.em.raschtype}
 \alias{latent.regression.em.raschtype}
@@ -138,10 +138,10 @@ Distribution Rasch Models: Extensions and Applications} (pp. 57-76).
 New York: Springer.
 
 Mislevy, R. J. (1991). Randomization-based inference about latent variables
-from complex samples. \emph{Psychometrika}, \bold{56}, 177-196.
+from complex samples. \emph{Psychometrika, 56}, 177-196.
 
 Stukel, T. A. (1988). Generalized logistic models.
-\emph{Journal of the American Statistical Association}, \bold{83}, 426-431.
+\emph{Journal of the American Statistical Association, 83}, 426-431.
 }
 \author{
 Alexander Robitzsch
@@ -225,7 +225,7 @@ mod <- sirt::latent.regression.em.raschtype( data=dat1, X=dfr[,-1], b=b )
   ##
   ## Residual Variance=0.685
   ## Explained Variance=0.3639
-  ## Total Variance   =1.049
+  ## Total Variance  =1.049
   ##                 R2=0.3469
 
 # compare with linear model (based on true scores)
@@ -260,7 +260,7 @@ mod1 <- sirt::latent.regression.em.raschtype( data=dat1, X=dfr[,-1],
   ##
   ## Residual Variance=0.9338
   ## Explained Variance=0.5487
-  ## Total Variance   =1.4825
+  ## Total Variance  =1.4825
   ##                 R2=0.3701
 
 #############################################################################
@@ -298,7 +298,7 @@ res <- sirt::latent.regression.em.raschtype( f.yi.qk=f.yi.qk,
   ##
   ##   Residual Variance=0.9877
   ##   Explained Variance=0.2343
-  ##   Total Variance   =1.222
+  ##   Total Variance  =1.222
   ##                   R2=0.1917
 
 #****
@@ -313,7 +313,7 @@ res2 <- sirt::latent.regression.em.normal( y=yast, sig.e=sig.e, X=X1)
   ##
   ##   Residual Variance=0.9877
   ##   Explained Variance=0.2343
-  ##   Total Variance   =1.222
+  ##   Total Variance  =1.222
   ##                   R2=0.1917
 
   ## -> Results between Model 1 and Model 2 are identical because they use

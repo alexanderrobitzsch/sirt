@@ -1,5 +1,5 @@
 ## File Name: lsdm.R
-## File Version: 1.23
+## File Version: 1.24
 
 #.......................................................................................................................#
 # LSDM - Least Squares Distance Method
@@ -113,7 +113,7 @@ lsdm <- function( data, Qmatrix, theta=qnorm(seq(.0005,.9995,len=100)), quant.li
     mm.lltm <- mean(mad.lltm)
     # Model Fit LSDM
     cat(paste( "Model Fit LSDM   -  Mean MAD:", formatC( round( mm0, 3 ),digits=3, width=6),
-                "    Median MAD:", formatC( round( median(mad0), 3 ),digits=3, width=6) , "\n") )
+                "    Median MAD:", formatC( round( median(mad0), 3 ),digits=3, width=6), "\n") )
     cat(paste( "Model Fit LLTM   -  Mean MAD:", formatC( round( mm.lltm, 3 ),digits=3, width=6),
                     "    Median MAD:", formatC( round( median(mad.lltm), 3 ),digits=3, width=6),
                     "   R^2=", format( round( slltm.res1$r.squared, 3 ),digits=3),   "\n") )

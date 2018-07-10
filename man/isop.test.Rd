@@ -1,5 +1,5 @@
 %% File Name: isop.test.Rd
-%% File Version: 0.19
+%% File Version: 0.22
 
 \name{isop.test}
 \alias{isop.test}
@@ -61,7 +61,7 @@ The \eqn{W1_i} statistics are printed by the \code{summary} method.
 
 \references{
 Scheiblechner, H. (2003). Nonparametric IRT: Testing the bi-isotonicity of
-isotonic probabilistic models (ISOP). \emph{Psychometrika}, \bold{68},
+isotonic probabilistic models (ISOP). \emph{Psychometrika, 68},
 79-96.
 }
 

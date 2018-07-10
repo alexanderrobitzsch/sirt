@@ -1,5 +1,5 @@
 %% File Name: class.accuracy.rasch.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{class.accuracy.rasch}
 \alias{class.accuracy.rasch}
@@ -57,7 +57,7 @@ A list with following entries:
 }
 \references{
 Rudner, L.M. (2001). Computing the expected proportions of misclassified examinees.
-\emph{Practical Assessment, Research & Evaluation}, \bold{7(14)}.
+\emph{Practical Assessment, Research & Evaluation, 7}(14).
 }
 
 \author{

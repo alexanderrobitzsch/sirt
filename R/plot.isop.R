@@ -1,5 +1,5 @@
 ## File Name: plot.isop.R
-## File Version: 1.13
+## File Version: 1.14
 
 #############################################################
 # plot ISOP item response functions
@@ -31,9 +31,9 @@ plotisoppoly <- function(x, ask=TRUE, ... ){
             kv <- substitute( expression( a ), list(a=kk) )
             xlabplot <- expression( paste( "Modified P Score ", rho[p] ))
 #            ylabplot <- expression(paste(P,"(",X[i], ">=", kv, "|", rho[p], ")" ))
-#            ylabplot <- substitute( paste(P,"(",X[i], ">=", kv, "|", rho[p], ")" ) ,
+#            ylabplot <- substitute( paste(P,"(",X[i], ">=", kv, "|", rho[p], ")" ),
 #                            list(kv=kk-1) )
-            ylabplot <- substitute( paste(P,"(",X[i] >=kv, "|", rho[p], ")" ) ,
+            ylabplot <- substitute( paste(P,"(",X[i] >=kv, "|", rho[p], ")" ),
                             list(kv=kk-1) )
             # saturated IRT model
             p1 <- mod$surv.saturated

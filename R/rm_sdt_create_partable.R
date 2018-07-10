@@ -1,10 +1,11 @@
 ## File Name: rm_sdt_create_partable.R
-## File Version: 0.45
+## File Version: 0.495
 
 
 rm_sdt_create_partable <- function( item.index, rater.index,
     est.c.rater, est.d.rater, tau.item, c.rater, diffindex,
-    tau.prior, a.prior, d.prior, c.prior, est.a.item )
+    tau.prior, a.prior, d.prior, c.prior, est.a.item, tau.item.fixed,
+    a.item.fixed, c.rater.fixed, index_no_est_value=-9 )
 {
     I <- nrow(tau.item)
     ND <- nrow(c.rater)
@@ -14,12 +15,20 @@ rm_sdt_create_partable <- function( item.index, rater.index,
     v1 <- 1:(K*I) + 0*tau.item
     partable <- rm_sdt_create_parm_index_modify_elements(x=v1, start_index=1, type="tau")
 
+    partable <- rm_sdt_create_partable_include_fixed_item_category_parameters(
+                        partable=partable, tif=tau.item.fixed,
+                        index_no_est_value=index_no_est_value )
+
     #--- a.item
     v1 <- seq_len(I)
     if (! est.a.item){
         v1 <- -9 + 0*v1
     }
     start <- max(partable$parindex) + 1
+    if ( ! is.null(a.item.fixed) ){
+        NT <- nrow(a.item.fixed)
+        v1[ a.item.fixed[,1] ] <- index_no_est_value
+    }
     v1 <- rm_sdt_create_parm_index_modify_elements(x=v1, start_index=start, type="a" )
     partable <- rbind( partable, v1)
     partable_item <- partable
@@ -35,6 +44,9 @@ rm_sdt_create_partable <- function( item.index, rater.index,
     }
     start <- 1
     partable <- rm_sdt_create_parm_index_modify_elements(x=v1, start_index=start, type="c")
+
+    partable <- rm_sdt_create_partable_include_fixed_item_category_parameters(
+                        partable=partable, tif=c.rater.fixed, index_no_est_value=index_no_est_value )
 
     #--- d.rater
     v1 <- rm_sdt_create_parm_index_rater( est.rater=est.d.rater, ND=ND,

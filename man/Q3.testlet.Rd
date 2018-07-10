@@ -1,5 +1,5 @@
 %% File Name: Q3.testlet.Rd
-%% File Version: 1.11
+%% File Version: 1.12
 
 \name{Q3.testlet}
 \alias{Q3.testlet}
@@ -35,11 +35,13 @@ A list with following entries
   \item{testlet.q3.korr}{Matrix of average \eqn{Q_3} statistics within and
       between testlets}
 }
+
 \references{
 Yen, W. M. (1984). Effects of local item dependence on the fit and equating
 performance of the three-parameter logistic model.
-\emph{Applied Psychological Measurement}, \bold{8}, 125-145.
+\emph{Applied Psychological Measurement, 8}, 125-145.
 }
+
 \author{
 Alexander Robitzsch
 }

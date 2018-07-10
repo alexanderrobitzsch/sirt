@@ -1,5 +1,5 @@
 %% File Name: sim.raschtype.Rd
-%% File Version: 0.20
+%% File Version: 0.21
 
 \name{sim.raschtype}
 \alias{sim.raschtype}
@@ -53,25 +53,26 @@ cloglog link function: \eqn{\alpha_1=0.62} and \eqn{\alpha_2=-0.037} \cr
 See \code{\link{pgenlogis}} for exact transformation formulas of
 the mentioned link functions.
 }
-%\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-%}
+
+\value{
+Data frame with simulated item responses
+}
+
+
 \references{
 Loken, E., & Rulison, K. L. (2010). Estimation of a four-parameter
 item response theory model. \emph{British Journal of Mathematical
-and Statistical Psychology}, \bold{63}, 509-525.
+and Statistical Psychology, 63}, 509-525.
 
 Stukel, T. A. (1988). Generalized logistic models.
-\emph{Journal of the American Statistical Association},
-\bold{83}, 426-431.
+\emph{Journal of the American Statistical Association,
+83}, 426-431.
 }
+
 \author{
 Alexander Robitzsch
 }
+
 %\note{
 %%  ~~further notes~~
 %}

@@ -1,5 +1,5 @@
 ## File Name: rm.sdt.R
-## File Version: 8.845
+## File Version: 8.874
 
 #################################################################
 # Hierarchical rater model
@@ -118,7 +118,9 @@ rm.sdt <- function( dat, pid, rater,Qmatrix=NULL, theta.k=seq(-9,9,len=30),
     res <- rm_sdt_create_partable( item.index=item.index,
                 rater.index=rater.index, est.c.rater=est.c.rater, est.d.rater=est.d.rater,
                 tau.item=tau.item, c.rater=c.rater, diffindex=diffindex, tau.prior=tau.prior,
-                a.prior=a.prior, d.prior=d.prior, c.prior=c.prior, est.a.item=est.a.item )
+                a.prior=a.prior, d.prior=d.prior, c.prior=c.prior, est.a.item=est.a.item,
+                tau.item.fixed=tau.item.fixed, a.item.fixed=a.item.fixed,
+                c.rater.fixed=c.rater.fixed)
     partable_item <- res$partable_item
     partable_rater <- res$partable_rater
     par_index <- res$par_index
@@ -173,11 +175,10 @@ rm.sdt <- function( dat, pid, rater,Qmatrix=NULL, theta.k=seq(-9,9,len=30),
                             theta.k=theta.k, VV=VV, K=K, TP=TP, eps=0, use_log=FALSE, as_vector=FALSE )
         }
         if (link_item=="GRM" ){
-            prob.item <- rm_sdt_calc_probs_grm_item_rcpp( tau.item, a.item, theta.k, VV,
-                        K, TP, eps=0, use_log=FALSE)
+            prob.item <- rm_sdt_calc_probs_grm_item_rcpp( tau.item=tau.item,
+                        a.item=a.item, theta.k=theta.k, VV=VV, K=K, TP=TP, eps=0, use_log=FALSE )
         }
         prob_item <- as.vector(prob.item)
-
 
         #** probabilities rater level
         prob.rater <- rm_sdt_calc_probs_grm_rcpp( c.rater=c.rater, d.rater=d.rater, I=I, K=K,
@@ -220,24 +221,22 @@ rm.sdt <- function( dat, pid, rater,Qmatrix=NULL, theta.k=seq(-9,9,len=30),
             }
         }
         if (link_item=="GRM" ){
+            #- arguments
+            probs_fun <- rm_sdt_calc_probs_grm_item_rcpp
+            K1 <- K+1
+            probs_dim <- c(VV, K1, TP)
+            probs_args <- list( VV=VV, K=K, theta.k=theta.k, TP=TP, eps=1E-10, use_log=TRUE )
+            update_probs_args <- c('tau.item', 'a.item')
+            #- optimization function
             expected_loglike_item <- function(x, ...){
-                K1 <- K + 1
-                probs_dim <- c(VV, K1, TP)
-                probs_fun <- rm_sdt_calc_probs_grm_item_rcpp
-                update_probs_args <- c('tau.item', 'a.item')
-                probs_args <- list( VV=VV, K=K, theta.k=theta.k, TP=TP, eps=1E-10, use_log=TRUE )
                 post <- rm_sdt_mstep_type_function_value( x=x, par_index=par_index,
                             partable=partable_item, type='item', probs_args=probs_args,
                             probs_fun=probs_fun, probs_dim=probs_dim,
                             update_probs_args=update_probs_args, nik=nik_item )
                 return(post)
             }
+            #- gradient
             gradient_loglike_item <- function(x, ...){
-                probs_fun <- rm_sdt_calc_probs_grm_item_rcpp
-                K1 <- K+1
-                probs_dim <- c(VV, K1, TP)
-                probs_args <- list( VV=VV, K=K, theta.k=theta.k, TP=TP, eps=1E-10, use_log=TRUE )
-                update_probs_args <- c('tau.item', 'a.item')
                 grad_post <- rm_sdt_mstep_type_function_gradient( x=x,
                         par_index=par_index, partable=partable_item, type='item',
                         pargroup_type=pargroup_item, probs_args=probs_args, probs_fun=probs_fun,
@@ -279,6 +278,7 @@ rm.sdt <- function( dat, pid, rater,Qmatrix=NULL, theta.k=seq(-9,9,len=30),
         res <- sirt_optimizer(optimizer=optimizer, par=parm0, fn=expected_loglike_rater,
                         grad=gradient_loglike_rater, control=ctl)
         parm0 <- res$par
+
         #-- fill parameter table
         res <- rm_sdt_fill_par_to_partable( par_index=par_index, partable=partable_rater,
                         parm0=parm0, type="rater" )
@@ -421,7 +421,7 @@ rm.sdt <- function( dat, pid, rater,Qmatrix=NULL, theta.k=seq(-9,9,len=30),
     sirt_summary_print_objects(obji=rater, digits=3, from=2)
 
     cat("*********************************\n")
-    cat("EAP Reliability=", round(EAP.rel,3), "\n")
+    cat("EAP Reliability","=", round(EAP.rel,3), "\n")
 
     s2 <- Sys.time()
 

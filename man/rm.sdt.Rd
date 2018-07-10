@@ -1,5 +1,5 @@
 %% File Name: rm.sdt.Rd
-%% File Version: 1.48
+%% File Version: 1.491
 
 \name{rm.sdt}
 \alias{rm.sdt}
@@ -268,7 +268,7 @@ errors}
 \references{
 DeCarlo, L. T. (2005). A model of rater behavior in essay grading
 based on signal detection theory.
-\emph{Journal of Educational Measurement}, \bold{42}, 53-76.
+\emph{Journal of Educational Measurement, 42}, 53-76.
 
 DeCarlo, L. T. (2010). \emph{Studies of a latent-class signal-detection model
 for constructed response scoring II: Incomplete and hierarchical designs}.
@@ -277,8 +277,7 @@ ETS Research Report ETS RR-10-08. Princeton NJ: ETS.
 DeCarlo, T., Kim, Y., & Johnson, M. S. (2011).
 A hierarchical rater model for constructed responses,
 with a signal detection rater model.
-\emph{Journal of Educational Measurement},
-\bold{48}, 333-356.
+\emph{Journal of Educational Measurement, 48}, 333-356.
 
 Robitzsch, A., & Steinfeld, J. (2018). Item response models for human ratings: Overview,
 estimation methods, and implementation in R.

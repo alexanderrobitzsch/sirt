@@ -1,5 +1,5 @@
 ## File Name: summary.rm.sdt.R
-## File Version: 1.28
+## File Version: 1.31
 
 
 #*******************************************************
@@ -22,8 +22,8 @@ summary.rm.sdt <- function( object, file=NULL, ...){
 
     cat("Hierarchical Rater Model: Signal Detection Model \n")
     cat("-----------------------------------------------------------------\n")
-    cat( "Iteration with minimal deviance=", object$iter_opt, "\n" )
-    cat( "Deviance=", round( object$deviance, 2 ), " | " )
+    cat( "Iteration with minimal deviance","=", object$iter_opt, "\n" )
+    cat( "Deviance","=", round( object$deviance, 2 ), " | " )
     cat( "Log Likelihood", "=",  round( -object$deviance/2, 2 ), "\n" )
     cat( "Number of persons", "=", object$ic$n, "\n" )
     cat( "Number of items  ", "=", object$ic$VV, "\n" )
@@ -39,7 +39,7 @@ summary.rm.sdt <- function( object, file=NULL, ...){
 
     cat("-----------------------------------------------------------------\n")
     cat( "Trait Distribution\n",
-              "Mean=", round(object$mu,3), " SD=", round( object$sigma, 3) )
+            "Mean","=", round(object$mu,3), " SD=", round( object$sigma, 3) )
 
     if ( object$skillspace=="discrete" ){
         cat("\n\nDiscrete Skill Distribution\n")
@@ -67,6 +67,4 @@ summary.rm.sdt <- function( object, file=NULL, ...){
 
 }
 #*******************************************************
-
-
 

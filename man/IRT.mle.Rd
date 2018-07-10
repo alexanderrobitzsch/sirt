@@ -1,5 +1,5 @@
 %% File Name: IRT.mle.Rd
-%% File Version: 0.20
+%% File Version: 0.21
 
 \name{IRT.mle}
 \alias{IRT.mle}
@@ -75,11 +75,11 @@ Data frame with estimated abilities (\code{est}) and its standard error
 \references{
 Penfield, R. D., & Bergeron, J. M. (2005). Applying a weighted
 maximum likelihood latent trait estimator to the generalized
-partial credit model. \emph{Applied Psychological Measurement},
-\bold{29}, 218-233.
+partial credit model. \emph{Applied Psychological Measurement,
+29}, 218-233.
 
 Warm, T. A. (1989). Weighted likelihood estimation of ability in item response theory.
-\emph{Psychometrika}, \bold{54}, 427-450.
+\emph{Psychometrika, 54}, 427-450.
 }
 
 \author{

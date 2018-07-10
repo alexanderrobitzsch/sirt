@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pnoh.Rd
-%% File Version: 0.24
+%% File Version: 0.26
 
 \name{mcmc.2pnoh}
 \alias{mcmc.2pnoh}
@@ -112,9 +112,9 @@ A list of class \code{mcmc.sirt} with following entries:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% REFERENCES
 \references{
-Janssen, R., Tuerlinckx, F., Meulders, M., & de Boeck, P. (2000).
+Janssen, R., Tuerlinckx, F., Meulders, M., & De Boeck, P. (2000).
 A hierarchical IRT model for criterion-referenced measurement.
-\emph{Journal of Educational and Behavioral Statistics}, \bold{25}, 285-306.
+\emph{Journal of Educational and Behavioral Statistics, 25}, 285-306.
 }
 \author{
 Alexander Robitzsch

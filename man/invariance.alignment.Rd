@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.44
+%% File Version: 1.45
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -174,18 +174,16 @@ A list with following entries
 \references{
 Asparouhov, T., & Muthen, B. (2014).
 Multiple-group factor analysis alignment.
-\emph{Structural Equation Modeling}, \bold{21}, 1-14.
-\url{http://www.statmodel.com/Alignment.shtml}
+\emph{Structural Equation Modeling, 21}, 1-14.
 
 Muthen, B., & Asparouhov, T. (2014). IRT studies of many groups: The alignment method.
-\emph{Frontiers in Psychology | Quantitative Psychology and Measurement},
-\bold{5:978}. doi: 10.3389/fpsyg.2014.00978,
-\url{http://journal.frontiersin.org/Journal/10.3389/fpsyg.2014.00978/abstract}.
+\emph{Frontiers in Psychology | Quantitative Psychology and Measurement,
+5}:978. doi: 10.3389/fpsyg.2014.00978,
 
 Vandenberg, R. J., & Lance, C. E. (2000). A review and synthesis of the
 measurement invariance literature: Suggestions, practices, and
 recommendations for organizational research. \emph{Organizational Research
-Methods}, \bold{3}, 4-70.
+Methods, 3}, 4-70.
 }
 
 \author{

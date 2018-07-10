@@ -1,10 +1,11 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.31
+## File Version: 0.32
 
 ##############################################
 # residualize data
 lsem_residualize <- function( data, moderator, moderator.grid,
-        lavmodel, h=1.1, residualize=TRUE, eps=1E-8, verbose=TRUE ){
+        lavmodel, h=1.1, residualize=TRUE, eps=1E-8, verbose=TRUE )
+{
     # lavaanify model
     lavaanstr <- lavaan::lavaanify( lavmodel  )
     vars <- unique( c( lavaanstr$rhs, lavaanstr$lhs ) )

@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.57
+%% File Version: 0.59
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -14,8 +14,9 @@ Local Structural Equation Models (LSEM)
 \description{
 Local structural equation models (LSEM) are structural equation models (SEM)
 which are evaluated for each value of a pre-defined moderator variable
-(Hildebrandt, Wilhelm, & Robitzsch, 2009; Hildebrandt et al., 2016).
-Like in nonparametric regression models, observations near a focal point - at
+(Hildebrandt, Wilhelm, & Robitzsch, 2009; Hildebrandt, Luedtke, Robitzsch,
+Sommer & Wilhelm, 2016).
+As in nonparametric regression models, observations near a focal point - at
 which the model is evaluated - obtain higher weights, far distant observations
 obtain lower weights. The LSEM can be specified by making use of \pkg{lavaan} syntax.
 It is also possible to specify a discretized version of LSEM in which
@@ -148,11 +149,11 @@ residualization.}
 Hildebrandt, A., Luedtke, O., Robitzsch, A., Sommer, C., &
 Wilhelm, O. (2016). Exploring factor model parameters across continuous variables
 with local structural equation models.
-\emph{Multivariate Behavioral Research}, \bold{51}, 257-278.
+\emph{Multivariate Behavioral Research, 51}, 257-278.
 
 Hildebrandt, A., Wilhelm, O., & Robitzsch, A. (2009). Complementary and
 competing factor analytic approaches for the investigation of measurement invariance.
-\emph{Review of Psychology}, \bold{16}, 87-102.
+\emph{Review of Psychology, 16}, 87-102.
 }
 
 

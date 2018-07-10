@@ -1,5 +1,5 @@
 %% File Name: lsem.permutationTest.Rd
-%% File Version: 0.21
+%% File Version: 0.22
 
 \name{lsem.permutationTest}
 \alias{lsem.permutationTest}
@@ -121,7 +121,7 @@ p values.}
 \references{
 Hildebrandt, A., Wilhelm, O., & Robitzsch, A. (2009). Complementary and
 competing factor analytic approaches for the investigation of measurement invariance.
-\emph{Review of Psychology}, \bold{16}, 87-102.
+\emph{Review of Psychology, 16}, 87-102.
 }
 
 \author{

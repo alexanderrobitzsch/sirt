@@ -1,5 +1,5 @@
 ## File Name: summary.lsdm.R
-## File Version: 0.08
+## File Version: 0.09
 
 
 #.............................
@@ -16,7 +16,7 @@ summary.lsdm <- function( object, ... )
         cat( display.separate, "\n" ) ; flush.console()
         cat("\nModel Fit\n\n")
         cat(paste( "Model Fit LSDM   -  Mean MAD:", formatC( round( lsdmobj$mean.mad.lsdm0, 3 ),digits=3, width=6),
-                        "    Median MAD:", formatC( round( median(lsdmobj$item$mad.lsdm), 3 ),digits=3, width=6) , "\n") )
+                        "    Median MAD:", formatC( round( median(lsdmobj$item$mad.lsdm), 3 ),digits=3, width=6), "\n") )
         cat(paste( "Model Fit LLTM   -  Mean MAD:", formatC( round( lsdmobj$mean.mad.lltm, 3 ),digits=3, width=6),
                     "    Median MAD:", formatC( round( median(lsdmobj$item$mad.lltm), 3 ),digits=3, width=6),
                     "   R^2=", format( round( summary(lsdmobj$lltm)$r.squared, 3 ),digits=3),   "\n") )

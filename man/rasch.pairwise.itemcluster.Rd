@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.itemcluster.Rd
-%% File Version: 0.35
+%% File Version: 0.36
 
 \name{rasch.pairwise.itemcluster}
 \alias{rasch.pairwise.itemcluster}
@@ -75,11 +75,8 @@ van der Linden, W. J., & Eggen, T. J. H. M. (1986). \emph{An empirical
 Bayes approach to item banking}. Research Report 86-6, University of Twente.
 
 Zwinderman, A. H. (1995). Pairwise parameter estimation in Rasch models.
-\emph{Applied Psychological Measurement}, \bold{19}, 369-375.
+\emph{Applied Psychological Measurement, 19}, 369-375.
 }
-
-%    Humphry, S. M. (2011). The role of the unit in physics and psychometrics.
-%    \emph{Measurement: Interdisciplinary Research & Perspective}, \bold{9}, 1-24.
 
 
 

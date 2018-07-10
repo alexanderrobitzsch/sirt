@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.Rd
-%% File Version: 1.36
+%% File Version: 1.37
 
 \name{rasch.jml}
 \alias{rasch.jml}
@@ -124,12 +124,15 @@ A list with following entries
 \item{dp}{Value of data preparation (it is used in the function
 \code{\link{rasch.jml.jackknife1}})}
 }
+
 \references{
  Linacre, J. M. (1994). \emph{Many-Facet Rasch Measurement}. Chicago: MESA Press.
 
  Warm, T. A. (1989). Weighted likelihood estimation of ability in the item
- response theory. \emph{Psychometrika}, \bold{54}, 427-450.
+ response theory. \emph{Psychometrika, 54}, 427-450.
     }
+    
+    
 \author{
 Alexander Robitzsch
 }

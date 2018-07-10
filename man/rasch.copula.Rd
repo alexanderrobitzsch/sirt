@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.66
+%% File Version: 1.67
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -187,27 +187,29 @@ distribution}
 }
 \references{
     Braeken, J. (2011). A boundary mixture approach to violations
-    of conditional independence. \emph{Psychometrika}, \bold{76}, 57-76.
+    of conditional independence. \emph{Psychometrika, 76}, 57-76.
 
 Braeken, J., & Tuerlinckx, F. (2009). Investigating latent constructs with item
 response models: A MATLAB IRTm toolbox.
-\emph{Behavior Research Methods}, \bold{41}, 1127-1137.
+\emph{Behavior Research Methods, 41}, 1127-1137.
 
     Braeken, J., Tuerlinckx, F., & De Boeck, P. (2007).
     Copulas for residual dependencies.
-    \emph{Psychometrika}, \bold{72}, 393-411.
+    \emph{Psychometrika, 72}, 393-411.
 
 Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014). A comparison of different
 psychometric approaches to modeling testlet structures: An example with C-tests.
 \emph{Journal of Educational Measurement, 51}(4), 400-418.
 
     Stukel, T. A. (1988). Generalized logistic models.
-    \emph{Journal of the American Statistical Association},
-    \bold{83}, 426-431.
+    \emph{Journal of the American Statistical Association,
+    83}, 426-431.
 }
+
 \author{
 Alexander Robitzsch
 }
+
 %\note{
 %The function \code{rasch.copula2} is substantially faster than
 %\code{rasch.copula}, but it is in a more experimental status.

@@ -1,5 +1,5 @@
 %% File Name: isop.scoring.Rd
-%% File Version: 1.22
+%% File Version: 1.23
 
 \name{isop.scoring}
 \alias{isop.scoring}
@@ -89,8 +89,8 @@ A list with following entries:
 
 \references{
 Scheiblechner, H. (1995). Isotonic ordinal
-probabilistic models (ISOP). \emph{Psychometrika},
-\bold{60}, 281-304.
+probabilistic models (ISOP). \emph{Psychometrika,
+60}, 281-304.
 
 Scheiblechner, H. (2003). \emph{Nonparametric IRT:
 Scoring functions and ordinal parameter estimation
@@ -99,7 +99,7 @@ Technical Report, Philipps-Universitaet Marburg.
 
 Scheiblechner, H. (2007). A unified nonparametric IRT model for
 d-dimensional psychological test data (d-ISOP).
-\emph{Psychometrika}, \bold{72}, 43-67.
+\emph{Psychometrika, 72}, 43-67.
 }
 
 

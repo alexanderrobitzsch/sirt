@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.40
+%% File Version: 0.41
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -176,17 +176,17 @@ A list. The most important entries are
 
 \references{
 Fraser, C., & McDonald, R. P. (1988). NOHARM: Least squares item factor analysis.
-\emph{Multivariate Behavioral Research}, \bold{23}, 267-269.
+\emph{Multivariate Behavioral Research, 23}, 267-269.
 
 Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}.
 {http://noharm.niagararesearch.ca/nh4man/nhman.html}.
 
 Green, S. B., & Yang, Y. (2009). Reliability of summed item
 scores using structural equation modeling: An alternative to
-coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167.
+coefficient alpha. \emph{Psychometrika, 74}, 155-167.
 
 McDonald, R. P. (1982a). Linear versus models in item response theory.
-\emph{Applied Psychological Measurement}, \bold{6}, 379-396.
+\emph{Applied Psychological Measurement, 6}, 379-396.
 
 McDonald, R. P. (1982b). \emph{Unidimensional and multidimensional models for
 item response theory}. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings.

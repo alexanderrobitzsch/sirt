@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.jackknife1.Rd
-%% File Version: 2.14
+%% File Version: 2.15
 
 \name{rasch.jml.jackknife1}
 \alias{rasch.jml.jackknife1}
@@ -45,7 +45,7 @@ A list with following entries
 }
 \references{
 Hahn, J., & Newey, W. (2004). Jackknife and analytical bias reduction for
-nonlinear panel models. \emph{Econometrica}, \bold{72}, 1295-1319.
+nonlinear panel models. \emph{Econometrica, 72}, 1295-1319.
 }
 \author{
 Alexander Robitzsch

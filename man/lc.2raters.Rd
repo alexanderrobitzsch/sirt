@@ -1,5 +1,5 @@
 %% File Name: lc.2raters.Rd
-%% File Version: 0.17
+%% File Version: 0.19
 
 \name{lc.2raters}
 \alias{lc.2raters}
@@ -92,18 +92,18 @@ Aickin's alpha (\code{alpha.aickin}; Aickin, 1990).
 \references{
 Aickin, M. (1990). Maximum likelihood estimation of agreement in the constant
 predictive probability model, and its relation to Cohen's kappa.
-\emph{Biometrics}, \bold{46}, 293-302.
+\emph{Biometrics, 46}, 293-302.
 
 Gwet, K. L. (2008). Computing inter-rater reliability and its variance
 in the presence of high agreement.
-\emph{British Journal of Mathematical and Statistical Psychology},
-\bold{61}, 29-48.
+\emph{British Journal of Mathematical and Statistical Psychology,
+61}, 29-48.
 
 Gwet, K. L. (2010). \emph{Handbook of Inter-Rater Reliability}.
-Advanced Analytics, Gaithersburg. \url{http://www.agreestat.com/}
+Advanced Analytics, Gaithersburg. \emph{http://www.agreestat.com/}
 
 Uebersax, J. S., & Grove, W. M. (1990). Latent class analysis of diagnostic
-agreement. \emph{Statistics in Medicine}, \bold{9}, 559-572.
+agreement. \emph{Statistics in Medicine, 9}, 559-572.
 }
 
 

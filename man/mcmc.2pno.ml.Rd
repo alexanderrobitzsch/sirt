@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pno.ml.Rd
-%% File Version: 0.41
+%% File Version: 0.42
 
 \name{mcmc.2pno.ml}
 \alias{mcmc.2pno.ml}
@@ -170,12 +170,12 @@ A list of class \code{mcmc.sirt} with following entries:
 \references{
 Asparouhov, T. & Muthen, B. (2012). General random effect latent variable
 modeling: Random subjects, items, contexts, and parameters.
-\url{http://www.statmodel.com/papers_date.shtml}.
+\emph{http://www.statmodel.com/papers_date.shtml}.
 
 Chaimongkol, S., Huffer, F. W., & Kamata, A. (2007).
 An explanatory differential item functioning (DIF)
 model by the WinBUGS 1.4.
-\emph{Songklanakarin Journal of Science and Technology}, \bold{29}, 449-458.
+\emph{Songklanakarin Journal of Science and Technology, 29}, 449-458.
 
 Fox, J.-P., & Verhagen, A.-J. (2010). Random item effects modeling for
 cross-national survey data.
@@ -184,18 +184,20 @@ In E. Davidov, P. Schmidt, & J. Billiet (Eds.),
 (pp. 467-488), London: Routledge Academic.
 
 Muthen, B. & Asparouhov, T. (2013). New methods for the study of measurement
-invariance with many groups. \url{http://www.statmodel.com/papers_date.shtml}
+invariance with many groups. \emph{http://www.statmodel.com/papers_date.shtml}
 
 Muthen, B. & Asparouhov, T. (2014).
 Item response modeling in Mplus: A multi-dimensional, multi-level,
 and multi-timepoint example. In W. Linden & R. Hambleton (2014).
 \emph{Handbook of item response theory: Models, statistical tools, and
-applications}. \url{http://www.statmodel.com/papers_date.shtml}
+applications}. \emph{http://www.statmodel.com/papers_date.shtml}
 
 van den Noortgate, W., De Boeck, P., & Meulders, M. (2003).
 Cross-classification multilevel logistic models in psychometrics.
-\emph{Journal of Educational and Behavioral Statistics}, \bold{28}, 369-386.
+\emph{Journal of Educational and Behavioral Statistics, 28}, 369-386.
 }
+
+
 \author{
 Alexander Robitzsch
 }

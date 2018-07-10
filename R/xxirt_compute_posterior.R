@@ -1,11 +1,11 @@
 ## File Name: xxirt_compute_posterior.R
-## File Version: 0.23
+## File Version: 0.24
 
 
 ###########################################################################
 xxirt_compute_posterior <- function( prior_Theta, p.xi.aj, group,
-                 G, weights, dat1, dat_resp, maxK, group_index,
-                 dat1_resp )
+                G, weights, dat1, dat_resp, maxK, group_index,
+                dat1_resp )
 {
     N <- nrow(dat_resp)
     TP <- ncol(p.xi.aj)

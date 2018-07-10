@@ -1,5 +1,5 @@
 %% File Name: sim.qm.ramsay.Rd
-%% File Version: 0.35
+%% File Version: 0.36
 
 \name{sim.qm.ramsay}
 \alias{sim.qm.ramsay}
@@ -34,26 +34,24 @@ Ramsay's quotient model (Ramsay, 1989) is defined by the equation
 \value{
 An \eqn{N \times I}  data frame with dichotomous item responses.
 }
+
 \references{
 Ramsay, J. O. (1989). A comparison of three simple test theory models.
-\emph{Psychometrika}, \bold{54}, 487-499.
+\emph{Psychometrika, 54}, 487-499.
 
 van der Maas, H. J. L., Molenaar, D., Maris, G., Kievit, R. A., &
 Borsboom, D. (2011).
 Cognitive psychology meets psychometric theory: On the relation between
 process models for decision making and latent variable models for
 individual differences.
-\emph{Psychological Review}, \bold{318}, 339-356.
+\emph{Psychological Review, 318}, 339-356.
 }
+
 \author{
 Alexander Robitzsch
 }
-%\section{Specific Objective Warning}{
-%    If the same arguments like in the Rasch model with respect to the scale level
-%    would apply for Ramsay's quotient model, this model could provide
-%    ratio scaled person abilities. This is prevalent in the model equation
-%    because person abilities are assumed to be nonnegative, i.e. \eqn{\theta_p >0}.
-%    }
+
+
 %\note{
 %%  ~~further notes~~
 %}

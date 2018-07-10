@@ -1,5 +1,5 @@
 ## File Name: plot.mcmc.sirt.R
-## File Version: 0.22
+## File Version: 0.23
 
 ######################################################
 # plot results of objects of class mcmc.sirt
@@ -72,7 +72,7 @@ plot.mcmc.sirt <- function( x, layout=1, conflevel=.90,
             graphics::text( x0 + .5, y0 + hvv,
                 paste0( format.numb( x=sparm.vv$MAP, digits=round.summ)  ), pos=4 )
 
-            graphics::text( x0 + .0015, y0 + heights.summ[6], "Posterior SD =", cex=cex.summ, pos=4)
+            graphics::text( x0 + .0015, y0 + heights.summ[6], "Posterior SD=", cex=cex.summ, pos=4)
             graphics::text( x0 + .5, y0 + heights.summ[6],
                 paste0( format.numb( x=stats::sd( x1 ), digits=round.summ)  ), pos=4 )
 

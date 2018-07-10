@@ -1,5 +1,5 @@
 %% File Name: pbivnorm2.Rd
-%% File Version: 0.20
+%% File Version: 0.22
 
 \name{pbivnorm2}
 \alias{pbivnorm2}
@@ -31,22 +31,21 @@ Vector of correlations between random normal variates
 %% \details{
 %%  ~~ If necessary, more details than the description above ~~
 %% }
+
 \value{
 Vector of probabilities
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
 }
+
 \references{
 Cox, D. R., & Wermuth, N. (1991). A simple approximation for bivariate and
 trivariate normal integrals.
-\emph{International Statistical Review}, \bold{59}, 263-269.
+\emph{International Statistical Review, 59}, 263-269.
 
 Hong, H. P. (1999). An approximation to bivariate and trivariate normal
-integrals. \emph{Engineering and Environmental Systems}, \bold{16}, 115-127.
+integrals. \emph{Engineering and Environmental Systems, 16}, 115-127.
 }
+
+
 \author{
 Alexander Robitzsch
 }

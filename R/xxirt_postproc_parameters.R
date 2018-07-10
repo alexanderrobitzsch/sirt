@@ -1,5 +1,5 @@
 ## File Name: xxirt_postproc_parameters.R
-## File Version: 0.16
+## File Version: 0.17
 
 #######################################################
 xxirt_postproc_parameters <- function( partable, customTheta,
@@ -40,8 +40,8 @@ xxirt_postproc_parameters <- function( partable, customTheta,
 
     #*** output
     res <- list( par_items=par_items, par_Theta=par_Theta,
-                  probs_items=probs_items, par_items_summary=dfr,
-                  par_items_bounds=par_items_bounds )
+                    probs_items=probs_items, par_items_summary=dfr,
+                    par_items_bounds=par_items_bounds )
     return(res)
 }
 #######################################################

@@ -1,5 +1,5 @@
 %% File Name: btm.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{btm}
 \alias{btm}
@@ -82,11 +82,11 @@ List with following entries
 \references{
 Bertoli-Barsotti, L., & Punzo, A. (2012).
 Comparison of two bias reduction techniques for the Rasch model.
-\emph{Electronic Journal of Applied Statistical Analysis},
-\bold{5}, 360-366.
+\emph{Electronic Journal of Applied Statistical Analysis,
+5}, 360-366.
 
 Hunter, D. R. (2004). MM algorithms for generalized Bradley-Terry models.
-\emph{Annals of Statistics}, \bold{32}, 384-406.
+\emph{Annals of Statistics, 32}, 384-406.
 }
 
 \author{

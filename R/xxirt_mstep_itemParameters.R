@@ -1,11 +1,11 @@
 ## File Name: xxirt_mstep_itemParameters.R
-## File Version: 0.32
+## File Version: 0.33
 
 ##############################################################
 # M-step item parameters
 xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
-          ncat, partable_index, N.ik, mstep_iter, par0, eps,
-          mstep_reltol, mstep_method, item_index, h, use_grad )
+            ncat, partable_index, N.ik, mstep_iter, par0, eps,
+            mstep_reltol, mstep_method, item_index, h, use_grad )
 {
     #-------------------------------------------------
     #**** define likelihood function

@@ -1,5 +1,5 @@
 %% File Name: marginal.truescore.reliability.Rd
-%% File Version: 0.23
+%% File Version: 0.24
 
 \name{marginal.truescore.reliability}
 \alias{marginal.truescore.reliability}
@@ -56,15 +56,17 @@ A list with following entries:
   (calculated by the formula in May & Nicewander, 1994)}
   \item{sig2.error}{Error variance \eqn{\sigma^2_{e}}}
 }
+
 \references{
 Dimitrov, D. (2003). Marginal true-score measures and reliability
 for binary items as a function of their IRT parameters.
-\emph{Applied Psychological Measurement}, \bold{27}, 440-458.
+\emph{Applied Psychological Measurement, 27}, 440-458.
 
 May, K., & Nicewander, W. A. (1994). Reliability and information
 functions for percentile ranks. \emph{Journal of Educational
-Measurement}, \bold{31}, 313-325.
+Measurement, 31}, 313-325.
 }
+
 \author{
 Alexander Robitzsch
 }

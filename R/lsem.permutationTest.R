@@ -1,5 +1,5 @@
 ## File Name: lsem.permutationTest.R
-## File Version: 0.28
+## File Version: 0.29
 
 ############################################
 # permutation test for LSEM model
@@ -12,7 +12,7 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
 
     lavaan.args <- lsem.object$lavaan.args
     entr <- c( "lavmodel", "data", "h", "moderator.grid", "moderator", "eps",
-              "fit_measures")
+            "fit_measures")
     object <- lsem.object
     arglist <- list()
     EE <- length(entr)
@@ -95,7 +95,7 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
     p2 <- rowMeans( parameters_pointwise_test$est <=par_pointwise_perm )
     parameters_pointwise_test$p <- 2*ifelse( p1 < p2, p1, p2 )
     parameters_pointwise_test$p <- ifelse( parameters_pointwise_test$p > 1,
-                                       1, parameters_pointwise_test$p )
+                                        1, parameters_pointwise_test$p )
 
     s2 <- Sys.time()
 
@@ -107,14 +107,13 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
                      parameters_summary_M=parameters_summary_M,
                      parameters_summary_SD=parameters_summary_SD,
                      parameters_summary_MAD=parameters_summary_MAD,
-                     parameters_summary_lin_slo=parameters_summary_lin_slo    ,
+                     parameters_summary_lin_slo=parameters_summary_lin_slo,
                      par_pointwise_perm=par_pointwise_perm,
-                     moderator.density=object$moderator.density    ,
-                     moderator=object$moderator    ,
+                     moderator.density=object$moderator.density,
+                     moderator=object$moderator,
                      moderator.grid=object$moderator.grid,
                      h=object$h, bw=object$bw, N=object$N,
-                     B=B, s1=s1, s2=s2,
-                     lavmodel=object$lavmodel, CALL=CALL
+                     B=B, s1=s1, s2=s2, lavmodel=object$lavmodel, CALL=CALL
                             )
     class(res) <- "lsem.permutationTest"
     return(res)

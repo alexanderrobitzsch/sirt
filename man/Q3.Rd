@@ -1,5 +1,5 @@
 %% File Name: Q3.Rd
-%% File Version: 1.17
+%% File Version: 1.18
 
 \name{Q3}
 \alias{Q3}
@@ -44,15 +44,16 @@ A list with following entries
 \item{residual}{An \eqn{N \times I} matrix of residuals obtained after
     fitting the Rasch model}
 \item{Q3.stat}{Vector with descriptive statistics of \eqn{Q_3}}
-%% ...
-%%        res <- list( "q3.matrix"=q3.matr, "q3.long"=q3.long,
-%%        "expected"=expected, "residual"=residual )
 }
+
+
 \references{
 Yen, W. M. (1984). Effects of local item dependence on the fit and equating
 performance of the three-parameter logistic model.
-\emph{Applied Psychological Measurement}, \bold{8}, 125-145.
+\emph{Applied Psychological Measurement, 8}, 125-145.
 }
+
+
 \author{
 Alexander Robitzsch
 }

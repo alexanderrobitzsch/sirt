@@ -1,5 +1,5 @@
 ## File Name: summary.mcmc.sirt.R
-## File Version: 1.28
+## File Version: 1.29
 
 #*******************************************************
 # summary for MCMC item analysis in sirt
@@ -26,7 +26,7 @@ summary.mcmc.sirt <- function( object, digits=3, file=NULL, ... ){
         cat( "  Group sizes: M=", round(object$ic$M.n,3),
             " | SD=", round(object$ic$SD.n,3), "\n")
     }
-    cat( "Number of items =", ncol(object$dat), "\n" )
+    cat( "Number of items=", ncol(object$dat), "\n" )
 
     cat( "\nEAP Reliability=")
     cat(round( object$EAP.rel,3 ) )

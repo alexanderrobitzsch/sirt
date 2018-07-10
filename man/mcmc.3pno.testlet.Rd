@@ -1,5 +1,5 @@
 %% File Name: mcmc.3pno.testlet.Rd
-%% File Version: 1.23
+%% File Version: 1.24
 
 \name{mcmc.3pno.testlet}
 \alias{mcmc.3pno.testlet}
@@ -132,11 +132,11 @@ Wainer, H., Bradlow, E. T., & Wang, X. (2007).
 Cambridge: Cambridge University Press.
 
 Wang, W.-C., & Wilson, M. (2005). The Rasch testlet model.
-\emph{Applied Psychological Measurement}, \bold{29}, 126-149.
+\emph{Applied Psychological Measurement, 29}, 126-149.
 
 Wang, X., Bradlow, E. T., & Wainer, H. (2002). A general Bayesian model
 for testlets: Theory and applications.
-\emph{Applied Psychological Measurement}, \bold{26}, 109-128.
+\emph{Applied Psychological Measurement, 26}, 109-128.
 }
 
 \author{

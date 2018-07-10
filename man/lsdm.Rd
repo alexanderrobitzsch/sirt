@@ -1,5 +1,5 @@
 %% File Name: lsdm.Rd
-%% File Version: 2.13
+%% File Version: 2.14
 
 
 \name{lsdm}
@@ -120,6 +120,8 @@ functions are evaluated}
 \item{lltm}{Model output of LLTM (\code{lm} values)}
 \item{W}{Matrix with empirical item-attribute discriminations}
 }
+
+
 \references{
   DiBello, L. V., Roussos, L. A., & Stout, W. F. (2007). Review of
   cognitively diagnostic assessment and a summary of psychometric models.
@@ -128,22 +130,25 @@ functions are evaluated}
 
   Dimitrov, D. M. (2007). Least squares distance method of cognitive validation
   and analysis for binary items using their item response theory parameters.
-  \emph{Applied Psychological Measurement}, \bold{31}, 367-387.
+  \emph{Applied Psychological Measurement, 31}, 367-387.
 
   Dimitrov, D. M., & Atanasov, D. V. (2012). Conjunctive and disjunctive
   extensions of the least squares distance model of cognitive diagnosis.
-  \emph{Educational and Psychological Measurement}, \bold{72}, 120-138.
+  \emph{Educational and Psychological Measurement, 72}, 120-138.
 
   Fischer, G. H. (1973). The linear logistic test model as an instrument
-  in educational research. \emph{Acta Psychologica}, \bold{37}, 359-374.
+  in educational research. \emph{Acta Psychologica, 37}, 359-374.
 
   Groemping, U. (2010). Inference with linear equality and inequality
   constraints using \R: The package \pkg{ic.infer}.
-  \emph{Journal of Statistical Software}, \bold{33(10)}, 1-31.
+  \emph{Journal of Statistical Software, 33}(10), 1-31.
 
 Sonnleitner, P. (2008). Using the LLTM to evaluate an item-generating system
-for reading comprehension. \emph{Psychology Science}, \bold{50}, 345-362.
+for reading comprehension. \emph{Psychology Science, 50}, 345-362.
 }
+
+
+
 \author{
 Alexander Robitzsch
 }

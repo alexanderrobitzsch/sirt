@@ -1,5 +1,5 @@
 %% File Name: smirt.Rd
-%% File Version: 2.35
+%% File Version: 2.36
 
 \name{smirt}
 \alias{smirt}
@@ -256,15 +256,15 @@ as well as the mode of the posterior distribution (\code{MLE} and \code{MAP}).}
 \references{
 Bolt, D. M., & Lall, V. F. (2003). Estimation of compensatory and
 noncompensatory multidimensional item response models using Markov chain
-Monte Carlo. \emph{Applied Psychological Measurement}, \bold{27}, 395-414.
+Monte Carlo. \emph{Applied Psychological Measurement, 27}, 395-414.
 
 Gonzalez, J., Tuerlinckx, F., De Boeck, P., & Cools, R. (2006).
 Numerical integration in logistic-normal models.
-\emph{Computational Statistics & Data Analysis}, \bold{51}, 1535-1548.
+\emph{Computational Statistics & Data Analysis, 51}, 1535-1548.
 
 Pan, J., & Thompson, R. (2007). Quasi-Monte Carlo estimation in
 generalized linear mixed models. \emph{Computational Statistics &
-Data Analysis}, \bold{51}, 5765-5775.
+Data Analysis, 51}, 5765-5775.
 
 Reckase, M.D. (2009). \emph{Multidimensional Item Response Theory}.
 New York: Springer.
@@ -273,6 +273,7 @@ Spray, J. A., Davey, T. C., Reckase, M. D., Ackerman, T. A., & Carlson, J. E. (1
 \emph{Comparison of two logistic multidimensional item response theory models}.
 ACT Research Report No. ACT-RR-ONR-90-8.
 }
+
 \author{
 Alexander Robitzsch
 }

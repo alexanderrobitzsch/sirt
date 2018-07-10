@@ -1,5 +1,5 @@
 %% File Name: tetrachoric2.Rd
-%% File Version: 1.31
+%% File Version: 1.33
 
 \name{tetrachoric2}
 \alias{tetrachoric2}
@@ -58,18 +58,18 @@ A list with following entries
 
 \references{
 Bonett, D. G., & Price, R. M. (2005). Inferential methods for the tetrachoric
-correlation coefficient. \emph{Journal of Educational and Behavioral Statistics},
-\bold{30}, 213-225.
+correlation coefficient. \emph{Journal of Educational and Behavioral Statistics,
+30}, 213-225.
 
 Divgi, D. R. (1979). Calculation of the tetrachoric correlation coefficient.
-\emph{Psychometrika}, \bold{44}, 169-172.
+\emph{Psychometrika, 44}, 169-172.
 
 Froemel, E. C. (1971). A comparison of computer routines for the
 calculation of the tetrachoric correlation coefficient.
-\emph{Psychometrika}, \bold{36}, 165-174.
+\emph{Psychometrika, 36}, 165-174.
 
 Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation
-coefficient. \emph{Psychometrika}, \bold{44}, 443-460.
+coefficient. \emph{Psychometrika, 44}, 443-460.
 }
 
 
@@ -77,7 +77,7 @@ coefficient. \emph{Psychometrika}, \bold{44}, 443-460.
 Alexander Robitzsch
 
 The code is adapted from an \R script of Cengiz Zopluoglu.
-See \url{http://sites.education.miami.edu/zopluoglu/software-programs/}.
+See \emph{http://sites.education.miami.edu/zopluoglu/software-programs/}.
 }
 %\note{
 %%  ~~further notes~~

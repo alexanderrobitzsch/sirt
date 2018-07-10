@@ -1,5 +1,5 @@
 %% File Name: greenyang.reliability.Rd
-%% File Version: 1.27
+%% File Version: 1.29
 
 \name{greenyang.reliability}
 \alias{greenyang.reliability}
@@ -60,23 +60,25 @@ is the ratio of the first and second eigenvalue.
 \item{dimensions}{Number of dimensions}
 \item{estimate}{Reliability estimate}
 }
+
+
 \references{
 Green, S. B., & Yang, Y. (2009). Reliability of summed item
 scores using structural equation modeling: An alternative to
-coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167.
+coefficient alpha. \emph{Psychometrika, 74}, 155-167.
 
 Reise, S. P. (2012). The rediscovery of bifactor measurement models.
-\emph{Multivariate Behavioral Research}, \bold{47}, 667-696.
+\emph{Multivariate Behavioral Research, 47}, 667-696.
 
 Reise, S. P., Bonifay, W. E., & Haviland, M. G. (2013).
 Scoring and modeling psychological measures in the presence of
-multidimensionality. \emph{Journal of Personality Assessment},
-\bold{95}, 129-140.
+multidimensionality. \emph{Journal of Personality Assessment,
+95}, 129-140.
 
 Reise, S. P., Moore, T. M., & Haviland, M. G.  (2010).
 Bifactor models and rotations: Exploring the extent to which
 multidimensional data yield univocal scale scores,
-\emph{Journal of Personality Assessment}, \bold{92}, 544-559.
+\emph{Journal of Personality Assessment, 92}, 544-559.
 }
 
 \author{

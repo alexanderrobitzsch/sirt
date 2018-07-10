@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_rm_sdt.cpp
-//// File Version: 0.411
+//// File Version: 0.412
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -186,7 +186,7 @@ Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_gradient_item_deriv_a( Rcpp::NumericVe
     int TP = prob_D1_dim[2];
     Rcpp::NumericVector prob_D1(VV*K1*TP);
     Rcpp::NumericMatrix exp_val(VV,TP);
-     //    exp_val <- prob0[,1,]
+    //    exp_val <- prob0[,1,]
     for (int ii=0; ii<VV; ii++){
         //    for (kk in 2:(K+1) ){
         //        exp_val <- exp_val + prob0[,kk,]*kk

@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.63
+%% File Version: 0.64
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -14,7 +14,7 @@ using the 2PL or the generalized item response model according to
 Haberman (2009). This method is a generalization of log-mean-mean
 linking from one study to several studies. The default \code{a_log=TRUE}
 logarithmizes item slopes for linking while otherwise an additive regression
-model is assumed for the original item loadings (see Details; Battauz, xxxx)
+model is assumed for the original item loadings (see Details; Battauz, 2017)
 }
 \usage{
 linking.haberman(itempars, personpars, a_trim=Inf, b_trim=Inf, a_log=TRUE,
@@ -144,10 +144,10 @@ A list with following entries
 \references{
 Asparouhov, T., & Muthen, B. (2014).
 Multiple-group factor analysis alignment.
-\emph{Structural Equation Modeling}, \bold{21}, 1-14.
+\emph{Structural Equation Modeling, 21}, 1-14.
 
-Battauz, M. (2016). Multiple equating of separate IRT calibrations.
-\emph{Psychometrika, xx}, xxx-xxx.
+Battauz, M. (2017). Multiple equating of separate IRT calibrations.
+\emph{Psychometrika, 82}, 610-636.
 
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
 from an item response model through separate calibrations}.

@@ -1,5 +1,5 @@
 %% File Name: R2noharm.jackknife.Rd
-%% File Version: 1.15
+%% File Version: 1.16
 
 \name{R2noharm.jackknife}
 \alias{R2noharm.jackknife}
@@ -59,8 +59,9 @@ A list of lists with following entries:
 
 \references{
 Christoffersson, A. (1977). Two-step weighted least squares factor analysis of
-dichotomized variables. \emph{Psychometrika}, \bold{42}, 433-438.
+dichotomized variables. \emph{Psychometrika, 42}, 433-438.
 }
+
 \author{
 Alexander Robitzsch
 }

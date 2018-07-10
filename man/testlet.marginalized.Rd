@@ -1,5 +1,5 @@
 %% File Name: testlet.marginalized.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{testlet.marginalized}
 \alias{testlet.marginalized}
@@ -65,8 +65,8 @@ marginal item slope \eqn{a_i^\ast} (\code{a1_marg}).
 \references{
 Ip, E. H. (2010). Empirically indistinguishable multidimensional
 IRT and locally dependent unidimensional item response models.
-\emph{British Journal of Mathematical and Statistical Psychology},
-\bold{63}, 395-416.
+\emph{British Journal of Mathematical and Statistical Psychology,
+63}, 395-416.
 }
 
 \author{

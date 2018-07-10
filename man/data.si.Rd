@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.30
+%% File Version: 0.32
 
 \name{data.sirt}
 
@@ -147,12 +147,12 @@ ALLBUS: http://www.gesis.org/allbus/allbus-home/
 Bartolucci, F., Montanari, G. E., & Pandolfi, S. (2012).
 Dimensionality of the latent structure and item selection via latent
 class multidimensional IRT models.
-\emph{Psychometrika}, \bold{77}, 782-802.
+\emph{Psychometrika, 77}, 782-802.
 
 Lindsay, B., Clogg, C. C., & Grego, J. (1991).
 Semiparametric estimation in the Rasch model and related exponential response
 models, including a simple latent class model for item analysis.
-\emph{Journal of the American Statistical Association}, \bold{86}, 96-107.
+\emph{Journal of the American Statistical Association, 86}, 96-107.
 }
 
 

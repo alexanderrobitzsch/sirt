@@ -1,5 +1,5 @@
 %% File Name: qmc.nodes.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{qmc.nodes}
 \alias{qmc.nodes}
@@ -35,12 +35,13 @@ Number of dimensions
 \references{
 Gonzalez, J., Tuerlinckx, F., De Boeck, P., & Cools, R. (2006).
 Numerical integration in logistic-normal models.
-\emph{Computational Statistics & Data Analysis}, \bold{51}, 1535-1548.
+\emph{Computational Statistics & Data Analysis, 51}, 1535-1548.
 
 Pan, J., & Thompson, R. (2007). Quasi-Monte Carlo estimation in
 generalized linear mixed models. \emph{Computational Statistics &
-Data Analysis}, \bold{51}, 5765-5775.
+Data Analysis, 51}, 5765-5775.
 }
+
 \author{
 Alexander Robitzsch
 }

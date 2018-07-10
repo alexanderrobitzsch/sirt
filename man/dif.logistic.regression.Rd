@@ -1,5 +1,5 @@
 %% File Name: dif.logistic.regression.Rd
-%% File Version: 0.30
+%% File Version: 0.33
 
 \name{dif.logistic.regression}
 \alias{dif.logistic.regression}
@@ -32,9 +32,10 @@ for assessing statistical significance}
 Items are classified into A (negligible DIF), B (moderate DIF) and
 C (large DIF) levels according to the
 ETS classification system (Longford, Holland & Thayer, 1993, p. 175).
-See also Monahan et al. (2007) for further DIF effect size
+See also Monahan, McHorney, Stump and Perkins (2007) for further DIF effect size
 classifications.
 }
+
 
 \value{
 A data frame with following variables:
@@ -81,7 +82,7 @@ Item Functioning} (pp. 171-196). Hillsdale, NJ: Erlbaum.
 Monahan, P. O., McHorney, C. A., Stump, T. E., & Perkins, A. J. (2007).
 Odds ratio, delta, ETS classification, and standardization measures of
 DIF magnitude for binary logistic regression.
-\emph{Journal of Educational and Behavioral Statistics}, \bold{32}, 92-109.
+\emph{Journal of Educational and Behavioral Statistics, 32}, 92-109.
 
 Zumbo, B. D. (1999). \emph{A handbook on the theory and methods of differential
 item functioning (DIF): Logistic regression modeling as a unitary framework
@@ -103,7 +104,7 @@ See the \pkg{difR} package for a large collection of DIF detection
 methods.
 
 For a download of the free \emph{DIF-Pack} software (SIBTEST, ...) see
-\url{http://psychometrictools.measuredprogress.org/home}.
+\emph{http://psychometrictools.measuredprogress.org/home}.
 
 }
 \examples{

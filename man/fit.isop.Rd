@@ -1,5 +1,5 @@
 %% File Name: fit.isop.Rd
-%% File Version: 1.16
+%% File Version: 1.17
 
 \name{fit.isop}
 \alias{fit.isop}
@@ -68,12 +68,12 @@ A list with following entries
 
 \references{
 Scheiblechner, H. (1995). Isotonic ordinal
-probabilistic models (ISOP). \emph{Psychometrika},
-\bold{60}, 281-304.
+probabilistic models (ISOP). \emph{Psychometrika,
+60}, 281-304.
 
 Scheiblechner, H. (1999). Additive conjoint isotonic
-probabilistic models (ADISOP). \emph{Psychometrika},
-\bold{64}, 295-316.
+probabilistic models (ADISOP). \emph{Psychometrika,
+64}, 295-316.
 }
 
 

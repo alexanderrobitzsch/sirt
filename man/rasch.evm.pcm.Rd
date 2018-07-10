@@ -1,5 +1,5 @@
 %% File Name: rasch.evm.pcm.Rd
-%% File Version: 0.38
+%% File Version: 0.39
 
 \name{rasch.evm.pcm}
 \alias{rasch.evm.pcm}
@@ -99,14 +99,14 @@ is provided as an argument}
 
 \references{
 Choppin, B. (1985). A fully conditional estimation procedure for Rasch Model
-parameters. \emph{Evaluation in Education}, \bold{9}, 29-42.
+parameters. \emph{Evaluation in Education, 9}, 29-42.
 
 Garner, M., & Engelhard, G. J. (2002). An eigenvector method for
 estimating item parameters of the dichotomous and polytomous Rasch models.
-\emph{Journal of Applied Measurement}, \bold{3}, 107-128.
+\emph{Journal of Applied Measurement, 3}, 107-128.
 
 Wang, J., & Engelhard, G. (2014). A pairwise algorithm in \R for rater-mediated
-assessments. \emph{Rasch Measurement Transactions}, \bold{28(1)}, 1457-1459.
+assessments. \emph{Rasch Measurement Transactions, 28}(1), 1457-1459.
 }
 
 \author{

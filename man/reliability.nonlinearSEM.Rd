@@ -1,5 +1,5 @@
 %% File Name: reliability.nonlinearSEM.Rd
-%% File Version: 0.18
+%% File Version: 0.19
 
 \name{reliability.nonlinearSEM}
 \alias{reliability.nonlinearSEM}
@@ -39,7 +39,7 @@ A list. The reliability is the list element \code{omega.rel}
 \references{
 Green, S. B., & Yang, Y. (2009). Reliability of summed item
 scores using structural equation modeling: An alternative to
-coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167.
+coefficient alpha. \emph{Psychometrika, 74}, 155-167.
 }
 \author{
 Alexander Robitzsch

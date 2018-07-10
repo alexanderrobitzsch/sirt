@@ -1,5 +1,5 @@
 %% File Name: personfit.stat.Rd
-%% File Version: 0.21
+%% File Version: 0.23
 
 \name{personfit.stat}
 \alias{personfit.stat}
@@ -54,14 +54,15 @@ and item \eqn{p} values}
 and item difficulties \code{b}}
 \item{U3}{Fit statistic \eqn{U_3}}
 }
+
 \references{
 Karabatsos, G. (2003). Comparing the aberrant response detection performance
-of thirty-six person-fit statistics. \emph{Applied Measurement in Education},
-\bold{16}, 277-298.
+of thirty-six person-fit statistics. \emph{Applied Measurement in Education,
+16}, 277-298.
 
 Meijer, R. R., & Sijtsma, K. (2001). Methodology
 review: Evaluating person fit. \emph{Applied Psychological
-Measurement}, \bold{25}, 107-135.
+Measurement, 25}, 107-135.
 }
 
 \author{

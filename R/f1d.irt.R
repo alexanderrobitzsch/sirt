@@ -1,11 +1,12 @@
 ## File Name: f1d.irt.R
-## File Version: 1.20
+## File Version: 1.21
 
 #########################################################
 # Functional Unidimensional Model (Ip et al., 2013)
 f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
             A=NULL, intercept=NULL, mu=NULL, Sigma=NULL, maxiter=100,
-            conv=10^(-5), progress=TRUE ){
+            conv=10^(-5), progress=TRUE )
+{
     if ( ! is.null(dat) ){
         TAM::require_namespace_msg("psych")
         # estimate tetrachoric correlation matrix
@@ -38,10 +39,10 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
     theta <- qmc.nodes( nnormal, nfactors )
     if ( is.null(mu) ){
         mu <- rep(0,nfactors)
-                        }
+    }
     if ( is.null(Sigma) ){
         Sigma <- diag(1,nfactors)
-                        }
+    }
 
     wgt_theta <- mvtnorm::dmvnorm(x=theta, mean=mu, sigma=Sigma )
     wgt_theta <- wgt_theta / sum( wgt_theta )
@@ -54,9 +55,8 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
     # a_i ' theta_p
     Zpi <- matrix( 0, TP, I )
     for (dd in 1:D){
-        # dd <- 1
         Zpi <- Zpi + theta[,dd] * matrix( A[,dd], TP, I, byrow=TRUE )
-                  }
+    }
     # Z_pi=a_i theta_p + d_i
     Zpi <- Zpi + matrix( intercept, TP, I, byrow=TRUE )
 
@@ -96,7 +96,6 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
         approx.error <- sum( errpi^2 * wgt_theta ) / I
         # parameter change
         parchange <- max( abs( c(diast - diast0,aiast-aiast0,thetaast-thetaast0) ))
-
         iter <- iter + 1
         if (progress){
             cat( paste0( "Iteration ", iter,
@@ -104,8 +103,8 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
                 " | Max. parameter change ", "=", " ", round( parchange, 5),
                  "\n") )
             utils::flush.console()
-                    }
         }
+    }
     #**************************************************
 
 
@@ -114,11 +113,11 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
         A0_stand <- fac0$loadings
         a0 <- A0_stand[,1] / sqrt( 1 - A0_stand[,1]^2 )
         d0 <- - res$tau / sqrt( 1 - A0_stand[,1]^2 )
-                    }
+    }
     if ( is.null(dat) ){
         a0 <- NULL
         d0 <- NULL
-                }
+    }
 
     item <- data.frame(  "item"=names.dat )
     item$ai.ast <- aiast
@@ -126,12 +125,9 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
     item$di.ast <- diast
     item$di0 <- d0
 
-    person <- data.frame( "theta.ast"=thetaast,
-            "wgt"=wgt_theta )
-
-    res <- list( "item"=item, "person"=person,
-                "A"=A, "intercept"=intercept,
+    person <- data.frame( "theta.ast"=thetaast, "wgt"=wgt_theta )
+    res <- list( "item"=item, "person"=person, "A"=A, "intercept"=intercept,
                 "dat"=dat, "tetra"=tetra )
     return(res)
-        }
+}
 #**************************************************

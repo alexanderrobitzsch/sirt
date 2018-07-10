@@ -1,5 +1,5 @@
 %% File Name: plausible.value.imputation.raschtype.Rd
-%% File Version: 1.30
+%% File Version: 1.31
 
 \name{plausible.value.imputation.raschtype}
 \alias{plausible.value.imputation.raschtype}
@@ -109,6 +109,7 @@ for covariates \eqn{Z}}
 \item{pv.indexes}{Index of iterations for which plausible
 values were drawn}
 }
+
 \references{
 Adams, R., & Wu. M. (2007). The mixed-coefficients multinomial
 logit model: A generalized form of the Rasch model.
@@ -117,8 +118,9 @@ Distribution Rasch Models: Extensions and Applications} (pp. 57-76).
 New York: Springer.
 
 Mislevy, R. J. (1991). Randomization-based inference about latent
-variables from complex samples. \emph{Psychometrika}, \bold{56}, 177-196.
+variables from complex samples. \emph{Psychometrika, 56}, 177-196.
 }
+
 \author{
 Alexander Robitzsch
 }

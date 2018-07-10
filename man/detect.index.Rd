@@ -1,5 +1,5 @@
 %% File Name: detect.index.Rd
-%% File Version: 0.13
+%% File Version: 0.14
 
 \name{detect.index}
 \alias{detect.index}
@@ -39,18 +39,18 @@ to the columns in \code{data} (submitted to \code{\link{ccov.np}}).
 \references{
 Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996).
 Conditional covariance-based nonparametric multidimensionality assessment.
-\emph{Applied Psychological Measurement}, \bold{20}, 331-354.
+\emph{Applied Psychological Measurement, 20}, 331-354.
 
 Zhang, J., & Stout, W. (1999a). Conditional covariance structure
 of generalized compensatory multidimensional items.
-\emph{Psychometrika}, \bold{64}, 129-152.
+\emph{Psychometrika, 64}, 129-152.
 
 Zhang, J., & Stout, W. (1999b). The theoretical DETECT index of
 dimensionality and its application to approximate simple structure.
-\emph{Psychometrika}, \bold{64}, 213-249.
+\emph{Psychometrika, 64}, 213-249.
 
 Zhang, J. (2007). Conditional covariance theory and DETECT for
-polytomous items. \emph{Psychometrika}, \bold{72}, 69-91.
+polytomous items. \emph{Psychometrika, 72}, 69-91.
 }
 \author{
 Alexander Robitzsch

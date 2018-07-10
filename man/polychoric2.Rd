@@ -1,5 +1,5 @@
 %% File Name: polychoric2.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{polychoric2}
 \alias{polychoric2}
@@ -43,7 +43,7 @@ A list with following entries
 
 \references{
 Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation
-coefficient. \emph{Psychometrika}, \bold{44}, 443-460.
+coefficient. \emph{Psychometrika, 44}, 443-460.
 }
 
 

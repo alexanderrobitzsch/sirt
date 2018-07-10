@@ -1,5 +1,5 @@
 %% File Name: data.big5.Rd
-%% File Version: 0.48
+%% File Version: 0.49
 
 \name{data.big5}
 \alias{data.big5}
@@ -57,7 +57,7 @@ See \code{big5} in \pkg{qgraph} package.
 \references{
 Dolan, C. V., Oort, F. J., Stoel, R. D., & Wicherts, J. M. (2009).
 Testing measurement invariance in the target rotates multigroup exploratory
-factor model. \emph{Structural Equation Modeling}, \bold{16}, 295-314.
+factor model. \emph{Structural Equation Modeling, 16}, 295-314.
 }
 
 

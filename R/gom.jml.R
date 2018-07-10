@@ -1,5 +1,5 @@
 ## File Name: gom.jml.R
-## File Version: 0.17
+## File Version: 0.19
 
 ########################################
 # GOM JML
@@ -38,7 +38,7 @@ gom.jml <- function( dat, K=2, seed=NULL, globconv=.001,
         devchange <- abs( ( dev - dev0 ) / dev0 )
         cat( paste( "   Deviance=", round( dev, 4 ),
             if (iter > 1 ){ " | Deviance change=" } else {""},
-            if( iter>1){round( - dev + dev0, 6 )} else { ""} ,"\n",sep="") )
+            if( iter>1){round( - dev + dev0, 6 )} else { ""},"\n",sep="") )
         cat( paste( "    Maximum membership parameter change=",
                     paste( round(max(abs(g-g0)),6), collapse=" " ), "\n", sep=""))
         cat( paste( "    Maximum probability change=",
@@ -97,11 +97,11 @@ summary.gom.jml <- function( object, ... ){
     cat( "Deviance=", round( object$deviance, 2 ), " | " )
     cat( "Log Likelihood=", round( -object$deviance/2, 2 ), "\n" )
     cat( "Number of persons=", object$ic$n, "\n" )
-    cat( "Number of items =", object$ic$I, "\n" )
+    cat( "Number of items=", object$ic$I, "\n" )
     cat( "Number of classes=", object$ic$K, "\n" )
     cat( "Number of estimated parameters=", object$ic$np, "\n" )
-    cat( "    Item parameters (ni)      =", object$ic$np.item, "\n" )
-    cat( "    Person parameters (np)    =", object$ic$np.person, "\n" )
+    cat( "    Item parameters (ni)     =", object$ic$np.item, "\n" )
+    cat( "    Person parameters (np)   =", object$ic$np.person, "\n" )
     cat( "AICi=", round( object$ic$AICi, 2 ), " | penalty=", round( object$ic$AICi - object$ic$deviance,2 ),
             "   | AICi=-2*LL + 2*(ni)  \n" )
     cat( "AICip=", round( object$ic$AICip, 2 ), " | penalty=", round( object$ic$AICip - object$ic$deviance,2 ),

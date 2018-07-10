@@ -1,5 +1,5 @@
 %% File Name: R2noharm.Rd
-%% File Version: 2.28
+%% File Version: 2.29
 
 \name{R2noharm}
 \alias{R2noharm}
@@ -160,13 +160,13 @@ A list with following entries
 }
 \references{
 Fraser, C., & McDonald, R. P. (1988). NOHARM: Least squares item factor analysis.
-\emph{Multivariate Behavioral Research}, \bold{23}, 267-269.
+\emph{Multivariate Behavioral Research, 23}, 267-269.
 
 Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}.
 http://noharm.niagararesearch.ca/nh4man/nhman.html.
 
 McDonald, R. P. (1982a). Linear versus models in item response theory.
-\emph{Applied Psychological Measurement}, \bold{6}, 379-396.
+\emph{Applied Psychological Measurement, 6}, 379-396.
 
 McDonald, R. P. (1982b). \emph{Unidimensional and multidimensional models for
 item response theory}. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings.

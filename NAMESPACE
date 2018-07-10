@@ -121,6 +121,7 @@ importFrom(TAM, tam.ctt3)
 importFrom(TAM, tam_matrix2)
 importFrom(TAM, tam_outer)
 importFrom(TAM, tam_packageinfo)
+importFrom(TAM, tam_print_call)
 importFrom(TAM, tam_rsessinfo)
 
 

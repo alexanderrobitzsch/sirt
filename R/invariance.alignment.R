@@ -1,5 +1,5 @@
 ## File Name: invariance.alignment.R
-## File Version: 2.30
+## File Version: 2.31
 ################################################################
 invariance.alignment__sirt045 <- function( lambda, nu, wgt,
    align.scale=c(1,1), align.pow=c(1,1), eps=.0001,
@@ -115,7 +115,7 @@ invariance.alignment__sirt045 <- function( lambda, nu, wgt,
                     }
             cat("\n")
 #            cat("** Maximum alpha parameter change=", round( alpha_change, 6), "\n" )
-            cat("** Maximum psi parameter change =", round( psi_change, 6), "\n" )
+            cat("** Maximum psi parameter change=", round( psi_change, 6), "\n" )
             flush.console()
                     }
         if ( fopt < minval ){
@@ -182,7 +182,7 @@ invariance.alignment__sirt045 <- function( lambda, nu, wgt,
                     }
             cat("\n")
             cat("** Maximum alpha parameter change=", round( alpha_change, 6), "\n" )
-#            cat("** Maximum psi parameter change =", round( psi_change, 6), "\n" )
+#            cat("** Maximum psi parameter change=", round( psi_change, 6), "\n" )
             flush.console()
                     }
         if ( fopt < minval ){

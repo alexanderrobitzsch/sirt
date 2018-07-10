@@ -1,5 +1,5 @@
 %% File Name: brm.sim.Rd
-%% File Version: 0.44
+%% File Version: 0.45
 
 \name{brm-Methods}
 \alias{brm.sim}
@@ -115,15 +115,15 @@ A matrix of item response probabilities if \code{brm.irf} is applied.
 \references{
 Gruen, B., Kosmidis, I., & Zeileis, A. (2012). Extended Beta regression
 in \R: Shaken, stirred, mixed, and partitioned.
-\emph{Journal of Statistical Software}, \bold{48(11)}, 1-25.
+\emph{Journal of Statistical Software, 48}(11), 1-25.
 
 Noel, Y., & Dauvier, B. (2007). A beta item response model for continuous
-bounded responses. \emph{Applied Psychological Measurement},
-\bold{31(1)}, 47-73.
+bounded responses. \emph{Applied Psychological Measurement,
+31}(1), 47-73.
 
 Smithson, M., & Verkuilen, J. (2006). A better lemon squeezer?
 Maximum-likelihood regression with beta-distributed dependent variables.
-\emph{Psychological Methods}, \bold{11(1)}, 54-71.
+\emph{Psychological Methods, 11}(1), 54-71.
 }
 
 \author{

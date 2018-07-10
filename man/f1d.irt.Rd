@@ -1,5 +1,5 @@
 %% File Name: f1d.irt.Rd
-%% File Version: 1.27
+%% File Version: 1.31
 
 \name{f1d.irt}
 \alias{f1d.irt}
@@ -7,13 +7,16 @@
 \title{
 Functional Unidimensional Item Response Model
 }
+
 \description{
 Estimates the functional unidimensional item response model for
-dichotomous data (Ip et al., 2013). Either the IRT model is estimated
-using a probit link and employing tetrachoric correlations or
-item discriminations and intercepts of a pre-estimated multidimensional IRT
+dichotomous data (Ip, Molenberghs, Chen, Goegebeur & De Boeck, 2013). 
+Either the IRT model is estimated using a probit link and employing tetrachoric 
+correlations or item discriminations and intercepts of a pre-estimated multidimensional IRT
 model are provided as input.
 }
+
+
 \usage{
 f1d.irt(dat=NULL, nnormal=1000, nfactors=3, A=NULL, intercept=NULL,
     mu=NULL, Sigma=NULL, maxiter=100, conv=10^(-5), progress=TRUE)
@@ -105,7 +108,7 @@ A list with following entries:
 Ip, E. H., Molenberghs, G., Chen, S. H., Goegebeur, Y., &
 De Boeck, P. (2013). Functionally unidimensional item
 response models for multivariate binary data.
-\emph{Multivariate Behavioral Research}, \bold{48}, 534-562.
+\emph{Multivariate Behavioral Research, 48}, 534-562.
 }
 
 \author{

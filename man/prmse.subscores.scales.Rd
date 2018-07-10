@@ -1,5 +1,5 @@
 %% File Name: prmse.subscores.scales.Rd
-%% File Version: 0.26
+%% File Version: 0.27
 
 \name{prmse.subscores.scales}
 \alias{prmse.subscores.scales}
@@ -35,15 +35,16 @@ The symbol \code{X} denotes the subscale and \code{Z}
 the whole scale (see also in the Examples section for the structure of
 this matrix).
 }
+
 \references{
 Haberman, S. J. (2008). When can subscores have value?
-\emph{Journal of Educational and Behavioral Statistics},
-\bold{33}, 204-229.
+\emph{Journal of Educational and Behavioral Statistics,
+33}, 204-229.
 
 Haberman, S., Sinharay, S., & Puhan, G. (2008).
 Reporting subscores for institutions.
-\emph{British Journal of Mathematical and Statistical Psychology},
-\bold{62}, 79-95.
+\emph{British Journal of Mathematical and Statistical Psychology,
+62}, 79-95.
 
 Meijer, R. R., Boeve, A. J., Tendeiro, J. N., Bosker, R. J., & Albers, C. J. (2017).
 The use of subscores in higher education: When is this useful?.

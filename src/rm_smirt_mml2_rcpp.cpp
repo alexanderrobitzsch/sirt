@@ -1,5 +1,5 @@
 //// File Name: rm_smirt_mml2_rcpp.cpp
-//// File Version: 5.29
+//// File Version: 5.30
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -456,7 +456,7 @@ Rcpp::NumericMatrix SMIRT_CALCPROB_NONCOMP( Rcpp::NumericMatrix A,
      for (int dd=0;dd<D;++dd){
          if ( QQ(ii,dd)>0 ){
              for (int tt=0; tt<TP; ++tt){
-                    yy[tt] =  A(ii,dd)*QQ(ii,dd)*THETA(tt,dd)-B(ii,dd) ;
+                    yy[tt] =  A(ii,dd)*QQ(ii,dd)*THETA(tt,dd)-B(ii,dd);
                          }   // end tt
              Rcpp::NumericVector p1=plogis(yy);
              for (int tt=0; tt<TP; ++tt){

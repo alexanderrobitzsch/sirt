@@ -1,5 +1,5 @@
 ## File Name: xxirt_compute_priorDistribution.R
-## File Version: 0.10
+## File Version: 0.11
 
 ###############################################################################
 xxirt_compute_priorDistribution <- function( Theta, customTheta, G )

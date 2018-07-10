@@ -1,20 +1,19 @@
 ## File Name: automatic.recode.R
-## File Version: 1.13
-###############################################
-# automatic recoding of a dataset
+## File Version: 1.15
+
+#*** automatic recoding of a dataset
 automatic.recode <- function( data, exclude=NULL, pstart.min=.6,
-    allocate=200, maxiter=20, progress=TRUE){
-    ########################################################
+    allocate=200, maxiter=20, progress=TRUE)
+{
     # data table with frequencies and discriminations
     item.stat <- data.frame( "item"=colnames(data),
-                    "old.key"=-99, "new.key"=NA, "p"=NA, "discrim"=NA )
+                "old.key"=-99, "new.key"=NA, "p"=NA, "discrim"=NA )
     items <- colnames(data)
     # compute frequencies
     fstart <- TAM::tam.ctt3( data, allocate=allocate, progress=FALSE)
     I <- ncol(data)
     prbar <- floor( 10 * ( 1:I ) / (I+1) )
     prbar <- c(1,which( diff(prbar)==1 )  )
-#    if (progress){ cat( "   |") }
 
     fstart1 <- fstart
     fstart1 <- fstart1[ ! ( fstart$Categ %in% exclude ), ]
@@ -63,22 +62,24 @@ automatic.recode <- function( data, exclude=NULL, pstart.min=.6,
                 }
     #********* end iterations
     item.stat$old.key <- item.stat$new.key <- NULL
-    res <- list( "item.stat"=item.stat,
-             "data.scored"=data.scored, "categ.stats"=fiter)
+    res <- list( item.stat=item.stat, data.scored=data.scored, categ.stats=fiter)
     return(res)
-    }
+}
+
+
 ##########################################################
 # utility function for recoding a raw dataset
-data.recode.sirt <- function( data.raw, keys ){
+data.recode.sirt <- function( data.raw, keys )
+{
     item.stat <- keys
     V <- ncol(data.raw)
     data.scored <- matrix( 0, nrow(data.raw), ncol(data.raw) )
     colnames(data.scored) <- colnames(data.raw )
     for (vv in 1:V){
-       data.scored[,vv] <- 1* ( paste(data.raw[,vv])==
+        data.scored[,vv] <- 1* ( paste(data.raw[,vv])==
                     paste(item.stat[ item.stat$item==colnames(data.raw)[vv], "key" ]) )
-       data.scored[ paste( data.raw[,vv] )=="NA", vv ] <- NA
-                  }
-    return( data.scored )
-        }
+        data.scored[ paste( data.raw[,vv] )=="NA", vv ] <- NA
+    }
+    return(data.scored)
+}
 ###########################################################

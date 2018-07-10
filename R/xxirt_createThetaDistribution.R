@@ -1,9 +1,9 @@
 ## File Name: xxirt_createThetaDistribution.R
-## File Version: 0.12
+## File Version: 0.13
 
 ######################################################################
 xxirt_createThetaDistribution <- function( par, est, P, prior=NULL,
-        prior_par1=NULL, prior_par2=NULL    )
+        prior_par1=NULL, prior_par2=NULL )
 {
     res <- list()
     res$par <- par

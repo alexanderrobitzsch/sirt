@@ -1,5 +1,5 @@
 %% File Name: rasch.va.Rd
-%% File Version: 0.16
+%% File Version: 0.17
 
 \name{rasch.va}
 \alias{rasch.va}
@@ -29,24 +29,24 @@ Maximal number of iterations
 %\details{
 %%  ~~ If necessary, more details than the description above ~~
 %}
+
+
 \value{
-%%  ~Describe the value returned
 A list with following entries:
   \item{sig}{Standard deviation of the trait}
   \item{item}{Data frame with item parameters}
   \item{xsi.ij}{Data frame with variational parameters \eqn{\xi_{ij}}}
   \item{mu.i}{Vector with individual means \eqn{\mu_i}}
 \item{sigma2.i}{Vector with individual variances \eqn{\sigma_i^2}}
-%% ...
-%%    res <- list("sig"=sqrt(sig2),
-%%            "item"=item, "xsi.ij"=xsi.ij, "mu.i"=mu.i, "sigma2.i"=sigma2.i )
 }
+
 \references{
 Rijmen, F., & Vomlel, J. (2008). Assessing the performance of
 variational methods for mixed logistic regression models.
-\emph{Journal of Statistical Computation and Simulation},
-\bold{78}, 765-779.
+\emph{Journal of Statistical Computation and Simulation,
+78}, 765-779.
 }
+
 \author{
 Alexander Robitzsch
 }

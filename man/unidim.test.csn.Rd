@@ -1,5 +1,5 @@
 %% File Name: unidim.test.csn.Rd
-%% File Version: 1.19
+%% File Version: 1.21
 
 \name{unidim.test.csn}
 \alias{unidim.test.csn}
@@ -72,13 +72,14 @@ permuted dataset}
 \references{
 De Gooijer, J. G., & Yuan, A. (2011). Some exact tests for
 manifest properties of latent trait models.
-\emph{Computational Statistics and Data Analysis}, \bold{55},
+\emph{Computational Statistics and Data Analysis, 55},
 34-44.
 
 Junker, B.W. (1993). Conditional association, essential independence, and
 monotone unidimensional item response models.
-\emph{Annals of Statistics}, \bold{21}, 1359-1378.
+\emph{Annals of Statistics, 21}, 1359-1378.
 }
+
 \author{
 Alexander Robitzsch
 }

@@ -1,5 +1,5 @@
 %% File Name: data.befki.Rd
-%% File Version: 0.10
+%% File Version: 0.11
 
 \name{data.befki}
 \alias{data.befki}
@@ -76,8 +76,7 @@ Synthetic dataset
 \references{
 Schroeders, U., Schipolowski, S., & Wilhelm, O. (2015). Age-related
 changes in the mean and covariance structure of fluid and crystallized
-intelligence in childhood and adolescence. \emph{Intelligence}, \bold{48}, 15-29.
-DOI 10.1016/j.intell.2014.10.006
+intelligence in childhood and adolescence. \emph{Intelligence, 48}, 15-29.
 
 Wilhelm, O., Schroeders, U., & Schipolowski, S. (2014). \emph{Berliner Test
 zur Erfassung fluider und kristalliner Intelligenz fuer die 8. bis 10.

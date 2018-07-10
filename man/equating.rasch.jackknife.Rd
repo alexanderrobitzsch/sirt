@@ -1,5 +1,5 @@
 %% File Name: equating.rasch.jackknife.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{equating.rasch.jackknife}
 \alias{equating.rasch.jackknife}
@@ -50,7 +50,7 @@ A list with following entries:
 \references{
 Monseur, C., & Berezner, A. (2007). The computation of equating errors
 in international surveys in education.
-\emph{Journal of Applied Measurement}, \bold{8}, 323-335.
+\emph{Journal of Applied Measurement, 8}, 323-335.
 }
 \author{
 Alexander Robitzsch

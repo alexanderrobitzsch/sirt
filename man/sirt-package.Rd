@@ -1,5 +1,5 @@
 %% File Name: sirt-package.Rd
-%% File Version: 2.55
+%% File Version: 2.59
 
 \name{sirt-package}
 \alias{sirt-package}
@@ -12,17 +12,18 @@ Supplementary Item Response Theory Models
     Supplementary functions for item response models aiming
     to complement existing R packages. The functionality includes among others
     multidimensional compensatory and noncompensatory IRT models
-    (Reckase, 2009, <doi:10.1007/978-0-387-89976-3>),
+    (Reckase, 2009, <doi:10.1007/978-0-387-89976-3>), 
     MCMC for hierarchical IRT models and testlet models
-    (Fox, 2010, <doi:10.1007/978-1-4419-0742-4>),
-    NOHARM (Fraser & McDonald, 1982, <doi:10.1207/s15327906mbr2302_9>),
+    (Fox, 2010, <doi:10.1007/978-1-4419-0742-4>), 
+    NOHARM (Fraser & McDonald, 1982, <doi:10.1207/s15327906mbr2302_9>), 
     Rasch copula model (Braeken, 2011, <doi:10.1007/s11336-010-9190-4>;
     Schroeders, Robitzsch & Schipolowski, 2014, <doi:10.1111/jedm.12054>),
     faceted and hierarchical rater models (DeCarlo, Kim & Johnson, 2011,
     <doi:10.1111/j.1745-3984.2011.00143.x>),
-    ordinal IRT model (ISOP; Scheiblechner, 1995, <doi:10.1007/BF02301417>),
-    DETECT statistic (Stout et al., 1996, <doi:10.1177/014662169602000403>),
-    local structural equation modeling (LSEM; Hildebrandt et al., 2016,
+    ordinal IRT model (ISOP; Scheiblechner, 1995, <doi:10.1007/BF02301417>), 
+    DETECT statistic (Stout, Habing, Douglas & Kim, 1996, 
+    <doi:10.1177/014662169602000403>), local structural equation modeling 
+    (LSEM; Hildebrandt, Luedtke, Robitzsch, Sommer & Wilhelm, 2016,
     <doi:10.1080/00273171.2016.1142856>).
 }
 \details{
@@ -200,31 +201,31 @@ Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de> \cr \cr
 \references{
 Asparouhov, T., & Muthen, B. (2014).
 Multiple-group factor analysis alignment.
-\emph{Structural Equation Modeling}, \bold{21}, 1-14.
+\emph{Structural Equation Modeling, 21}, 1-14.
 
 Bartolucci, F. (2007). A class of multidimensional
 IRT models for testing unidimensionality and clustering
-items. \emph{Psychometrika}, \bold{72}, 141-157.
+items. \emph{Psychometrika, 72}, 141-157.
 
 Braeken, J. (2011). A boundary mixture approach to violations of conditional
-independence. \emph{Psychometrika}, \bold{76}, 57-76.
+independence. \emph{Psychometrika, 76}, 57-76.
 
 DeCarlo, T., Kim, Y., & Johnson, M. S. (2011).
 A hierarchical rater model for constructed responses, with a signal detection
-rater model. \emph{Journal of Educational Measurement}, \bold{48}, 333-356.
+rater model. \emph{Journal of Educational Measurement, 48}, 333-356.
 
 Dimitrov, D. (2003). Marginal true-score measures and reliability
 for binary items as a function of their IRT parameters.
-\emph{Applied Psychological Measurement}, \bold{27}, 440-458.
+\emph{Applied Psychological Measurement, 27}, 440-458.
 
 Dimitrov, D. M. (2007). Least squares distance method of cognitive validation
 and analysis for binary items using their item response theory parameters.
-\emph{Applied Psychological Measurement}, \bold{31}, 367-387.
+\emph{Applied Psychological Measurement, 31}, 367-387.
 
 Erosheva, E. A., Fienberg, S. E., & Joutard, C. (2007).
 Describing disability through individual-level mixture models
-for multivariate binary data. \emph{Annals of Applied Statistics},
-\bold{1}, 502-537.
+for multivariate binary data. \emph{Annals of Applied Statistics,
+1}, 502-537.
 
 Fox, J.-P. (2010). \emph{Bayesian item response modeling}. New York: Springer.
 
@@ -235,14 +236,14 @@ In E. Davidov, P. Schmidt, & J. Billiet (Eds.),
 (pp. 467-488), London: Routledge Academic.
 
 Fraser, C., & McDonald, R. P. (1988). NOHARM: Least squares item factor analysis.
-\emph{Multivariate Behavioral Research}, \bold{23}, 267-269.
+\emph{Multivariate Behavioral Research, 23}, 267-269.
 
 Glas, C. A. W. (2012). \emph{Estimating and testing the extended testlet model.}
 LSAC Research Report Series, RR 12-03.
 
 Green, S.B., & Yang, Y. (2009). Reliability of summed item
 scores using structural equation modeling: An alternative to
-coefficient alpha. \emph{Psychometrika}, \bold{74}, 155-167.
+coefficient alpha. \emph{Psychometrika, 74}, 155-167.
 
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
 from an item response model through separate calibrations}.
@@ -251,23 +252,23 @@ ETS Research Report ETS RR-09-40. Princeton, ETS.
 Hildebrandt, A., Luedtke, O., Robitzsch, A., Sommer, C., &
 Wilhelm, O. (2016). Exploring factor model parameters across continuous variables
 with local structural equation models.
-\emph{Multivariate Behavioral Research}, \bold{51}, 257-278.
+\emph{Multivariate Behavioral Research, 51}, 257-278.
 
 Ip, E. H., Molenberghs, G., Chen, S. H., Goegebeur, Y., &
 De Boeck, P. (2013). Functionally unidimensional item
 response models for multivariate binary data.
-\emph{Multivariate Behavioral Research}, \bold{48}, 534-562.
+\emph{Multivariate Behavioral Research, 48}, 534-562.
 
 Janssen, R., Tuerlinckx, F., Meulders, M., & de Boeck, P. (2000).
 A hierarchical IRT model for criterion-referenced measurement.
-\emph{Journal of Educational and Behavioral Statistics}, \bold{25}, 285-306.
+\emph{Journal of Educational and Behavioral Statistics, 25}, 285-306.
 
 Linacre, J. M. (1994). \emph{Many-Facet Rasch Measurement}.
 Chicago: MESA Press.
 
 Loken, E. & Rulison, K. L. (2010). Estimation of a four-parameter
 item response theory model. \emph{British Journal of Mathematical
-and Statistical Psychology}, \bold{63}, 509-525.
+and Statistical Psychology, 63}, 509-525.
 
 McDonald, R. P. (1997). Normal-ogive multidimensional model.
 In W. van der Linden & R. K. Hambleton (1997):
@@ -276,29 +277,29 @@ New York: Springer.
 
 Meijer, R. R., & Sijtsma, K. (2001). Methodology
 review: Evaluating person fit. \emph{Applied Psychological
-Measurement}, \bold{25}, 107-135.
+Measurement, 25}, 107-135.
 
 Proctor, C. H. (1970). A probabilistic formulation and statistical analysis
-for Guttman scaling. \emph{Psychometrika}, \bold{35}, 73-78.
+for Guttman scaling. \emph{Psychometrika, 35}, 73-78.
 
 Ramsay, J. O. (1989). A comparison of three simple test theory models.
-\emph{Psychometrika}, \bold{54}, 487-499.
+\emph{Psychometrika, 54}, 487-499.
 
 Ramsay, J. O. (1991). Kernel smoothing approaches to
 nonparametric item characteristic curve estimation.
-\emph{Psychometrika}, \bold{56}, 611-630.
+\emph{Psychometrika, 56}, 611-630.
 
 Reckase, M.D. (2009). \emph{Multidimensional item response theory}.
 New York: Springer.
 
 Rijmen, F., & Vomlel, J. (2008). Assessing the performance of
 variational methods for mixed logistic regression models.
-\emph{Journal of Statistical Computation and Simulation},
-\bold{78}, 765-779.
+\emph{Journal of Statistical Computation and Simulation,
+78}, 765-779.
 
 Renard, D., Molenberghs, G., & Geys, H. (2004). A pairwise likelihood
 approach to estimation in multilevel probit models. \emph{Computational Statistics
-& Data Analysis}, \bold{44}, 649-667.
+& Data Analysis, 44}, 649-667.
 
 Robitzsch, A., & Steinfeld, J. (2018). Item response models for human ratings: Overview,
 estimation methods, and implementation in R.
@@ -306,20 +307,20 @@ estimation methods, and implementation in R.
 
 Rossi, N., Wang, X. & Ramsay, J. O. (2002). Nonparametric item response function
 estimates with the EM algorithm.
-\emph{Journal of Educational and Behavioral Statistics},
-\bold{27}, 291-317.
+\emph{Journal of Educational and Behavioral Statistics,
+27}, 291-317.
 
 Rusch, T., Mair, P., & Hatzinger, R. (2013).
 \emph{Psychometrics with \R: A Review of CRAN Packages for Item Response Theory.}
 \url{http://epub.wu.ac.at/4010/1/resrepIRThandbook.pdf}.
 
 Scheiblechner, H. (1995). Isotonic ordinal
-probabilistic models (ISOP). \emph{Psychometrika},
-\bold{60}, 281-304.
+probabilistic models (ISOP). \emph{Psychometrika,
+60}, 281-304.
 
 Scheiblechner, H. (1999). Additive conjoint isotonic
-probabilistic models (ADISOP). \emph{Psychometrika},
-\bold{64}, 295-316.
+probabilistic models (ADISOP). \emph{Psychometrika,
+64}, 295-316.
 
 Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014). A comparison of different
 psychometric approaches to modeling testlet structures: An example with C-tests.
@@ -327,30 +328,30 @@ psychometric approaches to modeling testlet structures: An example with C-tests.
 
 Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996).
 Conditional covariance-based nonparametric multidimensionality assessment.
-\emph{Applied Psychological Measurement}, \bold{20}, 331-354.
+\emph{Applied Psychological Measurement, 20}, 331-354.
 
 Stukel, T. A. (1988). Generalized logistic models.
-\emph{Journal of the American Statistical Association},
-\bold{83}, 426-431.
+\emph{Journal of the American Statistical Association,
+83}, 426-431.
 
 Uenlue, A., & Yanagida, T. (2011). \R you ready for \R?:
 The CRAN psychometrics task view.
-\emph{British Journal of Mathematical and Statistical Psychology},
-\bold{64}, 182-186.
+\emph{British Journal of Mathematical and Statistical Psychology,
+64}, 182-186.
 
 van den Noortgate, W., De Boeck, P., & Meulders, M. (2003).
 Cross-classification multilevel logistic models in psychometrics.
-\emph{Journal of Educational and Behavioral Statistics}, \bold{28}, 369-386.
+\emph{Journal of Educational and Behavioral Statistics, 28}, 369-386.
 
 Warm, T. A. (1989). Weighted likelihood estimation of ability in item response theory.
-\emph{Psychometrika}, \bold{54}, 427-450.
+\emph{Psychometrika, 54}, 427-450.
 
 Wainer, H., Bradlow, E. T., & Wang, X. (2007).
 \emph{Testlet response theory and its applications}.
 Cambridge: Cambridge University Press.
 
 Zwinderman, A. H. (1995). Pairwise parameter estimation in Rasch models.
-\emph{Applied Psychological Measurement}, \bold{19}, 369-375.
+\emph{Applied Psychological Measurement, 19}, 369-375.
 }
 
 

@@ -1,11 +1,13 @@
 ## File Name: rm_sdt_fill_par_to_partable.R
-## File Version: 0.08
+## File Version: 0.16
 
 
 rm_sdt_fill_par_to_partable <- function( par_index, partable, parm0, type)
 {
-    partable_parindex <- partable$parindex[ ! partable$fixed ]
-    partable[ ! partable$fixed, "value"] <- parm0[ partable_parindex ]
+
+    not_fixed <- ! partable$fixed
+    partable_parindex <- partable$parindex[ not_fixed ]
+    partable[ not_fixed, "value"] <- parm0[ partable_parindex ]
     #--- fill objects
     parm_list <- NULL
     if (type=="item"){

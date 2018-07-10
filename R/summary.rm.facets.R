@@ -1,5 +1,5 @@
 ## File Name: summary.rm.facets.R
-## File Version: 0.21
+## File Version: 0.23
 
 
 #*******************************************************
@@ -22,16 +22,16 @@ summary.rm.facets <- function( object, file=NULL, ... ){
     #-- number of parameters
     cat("Rater Facet Model with Item/Rater Intercepts and Slopes \n")
     cat("-----------------------------------------------------------------\n")
-    cat( "Number of iterations=", object$iter, "\n" )
-    cat( "Deviance=", round( object$deviance, 2 ), " | " )
-    cat( "Log Likelihood=", round( -object$deviance/2, 2 ), "\n" )
-    cat( "Number of persons=", object$ic$n, "\n" )
-    cat( "Number of items =", object$ic$VV, "\n" )
-    cat( "Number of raters=", object$ic$RR, "\n" )
-    cat( "Number of estimated parameters=", object$ic$np, "\n" )
-    cat( "   Number of item parameters =", object$ic$np.item, "\n" )
-    cat( "   Number of rater parameters=", object$ic$np.rater, "\n" )
-    cat( "   Number of distribution parameters=", object$ic$np.trait, "\n\n" )
+    cat( "Number of iterations","=", object$iter, "\n" )
+    cat( "Deviance","=", round( object$deviance, 2 ), " | " )
+    cat( "Log Likelihood","=", round( -object$deviance/2, 2 ), "\n" )
+    cat( "Number of persons","=", object$ic$n, "\n" )
+    cat( "Number of items","=", object$ic$VV, "\n" )
+    cat( "Number of raters","=", object$ic$RR, "\n" )
+    cat( "Number of estimated parameters","=", object$ic$np, "\n" )
+    cat( "   Number of item parameters","=", object$ic$np.item, "\n" )
+    cat( "   Number of rater parameters","=", object$ic$np.rater, "\n" )
+    cat( "   Number of distribution parameters","=", object$ic$np.trait, "\n\n" )
 
     #--- information criteria
     rm_summary_information_criteria(object=object)

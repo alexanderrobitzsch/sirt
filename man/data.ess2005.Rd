@@ -1,5 +1,5 @@
 %% File Name: data.ess2005.Rd
-%% File Version: 0.07
+%% File Version: 0.08
 
 \name{data.ess2005}
 \alias{data.ess2005}
@@ -47,7 +47,7 @@ The format of the dataset is:
 \references{
 Asparouhov, T., & Muthen, B. (2014).
 Multiple-group factor analysis alignment.
-\emph{Structural Equation Modeling}, \bold{21}, 1-14.
+\emph{Structural Equation Modeling, 21}, 1-14.
 }
 %\examples{
 %data(data.ess2005)

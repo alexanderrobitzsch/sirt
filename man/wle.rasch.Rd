@@ -1,5 +1,5 @@
 %% File Name: wle.rasch.Rd
-%% File Version: 1.14
+%% File Version: 1.15
 
 \name{wle.rasch}
 \alias{wle.rasch}
@@ -69,10 +69,10 @@ A list with following entries
 
 \references{
 Adams, R. J. (2005). Reliability as a measurement design effect.
-\emph{Studies in Educational Evaluation}, \bold{31}, 162-172.
+\emph{Studies in Educational Evaluation, 31}, 162-172.
 
 Warm, T. A. (1989). Weighted likelihood estimation of ability in item response theory.
-\emph{Psychometrika}, \bold{54}, 427-450.
+\emph{Psychometrika, 54}, 427-450.
 }
 
 

@@ -1,5 +1,5 @@
 %% File Name: fuzcluster.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{fuzcluster}
 \alias{fuzcluster}
@@ -75,7 +75,7 @@ A list with following entries
 \references{
 Denoeux, T. (2013). Maximum likelihood estimation from uncertain data
 in the belief function framework.
-\emph{IEEE Transactions on Knowledge and Data Engineering}, \bold{25}, 119-130.
+\emph{IEEE Transactions on Knowledge and Data Engineering, 25}, 119-130.
 }
 
 \author{

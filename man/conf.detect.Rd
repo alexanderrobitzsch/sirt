@@ -1,5 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.40
+%% File Version: 1.42
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -100,33 +100,37 @@ and MCOV100}
 Bonifay, W. E., Reise, S. P., Scheines, R., & Meijer, R. R. (2015).
 When are multidimensional data unidimensional enough for structural
 equation modeling? An evaluation of the DETECT multidimensionality index.
-\emph{Structural Equation Modeling}, \bold{22}, 504-516.
+\emph{Structural Equation Modeling, 22}, 504-516.
 
 Jang, E. E., & Roussos, L. (2007). An investigation into the dimensionality
 of TOEFL using conditional covariance-based nonparametric approach.
-\emph{Journal of Educational Measurement}, \bold{44}, 1-21.
+\emph{Journal of Educational Measurement, 44}, 1-21.
 
 Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996).
 Conditional covariance-based nonparametric multidimensionality assessment.
-\emph{Applied Psychological Measurement}, \bold{20}, 331-354.
+\emph{Applied Psychological Measurement, 20}, 331-354.
 
 Zhang, J., & Stout, W. (1999a). Conditional covariance structure
 of generalized compensatory multidimensional items.
-\emph{Psychometrika}, \bold{64}, 129-152.
+\emph{Psychometrika, 64}, 129-152.
 
 Zhang, J., & Stout, W. (1999b). The theoretical DETECT index of
 dimensionality and its application to approximate simple structure.
-\emph{Psychometrika}, \bold{64}, 213-249.
+\emph{Psychometrika, 64}, 213-249.
 
 Zhang, J. (2007). Conditional covariance theory and DETECT for
-polytomous items. \emph{Psychometrika}, \bold{72}, 69-91.
+polytomous items. \emph{Psychometrika, 72}, 69-91.
 
 Zhang, J. (2013). A procedure for dimensionality analyses of
-response data from various test designs. \emph{Psychometrika}, \bold{78}, 37-58.
+response data from various test designs. \emph{Psychometrika, 78}, 37-58.
 }
+
+
 \author{
 Alexander Robitzsch
 }
+
+
 %\note{
 %%  ~~further notes~~
 %}

@@ -1,5 +1,5 @@
 %% File Name: stratified.cronbach.alpha.Rd
-%% File Version: 0.23
+%% File Version: 0.24
 
 \name{stratified.cronbach.alpha}
 \alias{stratified.cronbach.alpha}
@@ -41,12 +41,13 @@ for the whole scale.
 \references{
 Cronbach, L.J., Schoenemann, P., & McKie, D. (1965).
 Alpha coefficient for stratified-parallel tests.
-\emph{Educational and Psychological Measurement},
-\bold{25}, 291-312.
+\emph{Educational and Psychological Measurement,
+25}, 291-312.
 
 Meyer, P. (2010). \emph{Reliability}. Cambridge:
 Oxford University Press.
 }
+
 \author{
 Alexander Robitzsch
 }

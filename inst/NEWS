@@ -34,9 +34,18 @@ CHANGELOG sirt
 
 
 
+------------------------------------------------------------------------
+VERSIONS sirt 3.0  |  2018-07-10  |  Last: sirt 3.0-2
+------------------------------------------------------------------------
+
+xxx   * ...
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
 
 ------------------------------------------------------------------------
-VERSIONS sirt 2.7  |  2018-06-25  |  Last: sirt 2.7-46
+VERSIONS sirt 2.7  |  2018-07-09  |  Last: sirt 2.7-50
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in tam2mirt() for models with polytomous data which
@@ -55,8 +64,6 @@ NOTE  * included utility function sirt_optimizer()
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 2.6  |  2018-03-21  |  Last: sirt 2.6-9

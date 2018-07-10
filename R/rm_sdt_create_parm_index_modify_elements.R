@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_create_parm_index_modify_elements.R
-## File Version: 0.07
+## File Version: 0.08
 
 
 rm_sdt_create_parm_index_modify_elements <- function(x, start_index, type)
@@ -18,8 +18,7 @@ rm_sdt_create_parm_index_modify_elements <- function(x, start_index, type)
         x_dim <- dim(x)
         K <- x_dim[2]
         for (kk in 1:K){
-            par1 <- data.frame(type=type, parindex=x[,kk], row=1:x_dim[1],
-                        col=kk)
+            par1 <- data.frame(type=type, parindex=x[,kk], row=1:x_dim[1], col=kk)
             partable0 <- rbind(partable0, par1)
         }
     }

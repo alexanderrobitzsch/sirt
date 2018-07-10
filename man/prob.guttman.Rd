@@ -1,5 +1,5 @@
 %% File Name: prob.guttman.Rd
-%% File Version: 1.25
+%% File Version: 1.27
 
 \name{prob.guttman}
 \alias{prob.guttman}
@@ -92,7 +92,7 @@ Hanson, B. (2000). \emph{IRT parameter estimation using the EM algorithm}.
 Technical Report.
 
 Proctor, C. H. (1970). A probabilistic formulation and statistical analysis
-for Guttman scaling. \emph{Psychometrika}, \bold{35}, 73-78.
+for Guttman scaling. \emph{Psychometrika, 35}, 73-78.
 }
 \author{
 Alexander Robitzsch
@@ -155,7 +155,7 @@ mirtmodel <- mirt::mirt.model("
 mod.pars <- mirt::mirt(dat, model=mirtmodel,  pars="values")
 # redefine initial parameter values
 mod.pars[ mod.pars$name=="d","value" ]  <- -1
-mod.pars[ mod.pars$name \%in\% paste0("a",1:3) & mod.pars$est  ,"value" ]  <- 2
+mod.pars[ mod.pars$name \%in\% paste0("a",1:3) & mod.pars$est ,"value" ]  <- 2
 mod.pars
 # define prior for latent class analysis
 lca_prior <- function(Theta,Etable){
@@ -229,9 +229,9 @@ mirtmodel <- mirt::mirt.model("
 mod.pars <- mirt::mirt(dat, model=mirtmodel,  pars="values")
 # redefine initial parameter values
 mod.pars[ mod.pars$name=="d","value" ]  <- -1
-mod.pars[ mod.pars$name \%in\% paste0("a",1:3) & mod.pars$est  ,"value" ]  <- .6
+mod.pars[ mod.pars$name \%in\% paste0("a",1:3) & mod.pars$est ,"value" ]  <- .6
 # set lower bound to zero ton ensure monotonicity
-mod.pars[ mod.pars$name \%in\% paste0("a",1:3)   ,"lbound" ]  <- 0
+mod.pars[ mod.pars$name \%in\% paste0("a",1:3)  ,"lbound" ]  <- 0
 mod.pars
 # estimate model in mirt
 mod4 <- mirt::mirt(dat, mirtmodel, pars=mod.pars, verbose=TRUE,

@@ -1,5 +1,5 @@
 %% File Name: rasch.mirtlc.Rd
-%% File Version: 2.91
+%% File Version: 2.931
 
 \name{rasch.mirtlc}
 \alias{rasch.mirtlc}
@@ -188,16 +188,16 @@ A list with following entries
 \references{
 Bartolucci, F. (2007). A class of multidimensional
 IRT models for testing unidimensionality and clustering
-items. \emph{Psychometrika}, \bold{72}, 141-157.
+items. \emph{Psychometrika, 72}, 141-157.
 
 Bartolucci, F., Montanari, G. E., & Pandolfi, S. (2012).
 Dimensionality of the latent structure and item selection via latent
 class multidimensional IRT models.
-\emph{Psychometrika}, \bold{77}, 782-802.
+\emph{Psychometrika, 77}, 782-802.
 
 De Leeuw, J., & Verhelst, N. (1986). Maximum likelihood estimation in
-generalized Rasch models. \emph{Journal of Educational and Behavioral Statistics},
-\bold{11}, 183-196.
+generalized Rasch models. \emph{Journal of Educational and Behavioral Statistics,
+11}, 183-196.
 
 Formann, A. K. (2007). (Almost) Equivalence between conditional and mixture
 maximum likelihood estimates for some models of the Rasch type.
@@ -207,17 +207,18 @@ Springer: New York.
 
 Goodman, L. A. (1974). Exploratory latent structure
 analysis using both identifiable and unidentifiable
-models. \emph{Biometrika}, \bold{61}, 215-231.
+models. \emph{Biometrika, 61}, 215-231.
 
 Lindsay, B., Clogg, C. C., & Grego, J. (1991).
 Semiparametric estimation in the Rasch model and related exponential response
 models, including a simple latent class model for item analysis.
-\emph{Journal of the American Statistical Association}, \bold{86}, 96-107.
+\emph{Journal of the American Statistical Association, 86}, 96-107.
 
 Xu, X., & von Davier, M. (2008). \emph{Fitting the structured general
 diagnostic model to NAEP data}. ETS Research Report ETS RR-08-27.
 Princeton, ETS.
 }
+
 \author{
 Alexander Robitzsch
 }
