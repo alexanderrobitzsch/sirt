@@ -1,5 +1,5 @@
 %% File Name: btm.Rd
-%% File Version: 0.21
+%% File Version: 0.31
 
 \name{btm}
 \alias{btm}
@@ -10,6 +10,10 @@ Extended Bradley-Terry Model
 }
 \description{
 Estimates an extended Bradley-Terry model (Hunter, 2004; see Details).
+Parameter estimation uses a bias corrected joint maximum likelihood
+estimation method based on
+\eqn{\varepsilon}-adjustment (see Bertoli-Barsotti, Lando & Punzo, 2014).
+See Details for the algorithm.
 }
 
 \usage{
@@ -46,7 +50,7 @@ Convergence criterion
 }
   \item{eps}{
 The \eqn{\varepsilon} parameter for the \eqn{\varepsilon}-adjustment
-method (see Bertoli-Barsotti & Punzo, 2012) which reduces bias
+method (see Bertoli-Barsotti, Lando & Punzo, 2014) which reduces bias
 in ability estimates. In case of \eqn{\varepsilon=0}, persons with
 extreme scores are removed from the pairwise comparison.
 }
@@ -65,6 +69,27 @@ The extended Bradley-Terry model for the comparison of individuals
 The parameters \eqn{\theta_i} denote the abilities, \eqn{\delta} is the
 tendency of the occurrence of ties and \eqn{\eta} is the home-advantage
 effect.
+
+A joint maximum likelihood (JML) estimation is applied for simulataneous 
+estimation of \eqn{\eta}, \eqn{\delta} and all \eqn{\theta_i} parameters.
+In the Rasch model, it was shown that JML can result in biased parameter
+estimates. The \eqn{\varepsilon}-adjustment approach has been proposed 
+to reduce the bias in parameter estimates (Bertoli-Bersotti, Lando & Punzo, 2014).
+This estimation approach is adapted to the Bradley-Terry model in
+the \code{btm} function. To this end, the likelihood function is
+modified for the purpose of bias reduction. It can be easily shown that there 
+exist sufficient statistics for \eqn{\eta}, \eqn{\delta} and all \eqn{\theta_i} 
+parameters. In the \eqn{\varepsilon}-adjustment approach, the sufficient
+statistic for the \eqn{\theta_i} parameter is modified. In JML estimation
+of the Bradley-Terry model, \eqn{S_i= \sum_{j \ne i} ( x_{ij} + x_{ji} )} is
+a suifficient statistic for \eqn{\theta_i}. Let \eqn{M_i} the maximum score
+for person \eqn{i} which is the number of \eqn{x_{ij}} terms appaering in
+\eqn{S_i}. In the \eqn{\varepsilon}-adjustment approach, the sufficient statistic
+\eqn{S_i} is modified to 
+\deqn{S_{i, \varepsilon} = \varepsilon + 
+\frac{M_i - 2 \varepsilon}{M_i} S_i } and \eqn{S_{i, \varepsilon}} intead of
+\eqn{S_{i}} is used in JML estimation. Hence, original scores \eqn{S_i} are
+linearly transformed for all persons \eqn{i}.
 }
 
 \value{
@@ -80,10 +105,10 @@ List with following entries
 }
 
 \references{
-Bertoli-Barsotti, L., & Punzo, A. (2012).
-Comparison of two bias reduction techniques for the Rasch model.
-\emph{Electronic Journal of Applied Statistical Analysis,
-5}, 360-366.
+Bertoli-Barsotti, L., Lando, T., & Punzo, A. (2014). Estimating a Rasch Model 
+via fuzzy empirical probability functions. In D. Vicari, A. Okada, G. Ragozini 
+& C. Weihs (Eds.). \emph{Analysis and Modeling of Complex Data in Behavioral 
+and Social Sciences}. Springer. 
 
 Hunter, D. R. (2004). MM algorithms for generalized Bradley-Terry models.
 \emph{Annals of Statistics, 32}, 384-406.

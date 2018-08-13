@@ -35,10 +35,12 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.0  |  2018-07-10  |  Last: sirt 3.0-2
+VERSIONS sirt 3.0  |  2018-08-13  |  Last: sirt 3.0-5
 ------------------------------------------------------------------------
 
-xxx   * ...
+NOTE  * included estimation details of btm() function 
+        (requested by San Verhavert)
+
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
