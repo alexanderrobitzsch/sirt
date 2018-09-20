@@ -1,10 +1,10 @@
 ## File Name: summary.lsem.R
-## File Version: 0.28
+## File Version: 0.31
 
 #############################################
 # summary lsem
-summary.lsem <- function( object, file=NULL, digits=3, ... ){
-
+summary.lsem <- function( object, file=NULL, digits=3, ... )
+{
     # open sink for a file
     sirt_osink( file=file  )
 

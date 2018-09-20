@@ -1,5 +1,5 @@
 %% File Name: rasch.pml3.Rd
-%% File Version: 2.72
+%% File Version: 2.73
 
 
 
@@ -23,8 +23,8 @@ error structure with itemclusters (argument \code{error.corr}).
 \usage{
 rasch.pml3(dat, est.b=seq(1, ncol(dat)), est.a=rep(0,ncol(dat)),
     est.sigma=TRUE, itemcluster=NULL, weight=rep(1, nrow(dat)), numdiff.parm=0.001,
-    b.init=NULL, a.init=NULL,  sigma.init=NULL, error.corr=0*diag( 1, ncol(dat) ), 
-    err.constraintM=NULL, err.constraintV=NULL, glob.conv=10^(-6), conv1=10^(-4), 
+    b.init=NULL, a.init=NULL,  sigma.init=NULL, error.corr=0*diag( 1, ncol(dat) ),
+    err.constraintM=NULL, err.constraintV=NULL, glob.conv=10^(-6), conv1=10^(-4),
     pmliter=300, progress=TRUE, use.maxincrement=TRUE )
 
 \method{summary}{rasch.pml}(object,...)

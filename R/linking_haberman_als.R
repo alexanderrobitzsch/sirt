@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_als.R
-## File Version: 0.50
+## File Version: 0.51
 
 
 ##########################################################################
@@ -27,13 +27,9 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
     while( ( parchange > conv ) & (iter < maxiter) ){
         logaAt0 <- logaAt
 
-        #---------------
-        # calculate average item parameter
+        #--- calculate average item parameter
         logaAt_M <- matrix( logaAt, nrow=NI, ncol=NS, byrow=TRUE)
-        # logaj <- rowSums( ( logaM - logaAt_M ) * wgtM, na.rm=TRUE)
         logaM_adj1 <- logaM - logaAt_M
-        # logaj <- rowSums( logaM_adj1 * wgtM, na.rm=TRUE) /
-        #            rowSums( wgtM, na.rm=TRUE)
         logaj <- weighted_rowMeans( mat=logaM_adj1, wgt=wgtM )
         # calculate adjusted mean slope
         logaMadj <- logaM - logaj

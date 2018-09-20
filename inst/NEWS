@@ -35,15 +35,18 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.0  |  2018-08-13  |  Last: sirt 3.0-5
+VERSIONS sirt 3.0  |  2018-09-20  |  Last: sirt 3.0-12
 ------------------------------------------------------------------------
 
 NOTE  * included estimation details of btm() function 
         (requested by San Verhavert)
+NOTE  * included argument 'center' in rasch.jml() which now also allows
+        option for centering item difficulties 
+        (request thoughtafter, issue #3)
 
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: rasch.jml (1)
 
 
 ------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 %% File Name: f1d.irt.Rd
-%% File Version: 1.31
+%% File Version: 1.32
 
 \name{f1d.irt}
 \alias{f1d.irt}
@@ -10,8 +10,8 @@ Functional Unidimensional Item Response Model
 
 \description{
 Estimates the functional unidimensional item response model for
-dichotomous data (Ip, Molenberghs, Chen, Goegebeur & De Boeck, 2013). 
-Either the IRT model is estimated using a probit link and employing tetrachoric 
+dichotomous data (Ip, Molenberghs, Chen, Goegebeur & De Boeck, 2013).
+Either the IRT model is estimated using a probit link and employing tetrachoric
 correlations or item discriminations and intercepts of a pre-estimated multidimensional IRT
 model are provided as input.
 }

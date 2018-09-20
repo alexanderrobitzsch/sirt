@@ -1,19 +1,19 @@
 ## File Name: fit.gradedresponse.R
-## File Version: 1.12
+## File Version: 1.13
 
 
 ###################################################
 # fit logistic model
 fit.gradedresponse <- function( freq.categories, SC, I, K,
-    conv=.0001, maxit=100, progress=TRUE ){
+    conv=.0001, maxit=100, progress=TRUE )
+{
     #*************************
     if (progress){ cat("\n*******Graded Response Model***********\n") }
     theta <- stats::qlogis( seq( .5, SC-1, len=SC ) / SC )
     # item parameters
     b <- rep(0,I)
     b.cat <- seq(1.5, -1.5, len=K)
-    #***********************************
-    # begin algorithm
+    #*** begin algorithm
     numdiff.parm <- .001
     max.increment <- 1
     increment.factor <- 1.01
@@ -44,17 +44,17 @@ fit.gradedresponse <- function( freq.categories, SC, I, K,
         b.cat <- b.cat - mean(b.cat )
         deviation <- max( abs( c( theta-theta0, b - b0, b.cat - b.cat0 )) )
         if (progress){
-                cat( "Iteration", iter, "- Deviation=",  round( deviation, 6 ), "\n")
-                flush.console()
-                    }
+            cat( "Iteration", iter, "- Deviation=",  round( deviation, 6 ), "\n")
+            utils::flush.console()
+        }
         iter <- iter + 1
-            }  # end algorithm
+    }  # end algorithm
     #*************************
     llcase.grm <- ll / mean( rowSums(colSums( freq.categories )))
     # output
-    res <- list( "item.sc"=b, "cat.sc"=b.cat,
-                "person.sc"=theta, "ll"=ll, "llcase"=llcase.grm,
-                "prob"=prob )
+    res <- list( item.sc=b, cat.sc=b.cat,
+                person.sc=theta, ll=ll, llcase=llcase.grm,
+                prob=prob )
     return(res)
-    }
+}
 ####################################################################

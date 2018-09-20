@@ -1,7 +1,6 @@
 ## File Name: lsem.estimate.R
-## File Version: 0.86
+## File Version: 0.892
 
-#################################################
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
         lavmodel, type="LSEM", h=1.1,
@@ -9,7 +8,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
         standardized=FALSE,
         standardized_type="std.all",
         lavaan_fct="sem", sufficient_statistics=FALSE,
-        eps=1E-8, verbose=TRUE, ... ){
+        eps=1E-8, verbose=TRUE, ... )
+{
 
     CALL <- match.call()
     s1 <- Sys.time()
@@ -51,11 +51,10 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     fM <- lavaan::fitMeasures( lavfit )
     fit_measures <- intersect( fit_measures, names(fM) )
     NF <- length(fit_measures)
-     if (standardized){
+    if (standardized){
         sol <- lavaan::standardizedSolution( lavfit, type=standardized_type)
         colnames(sol)[ which( colnames(sol)=="est.std" ) ] <- "est"
         sol$lhs <- paste0( "std__", sol$lhs)
-        # pars <- plyr::rbind.fill( pars, sol )
         pars <- sirt_rbind_fill( x=pars, y=sol )
     }
     pars <- apply( pars[, c("lhs", "op", "rhs" ) ], 1, FUN=function(ll){
@@ -66,14 +65,14 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     moderator.grid=moderator.grid, verbose=verbose, pars=pars,
                     standardized=standardized, variables_model=variables_model,
                     sufficient_statistics=sufficient_statistics,
-                    lavaan_fct=lavaan_fct, lavmodel=lavmodel,    ... )
+                    lavaan_fct=lavaan_fct, lavmodel=lavmodel, ... )
     parameters <- out2$parameters
     rownames(parameters) <- paste0( parameters$par, "__", parameters$grid_index )
 
     #****************************
     # parameter and fit statistics summary
     parameters_summary <- lsem_parameter_summary( parameters,
-             moderator.density=out$moderator.density, verbose )
+            moderator.density=out$moderator.density, verbose )
     out$moderator.density$Neff <- colSums(weights)
 
     obji0 <- obji <- out$moderator.density
@@ -98,22 +97,22 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     # output
     s2 <- Sys.time()
     res <- list( parameters=parameters, weights=weights,
-                 parameters_summary=parameters_summary,
-                 bw=out$bw, h=h, N=out$N,
-                 moderator.density=out$moderator.density,
-                 moderator.stat=moderator.stat,
-                 moderator.grouped=moderator.grouped,
-                 m.moderator=mean( data[,moderator], na.rm=TRUE ),
-                 sd.moderator=out$sd.moderator, moderator=moderator,
-                 moderator.grid=moderator.grid,
-                 lavmodel=lavmodel, residualize=residualize,
-                 data=data, residualized.intercepts=residualized_interceps,
-                 lavaan.args=lavaan.args,
-                 fit_measures=fit_measures, s1=s1, s2=s2,
-                 standardized=standardized,
-                 standardized_type=standardized_type,
-                 lavaan_fct=lavaan_fct,
-                 type=type, CALL=CALL )
+                    parameters_summary=parameters_summary,
+                    bw=out$bw, h=h, N=out$N,
+                    moderator.density=out$moderator.density,
+                    moderator.stat=moderator.stat,
+                    moderator.grouped=moderator.grouped,
+                    m.moderator=mean( data[,moderator], na.rm=TRUE ),
+                    sd.moderator=out$sd.moderator, moderator=moderator,
+                    moderator.grid=moderator.grid,
+                    lavmodel=lavmodel, residualize=residualize,
+                    data=data, residualized.intercepts=residualized_interceps,
+                    lavaan.args=lavaan.args,
+                    fit_measures=fit_measures, s1=s1, s2=s2,
+                    standardized=standardized,
+                    standardized_type=standardized_type,
+                    lavaan_fct=lavaan_fct,
+                    type=type, CALL=CALL )
     class(res) <- "lsem"
     return(res)
 }

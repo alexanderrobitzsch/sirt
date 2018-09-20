@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.Rd
-%% File Version: 1.37
+%% File Version: 1.42
 
 \name{rasch.jml}
 \alias{rasch.jml}
@@ -15,11 +15,11 @@ for the generation of starting values of item parameters.
 }
 \usage{
 rasch.jml(dat, method="MLE", b.init=NULL, constraints=NULL, weights=NULL,
-    glob.conv=10^(-6),   conv1=1e-05, conv2=0.001, progress=TRUE,
+    center="persons", glob.conv=10^(-6), conv1=1e-05, conv2=0.001, progress=TRUE,
     bsteps=4,thetasteps=2, wle.adj=0, jmliter=100, prox=TRUE,
     proxiter=30, proxconv=0.01, dp=NULL, theta.init=NULL, calc.fit=TRUE)
 
-\method{summary}{rasch.jml}(object,...)
+\method{summary}{rasch.jml}(object, digits=3, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -46,6 +46,10 @@ item difficulty.
   \item{weights}{
 Person sample weights. Default is \code{NULL}, i.e. all persons in the sample
 are equally weighted.
+}
+\item{center}{Character indicator whether persons (\code{"persons"}),
+items (\code{"items"}) should be centered or (\code{"none"})
+should be conducted.
 }
   \item{glob.conv}{
 Global convergence criterion with respect to the log-likelihood function
@@ -95,6 +99,7 @@ Convergence criterion for PROX iterations
   \item{object}{
 Object of class \code{rasch.jml}
 }
+\item{digits}{Number of digits used for rounding}
   \item{\dots}{
 Further arguments to be passed
 }
@@ -131,8 +136,8 @@ A list with following entries
  Warm, T. A. (1989). Weighted likelihood estimation of ability in the item
  response theory. \emph{Psychometrika, 54}, 427-450.
     }
-    
-    
+
+
 \author{
 Alexander Robitzsch
 }
@@ -169,12 +174,16 @@ set.seed(789)
 N <- 500    # number of persons
 I <- 11     # number of items
 b <- seq( -2, 2, length=I )
-dat <- sirt::sim.raschtype( stats::rnorm( N ), b )
+dat <- sirt::sim.raschtype( stats::rnorm( N, mean=.5 ), b )
 colnames(dat) <- paste( "I", 1:I, sep="")
 
-# JML estimation of the Rasch model
+# JML estimation of the Rasch model (centering persons)
 mod1 <- sirt::rasch.jml( dat )
 summary(mod1)
+
+# JML estimation of the Rasch model (centering items)
+mod1b <- sirt::rasch.jml( dat, center="items" )
+summary(mod1b)
 
 # MML estimation with rasch.mml2 function
 mod2 <- sirt::rasch.mml2( dat )

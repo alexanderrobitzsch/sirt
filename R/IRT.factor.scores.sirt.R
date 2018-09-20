@@ -1,10 +1,11 @@
 ## File Name: IRT.factor.scores.sirt.R
-## File Version: 0.10
+## File Version: 0.11
 
 
 ########################################################################
 # rm.facets
-IRT.factor.scores.rm.facets <- function( object, type="EAP", ... ){
+IRT.factor.scores.rm.facets <- function( object, type="EAP", ... )
+{
     # admissible factor score types
     x1 <- c("EAP","MLE","WLE")
     if ( ! ( type %in% x1 ) ){
@@ -16,7 +17,7 @@ IRT.factor.scores.rm.facets <- function( object, type="EAP", ... ){
         res <- res[, c("pid", "EAP", "SE.EAP") ]
         attr(res,"type") <- type
         attr(res,"reliability") <- object$EAP.rel
-                        }
+    }
     #**** MLE or WLE
     if ( type %in% c("MLE","WLE") ){
         data <- object$procdata$dat2.NA
@@ -30,10 +31,9 @@ IRT.factor.scores.rm.facets <- function( object, type="EAP", ... ){
         res <- data.frame("pid"=object$person$pid, res )
         attr(res,"type") <- type
         attr(res,"reliability") <- mle.reliability( meas=res$est, se.meas=res$se )
-                    }
-
+    }
     return(res)
-            }
+}
 ########################################################################
 # rm.sdt
 IRT.factor.scores.rm.sdt <- IRT.factor.scores.rm.facets

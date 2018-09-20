@@ -1,5 +1,5 @@
 ## File Name: mcmc.3pno.testlet.R
-## File Version: 4.19
+## File Version: 4.21
 ######################################################
 # MCMC estimation 2PNO model
 mcmc.3pno.testlet <- function(dat, testlets=rep(NA, ncol(dat)),
@@ -30,7 +30,6 @@ mcmc.3pno.testlet <- function(dat, testlets=rep(NA, ncol(dat)),
         weights <- N * weights / sum(weights )
     }
     # set initial values
-#    a.testlet <- a <- rep(.6,I)
     a.testlet <- a <- rep(1,I)
     b <- stats::qnorm( (colMeans(dat0, na.rm=TRUE) + .01 )/1.02 )
     # guessing parameters

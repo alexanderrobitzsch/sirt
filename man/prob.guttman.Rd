@@ -1,5 +1,5 @@
 %% File Name: prob.guttman.Rd
-%% File Version: 1.27
+%% File Version: 1.28
 
 \name{prob.guttman}
 \alias{prob.guttman}
@@ -155,7 +155,7 @@ mirtmodel <- mirt::mirt.model("
 mod.pars <- mirt::mirt(dat, model=mirtmodel,  pars="values")
 # redefine initial parameter values
 mod.pars[ mod.pars$name=="d","value" ]  <- -1
-mod.pars[ mod.pars$name \%in\% paste0("a",1:3) & mod.pars$est ,"value" ]  <- 2
+mod.pars[ mod.pars$name \%in\% paste0("a",1:3) & mod.pars$est,"value" ]  <- 2
 mod.pars
 # define prior for latent class analysis
 lca_prior <- function(Theta,Etable){
@@ -229,9 +229,9 @@ mirtmodel <- mirt::mirt.model("
 mod.pars <- mirt::mirt(dat, model=mirtmodel,  pars="values")
 # redefine initial parameter values
 mod.pars[ mod.pars$name=="d","value" ]  <- -1
-mod.pars[ mod.pars$name \%in\% paste0("a",1:3) & mod.pars$est ,"value" ]  <- .6
+mod.pars[ mod.pars$name \%in\% paste0("a",1:3) & mod.pars$est,"value" ]  <- .6
 # set lower bound to zero ton ensure monotonicity
-mod.pars[ mod.pars$name \%in\% paste0("a",1:3)  ,"lbound" ]  <- 0
+mod.pars[ mod.pars$name \%in\% paste0("a",1:3) ,"lbound" ]  <- 0
 mod.pars
 # estimate model in mirt
 mod4 <- mirt::mirt(dat, mirtmodel, pars=mod.pars, verbose=TRUE,

@@ -1,5 +1,5 @@
 ## File Name: mirt.wrapper.calc.counts.R
-## File Version: 0.09
+## File Version: 0.10
 
 
 #######################################################
@@ -9,15 +9,15 @@ mirt.wrapper.calc.counts <- function( resp, theta, resp.ind,
 {
     TP <- nrow(theta)
     I <- ncol(resp)
-    if ( is.null( group )){ 
-        group <- rep(1, nrow(resp)) 
+    if ( is.null( group )){
+        group <- rep(1, nrow(resp))
     }
     G <- length( unique( group ))
     # n.ik [ 1:TP, 1:I, 1:(K+1), 1:G ]
     n.ik <- array( 0, dim=c(TP,I,maxK, G ))
-    for (gg in 1:G){ 
+    for (gg in 1:G){
     ind.gg <- which( group==gg )
-        for (kk in 1:(maxK)){ 
+        for (kk in 1:(maxK)){
             dkk2 <- ( resp[ ind.gg, ]==(kk-1) ) * resp.ind[ ind.gg ] * pweights[ind.gg]
             # t( t(A) * B )=t(B) * A=crossprod(B,A)
             n.ik[,,kk,gg] <- crossprod( hwt[ind.gg,], dkk2 )
