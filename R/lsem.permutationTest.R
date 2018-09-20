@@ -1,5 +1,5 @@
 ## File Name: lsem.permutationTest.R
-## File Version: 0.29
+## File Version: 0.34
 
 ############################################
 # permutation test for LSEM model
@@ -39,7 +39,6 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
 
     #******************************************
     # start permutation test
-
     parameters_permutation <- matrix( NA, nrow(parameters), ncol=B)
     parameters_summary_M <- matrix( NA, nrow(parameters_summary), ncol=B)
     rownames(parameters_summary_M) <- parameters_summary$par
@@ -49,22 +48,34 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
     if ( verbose ){
         cat("Permutation test LSEM \n")
     }
-
-    for (bb in 1:B){
-        # bb <- 1
-        if (verbose){
-            cat( bb, " ")
-            if ( bb %% 20==0 ){ cat("\n") }
-            utils::flush.console();
-        }
+    #** estimate model for each permutation
+    bb <- 1
+    nn <- 0
+    while (bb <= B){
         data1[, moderator ] <- sample( data0[, moderator ] )
         arglist$data <- data1
-        res0 <- do.call( "lsem.estimate", arglist )
-        parameters_permutation[, bb] <- res0$parameters$est
-        parameters_summary_M[,bb] <- res0$parameters_summary$M
-        parameters_summary_SD[,bb] <- res0$parameters_summary$SD
-        parameters_summary_MAD[,bb] <- res0$parameters_summary$MAD
-        parameters_summary_lin_slo[,bb] <- res0$parameters_summary$lin_slo
+        res0 <- try( do.call( what="lsem.estimate", args=arglist ), silent=TRUE )
+        if ( class(res0) != "try-error" ){
+            parameters_permutation[, bb] <- res0$parameters$est
+            parameters_summary_M[,bb] <- res0$parameters_summary$M
+            parameters_summary_SD[,bb] <- res0$parameters_summary$SD
+            parameters_summary_MAD[,bb] <- res0$parameters_summary$MAD
+            parameters_summary_lin_slo[,bb] <- res0$parameters_summary$lin_slo
+            if (verbose){
+                cat( bb, " ")
+                if ( bb %% 20==0 ){ 
+                    cat("\n") 
+                }
+                utils::flush.console();
+            }                
+            bb <- bb+1
+        } else {
+            nn <- nn + 1
+            if (verbose){
+                cat( "\n Delete permutation dataset due to non-convergence\n")
+                utils::flush.console()
+            }        
+        }    
     }
     if (verbose){ cat("\n") }
 
@@ -97,6 +108,9 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
     parameters_pointwise_test$p <- ifelse( parameters_pointwise_test$p > 1,
                                         1, parameters_pointwise_test$p )
 
+    #- non-convergence rates
+    nonconverged_rate <- 100*nn / (B+nn)
+                                        
     s2 <- Sys.time()
 
     res <- list( teststat=teststat,
@@ -112,7 +126,8 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
                      moderator.density=object$moderator.density,
                      moderator=object$moderator,
                      moderator.grid=object$moderator.grid,
-                     h=object$h, bw=object$bw, N=object$N,
+                     h=object$h, bw=object$bw, N=object$N,        
+                     nonconverged_rate=nonconverged_rate,
                      B=B, s1=s1, s2=s2, lavmodel=object$lavmodel, CALL=CALL
                             )
     class(res) <- "lsem.permutationTest"

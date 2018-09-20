@@ -1,5 +1,5 @@
 ## File Name: rm.sdt.R
-## File Version: 8.874
+## File Version: 8.875
 
 #################################################################
 # Hierarchical rater model
@@ -403,11 +403,6 @@ rm.sdt <- function( dat, pid, rater,Qmatrix=NULL, theta.k=seq(-9,9,len=30),
     rt1$rater <- unlist( lapply( l2, FUN=function(uu){ uu[[2]] } ) )
 
     #*****
-    # dimnames probs
-    # dimnames(probs)[[1]] <- colnames(dat2)
-    #*****
-
-    #*****
     # distribution
     skill.distribution <- data.frame("theta.k"=theta.k, "pi.k"=pi.k )
 
@@ -424,7 +419,6 @@ rm.sdt <- function( dat, pid, rater,Qmatrix=NULL, theta.k=seq(-9,9,len=30),
     cat("EAP Reliability","=", round(EAP.rel,3), "\n")
 
     s2 <- Sys.time()
-
     res <- list( deviance=dev, ic=ic, item=item, rater=rater, person=person,
                 EAP.rel=EAP.rel, mu=mu, sigma=sigma, theta.k=theta.k, pi.k=pi.k, G=1,
                 tau.item=tau.item, a.item=a.item, c.rater=c.rater, d.rater=d.rater,

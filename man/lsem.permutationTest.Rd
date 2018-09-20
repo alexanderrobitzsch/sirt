@@ -1,5 +1,5 @@
 %% File Name: lsem.permutationTest.Rd
-%% File Version: 0.22
+%% File Version: 0.23
 
 \name{lsem.permutationTest}
 \alias{lsem.permutationTest}
@@ -111,6 +111,8 @@ p values.}
 \item{parameters_summary_MAD}{Mean absolute deviation (MAD)
     statistic in permutation sample.}
 \item{parameters_summary_MAD}{Linear slope parameter in permutation sample.}
+\item{nonconverged_rate}{Percentage of permuted dataset in which a LSEM model
+did not converge}
 }
 
 %%  \item{comp1 }{Description of 'comp1'}

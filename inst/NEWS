@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.0  |  2018-09-20  |  Last: sirt 3.0-12
+VERSIONS sirt 3.0  |  2018-09-20  |  Last: sirt 3.0-13
 ------------------------------------------------------------------------
 
 NOTE  * included estimation details of btm() function 
@@ -43,7 +43,9 @@ NOTE  * included estimation details of btm() function
 NOTE  * included argument 'center' in rasch.jml() which now also allows
         option for centering item difficulties 
         (request thoughtafter, issue #3)
-
+FIXED * exclude non-converged model estimates for permutation datasets 
+        in lsem.permutationTest() (reported by Moritz Breit)
+        
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: rasch.jml (1)
