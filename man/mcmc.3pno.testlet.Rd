@@ -1,5 +1,5 @@
 %% File Name: mcmc.3pno.testlet.Rd
-%% File Version: 1.24
+%% File Version: 1.25
 
 \name{mcmc.3pno.testlet}
 \alias{mcmc.3pno.testlet}
@@ -15,7 +15,7 @@ by Markov Chain Monte Carlo methods (Glas, 2012).
 mcmc.3pno.testlet(dat, testlets=rep(NA, ncol(dat)),
    weights=NULL, est.slope=TRUE, est.guess=TRUE, guess.prior=NULL,
    testlet.variance.prior=c(1, 0.2), burnin=500, iter=1000,
-   N.sampvalues=1000, progress.iter=50, save.theta=FALSE)
+   N.sampvalues=1000, progress.iter=50, save.theta=FALSE, save.gamma.testlet=FALSE )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -63,7 +63,10 @@ Display progress every \code{progress.iter}-th iteration. If no progress
 display is wanted, then choose \code{progress.iter} larger than \code{iter}.
 }
   \item{save.theta}{
-Should theta values be saved?
+Logical indicating whether theta values should be saved
+}
+\item{save.gamma.testlet}{
+Logical indicating whether gamma values should be saved
 }
 }
 

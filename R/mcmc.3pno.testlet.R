@@ -1,12 +1,12 @@
 ## File Name: mcmc.3pno.testlet.R
-## File Version: 4.21
+## File Version: 4.27
 ######################################################
 # MCMC estimation 2PNO model
 mcmc.3pno.testlet <- function(dat, testlets=rep(NA, ncol(dat)),
         weights=NULL, est.slope=TRUE, est.guess=TRUE, guess.prior=NULL,
         testlet.variance.prior=c( 1, .2 ),
         burnin=500, iter=1000, N.sampvalues=1000,
-        progress.iter=50, save.theta=FALSE )
+        progress.iter=50, save.theta=FALSE, save.gamma.testlet=FALSE )
 {
     s1 <- Sys.time()
     param <- 1
@@ -75,7 +75,6 @@ mcmc.3pno.testlet <- function(dat, testlets=rep(NA, ncol(dat)),
     sigma.chain <- deviance.chain <- rep(NA, SV)
     gamma.testlet.chain <- matrix(NA, SV, N*(TT+1) )
     zz <- 0
-
 
     #************************************************
     #************************************************
@@ -171,6 +170,9 @@ mcmc.3pno.testlet <- function(dat, testlets=rep(NA, ncol(dat)),
             }
             sigma.testlet.chain[zz,] <- sigma.testlet
             theta.chain[ zz, ] <- theta
+            if (save.gamma.testlet){
+                gamma.testlet.chain[zz,] <- matrix( gamma.testlet, nrow=1, ncol=N*(TT-1) )
+            }
             sigma.chain[ zz ] <- sigma
             gamma.testlet.chain[zz, ] <- matrix(gamma.testlet, ncol=N*(TT+1), nrow=1 )
             deviance.chain[zz] <- .mcmc.deviance.3pno.testlet( aM, bM,
@@ -223,7 +225,8 @@ mcmc.3pno.testlet <- function(dat, testlets=rep(NA, ncol(dat)),
     #----
     # result list
     res <- list( mcmcobj=mcmcobj, summary.mcmcobj=summary.mcmcobj, ic=ic, burnin=burnin,
-                iter=iter, theta.chain=theta.chain, deviance.chain=deviance.chain,
+                iter=iter, theta.chain=theta.chain, gamma.testlet.chain=gamma.testlet.chain,
+                deviance.chain=deviance.chain,
                 EAP.rel=EAP.rel, person=person, dat=dat0, weights=weights, time=time,
                 model='3pno.testlet', description=description, TT=TT )
     class(res) <- "mcmc.sirt"
