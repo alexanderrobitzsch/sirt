@@ -1,5 +1,5 @@
 ## File Name: rasch.jml.R
-## File Version: 3.294
+## File Version: 3.295
 
 
 rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights=NULL,
@@ -34,6 +34,7 @@ rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights
     if (! is.null(constraints) ){
         prox <- FALSE
         centerpersons <- FALSE
+        center <- "none"
     }
 
     # data preparations

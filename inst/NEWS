@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.0  |  2018-09-28  |  Last: sirt 3.0-14
+VERSIONS sirt 3.0  |  2018-10-18  |  Last: sirt 3.0-21
 ------------------------------------------------------------------------
 
 NOTE  * included estimation details of btm() function 
@@ -46,8 +46,10 @@ NOTE  * included argument 'center' in rasch.jml() which now also allows
 FIXED * exclude non-converged model estimates for permutation datasets 
         in lsem.permutationTest() (reported by Moritz Breit)
 NOTE  * added argument 'save.gamma.testlet' in mcmc.3pno.testlet()
-        (requested by Vladimir Volokhonsky, issue #4)
-        
+        (requested by Vladimir Volokhonsky, issue #4)     
+NOTE  * corrected internet address for DIMTEST software in ?conf.detect
+        (thanks to Julius Fenn)
+  
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: rasch.jml (1)

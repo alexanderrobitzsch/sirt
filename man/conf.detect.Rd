@@ -1,5 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.42
+%% File Version: 1.43
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -139,7 +139,7 @@ Alexander Robitzsch
 
 \seealso{
 For a download of the free \emph{DIM-Pack} software (DIMTEST, DETECT) see
-\url{http://psychometrictools.measuredprogress.org/home}.
+\emph{https://psychometrics.onlinehelp.measuredprogress.org/tools/dim/}.
 
 See \code{\link{expl.detect}} for exploratory DETECT analysis.
 }

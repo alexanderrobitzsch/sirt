@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.Rd
-%% File Version: 0.25
+%% File Version: 0.27
 
 \name{rasch.pairwise}
 \alias{rasch.pairwise}
@@ -88,32 +88,33 @@ estimation) can be conducted with \code{\link{rasch.pml3}}.
 #############################################################################
 
 data(data.read)
+dat <- data.read
 
 #*** Model 1: no constraint on item difficulties
-mod1 <- sirt::rasch.pairwise( data.read )
+mod1 <- sirt::rasch.pairwise(dat)
 summary(mod1)
 
 #*** Model 2: sum constraint on item difficulties
-mod2 <- sirt::rasch.pairwise( data.read, zerosum=TRUE)
+mod2 <- sirt::rasch.pairwise(dat, zerosum=TRUE)
 summary(mod2)
 
 \dontrun{
+#** obtain standard errors by bootstrap 
 mod2$item$b   # extract item difficulties
 
-# Bootstrap for item difficulties
+# Bootstrap of item difficulties
 boot_pw <- function(data, indices ){
-        dd <- data[ indices, ] # bootstrap of indices
-        mod <- sirt::rasch.pairwise( dd, zerosum=TRUE, progress=FALSE)
-        mod$item$b
-    }
+    dd <- data[ indices, ] # bootstrap of indices
+    mod <- sirt::rasch.pairwise( dat=dd, zerosum=TRUE, progress=FALSE)
+    return(mod$item$b)
+}
 set.seed(986)
 library(boot)
-dat <- data.read
-bmod2 <- boot::boot( dat, boot_pw, R=999 )
-bmod2
+bmod2 <- boot::boot(data=dat, statistic=boot_pw, R=999 )
+print(bmod2)
 summary(bmod2)
 # quantiles for bootstrap sample (and confidence interval)
-apply( bmod2$t, 2, quantile, c(.025,.5, .975) )
+apply(bmod2$t, 2, stats::quantile, probs=c(.025, .5, .975) )
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
