@@ -1,5 +1,5 @@
 ## File Name: rasch.copula2_aux.R
-## File Version: 1.21
+## File Version: 1.22
 
 
 
@@ -734,8 +734,9 @@ person.parameter.rasch.copula <- function( raschcopula.object, numdiff.parm=.001
                     "converged"=1*(ind1==1),
                 "score"=rowSums(dat2), "max"=rowSums( dat2.resp),
                  "theta.dep"=theta0, "theta.ind"=theta0i )
-        res$setheta.dep <- sqrt( - 1 / d2d )
-        res$setheta.ind <- sqrt( - 1 / d2i )
+        eps <- 1E-7
+        res$setheta.dep <- sqrt( - 1 / abs(d2d+eps) )
+        res$setheta.ind <- sqrt( - 1 / abs(d2i+eps) )
         res$setheta.dep[ is.na(theta0i) ] <- NA
         res$setheta.ind[ is.na(theta0i) ] <- NA
         res$seinflat <- res$setheta.dep / res$setheta.ind
