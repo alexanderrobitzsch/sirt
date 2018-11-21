@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_rm_sdt.cpp
-//// File Version: 0.412
+//// File Version: 0.413
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -311,7 +311,8 @@ double sirt_rcpp_plogis( double x)
     double y=0;
     double z=0;
     if (x >= 0){
-        y = 1 / ( 1 + std::exp(-x) );
+        z = std::exp(-x);
+        y = 1 / ( 1 + z );
     } else {
         z = std::exp(x);
         y = z / ( 1 + z );

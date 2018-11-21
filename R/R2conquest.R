@@ -1,5 +1,5 @@
 ## File Name: R2conquest.R
-## File Version: 1.37
+## File Version: 1.38
 
 
 
@@ -179,7 +179,7 @@ R2conquest <- function( dat, path.conquest, conquest.name="console",
                 "caseweight wgt;",
                 paste( "codes ", paste( itemcodes,collapse=","),";",sep=""),
                 ifelse( is.null(designmatrix), "labels << %name%.nam;", "" ),          "",
-                scorestate, "" ,
+                scorestate, "",
                 # initial item parameters
                 ifelse( ! is.null(init_parameters), paste( "import init_parameters << ", init_parameters, " ; ", sep=""), ""),
                 # import designmatrix

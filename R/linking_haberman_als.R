@@ -1,11 +1,11 @@
 ## File Name: linking_haberman_als.R
-## File Version: 0.51
+## File Version: 0.53
 
 
 ##########################################################################
 # alternating least squares for Haberman linking
 linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
-       progress, est.type, cutoff, reference_value=0 )
+            progress, est.type, cutoff, reference_value=0 )
 {
     #****************
     iter <- 0
@@ -26,7 +26,6 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
     #*** begin algorithm
     while( ( parchange > conv ) & (iter < maxiter) ){
         logaAt0 <- logaAt
-
         #--- calculate average item parameter
         logaAt_M <- matrix( logaAt, nrow=NI, ncol=NS, byrow=TRUE)
         logaM_adj1 <- logaM - logaAt_M
@@ -71,8 +70,8 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
         res <- list( vcov=0*diag(NS-1), se=rep(0,NS-1)  )
     } else {
         res <- linking_haberman_als_vcov( regr_resid=loga_resid,
-                   regr_wgt=wgtM, selitems=selitems,
-                   transf_pars=logaAt )
+                    regr_wgt=wgtM, selitems=selitems,
+                    transf_pars=logaAt )
     }
 
     #--- item statistics
@@ -81,10 +80,10 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
     item_stat$sumwgt_items <- colSums( wgt_adj, na.rm=TRUE )
     #-------
     #*** end algorithm
-    res <- list( "logaAt"=logaAt, "logaj"=logaj,
-                "loga_resid"=loga_resid, "loga_wgt"=wgtM,
-                "loga_wgt_adj"=wgt_adj,
-                "vcov"=res$vcov, "se"=c( NA, res$se),
+    res <- list( logaAt=logaAt, logaj=logaj,
+                loga_resid=loga_resid, loga_wgt=wgtM,
+                loga_wgt_adj=wgt_adj,
+                vcov=res$vcov, se=c(NA, res$se),
                 item_stat=item_stat )
     return(res)
 }

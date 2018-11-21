@@ -1,5 +1,5 @@
 ## File Name: mcmc.2pno.ml.R
-## File Version: 3.16
+## File Version: 3.18
 ##############################################
 # MCMC estimation 2PNO model
 mcmc.2pno.ml <- function(dat, group,
@@ -10,7 +10,8 @@ mcmc.2pno.ml <- function(dat, group,
         progress.iter=50, prior.sigma2=c(1,.4 ),
         prior.sigma.b=c(1,1), prior.sigma.a=c(1,1),
         prior.omega.b=c(1,1), prior.omega.a=c(1,.4),
-        sigma.b.init=.3        ){
+        sigma.b.init=.3 )
+{
     ##############################
     # INPUT:
     # describe input in help files
@@ -67,7 +68,7 @@ mcmc.2pno.ml <- function(dat, group,
     theta2 <- rep( stats::rnorm( G, sd=.2 ), groupsize )
     # inits Level 1 and Level 2 standard deviations
     sigma1 <- sqrt( .7 )
-    sigma2 <- sqrt( .3 )
+    sigma2 <- sqrt(.3)
     # residual standard deviation (only applies in model with normal data)
     sigma.res <- apply( dat0, 2, stats::sd, na.rm=TRUE ) * .8
     #***
@@ -79,7 +80,7 @@ mcmc.2pno.ml <- function(dat, group,
     threshupp[ is.na(dat0) ] <- ZZ
     # saved values
     SV <- min( N.sampvalues, iter - burnin )
-    svindex <- round( seq( burnin, iter, len=SV )     )
+    svindex <- round( seq( burnin, iter, len=SV ) )
     a.chain <- matrix( NA, SV, I )
     b.chain <- matrix( NA, SV, I )
     sigma.res.chain <- sigma.a.chain <- sigma.b.chain <- matrix( NA, SV, I )
@@ -218,23 +219,24 @@ mcmc.2pno.ml <- function(dat, group,
             omega.a.chain[zz] <- omega.a
             if (link=="normal"){
                 sigma.res.chain[zz,] <- sigma.res
-                    }
+            }
             # sum b and a parameters
             bM.chainsum <- bM.chainsum + bM
             aM.chainsum <- aM.chainsum + aM
-                        }
+        }
         # print progress
         if ( ( ii %% progress.iter )==0 ){
             cat( "Iteration", ii, " | ", paste(Sys.time()), "\n")
-            flush.console() }
+            utils::flush.console()
+        }
+    }
 
-                }
     ##############################
     # output
     # Information criteria
     ic <- .mcmc.ic.2pno.ml( aM.chainsum, bM.chainsum, theta.chain, N, I,
-                dat, dat.resp,eps, deviance.chain, groupsize,
-                sigma.res.chain, link  )
+                dat, dat.resp, eps, deviance.chain, groupsize,
+                sigma.res.chain, link )
 
     # EAP reliability and person parameter estimates (okay!)
     res <- .mcmc.person.2pno.ml( theta.chain, weights=NULL )
@@ -247,7 +249,7 @@ mcmc.2pno.ml <- function(dat, group,
         sigma1.chain, sigma2.chain, I, SV, burnin, iter,
         est.b.M, mu.b.chain, omega.b.chain, sigma.b.chain, est.b.Var,
         est.a.M, est.a.Var, omega.a.chain, sigma.a.chain,
-        sigma.res.chain, link        )
+        sigma.res.chain, link )
 
     #----
     # summary of the MCMC output
@@ -261,13 +263,12 @@ mcmc.2pno.ml <- function(dat, group,
     if ( link=="normal"){ description <- "Normal Multilevel Model" }
     #----
     # result list
-    res <- list( "mcmcobj"=mcmcobj, "summary.mcmcobj"=summary.mcmcobj,
-            "ic"=ic,
-            "burnin"=burnin, "iter"=iter,
-            "theta.chain"=theta.chain, "theta2.chain"=theta2.chain,
-            "deviance.chain"=deviance.chain,
-            "EAP.rel"=EAP.rel, "person"=person, "dat"=dat0,
-            "time"=time, "model"="2pno.ml", "description"=description )
+    res <- list( mcmcobj=mcmcobj, summary.mcmcobj=summary.mcmcobj,
+            ic=ic, burnin=burnin, iter=iter,
+            theta.chain=theta.chain, theta2.chain=theta2.chain,
+            deviance.chain=deviance.chain,
+            EAP.rel=EAP.rel, person=person, dat=dat0,
+            time=time, model='2pno.ml', description=description )
     class(res) <- "mcmc.sirt"
     return(res)
-    }
+}

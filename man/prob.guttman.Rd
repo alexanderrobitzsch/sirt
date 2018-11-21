@@ -1,5 +1,5 @@
 %% File Name: prob.guttman.Rd
-%% File Version: 1.28
+%% File Version: 1.29
 
 \name{prob.guttman}
 \alias{prob.guttman}
@@ -231,7 +231,7 @@ mod.pars <- mirt::mirt(dat, model=mirtmodel,  pars="values")
 mod.pars[ mod.pars$name=="d","value" ]  <- -1
 mod.pars[ mod.pars$name \%in\% paste0("a",1:3) & mod.pars$est,"value" ]  <- .6
 # set lower bound to zero ton ensure monotonicity
-mod.pars[ mod.pars$name \%in\% paste0("a",1:3) ,"lbound" ]  <- 0
+mod.pars[ mod.pars$name \%in\% paste0("a",1:3),"lbound" ]  <- 0
 mod.pars
 # estimate model in mirt
 mod4 <- mirt::mirt(dat, mirtmodel, pars=mod.pars, verbose=TRUE,

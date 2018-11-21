@@ -1,5 +1,5 @@
 ## File Name: rasch.jml.R
-## File Version: 3.295
+## File Version: 3.298
 
 
 rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights=NULL,
@@ -226,9 +226,14 @@ rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights
     # item parameter constraints and correction formula
     UJJ <- 0
     # item summary
-    dfr <- data.frame(  N=colSums( dat2.resp  * dat1[,2] ),
-                p=colMeans( dat, na.rm=TRUE ), itemdiff=b, itemdiff.correction=b * (I-1)/I,
-                se=se.b, discr=a.i )
+    dfr <- data.frame(  N=colSums(dat2.resp*dat1[,2]),
+                p=colMeans( dat, na.rm=TRUE ), itemdiff=b,
+                itemdiff.correction=b*(I-1)/I, se=se.b, discr=a.i )
+    if ( ! is.null(constraints)    ){
+        dfr$itemdiff.correction <- dfr$itemdiff
+    }
+
+
     # include item fit statistics                              #
     if (calc.fit){
         dfr <- data.frame( dfr, fit )

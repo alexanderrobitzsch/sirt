@@ -1,5 +1,5 @@
 ## File Name: latent.regression.em.raschtype.R
-## File Version: 2.58
+## File Version: 2.59
 
 
 #----------------------------------------------------------------------------
@@ -131,7 +131,7 @@ latent.regression.em.raschtype <- function( data=NULL, f.yi.qk=NULL, X,
         .prnum(scoefs,4)        # print results
         cat( paste( "\nResidual Variance=", round( sigma^2, 4 ) ), "\n" )
         cat( paste( "Explained Variance=", round( explvar, 4 ) ), "\n" )
-        cat( paste( "Total Variance =", round( totalvar, 4 ) ), "\n" )
+        cat( paste( "Total Variance=", round( totalvar, 4 ) ), "\n" )
         cat( paste( "            R2=", round( rsquared, 4 ) ), "\n" )
                 }
     #********

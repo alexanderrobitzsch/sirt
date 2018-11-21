@@ -1,12 +1,12 @@
 ## File Name: IRT.mle.R
-## File Version: 0.16
+## File Version: 0.26
 
 
 #################################################################
 # IRT.mle
 IRT.mle <- function(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
-     mu=0, sigma=1,maxiter=20,
-     maxincr=3, h=0.001, convP=1e-04, maxval=9, progress=TRUE){
+        mu=0, sigma=1,maxiter=20, maxincr=3, h=0.001, convP=1e-04, maxval=9, progress=TRUE)
+{
 
     N <- length(theta)
     I <- ncol(data)
@@ -47,17 +47,17 @@ IRT.mle <- function(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
         #-----
         # prior distribution
         if (MAP){
-           llP0 <- llP0 + log( stats::dnorm( theta, mean=mu,sd=sigma) )
-           llP1 <- llP1 + log( stats::dnorm( theta+h, mean=mu,sd=sigma) )
-           llP2 <- llP2 + log( stats::dnorm( theta+2*h, mean=mu,sd=sigma) )
-           llM1 <- llM1 + log( stats::dnorm( theta-h, mean=mu,sd=sigma) )
-           llM2 <- llM2 + log( stats::dnorm( theta-2*h, mean=mu,sd=sigma) )
+           llP0 <- llP0 + stats::dnorm( theta, mean=mu,sd=sigma, log=TRUE)
+           llP1 <- llP1 + stats::dnorm( theta+h, mean=mu,sd=sigma, log=TRUE)
+           llP2 <- llP2 + stats::dnorm( theta+2*h, mean=mu,sd=sigma, log=TRUE)
+           llM1 <- llM1 + stats::dnorm( theta-h, mean=mu,sd=sigma, log=TRUE)
+           llM2 <- llM2 + stats::dnorm( theta-2*h, mean=mu,sd=sigma, log=TRUE)
         }
         #-----
         #*** likelihood
         ll0 <- llP0
         ll1 <- ( llP1 - llP0 ) / h
-        ll2 <- ( llP1 - 2*llP0 + llM1 ) / (h^2 )
+        ll2 <- ( llP1 - 2*llP0 + llM1 ) / (h^2)
         # ability increments
         M1 <- ll1
         ll2 <- ll2 + eps
@@ -84,7 +84,7 @@ IRT.mle <- function(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
 
     #--- output
     se <- sqrt( abs( - 1 / ll2 ) )
-     se <-  ifelse( abs(theta)==maxval, NA, se )
+    se <-  ifelse( abs(theta)==maxval, NA, se )
     theta <- ifelse( theta==maxval, Inf, theta )
     theta <- ifelse( theta==- maxval, -Inf, theta )
     res <- data.frame( "est"=theta, "se"=se )
@@ -93,28 +93,30 @@ IRT.mle <- function(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
     attr(res, "type") <- type
     if ( type %in% c("MLE","WLE") ){
         attr(res, "reliability") <- mle.reliability( res$est, res$se )
-                                    }
+    }
     if ( type %in% c("MAP") ){
         attr(res, "reliability") <- eap.reliability( res$est, res$se )
-                                    }
+    }
+    #--- output
     return(res)
-
-        }
+}
 ###########################################################################
 
 
 
 ###############################################
 # calculate individual likelihood for item ii
-calc.ll <- function( probs, data, ii ){
+calc.ll <- function( probs, data, ii )
+{
     N <- nrow(data)
-    eps <- 1E-20
-    # probs <- log( probs + eps )
-    probs <- log(probs)
-    m1 <- cbind( 1:N, data[,ii] + 1 )
+    eps <- 1E-50
+    probs <- log(probs + eps)
+    # m1 <- cbind( 1:N, data[,ii] + 1 )
+    m1 <- matrix(1:N, nrow=N, ncol=2)
+    m1[,2] <- data[,ii] + 1
     h1 <- probs[ m1 ]
     h1[ is.na(h1) ] <- 0
     return(h1)
-        }
+}
 ################################################
 

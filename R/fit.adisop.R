@@ -1,5 +1,5 @@
 ## File Name: fit.adisop.R
-## File Version: 2.21
+## File Version: 2.22
 ###################################################################
 # Fit ADISOP model
 fit.adisop <- function( freq.correct, wgt, conv=.0001,
@@ -34,8 +34,8 @@ fit.adisop <- function( freq.correct, wgt, conv=.0001,
     Y <- Y0 <- I.matrix
     iter <- 0
     deviation <- 1000
-    if (progress){ 
-        cat("\n*******ADISOP Model*********\n") 
+    if (progress){
+        cat("\n*******ADISOP Model*********\n")
     }
     #########################
     # begin algorithm

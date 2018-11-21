@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.Rd
-%% File Version: 0.27
+%% File Version: 0.28
 
 \name{rasch.pairwise}
 \alias{rasch.pairwise}
@@ -99,7 +99,7 @@ mod2 <- sirt::rasch.pairwise(dat, zerosum=TRUE)
 summary(mod2)
 
 \dontrun{
-#** obtain standard errors by bootstrap 
+#** obtain standard errors by bootstrap
 mod2$item$b   # extract item difficulties
 
 # Bootstrap of item difficulties
