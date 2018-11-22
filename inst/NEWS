@@ -34,8 +34,21 @@ CHANGELOG sirt
 
 
 
+
+
 ------------------------------------------------------------------------
-VERSIONS sirt 3.0  |  2018-11-21  |  Last: sirt 3.0-30
+VERSIONS sirt 3.1  |  2018-11-22  |  Last: sirt 3.1-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 3.0  |  2018-11-22  |  Last: sirt 3.0-32
 ------------------------------------------------------------------------
 
 NOTE  * included estimation details of btm() function 
@@ -56,10 +69,8 @@ NOTE  * changed column 'itemdiff.correction' in output 'item' in
         rasch.jml() in case of constrained item parameters
         (noted by thoughtafter, issue #5)
 
-
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: rasch.jml (1)
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 2.7  |  2018-07-09  |  Last: sirt 2.7-50
