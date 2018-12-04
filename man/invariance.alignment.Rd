@@ -1,22 +1,28 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.45
+%% File Version: 1.583
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
 \alias{summary.invariance.alignment}
-\alias{plot.invariance.alignment}
+%% \alias{plot.invariance.alignment}
+\alias{invariance_alignment_constraints}
+\alias{summary.invariance_alignment_constraints}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Alignment Procedure for Linking under Approximate Invariance
 }
 \description{
-This function does alignment under approximate
+The function \code{invariance.alignment} performs alignment under approximate
 invariance for \eqn{G} groups and \eqn{I} items
-(Asparouhov & Muthen, 2014; Muthen, 2014).
+(Asparouhov & Muthen, 2014; Muthen & Asparouhov, 2014).
 It is assumed that item loadings and intercepts are
-previously estimated under the assumption of a factor
+previously estimated as a unidimensional factor model under the assumption of a factor
 with zero mean and a variance of one.
+
+The function \code{invariance_alignment_constraints} postprocesses the output of the
+\code{invariance.alignment} function and estimates item parameters under equality
+constraints for prespecified absolute values of parameter tolerance.
 }
 
 %% \emph{Note that this function is in an early experimental stage.}
@@ -24,11 +30,14 @@ with zero mean and a variance of one.
 
 \usage{
 invariance.alignment(lambda, nu, wgt=NULL, align.scale=c(1, 1),
-    align.pow=c(1, 1), eps=.01, h=0.001, max.increment=0.2,
-    increment.factor=c(1.001,1.02,1.04,1.08), maxiter=300, conv=1e-04,
-    fac.oldpar=c(.01,.2,.5,.85), psi0.init=NULL, alpha0.init=NULL, progress=TRUE)
+    align.pow=c(.25, .25), eps=.01, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
+    optimizer="optim", ...)
 
-\method{summary}{invariance.alignment}(object,...)
+\method{summary}{invariance.alignment}(object, digits=3, file=NULL, ...)
+
+invariance_alignment_constraints(model, lambda_parm_tol, nu_parm_tol )
+
+\method{summary}{invariance_alignment_constraints}(object, digits=3, file=NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -53,44 +62,29 @@ A vector of length two containing power
   \item{eps}{
 A parameter in the optimization function
 }
-  \item{h}{
-Numerical differentiation parameter
-}
-  \item{max.increment}{
-Maximum increment in each iteration
-}
-  \item{increment.factor}{
-A numerical larger than one indicating the extent
-of the decrease of \code{max.increment} in every
-iteration.
-}
-  \item{maxiter}{
-Maximum number of iterations
-}
-  \item{conv}{
-Maximum parameter change of the optimization function
-}
-\item{fac.oldpar}{Convergence acceleration parameter between 0 and 1.
-    This parameter defines the relative weight the previous parameter value
-    for the calculation of the parameter update.
-    The default is .85. But experiment with this value and study
-    the obtained results.
-}
   \item{psi0.init}{
 An optional vector of initial \eqn{\psi_0} parameters
 }
   \item{alpha0.init}{
 An optional vector of initial \eqn{\alpha_0} parameters
 }
-  \item{progress}{
-An optional logical indicating whether computational
-should be printed.
+ \item{center}{
+Logical indicating whether estimated means and standard deviations should
+be centered.
 }
+\item{optimizer}{Name of the optimizer chosen for alignment. Options are
+   \code{"optim"} (using \code{\link[stats:optim]{stats::optim}})
+   or \code{"nlminb"} (using \code{\link[stats:nlminb]{stats::nlminb}}).}
   \item{object}{
 Object of class \code{invariance.alignment}
   }
+\item{digits}{Number of digits used for rounding}
+\item{file}{Optional file name in which summary should be sunk}
   \item{\dots}{
 Further optional arguments to be passed}
+\item{model}{Model of class \code{invariance.alignment}}
+\item{lambda_parm_tol}{Parameter tolerance for \eqn{\lambda} parameters}
+\item{nu_parm_tol}{Parameter tolerance for \eqn{\nu} parameters}
 }
 
 \details{
@@ -164,7 +158,6 @@ A list with following entries
 \item{nu.resid}{Residuals of \eqn{ \nu_{i g,1}} parameters}
 \item{Niter}{Number of iterations for \eqn{f_\lambda} and
 \eqn{f_\nu} optimization functions}
-\item{miniter}{Iteration index with minimum optimization value}
 \item{fopt}{Minimum optimization value}
 \item{align.scale}{Used alignment scale parameters}
 \item{align.pow}{Used alignment power parameters}
@@ -186,9 +179,9 @@ recommendations for organizational research. \emph{Organizational Research
 Methods, 3}, 4-70.
 }
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
 
 %\note{
 %xxxx
@@ -197,7 +190,8 @@ Alexander Robitzsch
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-For IRT linking see also \code{\link{linking.haberman}}.
+For IRT linking see also \code{\link{linking.haberman}} or
+\code{\link[TAM:tam.linking]{TAM::tam.linking}}.
 
 For modeling random item effects for loadings and intercepts
 see \code{\link{mcmc.2pno.ml}}.
@@ -228,7 +222,7 @@ summary(mod1)
 #****
 # Model 2: Different powers for alignment
 mod2 <- sirt::invariance.alignment( lambda, nu, wgt,  align.pow=c(.25,1/2),
-              align.scale=c(.95,.95),  max.increment=.1)
+              align.scale=c(.95,.95))
 summary(mod2)
 
 # compare means from Models 1 and 2
@@ -414,7 +408,7 @@ set.seed(18785)
 itempars <- data.frame("item"=paste0("I",1:I) )
 itempars$study1 <- stats::rnorm( I, mean=.3, sd=1.4 )
 # simulate DIF effects plus some outliers
-bdif <- stats::rnorm(I,mean=.4,sd=.09)+( stats::runif(I)>.9 )* rep( 1*c(-1,1)+.4, each=I/2 )
+bdif <- stats::rnorm(I, mean=.4, sd=.09)+( stats::runif(I)>.9 )* rep( 1*c(-1,1)+.4, each=I/2 )
 itempars$study2 <- itempars$study1 + bdif
 # create input for function invariance.alignment
 nu <- t( itempars[,2:3] )
@@ -467,31 +461,15 @@ lambda <- 1+0*nu
 
 # mean of item difficulties
 round( rowMeans(nu), 3 )
-  ##     male female
-  ##   -0.081 -0.049
 
 # Linking using least squares optimization
 res1a <- sirt::invariance.alignment( lambda, nu, align.scale=c( .3, .5 ) )
 summary(res1a)
-  ##   Effect Sizes of Approximate Invariance
-  ##          loadings intercepts
-  ##   R2            1     0.9801
-  ##   sqrtU2        0     0.1412
-  ##   rbar          1     0.9626
-  ##   -----------------------------------------------------------------
-  ##   Group Means and Standard Deviations
-  ##          alpha0 psi0
-  ##   male   -0.016    1
-  ##   female  0.016    1
 
-# Linking using optimization with absolute values
+# Linking using optimization with absolute value function (pow=.5)
 res1b <- sirt::invariance.alignment( lambda, nu, align.scale=c( .3, .5 ),
                 align.pow=c( .5, .5 ) )
 summary(res1b)
-  ##   Group Means and Standard Deviations
-  ##          alpha0 psi0
-  ##   male   -0.045    1
-  ##   female  0.045    1
 
 #-- compare results with Haberman linking
 I <- ncol(dat.male)
@@ -501,20 +479,8 @@ itempartable$a <- 1
 itempartable$b <- c( mod1m$item$b, mod1f$item$b )
 # estimate linking parameters
 res1c <- sirt::linking.haberman( itempars=itempartable )
-  ##   Transformation parameters (Haberman linking)
-  ##      study At     Bt
-  ##   1 female  1  0.000
-  ##   2   male  1 -0.032
-  ##   Linear transformation for person parameters theta
-  ##      study A_theta B_theta
-  ##   1 female       1   0.000
-  ##   2   male       1   0.032
-  ##   R-Squared Measures of Invariance
-  ##          slopes intercepts
-  ##   R2          1     0.9801
-  ##   sqrtU2      0     0.1412
 
-#-- results of equating.rasch
+#-- results of sirt::equating.rasch
 x <- itempartable[ 1:I, c("item", "b") ]
 y <- itempartable[ I + 1:I, c("item", "b") ]
 res1d <- sirt::equating.rasch( x, y )
@@ -538,24 +504,10 @@ rownames(lambda) <- c("male", "female")
 
 res2a <- sirt::invariance.alignment( lambda, nu, align.scale=c( .3, .5 ) )
 summary(res2a)
-  ##   Effect Sizes of Approximate Invariance
-  ##          loadings intercepts
-  ##   R2       0.9589     0.9682
-  ##   sqrtU2   0.2027     0.1782
-  ##   rbar     0.5177     0.9394
-  ##   -----------------------------------------------------------------
-  ##   Group Means and Standard Deviations
-  ##          alpha0  psi0
-  ##   male   -0.044 0.968
-  ##   female  0.047 1.034
 
 res2b <- sirt::invariance.alignment( lambda, nu, align.scale=c( .3, .5 ),
                 align.pow=c( .5, .5 ) )
 summary(res2b)
-  ##   Group Means and Standard Deviations
-  ##          alpha0  psi0
-  ##   male   -0.046 1.053
-  ##   female  0.041 0.951
 
 # compare results with Haberman linking
 I <- ncol(dat.male)
@@ -565,18 +517,49 @@ itempartable$a <- c( mod2m$item$a, mod2f$item$a )
 itempartable$b <- c( mod2m$item$b, mod2f$item$b )
 # estimate linking parameters
 res2c <- sirt::linking.haberman( itempars=itempartable )
-  ##   Transformation parameters (Haberman linking)
-  ##      study    At   Bt
-  ##   1 female 1.000 0.00
-  ##   2   male 1.041 0.09
-  ##   Linear transformation for person parameters theta
-  ##      study A_theta B_theta
-  ##   1 female   1.000    0.00
-  ##   2   male   1.041   -0.09
-  ##   R-Squared Measures of Invariance
-  ##          slopes intercepts
-  ##   R2     0.9554     0.9484
-  ##   sqrtU2 0.2111     0.2273
+
+#############################################################################
+# EXAMPLE 6: Data from Asparouhov & Muthen (2014) simulation study
+#############################################################################
+
+G <- 3  # number of groups
+I <- 5  # number of items
+# define lambda and nu parameters
+lambda <- matrix(1, nrow=G, ncol=I)
+nu <- matrix(0, nrow=G, ncol=I)
+
+# define size of noninvariance
+dif <- 1
+
+#- 1st group: N(0,1)
+lambda[1,3] <- 1+dif*.4; nu[1,5] <- dif*.5
+
+#- 2nd group: N(0.3,1.5)
+gg <- 2 ; mu <- .3; sigma <- sqrt(1.5)
+lambda[gg,5] <- 1-.5*dif; nu[gg,1] <- -.5*dif
+nu[gg,] <- nu[gg,] + mu*lambda[gg,]
+lambda[gg,] <- lambda[gg,] * sigma
+
+#- 3nd group: N(.8,1.2)
+gg <- 3 ; mu <- .8; sigma <- sqrt(1.2)
+lambda[gg,4] <- 1-.7*dif; nu[gg,2] <- -.5*dif
+nu[gg,] <- nu[gg,] + mu*lambda[gg,]
+lambda[gg,] <- lambda[gg,] * sigma
+
+# define alignment scale
+align.scale <- c(.2,.4)   # Asparouhov and Muthen use c(1,1)
+# define alignment powers
+align.pow <- c(.25,.25)   # as in Asparouhov and Muthen
+
+#*** estimate alignment parameters
+mod1 <- sirt::invariance.alignment( lambda, nu, eps=.01, optimizer="optim",
+            align.scale=align.scale, align.pow=align.pow, center=FALSE )
+summary(mod1)
+
+#--- find parameter constraints for prespecified tolerance
+cmod1 <- sirt::invariance_alignment_constraints(model=mod1, nu_parm_tol=.4,
+            lambda_parm_tol=.2 )
+summary(cmod1)
 }
 }
 

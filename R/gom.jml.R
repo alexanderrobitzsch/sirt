@@ -1,5 +1,5 @@
 ## File Name: gom.jml.R
-## File Version: 0.22
+## File Version: 0.23
 
 ########################################
 # GOM JML
@@ -100,7 +100,7 @@ summary.gom.jml <- function( object, ... ){
     cat( "Number of items=", object$ic$I, "\n" )
     cat( "Number of classes=", object$ic$K, "\n" )
     cat( "Number of estimated parameters=", object$ic$np, "\n" )
-    cat( "    Item parameters (ni)  =", object$ic$np.item, "\n" )
+    cat( "    Item parameters (ni) =", object$ic$np.item, "\n" )
     cat( "    Person parameters (np)=", object$ic$np.person, "\n" )
     cat( "AICi=", round( object$ic$AICi, 2 ), " | penalty=", round( object$ic$AICi - object$ic$deviance,2 ),
             "   | AICi=-2*LL + 2*(ni)  \n" )

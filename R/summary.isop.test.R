@@ -1,9 +1,10 @@
 ## File Name: summary.isop.test.R
-## File Version: 0.04
+## File Version: 0.05
 
 ####################################################
 # summary for ISOP test
-summary.isop.test <- function( object, ... ){
+summary.isop.test <- function( object, ... )
+{
     obji <- object$itemstat
     VV <- ncol(obji)
     cat("*** Test for the W1 Axiom in the ISOP Model **** \n\n")

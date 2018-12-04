@@ -1,5 +1,5 @@
 //// File Name: matrixfunctions_sirt_rcpp.cpp
-//// File Version: 2.11
+//// File Version: 2.12
 
 
 
@@ -421,7 +421,7 @@ Rcpp::List md_pattern_csource( Rcpp::NumericMatrix dat ){
 
 
 ///********************************************************************
-///** md_pattern_csource
+///** monoreg_rowwise_Cpp
 // [[Rcpp::export]]
 Rcpp::NumericMatrix monoreg_rowwise_Cpp( Rcpp::NumericMatrix YM,
     Rcpp::NumericMatrix WM ){

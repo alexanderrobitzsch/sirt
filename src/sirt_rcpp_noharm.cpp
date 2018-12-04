@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_noharm.cpp
-//// File Version: 3.403
+//// File Version: 3.406
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -17,9 +17,10 @@ double noharm_trim_increment( double x, double maxincrement)
     double increment = x;
     if (increment < -maxincrement){
         increment = - maxincrement;
-    }
-    if (increment > maxincrement){
-        increment = maxincrement;
+    } else {
+        if (increment > maxincrement){
+            increment = maxincrement;
+        }
     }
     return increment;
 }
@@ -31,9 +32,10 @@ double noharm_avoid_zero(double x, double eps)
     double x0=x;
     if ( ( x < 0) & ( x > - eps ) ) {
         x0 = - eps;
-    }
-    if ( ( x > 0) & ( x < eps ) ) {
-        x0 = eps;
+    } else {
+        if ( ( x > 0) & ( x < eps ) ) {
+            x0 = eps;
+        }
     }
     return x0;
 }
@@ -66,10 +68,10 @@ Rcpp::List noharm_compute_ej(Rcpp::NumericVector dj, int I)
 {
     Rcpp::NumericVector ej(I);
     Rcpp::NumericMatrix ej_ek(I,I);
-    for( int jj = 0; jj<I;jj++){
+    for( int jj = 0; jj<I; jj++){
         ej[jj] = std::sqrt( 1 + std::pow( dj[jj], 2.0) );
     }
-    for ( int jj = 0; jj<I;jj++){
+    for ( int jj = 0; jj<I; jj++){
         for (int kk=0;kk<I;kk++){
             if ( jj != kk){
                 ej_ek(jj,kk) = 1/( ej[jj] * ej[kk] );

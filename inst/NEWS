@@ -37,13 +37,17 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.1  |  2018-11-22  |  Last: sirt 3.1-1
+VERSIONS sirt 3.1  |  2018-12-04  |  Last: sirt 3.1-18
 ------------------------------------------------------------------------
 
-xxx   * ...
+NOTE  * complete restructure of invariance.alignment() function which now
+        uses R internal optimizers stats::optim() or stats::nlminb().
+        Included postprocessing function invariance_alignment_constraints().
+NOTE  * added utility functions sirt_matrix2(), several sirt_colFoo()'s 
+
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: invariance.alignment (6)
 
 
 

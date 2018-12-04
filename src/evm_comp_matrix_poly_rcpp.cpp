@@ -1,5 +1,5 @@
 //// File Name: evm_comp_matrix_poly_rcpp.cpp
-//// File Version: 3.621
+//// File Version: 3.624
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -11,7 +11,7 @@ using namespace Rcpp;
 
 
 
-///////////////////////////////////////////////////
+//**********************************************************************
 // [[Rcpp::export]]
 Rcpp::List firsteigenvalsirt2(arma::mat X, int maxit, double conv, double K)
 {
@@ -33,7 +33,6 @@ Rcpp::List firsteigenvalsirt2(arma::mat X, int maxit, double conv, double K)
 
     ///////////////////////////////
     /// algorithm
-
     while ( ( iter < maxit ) & ( lambdadiff > conv) ){
         lambda_old = lambda;
         Xz = arma::mat( X * z );
@@ -47,7 +46,6 @@ Rcpp::List firsteigenvalsirt2(arma::mat X, int maxit, double conv, double K)
         z = Xz / lambda;
         iter ++;
     }
-
     lambda_est[0] = lambda;
 
     ////////////////////////////////////
@@ -57,7 +55,7 @@ Rcpp::List firsteigenvalsirt2(arma::mat X, int maxit, double conv, double K)
                 Rcpp::Named("lambda1")=lambda_est
             );
 }
-
+//**********************************************************************
 
 // Rcpp::Rcout << "Iteration =" << iter << " lambda = " << lambda << std::endl;
 // Rcpp::Rcout << " difference = " << lambdadiff << std::endl;
@@ -106,10 +104,10 @@ Rcpp::List parameters_jackknife( Rcpp::NumericMatrix PARS )
                 Rcpp::Named("PARS_vcov")= PARS_vcov
             );
 }
+//**********************************************************************
 
 
-
-//************************************************************
+//**********************************************************************
 // Eigenvector method
 // [[Rcpp::export]]
 Rcpp::List evm_aux( arma::mat B, int I, int powD,
@@ -138,7 +136,7 @@ Rcpp::List evm_aux( arma::mat B, int I, int powD,
     double tmp1= 0;
     // center difficulty vector
     for ( int ii = 0; ii<I; ii++){
-        u[ii] = log( u[ii] );
+        u[ii] = std::log( u[ii] );
         tmp1 += u[ii];
     }
     Rcpp::NumericVector b = u - tmp1 / I;
@@ -155,11 +153,11 @@ Rcpp::List evm_aux( arma::mat B, int I, int powD,
                 Rcpp::Named("b") = b
             );
 }
-
+//**********************************************************************
 
 // Rcpp::Rcout << "a100  " <<   std::endl;
 
-//***************************************
+//**********************************************************************
 // Choppin's row averaging approach
 // [[Rcpp::export]]
 Rcpp::NumericVector choppin_rowaveraging( arma::mat B, int I, double priorweight)
@@ -176,7 +174,7 @@ Rcpp::NumericVector choppin_rowaveraging( arma::mat B, int I, double priorweight
     for (int ii=0;ii<I;ii++){
         for (int jj=0;jj<I;jj++){
             if (ii!=jj){
-                TMP2(ii,jj) = log(  B_(jj,ii)  /  B_(ii,jj)  );
+                TMP2(ii,jj) = std::log(  B_(jj,ii)  /  B_(ii,jj)  );
             }
         }
     }
@@ -189,11 +187,10 @@ Rcpp::NumericVector choppin_rowaveraging( arma::mat B, int I, double priorweight
     //--- output
     return  b_ra;
 }
-//**********************************************
+//**********************************************************************
 
 
-
-///********************************************************************
+//**********************************************************************
 ///** evm_comp_matrix_poly
 // [[Rcpp::export]]
 Rcpp::List evm_comp_matrix_poly( Rcpp::NumericMatrix dat,
@@ -204,7 +201,7 @@ Rcpp::List evm_comp_matrix_poly( Rcpp::NumericMatrix dat,
     int N = dat.nrow();
     int I = row_index.nrow();
     double K = I;
-    double conv= 0.0001;
+    double conv=0.0001;
     int maxit=100;
 
     // matrix for dichotomous responses
@@ -319,4 +316,4 @@ Rcpp::List evm_comp_matrix_poly( Rcpp::NumericMatrix dat,
                 Rcpp::Named("PARS_vcov") = PARS_vcov
             );
 }
-
+//**********************************************************************

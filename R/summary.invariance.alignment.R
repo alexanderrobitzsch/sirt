@@ -1,50 +1,68 @@
 ## File Name: summary.invariance.alignment.R
-## File Version: 0.16
-#*******************************************************
-# Summary for smirt object
-summary.invariance.alignment <- function( object, ...){
-    cat("-----------------------------------------------------------------\n")
-    d1 <- utils::packageDescription("sirt")
-    cat( paste( d1$Package, " ", d1$Version, " (", d1$Date, ")", sep=""), "\n\n" )
-    cat( "Date of Analysis:", paste( object$s2 ), "\n" )
-    cat("Computation Time:", print(object$s2 - object$s1), "\n\n")
-    cat("  Function 'invariance.alignment' \n")
+## File Version: 0.273
 
-    cat("-----------------------------------------------------------------\n")
-#    cat( "Number of iterations=", object$Niter[1],
-#            "(LAMBDA) | ", object$Niter[2], "(NU)\n" )
-#    cat( "Iteration with minimum function value=",
-#        object$miniter[1],     "(LAMBDA) | ", object$miniter[2], "(NU)\n" )
-    cat( "Optimization Function Value (minimum value)=",
-        round(object$fopt[1],4),     "(LAMBDA) | ", round(object$fopt[2],4), "(NU)\n" )
-#    cat( "Optimization Function Value (last value)=",
-#                object$fopt.history[object$Niter[1]-1,1],     "(LAMBDA) | ",
-#                object$fopt.history[object$Niter[2]-1,2], "(NU)\n" )
-#    cat( "Log Likelihood=", round( -object$deviance/2, 2 ), "\n" )
-#    cat( "Number of persons=", object$ic$n, "\n" )
-    cat("-----------------------------------------------------------------\n")
+
+
+summary.invariance.alignment <- function( object, digits=3, file=NULL, ...)
+{
+    # open sink for a file
+    sirt_osink(file=file)
+
+    display_string <- sirt_summary_print_display(symbol="-", len=65)
+    cat(display_string)
+
+    #- package and R session
+    sirt_summary_print_package_rsession(pack="sirt")
+
+    #- print call
+    sirt_summary_print_call(CALL=object$CALL)
+
+    #-- informations about optimization
+    cat(display_string)
+    invariance_alignment_summary_optimization(object=object, digits=digits)
+
+    cat(display_string)
     cat("Effect Sizes of Approximate Invariance \n")
-    print( round( object$es.invariance, 4 ))
-    cat("-----------------------------------------------------------------\n")
-    cat("Group Means and Standard Deviations \n")
-    obji <- object$pars
-    obji <- round( obji, 3)
-    print( obji )
-    cat("-----------------------------------------------------------------\n")
-    cat("Summary Aligned Item Parameters \n")
-    obji <- object$itempars.aligned
-    obji <- round( obji, 3)
-    print( obji )
-    cat("-----------------------------------------------------------------\n")
-    cat("Summary Absolute Residuals Loadings LAMBDA \n")
-    obji <- as.vector( abs( object$lambda.resid  ))
-    obji <- round( summary(obji), 4)
-    print( obji )
-    cat("-----------------------------------------------------------------\n")
-    cat("Summary Absolute Residuals Intercepts NU \n")
-    obji <- as.vector( abs( object$nu.resid  ))
-    obji <- round( summary(obji), 4)
-    print( obji )
+    obji <- object$es.invariance
+    sirt_summary_print_objects(obji=obji, digits=digits, from=1, rownames_null=FALSE)
 
-            }
-#*******************************************************
+    cat(display_string)
+    cat("Group Means and Standard Deviations ")
+    cat(paste0("(center=", object$center,")\n"))
+    obji <- object$pars
+    sirt_summary_print_objects(obji=obji, digits=digits, from=1, rownames_null=FALSE)
+
+    cat(display_string)
+    cat("Summary Aligned Item Parameters Lambda \n")
+    obji <- object$itempars.aligned
+    sirt_summary_print_objects(obji=obji, digits=digits, from=1,
+                    rownames_null=FALSE, grep_string="lambda")
+
+    cat(display_string)
+    cat("Summary Aligned Item Parameters Nu \n")
+    obji <- object$itempars.aligned
+    sirt_summary_print_objects(obji=obji, digits=digits, from=1,
+                    rownames_null=FALSE, grep_string="nu")
+
+    cat(display_string)
+    cat("Aligned Lambda Parameters \n")
+    obji <- object$lambda.aligned
+    sirt_summary_print_objects(obji=obji, digits=digits, from=1, rownames_null=FALSE)
+
+    cat(display_string)
+    cat("Aligned Nu Parameters \n")
+    obji <- object$nu.aligned
+    sirt_summary_print_objects(obji=obji, digits=digits, from=1, rownames_null=FALSE)
+
+    cat(display_string)
+    cat("Summary Absolute Residuals Loadings Lambda \n")
+    obji <- as.vector(abs(object$lambda.resid))
+    sirt_summary_print_vector_summary(obji=obji, digits=digits)
+
+    cat(display_string)
+    cat("Summary Absolute Residuals Intercepts Nu \n")
+    obji <- as.vector(abs(object$nu.resid))
+    sirt_summary_print_vector_summary(obji=obji, digits=digits)
+
+    sirt_csink(file=file)
+}

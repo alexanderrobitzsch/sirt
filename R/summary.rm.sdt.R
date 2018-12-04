@@ -1,13 +1,14 @@
 ## File Name: summary.rm.sdt.R
-## File Version: 1.31
+## File Version: 1.32
 
 
 #*******************************************************
 # Summary for rm.facets object                         *
-summary.rm.sdt <- function( object, file=NULL, ...){
+summary.rm.sdt <- function( object, file=NULL, ...)
+{
 
     # open sink for a file
-    sirt_osink( file=file  )
+    sirt_osink( file=file)
 
     cat("-----------------------------------------------------------------\n")
     #- package and R session
@@ -64,7 +65,6 @@ summary.rm.sdt <- function( object, file=NULL, ...){
     sirt_summary_print_objects(obji=obji, digits=3, from=2)
 
     sirt_csink(file=file)
-
 }
 #*******************************************************
 

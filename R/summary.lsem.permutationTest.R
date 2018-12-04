@@ -1,7 +1,8 @@
 ## File Name: summary.lsem.permutationTest.R
-## File Version: 0.23
+## File Version: 0.25
 ######################################################
-summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... ){
+summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... )
+{
 
     # open sink for a file
     sirt_osink( file=file )
@@ -20,12 +21,12 @@ summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... ){
     cat( "Date of Analysis:", paste( object$s2 ), "\n" )
     cat("Computation Time:", print(object$s2 - object$s1), "\n\n")
 
-    cat( "Number of permutations=", object$B, "\n")
-    cat( "Percentage of non-converged datasets=", round(object$nonconverged_rate, digits=digits), "\n")
-    cat( paste0( "Number of observations=", round(object$N,digits) ), "\n")
-    cat( paste0( "Bandwidth factor=", round(object$h,digits) ), "\n")
-    cat( paste0( "Bandwidth=", round(object$bw,digits) ), "\n")
-    cat( paste0( "Number of focal points for moderator=",
+    cat( "Number of permutations", "=", object$B, "\n")
+    cat( "Percentage of non-converged datasets",  "=", round(object$nonconverged_rate, digits=digits), "\n")
+    cat( paste0( "Number of observations",  "=", round(object$N,digits) ), "\n")
+    cat( paste0( "Bandwidth factor",  "=", round(object$h,digits) ), "\n")
+    cat( paste0( "Bandwidth",  "=", round(object$bw,digits) ), "\n")
+    cat( paste0( "Number of focal points for moderator",  "=", 
                         length(object$moderator.grid ) ), "\n")
 
     cat("\nlavaan Model\n")
@@ -38,15 +39,16 @@ summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... ){
     VV <- ncol(obji)
     for (vv in 2:VV){
         obji[,vv] <- round( obji[,vv], digits )
-                    }
+    }
     print(obji)
+    
     cat("\n")
     cat("Pointwise Test Statistics\n\n")
     obji <- object$parameters_pointwise_test
     vars <- c("est", "p")
     for (vv in vars){
         obji[,vv] <- round( obji[,vv], digits )
-                    }
+    }
     obji <- obji[, c("par", "parindex", "moderator", "est", "p") ]
     rownames(obji) <- NULL
     print(obji)

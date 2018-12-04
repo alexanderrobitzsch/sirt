@@ -1,5 +1,5 @@
 %% File Name: sirt-utilities.Rd
-%% File Version: 0.26
+%% File Version: 0.34
 
 \name{sirt-utilities}
 \alias{sirt-utilities}
@@ -20,7 +20,12 @@
 \alias{sirt_summary_print_rsession}
 \alias{sirt_summary_print_call}
 \alias{sirt_optimizer}
-
+\alias{sirt_matrix2}
+\alias{sirt_colMeans}
+\alias{sirt_colSDs}
+\alias{sirt_colMins}
+\alias{sirt_colMaxs}
+\alias{sirt_colMedians}
 
 \title{Utility Functions in \pkg{sirt}}
 
@@ -37,18 +42,23 @@ dimproper(x)
 
 # generalized inverse of a symmetric function
 ginverse_sym(A, eps=1E-8)
-
 # hard thresholding function
 hard_thresholding(x, lambda)
-
 # soft thresholding function
 soft_thresholding(x, lambda)
 
 # power function x^a, like in Cpp
 pow(x, a)
-
 # trace of a matrix
 tracemat(A)
+
+#** matrix functions
+sirt_matrix2(x, nrow)   # matrix() function with byrow=TRUE
+sirt_colMeans(x, na.rm=TRUE)
+sirt_colSDs(x, na.rm=TRUE)
+sirt_colMins(x, na.rm=TRUE)
+sirt_colMaxs(x, na.rm=TRUE)
+sirt_colMedians(x, na.rm=TRUE)
 
 # plyr::rbind.fill implementation in sirt
 sirt_rbind_fill(x, y)
@@ -62,10 +72,11 @@ sirt_antifisherz(z)
 sirt_attach_list_elements(x, envir)
 
 # switch between stats::optim and stats::nlminb
-sirt_optimizer(optimizer, par, fn, grad=NULL, method="L-BFGS-B", ...)
+sirt_optimizer(optimizer, par, fn, grad=NULL, method="L-BFGS-B", hessian=TRUE, ...)
 
 # print objects in a summary
-sirt_summary_print_objects(obji, from=NULL, to=NULL, digits=3, rownames_null=TRUE)
+sirt_summary_print_objects(obji, from=NULL, to=NULL, digits=3, rownames_null=TRUE,
+      grep_string=NULL)
 # print package version and R session
 sirt_summary_print_package_rsession(pack)
 # print package version
@@ -80,27 +91,31 @@ sirt_summary_print_call(CALL)
 \item{pars}{Numeric vector}
 \item{lower}{Numeric vector}
 \item{upper}{Numeric vector}
-    \item{x}{Numeric vector or a matrix or a list}
-    \item{eps}{Numerical. Shrinkage parameter of eigenvalue in
-    \code{ginverse_sym}}
-    \item{a}{Numeric vector}
-    \item{lambda}{Numeric value}
-    \item{A}{Matrix}
-    \item{y}{Matrix}
-    \item{rho}{Numeric}
-    \item{z}{Numeric}
+\item{x}{Numeric vector or a matrix or a list}
+\item{eps}{Numerical. Shrinkage parameter of eigenvalue in
+\code{ginverse_sym}}
+\item{a}{Numeric vector}
+\item{lambda}{Numeric value}
+\item{A}{Matrix}
+\item{nrow}{Integer}    
+\item{na.rm}{Logical}
+\item{y}{Matrix}
+\item{rho}{Numeric}
+\item{z}{Numeric}
 \item{envir}{Environment}
 \item{optimizer}{Can be \code{optim} or \code{nlminb}}
 \item{par}{Initial parameter}
 \item{fn}{Function}
-\item{grad}{Gradient}
+\item{grad}{Gradient function}
 \item{method}{Optimization method}
+\item{hessian}{Logical}
 \item{\ldots}{Further arguments to be passed}
 \item{obji}{Data frame}
 \item{from}{Integer}
 \item{to}{Integer}
 \item{digits}{Integer}
 \item{rownames_null}{Logical}
+\item{grep_string}{String}
 \item{pack}{Package name}
 \item{CALL}{Call statement}
 }
