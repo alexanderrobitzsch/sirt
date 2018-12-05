@@ -1,5 +1,5 @@
 %% File Name: rasch.prox.Rd
-%% File Version: 1.14
+%% File Version: 1.15
 
 \name{rasch.prox}
 \alias{rasch.prox}
@@ -52,9 +52,12 @@ A list with following entries
 Wright, B., & Stone, W. (1999). \emph{Measurement Essentials}.
 Wilmington: Wide Range.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

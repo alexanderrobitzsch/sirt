@@ -1,5 +1,5 @@
 ## File Name: summary.lsem.permutationTest.R
-## File Version: 0.25
+## File Version: 0.26
 ######################################################
 summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... )
 {
@@ -26,7 +26,7 @@ summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... )
     cat( paste0( "Number of observations",  "=", round(object$N,digits) ), "\n")
     cat( paste0( "Bandwidth factor",  "=", round(object$h,digits) ), "\n")
     cat( paste0( "Bandwidth",  "=", round(object$bw,digits) ), "\n")
-    cat( paste0( "Number of focal points for moderator",  "=", 
+    cat( paste0( "Number of focal points for moderator",  "=",
                         length(object$moderator.grid ) ), "\n")
 
     cat("\nlavaan Model\n")
@@ -41,7 +41,7 @@ summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... )
         obji[,vv] <- round( obji[,vv], digits )
     }
     print(obji)
-    
+
     cat("\n")
     cat("Pointwise Test Statistics\n\n")
     obji <- object$parameters_pointwise_test

@@ -1,5 +1,5 @@
 %% File Name: sim.qm.ramsay.Rd
-%% File Version: 0.36
+%% File Version: 0.37
 
 \name{sim.qm.ramsay}
 \alias{sim.qm.ramsay}
@@ -47,9 +47,12 @@ individual differences.
 \emph{Psychological Review, 318}, 339-356.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 
 %\note{

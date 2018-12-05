@@ -1,5 +1,5 @@
 %% File Name: plot.mcmc.sirt.Rd
-%% File Version: 0.12
+%% File Version: 0.13
 
 \name{plot.mcmc.sirt}
 \alias{plot.mcmc.sirt}
@@ -68,9 +68,12 @@ Further arguments to be passed
 %\references{
 %% ~put references to the literature/web site here ~
 %}
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

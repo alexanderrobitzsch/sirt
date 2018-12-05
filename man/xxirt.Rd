@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.46
+%% File Version: 0.471
 
 \name{xxirt}
 \alias{xxirt}
@@ -184,9 +184,12 @@ List with following entries
 %}
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

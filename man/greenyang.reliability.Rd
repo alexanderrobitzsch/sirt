@@ -1,5 +1,5 @@
 %% File Name: greenyang.reliability.Rd
-%% File Version: 1.29
+%% File Version: 1.31
 
 \name{greenyang.reliability}
 \alias{greenyang.reliability}
@@ -81,9 +81,11 @@ multidimensional data yield univocal scale scores,
 \emph{Journal of Personality Assessment, 92}, 544-559.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 
 \note{
 This function needs the \pkg{psych} package.

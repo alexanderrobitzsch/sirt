@@ -1,5 +1,5 @@
 %% File Name: xxirt_createParTable.Rd
-%% File Version: 1.13
+%% File Version: 1.14
 
 \name{xxirt_createParTable}
 \alias{xxirt_createParTable}
@@ -73,9 +73,12 @@ List with item objects created by \code{xxirt_createDiscItem}
 %\references{
 %% ~put references to the literature/web site here ~
 %}
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

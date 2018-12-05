@@ -1,5 +1,5 @@
 %% File Name: mcmclist2coda.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{mcmclist2coda}
 \alias{mcmclist2coda}
@@ -36,9 +36,12 @@ written into the working directory.
 %\references{
 %% ~put references to the literature/web site here ~
 %}
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

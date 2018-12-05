@@ -1,5 +1,5 @@
 %% File Name: pbivnorm2.Rd
-%% File Version: 0.22
+%% File Version: 0.23
 
 \name{pbivnorm2}
 \alias{pbivnorm2}
@@ -46,9 +46,12 @@ integrals. \emph{Engineering and Environmental Systems, 16}, 115-127.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 \note{
 The function is less precise for correlations near 1 or -1.
 }

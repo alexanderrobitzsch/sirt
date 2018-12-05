@@ -1,5 +1,5 @@
 %% File Name: polychoric2.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{polychoric2}
 \alias{polychoric2}
@@ -47,9 +47,11 @@ coefficient. \emph{Psychometrika, 44}, 443-460.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %%\note{
 %%  ~~further notes~~

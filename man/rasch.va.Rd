@@ -1,5 +1,5 @@
 %% File Name: rasch.va.Rd
-%% File Version: 0.17
+%% File Version: 0.18
 
 \name{rasch.va}
 \alias{rasch.va}
@@ -47,9 +47,12 @@ variational methods for mixed logistic regression models.
 78}, 765-779.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

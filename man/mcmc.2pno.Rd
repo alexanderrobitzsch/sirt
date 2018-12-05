@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pno.Rd
-%% File Version: 1.29
+%% File Version: 1.31
 
 \name{mcmc.2pno}
 \alias{mcmc.2pno}
@@ -76,9 +76,12 @@ A list of class \code{mcmc.sirt} with following entries:
 Johnson, V. E., & Albert, J. H. (1999). \emph{Ordinal Data Modeling}.
 New York: Springer.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

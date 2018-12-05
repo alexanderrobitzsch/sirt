@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.59
+%% File Version: 0.62
 
 \name{lsem.estimate}
 \alias{lsem.estimate}

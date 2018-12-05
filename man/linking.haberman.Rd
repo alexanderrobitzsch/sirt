@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.64
+%% File Version: 0.65
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -154,9 +154,11 @@ from an item response model through separate calibrations}.
 ETS Research Report ETS RR-09-40. Princeton, ETS.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 
 
 %\note{

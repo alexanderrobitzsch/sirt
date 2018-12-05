@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pnoh.Rd
-%% File Version: 0.26
+%% File Version: 0.27
 
 \name{mcmc.2pnoh}
 \alias{mcmc.2pnoh}
@@ -116,9 +116,12 @@ Janssen, R., Tuerlinckx, F., Meulders, M., & De Boeck, P. (2000).
 A hierarchical IRT model for criterion-referenced measurement.
 \emph{Journal of Educational and Behavioral Statistics, 25}, 285-306.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

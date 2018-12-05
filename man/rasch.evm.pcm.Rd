@@ -1,5 +1,5 @@
 %% File Name: rasch.evm.pcm.Rd
-%% File Version: 0.39
+%% File Version: 0.41
 
 \name{rasch.evm.pcm}
 \alias{rasch.evm.pcm}
@@ -109,9 +109,12 @@ Wang, J., & Engelhard, G. (2014). A pairwise algorithm in \R for rater-mediated
 assessments. \emph{Rasch Measurement Transactions, 28}(1), 1457-1459.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

@@ -1,5 +1,5 @@
 %% File Name: R2conquest.Rd
-%% File Version: 3.19
+%% File Version: 3.21
 
 \name{R2conquest}
 \alias{R2conquest}
@@ -212,9 +212,13 @@ Wu, M. L., Adams, R. J., Wilson, M. R. & Haldane, S. (2007).
 \emph{ACER ConQuest Version 2.0}. Mulgrave.
 {https://shop.acer.edu.au/acer-shop/group/CON3}.
 }
-\author{
-Alexander Robitzsch
-}
+
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

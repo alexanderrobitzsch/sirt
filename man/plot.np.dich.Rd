@@ -1,5 +1,5 @@
 %% File Name: plot.np.dich.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{plot.np.dich}
 \alias{plot.np.dich}
@@ -56,9 +56,12 @@ Further arguments to be passed
 }
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{

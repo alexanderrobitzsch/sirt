@@ -1,5 +1,5 @@
 %% File Name: md.pattern.sirt.Rd
-%% File Version: 0.17
+%% File Version: 0.18
 
 \name{md.pattern.sirt}
 \alias{md.pattern.sirt}
@@ -45,9 +45,11 @@ A list with following entries:
 %}
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 
 %\note{
 %%  ~~further notes~~

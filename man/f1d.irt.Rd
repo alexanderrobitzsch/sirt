@@ -1,5 +1,5 @@
 %% File Name: f1d.irt.Rd
-%% File Version: 1.32
+%% File Version: 1.33
 
 \name{f1d.irt}
 \alias{f1d.irt}
@@ -111,9 +111,12 @@ response models for multivariate binary data.
 \emph{Multivariate Behavioral Research, 48}, 534-562.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

@@ -1,5 +1,5 @@
 %% File Name: xxirt_createThetaDistribution.Rd
-%% File Version: 0.11
+%% File Version: 0.12
 
 \name{xxirt_createThetaDistribution}
 \alias{xxirt_createThetaDistribution}
@@ -54,9 +54,12 @@ Second parameter of prior distribution
 %% ~put references to the literature/web site here ~
 %}
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

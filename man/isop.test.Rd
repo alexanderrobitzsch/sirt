@@ -1,5 +1,5 @@
 %% File Name: isop.test.Rd
-%% File Version: 0.22
+%% File Version: 0.23
 
 \name{isop.test}
 \alias{isop.test}
@@ -65,9 +65,12 @@ isotonic probabilistic models (ISOP). \emph{Psychometrika, 68},
 79-96.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

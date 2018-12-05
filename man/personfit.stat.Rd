@@ -1,5 +1,5 @@
 %% File Name: personfit.stat.Rd
-%% File Version: 0.23
+%% File Version: 0.24
 
 \name{personfit.stat}
 \alias{personfit.stat}
@@ -65,9 +65,12 @@ review: Evaluating person fit. \emph{Applied Psychological
 Measurement, 25}, 107-135.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

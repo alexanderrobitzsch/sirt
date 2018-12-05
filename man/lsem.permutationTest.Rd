@@ -1,5 +1,5 @@
 %% File Name: lsem.permutationTest.Rd
-%% File Version: 0.23
+%% File Version: 0.27
 
 \name{lsem.permutationTest}
 \alias{lsem.permutationTest}
@@ -14,7 +14,7 @@ Permutation Test for a Local Structural Equation Model
 \description{
 Performs a permutation test for testing the hypothesis that model
 parameter are independent of a moderator variable (see Hildebrandt,
-Wilhelm, & Robitzsch, 2009).
+Wilhelm, & Robitzsch, 2009; Hildebrandt, Luedtke, Robitzsch, Sommer, & Wilhelm, 2016).
 }
 
 
@@ -121,6 +121,11 @@ did not converge}
 
 
 \references{
+Hildebrandt, A., Luedtke, O., Robitzsch, A., Sommer, C., &
+Wilhelm, O. (2016). Exploring factor model parameters across continuous variables
+with local structural equation models.
+\emph{Multivariate Behavioral Research, 51}, 257-278.
+
 Hildebrandt, A., Wilhelm, O., & Robitzsch, A. (2009). Complementary and
 competing factor analytic approaches for the investigation of measurement invariance.
 \emph{Review of Psychology, 16}, 87-102.

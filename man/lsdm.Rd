@@ -1,5 +1,5 @@
 %% File Name: lsdm.Rd
-%% File Version: 2.14
+%% File Version: 2.15
 
 
 \name{lsdm}
@@ -149,9 +149,11 @@ for reading comprehension. \emph{Psychology Science, 50}, 345-362.
 
 
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
+
+
 \note{
 This function needs the \pkg{ic.infer} package.
 }

@@ -1,5 +1,5 @@
 %% File Name: prior_model_parse.Rd
-%% File Version: 0.07
+%% File Version: 0.08
 
 \name{prior_model_parse}
 \alias{prior_model_parse}
@@ -35,9 +35,12 @@ as needed for the \code{prior} argument in \code{LAM::amh}
 %\references{
 %% ~put references to the literature/web site here ~
 %}
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

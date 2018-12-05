@@ -1,5 +1,5 @@
 %% File Name: lc.2raters.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{lc.2raters}
 \alias{lc.2raters}
@@ -107,9 +107,12 @@ agreement. \emph{Statistics in Medicine, 9}, 559-572.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

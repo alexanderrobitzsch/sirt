@@ -1,5 +1,5 @@
 %% File Name: qmc.nodes.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{qmc.nodes}
 \alias{qmc.nodes}
@@ -42,9 +42,12 @@ generalized linear mixed models. \emph{Computational Statistics &
 Data Analysis, 51}, 5765-5775.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 \note{
 This function uses the

@@ -1,8 +1,8 @@
-%% File Name: eigenvalues.sirt.Rd
-%% File Version: 0.09
+%% File Name: sirt_eigenvalues.Rd
+%% File Version: 0.13
 
-\name{eigenvalues.sirt}
-\alias{eigenvalues.sirt}
+\name{sirt_eigenvalues}
+\alias{sirt_eigenvalues}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 First Eigenvalues of a Symmetric Matrix
@@ -13,7 +13,7 @@ symmetric positive definite matrices. The eigenvalues are computed
 by the Rayleigh quotient method (Lange, 2010, p. 120).
 }
 \usage{
-eigenvalues.sirt( X, D, maxit=200, conv=10^(-6) )
+sirt_eigenvalues( X, D, maxit=200, conv=10^(-6) )
 }
 
 %% eigenvalues.sirt <- function (X,D,maxit,conv){
@@ -54,9 +54,9 @@ New York: Springer.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
 
 %\note{
 %%  ~~further notes~~
@@ -70,7 +70,7 @@ Alexander Robitzsch
 \examples{
 Sigma <- diag(1,3)
 Sigma[ lower.tri(Sigma) ] <- Sigma[ upper.tri(Sigma) ] <- c(.4,.6,.8 )
-eigenvalues.sirt(X=Sigma, D=2 )
+sirt::sirt_eigenvalues(X=Sigma, D=2 )
 # compare with svd function
 svd(Sigma)
 }

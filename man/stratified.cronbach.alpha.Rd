@@ -1,5 +1,5 @@
 %% File Name: stratified.cronbach.alpha.Rd
-%% File Version: 0.24
+%% File Version: 0.25
 
 \name{stratified.cronbach.alpha}
 \alias{stratified.cronbach.alpha}
@@ -48,9 +48,12 @@ Meyer, P. (2010). \emph{Reliability}. Cambridge:
 Oxford University Press.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

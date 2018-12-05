@@ -1,5 +1,5 @@
 ## File Name: unidim.csn.R
-## File Version: 0.16
+## File Version: 0.17
 
 #############################################################
 unidim.test.csn <- function( dat, RR=400, prop.perm=.75,
@@ -28,13 +28,13 @@ unidim.test.csn <- function( dat, RR=400, prop.perm=.75,
     progress <- 1*progress
     progress_vec <- c(0,which( diff( floor( 10 * ( 1:RR ) / ( RR+1 ) ) )==1 ) )
     # perform test
-#    res <- gooijer_csn_table( dat, dat_perm, RR=RR, NS=0, progress, progress_vec,
-#                as.matrix(score_index) )
-# extern "C" {
-# SEXP gooijer_csn_table( SEXP dat_, SEXP dat_perm_,
-# SEXP RR_, SEXP NS_, SEXP progress_, SEXP progress_vec_,
-# SEXP score_index_) ;
-# }
+    #    res <- gooijer_csn_table( dat, dat_perm, RR=RR, NS=0, progress, progress_vec,
+    #                as.matrix(score_index) )
+    # extern "C" {
+    # SEXP gooijer_csn_table( SEXP dat_, SEXP dat_perm_,
+    # SEXP RR_, SEXP NS_, SEXP progress_, SEXP progress_vec_,
+    # SEXP score_index_) ;
+    # }
     if (progress==1){    cat("|**********|\n")  }
     res <- gooijer_csn_table(
                 dat, dat_perm, RR=RR, NS=0, progress, progress_vec,
@@ -44,7 +44,7 @@ unidim.test.csn <- function( dat, RR=400, prop.perm=.75,
     if ( progress==1 ){
         cat( paste0("CSN Statistic=", round( res$stat, 5) ) )
         cat( ", p=", round( res$p, 5 ), "\n")
-        }
-    return(res)
     }
+    return(res)
+}
 #############################################################

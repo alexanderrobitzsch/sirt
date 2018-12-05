@@ -1,5 +1,5 @@
 %% File Name: R2noharm.EAP.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{R2noharm.EAP}
 \alias{R2noharm.EAP}
@@ -45,9 +45,11 @@ A list with following entries
 %% ~put references to the literature/web site here ~
 %}
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 
 
 %\note{

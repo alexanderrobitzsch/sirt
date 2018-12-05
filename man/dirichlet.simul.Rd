@@ -1,5 +1,5 @@
 %% File Name: dirichlet.simul.Rd
-%% File Version: 0.13
+%% File Version: 0.14
 
 \name{dirichlet.simul}
 \alias{dirichlet.simul}
@@ -29,9 +29,9 @@ A data frame with Dirichlet distributed responses
 %\references{
 %% ~put references to the literature/web site here ~
 %}
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
 %\note{
 %%  ~~further notes~~
 %}

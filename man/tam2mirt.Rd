@@ -1,5 +1,5 @@
 %% File Name: tam2mirt.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{tam2mirt}
 \alias{tam2mirt}
@@ -57,9 +57,12 @@ with freed parameters for estimation.}
 %% ~put references to the literature/web site here ~
 %}
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

@@ -1,5 +1,5 @@
 %% File Name: Q3.testlet.Rd
-%% File Version: 1.12
+%% File Version: 1.13
 
 \name{Q3.testlet}
 \alias{Q3.testlet}
@@ -42,9 +42,12 @@ performance of the three-parameter logistic model.
 \emph{Applied Psychological Measurement, 8}, 125-145.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -53,6 +56,8 @@ Alexander Robitzsch
 For estimating all \eqn{Q_3} statistics between item pairs use
 \code{\link{Q3}}.
 }
+
+
 \examples{
 #############################################################################
 # EXAMPLE 1: data.read. The 12 items are arranged in 4 testlets

@@ -1,5 +1,5 @@
 %% File Name: marginal.truescore.reliability.Rd
-%% File Version: 0.24
+%% File Version: 0.25
 
 \name{marginal.truescore.reliability}
 \alias{marginal.truescore.reliability}
@@ -67,9 +67,12 @@ functions for percentile ranks. \emph{Journal of Educational
 Measurement, 31}, 313-325.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

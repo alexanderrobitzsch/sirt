@@ -1,5 +1,5 @@
 %% File Name: Q3.Rd
-%% File Version: 1.18
+%% File Version: 1.19
 
 \name{Q3}
 \alias{Q3}
@@ -54,9 +54,12 @@ performance of the three-parameter logistic model.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

@@ -1,5 +1,5 @@
 %% File Name: gom.jml.Rd
-%% File Version: 0.20
+%% File Version: 0.21
 
 \name{gom.jml}
 \alias{gom.jml}
@@ -106,9 +106,12 @@ PhD thesis, Carnegie Mellon University, Department
 of Statistics.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

@@ -1,5 +1,5 @@
 %% File Name: sim.raschtype.Rd
-%% File Version: 0.21
+%% File Version: 0.22
 
 \name{sim.raschtype}
 \alias{sim.raschtype}
@@ -69,9 +69,9 @@ Stukel, T. A. (1988). Generalized logistic models.
 83}, 426-431.
 }
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
 
 %\note{
 %%  ~~further notes~~

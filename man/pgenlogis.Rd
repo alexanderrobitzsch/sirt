@@ -1,5 +1,5 @@
 %% File Name: pgenlogis.Rd
-%% File Version: 0.24
+%% File Version: 0.25
 
 \name{pgenlogis}
 \alias{pgenlogis}
@@ -71,9 +71,12 @@ Stukel, T. A. (1988). Generalized logistic models.
 83}, 426-431.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}
@@ -84,7 +87,7 @@ Alexander Robitzsch
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 %}
 \examples{
-pgenlogis( x=c(-.3, 0, .25, 1 ), alpha1=0, alpha2=.6 )
+sirt::pgenlogis( x=c(-.3, 0, .25, 1 ), alpha1=0, alpha2=.6 )
   ##   [1] 0.4185580 0.5000000 0.5621765 0.7310586
 
 ####################################################################

@@ -1,5 +1,5 @@
 %% File Name: mle.pcm.group.Rd
-%% File Version: 0.22
+%% File Version: 0.23
 
 \name{mle.pcm.group}
 \alias{mle.pcm.group}
@@ -99,9 +99,12 @@ maximum likelihood latent trait estimator to the generalized
 partial credit model. \emph{Applied Psychological Measurement,
 29}, 218-233.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %%\note{
 %%  ~~further notes~~
 %%}

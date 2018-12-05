@@ -1,5 +1,5 @@
 %% File Name: categorize.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{categorize}
 \alias{categorize}
@@ -61,9 +61,9 @@ For \code{decategorize} it is a data frame.
 %\references{
 %% ~put references to the literature/web site here ~
 %}
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
 
 %\note{
 %%  ~~further notes~~

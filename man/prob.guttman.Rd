@@ -1,5 +1,5 @@
 %% File Name: prob.guttman.Rd
-%% File Version: 1.29
+%% File Version: 1.31
 
 \name{prob.guttman}
 \alias{prob.guttman}
@@ -94,9 +94,12 @@ Technical Report.
 Proctor, C. H. (1970). A probabilistic formulation and statistical analysis
 for Guttman scaling. \emph{Psychometrika, 35}, 73-78.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

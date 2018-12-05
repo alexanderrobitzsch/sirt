@@ -1,5 +1,5 @@
 %% File Name: equating.rasch.Rd
-%% File Version: 1.32
+%% File Version: 1.33
 
 \name{equating.rasch}
 \alias{equating.rasch}
@@ -59,9 +59,12 @@ random sampling of items}
 Kolen, M. J., & Brennan, R. L. (2004). \emph{Test Equating, Scaling, and Linking:
 Methods and Practices}. New York: Springer.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

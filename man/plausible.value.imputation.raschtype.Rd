@@ -1,5 +1,5 @@
 %% File Name: plausible.value.imputation.raschtype.Rd
-%% File Version: 1.31
+%% File Version: 1.32
 
 \name{plausible.value.imputation.raschtype}
 \alias{plausible.value.imputation.raschtype}
@@ -90,6 +90,7 @@ A logical indicated whether iteration progress should be displayed
 at the console.
 }
 }
+
 \details{
 Plausible values are drawn from the latent regression model with
 heterogeneous variances:
@@ -97,6 +98,8 @@ heterogeneous variances:
 \epsilon_p \sim N( 0, \sigma_p^2 ) \quad, \quad
 \log( \sigma_p )=Z_p \gamma + \nu_p }
 }
+
+
 \value{
 A list with following entries:
 \item{coefs.X}{Sampled regression coefficients for covariates \eqn{X}}
@@ -121,9 +124,12 @@ Mislevy, R. J. (1991). Randomization-based inference about latent
 variables from complex samples. \emph{Psychometrika, 56}, 177-196.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}
@@ -134,6 +140,9 @@ Alexander Robitzsch
 For estimating the latent regression model see
 \code{\link{latent.regression.em.raschtype}}.
 }
+
+
+
 \examples{
 #############################################################################
 # EXAMPLE 1: Rasch model with covariates

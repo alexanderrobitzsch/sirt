@@ -1,10 +1,10 @@
 ## File Name: rasch.va.R
-## File Version: 0.09
+## File Version: 0.11
 
-#################################################
+
 # estimating the Rasch model with variational approximation
-rasch.va <- function( dat, globconv=.001, maxiter=1000){
-    #********************
+rasch.va <- function( dat, globconv=.001, maxiter=1000)
+{
     # data preparation
     N <- nrow(dat)
     I <- ncol(dat)
@@ -53,7 +53,6 @@ rasch.va <- function( dat, globconv=.001, maxiter=1000){
         utils::flush.console()
     }
     item <- data.frame("item"=colnames(dat), "b"=b )
-    res <- list("sig"=sqrt(sig2),
-            "item"=item, "xsi.ij"=xsi.ij, "mu.i"=mu.i, "sigma2.i"=sigma2.i )
+    res <- list(sig=sqrt(sig2), item=item, xsi.ij=xsi.ij, mu.i=mu.i, sigma2.i=sigma2.i)
     return(res)
-        }
+}

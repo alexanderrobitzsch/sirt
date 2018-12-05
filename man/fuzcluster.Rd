@@ -1,5 +1,5 @@
 %% File Name: fuzcluster.Rd
-%% File Version: 0.21
+%% File Version: 0.22
 
 \name{fuzcluster}
 \alias{fuzcluster}
@@ -78,9 +78,11 @@ in the belief function framework.
 \emph{IEEE Transactions on Knowledge and Data Engineering, 25}, 119-130.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 
 %\note{
 %%  ~~further notes~~

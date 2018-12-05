@@ -1,5 +1,5 @@
 %% File Name: rasch.pml3.Rd
-%% File Version: 2.73
+%% File Version: 2.74
 
 
 
@@ -192,9 +192,12 @@ Machine Intelligence, 24}, 1517-1520.
 
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 \note{
 This function needs the \pkg{combinat} library.
 }

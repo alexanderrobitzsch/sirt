@@ -1,5 +1,5 @@
-//// File Name: eigenvaluessirt_rcpp.cpp
-//// File Version: 4.17
+//// File Name: sirt_rcpp_eigenvalues.cpp
+//// File Version: 4.25
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -13,8 +13,9 @@ using namespace Rcpp;
 
 
 ///********************************************************************
-///** firsteigenvalsirt
-Rcpp::List firsteigenvalsirt(arma::mat X, int maxit, double conv, double K)
+///** sirt_rcpp_first_eigenvalue
+// [[Rcpp::export]]
+Rcpp::List sirt_rcpp_first_eigenvalue(arma::mat X, int maxit, double conv, double K)
 {
     double lambda=0;
     double lambdadiff=1000;
@@ -31,8 +32,7 @@ Rcpp::List firsteigenvalsirt(arma::mat X, int maxit, double conv, double K)
         z[ii] = temp1;
     }
 
-    ///////////////////////////////
-    /// algorithm
+    ///---- algorithm
     while ( ( iter < maxit ) & ( lambdadiff > conv) ){
         lambda_old = lambda;
         Xz = arma::mat( X * z );
@@ -41,28 +41,24 @@ Rcpp::List firsteigenvalsirt(arma::mat X, int maxit, double conv, double K)
             lambda_temp += Xz[ii]*Xz[ii];
         }
         lambda = std::sqrt(lambda_temp);
-        lambdadiff = lambda - lambda_old;
-        if ( lambdadiff < 0 ){ lambdadiff = - lambdadiff; }
+        lambdadiff = std::abs( lambda - lambda_old);
         z = Xz / lambda;
         iter ++;
     }
     lambda_est[0] = lambda;
 
-    ////////////////////////////////////
-    // OUTPUT:
+    //---- OUTPUT:
     return Rcpp::List::create(
                 Rcpp::Named("u")=z,
                 Rcpp::Named("lambda1")=lambda_est
             );
 }
-
-
+///********************************************************************
 
 ///********************************************************************
-///** eigenvaluesDsirt
+///** sirt_rcpp_D_eigenvalues
 // [[Rcpp::export]]
-Rcpp::List eigenvaluesDsirt( Rcpp::NumericMatrix Xr,
-    int D, int maxit, double conv )
+Rcpp::List sirt_rcpp_D_eigenvalues( Rcpp::NumericMatrix Xr, int D, int maxit, double conv )
 {
     Rcpp::NumericVector d1(2);
     double K=Xr.nrow();
@@ -74,7 +70,7 @@ Rcpp::List eigenvaluesDsirt( Rcpp::NumericMatrix Xr,
     arma::mat X0(Xr.begin(), K, K, false);
     for (int dd=0; dd<D; dd++){
         // estimate first eigenvalue of reduced matrix
-        res2 = firsteigenvalsirt(X0, maxit, conv, K);
+        res2 = sirt_rcpp_first_eigenvalue(X0, maxit, conv, K);
         d1 = res2["lambda1"];
         dvec[dd] = d1[0];
         arma::mat u1 = res2["u"];
@@ -88,8 +84,7 @@ Rcpp::List eigenvaluesDsirt( Rcpp::NumericMatrix Xr,
         }
     }
 
-    ////////////////////////////////////
-    // OUTPUT:
+    //----- OUTPUT:
     return Rcpp::List::create(
                 Rcpp::Named("d")=dvec,
                 Rcpp::Named("u")=u

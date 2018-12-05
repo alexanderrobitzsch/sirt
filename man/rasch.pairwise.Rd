@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.Rd
-%% File Version: 0.28
+%% File Version: 0.29
 
 \name{rasch.pairwise}
 \alias{rasch.pairwise}
@@ -64,9 +64,12 @@ An object of class \code{rasch.pairwise} with following entries
   In C. R. Rao and S. Sinharay (Eds.), \emph{Handbook of Statistics},
   Vol. 26 (pp. 515-585). Amsterdam: Elsevier.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

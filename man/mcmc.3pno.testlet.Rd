@@ -1,5 +1,5 @@
 %% File Name: mcmc.3pno.testlet.Rd
-%% File Version: 1.25
+%% File Version: 1.26
 
 \name{mcmc.3pno.testlet}
 \alias{mcmc.3pno.testlet}
@@ -142,9 +142,12 @@ for testlets: Theory and applications.
 \emph{Applied Psychological Measurement, 26}, 109-128.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

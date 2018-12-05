@@ -1,5 +1,5 @@
 %% File Name: sirt-utilities.Rd
-%% File Version: 0.34
+%% File Version: 0.35
 
 \name{sirt-utilities}
 \alias{sirt-utilities}
@@ -97,7 +97,7 @@ sirt_summary_print_call(CALL)
 \item{a}{Numeric vector}
 \item{lambda}{Numeric value}
 \item{A}{Matrix}
-\item{nrow}{Integer}    
+\item{nrow}{Integer}
 \item{na.rm}{Logical}
 \item{y}{Matrix}
 \item{rho}{Numeric}

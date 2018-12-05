@@ -1,5 +1,5 @@
 %% File Name: pcm.conversion.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{pcm.conversion}
 \alias{pcm.conversion}
@@ -47,9 +47,12 @@ List with the following entries
 %\references{
 %% ~put references to the literature/web site here ~
 %}
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

@@ -1,5 +1,5 @@
 %% File Name: mcmc.list.descriptives.Rd
-%% File Version: 0.24
+%% File Version: 0.25
 
 \name{mcmc.list.descriptives}
 \alias{mcmc.list.descriptives}
@@ -34,9 +34,12 @@ the \code{mcmc.list} object.
 %\references{
 %% ~put references to the literature/web site here ~
 %}
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

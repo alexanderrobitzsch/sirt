@@ -1,5 +1,5 @@
 %% File Name: expl.detect.Rd
-%% File Version: 1.16
+%% File Version: 1.17
 
 \name{expl.detect}
 \alias{expl.detect}
@@ -70,9 +70,11 @@ dimensionality and its application to approximate simple structure,
 \emph{Psychometrika, 64}, 213-249.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 
 \seealso{
 For examples see \code{\link{conf.detect}}.

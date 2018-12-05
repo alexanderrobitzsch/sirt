@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.biascorr.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{rasch.jml.biascorr}
 \alias{rasch.jml.biascorr}
@@ -44,9 +44,12 @@ models: Some recent developments. In R. Blundell, W. Newey &
 T. Persson (Eds.): \emph{Advances in Economics and
 Econometrics, Ninth World Congress}, Cambridge University Press.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

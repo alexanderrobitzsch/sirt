@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.67
+%% File Version: 1.68
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -206,9 +206,12 @@ psychometric approaches to modeling testlet structures: An example with C-tests.
     83}, 426-431.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %The function \code{rasch.copula2} is substantially faster than

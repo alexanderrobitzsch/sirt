@@ -1,5 +1,5 @@
 %% File Name: data.wide2long.Rd
-%% File Version: 0.21
+%% File Version: 0.22
 
 \name{data.wide2long}
 \alias{data.wide2long}
@@ -38,9 +38,9 @@ Data frame in long format
 %\references{
 %% ~put references to the literature/web site here ~
 %}
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
 %\note{
 %%  ~~further notes~~
 %}

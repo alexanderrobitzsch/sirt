@@ -1,5 +1,5 @@
 %% File Name: R2noharm.jackknife.Rd
-%% File Version: 1.16
+%% File Version: 1.17
 
 \name{R2noharm.jackknife}
 \alias{R2noharm.jackknife}
@@ -62,9 +62,12 @@ Christoffersson, A. (1977). Two-step weighted least squares factor analysis of
 dichotomized variables. \emph{Psychometrika, 42}, 433-438.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

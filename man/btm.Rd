@@ -1,5 +1,5 @@
 %% File Name: btm.Rd
-%% File Version: 0.36
+%% File Version: 0.37
 
 \name{btm}
 \alias{btm}
@@ -114,9 +114,9 @@ Hunter, D. R. (2004). MM algorithms for generalized Bradley-Terry models.
 \emph{Annals of Statistics, 32}, 384-406.
 }
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
 
 %\note{
 %%  ~~further notes~~

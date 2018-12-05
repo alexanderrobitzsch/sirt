@@ -1,5 +1,5 @@
 %% File Name: likelihood.adjustment.Rd
-%% File Version: 0.10
+%% File Version: 0.11
 
 \name{likelihood.adjustment}
 \alias{likelihood.adjustment}
@@ -86,9 +86,11 @@ Princeton, NJ: Educational Testing Service.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 
 %\note{
 %%  ~~further notes~~

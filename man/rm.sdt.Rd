@@ -1,5 +1,5 @@
 %% File Name: rm.sdt.Rd
-%% File Version: 1.491
+%% File Version: 1.492
 
 \name{rm.sdt}
 \alias{rm.sdt}
@@ -288,9 +288,10 @@ multilevel data sets. \emph{Statistical Methods in Medical Research, 17}, 33-51.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
+
 
 %\note{
 %%  ~~further notes~~

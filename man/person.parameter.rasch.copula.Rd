@@ -1,5 +1,5 @@
 %% File Name: person.parameter.rasch.copula.Rd
-%% File Version: 1.16
+%% File Version: 1.17
 
 \name{person.parameter.rasch.copula}
 \alias{person.parameter.rasch.copula}
@@ -57,9 +57,12 @@ to local dependence}
 %% ~put references to the literature/web site here ~
 %}
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

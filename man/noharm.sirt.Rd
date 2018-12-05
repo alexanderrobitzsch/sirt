@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.41
+%% File Version: 0.42
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -198,9 +198,11 @@ New York: Springer.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 
 %\note{

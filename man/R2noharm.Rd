@@ -1,5 +1,5 @@
 %% File Name: R2noharm.Rd
-%% File Version: 2.29
+%% File Version: 2.31
 
 \name{R2noharm}
 \alias{R2noharm}
@@ -178,9 +178,12 @@ New York: Springer.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 \note{
 Possible errors often occur due to wrong \code{dec}
 specification.

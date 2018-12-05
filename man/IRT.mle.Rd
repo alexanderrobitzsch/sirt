@@ -1,5 +1,5 @@
 %% File Name: IRT.mle.Rd
-%% File Version: 0.21
+%% File Version: 0.22
 
 \name{IRT.mle}
 \alias{IRT.mle}
@@ -82,9 +82,11 @@ Warm, T. A. (1989). Weighted likelihood estimation of ability in item response t
 \emph{Psychometrika, 54}, 427-450.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 
 %\note{
 %%  ~~further notes~~

@@ -1,5 +1,5 @@
 %% File Name: fit.isop.Rd
-%% File Version: 1.17
+%% File Version: 1.18
 
 \name{fit.isop}
 \alias{fit.isop}
@@ -77,9 +77,12 @@ probabilistic models (ADISOP). \emph{Psychometrika,
 }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 \note{
 For fitting the ADISOP model it is recommended to first

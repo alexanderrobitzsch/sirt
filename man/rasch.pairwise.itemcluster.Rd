@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.itemcluster.Rd
-%% File Version: 0.36
+%% File Version: 0.37
 
 \name{rasch.pairwise.itemcluster}
 \alias{rasch.pairwise.itemcluster}
@@ -80,9 +80,11 @@ Zwinderman, A. H. (1995). Pairwise parameter estimation in Rasch models.
 
 
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
+
+
 \note{
 No standard errors are provided by this function. Use resampling
 methods for conducting statistical inference.

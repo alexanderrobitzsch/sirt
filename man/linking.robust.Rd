@@ -1,5 +1,5 @@
 %% File Name: linking.robust.Rd
-%% File Version: 0.22
+%% File Version: 0.23
 
 \name{linking.robust}
 \alias{linking.robust}
@@ -60,9 +60,12 @@ A list with following entries
 %% ~put references to the literature/web site here ~
 %}
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

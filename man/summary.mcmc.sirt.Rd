@@ -1,5 +1,5 @@
 %% File Name: summary.mcmc.sirt.Rd
-%% File Version: 0.08
+%% File Version: 0.09
 
 \name{summary.mcmc.sirt}
 \alias{summary.mcmc.sirt}
@@ -28,9 +28,12 @@ Object of class \code{mcmc.sirt}
 Further arguments to be passed
 }
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 

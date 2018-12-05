@@ -1,5 +1,5 @@
 //// File Name: gooijer_isop_rcpp.cpp
-//// File Version: 5.29
+//// File Version: 5.31
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -98,9 +98,8 @@ Rcpp::NumericMatrix gooijer_permutation(Rcpp::NumericMatrix sampleM, int NS, int
     int NS1=0;
     int n0=0;
     int n1=0;
-
-    for ( int ss=0; ss < SS; ss++){
-        NS1 = score_index(ss,3 );
+    for (int ss=0; ss<SS; ss++){
+        NS1 = score_index(ss,3);
         n0 = score_index(ss,0) - 1;
         n1 = score_index(ss,1) - 1;
         for (int ii =0; ii<I;ii++){ // variable ii
@@ -249,12 +248,11 @@ Rcpp::List isop_tests_C( Rcpp::NumericMatrix dat,
     }
 
     // compute statistic for the whole test
-    double tmp1;
-    double tmp2;
+    double tmp1, tmp2;
     for (int jj=0;jj<JJ+1;jj++){
         tmp2 = 0;
         for (int ii=0;ii<I;ii++){
-            tmp1 =  ( Esi(ii,jj) + Edi(ii,jj) );
+            tmp1 = ( Esi(ii,jj) + Edi(ii,jj) );
             tmp2 += tmp1;
             W1test[jj] += tmp1 * W1i(ii,jj);
         }

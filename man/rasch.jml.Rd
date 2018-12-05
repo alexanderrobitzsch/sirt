@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.Rd
-%% File Version: 1.42
+%% File Version: 1.43
 
 \name{rasch.jml}
 \alias{rasch.jml}
@@ -138,9 +138,12 @@ A list with following entries
     }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

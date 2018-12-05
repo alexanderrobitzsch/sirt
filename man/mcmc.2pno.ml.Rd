@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pno.ml.Rd
-%% File Version: 0.42
+%% File Version: 0.43
 
 \name{mcmc.2pno.ml}
 \alias{mcmc.2pno.ml}
@@ -198,9 +198,12 @@ Cross-classification multilevel logistic models in psychometrics.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

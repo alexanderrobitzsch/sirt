@@ -1,5 +1,5 @@
 %% File Name: truescore.irt.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{truescore.irt}
 \alias{truescore.irt}
@@ -71,9 +71,12 @@ divided by the maximum true score}
 %% ~put references to the literature/web site here ~
 %}
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

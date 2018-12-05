@@ -1,5 +1,5 @@
 %% File Name: rasch.mirtlc.Rd
-%% File Version: 2.931
+%% File Version: 2.932
 
 \name{rasch.mirtlc}
 \alias{rasch.mirtlc}
@@ -219,9 +219,12 @@ diagnostic model to NAEP data}. ETS Research Report ETS RR-08-27.
 Princeton, ETS.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 \note{
 For the estimation of latent class models,

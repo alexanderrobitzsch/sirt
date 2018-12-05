@@ -1,5 +1,5 @@
 %% File Name: gom.em.Rd
-%% File Version: 1.73
+%% File Version: 1.74
 
 \name{gom.em}
 \alias{gom.em}
@@ -226,9 +226,12 @@ theorem. In E. M. Airoldi, D. Blei, E. A. Erosheva, & S. E. Fienberg (Eds.).
 \emph{Handbook of Mixed Membership Models} (pp. 39-65). Chapman & Hall.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 
 %%\note{

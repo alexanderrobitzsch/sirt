@@ -1,5 +1,5 @@
 %% File Name: testlet.marginalized.Rd
-%% File Version: 0.21
+%% File Version: 0.22
 
 \name{testlet.marginalized}
 \alias{testlet.marginalized}
@@ -69,9 +69,12 @@ IRT and locally dependent unidimensional item response models.
 63}, 395-416.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %%\note{
 %%  ~~further notes~~

@@ -1,5 +1,5 @@
 %% File Name: nedelsky.sim.Rd
-%% File Version: 0.21
+%% File Version: 0.22
 
 \name{nedelsky-methods}
 
@@ -105,9 +105,12 @@ sciences}, pp. 187-206. Mahwah, Lawrence Erlbaum.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

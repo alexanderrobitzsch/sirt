@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 0.911
+## File Version: 0.912
 
 
 #########################################################################
@@ -81,8 +81,8 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 ){
 
         if ( verbose){
-           cat(disp)
-           cat("Iteration", iter, "   ", paste( Sys.time() ), "\n" )
+            cat(disp)
+            cat("Iteration", iter, "   ", paste( Sys.time() ), "\n" )
         }
         dev0 <- dev
 
@@ -113,11 +113,11 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         #*** M-step item parameters
         par00 <- par0
         res <- xxirt_mstep_itemParameters( partable=partable, item_list=item_list,
-                      items=items, Theta=Theta, ncat=ncat,
-                      partable_index=partable_index, N.ik=N.ik,
-                      mstep_iter=mstep_iter, par0=par0, eps=eps,
-                      mstep_reltol=mstep_reltol, mstep_method=mstep_method,
-                      item_index=item_index, h=h, use_grad=use_grad )
+                        items=items, Theta=Theta, ncat=ncat,
+                        partable_index=partable_index, N.ik=N.ik,
+                        mstep_iter=mstep_iter, par0=par0, eps=eps,
+                        mstep_reltol=mstep_reltol, mstep_method=mstep_method,
+                        item_index=item_index, h=h, use_grad=use_grad )
         ll1 <- res$ll1
         partable <- res$partable
         par0 <- res$par0
@@ -125,8 +125,8 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         #*** M-step theta distribution
         par10 <- par1
         res <- xxirt_mstep_ThetaParameters( customTheta=customTheta, G=G, eps=eps,
-                  mstep_iter=mstep_iter, N.k=N.k, par1=par1,
-                  mstep_reltol=mstep_reltol, Theta=Theta )
+                        mstep_iter=mstep_iter, N.k=N.k, par1=par1,
+                        mstep_reltol=mstep_reltol, Theta=Theta )
         ll2 <- res$ll2
         customTheta <- res$customTheta
         par1 <- res$par1
@@ -174,37 +174,25 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
 
     #-- information criteria
     ic <- xxirt_ic( dev=dev, N=sum(weights), par_items=par_items,
-                   par_Theta=par_Theta, I=I, par_items_bounds=par_items_bounds )
+                par_Theta=par_Theta, I=I, par_items_bounds=par_items_bounds )
 
     #-- compute EAP
     EAP <- xxirt_EAP(p.aj.xi=p.aj.xi, Theta=Theta )
 
-
     #*********************************************#
     # output
     s2 <- Sys.time()
-    res <- list( partable=partable, par_items=par_items,
-                          par_items_summary=par_items_summary,
-                       par_items_bounds=par_items_bounds,
-                       par_Theta=par_Theta,
-                       Theta=Theta,
-                       probs_items=probs_items,
-                       probs_Theta=prior_Theta,
-                       deviance=dev, loglike=-dev/2, ic=ic, item_list=item_list,
-                       customItems=customItems, customTheta=customTheta,
-                       p.xi.aj=p.xi.aj, p.aj.xi=p.aj.xi,
-                       n.ik=n.ik, EAP=EAP,
-                       dat=dat, dat_resp=dat_resp, weights=weights,
-                       item_index=item_index,
-                       G=G, group=group, group_orig=group0,
-                       ncat=ncat, mstepItem_method=mstep_method,
-                       partable_index=partable_index, items=items, dat1=dat1,
-                       group_index=group_index, maxK=maxK, weights=weights,
-                       resp_index=resp_index,
-                       converged=converged, iter=iter-1,
-                       CALL=CALL, s1=s1, s2=s2
-                                )
-    class(res) <- "xxirt"
+    res <- list( partable=partable, par_items=par_items, 
+                par_items_summary=par_items_summary, par_items_bounds=par_items_bounds, 
+                par_Theta=par_Theta, Theta=Theta, probs_items=probs_items, 
+                probs_Theta=prior_Theta, deviance=dev, loglike=-dev/2, ic=ic, 
+                item_list=item_list, customItems=customItems, customTheta=customTheta, 
+                p.xi.aj=p.xi.aj, p.aj.xi=p.aj.xi, n.ik=n.ik, EAP=EAP, dat=dat, dat_resp=dat_resp, 
+                weights=weights, item_index=item_index, G=G, group=group, group_orig=group0, 
+                ncat=ncat, mstepItem_method=mstep_method, partable_index=partable_index, 
+                items=items, dat1=dat1, group_index=group_index, maxK=maxK, weights=weights, 
+                resp_index=resp_index, converged=converged, iter=iter-1, CALL=CALL, s1=s1, s2=s2 ) 
+    class(res) <- 'xxirt'
     return(res)
 }
 #########################################################################

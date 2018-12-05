@@ -1,5 +1,5 @@
 %% File Name: isop.Rd
-%% File Version: 3.28
+%% File Version: 3.29
 
 \name{isop}
 \alias{isop.dich}
@@ -221,9 +221,10 @@ am Beispiel des MR SOC. \emph{Diagnostica, 55},
 }
 
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
+
 
 %\note{
 %%  ~~further notes~~

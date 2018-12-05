@@ -1,5 +1,5 @@
 %% File Name: rinvgamma2.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{rinvgamma2}
 \alias{rinvgamma2}
@@ -53,9 +53,12 @@ Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A.,
 \emph{Bayesian data analysis} (Vol. 3). Boca Raton, FL, USA: Chapman & Hall/CRC.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 %\note{
 %%  ~~further notes~~

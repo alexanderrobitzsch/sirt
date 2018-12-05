@@ -1,5 +1,5 @@
 %% File Name: smirt.Rd
-%% File Version: 2.36
+%% File Version: 2.37
 
 \name{smirt}
 \alias{smirt}
@@ -274,9 +274,12 @@ Spray, J. A., Davey, T. C., Reckase, M. D., Ackerman, T. A., & Carlson, J. E. (1
 ACT Research Report No. ACT-RR-ONR-90-8.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 %\note{
 %%  ~~further notes~~
 %}

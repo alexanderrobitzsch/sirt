@@ -1,5 +1,5 @@
 %% File Name: wle.rasch.Rd
-%% File Version: 1.15
+%% File Version: 1.16
 
 \name{wle.rasch}
 \alias{wle.rasch}
@@ -76,9 +76,11 @@ Warm, T. A. (1989). Weighted likelihood estimation of ability in item response t
 }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 
 
 %\note{

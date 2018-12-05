@@ -1,5 +1,5 @@
 %% File Name: ccov.np.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{ccov.np}
 \alias{ccov.np}
@@ -50,9 +50,11 @@ Zhang, J., & Stout, W. (1999). Conditional covariance structure
 of generalized compensatory multidimensional items,
 \emph{Psychometrika}, \bold{64}, 129-152.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 \note{
 This function is used in \code{\link{conf.detect}} and \code{\link{expl.detect}}.
 }

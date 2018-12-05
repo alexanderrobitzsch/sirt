@@ -1,5 +1,5 @@
 %% File Name: eigenvalues.manymatrices.Rd
-%% File Version: 0.15
+%% File Version: 0.16
 
 \name{eigenvalues.manymatrices}
 \alias{eigenvalues.manymatrices}
@@ -48,9 +48,10 @@ A list with following entries
 Lange, K. (2010). \emph{Numerical Analysis for Statisticians}.
 New York: Springer.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
 %\note{
 %%  ~~further notes~~
 %}

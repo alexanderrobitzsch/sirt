@@ -1,5 +1,5 @@
 %% File Name: isop.scoring.Rd
-%% File Version: 1.23
+%% File Version: 1.24
 
 \name{isop.scoring}
 \alias{isop.scoring}
@@ -103,9 +103,11 @@ d-dimensional psychological test data (d-ISOP).
 }
 
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 %\note{
 %%  ~~further notes~~
 %}

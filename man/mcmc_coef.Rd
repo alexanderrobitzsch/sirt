@@ -1,5 +1,5 @@
 %% File Name: mcmc_coef.Rd
-%% File Version: 0.09
+%% File Version: 0.11
 
 \name{mcmc_coef}
 \alias{mcmc_coef}
@@ -78,9 +78,12 @@ See \code{LAM::plot.amh} for arguments.
 %% ~put references to the literature/web site here ~
 %}
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 
 %\note{

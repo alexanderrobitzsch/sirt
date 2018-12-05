@@ -1,5 +1,5 @@
 %% File Name: dif.logistic.regression.Rd
-%% File Version: 0.33
+%% File Version: 0.34
 
 \name{dif.logistic.regression}
 \alias{dif.logistic.regression}
@@ -90,9 +90,11 @@ for binary and Likert-type (ordinal) item scores}.
 Ottawa ON: Directorate of Human Resources Research and Evaluation,
 Department of National Defense.
 }
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
 \seealso{
 For assessing DIF variance see \code{\link{dif.variance}} and
 \code{\link{dif.strata.variance}}

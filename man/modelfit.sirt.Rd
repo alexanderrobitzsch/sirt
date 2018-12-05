@@ -1,5 +1,5 @@
 %% File Name: modelfit.sirt.Rd
-%% File Version: 0.58
+%% File Version: 0.59
 
 \name{modelfit.sirt}
 \alias{modelfit.sirt}
@@ -86,9 +86,12 @@ performance of the three-parameter logistic model.
 \emph{Applied Psychological Measurement, 8}, 125-145.
 }
 
-\author{
-Alexander Robitzsch
-}
+
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 
 \note{

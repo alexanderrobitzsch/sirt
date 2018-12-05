@@ -1,5 +1,5 @@
 %% File Name: dif.strata.variance.Rd
-%% File Version: 0.07
+%% File Version: 0.08
 
 \name{dif.strata.variance}
 \alias{dif.strata.variance}
@@ -40,9 +40,11 @@ Stability of the MH D-DIF statistics across populations.
 In P. W. Holland & H. Wainer (Eds.). \emph{Differential
 Item Functioning} (pp. 171-196). Hillsdale, NJ: Erlbaum.
 }
-\author{
-Alexander Robitzsch
-}
+
+
+%\author{
+%Alexander Robitzsch
+%}
 %\note{
 %%  ~~further notes~~
 %}

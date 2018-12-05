@@ -1,11 +1,11 @@
 ## File Name: linking.haberman.R
-## File Version: 2.52
+## File Version: 2.53
 
-##################################################
-# Linking Haberman ETS Research Report
+
+#**** Linking Haberman ETS Research Report
 linking.haberman <- function( itempars, personpars=NULL,
-    a_trim=Inf, b_trim=Inf, a_log=TRUE,
-    conv=.00001, maxiter=1000, progress=TRUE ){
+        a_trim=Inf, b_trim=Inf, a_log=TRUE, conv=.00001, maxiter=1000, progress=TRUE )
+{
 
     CALL <- match.call()
     s1 <- Sys.time()
@@ -138,13 +138,11 @@ linking.haberman <- function( itempars, personpars=NULL,
             personpars[[ll]] <- pp1
         }
     }
-    #*************************
-    # calculate R-squared measures of invariance
 
+    #****** calculate R-squared measures of invariance
     # select items for R2 calculation for which at least
     # two studies are available.
     selitems <- which( rowSums( 1 - is.na( a.orig ) ) > 1 )
-
     Rsquared.partial.invariance <- Rsquared.invariance <- c(NA,NA)
     names(Rsquared.invariance) <- c("slopes", "intercepts" )
     names(Rsquared.partial.invariance) <- c("slopes", "intercepts" )
@@ -154,18 +152,18 @@ linking.haberman <- function( itempars, personpars=NULL,
     a.res <- a.orig - aj1
 
     Rsquared.invariance["slopes"] <- 1 -
-        sum0( a.res[ selitems,]^2 ) / sum0( a.orig[ selitems, ]^2 )
+        sirt_sum( a.res[ selitems,]^2 ) / sirt_sum( a.orig[ selitems, ]^2 )
     Rsquared.partial.invariance["slopes"] <- 1 -
-        sum0( a.res[ selitems,]^2 * aj_wgtM[selitems,]  ) /
-        sum0( a.orig[ selitems, ]^2 * aj_wgtM[selitems, ]  )
+        sirt_sum( a.res[ selitems,]^2 * aj_wgtM[selitems,]  ) /
+        sirt_sum( a.orig[ selitems, ]^2 * aj_wgtM[selitems, ]  )
     bj1 <- 1 / AtM *( Bj + BtM )
     b.res <- b.orig - bj1
 
     Rsquared.partial.invariance["intercepts"] <- 1 -
-        sum0( b.res[ selitems,]^2 * Bj_wgtM[selitems,] ) /
-        sum0( b.orig[ selitems, ]^2 * Bj_wgtM[selitems,] )
+        sirt_sum( b.res[ selitems,]^2 * Bj_wgtM[selitems,] ) /
+        sirt_sum( b.orig[ selitems, ]^2 * Bj_wgtM[selitems,] )
     Rsquared.invariance["intercepts"] <- 1 -
-        sum0( b.res[ selitems,]^2  ) /     sum0( b.orig[ selitems, ]^2 )
+        sirt_sum( b.res[ selitems,]^2  ) / sirt_sum( b.orig[ selitems, ]^2 )
     es.invariance <- rbind( Rsquared.invariance,
             sqrt( 1- Rsquared.invariance ) )
     rownames(es.invariance) <- c("R2", "sqrtU2")
@@ -177,18 +175,17 @@ linking.haberman <- function( itempars, personpars=NULL,
     linking_slopes <- stats::sd( transf.pars$At ) < 1E-10
 
     res <- list(
-        transf.pars=transf.pars, transf.itempars=transf.itempars,
-        transf.personpars=transf.personpars, joint.itempars=joint.itempars,
-        a.trans=aM, b.trans=bM, a.orig=a.orig, b.orig=b.orig,
-        a.resid=aj_resid, b.resid=Bj_resid, personpars=personpars,
-        es.invariance=es.invariance, es.robust=es.partial.invariance,
-        selitems=selitems, a_trim=a_trim, b_trim=b_trim,
-        a.wgt=aj_wgtM, b.wgt=Bj_wgtM, a.wgt.adj=aj_wgt_adj, b.wgt.adj=Bj_wgt_adj,
-        a.vcov=aj_vcov, b.vcov=Bj_vcov, a.item_stat=aj_item_stat,
-        b.item_stat=Bj_item_stat, linking_slopes=linking_slopes,
-        description='Linking according to Haberman (2009)',
-        CALL=CALL, time=s1
-        )
+            transf.pars=transf.pars, transf.itempars=transf.itempars,
+            transf.personpars=transf.personpars, joint.itempars=joint.itempars,
+            a.trans=aM, b.trans=bM, a.orig=a.orig, b.orig=b.orig,
+            a.resid=aj_resid, b.resid=Bj_resid, personpars=personpars,
+            es.invariance=es.invariance, es.robust=es.partial.invariance,
+            selitems=selitems, a_trim=a_trim, b_trim=b_trim,
+            a.wgt=aj_wgtM, b.wgt=Bj_wgtM, a.wgt.adj=aj_wgt_adj, b.wgt.adj=Bj_wgt_adj,
+            a.vcov=aj_vcov, b.vcov=Bj_vcov, a.item_stat=aj_item_stat,
+            b.item_stat=Bj_item_stat, linking_slopes=linking_slopes,
+            description='Linking according to Haberman (2009)',
+            CALL=CALL, time=s1 )
     class(res) <- "linking.haberman"
     return(res)
 }

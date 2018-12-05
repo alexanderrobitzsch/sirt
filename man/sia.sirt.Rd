@@ -1,5 +1,5 @@
 %% File Name: sia.sirt.Rd
-%% File Version: 0.20
+%% File Version: 0.21
 
 \name{sia.sirt}
 \alias{sia.sirt}
@@ -80,9 +80,11 @@ Springer, Berlin Heidelberg.
 }
 
 
-\author{
-Alexander Robitzsch
-}
+%\author{
+%Alexander Robitzsch
+%}
+
+
 
 
 \note{
