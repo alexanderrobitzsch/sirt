@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.583
+%% File Version: 1.587
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -15,8 +15,8 @@ Alignment Procedure for Linking under Approximate Invariance
 \description{
 The function \code{invariance.alignment} performs alignment under approximate
 invariance for \eqn{G} groups and \eqn{I} items
-(Asparouhov & Muthen, 2014; Muthen & Asparouhov, 2014).
-It is assumed that item loadings and intercepts are
+(Asparouhov & Muthen, 2014; Byrne & van de Vijver, 2017; Marsh et al., 2018; 
+Muthen & Asparouhov, 2014, 2018). It is assumed that item loadings and intercepts are
 previously estimated as a unidimensional factor model under the assumption of a factor
 with zero mean and a variance of one.
 
@@ -118,12 +118,6 @@ For identification reasons, the product \eqn{\Pi_g \psi_{g0}}
 of all group standard deviations is set to one. The mean
 \eqn{\alpha_{g0}} of the first group is set to zero.
 
-Note that the standard deviations \eqn{\psi_g} are estimated
-due to minimizing the sum of \eqn{f_\lambda} functions while
-means \eqn{\alpha_g} are obtained by minimizing the \eqn{f_\nu}
-part with fixed \eqn{\psi_g} parameters. Therefore, the original approach
-of Asparouhov and Muthen (2014) is split into a two-step procedure.
-
 Note that Asparouhov and Muthen (2014) use \eqn{a_\lambda=a_\nu=1}
 (which can be modified in \code{align.scale})
 and \eqn{p_\lambda=p_\nu=1/4} (which can be modified in \code{align.pow}).
@@ -165,13 +159,25 @@ A list with following entries
 
 
 \references{
-Asparouhov, T., & Muthen, B. (2014).
-Multiple-group factor analysis alignment.
+Asparouhov, T., & Muthen, B. (2014). Multiple-group factor analysis alignment.
 \emph{Structural Equation Modeling, 21}, 1-14.
 
+Byrne, B. M., & van de Vijver, F. J. R. (2017). The maximum likelihood alignment 
+approach to testing for approximate measurement invariance: 
+A paradigmatic cross-cultural application. \emph{Psicothema, 29}(4), 539-551.
+
+Marsh, H. W., Guo, J., Parker, P. D., Nagengast, B., Asparouhov, T., Muthen, B., 
+& Dicke, T. (2018). What to do when scalar invariance fails: The extended alignment 
+method for multi-group factor analysis comparison of latent means across many groups. 
+\emph{Psychological Methods, 23}(3), 524-545. 
+
 Muthen, B., & Asparouhov, T. (2014). IRT studies of many groups: The alignment method.
-\emph{Frontiers in Psychology | Quantitative Psychology and Measurement,
-5}:978. doi: 10.3389/fpsyg.2014.00978,
+\emph{Frontiers in Psychology | Quantitative Psychology and Measurement, 5}:978. 
+doi: 10.3389/fpsyg.2014.00978.
+
+Muthen, B., & Asparouhov, T. (2018). Recent methods for the study of measurement 
+invariance with many groups: Alignment and random effects. 
+\emph{Sociological Methods & Research, 47}(4), 637-664.
 
 Vandenberg, R. J., & Lance, C. E. (2000). A review and synthesis of the
 measurement invariance literature: Suggestions, practices, and

@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.1  |  2018-12-05  |  Last: sirt 3.1-27
+VERSIONS sirt 3.1  |  2018-12-10  |  Last: sirt 3.1-28
 ------------------------------------------------------------------------
 
 NOTE  * complete restructure of invariance.alignment() function which now
