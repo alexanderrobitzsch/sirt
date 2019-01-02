@@ -1,5 +1,5 @@
 %% File Name: ccov.np.Rd
-%% File Version: 0.15
+%% File Version: 0.17
 
 \name{ccov.np}
 \alias{ccov.np}
@@ -63,5 +63,5 @@ This function is used in \code{\link{conf.detect}} and \code{\link{expl.detect}}
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{DETECT}
+%% \keyword{DETECT}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

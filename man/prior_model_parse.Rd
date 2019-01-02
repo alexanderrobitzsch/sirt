@@ -1,5 +1,5 @@
 %% File Name: prior_model_parse.Rd
-%% File Version: 0.08
+%% File Version: 0.10
 
 \name{prior_model_parse}
 \alias{prior_model_parse}

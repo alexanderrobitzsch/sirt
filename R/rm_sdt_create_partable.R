@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_create_partable.R
-## File Version: 0.495
+## File Version: 0.497
 
 
 rm_sdt_create_partable <- function( item.index, rater.index,

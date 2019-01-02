@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_evm_comp_poly.cpp
-//// File Version: 3.637
+//// File Version: 3.639
 
 // [[Rcpp::depends(RcppArmadillo)]]
 

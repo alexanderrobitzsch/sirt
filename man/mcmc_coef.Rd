@@ -1,5 +1,5 @@
 %% File Name: mcmc_coef.Rd
-%% File Version: 0.11
+%% File Version: 0.13
 
 \name{mcmc_coef}
 \alias{mcmc_coef}

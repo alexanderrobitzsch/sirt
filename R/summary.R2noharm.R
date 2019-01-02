@@ -1,5 +1,5 @@
 ## File Name: summary.R2noharm.R
-## File Version: 0.12
+## File Version: 0.14
 
 #..........................................................
 # R2Noharm summary function

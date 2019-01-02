@@ -1,5 +1,5 @@
 ## File Name: f1d.irt.R
-## File Version: 1.21
+## File Version: 1.23
 
 #########################################################
 # Functional Unidimensional Model (Ip et al., 2013)

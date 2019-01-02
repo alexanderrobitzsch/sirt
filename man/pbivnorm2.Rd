@@ -1,5 +1,5 @@
 %% File Name: pbivnorm2.Rd
-%% File Version: 0.23
+%% File Version: 0.25
 
 \name{pbivnorm2}
 \alias{pbivnorm2}
@@ -84,5 +84,5 @@ round( cbind( x, y, rho,pbiv, pbiv2 ), 4 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Bivariate normal distribution}
+%% \keyword{Bivariate normal distribution}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

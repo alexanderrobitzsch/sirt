@@ -1,5 +1,5 @@
 %% File Name: data.big5.Rd
-%% File Version: 0.49
+%% File Version: 0.51
 
 \name{data.big5}
 \alias{data.big5}
@@ -265,4 +265,4 @@ sirt::mirt.wrapper.itemplot(mod5b)
 }
 
 
-\keyword{datasets}
+%% \keyword{datasets}

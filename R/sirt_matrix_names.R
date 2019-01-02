@@ -1,5 +1,5 @@
 ## File Name: sirt_matrix_names.R
-## File Version: 0.05
+## File Version: 0.07
 
 sirt_matrix_names <- function(x, row_names=NULL, col_names=NULL, extract_names=NULL)
 {

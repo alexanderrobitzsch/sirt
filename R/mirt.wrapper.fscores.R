@@ -1,5 +1,5 @@
 ## File Name: mirt.wrapper.fscores.R
-## File Version: 0.06
+## File Version: 0.08
 
 ##################################################################
 # calculation of factor scores (EAP, MAP and MLE) in mirt

@@ -1,5 +1,5 @@
 ## File Name: lsem.MGM.stepfunctions.R
-## File Version: 0.10
+## File Version: 0.12
 
 ##############################################################
 lsem.MGM.stepfunctions <- function( object, moderator.grid ){

@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.32
+%% File Version: 0.34
 
 \name{data.sirt}
 
@@ -188,4 +188,4 @@ cmod2[,ind] <- t( apply( h1, 1, FUN=function(ll){ ll - mean(ll) } ) )
 cmod2[,-1] <- round( cmod2[,-1], 3)
 }
 }
-\keyword{datasets}
+%% \keyword{datasets}

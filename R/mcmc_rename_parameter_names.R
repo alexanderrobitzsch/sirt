@@ -1,5 +1,5 @@
 ## File Name: mcmc_rename_parameter_names.R
-## File Version: 0.09
+## File Version: 0.11
 
 mcmc_rename_parameter_names <- function( vec, orig, trans)
 {

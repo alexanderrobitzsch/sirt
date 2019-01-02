@@ -1,5 +1,5 @@
 ## File Name: xxirt_compute_posterior.R
-## File Version: 0.24
+## File Version: 0.26
 
 
 ###########################################################################

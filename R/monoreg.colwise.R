@@ -1,5 +1,5 @@
 ## File Name: monoreg.colwise.R
-## File Version: 0.11
+## File Version: 0.13
 
 
 # monotone regression for all columns in a matrix

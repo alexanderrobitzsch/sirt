@@ -1,5 +1,5 @@
 ## File Name: xxirt_ThetaDistribution_extract_freeParameters.R
-## File Version: 0.08
+## File Version: 0.10
 
 
 xxirt_ThetaDistribution_extract_freeParameters <- function( customTheta )

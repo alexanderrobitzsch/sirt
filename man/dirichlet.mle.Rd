@@ -1,5 +1,5 @@
 %% File Name: dirichlet.mle.Rd
-%% File Version: 0.21
+%% File Version: 0.23
 
 \name{dirichlet.mle}
 \alias{dirichlet.mle}
@@ -145,5 +145,5 @@ coef( mod3b )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Dirichlet distribution}
+%% \keyword{Dirichlet distribution}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

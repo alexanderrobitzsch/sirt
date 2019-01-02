@@ -1,5 +1,5 @@
 %% File Name: automatic.recode.Rd
-%% File Version: 0.17
+%% File Version: 0.19
 
 \name{automatic.recode}
 \alias{automatic.recode}
@@ -92,5 +92,5 @@ res2 <- sirt::automatic.recode( data=raw.resp )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{R utilities}
+%% \keyword{R utilities}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -1,5 +1,5 @@
 ## File Name: sirt_pem_extract_parameters.R
-## File Version: 0.01
+## File Version: 0.03
 
 sirt_pem_extract_parameters <- function( parm, parmgroup, pem_parameter_index )
 {

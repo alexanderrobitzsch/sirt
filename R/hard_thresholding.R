@@ -1,5 +1,5 @@
 ## File Name: hard_thresholding.R
-## File Version: 0.04
+## File Version: 0.06
 
 
 hard_thresholding <- function( x, lambda )

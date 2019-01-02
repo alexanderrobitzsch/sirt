@@ -1,5 +1,5 @@
 ## File Name: mcmc_vcov.R
-## File Version: 0.10
+## File Version: 0.12
 
 
 ###########################################

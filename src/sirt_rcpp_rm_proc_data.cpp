@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_rm_proc_data.cpp
-//// File Version: 0.25
+//// File Version: 0.27
 
 
 // [[Rcpp::depends(RcppArmadillo)]]

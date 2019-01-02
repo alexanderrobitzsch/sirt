@@ -1,5 +1,5 @@
 ## File Name: read.fwf2.R
-## File Version: 1.06
+## File Version: 1.08
 
 
 

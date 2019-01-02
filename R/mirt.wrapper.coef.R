@@ -1,5 +1,5 @@
 ## File Name: mirt.wrapper.coef.R
-## File Version: 3.05
+## File Version: 3.07
 
 mirt.wrapper.coef <- function (mirt.obj)
 {

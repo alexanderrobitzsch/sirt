@@ -1,5 +1,5 @@
 %% File Name: rm.sdt.Rd
-%% File Version: 1.492
+%% File Version: 1.494
 
 \name{rm.sdt}
 \alias{rm.sdt}
@@ -389,7 +389,7 @@ plot(mod2)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Rater model}
-\keyword{Signal detection model}
-\keyword{summary}
-\keyword{plot}
+%% \keyword{Rater model}
+%% \keyword{Signal detection model}
+%% \keyword{summary}
+%% \keyword{plot}

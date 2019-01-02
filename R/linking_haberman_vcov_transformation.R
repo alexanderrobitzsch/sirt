@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_vcov_transformation.R
-## File Version: 0.08
+## File Version: 0.10
 
 linking_haberman_vcov_transformation <- function( H1, aj_vcov )
 {

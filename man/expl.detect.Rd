@@ -1,5 +1,5 @@
 %% File Name: expl.detect.Rd
-%% File Version: 1.17
+%% File Version: 1.19
 
 \name{expl.detect}
 \alias{expl.detect}
@@ -80,5 +80,5 @@ dimensionality and its application to approximate simple structure,
 For examples see \code{\link{conf.detect}}.
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
-\keyword{DETECT}
+%% \keyword{DETECT}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

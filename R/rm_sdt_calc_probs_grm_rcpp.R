@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_calc_probs_grm_rcpp.R
-## File Version: 0.03
+## File Version: 0.05
 
 
 rm_sdt_calc_probs_grm_rcpp <- function(c.rater, d.rater, I, K, eps=0, use_log=FALSE)

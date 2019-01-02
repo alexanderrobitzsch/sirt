@@ -1,5 +1,5 @@
 ## File Name: personfit.R
-## File Version: 1.27
+## File Version: 1.29
 
 
 

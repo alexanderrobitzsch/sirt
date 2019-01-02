@@ -1,5 +1,5 @@
 ## File Name: dirichlet.R
-## File Version: 1.11
+## File Version: 1.13
 
 ###########################################
 # simulate from a Dirichlet distribution

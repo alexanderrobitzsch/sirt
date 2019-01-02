@@ -1,5 +1,5 @@
 %% File Name: data.lsem.Rd
-%% File Version: 0.04
+%% File Version: 0.06
 
 \name{data.lsem}
 \alias{data.lsem01}
@@ -52,4 +52,4 @@ data(data.lsem01)
 %data(data.lsem01)
 %}
 
-\keyword{datasets}
+%% \keyword{datasets}

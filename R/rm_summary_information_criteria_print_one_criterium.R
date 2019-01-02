@@ -1,5 +1,5 @@
 ## File Name: rm_summary_information_criteria_print_one_criterium.R
-## File Version: 0.10
+## File Version: 0.12
 
 rm_summary_information_criteria_print_one_criterium <- function(ic, crit, desc, digits_crit=0, digits_penalty=2)
 {

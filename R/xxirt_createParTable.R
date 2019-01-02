@@ -1,5 +1,5 @@
 ## File Name: xxirt_createParTable.R
-## File Version: 0.21
+## File Version: 0.23
 
 ##################################################
 # create parameter table

@@ -1,5 +1,5 @@
 ## File Name: rm_calclike.R
-## File Version: 0.05
+## File Version: 0.07
 
 
 #**** calculation of the likelihood

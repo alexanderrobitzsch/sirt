@@ -1,5 +1,5 @@
 ## File Name: rasch.jml.R
-## File Version: 3.298
+## File Version: 3.300
 
 
 rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights=NULL,

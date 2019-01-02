@@ -1,5 +1,5 @@
 %% File Name: unidim.test.csn.Rd
-%% File Version: 1.22
+%% File Version: 1.24
 
 \name{unidim.test.csn}
 \alias{unidim.test.csn}
@@ -130,5 +130,5 @@ res <- sirt::unidim.test.csn( dat )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Test for unidimensionality}
+%% \keyword{Test for unidimensionality}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

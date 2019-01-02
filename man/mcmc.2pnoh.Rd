@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pnoh.Rd
-%% File Version: 0.27
+%% File Version: 0.29
 
 \name{mcmc.2pnoh}
 \alias{mcmc.2pnoh}
@@ -175,5 +175,5 @@ mcmclist2coda( mod$mcmcobj, name="simul_2pnoh" )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Markov Chain Monte Carlo (MCMC)}
+%% \keyword{Markov Chain Monte Carlo (MCMC)}
 % \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

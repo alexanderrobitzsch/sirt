@@ -1,5 +1,5 @@
 %% File Name: rasch.pml3.Rd
-%% File Version: 2.74
+%% File Version: 2.76
 
 
 
@@ -493,6 +493,6 @@ summary(mod4)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Pairwise marginal maximum likelihood (PMML)}
-\keyword{Local dependence}
-\keyword{summary}
+%% \keyword{Pairwise marginal maximum likelihood (PMML)}
+%% \keyword{Local dependence}
+%% \keyword{summary}

@@ -1,5 +1,5 @@
 %% File Name: np.dich.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{np.dich}
 \alias{np.dich}
@@ -94,5 +94,5 @@ plot( np1, b=mod$item$b )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Nonparametric item response theory}
+%% \keyword{Nonparametric item response theory}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

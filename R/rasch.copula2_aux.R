@@ -1,19 +1,12 @@
 ## File Name: rasch.copula2_aux.R
-## File Version: 1.22
+## File Version: 1.345
 
 
-
-sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
-{
-    TAM::require_namespace_msg("gtools")
-    res <- gtools::permutations(n=n, r=r, v=v, repeats.allowed=repeats.allowed)
-    return(res)
-}
 
 #--------------------------------------------------------------------------------------
 # Function calculates necessary patterns for copula IRT models (Braeken, 2011)
 .calc.copula.itemcluster <- function(D){
-    res <- sirt_permutations(n=2, r=D, v=0:1, repeats.allowed=TRUE)
+    res <- sirt_permutations(r=D, v=0:1)
     rownames(res) <- apply( res, 1, FUN=function(ll){ paste("P", paste( ll,collapse=""),sep="") } )
     RR <- nrow(res)
     matr <- matrix( 0, RR, RR )
@@ -39,7 +32,7 @@ sirt_permutations <- function(n,r,v, repeats.allowed=TRUE)
 #--------------------------------------------------------------------------------------
 # Function calculates necessary patterns for copula IRT models (Braeken, 2011)
 .calc.copula.itemcluster2 <- function(D){
-    res <- sirt_permutations(n=2, r=D, v=0:1, repeats.allowed=TRUE)
+    res <- sirt_permutations(r=D, v=0:1)
     rownames(res) <- apply( res, 1, FUN=function(ll){ paste("P", paste( ll,collapse=""),sep="") } )
     RR <- nrow(res)
     matr <- matrix( 0, RR, RR )

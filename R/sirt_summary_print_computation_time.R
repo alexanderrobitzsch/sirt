@@ -1,5 +1,5 @@
 ## File Name: sirt_summary_print_computation_time.R
-## File Version: 0.03
+## File Version: 0.05
 
 sirt_summary_print_computation_time <- function( object )
 {

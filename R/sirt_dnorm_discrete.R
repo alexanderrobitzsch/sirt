@@ -1,5 +1,5 @@
 ## File Name: sirt_dnorm_discrete.R
-## File Version: 0.01
+## File Version: 0.03
 
 sirt_dnorm_discrete <- function(x, mean=0, sd=1)
 {

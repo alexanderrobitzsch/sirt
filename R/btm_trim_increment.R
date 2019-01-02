@@ -1,5 +1,5 @@
 ## File Name: btm_trim_increment.R
-## File Version: 0.02
+## File Version: 0.04
 
 btm_trim_increment <- function(incr, maxincr )
 {

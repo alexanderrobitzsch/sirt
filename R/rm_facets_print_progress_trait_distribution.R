@@ -1,5 +1,5 @@
 ## File Name: rm_facets_print_progress_trait_distribution.R
-## File Version: 0.06
+## File Version: 0.08
 
 
 rm_facets_print_progress_trait_distribution <- function( parm, parmlabel, digits_trait )

@@ -1,5 +1,5 @@
 %% File Name: Q3.testlet.Rd
-%% File Version: 1.13
+%% File Version: 1.15
 
 \name{Q3.testlet}
 \alias{Q3.testlet}
@@ -82,7 +82,7 @@ mod.testletq3
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Testlets}
-\keyword{Local dependence}
-\keyword{Q3}
+%% \keyword{Testlets}
+%% \keyword{Local dependence}
+%% \keyword{Q3}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

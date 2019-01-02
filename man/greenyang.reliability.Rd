@@ -1,5 +1,5 @@
 %% File Name: greenyang.reliability.Rd
-%% File Version: 1.31
+%% File Version: 1.33
 
 \name{greenyang.reliability}
 \alias{greenyang.reliability}
@@ -147,5 +147,5 @@ greenyang.reliability( object.tetra=dat.tetra2, nfactors=4 )
 # The same result will be obtained by using fap as the input
 greenyang.reliability( object.tetra=fap, nfactors=4 ) }
 }
-\keyword{Reliability}
+%% \keyword{Reliability}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

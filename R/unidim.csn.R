@@ -1,5 +1,5 @@
 ## File Name: unidim.csn.R
-## File Version: 0.17
+## File Version: 0.19
 
 #############################################################
 unidim.test.csn <- function( dat, RR=400, prop.perm=.75,

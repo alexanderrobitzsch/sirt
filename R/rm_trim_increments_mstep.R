@@ -1,5 +1,5 @@
 ## File Name: rm_trim_increments_mstep.R
-## File Version: 0.03
+## File Version: 0.05
 
 rm_trim_increments_mstep <- function( parm, parm0, max.increment )
 {

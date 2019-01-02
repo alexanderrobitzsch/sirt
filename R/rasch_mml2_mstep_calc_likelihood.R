@@ -1,5 +1,5 @@
 ## File Name: rasch_mml2_mstep_calc_likelihood.R
-## File Version: 0.02
+## File Version: 0.05
 
 rasch_mml2_mstep_calc_likelihood <- function(G, pjk.M, n.jk, r.jk )
 {

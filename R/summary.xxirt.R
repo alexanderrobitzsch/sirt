@@ -1,5 +1,5 @@
 ## File Name: summary.xxirt.R
-## File Version: 0.23
+## File Version: 0.25
 #*******************************************************
 # Summary for xxirt object
 summary.xxirt <- function( object, digits=3, file=NULL, ...)

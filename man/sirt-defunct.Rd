@@ -1,5 +1,5 @@
 %% File Name: sirt-defunct.Rd
-%% File Version: 0.06
+%% File Version: 0.08
 
 \name{sirt-defunct}
 \alias{sirt-defunct}

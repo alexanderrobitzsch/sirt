@@ -1,5 +1,5 @@
 %% File Name: rasch.evm.pcm.Rd
-%% File Version: 0.41
+%% File Version: 0.46
 
 \name{rasch.evm.pcm}
 \alias{rasch.evm.pcm}
@@ -16,7 +16,7 @@ Estimation of the Partial Credit Model using the Eigenvector Method
 \description{
 This function performs the eigenvector approach to estimate item
 parameters which is based on a pairwise estimation approach
-(Gardner & Engelhard, 2002). No assumption about person parameters
+(Garner & Engelhard, 2002). No assumption about person parameters
 is required for item parameter estimation. Statistical inference is performed by
 Jackknifing. If a group identifier is provided, tests for differential item
 functioning are performed.
@@ -26,7 +26,7 @@ functioning are performed.
 rasch.evm.pcm(dat, jackunits=20, weights=NULL, pid=NULL,
     group=NULL, powB=2, adj_eps=0.3, progress=TRUE )
 
-\method{summary}{rasch.evm.pcm}(object,...)
+\method{summary}{rasch.evm.pcm}(object, digits=3, file=NULL, ...)
 
 \method{coef}{rasch.evm.pcm}(object,...)
 
@@ -65,6 +65,8 @@ Adjustment parameter for person parameter estimation
 An optional logical indicating whether progress should be displayed
 }
 \item{object}{Object of class \code{rasch.evm.pcm}}
+\item{digits}{Number of digits after decimals for rounding in \code{summary}.}
+\item{file}{Optional file name if \code{summary} should be sunk into a file.}
 \item{\dots}{Further arguments to be passed}
 }
 
@@ -292,8 +294,8 @@ summary(mod1)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Eigenvector method}
-\keyword{Pairwise estimation}
-\keyword{summary}
-\keyword{coef}
-\keyword{vcov}
+%% \keyword{Eigenvector method}
+%% \keyword{Pairwise estimation}
+%% \keyword{summary}
+%% \keyword{coef}
+%% \keyword{vcov}

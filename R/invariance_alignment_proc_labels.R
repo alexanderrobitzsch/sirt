@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_proc_labels.R
-## File Version: 0.02
+## File Version: 0.04
 
 invariance_alignment_proc_labels <- function(x)
 {

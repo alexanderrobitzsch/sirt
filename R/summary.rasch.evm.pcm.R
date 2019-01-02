@@ -1,14 +1,23 @@
 ## File Name: summary.rasch.evm.pcm.R
-## File Version: 0.11
-#*******************************************************
-# Summary for rasch.mirtlc object                         *
-summary.rasch.evm.pcm <- function( object,... ){
-    # object      ... object from rasch.mml                #
-    cat("------------------------------------------------------------------------------------\n")
-    d1 <- utils::packageDescription("sirt")
-    cat( paste( d1$Package, " ", d1$Version, " (", d1$Date, ")", sep=""), "\n\n" )
-#    cat( "Date of Analysis:", paste( object$s2 ), "\n" )
-#    cat("Computation time:", print(object$s2 - object$s1), "\n\n")
+## File Version: 0.18
+
+summary.rasch.evm.pcm <- function( object, digits=3, file=NULL, ... )
+{
+    # open sink for a file
+    sirt_osink(file=file)
+
+    display_string <- sirt_summary_print_display(symbol="-", len=65)
+    cat(display_string)
+
+    #- package and R session
+    sirt_summary_print_package_rsession(pack="sirt")
+
+    #- print call
+    sirt_summary_print_call(CALL=object$CALL)
+
+    #-- print computation time
+    sirt_summary_print_computation_time_s1(object=object)
+
     cat("Partial Credit Model (estimated with eigenvector method) \n\n")
     options(scipen=999)
     cat( "Number of groups:", object$desc$G[1], "\n" )
@@ -24,23 +33,18 @@ summary.rasch.evm.pcm <- function( object,... ){
                 )
     cat( "Number of parameters:", sum(object$desc$N.pars), "\n\n" )
 
-
-    cat("------------------------------------------------------------------------------------\n")
+    cat(display_string)
     cat("Item Parameters \n\n")
     obji <- object$item
-    for (vv in seq(4,ncol(obji)) ){
-        obji[,vv] <- round( obji[,vv], 3 )
-                    }
-    print( obji )
+    sirt_summary_print_objects(obji=obji, digits=digits, from=4, rownames_null=FALSE)
+
     if (! is.null( object$difstats) ){
-        cat("\n------------------------------------------------------------------------------------\n")
+        cat(display_string)
         cat("DIF Tests \n\n")
         obji <- object$difstats
-        for (vv in seq(2,ncol(obji)) ){
-            obji[,vv] <- round( obji[,vv], 3 )
-                        }
-        print( obji )
-            }
+        sirt_summary_print_objects(obji=obji, digits=digits, from=2, rownames_null=FALSE)
+    }
     options(scipen=0)
-            }
-#*******************************************************
+
+    sirt_csink(file=file)
+}

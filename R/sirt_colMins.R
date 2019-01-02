@@ -1,5 +1,5 @@
 ## File Name: sirt_colMins.R
-## File Version: 0.02
+## File Version: 0.04
 
 sirt_colMins <- function(x, na.rm=TRUE)
 {

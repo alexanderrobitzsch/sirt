@@ -1,5 +1,5 @@
 %% File Name: data.mcdonald.Rd
-%% File Version: 0.20
+%% File Version: 0.22
 
 \name{data.mcdonald}
 
@@ -228,4 +228,4 @@ sum(  (nu[1,]-nu[2,]) * lambda[2,] ) / sqrt( sum( (nu[1,]-nu[2,])^2 ) * sum( lam
   ##   [1] 0.968176
 }
 }
-\keyword{datasets}
+%% \keyword{datasets}

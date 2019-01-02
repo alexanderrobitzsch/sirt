@@ -1,5 +1,5 @@
 ## File Name: rm_posterior.R
-## File Version: 0.15
+## File Version: 0.17
 
 
 #######################################################

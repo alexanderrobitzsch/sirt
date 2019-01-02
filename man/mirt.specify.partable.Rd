@@ -1,5 +1,5 @@
 %% File Name: mirt.specify.partable.Rd
-%% File Version: 0.07
+%% File Version: 0.09
 
 \name{mirt.specify.partable}
 \alias{mirt.specify.partable}
@@ -105,5 +105,5 @@ mirt.specify.partable(mirt.partable, parlist)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{mirt}
+%% \keyword{mirt}
 % \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

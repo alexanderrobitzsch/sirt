@@ -1,23 +1,18 @@
 ## File Name: print.xxirt.R
-## File Version: 0.07
+## File Version: 0.11
 
 
-################################################################################
-print.xxirt <- function(x, ... ){
+print.xxirt <- function(x, ... )
+{
     object <- x
     d1 <- utils::packageDescription("sirt")
     cat( paste( d1$Package, " ", d1$Version, " (", d1$Date, ")", sep=""), "\n\n" )
-#    cat( "Date of Analysis:", paste( object$s2 ), "\n" )
-#    cat("Computation Time:", print(object$s2 - object$s1), "\n\n")
 
     cat("Call:\n", paste(deparse(object$CALL), sep="\n", collapse="\n"),
                 "\n\n", sep="")
 
-#    modeltype <- object$irtmodel
-        cat( object$ic$n, "Cases, ", object$ic$I, "Items, ",
-                object$G, "Group(s)", # ",",
-                "\n")
-
+    cat( object$ic$n, "Cases, ", object$ic$I, "Items, ",
+                object$G, "Group(s)", "\n")
 
     #*** parameters
     cat( "Number of estimated parameters=", object$ic$np, "\n" )

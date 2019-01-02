@@ -1,5 +1,5 @@
 %% File Name: pcm.fit.Rd
-%% File Version: 0.18
+%% File Version: 0.20
 
 \name{pcm.fit}
 \alias{pcm.fit}
@@ -153,5 +153,5 @@ pcm.fit(b=b1, theta=wle1$theta, dat)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Item fit}
-\keyword{Person fit}% __ONLY ONE__ keyword per line
+%% \keyword{Item fit}
+%% \keyword{Person fit}% __ONLY ONE__ keyword per line

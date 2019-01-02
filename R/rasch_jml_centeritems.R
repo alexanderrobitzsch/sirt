@@ -1,5 +1,5 @@
 ## File Name: rasch_jml_centeritems.R
-## File Version: 0.02
+## File Version: 0.04
 
 rasch_jml_centeritems <- function(b, centeritems)
 {

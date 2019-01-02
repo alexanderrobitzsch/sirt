@@ -1,5 +1,5 @@
 ## File Name: sirt_pem_collect_parameters.R
-## File Version: 0.03
+## File Version: 0.05
 
 sirt_pem_collect_parameters <- function( parmlist, pem_parameter_index )
 {

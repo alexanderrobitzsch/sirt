@@ -1,5 +1,5 @@
 %% File Name: categorize.Rd
-%% File Version: 0.15
+%% File Version: 0.17
 
 \name{categorize}
 \alias{categorize}
@@ -128,5 +128,5 @@ str(res)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Utilities}
+%% \keyword{Utilities}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

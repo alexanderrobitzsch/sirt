@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_prepare_diffindex.R
-## File Version: 0.04
+## File Version: 0.06
 
 rm_sdt_prepare_diffindex <- function( item.index, rater.index, I, est.c.rater, est.d.rater )
 {

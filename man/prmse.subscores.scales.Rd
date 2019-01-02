@@ -1,5 +1,5 @@
 %% File Name: prmse.subscores.scales.Rd
-%% File Version: 0.28
+%% File Version: 0.30
 
 \name{prmse.subscores.scales}
 \alias{prmse.subscores.scales}
@@ -105,5 +105,5 @@ print( p1, digits=3 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Proportional reduction of mean squared error (PRMSE)}
+%% \keyword{Proportional reduction of mean squared error (PRMSE)}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

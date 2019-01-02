@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_inference_jackknife.h
-//// File Version: 0.01
+//// File Version: 0.03
 
 #ifndef _SIRT_SIRT_RCPP_INFERENCE_JACKKNIFE_H
 #define _SIRT_SIRT_RCPP_INFERENCE_JACKKNIFE_H

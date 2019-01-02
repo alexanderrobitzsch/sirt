@@ -1,5 +1,5 @@
 %% File Name: mirt.wrapper.Rd
-%% File Version: 1.82
+%% File Version: 1.84
 
 \name{mirt.wrapper}
 \alias{mirt.wrapper}
@@ -405,5 +405,5 @@ round(fres$EAP.rel,3)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{mirt}
+%% \keyword{mirt}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

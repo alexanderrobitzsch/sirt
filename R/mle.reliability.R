@@ -1,5 +1,5 @@
 ## File Name: mle.reliability.R
-## File Version: 0.06
+## File Version: 0.08
 
 
 #########################################################

@@ -1,5 +1,5 @@
 ## File Name: sirt_vector_with_names.R
-## File Version: 0.04
+## File Version: 0.06
 
 sirt_vector_with_names <- function(value, names)
 {

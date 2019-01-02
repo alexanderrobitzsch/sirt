@@ -1,5 +1,5 @@
 ## File Name: R2noharm.R
-## File Version: 2.22
+## File Version: 2.24
 
 #------------------------------------------------------------------
 # NOHARM exploratory factor analysis

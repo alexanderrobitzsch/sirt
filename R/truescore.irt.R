@@ -1,5 +1,5 @@
 ## File Name: truescore.irt.R
-## File Version: 0.20
+## File Version: 0.22
 
 ###############################################################
 truescore.irt <- function( A, B, c=NULL, d=NULL,

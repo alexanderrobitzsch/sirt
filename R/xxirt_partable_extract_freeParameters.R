@@ -1,5 +1,5 @@
 ## File Name: xxirt_partable_extract_freeParameters.R
-## File Version: 0.07
+## File Version: 0.09
 
 #########################################################################
 xxirt_partable_extract_freeParameters <- function( partable ){

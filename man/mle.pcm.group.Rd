@@ -1,5 +1,5 @@
 %% File Name: mle.pcm.group.Rd
-%% File Version: 0.23
+%% File Version: 0.25
 
 \name{mle.pcm.group}
 \alias{mle.pcm.group}
@@ -159,6 +159,6 @@ lines( score, res30$theta, col=4, lty=3 )
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Person parameters}
-\keyword{Group parameters}
+%% \keyword{Person parameters}
+%% \keyword{Group parameters}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

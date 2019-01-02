@@ -1,5 +1,5 @@
 ## File Name: sirt_sign_space.R
-## File Version: 0.01
+## File Version: 0.03
 
 sirt_sign_space <- function(sign1="=")
 {

@@ -1,5 +1,5 @@
 ## File Name: summary.rasch.mirtlc.R
-## File Version: 7.11
+## File Version: 7.13
 #*******************************************************
 # Summary for rasch.mirtlc object                         *
 summary.rasch.mirtlc <- function( object,... ){

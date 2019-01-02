@@ -1,5 +1,5 @@
 ## File Name: mcmc_rename_helper.R
-## File Version: 0.02
+## File Version: 0.04
 
 mcmc_rename_helper <- function( string, rep_string=3, pre=3, suff=3)
 {

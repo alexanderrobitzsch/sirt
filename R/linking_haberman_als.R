@@ -1,11 +1,11 @@
 ## File Name: linking_haberman_als.R
-## File Version: 0.53
+## File Version: 0.566
 
 
-##########################################################################
-# alternating least squares for Haberman linking
+
+#--- alternating least squares for Haberman linking
 linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
-            progress, est.type, cutoff, reference_value=0 )
+            progress, est.type, cutoff, reference_value=0, adjust_main_effects=FALSE )
 {
     #****************
     iter <- 0
@@ -16,7 +16,7 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
     logaAt <- rep(0,NS)
     At_inits <- TRUE
     if ( At_inits ){
-        logaAt <- colSums( logaM * wgtM, na.rm=TRUE ) / colSums( wgtM, na.rm=TRUE )
+        logaAt <- weighted_colMeans( mat=logaM, wgt=wgtM )
         logaAt <- logaAt - logaAt[1]
     }
     wgtM0 <- wgtM
@@ -27,7 +27,7 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
     while( ( parchange > conv ) & (iter < maxiter) ){
         logaAt0 <- logaAt
         #--- calculate average item parameter
-        logaAt_M <- matrix( logaAt, nrow=NI, ncol=NS, byrow=TRUE)
+        logaAt_M <- sirt_matrix2( x=logaAt, nrow=NI)
         logaM_adj1 <- logaM - logaAt_M
         logaj <- weighted_rowMeans( mat=logaM_adj1, wgt=wgtM )
         # calculate adjusted mean slope
@@ -35,12 +35,14 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
         res <- linking_haberman_als_residual_weights( logaj=logaj, logaAt=logaAt,
                     logaM=logaM, cutoff=cutoff, wgtM0=wgtM0, eps=eps )
         wgtM <- res$wgtM
-        # logaAt <- colSums( logaMadj * wgtM, na.rm=TRUE ) /
-        #                 colSums( wgtM, na.rm=TRUE )
         logaAt <- weighted_colMeans( mat=logaMadj, wgt=wgtM )
-        logaAt[1] <- reference_value
-
-        #*** calculate residual and weight
+        if ( ! adjust_main_effects){
+            logaAt[1] <- reference_value
+        } else {
+            ma <- logaAt[1]
+            logaAt <- logaAt - ma + reference_value
+        }
+        #*** calculate residuals and weight
         res <- linking_haberman_als_residual_weights( logaj=logaj, logaAt=logaAt,
                     logaM=logaM, cutoff=cutoff, wgtM0=wgtM0, eps=eps )
         loga_resid <- res$loga_resid
@@ -70,21 +72,16 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
         res <- list( vcov=0*diag(NS-1), se=rep(0,NS-1)  )
     } else {
         res <- linking_haberman_als_vcov( regr_resid=loga_resid,
-                    regr_wgt=wgtM, selitems=selitems,
-                    transf_pars=logaAt )
+                    regr_wgt=wgtM, selitems=selitems, transf_pars=logaAt )
     }
-
     #--- item statistics
-    item_stat <- data.frame( "study"=colnames(wgtM0) )
+    item_stat <- data.frame( study=colnames(wgtM0) )
     item_stat$N_items <- colSums( wgtM0 > 0, na.rm=TRUE)
     item_stat$sumwgt_items <- colSums( wgt_adj, na.rm=TRUE )
-    #-------
     #*** end algorithm
-    res <- list( logaAt=logaAt, logaj=logaj,
-                loga_resid=loga_resid, loga_wgt=wgtM,
-                loga_wgt_adj=wgt_adj,
-                vcov=res$vcov, se=c(NA, res$se),
+    res <- list( logaAt=logaAt, logaj=logaj, loga_resid=loga_resid, loga_wgt=wgtM,
+                loga_wgt_adj=wgt_adj, vcov=res$vcov, se=c(NA, res$se),
                 item_stat=item_stat )
     return(res)
 }
-##########################################################################
+

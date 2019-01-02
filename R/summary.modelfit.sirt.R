@@ -1,5 +1,5 @@
 ## File Name: summary.modelfit.sirt.R
-## File Version: 1.05
+## File Version: 1.07
 
 
 ##############################################################

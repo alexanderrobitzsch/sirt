@@ -1,5 +1,5 @@
 ## File Name: rm_facets_postproc_person.R
-## File Version: 0.09
+## File Version: 0.11
 
 rm_facets_postproc_person <- function( dat2, dat2.resp, procdata, maxK, RR, theta.k, f.qk.yi )
 {

@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_create_parm_index_modify_elements.R
-## File Version: 0.08
+## File Version: 0.10
 
 
 rm_sdt_create_parm_index_modify_elements <- function(x, start_index, type)

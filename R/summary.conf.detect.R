@@ -1,18 +1,21 @@
 ## File Name: summary.conf.detect.R
-## File Version: 0.08
-#*******************************************************
-# Summary for conf.detect object
-summary.conf.detect <- function( object, digits=3, file=NULL, ...){
+## File Version: 0.15
 
+#**** Summary for conf.detect object
+summary.conf.detect <- function( object, digits=3, file=NULL, ...)
+{
     # open sink
     sirt_osink( file=file )
 
-    cat("-----------------------------------------------------------------\n")
-    d1 <- utils::packageDescription("sirt")
-    cat( paste( d1$Package, " ", d1$Version, " (", d1$Date, ")", sep=""), "\n\n" )
+    display_string <- sirt_summary_print_display(symbol="-", len=65)
+    cat(display_string)
 
-    cat("Call:\n", paste(deparse(object$CALL), sep="\n", collapse="\n"),
-                "\n\n", sep="")
+    #- package and R session
+    sirt_summary_print_package_rsession(pack="sirt")
+
+    #- print call
+    sirt_summary_print_call(CALL=object$CALL)
+
     itemcluster <- object$itemcluster
     IC <- length( unique(itemcluster) )
 
@@ -20,13 +23,12 @@ summary.conf.detect <- function( object, digits=3, file=NULL, ...){
     cat(des1,"\n")
     cat(paste("Bandwidth Scale:", object$bwscale, "\n" ) )
 
-    cat("-----------------------------------------------------------------\n")
+    cat(display_string)
     cat("Dimensionality Statistics \n")
     obji <- object$detect.summary
-    obji <- round( obji, digits)
-    print( obji )
+    sirt_summary_print_objects(obji=obji, digits=digits, from=1, rownames_null=FALSE)
 
     # close sink
     sirt_csink( file=file )
 }
-#*******************************************************
+

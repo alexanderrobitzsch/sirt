@@ -1,5 +1,5 @@
 %% File Name: sirt-utilities.Rd
-%% File Version: 0.35
+%% File Version: 0.395
 
 \name{sirt-utilities}
 \alias{sirt-utilities}
@@ -26,6 +26,11 @@
 \alias{sirt_colMins}
 \alias{sirt_colMaxs}
 \alias{sirt_colMedians}
+\alias{sirt_sum_norm}
+\alias{sirt_dnorm_discrete}
+\alias{sirt_abs_smooth}
+\alias{sirt_permutations}
+
 
 \title{Utility Functions in \pkg{sirt}}
 
@@ -60,6 +65,11 @@ sirt_colMins(x, na.rm=TRUE)
 sirt_colMaxs(x, na.rm=TRUE)
 sirt_colMedians(x, na.rm=TRUE)
 
+#* normalize vector to have sum of one
+sirt_sum_norm(x, na.rm=TRUE)
+#* discrete normal distribution 
+sirt_dnorm_discrete(x, mean=0, sd=1)
+
 # plyr::rbind.fill implementation in sirt
 sirt_rbind_fill(x, y)
 
@@ -67,6 +77,13 @@ sirt_rbind_fill(x, y)
 sirt_fisherz(rho)
 # inverse Fisher-z transformation, see psych::fisherz2r
 sirt_antifisherz(z)
+
+# smooth approximation of the absolute value function
+sirt_abs_smooth(x, deriv=0, eps=1e-4)
+
+# permutations with replacement
+sirt_permutations(r,v)
+  #-> is equivalent to gtools::permutations(n=length(v), r=D, v=v, repeats.allowed=TRUE)  
 
 # attach all elements in a list in a specified environment
 sirt_attach_list_elements(x, envir)
@@ -92,16 +109,20 @@ sirt_summary_print_call(CALL)
 \item{lower}{Numeric vector}
 \item{upper}{Numeric vector}
 \item{x}{Numeric vector or a matrix or a list}
-\item{eps}{Numerical. Shrinkage parameter of eigenvalue in
-\code{ginverse_sym}}
+\item{eps}{Numerical. Shrinkage parameter of eigenvalue in \code{ginverse_sym}}
 \item{a}{Numeric vector}
 \item{lambda}{Numeric value}
 \item{A}{Matrix}
 \item{nrow}{Integer}
 \item{na.rm}{Logical}
+\item{mean}{Numeric}
+\item{sd}{Numeric}
 \item{y}{Matrix}
 \item{rho}{Numeric}
+\item{deriv}{Integer indicating the order of derivative}
 \item{z}{Numeric}
+\item{r}{Integer}
+\item{v}{Vector}
 \item{envir}{Environment}
 \item{optimizer}{Can be \code{optim} or \code{nlminb}}
 \item{par}{Initial parameter}
@@ -148,7 +169,7 @@ x^a            #=sirt::pow(x,a)
 ## EXAMPLE 3: Soft and hard thresholding function (e.g. in LASSO estimation)
 #############################################################################
 
-x <- seq( -2, 2, length=100 )
+x <- seq(-2, 2, length=100)
 y <- sirt::soft_thresholding( x, lambda=.5)
 graphics::plot( x, y, type="l")
 
@@ -159,6 +180,36 @@ graphics::lines( x, z, lty=2, col=2)
 ## EXAMPLE 4: Bounds on parameters
 #############################################################################
 
-pars <- c( .721, .346 )
+pars <- c(.721, .346)
 bounds_parameters( pars=pars, lower=c(-Inf, .5), upper=c(Inf,1) )
+
+#############################################################################
+## EXAMPLE 5: Smooth approximation of absolute value function
+#############################################################################
+
+x <- seq(-1,1,len=100)
+graphics::plot(x, abs(x), lwd=2, col=1, lty=1, type="l", ylim=c(-1,1) )
+# smooth approximation
+tt <- 2
+graphics::lines(x, sirt::sirt_abs_smooth(x), lty=tt, col=tt, lwd=2)
+# first derivative
+tt <- 3
+graphics::lines(x, sirt::sirt_abs_smooth(x, deriv=1), lty=tt, col=tt, lwd=2)
+# second derivative
+tt <- 4
+graphics::lines(x, sirt::sirt_abs_smooth(x, deriv=2), lty=tt, col=tt, lwd=2)
+
+# analytic computation of first and second derivative
+stats::deriv( ~ sqrt(x^2 + eps), namevec="x", hessian=TRUE )
+
+\dontrun{
+#############################################################################
+## EXAMPLE 6: Permutations with replacement
+#############################################################################
+
+D <- 4
+v <- 0:1
+sirt::sirt_permutations(r=D, v=v)
+gtools::permutations(n=length(v), r=D, v=v, repeats.allowed=TRUE)
+}
 }

@@ -1,5 +1,5 @@
 //// File Name: rm_smirt_mml2_rcpp.cpp
-//// File Version: 5.30
+//// File Version: 5.32
 
 
 // [[Rcpp::depends(RcppArmadillo)]]

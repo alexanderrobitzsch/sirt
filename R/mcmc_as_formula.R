@@ -1,5 +1,5 @@
 ## File Name: mcmc_as_formula.R
-## File Version: 0.09
+## File Version: 0.11
 
 mcmc_as_formula <- function( string )
 {

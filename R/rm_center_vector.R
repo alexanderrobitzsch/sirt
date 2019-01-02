@@ -1,5 +1,5 @@
 ## File Name: rm_center_vector.R
-## File Version: 0.07
+## File Version: 0.09
 
 rm_center_vector <- function( vec, center_type, do_log=FALSE )
 {

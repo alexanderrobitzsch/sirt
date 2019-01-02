@@ -1,5 +1,5 @@
 ## File Name: summary.invariance.alignment.R
-## File Version: 0.273
+## File Version: 0.282
 
 
 
@@ -17,9 +17,16 @@ summary.invariance.alignment <- function( object, digits=3, file=NULL, ...)
     #- print call
     sirt_summary_print_call(CALL=object$CALL)
 
+    #-- print computation time
+    sirt_summary_print_computation_time_s1(object=object)
+
     #-- informations about optimization
     cat(display_string)
     invariance_alignment_summary_optimization(object=object, digits=digits)
+
+    cat(display_string)
+    cat("Number of items per group\n")
+    print(object$numb_items)
 
     cat(display_string)
     cat("Effect Sizes of Approximate Invariance \n")

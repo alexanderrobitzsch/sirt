@@ -1,5 +1,5 @@
 %% File Name: data.noharm.Rd
-%% File Version: 2.09
+%% File Version: 2.11
 
 \name{data.noharm}
 
@@ -82,4 +82,4 @@ A data frame with 200 observations on the following 18 variables \code{I01},
 %data(data.noharm)
 %## maybe str(data.noharm) ; plot(data.noharm) ...
 %}
-\keyword{datasets}
+%% \keyword{datasets}

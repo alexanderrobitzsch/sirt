@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_calc_probs_gpcm_rcpp.R
-## File Version: 0.10
+## File Version: 0.12
 
 rm_sdt_calc_probs_gpcm_rcpp <- function(a.item, tau.item, Qmatrix, theta.k, VV, K, TP,
     eps=0, use_log=FALSE, as_vector=FALSE)

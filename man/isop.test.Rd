@@ -1,5 +1,5 @@
 %% File Name: isop.test.Rd
-%% File Version: 0.23
+%% File Version: 0.25
 
 \name{isop.test}
 \alias{isop.test}
@@ -108,7 +108,7 @@ summary(mod)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ISOP model}
-\keyword{summary}
-\keyword{Nonparametric IRT}
+%% \keyword{ISOP model}
+%% \keyword{summary}
+%% \keyword{Nonparametric IRT}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -1,5 +1,5 @@
 %% File Name: data.raw1.Rd
-%% File Version: 0.05
+%% File Version: 0.07
 
 \name{data.raw1}
 \alias{data.raw1}
@@ -39,4 +39,4 @@ A data frame with raw item responses of 1200 persons on the following 77 items:
 %data(data.raw1)
 %## maybe str(data.raw1) ; plot(data.raw1) ...
 %}
-\keyword{datasets}
+%% \keyword{datasets}

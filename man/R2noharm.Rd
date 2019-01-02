@@ -1,5 +1,5 @@
 %% File Name: R2noharm.Rd
-%% File Version: 2.31
+%% File Version: 2.33
 
 \name{R2noharm}
 \alias{R2noharm}
@@ -491,6 +491,6 @@ summary(ex4a)
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{NOHARM}
-\keyword{summary}
+%% \keyword{NOHARM}
+%% \keyword{summary}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

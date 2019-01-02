@@ -1,5 +1,5 @@
 ## File Name: bounds_parameters.R
-## File Version: 0.06
+## File Version: 0.08
 
 
 bounds_parameters <- function( pars, lower=NULL, upper=NULL)

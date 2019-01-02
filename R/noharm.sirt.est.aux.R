@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.est.aux.R
-## File Version: 4.10
+## File Version: 4.99903
 
 
 ###############################################################
@@ -210,38 +210,3 @@
     }
 ######################################################################
 
-
-
-
-
-###############################################################
-# estimating P entries
-.noharm.est.residuals <- function( Fval, Pval, Fpatt, Ppatt,
-        I, D,  b0.jk, b1.jk, b2.jk, b3.jk, wgtm, pm,
-        Psival, Psipatt ){
-
-    # compute dj
-    dj <- sqrt( diag( Fval %*% Pval %*% t(Fval) ) )
-
-    # compute ej
-     ej <- sqrt( 1 + dj^2 )
-    # ej <- sqrt( 1+ .5^2 )
-     ej.ek <- 1 / outer( ej, ej )
-     #ej.ek <- 1+0*ej.ek
-     diag( ej.ek ) <- 0
-    v0.jk <- b0.jk
-    v1.jk <- b1.jk   * ej.ek
-    v2.jk <- b2.jk   * ej.ek^2
-    v3.jk <- b3.jk   * ej.ek^3
-    # compute gamma.jk=f_j' P f_k
-    gamma.jk <- Fval %*% Pval %*% t(Fval ) + Psival
-    # gamma.jk <- gamma.jk * ej.ek
-    # compute p_d ' f_k
-    pd.fk <- Fval %*% Pval
-    Fval_old <- Fval
-    Pval_old <- Pval
-    eps0.jj <- ( wgtm * ( pm - v0.jk - v1.jk*gamma.jk - v2.jk*gamma.jk^2 -
-                    v3.jk*gamma.jk^3 ) )
-    return(eps0.jj)
-    }
-######################################################################

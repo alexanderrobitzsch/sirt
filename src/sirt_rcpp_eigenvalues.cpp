@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_eigenvalues.cpp
-//// File Version: 4.25
+//// File Version: 4.28
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -8,7 +8,6 @@
 #include <Rcpp.h>
 
 using namespace Rcpp;
-
 
 
 
@@ -41,7 +40,7 @@ Rcpp::List sirt_rcpp_first_eigenvalue(arma::mat X, int maxit, double conv, doubl
             lambda_temp += Xz[ii]*Xz[ii];
         }
         lambda = std::sqrt(lambda_temp);
-        lambdadiff = std::abs( lambda - lambda_old);
+        lambdadiff = std::abs(lambda - lambda_old);
         z = Xz / lambda;
         iter ++;
     }
@@ -90,7 +89,7 @@ Rcpp::List sirt_rcpp_D_eigenvalues( Rcpp::NumericMatrix Xr, int D, int maxit, do
                 Rcpp::Named("u")=u
             );
 }
-
+///********************************************************************
 
 // Rcpp::Rcout << " d1 = " << d1[0] << std::endl;
 

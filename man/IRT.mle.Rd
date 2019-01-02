@@ -1,5 +1,5 @@
 %% File Name: IRT.mle.Rd
-%% File Version: 0.22
+%% File Version: 0.24
 
 \name{IRT.mle}
 \alias{IRT.mle}
@@ -198,5 +198,5 @@ res <- sirt::IRT.mle( data=dat, irffct=irffct, arg.list=arg.list, theta=theta0,
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 
-\keyword{Person parameters}
+%% \keyword{Person parameters}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

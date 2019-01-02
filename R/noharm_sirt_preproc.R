@@ -1,15 +1,11 @@
-## File Name: noharm.sirt.preprocess.R
-## File Version: 0.19
+## File Name: noharm_sirt_preproc.R
+## File Version: 0.31
 
 
-# e1 <- environment()
-# .attach.environment( res, envir=e1 )
-
-
-############################################################
-# data preprocessing noharm.sirt
-.noharm.sirt.preproc <- function( dat, weights, Fpatt, Fval,
-    Ppatt, Pval, Psipatt, Psival, wgtm, dimensions ){
+#**** data preprocessing noharm.sirt
+noharm_sirt_preproc <- function( dat, weights, Fpatt, Fval,
+    Ppatt, Pval, Psipatt, Psival, wgtm, dimensions )
+{
 
     res <- NULL
     res$dat0 <- dat
@@ -18,7 +14,9 @@
     # data processing
     res$N <- N <- nrow(dat)
     res$I <- I <- ncol(dat)
-    if (is.null(weights)){ weights <- rep(1,nrow(dat) ) }
+    if (is.null(weights)){
+        weights <- rep(1,nrow(dat) )
+    }
     res$weights <- weights
     dat.resp <- 1-is.na(dat)
     dat0 <- dat
@@ -27,7 +25,7 @@
     res$dat.resp <- dat.resp
     # calculate (weighted) product moment correlation
     ss <- as.matrix( crossprod( weights*dat.resp ) )
-    eps <- .000001
+    eps <- 1e-6
     pm <- as.matrix( crossprod( as.matrix(dat*weights*dat.resp) ) / ( ss+eps ) )
     res$pm <- pm
     res$pm0 <- pm
@@ -44,14 +42,16 @@
         Ppatt <- 0*diag(D)
         Fpatt <- matrix(1,nrow=I,ncol=D)
         if (D>1){
-            for (dd in 2:D){  Fpatt[dd,1:(dd-1)] <- 0 }
-                    }
+            for (dd in 2:D){
+                Fpatt[dd,1:(dd-1)] <- 0
+            }
+        }
         Fval <- .5*(Fpatt>0)
-        if ( D==1 ){     # 1 dimension
-                model.type <- "CFA"
-                modtype <- 3
-                        }
-                    }
+        if ( D==1 ){ # 1 dimension
+            model.type <- "CFA"
+            modtype <- 3
+        }
+    }
 
     res$model.type <- model.type
     res$modtype  <- modtype
@@ -59,15 +59,13 @@
     if ( is.null(Psival) ){ Psival <- 0*diag(res$I) }
     if ( is.null(Psipatt) ){ Psipatt <- 0*diag(res$I) }
     if ( is.null(Fval) ){ Fval <- .5*(Fpatt>0) }
-    if ( is.null(Pval) ){
-        Pval <- diag( ncol(Ppatt) )
-            }
+    if ( is.null(Pval) ){ Pval <- diag( ncol(Ppatt) ) }
     # weight matrix
     wgtm.default <- FALSE
     if ( is.null(wgtm) ){
-        wgtm <- matrix(1,I,I)
+        wgtm <- matrix(1, nrow=I, ncol=I)
         wgtm.default <- TRUE
-                    }
+    }
     diag(wgtm) <- 0
     wgtm <- wgtm * ( ss > 0 )
     res$wgtm <- wgtm
@@ -77,17 +75,18 @@
     D <- ncol(Ppatt)
     cn <- paste0("F",1:D)
     if (is.null(colnames(Fpatt) ) ){
-        colnames(Fpatt) <- cn }
+        colnames(Fpatt) <- cn
+    }
     if (is.null(colnames(Fval) ) ){
         colnames(Fval) <- colnames(Fpatt)
-                    }
+    }
 
     if (is.null(colnames(Pval))){
-            colnames(Pval) <- colnames(Ppatt)
-                    }
+        colnames(Pval) <- colnames(Ppatt)
+    }
     if (is.null(colnames(Pval))){
-            colnames(Pval) <- colnames(Fval)
-                    }
+        colnames(Pval) <- colnames(Fval)
+    }
     rownames(Pval) <- colnames(Pval)
 
     #*****
@@ -106,7 +105,9 @@
     res$Ppatt <- 1*(res$Ppatt>0)
     res$Psipatt <- 1*(res$Psipatt>0)
     res$wgtm.default <- wgtm.default
+    res$F_dimnames <- colnames(Fpatt)
+    res$items <- colnames(dat)
     return(res)
-    }
+}
 
-######################################################################
+

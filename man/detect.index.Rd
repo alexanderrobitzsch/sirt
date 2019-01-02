@@ -1,5 +1,5 @@
 %% File Name: detect.index.Rd
-%% File Version: 0.15
+%% File Version: 0.17
 
 \name{detect.index}
 \alias{detect.index}
@@ -70,5 +70,5 @@ For examples see \code{\link{conf.detect}}.
 %}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{DETECT}
+%% \keyword{DETECT}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -1,5 +1,5 @@
 //// File Name: probs_multcat_items_counts_rcpp.cpp
-//// File Version: 3.12
+//// File Version: 3.14
 
 
 #include <Rcpp.h>

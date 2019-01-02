@@ -1,5 +1,5 @@
 %% File Name: data.timss07.G8.RUS.Rd
-%% File Version: 0.05
+%% File Version: 0.07
 
 \name{data.timss07.G8.RUS}
 \alias{data.timss07.G8.RUS}
@@ -82,4 +82,4 @@ TIMSS 2007 8th Grade, Russian Sample
 %}
 
 
-\keyword{datasets}
+%% \keyword{datasets}

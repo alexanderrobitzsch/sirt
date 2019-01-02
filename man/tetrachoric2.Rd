@@ -1,5 +1,5 @@
 %% File Name: tetrachoric2.Rd
-%% File Version: 1.33
+%% File Version: 1.35
 
 \name{tetrachoric2}
 \alias{tetrachoric2}
@@ -126,5 +126,5 @@ max( abs( t0 - t4 ) )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Tetrachoric correlation}
+%% \keyword{Tetrachoric correlation}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

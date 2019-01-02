@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.jackknife1.Rd
-%% File Version: 2.16
+%% File Version: 2.18
 
 \name{rasch.jml.jackknife1}
 \alias{rasch.jml.jackknife1}
@@ -99,5 +99,5 @@ mod2 <- sirt::rasch.jml.jackknife1( mod )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Joint maximum likelihood (JML)}
+%% \keyword{Joint maximum likelihood (JML)}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

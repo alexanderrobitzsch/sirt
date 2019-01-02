@@ -1,5 +1,5 @@
 %% File Name: data.math.Rd
-%% File Version: 0.10
+%% File Version: 0.12
 
 \name{data.math}
 \alias{data.math}
@@ -56,4 +56,4 @@ The format is:
 
 
 
-\keyword{datasets}
+%% \keyword{datasets}

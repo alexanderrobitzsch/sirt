@@ -1,5 +1,5 @@
 ## File Name: mcmc_rename_define_symbols.R
-## File Version: 0.03
+## File Version: 0.05
 
 mcmc_rename_define_symbols <- function()
 {

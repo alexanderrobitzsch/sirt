@@ -1,5 +1,5 @@
 ## File Name: tracemat.R
-## File Version: 0.05
+## File Version: 0.07
 
 ########################################
 # trace of a matrix

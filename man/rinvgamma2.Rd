@@ -1,5 +1,5 @@
 %% File Name: rinvgamma2.Rd
-%% File Version: 0.16
+%% File Version: 0.18
 
 \name{rinvgamma2}
 \alias{rinvgamma2}

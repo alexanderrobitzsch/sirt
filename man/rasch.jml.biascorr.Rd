@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.biascorr.Rd
-%% File Version: 0.21
+%% File Version: 0.23
 
 \name{rasch.jml.biascorr}
 \alias{rasch.jml.biascorr}
@@ -87,5 +87,5 @@ print( res1$b.biascorr, digits=3 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Joint maximum likelihood (JML)}
+%% \keyword{Joint maximum likelihood (JML)}
 %\keyword{xxx}

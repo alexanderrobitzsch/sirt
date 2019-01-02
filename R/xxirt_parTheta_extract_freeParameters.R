@@ -1,5 +1,5 @@
 ## File Name: xxirt_parTheta_extract_freeParameters.R
-## File Version: 0.06
+## File Version: 0.08
 
 
 xxirt_parTheta_extract_freeParameters <- function( customTheta )

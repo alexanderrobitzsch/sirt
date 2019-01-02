@@ -1,5 +1,5 @@
 ## File Name: summary.invariance_alignment_constraints.R
-## File Version: 0.08
+## File Version: 0.10
 
 
 

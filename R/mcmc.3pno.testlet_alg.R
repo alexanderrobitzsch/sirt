@@ -1,5 +1,5 @@
 ## File Name: mcmc.3pno.testlet_alg.R
-## File Version: 2.22
+## File Version: 2.24
 
 ##############################################
 # draw latent response data W

@@ -1,5 +1,5 @@
 %% File Name: rasch.mml.Rd
-%% File Version: 3.99246
+%% File Version: 3.99248
 
 \name{rasch.mml2}
 \alias{rasch.mml2}
@@ -1061,10 +1061,10 @@ mod5a@logLik    # GRM
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Marginal maximum likelihood (MML)}
-\keyword{Ramsay's quotient model}
-\keyword{Nonparametric item response theory}
-\keyword{Pseudo-likelihood estimation}
-\keyword{summary}
-\keyword{plot}
+%% \keyword{Marginal maximum likelihood (MML)}
+%% \keyword{Ramsay's quotient model}
+%% \keyword{Nonparametric item response theory}
+%% \keyword{Pseudo-likelihood estimation}
+%% \keyword{summary}
+%% \keyword{plot}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

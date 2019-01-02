@@ -1,5 +1,5 @@
 %% File Name: mcmc_Rhat.Rd
-%% File Version: 0.07
+%% File Version: 0.09
 
 \name{mcmc_Rhat}
 \alias{mcmc_Rhat}

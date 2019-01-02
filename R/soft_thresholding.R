@@ -1,5 +1,5 @@
 ## File Name: soft_thresholding.R
-## File Version: 0.05
+## File Version: 0.07
 
 
 soft_thresholding <- function( x, lambda )

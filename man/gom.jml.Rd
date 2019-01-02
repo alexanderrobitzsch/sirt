@@ -1,5 +1,5 @@
 %% File Name: gom.jml.Rd
-%% File Version: 0.21
+%% File Version: 0.23
 
 \name{gom.jml}
 \alias{gom.jml}
@@ -148,5 +148,5 @@ summary(m3)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Grade of membership model}
+%% \keyword{Grade of membership model}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

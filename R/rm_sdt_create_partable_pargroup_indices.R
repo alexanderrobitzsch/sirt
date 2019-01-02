@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_create_partable_pargroup_indices.R
-## File Version: 0.06
+## File Version: 0.08
 
 
 rm_sdt_create_partable_pargroup_indices <- function(partable, item.index,

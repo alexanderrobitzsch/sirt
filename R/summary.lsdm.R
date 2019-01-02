@@ -1,43 +1,58 @@
 ## File Name: summary.lsdm.R
-## File Version: 0.09
+## File Version: 0.199
 
 
-#.............................
-# summary for LSDM function
-summary.lsdm <- function( object, ... )
+
+#*** summary for LSDM function
+summary.lsdm <- function( object, file=NULL, digits=3, ... )
 {
-        lsdmobj <- object
-        # generate sequence for display
-        display.separate <- paste( rep(".", each=80 ), collapse="" )
-        # display progress
-        cat( display.separate, "\n" )
-        cat( "LSDM -- Least Squares Distance Method of Cognitive Validation \n")
-        cat("Reference: Dimitrov, D. (2007) Applied Psychological Measurement, 31, 367-387.\n")
-        cat( display.separate, "\n" ) ; flush.console()
-        cat("\nModel Fit\n\n")
-        cat(paste( "Model Fit LSDM   -  Mean MAD:", formatC( round( lsdmobj$mean.mad.lsdm0, 3 ),digits=3, width=6),
-                        "    Median MAD:", formatC( round( median(lsdmobj$item$mad.lsdm), 3 ),digits=3, width=6), "\n") )
-        cat(paste( "Model Fit LLTM   -  Mean MAD:", formatC( round( lsdmobj$mean.mad.lltm, 3 ),digits=3, width=6),
-                    "    Median MAD:", formatC( round( median(lsdmobj$item$mad.lltm), 3 ),digits=3, width=6),
-                    "   R^2=", format( round( summary(lsdmobj$lltm)$r.squared, 3 ),digits=3),   "\n") )
-        cat( display.separate, "\n" )
-        cat("\nAttribute Parameters\n\n")
-        dfr.a <- data.frame( "N.Items"=colSums(lsdmobj$Qmatrix), round( lsdmobj$attr.pars, 3 )  )
-        elim.a <- union( grep("Q", colnames(dfr.a) ), grep( "sigma", colnames(dfr.a) ) )
-        print( dfr.a[, -elim.a ] )
-        cat( display.separate, "\n" )
-        cat("\nItem Parameters\n\n")
-        dfr.i <- round( lsdmobj$item, 3 )
+    # open sink for a file
+    sirt_osink(file=file)
 
-        displ.i <- sort( union(  which( colnames(dfr.i)   %in% c(  "a.2PL", "b.2PL", "N.Items", "b.1PL" ) ),
-                            grep( "mad", colnames(dfr.i)   ) )
-                                        )
-        print( round( dfr.i[,  displ.i  ], 3 ) )
-        cat( display.separate, "\n" )
-        cat("\nDiscrimination Parameters\n\n")
-        dfr.i <- round( lsdmobj$W, 3 )
-        print( dfr.i )
+    lsdmobj <- object
+    # generate sequence for display
+    display <- paste0( paste( rep("-", each=65 ), collapse="" ), "\n")
+    cat(display)
 
+    #- package and R session
+    sirt_summary_print_package_rsession(pack="sirt")
+
+    #- print call
+    sirt_summary_print_call(CALL=object$CALL)
+
+    #-- print computation time
+    sirt_summary_print_computation_time_s1(object=object$time)
+
+    cat("\nLSDM -- Least Squares Distance Method of Cognitive Validation \n")
+    cat("Reference: Dimitrov, D. (2007). Applied Psychological Measurement, 31, 367-387.\n")
+
+    cat(display)
+    cat("Model Fit\n\n")
+    cat("Distance function", "=", object$distance, "\n" )
+    cat(paste( "Model Fit LSDM   -  Mean MAD:",
+                    formatC( lsdmobj$mean.mad.lsdm0, digits=digits, width=digits+3),
+                    "    Median MAD:", formatC( median(lsdmobj$item$mad.lsdm), digits=digits, width=digits+3), "\n") )
+    cat(paste( "Model Fit LLTM   -  Mean MAD:", formatC( lsdmobj$mean.mad.lltm, digits=digits, width=digits+3),
+                    "    Median MAD:", formatC( median(lsdmobj$item$mad.lltm), digits=digits, width=digits+3),
+                    "   R^2=", format( summary(lsdmobj$lltm)$r.squared, digits=digits),   "\n") )
+
+    cat(display)
+    cat("Attribute Parameters\n\n")
+    dfr.a <- data.frame( "N.Items"=colSums(lsdmobj$Qmatrix), round( lsdmobj$attr.pars, digits) )
+    elim.a <- union( grep("Q", colnames(dfr.a) ), grep( "sigma", colnames(dfr.a) ) )
+    print( dfr.a[, -elim.a ] )
+
+    cat(display)
+    cat("Item Parameters\n\n")
+    dfr.i <- round( lsdmobj$item, digits)
+    displ.i <- sort( union( which( colnames(dfr.i) %in% c(  "a.2PL", "b.2PL", "N.Items", "b.1PL" ) ),
+                    grep( "mad", colnames(dfr.i))) )
+    print( round( dfr.i[, displ.i ], digits) )
+
+    cat(display)
+    cat("Discrimination Parameters\n\n")
+    dfr.i <- round( lsdmobj$W, digits)
+    print(dfr.i)
+
+    sirt_csink(file=file)
 }
-
-

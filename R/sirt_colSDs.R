@@ -1,5 +1,5 @@
 ## File Name: sirt_colSDs.R
-## File Version: 0.02
+## File Version: 0.04
 
 sirt_colSDs <- function(x, na.rm=TRUE)
 {

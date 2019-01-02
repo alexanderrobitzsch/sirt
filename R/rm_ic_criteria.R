@@ -1,5 +1,5 @@
 ## File Name: rm_ic_criteria.R
-## File Version: 0.03
+## File Version: 0.05
 
 rm_ic_criteria <- function(ic)
 {

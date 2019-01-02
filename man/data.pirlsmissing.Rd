@@ -1,5 +1,5 @@
 %% File Name: data.pirlsmissing.Rd
-%% File Version: 0.09
+%% File Version: 0.11
 
 \name{data.pirlsmissing}
 \alias{data.pirlsmissing}
@@ -66,4 +66,4 @@ round( colMeans( data.pirlsmissing==9 ), 3 )
 }
 
 
-\keyword{datasets}
+%% \keyword{datasets}

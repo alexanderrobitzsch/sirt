@@ -1,5 +1,5 @@
 ## File Name: sirt_antifisherz.R
-## File Version: 0.01
+## File Version: 0.03
 
 ## see psych::fisherz2r
 sirt_antifisherz <- function(z)

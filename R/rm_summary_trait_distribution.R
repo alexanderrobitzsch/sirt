@@ -1,5 +1,5 @@
 ## File Name: rm_summary_trait_distribution.R
-## File Version: 0.05
+## File Version: 0.07
 
 rm_summary_trait_distribution <- function(object)
 {

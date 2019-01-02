@@ -1,5 +1,5 @@
 %% File Name: person.parameter.rasch.copula.Rd
-%% File Version: 1.17
+%% File Version: 1.19
 
 \name{person.parameter.rasch.copula}
 \alias{person.parameter.rasch.copula}
@@ -129,6 +129,6 @@ pmod1 <- sirt::person.parameter.rasch.copula(raschcopula.object=mod1 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{IRT copula models}
-\keyword{Person parameter estimation}
+%% \keyword{IRT copula models}
+%% \keyword{Person parameter estimation}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

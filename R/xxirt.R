@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 0.912
+## File Version: 0.916
 
 
 #########################################################################
@@ -146,7 +146,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         conv_temp <- max( conv0, conv1)
         converged <- ( globconv_temp < globconv ) & ( conv_temp < conv )
 
-        # print progress
+        #-- print progress
         if (verbose){
             cat( paste( "   Deviance=", round( dev, 4 ),
                 if (iter > 1 ){ " | Deviance change=" } else {""},
@@ -182,16 +182,16 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     #*********************************************#
     # output
     s2 <- Sys.time()
-    res <- list( partable=partable, par_items=par_items, 
-                par_items_summary=par_items_summary, par_items_bounds=par_items_bounds, 
-                par_Theta=par_Theta, Theta=Theta, probs_items=probs_items, 
-                probs_Theta=prior_Theta, deviance=dev, loglike=-dev/2, ic=ic, 
-                item_list=item_list, customItems=customItems, customTheta=customTheta, 
-                p.xi.aj=p.xi.aj, p.aj.xi=p.aj.xi, n.ik=n.ik, EAP=EAP, dat=dat, dat_resp=dat_resp, 
-                weights=weights, item_index=item_index, G=G, group=group, group_orig=group0, 
-                ncat=ncat, mstepItem_method=mstep_method, partable_index=partable_index, 
-                items=items, dat1=dat1, group_index=group_index, maxK=maxK, weights=weights, 
-                resp_index=resp_index, converged=converged, iter=iter-1, CALL=CALL, s1=s1, s2=s2 ) 
+    res <- list( partable=partable, par_items=par_items,
+                par_items_summary=par_items_summary, par_items_bounds=par_items_bounds,
+                par_Theta=par_Theta, Theta=Theta, probs_items=probs_items,
+                probs_Theta=prior_Theta, deviance=dev, loglike=-dev/2, ic=ic,
+                item_list=item_list, customItems=customItems, customTheta=customTheta,
+                p.xi.aj=p.xi.aj, p.aj.xi=p.aj.xi, n.ik=n.ik, EAP=EAP, dat=dat, dat_resp=dat_resp,
+                weights=weights, item_index=item_index, G=G, group=group, group_orig=group0,
+                ncat=ncat, mstepItem_method=mstep_method, partable_index=partable_index,
+                items=items, dat1=dat1, group_index=group_index, maxK=maxK, weights=weights,
+                resp_index=resp_index, converged=converged, iter=iter-1, CALL=CALL, s1=s1, s2=s2 )
     class(res) <- 'xxirt'
     return(res)
 }

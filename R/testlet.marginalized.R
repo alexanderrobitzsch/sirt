@@ -1,11 +1,13 @@
 ## File Name: testlet.marginalized.R
-## File Version: 0.09
-testlet.marginalized <-
-function( tam.fa.obj=NULL, a1=NULL, d1=NULL, testlet=NULL, a.testlet=NULL, var.testlet=NULL){
+## File Version: 0.15
 
+
+testlet.marginalized <- function( tam.fa.obj=NULL, a1=NULL, d1=NULL, testlet=NULL,
+    a.testlet=NULL, var.testlet=NULL)
+{
     if ( ! is.null(a1) ){
         itemlabel <- rep(1:length(a1))
-                    }
+    }
     if (! is.null(tam.fa.obj) ){
         mod1 <- tam.fa.obj
         a1 <- mod1$B[,2,1]
@@ -15,13 +17,13 @@ function( tam.fa.obj=NULL, a1=NULL, d1=NULL, testlet=NULL, a.testlet=NULL, var.t
             if (length(l1)==0 ){ l1 <- NA }
             l1
                 }
-                )
+            )
         a.testlet <- mod1$B[, 2,  - 1]
         a.testlet <- a.testlet[ cbind( seq(1,length(testlets) ), testlets ) ]
         var.testlet <- diag( mod1$variance )[-1]
         testlet <- testlets
         itemlabel <- colnames(mod1$resp)
-                        }
+    }
     # compute marginalized item intercepts and item slopes
     k <- 16*sqrt(3) / ( 15*pi )     # multiplication constant
             # 1 / k=1.700
@@ -41,6 +43,6 @@ function( tam.fa.obj=NULL, a1=NULL, d1=NULL, testlet=NULL, a.testlet=NULL, var.t
     # marginal parameters
     dfr$a1_marg <- dfr$a1 * lambda.logit
     dfr$d1_marg <- dfr$d1 * lambda.logit
-    # output
+    #--- output
     return(dfr)
-        }
+}

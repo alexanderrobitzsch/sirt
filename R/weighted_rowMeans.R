@@ -1,5 +1,5 @@
 ## File Name: weighted_rowMeans.R
-## File Version: 0.07
+## File Version: 0.09
 
 weighted_rowMeans <- function( mat, wgt=NULL)
 {

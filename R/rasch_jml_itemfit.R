@@ -1,5 +1,5 @@
 ## File Name: rasch_jml_itemfit.R
-## File Version: 0.03
+## File Version: 0.05
 
 
 

@@ -1,5 +1,5 @@
 ## File Name: rasch.va.R
-## File Version: 0.11
+## File Version: 0.13
 
 
 # estimating the Rasch model with variational approximation

@@ -1,5 +1,5 @@
 ## File Name: sirt_summary_print_display.R
-## File Version: 0.01
+## File Version: 0.03
 
 sirt_summary_print_display <- function(symbol="-", len=65)
 {

@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_als_vcov.R
-## File Version: 0.08
+## File Version: 0.10
 
 linking_haberman_als_vcov <- function( regr_resid, regr_wgt, transf_pars,
         selitems )

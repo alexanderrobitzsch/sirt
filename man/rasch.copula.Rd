@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.68
+%% File Version: 1.728
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -48,8 +48,8 @@ rasch.copula3(dat, itemcluster, dims=NULL, copula.type="bound.mixt",
     est.alpha=FALSE, glob.conv=0.0001, alpha.conv=1e-04, conv1=0.001,
     dev.crit=.2, rho.init=.5, increment.factor=1.01)
 
-\method{summary}{rasch.copula2}(object,...)
-\method{summary}{rasch.copula3}(object,...)
+\method{summary}{rasch.copula2}(object, file=NULL, digits=3, ...)
+\method{summary}{rasch.copula3}(object, file=NULL, digits=3, ...)
 
 \method{anova}{rasch.copula2}(object,...)
 \method{anova}{rasch.copula3}(object,...)
@@ -150,6 +150,8 @@ Maximal change in the deviance. Default is \code{.2}.
   \item{object}{
 Object of class \code{rasch.copula2} or \code{rasch.copula3}
 }
+\item{file}{Optional file name for \code{summary} output}
+\item{digits}{Number of digits after decimal in \code{summary} output}
   \item{\dots}{
 Further arguments to be passed
 }
@@ -183,27 +185,35 @@ distribution}
 \item{summary.delta}{Summary for estimated \eqn{\delta} parameters}
 \item{f.qk.yi}{Individual posterior}
 \item{f.yi.qk}{Individual likelihood}
-\item{\dots}{}
+\item{\dots}{Further values}
 }
+
 \references{
-    Braeken, J. (2011). A boundary mixture approach to violations
-    of conditional independence. \emph{Psychometrika, 76}, 57-76.
+Braeken, J. (2011). A boundary mixture approach to violations
+of conditional independence. \emph{Psychometrika, 76}, 57-76.
+http://dx.doi.org/10.1007/s11336-010-9190-4
+
+Braeken, J., Kuppens, P., De Boeck, P., & Tuerlinckx, F. (2013). 
+Contextualized personality questionnaires: A case for copulas in structural 
+equation models for categorical data. \emph{Multivariate Behavioral Research, 48}, 
+845-870. http://dx.doi.org/10.1080/00273171.2013.827965
 
 Braeken, J., & Tuerlinckx, F. (2009). Investigating latent constructs with item
-response models: A MATLAB IRTm toolbox.
-\emph{Behavior Research Methods, 41}, 1127-1137.
+response models: A MATLAB IRTm toolbox. \emph{Behavior Research Methods, 41}, 1127-1137.
+http://dx.doi.org/10.3758/BRM.41.4.1127
 
-    Braeken, J., Tuerlinckx, F., & De Boeck, P. (2007).
-    Copulas for residual dependencies.
-    \emph{Psychometrika, 72}, 393-411.
+Braeken, J., Tuerlinckx, F., & De Boeck, P. (2007).
+Copula functions for residual dependency. \emph{Psychometrika, 72}, 393-411.
+http://dx.doi.org/10.1007/s11336-007-9005-4
 
 Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014). A comparison of different
 psychometric approaches to modeling testlet structures: An example with C-tests.
 \emph{Journal of Educational Measurement, 51}(4), 400-418.
+http://dx.doi.org/10.1111/jedm.12054
 
-    Stukel, T. A. (1988). Generalized logistic models.
-    \emph{Journal of the American Statistical Association,
-    83}, 426-431.
+Stukel, T. A. (1988). Generalized logistic models.
+\emph{Journal of the American Statistical Association, 83}, 426-431.
+http://dx.doi.org/10.1080/01621459.1988.10478613
 }
 
 
@@ -238,6 +248,9 @@ See \code{\link{rasch.mml2}} for the generalized logistic link function.
 See also Braeken and Tuerlinckx (2009) for alternative (and more expanded)
 copula models implemented in the MATLAB software. See
 \url{http://ppw.kuleuven.be/okp/software/irtm/}.
+
+See Braeken, Kuppens, De Boeck and Tuerlinckx (2013) for an extension of the
+copula modeling approach to polytomous data.
 }
 
 
@@ -257,7 +270,7 @@ mod1 <- sirt::rasch.copula2( dat=dat, itemcluster=itemcluster)
 
 # estimate Rasch model
 mod2 <- sirt::rasch.copula2( dat=dat, itemcluster=itemcluster,
-        delta=rep(0,3), est.delta=rep(0,3 ) )
+        delta=rep(0,3), est.delta=rep(0,3) )
 summary(mod1)
 summary(mod2)
 
@@ -385,7 +398,7 @@ summary(mod0b)
 
 # both dimensions
 dat <- cbind( dat1, dat2 )
-itemcluster2 <- ifelse( itemcluster2 > 0, itemcluster2 +2, 0 )
+itemcluster2 <- ifelse( itemcluster2 > 0, itemcluster2 + 2, 0 )
 itemcluster <- c( itemcluster1, itemcluster2 )
 dims <- rep( 1:2, each=I)
 
@@ -527,9 +540,9 @@ round(dfr,4)
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{IRT copula models}
-\keyword{Local dependence}
-\keyword{summary}
-\keyword{logLik}
-\keyword{anova}
+%% \keyword{IRT copula models}
+%% \keyword{Local dependence}
+%% \keyword{summary}
+%% \keyword{logLik}
+%% \keyword{anova}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

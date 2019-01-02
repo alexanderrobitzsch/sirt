@@ -1,5 +1,5 @@
 %% File Name: mcmc.2pno.ml.Rd
-%% File Version: 0.43
+%% File Version: 0.45
 
 \name{mcmc.2pno.ml}
 \alias{mcmc.2pno.ml}
@@ -340,6 +340,6 @@ plot(mod, layout=2, ask=TRUE )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Markov Chain Monte Carlo (MCMC)}
-\keyword{Multilevel item response model}
-\keyword{Multilevel DIF}
+%% \keyword{Markov Chain Monte Carlo (MCMC)}
+%% \keyword{Multilevel item response model}
+%% \keyword{Multilevel DIF}

@@ -37,18 +37,33 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.1  |  2018-12-10  |  Last: sirt 3.1-28
+VERSIONS sirt 3.1  |  2019-01-02  |  Last: sirt 3.1-77
 ------------------------------------------------------------------------
 
 NOTE  * complete restructure of invariance.alignment() function which now
         uses R internal optimizers stats::optim() or stats::nlminb().
         Included postprocessing function invariance_alignment_constraints().
-NOTE  * added utility functions sirt_matrix2(), several sirt_colFoo()'s 
+NOTE  * added utility functions sirt_matrix2() and several sirt_colFoo()'s 
 NOTE  * renamed eigenvalues.sirt() into sirt_eigenvalues()
+NOTE  * included argument 'adjust_main_effects' in linking.haberman()
+ADDED * included linking method linking.haebara() for linking multiple
+        groups with robust and non-robust estimation function
+NOTE  * included more arguments in summary.rasch.pairwise(), 
+        summary.rasch.evm.pcm()
+NOTE  * changed default of 'theta' argument in lsdm() function
+ADDED * included alternative optimization method of absolute value loss
+        function in lsdm() and added arguments 'wgt_theta' and 'distance'
+NOTE  * removed dependency in lsdm() function from ic.infer::orlm() 
+NOTE  * included utility functions sirt_sum_norm(), sirt_dnorm_discrete(),
+        sirt_abs_smooth(), sirt_permutations()
+NOTE  * included a plot method for lsdm()
+NOTE  * removed dependency in rasch.copula2() from gtools::permutations()
 
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: invariance.alignment (6)
+EXAMP * included/modified examples: invariance.alignment (6),
+        linking.haberman (1,5), linking.haebara (1), lsdm (1,5,6),
+        sirt-utilities (5,6)
 
 
 

@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_rm_sdt.cpp
-//// File Version: 0.413
+//// File Version: 0.415
 
 
 // [[Rcpp::depends(RcppArmadillo)]]

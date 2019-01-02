@@ -1,5 +1,5 @@
 ## File Name: mcmc.2pno_alg.R
-## File Version: 1.20
+## File Version: 1.22
 
 
 ######################

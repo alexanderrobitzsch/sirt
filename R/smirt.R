@@ -1,5 +1,5 @@
 ## File Name: smirt.R
-## File Version: 7.25
+## File Version: 7.27
 
 #################################################################
 # smirt model

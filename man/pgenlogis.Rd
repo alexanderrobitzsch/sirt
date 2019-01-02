@@ -1,5 +1,5 @@
 %% File Name: pgenlogis.Rd
-%% File Version: 0.25
+%% File Version: 0.27
 
 \name{pgenlogis}
 \alias{pgenlogis}
@@ -126,5 +126,5 @@ points( x, y, pch=17, col=2 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Generalized logistic item response model}
+%% \keyword{Generalized logistic item response model}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

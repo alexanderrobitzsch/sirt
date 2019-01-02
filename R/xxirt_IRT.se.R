@@ -1,5 +1,5 @@
 ## File Name: xxirt_IRT.se.R
-## File Version: 0.08
+## File Version: 0.10
 
 
 IRT.se.xxirt <- function( object, ...)

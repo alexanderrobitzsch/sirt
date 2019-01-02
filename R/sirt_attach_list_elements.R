@@ -1,5 +1,5 @@
 ## File Name: sirt_attach_list_elements.R
-## File Version: 0.04
+## File Version: 0.06
 
 sirt_attach_list_elements <- function(x, envir)
 {

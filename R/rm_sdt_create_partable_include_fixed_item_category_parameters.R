@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_create_partable_include_fixed_item_category_parameters.R
-## File Version: 0.11
+## File Version: 0.13
 
 rm_sdt_create_partable_include_fixed_item_category_parameters <- function(
     partable, tif, index_no_est_value )

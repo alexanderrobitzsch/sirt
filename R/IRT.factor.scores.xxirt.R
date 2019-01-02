@@ -1,5 +1,5 @@
 ## File Name: IRT.factor.scores.xxirt.R
-## File Version: 0.05
+## File Version: 0.07
 
 
 ###########################################################

@@ -1,5 +1,5 @@
 %% File Name: fuzcluster.Rd
-%% File Version: 0.22
+%% File Version: 0.24
 
 \name{fuzcluster}
 \alias{fuzcluster}
@@ -193,6 +193,6 @@ res4 <- stats::kmeans( dat_m, centers=2 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Fuzzy data}
-\keyword{Clustering}
-\keyword{summary}% __ONLY ONE__ keyword per line
+%% \keyword{Fuzzy data}
+%% \keyword{Clustering}
+%% \keyword{summary}% __ONLY ONE__ keyword per line

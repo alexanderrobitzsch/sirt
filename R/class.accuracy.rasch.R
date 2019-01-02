@@ -1,5 +1,5 @@
 ## File Name: class.accuracy.rasch.R
-## File Version: 0.10
+## File Version: 0.12
 ############################################################
 # classification accuracy in the Rasch model
 class.accuracy.rasch <-

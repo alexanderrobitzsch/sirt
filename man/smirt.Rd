@@ -1,5 +1,5 @@
 %% File Name: smirt.Rd
-%% File Version: 2.37
+%% File Version: 2.39
 
 \name{smirt}
 \alias{smirt}
@@ -556,6 +556,6 @@ summary(mod2)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Multidimensional item response model}
-\keyword{summary}
+%% \keyword{Multidimensional item response model}
+%% \keyword{summary}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -1,5 +1,5 @@
 ## File Name: R2conquest.R
-## File Version: 1.38
+## File Version: 1.40
 
 
 

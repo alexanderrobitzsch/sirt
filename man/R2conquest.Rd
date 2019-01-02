@@ -1,5 +1,5 @@
 %% File Name: R2conquest.Rd
-%% File Version: 3.21
+%% File Version: 3.23
 
 \name{R2conquest}
 \alias{R2conquest}
@@ -341,6 +341,6 @@ mod32 <- sirt::R2conquest(dat=dat[,items], path.conquest=path.conquest,
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ConQuest}
-\keyword{summary}
+%% \keyword{ConQuest}
+%% \keyword{summary}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

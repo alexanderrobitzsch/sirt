@@ -1,5 +1,5 @@
 ## File Name: smirt_squeeze.R
-## File Version: 0.06
+## File Version: 0.08
 
 smirt_squeeze <- function( val, lower, upper, est)
 {

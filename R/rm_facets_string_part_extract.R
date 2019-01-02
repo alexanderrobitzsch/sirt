@@ -1,5 +1,5 @@
 ## File Name: rm_facets_string_part_extract.R
-## File Version: 0.04
+## File Version: 0.06
 
 rm_facets_string_part_extract <- function( x, split, part)
 {

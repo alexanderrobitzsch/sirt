@@ -1,5 +1,5 @@
 %% File Name: data.g308.Rd
-%% File Version: 0.16
+%% File Version: 0.18
 
 \name{data.g308}
 \alias{data.g308}
@@ -119,4 +119,4 @@ summary(mod4)
 
 
 
-\keyword{datasets}
+%% \keyword{datasets}

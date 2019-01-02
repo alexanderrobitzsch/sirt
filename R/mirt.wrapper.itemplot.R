@@ -1,5 +1,5 @@
 ## File Name: mirt.wrapper.itemplot.R
-## File Version: 0.04
+## File Version: 0.06
 
 
 

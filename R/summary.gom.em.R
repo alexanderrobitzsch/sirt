@@ -1,5 +1,5 @@
 ## File Name: summary.gom.em.R
-## File Version: 0.13
+## File Version: 0.15
 #*******************************************************
 # Summary for gom object
 summary.gom <- function( object,...){

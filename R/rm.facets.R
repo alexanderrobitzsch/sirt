@@ -1,5 +1,5 @@
 ## File Name: rm.facets.R
-## File Version: 4.638
+## File Version: 4.641
 
 #################################################################
 # Facets Model for Raters:
@@ -222,7 +222,6 @@ active <- FALSE
             a.rater <- res$a.rater
             se.a.rater <- res$se.a.rater
         }
-
         utils::flush.console()
 
         #-- update distribution
@@ -255,12 +254,10 @@ active <- FALSE
         #-- save deviance values
         deviance.history[iter+1] <- dev <- -2*ll
 
-
         #-- convergence criteria
         conv <- max( abs(b.rater-b.rater0), abs( a.rater-a.rater0), abs( tau.item0-tau.item), abs( a.item - a.item0 ) )
         iter <- iter+1
         devchange <- abs( ( dev - dev0 ) / dev0  )
-
 
         #-- print progress
         res <- rm_facets_print_progress( dev=dev, dev0=dev0, b.rater=b.rater, b.rater0=b.rater0,

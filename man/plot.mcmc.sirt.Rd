@@ -1,5 +1,5 @@
 %% File Name: plot.mcmc.sirt.Rd
-%% File Version: 0.13
+%% File Version: 0.15
 
 \name{plot.mcmc.sirt}
 \alias{plot.mcmc.sirt}
@@ -89,5 +89,5 @@ Further arguments to be passed
 %}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{plot}
+%% \keyword{plot}
 % \keyword{methods}% __ONLY ONE__ keyword per line

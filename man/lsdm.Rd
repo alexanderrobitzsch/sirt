@@ -1,10 +1,12 @@
 %% File Name: lsdm.Rd
-%% File Version: 2.15
+%% File Version: 2.232
 
 
 \name{lsdm}
 \alias{lsdm}
 \alias{summary.lsdm}
+\alias{plot.lsdm}
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Least Squares Distance Method of Cognitive Validation
@@ -13,17 +15,22 @@ Least Squares Distance Method of Cognitive Validation
 This function estimates the least squares distance method
 of cognitive validation (Dimitrov, 2007; Dimitrov & Atanasov, 2012)
 which assumes a multiplicative relationship of attribute response
-probabilities to explain item response probabilities.
+probabilities to explain item response probabilities. The argument \code{distance}
+allows the estimation of a squared loss function (\code{distance="L2"})
+and an absolute value loss function (\code{distance="L1"}).
+
 The function also estimates the classical linear logistic test
 model (LLTM; Fischer, 1973) which assumes a linear relationship
 for item difficulties in the Rasch model.
 }
-\usage{
-lsdm(data, Qmatrix, theta=qnorm(seq(5e-04,0.9995,len=100)),
-       quant.list=c(0.5,0.65,0.8), b=NULL, a=rep(1,nrow(Qmatrix)),
-       c=rep(0,nrow(Qmatrix)) )
 
-\method{summary}{lsdm}(object,...)
+\usage{
+lsdm(data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(theta)), distance="L2",
+   quant.list=c(0.5,0.65,0.8), b=NULL, a=rep(1,nrow(Qmatrix)), c=rep(0,nrow(Qmatrix)) )
+
+\method{summary}{lsdm}(object, file=NULL, digits=3, ...)
+
+\method{plot}{lsdm}(x, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -42,12 +49,18 @@ zero and one are permitted. There must not be any items with only zero
 Q-matrix entries in a row.
 }
   \item{theta}{
-The discrete grid points where item response functions
+The discrete grid points \eqn{\theta} where item response functions
 are evaluated for doing the LSDM method.
 }
+\item{wgt_theta}{Optional vector for weights of discrete \eqn{\theta} points}
   \item{quant.list}{
 A vector of quantiles where attribute response functions are
 evaluated.
+}
+\item{distance}{Type of distance function for minimizing the discrepancy between
+observed and expected item response functions. Options are \code{"L2"} which is the
+squared distance (proposed in the original LSDM formulation in Dimitrov, 2007)
+and the absolute value distance \code{"L1"} (see Details).
 }
   \item{b}{
 An optional vector of item difficulties. If it is specified,
@@ -59,12 +72,11 @@ An optional vector of item discriminations.
   \item{c}{
 An optional vector of guessing parameters.
 }
-  \item{object}{
-Object of class \code{lsdm}
-}
-  \item{\dots}{
-Further arguments to be passed
-}
+\item{object}{Object of class \code{lsdm}}
+\item{file}{Optional file name for \code{summary} output}
+\item{digits}{Number of digits aftert decimal in \code{summary}}
+\item{\dots}{Further arguments to be passed}
+\item{x}{Object of class \code{lsdm}}
 }
 
 
@@ -77,20 +89,26 @@ The least squares distance method (LSDM; Dimitrov 2007) is based on the
 assumption that estimated item response functions \eqn{P(X_i=1 | \theta)}
 can be decomposed in a multiplicative way (in the implemented
 conjunctive model):
-\deqn{ P( X_i=1  | \theta )=\prod_{k=1}^K [ P( A_k=1 | \theta ) ]^{q_{ik}} }
+\deqn{ P( X_i=1  | \theta ) \approx \prod_{k=1}^K [ P( A_k=1 | \theta ) ]^{q_{ik}} }
 where \eqn{P( A_k=1 | \theta )} are attribute response functions and
 \eqn{q_{ik}} are entries of the Q-matrix. Note that the multiplicative form
 can be rewritten by taking the logarithm
-\deqn{ \log P( X_i=1  | \theta )=
+\deqn{ \log P( X_i=1  | \theta ) \approx
     \sum_{k=1}^K q_{ik} \log [ P( A_k=1 | \theta ) ] }
-Evaluation item and attribute response functions on a grid of \eqn{\theta} values and
-collecting these values in matrices \eqn{\bold{L}=\{ \log P( X_i=1 ) | \theta ) \} },
+The item and attribute response functions are evaluated on a grid of \eqn{\theta} values.
+Using the definitions of matrices \eqn{\bold{L}=\{ \log P( X_i=1 ) | \theta ) \} },
 \eqn{\bold{Q}=\{ q_{ik} \} } and
-\eqn{\bold{X}=\{ \log P( A_k=1  | \theta ) \} } leads to a least squares
-problem of the form \eqn{ \bold{L} \approx \bold{Q} \bold{X}} with the
-restriction of positive \bold{X} matrix entries. This least squares problem
-is a linear inequality constrained model which is solved by making use of
-the \pkg{ic.infer} package (Groemping, 2010).
+\eqn{\bold{X}=\{ \log P( A_k=1  | \theta ) \} }, the estimation problem can be formulated
+as \eqn{ \bold{L} \approx \bold{Q} \bold{X}}. Two different loss functions for minimizing
+the discrepancy between \eqn{ \bold{L}} and \eqn{\bold{Q} \bold{X}} are implemented.
+First, the squared loss function computes the weighted difference
+\eqn{|| \bold{L} - \bold{Q} \bold{X}||_2=\sum_i ( l_i - \sum_t q_{it} x_{it})^2}
+ (\code{distance="L2"}) and has
+been originally proposed by Dimitrov (2007). Second, the
+absolute value loss function
+\eqn{|| \bold{L} - \bold{Q} \bold{X}||_1=\sum_i | l_i - \sum_t q_{it} x_{it} |}
+(\code{distance="L1"}) is more robust to outliers (i.e., items which
+show misfit to the assumed multiplicative LSDM formulation).
 
 After fitting the attribute response functions, empirical item-attribute
 discriminations \eqn{w_{ik}} are calculated as the approximation of the following
@@ -123,40 +141,55 @@ functions are evaluated}
 
 
 \references{
-  DiBello, L. V., Roussos, L. A., & Stout, W. F. (2007). Review of
-  cognitively diagnostic assessment and a summary of psychometric models.
-  In C. R. Rao and S. Sinharay (Eds.), \emph{Handbook of Statistics},
-  Vol. 26 (pp. 979-1030). Amsterdam: Elsevier.
 
-  Dimitrov, D. M. (2007). Least squares distance method of cognitive validation
-  and analysis for binary items using their item response theory parameters.
-  \emph{Applied Psychological Measurement, 31}, 367-387.
+Al-Shamrani, A., & Dimitrov, D. M. (2016). Cognitive diagnostic analysis of reading
+comprehension items: The case of English proficiency assessment in Saudi Arabia.
+\emph{International Journal of School and Cognitive Psychology, 4}(3). 1000196.
+http://dx.doi.org/10.4172/2469-9837.1000196
 
-  Dimitrov, D. M., & Atanasov, D. V. (2012). Conjunctive and disjunctive
-  extensions of the least squares distance model of cognitive diagnosis.
-  \emph{Educational and Psychological Measurement, 72}, 120-138.
+DiBello, L. V., Roussos, L. A., & Stout, W. F. (2007). Review of
+cognitively diagnostic assessment and a summary of psychometric models.
+In C. R. Rao and S. Sinharay (Eds.), \emph{Handbook of Statistics},
+Vol. 26 (pp. 979-1030). Amsterdam: Elsevier.
 
-  Fischer, G. H. (1973). The linear logistic test model as an instrument
-  in educational research. \emph{Acta Psychologica, 37}, 359-374.
+Dimitrov, D. M. (2007). Least squares distance method of cognitive validation
+and analysis for binary items using their item response theory parameters.
+\emph{Applied Psychological Measurement, 31}, 367-387.
+http://dx.doi.org/10.1177/0146621606295199
 
-  Groemping, U. (2010). Inference with linear equality and inequality
-  constraints using \R: The package \pkg{ic.infer}.
-  \emph{Journal of Statistical Software, 33}(10), 1-31.
+Dimitrov, D. M., & Atanasov, D. V. (2012). Conjunctive and disjunctive
+extensions of the least squares distance model of cognitive diagnosis.
+\emph{Educational and Psychological Measurement, 72}, 120-138.
+http://dx.doi.org/10.1177/0013164411402324
+
+Dimitrov, D. M., Gerganov, E. N., Greenberg, M., & Atanasov, D. V. (2008).
+\emph{Analysis of cognitive attributes for mathematics items in the framework of
+Rasch measurement}. AERA 2008, New York.
+
+Fischer, G. H. (1973). The linear logistic test model as an instrument
+in educational research. \emph{Acta Psychologica, 37}, 359-374.
+http://dx.doi.org/10.1016/0001-6918(73)90003-6
 
 Sonnleitner, P. (2008). Using the LLTM to evaluate an item-generating system
 for reading comprehension. \emph{Psychology Science, 50}, 345-362.
 }
 
 
+%  Groemping, U. (2010). Inference with linear equality and inequality
+%  constraints using \R: The package \pkg{ic.infer}.
+%  \emph{Journal of Statistical Software, 33}(10), 1-31.
 
 %\author{
 %Alexander Robitzsch
 %}
 
 
-\note{
-This function needs the \pkg{ic.infer} package.
-}
+%\note{
+%xx
+%}
+
+
+% This function needs the \pkg{ic.infer} package.
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
@@ -176,7 +209,7 @@ cognitive diagnostic models (DiBello, Roussos & Stout, 2007).
 
 \examples{
 #############################################################################
-# EXAMPLE 1: DATA FISCHER (see Dimitrov, 2007)
+# EXAMPLE 1: Dataset Fischer (see Dimitrov, 2007)
 #############################################################################
 
 # item difficulties
@@ -197,27 +230,23 @@ Qmatrix <- matrix( Qmatrix, nrow=29, byrow=TRUE )
 colnames(Qmatrix) <- paste("A",1:8,sep="")
 rownames(Qmatrix) <- paste("Item",1:29,sep="")
 
-# Perform a LSDM analysis
-lsdm.res <- sirt::lsdm( b=b, Qmatrix=Qmatrix )
-summary(lsdm.res)
-  ## Model Fit
-  ## Model Fit LSDM   -  Mean MAD:  0.071     Median MAD:   0.07
-  ## Model Fit LLTM   -  Mean MAD:  0.079     Median MAD:  0.063    R^2=0.615
-  ## ................................................................................
-  ## Attribute Parameters
-  ##    N.Items  b.2PL a.2PL  b.1PL eta.LLTM se.LLTM pval.LLTM
-  ## A1      27 -2.101 1.615 -2.664   -1.168   0.404     0.009
-  ## A2       8 -3.736 3.335 -5.491   -0.645   0.284     0.034
-  ## A3      12 -5.491 0.360 -2.685   -0.013   0.284     0.963
-  ## A4      22 -0.081 0.744 -0.059    1.495   0.350     0.000
-  ## A5       7 -2.306 0.580 -1.622    0.243   0.301     0.428
-  ## A6      10 -1.946 0.542 -1.306    0.447   0.243     0.080
-  ## A7       5 -4.247 1.283 -4.799   -0.147   0.316     0.646
-  ## A8       5 -2.670 0.663 -2.065    0.077   0.310     0.806
-  ## [...]
+#* Model 1: perform a LSDM analysis with defaults
+mod1 <- sirt::lsdm( b=b, Qmatrix=Qmatrix )
+summary(mod1)
+plot(mod1)
+
+#* Model 2: different theta values and weights
+theta <- seq(-4,4,len=31)
+wgt_theta <- stats::dnorm(theta)
+mod2 <- sirt::lsdm( b=b, Qmatrix=Qmatrix, theta=theta, wgt_theta=wgt_theta )
+summary(mod2)
+
+#* Model 3: absolute value distance function
+mod3 <- sirt::lsdm( b=b, Qmatrix=Qmatrix, distance="L1" )
+summary(mod3)
 
 #############################################################################
-# EXAMPLE 2 DATA HENNING (see Dimitrov, 2007)
+# EXAMPLE 2: Dataset Henning (see Dimitrov, 2007)
 #############################################################################
 
 # item difficulties
@@ -232,33 +261,8 @@ colnames(Qmatrix) <- paste("A",1:5,sep="")
 rownames(Qmatrix) <- paste("Item",1:10,sep="")
 
 # LSDM analysis
-lsdm.res <- sirt::lsdm( b=b, a=a, Qmatrix=Qmatrix )
-summary(lsdm.res)
-  ## Model Fit LSDM   -  Mean MAD:  0.061     Median MAD:   0.06
-  ## Model Fit LLTM   -  Mean MAD:  0.069     Median MAD:  0.069    R^2=0.902
-  ## ................................................................................
-  ## Attribute Parameters
-  ##    N.Items  b.2PL a.2PL  b.1PL eta.LLTM se.LLTM pval.LLTM
-  ## A1       2 -2.727 0.786 -2.367   -1.592   0.478     0.021
-  ## A2       5 -2.099 0.794 -1.834   -0.934   0.295     0.025
-  ## A3       2 -0.763 0.401 -0.397    1.260   0.507     0.056
-  ## A4       4 -1.459 0.638 -1.108   -0.738   0.309     0.062
-  ## A5       2  2.410 0.509  1.564    2.673   0.451     0.002
-  ## [...]
-  ##
-  ##  Discrimination Parameters
-  ##
-  ##            A1    A2   A3    A4    A5
-  ##  Item1  1.723    NA   NA    NA    NA
-  ##  Item2     NA 1.615   NA    NA    NA
-  ##  Item3     NA 0.650   NA 0.798    NA
-  ##  Item4     NA 1.367   NA    NA    NA
-  ##  Item5     NA 1.001 1.26    NA    NA
-  ##  Item6     NA    NA   NA 0.866    NA
-  ##  Item7     NA 0.697   NA    NA 0.891
-  ##  Item8     NA    NA   NA 0.997    NA
-  ##  Item9     NA    NA   NA 1.312 1.074
-  ##  Item10 1.000    NA 0.74    NA    NA
+mod <- sirt::lsdm( b=b, a=a, Qmatrix=Qmatrix )
+summary(mod)
 
 \dontrun{
 #############################################################################
@@ -282,16 +286,9 @@ theta <- sirt::wle.rasch( dat=dat,b=mod$item$b )$theta
 mod2 <- sirt::np.dich( dat=dat, theta=theta, thetagrid=seq(-3,3,len=100) )
 
 # LSDM analysis
-lsdm.res <- sirt::lsdm( data=mod2$estimate, Qmatrix=Qmatrix, theta=mod2$thetagrid)
-summary(lsdm.res)
-  ## Model Fit
-  ## Model Fit LSDM   -  Mean MAD:  0.215     Median MAD:  0.151
-  ## Model Fit LLTM   -  Mean MAD:  0.193     Median MAD:  0.119    R^2=0.285
-  ## ................................................................................
-  ## Attribute Parameter
-  ##    N.Items  b.2PL a.2PL  b.1PL eta.LLTM se.LLTM pval.LLTM
-  ## A0       5  1.326 0.705  1.289   -0.455   0.965     0.648
-  ## A1       7 -1.271 1.073 -1.281   -1.585   0.816     0.081
+lmod <- sirt::lsdm( data=mod2$estimate, Qmatrix=Qmatrix, theta=mod2$thetagrid)
+summary(lmod)
+plot(lmod)
 
 #############################################################################
 # EXAMPLE 4: Fraction subtraction dataset
@@ -306,30 +303,16 @@ q.matrix <- data.fraction1$q.matrix
 mod1 <- sirt::rasch.mml2( data, est.a=1:nrow(q.matrix) )
 
 # LSDM analysis
-lsdm.res1 <- sirt::lsdm( b=mod1$item$b, a=mod1$item$a, Qmatrix=q.matrix )
-summary(lsdm.res1)
-  ##
-  ##   Model Fit LSDM   -  Mean MAD:  0.076     Median MAD:  0.055
-  ##   Model Fit LLTM   -  Mean MAD:  0.153     Median MAD:  0.155    R^2=0.801
-  ##   ................................................................................
-  ##   Attribute Parameter
-  ##       N.Items   b.2PL a.2PL  b.1PL eta.LLTM se.LLTM pval.LLTM
-  ##   QT1      14  -0.741 2.991 -1.115   -0.815   0.217     0.004
-  ##   QT2       8 -80.387 0.031 -4.806   -0.025   0.262     0.925
-  ##   QT3      12  -2.461 0.711 -2.006   -0.362   0.268     0.207
-  ##   QT4       9  -0.019 3.873 -0.100    1.465   0.345     0.002
-  ##   QT5       3  -3.062 0.375 -1.481    0.254   0.280     0.387
+lmod1 <- sirt::lsdm( b=mod1$item$b, a=mod1$item$a, Qmatrix=q.matrix )
+summary(lmod1)
 
 #****
 # Model 2: 1PL estimation
-mod2 <- sirt::rasch.mml2( data  )
+mod2 <- sirt::rasch.mml2(data)
 
 # LSDM analysis
-lsdm.res2 <- sirt::lsdm( b=mod1$item$b, Qmatrix=q.matrix )
-summary(lsdm.res2)
-  ##
-  ##   Model Fit LSDM   -  Mean MAD:  0.046     Median MAD:   0.03
-  ##   Model Fit LLTM   -  Mean MAD:  0.041     Median MAD:  0.042    R^2=0.772
+lmod2 <- sirt::lsdm( b=mod1$item$b, Qmatrix=q.matrix )
+summary(lmod2)
 
 #############################################################################
 # EXAMPLE 5: Dataset LLTM Sonnleitner Reading Comprehension (Sonnleitner, 2008)
@@ -357,15 +340,77 @@ colnames(Qmatrix) <- scan( what="character", nlines=1)
 # divide Q-matrix entries by maximum in each column
 Qmatrix <- round(Qmatrix / matrix(apply(Qmatrix,2,max),21,12,byrow=TRUE),3)
 # LSDM analysis
-res <- sirt::lsdm( b=b, Qmatrix=Qmatrix )
-summary(res)
-  ##
-  ##   Model Fit LSDM   -  Mean MAD:  0.217     Median MAD:  0.178
-  ##   Model Fit LLTM   -  Mean MAD:  0.087     Median MAD:  0.062    R^2=0.785
+mod <- sirt::lsdm( b=b, Qmatrix=Qmatrix )
+summary(mod)
+
+#############################################################################
+# EXAMPLE 6: Dataset Dimitrov et al. (2008)
+#############################################################################
+
+Qmatrix <- scan()
+1 0 0 0 1 1 0 1 1 0 0 0 1 0 0 0 1 1 0 0 1 1 0 1 0 0 1 1 1 0 1 0 0 0 1 0
+
+Qmatrix <- matrix(Qmatrix, ncol=4, byrow=TRUE)
+colnames(Qmatrix) <- paste0("A",1:4)
+rownames(Qmatrix) <- paste0("I",1:9)
+
+b <- scan()
+0.068 1.095 -0.641 -1.129 -0.061 1.218 1.244 -0.648 -1.146
+
+# estimate model
+mod <- sirt::lsdm( b=b, Qmatrix=Qmatrix )
+summary(mod)
+plot(mod)
+
+#############################################################################
+# EXAMPLE 7: Dataset Al-Shamrani & Dimitrov et al. (2017)
+#############################################################################
+
+I <- 39  # number of items
+
+Qmatrix <- scan()
+0 0 0 1 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0
+0 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0
+0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0
+0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0
+0 1 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 1 0 0 0
+0 0 1 0 0 0 0 0 0 0 0 0 0 1 0
+
+Qmatrix <- matrix(Qmatrix, nrow=I, byrow=TRUE)
+colnames(Qmatrix) <- paste0("A",1:7)
+rownames(Qmatrix) <- paste0("I",1:I)
+
+pars <- scan()
+1.952 0.9833 0.1816 1.1053 0.9631 0.1653 1.3904 1.3208 0.2545 0.7391 1.9367 0.2083 2.0833
+1.8627 0.1873 1.4139 1.0107 0.2454 0.8274 0.9913 0.2137 1.0338 -0.0068 0.2368 2.4803
+0.7939 0.1997 1.4867 1.1705 0.2541 1.4482 1.4176 0.2889 1.0789 0.8062 0.269 1.6258 1.1739
+0.1723 1.5995 1.0936 0.2054 1.1814 1.0909 0.2623 2.0389 1.5023 0.2466 1.3636 1.1485 0.2059
+1.8468 1.2755 0.192 1.9461 1.4947 0.2001 1.194 0.0889 0.2275 1.2114 0.8925 0.2367 2.0912
+0.5961 0.2036 2.5769 1.3014 0.186 1.4554 1.2529 0.2423 1.4919 0.4763 0.2482 2.6787 1.7069
+0.1796 1.5611 1.3991 0.2312 1.4353 0.678 0.1851 0.9127 1.3523 0.2525 0.6886 -0.3652 0.207
+0.7039 -0.2494 0.2315 1.3683 0.8953 0.2326 1.4992 0.1025 0.2403 1.0727 0.2591 0.2152
+1.3854 1.3802 0.2448 0.7748 0.4304 0.184 1.0218 1.8964 0.1949 1.5773 1.8934 0.2231 0.8631
+1.4145 0.2132
+
+pars <- matrix(pars, nrow=I, byrow=TRUE)
+colnames(pars) <- c("a","b","c")
+rownames(pars) <- paste0("I",1:I)
+pars <- as.data.frame(pars)
+
+#* Model 1: fit LSDM to 3PL curves (as in Al-Shamrani)
+mod1 <- sirt::lsdm(b=pars$b, a=pars$a, c=pars$c, Qmatrix=Qmatrix)
+summary(mod1)
+plot(mod1)
+
+#* Model 2: fit LSDM to 2PL curves
+mod2 <- sirt::lsdm(b=pars$b, a=pars$a, Qmatrix=Qmatrix)
+summary(mod2)
+plot(mod2)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Least Squares Distance Method (LSDM)}
-\keyword{summary}
+%% \keyword{Least Squares Distance Method (LSDM)}
+%% \keyword{summary}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -1,5 +1,5 @@
 ## File Name: plot.isop.R
-## File Version: 1.14
+## File Version: 1.16
 
 #############################################################
 # plot ISOP item response functions

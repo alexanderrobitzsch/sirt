@@ -1,19 +1,14 @@
 ## File Name: detect.index.R
-## File Version: 0.26
+## File Version: 0.30
 
 
-#-----------------------------------------------------------------------------------------------------
-detect.index <- function( ccovtable, itemcluster ){
-    # INPUT:
-    # result from ccov.np
-    # itemcluster ... identifies an item cluster for each item
-    #.............................
-    # calculate delta
+
+detect.index <- function( ccovtable, itemcluster )
+{
     ccovtable <- ccovtable$ccov.table
     ccovtable$delta <- ifelse( itemcluster[ ccovtable$item1ID ]==
-                itemcluster[ ccovtable$item2ID ], 1, -1 )
+                            itemcluster[ ccovtable$item2ID ], 1, -1 )
 
-    #******************************************
     #--- calculate unweighted and weighted indizes
     ccov <- ccovtable$ccov            # conditional covariance
     delta <- ccovtable$delta        # indicator for partition
@@ -51,11 +46,10 @@ detect.index <- function( ccovtable, itemcluster ){
     weighted.indizes[ii] <- 100* stats::weighted.mean( ccov, sqrt_N )
     parnames[ii] <- "MCOV100"
 
-    #******************************************
-    #--- calculate weighted indizes
+    #--- output
     res <- data.frame( "unweighted"=indizes, "weighted"=weighted.indizes )
     rownames(res) <- parnames
     return(res)
 }
-#-----------------------------------------------------------------------------------------------------
+
 

@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.itemcluster.Rd
-%% File Version: 0.37
+%% File Version: 0.44
 
 \name{rasch.pairwise.itemcluster}
 \alias{rasch.pairwise.itemcluster}
@@ -152,21 +152,16 @@ mod5 <- sirt::rasch.copula2( dat, itemcluster=itemcluster )
 summary(mod5)
 
 # compare different item parameter estimates
-M1 <- cbind( "true.b"=bsamp,  "b.rasch"=mod4$item$b,
-        "b.rasch.copula"=mod5$item$thresh,
-        "b.rasch.pairwise"=mod3$b,
-        "b.rasch.pairwise.cluster"=mod$b
-      )
+M1 <- cbind( "true.b"=bsamp, "b.rasch"=mod4$item$b, "b.rasch.copula"=mod5$item$thresh,
+         "b.rasch.pairwise"=mod3$b, "b.rasch.pairwise.cluster"=mod$b )
 # center item difficulties
 M1 <- scale( M1, scale=FALSE )
 round( M1, 3 )
 round( apply( M1, 2, stats::sd ), 3 )
 
 #  Below the output of the example is presented.
-#  It is surprising that the rasch.pairwise.itemcluster is pretty close
-#  to the estimate in the Rasch copula model.
+#  The rasch.pairwise.itemcluster is pretty close to the estimate in the Rasch copula model.
 
-  ##   > M1 <- scale( M1, scale=F )
   ##   > round( M1, 3 )
   ##       true.b b.rasch b.rasch.copula b.rasch.pairwise b.rasch.pairwise.cluster
   ##   I1   0.545   0.561          0.526            0.628                    0.524
@@ -185,7 +180,7 @@ round( apply( M1, 2, stats::sd ), 3 )
   ##                     true.b                  b.rasch           b.rasch.copula
   ##                      1.311                    1.398                    1.310
   ##      b.rasch.pairwise    b.rasch.pairwise.cluster
-  ##                 1.373                       1.310   }
+  ##                 1.373                       1.310
 
 # set item parameters of first item to 0 and of second item to -0.7
 b.fixed <- cbind( c(1,2), c(0,-.7) )
@@ -194,10 +189,11 @@ mod5 <- sirt::rasch.pairwise.itemcluster( dat=dat, b.fixed=b.fixed,
 # difference between estimations 'mod' and 'mod5'
 dfr <- cbind( mod5$item$b, mod$item$b )
 plot( mod5$item$b, mod$item$b, pch=16)
-apply( dfr, 1, diff )
+apply( dfr, 1, diff)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Pairwise conditional maximum likelihood (PCML)}
+%% \keyword{Pairwise conditional maximum likelihood (PCML)}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
-\keyword{Local dependence}
+%% \keyword{Local dependence}

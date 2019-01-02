@@ -1,5 +1,5 @@
 %% File Name: data.activity.itempars.Rd
-%% File Version: 0.07
+%% File Version: 0.09
 
 \name{data.activity.itempars}
 \alias{data.activity.itempars}
@@ -49,4 +49,4 @@ item intercepts (\code{nu}):
 %%data(data.activity.itempars)
 %%## maybe str(data.activity.itempars) ; plot(data.activity.itempars) ...
 %%}
-\keyword{datasets}
+%% \keyword{datasets}

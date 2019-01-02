@@ -1,5 +1,5 @@
 ## File Name: pgenlogis.R
-## File Version: 1.07
+## File Version: 1.09
 
 #............................................................
 # generalized logistic distribution

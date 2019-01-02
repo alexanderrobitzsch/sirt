@@ -1,5 +1,5 @@
 %% File Name: rasch.mirtlc.Rd
-%% File Version: 2.932
+%% File Version: 2.934
 
 \name{rasch.mirtlc}
 \alias{rasch.mirtlc}
@@ -679,6 +679,6 @@ round(d2,4) # simulated
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Multidimensional latent class Rasch model}
-\keyword{summary}
+%% \keyword{Multidimensional latent class Rasch model}
+%% \keyword{summary}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

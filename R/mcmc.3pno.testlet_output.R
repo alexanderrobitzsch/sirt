@@ -1,5 +1,5 @@
 ## File Name: mcmc.3pno.testlet_output.R
-## File Version: 1.18
+## File Version: 1.20
 
 ######################################################
 # compute deviance

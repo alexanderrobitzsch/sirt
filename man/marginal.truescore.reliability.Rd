@@ -1,5 +1,5 @@
 %% File Name: marginal.truescore.reliability.Rd
-%% File Version: 0.25
+%% File Version: 0.27
 
 \name{marginal.truescore.reliability}
 \alias{marginal.truescore.reliability}
@@ -153,5 +153,5 @@ psych::omega(dat, nfactors=1)     # 1 factor
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Reliability}
+%% \keyword{Reliability}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

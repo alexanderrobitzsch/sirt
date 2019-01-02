@@ -1,5 +1,5 @@
 %% File Name: parmsummary_extend.Rd
-%% File Version: 0.11
+%% File Version: 0.13
 
 \name{parmsummary_extend}
 \alias{parmsummary_extend}

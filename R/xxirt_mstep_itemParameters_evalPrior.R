@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_itemParameters_evalPrior.R
-## File Version: 0.12
+## File Version: 0.14
 
 
 #*** evaluate prior in M-step

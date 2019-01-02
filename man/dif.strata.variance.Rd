@@ -1,5 +1,5 @@
 %% File Name: dif.strata.variance.Rd
-%% File Version: 0.08
+%% File Version: 0.10
 
 \name{dif.strata.variance}
 \alias{dif.strata.variance}
@@ -59,5 +59,5 @@ See \code{\link{dif.logistic.regression}} for examples.
 %}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Differential item functioning (DIF)}
+%% \keyword{Differential item functioning (DIF)}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

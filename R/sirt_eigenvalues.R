@@ -1,5 +1,5 @@
 ## File Name: sirt_eigenvalues.R
-## File Version: 0.21
+## File Version: 0.23
 
 
 # calculation of first D eigenvalues

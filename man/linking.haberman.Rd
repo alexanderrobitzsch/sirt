@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.65
+%% File Version: 0.682
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -18,7 +18,7 @@ model is assumed for the original item loadings (see Details; Battauz, 2017)
 }
 \usage{
 linking.haberman(itempars, personpars, a_trim=Inf, b_trim=Inf, a_log=TRUE,
-    conv=1e-05, maxiter=1000, progress=TRUE)
+    conv=1e-05, maxiter=1000, progress=TRUE, adjust_main_effects=TRUE)
 
 \method{summary}{linking.haberman}(object, digits=3, file=NULL, ...)
 }
@@ -54,6 +54,8 @@ Maximum number of iterations.
 An optional logical indicating whether computational progress
 should be displayed.
 }
+\item{adjust_main_effects}{Logical indicating whether all elements in the vector
+of main effects should be simultaneously adjusted}
 \item{object}{Object of class \code{linking.haberman}.}
 \item{digits}{Number of digits after decimals for rounding in \code{summary}.}
 \item{file}{Optional file name if \code{summary} should be sunk into a file.}
@@ -84,20 +86,19 @@ linearly transformed using equations \eqn{a_{it} \approx a_i / A_t}
 we define \eqn{A_1=1} and \eqn{B_1}=0.
 
 The optimization function (which is a least squares criterion;
-see Haberman 2009) seeks the transformation parameters \eqn{A_t} and
+see Haberman, 2009) seeks the transformation parameters \eqn{A_t} and
 \eqn{B_t} with an alternating least squares
 method. Note that every item \eqn{i} and every study \eqn{t} can
 be weighted (specified in the fifth column of \code{itempars}).
-Alternatively, a robust regression method can be employed for linking
+Alternatively, a robust regression method (Fox, 2015) can be employed for linking
 using the arguments \code{a_trim} and \code{b_trim}. For example, in the case
 of item loadings, bisquare weighting is applied to
 residuals \eqn{e_{it}=a_{it} - a_i - A_t } (where logarithmized or non-logarithmized
 item loadings are employed) forming weights
-\eqn{w_{it}=[ 1 - ( e_{it} / k )^2 ]^2} where \eqn{k} is
-the trimming constant \code{a_trim}. Items in studies with large residuals
-(differential item functioning) are effectively set to zero in the
-linking procedure. Analogously, the same rationale can
-be applied to linking item intercepts.
+\eqn{w_{it}=[ 1 - ( e_{it} / k )^2 ]^2} for \eqn{e_{it} <k} and 0 for \eqn{e_{it} \ge k}
+where \eqn{k} is the trimming constant \code{a_trim}. Items in studies with large residuals
+(i.e., presence differential item functioning) are effectively set to zero in the
+linking procedure. Analogously, the same rationale is applied to linking item intercepts.
 
 Effect sizes of invariance are calculated as R-squared measures
 of explained item slopes and intercepts after linking
@@ -124,12 +125,11 @@ A list with following entries
   \item{a.orig}{Original \eqn{a_{it}} parameters}
   \item{b.orig}{Original \eqn{b_{it}} parameters}
   \item{a.resid}{Residual \eqn{a_{it}} parameters (DIF parameters)}
-  \item{b.resid}{Residual \eqn{b_{it}} parameters (DIF parameters}
+  \item{b.resid}{Residual \eqn{b_{it}} parameters (DIF parameters)}
   \item{personpars}{Transformed person parameters}
   \item{es.invariance}{Effect size measures of invariance,
         separately for item slopes and intercepts.
-        In the rows, \eqn{R^2} and \eqn{\sqrt{1-R^2}}
-          are reported.}
+        In the rows, \eqn{R^2} and \eqn{\sqrt{1-R^2}} are reported.}
   \item{es.robust}{Effect size measures of invariance based on
   robust estimation (if used).}
   \item{selitems}{Indices of items which are present in more than one
@@ -142,16 +142,25 @@ A list with following entries
 
 
 \references{
-Asparouhov, T., & Muthen, B. (2014).
-Multiple-group factor analysis alignment.
+Asparouhov, T., & Muthen, B. (2014). Multiple-group factor analysis alignment.
 \emph{Structural Equation Modeling, 21}, 1-14.
+http://dx.doi.org/10.1080/10705511.2014.919210
 
 Battauz, M. (2017). Multiple equating of separate IRT calibrations.
 \emph{Psychometrika, 82}, 610-636.
+http://dx.doi.org/10.1007/s11336-016-9517-x
+
+Fox, J. (2015). \emph{Applied regression analysis and generalized linear models}. 
+Thousand Oaks: Sage.
 
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
 from an item response model through separate calibrations}.
 ETS Research Report ETS RR-09-40. Princeton, ETS.
+https://doi.org/10.1002/j.2333-8504.2009.tb02197.x
+
+Weeks, J. P. (2010). \pkg{plink}: An \R package for linking mixed-format tests 
+using IRT-based methods. \code{Journal of Statistical Software, 35}(12), 1-33.
+https://doi.org/10.18637/jss.v035.i12
 }
 
 
@@ -168,13 +177,15 @@ ETS Research Report ETS RR-09-40. Princeton, ETS.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See the \pkg{plink} package for a wide diversity of linking methods.
+See the \pkg{plink} package (Weeks, 2010) for a wide diversity of linking methods.
 
 Mean-mean linking, Stocking-Lord and Haebara linking in the generalized
 logistic item response model can be conducted with
-\code{\link{equating.rasch}}.
+\code{\link{equating.rasch}}. See also \code{\link[TAM:tam.linking]{TAM::tam.linking}}
+in the \pkg{TAM} package.
 
-For more general linking functions than the Haberman method
+The invariance alignment method employs an optimization function based on
+pairwise loss functions of item parameters (Asparouhov & Muthen, 2014),
 see \code{\link{invariance.alignment}}.
 }
 
@@ -212,7 +223,7 @@ data(data.pars1.2pl)
 mod2 <- sirt::linking.haberman( itempars=data.pars1.2pl )
 summary(mod2)
 
-# additive model instaed of logarithmic model for item slopes
+# additive model instead of logarithmic model for item slopes
 mod2b <- sirt::linking.haberman( itempars=data.pars1.2pl, a_log=FALSE )
 summary(mod2b)
 
@@ -457,11 +468,13 @@ mod1 <- sirt::linking.haberman( itempars=itempars )
 summary(mod1)
 
 #*** Model 2: Haberman linking with robust bisquare regression
-mod2 <- sirt::linking.haberman( itempars=itempars2, b_trim=.4, maxiter=20)
+mod2 <- sirt::linking.haberman( itempars=itempars, b_trim=.4)
 summary(mod2)
+
+## see also Example 3 of ?sirt::robust.linking
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Linking}
-\keyword{Equating}
+%% \keyword{Linking}
+%% \keyword{Equating}

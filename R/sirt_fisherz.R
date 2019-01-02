@@ -1,5 +1,5 @@
 ## File Name: sirt_fisherz.R
-## File Version: 0.04
+## File Version: 0.06
 
 
 ### just a copy of psych::fisherz

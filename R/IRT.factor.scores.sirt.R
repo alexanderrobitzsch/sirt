@@ -1,5 +1,5 @@
 ## File Name: IRT.factor.scores.sirt.R
-## File Version: 0.11
+## File Version: 0.16
 
 
 ########################################################################
@@ -25,8 +25,8 @@ IRT.factor.scores.rm.facets <- function( object, type="EAP", ... )
         b <- object$ipars.dat2$b
         theta0 <- object$person$EAP
         WLE <- if( type=="WLE"){ TRUE } else {FALSE }
-        res <- rm.facets.mle( data, a, b, theta=theta0,  WLE=WLE,
-                    maxiter=20, maxincr=3, h=.001, convP=.001, maxval=9.99,
+        res <- rm_facets_pp_mle( data=data, a=a, b=b, theta=theta0,  WLE=WLE,
+                    maxiter=30, maxincr=3, h=.001, convP=.001, maxval=9.99,
                     progress=TRUE )
         res <- data.frame("pid"=object$person$pid, res )
         attr(res,"type") <- type

@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_center_parameters.R
-## File Version: 0.01
+## File Version: 0.03
 
 invariance_alignment_center_parameters <- function(alpha0, psi0, center)
 {

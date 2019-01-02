@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.missing1.R
-## File Version: 1.20
+## File Version: 1.22
 
 ####################################################################
 # calculation of probabilities in the missing data IRT model

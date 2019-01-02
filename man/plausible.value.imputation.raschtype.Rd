@@ -1,5 +1,5 @@
 %% File Name: plausible.value.imputation.raschtype.Rd
-%% File Version: 1.32
+%% File Version: 1.34
 
 \name{plausible.value.imputation.raschtype}
 \alias{plausible.value.imputation.raschtype}
@@ -267,5 +267,5 @@ colnames(res3) <- c("x=0","x=1")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Plausible values}
+%% \keyword{Plausible values}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

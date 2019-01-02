@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.62
+%% File Version: 0.64
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -262,5 +262,5 @@ pmod1 <- sirt::lsem.permutationTest( mod4, B=3 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{LSEM}
+%% \keyword{LSEM}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

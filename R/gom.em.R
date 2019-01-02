@@ -1,5 +1,5 @@
 ## File Name: gom.em.R
-## File Version: 5.20
+## File Version: 5.22
 
 #################################################################
 # gom EM algorithm

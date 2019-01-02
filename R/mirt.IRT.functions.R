@@ -1,5 +1,5 @@
 ## File Name: mirt.IRT.functions.R
-## File Version: 0.06
+## File Version: 0.08
 
 ###############################################
 # mirt IRT functions

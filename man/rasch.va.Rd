@@ -1,5 +1,5 @@
 %% File Name: rasch.va.Rd
-%% File Version: 0.18
+%% File Version: 0.20
 
 \name{rasch.va}
 \alias{rasch.va}
@@ -95,5 +95,5 @@ round( cbind( mod1$item$b, mod2$item$b, mod3$item$itemdiff), 3 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Variational approximation}
+%% \keyword{Variational approximation}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

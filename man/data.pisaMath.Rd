@@ -1,5 +1,5 @@
 %% File Name: data.pisaMath.Rd
-%% File Version: 0.10
+%% File Version: 0.12
 
 \name{data.pisaMath}
 \alias{data.pisaMath}
@@ -56,4 +56,4 @@ The format is:
 
 
 
-\keyword{datasets}
+%% \keyword{datasets}

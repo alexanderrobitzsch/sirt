@@ -1,5 +1,5 @@
 ## File Name: rm_proc_create_pseudoraters.R
-## File Version: 0.10
+## File Version: 0.12
 
 rm_proc_create_pseudoraters <- function( dat, rater, pid, reference_rater=NULL )
 {

@@ -1,5 +1,5 @@
 ## File Name: mirt.wrapper.posterior.R
-## File Version: 0.29
+## File Version: 0.31
 
 #############################################################
 # calculation of posterior

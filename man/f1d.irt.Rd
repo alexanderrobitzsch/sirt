@@ -1,5 +1,5 @@
 %% File Name: f1d.irt.Rd
-%% File Version: 1.33
+%% File Version: 1.35
 
 \name{f1d.irt}
 \alias{f1d.irt}
@@ -212,5 +212,5 @@ fumod1$item
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Functional unidimensional item response model}
+%% \keyword{Functional unidimensional item response model}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

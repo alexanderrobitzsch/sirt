@@ -1,5 +1,5 @@
 ## File Name: R2noharm.EAP.R
-## File Version: 0.22
+## File Version: 0.24
 R2noharm.EAP <-
 function( noharmobj, theta.k=seq(-6,6,len=21), print.output=TRUE ){
     mod <- noharmobj

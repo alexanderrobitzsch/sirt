@@ -1,5 +1,5 @@
 %% File Name: class.accuracy.rasch.Rd
-%% File Version: 0.22
+%% File Version: 0.24
 
 \name{class.accuracy.rasch}
 \alias{class.accuracy.rasch}
@@ -107,5 +107,5 @@ class.accuracy.rasch( cutscores=cutscores, b=mod$item$b,
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Classification accuracy}
+%% \keyword{Classification accuracy}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

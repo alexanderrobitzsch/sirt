@@ -1,5 +1,5 @@
 %% File Name: lsem.permutationTest.Rd
-%% File Version: 0.27
+%% File Version: 0.29
 
 \name{lsem.permutationTest}
 \alias{lsem.permutationTest}
@@ -150,5 +150,5 @@ For Examples see \code{\link{lsem.estimate}}.
 %}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{LSEM}
+%% \keyword{LSEM}
 % \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

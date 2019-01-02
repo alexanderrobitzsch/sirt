@@ -1,5 +1,5 @@
 ## File Name: decategorize.R
-## File Version: 0.08
+## File Version: 0.10
 
 ###########################################################
 decategorize <- function( dat, categ_design=NULL ){

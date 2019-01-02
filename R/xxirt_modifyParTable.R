@@ -1,5 +1,5 @@
 ## File Name: xxirt_modifyParTable.R
-## File Version: 0.17
+## File Version: 0.19
 
 #**** modify parameter table
 xxirt_modifyParTable <- function( partable, parname, item=NULL, value=NULL,

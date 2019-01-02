@@ -1,11 +1,11 @@
 ## File Name: rasch_evm_pcm_dif.R
-## File Version: 0.21
+## File Version: 0.24
 
 
 rasch_evm_pcm_dif <- function( b_evm, item, PARS_vcov, I, G, group.unique,
         dat, dat.resp )
 {
-    difstats <- data.frame( "item"=colnames(dat), "X2"=NA, "df"=NA, "p"=NA, "p.holm"=NA )
+    difstats <- data.frame( item=colnames(dat), X2=NA, df=NA, p=NA, p.holm=NA )
     for (jj in 1:I){
         ii <- jj
         ind.ii <- which( item$item==ii )
@@ -26,11 +26,11 @@ rasch_evm_pcm_dif <- function( b_evm, item, PARS_vcov, I, G, group.unique,
         # calculate test value
         d0 <- Rdesign.jj %*% delta.jj
         # calculate variance matrix
-        ivm <- solve( Rdesign.jj %*% varmat.jj %*% t(Rdesign.jj ) )
+        ivm <- solve( Rdesign.jj %*% varmat.jj %*% t(Rdesign.jj) )
         difstats[jj,"X2"] <- ( t(d0) %*% ivm %*% d0 )[1,1]
         difstats[jj,"df"] <- nrow(Rdesign.jj)
         # compute item-wise DIF statistics
-        difjj <- stats::aggregate( delta.jj, list( rep(1:G, each=nj) ),  mean )[,2]
+        difjj <- stats::aggregate( delta.jj, list( rep(1:G, each=nj) ), mean)[,2]
         for (gg1 in 1:(G-1)){
             for (gg2 in (gg1+1):G){
                 difstats[jj, paste0("DIF.",group.unique[gg1],".",group.unique[gg2]) ] <- difjj[gg1] - difjj[gg2]
@@ -39,6 +39,6 @@ rasch_evm_pcm_dif <- function( b_evm, item, PARS_vcov, I, G, group.unique,
     }
     difstats$p <- 1 - stats::pchisq( difstats$X2, df=difstats$df )
     difstats$p.holm <- stats::p.adjust( difstats$p )
-    #    difstats$V <- sqrt( difstats$X2 / ( colSums( dat.resp ) * difstats$df ) )
+    #-- output
     return(difstats)
 }

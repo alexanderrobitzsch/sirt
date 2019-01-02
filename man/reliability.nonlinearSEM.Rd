@@ -1,5 +1,5 @@
 %% File Name: reliability.nonlinearSEM.Rd
-%% File Version: 0.21
+%% File Version: 0.23
 
 \name{reliability.nonlinearSEM}
 \alias{reliability.nonlinearSEM}
@@ -93,5 +93,5 @@ rel1$omega.rel
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Reliability}
+%% \keyword{Reliability}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -1,5 +1,5 @@
 %% File Name: brm.sim.Rd
-%% File Version: 0.46
+%% File Version: 0.48
 
 \name{brm-Methods}
 \alias{brm.sim}
@@ -267,5 +267,5 @@ round( m2, 3 )
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Beta item response model}
+%% \keyword{Beta item response model}
 % \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

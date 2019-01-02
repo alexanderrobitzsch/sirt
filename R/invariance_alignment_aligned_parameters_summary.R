@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_aligned_parameters_summary.R
-## File Version: 0.04
+## File Version: 0.06
 
 invariance_alignment_aligned_parameters_summary <- function(x, label=NULL)
 {

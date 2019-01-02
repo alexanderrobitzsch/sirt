@@ -1,5 +1,5 @@
 %% File Name: linking.robust.Rd
-%% File Version: 0.23
+%% File Version: 0.25
 
 \name{linking.robust}
 \alias{linking.robust}
@@ -141,7 +141,7 @@ plot(res)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Linking}
-\keyword{Robust linking}% __ONLY ONE__ keyword per line
-\keyword{summary}
-\keyword{plot}
+%% \keyword{Linking}
+%% \keyword{Robust linking}% __ONLY ONE__ keyword per line
+%% \keyword{summary}
+%% \keyword{plot}

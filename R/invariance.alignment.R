@@ -1,5 +1,5 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.602
+## File Version: 3.621
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
@@ -20,26 +20,29 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     if ( is.null(wgt) ){
         wgt <- 1+0*nu
     }
+
     W1 <- dim(wgt)
     wgtM <- matrix( colSums(wgt,na.rm=TRUE), nrow=W1[1], ncol=W1[2], byrow=TRUE )
+    # wgtM <- matrix( 1, nrow=W1[1], ncol=W1[2], byrow=TRUE )
     wgtM <- wgt / wgtM
-    wgt <- G * wgtM
+    wgt <- wgtM
 
     # missing indicator matrix: 1 - no missings
     missM <- 0.5 * ( (1-is.na(lambda))+ (1- is.na(nu)) )
     wgt <- wgt * missM
     wgt[ missM==0 ] <- 0
+    numb_items <- rowSums(missM)
 
     lambda[ missM==0 ] <- mean( lambda, na.rm=TRUE )
     nu[ missM==0 ] <- mean( nu, na.rm=TRUE )
-    group.combis <- t( utils::combn(G, 2))
+    group.combis <- t( utils::combn(x=G, m=2))
     group.combis <- rbind( group.combis, group.combis[,c(2,1) ] )
     group_combis <- group.combis
 
     #--- initial estimates means and SDs
-    psi0 <- apply(lambda, 1, median)
+    psi0 <- apply(lambda, 1, stats::median)
     psi0 <- psi0 / psi0[1]
-    alpha0 <- apply(nu, 1, median, na.rm=TRUE)
+    alpha0 <- apply(nu, 1, stats::median, na.rm=TRUE)
     alpha0 <- alpha0 - alpha0[1]
     if ( ! is.null( psi0.init) ){ psi0 <- psi0.init }
     if ( ! is.null( alpha0.init) ){ alpha0 <- alpha0.init }
@@ -48,7 +51,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     wgt <- as.matrix(wgt)
     wgt_combi <- matrix(NA, nrow=nrow(group.combis), ncol=ncol(lambda) )
     for (ii in 1:I){
-        wgt_combi[,ii] <- sqrt(wgt[ group.combis[,1], ii]*wgt[ group.combis[,2], ii])
+        wgt_combi[,ii] <- wgt[ group.combis[,1], ii]*wgt[ group.combis[,2], ii]
     }
 
     group_combis <- group.combis-1
@@ -106,8 +109,8 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
                             invariance_alignment_aligned_parameters_summary(x=nu.aligned, label="nu"),
                             row.names=colnames(lambda) )
 
-    M.lambda_matr <- TAM::tam_matrix2( itempars.aligned$M.lambda, nrow=G)
-    M.nu_matr <- TAM::tam_matrix2( itempars.aligned$M.nu, nrow=G)
+    M.lambda_matr <- sirt_matrix2( itempars.aligned$M.lambda, nrow=G)
+    M.nu_matr <- sirt_matrix2( itempars.aligned$M.nu, nrow=G)
     lambda.resid <- lambda.aligned - M.lambda_matr
     nu.resid <- nu.aligned - M.nu_matr
 
@@ -141,8 +144,9 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
             es.invariance=es.invariance, center=center, lambda.aligned=lambda.aligned,
             lambda.resid=lambda.resid, nu.aligned=nu.aligned,
             nu.resid=nu.resid, fopt=fopt, align.scale=align.scale, align.pow=align.pow,
-            res_optim=res_optim, eps=eps, wgt=wgt, s1=s1, s2=s2, time_diff=time_diff, CALL=CALL)
-    class(res) <- "invariance.alignment"
+            res_optim=res_optim, eps=eps, wgt=wgt, miss_items=missM, numb_items=numb_items,
+            s1=s1, s2=s2, time_diff=time_diff, CALL=CALL)
+    class(res) <- 'invariance.alignment'
     return(res)
 }
 

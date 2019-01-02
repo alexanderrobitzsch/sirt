@@ -1,5 +1,5 @@
 ## File Name: rasch.copula3.covariance.R
-## File Version: 0.13
+## File Version: 0.15
 
 
 ######################################

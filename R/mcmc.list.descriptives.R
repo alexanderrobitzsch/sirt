@@ -1,5 +1,5 @@
 ## File Name: mcmc.list.descriptives.R
-## File Version: 0.16
+## File Version: 0.18
 
 ########################################################
 # mcmclist descriptives

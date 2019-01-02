@@ -1,5 +1,5 @@
 ## File Name: weighted_colSums.R
-## File Version: 0.06
+## File Version: 0.08
 
 
 weighted_colSums <- function( mat, wgt=NULL)

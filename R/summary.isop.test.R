@@ -1,5 +1,5 @@
 ## File Name: summary.isop.test.R
-## File Version: 0.05
+## File Version: 0.07
 
 ####################################################
 # summary for ISOP test

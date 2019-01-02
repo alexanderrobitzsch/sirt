@@ -1,5 +1,5 @@
 ## File Name: rasch.pml3.R
-## File Version: 6.10
+## File Version: 6.131
 
 
 
@@ -396,7 +396,7 @@ rasch.pml3 <- function( dat, est.b=seq( 1, ncol(dat) ),
     # print item summary
     cat("Item Parameter Summary\n")
     cat( " Estimated", length(bG), "Item Parameters\n\n")
-    .pr( item, digits=3 )        # print item statistics
+    sirt_print_helper( item, digits=3 )        # print item statistics
     cat("---------------------------------------------------------------------------------------------------------- \n")
 
     #....................................................................
@@ -424,7 +424,7 @@ rasch.pml3 <- function( dat, est.b=seq( 1, ncol(dat) ),
         error.corr <- error.corr + t(error.corr)
 #        error.corr[ lower.tri( error.corr) ] <- eps.corr
         diag(error.corr) <- 1
-       .pr( error.corr, digits=3 )        # print item statistics
+       sirt_print_helper( error.corr, digits=3 )        # print item statistics
        cat("---------------------------------------------------------------------------------------------------------- \n")
             }
         # computational time

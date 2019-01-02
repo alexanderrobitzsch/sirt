@@ -1,5 +1,5 @@
 ## File Name: prior_model_pars_CleanString.R
-## File Version: 0.06
+## File Version: 0.08
 
 
 #################################################

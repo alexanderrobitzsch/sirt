@@ -1,5 +1,5 @@
 %% File Name: sim.raschtype.Rd
-%% File Version: 0.22
+%% File Version: 0.24
 
 \name{sim.raschtype}
 \alias{sim.raschtype}
@@ -97,6 +97,6 @@ colnames(dat) <- paste0( "I", 1:I )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Simulating IRT models}
+%% \keyword{Simulating IRT models}
 %\keyword{ ~kwd1 }
 

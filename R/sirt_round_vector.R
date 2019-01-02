@@ -1,5 +1,5 @@
 ## File Name: sirt_round_vector.R
-## File Version: 0.02
+## File Version: 0.04
 
 
 sirt_round_vector <- function(x, digits)

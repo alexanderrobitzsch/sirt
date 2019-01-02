@@ -1,5 +1,5 @@
 %% File Name: md.pattern.sirt.Rd
-%% File Version: 0.18
+%% File Version: 0.20
 
 \name{md.pattern.sirt}
 \alias{md.pattern.sirt}
@@ -90,5 +90,5 @@ image( z=t(res$dat.ordered), y=1:N, x=1:I, xlab="Items", ylab="Persons")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Utilities}
+%% \keyword{Utilities}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

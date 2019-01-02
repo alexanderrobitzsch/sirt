@@ -1,5 +1,5 @@
 ## File Name: rm_eap_reliability.R
-## File Version: 0.03
+## File Version: 0.05
 
 rm_eap_reliability <- function( EAP, SE_EAP )
 {

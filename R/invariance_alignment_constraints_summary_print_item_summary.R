@@ -1,12 +1,13 @@
 ## File Name: invariance_alignment_constraints_summary_print_item_summary.R
-## File Version: 0.02
+## File Version: 0.07
 
 invariance_alignment_constraints_summary_print_item_summary <- function(x, digits)
 {
     cat("Parameter tolerance value", "=", x$parm_tol, "\n")
     cat("Total number of items", "=", x$N_total, "\n")
     cat("Number of unique item parameters", "=", x$N_parm_all, "\n")
-    cat("Percentage of noninvariance item parameters", "=", x$prop_noninvariance,"%\n")
+    cat("Percentage of noninvariance item parameters", "=",
+                round(x$prop_noninvariance,1),"%\n")
 
     cat("\nUnique item parameters per item\n")
     print(x$N_unique_parm_items)

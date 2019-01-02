@@ -1,5 +1,5 @@
 %% File Name: data.liking.science.Rd
-%% File Version: 0.06
+%% File Version: 0.08
 
 \name{data.liking.science}
 \alias{data.liking.science}
@@ -44,4 +44,4 @@ Chicago: MESA Press.
 %data(data.liking.science)
 %## maybe str(data.liking.science) ; plot(data.liking.science) ...
 %}
-\keyword{datasets}
+%% \keyword{datasets}

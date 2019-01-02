@@ -1,5 +1,5 @@
 %% File Name: data.pisaPars.Rd
-%% File Version: 0.08
+%% File Version: 0.10
 
 \name{data.pisaPars}
 \alias{data.pisaPars}
@@ -27,4 +27,4 @@ data(data.pisaPars)
 }
 
 
-\keyword{datasets}
+%% \keyword{datasets}

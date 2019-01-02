@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.42
+## File Version: 0.44
 
 ##############################################################
 lsem_fitsem <- function( dat, weights, lavfit,

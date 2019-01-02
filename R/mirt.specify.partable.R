@@ -1,5 +1,5 @@
 ## File Name: mirt.specify.partable.R
-## File Version: 0.08
+## File Version: 0.10
 
 
 #######################################################################

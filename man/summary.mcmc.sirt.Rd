@@ -1,5 +1,5 @@
 %% File Name: summary.mcmc.sirt.Rd
-%% File Version: 0.09
+%% File Version: 0.11
 
 \name{summary.mcmc.sirt}
 \alias{summary.mcmc.sirt}
@@ -46,4 +46,4 @@ Further arguments to be passed
 % R documentation directory.
 %\keyword{ ~kwd1 }
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
-\keyword{summary}
+%% \keyword{summary}

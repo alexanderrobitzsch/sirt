@@ -1,5 +1,5 @@
 ## File Name: rm_summary_information_criteria.R
-## File Version: 0.07
+## File Version: 0.09
 
 rm_summary_information_criteria <- function(object, digits_crit=0, digits_penalty=2)
 {

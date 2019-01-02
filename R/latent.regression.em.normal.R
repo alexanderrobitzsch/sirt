@@ -1,5 +1,5 @@
 ## File Name: latent.regression.em.normal.R
-## File Version: 2.17
+## File Version: 2.19
 
 
 #----------------------------------------------------------------------------

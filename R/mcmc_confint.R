@@ -1,5 +1,5 @@
 ## File Name: mcmc_confint.R
-## File Version: 0.09
+## File Version: 0.11
 
 ###########################################
 # confidence interval

@@ -1,5 +1,5 @@
 ## File Name: xxirt_compute_likelihood.R
-## File Version: 0.22
+## File Version: 0.24
 
 
 ###########################################################################

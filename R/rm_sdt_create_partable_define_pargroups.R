@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_create_partable_define_pargroups.R
-## File Version: 0.04
+## File Version: 0.06
 
 
 rm_sdt_create_partable_define_pargroups <- function(partable, pg1, pg2)

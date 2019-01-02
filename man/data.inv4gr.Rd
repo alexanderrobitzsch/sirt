@@ -1,5 +1,5 @@
 %% File Name: data.inv4gr.Rd
-%% File Version: 0.06
+%% File Version: 0.08
 
 \name{data.inv4gr}
 \alias{data.inv4gr}
@@ -51,4 +51,4 @@ Simulated dataset
 %data(data.inv4gr)
 %## maybe str(data.inv4gr) ; plot(data.inv4gr) ...
 %}
-\keyword{datasets}
+%% \keyword{datasets}

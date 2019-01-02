@@ -1,5 +1,5 @@
 ## File Name: fit.logistic_alg.R
-## File Version: 0.12
+## File Version: 0.14
 
 
 #####################################################################

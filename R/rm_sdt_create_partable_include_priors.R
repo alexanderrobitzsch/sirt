@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_create_partable_include_priors.R
-## File Version: 0.03
+## File Version: 0.05
 
 rm_sdt_create_partable_include_priors <- function(partable, type, obj)
 {

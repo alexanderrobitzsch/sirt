@@ -1,5 +1,5 @@
 ## File Name: sirt_colMedians.R
-## File Version: 0.02
+## File Version: 0.04
 
 sirt_colMedians <- function(x, na.rm=TRUE)
 {

@@ -1,5 +1,5 @@
 %% File Name: data.long.Rd
-%% File Version: 0.27
+%% File Version: 0.29
 
 \name{data.long}
 \alias{data.long}
@@ -242,4 +242,4 @@ link2a <- sirt::invariance.alignment( lambda, nu )
 summary(link2a)
 }
 }
-\keyword{datasets}
+%% \keyword{datasets}

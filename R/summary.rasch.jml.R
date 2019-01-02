@@ -1,5 +1,5 @@
 ## File Name: summary.rasch.jml.R
-## File Version: 1.10
+## File Version: 1.12
 
 
 summary.rasch.jml <- function( object, digits=3, ... )

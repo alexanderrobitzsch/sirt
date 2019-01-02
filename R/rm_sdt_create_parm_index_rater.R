@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_create_parm_index_rater.R
-## File Version: 0.04
+## File Version: 0.06
 
 
 rm_sdt_create_parm_index_rater <- function( est.rater, ND, item.index,

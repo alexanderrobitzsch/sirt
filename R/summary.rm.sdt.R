@@ -1,5 +1,5 @@
 ## File Name: summary.rm.sdt.R
-## File Version: 1.32
+## File Version: 1.34
 
 
 #*******************************************************

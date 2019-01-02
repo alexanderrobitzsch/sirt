@@ -1,5 +1,5 @@
 ## File Name: tetrachoric2.R
-## File Version: 1.23
+## File Version: 1.25
 
 tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
     cor.smooth=TRUE, progress=TRUE){

@@ -1,5 +1,5 @@
 %% File Name: modelfit.sirt.Rd
-%% File Version: 0.59
+%% File Version: 0.61
 
 \name{modelfit.sirt}
 \alias{modelfit.sirt}
@@ -225,5 +225,5 @@ mirt::M2(mod11)
 mirt::residuals(mod11)
 }
 }
-\keyword{Model fit}
+%% \keyword{Model fit}
 

@@ -1,5 +1,5 @@
 %% File Name: matrixfunctions.sirt.Rd
-%% File Version: 1.13
+%% File Version: 1.15
 
 \name{matrixfunctions.sirt}
 
@@ -118,5 +118,5 @@ rowKSmallest2.sirt(matr=M1, K=2)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Matrix utilities}
+%% \keyword{Matrix utilities}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

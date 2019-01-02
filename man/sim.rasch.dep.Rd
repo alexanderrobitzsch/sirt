@@ -1,5 +1,5 @@
 %% File Name: sim.rasch.dep.Rd
-%% File Version: 0.31
+%% File Version: 0.33
 
 \name{sim.rasch.dep}
 \alias{sim.rasch.dep}
@@ -143,6 +143,6 @@ summary(mod3)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Simulating IRT models}
+%% \keyword{Simulating IRT models}
 %\keyword{ ~kwd1 }
 

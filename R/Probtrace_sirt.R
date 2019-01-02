@@ -1,5 +1,5 @@
 ## File Name: Probtrace_sirt.R
-## File Version: 0.02
+## File Version: 0.04
 
 ######################################################################
 # auxiliary function for mirt package

@@ -1,8 +1,8 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 3.1-28
-Date: 2018-12-10 14:58:55
+Version: 3.1-77
+Date: 2019-01-02 14:13:33
 Author: Alexander Robitzsch [aut,cre] (<https://orcid.org/0000-0002-8226-3132>)
 Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
 Description: 
@@ -29,8 +29,7 @@ Imports:
     MASS, methods, mirt, mvtnorm, Rcpp, sfsmisc, stats, 
     survey, TAM (>= 2.5-5), utils
 Suggests:
-    gtools, ic.infer (>= 1.1-6), igraph, Matrix, miceadds, pbivnorm, 
-    psych, sm
+    igraph, Matrix, miceadds, pbivnorm, psych, sm
 LinkingTo: 
     Rcpp, RcppArmadillo
 URL: 

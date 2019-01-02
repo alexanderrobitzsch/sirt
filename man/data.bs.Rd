@@ -1,5 +1,5 @@
 %% File Name: data.bs.Rd
-%% File Version: 0.11
+%% File Version: 0.13
 
 
 \name{data.bs}
@@ -152,4 +152,4 @@ summary(mod7)
 IRT.compareModels( mod1, mod2, mod3, mod4, mod5, mod6, mod7 )
 }
 }
-\keyword{datasets}
+%% \keyword{datasets}

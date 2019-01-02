@@ -1,5 +1,5 @@
 ## File Name: mcmc_WaldTest.R
-## File Version: 0.17
+## File Version: 0.19
 
 ##########################################################
 # Wald Test for a set of hypotheses

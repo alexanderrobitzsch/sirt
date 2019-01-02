@@ -1,5 +1,5 @@
 ## File Name: sirt_osink.R
-## File Version: 0.04
+## File Version: 0.06
 
 
 sirt_osink <- function(file)

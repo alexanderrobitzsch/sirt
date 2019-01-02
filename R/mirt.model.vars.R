@@ -1,5 +1,5 @@
 ## File Name: mirt.model.vars.R
-## File Version: 0.16
+## File Version: 0.18
 
 ###################################################################
 # Input is a mirt syntax specified with variable names instead

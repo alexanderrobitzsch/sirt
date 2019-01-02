@@ -1,9 +1,8 @@
 ## File Name: summary.rm.facets.R
-## File Version: 0.23
+## File Version: 0.26
 
 
-#*******************************************************
-# Summary for rm.facets object                         *
+# Summary for rm.facets object
 summary.rm.facets <- function( object, file=NULL, ... ){
 
     # open sink for a file
@@ -51,7 +50,3 @@ summary.rm.facets <- function( object, file=NULL, ... ){
 
     sirt_csink(file=file)
 }
-#*******************************************************
-
-
-

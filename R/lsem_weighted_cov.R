@@ -1,5 +1,5 @@
 ## File Name: lsem_weighted_cov.R
-## File Version: 0.07
+## File Version: 0.09
 
 lsem_weighted_cov <- function( x, weights )
 {

@@ -1,5 +1,5 @@
 ## File Name: dimproper.R
-## File Version: 0.02
+## File Version: 0.04
 
 ###################################################
 # improper density which is constant to 1

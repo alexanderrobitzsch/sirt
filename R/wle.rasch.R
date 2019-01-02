@@ -1,5 +1,5 @@
 ## File Name: wle.rasch.R
-## File Version: 1.18
+## File Version: 1.20
 
 #----------------------------------------------------------
 # Function for WLE ability estimation

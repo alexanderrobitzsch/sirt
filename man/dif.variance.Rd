@@ -1,5 +1,5 @@
 %% File Name: dif.variance.Rd
-%% File Version: 0.11
+%% File Version: 0.13
 
 \name{dif.variance}
 \alias{dif.variance}
@@ -60,6 +60,6 @@ See \code{\link{dif.logistic.regression}} for examples.
 %}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Differential item functioning (DIF)}
-\keyword{DIF variance}
+%% \keyword{Differential item functioning (DIF)}
+%% \keyword{DIF variance}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

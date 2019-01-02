@@ -1,5 +1,5 @@
 ## File Name: rm_facets_center_value_aggregate.R
-## File Version: 0.04
+## File Version: 0.06
 
 rm_facets_center_value_aggregate <- function(x, index, value=0)
 {

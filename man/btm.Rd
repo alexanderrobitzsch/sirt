@@ -1,5 +1,5 @@
 %% File Name: btm.Rd
-%% File Version: 0.37
+%% File Version: 0.39
 
 \name{btm}
 \alias{btm}
@@ -223,5 +223,5 @@ summary(mod2)
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Bradley-Terry model}
-\keyword{summary}% __ONLY ONE__ keyword per line
+%% \keyword{Bradley-Terry model}
+%% \keyword{summary}% __ONLY ONE__ keyword per line

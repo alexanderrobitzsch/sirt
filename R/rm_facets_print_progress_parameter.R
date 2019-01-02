@@ -1,5 +1,5 @@
 ## File Name: rm_facets_print_progress_parameter.R
-## File Version: 0.06
+## File Version: 0.08
 
 
 rm_facets_print_progress_parameter <- function( parm, parm0, parmlabel, digits_parm )

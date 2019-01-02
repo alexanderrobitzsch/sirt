@@ -1,5 +1,5 @@
 ## File Name: rasch.copula3.R
-## File Version: 6.48
+## File Version: 6.52
 
 
 
@@ -30,6 +30,7 @@ rasch.copula3 <- function( dat, itemcluster, dims=NULL,
     # est.b    ... which b parameters shall be estimated
     ###############################################################
     s1 <- Sys.time()
+    CALL <- match.call()
     group <- NULL
     N <- nrow(dat)
     if (is.null(dims) ){
@@ -779,7 +780,7 @@ rasch.copula3 <- function( dat, itemcluster, dims=NULL,
     # print item summary
     if (progress){
         cat("Parameter summary\n")
-        .pr( item, digits=3 )        # print item statistics
+        sirt_print_helper( item, digits=3)        # print item statistics
         # dependency parameter
         cat("\nDependency parameters\n")
                 }
@@ -790,7 +791,7 @@ rasch.copula3 <- function( dat, itemcluster, dims=NULL,
                 } )
             s2 <- Sys.time()
     if (progress){
-        .pr(summary.delta, digits=3)
+        sirt_print_helper(summary.delta, digits=3)
         cat(paste("\nEAP Reliability:\n "))
         print( round( EAP.Rel,3))
         cat("\n")
@@ -828,7 +829,7 @@ rasch.copula3 <- function( dat, itemcluster, dims=NULL,
                     "f.qk.yi"=(res.posterior$post)[ patternindex,],
                     "f.yi.qk"=(res.posterior$post.unnorm)[ patternindex,],
                     "Qmatrix"=Qmatrix, "D"=D,
-                    "s2"=s2, "s1"=s1
+                    "s2"=s2, "s1"=s1, CALL=CALL
                                 )
     class(res) <- "rasch.copula3"
     return(res)

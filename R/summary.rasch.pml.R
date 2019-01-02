@@ -1,5 +1,5 @@
 ## File Name: summary.rasch.pml.R
-## File Version: 0.13
+## File Version: 0.161
 
 
 #*******************************************************
@@ -33,7 +33,7 @@ summary.rasch.pml <- function( object, ...){
     # print item summary
     cat("Item Parameter Summary\n")
     cat( " Estimated", length(object$bG)+length(object$aG), "Item Parameters\n\n")
-    .pr( object$item, digits=3 )        # print item statistics
+    sirt_print_helper( object$item, digits=3 )        # print item statistics
     #....................................................................
     # print Trait parameter summary
     cat("-----------------------------------------------------------------\n")
@@ -52,7 +52,7 @@ summary.rasch.pml <- function( object, ...){
     cat("-----------------------------------------------------------------\n")
     cat("Residual Correlation Parameter Summary\n")
         cat( " Estimated", length(object$epsG), "Residual Correlation Parameters\n\n")
-       .pr( object$eps.corrM, digits=3 )        # print item statistics
+       sirt_print_helper( object$eps.corrM, digits=3 )        # print item statistics
             }
         }
 #*******************************************************

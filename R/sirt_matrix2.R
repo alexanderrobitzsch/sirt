@@ -1,5 +1,5 @@
 ## File Name: sirt_matrix2.R
-## File Version: 0.02
+## File Version: 0.04
 
 sirt_matrix2 <- function(x, nrow)
 {

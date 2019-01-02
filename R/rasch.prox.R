@@ -1,5 +1,5 @@
 ## File Name: rasch.prox.R
-## File Version: 1.12
+## File Version: 1.14
 
 
 

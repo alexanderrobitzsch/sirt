@@ -1,5 +1,5 @@
 ## File Name: lsem.permutationTest.R
-## File Version: 0.36
+## File Version: 0.38
 
 ############################################
 # permutation test for LSEM model

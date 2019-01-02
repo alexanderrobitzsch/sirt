@@ -1,5 +1,5 @@
 ## File Name: dif.variance.R
-## File Version: 0.15
+## File Version: 0.18
 
 
 #-------------------------------------------------------------------------#
@@ -31,7 +31,7 @@ dif.variance <- function( dif, se.dif, items=paste("item",1:length(dif),sep="") 
 
 #################################################################################
 dif.strata.variance <- function( dif, se.dif, itemcluster ){
-    # stratified dif variance
+    # stratified DIF variance
     # means in differential item functioning
     # itemcluster is a vector of strata corresponding to items
     stratadif <- stats::aggregate( 1+0*dif, list( itemcluster ), sum, na.rm=T )

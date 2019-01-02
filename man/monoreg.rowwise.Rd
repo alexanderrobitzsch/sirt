@@ -1,5 +1,5 @@
 %% File Name: monoreg.rowwise.Rd
-%% File Version: 0.12
+%% File Version: 0.14
 
 \name{monoreg.rowwise}
 \alias{monoreg.rowwise}
@@ -86,6 +86,6 @@ fdrtool::monoreg(x=yM[2,], w=wM[2,])$yf
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Monotone regression}
-\keyword{Isotone regression}
+%% \keyword{Monotone regression}
+%% \keyword{Isotone regression}
 % __ONLY ONE__ keyword per line

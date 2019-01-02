@@ -1,5 +1,5 @@
 ## File Name: stratified.cronbach.alpha.R
-## File Version: 0.10
+## File Version: 0.12
 
 
 ########################################################################################

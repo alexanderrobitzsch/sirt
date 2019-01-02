@@ -1,5 +1,5 @@
 %% File Name: tam2mirt.Rd
-%% File Version: 0.21
+%% File Version: 0.23
 
 \name{tam2mirt}
 \alias{tam2mirt}
@@ -298,5 +298,5 @@ mirt::itemfit(rmod2)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{TAM}
-\keyword{mirt}
+%% \keyword{TAM}
+%% \keyword{mirt}

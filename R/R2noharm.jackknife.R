@@ -1,17 +1,14 @@
 ## File Name: R2noharm.jackknife.R
-## File Version: 1.09
+## File Version: 1.13
 
 
-
-#*************************************************************
-# jackknife R2noharm
-R2noharm.jackknife <- function( object, jackunits=NULL ){
-    #############################################
+#**** jackknife R2noharm
+R2noharm.jackknife <- function( object, jackunits=NULL )
+{
     # INPUT:
     # object     ... R2noharm object
     # jackunits ... units for jackknife
     #                    can be a number or a vector of jackknife units
-    #********************************
     # modtype permitted?
     modtype <- object$modtype
     if (modtype %in% 1:2 ){
@@ -253,6 +250,6 @@ R2noharm.jackknife <- function( object, jackunits=NULL ){
             "u.jackunits"=u.jackunits )
     class(res) <- "R2noharm.jackknife"
     return(res)
-    }
-#################################################################
+}
+
 

@@ -1,5 +1,5 @@
 %% File Name: wle.rasch.jackknife.Rd
-%% File Version: 1.23
+%% File Version: 1.25
 
 \name{wle.rasch.jackknife}
 \alias{wle.rasch.jackknife}
@@ -151,5 +151,5 @@ round( a2, 3 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Weighted likelihood estimation (WLE)}
+%% \keyword{Weighted likelihood estimation (WLE)}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

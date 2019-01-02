@@ -1,5 +1,5 @@
 ## File Name: rasch_jml_update_b.R
-## File Version: 0.02
+## File Version: 0.04
 
 
 

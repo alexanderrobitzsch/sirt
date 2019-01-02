@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.42
+%% File Version: 0.45
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -25,7 +25,7 @@ noharm.sirt(dat, weights=NULL, Fval=NULL, Fpatt=NULL, Pval=NULL,
    Ppatt=NULL, Psival=NULL, Psipatt=NULL, dimensions=NULL,
    lower=rep(0, ncol(dat)), upper=rep(1, ncol(dat)), wgtm=NULL, modesttype=1,
    pos.loading=FALSE, pos.variance=FALSE,  pos.residcorr=FALSE,
-   maxiter=1000, conv=10^(-6), increment.factor=1.01, reliability=TRUE)
+   maxiter=1000, conv=1e-6, increment.factor=1.01, reliability=TRUE)
 
 \method{summary}{noharm.sirt}(object, file=NULL, \dots)
 }
@@ -417,7 +417,7 @@ summary(mod8)
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{NOHARM}
-\keyword{summary}
+%% \keyword{NOHARM}
+%% \keyword{summary}
 % \keyword{plot}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

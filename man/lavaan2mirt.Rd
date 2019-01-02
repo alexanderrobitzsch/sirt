@@ -1,5 +1,5 @@
 %% File Name: lavaan2mirt.Rd
-%% File Version: 0.41
+%% File Version: 0.43
 
 \name{lavaan2mirt}
 \alias{lavaan2mirt}
@@ -397,6 +397,6 @@ plot(res2, type="trace")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{mirt}
-\keyword{lavaan}
+%% \keyword{mirt}
+%% \keyword{lavaan}
 % \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

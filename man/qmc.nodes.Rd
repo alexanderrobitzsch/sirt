@@ -1,5 +1,5 @@
 %% File Name: qmc.nodes.Rd
-%% File Version: 0.16
+%% File Version: 0.18
 
 \name{qmc.nodes}
 \alias{qmc.nodes}
@@ -87,5 +87,5 @@ qmc.nodes( snodes=7, ndim=2 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Quasi Monte Carlo integration}
+%% \keyword{Quasi Monte Carlo integration}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

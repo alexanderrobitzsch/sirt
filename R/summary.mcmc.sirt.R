@@ -1,7 +1,7 @@
 ## File Name: summary.mcmc.sirt.R
-## File Version: 1.29
+## File Version: 1.33
 
-#*******************************************************
+
 # summary for MCMC item analysis in sirt
 summary.mcmc.sirt <- function( object, digits=3, file=NULL, ... ){
 
@@ -36,8 +36,7 @@ summary.mcmc.sirt <- function( object, digits=3, file=NULL, ... ){
     cat("Item Parameters \n")
     obji <- object$summary.mcmcobj
     obji <- obji[ obji$parameter !="deviance", ]
-    vars <- c("parameter", "Mean", "SD", "MAP", "Rhat", "effSize",
-            "Q5", "Q95"  )  #         "Q2.5", "Q5", "Q95", "Q97.5" )
+    vars <- c("parameter", "Mean", "SD", "MAP", "Rhat", "effSize", "Q5", "Q95" )
     obji <- obji[, vars ]
     digits_vec <- sirt_vector_with_names(value=digits, names=vars)
     digits_vec["Rhat"] <- 2
@@ -47,7 +46,3 @@ summary.mcmc.sirt <- function( object, digits=3, file=NULL, ... ){
     #- close sink
     sirt_csink(file=file)
 }
-#*******************************************************
-
-
-

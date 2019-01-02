@@ -1,5 +1,5 @@
 %% File Name: data.wide2long.Rd
-%% File Version: 0.22
+%% File Version: 0.24
 
 \name{data.wide2long}
 \alias{data.wide2long}
@@ -120,5 +120,5 @@ summary(mod1)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{R utilities}
+%% \keyword{R utilities}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

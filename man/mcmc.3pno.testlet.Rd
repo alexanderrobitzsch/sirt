@@ -1,5 +1,5 @@
 %% File Name: mcmc.3pno.testlet.Rd
-%% File Version: 1.26
+%% File Version: 1.28
 
 \name{mcmc.3pno.testlet}
 \alias{mcmc.3pno.testlet}
@@ -318,7 +318,7 @@ cbind( sdt, summ1[ grep("sigma\\.testlet", summ1$parameter ), "Mean" ] )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Testlet model}
-\keyword{Testlets}
-\keyword{Markov Chain Monte Carlo (MCMC)}
+%% \keyword{Testlet model}
+%% \keyword{Testlets}
+%% \keyword{Markov Chain Monte Carlo (MCMC)}
 % __ONLY ONE__ keyword per line

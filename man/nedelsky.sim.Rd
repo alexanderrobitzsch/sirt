@@ -1,5 +1,5 @@
 %% File Name: nedelsky.sim.Rd
-%% File Version: 0.22
+%% File Version: 0.24
 
 \name{nedelsky-methods}
 
@@ -286,5 +286,5 @@ mirt.wrapper.itemplot(mod1,ask=TRUE)
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 
-\keyword{Nedelsky model}
+%% \keyword{Nedelsky model}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

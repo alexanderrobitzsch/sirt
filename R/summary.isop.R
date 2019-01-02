@@ -1,5 +1,5 @@
 ## File Name: summary.isop.R
-## File Version: 0.10
+## File Version: 0.12
 
 
 #*******************************************************

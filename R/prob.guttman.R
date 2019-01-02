@@ -1,5 +1,5 @@
 ## File Name: prob.guttman.R
-## File Version: 1.15
+## File Version: 1.17
 
 
 

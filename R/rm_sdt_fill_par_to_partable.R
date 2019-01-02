@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_fill_par_to_partable.R
-## File Version: 0.16
+## File Version: 0.18
 
 
 rm_sdt_fill_par_to_partable <- function( par_index, partable, parm0, type)

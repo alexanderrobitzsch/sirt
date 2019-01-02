@@ -1,5 +1,5 @@
 %% File Name: prob.guttman.Rd
-%% File Version: 1.31
+%% File Version: 1.33
 
 \name{prob.guttman}
 \alias{prob.guttman}
@@ -253,6 +253,6 @@ matplot( 1:4,  t(probs4), type="b", pch=1:I)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Probabilistic Guttman model}
-\keyword{summary}
+%% \keyword{Probabilistic Guttman model}
+%% \keyword{summary}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

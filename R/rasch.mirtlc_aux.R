@@ -1,5 +1,5 @@
 ## File Name: rasch.mirtlc_aux.R
-## File Version: 91.21
+## File Version: 91.23
 
 #*************************************************************************************
 # E Step Multidimensional Latent Class Rasch Model                                 #

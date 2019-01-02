@@ -1,5 +1,5 @@
 ## File Name: rm_facets_ic.R
-## File Version: 0.18
+## File Version: 0.20
 
 #########################################################################
 # computation information criteria

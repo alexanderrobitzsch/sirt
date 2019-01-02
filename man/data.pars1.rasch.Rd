@@ -1,5 +1,5 @@
 %% File Name: data.pars1.rasch.Rd
-%% File Version: 0.10
+%% File Version: 0.12
 
 \name{data.pars1.rasch}
 \alias{data.pars1.rasch}
@@ -59,4 +59,4 @@ are denoted by \code{b}. \cr
 %data(data.pars1.rasch)
 %## maybe str(data.pars1.rasch) ; plot(data.pars1.rasch) ...
 %}
-\keyword{datasets}
+%% \keyword{datasets}

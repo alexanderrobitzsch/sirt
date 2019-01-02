@@ -1,5 +1,5 @@
 %% File Name: isop.Rd
-%% File Version: 3.29
+%% File Version: 3.31
 
 \name{isop}
 \alias{isop.dich}
@@ -302,8 +302,8 @@ summary(mod1)
 plot(mod1)
 }
 
-\keyword{ISOP model}
-\keyword{ADISOP model}
-\keyword{Nonparametric IRT}
-\keyword{summary}
-\keyword{plot}
+%% \keyword{ISOP model}
+%% \keyword{ADISOP model}
+%% \keyword{Nonparametric IRT}
+%% \keyword{summary}
+%% \keyword{plot}

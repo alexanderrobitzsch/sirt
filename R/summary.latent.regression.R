@@ -1,5 +1,5 @@
 ## File Name: summary.latent.regression.R
-## File Version: 0.09
+## File Version: 0.11
 
 
 summary.latent.regression <- function( object, ... ){

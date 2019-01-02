@@ -1,5 +1,5 @@
 ## File Name: mcmc_extract_samples_first_chain.R
-## File Version: 0.02
+## File Version: 0.04
 
 mcmc_extract_samples_first_chain <- function(mcmcobj)
 {

@@ -1,5 +1,5 @@
 %% File Name: data.ratings1.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{data.ratings}
 \alias{data.ratings}
@@ -89,4 +89,4 @@ Data frame with 3169 observations containing 4 criteria (\code{crit2}, ..., \cod
 %# include an example of rating data here
 %}
 
-\keyword{datasets}
+%% \keyword{datasets}

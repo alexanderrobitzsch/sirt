@@ -1,5 +1,5 @@
 ## File Name: summary.smirt.R
-## File Version: 0.16
+## File Version: 0.18
 #*******************************************************
 # Summary for smirt object
 summary.smirt <- function( object, ...){

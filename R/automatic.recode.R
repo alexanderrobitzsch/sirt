@@ -1,5 +1,5 @@
 ## File Name: automatic.recode.R
-## File Version: 1.16
+## File Version: 1.18
 
 #*** automatic recoding of a dataset
 automatic.recode <- function( data, exclude=NULL, pstart.min=.6,

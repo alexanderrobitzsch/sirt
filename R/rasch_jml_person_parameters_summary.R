@@ -1,5 +1,5 @@
 ## File Name: rasch_jml_person_parameters_summary.R
-## File Version: 0.02
+## File Version: 0.04
 
 rasch_jml_person_parameters_summary <- function(x)
 {

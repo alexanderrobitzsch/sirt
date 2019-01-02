@@ -1,5 +1,5 @@
 %% File Name: personfit.stat.Rd
-%% File Version: 0.24
+%% File Version: 0.26
 
 \name{personfit.stat}
 \alias{personfit.stat}
@@ -137,5 +137,5 @@ stats::factanal( x=x0, factors=2, rotation="promax" )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Person fit}
+%% \keyword{Person fit}
 %%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

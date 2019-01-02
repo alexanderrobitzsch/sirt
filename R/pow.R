@@ -1,5 +1,5 @@
 ## File Name: pow.R
-## File Version: 0.03
+## File Version: 0.05
 
 pow <- function(x, a)
 {

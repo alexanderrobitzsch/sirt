@@ -1,5 +1,5 @@
 ## File Name: mcmc_derivedPars.R
-## File Version: 0.26
+## File Version: 0.28
 
 #####################################################
 # derived parameters for objects of class mcmc

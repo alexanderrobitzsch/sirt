@@ -1,5 +1,5 @@
 %% File Name: data.pw01.Rd
-%% File Version: 0.04
+%% File Version: 0.06
 
 \name{data.pw}
 \alias{data.pw01}
@@ -30,4 +30,4 @@ from the season 2000/01.
 %\examples{
 %data(data.pw01)
 %}
-\keyword{datasets}
+%% \keyword{datasets}

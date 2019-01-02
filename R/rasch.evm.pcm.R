@@ -1,5 +1,5 @@
 ## File Name: rasch.evm.pcm.R
-## File Version: 1.51
+## File Version: 1.59
 
 
 # estimation of the partial credit model employing the eigenvector method
@@ -7,6 +7,7 @@ rasch.evm.pcm <- function( dat, jackunits=20, weights=NULL,
     pid=NULL, group=NULL, powB=2, adj_eps=.3, progress=TRUE )
 {
     CALL <- match.call()
+    s1 <- Sys.time()
     dat0 <- dat <- as.matrix(dat)
     N <- nrow(dat)
     if ( is.null(weights) ){
@@ -54,23 +55,18 @@ rasch.evm.pcm <- function( dat, jackunits=20, weights=NULL,
         desc$N.items <- ncol(dat)
         desc$N.pars <- nrow(dfr)
         desc$sum.weights <- sum(weights)
-        m1 <- rowSums( dat.resp )
-        desc$M.Nitems <- mean(m1)
-        desc$SD.Nitems <- stats::sd(m1)
-        desc$min.Nitems <- min(m1)
-        desc$max.Nitems <- max(m1)
     }
     if (!nogroup){
         desc <- data.frame( Nobs=as.numeric(table(group)), G=G )
         desc$N.items <- ncol(dat)
         desc$N.pars <- nrow(dfr)
         desc$sum.weights <- stats::aggregate( weights, list(group), sum)[,2]
-        m1 <- rowSums(dat.resp)
-        desc$M.Nitems <- mean(m1)
-        desc$SD.Nitems <- stats::sd(m1)
-        desc$min.Nitems <- min(m1)
-        desc$max.Nitems <- max(m1)
     }
+    m1 <- rowSums(dat.resp)
+    desc$M.Nitems <- mean(m1)
+    desc$SD.Nitems <- stats::sd(m1)
+    desc$min.Nitems <- min(m1)
+    desc$max.Nitems <- max(m1)
 
     #**** run Rcpp subroutine
     # no group
@@ -94,15 +90,16 @@ rasch.evm.pcm <- function( dat, jackunits=20, weights=NULL,
     }
     #************************
     # collect item parameters
-    ri <- paste0( colnames(dat)[ row_index[,1]+1 ], "_Cat", row_index[,2]  )
+    item_index <- row_index[,1]+1
+    items <- colnames(dat)[ item_index ]
+    ri <- paste0( items, "_Cat", row_index[,2]  )
     # item parameters
     if (nogroup){
         PP <- nrow(res1$PARS_vcov) - 2
     } else {
         PP <- nrow(res1[[1]]$PARS_vcov) - 2
     }
-    item <- data.frame(parmlabel=ri, item=row_index[,1]+1,
-                itemlabel=colnames(dat)[ row_index[,1]+1 ],
+    item <- data.frame(parmlabel=ri, item=item_index, itemlabel=items,
                 category=row_index[,2] )
     item$parmindex <- seq(1,PP)
     if ( nogroup){
@@ -166,7 +163,7 @@ rasch.evm.pcm <- function( dat, jackunits=20, weights=NULL,
         }
     }
 
-    #**** perform differential item functioning
+    #*** assess differential item functioning
     difstats <- NULL
     if ( ! nogroup ){
         difstats <- rasch_evm_pcm_dif( b_evm=b_evm, item=item,
@@ -195,10 +192,11 @@ rasch.evm.pcm <- function( dat, jackunits=20, weights=NULL,
         rownames(PARS_vcov) <- colnames(PARS_vcov) <- names(coeff)
     }
     #************************* output *******************************
+    s2 <- Sys.time()
     res <- list( item=item, b=b, person=person, B=B, D=D, coef=coeff, vcov=PARS_vcov,
                 JJ=JJ, JJadj=JJadj, powB=powB, maxK=maxK, G=G, desc=desc,
                 difstats=difstats, b_evm=b_evm, I=I, group.unique=group.unique,
-                dat=dat0, CALL=CALL)
+                dat=dat0, CALL=CALL, s1=s1, s2=s2)
     class(res) <- 'rasch.evm.pcm'
     return(res)
 }

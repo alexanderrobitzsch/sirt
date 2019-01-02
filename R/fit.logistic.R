@@ -1,5 +1,5 @@
 ## File Name: fit.logistic.R
-## File Version: 2.11
+## File Version: 2.13
 
 
 ###################################################

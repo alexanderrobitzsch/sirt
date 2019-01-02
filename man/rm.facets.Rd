@@ -1,5 +1,5 @@
 %% File Name: rm.facets.Rd
-%% File Version: 0.821
+%% File Version: 0.823
 
 \name{rm.facets}
 \alias{rm.facets}
@@ -397,6 +397,6 @@ summary(mod7)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Rater model}
-\keyword{Facets model}
-\keyword{summary}
+%% \keyword{Rater model}
+%% \keyword{Facets model}
+%% \keyword{summary}

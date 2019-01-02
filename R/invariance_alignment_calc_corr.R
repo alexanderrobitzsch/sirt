@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_calc_corr.R
-## File Version: 0.01
+## File Version: 0.03
 
 
 # auxiliary function for calculation of correlations

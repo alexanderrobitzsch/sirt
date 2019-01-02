@@ -1,5 +1,5 @@
 ## File Name: rasch.copula2.R
-## File Version: 6.26
+## File Version: 6.292
 
 
 
@@ -29,6 +29,7 @@ rasch.copula2 <- function( dat, itemcluster,
     ###############################################################
 # vv0 <- Sys.time()
     s1 <- Sys.time()
+    CALL <- match.call()
     group <- NULL
     # arrange item clusters item clusters
     t1 <- table(itemcluster)
@@ -722,7 +723,7 @@ rasch.copula2 <- function( dat, itemcluster,
     # print item summary
     if (progress){
         cat("Parameter summary\n")
-        .pr( item, digits=3 )        # print item statistics
+        sirt_print_helper( item, digits=3 )        # print item statistics
                     }
     # dependency parameter
     if (progress){
@@ -735,7 +736,7 @@ rasch.copula2 <- function( dat, itemcluster,
                 } )
         s2 <- Sys.time()
     if (progress){
-        .pr(summary.delta, digits=3)
+        sirt_print_helper(summary.delta, digits=3)
         cat(paste("\nEAP Reliability:", round( EAP.Rel,3)),"\n\n")
         cat("Generalized logistic link function\n")
         cat("alpha1=",round(alpha1,3)," alpha2=", round(alpha2,3), " \n\n")
@@ -772,7 +773,7 @@ rasch.copula2 <- function( dat, itemcluster,
                     "copula.type"=copula.type    , "summary.delta"=summary.delta,
                     "f.qk.yi"=(res.posterior$post)[ patternindex,],
                     "f.yi.qk"=(res.posterior$post.unnorm)[ patternindex,],
-                    "s2"=s2, "s1"=s1
+                    "s2"=s2, "s1"=s1, CALL=CALL
                                 )
     class(res) <- "rasch.copula2"
     return(res)

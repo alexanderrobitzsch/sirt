@@ -1,5 +1,5 @@
 %% File Name: wle.rasch.Rd
-%% File Version: 1.16
+%% File Version: 1.18
 
 \name{wle.rasch}
 \alias{wle.rasch}
@@ -111,6 +111,6 @@ mod.wle <- sirt::wle.rasch( dat=data.read, b=mod$item$b )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Weighted likelihood estimation (WLE)}
-\keyword{Person parameter estimation}
+%% \keyword{Weighted likelihood estimation (WLE)}
+%% \keyword{Person parameter estimation}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

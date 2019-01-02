@@ -1,5 +1,5 @@
 %% File Name: latent.regression.em.raschtype.Rd
-%% File Version: 1.44
+%% File Version: 1.46
 
 \name{latent.regression.em.raschtype}
 \alias{latent.regression.em.raschtype}
@@ -349,7 +349,7 @@ summary(mod4)
   ##   F-statistic: 362.4 on 2 and 3997 DF,  p-value: < 2.2e-16
 }
 }
-\keyword{Latent regression model}
-\keyword{Generalized logistic item response model}
-\keyword{Plausible values}
-\keyword{summary}
+%% \keyword{Latent regression model}
+%% \keyword{Generalized logistic item response model}
+%% \keyword{Plausible values}
+%% \keyword{summary}

@@ -1,5 +1,5 @@
 ## File Name: lc.2raters.aux.R
-## File Version: 0.08
+## File Version: 0.10
 
 #########################################
 # data preparation exchanegable raters

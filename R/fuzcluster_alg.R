@@ -1,5 +1,5 @@
 ## File Name: fuzcluster_alg.R
-## File Version: 0.22
+## File Version: 0.24
 
 fuzcluster_estimate <- function(K, dat_m, dat_s, dat_resp,
     maxiter=1000, parmconv=.0001, progress=TRUE, seed=NULL,    fac.oldxsi=0)

@@ -1,5 +1,5 @@
 %% File Name: equating.rasch.Rd
-%% File Version: 1.33
+%% File Version: 1.35
 
 \name{equating.rasch}
 \alias{equating.rasch}
@@ -137,5 +137,5 @@ pars.out <- plink::link.pars(out)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Equating}
-\keyword{Linking}
+%% \keyword{Equating}
+%% \keyword{Linking}

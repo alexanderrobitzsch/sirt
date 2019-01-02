@@ -1,5 +1,5 @@
 %% File Name: equating.rasch.jackknife.Rd
-%% File Version: 0.22
+%% File Version: 0.24
 
 \name{equating.rasch.jackknife}
 \alias{equating.rasch.jackknife}
@@ -90,5 +90,5 @@ res2$descriptives
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Equating}
-\keyword{Linking}% __ONLY ONE__ keyword per line
+%% \keyword{Equating}
+%% \keyword{Linking}% __ONLY ONE__ keyword per line

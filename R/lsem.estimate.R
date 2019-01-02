@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 0.892
+## File Version: 0.894
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,

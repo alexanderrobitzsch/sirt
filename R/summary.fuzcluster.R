@@ -1,5 +1,5 @@
 ## File Name: summary.fuzcluster.R
-## File Version: 0.11
+## File Version: 0.13
 #*******************************************************
 summary.fuzcluster <- function( object,... ){
     # object      ... object from rasch.mml                #

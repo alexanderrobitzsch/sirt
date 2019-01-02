@@ -1,5 +1,5 @@
 %% File Name: mcmc.list.descriptives.Rd
-%% File Version: 0.25
+%% File Version: 0.27
 
 \name{mcmc.list.descriptives}
 \alias{mcmc.list.descriptives}

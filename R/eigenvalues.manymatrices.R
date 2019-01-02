@@ -1,5 +1,5 @@
 ## File Name: eigenvalues.manymatrices.R
-## File Version: 0.08
+## File Version: 0.10
 
 ###################################################################
 # computation of eigenvalues of many matrices

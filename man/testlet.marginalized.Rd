@@ -1,5 +1,5 @@
 %% File Name: testlet.marginalized.Rd
-%% File Version: 0.22
+%% File Version: 0.24
 
 \name{testlet.marginalized}
 \alias{testlet.marginalized}
@@ -146,5 +146,5 @@ res2
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Testlet model}
-\keyword{Bifactor model}% __ONLY ONE__ keyword per line
+%% \keyword{Testlet model}
+%% \keyword{Bifactor model}% __ONLY ONE__ keyword per line

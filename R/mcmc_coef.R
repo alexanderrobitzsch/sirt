@@ -1,5 +1,5 @@
 ## File Name: mcmc_coef.R
-## File Version: 0.07
+## File Version: 0.09
 
 ###########################################
 # coefficients from one MCMC chain

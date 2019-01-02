@@ -1,5 +1,5 @@
 %% File Name: lc.2raters.Rd
-%% File Version: 0.21
+%% File Version: 0.23
 
 \name{lc.2raters}
 \alias{lc.2raters}
@@ -150,6 +150,6 @@ summary(mod3)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{summary}
-\keyword{Rater model}
-\keyword{Latent class model}
+%% \keyword{summary}
+%% \keyword{Rater model}
+%% \keyword{Latent class model}

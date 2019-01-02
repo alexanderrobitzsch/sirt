@@ -1,5 +1,5 @@
 %% File Name: data.ess2005.Rd
-%% File Version: 0.08
+%% File Version: 0.10
 
 \name{data.ess2005}
 \alias{data.ess2005}
@@ -55,4 +55,4 @@ Multiple-group factor analysis alignment.
 %}
 
 
-\keyword{datasets}
+%% \keyword{datasets}

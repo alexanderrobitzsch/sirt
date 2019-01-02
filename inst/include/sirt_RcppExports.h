@@ -150,6 +150,90 @@ namespace sirt {
         return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
     }
 
+    inline double sirt_rcpp_linking_haebara_fct_optim_one_item(Rcpp::NumericVector theta, Rcpp::NumericVector prob_theta, Rcpp::NumericMatrix aM, Rcpp::NumericMatrix bM, Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu, Rcpp::NumericVector sigma, int ii, int ss, Rcpp::CharacterVector dist, double eps) {
+        typedef SEXP(*Ptr_sirt_rcpp_linking_haebara_fct_optim_one_item)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_linking_haebara_fct_optim_one_item p_sirt_rcpp_linking_haebara_fct_optim_one_item = NULL;
+        if (p_sirt_rcpp_linking_haebara_fct_optim_one_item == NULL) {
+            validateSignature("double(*sirt_rcpp_linking_haebara_fct_optim_one_item)(Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericMatrix,Rcpp::NumericMatrix,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector,int,int,Rcpp::CharacterVector,double)");
+            p_sirt_rcpp_linking_haebara_fct_optim_one_item = (Ptr_sirt_rcpp_linking_haebara_fct_optim_one_item)R_GetCCallable("sirt", "_sirt_sirt_rcpp_linking_haebara_fct_optim_one_item");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_linking_haebara_fct_optim_one_item(Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(prob_theta)), Shield<SEXP>(Rcpp::wrap(aM)), Shield<SEXP>(Rcpp::wrap(bM)), Shield<SEXP>(Rcpp::wrap(a)), Shield<SEXP>(Rcpp::wrap(b)), Shield<SEXP>(Rcpp::wrap(mu)), Shield<SEXP>(Rcpp::wrap(sigma)), Shield<SEXP>(Rcpp::wrap(ii)), Shield<SEXP>(Rcpp::wrap(ss)), Shield<SEXP>(Rcpp::wrap(dist)), Shield<SEXP>(Rcpp::wrap(eps)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
+    inline double sirt_rcpp_linking_haebara_fct_optim(int NI, int NS, Rcpp::CharacterVector dist, Rcpp::NumericMatrix aM, Rcpp::NumericMatrix bM, Rcpp::NumericVector theta, Rcpp::NumericVector prob_theta, Rcpp::LogicalMatrix est_pars, Rcpp::NumericMatrix wgtM, Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu, Rcpp::NumericVector sigma, double eps) {
+        typedef SEXP(*Ptr_sirt_rcpp_linking_haebara_fct_optim)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_linking_haebara_fct_optim p_sirt_rcpp_linking_haebara_fct_optim = NULL;
+        if (p_sirt_rcpp_linking_haebara_fct_optim == NULL) {
+            validateSignature("double(*sirt_rcpp_linking_haebara_fct_optim)(int,int,Rcpp::CharacterVector,Rcpp::NumericMatrix,Rcpp::NumericMatrix,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::LogicalMatrix,Rcpp::NumericMatrix,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector,double)");
+            p_sirt_rcpp_linking_haebara_fct_optim = (Ptr_sirt_rcpp_linking_haebara_fct_optim)R_GetCCallable("sirt", "_sirt_sirt_rcpp_linking_haebara_fct_optim");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_linking_haebara_fct_optim(Shield<SEXP>(Rcpp::wrap(NI)), Shield<SEXP>(Rcpp::wrap(NS)), Shield<SEXP>(Rcpp::wrap(dist)), Shield<SEXP>(Rcpp::wrap(aM)), Shield<SEXP>(Rcpp::wrap(bM)), Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(prob_theta)), Shield<SEXP>(Rcpp::wrap(est_pars)), Shield<SEXP>(Rcpp::wrap(wgtM)), Shield<SEXP>(Rcpp::wrap(a)), Shield<SEXP>(Rcpp::wrap(b)), Shield<SEXP>(Rcpp::wrap(mu)), Shield<SEXP>(Rcpp::wrap(sigma)), Shield<SEXP>(Rcpp::wrap(eps)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
+    inline Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim_one_item(Rcpp::NumericVector theta, Rcpp::NumericVector prob_theta, Rcpp::NumericMatrix aM, Rcpp::NumericMatrix bM, Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu, Rcpp::NumericVector sigma, int ii, int ss, Rcpp::CharacterVector dist, double eps, int NI, int NS, Rcpp::IntegerVector index_a, Rcpp::IntegerVector index_b, Rcpp::IntegerVector index_mu, Rcpp::IntegerVector index_sigma, Rcpp::NumericMatrix wgtM, Rcpp::NumericVector grad0) {
+        typedef SEXP(*Ptr_sirt_rcpp_linking_haebara_grad_optim_one_item)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_linking_haebara_grad_optim_one_item p_sirt_rcpp_linking_haebara_grad_optim_one_item = NULL;
+        if (p_sirt_rcpp_linking_haebara_grad_optim_one_item == NULL) {
+            validateSignature("Rcpp::NumericVector(*sirt_rcpp_linking_haebara_grad_optim_one_item)(Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericMatrix,Rcpp::NumericMatrix,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector,int,int,Rcpp::CharacterVector,double,int,int,Rcpp::IntegerVector,Rcpp::IntegerVector,Rcpp::IntegerVector,Rcpp::IntegerVector,Rcpp::NumericMatrix,Rcpp::NumericVector)");
+            p_sirt_rcpp_linking_haebara_grad_optim_one_item = (Ptr_sirt_rcpp_linking_haebara_grad_optim_one_item)R_GetCCallable("sirt", "_sirt_sirt_rcpp_linking_haebara_grad_optim_one_item");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_linking_haebara_grad_optim_one_item(Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(prob_theta)), Shield<SEXP>(Rcpp::wrap(aM)), Shield<SEXP>(Rcpp::wrap(bM)), Shield<SEXP>(Rcpp::wrap(a)), Shield<SEXP>(Rcpp::wrap(b)), Shield<SEXP>(Rcpp::wrap(mu)), Shield<SEXP>(Rcpp::wrap(sigma)), Shield<SEXP>(Rcpp::wrap(ii)), Shield<SEXP>(Rcpp::wrap(ss)), Shield<SEXP>(Rcpp::wrap(dist)), Shield<SEXP>(Rcpp::wrap(eps)), Shield<SEXP>(Rcpp::wrap(NI)), Shield<SEXP>(Rcpp::wrap(NS)), Shield<SEXP>(Rcpp::wrap(index_a)), Shield<SEXP>(Rcpp::wrap(index_b)), Shield<SEXP>(Rcpp::wrap(index_mu)), Shield<SEXP>(Rcpp::wrap(index_sigma)), Shield<SEXP>(Rcpp::wrap(wgtM)), Shield<SEXP>(Rcpp::wrap(grad0)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
+    }
+
+    inline Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim(int NI, int NS, Rcpp::CharacterVector dist, Rcpp::NumericMatrix aM, Rcpp::NumericMatrix bM, Rcpp::NumericVector theta, Rcpp::NumericVector prob_theta, Rcpp::LogicalMatrix est_pars, Rcpp::NumericMatrix wgtM, Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu, Rcpp::NumericVector sigma, double eps, Rcpp::IntegerVector index_a, Rcpp::IntegerVector index_b, Rcpp::IntegerVector index_mu, Rcpp::IntegerVector index_sigma, Rcpp::CharacterVector parnames, int NP) {
+        typedef SEXP(*Ptr_sirt_rcpp_linking_haebara_grad_optim)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_linking_haebara_grad_optim p_sirt_rcpp_linking_haebara_grad_optim = NULL;
+        if (p_sirt_rcpp_linking_haebara_grad_optim == NULL) {
+            validateSignature("Rcpp::NumericVector(*sirt_rcpp_linking_haebara_grad_optim)(int,int,Rcpp::CharacterVector,Rcpp::NumericMatrix,Rcpp::NumericMatrix,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::LogicalMatrix,Rcpp::NumericMatrix,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector,double,Rcpp::IntegerVector,Rcpp::IntegerVector,Rcpp::IntegerVector,Rcpp::IntegerVector,Rcpp::CharacterVector,int)");
+            p_sirt_rcpp_linking_haebara_grad_optim = (Ptr_sirt_rcpp_linking_haebara_grad_optim)R_GetCCallable("sirt", "_sirt_sirt_rcpp_linking_haebara_grad_optim");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_linking_haebara_grad_optim(Shield<SEXP>(Rcpp::wrap(NI)), Shield<SEXP>(Rcpp::wrap(NS)), Shield<SEXP>(Rcpp::wrap(dist)), Shield<SEXP>(Rcpp::wrap(aM)), Shield<SEXP>(Rcpp::wrap(bM)), Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(prob_theta)), Shield<SEXP>(Rcpp::wrap(est_pars)), Shield<SEXP>(Rcpp::wrap(wgtM)), Shield<SEXP>(Rcpp::wrap(a)), Shield<SEXP>(Rcpp::wrap(b)), Shield<SEXP>(Rcpp::wrap(mu)), Shield<SEXP>(Rcpp::wrap(sigma)), Shield<SEXP>(Rcpp::wrap(eps)), Shield<SEXP>(Rcpp::wrap(index_a)), Shield<SEXP>(Rcpp::wrap(index_b)), Shield<SEXP>(Rcpp::wrap(index_mu)), Shield<SEXP>(Rcpp::wrap(index_sigma)), Shield<SEXP>(Rcpp::wrap(parnames)), Shield<SEXP>(Rcpp::wrap(NP)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
+    }
+
 }
 
 #endif // RCPP_sirt_RCPPEXPORTS_H_GEN_

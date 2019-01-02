@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.Rd
-%% File Version: 1.43
+%% File Version: 1.45
 
 \name{rasch.jml}
 \alias{rasch.jml}
@@ -222,6 +222,6 @@ summary(mod6)
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 %\keyword{Rasch model}
-\keyword{Joint maximum likelihood (JML)}
-\keyword{summary}
+%% \keyword{Joint maximum likelihood (JML)}
+%% \keyword{summary}
 % __ONLY ONE__ keyword per line

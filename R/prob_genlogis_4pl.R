@@ -1,5 +1,6 @@
 ## File Name: prob_genlogis_4pl.R
-## File Version: 0.02
+## File Version: 0.05
+
 
 prob_genlogis_4pl <- function(theta, b, a, c, d, alpha1, alpha2, Qmatrix)
 {
@@ -9,6 +10,6 @@ prob_genlogis_4pl <- function(theta, b, a, c, d, alpha1, alpha2, Qmatrix)
     cM <- sirt_matrix2( x=c, nrow=np )
     dM <- sirt_matrix2( x=d, nrow=np )
     pjk <- cM + (dM - cM) * pjk
-    #--- OUTPUT
+    #--- output
     return(pjk)
 }

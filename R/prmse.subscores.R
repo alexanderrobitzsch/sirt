@@ -1,5 +1,5 @@
 ## File Name: prmse.subscores.R
-## File Version: 0.12
+## File Version: 0.14
 
 #--------------------------------------------------------------------------
 # calculation of PRMSE for Subscores according to Haberman (2007)

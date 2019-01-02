@@ -1,5 +1,5 @@
 %% File Name: truescore.irt.Rd
-%% File Version: 0.21
+%% File Version: 0.23
 
 \name{truescore.irt}
 \alias{truescore.irt}
@@ -178,5 +178,5 @@ dfr <- sirt::truescore.irt( A=A, B=B, theta=theta, error=error )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{True scores}
+%% \keyword{True scores}
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

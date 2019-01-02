@@ -1,5 +1,5 @@
 ## File Name: rm_numdiff_discrete_differences.R
-## File Version: 0.06
+## File Version: 0.08
 
 rm_numdiff_discrete_differences <- function(ll0, ll1, ll2, h)
 {

@@ -1,5 +1,5 @@
 %% File Name: data.mixed1.Rd
-%% File Version: 0.10
+%% File Version: 0.12
 
 \name{data.mixed1}
 \alias{data.mixed1}
@@ -48,4 +48,4 @@ apply( data.mixed1, 2, max )
   ##   I33 I34 I35 I36 I37
   ##     1   1   1   1   1
 }
-\keyword{datasets}
+%% \keyword{datasets}

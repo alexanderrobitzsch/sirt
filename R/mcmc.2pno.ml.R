@@ -1,5 +1,5 @@
 ## File Name: mcmc.2pno.ml.R
-## File Version: 3.18
+## File Version: 3.20
 ##############################################
 # MCMC estimation 2PNO model
 mcmc.2pno.ml <- function(dat, group,

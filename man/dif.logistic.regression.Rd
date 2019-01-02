@@ -1,5 +1,5 @@
 %% File Name: dif.logistic.regression.Rd
-%% File Version: 0.34
+%% File Version: 0.36
 
 \name{dif.logistic.regression}
 \alias{dif.logistic.regression}
@@ -246,5 +246,5 @@ colMeans( abs( dfr[,-1] - bdif ))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Differential item functioning (DIF)}
+%% \keyword{Differential item functioning (DIF)}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

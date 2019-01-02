@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_mstep_rater_function_value.R
-## File Version: 0.07
+## File Version: 0.09
 
 
 rm_sdt_mstep_rater_function_value <- function(x, par_index, partable_rater, I, K,

@@ -1,5 +1,5 @@
 %% File Name: data.eid.Rd
-%% File Version: 0.28
+%% File Version: 0.30
 
 \name{data.eid}
 \alias{data.eid}
@@ -469,4 +469,4 @@ plot(mod2e)
 }
 
 
-\keyword{datasets}
+%% \keyword{datasets}

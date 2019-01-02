@@ -1,54 +1,40 @@
 ## File Name: linking.haberman.R
-## File Version: 2.53
+## File Version: 2.617
 
 
-#**** Linking Haberman ETS Research Report
-linking.haberman <- function( itempars, personpars=NULL,
-        a_trim=Inf, b_trim=Inf, a_log=TRUE, conv=.00001, maxiter=1000, progress=TRUE )
+#**** Linking Haberman: ETS Research Report 2009
+linking.haberman <- function( itempars, personpars=NULL, a_trim=Inf, b_trim=Inf,
+        a_log=TRUE, conv=.00001, maxiter=1000, progress=TRUE, adjust_main_effects=TRUE)
 {
-
     CALL <- match.call()
     s1 <- Sys.time()
 
-    #****
-    # convert itempars to data frame
-    itempars <- as.data.frame( itempars )
-    # include wgt if there does not exist a fifth columm
-    if ( ncol(itempars)==4){
-        itempars$wgt <- 1
-    }
-    # extract studies
-    studies <- sort( paste( unique( itempars[,1] ) ) )
-    NS <- length(studies)
-    # extract items
-    items <- sort( paste( unique( itempars[,2] ) ) )
-    NI <- length(items)
-    # define a and b matrices
-    wgtM <- bM <- aM <- matrix(NA, nrow=NI, ncol=NS)
-    rownames(wgtM) <- rownames(bM) <- rownames(aM) <- items
-    colnames(wgtM) <- colnames(bM) <- colnames(aM) <- studies
-    # define item parameters
-    for (ss in studies){
-        # ss <- studies[1]
-        itempars.ss <- itempars[ itempars[,1]==ss, ]
-        aM[ paste(itempars.ss[,2]), ss ] <- itempars.ss[,3]
-        bM[ paste(itempars.ss[,2]), ss ] <- itempars.ss[,4]
-        wgtM[ paste(itempars.ss[,2]), ss ] <- itempars.ss[,5]
-    }
+    #--- process item parameters
+    res <- linking_proc_itempars(itempars=itempars)
+    itempars <- res$itempars
+    NS <- res$NS
+    NI <- res$NI
+    items <- res$items
+    studies <- res$studies
+    wgtM <- res$wgtM
+    aM <- res$aM
+    bM <- res$bM
+    est_pars <- res$est_pars
+    weights_exist <- res$weights_exist
+
     a.orig <- aM
     b.orig <- bM
-    wgtM <- wgtM / matrix( rowSums( wgtM, na.rm=TRUE ), nrow=NI, ncol=NS )
-    #*****
-    # estimation of A
+
+    #**** estimation of A
     if (a_log){
         logaM <- log(aM)
     } else {
         logaM <- aM
     }
     est_type <- "A (slopes)"
-    resA <- linking_haberman_als(logaM=logaM, wgtM=wgtM, maxiter=maxiter,
-                 conv=conv, progress=progress, est.type=est_type,
-                 cutoff=a_trim, reference_value=1 - a_log )
+    resA <- linking_haberman_als(logaM=logaM, wgtM=wgtM, maxiter=maxiter, conv=conv,
+                    progress=progress, est.type=est_type, cutoff=a_trim,
+                    reference_value=1-a_log, adjust_main_effects=adjust_main_effects )
     if (a_log){
         aj <- exp(resA$logaj)
         At <- exp(resA$logaAt)
@@ -70,13 +56,13 @@ linking.haberman <- function( itempars, personpars=NULL,
     aj_vcov <- res$vcov
     aj_se <- c( NA, res$se )
 
-    #******
-    # estimation of B
+    #**** estimation of B
     est_type <- "B (intercepts)"
-    bMadj <- bM * matrix( At, nrow=NI, ncol=NS, byrow=TRUE )
+    At_m <- sirt_matrix2( At, nrow=NI)
+    bMadj <- bM * At_m
     resB <- linking_haberman_als(logaM=bMadj, wgtM=wgtM, maxiter=maxiter,
-                 conv=conv, progress=progress, est.type=est_type,
-                 cutoff=b_trim )
+                    conv=conv, progress=progress, est.type=est_type,
+                    cutoff=b_trim, reference_value=0, adjust_main_effects=adjust_main_effects )
     Bj <- resB$logaj
     Bt <- resB$logaAt
     Bj_resid <- resB$loga_resid
@@ -88,28 +74,24 @@ linking.haberman <- function( itempars, personpars=NULL,
 
     #*****
     # transformations
-    transf.pars <- data.frame( "study"=studies, "At"=At,
-            "se_At"=aj_se, "Bt"=Bt, "se_Bt"=Bj_se )
+    transf.pars <- data.frame( study=studies, At=At, se_At=aj_se, Bt=Bt, se_Bt=Bj_se )
     rownames(transf.pars) <- NULL
-    transf.itempars <- data.frame( "study"=studies, "At"=1/At,
-            "se_At"=NA, "At2"=At, "se_At2"=transf.pars$se_At,
-            "Bt"=Bt, "se_Bt"=transf.pars$se_Bt )
+    transf.itempars <- data.frame( study=studies, At=1/At, se_At=NA, At2=At,
+            se_At2=transf.pars$se_At, Bt=Bt, se_Bt=transf.pars$se_Bt )
     rownames(transf.itempars) <- NULL
 
     #*** transformation 1/At
 
     # H1 <- diag( - 1 / At^2  )[-1,-1]
-    H1 <- diag2( - 1 / ( At[-1] ) ^2 )
+    H1 <- diag2( - 1 / ( At[-1] )^2 )
 
     res <- linking_haberman_vcov_transformation( H1=H1, aj_vcov=aj_vcov )
     transf.itempars$se_At <- c( NA, res$se )
 
-    # This is the transformation for item parameters.
-    #****
-    # transf.personpars <- transf.itempars[,c(1,2,4)]
+    #**** tranbsformation for person parameters
     transf.personpars <- transf.itempars[,c("study","At","se_At2","Bt", "se_Bt")]
     transf.personpars$At <- transf.pars$At
-    transf.personpars$Bt <-  - transf.pars$Bt
+    transf.personpars$Bt <- -transf.pars$Bt
     colnames(transf.personpars) <- c("study", "A_theta",
                 "se_A_theta", "B_theta", "se_B_theta" )
     colnames(transf.itempars) <- c("study", "A_a", "se_A_a",
@@ -117,8 +99,8 @@ linking.haberman <- function( itempars, personpars=NULL,
     # new item parameters
     joint.itempars <- data.frame("item"=items, "aj"=aj, "bj"=Bj )
     # transformations for item parameters
-    AtM <- matrix( At, nrow=NI, ncol=NS, byrow=TRUE )
-    BtM <- matrix( Bt, nrow=NI, ncol=NS, byrow=TRUE )
+    AtM <- sirt_matrix2( At, nrow=NI)
+    BtM <- sirt_matrix2( Bt, nrow=NI)
     aM <- aM / AtM
     bM <- bM * AtM - BtM
     #****
@@ -151,8 +133,7 @@ linking.haberman <- function( itempars, personpars=NULL,
     aj1 <- aj * AtM
     a.res <- a.orig - aj1
 
-    Rsquared.invariance["slopes"] <- 1 -
-        sirt_sum( a.res[ selitems,]^2 ) / sirt_sum( a.orig[ selitems, ]^2 )
+    Rsquared.invariance["slopes"] <- 1 - sirt_sum( a.res[ selitems,]^2 ) / sirt_sum( a.orig[ selitems, ]^2 )
     Rsquared.partial.invariance["slopes"] <- 1 -
         sirt_sum( a.res[ selitems,]^2 * aj_wgtM[selitems,]  ) /
         sirt_sum( a.orig[ selitems, ]^2 * aj_wgtM[selitems, ]  )
@@ -174,8 +155,11 @@ linking.haberman <- function( itempars, personpars=NULL,
     # logical indicating whether item slopes are linked
     linking_slopes <- stats::sd( transf.pars$At ) < 1E-10
 
-    res <- list(
-            transf.pars=transf.pars, transf.itempars=transf.itempars,
+    s2 <- Sys.time()
+    time <- list(s1=s1, s2=s2)
+
+    #--- output
+    res <- list( transf.pars=transf.pars, transf.itempars=transf.itempars,
             transf.personpars=transf.personpars, joint.itempars=joint.itempars,
             a.trans=aM, b.trans=bM, a.orig=a.orig, b.orig=b.orig,
             a.resid=aj_resid, b.resid=Bj_resid, personpars=personpars,
@@ -185,10 +169,9 @@ linking.haberman <- function( itempars, personpars=NULL,
             a.vcov=aj_vcov, b.vcov=Bj_vcov, a.item_stat=aj_item_stat,
             b.item_stat=Bj_item_stat, linking_slopes=linking_slopes,
             description='Linking according to Haberman (2009)',
-            CALL=CALL, time=s1 )
+            CALL=CALL, time=time )
     class(res) <- "linking.haberman"
     return(res)
 }
-#######################################################################
 
 

@@ -1,5 +1,5 @@
 ## File Name: lsem_weighted_mean.R
-## File Version: 0.07
+## File Version: 0.09
 
 lsem_weighted_mean <- function( x, weights )
 {

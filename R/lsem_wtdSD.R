@@ -1,5 +1,5 @@
 ## File Name: lsem_wtdSD.R
-## File Version: 0.12
+## File Version: 0.14
 
 
 lsem_wtdSD <- function( x, w ){

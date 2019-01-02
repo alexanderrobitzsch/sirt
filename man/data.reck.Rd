@@ -1,5 +1,5 @@
 %% File Name: data.reck.Rd
-%% File Version: 0.26
+%% File Version: 0.28
 
 \name{data.reck}
 
@@ -359,4 +359,4 @@ detect_explB <- sirt::expl.detect(data=dat, score, nclusters=10, N.est=nrow(dat)
   ##   9        10      50  1250  1250 10-6-7-7-3-5-3-5-2-2      0.613    0.512
 }
 }
-\keyword{datasets}
+%% \keyword{datasets}

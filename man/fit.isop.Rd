@@ -1,5 +1,5 @@
 %% File Name: fit.isop.Rd
-%% File Version: 1.18
+%% File Version: 1.20
 
 \name{fit.isop}
 \alias{fit.isop}
@@ -147,5 +147,5 @@ res.adisop$fX
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ISOP model}
-\keyword{ADISOP model}
+%% \keyword{ISOP model}
+%% \keyword{ADISOP model}

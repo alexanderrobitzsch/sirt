@@ -1,5 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.44
+%% File Version: 1.46
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -274,5 +274,5 @@ detect1 <- sirt::conf.detect( data=dat, score=wmod1, itemcluster=itemcluster)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{DETECT}
+%% \keyword{DETECT}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -1,5 +1,5 @@
 ## File Name: sirt_summary_print_objects.R
-## File Version: 0.17
+## File Version: 0.19
 
 sirt_summary_print_objects <- function(obji, from=NULL, to=NULL,
         digits=3, rownames_null=TRUE, grep_string=NULL)

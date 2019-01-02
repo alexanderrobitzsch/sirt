@@ -1,5 +1,5 @@
 %% File Name: likelihood.adjustment.Rd
-%% File Version: 0.11
+%% File Version: 0.13
 
 \name{likelihood.adjustment}
 \alias{likelihood.adjustment}
@@ -151,5 +151,5 @@ summary(lmod1b)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Likelihood adjustment}
+%% \keyword{Likelihood adjustment}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

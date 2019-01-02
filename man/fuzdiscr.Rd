@@ -1,5 +1,5 @@
 %% File Name: fuzdiscr.Rd
-%% File Version: 0.19
+%% File Version: 0.21
 
 \name{fuzdiscr}
 \alias{fuzdiscr}
@@ -188,5 +188,5 @@ colMeans(X)
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Fuzzy data}
-\keyword{Belief function}
+%% \keyword{Fuzzy data}
+%% \keyword{Belief function}

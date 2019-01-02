@@ -1,5 +1,5 @@
 ## File Name: xxirt_EAP.R
-## File Version: 0.08
+## File Version: 0.10
 
 ############################################
 # compute EAP and its standard deviation

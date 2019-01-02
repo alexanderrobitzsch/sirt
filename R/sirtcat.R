@@ -1,5 +1,5 @@
 ## File Name: sirtcat.R
-## File Version: 0.06
+## File Version: 0.08
 
 ######################################################
 sirtcat <- function( label, time0, active ){
