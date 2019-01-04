@@ -1,5 +1,5 @@
 ## File Name: rm_facets_pp_mle.R
-## File Version: 0.183
+## File Version: 0.184
 
 
 #*** person parameter estimation in partial credit model
@@ -13,17 +13,17 @@ rm_facets_pp_mle <- function( data, a, b, theta, WLE=FALSE,
     I <- ncol(data)
     iter <- 1
     conv <- 1E5
-    
-    args <- list(data=data, a=a, b=b, theta=theta)    
+
+    args <- list(data=data, a=a, b=b, theta=theta)
     args_change <- function(args, theta){
         args$theta <- theta
         return(args)
     }
-    
+
     #-------- begin algorithm
     while ( ( conv > convP ) & (  iter <=maxiter ) ){
 
-        theta0 <- theta        
+        theta0 <- theta
         ll0 <- do.call(rm_facets_pp_mle_calc_ll_theta, args_change(args, theta))
         llP1 <- do.call(rm_facets_pp_mle_calc_ll_theta, args_change(args, theta+h))
         llM1 <- do.call(rm_facets_pp_mle_calc_ll_theta, args_change(args, theta-h))
@@ -41,7 +41,7 @@ rm_facets_pp_mle <- function( data, a, b, theta, WLE=FALSE,
         }
 
         maxincr <- maxincr / 1.05
-        incr <- rm_numdiff_trim_increment( increment=incr, max.increment=maxincr, eps2=0 )        
+        incr <- rm_numdiff_trim_increment( increment=incr, max.increment=maxincr, eps2=0 )
         theta <- theta + incr
         theta <- ifelse( abs(theta) > maxval, sign(theta)*maxval, theta )
         conv <- max( abs( theta - theta0) )

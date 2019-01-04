@@ -1,5 +1,5 @@
 ## File Name: sirt_print_helper.R
-## File Version: 2.144
+## File Version: 2.145
 
 
 # This is an auxiliary function which helps for printing some progress
@@ -10,8 +10,8 @@ sirt_print_helper <- function( object, digits)
         options( warn=-1 )
         if ( nrow(object) >=1 ){
             g1a <- apply( object, 2, as.numeric )
-        } else { 
-            g1a <- object 
+        } else {
+            g1a <- object
         }
         g1a <- matrix(g1a, nrow=nrow(object), ncol=ncol(object))
         colnames(g1a) <- colnames(object)
@@ -20,9 +20,9 @@ sirt_print_helper <- function( object, digits)
         options( warn=ow )
         object1 <- object
         object1[, g1 ] <- round( object1[, g1 ], digits )
-        print( object1 )  
-    } else { 
-        print( round( object, digits ) ) 
+        print( object1 )
+    } else {
+        print( round( object, digits ) )
     }
 }
 

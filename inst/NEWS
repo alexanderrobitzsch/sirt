@@ -35,9 +35,19 @@ CHANGELOG sirt
 
 
 
+------------------------------------------------------------------------
+VERSIONS sirt 3.2  |  2019-01-04  |  Last: sirt 3.2-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.1  |  2019-01-02  |  Last: sirt 3.1-77
+VERSIONS sirt 3.1  |  2019-01-04  |  Last: sirt 3.1-80
 ------------------------------------------------------------------------
 
 NOTE  * complete restructure of invariance.alignment() function which now
@@ -59,13 +69,10 @@ NOTE  * included utility functions sirt_sum_norm(), sirt_dnorm_discrete(),
 NOTE  * included a plot method for lsdm()
 NOTE  * removed dependency in rasch.copula2() from gtools::permutations()
 
-
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: invariance.alignment (6),
         linking.haberman (1,5), linking.haebara (1), lsdm (1,5,6),
         sirt-utilities (5,6)
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.0  |  2018-11-22  |  Last: sirt 3.0-32

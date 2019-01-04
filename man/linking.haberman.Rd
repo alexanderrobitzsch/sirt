@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.682
+%% File Version: 0.684
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -150,7 +150,7 @@ Battauz, M. (2017). Multiple equating of separate IRT calibrations.
 \emph{Psychometrika, 82}, 610-636.
 http://dx.doi.org/10.1007/s11336-016-9517-x
 
-Fox, J. (2015). \emph{Applied regression analysis and generalized linear models}. 
+Fox, J. (2015). \emph{Applied regression analysis and generalized linear models}.
 Thousand Oaks: Sage.
 
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
@@ -158,7 +158,10 @@ from an item response model through separate calibrations}.
 ETS Research Report ETS RR-09-40. Princeton, ETS.
 https://doi.org/10.1002/j.2333-8504.2009.tb02197.x
 
-Weeks, J. P. (2010). \pkg{plink}: An \R package for linking mixed-format tests 
+Kolen, M. J., & Brennan, R. L. (2014). \emph{Test equating, scaling, and linking:
+Methods and Practices}. New York: Springer.
+
+Weeks, J. P. (2010). \pkg{plink}: An \R package for linking mixed-format tests
 using IRT-based methods. \code{Journal of Statistical Software, 35}(12), 1-33.
 https://doi.org/10.18637/jss.v035.i12
 }
@@ -177,10 +180,10 @@ https://doi.org/10.18637/jss.v035.i12
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See the \pkg{plink} package (Weeks, 2010) for a wide diversity of linking methods.
+See the \pkg{plink} package (Weeks, 2010) for a diversity of linking methods.
 
-Mean-mean linking, Stocking-Lord and Haebara linking in the generalized
-logistic item response model can be conducted with
+Mean-mean linking, Stocking-Lord and Haebara linking (see Kolen & Brennan, 2014,
+for an overview) in the generalized logistic item response model can be conducted with
 \code{\link{equating.rasch}}. See also \code{\link[TAM:tam.linking]{TAM::tam.linking}}
 in the \pkg{TAM} package.
 

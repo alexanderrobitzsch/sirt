@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.728
+%% File Version: 1.729
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -193,9 +193,9 @@ Braeken, J. (2011). A boundary mixture approach to violations
 of conditional independence. \emph{Psychometrika, 76}, 57-76.
 http://dx.doi.org/10.1007/s11336-010-9190-4
 
-Braeken, J., Kuppens, P., De Boeck, P., & Tuerlinckx, F. (2013). 
-Contextualized personality questionnaires: A case for copulas in structural 
-equation models for categorical data. \emph{Multivariate Behavioral Research, 48}, 
+Braeken, J., Kuppens, P., De Boeck, P., & Tuerlinckx, F. (2013).
+Contextualized personality questionnaires: A case for copulas in structural
+equation models for categorical data. \emph{Multivariate Behavioral Research, 48},
 845-870. http://dx.doi.org/10.1080/00273171.2013.827965
 
 Braeken, J., & Tuerlinckx, F. (2009). Investigating latent constructs with item

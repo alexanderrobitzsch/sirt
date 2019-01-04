@@ -1,5 +1,5 @@
 %% File Name: sirt-utilities.Rd
-%% File Version: 0.395
+%% File Version: 0.396
 
 \name{sirt-utilities}
 \alias{sirt-utilities}
@@ -67,7 +67,7 @@ sirt_colMedians(x, na.rm=TRUE)
 
 #* normalize vector to have sum of one
 sirt_sum_norm(x, na.rm=TRUE)
-#* discrete normal distribution 
+#* discrete normal distribution
 sirt_dnorm_discrete(x, mean=0, sd=1)
 
 # plyr::rbind.fill implementation in sirt
@@ -83,7 +83,7 @@ sirt_abs_smooth(x, deriv=0, eps=1e-4)
 
 # permutations with replacement
 sirt_permutations(r,v)
-  #-> is equivalent to gtools::permutations(n=length(v), r=D, v=v, repeats.allowed=TRUE)  
+  #-> is equivalent to gtools::permutations(n=length(v), r=D, v=v, repeats.allowed=TRUE)
 
 # attach all elements in a list in a specified environment
 sirt_attach_list_elements(x, envir)

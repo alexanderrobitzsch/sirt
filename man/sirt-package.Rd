@@ -1,5 +1,5 @@
 %% File Name: sirt-package.Rd
-%% File Version: 2.62
+%% File Version: 2.67
 
 \name{sirt-package}
 \alias{sirt-package}
@@ -254,6 +254,10 @@ Janssen, R., Tuerlinckx, F., Meulders, M., & de Boeck, P. (2000).
 A hierarchical IRT model for criterion-referenced measurement.
 \emph{Journal of Educational and Behavioral Statistics, 25}, 285-306.
 
+Jeon, M., & Rijmen, F. (2016). A modular approach for item response theory modeling with 
+the \R package \pkg{flirt}. \emph{Behavior Research Methods, 48}(2), 742-755.
+http://dx.doi.org/10.3758/s13428-015-0606-z
+
 Linacre, J. M. (1994). \emph{Many-Facet Rasch Measurement}.
 Chicago: MESA Press.
 
@@ -303,15 +307,13 @@ estimates with the EM algorithm.
 
 Rusch, T., Mair, P., & Hatzinger, R. (2013).
 \emph{Psychometrics with \R: A Review of CRAN Packages for Item Response Theory.}
-\url{http://epub.wu.ac.at/4010/1/resrepIRThandbook.pdf}.
+http://epub.wu.ac.at/4010/1/resrepIRThandbook.pdf
 
 Scheiblechner, H. (1995). Isotonic ordinal
-probabilistic models (ISOP). \emph{Psychometrika,
-60}, 281-304.
+probabilistic models (ISOP). \emph{Psychometrika, 60}, 281-304.
 
 Scheiblechner, H. (1999). Additive conjoint isotonic
-probabilistic models (ADISOP). \emph{Psychometrika,
-64}, 295-316.
+probabilistic models (ADISOP). \emph{Psychometrika, 64}, 295-316.
 
 Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014). A comparison of different
 psychometric approaches to modeling testlet structures: An example with C-tests.
@@ -349,8 +351,7 @@ Zwinderman, A. H. (1995). Pairwise parameter estimation in Rasch models.
 
 \seealso{
 For estimating multidimensional models for polytomous item responses
-see the \pkg{mirt}, \pkg{flirt}
-(\url{http://faculty.psy.ohio-state.edu/jeon/lab/flirt.php}) and \pkg{TAM} packages.
+see the \pkg{mirt}, \pkg{flirt} (Jeon & Rijmen, 2016) and \pkg{TAM} packages.
 
 For conditional maximum likelihood estimation see the \pkg{eRm} package.
 

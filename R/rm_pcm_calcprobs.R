@@ -1,5 +1,5 @@
 ## File Name: rm_pcm_calcprobs.R
-## File Version: 0.12
+## File Version: 0.13
 
 
 
@@ -20,5 +20,5 @@ rm_pcm_calcprobs <- function( a, b, Qmatrix, theta.k, I, K, TP )
     for (kk in 1:(K+1)){
         probs[,kk,] <- probs[,kk,] / probs1
     }
-   return(probs)
+    return(probs)
 }
