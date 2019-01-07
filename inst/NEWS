@@ -36,13 +36,17 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.2  |  2019-01-04  |  Last: sirt 3.2-1
+VERSIONS sirt 3.2  |  2019-01-07  |  Last: sirt 3.2-15
 ------------------------------------------------------------------------
 
-xxx   * ...
+NOTE  * changes in estimation algorithm in noharm.sirt(). Disabled
+        estimation based on tetrachoric correlations and, hence,
+        removed argument 'modesttype'. Included arguments 'optimizer'
+        and 'par_lower'.
+
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: noharm.sirt (1,2.3)
 
 
 

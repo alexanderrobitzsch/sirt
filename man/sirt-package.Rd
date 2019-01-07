@@ -1,5 +1,5 @@
 %% File Name: sirt-package.Rd
-%% File Version: 2.67
+%% File Version: 2.68
 
 \name{sirt-package}
 \alias{sirt-package}
@@ -117,7 +117,7 @@ with \code{\link{mcmc.2pno.ml}}.
 
 %% NOHARM
 \item For dichotomous response data, the free NOHARM software
-(McDonald, 1997) estimates the multidimensional compensatory 3PL model and the function
+(McDonald, 1982, 1997) estimates the multidimensional compensatory 3PL model and the function
 \code{\link{R2noharm}} runs NOHARM from within \R. Note that NOHARM must be
 downloaded from \emph{http://noharm.niagararesearch.ca/nh4cldl.html}
 at first. A pure \R implementation of the NOHARM model with some extensions
@@ -264,6 +264,10 @@ Chicago: MESA Press.
 Loken, E. & Rulison, K. L. (2010). Estimation of a four-parameter
 item response theory model. \emph{British Journal of Mathematical
 and Statistical Psychology, 63}, 509-525.
+
+McDonald, R. P. (1982). Linear versus nonlinear models in item response theory.
+\emph{Applied Psychological Measurement, 6}, 379-396.
+https://doi.org/10.1177/014662168200600402
 
 McDonald, R. P. (1997). Normal-ogive multidimensional model.
 In W. van der Linden & R. K. Hambleton (1997):

@@ -1,10 +1,11 @@
 ## File Name: noharm_sirt_preproc.R
-## File Version: 0.31
+## File Version: 0.385
 
 
 #**** data preprocessing noharm.sirt
 noharm_sirt_preproc <- function( dat, weights, Fpatt, Fval,
-    Ppatt, Pval, Psipatt, Psival, wgtm, dimensions )
+    Ppatt, Pval, Psipatt, Psival, wgtm, dimensions, pos.loading,
+    pos.variance, pos.residcorr )
 {
 
     res <- NULL
@@ -20,7 +21,7 @@ noharm_sirt_preproc <- function( dat, weights, Fpatt, Fval,
     res$weights <- weights
     dat.resp <- 1-is.na(dat)
     dat0 <- dat
-    dat[ dat.resp==0] <- 0
+    dat[dat.resp==0] <- 0
     res$dat <- dat
     res$dat.resp <- dat.resp
     # calculate (weighted) product moment correlation
@@ -88,6 +89,78 @@ noharm_sirt_preproc <- function( dat, weights, Fpatt, Fval,
         colnames(Pval) <- colnames(Fval)
     }
     rownames(Pval) <- colnames(Pval)
+
+    #--- create parameter table
+
+    # F
+    parm_table <- noharm_sirt_preproc_parameter_table_matrix(pattmat=Fpatt, valmat=Fval,
+            patt_id=1, patt_label="F", minval=0, symm=FALSE)
+    # P
+    parm1 <- noharm_sirt_preproc_parameter_table_matrix(pattmat=Ppatt, valmat=Pval,
+            patt_id=2, patt_label="P", minval=max(parm_table$index, na.rm=TRUE), symm=TRUE)
+    parm_table <- rbind(parm_table, parm1)
+    # Psi
+    parm1 <- noharm_sirt_preproc_parameter_table_matrix(pattmat=Psipatt, valmat=Psival,
+            patt_id=3, patt_label="Psi", minval=max(parm_table$index, na.rm=TRUE), symm=TRUE)
+    parm_table <- rbind(parm_table, parm1)
+    parm_table <- parm_table[ parm_table$nonnull_par==1, ]
+    rownames(parm_table) <- NULL
+    npar <- max(parm_table$index, na.rm=TRUE)
+
+    # indices
+    ip <- parm_table$index
+    ip[duplicated(ip)] <- NA
+    extract_index <- match(1:npar, ip)
+    extract_index <- intersect( which( ! is.na( parm_table$index ) ),
+                            which( ! duplicated( parm_table$index ) ) )
+    parm_table$est <- parm_table$starts
+
+    parm_table$lower <- -Inf
+
+    ind <- NULL
+    if (pos.variance){
+        ind1 <- which((parm_table$mat=="P") & (parm_table$row==parm_table$col ))
+        ind <- union(ind, ind1)
+    }
+    if (pos.loading){
+        ind1 <- which((parm_table$mat=="F") )
+        ind <- union(ind, ind1)
+    }
+    if (pos.residcorr){
+        ind1 <- which((parm_table$mat=="Psi") )
+        ind <- union(ind, ind1)
+    }
+    parm_table[ind, "lower"] <- 0
+    parm_table[ is.na(parm_table$index), "lower"] <- NA
+
+    non_fixed <- ! parm_table$fixed
+    include_index <- parm_table$index[ non_fixed ]
+    parm_table$nonnull_par <- NULL
+    attr(parm_table, "extract_index") <- extract_index
+    attr(parm_table, "non_fixed") <- non_fixed
+    attr(parm_table, "include_index") <- include_index
+    attr(parm_table, "npar") <- npar
+    attr(parm_table, "NH") <- sum(non_fixed)
+    attr(parm_table, "est_par_index") <- which(parm_table$est_par==1)
+    attr(parm_table, "parm_table_free_index") <- which(parm_table$fixed==0)
+
+    parm_index <- list()
+    for (mat_label in c("F", "P", "Psi") ){
+        ind_mat <- which(parm_table$mat==mat_label)
+        parm_index[[ mat_label ]][[ "row_parm_table" ]] <- ind_mat
+        parm_index[[ mat_label ]][[ "entries" ]] <- parm_table[ ind_mat, c("row","col")]
+        parm_index[[ mat_label ]][[ "len" ]] <- length(ind_mat)
+        nrow <- I
+        ncol <- D
+        if (mat_label=="P"){ nrow <- D}
+        if (mat_label=="Psi"){ ncol <- I}
+        parm_index[[ mat_label ]][["nrow"]] <- nrow
+        parm_index[[ mat_label ]][["ncol"]] <- ncol
+    }
+
+    res$parm_table <- parm_table
+    res$npar <- npar
+    res$parm_index <- parm_index
 
     #*****
     # matrix conversion

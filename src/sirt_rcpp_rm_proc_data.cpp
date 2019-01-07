@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_rm_proc_data.cpp
-//// File Version: 0.27
+//// File Version: 0.28
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -61,10 +61,10 @@ Rcpp::NumericMatrix sirt_rcpp_rm_proc_expand_dataset(Rcpp::NumericMatrix dat,
     int rater_dd=0;
     int IR = 0;
 
-    for (int dd = 0; dd<ND; dd++){
+    for (int dd=0; dd<ND; dd++){
         rater_dd = rater0[dd];
         IR = I * rater_dd;
-        for (int ii = 0; ii<I; ii++){
+        for (int ii=0; ii<I; ii++){
             dat2( pid0[dd], IR + ii) = dat(dd,ii);
         }
     }

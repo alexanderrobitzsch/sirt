@@ -1,7 +1,8 @@
 ## File Name: summary_round_helper.R
-## File Version: 0.08
+## File Version: 0.09
 
-summary_round_helper <- function( obji, digits, exclude=NULL, print=TRUE){
+summary_round_helper <- function( obji, digits, exclude=NULL, print=TRUE)
+{
     NC <- ncol(obji)
     ind <- 1:NC
     if ( ! is.null(exclude) ){

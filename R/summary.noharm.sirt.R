@@ -1,5 +1,5 @@
 ## File Name: summary.noharm.sirt.R
-## File Version: 1.181
+## File Version: 1.188
 
 
 #--- summary function for noharm.sirt
@@ -22,6 +22,9 @@ summary.noharm.sirt <- function( object, file=NULL, ...)
 
     cat( paste0( "Function '", class(object), "'\n\n" ) )
 
+    #-- elapsed time
+    sirt_summary_print_elapsed_time(object=object)
+
     #--- model type
     if (object$modtype==2){
         cat( "Multidimensional Exploratory Factor Analysis\n")
@@ -31,18 +34,20 @@ summary.noharm.sirt <- function( object, file=NULL, ...)
     }
 
     if (object$modesttype==1){
-        cat( "NOHARM approximation\n\n")
+        cat( "NOHARM approximation\n")
     }
-    if (object$modesttype==2){
-        cat( "Estimation based on tetrachoric correlations\n\n")
-    }
+    # if (object$modesttype==2){
+    #     cat( "Estimation based on tetrachoric correlations\n\n")
+    # }
+
+    sirt_optimizer_summary_print(res=object$res_opt)
 
     #*********************
     # descriptives
     cat( paste( "Number of Observations: ", object$Nobs, sep=""), "\n" )
     cat( paste( "Number of Items       : ", object$Nitems, sep=""), "\n" )
     cat( paste( "Number of Dimensions  : ", object$dimensions, sep=""), "\n" )
-    cat( paste( "Number of Iterations  : ", object$iter, sep=""), "\n" )
+    # cat( paste( "Number of Iterations  : ", object$iter, sep=""), "\n" )
     if (object$modesttype==1){
         cat( paste( "Tanaka Index          : ", round(object$tanaka,object$display.fit), sep=""), "\n" )
         cat( paste( "RMSR                  : ", round(object$rmsr,object$display.fit), sep=""), "\n\n" )
@@ -83,7 +88,7 @@ summary.noharm.sirt <- function( object, file=NULL, ...)
         cat("\nItem Parameters - Latent Trait Model (THETA) Parametrization\n",
                 "Loadings, Constants, Asymptotes and Descriptives\n\n")
         m1 <- l1 %*% as.matrix(object$factor.cor) %*% t( l1 )
-        v1 <- 1 + diag( m1 )
+        v1 <- 1 + diag(m1)
         l1 <- data.frame( l1, final.constant=object$final.constants,
                     lower=object$lower, upper=object$upper,
                     item.variance=round(v1, 3), N=diag(object$N.itempair),
@@ -117,7 +122,7 @@ summary.noharm.sirt <- function( object, file=NULL, ...)
                     N=diag(object$N.itempair), p=diag(object$pm) )
         l1 <- round(l1,3)
         print(l1)
-        res <- list( "itempars.promax.theta"=l1 )
+        res <- list( itempars.promax.theta=l1 )
         #****
         cat("\nItem Parameters - Promax Rotated Parameters (DELTA)\n",
                 "Loadings, Constants, Asymptotes and Descriptives\n\n")
@@ -128,6 +133,13 @@ summary.noharm.sirt <- function( object, file=NULL, ...)
         l1 <- round(l1,3)
         print(l1)
     }
+
+    cat("\n--- Parameter table ---\n\n")
+    obji <- object$parm_table
+    elim <- c("matid", "starts", "est_par")
+    obji <- obji[, ! ( colnames(obji) %in% elim ) ]
+    digits <- 3
+    sirt_summary_print_objects(obji=obji, digits=digits, from=2, rownames_null=TRUE)
 
     # close sink
     sirt_csink( file=file )

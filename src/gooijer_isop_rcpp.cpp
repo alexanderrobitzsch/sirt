@@ -1,5 +1,5 @@
 //// File Name: gooijer_isop_rcpp.cpp
-//// File Version: 5.33
+//// File Version: 5.34
 
 
 // [[Rcpp::depends(RcppArmadillo)]]

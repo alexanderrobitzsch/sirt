@@ -1,5 +1,5 @@
 %% File Name: R2noharm.Rd
-%% File Version: 2.33
+%% File Version: 2.355
 
 \name{R2noharm}
 \alias{R2noharm}
@@ -13,7 +13,7 @@ This function enables the estimation of a NOHARM analysis
 (Fraser & McDonald, 1988; McDonald, 1982a, 1982b, 1997) from within \R.
 NOHARM estimates a compensatory multidimensional factor analysis for dichotomous
 response data. Arguments of this function strictly follow
-the rules of the NOHARM manual (see Fraser & McDonald, 2012).
+the rules of the NOHARM manual (see Fraser & McDonald, 2012; Lee & Lee, 2016).
 }
 
 
@@ -111,7 +111,10 @@ For the definition of \eqn{F} and \eqn{P} matrices, please
 consult the NOHARM manual.
 
 This function needs the 64-bit command line version which can be downloaded
-at \emph{http://noharm.niagararesearch.ca/nh4cldl.html}.
+from (some links may be broken in the meantime) \cr \cr
+http://noharm.niagararesearch.ca/nh4cldl.html \cr
+https://noharm.software.informer.com/4.0/   \cr
+https://cehs.unl.edu/edpsych/software-urls-and-other-interesting-sites/ \cr
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -161,12 +164,19 @@ A list with following entries
 \references{
 Fraser, C., & McDonald, R. P. (1988). NOHARM: Least squares item factor analysis.
 \emph{Multivariate Behavioral Research, 23}, 267-269.
+https://doi.org/10.1207/s15327906mbr2302_9
 
-Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}.
-http://noharm.niagararesearch.ca/nh4man/nhman.html.
+Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}. \cr
+{http://noharm.niagararesearch.ca/nh4man/nhman.html}.
 
-McDonald, R. P. (1982a). Linear versus models in item response theory.
+Lee, J. J., & Lee, M. K. (2016). An overview of the normal ogive harmonic analysis 
+robust method (NOHARM) approach to item response theory.
+\emph{Tutorials in Quantitative Methods for Psychology, 12}(1), 1-8.
+https://doi.org/10.20982/tqmp.12.1.p001
+
+McDonald, R. P. (1982a). Linear versus nonlinear models in item response theory.
 \emph{Applied Psychological Measurement, 6}, 379-396.
+https://doi.org/10.1177/014662168200600402
 
 McDonald, R. P. (1982b). \emph{Unidimensional and multidimensional models for
 item response theory}. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings.
@@ -174,7 +184,7 @@ item response theory}. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings
 McDonald, R. P. (1997). Normal-ogive multidimensional model.
 In W. van der Linden & R. K. Hambleton (1997):
 \emph{Handbook of modern item response theory} (pp. 257-269).
-New York: Springer.
+New York: Springer. http://dx.doi.org/10.1007/978-1-4757-2691-6
 }
 
 

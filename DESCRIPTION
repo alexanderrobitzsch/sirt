@@ -1,8 +1,8 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 3.2-1
-Date: 2019-01-04 17:22:06
+Version: 3.2-15
+Date: 2019-01-07 14:31:01
 Author: Alexander Robitzsch [aut,cre] (<https://orcid.org/0000-0002-8226-3132>)
 Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
 Description: 
@@ -12,7 +12,7 @@ Description:
     (Reckase, 2009, <doi:10.1007/978-0-387-89976-3>), 
     MCMC for hierarchical IRT models and testlet models
     (Fox, 2010, <doi:10.1007/978-1-4419-0742-4>), 
-    NOHARM (Fraser & McDonald, 1982, <doi:10.1207/s15327906mbr2302_9>), 
+    NOHARM (McDonald, 1982, <doi:10.1177/014662168200600402>), 
     Rasch copula model (Braeken, 2011, <doi:10.1007/s11336-010-9190-4>;
     Schroeders, Robitzsch & Schipolowski, 2014, <doi:10.1111/jedm.12054>),
     faceted and hierarchical rater models (DeCarlo, Kim & Johnson, 2011,

@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.863
+## File Version: 0.899
 
 
 ########################################
@@ -17,16 +17,17 @@
 noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
     Pval=NULL, Ppatt=NULL, Psival=NULL, Psipatt=NULL, dimensions=NULL,
     lower=rep(0,ncol(dat)), upper=rep(1,ncol(dat)), wgtm=NULL,
-    modesttype=1, pos.loading=FALSE, pos.variance=FALSE,
-    pos.residcorr=FALSE, maxiter=1000, conv=1e-6,  increment.factor=1.01,
-    reliability=TRUE )
+    pos.loading=FALSE, pos.variance=FALSE,
+    pos.residcorr=FALSE, maxiter=1000, conv=1e-6, optimizer="nlminb",
+    par_lower=NULL, reliability=FALSE, ... )
 {
-    s1 <- Sys.time()
+    v1 <- s1 <- Sys.time()
     CALL <- match.call()
     #*** data preprocessing
     res <- noharm_sirt_preproc( dat=dat, weights=weights, Fpatt=Fpatt, Fval=Fval,
                 Ppatt=Ppatt, Pval=Pval, Psipatt=Psipatt, Psival=Psival, wgtm=wgtm,
-                dimensions=dimensions )
+                dimensions=dimensions, pos.loading=pos.loading,
+                pos.variance=pos.variance, pos.residcorr=pos.residcorr )
     ss <- res$ss
     pm0 <- res$pm0
     sumwgtm <- res$sumwgtm
@@ -49,16 +50,12 @@ noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
     F_dimnames <- res$F_dimnames
     items <- res$items
     wgtm.default <- res$wgtm.default
+    parm_table <- res$parm_table
+    npar <- res$npar
+    parm_index <- res$parm_index
 
-    #    modesttype <- 1        # NOHARM estimation
-    #    modesttype <- 2        # estimation using tetrachoric correlations
-    if (modesttype==2){
-        pm2 <- tetrachoric2( dat, method="Bo")
-        pm <- pm2$rho
-        betaj <- pm2$tau
-        lower <- 0*lower
-        upper <- 1+lower
-    }
+    modesttype <- 1        # NOHARM estimation
+
     #----
     # compute betaj
     if (modesttype==1){
@@ -72,67 +69,50 @@ noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
     b3 <- ( betaj^2 -1 ) * b1 / sqrt(6)
 
     # create fixed cofficients
-    b0.jk <- noharm_sirt_outer_coefs(x=b0)
-    b1.jk <- noharm_sirt_outer_coefs(x=b1)
-    b2.jk <- noharm_sirt_outer_coefs(x=b2)
-    b3.jk <- noharm_sirt_outer_coefs(x=b3)
+    b0_jk <- b0.jk <- noharm_sirt_outer_coefs(x=b0)
+    b1_jk <- b1.jk <- noharm_sirt_outer_coefs(x=b1)
+    b2_jk <- b2.jk <- noharm_sirt_outer_coefs(x=b2)
+    b3_jk <- b3.jk <- noharm_sirt_outer_coefs(x=b3)
 
-    parchange <- 1
-    changeF <- changeP <- changePsi <- 0
-    iter <- 0
-    maxincrement <- .2
-    estPsi <-  sum( Psipatt > 0 ) > 0
-    estF <- sum( Fpatt > 0 ) > 0
-    estP <- sum( Ppatt > 0 ) > 0
-    estpars <- list(estF=estF, estP=estP, estPsi=estPsi)
-    eps <- 2*conv
+    par0 <- noharm_sirt_partable_extract_par(parm_table=parm_table)
+    parm_table_free <- parm_table[ parm_table$fixed==0, ]
 
-    #- list of arguments in optimization routine
-    args <- list( Fval=Fval, Pval=Pval, Fpatt=Fpatt, Ppatt=Ppatt, I=I, D=D,
-                        b0jk=b0.jk, b1jk=b1.jk, b2jk=b2.jk, b3jk=b3.jk, wgtm=wgtm, pm=pm, Psival=Psival,
-                        Psipatt=Psipatt, maxincrement=maxincrement, modtype=modesttype )
+    args_optim <- list(parm_table=parm_table, parm_index=parm_index, I=I, D=D,
+                    b0.jk=b0.jk, b1.jk=b1.jk, b2.jk=b2.jk, b3.jk=b3.jk,
+                    pm=pm, wgtm=wgtm, use_rcpp=TRUE)
 
-    #**** begin algorithm
-    while( ( iter < maxiter ) & ( parchange > conv ) ){
-        maxincrement <- maxincrement  / increment.factor
-        args$maxincrement <- maxincrement
-
-        #---- update F
-        if (estF){
-            res <- do.call(what=sirt_rcpp_noharm_estF, args=args)
-            changeF <- res$change
-            Fval <- res$Fval_
-            # F_der <- res$F_der
-            if ( pos.loading ){
-                Fval[ Fval < 0 ] <- eps
-            }
-            args$Fval <- Fval
-        }
-        #---- update P
-        if (estP){
-            res <- do.call(what=sirt_rcpp_noharm_estP, args=args)
-            changeP <- res$change
-            Pval <- res$Pval_
-            if ( pos.variance ){
-                diag(Pval)[ diag(Pval) < 0 ] <- eps
-            }
-            diag(Pval)[ is.na(diag(Pval)) ] <- eps
-            args$Pval <- Pval
-        }
-        #---- update Psi
-        if (estPsi){
-            res <- do.call(what=sirt_rcpp_noharm_estPsi, args=args)
-            changePsi <- res$change
-            Psival <- res$Psival_
-            if ( pos.residcorr ){
-                Psival[ Psival < 0 ] <- eps
-            }
-            args$Psival <- Psival
-        }
-        parchange <- max( c(changeP, changeF, changePsi) )
-        iter <- iter + 1
+    optim_fn <- function(x){
+        args_optim$x <- x
+        val <- do.call(what=noharm_sirt_optim_function, args=args_optim)
+        return(val)
     }
-    #**** end algorithm
+    optim_gr <- function(x){
+        args_optim$x <- x
+        grad <- do.call(what=noharm_sirt_optim_gradient, args=args_optim)
+        return(grad)
+    }
+
+    v2 <- Sys.time()
+    time <- list( time_pre=v2-v1)
+
+    #* optimization
+    if (is.null(par_lower)){
+        par_lower <- noharm_sirt_partable_extract_par(parm_table=parm_table, col="lower")
+    }
+    res <- sirt_optimizer(optimizer=optimizer, par=par0, fn=optim_fn,
+                grad=optim_gr, lower=par_lower, method="L-BFGS-B", hessian=FALSE, ...)
+    res_opt <- res
+    par0 <- res$par
+
+    v3 <- Sys.time()
+    time$time_opt <- v3-v2
+
+    #* include in parameter table
+    parm_table <- noharm_sirt_partable_include_par(par=par0, parm_table=parm_table)
+    Fval <- Fmat <- noharm_sirt_create_parameter_matrices("F", parm_table=parm_table, parm_index=parm_index)
+    Pval <- Pmat <- noharm_sirt_create_parameter_matrices("P", parm_table=parm_table, parm_index=parm_index)
+    Psival <- Psimat <- noharm_sirt_create_parameter_matrices("Psi", parm_table=parm_table, parm_index=parm_index)
+    estpars <- list( estF=sum(Fpatt>0), estP=sum(Ppatt>0), estPsi=sum(Psipatt>0) )
 
     #--- include colnames in estimated matrices
     colnames(Fval) <- F_dimnames
@@ -161,7 +141,8 @@ noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
                 factor.cor=Pval, thresholds=betaj, uniquenesses=uqn, loadings=loadingsF,
                 loadings.theta=Fval, residcorr=Psival, model.type=model.type, modtype=modtype,
                 Nobs=N, Nitems=I, Fpatt=Fpatt, Ppatt=Ppatt, Psipatt=Psipatt,
-                dat=dat0, systime=Sys.time(), dimensions=D, display.fit=5, iter=iter )
+                dat=dat0, systime=Sys.time(), dimensions=D, display.fit=5,
+                res_opt=res_opt, parm_table=parm_table, b0=b0, b1=b1, b2=b2, b3=b3)
 
     #*** number of estimated parameters
     Nestpars <- noharm_sirt_number_estimated_parameters( I=I, Fpatt=Fpatt,
@@ -190,8 +171,9 @@ noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
     Fval2 <- Fval2 / ej
     standardized.solution <- list( Fval=Fval2, Pval=Pval2 )
     if (reliability){
-        res$omega.rel <- reliability.nonlinearSEM(facloadings=Fval2,
-            thresh=res$thresholds, resid.cov=res$residcorr, cor.factors=Pval2 )$omega.rel
+        res0 <- reliability.nonlinearSEM(facloadings=Fval2,
+            thresh=res$thresholds, resid.cov=res$residcorr, cor.factors=Pval2 )
+        res$omega.rel <- res0$omega.rel
     }
     if ( sum(v1) + I < I^2 ){
         res$omega.rel <- NA
@@ -216,6 +198,9 @@ noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
     res$s1 <- s1
     res$s2 <- s2
     res$CALL <- CALL
+    v4 <- Sys.time()
+    time$time_post <- v4-v3
+    res$time <- time
     class(res) <- 'noharm.sirt'
     return(res)
 }

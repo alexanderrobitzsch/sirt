@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.45
+%% File Version: 0.524
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -16,16 +16,16 @@ The function is an \R implementation of the normal ogive harmonic analysis
 robust method (the NOHARM model; McDonald, 1997). Exploratory and confirmatory
 multidimensional item response models for dichotomous data using the
 probit link function can be estimated. Lower asymptotes (guessing parameters)
-and upper asymptotes (One minus slipping parameters) can be provided as
+and upper asymptotes (one minus slipping parameters) can be provided as
 fixed values.
 }
 
 \usage{
 noharm.sirt(dat, weights=NULL, Fval=NULL, Fpatt=NULL, Pval=NULL,
    Ppatt=NULL, Psival=NULL, Psipatt=NULL, dimensions=NULL,
-   lower=rep(0, ncol(dat)), upper=rep(1, ncol(dat)), wgtm=NULL, modesttype=1,
+   lower=rep(0, ncol(dat)), upper=rep(1, ncol(dat)), wgtm=NULL,
    pos.loading=FALSE, pos.variance=FALSE,  pos.residcorr=FALSE,
-   maxiter=1000, conv=1e-6, increment.factor=1.01, reliability=TRUE)
+   maxiter=1000, conv=1e-6, optimizer="nlminb", par_lower=NULL, reliability=FALSE, \dots)
 
 \method{summary}{noharm.sirt}(object, file=NULL, \dots)
 }
@@ -35,7 +35,7 @@ noharm.sirt(dat, weights=NULL, Fval=NULL, Fpatt=NULL, Pval=NULL,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{dat}{
-Matrix of dichotomous item responses. This matrix contain missing data (indicated
+Matrix of dichotomous item responses. This matrix may contain missing data (indicated
 by \code{NA}) but missingness is assumed to be missing completely at random (MCAR).
 }
   \item{weights}{
@@ -46,7 +46,9 @@ Initial or fixed values of the loading matrix \eqn{\bold{F}}.
 }
   \item{Fpatt}{
 Pattern matrix of the loading matrix \eqn{\bold{F}}. If elements should be
-estimated, then an entry of 1 must be included in the pattern matrix.
+estimated, then an entry of 1 must be included in the pattern matrix. Parameters
+which should be estimated with equality constraints must be indicated by same
+integers but values largers than 1.
 }
   \item{Pval}{
 Initial or fixed values for the covariance matrix \eqn{\bold{P}}.
@@ -73,11 +75,6 @@ Fixed vector of upper asymptotes \eqn{d_i}.
 Matrix with positive entries which indicates by a positive entry which
 item pairs should be used for estimation.
 }
-\item{modesttype}{
-Estimation type. \code{modesttype=1} refers to the NOHARM approximation,
-while \code{modesttype=2} refers to the estimation based on tetrachoric
-correlations.
-}
 \item{pos.loading}{An optional logical indicating whether all entries in the
 loading matrix \eqn{\bold{F}} should be positive}
 \item{pos.variance}{An optional logical indicating whether all variances (i.e.
@@ -85,21 +82,22 @@ loading matrix \eqn{\bold{F}} should be positive}
 \item{pos.residcorr}{An optional logical indicating whether all
     entries in the matrix of residual correlations \eqn{\bold{\Psi}} should
     be positive}
+\item{par_lower}{Optional vector of lower parameter bounds}
   \item{maxiter}{
 Maximum number of iterations
 }
   \item{conv}{
 Convergence criterion for parameters
 }
-  \item{increment.factor}{
-Numeric value larger than 1 which controls the size of increments
-in increasing iteration numbers. With a larger value, the increments
-are heavier penalized.
+  \item{optimizer}{
+Optimization function to be used. Can be \code{"nlminb"} for
+\code{\link[stats:nlminb]{stats::nlminb}}
+or \code{"optim"} for \code{\link[stats:optim]{stats::optim}}.
 }
 \item{reliability}{Logical indicating whether reliability should be computed.}
+\item{\dots}{Further arguments to be passed. }
 \item{object}{Object of class \code{noharm.sirt}}
 \item{file}{String indicating a file name for summary.}
-\item{\dots}{Further arguments to be passed. }
 }
 
 %\item{x}{Object of class \code{noharm.sirt}}
@@ -125,14 +123,33 @@ asymptotes \eqn{c_i} and upper asymptotes \eqn{d_i} must be
 provided as fixed values.
 The response equation can be equivalently written by introducing a latent
 continuous item response \eqn{X_{pi}^\ast}
-\deqn{ X_{pi}^\ast=f_{i0} + f_{i1} \theta_{p1} + ... +
-f_{iD} \theta_{pD} + e_{pi} }
+\deqn{ X_{pi}^\ast=f_{i0} + f_{i1} \theta_{p1} + ... +  f_{iD} \theta_{pD} + e_{pi} }
 with a standard normally distributed residual \eqn{e_{pi}}. These residuals
 have a correlation matrix \eqn{\bold{\Psi}} with ones in the diagonal.
 In this \R implementation of the NOHARM model, correlations between residuals
 are allowed.
 
-See References for more details about estimation.
+The estimation relies on a Hermite series approximation of the normal ogive
+item response functions. In more detail, a series expansion
+\deqn{\Phi(x)=b_0 + b_1 H_1(x) + b_2 H_2(x) + b_3 H_3(x)} is used
+(McDonald, 1982a).
+This enables to express cross products \eqn{p_ij=P(X_i=1, X_j=1)} as a function of
+unknown model parameters
+\deqn{\hat{p}_ij=b_{0i} b_{0j} + \sum_{m=1}^3 b_{mi} b_{mj}
+\left( \frac{\bold{f}_i \bold{P} \bold{f}_j }{\sqrt{ (1+\bold{f}_i \bold{P} \bold{f}_i)
+(1+\bold{f}_j \bold{P} \bold{f}_j)}} \right) ^m }
+where \eqn{b_{0i}=p_{i}=P(X_i=1)=l_i + (u_i - l_i) \Phi(\tau_i)},
+\eqn{b_{1i}=(u_i-l_i)\phi(\tau_i)}, \eqn{b_{2i}=(u_i-l_i)\tau_i \phi(\tau_i) / \sqrt{2}},
+and \eqn{b_{3i}=(u_i-l_i)(\tau_i^2 - 1)\phi(\tau_i) / \sqrt{6}}.
+
+The least squares criterion \eqn{\sum_{i<j} ( p_{ij} - \hat{p}_{ij})^2} is used
+for estimating unknown model parameters (McDonald, 1982a, 1982b, 1997).
+
+For derivations of standard errors and fit statistics see
+Maydeu-Olivares (2001) and Swaminathan and Rogers (2016).
+
+For the statistical properties of the NOHARM approach see 
+Knol and Berger (1991), Finch (2011) or Svetina and Levy (2016).
 }
 
 
@@ -175,18 +192,29 @@ A list. The most important entries are
 
 
 \references{
+Finch, H. (2011). Multidimensional item response theory parameter estimation with 
+nonsimple structure items. \emph{Applied Psychological Measurement, 35}(1), 67-82. \cr
+https://doi.org/10.1177/0146621610367787
+
 Fraser, C., & McDonald, R. P. (1988). NOHARM: Least squares item factor analysis.
 \emph{Multivariate Behavioral Research, 23}, 267-269.
+https://doi.org/10.1207/s15327906mbr2302_9
 
-Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}.
+Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}. \cr
 {http://noharm.niagararesearch.ca/nh4man/nhman.html}.
 
-Green, S. B., & Yang, Y. (2009). Reliability of summed item
-scores using structural equation modeling: An alternative to
-coefficient alpha. \emph{Psychometrika, 74}, 155-167.
+Knol, D. L., & Berger, M. P. (1991). Empirical comparison between factor analysis 
+and multidimensional item response models. \emph{Multivariate Behavioral Research, 26}(3), 
+457-477. \cr https://doi.org/10.1207/s15327906mbr2603_5
 
-McDonald, R. P. (1982a). Linear versus models in item response theory.
+Maydeu-Olivares, A. (2001). Multidimensional item response theory modeling of binary data:
+Large sample properties of NOHARM estimates.
+\emph{Journal of Educational and Behavioral Statistics, 26}(1), 51-71.
+https://doi.org/10.3102/10769986026001051
+
+McDonald, R. P. (1982a). Linear versus nonlinear models in item response theory.
 \emph{Applied Psychological Measurement, 6}, 379-396.
+https://doi.org/10.1177/014662168200600402
 
 McDonald, R. P. (1982b). \emph{Unidimensional and multidimensional models for
 item response theory}. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings.
@@ -194,7 +222,16 @@ item response theory}. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings
 McDonald, R. P. (1997). Normal-ogive multidimensional model.
 In W. van der Linden & R. K. Hambleton (1997):
 \emph{Handbook of modern item response theory} (pp. 257-269).
-New York: Springer.
+New York: Springer. http://dx.doi.org/10.1007/978-1-4757-2691-6
+
+Svetina, D., & Levy, R. (2016). Dimensionality in compensatory MIRT when complex structure 
+exists: Evaluation of DETECT and NOHARM. \emph{The Journal of Experimental Education, 84}(2), 
+398-420. https://doi.org/10.1080/00220973.2015.1048845
+
+Swaminathan, H., & Rogers, H. J. (2016). Normal-ogive multidimensional models.
+In W. J. van der Linden (Ed.). \emph{Handbook of item response theory.
+Volume One: Models} (pp. 167-187). Boca Raton: CRC Press.
+http://dx.doi.org/10.1201/9781315374512
 }
 
 
@@ -220,7 +257,7 @@ Model fit can be assessed by \code{\link{modelfit.sirt}}.
 
 See \code{\link{R2noharm}} for running the NOHARM software from within \R.
 
-See Fraser and McDonald (2012) for an implementation of the NOHARM model which
+See Fraser and McDonald (1988, 2012) for an implementation of the NOHARM model which
 is available as freeware ({http://noharm.niagararesearch.ca/};
 the link seems to be broken in the meanwhile).
 }
@@ -263,17 +300,18 @@ diag(Pval) <- 1
 Fval <- .7 * ( f1>0)
 Fpatt <- 1 * ( Fval > 0 )
 # estimate model
-mod1 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval )
+mod1 <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt, Fpatt=Fpatt, Fval=Fval, Pval=Pval )
 summary(mod1)
 # EAP ability estimates
 pmod1 <- sirt::R2noharm.EAP(mod1, theta.k=seq(-4,4,len=10) )
 # model fit
 summary( sirt::modelfit.sirt( mod1 ))
 
-# estimate model based on tetrachoric correlations
-mod1b <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt,Fpatt=Fpatt, Fval=Fval, Pval=Pval,
-            modesttype=2)
-summary(mod1b)
+#**** Model 1c: put some equality constraints
+Fpatt[ c(1,4),1] <- 3
+Fpatt[ cbind( c(3,7), c(1,2)) ] <- 4
+mod1c <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt, Fpatt=Fpatt, Fval=Fval, Pval=Pval)
+summary(mod1c)
 
 \dontrun{
 #**** Model 2: Two-dimensional CFA with correlated residuals
@@ -346,6 +384,13 @@ summary(mod3)
 mod3b <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt, Fpatt=Fpatt, Fval=Fval, Pval=Pval,
             Psival=Psival, Psipatt=Psipatt, pos.residcorr=TRUE)
 summary(mod3b)
+#* constrain residual correlations
+Psipatt[1:4,1:4] <- 2
+Psipatt[5:8,5:8] <- 3
+Psipatt[ 9:12, 9:12] <- 4
+mod3c <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt, Fpatt=Fpatt, Fval=Fval, Pval=Pval,
+            Psival=Psival, Psipatt=Psipatt, pos.residcorr=TRUE)
+summary(mod3c)
 
 #**** Model 4: Rasch testlet model
 Fval <- Fpatt <- matrix( 0, I, 4 )
