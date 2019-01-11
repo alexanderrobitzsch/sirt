@@ -1,9 +1,10 @@
 ## File Name: linking.haberman.R
-## File Version: 2.617
+## File Version: 2.634
 
 
 #**** Linking Haberman: ETS Research Report 2009
-linking.haberman <- function( itempars, personpars=NULL, a_trim=Inf, b_trim=Inf,
+linking.haberman <- function( itempars, personpars=NULL,
+        estimation="OLS", a_trim=Inf, b_trim=Inf, lts_prop=.5,
         a_log=TRUE, conv=.00001, maxiter=1000, progress=TRUE, adjust_main_effects=TRUE)
 {
     CALL <- match.call()
@@ -34,7 +35,8 @@ linking.haberman <- function( itempars, personpars=NULL, a_trim=Inf, b_trim=Inf,
     est_type <- "A (slopes)"
     resA <- linking_haberman_als(logaM=logaM, wgtM=wgtM, maxiter=maxiter, conv=conv,
                     progress=progress, est.type=est_type, cutoff=a_trim,
-                    reference_value=1-a_log, adjust_main_effects=adjust_main_effects )
+                    reference_value=1-a_log, adjust_main_effects=adjust_main_effects,
+                    estimation=estimation, lts_prop=lts_prop)
     if (a_log){
         aj <- exp(resA$logaj)
         At <- exp(resA$logaAt)
@@ -55,14 +57,15 @@ linking.haberman <- function( itempars, personpars=NULL, a_trim=Inf, b_trim=Inf,
     res <- linking_haberman_vcov_transformation( H1=H1, aj_vcov=aj_vcov )
     aj_vcov <- res$vcov
     aj_se <- c( NA, res$se )
-
+    
     #**** estimation of B
     est_type <- "B (intercepts)"
     At_m <- sirt_matrix2( At, nrow=NI)
     bMadj <- bM * At_m
     resB <- linking_haberman_als(logaM=bMadj, wgtM=wgtM, maxiter=maxiter,
                     conv=conv, progress=progress, est.type=est_type,
-                    cutoff=b_trim, reference_value=0, adjust_main_effects=adjust_main_effects )
+                    cutoff=b_trim, reference_value=0, adjust_main_effects=adjust_main_effects,
+                    estimation=estimation, lts_prop=lts_prop)
     Bj <- resB$logaj
     Bt <- resB$logaAt
     Bj_resid <- resB$loga_resid
@@ -81,8 +84,6 @@ linking.haberman <- function( itempars, personpars=NULL, a_trim=Inf, b_trim=Inf,
     rownames(transf.itempars) <- NULL
 
     #*** transformation 1/At
-
-    # H1 <- diag( - 1 / At^2  )[-1,-1]
     H1 <- diag2( - 1 / ( At[-1] )^2 )
 
     res <- linking_haberman_vcov_transformation( H1=H1, aj_vcov=aj_vcov )
@@ -169,7 +170,7 @@ linking.haberman <- function( itempars, personpars=NULL, a_trim=Inf, b_trim=Inf,
             a.vcov=aj_vcov, b.vcov=Bj_vcov, a.item_stat=aj_item_stat,
             b.item_stat=Bj_item_stat, linking_slopes=linking_slopes,
             description='Linking according to Haberman (2009)',
-            CALL=CALL, time=time )
+            res_opt_slopes=resA, res_opt_intercepts=resB, CALL=CALL, time=time )
     class(res) <- "linking.haberman"
     return(res)
 }

@@ -1,5 +1,5 @@
 %% File Name: linking.robust.Rd
-%% File Version: 0.25
+%% File Version: 0.271
 
 \name{linking.robust}
 \alias{linking.robust}
@@ -16,6 +16,8 @@ Robust Linking of Item Intercepts
 This function implements a robust alternative of mean-mean linking which
 employs trimmed means instead of means.
 The linking constant is calculated for varying trimming parameters \eqn{k}.
+The treatment of differential item functioning as outliers and application of
+robust statistics is discussed in Magis and De Boeck (2011, 2012).
 }
 
 \usage{
@@ -56,9 +58,17 @@ A list with following entries
 \item{itempars}{Used data frame of item parameters}
 }
 
-%\references{
-%% ~put references to the literature/web site here ~
-%}
+\references{
+Magis, D., & De Boeck, P. (2011). Identification of differential item functioning in 
+multiple-group settings: A multivariate outlier detection approach. 
+\emph{Multivariate Behavioral Research, 46}(5), 733-755.
+http://dx.doi.org/10.1080/00273171.2011.606757
+
+Magis, D., & De Boeck, P. (2012). A robust outlier approach to prevent type I error 
+inflation in differential item functioning. 
+\emph{Educational and Psychological Measurement, 72}(2), 291-311.
+http://dx.doi.org/10.1177/0013164411416975
+}
 
 
 %\author{

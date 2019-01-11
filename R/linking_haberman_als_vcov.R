@@ -1,8 +1,8 @@
 ## File Name: linking_haberman_als_vcov.R
-## File Version: 0.10
+## File Version: 0.13
 
 linking_haberman_als_vcov <- function( regr_resid, regr_wgt, transf_pars,
-        selitems )
+        selitems, estimation="OLS" )
 {
     transf_parsM <- matrix( transf_pars, nrow=nrow(regr_resid),
             ncol=ncol(regr_resid), byrow=TRUE )
@@ -21,9 +21,14 @@ linking_haberman_als_vcov <- function( regr_resid, regr_wgt, transf_pars,
     # form <- paste0( "y ~ 0 + ", paste0("X", 2:NS, collapse=" + " ) )
     form <- paste0( "y ~ ", paste0("X", 2:NS, collapse=" + " ) )
     mod <- stats::lm( stats::as.formula(form), data=data, weights=data$wgt )
-    mod_vcov <- stats::vcov(mod)
+    mod_vcov <- stats::vcov(mod)    
+    vcov <- mod_vcov[-1,-1]
+    se <- sqrt( diag( mod_vcov) )[-1]
+    if (estimation!="OLS"){
+        vcov <- NA*vcov
+        se <- NA*se
+    }
     #-- output
-    res <- list( vcov=mod_vcov[-1,-1],
-                    se=sqrt( diag( mod_vcov) )[-1] )
+    res <- list( vcov=vcov, se=se )
     return(res)
 }

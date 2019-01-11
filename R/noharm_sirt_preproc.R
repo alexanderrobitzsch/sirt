@@ -1,41 +1,66 @@
 ## File Name: noharm_sirt_preproc.R
-## File Version: 0.385
+## File Version: 0.398
 
 
 #**** data preprocessing noharm.sirt
-noharm_sirt_preproc <- function( dat, weights, Fpatt, Fval,
+noharm_sirt_preproc <- function( dat, pm, N, weights, Fpatt, Fval,
     Ppatt, Pval, Psipatt, Psival, wgtm, dimensions, pos.loading,
-    pos.variance, pos.residcorr )
+    pos.variance, pos.residcorr, input_pm, lower, upper )
 {
 
     res <- NULL
     res$dat0 <- dat
 
-    #*****************
-    # data processing
-    res$N <- N <- nrow(dat)
-    res$I <- I <- ncol(dat)
-    if (is.null(weights)){
-        weights <- rep(1,nrow(dat) )
+    if ( ! input_pm ){
+        N <- nrow(dat)
+        I <- ncol(dat)
+        items <- colnames(dat)
+    } else {
+        I <- ncol(pm)
+        items <- colnames(pm)
+        pm <- as.matrix(pm)
     }
-    res$weights <- weights
-    dat.resp <- 1-is.na(dat)
-    dat0 <- dat
-    dat[dat.resp==0] <- 0
+
+    if (length(lower)==1){
+        lower <- rep(lower, I)
+    }
+    if (length(upper)==1){
+        upper <- rep(upper, I)
+    }
+
+    #---- data processing
+    res$N <- N
+    res$I <- I
+
+    if (! input_pm){
+        if (is.null(weights)){
+            weights <- rep(1, N)
+        }
+        res$weights <- weights
+        dat.resp <- 1-is.na(dat)
+        dat0 <- dat
+        dat[dat.resp==0] <- 0
+        # calculate (weighted) product moment correlation
+        ss <- as.matrix( crossprod( weights*dat.resp ) )
+        eps <- 1e-6
+        pm <- as.matrix( crossprod( as.matrix(dat*weights*dat.resp) ) / ( ss+eps ) )
+    } else {
+        dat.resp <- NULL
+        ss <- 1
+    }
     res$dat <- dat
     res$dat.resp <- dat.resp
-    # calculate (weighted) product moment correlation
-    ss <- as.matrix( crossprod( weights*dat.resp ) )
-    eps <- 1e-6
-    pm <- as.matrix( crossprod( as.matrix(dat*weights*dat.resp) ) / ( ss+eps ) )
     res$pm <- pm
     res$pm0 <- pm
     res$ss <- ss
+    res$lower <- lower
+    res$upper <- upper
+
     # CFA or EFA?
     if ( is.null(dimensions) ){
         model.type <- "CFA"
         modtype <- 3    # 3 - multidimensional CFA
-            } else {
+    } else {
         model.type <- "EFA"
         modtype <- 2    # 2 - multidimensional EFA
         D <- dimensions
@@ -71,8 +96,8 @@ noharm_sirt_preproc <- function( dat, weights, Fpatt, Fval,
     wgtm <- wgtm * ( ss > 0 )
     res$wgtm <- wgtm
     res$sumwgtm <- ( sum( wgtm > 0 ) - sum( diag(wgtm) > 0 ) ) / 2
-    #***
-    # column names
+
+    #*** column names
     D <- ncol(Ppatt)
     cn <- paste0("F",1:D)
     if (is.null(colnames(Fpatt) ) ){
@@ -147,6 +172,7 @@ noharm_sirt_preproc <- function( dat, weights, Fpatt, Fval,
     parm_index <- list()
     for (mat_label in c("F", "P", "Psi") ){
         ind_mat <- which(parm_table$mat==mat_label)
+        parm_index[[ mat_label ]] <- list()
         parm_index[[ mat_label ]][[ "row_parm_table" ]] <- ind_mat
         parm_index[[ mat_label ]][[ "entries" ]] <- parm_table[ ind_mat, c("row","col")]
         parm_index[[ mat_label ]][[ "len" ]] <- length(ind_mat)
@@ -179,7 +205,7 @@ noharm_sirt_preproc <- function( dat, weights, Fpatt, Fval,
     res$Psipatt <- 1*(res$Psipatt>0)
     res$wgtm.default <- wgtm.default
     res$F_dimnames <- colnames(Fpatt)
-    res$items <- colnames(dat)
+    res$items <- items
     return(res)
 }
 

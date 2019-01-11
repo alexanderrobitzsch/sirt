@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.684
+%% File Version: 0.702
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -17,8 +17,9 @@ logarithmizes item slopes for linking while otherwise an additive regression
 model is assumed for the original item loadings (see Details; Battauz, 2017)
 }
 \usage{
-linking.haberman(itempars, personpars, a_trim=Inf, b_trim=Inf, a_log=TRUE,
-    conv=1e-05, maxiter=1000, progress=TRUE, adjust_main_effects=TRUE)
+linking.haberman(itempars, personpars, estimation="OLS", a_trim=Inf, b_trim=Inf,
+    lts_prop=.5, a_log=TRUE, conv=1e-05, maxiter=1000, progress=TRUE,
+    adjust_main_effects=TRUE)
 
 \method{summary}{linking.haberman}(object, digits=3, file=NULL, ...)
 }
@@ -38,10 +39,16 @@ column is only multiplied by \eqn{A_t}.
 If a column is labeled as \code{pid} (person ID),
 then it is left untransformed.
 }
+\item{estimation}{Estimation method. Can be \code{"OLS"} (ordinary least squares),
+\code{"BSQ"} (bisquare weighted regression),
+\code{"MED"} (median regression) or \code{"LTS"} (trimmed least squares).
+}
 \item{a_trim}{Trimming parameter for item slopes \eqn{a_{it}} in
 bisquare regression (see Details).}
 \item{b_trim}{Trimming parameter for item slopes \eqn{b_{it}} in
 bisquare regression (see Details).}
+\item{lts_prop}{Proportion of retained observations in \code{"LTS"}
+regression estimation}
 \item{a_log}{Logical indicating whether item slopes should be logarithmized
 for linking.}
 \item{conv}{
@@ -88,17 +95,24 @@ we define \eqn{A_1=1} and \eqn{B_1}=0.
 The optimization function (which is a least squares criterion;
 see Haberman, 2009) seeks the transformation parameters \eqn{A_t} and
 \eqn{B_t} with an alternating least squares
-method. Note that every item \eqn{i} and every study \eqn{t} can
+method (\code{estimation="OLS"}). Note that every item \eqn{i} and every study \eqn{t} can
 be weighted (specified in the fifth column of \code{itempars}).
-Alternatively, a robust regression method (Fox, 2015) can be employed for linking
-using the arguments \code{a_trim} and \code{b_trim}. For example, in the case
-of item loadings, bisquare weighting is applied to
+Alternatively, a robust regression method based on bisquare weighting (Fox, 2015)
+can be employed for linking using the argument \code{estimation="BSQ"}.
+For example, in the case of item loadings, bisquare weighting is applied to
 residuals \eqn{e_{it}=a_{it} - a_i - A_t } (where logarithmized or non-logarithmized
 item loadings are employed) forming weights
 \eqn{w_{it}=[ 1 - ( e_{it} / k )^2 ]^2} for \eqn{e_{it} <k} and 0 for \eqn{e_{it} \ge k}
-where \eqn{k} is the trimming constant \code{a_trim}. Items in studies with large residuals
+where \eqn{k} is the trimming constant which can be estimated or fixed
+during estimation using arguments \code{a_trim} or \code{b_trim}. Items in studies with large residuals
 (i.e., presence differential item functioning) are effectively set to zero in the
 linking procedure. Analogously, the same rationale is applied to linking item intercepts.
+The method \code{estimation="MED"} estimates item parameters and linking constants
+based on ideas of median regression and uses the median polish procedure of Tukey
+(Tukey, 1977, p. 362ff.; Maronna, Martin & Yohai, 2006, p. 104;
+see also \code{\link[stats:medpolish]{stats::medpolish}}).
+The method \code{estimation="LTS"} employs trimmed least squares where the proportion
+of data retained is specified in \code{lts_prop} whose default is set to .50.
 
 Effect sizes of invariance are calculated as R-squared measures
 of explained item slopes and intercepts after linking
@@ -155,11 +169,21 @@ Thousand Oaks: Sage.
 
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
 from an item response model through separate calibrations}.
-ETS Research Report ETS RR-09-40. Princeton, ETS.
+ETS Research Report ETS RR-09-40. Princeton, ETS. \cr
 https://doi.org/10.1002/j.2333-8504.2009.tb02197.x
 
 Kolen, M. J., & Brennan, R. L. (2014). \emph{Test equating, scaling, and linking:
 Methods and Practices}. New York: Springer.
+
+Magis, D., & De Boeck, P. (2012). A robust outlier approach to prevent type I error 
+inflation in differential item functioning. 
+\emph{Educational and Psychological Measurement, 72}(2), 291-311.
+http://dx.doi.org/10.1177/0013164411416975
+
+Maronna, R. A., Martin, R. D., & Yohai, V. J. (2006). \emph{Robust Statistics}.
+West Sussex: Wiley.
+
+Tukey, J. W. (1977). \emph{Exploratory data analysis}. Addison-Wesley.
 
 Weeks, J. P. (2010). \pkg{plink}: An \R package for linking mixed-format tests
 using IRT-based methods. \code{Journal of Statistical Software, 35}(12), 1-33.
@@ -470,11 +494,44 @@ itempars <- data.frame( "study"=paste0("study",rep(1:2, each=I)),
 mod1 <- sirt::linking.haberman( itempars=itempars )
 summary(mod1)
 
-#*** Model 2: Haberman linking with robust bisquare regression
-mod2 <- sirt::linking.haberman( itempars=itempars, b_trim=.4)
+#*** Model 2: Haberman linking with robust bisquare regression with fixed trimming value
+mod2 <- sirt::linking.haberman( itempars=itempars, estimation="BSQ", b_trim=.4)
 summary(mod2)
 
+#*** Model 2: Haberman linking with robust bisquare regression with estimated trimming value
+mod3 <- sirt::linking.haberman( itempars=itempars, estimation="BSQ")
+summary(mod3)
+
 ## see also Example 3 of ?sirt::robust.linking
+
+#############################################################################
+# EXAMPLE 6: Toy example of Magis and De Boeck (2012)
+#############################################################################
+
+# define item parameters from Magis & De Boeck (20212, p. 293)
+b1 <- c(1,1,1,1)
+b2 <- c(1,1,1,2)
+itempars <- data.frame(study = rep(1:2, each=4), item=rep(1:4,2), a=1, b=c(b1,b2) )
+
+#- Least squares regression
+mod1 <- sirt::linking.haberman( itempars=itempars, estimation="OLS")
+summary(mod1)
+
+#- Bisquare regression with estimated and fixed trimming factors 
+mod2 <- sirt::linking.haberman( itempars=itempars, estimation="BSQ")
+mod2a <- sirt::linking.haberman( itempars=itempars, estimation="BSQ", b_trim=.4)
+mod2b <- sirt::linking.haberman( itempars=itempars, estimation="BSQ", b_trim=1.2)
+summary(mod2)
+summary(mod2a)
+summary(mod2b)
+
+#- Least squares trimmed regression
+mod3 <- sirt::linking.haberman( itempars=itempars, estimation="LTS")
+summary(mod3)
+
+#- median regression
+mod4 <- sirt::linking.haberman( itempars=itempars, estimation="MED")
+summary(mod4)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

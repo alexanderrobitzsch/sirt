@@ -1,5 +1,5 @@
 ## File Name: summary.linking.haberman.R
-## File Version: 0.278
+## File Version: 0.284
 
 
 summary.linking.haberman <- function( object, digits=3, file=NULL, ... )
@@ -7,7 +7,9 @@ summary.linking.haberman <- function( object, digits=3, file=NULL, ... )
     # open sink
     sirt_osink(file=file)
 
-    cat("-----------------------------------------------------------------\n")
+    display_string <- sirt_summary_print_display(symbol="-", len=65)
+    cat(display_string)
+
     #- package and R session
     sirt_summary_print_package_rsession(pack="sirt")
 
@@ -20,7 +22,15 @@ summary.linking.haberman <- function( object, digits=3, file=NULL, ... )
     #-- print computation time
     sirt_summary_print_computation_time_s1(object=object$time)
 
-    cat("-----------------------------------------------------------------\n")
+    cat(display_string)
+    cat("Estimation information item slopes\n")
+    linking_haberman_summary_estimation_information(res_opt=object$res_opt_slopes)
+
+    cat(display_string)
+    cat("Estimation information item intercepts\n")
+    linking_haberman_summary_estimation_information(res_opt=object$res_opt_intercepts)
+
+    cat(display_string)
     cat("Transformation parameters (Haberman linking)\n")
     obji <- object$transf.pars
     sirt_summary_print_objects(obji=obji, digits=digits, from=2, rownames_null=FALSE)
@@ -33,7 +43,8 @@ summary.linking.haberman <- function( object, digits=3, file=NULL, ... )
     obji <- object$transf.personpars
     sirt_summary_print_objects(obji=obji, digits=digits, from=2, rownames_null=FALSE)
 
-    cat("\n-----------------------------------------------------------------\n")
+    cat("\n")
+    cat(display_string)
     cat("R-Squared Measures of Invariance (all items and unweighted)\n")
     obji <- object$es.invariance
     sirt_summary_print_objects(obji=obji, digits=digits, from=1, rownames_null=FALSE)

@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.899
+## File Version: 0.919
 
 
 ########################################
@@ -14,20 +14,26 @@
 # is denoted as 'noharm.loglm.sirt'.
 #---------------
 
-noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
+noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NULL,
     Pval=NULL, Ppatt=NULL, Psival=NULL, Psipatt=NULL, dimensions=NULL,
-    lower=rep(0,ncol(dat)), upper=rep(1,ncol(dat)), wgtm=NULL,
-    pos.loading=FALSE, pos.variance=FALSE,
+    lower=0, upper=1, wgtm=NULL, pos.loading=FALSE, pos.variance=FALSE,
     pos.residcorr=FALSE, maxiter=1000, conv=1e-6, optimizer="nlminb",
     par_lower=NULL, reliability=FALSE, ... )
 {
     v1 <- s1 <- Sys.time()
     CALL <- match.call()
     #*** data preprocessing
-    res <- noharm_sirt_preproc( dat=dat, weights=weights, Fpatt=Fpatt, Fval=Fval,
+    if (missing(dat)){
+        input_pm <- TRUE
+        dat <- NULL
+    } else {
+        input_pm <- FALSE
+    }
+    res <- noharm_sirt_preproc( dat=dat, pm=pm, N=N, weights=weights, Fpatt=Fpatt, Fval=Fval,
                 Ppatt=Ppatt, Pval=Pval, Psipatt=Psipatt, Psival=Psival, wgtm=wgtm,
                 dimensions=dimensions, pos.loading=pos.loading,
-                pos.variance=pos.variance, pos.residcorr=pos.residcorr )
+                pos.variance=pos.variance, pos.residcorr=pos.residcorr,
+                input_pm=input_pm, lower=lower, upper=upper)
     ss <- res$ss
     pm0 <- res$pm0
     sumwgtm <- res$sumwgtm
@@ -53,6 +59,8 @@ noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
     parm_table <- res$parm_table
     npar <- res$npar
     parm_index <- res$parm_index
+    lower <- res$lower
+    upper <- res$upper
 
     modesttype <- 1        # NOHARM estimation
 
@@ -63,6 +71,7 @@ noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
     }
     # compute bjk coefficients
     # include lower and upper asymptotes here
+
     b0 <- lower + (upper-lower) * stats::pnorm(-betaj)
     b1 <- (upper-lower) * stats::dnorm(betaj)
     b2 <- betaj * b1 / sqrt(2)
@@ -103,7 +112,6 @@ noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
                 grad=optim_gr, lower=par_lower, method="L-BFGS-B", hessian=FALSE, ...)
     res_opt <- res
     par0 <- res$par
-
     v3 <- Sys.time()
     time$time_opt <- v3-v2
 
@@ -142,7 +150,8 @@ noharm.sirt <- function(dat, weights=NULL, Fval=NULL, Fpatt=NULL,
                 loadings.theta=Fval, residcorr=Psival, model.type=model.type, modtype=modtype,
                 Nobs=N, Nitems=I, Fpatt=Fpatt, Ppatt=Ppatt, Psipatt=Psipatt,
                 dat=dat0, systime=Sys.time(), dimensions=D, display.fit=5,
-                res_opt=res_opt, parm_table=parm_table, b0=b0, b1=b1, b2=b2, b3=b3)
+                res_opt=res_opt, parm_table=parm_table, b0=b0, b1=b1, b2=b2, b3=b3,
+                par_lower=par_lower)
 
     #*** number of estimated parameters
     Nestpars <- noharm_sirt_number_estimated_parameters( I=I, Fpatt=Fpatt,

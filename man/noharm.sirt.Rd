@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.524
+%% File Version: 0.533
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -21,10 +21,9 @@ fixed values.
 }
 
 \usage{
-noharm.sirt(dat, weights=NULL, Fval=NULL, Fpatt=NULL, Pval=NULL,
+noharm.sirt(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NULL, Pval=NULL,
    Ppatt=NULL, Psival=NULL, Psipatt=NULL, dimensions=NULL,
-   lower=rep(0, ncol(dat)), upper=rep(1, ncol(dat)), wgtm=NULL,
-   pos.loading=FALSE, pos.variance=FALSE,  pos.residcorr=FALSE,
+   lower=0, upper=1, wgtm=NULL, pos.loading=FALSE, pos.variance=FALSE,  pos.residcorr=FALSE,
    maxiter=1000, conv=1e-6, optimizer="nlminb", par_lower=NULL, reliability=FALSE, \dots)
 
 \method{summary}{noharm.sirt}(object, file=NULL, \dots)
@@ -37,7 +36,10 @@ noharm.sirt(dat, weights=NULL, Fval=NULL, Fpatt=NULL, Pval=NULL,
   \item{dat}{
 Matrix of dichotomous item responses. This matrix may contain missing data (indicated
 by \code{NA}) but missingness is assumed to be missing completely at random (MCAR).
+Alternatively, a product-moment matrix \code{pm} can be used as input.
 }
+\item{pm}{Optional product-moment matrix}
+\item{N}{Sample size if \code{pm} is provided}
   \item{weights}{
 Optional vector of student weights.
 }
@@ -66,10 +68,10 @@ Pattern matrix for the matrix of residual correlations \eqn{\bold{\Psi}}.
 Number of dimensions if an exploratory factor analysis should be estimated.
 }
   \item{lower}{
-Fixed vector of lower asymptotes \eqn{c_i}.
+Fixed vector (or numeric) of lower asymptotes \eqn{c_i}.
 }
   \item{upper}{
-Fixed vector of upper asymptotes \eqn{d_i}.
+Fixed vector (or numeric) of upper asymptotes \eqn{d_i}.
 }
   \item{wgtm}{
 Matrix with positive entries which indicates by a positive entry which
@@ -138,9 +140,9 @@ unknown model parameters
 \deqn{\hat{p}_ij=b_{0i} b_{0j} + \sum_{m=1}^3 b_{mi} b_{mj}
 \left( \frac{\bold{f}_i \bold{P} \bold{f}_j }{\sqrt{ (1+\bold{f}_i \bold{P} \bold{f}_i)
 (1+\bold{f}_j \bold{P} \bold{f}_j)}} \right) ^m }
-where \eqn{b_{0i}=p_{i}=P(X_i=1)=l_i + (u_i - l_i) \Phi(\tau_i)},
-\eqn{b_{1i}=(u_i-l_i)\phi(\tau_i)}, \eqn{b_{2i}=(u_i-l_i)\tau_i \phi(\tau_i) / \sqrt{2}},
-and \eqn{b_{3i}=(u_i-l_i)(\tau_i^2 - 1)\phi(\tau_i) / \sqrt{6}}.
+where \eqn{b_{0i}=p_{i}=P(X_i=1)=c_i + (d_i - c_i) \Phi(\tau_i)},
+\eqn{b_{1i}=(d_i-c_i)\phi(\tau_i)}, \eqn{b_{2i}=(d_i-c_i)\tau_i \phi(\tau_i) / \sqrt{2}},
+and \eqn{b_{3i}=(d_i-c_i)(\tau_i^2 - 1)\phi(\tau_i) / \sqrt{6}}.
 
 The least squares criterion \eqn{\sum_{i<j} ( p_{ij} - \hat{p}_{ij})^2} is used
 for estimating unknown model parameters (McDonald, 1982a, 1982b, 1997).
@@ -148,7 +150,7 @@ for estimating unknown model parameters (McDonald, 1982a, 1982b, 1997).
 For derivations of standard errors and fit statistics see
 Maydeu-Olivares (2001) and Swaminathan and Rogers (2016).
 
-For the statistical properties of the NOHARM approach see 
+For the statistical properties of the NOHARM approach see
 Knol and Berger (1991), Finch (2011) or Svetina and Levy (2016).
 }
 
@@ -192,7 +194,7 @@ A list. The most important entries are
 
 
 \references{
-Finch, H. (2011). Multidimensional item response theory parameter estimation with 
+Finch, H. (2011). Multidimensional item response theory parameter estimation with
 nonsimple structure items. \emph{Applied Psychological Measurement, 35}(1), 67-82. \cr
 https://doi.org/10.1177/0146621610367787
 
@@ -203,8 +205,8 @@ https://doi.org/10.1207/s15327906mbr2302_9
 Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}. \cr
 {http://noharm.niagararesearch.ca/nh4man/nhman.html}.
 
-Knol, D. L., & Berger, M. P. (1991). Empirical comparison between factor analysis 
-and multidimensional item response models. \emph{Multivariate Behavioral Research, 26}(3), 
+Knol, D. L., & Berger, M. P. (1991). Empirical comparison between factor analysis
+and multidimensional item response models. \emph{Multivariate Behavioral Research, 26}(3),
 457-477. \cr https://doi.org/10.1207/s15327906mbr2603_5
 
 Maydeu-Olivares, A. (2001). Multidimensional item response theory modeling of binary data:
@@ -224,8 +226,8 @@ In W. van der Linden & R. K. Hambleton (1997):
 \emph{Handbook of modern item response theory} (pp. 257-269).
 New York: Springer. http://dx.doi.org/10.1007/978-1-4757-2691-6
 
-Svetina, D., & Levy, R. (2016). Dimensionality in compensatory MIRT when complex structure 
-exists: Evaluation of DETECT and NOHARM. \emph{The Journal of Experimental Education, 84}(2), 
+Svetina, D., & Levy, R. (2016). Dimensionality in compensatory MIRT when complex structure
+exists: Evaluation of DETECT and NOHARM. \emph{The Journal of Experimental Education, 84}(2),
 398-420. https://doi.org/10.1080/00220973.2015.1048845
 
 Swaminathan, H., & Rogers, H. J. (2016). Normal-ogive multidimensional models.
@@ -453,6 +455,44 @@ summary( sirt::modelfit.sirt(mod7) )
 # estimation
 mod8 <- sirt::noharm.sirt( dat=dat, dimensions=3  )
 summary(mod8)
+
+#############################################################################
+# EXAMPLE 3: Product-moment matrix input, McDonald (1997)
+#############################################################################
+
+# data from Table 1 of McDonald (1997, p. 266)
+pm0 <- "
+0.828
+0.567 0.658
+0.664 0.560 0.772
+0.532 0.428 0.501 0.606
+0.718 0.567 0.672 0.526 0.843
+"
+pm <- miceadds::string_to_matrix(x=pm0, as_numeric=TRUE, extend=TRUE)
+I <- nrow(pm)
+rownames(pm) <- colnames(pm) <- paste0("I", 1:I)
+
+#- Model 1: Unidimensional model
+Fval <- matrix(.7, nrow=I, ncol=1)
+Fpatt <- 1+0*Fval
+Pval <- matrix(1, nrow=1,ncol=1)
+Ppatt <- 0*Pval
+
+mod1 <- sirt::noharm.sirt(pm=pm, N=1000, Fval=Fval, Fpatt=Fpatt, Pval=Pval, Ppatt=Ppatt)
+summary(mod1)
+
+#- Model 2: Twodimensional exploratory model
+mod2 <- sirt::noharm.sirt(pm=pm, N=1000, dimensions=2)
+summary(mod2)
+
+#- Model 3: Unidimensional model with correlated residuals
+Psival <- matrix(0, nrow=I, ncol=I)
+Psipatt <- 0*Psival
+Psipatt[5,1] <- 1
+
+mod3 <- sirt::noharm.sirt(pm=pm, N=1000, Fval=Fval, Fpatt=Fpatt, Pval=Pval, Ppatt=Ppatt,
+            Psival=Psival, Psipatt=Psipatt)
+summary(mod3)
 }
 }
 

@@ -1,5 +1,5 @@
 ## File Name: noharm_sirt_preproc_parameter_table_matrix.R
-## File Version: 0.05
+## File Version: 0.07
 
 noharm_sirt_preproc_parameter_table_matrix <- function(pattmat, valmat, patt_id,
     patt_label, minval, symm=FALSE)

@@ -1,5 +1,5 @@
 %% File Name: R2noharm.Rd
-%% File Version: 2.355
+%% File Version: 2.356
 
 \name{R2noharm}
 \alias{R2noharm}
@@ -169,7 +169,7 @@ https://doi.org/10.1207/s15327906mbr2302_9
 Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}. \cr
 {http://noharm.niagararesearch.ca/nh4man/nhman.html}.
 
-Lee, J. J., & Lee, M. K. (2016). An overview of the normal ogive harmonic analysis 
+Lee, J. J., & Lee, M. K. (2016). An overview of the normal ogive harmonic analysis
 robust method (NOHARM) approach to item response theory.
 \emph{Tutorials in Quantitative Methods for Psychology, 12}(1), 1-8.
 https://doi.org/10.20982/tqmp.12.1.p001

@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.Rd
-%% File Version: 1.45
+%% File Version: 1.461
 
 \name{rasch.jml}
 \alias{rasch.jml}
@@ -158,7 +158,7 @@ See \code{\link{rasch.prox}} for the PROX algorithm as initial iterations.
 For a bias correction of the JML method try \code{\link{rasch.jml.jackknife1}}.
 
 JML estimation can also be conducted with the \pkg{TAM}
-(\code{\link[TAM:tam.jml2]{TAM::tam.jml2}})
+(\code{\link[TAM:tam.jml]{TAM::tam.jml}})
 and \pkg{mixRasch} (\code{mixRasch::mixRasch})
 packages.
 

@@ -36,17 +36,22 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.2  |  2019-01-07  |  Last: sirt 3.2-15
+VERSIONS sirt 3.2  |  2019-01-11  |  Last: sirt 3.2-24
 ------------------------------------------------------------------------
 
 NOTE  * changes in estimation algorithm in noharm.sirt(). Disabled
         estimation based on tetrachoric correlations and, hence,
         removed argument 'modesttype'. Included arguments 'optimizer'
         and 'par_lower'.
+ADDED * included arguments 'pm' and 'N' for product-moment matrix
+        input in noharm.sirt()
+ADDED * added additional estimation methods 'MED' and 'LTS' in
+        linking.haberman()
 
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: noharm.sirt (1,2.3)
+EXAMP * included/modified examples: noharm.sirt (1,2.3,3),
+        linking.haberman (6)
 
 
 
