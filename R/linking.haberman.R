@@ -1,5 +1,5 @@
 ## File Name: linking.haberman.R
-## File Version: 2.634
+## File Version: 2.635
 
 
 #**** Linking Haberman: ETS Research Report 2009
@@ -57,7 +57,7 @@ linking.haberman <- function( itempars, personpars=NULL,
     res <- linking_haberman_vcov_transformation( H1=H1, aj_vcov=aj_vcov )
     aj_vcov <- res$vcov
     aj_se <- c( NA, res$se )
-    
+
     #**** estimation of B
     est_type <- "B (intercepts)"
     At_m <- sirt_matrix2( At, nrow=NI)

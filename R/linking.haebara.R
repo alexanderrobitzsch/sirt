@@ -1,5 +1,5 @@
 ## File Name: linking.haebara.R
-## File Version: 0.412
+## File Version: 0.422
 
 linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         optimizer="optim", center=FALSE, eps=1e-5, use_rcpp=TRUE, ...)
@@ -19,6 +19,7 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
     bM <- res$bM
     est_pars <- res$est_pars
     weights_exist <- res$weights_exist
+    is_1pl <- res$is_1pl
 
     a.orig <- aM
     b.orig <- bM
@@ -26,8 +27,9 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
 
     #* define parameter vector
     par <- c(rep(1,NI), rep(0,NI), rep(0,NS-1), rep(1, NS-1))
-    names(par) <- c( paste0("a_",items), paste0("b_",items), paste0("mu_",studies[-1]),
+    parnames <- c( paste0("a_",items), paste0("b_",items), paste0("mu_",studies[-1]),
                     paste0("sigma_",studies[-1]) )
+    names(par) <- parnames
     index_a <- 1:NI
     index_b <- NI + 1:NI
     index_mu <- 2*NI + 1:(NS-1)
@@ -39,7 +41,7 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
     par[index_mu] <- - ( b_mean - b_mean[1] )[-1]
     bM_centered <- apply( bM, 2, FUN=function(vv){ vv - mean(vv, na.rm=TRUE) } )
     par[index_b] <- rowMeans(bM_centered, na.rm=TRUE)
-    parnames <- names(par)
+
 
     #-- define optimization function
     if (use_rcpp){
@@ -63,6 +65,10 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         b <- x[index_b]
         mu <- c(0, x[index_mu])
         sigma <- c(1, x[index_sigma])
+        if (is_1pl){
+            a <- rep(1,NI)
+            sigma <- 1+0*sigma
+        }
         args <- list( NI=NI, NS=NS, dist=dist, aM=aM, bM=bM,
                     theta=theta, prob_theta=prob_theta, est_pars=est_pars, wgtM=wgtM,
                     a=a, b=b, mu=mu, sigma=sigma, eps=eps )
@@ -74,12 +80,20 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         b <- x[index_b]
         mu <- c(0, x[index_mu])
         sigma <- c(1, x[index_sigma])
+        if (is_1pl){
+            a <- rep(1,NI)
+            sigma <- 1+0*sigma
+        }
         args <- list( NI=NI, NS=NS, dist=dist, aM=aM, bM=bM, theta=theta,
                     prob_theta=prob_theta, est_pars=est_pars, wgtM=wgtM, a=a, b=b,
                     mu=mu, sigma=sigma, eps=eps, index_a=index_a_, index_b=index_b_,
                     index_mu=index_mu_, index_sigma=index_sigma_,
                     parnames=parnames, NP=NP )
         grad <- do.call(what=grad_optim_call, args=args)
+        if (is_1pl){
+            grad[index_a] <- 0
+            grad[index_sigma] <- 0
+        }
         names(grad) <- parnames
         return(grad)
     }

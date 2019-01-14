@@ -1,5 +1,5 @@
 ## File Name: linking_proc_itempars.R
-## File Version: 0.07
+## File Version: 0.09
 
 linking_proc_itempars <- function(itempars)
 {
@@ -32,8 +32,11 @@ linking_proc_itempars <- function(itempars)
     wgtM <- wgtM / matrix( rowSums( wgtM, na.rm=TRUE ), nrow=NI, ncol=NS )
     est_pars <- ! is.na(wgtM)
 
+    is_1pl <- ( stats::sd(aM, na.rm=TRUE) < 1e-5 )
+
     #--- output
     res <- list(itempars=itempars, NS=NS, NI=NI, items=items, studies=studies,
-                wgtM=wgtM, aM=aM, bM=bM, est_pars=est_pars, weights_exist=weights_exist)
+                wgtM=wgtM, aM=aM, bM=bM, est_pars=est_pars,
+                weights_exist=weights_exist, is_1pl=is_1pl)
     return(res)
 }
