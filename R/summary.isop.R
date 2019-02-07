@@ -1,14 +1,15 @@
 ## File Name: summary.isop.R
-## File Version: 0.12
+## File Version: 0.13
 
 
-#*******************************************************
-# Summary for isop object                         *
-summary.isop <- function( object, ... ){
+#*** Summary for isop object
+summary.isop <- function( object, ... )
+{
     cat("-----------------------------------------------------------------\n")
-        d1 <- utils::packageDescription("sirt")
-        cat( paste( d1$Package, " ", d1$Version, " (", d1$Date, ")", sep=""), "\n\n" )
-        cat( "Date of Analysis:", paste( object$s2 ), "\n" )
+    d1 <- utils::packageDescription("sirt")
+    cat( paste( d1$Package, " ", d1$Version, " (", d1$Date, ")", sep=""), "\n\n" )
+    cat( "Date of Analysis:", paste( object$s2 ), "\n" )
+
     cat("ISOP and ADISOP Model \n")
     cat("-----------------------------------------------------------------\n")
     cat( "Number of persons=", dim(object$dat)[1], "\n" )
@@ -23,7 +24,7 @@ summary.isop <- function( object, ... ){
     obji[,3] <- round( obji[,3], 5 )
     if ( object$model=="np.dich" ){
         obji$fit <- round( c(NA,object$fit ), 4 )
-                    }
+    }
     print(obji)
 
     cat("*****************************************************************\n")
@@ -31,11 +32,10 @@ summary.isop <- function( object, ... ){
     obji <- object$item
     for (vv in 2:( ncol(obji))){
         obji[,vv] <- round( obji[,vv], 4 )
-                    }
+    }
     print(obji)
+}
 
-                }
-#*******************************************************
 
 
 

@@ -36,7 +36,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.2  |  2019-01-14  |  Last: sirt 3.2-32
+VERSIONS sirt 3.2  |  2019-02-07  |  Last: sirt 3.2-37
 ------------------------------------------------------------------------
 
 NOTE  * changes in estimation algorithm in noharm.sirt(). Disabled
@@ -53,13 +53,16 @@ NOTE  * included utility function linking_haberman_itempars_prepare()
 NOTE  * included utility function 'L0_polish'
 NOTE  * included automatic functionality for detecting linking of 
         1PL models in linking.haebara()
-
+NOTE  * included example for 2PL copula model (?rasch.copula, Example 1;
+        requested by Jarkko Hautala)
+ADDED * included utility functions invariance_alignment_cfa_config()
+        and invariance_alignment_simulate() for invariance
+        alignment (due to a discussion with Emily Harris)
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: noharm.sirt (1,2.3,3),
-        linking.haberman (6,7,8)
-
-
+        linking.haberman (6,7,8), rasch.copula2 (1),
+        invariance.alignment (7)
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.1  |  2019-01-04  |  Last: sirt 3.1-80

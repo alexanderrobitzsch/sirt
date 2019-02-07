@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.734
+%% File Version: 0.735
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -208,7 +208,7 @@ ETS Research Report ETS RR-09-40. Princeton, ETS. \cr
 https://doi.org/10.1002/j.2333-8504.2009.tb02197.x
 
 Kolen, M. J., & Brennan, R. L. (2014). \emph{Test equating, scaling, and linking:
-Methods and Practices}. New York: Springer.
+Methods and practices}. New York: Springer.
 
 Magis, D., & De Boeck, P. (2012). A robust outlier approach to prevent type I error
 inflation in differential item functioning.

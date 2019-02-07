@@ -1,0 +1,19 @@
+## File Name: invariance_alignment_cfa_config_estimate.R
+## File Version: 0.04
+
+invariance_alignment_cfa_config_estimate <- function(dat_gg, ...)
+{
+    I_gg <- ncol(dat_gg)
+    items_gg <- colnames(dat_gg)
+    lavmodel <- paste0("F=~", paste0(items_gg, collapse="+") )
+    mod <- lavaan::cfa(data=dat_gg, model=lavmodel, std.lv=TRUE,
+                meanstructure=TRUE, ...)
+    partable <- lavaan::parameterTable(object=mod)
+    lambda <- partable[ partable$op=="=~", "est"]
+    nu <- partable[ partable$op=="~1", "est"][1:I_gg]
+    err_var <- partable[ partable$op=="~~", "est"][1:I_gg]
+    nobs <- mod@Data@nobs[[1]]
+    #--- output
+    res <- list(lambda=lambda, nu=nu, err_var=err_var, nobs=nobs)
+    return(res)
+}

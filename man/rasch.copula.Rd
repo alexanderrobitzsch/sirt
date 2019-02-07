@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.729
+%% File Version: 1.732
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -273,6 +273,12 @@ mod2 <- sirt::rasch.copula2( dat=dat, itemcluster=itemcluster,
         delta=rep(0,3), est.delta=rep(0,3) )
 summary(mod1)
 summary(mod2)
+
+# estimate copula 2PL model
+I <- ncol(dat)
+mod3 <- sirt::rasch.copula2( dat=dat, itemcluster=itemcluster, est.a=1:I,
+                increment.factor=1.05)
+summary(mod3)
 
 \dontrun{
 #############################################################################

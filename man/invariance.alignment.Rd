@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.593
+%% File Version: 1.602
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -7,6 +7,8 @@
 %% \alias{plot.invariance.alignment}
 \alias{invariance_alignment_constraints}
 \alias{summary.invariance_alignment_constraints}
+\alias{invariance_alignment_simulate}
+\alias{invariance_alignment_cfa_config}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
@@ -23,6 +25,14 @@ with zero mean and a variance of one.
 The function \code{invariance_alignment_constraints} postprocesses the output of the
 \code{invariance.alignment} function and estimates item parameters under equality
 constraints for prespecified absolute values of parameter tolerance.
+
+The function \code{invariance_alignment_simulate} simulates a one-factor model
+for multiple groups for given matrices of \eqn{\nu} and \eqn{\lambda} parameters of
+item intercepts and item slopes (see Example 6).
+
+The function \code{invariance_alignment_cfa_config} estimates one-factor
+models separately for each group as a preliminary step for invariance
+alignment (see Example 6).
 }
 
 %% \emph{Note that this function is in an early experimental stage.}
@@ -38,6 +48,10 @@ invariance.alignment(lambda, nu, wgt=NULL, align.scale=c(1, 1),
 invariance_alignment_constraints(model, lambda_parm_tol, nu_parm_tol )
 
 \method{summary}{invariance_alignment_constraints}(object, digits=3, file=NULL, ...)
+
+invariance_alignment_simulate(nu, lambda, err_var, mu, sigma, N)
+
+invariance_alignment_cfa_config(dat, group, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -85,6 +99,12 @@ Further optional arguments to be passed}
 \item{model}{Model of class \code{invariance.alignment}}
 \item{lambda_parm_tol}{Parameter tolerance for \eqn{\lambda} parameters}
 \item{nu_parm_tol}{Parameter tolerance for \eqn{\nu} parameters}
+\item{err_var}{Error variance}
+\item{mu}{Vector of means}
+\item{sigma}{Vector of standard deviations}
+\item{N}{Vector of sample sizes per group}
+\item{dat}{Dataset with items}
+\item{group}{Vector containing group indicators}
 }
 
 \details{
@@ -161,28 +181,33 @@ A list with following entries
 \references{
 Asparouhov, T., & Muthen, B. (2014). Multiple-group factor analysis alignment.
 \emph{Structural Equation Modeling, 21}, 1-14.
+http://dx.doi.org/10.1080/10705511.2014.919210
 
 Byrne, B. M., & van de Vijver, F. J. R. (2017). The maximum likelihood alignment
 approach to testing for approximate measurement invariance:
 A paradigmatic cross-cultural application. \emph{Psicothema, 29}(4), 539-551.
+http://dx.doi.org/10.7334/psicothema2017.178
 
 Marsh, H. W., Guo, J., Parker, P. D., Nagengast, B., Asparouhov, T., Muthen, B.,
 & Dicke, T. (2018). What to do when scalar invariance fails: The extended alignment
 method for multi-group factor analysis comparison of latent means across many groups.
 \emph{Psychological Methods, 23}(3), 524-545.
+http://dx.doi.org/10.1037/met0000113
 
 Muthen, B., & Asparouhov, T. (2014). IRT studies of many groups: The alignment method.
-\emph{Frontiers in Psychology | Quantitative Psychology and Measurement, 5}:978.
-doi: 10.3389/fpsyg.2014.00978.
+\emph{Frontiers in Psychology | Quantitative Psychology and Measurement, 5}:978. \cr
+http://dx.doi.org/10.3389/fpsyg.2014.00978.
 
 Muthen, B., & Asparouhov, T. (2018). Recent methods for the study of measurement
 invariance with many groups: Alignment and random effects.
 \emph{Sociological Methods & Research, 47}(4), 637-664.
+http://dx.doi.org/10.1177/0049124117701488
 
 Vandenberg, R. J., & Lance, C. E. (2000). A review and synthesis of the
 measurement invariance literature: Suggestions, practices, and
 recommendations for organizational research. \emph{Organizational Research
 Methods, 3}, 4-70.
+http://dx.doi.org/10.1177/109442810031002
 }
 
 %\author{
@@ -208,7 +233,7 @@ see \code{\link{mcmc.2pno.ml}}.
 # EXAMPLE 1: Item parameters cultural activities
 #############################################################################
 
-data( data.activity.itempars )
+data(data.activity.itempars, package="sirt")
 lambda <- data.activity.itempars$lambda
 nu <- data.activity.itempars$nu
 Ng <-  data.activity.itempars$N
@@ -563,6 +588,55 @@ mod1 <- sirt::invariance.alignment( lambda, nu, eps=.01, optimizer="optim",
 summary(mod1)
 
 #--- find parameter constraints for prespecified tolerance
+cmod1 <- sirt::invariance_alignment_constraints(model=mod1, nu_parm_tol=.4,
+            lambda_parm_tol=.2 )
+summary(cmod1)
+
+#############################################################################
+# EXAMPLE 7: Similar to Example 6, but with data simulation and CFA estimation
+#############################################################################
+
+#--- data simulation
+
+set.seed(65)
+G <- 3  # number of groups
+I <- 5  # number of items
+# define lambda and nu parameters
+lambda <- matrix(1, nrow=G, ncol=I)
+nu <- matrix(0, nrow=G, ncol=I)
+err_var <- matrix(1, nrow=G, ncol=I)
+
+# define size of noninvariance
+dif <- 1
+#- 1st group: N(0,1)
+lambda[1,3] <- 1+dif*.4; nu[1,5] <- dif*.5
+#- 2nd group: N(0.3,1.5)
+gg <- 2 ;
+lambda[gg,5] <- 1-.5*dif; nu[gg,1] <- -.5*dif
+#- 3nd group: N(.8,1.2)
+gg <- 3
+lambda[gg,4] <- 1-.7*dif; nu[gg,2] <- -.5*dif
+#- define distributions of groups
+mu <- c(0,.3,.8)
+sigma <- sqrt(c(1,1.5,1.2))
+N <- rep(1000,3) # sample sizes per group
+
+#* simulate data
+dat <- sirt::invariance_alignment_simulate(nu, lambda, err_var, mu, sigma, N)
+head(dat)
+
+#--- estimate CFA models
+pars <- sirt::invariance_alignment_cfa_config(dat[,-1], group=dat$group)
+print(pars)
+
+#--- invariance alignment
+# define alignment scale
+align.scale <- c(.2,.4)
+# define alignment powers
+align.pow <- c(.25,.25)
+mod1 <- sirt::invariance.alignment( lambda=pars$lambda, nu=pars$nu, eps=.01,
+            optimizer="optim", align.scale=align.scale, align.pow=align.pow, center=FALSE)
+#* find parameter constraints for prespecified tolerance
 cmod1 <- sirt::invariance_alignment_constraints(model=mod1, nu_parm_tol=.4,
             lambda_parm_tol=.2 )
 summary(cmod1)
