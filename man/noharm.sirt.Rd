@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.533
+%% File Version: 0.535
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -22,9 +22,9 @@ fixed values.
 
 \usage{
 noharm.sirt(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NULL, Pval=NULL,
-   Ppatt=NULL, Psival=NULL, Psipatt=NULL, dimensions=NULL,
-   lower=0, upper=1, wgtm=NULL, pos.loading=FALSE, pos.variance=FALSE,  pos.residcorr=FALSE,
-   maxiter=1000, conv=1e-6, optimizer="nlminb", par_lower=NULL, reliability=FALSE, \dots)
+   Ppatt=NULL, Psival=NULL, Psipatt=NULL, dimensions=NULL, lower=0, upper=1, wgtm=NULL,
+   pos.loading=FALSE, pos.variance=FALSE, pos.residcorr=FALSE, maxiter=1000, conv=1e-6,
+   optimizer="nlminb", par_lower=NULL, reliability=FALSE, \dots)
 
 \method{summary}{noharm.sirt}(object, file=NULL, \dots)
 }

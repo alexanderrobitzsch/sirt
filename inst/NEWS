@@ -36,7 +36,19 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.2  |  2019-02-07  |  Last: sirt 3.2-37
+VERSIONS sirt 3.3  |  2019-02-08  |  Last: sirt 3.3-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 3.2  |  2019-02-08  |  Last: sirt 3.2-39
 ------------------------------------------------------------------------
 
 NOTE  * changes in estimation algorithm in noharm.sirt(). Disabled

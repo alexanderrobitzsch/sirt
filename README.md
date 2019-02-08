@@ -4,7 +4,7 @@
 
 If you use `sirt` and have suggestions for improvement or have found bugs, please email me at robitzsch@ipn.uni-kiel.de.
 
-#### CRAN version `sirt` 3.1-80 (2019-01-04)
+#### CRAN version `sirt` 3.2-39 (2019-02-08)
 
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version-last-release/sirt)](https://cran.r-project.org/package=sirt)
@@ -18,9 +18,9 @@ The CRAN version can be installed from within R using:
 utils::install.packages("sirt")
 ```
 
-#### GitHub version `sirt` 3.2-37 (2019-02-07)
+#### GitHub version `sirt` 3.3-1 (2019-02-08)
 
-[![](https://img.shields.io/badge/github%20version-3.2--37-orange.svg)](https://github.com/alexanderrobitzsch/sirt)&#160;&#160;
+[![](https://img.shields.io/badge/github%20version-3.3--1-orange.svg)](https://github.com/alexanderrobitzsch/sirt)&#160;&#160;
 
 The version hosted [here](https://github.com/alexanderrobitzsch/sirt) is the development version of `sirt`. 
 The GitHub version can be installed using `devtools` as:

@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.602
+%% File Version: 1.603
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -196,7 +196,7 @@ http://dx.doi.org/10.1037/met0000113
 
 Muthen, B., & Asparouhov, T. (2014). IRT studies of many groups: The alignment method.
 \emph{Frontiers in Psychology | Quantitative Psychology and Measurement, 5}:978. \cr
-http://dx.doi.org/10.3389/fpsyg.2014.00978.
+http://dx.doi.org/10.3389/fpsyg.2014.00978
 
 Muthen, B., & Asparouhov, T. (2018). Recent methods for the study of measurement
 invariance with many groups: Alignment and random effects.
