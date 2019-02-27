@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_als_residual_weights.R
-## File Version: 0.370
+## File Version: 0.371
 
 
 linking_haberman_als_residual_weights <- function( logaj, logaAt,
@@ -28,7 +28,7 @@ linking_haberman_als_residual_weights <- function( logaj, logaAt,
     #-- estimation BSQ or HUB
     if (estimation %in% c("BSQ","HUB") ){
         if (cutoff==Inf ){
-            k <- k_fac*MAR_normalized(x=loga_resid)
+            k <- k_fac*mad_normalized(x=loga_resid)
             k_estimate <- TRUE
             cutoff <- k + eps_k
         }

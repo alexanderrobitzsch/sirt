@@ -36,13 +36,17 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.3  |  2019-02-08  |  Last: sirt 3.3-1
+VERSIONS sirt 3.3  |  2019-02-27  |  Last: sirt 3.3-6
 ------------------------------------------------------------------------
 
-xxx   * ...
+ADDED * included sampling weights for invariance alignment in function
+        invariance_alignment_cfa_config()
+FIXED * fixed numerical instabilities in wle.rasch()
+        (thanks to Tom Tinkler)
+
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: invariance.alignment (7)
 
 
 

@@ -1,19 +1,20 @@
 ## File Name: Rhat_sirt.R
-## File Version: 1.08
+## File Version: 1.09
 
 
 ####################################
 # auxiliary functions for Rhat statistic
-        ############################################################################
-        # Code from rube package
-        # Source: http://www.stat.cmu.edu/~hseltman/rube/rube0.2-16/R/Rhat.R
-        # Inference from Iterative Simulation Using Multiple Sequences
-        # Author(s): Andrew Gelman and Donald B. Rubin
-        # Source: Statistical Science, Vol. 7, No. 4 (Nov., 1992), pp. 457-472
-        # Stable URL: http://www.jstor.org/stable/2246093
-        ## Matches gelman.diag() from package "coda", but not WinBUGS() "summary" component.
-        ## Better than gelman.diag() because multivariate stat is not bothered to be calculated
-Rhat1 <- function(mat) {
+    ############################################################################
+    # Code from rube package
+    # Source: http://www.stat.cmu.edu/~hseltman/rube/rube0.2-16/R/Rhat.R
+    # Inference from Iterative Simulation Using Multiple Sequences
+    # Author(s): Andrew Gelman and Donald B. Rubin
+    # Source: Statistical Science, Vol. 7, No. 4 (Nov., 1992), pp. 457-472
+    # Stable URL: http://www.jstor.org/stable/2246093
+    ## Matches gelman.diag() from package "coda", but not WinBUGS() "summary" component.
+    ## Better than gelman.diag() because multivariate stat is not bothered to be calculated
+Rhat1 <- function(mat)
+{
     m <- ncol(mat)
     n <- nrow(mat)
     b <- apply(mat,2,mean)
@@ -32,11 +33,11 @@ Rhat1 <- function(mat) {
 }
 
 
-
-Rhat <- function(arr) {
-            dm <- dim(arr)
-            if (length(dm)==2) return(Rhat1(arr))
-            if (dm[2]==1) return(NULL)
-            if (dm[3]==1) return(Rhat1(arr[,,1]))
-            return(apply(arr,3,Rhat1))
-        }
+Rhat <- function(arr)
+{
+    dm <- dim(arr)
+    if (length(dm)==2) return(Rhat1(arr))
+    if (dm[2]==1) return(NULL)
+    if (dm[3]==1) return(Rhat1(arr[,,1]))
+    return(apply(arr,3,Rhat1))
+}

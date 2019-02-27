@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.603
+%% File Version: 1.606
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -32,7 +32,8 @@ item intercepts and item slopes (see Example 6).
 
 The function \code{invariance_alignment_cfa_config} estimates one-factor
 models separately for each group as a preliminary step for invariance
-alignment (see Example 6).
+alignment (see Example 6). Sampling weights are accommodated by the
+argument \code{weights}.
 }
 
 %% \emph{Note that this function is in an early experimental stage.}
@@ -51,7 +52,7 @@ invariance_alignment_constraints(model, lambda_parm_tol, nu_parm_tol )
 
 invariance_alignment_simulate(nu, lambda, err_var, mu, sigma, N)
 
-invariance_alignment_cfa_config(dat, group, ...)
+invariance_alignment_cfa_config(dat, group, weights=NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -640,6 +641,15 @@ mod1 <- sirt::invariance.alignment( lambda=pars$lambda, nu=pars$nu, eps=.01,
 cmod1 <- sirt::invariance_alignment_constraints(model=mod1, nu_parm_tol=.4,
             lambda_parm_tol=.2 )
 summary(cmod1)
+
+#--- estimate CFA models with sampling weights
+
+#* simulate weights
+weights <- stats::runif(sum(N), 0, 2)
+#* estimate models
+pars2 <- sirt::invariance_alignment_cfa_config(dat[,-1], group=dat$group, weights=weights)
+print(pars2$nu)
+print(pars$nu)
 }
 }
 

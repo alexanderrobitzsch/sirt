@@ -1,8 +1,8 @@
 ## File Name: data.wide2long.R
-## File Version: 0.24
+## File Version: 0.25
 
-#####################################################################
-# converts a data frame in wide format into long format
+
+#--- converts a data frame in wide format into long format
 data.wide2long <- function( dat, id=NULL, X=NULL, Q=NULL)
 {
     items <- setdiff( colnames(dat), id )
@@ -12,14 +12,12 @@ data.wide2long <- function( dat, id=NULL, X=NULL, Q=NULL)
     dat2 <- data.frame( dat1 )
     colnames(dat2) <- "resp"
     dat1 <- data.frame( "id_index"=rep( 1:N, each=I ) )
-
     if ( ! is.null(id) ){
         dat1 <- cbind( dat1, rep( dat[, id], each=I ) )
         colnames(dat1)[2] <- id
     }
-    dat1 <- cbind( dat1,  "item"=rep( items, N ),
-                "item_index"=rep(1:I, N ),
-                "resp"=dat2$resp )
+    dat1 <- cbind( dat1, item=rep( items, N ), item_index=rep(1:I, N),
+                    resp=dat2$resp )
     if ( ! is.null(X) ){
         dat1 <- cbind( dat1, X[ rep(1:N, each=I ), ] )
     }
@@ -38,4 +36,4 @@ data.wide2long <- function( dat, id=NULL, X=NULL, Q=NULL)
     dat1 <- data.frame( "rowindex"=1:(N*I), dat1 )
     return(dat1)
 }
-#####################################################################
+

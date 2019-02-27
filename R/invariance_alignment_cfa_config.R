@@ -1,8 +1,8 @@
 ## File Name: invariance_alignment_cfa_config.R
-## File Version: 0.12
+## File Version: 0.16
 
 
-invariance_alignment_cfa_config <- function(dat, group, ...)
+invariance_alignment_cfa_config <- function(dat, group, weights=NULL, ...)
 {
     groups <- unique(group)
     G <- length(groups)
@@ -15,12 +15,17 @@ invariance_alignment_cfa_config <- function(dat, group, ...)
     colnames(nu) <- items
     lambda <- nu
     err_var <- nu
+    weights_gg <- NULL
     for (gg in 1:G){
         dat_gg <- dat[ group==groups[gg], ]
         dat_gg <- dat_gg[, colMeans(is.na(dat_gg)) < 1 ]
         items_gg <- colnames(dat_gg)
         ind_gg <- match(items_gg, items)
-        res <- invariance_alignment_cfa_config_estimate(dat_gg=dat_gg, ...)
+        if (!is.null(weights)){
+            weights_gg <- weights[ind_gg]
+        }
+        res <- invariance_alignment_cfa_config_estimate(dat_gg=dat_gg,
+                        weights=weights_gg, ...)
         nu[gg, ind_gg] <- res$nu
         lambda[gg, ind_gg] <- res$lambda
         err_var[gg, ind_gg] <- res$err_var
