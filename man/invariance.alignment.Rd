@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.606
+%% File Version: 1.607
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -106,6 +106,7 @@ Further optional arguments to be passed}
 \item{N}{Vector of sample sizes per group}
 \item{dat}{Dataset with items}
 \item{group}{Vector containing group indicators}
+\item{weights}{Optional vector of sampling weights}
 }
 
 \details{

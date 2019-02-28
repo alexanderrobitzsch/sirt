@@ -1,5 +1,5 @@
 ## File Name: summary.lsem.R
-## File Version: 0.33
+## File Version: 0.35
 
 #############################################
 # summary lsem
@@ -12,8 +12,12 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
     cat("Local Structural Equation Model \n\n")
 
     #-- print packages
-    packages <- c("sirt", "lavaan", "lavaan.survey")
+    packages <- c("sirt", "lavaan")
+    if (object$use_lavaan_survey){
+        packages <- c(packages, "lavaan.survey")
+    }
     sirt_summary_print_packages(packages=packages)
+
     #-- print R session
     cat("\n")
     sirt_summary_print_rsession()

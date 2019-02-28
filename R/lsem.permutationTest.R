@@ -1,5 +1,5 @@
 ## File Name: lsem.permutationTest.R
-## File Version: 0.38
+## File Version: 0.44
 
 ############################################
 # permutation test for LSEM model
@@ -31,6 +31,8 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
     arglist$standardized <- lsem.object$standardized
     arglist$standardized_type <- lsem.object$standardized_type
     arglist$lavaan_fct <- lsem.object$lavaan_fct
+    use_lavaan_survey <- arglist$use_lavaan_survey <- lsem.object$use_lavaan_survey
+    arglist$pseudo_weights <- lsem.object$pseudo_weights
 
     data1 <- data0 <- object$data
     parameters <- object$parameters
@@ -128,6 +130,7 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
                      moderator.grid=object$moderator.grid,
                      h=object$h, bw=object$bw, N=object$N,
                      nonconverged_rate=nonconverged_rate,
+                     use_lavaan_survey=use_lavaan_survey,
                      B=B, s1=s1, s2=s2, lavmodel=object$lavmodel, CALL=CALL
                             )
     class(res) <- "lsem.permutationTest"

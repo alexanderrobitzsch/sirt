@@ -143,7 +143,6 @@ importFrom(lavaan, parameterEstimates)
 importFrom(lavaan, parameterTable)
 importFrom(lavaan, standardizedSolution)
 importFrom(lavaan, sem)
-importFrom(lavaan.survey, lavaan.survey)
 importFrom(MASS, ginv)
 importFrom(mirt, extract.item)
 importFrom(mirt, mirt)
@@ -153,8 +152,8 @@ importFrom(mirt, probtrace)
 importFrom(mvtnorm, dmvnorm)
 importFrom(mvtnorm, pmvnorm)
 # importFrom(mvtnorm, rmvnorm) # replaced by CDM::CDM_rmvnorm
-importFrom(sfsmisc, QUnif)
-importFrom(survey, svydesign)
+
+
 
  #*** not imported anymore
  # import(qgraph)
@@ -169,14 +168,16 @@ importFrom(survey, svydesign)
 # require_namespace_msg("another_package")
 
 # importFrom(igraph, graph.edgelist)
+# importFrom(lavaan.survey, lavaan.survey)
 # importFrom(Matrix, bdiag)
 # importFrom(pbivnorm, pbivnorm)
 # importFrom(psych, cor.smooth)
 # importFrom(psych, fa)
 # importFrom(psych, omega)
+# importFrom(sfsmisc, QUnif)
 # importFrom(sm, h.select)
 # importFrom(sm, sm.binomial)
-
+# importFrom(survey, svydesign)
 
 
 ####################################################
@@ -241,6 +242,7 @@ export(lsdm)
 export(lsem.estimate)
 export(lsem.MGM.stepfunctions)
 export(lsem.permutationTest)
+export(lsem_local_weights)
 export(marginal.truescore.reliability)
 export(mcmc.2pno)
 export(mcmc.2pno.ml)

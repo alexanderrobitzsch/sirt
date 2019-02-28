@@ -1,11 +1,12 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.64
+%% File Version: 0.680
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
 \alias{summary.lsem}
 \alias{plot.lsem}
 \alias{lsem.MGM.stepfunctions}
+\alias{lsem_local_weights}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
@@ -26,12 +27,16 @@ The LSEM can be tested by employing a permutation test, see
 The function \code{lsem.MGM.stepfunctions} outputs stepwise functions
 for a multiple group model evaluated at a grid of focal points of the
 moderator, specified in \code{moderator.grid}.
+
+The argument \code{pseudo_weights} provides an ad hoc solution to estimate
+an LSEM for any model which can be fitted in \pkg{lavaan}.
 }
 \usage{
 lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1,
     residualize=TRUE, fit_measures=c("rmsea", "cfi", "tli", "gfi", "srmr"),
     standardized=FALSE, standardized_type="std.all",
-    lavaan_fct="sem", sufficient_statistics=FALSE, eps=1e-08, verbose=TRUE, ...)
+    lavaan_fct="sem", sufficient_statistics=FALSE, use_lavaan_survey=FALSE,
+    pseudo_weights=0, eps=1e-08, verbose=TRUE, ...)
 
 \method{summary}{lsem}(object, file=NULL, digits=3, ...)
 
@@ -40,6 +45,9 @@ lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1,
        digits=3, ...)
 
 lsem.MGM.stepfunctions( object, moderator.grid )
+
+# compute local weights
+lsem_local_weights(data.mod, moderator.grid, h)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -90,6 +98,15 @@ should be used.
 means and covariances should be used for model fitting. This option
 must be used if the data contain missing values. Note that this approach is
 only valid for missing completely at random (MCAR) data.}
+\item{use_lavaan_survey}{Logical indicating whether estimation should be
+conducted with \pkg{lavaan.survey} package.}
+\item{pseudo_weights}{Integer defining a factor which is multiplied to weights.
+The resulting number is rounded to integers. This approach is referred as
+a pseudo weighting approach. For example, using \code{pseudo_weights=50} implies
+that observations with local weight of 1 are replicated 50 times in the dataset,
+while observations with local weight of .05 occur three times in the
+dataset (because \code{round(.05*50)=round(2.5)=3}).
+}
   \item{eps}{
 Minimum number for weights
 }
@@ -114,6 +131,7 @@ Optional logical printing information about computation progress.
 Further arguments to be passed to \code{\link[lavaan:sem]{lavaan::sem}} or
 \code{\link[lavaan:lavaan]{lavaan::lavaan}}.
 }
+\item{data.mod}{Observed values of the moderator}
 }
 
 %\details{
@@ -210,6 +228,11 @@ mod1b <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.gri
                lavmodel=lavmodel, h=2, std.lv=TRUE, sufficient_statistics=TRUE )
 summary(mod1b)
 
+#** estimate Model 1 based on pseudo weights
+mod1c <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+               lavmodel=lavmodel, h=2, std.lv=TRUE, pseudo_weights=50 )
+summary(mod1c)
+
 #********************************
 #*** Model 2: estimate multiple group model with 4 age groups
 
@@ -258,6 +281,67 @@ mod4 <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid
 summary(mod4)
 # permutation test
 pmod1 <- sirt::lsem.permutationTest( mod4, B=3 )
+
+#**** compute LSEM local weights
+wgt <- sirt::lsem_local_weights(data.mod=dat$age, moderator.grid=moderator.grid,
+             h=2)$weights
+print(str(weights))
+
+#############################################################################
+# EXAMPLE 2: data.lsem01 | FIML with missing data
+#############################################################################
+
+data(data.lsem01)
+dat <- data.lsem01
+# induce artifical missing values
+set.seed(98)
+dat[ runif(nrow(dat)) < .5, c("v1")] <- NA
+dat[ runif(nrow(dat)) < .25, c("v2")] <- NA
+
+# specify lavaan model
+lavmodel1 <- "
+        F=~ v1+v2+v3+v4+v5
+        F ~~ 1*F"
+
+# define grid of moderator variable age
+moderator.grid <- seq(4,23,2)
+
+#*** estimate LSEM with FIML
+mod1 <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+                lavmodel=lavmodel1, h=2, std.lv=TRUE, estimator="ML", missing="fiml")
+summary(mod1)
+
+#############################################################################
+# EXAMPLE 3: data.lsem01 | WLSMV estimation
+#############################################################################
+
+data(data.lsem01)
+dat <- data.lsem01
+
+# create artificial dichotomous data
+for (vv in 2:6){
+dat[,vv] <- 1*(dat[,vv] > mean(dat[,vv]))
+}
+
+# specify lavaan model
+lavmodel1 <- "
+        F=~ v1+v2+v3+v4+v5
+        F ~~ 1*F
+        v1 | t1
+        v2 | t1
+        v3 | t1
+        v4 | t1
+        v5 | t1
+        "
+
+# define grid of moderator variable age
+moderator.grid <- seq(4,23,5)
+
+#*** local WLSMV estimation
+mod1 <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+          lavmodel=lavmodel1, h=2, std.lv=TRUE, estimator="DWLS", ordered=paste0("v",1:5),
+          residualize=FALSE, pseudo_weights=30, parameterization="THETA" )
+summary(mod1)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

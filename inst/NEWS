@@ -36,17 +36,31 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.3  |  2019-02-27  |  Last: sirt 3.3-6
+VERSIONS sirt 3.3  |  2019-02-28  |  Last: sirt 3.3-11
 ------------------------------------------------------------------------
 
 ADDED * included sampling weights for invariance alignment in function
         invariance_alignment_cfa_config()
 FIXED * fixed numerical instabilities in wle.rasch()
         (thanks to Tom Tinkler)
+FIXED * fixed a bug in lsem.estimate() when sufficient_statistics=TRUE 
+        is applied in case of missing data
+        (thanks to Johanna Hartung) 
+NOTE  * lsem.estimate() does not use anymore the lavaan.survey package
+        as the default. The behavior of previuous versions can be 
+        obtained with the argument value 'use_lavaan_survey=TRUE'.
+ADDED * added argument 'pseudo_weights' in lsem.estimate() which provides
+        an ad-hoc solution for fitting LSEMs for all lavaan models.
+        FIML and WLSMV is now possible in lsem.estimate, see
+        Examples 2 and 3 (requested by Ulrich Schroeders and
+        Andrea Hildebrandt)
+ADDED * added utility function lsem_local_weights() for computing
+        local weights for LSEMs
 
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: invariance.alignment (7)
+EXAMP * included/modified examples: invariance.alignment (7),
+        lsem.estimate (1,2,3)
 
 
 

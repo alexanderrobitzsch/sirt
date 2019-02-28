@@ -1,18 +1,18 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.44
+## File Version: 0.472
 
-##############################################################
 lsem_fitsem <- function( dat, weights, lavfit,
             fit_measures, NF, G, moderator.grid, verbose,
             pars, standardized, variables_model,
             sufficient_statistics, lavaan_fct, lavmodel,
-            ... )
+            use_lavaan_survey=TRUE, pseudo_weights=0, ... )
 {
 
     parameters <- NULL
     fits <- NULL
+    survey.fit <- lavfit
     pars0 <- pars
-    env_temp <- environment()
+    lavaan_est_fun <- lsem_define_lavaan_est_fun(lavaan_fct=lavaan_fct)
 
     if (verbose){
         cat( "** Fit lavaan model\n")
@@ -25,16 +25,24 @@ lsem_fitsem <- function( dat, weights, lavfit,
     }
 
     for (gg in 1:G){
-        # gg <- 1
         dat$weight <- weights[,gg]
         #***** fit the model using weighted data
         if (! sufficient_statistics){
-            datsvy <- survey::svydesign(id=~index, weights=~weight, data=dat)
-            # assign(x="lavmodel__", value=lavmodel, pos=1)
-            assign_args <- list( x="lavmodel__", value=lavmodel, pos=1)
-            res0 <- do.call( what="assign", args=assign_args)
-            survey.fit <- lavaan.survey::lavaan.survey(lavaan.fit=lavfit,
-                                survey.design=datsvy )
+            if (use_lavaan_survey){
+                survey.fit <- lsem_fitsem_raw_data_lavaan_survey(dat=dat,
+                                    lavmodel=lavmodel, lavfit=lavfit)
+            }
+            if (! use_lavaan_survey){
+                res <- lsem_fitsem_raw_data_define_pseudo_weights(dat=dat,
+                            pseudo_weights=pseudo_weights)
+                dat1 <- res$dat
+                sampling_weights <- res$sampling_weights
+                # use starting values
+                partable <- lavaan::parameterTable(object=survey.fit)
+                partable$start <- partable$est
+                survey.fit <- lavaan_est_fun(model=partable, data=dat1,
+                                sampling.weights=sampling_weights, ... )
+            }
         }
         #***** fit the model using sufficient statistics
         if (sufficient_statistics){
@@ -42,24 +50,17 @@ lsem_fitsem <- function( dat, weights, lavfit,
             wmean <- res$mean
             res <- lsem_weighted_cov( x=dat[, variables_model], weights=dat$weight )
             wcov <- res$cov
-            Nobs <- round( res$Nobs )
-            if (lavaan_fct=="sem"){
-                survey.fit <- lavaan::sem(model=lavmodel, sample.cov=wcov,
+            Nobs <- round(res$Nobs)
+            survey.fit <- lavaan_est_fun(model=lavmodel, sample.cov=wcov,
                                 sample.mean=wmean, sample.nobs=Nobs, ... )
-            }
-            if (lavaan_fct=="lavaan"){
-                survey.fit <- lavaan::lavaan(model=lavmodel, sample.cov=wcov,
-                                sample.mean=wmean, sample.nobs=Nobs, ... )
-            }
         }
 
-        dfr.gg <- pars <- lavaan::parameterEstimates(survey.fit)
+        dfr.gg <- pars <- lavaan::parameterEstimates(object=survey.fit)
         if (standardized){
-            sol <- lavaan::standardizedSolution( survey.fit )
+            sol <- lavaan::standardizedSolution(object=survey.fit)
             colnames(sol)[ which( colnames(sol)=="est.std" ) ] <- "est"
             sol$lhs <- paste0( "std__", sol$lhs)
             pars <- sirt_rbind_fill( x=pars, y=sol )
-            # pars <- plyr::rbind.fill( pars, sol )
             dfr.gg <- pars
         }
         pars <- paste0( pars$lhs, pars$op, pars$rhs )
@@ -68,10 +69,10 @@ lsem_fitsem <- function( dat, weights, lavfit,
         dfr.gg <- dfr.gg[ ind, ]
         dfr.gg <- data.frame("grid_index"=gg, "moderator"=moderator.grid[gg],
                           "par"=pars0, "parindex"=1:NP, dfr.gg    )
+        est_fit <- lavaan::fitMeasures(object=survey.fit, fit.measures=fit_measures )
         dfr.gg0 <- data.frame("grid_index"=gg, "moderator"=moderator.grid[gg],
                           "par"=fit_measures, "parindex"=NP + 1:NF,
-                          "est"=lavaan::fitMeasures(survey.fit, fit.measures=fit_measures ),
-                          "op"="fit" )
+                          "est"=est_fit, "op"="fit" )
         vars <- setdiff( colnames(dfr.gg), colnames(dfr.gg0) )
         for (vv in vars){ dfr.gg0[,vv] <- NA }
         dfr.gg <- rbind( dfr.gg, dfr.gg0[, colnames(dfr.gg) ] )
@@ -93,6 +94,5 @@ lsem_fitsem <- function( dat, weights, lavfit,
     res <- list( parameters=parameters )
     return(res)
 }
-#######################################################################
 
 lsem.fitsem <- lsem_fitsem

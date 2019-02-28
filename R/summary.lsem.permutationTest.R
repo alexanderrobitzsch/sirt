@@ -1,5 +1,5 @@
 ## File Name: summary.lsem.permutationTest.R
-## File Version: 0.28
+## File Version: 0.292
 ######################################################
 summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... )
 {
@@ -10,7 +10,10 @@ summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... )
     cat("-----------------------------------------------------------------\n")
     cat("Permutation Test for Local Structural Equation Model \n\n")
 
-    packages <- c("sirt", "lavaan", "lavaan.survey")
+    packages <- c("sirt", "lavaan")
+    if (object$use_lavaan_survey){
+        packages <- c(packages, "lavaan.survey")
+    }
     sirt_summary_print_packages(packages=packages)
 
     cat("\nFunction 'sirt::lsem.permutationTest' \n\n")

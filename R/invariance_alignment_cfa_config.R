@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_cfa_config.R
-## File Version: 0.16
+## File Version: 0.17
 
 
 invariance_alignment_cfa_config <- function(dat, group, weights=NULL, ...)
@@ -25,7 +25,7 @@ invariance_alignment_cfa_config <- function(dat, group, weights=NULL, ...)
             weights_gg <- weights[ind_gg]
         }
         res <- invariance_alignment_cfa_config_estimate(dat_gg=dat_gg,
-                        weights=weights_gg, ...)
+                        weights_gg=weights_gg, ...)
         nu[gg, ind_gg] <- res$nu
         lambda[gg, ind_gg] <- res$lambda
         err_var[gg, ind_gg] <- res$err_var

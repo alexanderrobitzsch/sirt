@@ -1,14 +1,13 @@
 ## File Name: lsem.estimate.R
-## File Version: 0.894
+## File Version: 0.917
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
         lavmodel, type="LSEM", h=1.1,
         residualize=TRUE, fit_measures=c("rmsea","cfi","tli","gfi","srmr"),
-        standardized=FALSE,
-        standardized_type="std.all",
+        standardized=FALSE, standardized_type="std.all",
         lavaan_fct="sem", sufficient_statistics=FALSE,
-        eps=1E-8, verbose=TRUE, ... )
+        use_lavaan_survey=FALSE, pseudo_weights=0, eps=1E-8, verbose=TRUE, ... )
 {
 
     CALL <- match.call()
@@ -20,6 +19,9 @@ lsem.estimate <- function( data, moderator, moderator.grid,
             stop("standardized=TRUE cannot be applied for type='MGM'")
         }
     }
+    if (sufficient_statistics){ use_lavaan_survey <- FALSE }
+    if (pseudo_weights>0){ use_lavaan_survey <- FALSE }
+
     # group moderator if type="MGM"
     out <- lsem_group_moderator( data=data, type=type, moderator.grid=moderator.grid,
                 moderator=moderator, residualize=residualize, h=h )
@@ -39,12 +41,11 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     # unweighted fit of lavaan model
     dat <- data
     lavmodel__ <- lavmodel
-    if (lavaan_fct=="sem"){
-        lavfit <- lavaan::sem(model=lavmodel__, data=dat,  ... )
-    }
-    if (lavaan_fct=="lavaan"){
-        lavfit <- lavaan::lavaan(model=lavmodel__, data=dat,  ... )
-    }
+
+    #* fit lavaan model
+    lavaan_est_fun <- lsem_define_lavaan_est_fun(lavaan_fct=lavaan_fct)
+    lavfit <- lavaan_est_fun(model=lavmodel__, data=dat,  ... )
+
     # extract variables which are in model and data frame
     partable <- pars <- lavaan::parameterEstimates(lavfit)
     variables_model <- intersect( union( partable$lhs, partable$rhs ), colnames(dat) )
@@ -65,7 +66,9 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     moderator.grid=moderator.grid, verbose=verbose, pars=pars,
                     standardized=standardized, variables_model=variables_model,
                     sufficient_statistics=sufficient_statistics,
-                    lavaan_fct=lavaan_fct, lavmodel=lavmodel, ... )
+                    lavaan_fct=lavaan_fct, lavmodel=lavmodel,
+                    use_lavaan_survey=use_lavaan_survey, pseudo_weights=pseudo_weights,
+                    ... )
     parameters <- out2$parameters
     rownames(parameters) <- paste0( parameters$par, "__", parameters$grid_index )
 
@@ -87,8 +90,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     dfr0 <- data.frame("M"=mean( data[,moderator], na.rm=TRUE ),
                 "SD"=out$sd.moderator,
                 "min"=min( data[, moderator ], na.rm=TRUE ),
-                "max"=max( data[, moderator ], na.rm=TRUE )
-                            )
+                "max"=max( data[, moderator ], na.rm=TRUE ) )
     obji <- rbind( dfr0, dfr )
     rownames(obji) <- NULL
     moderator.stat <- data.frame("variable"=c("moderator",
@@ -111,8 +113,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     fit_measures=fit_measures, s1=s1, s2=s2,
                     standardized=standardized,
                     standardized_type=standardized_type,
-                    lavaan_fct=lavaan_fct,
-                    type=type, CALL=CALL )
+                    lavaan_fct=lavaan_fct, use_lavaan_survey=use_lavaan_survey,
+                    pseudo_weights=pseudo_weights, type=type, CALL=CALL )
     class(res) <- "lsem"
     return(res)
 }
