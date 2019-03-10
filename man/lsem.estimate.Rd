@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.680
+%% File Version: 0.687
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -62,8 +62,7 @@ Focal points at which the LSEM should be evaluated. If \code{type="MGM"},
 breaks are defined in this vector.
 }
   \item{lavmodel}{
-Specified SEM in \pkg{lavaan}. The function
-\code{\link[lavaan:sem]{lavaan::sem}} (\pkg{lavaan}) is used.
+Specified SEM in \pkg{lavaan}.
 }
 \item{type}{Type of estimated model. The default is \code{type="LSEM"} which means
     that a local structural equation model is estimated.
@@ -90,8 +89,10 @@ The types are described in
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution}}.
 }
 \item{lavaan_fct}{String whether
-\code{\link[lavaan:lavaan]{lavaan::lavaan}} (\code{lavaan_fct="lavaan"}) or
-\code{\link[lavaan:sem]{lavaan::sem}} (\code{lavaan_fct="sem"})
+\code{\link[lavaan:lavaan]{lavaan::lavaan}} (\code{lavaan_fct="lavaan"}),
+\code{\link[lavaan:sem]{lavaan::sem}} (\code{lavaan_fct="sem"}),
+\code{\link[lavaan:cfa]{lavaan::cfa}} (\code{lavaan_fct="cfa"}) or
+\code{\link[lavaan:growth]{lavaan::growth}} (\code{lavaan_fct="growth"})
 should be used.
 }
 \item{sufficient_statistics}{Logical whether sufficient statistics of weighted
@@ -100,12 +101,11 @@ must be used if the data contain missing values. Note that this approach is
 only valid for missing completely at random (MCAR) data.}
 \item{use_lavaan_survey}{Logical indicating whether estimation should be
 conducted with \pkg{lavaan.survey} package.}
-\item{pseudo_weights}{Integer defining a factor which is multiplied to weights.
-The resulting number is rounded to integers. This approach is referred as
-a pseudo weighting approach. For example, using \code{pseudo_weights=50} implies
-that observations with local weight of 1 are replicated 50 times in the dataset,
-while observations with local weight of .05 occur three times in the
-dataset (because \code{round(.05*50)=round(2.5)=3}).
+\item{pseudo_weights}{Integer defining a target sample size. Local weights
+are multiplied by a factor which is rounded to integers.
+This approach is referred as a pseudo weighting approach.
+For example, using \code{pseudo_weights=30000} implies
+that the sum of local weights at each focal point is \code{30000}.
 }
   \item{eps}{
 Minimum number for weights
@@ -335,12 +335,12 @@ lavmodel1 <- "
         "
 
 # define grid of moderator variable age
-moderator.grid <- seq(4,23,5)
+moderator.grid <- seq(4,23,2)
 
 #*** local WLSMV estimation
 mod1 <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
           lavmodel=lavmodel1, h=2, std.lv=TRUE, estimator="DWLS", ordered=paste0("v",1:5),
-          residualize=FALSE, pseudo_weights=30, parameterization="THETA" )
+          residualize=FALSE, pseudo_weights=10000, parameterization="THETA" )
 summary(mod1)
 }
 }

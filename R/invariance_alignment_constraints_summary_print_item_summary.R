@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_constraints_summary_print_item_summary.R
-## File Version: 0.07
+## File Version: 0.08
 
 invariance_alignment_constraints_summary_print_item_summary <- function(x, digits)
 {
@@ -21,5 +21,9 @@ invariance_alignment_constraints_summary_print_item_summary <- function(x, digit
 
     cat("\nEstimated item parameters\n")
     obji <- x$parm_est
+    sirt_summary_print_objects(obji=obji, digits=digits, from=1, rownames_null=FALSE)
+
+    cat("\nEstimated DIF effects\n")
+    obji <- x$parm_dif
     sirt_summary_print_objects(obji=obji, digits=digits, from=1, rownames_null=FALSE)
 }

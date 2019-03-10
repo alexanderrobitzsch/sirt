@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.472
+## File Version: 0.478
 
 lsem_fitsem <- function( dat, weights, lavfit,
             fit_measures, NF, G, moderator.grid, verbose,
@@ -26,6 +26,7 @@ lsem_fitsem <- function( dat, weights, lavfit,
 
     for (gg in 1:G){
         dat$weight <- weights[,gg]
+
         #***** fit the model using weighted data
         if (! sufficient_statistics){
             if (use_lavaan_survey){
@@ -71,7 +72,7 @@ lsem_fitsem <- function( dat, weights, lavfit,
                           "par"=pars0, "parindex"=1:NP, dfr.gg    )
         est_fit <- lavaan::fitMeasures(object=survey.fit, fit.measures=fit_measures )
         dfr.gg0 <- data.frame("grid_index"=gg, "moderator"=moderator.grid[gg],
-                          "par"=fit_measures, "parindex"=NP + 1:NF,
+                          "par"=fit_measures, "parindex"=NP+1:NF,
                           "est"=est_fit, "op"="fit" )
         vars <- setdiff( colnames(dfr.gg), colnames(dfr.gg0) )
         for (vv in vars){ dfr.gg0[,vv] <- NA }

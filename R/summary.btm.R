@@ -1,10 +1,8 @@
 ## File Name: summary.btm.R
-## File Version: 0.23
+## File Version: 0.262
 
 
-
-#*******************************************************
-# summary.btm
+#--- summary.btm
 summary.btm <- function( object, file=NULL, digits=4,... )
 {
     # open sink
@@ -19,18 +17,17 @@ summary.btm <- function( object, file=NULL, digits=4,... )
     #-- print computation time
     sirt_summary_print_computation_time_s1(object=object)
 
-
     #- print call
     sirt_summary_print_call(CALL=object$CALL)
 
     cat("Bradley-Terry Model with Ties and Home Advantage Parameters\n")
 
     cat("------------------------------------------------------------\n")
-    cat( "Number of iterations=", object$iter, "\n" )
+    cat( "Number of iterations", "=", object$iter, "\n" )
     #    cat( "Deviance=", round( object$deviance, 2 ), " | " )
     #    cat( "Log Likelihood=", round( -object$deviance/2, 2 ), "\n" )
-    cat( "Number of individuals=", object$ic$n, "\n" )
-    cat( "Number of pairwise comparisons=", object$ic$D, "\n" )
+    cat( "Number of individuals", "=", object$ic$n, "\n" )
+    cat( "Number of pairwise comparisons", "=", object$ic$D, "\n" )
     #    cat( "Number of estimated parameters=", object$ic$np, "\n" )
 
     cat("------------------------------------------------------------\n")
@@ -45,18 +42,21 @@ summary.btm <- function( object, file=NULL, digits=4,... )
 
     cat("------------------------------------------------------------\n")
     cat("MLE reliability (separation reliability)\n")
-    cat(paste0("MLE Rel=", round( res$mle.rel, digits ), "\n") )
-    cat(paste0("Separation index=", round( res$sepG, digits ), "\n") )
+    cat(paste0("MLE Rel", "=", round( res$mle.rel, digits ), "\n") )
+    cat(paste0("Separation index", "=", round( res$sepG, digits ), "\n") )
 
     cat("------------------------------------------------------------\n")
     cat("Individual effects parameters\n")
     obji <- res$effects
     sirt_summary_print_objects(obji=obji, digits=digits, from=3)
 
+    if (res$multiple_judges){
+        cat("------------------------------------------------------------\n")
+        cat("Fit statistics judges\n")
+        obji <- res$fit_judges
+        sirt_summary_print_objects(obji=obji, digits=digits, from=2)
+    }
+
     # close sink
     sirt_csink( file=file )
 }
-#*******************************************************
-
-
-

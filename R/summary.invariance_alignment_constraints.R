@@ -1,5 +1,5 @@
 ## File Name: summary.invariance_alignment_constraints.R
-## File Version: 0.10
+## File Version: 0.12
 
 
 
@@ -10,6 +10,12 @@ summary.invariance_alignment_constraints <- function( object, digits=3, file=NUL
 
     display_string <- sirt_summary_print_display(symbol="-", len=65)
     cat(display_string)
+
+    #- package and R session
+    sirt_summary_print_package_rsession(pack="sirt")
+
+    #- print call
+    sirt_summary_print_call(CALL=object$CALL)
 
     cat("Invariance Alignment with Post-Hoc Item Parameter Constraints\n\n")
     invariance_alignment_summary_optimization(object=object$model, digits=digits)

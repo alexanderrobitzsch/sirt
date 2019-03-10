@@ -36,7 +36,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.3  |  2019-02-28  |  Last: sirt 3.3-11
+VERSIONS sirt 3.3  |  2019-03-10  |  Last: sirt 3.3-24
 ------------------------------------------------------------------------
 
 ADDED * included sampling weights for invariance alignment in function
@@ -44,23 +44,29 @@ ADDED * included sampling weights for invariance alignment in function
 FIXED * fixed numerical instabilities in wle.rasch()
         (thanks to Tom Tinkler)
 FIXED * fixed a bug in lsem.estimate() when sufficient_statistics=TRUE 
-        is applied in case of missing data
-        (thanks to Johanna Hartung) 
+        is applied in case of missing data (thanks to Johanna Hartung) 
 NOTE  * lsem.estimate() does not use anymore the lavaan.survey package
-        as the default. The behavior of previuous versions can be 
+        as the default. The behavior of previous versions can be 
         obtained with the argument value 'use_lavaan_survey=TRUE'.
 ADDED * added argument 'pseudo_weights' in lsem.estimate() which provides
         an ad-hoc solution for fitting LSEMs for all lavaan models.
-        FIML and WLSMV is now possible in lsem.estimate, see
+        FIML and WLSMV is now available in lsem.estimate(), see
         Examples 2 and 3 (requested by Ulrich Schroeders and
         Andrea Hildebrandt)
 ADDED * added utility function lsem_local_weights() for computing
         local weights for LSEMs
+ADDED * added argument 'judge' for judge identifiers in btm() which
+        allows computation of fit statistics for judges in pairwise
+        comparison data (suggested by Jem Stach)
+FIXED * fixed a bug in estimation of home advantage parameter in btm()
+ADDED * added simulation function btm_sim() for simulating data from
+        the extended Bradley-Terry model
+NOTE  * removed argument 'seed' from class.accuracy.rasch()
 
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: invariance.alignment (7),
-        lsem.estimate (1,2,3)
+        lsem.estimate (1,2,3), btm (3,4)
 
 
 

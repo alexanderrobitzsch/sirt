@@ -1,12 +1,11 @@
 ## File Name: btm.R
-## File Version: 1.43
+## File Version: 1.497
 
-###############################################
-# Bradley-Terry model in sirt
-btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
-            fix.theta=NULL,     maxiter=100, conv=.0001, eps=.3)
+
+#--- Bradley-Terry model in sirt
+btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
+            fix.theta=NULL, maxiter=100, conv=.0001, eps=.3)
 {
-
     s1 <- Sys.time()
     CALL <- match.call()
     admiss <- c(0,1,.5)
@@ -31,12 +30,12 @@ btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
 
     # teams
     teams <- unique( sort( c( paste(dat[,1] ), paste(dat[,2] ) ) ) )
+    teams1 <- as.numeric(teams)
+    if ( sum( is.na(teams1))==0 ){ teams <- sort(teams1) }
     dat0[,1] <- match( paste( dat0[,1] ), teams )
     dat0[,2] <- match( paste( dat0[,2] ), teams )
-
-    dfr <- data.frame( "res1"=1 * ( dat0[,3]==1 ),
-                "res0"=1 * ( dat0[,3]==0 ),
-                "resD"=1 * ( dat0[,3]==1/2 ) )
+    dfr <- data.frame( res1=1*( dat0[,3]==1 ), res0=1*( dat0[,3]==0 ),
+                    resD=1*( dat0[,3]==1/2 ) )
 
     # calculate scores for each team
     TP <- length(teams)
@@ -53,7 +52,7 @@ btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
     score <- r3[,1]*1 + r3[,3]*1/2
     maxscore <- rowSums(r3)
     score_delta <- sum(r1[,3])
-    score_eta <- sum(r1[,1]+r1[,2]/2)
+    score_eta <- sum(r1[,1]+r1[,3]/2)
 
     # epsilon adjustment
     score <- eps + ( maxscore-2*eps)*score / maxscore
@@ -117,8 +116,7 @@ btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
 
         maxincr <- maxincr * incrfac
 
-        #***********************************
-        # derivatives with respect to delta
+        #**** derivatives with respect to delta
         if ( est.delta ){
             d1 <- score_delta - sum( M1[,3] )
             d2 <- sum( M1[,3] * ( 1 - M1[,3] ) )
@@ -127,10 +125,9 @@ btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
             delta <- delta + incr
             se.delta <- sqrt( 1 / d2 )
         }
-        #***********************************
-        # derivatives with respect to eta
-        if ( est.eta ){
 
+        #*** derivatives with respect to eta
+        if ( est.eta ){
             d1 <- score_eta - sum( M1[,1] + M1[,3]/2 )
             d2 <- sum( M1[,1] * ( 1 - M1[,1] - M1[,3]/2 ) +
                                 M1[,3]/2 * ( 1/2 - M1[,1] - M1[,3]/2 ) )
@@ -139,8 +136,8 @@ btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
             eta <- eta + incr
             se.eta <- sqrt( 1 / d2 )
         }
-        #******************
-        # derivatives with respect to theta
+
+        #*** derivatives with respect to theta
         # first derivative
         fac1 <-  M1[,1] + M1[,3]/2
         deriv_theta_i1 <- fac1
@@ -155,11 +152,10 @@ btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
         d1a[ ind2 ] <- d1a[ ind2 ] + h2
         d1 <- score -  d1a
         # second derivative
-        d2a <- M1[,1]  * (1 - M1[,1] - M1[,3] / 2 ) +
+        d2a <- M1[,1]*(1 - M1[,1] - M1[,3] / 2 ) +
                             M1[,3]/2 * (1/2 - M1[,1] - M1[,3] / 2 )
-        d2b <- M1[,2]  * (1 - M1[,2] - M1[,3] / 2 ) +
+        d2b <- M1[,2]*(1 - M1[,2] - M1[,3] / 2 ) +
                             M1[,3]/2 * (1/2 - M1[,2] - M1[,3] / 2 )
-
         h1 <- rowsum( d2a, dat0[,1] )
         h2 <- rowsum( d2b, dat0[,2] )
         d2 <- rep(1E-20,TP)
@@ -231,17 +227,19 @@ btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
                     "M"=mean(theta2,na.rm=TRUE),
                     "median"=stats::median(theta),
                     "SD"=stats::sd(theta2,na.rm=TRUE),
-                    "min"=min(theta),
-                    "max"=max(theta) )
+                    "min"=min(theta), "max"=max(theta) )
 
     # probabilities
     probs <- M1
     colnames(probs) <- c("p1", "p0", "pD")
 
     # fit statistics
-    res0 <- btm_fit( probs=probs, dat0=dat0, ind1=ind1, ind2=ind2, TP=TP )
+    res0 <- btm_fit_statistics( probs=probs, dat0=dat0, ind1=ind1, ind2=ind2,
+                TP=TP, judge=judge )
     effects$outfit <- res0$outfit
     effects$infit <- res0$infit
+    multiple_judges <- res0$multiple_judges
+    fit_judges <- res0$fit_judges
 
     # MLE reliability
     v2 <- mean(effects$se.theta^2)
@@ -250,8 +248,8 @@ btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
     sep.rel <- sqrt( v0 / v2 )
     # output list
     res <- list( effects=effects, pars=pars, summary.effects=summary.effects,
-                        mle.rel=mle.rel, sepG=sep.rel,
-                        probs=probs, data=dat0 )
+                mle.rel=mle.rel, sepG=sep.rel, probs=probs, data=dat0,
+                multiple_judges=multiple_judges, fit_judges=fit_judges )
     res$CALL <- CALL
     res$iter <- iter
     ic <- list( "n"=length(teams), "D"=nrow(dat0) )
@@ -262,4 +260,3 @@ btm <- function( data,    ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL,
     class(res) <- "btm"
     return(res)
 }
-#########################################################################

@@ -1,5 +1,5 @@
 %% File Name: class.accuracy.rasch.Rd
-%% File Version: 0.24
+%% File Version: 0.25
 
 \name{class.accuracy.rasch}
 \alias{class.accuracy.rasch}
@@ -13,8 +13,7 @@ for the maximum likelihood (person parameter) estimate according
 to the method of Rudner (2001).
 }
 \usage{
-class.accuracy.rasch(cutscores, b, meantheta, sdtheta, theta.l,
-    n.sims=0, seed=988)
+class.accuracy.rasch(cutscores, b, meantheta, sdtheta, theta.l, n.sims=0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -37,7 +36,6 @@ Discretized theta distribution
 Number of simulated persons in a data set. The default is 0
 which means that no simulation is performed.
 }
-\item{seed}{The random seed for the simulation}
 }
 %\details{
 %%  ~~ If necessary, more details than the description above ~~

@@ -1,26 +1,32 @@
 %% File Name: btm.Rd
-%% File Version: 0.39
+%% File Version: 0.411
 
 \name{btm}
 \alias{btm}
 \alias{summary.btm}
+\alias{btm_sim}
+
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Extended Bradley-Terry Model
 }
 \description{
-Estimates an extended Bradley-Terry model (Hunter, 2004; see Details).
+The function \code{btm} estimates an extended Bradley-Terry model (Hunter, 2004; see Details).
 Parameter estimation uses a bias corrected joint maximum likelihood
-estimation method based on
-\eqn{\varepsilon}-adjustment (see Bertoli-Barsotti, Lando & Punzo, 2014).
+estimation method based on \eqn{\varepsilon}-adjustment (see Bertoli-Barsotti, Lando & Punzo, 2014).
 See Details for the algorithm.
+
+The function \code{btm_sim} simulated data from the extended Bradley-Terry model.
 }
 
 \usage{
-btm(data, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL, fix.theta=NULL,
+btm(data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL, fix.theta=NULL,
        maxiter=100, conv=1e-04, eps=0.3)
 
 \method{summary}{btm}(object, file=NULL, digits=4,...)
+
+btm_sim(theta, eta=0, delta=-99, repeated=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -30,6 +36,8 @@ from the units in the pair comparison. The third column contains the
 result of the comparison. "1" means that the first units wins, "0" means
 that the second unit wins and "0.5" means a draw (a tie).
 }
+\item{judge}{Optional vector of judge identifiers (if multiple
+judges are available)}
   \item{ignore.ties}{
 Logical indicating whether ties should be ignored.
 }
@@ -58,6 +66,11 @@ extreme scores are removed from the pairwise comparison.
 \item{file}{Optional file name for sinking the summary into}
 \item{digits}{Number of digits after decimal to print}
 \item{\dots}{Further arguments to be passed.}
+\item{theta}{Vector of abilities}
+\item{eta}{Value of \eqn{\eta} parameter}
+\item{delta}{Value of \eqn{\delta} parameter}
+\item{repeated}{Logical indicating whether repeated ratings of dyads (for home advantage
+effect) should be simulated}
 }
 
 \details{
@@ -102,6 +115,10 @@ List with following entries
   \item{sepG}{Separation index \eqn{G}}
   \item{probs}{Estimated probabilities}
   \item{data}{Used dataset with integer identifiers}
+  \item{fit_judges}{Fit statistics (outfit and infit) for judges if \code{judge}
+   is provided. In addition, average agreement of the rating with the mode of
+   the ratings is calculated for each judge (at least three ratings per dyad has
+   to be available for computing the agreement).}
 }
 
 \references{
@@ -167,7 +184,7 @@ mod4 <- sirt::btm( dat, ignore.ties=TRUE, fix.eta=0)
 summary(mod4)
 
 #********************
-# Model 5: Ignoring ties, no home advantage effect (JML approach -> eps=0)
+# Model 5: Ignoring ties, no home advantage effect (JML approach and eps=0)
 mod5 <- sirt::btm( dat, ignore.ties=TRUE, fix.eta=0, eps=0)
 summary(mod5)
 
@@ -204,7 +221,7 @@ for (gg in 1:G){
     ind.gg <- which( games.gg !="." )
     results[gg, 1:2 ] <- games[ ind.gg, 2]
     results[gg, 3 ] <- games.gg[ ind.gg[1] ]
-            }
+}
 results <- as.data.frame(results)
 results[,3] <- paste(results[,3] )
 results[ results[,3]=="D", 3] <- 1/2
@@ -217,6 +234,50 @@ summary(mod1)
 # fit model with draws
 mod2 <- sirt::btm( results, fix.eta=0, eps=0 )
 summary(mod2)
+
+#############################################################################
+# EXAMPLE 3: Simulated data from the Bradley-Terry model
+#############################################################################
+
+set.seed(9098)
+N <- 22
+theta <- seq(2,-2, len=N)
+
+#** simulate and estimate data without repeated dyads
+dat1 <- sirt::btm_sim(theta=theta)
+mod1 <- sirt::btm( dat1, ignore.ties=TRUE, fix.delta=-99, fix.eta=0)
+summary(mod1)
+
+#*** simulate data with home advantage effect and ties
+dat2 <- sirt::btm_sim(theta=theta, eta=.8, delta=-.6, repeated=TRUE)
+mod2 <- sirt::btm(dat2)
+summary(mod2)
+
+#############################################################################
+# EXAMPLE 4: Estimating the Bradley-Terry model with multiple judges
+#############################################################################
+
+#*** simulating data with multiple judges
+set.seed(987)
+N <- 26  # number of objects to be rated
+theta <- seq(2,-2, len=N)
+s1 <- stats::sd(theta)
+dat <- NULL
+# judge discriminations which define tendency to provide reliable ratings
+discrim <- c( rep(.9,10), rep(.5,2), rep(0,2) )
+#=> last four raters provide less reliable ratings
+
+RR <- length(discrim)
+for (rr in 1:RR){
+    theta1 <- discrim[rr]*theta + stats::rnorm(N, mean=0, sd=s1*sqrt(1-discrim[rr]))
+    dat1 <- sirt::btm_sim(theta1)
+    dat1$judge <- rr
+    dat <- rbind(dat, dat1)
+}
+
+#** estimate the Bradley-Terry model and compute judge-specific fit statistics
+mod <- sirt::btm( dat[,1:3], judge=paste0("J",100+dat[,4]), fix.eta=0, ignore.ties=TRUE)
+summary(mod)
 }
 }
 

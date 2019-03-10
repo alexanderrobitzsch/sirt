@@ -1,9 +1,10 @@
 ## File Name: invariance_alignment_cfa_config.R
-## File Version: 0.17
+## File Version: 0.221
 
 
 invariance_alignment_cfa_config <- function(dat, group, weights=NULL, ...)
 {
+    CALL <- match.call()
     groups <- unique(group)
     G <- length(groups)
     I <- ncol(dat)
@@ -22,7 +23,7 @@ invariance_alignment_cfa_config <- function(dat, group, weights=NULL, ...)
         items_gg <- colnames(dat_gg)
         ind_gg <- match(items_gg, items)
         if (!is.null(weights)){
-            weights_gg <- weights[ind_gg]
+            weights_gg <- weights[group==groups[gg]]
         }
         res <- invariance_alignment_cfa_config_estimate(dat_gg=dat_gg,
                         weights_gg=weights_gg, ...)
@@ -33,6 +34,6 @@ invariance_alignment_cfa_config <- function(dat, group, weights=NULL, ...)
     }
     #-- output
     res <- list(nu=nu, lambda=lambda, err_var=err_var, N=N, G=G, I=I,
-                    items=items, groups=groups)
+                    items=items, groups=groups, CALL=CALL)
     return(res)
 }
