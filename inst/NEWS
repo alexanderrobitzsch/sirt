@@ -35,8 +35,22 @@ CHANGELOG sirt
 
 
 
+
 ------------------------------------------------------------------------
-VERSIONS sirt 3.3  |  2019-03-10  |  Last: sirt 3.3-24
+VERSIONS sirt 3.4  |  2019-03-18  |  Last: sirt 3.4-3
+------------------------------------------------------------------------
+
+xxx   * ...
+
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 3.3  |  2019-03-18  |  Last: sirt 3.3-26
 ------------------------------------------------------------------------
 
 ADDED * included sampling weights for invariance alignment in function
@@ -63,13 +77,9 @@ ADDED * added simulation function btm_sim() for simulating data from
         the extended Bradley-Terry model
 NOTE  * removed argument 'seed' from class.accuracy.rasch()
 
-
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: invariance.alignment (7),
         lsem.estimate (1,2,3), btm (3,4)
-
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.2  |  2019-02-08  |  Last: sirt 3.2-39

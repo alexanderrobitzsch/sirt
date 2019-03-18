@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_linking_haebara.cpp
-//// File Version: 0.381
+//// File Version: 0.384
 
 
 // [[Rcpp::depends(RcppArmadillo)]]

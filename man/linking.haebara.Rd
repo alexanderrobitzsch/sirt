@@ -1,5 +1,5 @@
 %% File Name: linking.haebara.Rd
-%% File Version: 0.17
+%% File Version: 0.18
 
 \name{linking.haebara}
 \alias{linking.haebara}
@@ -16,7 +16,7 @@ The function \code{linking.haebara} is a generalization of Haebara linking
 of the 2PL model to multiple groups (or multiple studies; see Battauz, 2017,
 for a similar approach). The optimization estimates transformation parameters for
 means and standard deviations of the groups and joint item parameters.
-The function allows tow different distance functions \code{dist="L2"} and
+The function allows two different distance functions \code{dist="L2"} and
 \code{dist="L1"} where the latter is a robustified version of
 Haebara linking (see Details; He, Cui, & Osterlind, 2015;
 Hu, Rogers, & Vukmirovic, 2008).
