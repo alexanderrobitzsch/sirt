@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_invariance_alignment.cpp
-//// File Version: 2.549
+//// File Version: 2.565
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -62,8 +62,12 @@ double sirt_rcpp_invariance_alignment_simplicity_function_value(
 {
     double diff_par = parm1 - parm2;
     double fval=0;
-    if (type[0]=="AM"){
-        fval = std::pow( std::pow(diff_par / scale, 2.0) + eps, power );
+    double parm = std::pow(diff_par / scale, 2.0);
+    if (power > 0){
+        fval = std::pow( parm + eps, power );
+    } else {
+        double gamma0 = 50.0;
+        fval = 2 / ( 1 + std::exp(-gamma0*std::sqrt( parm + eps)) ) - 1;
     }
     //--- output
     return fval;
@@ -125,9 +129,15 @@ double sirt_rcpp_invariance_alignment_simplicity_function_gradient(
 {
     double diff_par = parm1 - parm2;
     double fval=0;
-    if (type[0]=="AM"){
+    if (power > 0){
         fval = power * std::pow( std::pow(diff_par / scale, 2.0) + eps, power - 1.0 );
         fval = fval*2*diff_par/(scale*scale);
+    } else {
+        double gamma0 = 50.0;
+        double g1 = ( 1 + std::exp(-gamma0*std::abs(diff_par/scale)) );
+        double g2 = std::pow( std::pow(diff_par / scale, 2.0) + eps, -0.5 );
+        g2 = g2*diff_par/(scale*scale);
+        fval = 2*gamma0/g1 * ( 1 - 1 /g1 )* g2;
     }
     //--- output
     return fval;

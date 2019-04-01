@@ -37,14 +37,17 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.4  |  2019-03-18  |  Last: sirt 3.4-3
+VERSIONS sirt 3.4  |  2019-04-01  |  Last: sirt 3.4-8
 ------------------------------------------------------------------------
 
-xxx   * ...
+ADDED * included optimization function for invariance alignment which
+        minimizes number of DIF effects in invariance.alignment() by
+        setting 'align.pow=c(0,0)'. This optimization function
+        corresponds to the L0 penalty.
 
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: invariance.alignment (1)
 
 
 

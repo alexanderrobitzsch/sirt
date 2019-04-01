@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.607
+%% File Version: 1.616
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -41,7 +41,7 @@ argument \code{weights}.
 
 \usage{
 invariance.alignment(lambda, nu, wgt=NULL, align.scale=c(1, 1),
-    align.pow=c(.25, .25), eps=.01, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
+    align.pow=c(.25, .25), eps=.0001, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
     optimizer="optim", ...)
 
 \method{summary}{invariance.alignment}(object, digits=3, file=NULL, ...)
@@ -134,7 +134,12 @@ and the optimization functions are defined as
     f_\nu (x)=[ ( x/ a_\nu )^2 + \varepsilon ]^{p_\nu}
             }
 using a small \eqn{ \varepsilon > 0} (e.g. .0001) to obtain
-a differentiable optimization function.
+a differentiable optimization function. For \eqn{p_\nu=0} or \eqn{p_\lambda=0}, the
+optimization function essentially counts the number of different parameter
+and mimicks a \eqn{L_0} penalty which is zero iff the argument is zero
+and one otherwise. It is approximated by
+\deqn{f(x)=2 / ( 1 + \exp( - \gamma \sqrt{x^2 + \varepsilon} ) - 1}
+(Oelker & Tutz, 2017).
 
 For identification reasons, the product \eqn{\Pi_g \psi_{g0}}
 of all group standard deviations is set to one. The mean
@@ -205,6 +210,11 @@ invariance with many groups: Alignment and random effects.
 \emph{Sociological Methods & Research, 47}(4), 637-664.
 http://dx.doi.org/10.1177/0049124117701488
 
+Oelker, M. R., & Tutz, G. (2017). A uniform framework for the combination of penalties in
+generalized structured models. \emph{Advances in Data Analysis and Classification, 11}(1),
+97-120. \cr
+https://doi.org/10.1007/s11634-015-0205-y
+
 Vandenberg, R. J., & Lance, C. E. (2000). A review and synthesis of the
 measurement invariance literature: Suggestions, practices, and
 recommendations for organizational research. \emph{Organizational Research
@@ -265,6 +275,12 @@ lines( c(-1,1), c(-1,1), col="gray")
 round( cbind( mod1$pars$alpha0, mod2$pars$alpha0 ), 3 )
 round( mod1$nu.resid, 3)
 round( mod2$nu.resid,3 )
+
+# L0 penalty
+mod2b <- sirt::invariance.alignment( lambda, nu, wgt,  align.pow=c(0,0),
+              align.scale=c(.3,.3))
+summary(mod2b)
+
 
 #****
 # Model 3: Low powers for alignment of scale and power

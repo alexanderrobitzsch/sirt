@@ -1,9 +1,9 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.621
+## File Version: 3.626
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
-    align.scale=c(1,1), align.pow=c(.25,.25), eps=.01,
+    align.scale=c(1,1), align.pow=c(.25,.25), eps=.0001,
     psi0.init=NULL, alpha0.init=NULL, center=FALSE, optimizer="optim", ... )
 {
     CALL <- match.call()
@@ -77,6 +77,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         grad <- grad[-c(1,G+1)]
         return(grad)
     }
+    # if ( align.pow[1]==0){ grad_optim <- NULL }
 
     #* estimate alignment parameters
     lower <- c(rep(-Inf,G1), rep(.01, G1))
