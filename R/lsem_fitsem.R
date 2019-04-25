@@ -1,11 +1,9 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.478
+## File Version: 0.502
 
-lsem_fitsem <- function( dat, weights, lavfit,
-            fit_measures, NF, G, moderator.grid, verbose,
-            pars, standardized, variables_model,
-            sufficient_statistics, lavaan_fct, lavmodel,
-            use_lavaan_survey=TRUE, pseudo_weights=0, ... )
+lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
+                verbose, pars, standardized, variables_model, sufficient_statistics,
+                lavaan_fct, lavmodel, use_lavaan_survey=TRUE, pseudo_weights=0, ... )
 {
 
     parameters <- NULL
@@ -14,16 +12,25 @@ lsem_fitsem <- function( dat, weights, lavfit,
     pars0 <- pars
     lavaan_est_fun <- lsem_define_lavaan_est_fun(lavaan_fct=lavaan_fct)
 
-    if (verbose){
-        cat( "** Fit lavaan model\n")
-        G1 <- min(G,10)
-        pr <- round( seq(1,G, len=G1) )
-        cat("|")
-        cat( paste0( rep("*",G1), collapse="") )
-        cat("|\n")
-        cat("|")
+    #- verbose
+    pr <- lsem_fitsem_verbose_start(G=G, verbose=verbose)
+
+    #- sufficient statistics
+    if (sufficient_statistics){
+        wmean <- wcov <- Nobs <- as.list(1:G)
+        data_suff <- dat[, variables_model]
+        dat_resp <- 1 - is.na(data_suff)
+        for (gg in 1:G){
+            weights_gg <- weights[,gg]
+            res <- lsem_weighted_mean( x=data_suff, weights=weights_gg,    x_resp=dat_resp)
+            wmean[[gg]] <- res$mean
+            res <- lsem_weighted_cov( x=data_suff, weights=weights_gg, x_resp=dat_resp)
+            wcov[[gg]] <- res$cov
+            Nobs[[gg]] <- round(res$Nobs)
+        }
     }
 
+    #-- loop over groups
     for (gg in 1:G){
         dat$weight <- weights[,gg]
 
@@ -38,22 +45,24 @@ lsem_fitsem <- function( dat, weights, lavfit,
                             pseudo_weights=pseudo_weights)
                 dat1 <- res$dat
                 sampling_weights <- res$sampling_weights
+                nobs_pseudo <- res$nobs_pseudo
+                sum_weight <- res$sum_weight
+
                 # use starting values
                 partable <- lavaan::parameterTable(object=survey.fit)
                 partable$start <- partable$est
+                #- fit model
                 survey.fit <- lavaan_est_fun(model=partable, data=dat1,
-                                sampling.weights=sampling_weights, ... )
+                                    sampling.weights=sampling_weights, ... )
+                #- adjust sample size
+                survey.fit <- lavaan_object_adjust_sample_size(object=survey.fit,
+                                    n_used=sum_weight)
             }
         }
         #***** fit the model using sufficient statistics
         if (sufficient_statistics){
-            res <- lsem_weighted_mean( x=dat[, variables_model], weights=dat$weight )
-            wmean <- res$mean
-            res <- lsem_weighted_cov( x=dat[, variables_model], weights=dat$weight )
-            wcov <- res$cov
-            Nobs <- round(res$Nobs)
-            survey.fit <- lavaan_est_fun(model=lavmodel, sample.cov=wcov,
-                                sample.mean=wmean, sample.nobs=Nobs, ... )
+            survey.fit <- lavaan_est_fun(model=lavmodel, sample.cov=wcov[[gg]],
+                                sample.mean=wmean[[gg]], sample.nobs=Nobs[[gg]], ... )
         }
 
         dfr.gg <- pars <- lavaan::parameterEstimates(object=survey.fit)
@@ -68,28 +77,19 @@ lsem_fitsem <- function( dat, weights, lavfit,
         NP <- length(pars0)
         ind <- match( pars0, pars )
         dfr.gg <- dfr.gg[ ind, ]
-        dfr.gg <- data.frame("grid_index"=gg, "moderator"=moderator.grid[gg],
-                          "par"=pars0, "parindex"=1:NP, dfr.gg    )
+        dfr.gg <- data.frame(grid_index=gg, moderator=moderator.grid[gg],
+                          par=pars0, parindex=1:NP, dfr.gg )
         est_fit <- lavaan::fitMeasures(object=survey.fit, fit.measures=fit_measures )
-        dfr.gg0 <- data.frame("grid_index"=gg, "moderator"=moderator.grid[gg],
-                          "par"=fit_measures, "parindex"=NP+1:NF,
-                          "est"=est_fit, "op"="fit" )
+        dfr.gg0 <- data.frame(grid_index=gg, moderator=moderator.grid[gg],
+                          par=fit_measures, parindex=NP+1:NF, est=est_fit, op='fit' )
         vars <- setdiff( colnames(dfr.gg), colnames(dfr.gg0) )
         for (vv in vars){ dfr.gg0[,vv] <- NA }
         dfr.gg <- rbind( dfr.gg, dfr.gg0[, colnames(dfr.gg) ] )
         parameters <- rbind( parameters, dfr.gg )
-        # fits <- rbind( fits, dfr.gg )
-        if (verbose){
-            if ( gg %in% pr ){
-                cat("-")
-                utils::flush.console()
-            }
-        }
+        #- verbose
+        res <- lsem_fitsem_verbose_progress(gg=gg, G=G, pr=pr, verbose=verbose)
     }
-    if (verbose){
-        cat("|\n")
-        utils::flush.console()
-    }
+    res <- lsem_fitsem_verbose_progress(gg=G+1, G=G, pr=pr, verbose=verbose)
     parameters <- parameters[ order(parameters$parindex), ]
     #--- OUTPUT
     res <- list( parameters=parameters )

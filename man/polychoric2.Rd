@@ -1,8 +1,10 @@
 %% File Name: polychoric2.Rd
-%% File Version: 0.18
+%% File Version: 0.28
 
 \name{polychoric2}
 \alias{polychoric2}
+\alias{sirt_rcpp_polychoric2}
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Polychoric Correlation
@@ -12,12 +14,16 @@ This function estimates the polychoric correlation coefficient
 using maximum likelihood estimation (Olsson, 1979).
 }
 \usage{
-polychoric2(dat, maxiter=100, cor.smooth=TRUE)
+polychoric2(dat, maxiter=100, cor.smooth=TRUE, use_pbv=TRUE, conv=1e-10,
+      rho_init=NULL, weights=NULL)
+
+## exported Rcpp function
+sirt_rcpp_polychoric2( dat, maxK, maxiter, use_pbv, conv, rho_init, weights)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{dat}{
-A dataset with integer values
+A dataset with integer values \eqn{0,1,\ldots,K}
 }
   \item{maxiter}{
 Maximum number of iterations
@@ -26,6 +32,12 @@ Maximum number of iterations
 An optional logical indicating whether the polychoric correlation
 matrix should be smooth to ensure positive definiteness.
 }
+\item{use_pbv}{Logical indicating whether the \pkg{pbv} package is used
+for computation of bivariate normal distribution}
+\item{conv}{Convergence criterion}
+\item{rho_init}{Optional matrix of initial values for polychoric correlations}
+\item{weights}{Optional vector of sampling weights}
+\item{maxK}{Maximum number of categories}
 }
 
 %\details{
@@ -77,12 +89,12 @@ dat <- data.Students[, paste0("act", 1:5 ) ]
 
 # tetrachoric correlation from psych package
 library(psych)
-t0 <- psych::polychoric( dat )$rho
+t0 <- psych::polychoric(dat)$rho
 # Olsson method (maximum likelihood estimation)
-t1 <- sirt::polychoric2( dat )$rho
+t1 <- sirt::polychoric2(dat)$rho
 # maximum absolute difference
 max( abs( t0 - t1 ) )
-  ##   [1] 0.006914892
+  ##   [1] 0.004102429
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

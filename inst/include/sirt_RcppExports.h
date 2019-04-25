@@ -234,6 +234,153 @@ namespace sirt {
         return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
     }
 
+    inline Rcpp::NumericVector sirt_rcpp_pbivnorm2(Rcpp::NumericVector x, Rcpp::NumericVector y, Rcpp::NumericVector rho1) {
+        typedef SEXP(*Ptr_sirt_rcpp_pbivnorm2)(SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_pbivnorm2 p_sirt_rcpp_pbivnorm2 = NULL;
+        if (p_sirt_rcpp_pbivnorm2 == NULL) {
+            validateSignature("Rcpp::NumericVector(*sirt_rcpp_pbivnorm2)(Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector)");
+            p_sirt_rcpp_pbivnorm2 = (Ptr_sirt_rcpp_pbivnorm2)R_GetCCallable("sirt", "_sirt_sirt_rcpp_pbivnorm2");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_pbivnorm2(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(y)), Shield<SEXP>(Rcpp::wrap(rho1)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
+    }
+
+    inline double sirt_rcpp_dmvnorm_2dim(double x, double y, double rho) {
+        typedef SEXP(*Ptr_sirt_rcpp_dmvnorm_2dim)(SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_dmvnorm_2dim p_sirt_rcpp_dmvnorm_2dim = NULL;
+        if (p_sirt_rcpp_dmvnorm_2dim == NULL) {
+            validateSignature("double(*sirt_rcpp_dmvnorm_2dim)(double,double,double)");
+            p_sirt_rcpp_dmvnorm_2dim = (Ptr_sirt_rcpp_dmvnorm_2dim)R_GetCCallable("sirt", "_sirt_sirt_rcpp_dmvnorm_2dim");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_dmvnorm_2dim(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(y)), Shield<SEXP>(Rcpp::wrap(rho)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
+    inline double sirt_rcpp_polychoric2_pbivnorm(Rcpp::NumericVector x, Rcpp::NumericVector y, Rcpp::NumericVector rho, bool use_pbv) {
+        typedef SEXP(*Ptr_sirt_rcpp_polychoric2_pbivnorm)(SEXP,SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_polychoric2_pbivnorm p_sirt_rcpp_polychoric2_pbivnorm = NULL;
+        if (p_sirt_rcpp_polychoric2_pbivnorm == NULL) {
+            validateSignature("double(*sirt_rcpp_polychoric2_pbivnorm)(Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector,bool)");
+            p_sirt_rcpp_polychoric2_pbivnorm = (Ptr_sirt_rcpp_polychoric2_pbivnorm)R_GetCCallable("sirt", "_sirt_sirt_rcpp_polychoric2_pbivnorm");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_polychoric2_pbivnorm(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(y)), Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(use_pbv)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
+    inline Rcpp::NumericVector sirt_rcpp_polychoric2_estimating_equation(Rcpp::NumericMatrix frtab, int maxK, Rcpp::NumericVector rho, Rcpp::NumericVector thresh1n, Rcpp::NumericVector thresh2n, int maxK1, int maxK2, bool use_pbv) {
+        typedef SEXP(*Ptr_sirt_rcpp_polychoric2_estimating_equation)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_polychoric2_estimating_equation p_sirt_rcpp_polychoric2_estimating_equation = NULL;
+        if (p_sirt_rcpp_polychoric2_estimating_equation == NULL) {
+            validateSignature("Rcpp::NumericVector(*sirt_rcpp_polychoric2_estimating_equation)(Rcpp::NumericMatrix,int,Rcpp::NumericVector,Rcpp::NumericVector,Rcpp::NumericVector,int,int,bool)");
+            p_sirt_rcpp_polychoric2_estimating_equation = (Ptr_sirt_rcpp_polychoric2_estimating_equation)R_GetCCallable("sirt", "_sirt_sirt_rcpp_polychoric2_estimating_equation");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_polychoric2_estimating_equation(Shield<SEXP>(Rcpp::wrap(frtab)), Shield<SEXP>(Rcpp::wrap(maxK)), Shield<SEXP>(Rcpp::wrap(rho)), Shield<SEXP>(Rcpp::wrap(thresh1n)), Shield<SEXP>(Rcpp::wrap(thresh2n)), Shield<SEXP>(Rcpp::wrap(maxK1)), Shield<SEXP>(Rcpp::wrap(maxK2)), Shield<SEXP>(Rcpp::wrap(use_pbv)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
+    }
+
+    inline Rcpp::List sirt_rcpp_polychoric2_est_itempair(Rcpp::NumericVector v1, Rcpp::NumericVector v2, int maxK_, int maxiter, bool use_pbv, double conv, double rho_init, Rcpp::NumericVector weights) {
+        typedef SEXP(*Ptr_sirt_rcpp_polychoric2_est_itempair)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_polychoric2_est_itempair p_sirt_rcpp_polychoric2_est_itempair = NULL;
+        if (p_sirt_rcpp_polychoric2_est_itempair == NULL) {
+            validateSignature("Rcpp::List(*sirt_rcpp_polychoric2_est_itempair)(Rcpp::NumericVector,Rcpp::NumericVector,int,int,bool,double,double,Rcpp::NumericVector)");
+            p_sirt_rcpp_polychoric2_est_itempair = (Ptr_sirt_rcpp_polychoric2_est_itempair)R_GetCCallable("sirt", "_sirt_sirt_rcpp_polychoric2_est_itempair");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_polychoric2_est_itempair(Shield<SEXP>(Rcpp::wrap(v1)), Shield<SEXP>(Rcpp::wrap(v2)), Shield<SEXP>(Rcpp::wrap(maxK_)), Shield<SEXP>(Rcpp::wrap(maxiter)), Shield<SEXP>(Rcpp::wrap(use_pbv)), Shield<SEXP>(Rcpp::wrap(conv)), Shield<SEXP>(Rcpp::wrap(rho_init)), Shield<SEXP>(Rcpp::wrap(weights)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::List >(rcpp_result_gen);
+    }
+
+    inline Rcpp::List sirt_rcpp_polychoric2(Rcpp::NumericMatrix dat, int maxK, int maxiter, bool use_pbv, double conv, Rcpp::IntegerMatrix rho_init, Rcpp::NumericVector weights) {
+        typedef SEXP(*Ptr_sirt_rcpp_polychoric2)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_polychoric2 p_sirt_rcpp_polychoric2 = NULL;
+        if (p_sirt_rcpp_polychoric2 == NULL) {
+            validateSignature("Rcpp::List(*sirt_rcpp_polychoric2)(Rcpp::NumericMatrix,int,int,bool,double,Rcpp::IntegerMatrix,Rcpp::NumericVector)");
+            p_sirt_rcpp_polychoric2 = (Ptr_sirt_rcpp_polychoric2)R_GetCCallable("sirt", "_sirt_sirt_rcpp_polychoric2");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_polychoric2(Shield<SEXP>(Rcpp::wrap(dat)), Shield<SEXP>(Rcpp::wrap(maxK)), Shield<SEXP>(Rcpp::wrap(maxiter)), Shield<SEXP>(Rcpp::wrap(use_pbv)), Shield<SEXP>(Rcpp::wrap(conv)), Shield<SEXP>(Rcpp::wrap(rho_init)), Shield<SEXP>(Rcpp::wrap(weights)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::List >(rcpp_result_gen);
+    }
+
+    inline Rcpp::NumericVector sirt_rcpp_tetrachoric2_rcpp(Rcpp::NumericMatrix dfr, double h, int maxiter) {
+        typedef SEXP(*Ptr_sirt_rcpp_tetrachoric2_rcpp)(SEXP,SEXP,SEXP);
+        static Ptr_sirt_rcpp_tetrachoric2_rcpp p_sirt_rcpp_tetrachoric2_rcpp = NULL;
+        if (p_sirt_rcpp_tetrachoric2_rcpp == NULL) {
+            validateSignature("Rcpp::NumericVector(*sirt_rcpp_tetrachoric2_rcpp)(Rcpp::NumericMatrix,double,int)");
+            p_sirt_rcpp_tetrachoric2_rcpp = (Ptr_sirt_rcpp_tetrachoric2_rcpp)R_GetCCallable("sirt", "_sirt_sirt_rcpp_tetrachoric2_rcpp");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_sirt_rcpp_tetrachoric2_rcpp(Shield<SEXP>(Rcpp::wrap(dfr)), Shield<SEXP>(Rcpp::wrap(h)), Shield<SEXP>(Rcpp::wrap(maxiter)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
+    }
+
 }
 
 #endif // RCPP_sirt_RCPPEXPORTS_H_GEN_

@@ -1,5 +1,5 @@
-//// File Name: polychoric2_tetrachoric2_rcpp.cpp
-//// File Version: 3.328
+//// File Name: sirt_rcpp_polychoric2.cpp
+//// File Version: 3.393
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -7,20 +7,22 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
+// [[Rcpp::interfaces(r, cpp)]]
+
 using namespace Rcpp;
 
+#include <pbv.h>
+// # include "c:/Users/sunpn563/Dropbox/Eigene_Projekte/R-Routinen/IRT-Functions/pbv_package/0.3/pbv_work/inst/include/pbv.h"
+
+const double pi1 = 3.1415926535897;
 
 //**********************************************************************
 // bivariate normal distribution
-///** pbivnorm2_rcpp
+///** sirt_rcpp_pbivnorm2
 // [[Rcpp::export]]
-Rcpp::NumericVector pbivnorm2_rcpp( Rcpp::NumericVector x_, Rcpp::NumericVector y_,
-    Rcpp::NumericVector rho_  )
+Rcpp::NumericVector sirt_rcpp_pbivnorm2( Rcpp::NumericVector x, Rcpp::NumericVector y,
+    Rcpp::NumericVector rho1  )
 {
-    Rcpp::NumericVector x(x_);
-    Rcpp::NumericVector y(y_);
-    Rcpp::NumericVector rho1(rho_);
-
     double a=x[0];
     double b=y[0];
     double rho=rho1[0];
@@ -76,7 +78,7 @@ Rcpp::NumericVector pbivnorm2_rcpp( Rcpp::NumericVector x_, Rcpp::NumericVector 
     double mu = ::Rf_dnorm4(a1, 0.0, 1.0, FALSE) / t1;
     //    xi <-  ( rho * mu - b1 ) / sqrt( 1 - rho^2 )
     double rho2 = rho*rho;
-    double xi = ( rho * mu - b1 ) / std::sqrt( 1 - rho2);
+    double xi = ( rho * mu - b1 ) / std::sqrt(1 - rho2);
     //    sig2 <- 1 + a1*mu - mu^2
     double sig2 = 1 + a1*mu - mu*mu;
     // prob1 <- t1 * ( pnorm(  xi ) - 1/2 * rho^2 / ( 1 - rho^2 ) * xi * dnorm( xi ) * sig2  )
@@ -98,42 +100,51 @@ Rcpp::NumericVector pbivnorm2_rcpp( Rcpp::NumericVector x_, Rcpp::NumericVector 
     prob2[0] = prob1;
     return prob2;
 }
+//**********************************************************************
 
-
-const double pi1 = 3.1415926535897;
 
 //**********************************************************************
 // bivariate normal density
-///** dmvnorm_2dim_rcpp
+///** sirt_rcpp_dmvnorm_2dim
 // [[Rcpp::export]]
-Rcpp::NumericVector dmvnorm_2dim_rcpp( Rcpp::NumericVector x_,
-        Rcpp::NumericVector y_, Rcpp::NumericVector rho_)
+double sirt_rcpp_dmvnorm_2dim( double x, double y, double rho)
 {
-    //  x, y, rho
-    Rcpp::NumericVector x1_(x_);
-    Rcpp::NumericVector y1_(y_);
-    Rcpp::NumericVector rho1_(rho_);
-    double x = x1_[0];
-    double y = y1_[0];
-    double rho = rho1_[0];
     double tmp1 = 0;
     tmp1 = x*x - 2*rho*x*y + y*y;
     tmp1 = tmp1 / ( 2*(1-rho*rho) );
     tmp1 = std::exp( - tmp1 );
     tmp1 = tmp1 / ( 2*pi1*std::sqrt(1-rho*rho) );
-    Rcpp::NumericVector d1(1);
-    d1[0] = tmp1;
-    return d1;
+    return tmp1;
 }
 //**********************************************************************
 
+
+//**********************************************************************
+///** sirt_rcpp_polychoric2_pbivnorm
+// [[Rcpp::export]]
+double sirt_rcpp_polychoric2_pbivnorm( Rcpp::NumericVector x,
+        Rcpp::NumericVector y, Rcpp::NumericVector rho, bool use_pbv)
+{
+    double val=0;
+    if (use_pbv){
+        val = pbv::pbv_rcpp_pbvnorm0( x[0], y[0], rho[0]);
+    } else {
+        val = sirt_rcpp_pbivnorm2( x, y, rho )[0];
+    }
+    return val;
+}
+//**********************************************************************
+
+
+
 //**********************************************************************
 // calculation estimating equation polychoric correlation
-///** polychoric2_estequation
+///** sirt_rcpp_polychoric2_estimating_equation
 // [[Rcpp::export]]
-Rcpp::NumericVector polychoric2_estequation( Rcpp::NumericMatrix frtab,
-    int maxK, Rcpp::NumericVector rho, Rcpp::NumericVector thresh1n,
-    Rcpp::NumericVector thresh2n, int maxK1, int maxK2 )
+Rcpp::NumericVector sirt_rcpp_polychoric2_estimating_equation(
+    Rcpp::NumericMatrix frtab, int maxK, Rcpp::NumericVector rho,
+    Rcpp::NumericVector thresh1n, Rcpp::NumericVector thresh2n, int maxK1,
+    int maxK2, bool use_pbv )
 {
     // INPUT:
     // frtab, thresh1n, thresh2n, rho, maxK1, maxK2
@@ -150,8 +161,8 @@ Rcpp::NumericVector polychoric2_estequation( Rcpp::NumericMatrix frtab,
         for ( int jj=0; jj < maxK2+1; jj++){
             tmp1ii[0] = thresh1n[ii];
             tmp1jj[0] = thresh2n[jj];
-            phip_ij(ii,jj) = pbivnorm2_rcpp( tmp1ii, tmp1jj, rho )[0];
-            phid_ij(ii,jj) = dmvnorm_2dim_rcpp( tmp1ii, tmp1jj, rho )[0];
+            phip_ij(ii,jj) = sirt_rcpp_polychoric2_pbivnorm( tmp1ii, tmp1jj, rho, use_pbv );
+            phid_ij(ii,jj) = sirt_rcpp_dmvnorm_2dim( tmp1ii[0], tmp1jj[0], rho[0] );
         }
     }
     // compute pi_ij and estimating equation
@@ -171,16 +182,16 @@ Rcpp::NumericVector polychoric2_estequation( Rcpp::NumericMatrix frtab,
 
 //**********************************************************************
 // calculation polychoric correlation for one item pair
-///** polychoric2_itempair
+///** sirt_rcpp_polychoric2_est_itempair
 // [[Rcpp::export]]
-Rcpp::List polychoric2_itempair( Rcpp::NumericVector v1, Rcpp::NumericVector v2,
-    int maxK_, int maxiter)
+Rcpp::List sirt_rcpp_polychoric2_est_itempair( Rcpp::NumericVector v1,
+    Rcpp::NumericVector v2, int maxK_, int maxiter, bool use_pbv,
+    double conv, double rho_init, Rcpp::NumericVector weights )
 {
     int maxK = maxK_ + 1;
     int CC = v1.size();
     double eps=1e-5;
-    double h =1e-6;
-    double conv=1e-10;
+    double h=1e-5;
 
     //////////*********** FREQUENCIES ************************//////
     // calculate frequency table
@@ -188,8 +199,8 @@ Rcpp::List polychoric2_itempair( Rcpp::NumericVector v1, Rcpp::NumericVector v2,
     Rcpp::NumericMatrix frtab(maxK,maxK);
     for (int cc = 0; cc < CC; cc++){
         if ( ( ! R_IsNA( v1[cc] ) ) & ( ! R_IsNA( v2[cc] ) ) ){
-            frtab( v1[cc], v2[cc] ) ++;
-            Ntotal ++;
+            frtab( v1[cc], v2[cc] ) += weights[cc];
+            Ntotal += weights[cc];
         }
     }
     // set values to .5 if they are zero
@@ -244,8 +255,10 @@ Rcpp::List polychoric2_itempair( Rcpp::NumericVector v1, Rcpp::NumericVector v2,
     maxK2 = maxK2+1;
 
     //////////*********** ALGORITHM POLYCHORIC ************************//////
-    Rcpp::NumericVector rho(1);  // initial correlation = 0;
+    Rcpp::NumericVector rho(1);
     Rcpp::NumericVector rho1(1);
+    rho1[0] = rho_init;
+    rho[0] = rho_init;
 
     double ll0, ll1;
     double incr, der;
@@ -256,8 +269,10 @@ Rcpp::List polychoric2_itempair( Rcpp::NumericVector v1, Rcpp::NumericVector v2,
             rho[0] = rho[0] - h*1.5;
         }
         rho1[0] = rho[0] + h;
-        ll0 = polychoric2_estequation( frtab,maxK,rho,thresh1n,thresh2n,maxK1,maxK2)[0];
-        ll1 = polychoric2_estequation( frtab,maxK,rho1,thresh1n,thresh2n,maxK1,maxK2)[0];
+        ll0 = sirt_rcpp_polychoric2_estimating_equation( frtab, maxK, rho, thresh1n,
+                            thresh2n, maxK1, maxK2, use_pbv)[0];
+        ll1 = sirt_rcpp_polychoric2_estimating_equation( frtab, maxK, rho1, thresh1n,
+                            thresh2n, maxK1, maxK2, use_pbv)[0];
         der = (ll1-ll0)/h;
         incr = ll0 / der;
         rho[0] = rho[0] - incr;
@@ -283,93 +298,52 @@ Rcpp::List polychoric2_itempair( Rcpp::NumericVector v1, Rcpp::NumericVector v2,
     maxK21[0] = maxK2-1;
     Rcpp::NumericVector Ntot1(1);
     Ntot1[0] = Ntotal;
-    //*************************************************
-    // OUTPUT
+
+    //--- OUTPUT
     return Rcpp::List::create(
             Rcpp::Named("thresh1") = thresh1n,
             Rcpp::Named("thresh2") = thresh2n,
             Rcpp::Named("rho") = rho,
             Rcpp::Named("maxK1") = maxK11,
             Rcpp::Named("maxK2") = maxK21,
-            Rcpp::Named("Ntotal") = Ntot1
+            Rcpp::Named("Ntotal") = Ntot1,
+            Rcpp::Named("iter") = iter,
+            Rcpp::Named("der") = der
         );
 }
+///********************************************************************
 
 
 // Rcout << "iter " << iter << "rho " << rho0[0]  << std::endl;
 
 ///********************************************************************
-///** tetrachoric2_rcpp_aux
+///** sirt_rcpp_polychoric2
 // [[Rcpp::export]]
-Rcpp::NumericVector tetrachoric2_rcpp_aux( Rcpp::NumericMatrix dfr,
-    double h, int maxiter )
-{
-    int ZZ = dfr.nrow();
-    Rcpp::NumericVector x(1);
-    Rcpp::NumericVector y(1);
-    Rcpp::NumericVector rho(1);
-    Rcpp::NumericVector p11(1);
-    Rcpp::NumericVector rhores(ZZ);
-    Rcpp::NumericVector L0(1), L0h(1);
-    double L1;
-    double aincr=1;
-    double incr=0;
-    double maxincr = 1e-9;
-    double eps=1e-10;
-    int iter=0;
-
-    for (int zz = 0; zz<ZZ;zz++){
-        iter=0;
-        aincr=1;
-        x[0] = dfr(zz,10);
-        y[0] = dfr(zz,11);
-        rho[0] = dfr(zz,15);
-        p11[0] = dfr(zz,7);
-        while ( ( iter < maxiter ) & ( aincr > maxincr ) ){
-            L0 = pbivnorm2_rcpp( x, y, rho );
-            L0h = pbivnorm2_rcpp( x, y, rho+h );
-            L1 = ( L0h[0] - L0[0] ) / h;
-            // Newton-Raphson step according Divgi (1979)
-            incr = ( L0[0] - p11[0] ) / ( L1 + eps );
-            rho[0] = rho[0] - incr;
-            iter ++;
-            aincr = std::abs(incr);
-        }
-        rhores[zz] = rho[0];
-    }
-    return rhores;
-}
-
-
-    // Rcout << "prob1 " << prob1 << std::endl;
-
-
-///********************************************************************
-///** polychoric2_aux_rcpp
-// [[Rcpp::export]]
-Rcpp::List polychoric2_aux_rcpp( Rcpp::NumericMatrix dat,
-    int maxK, int maxiter )
+Rcpp::List sirt_rcpp_polychoric2( Rcpp::NumericMatrix dat, int maxK,
+    int maxiter, bool use_pbv, double conv, Rcpp::IntegerMatrix rho_init,
+    Rcpp::NumericVector weights)
 {
     int I = dat.ncol();
     int maxK3 = maxK + 3;
-    Rcpp::NumericVector v1, tmp1, tmp2;
-    Rcpp::NumericVector v2;
+    Rcpp::NumericVector v1, v2, tmp1, tmp2, tmp3;
     Rcpp::List res;
     Rcpp::NumericMatrix rho(I,I);
+    Rcpp::IntegerMatrix iter(I,I);
     Rcpp::NumericMatrix Nobs(I,I);
     Rcpp::NumericMatrix thresh(I,maxK3);
     Rcpp::NumericVector maxcat(I);
-    Rcpp::NumericVector tmp3;
     Rcpp::NumericVector Ntot_used(I);
 
     for (int ii=0; ii < I-1;ii++){
         for (int jj=ii+1;jj<I;jj++){
             v1 = dat(_,ii);
             v2 = dat(_,jj);
-            res=polychoric2_itempair( v1, v2, maxK, maxiter );
+            res = sirt_rcpp_polychoric2_est_itempair( v1, v2, maxK, maxiter,
+                            use_pbv, conv, rho_init(jj,ii), weights );
             tmp1 = res["rho"];
             rho(ii,jj) = tmp1[0];
             rho(jj,ii) = rho(ii,jj);
+            iter(jj,ii) = res["iter"];
             tmp1 = res["Ntotal"];
             Nobs(ii,jj) = tmp1[0];
             Nobs(jj,ii) = Nobs(ii,jj);
@@ -400,14 +374,63 @@ Rcpp::List polychoric2_aux_rcpp( Rcpp::NumericMatrix dat,
         rho(ii,ii) = 1;
     }
 
-    //*************************************************
-    // OUTPUT
+    //--- OUTPUT
     return Rcpp::List::create(
             Rcpp::Named("rho") = rho,
             Rcpp::Named("thresh")=thresh,
             Rcpp::Named("maxcat") = maxcat,
             Rcpp::Named("Nobs")=Nobs,
-            Rcpp::Named("Ntot_used") = Ntot_used
+            Rcpp::Named("Ntot_used") = Ntot_used,
+            Rcpp::Named("iter") = iter
         );
 }
+///********************************************************************
 
+
+
+///********************************************************************
+///** sirt_rcpp_tetrachoric2_rcpp
+// [[Rcpp::export]]
+Rcpp::NumericVector sirt_rcpp_tetrachoric2_rcpp( Rcpp::NumericMatrix dfr,
+    double h, int maxiter )
+{
+    int ZZ = dfr.nrow();
+    Rcpp::NumericVector x(1);
+    Rcpp::NumericVector y(1);
+    Rcpp::NumericVector rho(1);
+    Rcpp::NumericVector p11(1);
+    Rcpp::NumericVector rhores(ZZ);
+    Rcpp::NumericVector L0(1), L0h(1);
+    double L1;
+    double aincr=1;
+    double incr=0;
+    double maxincr = 1e-9;
+    double eps=1e-10;
+    int iter=0;
+
+    for (int zz = 0; zz<ZZ;zz++){
+        iter=0;
+        aincr=1;
+        x[0] = dfr(zz,10);
+        y[0] = dfr(zz,11);
+        rho[0] = dfr(zz,15);
+        p11[0] = dfr(zz,7);
+        while ( ( iter < maxiter ) & ( aincr > maxincr ) ){
+            L0 = sirt_rcpp_pbivnorm2( x, y, rho-h );
+            L0h = sirt_rcpp_pbivnorm2( x, y, rho+h );
+            L1 = ( L0h[0] - L0[0] ) / (2*h);
+            // Newton-Raphson step according Divgi (1979)
+            incr = ( L0[0] - p11[0] ) / ( L1 + eps );
+            rho[0] = rho[0] - incr;
+            iter ++;
+            aincr = std::abs(incr);
+        }
+        rhores[zz] = rho[0];
+    }
+    return rhores;
+}
+///********************************************************************
+
+
+
+// Rcout << "prob1 " << prob1 << std::endl;

@@ -1,8 +1,8 @@
 ## File Name: summary.lsem.R
-## File Version: 0.35
+## File Version: 0.386
 
-#############################################
-# summary lsem
+
+#-- summary lsem
 summary.lsem <- function( object, file=NULL, digits=3, ... )
 {
     # open sink for a file
@@ -30,12 +30,21 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
     #-- print computation time
     sirt_summary_print_computation_time_s1(object=object)
 
-    cat( paste0( "Number of observations=", round(object$N,digits) ), "\n")
+    # space between equality sign
+    sp_eq <- paste0( c(" ", "=", " "), collapse="")
+
+    cat( paste0( "Number of observations", sp_eq, round(object$N,digits) ), "\n")
+    cat("Used samping weights:", ! object$no_sampling_weights, "\n")
     if ( object$type=="LSEM"){
-        cat( paste0( "Bandwidth factor=", round(object$h,digits) ), "\n")
-        cat( paste0( "Bandwidth=", round(object$bw,digits) ), "\n")
-        cat( paste0( "Number of focal points for moderator=",
+        cat( paste0( "Bandwidth factor", sp_eq, round(object$h,digits) ), "\n")
+        cat( paste0( "Bandwidth", sp_eq, round(object$bw,digits) ), "\n")
+        cat( paste0( "Number of focal points for moderator", sp_eq,
                             length(object$moderator.grid ) ), "\n")
+        cat("\n")
+        cat("Used sufficient statistics:", object$sufficient_statistics, "\n")
+        cat("Used pseudo weights:", object$use_pseudo_weights, "\n")
+        cat("Used lavaan package:", TRUE, "\n")
+        cat("Used lavaan.survey package:", object$use_lavaan_survey, "\n")
     }
 
     if ( object$type=="MGM"){
@@ -62,6 +71,4 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
 
     # close file
     sirt_csink(file)
-
 }
-#############################################

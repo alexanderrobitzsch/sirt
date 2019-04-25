@@ -1,8 +1,8 @@
 ## File Name: lsem_parameter_summary.R
-## File Version: 0.21
+## File Version: 0.22
 
 
-###############################################################
+## lsem parameter summary
 lsem_parameter_summary <- function( parameters, moderator.density, verbose ){
 
     mod.density <- moderator.density
@@ -13,7 +13,6 @@ lsem_parameter_summary <- function( parameters, moderator.density, verbose ){
     }
     parameters_summary <- NULL
     for (pp in 1:NP){
-        # pp <- 1
         par.pp <- parameters[ parameters$parindex==pp, ]
         pars1 <- data.frame( "par"=paste(par.pp$par[1]), "parindex"=pp)
         x <- par.pp[,"est"]
@@ -28,8 +27,8 @@ lsem_parameter_summary <- function( parameters, moderator.density, verbose ){
         pars1$SD_nonlin <- lsem_wtdSD( stats::resid(mod1), mod.density[,2] )
         parameters_summary <- rbind( parameters_summary, pars1 )
     }
-    return( parameters_summary )
+    return(parameters_summary)
 }
-###############################################################
+
 
 lsem.parameter.summary <- lsem_parameter_summary

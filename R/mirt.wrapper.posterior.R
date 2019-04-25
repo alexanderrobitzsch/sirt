@@ -1,11 +1,12 @@
 ## File Name: mirt.wrapper.posterior.R
-## File Version: 0.31
+## File Version: 0.32
 
-#############################################################
+
 # calculation of posterior
-mirt.wrapper.posterior <- function( mirt.obj, weights=NULL ){
+mirt.wrapper.posterior <- function( mirt.obj, weights=NULL )
+{
+    TAM::require_namespace_msg("mirt")
     # adapt function for multiple groups
-    # ****
     mobj <- mirt.obj
     # extract theta
     # Theta <- mobj@Theta

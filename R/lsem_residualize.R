@@ -1,13 +1,14 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.376
+## File Version: 0.384
 
 
 #**** residualize data
 lsem_residualize <- function( data, moderator, moderator.grid,
-        lavmodel, h=1.1, residualize=TRUE, eps=1E-10, verbose=TRUE )
+        lavmodel, h=1.1, residualize=TRUE, sampling_weights=NULL,
+        eps=1E-10, verbose=TRUE )
 {
     # lavaanify model
-    lavaanstr <- lavaan::lavaanify( lavmodel  )
+    lavaanstr <- lavaan::lavaanify(model=lavmodel)
     vars <- unique( c( lavaanstr$rhs, lavaanstr$lhs ) )
     vars <- intersect( colnames(data), vars )
     data.mod <- data[, moderator ]
@@ -21,13 +22,15 @@ lsem_residualize <- function( data, moderator, moderator.grid,
     sd.moderator <- res$sd.moderator
     bw <- res$bw
     moderator.density <- res$moderator.density
+    sampling_weights <- res$sampling_weights
+    no_sampling_weights <- res$no_sampling_weights
 
     # residualize
     dat2 <- data
     V <- length(vars)
-    residualized_interceps <- matrix( 0, nrow=G, ncol=V)
-    colnames( residualized_interceps ) <- vars
-    rownames( residualized_interceps ) <- round( moderator.grid, 3 )
+    residualized_intercepts <- matrix( 0, nrow=G, ncol=V)
+    colnames(residualized_intercepts) <- vars
+    rownames(residualized_intercepts) <- round( moderator.grid, 3 )
 
     if (residualize){
         if (verbose){
@@ -36,17 +39,15 @@ lsem_residualize <- function( data, moderator, moderator.grid,
         }
         N <- nrow(data)
         for (vv in 1:V){
-            # vv <- 1
             var.vv <- vars[vv]
             ind_vv <- which( ! is.na( data[,var.vv] ) )
             y0 <- rep(NA,N)
             for (gg in 1:G){
-                # gg <- 1
                 x <- dat2[,moderator]
                 res_formula <- data[, var.vv ] ~  x + I( x^2 )
                 mod <- stats::lm( res_formula, weights=weights[,gg]  )
                 m1 <- stats::predict( mod, data.frame( x=moderator.grid[gg] ) )
-                residualized_interceps[gg,vv] <- m1
+                residualized_intercepts[gg,vv] <- m1
                 y <- stats::resid(mod)
                 y0[ ind_vv ] <- y
                 dat2[, var.vv ] <- ifelse( modgrid_index==gg, y0, dat2[, var.vv ] )
@@ -54,11 +55,10 @@ lsem_residualize <- function( data, moderator, moderator.grid,
         }
     }
     #--- OUTPUT
-    res <- list( resid_vars=vars, data=dat2,
-            weights_grid=weights, bw=bw,
-            moderator.density=moderator.density,
-            sd.moderator=sd.moderator, G=G, N=N,
-            residualized_interceps=residualized_interceps )
+    res <- list( resid_vars=vars, data=dat2, weights_grid=weights, bw=bw,
+            moderator.density=moderator.density, sd.moderator=sd.moderator, G=G, N=N,
+            residualized_intercepts=residualized_intercepts,
+            sampling_weights=sampling_weights, no_sampling_weights=no_sampling_weights)
     return(res)
 }
 

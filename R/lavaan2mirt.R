@@ -1,10 +1,11 @@
 ## File Name: lavaan2mirt.R
-## File Version: 0.63
+## File Version: 0.641
 
-###################################################################
-# Converting lavaan syntax into mirt syntax
+
+#--- Converting lavaan syntax into mirt syntax
 lavaan2mirt <- function( dat, lavmodel, est.mirt=TRUE, poly.itemtype="gpcm", ... )
 {
+    TAM::require_namespace_msg("mirt")
     # lavaanify model
     lavmodel2 <- TAM::lavaanify.IRT( lavmodel, data=dat )$lavpartable
 
@@ -227,4 +228,3 @@ lavaan2mirt <- function( dat, lavmodel, est.mirt=TRUE, poly.itemtype="gpcm", ...
     res$dat <- dat
     return(res)
 }
-###################################################################

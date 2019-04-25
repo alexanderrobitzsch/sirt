@@ -37,17 +37,32 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.4  |  2019-04-01  |  Last: sirt 3.4-8
+VERSIONS sirt 3.4  |  2019-04-25  |  Last: sirt 3.4-22
 ------------------------------------------------------------------------
 
 ADDED * included optimization function for invariance alignment which
         minimizes number of DIF effects in invariance.alignment() by
         setting 'align.pow=c(0,0)'. This optimization function
         corresponds to the L0 penalty.
+NOTE  * included a warning message in polychoric2() if lowest category
+        is larger than zero (due to correspondence with Njaal Foldnes)
+NOTE  * included argument 'use_pbv' in polychoric2() which allows use
+        of pbv package for computation of bivariate normal probabilities
+NOTE  * included arguments 'conv', 'rho_init' and 'weights' in 
+        polychoric2(). Exported Rcpp-level function sirt_rcpp_polychoric2().
+FIXED * fixed a bug when computing standard errors in lsem.estimate() 
+        when arguments 'pseudo_weights>0' or 'use_lavaan_survey=FALSE' 
+        were used (thanks to Gabriel Olaru)
+NOTE  * changed default in lsem.estimate() of argument 
+        'sufficient_statistics' to TRUE. This option can only be used 
+        for continuous data.
+ADDED * included option for sampling weights in lsem.estimate() and
+        lsem_local_weights()
 
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: invariance.alignment (1)
+EXAMP * included/modified examples: invariance.alignment (1),
+        polychoric2 (1)
 
 
 

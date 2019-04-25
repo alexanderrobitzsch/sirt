@@ -1,9 +1,10 @@
 ## File Name: lsem_fitsem_raw_data_define_pseudo_weights.R
-## File Version: 0.06
+## File Version: 0.09
 
 lsem_fitsem_raw_data_define_pseudo_weights <- function(dat, pseudo_weights)
 {
     sampling_weights <- "weight"
+    W <- sum(dat[,sampling_weights])
     if (pseudo_weights>0){
         weights <- dat$weight
         N <- nrow(dat)
@@ -17,7 +18,10 @@ lsem_fitsem_raw_data_define_pseudo_weights <- function(dat, pseudo_weights)
         dat <- dat[ind,]
         sampling_weights <- NULL
     }
+    nobs_pseudo <- nrow(dat)
+    sum_weight <- W
     #-- output
-    res <- list(dat=dat, sampling_weights=sampling_weights)
+    res <- list(dat=dat, sampling_weights=sampling_weights,
+                    nobs_pseudo=nobs_pseudo, sum_weight=sum_weight)
     return(res)
 }
