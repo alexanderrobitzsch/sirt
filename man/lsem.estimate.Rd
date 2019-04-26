@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.708
+%% File Version: 0.711
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -350,7 +350,7 @@ summary(mod5d)
 pj <- mod5d$partable_joint
 #* modify parameter table for user-defined constraints
 # define step function for F=~v1 which is constant on intervals 1:4 and 5:7
-pj2 <- pj[ pj$con == 1 , ]
+pj2 <- pj[ pj$con==1, ]
 pj2[ c(5,6), "lhs" ] <- "p1g5"
 pj2 <- pj2[ -4, ]
 partable_joint <- rbind(pj1, pj2)

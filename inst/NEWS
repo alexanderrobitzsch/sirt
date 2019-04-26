@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.4  |  2019-04-26  |  Last: sirt 3.4-32
+VERSIONS sirt 3.4  |  2019-04-26  |  Last: sirt 3.4-33
 ------------------------------------------------------------------------
 
 ADDED * included optimization function for invariance alignment which

@@ -1,16 +1,21 @@
 ## File Name: lsem_fitsem_joint_estimation_prepare_partable.R
-## File Version: 0.281
+## File Version: 0.285
 
 lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
     par_invariant=NULL, par_linear=NULL, par_quadratic=NULL)
 {
+    partable0 <- partable
     partable$id0 <- 1:nrow(partable)
-    partable$con <- 0    
-    label_list <- paste0("p", partable$id)
-    partable$plabel <- paste0(label_list,"g",1)        
-    partable_mg <- partable    
+    partable$con <- 0
+    label_list <- partable$plabel
+    partable1 <- lsem_fitsem_joint_estimation_prepare_partable_include_group_label(
+                        partable=partable, gg=1, label_list=label_list)
+
+    partable_mg <- partable1
     for (gg in 2:G){
         partable_gg <- partable
+        partable_gg <- lsem_fitsem_joint_estimation_prepare_partable_include_group_label(
+                            partable=partable_gg, gg=gg, label_list=label_list)        
         partable_gg$group <- partable_gg$block <- gg
         for (vv in c("free","id")){
             partable_gg <- lsem_fitsem_joint_estimation_partable_id(partable_gg=partable_gg,

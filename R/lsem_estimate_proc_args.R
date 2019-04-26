@@ -1,5 +1,5 @@
 ## File Name: lsem_estimate_proc_args.R
-## File Version: 0.13
+## File Version: 0.14
 
 lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     pseudo_weights, lavmodel, data, use_lavaan_survey, est_joint=FALSE,
@@ -31,7 +31,7 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     if (est_joint){
         sufficient_statistics <- TRUE
     }
-    
+
 
     #- ordered variables
     variables_ordered <- NULL

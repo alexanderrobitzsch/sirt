@@ -1,10 +1,10 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.5412
+## File Version: 0.5413
 
 lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
                 verbose, pars, standardized, variables_model, sufficient_statistics,
                 lavaan_fct, lavmodel, use_lavaan_survey=TRUE, pseudo_weights=0,
-                est_joint=FALSE, par_invariant=NULL, par_linear=NULL, par_quadratic=NULL, 
+                est_joint=FALSE, par_invariant=NULL, par_linear=NULL, par_quadratic=NULL,
                 partable_joint=NULL, ... )
 {
 

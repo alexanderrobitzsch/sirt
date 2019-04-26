@@ -1,7 +1,7 @@
 ## File Name: lsem_fitsem_raw_data_lavaan.R
-## File Version: 0.06
+## File Version: 0.07
 
-lsem_fitsem_raw_data_lavaan <- function(dat, pseudo_weights, survey.fit, 
+lsem_fitsem_raw_data_lavaan <- function(dat, pseudo_weights, survey.fit,
         lavaan_est_fun, ...)
 {
     #- define pseudo weights if requested

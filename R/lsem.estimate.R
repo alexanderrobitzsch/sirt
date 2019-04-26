@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 0.9619
+## File Version: 0.9620
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -24,7 +24,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     res <- lsem_estimate_proc_args( lavaan.args=lavaan.args, sufficient_statistics=sufficient_statistics,
                 pseudo_weights=pseudo_weights, lavmodel=lavmodel, data=data,
                 use_lavaan_survey=use_lavaan_survey, est_joint=est_joint,
-                par_invariant=par_invariant, par_linear=par_linear, 
+                par_invariant=par_invariant, par_linear=par_linear,
                 par_quadratic=par_quadratic, partable_joint=partable_joint )
     sufficient_statistics <- res$sufficient_statistics
     use_lavaan_survey <- res$use_lavaan_survey
