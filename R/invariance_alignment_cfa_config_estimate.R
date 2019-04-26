@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_cfa_config_estimate.R
-## File Version: 0.08
+## File Version: 0.12
 
 invariance_alignment_cfa_config_estimate <- function(dat_gg, weights_gg=NULL, ...)
 {
@@ -12,9 +12,9 @@ invariance_alignment_cfa_config_estimate <- function(dat_gg, weights_gg=NULL, ..
         dat_gg$weights <- weights_gg
         weights_name <- "weights"
     }
-    mod <- lavaan::cfa(data=dat_gg, model=lavmodel, std.lv=TRUE,
+    mod <- sirt_import_lavaan_cfa(data=dat_gg, model=lavmodel, std.lv=TRUE,
                 meanstructure=TRUE, sampling.weights=weights_name, ...)
-    partable <- lavaan::parameterTable(object=mod)
+    partable <- sirt_import_lavaan_parameterTable(object=mod)
     lambda <- partable[ partable$op=="=~", "est"]
     nu <- partable[ partable$op=="~1", "est"][1:I_gg]
     err_var <- partable[ partable$op=="~~", "est"][1:I_gg]

@@ -1,5 +1,5 @@
 ## File Name: mirt.model.vars.R
-## File Version: 0.21
+## File Version: 0.22
 
 
 # Input is a mirt syntax specified with variable names instead of numbers
@@ -81,8 +81,8 @@ split_conc <- function( syn.ll, vv )
     g1 <- strsplit( syn.ll, vv, perl=FALSE )[[1]]
     Lg1 <- length(g1)
     vec <- NULL
-    if (Lg1==1 ){ 
-        vec <- c( g1, vv ) 
+    if (Lg1==1 ){
+        vec <- c( g1, vv )
     }
     if (Lg1 > 1 ){
         vec <- rep("", Lg1 + (Lg1-1) )

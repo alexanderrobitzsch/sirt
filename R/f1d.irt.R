@@ -1,8 +1,7 @@
 ## File Name: f1d.irt.R
-## File Version: 1.23
+## File Version: 1.25
 
-#########################################################
-# Functional Unidimensional Model (Ip et al., 2013)
+#--- Functional Unidimensional Model (Ip et al., 2013)
 f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
             A=NULL, intercept=NULL, mu=NULL, Sigma=NULL, maxiter=100,
             conv=10^(-5), progress=TRUE )
@@ -26,7 +25,7 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
         # intercepts
         intercept <- - res$tau / sqrt( 1 - h2 )
         names.dat <- colnames(dat)
-                    } else {
+    } else {
         a0 <- NA
         d0 <- NA
         A[ is.na(A) ] <- 0
@@ -107,7 +106,6 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
     }
     #**************************************************
 
-
     if ( ! is.null(dat) ){
         # unstandardized loadings 1 factor model
         A0_stand <- fac0$loadings
@@ -119,15 +117,15 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
         d0 <- NULL
     }
 
-    item <- data.frame(  "item"=names.dat )
+    item <- data.frame( item=names.dat )
     item$ai.ast <- aiast
     item$ai0 <- a0
     item$di.ast <- diast
     item$di0 <- d0
-
-    person <- data.frame( "theta.ast"=thetaast, "wgt"=wgt_theta )
-    res <- list( "item"=item, "person"=person, "A"=A, "intercept"=intercept,
-                "dat"=dat, "tetra"=tetra )
+    person <- data.frame( theta.ast=thetaast, wgt=wgt_theta )
+    #--- output
+    res <- list( item=item, person=person, A=A, intercept=intercept,
+                dat=dat, tetra=tetra )
     return(res)
 }
-#**************************************************
+

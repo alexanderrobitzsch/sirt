@@ -1,26 +1,28 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.384
+## File Version: 0.395
 
 
 #**** residualize data
 lsem_residualize <- function( data, moderator, moderator.grid,
-        lavmodel, h=1.1, residualize=TRUE, sampling_weights=NULL,
-        eps=1E-10, verbose=TRUE )
+        lavmodel, h=1.1, bw=NULL, residualize=TRUE, sampling_weights=NULL,
+        eps=1E-10, verbose=TRUE, kernel="gaussian", variables_model )
 {
     # lavaanify model
-    lavaanstr <- lavaan::lavaanify(model=lavmodel)
-    vars <- unique( c( lavaanstr$rhs, lavaanstr$lhs ) )
-    vars <- intersect( colnames(data), vars )
+    lavaanstr <- sirt_import_lavaan_lavaanify(model=lavmodel)
+    vars <- variables_model
     data.mod <- data[, moderator ]
 
     # compute local weights
-    res <- lsem_local_weights(data.mod=data.mod, moderator.grid=moderator.grid, h=h)
+    res <- lsem_local_weights(data.mod=data.mod, moderator.grid=moderator.grid,
+                        h=h, sampling_weights=sampling_weights, bw=bw, kernel=kernel)
     weights <- res$weights
     modgrid_index <- res$modgrid_index
     N <- res$N
     G <- res$G
+    m.moderator <- res$m.moderator
     sd.moderator <- res$sd.moderator
     bw <- res$bw
+    h <- res$h
     moderator.density <- res$moderator.density
     sampling_weights <- res$sampling_weights
     no_sampling_weights <- res$no_sampling_weights
@@ -55,10 +57,11 @@ lsem_residualize <- function( data, moderator, moderator.grid,
         }
     }
     #--- OUTPUT
-    res <- list( resid_vars=vars, data=dat2, weights_grid=weights, bw=bw,
+    res <- list( resid_vars=vars, data=dat2, weights_grid=weights, bw=bw, h=h,
             moderator.density=moderator.density, sd.moderator=sd.moderator, G=G, N=N,
             residualized_intercepts=residualized_intercepts,
-            sampling_weights=sampling_weights, no_sampling_weights=no_sampling_weights)
+            sampling_weights=sampling_weights, no_sampling_weights=no_sampling_weights,
+            m.moderator=m.moderator)
     return(res)
 }
 

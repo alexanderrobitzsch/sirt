@@ -1,8 +1,9 @@
 ## File Name: lsem_define_lavaan_est_fun.R
-## File Version: 0.06
+## File Version: 0.07
 
 lsem_define_lavaan_est_fun <- function(lavaan_fct)
 {
+    TAM::require_namespace_msg("lavaan")
     if (lavaan_fct=="sem"){
         lavaan_est_fun <- lavaan::sem
     }

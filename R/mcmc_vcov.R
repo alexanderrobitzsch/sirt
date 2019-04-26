@@ -1,9 +1,8 @@
 ## File Name: mcmc_vcov.R
-## File Version: 0.12
+## File Version: 0.13
 
 
-###########################################
-# variance covariance matrix
+#--- variance covariance matrix
 mcmc_vcov <- function( mcmcobj, exclude="deviance" )
 {
     mcmcobj <- mcmc_extract_samples_first_chain(mcmcobj=mcmcobj)

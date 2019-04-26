@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.693
+%% File Version: 0.708
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -24,19 +24,27 @@ It is also possible to specify a discretized version of LSEM in which
 values of the moderator are grouped and a multiple group SEM is specified.
 The LSEM can be tested by employing a permutation test, see
 \code{\link{lsem.permutationTest}}.
+
 The function \code{lsem.MGM.stepfunctions} outputs stepwise functions
 for a multiple group model evaluated at a grid of focal points of the
 moderator, specified in \code{moderator.grid}.
 
 The argument \code{pseudo_weights} provides an ad hoc solution to estimate
 an LSEM for any model which can be fitted in \pkg{lavaan}.
+
+It is also possible to constrain some of the parameters along the values
+of the moderator in a joint estimation approach (\code{est_joint=TRUE}). Parameter
+names can be speicified which are assumed to be invariant (in \code{par_invariant}).
+In addition, linear or quadratic constraints can be imposed on
+parameters (\code{par_linear} or \code{par_quadratic}).
 }
 \usage{
-lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1,
+lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=NULL,
     residualize=TRUE, fit_measures=c("rmsea", "cfi", "tli", "gfi", "srmr"),
     standardized=FALSE, standardized_type="std.all", lavaan_fct="sem",
     sufficient_statistics=TRUE, use_lavaan_survey=FALSE, pseudo_weights=0,
-    sampling_weights=NULL, eps=1e-08, verbose=TRUE, ...)
+    sampling_weights=NULL, est_joint=FALSE, par_invariant=NULL, par_linear=NULL,
+    par_quadratic=NULL, kernel="gaussian", eps=1e-08, verbose=TRUE, ...)
 
 \method{summary}{lsem}(object, file=NULL, digits=3, ...)
 
@@ -47,7 +55,8 @@ lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1,
 lsem.MGM.stepfunctions( object, moderator.grid )
 
 # compute local weights
-lsem_local_weights(data.mod, moderator.grid, h, sampling_weights=NULL)
+lsem_local_weights(data.mod, moderator.grid, h, sampling_weights=NULL,  bw=NULL,
+     kernel="gaussian")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -73,6 +82,7 @@ Specified SEM in \pkg{lavaan}.
   \item{h}{
 Bandwidth factor
 }
+\item{bw}{Optional bandwidth parameter if \code{h} should not be used}
 \item{residualize}{Logical indicating whether a residualization
     should be applied. }
   \item{fit_measures}{
@@ -109,12 +119,15 @@ For example, using \code{pseudo_weights=30000} implies
 that the sum of local weights at each focal point is \code{30000}.
 }
 \item{sampling_weights}{Optional vector of sampling weights}
-  \item{eps}{
-Minimum number for weights
-}
-  \item{verbose}{
-Optional logical printing information about computation progress.
-}
+\item{est_joint}{Logical indicating whether LSEM should be estimated in a
+joint estimation approach.}
+\item{par_invariant}{Vector of invariant parameters}
+\item{par_linear}{Vector of parameters with linear function}
+\item{par_quadratic}{Vector of parameters with quadratic function}
+\item{kernel}{Type of kernel function. Can be \code{"gaussian"},
+\code{"uniform"} or \code{"epanechnikov"}.}
+\item{eps}{Minimum number for weights}
+\item{verbose}{Optional logical printing information about computation progress.}
 \item{object}{Object of class \code{lsem}}
 \item{file}{A file name in which the summary output will be written.}
 \item{digits}{Number of digits.}
@@ -162,6 +175,7 @@ moderator if \code{type="MGM"}.}
 residualization.}
 \item{lavmodel}{Used lavaan model}
 \item{data}{Used data frame, possibly residualized if \code{residualize=TRUE}}
+\item{model_parameters}{Model parameters in LSEM}
 }
 
 
@@ -170,6 +184,7 @@ Hildebrandt, A., Luedtke, O., Robitzsch, A., Sommer, C., &
 Wilhelm, O. (2016). Exploring factor model parameters across continuous variables
 with local structural equation models.
 \emph{Multivariate Behavioral Research, 51}, 257-278.
+http://dx.doi.org/10.1080/00273171.2016.1142856
 
 Hildebrandt, A., Wilhelm, O., & Robitzsch, A. (2009). Complementary and
 competing factor analytic approaches for the investigation of measurement invariance.
@@ -285,13 +300,65 @@ lavmodel <- "
 mod4 <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
                lavmodel=lavmodel, h=2, standardized=TRUE)
 summary(mod4)
-# permutation test
+# permutation test (use only few permutations for testing purposes)
 pmod1 <- sirt::lsem.permutationTest( mod4, B=3 )
 
 #**** compute LSEM local weights
 wgt <- sirt::lsem_local_weights(data.mod=dat$age, moderator.grid=moderator.grid,
              h=2)$weights
 print(str(weights))
+
+#********************************
+#*** Model 5: invariance parameter constraints and other constraints
+
+lavmodel <- "
+        F=~ 1*v1+v2+v3+v4
+        F ~~ F"
+moderator.grid <- seq(4,23,4)
+
+#- estimate model without constraints
+mod5a <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+               lavmodel=lavmodel, h=2, standardized=TRUE)
+summary(mod5a)
+# extract parameter names
+mod5a$model_parameters
+
+#- invariance constraints on residual variances
+par_invariant <- c("F=~v1","v2~~v2")
+mod5b <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+               lavmodel=lavmodel, h=2, standardized=TRUE, par_invariant=par_invariant)
+summary(mod5b)
+
+#- compare model mod5b with joint estimation without constraints
+mod5c <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
+               lavmodel=lavmodel, h=2, standardized=TRUE, est_joint=TRUE)
+summary(mod5c)
+
+#- linear and quadratic functions
+par_invariant <- c("F=~v1","v2~~v2")
+par_linear <- c("v1~~v1")
+par_quadratic <- c("v4~~v4")
+
+mod5d <- sirt::lsem.estimate( dat1, moderator="age", moderator.grid=moderator.grid,
+            lavmodel=lavmodel, h=2, par_invariant=par_invariant, par_linear=par_linear,
+            par_quadratic=par_quadratic)
+summary(mod5d)
+
+#- user-defined constraints: step functions for parameters
+
+# inspect parameter table (from lavaan) of fitted model
+pj <- mod5d$partable_joint
+#* modify parameter table for user-defined constraints
+# define step function for F=~v1 which is constant on intervals 1:4 and 5:7
+pj2 <- pj[ pj$con == 1 , ]
+pj2[ c(5,6), "lhs" ] <- "p1g5"
+pj2 <- pj2[ -4, ]
+partable_joint <- rbind(pj1, pj2)
+# estimate model with constraints
+mod5e <- lsem::lsem.estimate( dat1, moderator="age", moderator.grid=moderator.grid,
+             lavmodel=lavmodel, h=2, std.lv=TRUE, estimator="ML",
+             partable_joint=partable_joint)
+summary(mod5e)
 
 #############################################################################
 # EXAMPLE 2: data.lsem01 | FIML with missing data

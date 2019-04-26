@@ -1,8 +1,10 @@
 ## File Name: lsem_estimate_proc_args.R
-## File Version: 0.04
+## File Version: 0.13
 
 lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
-    pseudo_weights, lavmodel, data, use_lavaan_survey)
+    pseudo_weights, lavmodel, data, use_lavaan_survey, est_joint=FALSE,
+    par_invariant=NULL, par_linear=NULL, par_quadratic=NULL,
+    partable_joint=NULL)
 {
     use_pseudo_weights <- pseudo_weights > 0
     if ( sufficient_statistics | use_pseudo_weights ){
@@ -13,8 +15,23 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     }
 
     #- variables in model
-    partable <- lavaan::lavaanify(model=lavmodel)
+    partable <- sirt_import_lavaan_lavaanify(model=lavmodel)
     variables_model <- intersect( union( partable$lhs, partable$rhs ), colnames(data) )
+
+    #- joint estimation
+    par_vec <- union(union(par_invariant, par_linear), par_quadratic)
+    if (length(par_vec)>0){
+        cat("Use joint estimation\n")
+        est_joint <- TRUE
+        sufficient_statistics <- TRUE
+    }
+    if ( !is.null(partable_joint) ){
+        est_joint <- TRUE
+    }
+    if (est_joint){
+        sufficient_statistics <- TRUE
+    }
+    
 
     #- ordered variables
     variables_ordered <- NULL
@@ -34,10 +51,13 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
         sufficient_statistics <- FALSE
         variables_ordered <- union(variables_ordered, names(data_ordered)[data_ordered] )
     }
+    if (est_joint & ( ! sufficient_statistics)){
+        stop("Cannot perform joint estimation for non-continuous data.")
+    }
 
     #-- output
     res <- list(sufficient_statistics=sufficient_statistics, use_lavaan_survey=use_lavaan_survey,
                 variables_model=variables_model, use_pseudo_weights=use_pseudo_weights,
-                variables_ordered=variables_ordered)
+                variables_ordered=variables_ordered, est_joint=est_joint)
     return(res)
 }

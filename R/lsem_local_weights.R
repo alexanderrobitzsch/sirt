@@ -1,7 +1,8 @@
 ## File Name: lsem_local_weights.R
-## File Version: 0.183
+## File Version: 0.192
 
-lsem_local_weights <- function(data.mod, moderator.grid, h, sampling_weights=NULL)
+lsem_local_weights <- function(data.mod, moderator.grid, h,
+        sampling_weights=NULL, bw=NULL, kernel="gaussian")
 {
     eps <- 1E-8
     N <- length(data.mod)
@@ -22,7 +23,13 @@ lsem_local_weights <- function(data.mod, moderator.grid, h, sampling_weights=NUL
     # compute weights for every grid point gg
     weights <- matrix( NA, nrow=N, ncol=G )
     sd.moderator <- TAM::weighted_sd(x=data.mod, w=sampling_weights)
-    bw <- h * sd.moderator * N^(-1/5)
+    m.moderator <- TAM::weighted_mean(x=data.mod, w=sampling_weights)
+    bw_basis <- sd.moderator * N^(-1/5)
+    if (is.null(bw)){
+        bw <- h * bw_basis
+    } else {
+        h <- bw / bw_basis
+    }
     weights1 <- sampling_weights / sum(sampling_weights)
     moderator.density <- stats::density( data.mod, weights=weights1,
                             from=min(moderator.grid), to=max(moderator.grid ), n=G )$y
@@ -31,13 +38,14 @@ lsem_local_weights <- function(data.mod, moderator.grid, h, sampling_weights=NUL
 
     for (gg in 1:G){
         xgg <- moderator.grid[gg]
-        wgt <- lsem_kernel_weights(x=data.mod, x0=xgg, bw=bw)
+        wgt <- lsem_kernel_weights(x=data.mod, x0=xgg, bw=bw, kernel=kernel)
         weights[,gg] <- ifelse( wgt < eps, eps, wgt )
     }
 
     #--- output
     res <- list(weights=weights, N=N, G=G, modgrid_index=modgrid_index,
-                sd.moderator=sd.moderator, bw=bw, moderator.density=moderator.density,
+                m.moderator=m.moderator, sd.moderator=sd.moderator, bw=bw, h=h,
+                moderator.density=moderator.density,
                 sampling_weights=sampling_weights, no_sampling_weights=no_sampling_weights)
     return(res)
 }

@@ -1,5 +1,5 @@
 ## File Name: summary.lsem.R
-## File Version: 0.386
+## File Version: 0.393
 
 
 #-- summary lsem
@@ -41,10 +41,12 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
         cat( paste0( "Number of focal points for moderator", sp_eq,
                             length(object$moderator.grid ) ), "\n")
         cat("\n")
+        cat("Used joint estimation:", object$est_joint, "\n")
         cat("Used sufficient statistics:", object$sufficient_statistics, "\n")
         cat("Used pseudo weights:", object$use_pseudo_weights, "\n")
         cat("Used lavaan package:", TRUE, "\n")
-        cat("Used lavaan.survey package:", object$use_lavaan_survey, "\n")
+        cat("Used lavaan.survey package:", object$use_lavaan_survey, "\n\n")
+        cat("Mean structure modelled:", object$is_meanstructure, "\n")
     }
 
     if ( object$type=="MGM"){
@@ -55,6 +57,13 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
     cat("\nlavaan Model\n")
     cat(object$lavmodel)
 
+    if (object$est_joint){
+        cat("\n\n")
+        cat("Global Fit Statistics for Joint Estimation\n\n")
+        obji <- object$fitstats_joint
+        sirt_summary_print_objects(obji=obji, digits=digits)
+    }
+
     cat("\n\n")
     cat("Parameter Estimate Summary\n\n")
     obji <- object$parameters_summary
@@ -62,6 +71,8 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
 
     cat("\n")
     cat("Distribution of Moderator: Density and Effective Sample Size\n\n")
+    cat( paste0("M=", round(object$m.moderator, digits), " | SD=",
+                round(object$sd.moderator, digits), "\n\n") )
     obji <- object$moderator.density
     sirt_summary_print_objects(obji=obji, digits=digits, from=1)
 

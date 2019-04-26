@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.4  |  2019-04-25  |  Last: sirt 3.4-22
+VERSIONS sirt 3.4  |  2019-04-26  |  Last: sirt 3.4-32
 ------------------------------------------------------------------------
 
 ADDED * included optimization function for invariance alignment which
@@ -58,11 +58,16 @@ NOTE  * changed default in lsem.estimate() of argument
         for continuous data.
 ADDED * included option for sampling weights in lsem.estimate() and
         lsem_local_weights()
+ADDED * included uniform and Epanechnikov kernel for LSEM estimation
+        by including the argument 'kernel' in lsem.estimate()
+ADDED * LSEM can now be additionally estimated in a joint estimation
+        approach ('est_joint=TRUE'). Invariance constraints on 
+        parameters are allowed by 'par_invariant' in lsem.estimate()
 
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: invariance.alignment (1),
-        polychoric2 (1)
+        polychoric2 (1), lsem.estimate (1.1, 1.5)
 
 
 
