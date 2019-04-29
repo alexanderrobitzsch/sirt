@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.5413
+## File Version: 0.5426
 
 lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
                 verbose, pars, standardized, variables_model, sufficient_statistics,
@@ -15,9 +15,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
     survey.fit <- lavfit
     pars0 <- pars
     lavaan_est_fun <- lsem_define_lavaan_est_fun(lavaan_fct=lavaan_fct)
-
     est_separate <- ! est_joint
-
 
     #- verbose
     pr <- lsem_fitsem_verbose_start(G=G, verbose=verbose)
@@ -82,6 +80,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
 
         pars <- sirt_lavaan_partable_parnames(partable=pars)
         NP <- length(pars0)
+
         if (est_separate){
             ind <- match(pars0, pars)
             grid_index <- gg
@@ -89,19 +88,18 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
             par_gg <- pars0
         } else {
             ind <- NULL
-            # parindex <- NULL
             par_gg <- NULL
             for (pp in 1:NP){
                 ind_pp <- which(pars==pars0[pp])
                 npp <- length(ind_pp)
                 ind <- c( ind, ind_pp)
-                # parindex <- c(parindex, rep(pp, npp))
                 par_gg <- c(par_gg, rep(pars0[pp], npp) )
             }
-            grid_index <- dfr.gg$block[ ind ]
+            grid_index <- dfr.gg$group[ ind ]
             parindex <- rep(1:NP, each=G)
             dfr.gg$block <- dfr.gg$group <- NULL
         }
+        
         dfr.gg <- dfr.gg[ ind, ]
         dfr.gg <- data.frame(grid_index=grid_index, moderator=moderator.grid[grid_index],
                             par=par_gg, parindex=parindex, dfr.gg )
@@ -122,7 +120,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
     res <- lsem_fitsem_verbose_progress(gg=G+1, G=G, pr=pr, verbose=verbose)
     parameters <- parameters[ order(parameters$parindex), ]
     rownames(parameters) <- paste0( parameters$par, "__", parameters$grid_index )
-
+    
     #--- OUTPUT
     res <- list( parameters=parameters, is_meanstructure=is_meanstructure,
                     partable_joint=partable_joint, fitstats_joint=fitstats_joint,

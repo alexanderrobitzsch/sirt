@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 0.9620
+## File Version: 0.9622
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -20,6 +20,10 @@ lsem.estimate <- function( data, moderator, moderator.grid,
         }
     }
 
+    #- data cleaning
+    data <- as.data.frame(data)
+    data <- data[ ! is.na(data[,moderator]), ]    
+    
     #- process arguments
     res <- lsem_estimate_proc_args( lavaan.args=lavaan.args, sufficient_statistics=sufficient_statistics,
                 pseudo_weights=pseudo_weights, lavmodel=lavmodel, data=data,

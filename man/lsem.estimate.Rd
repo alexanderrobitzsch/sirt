@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.711
+%% File Version: 0.715
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -44,7 +44,8 @@ lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=
     standardized=FALSE, standardized_type="std.all", lavaan_fct="sem",
     sufficient_statistics=TRUE, use_lavaan_survey=FALSE, pseudo_weights=0,
     sampling_weights=NULL, est_joint=FALSE, par_invariant=NULL, par_linear=NULL,
-    par_quadratic=NULL, kernel="gaussian", eps=1e-08, verbose=TRUE, ...)
+    par_quadratic=NULL, partable_joint=NULL, kernel="gaussian", eps=1e-08,
+    verbose=TRUE, ...)
 
 \method{summary}{lsem}(object, file=NULL, digits=3, ...)
 
@@ -120,10 +121,13 @@ that the sum of local weights at each focal point is \code{30000}.
 }
 \item{sampling_weights}{Optional vector of sampling weights}
 \item{est_joint}{Logical indicating whether LSEM should be estimated in a
-joint estimation approach.}
+joint estimation approach. This options only works wih continuous data and
+sufficient statistics.}
 \item{par_invariant}{Vector of invariant parameters}
 \item{par_linear}{Vector of parameters with linear function}
 \item{par_quadratic}{Vector of parameters with quadratic function}
+\item{partable_joint}{User-defined parameter table if joint estimation is
+used (\code{est_joint=TRUE}).}
 \item{kernel}{Type of kernel function. Can be \code{"gaussian"},
 \code{"uniform"} or \code{"epanechnikov"}.}
 \item{eps}{Minimum number for weights}
@@ -324,7 +328,7 @@ summary(mod5a)
 mod5a$model_parameters
 
 #- invariance constraints on residual variances
-par_invariant <- c("F=~v1","v2~~v2")
+par_invariant <- c("F=~v2","v2~~v2")
 mod5b <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
                lavmodel=lavmodel, h=2, standardized=TRUE, par_invariant=par_invariant)
 summary(mod5b)

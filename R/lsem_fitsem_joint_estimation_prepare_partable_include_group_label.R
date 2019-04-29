@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem_joint_estimation_prepare_partable_include_group_label.R
-## File Version: 0.03
+## File Version: 0.05
 
 
 lsem_fitsem_joint_estimation_prepare_partable_include_group_label <- function(
@@ -13,6 +13,6 @@ lsem_fitsem_joint_estimation_prepare_partable_include_group_label <- function(
         }
     }
     partable$plabel <- paste0(label_list,"g", gg)
-    partable$plabel[ paste(label_list) == "" ] <- ""
+    partable$plabel[ paste(label_list)=="" ] <- ""
     return(partable)
 }
