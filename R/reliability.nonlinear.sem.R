@@ -1,5 +1,5 @@
 ## File Name: reliability.nonlinear.sem.R
-## File Version: 1.18
+## File Version: 1.19
 
 
 
@@ -40,11 +40,11 @@ reliability.nonlinearSEM <- function( facloadings, thresh,
                                             matrix( as.vector(facloadings[ii2,]), ncol=1 )
                 rho.exp[ii2,ii1] <- rho.exp[ii1,ii2]
                 r1 <- rho.exp[ii1,ii2]
-                rel.matrix[ii1,ii2] <- mvtnorm::pmvnorm( c(-Inf,-Inf), pthresh[c(ii1,ii2)],
+                rel.matrix[ii1,ii2] <- sirt_pmvnorm( c(-Inf,-Inf), pthresh[c(ii1,ii2)],
                                          corr=matrix( c( 1, r1, r1, 1),2,2 ) ) -
                                          stats::pnorm( pthresh[ii1] ) * stats::pnorm( pthresh[ii2] )
                 r1 <- max( -1, min( r1 + resid.cov[ii1,ii2], 1 ) )
-                rel.matrix2[ii1,ii2] <- mvtnorm::pmvnorm( c(-Inf,-Inf), pthresh[c(ii1,ii2)],
+                rel.matrix2[ii1,ii2] <- sirt_pmvnorm( c(-Inf,-Inf), pthresh[c(ii1,ii2)],
                                          corr=matrix( c( 1, r1, r1, 1),2,2 ) ) -
                                          stats::pnorm( pthresh[ii1] ) * stats::pnorm( pthresh[ii2] )
 #                rel.matrix2[ii1,ii2] <- rel.matrix[ii1,ii2]
@@ -53,7 +53,7 @@ reliability.nonlinearSEM <- function( facloadings, thresh,
                 if (ii1==ii2){
                     r1 <- 1
 #                    r1 <- 1 - 1e-6
-                    rel.matrix2[ii1,ii2] <- mvtnorm::pmvnorm( c(-Inf,-Inf), pthresh[c(ii1,ii2)],
+                    rel.matrix2[ii1,ii2] <- sirt_pmvnorm( c(-Inf,-Inf), pthresh[c(ii1,ii2)],
                                                corr=matrix( c( 1, r1, r1, 1),2,2 ) ) -
                                                     stats::pnorm( pthresh[ii1] ) * stats::pnorm( pthresh[ii2] )
                     rel.matrix2[ii2,ii1] <- rel.matrix2[ii1,ii2]

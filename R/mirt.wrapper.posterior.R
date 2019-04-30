@@ -1,5 +1,5 @@
 ## File Name: mirt.wrapper.posterior.R
-## File Version: 0.32
+## File Version: 0.33
 
 
 # calculation of posterior
@@ -9,11 +9,8 @@ mirt.wrapper.posterior <- function( mirt.obj, weights=NULL )
     # adapt function for multiple groups
     mobj <- mirt.obj
     # extract theta
-    # Theta <- mobj@Theta
     Theta <- mobj@Model$Theta
     # extract theta distribution
-    # pi.k <- mobj@bfactor$Prior[[1]]
-    # pi.k <- mobj@Prior[[1]]
     pi.k <- mobj@Internals$Prior[[1]]
     # extract full data
     fulldata <- mobj@Data$fulldata[[1]]
@@ -24,9 +21,7 @@ mirt.wrapper.posterior <- function( mirt.obj, weights=NULL )
         items[[ii]] <- mirt::extract.item(mobj, ii)
     }
     # check whether prodlist exists
-    # prodlist <- attr(mobj@pars, "prodlist")
     prodlist <- mobj@Model$prodlist
-    # Theta <- mobj@Theta
     Theta1 <- Theta
     if ( length(prodlist) > 0 ){
         Theta1 <- mirt_prodterms(Theta, prodlist)
@@ -47,7 +42,7 @@ mirt.wrapper.posterior <- function( mirt.obj, weights=NULL )
     resp <- mobj@Data$data
     resp[ resp.ind==0 ] <- 0
     # calc counts
-    group <- NULL    # only applies to single groups for now
+    group <- NULL # only applies to single groups for now
     if (is.null(weights) ){
         pweights <- rep(1,N)
     } else {

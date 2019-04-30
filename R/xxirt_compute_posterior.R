@@ -1,11 +1,10 @@
 ## File Name: xxirt_compute_posterior.R
-## File Version: 0.26
+## File Version: 0.285
 
 
-###########################################################################
+##-- xxirt: compute posterior
 xxirt_compute_posterior <- function( prior_Theta, p.xi.aj, group,
-                G, weights, dat1, dat_resp, maxK, group_index,
-                dat1_resp )
+                G, weights, dat1, dat_resp, maxK, group_index, dat1_resp )
 {
     N <- nrow(dat_resp)
     TP <- ncol(p.xi.aj)
@@ -21,12 +20,11 @@ xxirt_compute_posterior <- function( prior_Theta, p.xi.aj, group,
     for (gg in 1:G){
         ind_gg <- group_index[[gg]]
         p.aj.xi.gg <- as.matrix( p.aj.xi[ind_gg, ] )
-        dat1_resp_gg <- as.matrix(dat1_resp[ ind_gg,, ])
+        dat1_resp_gg <- dat1_resp[ ind_gg,, ]
         for (kk in 1:maxK){
-            dat1_resp_gg_kk <- as.logical(dat1_resp_gg[,,kk])
+            dat1_resp_gg_kk <- as.matrix(dat1_resp_gg[,,kk])
             n.ik[,kk,,gg] <- sirt_rcpp_xxirt_compute_posterior_expected_counts(
-                                dat1_resp_gg=dat1_resp_gg_kk,
-                                p_aj_xi_gg=p.aj.xi.gg )
+                                dat1_resp_gg=dat1_resp_gg_kk, p_aj_xi_gg=p.aj.xi.gg )
         }
         N.ik <- N.ik + n.ik[,,,gg]
         pi.k[,gg] <- colSums( p.aj.xi.gg * weights[ ind_gg ] )
@@ -35,4 +33,3 @@ xxirt_compute_posterior <- function( prior_Theta, p.xi.aj, group,
                     post_unnorm=p1 )
     return(res)
 }
-###########################################################################

@@ -1,8 +1,9 @@
 ## File Name: tetrachoric2.R
-## File Version: 1.27
+## File Version: 1.29
 
 tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
-    cor.smooth=TRUE, progress=TRUE){
+    cor.smooth=TRUE, progress=TRUE)
+{
     # process data
     dat <- as.matrix(dat)
     if (method=="Ol"){
@@ -94,8 +95,7 @@ tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
         TC[ as.matrix(dfr[, c("item1","item2") ] ) ] <- dfr$r0
         TC[ as.matrix(dfr[, c("item2","item1") ] ) ] <- dfr$r0
         if (cor.smooth){
-            TAM::require_namespace_msg("psych")
-            TC <- psych::cor.smooth(TC)
+            TC <- sirt_import_psych_cor.smooth(x=TC)
         }
         rownames(TC) <- colnames(TC) <- colnames(dat)
         res <- list("tau"=tau, "rho"=TC )

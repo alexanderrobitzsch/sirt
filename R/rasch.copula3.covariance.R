@@ -1,5 +1,5 @@
 ## File Name: rasch.copula3.covariance.R
-## File Version: 0.15
+## File Version: 0.16
 
 
 ######################################
@@ -50,8 +50,7 @@ rasch.copula3.covariance <- function( f.qk.yi, Sigma, theta.k, N,
         diag(Sigma.cov) <- diag(Sigma.cov) + 10^(-10)
 
 
-        pi.k <- matrix( mvtnorm::dmvnorm( theta.k, mean=mu, sigma=Sigma.cov )    , ncol=1 )
-        pi.k <- pi.k / sum( pi.k )
+        pi.k <- sirt_dmvnorm_discrete( theta.k, mean=mu, sigma=Sigma.cov, as_matrix=TRUE )
         res <- list( "mu"=mu, "Sigma"=Sigma.cov, "pi.k"=pi.k,
             "Sigma0"=Sigma.cov0)
         return(res)

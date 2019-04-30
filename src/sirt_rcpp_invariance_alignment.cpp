@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_invariance_alignment.cpp
-//// File Version: 2.565
+//// File Version: 2.566
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -9,7 +9,7 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
-// [[Rcpp::interfaces(r, cpp)]]
+// [[RcppNOinterfaces(r, cpp)]]
 
 using namespace Rcpp;
 

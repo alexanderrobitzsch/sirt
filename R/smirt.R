@@ -1,5 +1,5 @@
 ## File Name: smirt.R
-## File Version: 7.27
+## File Version: 7.28
 
 #################################################################
 # smirt model
@@ -141,8 +141,7 @@ smirt <- function( dat, Qmatrix, irtmodel="noncomp",
             Sigma[ variance.fixed[,c(2,1),drop=FALSE] ] <- variance.fixed[,3]
                             }
 
-    pi.k <- mvtnorm::dmvnorm( theta.k, mean=mu, sigma=Sigma )
-    pi.k <- pi.k / sum( pi.k)
+    pi.k <- sirt_dmvnorm_discrete( theta.k, mean=mu, sigma=Sigma )
     # init counts
     n.ik <- array( 0, dim=c(TP,I, K+1) )
     probs <- array(0, dim=c(I,K+1,TP))

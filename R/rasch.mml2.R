@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.415
+## File Version: 7.418
 
 
 #------------------------------------------------------------------------
@@ -321,8 +321,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
             pi.k <- pi.k / sum( pi.k )
                 }
         if (D > 1){
-            pi.k <- mvtnorm::dmvnorm( theta.k, mean=rep(0,D), sigma=Sigma.cov )
-            pi.k <- pi.k / sum( pi.k )
+            pi.k <- sirt_dmvnorm_discrete( theta.k, mean=rep(0,D), sigma=Sigma.cov )
                 }
         G <- 1
         pi.k <- matrix( pi.k, nrow=length(pi.k), ncol=G )
@@ -579,8 +578,8 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                 if ( adaptive.quadrature ){
                     theta.k <- mu + theta.k0 %*% chol(Sigma.cov)
                             }
-                pi.k <- matrix( mvtnorm::dmvnorm( theta.k, mean=mu, sigma=Sigma.cov )    , ncol=1 )
-                m1$pi.k <- pi.k <- pi.k / sum( pi.k )
+                pi.k <- sirt_dmvnorm_discrete( theta.k, mean=mu, sigma=Sigma.cov, as_matrix=TRUE )
+                m1$pi.k <- pi.k
 
                             }
             # end MIRT

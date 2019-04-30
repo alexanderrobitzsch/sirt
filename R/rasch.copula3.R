@@ -1,5 +1,5 @@
 ## File Name: rasch.copula3.R
-## File Version: 6.52
+## File Version: 6.53
 
 
 
@@ -251,9 +251,7 @@ rasch.copula3 <- function( dat, itemcluster, dims=NULL,
     # initial estimate of (mean) item discrimination
     if ( is.null(a.init) ){ a <- rep( 1, I ) } else { a <- a.init }
     # density weights
-#    wgt.theta <- dnorm(theta.k)
-    wgt.theta <- mvtnorm::dmvnorm( theta.k, mean=mu, sigma=sigma)
-    wgt.theta <- wgt.theta / sum( wgt.theta )
+    wgt.theta <- sirt_dmvnorm_discrete( theta.k, mean=mu, sigma=sigma)
 
     if ( G > 1){
         wgt.theta <- matrix(0, length(theta.k), G )

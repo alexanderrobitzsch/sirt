@@ -136,15 +136,6 @@ importFrom(TAM, weighted_sd)
 importFrom(coda, as.mcmc.list)
 importFrom(coda, effectiveSize)
 importFrom(coda, mcmc)
-importFrom(mvtnorm, dmvnorm)
-importFrom(mvtnorm, pmvnorm)
-# importFrom(mvtnorm, rmvnorm) # replaced by CDM::CDM_rmvnorm
-
-
-
- #*** not imported anymore
- # import(qgraph)
- # import(semPlot)
 
 
 
@@ -171,6 +162,9 @@ importFrom(mvtnorm, pmvnorm)
 # importFrom(mirt, itemplot)
 # importFrom(mirt, mirt.model)
 # importFrom(mirt, probtrace)
+# importFrom(mvtnorm, dmvnorm)
+# importFrom(mvtnorm, pmvnorm)
+# importFrom(mvtnorm, rmvnorm) # replaced by CDM::CDM_rmvnorm
 # importFrom(pbivnorm, pbivnorm)
 # importFrom(psych, cor.smooth)
 # importFrom(psych, fa)

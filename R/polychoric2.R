@@ -1,5 +1,5 @@
 ## File Name: polychoric2.R
-## File Version: 0.327
+## File Version: 0.328
 
 
 #---- estimating polychoric correlation using the Olsson method
@@ -53,8 +53,7 @@ polychoric2 <- function( dat, maxiter=100, cor.smooth=TRUE, use_pbv=TRUE,
         cor.smooth <- FALSE
     }
     if (cor.smooth){
-        TAM::require_namespace_msg("psych")
-        rho <- psych::cor.smooth(rho)
+        rho <- sirt_import_psych_cor.smooth(x=rho)
     }
     # output list
     res <- list(tau=tau, rho=rho, Nobs=Nobs, maxcat=maxcat,

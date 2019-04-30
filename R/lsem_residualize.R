@@ -1,5 +1,5 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.395
+## File Version: 0.397
 
 
 #**** residualize data
@@ -10,7 +10,7 @@ lsem_residualize <- function( data, moderator, moderator.grid,
     # lavaanify model
     lavaanstr <- sirt_import_lavaan_lavaanify(model=lavmodel)
     vars <- variables_model
-    data.mod <- data[, moderator ]
+    data.mod <- data[, moderator, drop=TRUE ]
 
     # compute local weights
     res <- lsem_local_weights(data.mod=data.mod, moderator.grid=moderator.grid,
@@ -26,7 +26,7 @@ lsem_residualize <- function( data, moderator, moderator.grid,
     moderator.density <- res$moderator.density
     sampling_weights <- res$sampling_weights
     no_sampling_weights <- res$no_sampling_weights
-
+    
     # residualize
     dat2 <- data
     V <- length(vars)

@@ -1,5 +1,5 @@
 ## File Name: rasch.pml_aux.R
-## File Version: 1.18
+## File Version: 1.21
 
 
 
@@ -134,7 +134,7 @@
                 index2 <- 3*(kk2 - 1) + kk1
                 cor.kk <- S.ki[kk1] * S.ki[kk2] * sigma^2 / sqrt( ( 1 + sigma^2 * S.ki[kk1]^2 ) *
                                     ( 1 + sigma^2 * S.ki[kk2]^2 ) )
-                phi.matrix[ii,index1] <- mvtnorm::pmvnorm(lower=c(-Inf,-Inf),upper=c(xi1[ii,kk1],xi2[ii,kk2] ),
+                phi.matrix[ii,index1] <- sirt_pmvnorm(lower=c(-Inf,-Inf),upper=c(xi1[ii,kk1],xi2[ii,kk2] ),
                         mean=c(0,0),
                         sigma=matrix( c(1,cor.kk,cor.kk,1), 2, 2 )
                                     )
@@ -200,7 +200,7 @@
                 index2 <- 3*(kk2 - 1) + kk1
                 cor.kk <- S.ki[kk1] * S.ki[kk2] * sigma^2 / sqrt( ( 1 + sigma^2 * S.ki[kk1]^2 ) *
                                     ( 1 + sigma^2 * S.ki[kk2]^2 ) )
-                phi.matrix[ii,index1] <- mvtnorm::pmvnorm(lower=c(-Inf,-Inf),upper=c(xi1[ii,kk1],xi2[ii,kk2] ),
+                phi.matrix[ii,index1] <- sirt_pmvnorm(lower=c(-Inf,-Inf),upper=c(xi1[ii,kk1],xi2[ii,kk2] ),
                         mean=c(0,0),
                         sigma=matrix( c(1,cor.kk,cor.kk,1), 2, 2 )
                                     )

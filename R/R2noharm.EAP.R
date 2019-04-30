@@ -1,7 +1,8 @@
 ## File Name: R2noharm.EAP.R
-## File Version: 0.24
-R2noharm.EAP <-
-function( noharmobj, theta.k=seq(-6,6,len=21), print.output=TRUE ){
+## File Version: 0.26
+
+R2noharm.EAP <- function( noharmobj, theta.k=seq(-6,6,len=21), print.output=TRUE )
+{
     mod <- noharmobj
     mod$guess <- guess <- mod$guesses
     f0 <- mod$final.constants
@@ -15,15 +16,14 @@ function( noharmobj, theta.k=seq(-6,6,len=21), print.output=TRUE ){
     TT <- nrow(theta.k)
     if ( TT > 1000 ){
         theta.k <- qmc.nodes( snodes=1000, ndim=D )
-                        }
+    }
     TT <- nrow(theta.k)
     #***
     # calculate probabilities
     probs <- matrix( f0, nrow=I, ncol=TT, byrow=F)
     for (dd in 1:D){
-        # dd <- 1
         probs <- probs + outer( FL[,dd], theta.k[,dd] )
-                }
+    }
     guessM <- matrix( mod$guess, nrow=I, ncol=TT )
     upperM <- matrix( mod$upper, nrow=I, ncol=TT )
     probs1 <- guessM + ( upperM - guessM) * stats::pnorm( probs )
@@ -33,15 +33,13 @@ function( noharmobj, theta.k=seq(-6,6,len=21), print.output=TRUE ){
 
     #****
     # evaluate posterior distribution
-    prior.density <- mvtnorm::dmvnorm( as.matrix(theta.k), mean=rep(0,D),sigma=as.matrix(P) )
-    prior.density <- prior.density / sum( prior.density )
-    prior.density <- matrix( prior.density, nrow=N, ncol=TT, byrow=T )
+    prior.density <- sirt_dmvnorm_discrete( x=as.matrix(theta.k), mean=rep(0,D), sigma=as.matrix(P) )
+    prior.density <- matrix( prior.density, nrow=N, ncol=TT, byrow=TRUE )
     like <- matrix( 1, nrow=N, ncol=TT )
     for (ii in 1:I){
-        # ii <- 1
         ind.ii <- which( ! is.na( dat[,ii] ) )
         like[ind.ii,] <- like[ ind.ii, ] * t( probs[ ii,, dat[ ind.ii,ii ] + 1 ] )
-            }
+    }
     posterior <- like * prior.density
     # posterior <- like
     posterior <- posterior / rowSums( posterior )
@@ -70,9 +68,8 @@ function( noharmobj, theta.k=seq(-6,6,len=21), print.output=TRUE ){
     if ( print.output ){
         cat("EAP Reliabilities:\n")
         print( round (EAP.rel,3) )
-                    }
-    res <- list( "person"=person, "theta"=theta.k,
-            "posterior"=posterior, "like"=like,
-            "EAP.rel"=EAP.rel, "probs"=probs )
-    return(res)
     }
+    res <- list( person=person, theta=theta.k, posterior=posterior, like=like,
+                        EAP.rel=EAP.rel, probs=probs )
+    return(res)
+}

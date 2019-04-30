@@ -1,9 +1,8 @@
 ## File Name: xxirt.R
-## File Version: 0.916
+## File Version: 0.9182
 
 
-#########################################################################
-# user specified item response model
+#--- user specified item response model
 xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 partable=NULL, customTheta=NULL, group=NULL, weights=NULL,
                 globconv=1E-6, conv=1E-4, maxit=200, mstep_iter=4,
@@ -13,6 +12,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     #*** preliminaries
     CALL <- match.call()
     s1 <- Sys.time()
+    
     #*** some data processing of dat
     res <- xxirt_data_proc(dat=dat, group=group )
     N <- res$N
@@ -195,4 +195,3 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     class(res) <- 'xxirt'
     return(res)
 }
-#########################################################################

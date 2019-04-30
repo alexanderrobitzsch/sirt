@@ -1,5 +1,5 @@
 ## File Name: gom.em.R
-## File Version: 5.22
+## File Version: 5.23
 
 #################################################################
 # gom EM algorithm
@@ -40,8 +40,7 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         #***
         mu <- c(0, .7)
         Sigma <- as.matrix(diag(c(1, 1 )))
-        pi.k <- mvtnorm::dmvnorm( theta.kM, mu, Sigma )
-        pi.k <- pi.k / sum( pi.k )
+        pi.k <- sirt_dmvnorm_discrete( x=theta.kM, mean=mu, sigma=Sigma )
         lambda <- stats::plogis( - outer( b, theta0.k, "-" ) )
         # design matrix skill space
 #        Z <- cbind( 1, theta.kM[,1], theta.kM[,1]^2, theta.kM[,1]^3,

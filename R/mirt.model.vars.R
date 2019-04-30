@@ -1,8 +1,8 @@
 ## File Name: mirt.model.vars.R
-## File Version: 0.22
+## File Version: 0.24
 
 
-# Input is a mirt syntax specified with variable names instead of numbers
+#-- Input is a mirt syntax specified with variable names instead of numbers
 mirt.model.vars <- function( mirtsyn2, data=NULL, items=NULL )
 {
     TAM::require_namespace_msg("mirt")
@@ -43,8 +43,8 @@ mirt.model.vars <- function( mirtsyn2, data=NULL, items=NULL )
     return(mirtmodel)
 }
 
-#########################################################################
-# split_syn_string vectorized input
+
+#-- split_syn_string vectorized input
 split_syn_string_vec <- function( syn, vecstr )
 {
     for (vv in vecstr){
@@ -52,11 +52,10 @@ split_syn_string_vec <- function( syn, vecstr )
     }
     return(syn)
 }
-########################################################################
 
 
-########################################################################
-# cleans syntax in a vector from strings vv
+
+#-- cleans syntax in a vector from strings vv
 split_syn_string <- function( syn, vv )
 {
     syn <- as.list(syn )
@@ -65,17 +64,16 @@ split_syn_string <- function( syn, vv )
     if (LL>0){
         for (ii in 1:LL){
             ll <- syn.vv[ii]
-             syn.ll <- syn[[ll]]
+            syn.ll <- syn[[ll]]
             syn[[ll]] <- split_conc( syn.ll, vv )
         }
     }
     syn <- unlist(syn)
     return(syn)
 }
-########################################################################
 
-########################################################################
-# splits a string syn.ll and concatanates it with string vv
+
+#-- splits a string syn.ll and concatanates it with string vv
 split_conc <- function( syn.ll, vv )
 {
     g1 <- strsplit( syn.ll, vv, perl=FALSE )[[1]]
@@ -95,4 +93,3 @@ split_conc <- function( syn.ll, vv )
     }
     return(vec)
 }
-########################################################################

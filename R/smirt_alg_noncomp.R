@@ -1,5 +1,5 @@
 ## File Name: smirt_alg_noncomp.R
-## File Version: 2.38
+## File Version: 2.401
 
 ############################################
 # probability in noncompensatory model
@@ -55,8 +55,7 @@ calcpost <- function (dat2, dat2resp, probs, dat2ind, pik, K){
 #
                                     }
         diag(Sigma.cov) <- diag(Sigma.cov) + 10^(-10)
-        pi.k <- matrix( mvtnorm::dmvnorm( theta.k, mean=mu, sigma=Sigma.cov )    , ncol=1 )
-        pi.k <- pi.k / sum( pi.k )
+        pi.k <- sirt_dmvnorm_discrete( theta.k, mean=mu, sigma=Sigma.cov, as_matrix=TRUE) 
         res <- list("mu"=mu, "Sigma"=Sigma.cov, "pi.k"=pi.k )
         return(res)
                     }
@@ -77,7 +76,8 @@ problong2probarray <- function( probres, I, TP ){
     h <- numdiff.parm
     diffindex <- est.b        # zeros are allowed!
     cat("  M steps b parameter   |")
-    it <- 0 ;    conv1 <- 1000
+    it <- 0
+    conv1 <- 1000
     Q2 <- Q1 <- 0*Qmatrix
     Q <- Qmatrix
     se.b <- b
