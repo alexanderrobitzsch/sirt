@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.715
+%% File Version: 0.724
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -7,6 +7,7 @@
 \alias{plot.lsem}
 \alias{lsem.MGM.stepfunctions}
 \alias{lsem_local_weights}
+\alias{lsem.bootstrap}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
@@ -37,6 +38,9 @@ of the moderator in a joint estimation approach (\code{est_joint=TRUE}). Paramet
 names can be speicified which are assumed to be invariant (in \code{par_invariant}).
 In addition, linear or quadratic constraints can be imposed on
 parameters (\code{par_linear} or \code{par_quadratic}).
+
+Statistical inference in case of joint estimation (but also for separate estimation)
+can be conducted via bootstrap using the function \code{lsem.bootstrap}.
 }
 \usage{
 lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=NULL,
@@ -44,7 +48,7 @@ lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=
     standardized=FALSE, standardized_type="std.all", lavaan_fct="sem",
     sufficient_statistics=TRUE, use_lavaan_survey=FALSE, pseudo_weights=0,
     sampling_weights=NULL, est_joint=FALSE, par_invariant=NULL, par_linear=NULL,
-    par_quadratic=NULL, partable_joint=NULL, kernel="gaussian", eps=1e-08,
+    par_quadratic=NULL, partable_joint=NULL, se=NULL, kernel="gaussian", eps=1e-08,
     verbose=TRUE, ...)
 
 \method{summary}{lsem}(object, file=NULL, digits=3, ...)
@@ -58,6 +62,8 @@ lsem.MGM.stepfunctions( object, moderator.grid )
 # compute local weights
 lsem_local_weights(data.mod, moderator.grid, h, sampling_weights=NULL,  bw=NULL,
      kernel="gaussian")
+
+lsem.bootstrap(object, R=100, verbose=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -128,6 +134,8 @@ sufficient statistics.}
 \item{par_quadratic}{Vector of parameters with quadratic function}
 \item{partable_joint}{User-defined parameter table if joint estimation is
 used (\code{est_joint=TRUE}).}
+\item{se}{Type of standard error used in \code{lavaan::lavaan}. If \code{NULL},
+the \pkg{lavaan} default is used.}
 \item{kernel}{Type of kernel function. Can be \code{"gaussian"},
 \code{"uniform"} or \code{"epanechnikov"}.}
 \item{eps}{Minimum number for weights}
@@ -151,6 +159,7 @@ Further arguments to be passed to \code{\link[lavaan:sem]{lavaan::sem}} or
 \code{\link[lavaan:lavaan]{lavaan::lavaan}}.
 }
 \item{data.mod}{Observed values of the moderator}
+\item{R}{Number of bootstrap samples}
 }
 
 %\details{
@@ -160,7 +169,8 @@ Further arguments to be passed to \code{\link[lavaan:sem]{lavaan::sem}} or
 \value{
 List with following entries
 \item{parameters}{Data frame with all parameters estimated at focal points of
-    moderator}
+    moderator. Bias-corrected estimates under boostrap can be found in
+    the column \code{est_bc}.}
 \item{weights}{Data frame with weights at each focal point}
 \item{parameters_summary}{Summary table for estimated parameters}
 \item{parametersM}{Estimated parameters in matrix form. Parameters are in
@@ -180,6 +190,10 @@ residualization.}
 \item{lavmodel}{Used lavaan model}
 \item{data}{Used data frame, possibly residualized if \code{residualize=TRUE}}
 \item{model_parameters}{Model parameters in LSEM}
+\item{parameters_boot}{Parameter values in each bootstrap sample
+(for \code{lsem.bootstrap})}
+\item{fitstats_joint_boot}{Fit statistics in each bootstrap sample
+(for \code{lsem.bootstrap})}
 }
 
 
@@ -332,6 +346,11 @@ par_invariant <- c("F=~v2","v2~~v2")
 mod5b <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
                lavmodel=lavmodel, h=2, standardized=TRUE, par_invariant=par_invariant)
 summary(mod5b)
+
+#- bootstrap for statistical inference
+bmod5b <- sirt::lsem.bootstrap(mod5b, R=100)
+# inspect parameter values and standard errors
+bmod5b$parameters
 
 #- compare model mod5b with joint estimation without constraints
 mod5c <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,

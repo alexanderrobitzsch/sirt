@@ -1,8 +1,8 @@
 ## File Name: lsem_fitsem_sufficient_statistics_lavaan.R
-## File Version: 0.04
+## File Version: 0.06
 
 lsem_fitsem_sufficient_statistics_lavaan <- function(gg, lavmodel, lavaan_est_fun,
-    survey.fit, sample_stats, is_meanstructure, ...)
+    survey.fit, sample_stats, is_meanstructure, se, ...)
 {
     wmean <- sample_stats$wmean
     wcov <- sample_stats$wcov
@@ -18,6 +18,7 @@ lsem_fitsem_sufficient_statistics_lavaan <- function(gg, lavmodel, lavaan_est_fu
         wmean_gg <- NULL
     }
     survey.fit <- lavaan_est_fun(input_model, sample.cov=wcov[[gg]],
-                                sample.mean=wmean_gg, sample.nobs=Nobs[[gg]], ... )
+                                sample.mean=wmean_gg, sample.nobs=Nobs[[gg]],
+                                se=se, ... )
     return(survey.fit)
 }

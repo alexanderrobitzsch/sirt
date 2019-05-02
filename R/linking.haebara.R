@@ -1,5 +1,5 @@
 ## File Name: linking.haebara.R
-## File Version: 0.422
+## File Version: 0.423
 
 linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         optimizer="optim", center=FALSE, eps=1e-5, use_rcpp=TRUE, ...)
@@ -23,7 +23,7 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
 
     a.orig <- aM
     b.orig <- bM
-    prob_theta <- sirt_sum_norm( stats::dnorm(x=theta, mean=0, sd=1) )
+    prob_theta <- sirt_dnorm_discrete(x=theta, mean=0, sd=1)
 
     #* define parameter vector
     par <- c(rep(1,NI), rep(0,NI), rep(0,NS-1), rep(1, NS-1))

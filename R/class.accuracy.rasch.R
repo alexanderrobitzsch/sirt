@@ -1,5 +1,5 @@
 ## File Name: class.accuracy.rasch.R
-## File Version: 0.15
+## File Version: 0.17
 
 
 #*** classification accuracy in the Rasch model
@@ -15,13 +15,11 @@ class.accuracy.rasch <- function( cutscores, b, meantheta, sdtheta, theta.l,
     cutscores.long <- c(-Inf, cutscores, Inf )
     # MLE standard error
     semle <- rasch.info.mle(dat=dat0, theta=theta.l, b=b )
-    wgttheta <- stats::dnorm( theta.l, mean=meantheta, sd=sdtheta )
-    wgttheta <- wgttheta / sum( wgttheta )
+    wgttheta <- sirt_dnorm_discrete( theta.l, mean=meantheta, sd=sdtheta )
     # distribution of estimated theta values
     m1 <- matrix( NA, nrow=L, ncol=L )
     for (tt in 1:L ){
-        w.tt <- stats::dnorm( theta.l, mean=theta.l[tt], sd=semle[tt] )
-        w.tt <- w.tt / sum( w.tt )
+        w.tt <- sirt_dnorm_discrete( theta.l, mean=theta.l[tt], sd=semle[tt] )
         m1[tt,] <- w.tt
     }
     # calculate probability classification

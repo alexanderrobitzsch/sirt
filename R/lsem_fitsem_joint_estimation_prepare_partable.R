@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem_joint_estimation_prepare_partable.R
-## File Version: 0.287
+## File Version: 0.301
 
 lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
     par_invariant=NULL, par_linear=NULL, par_quadratic=NULL)
@@ -10,7 +10,6 @@ lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
     label_list <- partable$plabel
     partable1 <- lsem_fitsem_joint_estimation_prepare_partable_include_group_label(
                         partable=partable, gg=1, label_list=label_list)
-
     partable_mg <- partable1
     for (gg in 2:G){
         partable_gg <- partable
@@ -23,6 +22,7 @@ lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
             partable_gg[,vv][ partable[,vv]==0 ] <- 0
         }
         partable_gg$plabel <- paste0(label_list,"g",gg)
+        partable_gg$plabel[ label_list==""] <- ""
         partable_mg <- rbind(partable_mg, partable_gg)
     }
 
@@ -31,8 +31,8 @@ lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
     partable_mg$par <- pars
 
     # handle constraints
-    fixed_invariant <- intersect( paste(partable_mg$par[ partable$free == 0]), par_invariant )
-    par_invariant <- setdiff( par_invariant, fixed_invariant)    
+    fixed_invariant <- intersect( paste(partable_mg$par[ partable$free==0]), par_invariant )
+    par_invariant <- setdiff( par_invariant, fixed_invariant)
     par1 <- sirt_define_vector( value="inv", names=par_invariant)
     par2 <- sirt_define_vector( value="lin", names=par_linear)
     par3 <- sirt_define_vector( value="quad", names=par_quadratic)
@@ -90,6 +90,9 @@ lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
             }
         }
     }
+
+    #- handle parameter labels
+    # same_labels <- setdiff( unique(paste(partable_mg$label)), "")
 
     #-- output
     return(partable_mg)

@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 0.9182
+## File Version: 0.9183
 
 
 #--- user specified item response model
@@ -12,7 +12,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     #*** preliminaries
     CALL <- match.call()
     s1 <- Sys.time()
-    
+
     #*** some data processing of dat
     res <- xxirt_data_proc(dat=dat, group=group )
     N <- res$N

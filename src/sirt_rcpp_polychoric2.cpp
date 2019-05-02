@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_polychoric2.cpp
-//// File Version: 3.393
+//// File Version: 3.396
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -7,7 +7,7 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
-// [[Rcpp::interfaces(r, cpp)]]
+// [[RcppNOinterfaces(r, cpp)]]
 
 using namespace Rcpp;
 

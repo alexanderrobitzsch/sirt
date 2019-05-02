@@ -1,12 +1,12 @@
 ## File Name: likelihood_adjustment_aux.R
-## File Version: 0.16
+## File Version: 0.18
 
 
 #######################################################
 # compute adjusted likelihood
 likelihood_adjustment_compute <- function( likelihood, theta,
-            thetaM, adjfac, tuningfac=1){
-    #*******************
+            thetaM, adjfac, tuningfac=1)
+{
     TP <- length(theta)
     # compute weighted mean and weighted SD
     res0 <- likelihood_moments( likelihood, theta=theta )
@@ -17,7 +17,7 @@ likelihood_adjustment_compute <- function( likelihood, theta,
     like2 <- 0*likelihood
     for (tt in 1:TP){
         like2[,tt] <- stats::dnorm( theta[tt], mean=M1, sd=SD1*adjfac*tuningfac )
-                    }
+    }
     like2 <- like2 / rowSums(like2) * w1
     return(like2)
 }
@@ -62,14 +62,12 @@ likelihood_adjustment_tuning <- function( likelihood, theta, thetaM, adjfac,
     res <- list( "likelihood"=like2, "EAP.rel"=EAP.rel )
     return(res)
 }
-##########################################################
-# normal approximation of trait distribution
+
+#*** normal approximation of trait distribution
 trait_normal_approx <- function( probs, theta )
 {
     M <- sum( theta*probs )
     SD <- sqrt( sum( theta^2*probs ) - M^2 )
-    probs1 <- stats::dnorm( theta, mean=M, sd=SD)
-    probs1 <- probs1/sum(probs1)
+    probs1 <- sirt_dnorm_discrete( theta, mean=M, sd=SD)
     return(probs1)
 }
-############################################################

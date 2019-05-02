@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 0.9624
+## File Version: 0.96592
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -8,11 +8,11 @@ lsem.estimate <- function( data, moderator, moderator.grid,
         standardized_type="std.all", lavaan_fct="sem", sufficient_statistics=TRUE,
         use_lavaan_survey=FALSE, pseudo_weights=0, sampling_weights=NULL,
         est_joint=FALSE, par_invariant=NULL, par_linear=NULL, par_quadratic=NULL,
-        partable_joint=NULL, kernel="gaussian", eps=1E-8, verbose=TRUE, ... )
+        partable_joint=NULL, se=NULL, kernel="gaussian", eps=1E-8, verbose=TRUE, ... )
 {
+    lsem_args <- c(as.list(environment()), list(...))
     CALL <- match.call()
     s1 <- Sys.time()
-
     lavaan.args <- list(...)
     if (standardized){
         if ( type=="MGM"){
@@ -22,20 +22,25 @@ lsem.estimate <- function( data, moderator, moderator.grid,
 
     #- data cleaning
     data <- as.data.frame(data)
-    data <- data[ ! is.na(data[,moderator]), ]    
-    
+    data <- data[ ! is.na(data[,moderator]), ]
+
     #- process arguments
     res <- lsem_estimate_proc_args( lavaan.args=lavaan.args, sufficient_statistics=sufficient_statistics,
                 pseudo_weights=pseudo_weights, lavmodel=lavmodel, data=data,
                 use_lavaan_survey=use_lavaan_survey, est_joint=est_joint,
                 par_invariant=par_invariant, par_linear=par_linear,
-                par_quadratic=par_quadratic, partable_joint=partable_joint )
+                par_quadratic=par_quadratic, partable_joint=partable_joint,
+                se=se, verbose=verbose )
     sufficient_statistics <- res$sufficient_statistics
     use_lavaan_survey <- res$use_lavaan_survey
     variables_model <- res$variables_model
     use_pseudo_weights <- res$use_pseudo_weights
     variables_ordered <- res$variables_ordered
     est_joint <- res$est_joint
+    partable <- res$partable
+    has_meanstructure <- res$has_meanstructure
+    se <- res$se
+    compute_se <- res$compute_se
 
     # group moderator if type="MGM"
     out <- lsem_group_moderator( data=data, type=type, moderator.grid=moderator.grid,
@@ -67,9 +72,15 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     dat <- data
     lavmodel__ <- lavmodel
 
-    #* fit lavaan model
+    #* extract estimation function
     lavaan_est_fun <- lsem_define_lavaan_est_fun(lavaan_fct=lavaan_fct)
-    lavfit <- lavaan_est_fun(model=lavmodel__, data=dat,  ... )
+
+    #* fit initial lavaan model
+    lavfit <- lsem_fit_initial_model( lavmodel__=lavmodel__,
+                    lavaan_est_fun=lavaan_est_fun, dat=dat, variables_model=variables_model,
+                    sampling_weights=sampling_weights, has_meanstructure=has_meanstructure,
+                    sufficient_statistics=sufficient_statistics, est_joint=est_joint,
+                    se=se, use_lavaan_survey=use_lavaan_survey, ... )
 
     # extract variables which are in model and data frame
     pars <- sirt_import_lavaan_parameterEstimates(object=lavfit)
@@ -94,7 +105,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     lavaan_fct=lavaan_fct, lavmodel=lavmodel, use_lavaan_survey=use_lavaan_survey,
                     pseudo_weights=pseudo_weights, est_joint=est_joint,
                     par_invariant=par_invariant, par_linear=par_linear,
-                    par_quadratic=par_quadratic, partable_joint=partable_joint, ... )
+                    par_quadratic=par_quadratic, partable_joint=partable_joint,
+                    se=se, ... )
     parameters <- out2$parameters
     is_meanstructure <- out2$is_meanstructure
     fitstats_joint <- out2$fitstats_joint
@@ -122,9 +134,9 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     #-- model parameters
     model_parameters <- setdiff( paste(parameters_summary$par), fit_measures)
 
-
     #-- output
     s2 <- Sys.time()
+    time <- s2-s1
     res <- list( parameters=parameters, weights=weights,
                     parameters_summary=parameters_summary,
                     bw=out$bw, h=h, N=out$N, moderator.density=out$moderator.density,
@@ -132,8 +144,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     m.moderator=m.moderator, sd.moderator=sd.moderator, moderator=moderator,
                     moderator.grid=moderator.grid, lavmodel=lavmodel, residualize=residualize,
                     data=data, residualized.intercepts=residualized_intercepts,
-                    lavaan.args=lavaan.args, fit_measures=fit_measures,
-                    model_parameters=model_parameters, s1=s1, s2=s2,
+                    lavaan.args=lavaan.args, lsem_args=lsem_args, fit_measures=fit_measures,
+                    model_parameters=model_parameters, s1=s1, s2=s2, time=time,
                     standardized=standardized, standardized_type=standardized_type,
                     lavaan_fct=lavaan_fct, use_lavaan_survey=use_lavaan_survey,
                     pseudo_weights=pseudo_weights, use_pseudo_weights=use_pseudo_weights,
@@ -142,7 +154,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     no_sampling_weights=no_sampling_weights, is_meanstructure=is_meanstructure,
                     par_invariant=par_invariant, par_linear=par_linear, par_quadratic=par_quadratic,
                     est_joint=est_joint, fitstats_joint=fitstats_joint, partable_joint=partable_joint,
-                    sample_stats=sample_stats, type=type, CALL=CALL )
+                    sample_stats=sample_stats, se=se, compute_se=compute_se,
+                    class_boot=FALSE, type=type, CALL=CALL )
     class(res) <- "lsem"
     return(res)
 }

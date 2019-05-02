@@ -1,5 +1,5 @@
 ## File Name: lsem_local_weights.R
-## File Version: 0.193
+## File Version: 0.194
 
 lsem_local_weights <- function(data.mod, moderator.grid, h,
         sampling_weights=NULL, bw=NULL, kernel="gaussian")
@@ -31,7 +31,7 @@ lsem_local_weights <- function(data.mod, moderator.grid, h,
         h <- bw / bw_basis
     }
     weights1 <- sampling_weights / sum(sampling_weights)
-    
+
     moderator.density <- stats::density( data.mod, weights=weights1,
                             from=min(moderator.grid), to=max(moderator.grid ), n=G )$y
     moderator.density <- data.frame( moderator=moderator.grid,

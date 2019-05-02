@@ -1,5 +1,5 @@
 ## File Name: marginal.truescore.reliability.R
-## File Version: 0.13
+## File Version: 0.15
 
 
 marginal.truescore.reliability <- function(  b, a=1+0*b, c=0*b, d=1+0*b,
@@ -7,8 +7,7 @@ marginal.truescore.reliability <- function(  b, a=1+0*b, c=0*b, d=1+0*b,
 {
     TT <- length(theta.k)
     I <- length(b)
-    phi.k <- stats::dnorm( theta.k, mean=mean.trait, sd=sd.trait )
-    phi.k <- phi.k / sum( phi.k )
+    phi.k <- sirt_dnorm_discrete( theta.k, mean=mean.trait, sd=sd.trait )
     phi.kM <- matrix( phi.k, nrow=TT, ncol=I )
 
     aM <- sirt_matrix2( a, nrow=TT)
@@ -47,7 +46,7 @@ marginal.truescore.reliability <- function(  b, a=1+0*b, c=0*b, d=1+0*b,
     cat("Reliability", "=", round( rel.test,3 ),"\n")
     # Formula (15)
     # sum( sqrt( outer( sig2.tau, sig2.tau ) ) )
-    res <- list(rel.test=rel.test, item=item, pi=mu/I,
-                sig2.tau=sig2.total.tau, sig2.error=sig2.total.error )
+    res <- list(rel.test=rel.test, item=item, pi=mu/I, sig2.tau=sig2.total.tau, 
+                    sig2.error=sig2.total.error )
     invisible(res)
 }

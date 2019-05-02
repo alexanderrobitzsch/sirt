@@ -1,10 +1,10 @@
 ## File Name: lsem_estimate_proc_args.R
-## File Version: 0.14
+## File Version: 0.25
 
 lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     pseudo_weights, lavmodel, data, use_lavaan_survey, est_joint=FALSE,
     par_invariant=NULL, par_linear=NULL, par_quadratic=NULL,
-    partable_joint=NULL)
+    partable_joint=NULL, se=NULL, verbose=TRUE)
 {
     use_pseudo_weights <- pseudo_weights > 0
     if ( sufficient_statistics | use_pseudo_weights ){
@@ -17,11 +17,14 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     #- variables in model
     partable <- sirt_import_lavaan_lavaanify(model=lavmodel)
     variables_model <- intersect( union( partable$lhs, partable$rhs ), colnames(data) )
+    has_meanstructure <- "~" %in% partable$op
 
     #- joint estimation
     par_vec <- union(union(par_invariant, par_linear), par_quadratic)
     if (length(par_vec)>0){
-        cat("Use joint estimation\n")
+        if (verbose){
+            cat("Use joint estimation\n")
+        }
         est_joint <- TRUE
         sufficient_statistics <- TRUE
     }
@@ -31,7 +34,6 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     if (est_joint){
         sufficient_statistics <- TRUE
     }
-
 
     #- ordered variables
     variables_ordered <- NULL
@@ -54,10 +56,21 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     if (est_joint & ( ! sufficient_statistics)){
         stop("Cannot perform joint estimation for non-continuous data.")
     }
+    if (is.null(se)){
+        if (est_joint){
+            se <- "none"
+        } else {
+            se <- "standard"
+
+        }
+    }
+    compute_se <- se !="none"
 
     #-- output
     res <- list(sufficient_statistics=sufficient_statistics, use_lavaan_survey=use_lavaan_survey,
                 variables_model=variables_model, use_pseudo_weights=use_pseudo_weights,
-                variables_ordered=variables_ordered, est_joint=est_joint)
+                variables_ordered=variables_ordered, est_joint=est_joint,
+                partable=partable, has_meanstructure=has_meanstructure, se=se,
+                compute_se=compute_se)
     return(res)
 }

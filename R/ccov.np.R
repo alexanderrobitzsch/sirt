@@ -1,5 +1,5 @@
 ## File Name: ccov.np.R
-## File Version: 1.14
+## File Version: 1.15
 
 
 #---- nonparametric estimation of conditional covariance
@@ -44,8 +44,7 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
     }
     sirt_progress_cat(progress=progress)
     # weights thetagrid
-    wgt.thetagrid <- stats::dnorm(thetagrid)
-    wgt.thetagrid <- wgt.thetagrid
+    wgt.thetagrid <- sirt_dnorm_discrete(x=thetagrid)
     if (progress ){
         cat("...........................................................\n" )
         cat("Nonparametric Estimation of conditional covariances \n " )

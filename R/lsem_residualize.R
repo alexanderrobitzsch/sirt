@@ -1,5 +1,5 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.397
+## File Version: 0.398
 
 
 #**** residualize data
@@ -26,7 +26,7 @@ lsem_residualize <- function( data, moderator, moderator.grid,
     moderator.density <- res$moderator.density
     sampling_weights <- res$sampling_weights
     no_sampling_weights <- res$no_sampling_weights
-    
+
     # residualize
     dat2 <- data
     V <- length(vars)

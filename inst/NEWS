@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.4  |  2019-04-30  |  Last: sirt 3.4-44
+VERSIONS sirt 3.4  |  2019-05-02  |  Last: sirt 3.4-58
 ------------------------------------------------------------------------
 
 ADDED * included optimization function for invariance alignment which
@@ -65,11 +65,18 @@ ADDED * LSEM can now be additionally estimated in a joint estimation
         parameters are allowed by 'par_invariant' in lsem.estimate()
 NOTE  * included check on invariance constraint for fixed parameters
         in lsem.estimate() (thanks to Ingo Seifert)
+NOTE  * excluded computation of standard errors in lsem.estimate() if
+        'est_joint=TRUE' is used (thanks to an example of Ingo Seifert)
 NOTE  * now remove cases with missing values on moderators in
         lsem.estimate() (thanks to @Deleetdk, issues #8, #9)
 FIXED * fixed a bug in xxirt() caused by incorrect data processing 
         which stopped the function (thanks to Hyejin Shim)
-        
+NOTE  * fit initial model in lsem.estimate() if sufficient
+        statistics are used based on pairwise deletion
+        (thanks to Martina Bader)
+ADDED * added bootstrap functionality for LSEM in the function
+        lsem.bootstrap()        
+
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: invariance.alignment (1),

@@ -1,5 +1,5 @@
 ## File Name: summary.lsem.R
-## File Version: 0.393
+## File Version: 0.398
 
 
 #-- summary lsem
@@ -47,6 +47,12 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
         cat("Used lavaan package:", TRUE, "\n")
         cat("Used lavaan.survey package:", object$use_lavaan_survey, "\n\n")
         cat("Mean structure modelled:", object$is_meanstructure, "\n")
+
+        if (object$class_boot){
+            v1 <- paste0("\nStatistical inference based on ", object$R, " bootstrap samples.")
+            cat(v1,"\n")
+        }
+
     }
 
     if ( object$type=="MGM"){

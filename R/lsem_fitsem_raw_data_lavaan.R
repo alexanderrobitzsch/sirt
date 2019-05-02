@@ -1,8 +1,8 @@
 ## File Name: lsem_fitsem_raw_data_lavaan.R
-## File Version: 0.07
+## File Version: 0.08
 
 lsem_fitsem_raw_data_lavaan <- function(dat, pseudo_weights, survey.fit,
-        lavaan_est_fun, ...)
+        lavaan_est_fun, se, ...)
 {
     #- define pseudo weights if requested
     res <- lsem_fitsem_raw_data_define_pseudo_weights(dat=dat, pseudo_weights=pseudo_weights)
@@ -16,7 +16,7 @@ lsem_fitsem_raw_data_lavaan <- function(dat, pseudo_weights, survey.fit,
     partable$start <- partable$est
     #- fit model with sampling weights
     survey.fit <- lavaan_est_fun(model=partable, data=dat1,
-                        sampling.weights=sampling_weights, ... )
+                        sampling.weights=sampling_weights, se=se, ... )
     #- adjust sample size
     survey.fit <- lavaan_object_adjust_sample_size(object=survey.fit, n_used=sum_weight)
 

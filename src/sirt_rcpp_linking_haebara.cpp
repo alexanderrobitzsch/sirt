@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_linking_haebara.cpp
-//// File Version: 0.384
+//// File Version: 0.385
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -9,7 +9,7 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
-// [[Rcpp::interfaces(r, cpp)]]
+// [[RcppNOinterfaces(r, cpp)]]
 
 using namespace Rcpp;
 

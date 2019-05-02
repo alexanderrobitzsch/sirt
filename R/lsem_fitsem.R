@@ -1,11 +1,11 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.5426
+## File Version: 0.5456
 
 lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
                 verbose, pars, standardized, variables_model, sufficient_statistics,
                 lavaan_fct, lavmodel, use_lavaan_survey=TRUE, pseudo_weights=0,
                 est_joint=FALSE, par_invariant=NULL, par_linear=NULL, par_quadratic=NULL,
-                partable_joint=NULL, ... )
+                partable_joint=NULL, se="standard", ... )
 {
 
     parameters <- NULL
@@ -37,13 +37,16 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
                                 par_invariant=par_invariant, par_linear=par_linear,
                                 par_quadratic=par_quadratic)
         }
+
         #- fit model
         if (sufficient_statistics){
             survey.fit <- lsem_fitsem_joint_estimation_sufficient_statistics(
                             partable_joint=partable_joint, is_meanstructure=is_meanstructure,
-                            sample_stats=sample_stats, lavaan_est_fun=lavaan_est_fun, ... )
+                            sample_stats=sample_stats, lavaan_est_fun=lavaan_est_fun,
+                            verbose=verbose, se=se, ... )
         }
         fitstats_joint <- lsem_lavaan_fit_measures(object=survey.fit, fit_measures=fit_measures)
+        fitstats_joint <- data.frame(stat=names(fitstats_joint), value=fitstats_joint)
     }
 
     #-- separate estimation: loop over groups
@@ -58,14 +61,16 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
             }
             if (! use_lavaan_survey){  # fit in lavaan
                 survey.fit <- lsem_fitsem_raw_data_lavaan(dat=dat, pseudo_weights=pseudo_weights,
-                                    survey.fit=survey.fit, lavaan_est_fun=lavaan_est_fun, ...)
+                                    survey.fit=survey.fit, lavaan_est_fun=lavaan_est_fun,
+                                    se=se, ...)
             }
         }
         #***** fit the model using sufficient statistics
         if (sufficient_statistics & est_separate){
             survey.fit <- lsem_fitsem_sufficient_statistics_lavaan( gg=gg, lavmodel=lavmodel,
                                 lavaan_est_fun=lavaan_est_fun, survey.fit=survey.fit,
-                                sample_stats=sample_stats, is_meanstructure=is_meanstructure, ... )
+                                sample_stats=sample_stats, is_meanstructure=is_meanstructure,
+                                se=se, ... )
         }
 
         dfr.gg <- pars <- sirt_import_lavaan_parameterEstimates(object=survey.fit)
@@ -80,7 +85,6 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
 
         pars <- sirt_lavaan_partable_parnames(partable=pars)
         NP <- length(pars0)
-
         if (est_separate){
             ind <- match(pars0, pars)
             grid_index <- gg
@@ -99,7 +103,6 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
             parindex <- rep(1:NP, each=G)
             dfr.gg$block <- dfr.gg$group <- NULL
         }
-        
         dfr.gg <- dfr.gg[ ind, ]
         dfr.gg <- data.frame(grid_index=grid_index, moderator=moderator.grid[grid_index],
                             par=par_gg, parindex=parindex, dfr.gg )
@@ -116,11 +119,14 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
         res <- lsem_fitsem_verbose_progress(gg=gg, G=G, pr=pr, verbose=verbose)
         if (est_joint){ break }
     }
+    if ( sum(colnames(parameters)=="se")==0){
+        parameters$se <- NA
+    }
 
     res <- lsem_fitsem_verbose_progress(gg=G+1, G=G, pr=pr, verbose=verbose)
     parameters <- parameters[ order(parameters$parindex), ]
     rownames(parameters) <- paste0( parameters$par, "__", parameters$grid_index )
-    
+
     #--- OUTPUT
     res <- list( parameters=parameters, is_meanstructure=is_meanstructure,
                     partable_joint=partable_joint, fitstats_joint=fitstats_joint,
