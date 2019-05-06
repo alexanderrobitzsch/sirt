@@ -1,10 +1,11 @@
 ## File Name: rasch.mml.ramsay.R
-## File Version: 2.15
+## File Version: 2.17
 
 
 ######################################################
 # probability ramsay qm
-.prob.ramsay <- function( theta, b,  fixed.K=3 + 0*b, pow=1){
+.prob.ramsay <- function( theta, b,  fixed.K=3 + 0*b, pow=1)
+{
     XXT <- matrix( theta, nrow=length(theta), ncol=length(b))
     XXb <- matrix( b, nrow=length(theta), ncol=length(b), byrow=T )
     XX2 <- exp( (exp( XXT ))^pow / exp(XXb) )
@@ -13,7 +14,7 @@
     pm <- XX2 / ( KM + XX2 )
     pm[ pm==Inf ] <- 1
     return(pm)
-    }
+}
 #-----------------------------------------------------------------
 
 
@@ -118,9 +119,8 @@ sim.qm.ramsay <- function( theta, b, K  ){
     for (gg in 1:G){
         if (is.null( trait.weights) | G > 1 ){
                 pi.k[,gg] <- n.k[,gg] / n[gg]  } else  {
-                 pi.k <- stats::dnorm( theta.k)
-                 pi.k <- pi.k/sum(pi.k)
-                 pi.k <- matrix( pi.k, ncol=1 )
+                pi.k <- sirt_dnorm_discrete( theta.k)
+                pi.k <- matrix( pi.k, ncol=1 )
                         }
                }
     #*****

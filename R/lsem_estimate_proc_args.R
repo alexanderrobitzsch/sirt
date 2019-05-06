@@ -1,5 +1,5 @@
 ## File Name: lsem_estimate_proc_args.R
-## File Version: 0.25
+## File Version: 0.29
 
 lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     pseudo_weights, lavmodel, data, use_lavaan_survey, est_joint=FALSE,
@@ -13,7 +13,12 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     if (use_pseudo_weights){
         use_lavaan_survey <- FALSE
     }
-
+    lavaan_args_names <- names(lavaan.args)
+    if ( "missing" %in% lavaan_args_names){
+        if ( lavaan.args[["missing"]] == "fiml" ){
+            sufficient_statistics <- FALSE
+        }
+    }
     #- variables in model
     partable <- sirt_import_lavaan_lavaanify(model=lavmodel)
     variables_model <- intersect( union( partable$lhs, partable$rhs ), colnames(data) )

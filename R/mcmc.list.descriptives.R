@@ -1,5 +1,5 @@
 ## File Name: mcmc.list.descriptives.R
-## File Version: 0.18
+## File Version: 0.19
 
 ########################################################
 # mcmclist descriptives
@@ -32,7 +32,7 @@ mcmc.list.descriptives <- function( mcmcobj, quantiles=c(.025,.05,.1,.50,.9,.95,
     smc2 <- summary.mcmcobj$statistics
     colnames(summary.mcmcobj$quantiles) <- paste0( "Q", 100*quantiles )
     # calculate effective sample size
-    effSize <- coda::effectiveSize( mcmcobj )
+    effSize <- sirt_import_coda_effectiveSize( mcmcobj )
     statis <- summary.mcmcobj$statistics
     statis <- cbind( statis[, c(1,2) ], apply( as.matrix(mcmcobj), 2, stats::mad ),
                 apply( as.matrix(mcmcobj), 2, skewness.sirt ),

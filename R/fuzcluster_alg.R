@@ -1,5 +1,5 @@
 ## File Name: fuzcluster_alg.R
-## File Version: 0.24
+## File Version: 0.25
 
 fuzcluster_estimate <- function(K, dat_m, dat_s, dat_resp,
     maxiter=1000, parmconv=.0001, progress=TRUE, seed=NULL,    fac.oldxsi=0)
@@ -67,7 +67,7 @@ fuzcluster_estimate <- function(K, dat_m, dat_s, dat_resp,
             # xi estimate
             xi_ik[,,kk] <- mu_ik[,,kk]^2 + sig2_ik[,,kk]
             # t_ik: posterior distribution
-            phi_ik[,,kk] <- stats::dnorm( dat.resp*( dat_m - mu_k ) / sqrt( sd_k^2 + dat_s^2 + eps) )
+            phi_ik[,,kk] <- sirt_dnorm( dat.resp*( dat_m - mu_k ) / sqrt( sd_k^2 + dat_s^2 + eps) )
             t_ik[,kk] <- pi_est[kk] * rowProds2( phi_ik[,,kk] )
                     }
         t_ik <- t_ik / rowSums( t_ik )

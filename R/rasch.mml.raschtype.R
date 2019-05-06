@@ -1,5 +1,5 @@
 ## File Name: rasch.mml.raschtype.R
-## File Version: 2.54
+## File Version: 2.57
 
 ################################################
 # calculation of the likelihood
@@ -125,7 +125,11 @@ mml_raschtype_counts <- function (dat2,dat2resp,dat1,fqkyi,pik,fyiqk){
     abs.change <- 1
     miter <- 0
     # update pi.k
-    if (is.null( trait.weights) ){ pi.k <- n.k / n  } else { pi.k <- stats::dnorm( theta.k) ; pi.k <- pi.k/sum(pi.k) }
+    if (is.null( trait.weights) ){ 
+        pi.k <- n.k / n  
+    } else { 
+        pi.k <- sirt_dnorm_discrete(theta.k)
+    }
     while( abs.change > conv1 & miter < mitermax ){
         b0 <- b
         if (pure.rasch==1){
@@ -605,23 +609,22 @@ squeeze.mml2 <- function( v1, rgvec ){
 ##################################################
 # estimation of group means in the 1dim IRT model
 .est.mean <- function( dat1.gg, f.yi.qk.gg, X1, pi.k, pi.k0, gg,
-                            mean.trait, sd.trait, theta.k, h){
-                        ll0 <- sum( dat1.gg * log( rowSums( f.yi.qk.gg * outer( X1, pi.k[,gg] ) ) ) )
-                        pi.k2 <- pi.k0
-                        pi.k2[,gg] <- stats::dnorm( theta.k, mean=mean.trait[gg]+h, sd=sd.trait[gg]  )
-                        pi.k2[,gg] <- pi.k2[,gg] / sum( pi.k2[,gg] )
-                        ll1 <- sum( dat1.gg * log( rowSums( f.yi.qk.gg * outer( X1, pi.k2[,gg] ) ) ))
-                        pi.k2 <- pi.k0
-                        pi.k2[,gg] <- stats::dnorm( theta.k, mean=mean.trait[gg] -h, sd=sd.trait[gg]  )
-                        pi.k2[,gg] <- pi.k2[,gg] / sum( pi.k2[,gg] )
-                        ll2 <- sum( dat1.gg * log( rowSums( f.yi.qk.gg * outer( X1, pi.k2[,gg] ) ) ) )
-                        d1 <- ( ll1 - ll2  ) / ( 2 * h )    # negative sign?
-                        d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2
-                        d2[ abs(d2) < 10^(-15) ]  <- 10^(-15)
-                        d.change <- - d1 / d2
-                        d.change <- ifelse( abs(d.change) > .1, .1*sign(d.change), d.change )
-                        return(d.change )
-                            }
+                            mean.trait, sd.trait, theta.k, h)
+{
+    ll0 <- sum( dat1.gg * log( rowSums( f.yi.qk.gg * outer( X1, pi.k[,gg] ) ) ) )
+    pi.k2 <- pi.k0
+    pi.k2[,gg] <- sirt_dnorm_discrete( theta.k, mean=mean.trait[gg]+h, sd=sd.trait[gg]  )
+    ll1 <- sum( dat1.gg * log( rowSums( f.yi.qk.gg * outer( X1, pi.k2[,gg] ) ) ))
+    pi.k2 <- pi.k0
+    pi.k2[,gg] <- sirt_dnorm_discrete( theta.k, mean=mean.trait[gg] -h, sd=sd.trait[gg]  )
+    ll2 <- sum( dat1.gg * log( rowSums( f.yi.qk.gg * outer( X1, pi.k2[,gg] ) ) ) )
+    d1 <- ( ll1 - ll2  ) / ( 2 * h )    # negative sign?
+    d2 <- ( ll1 + ll2 - 2*ll0 ) / h^2
+    d2[ abs(d2) < 10^(-15) ]  <- 10^(-15)
+    d.change <- - d1 / d2
+    d.change <- ifelse( abs(d.change) > .1, .1*sign(d.change), d.change )
+    return(d.change)
+}
 ##################################################
 
 
@@ -632,11 +635,10 @@ squeeze.mml2 <- function( v1, rgvec ){
                             mean.trait, sd.trait, theta.k, h){
         ll0 <- sum( dat1.gg * log( rowSums( f.yi.qk.gg * outer( X1, pi.k[,gg] ) ) ) )
         pi.k2 <- pi.k
-        pi.k2[,gg] <- stats::dnorm( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] + h )
-        pi.k2[,gg] <- pi.k2[,gg] / sum( pi.k2[,gg] )
+        pi.k2[,gg] <- sirt_dnorm_discrete( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] + h )
         ll1 <- sum( dat1.gg * log( rowSums( f.yi.qk.gg * outer( X1, pi.k2[,gg] ) ) ) )
         pi.k2 <- pi.k
-        pi.k2[,gg] <- stats::dnorm( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] - h )
+        pi.k2[,gg] <- sirt_dnorm_discrete( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] - h )
         pi.k2[,gg] <- pi.k2[,gg] / sum( pi.k2[,gg] )
         ll2 <- sum( dat1.gg * log( rowSums( f.yi.qk.gg * outer( X1, pi.k2[,gg] ) ) ) )
         d1 <- ( ll1 - ll2  ) / ( 2 * h )    # negative sign?

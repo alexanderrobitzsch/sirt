@@ -1,8 +1,9 @@
 ## File Name: sirt_import_lavaan_cfa.R
-## File Version: 0.03
+## File Version: 0.04
 
 sirt_import_lavaan_cfa <- function(...)
 {
-    res <- sirt_import_function_value(fun="cfa", pkg="lavaan", ...)
+    TAM::require_namespace_msg("lavaan")
+    res <- lavaan::cfa(...)
     return(res)
 }

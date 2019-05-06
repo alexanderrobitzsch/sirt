@@ -1,5 +1,5 @@
 ## File Name: mcmc_derivedPars.R
-## File Version: 0.28
+## File Version: 0.31
 
 #####################################################
 # derived parameters for objects of class mcmc
@@ -25,7 +25,6 @@ mcmc_derivedPars <- function( mcmcobj, derivedPars )
     }
     colnames(data) <- mcmc_rename_undo_parameter_names( vec=colnames(data), orig=orig, trans=trans)
     a1 <- attr( mcmcobj, "mcpar")
-    res <- coda::mcmc(     data=data,  start=a1[1], end=a1[2],
-                    thin=a1[3] )
+    res <- sirt_import_coda_mcmc( data=data,  start=a1[1], end=a1[2], thin=a1[3] )
     return(res)
 }

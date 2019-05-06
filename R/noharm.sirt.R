@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.919
+## File Version: 0.921
 
 
 ########################################
@@ -73,7 +73,7 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
     # include lower and upper asymptotes here
 
     b0 <- lower + (upper-lower) * stats::pnorm(-betaj)
-    b1 <- (upper-lower) * stats::dnorm(betaj)
+    b1 <- (upper-lower) * sirt_dnorm(betaj)
     b2 <- betaj * b1 / sqrt(2)
     b3 <- ( betaj^2 -1 ) * b1 / sqrt(6)
 

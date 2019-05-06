@@ -1,13 +1,11 @@
 ## File Name: IRT.mle.R
-## File Version: 0.28
+## File Version: 0.32
 
 
-#################################################################
-# IRT.mle
+#--- IRT.mle
 IRT.mle <- function(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
-        mu=0, sigma=1,maxiter=20, maxincr=3, h=0.001, convP=1e-04, maxval=9, progress=TRUE)
+        mu=0, sigma=1, maxiter=20, maxincr=3, h=0.001, convP=1e-04, maxval=9, progress=TRUE)
 {
-
     N <- length(theta)
     I <- ncol(data)
     iter <- 1
@@ -47,11 +45,11 @@ IRT.mle <- function(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
         #-----
         # prior distribution
         if (MAP){
-           llP0 <- llP0 + stats::dnorm( theta, mean=mu,sd=sigma, log=TRUE)
-           llP1 <- llP1 + stats::dnorm( theta+h, mean=mu,sd=sigma, log=TRUE)
-           llP2 <- llP2 + stats::dnorm( theta+2*h, mean=mu,sd=sigma, log=TRUE)
-           llM1 <- llM1 + stats::dnorm( theta-h, mean=mu,sd=sigma, log=TRUE)
-           llM2 <- llM2 + stats::dnorm( theta-2*h, mean=mu,sd=sigma, log=TRUE)
+           llP0 <- llP0 + sirt_dnorm( theta, mean=mu,sd=sigma, log=TRUE)
+           llP1 <- llP1 + sirt_dnorm( theta+h, mean=mu,sd=sigma, log=TRUE)
+           llP2 <- llP2 + sirt_dnorm( theta+2*h, mean=mu,sd=sigma, log=TRUE)
+           llM1 <- llM1 + sirt_dnorm( theta-h, mean=mu,sd=sigma, log=TRUE)
+           llM2 <- llM2 + sirt_dnorm( theta-2*h, mean=mu,sd=sigma, log=TRUE)
         }
         #-----
         #*** likelihood
@@ -76,7 +74,7 @@ IRT.mle <- function(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
         if (progress){
             cat("* Iteration", iter, ":", "maximum parameter change",
                 round( conv, 5 ), "\n")
-            utils::flush.console();
+            utils::flush.console()
         }
         iter <- iter + 1
     }
@@ -100,23 +98,17 @@ IRT.mle <- function(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
     #--- output
     return(res)
 }
-###########################################################################
 
 
-
-###############################################
-# calculate individual likelihood for item ii
-calc.ll <- function( probs, data, ii )
+#--- calculate individual likelihood for item ii
+calc.ll <- function( probs, data, ii, eps=1e-50 )
 {
     N <- nrow(data)
-    eps <- 1E-50
     probs <- log(probs + eps)
-    # m1 <- cbind( 1:N, data[,ii] + 1 )
     m1 <- matrix(1:N, nrow=N, ncol=2)
     m1[,2] <- data[,ii] + 1
     h1 <- probs[ m1 ]
     h1[ is.na(h1) ] <- 0
     return(h1)
 }
-################################################
 

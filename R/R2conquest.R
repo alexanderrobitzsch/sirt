@@ -1,5 +1,5 @@
 ## File Name: R2conquest.R
-## File Version: 1.40
+## File Version: 1.41
 
 
 
@@ -301,7 +301,7 @@ R2conquest <- function( dat, path.conquest, conquest.name="console",
                 thetagrid <- seq( -10, 10, .01 )
                 mean.trait <- mean( pv1$PV1)
                 sd.trait <- stats::sd( pv1$PV1 )
-                dens.thetagrid <- stats::dnorm( thetagrid, mean=mean.trait, sd=sd.trait )
+                dens.thetagrid <- sirt_dnorm( thetagrid, mean=mean.trait, sd=sd.trait )
                 dens.thetagrid <- dens.thetagrid / sum( dens.thetagrid )
                 p.exp <- sapply( itemdiff, FUN=function(bii) {
                        stats::weighted.mean( stats::plogis( thetagrid - bii ), dens.thetagrid )

@@ -1,5 +1,5 @@
 ## File Name: rasch.mml.R
-## File Version: 2.15
+## File Version: 2.162
 
 
 
@@ -175,8 +175,7 @@ rasch.mml <- function( dat, theta.k=seq(-4,4,len=20), group=NULL, weights=NULL,
         n <- dp$n
         I <- dp$I
         # probability weights at theta.k
-        pi.k <- stats::dnorm( theta.k )
-        pi.k <- pi.k / sum( pi.k )
+        pi.k <- sirt_dnorm_discrete( theta.k )
         # group calculations
         if ( !is.null( group )){
             G <- length( unique( group ) )
@@ -253,8 +252,7 @@ rasch.mml <- function( dat, theta.k=seq(-4,4,len=20), group=NULL, weights=NULL,
                         sd.trait[gg] <- sqrt( stats::weighted.mean( ( theta.k - mean.trait[gg] )^2, pi.k[,gg] ) )
                         if (center.trait){ mean.trait[1] <- 0 }
                         if ( ! is.null(est.a) ){ sd.trait[1] <- 1 }
-                        pi.k[,gg] <- stats::dnorm( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] )
-                        pi.k[,gg] <- pi.k[,gg] / sum( pi.k[,gg] )
+                        pi.k[,gg] <- sirt_dnorm_discrete( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] )
                             }
                     # sigma <- sd.trait
                         }

@@ -1,5 +1,5 @@
 ## File Name: pbivnorm2.R
-## File Version: 1.14
+## File Version: 1.15
 
 
 #################################################################
@@ -36,7 +36,7 @@ pbivnorm2 <- function( x, y, rho ){
         a1[ind] <- t1[ind]
             }
     t1 <- stats::pnorm( - a1 )
-    mu <- stats::dnorm( a1 ) / stats::pnorm( - a1 )
+    mu <- sirt_dnorm( a1 ) / stats::pnorm( - a1 )
     xi <-  ( rho * mu - b1 ) / sqrt( 1 - rho^2 )
     # see Hong (1999)
     # sig2 <- 1 + mu - mu^2 #=> formula in Cox & Wermuth (1991)
@@ -45,7 +45,7 @@ pbivnorm2 <- function( x, y, rho ){
     # t1 * pnorm( xi )
     # Formula (4): correction in Hong (1999)
     prob1 <- t1 * ( stats::pnorm(  xi ) - 1/2 * rho^2 / ( 1 - rho^2 ) * xi *
-                stats::dnorm( xi ) * sig2  )
+                sirt_dnorm( xi ) * sig2  )
     # adjust formula in case of APPROX. (ii)
     if ( length(ind2) > 0 ){
         # CW. Formula in (ii), p. 264

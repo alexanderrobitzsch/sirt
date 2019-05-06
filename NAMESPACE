@@ -133,9 +133,7 @@ importFrom(TAM, weighted_sd)
 #************** Imports ****************************
 #***************************************************
 
-importFrom(coda, as.mcmc.list)
-importFrom(coda, effectiveSize)
-importFrom(coda, mcmc)
+
 
 
 
@@ -145,6 +143,9 @@ importFrom(coda, mcmc)
 # requireNamespace("another_package")
 # TAM::require_namespace_msg("another_package")
 
+# importFrom(coda, as.mcmc.list)
+# importFrom(coda, effectiveSize)
+# importFrom(coda, mcmc)
 # importFrom(igraph, graph.edgelist)
 # importFrom(lavaan, cfa)
 # importFrom(lavaan, fitMeasures)

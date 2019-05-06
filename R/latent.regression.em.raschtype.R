@@ -1,34 +1,17 @@
 ## File Name: latent.regression.em.raschtype.R
-## File Version: 2.61
+## File Version: 2.62
 
 
 #----------------------------------------------------------------------------
-# Latent Regression: EM algorithm
-#    Rasch type model: based on individual likelihood
+
+#-- Latent Regression: EM algorithm
+#-- Rasch type model: based on individual likelihood
 latent.regression.em.raschtype <- function( data=NULL, f.yi.qk=NULL, X,
-                                weights=rep(1,nrow(X)),
-                                beta.init=rep(0,ncol(X)), sigma.init=1,
-                                b=rep(0,ncol(X)), a=rep(1, length(b)), c=rep(0, length(b)),
-                                d=rep(1, length(b)), alpha1=0, alpha2=0,
-                                max.parchange=.0001,
-                                theta.list=seq(-5,5,len=20), maxiter=300,
-                                progress=TRUE ){
-    #.....................................................................................#
-    # INPUT:                                                                              #
-    # data          ... item response matrix                                              #
-    # X             ... covariates (background variables)                                 #
-    # weights       ... sample weights                                                    #
-    # beta.init     ... initial estimate of beta coefficients                             #
-    # sigma.init    ... initial estimate of residual standard deviation                   #
-    # b     ... item difficulties                                                 #
-    # a ... item discrimination
-    # c ... guessing parameter
-    # d ... 1 minus slipping parameter
-    # alpha1, alpha2 ... alpha parameter in rasch type model                              #
-    # max.parchange ... maximum parameter change                                          #
-    # theta.list    ... grid of theta values for evaluation of posterior density          #
-    # maxiter       ... maximum number of iterations                                      #
-    #.....................................................................................#
+        weights=rep(1,nrow(X)), beta.init=rep(0,ncol(X)), sigma.init=1,
+        b=rep(0,ncol(X)), a=rep(1, length(b)), c=rep(0, length(b)),
+        d=rep(1, length(b)), alpha1=0, alpha2=0, max.parchange=.0001,
+        theta.list=seq(-5,5,len=20), maxiter=300, progress=TRUE )
+{
     X <- as.matrix(X)   # matrix format
     # init parameters
     beta0 <- beta.init
@@ -48,9 +31,8 @@ latent.regression.em.raschtype <- function( data=NULL, f.yi.qk=NULL, X,
         dat1 <- data.frame( 1+0*y[,1], 1 )
                     }
     LT <- length( theta.list )
-    pi.k <- stats::dnorm( theta.list )
-    theta.kM <- matrix( theta.list, nrow=nrow(X),
-                    ncol=length(theta.list), byrow=TRUE )
+    pi.k <- sirt_dnorm( theta.list )
+    theta.kM <- matrix( theta.list, nrow=nrow(X), ncol=length(theta.list), byrow=TRUE )
     theta.kM2 <- theta.kM^2
     n <- nrow(X)
     # calculate likelihood if not provided
@@ -76,7 +58,7 @@ latent.regression.em.raschtype <- function( data=NULL, f.yi.qk=NULL, X,
         fmod <- stats::fitted(mod)
         sigma.res <- stats::sd( stats::resid(mod) )
         h1 <- theta.kM - matrix( fmod,  nrow=n, ncol=LT )
-        prior <- stats::dnorm( h1, sd=sigma )
+        prior <- sirt_dnorm( h1, sd=sigma )
         prior <- prior / rowSums( prior )
         post <- f.yi.qk * prior
         post <- post / rowSums( post )

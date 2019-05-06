@@ -1,5 +1,5 @@
 ## File Name: mcmc.3pno.testlet_output.R
-## File Version: 1.20
+## File Version: 1.21
 
 ######################################################
 # compute deviance
@@ -100,7 +100,7 @@
     if (save.theta){ mcmcobj <- cbind( mcmcobj, theta ) }
     class(mcmcobj) <- "mcmc"
     attr(mcmcobj, "mcpar") <- c( burnin+1, burnin+SV, 1 )
-    mcmcobj <- coda::as.mcmc.list( mcmcobj )
+    mcmcobj <- sirt_import_coda_as.mcmc.list( mcmcobj )
     res <- list( "mcmcobj"=mcmcobj, "theta"=theta )
     return(res)
 }

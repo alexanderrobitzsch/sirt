@@ -1,5 +1,5 @@
 ## File Name: plausible.values.raschtype.R
-## File Version: 2.25
+## File Version: 2.27
 
 #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -59,7 +59,7 @@ plausible.value.imputation.raschtype <- function( data=NULL,
         dat1 <- data.frame( 1+0*y[,1], 1 )
                     }
     LT <- length( theta.list )
-    pi.k <- stats::dnorm( theta.list )
+    pi.k <- sirt_dnorm( theta.list )
     theta.kM <- matrix( theta.list, nrow=nrow(X),
                     ncol=length(theta.list), byrow=TRUE )
     theta.kM2 <- theta.kM^2
@@ -142,7 +142,7 @@ plausible.value.imputation.raschtype <- function( data=NULL,
     theta.listM <- thetaM <- matrix( theta.list, nrow=n, ncol=length(theta.list),
         byrow=TRUE)
     # compute density resulting from regression
-    dens.Regr <- stats::dnorm( thetaM, mean=M.Regr, sd=SD.Regr )
+    dens.Regr <- sirt_dnorm( thetaM, mean=M.Regr, sd=SD.Regr )
     dens.total <- f.yi.qk * dens.Regr
     dens.total <- dens.total / rowSums( dens.total)
 #   theta.listM <- outer( l1, theta.list )

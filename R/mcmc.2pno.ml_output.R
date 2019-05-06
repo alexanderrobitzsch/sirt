@@ -1,5 +1,5 @@
 ## File Name: mcmc.2pno.ml_output.R
-## File Version: 1.13
+## File Version: 1.15
 
 ######################################################
 # subfunction for calculating the DIC
@@ -84,7 +84,7 @@
                             }
     class(mcmcobj) <- "mcmc"
     attr(mcmcobj, "mcpar") <- c( burnin+1, burnin+SV, 1 )
-    mcmcobj <- coda::as.mcmc.list( mcmcobj )
+    mcmcobj <- sirt_import_coda_as.mcmc.list( mcmcobj )
     return(mcmcobj)
         }
 ######################################################
@@ -94,7 +94,7 @@
     mexp <- aM*theta - bM
     mres <- dat - mexp
     llres <- - sum( dat.resp *
-        log( stats::dnorm( mres, sd=matrix( sigma.res, N, I, byrow=TRUE ) )    ) )
+        log( sirt_dnorm( mres, sd=matrix( sigma.res, N, I, byrow=TRUE ) )    ) )
     return(llres)
         }
 

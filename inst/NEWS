@@ -37,7 +37,19 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.4  |  2019-05-02  |  Last: sirt 3.4-58
+VERSIONS sirt 3.5  |  2019-05-06  |  Last: sirt 3.5-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 3.4  |  2019-05-03  |  Last: sirt 3.4-64
 ------------------------------------------------------------------------
 
 ADDED * included optimization function for invariance alignment which
@@ -77,13 +89,9 @@ NOTE  * fit initial model in lsem.estimate() if sufficient
 ADDED * added bootstrap functionality for LSEM in the function
         lsem.bootstrap()        
 
-
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: invariance.alignment (1),
         polychoric2 (1), lsem.estimate (1.1, 1.5)
-
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.3  |  2019-03-18  |  Last: sirt 3.3-26

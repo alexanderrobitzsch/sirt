@@ -1,5 +1,5 @@
 %% File Name: sirt-utilities.Rd
-%% File Version: 0.396
+%% File Version: 0.397
 
 \name{sirt-utilities}
 \alias{sirt-utilities}
@@ -68,7 +68,7 @@ sirt_colMedians(x, na.rm=TRUE)
 #* normalize vector to have sum of one
 sirt_sum_norm(x, na.rm=TRUE)
 #* discrete normal distribution
-sirt_dnorm_discrete(x, mean=0, sd=1)
+sirt_dnorm_discrete(x, mean=0, sd=1, ...)
 
 # plyr::rbind.fill implementation in sirt
 sirt_rbind_fill(x, y)

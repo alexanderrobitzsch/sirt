@@ -1,5 +1,5 @@
 ## File Name: lsem_fit_initial_model.R
-## File Version: 0.18
+## File Version: 0.193
 
 lsem_fit_initial_model <- function(lavmodel__, lavaan_est_fun, dat, variables_model,
     sampling_weights, has_meanstructure, sufficient_statistics, est_joint=FALSE,
@@ -21,7 +21,7 @@ lsem_fit_initial_model <- function(lavmodel__, lavaan_est_fun, dat, variables_mo
     } else {
         if (! use_lavaan_survey){
             lavfit <- lavaan_est_fun(model=lavmodel__, data=dat, se=se, ...)
-        } else {
+        } else {        
             lavfit <- lavaan_est_fun(model=lavmodel__, data=dat, ...)
         }
     }

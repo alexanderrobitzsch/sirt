@@ -1,5 +1,5 @@
 ## File Name: likelihood_adjustment_aux.R
-## File Version: 0.18
+## File Version: 0.19
 
 
 #######################################################
@@ -16,7 +16,7 @@ likelihood_adjustment_compute <- function( likelihood, theta,
     # compute adjusted likelihood
     like2 <- 0*likelihood
     for (tt in 1:TP){
-        like2[,tt] <- stats::dnorm( theta[tt], mean=M1, sd=SD1*adjfac*tuningfac )
+        like2[,tt] <- sirt_dnorm( theta[tt], mean=M1, sd=SD1*adjfac*tuningfac )
     }
     like2 <- like2 / rowSums(like2) * w1
     return(like2)

@@ -1,5 +1,5 @@
 ## File Name: mcmc.2pnoh.R
-## File Version: 1.13
+## File Version: 1.14
 ##############################################
 # MCMC estimation 2PNO model
 mcmc.2pnoh <- function(dat, itemgroups, prob.mastery=c(.5, .8 ),
@@ -157,7 +157,7 @@ mcmc.2pnoh <- function(dat, itemgroups, prob.mastery=c(.5, .8 ),
     if (save.theta){ mcmcobj <- cbind( mcmcobj, theta ) }
     class(mcmcobj) <- "mcmc"
     attr(mcmcobj, "mcpar") <- c( burnin+1, burnin+SV, 1 )
-    mcmcobj <- coda::as.mcmc.list( mcmcobj )
+    mcmcobj <- sirt_import_coda_as.mcmc.list( mcmcobj )
 
     #----
     # summary of the MCMC output

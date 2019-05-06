@@ -1,9 +1,9 @@
 ## File Name: sirt_import_lavaan_standardizedSolution.R
-## File Version: 0.03
+## File Version: 0.04
 
 sirt_import_lavaan_standardizedSolution <- function(...)
 {
-    res <- sirt_import_function_value(fun="standardizedSolution", pkg="lavaan", ...)
+    TAM::require_namespace_msg("lavaan")
+    res <- lavaan::standardizedSolution(...)
     return(res)
-
 }

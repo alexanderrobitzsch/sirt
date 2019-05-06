@@ -1,5 +1,5 @@
 ## File Name: rm_numdiff_index.R
-## File Version: 0.23
+## File Version: 0.24
 
 
 ####################################################################
@@ -24,9 +24,9 @@ rm_numdiff_index <- function( pjk, pjk1, pjk2, n.ik, diffindex,
         }
         M <- prior[1]
         SD <- sqrt(prior[2])
-        ll0 <- ll0 + stats::dnorm( value, mean=M, sd=SD, log=TRUE)
-        ll1 <- ll1 + stats::dnorm( value+h, mean=M, sd=SD, log=TRUE)
-        ll2 <- ll2 + stats::dnorm( value-h, mean=M, sd=SD, log=TRUE)
+        ll0 <- ll0 + sirt_dnorm( value, mean=M, sd=SD, log=TRUE)
+        ll1 <- ll1 + sirt_dnorm( value+h, mean=M, sd=SD, log=TRUE)
+        ll2 <- ll2 + sirt_dnorm( value-h, mean=M, sd=SD, log=TRUE)
     }
 
     #-- discrete differences

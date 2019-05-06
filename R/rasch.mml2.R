@@ -1,79 +1,26 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.418
+## File Version: 7.423
 
 
-#------------------------------------------------------------------------
-# --------------------------------------------------------------------#
-# Semiparametric Maximum Likelihood Estimation in the Raschtype
-#  Model
+# Semiparametric Maximum Likelihood Estimation in the Rasch type Model
 # item discrimination and guessing parameter can be fixed
 rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
-                        constraints=NULL,
-                        glob.conv=10^(-5), parm.conv=10^(-4), mitermax=4,
-                        mmliter=1000, progress=TRUE,
-                        fixed.a=rep(1,ncol(dat)),
-                        fixed.c=rep(0,ncol(dat)),
-                        fixed.d=rep(1,ncol(dat)),
-                        fixed.K=rep(3,ncol(dat)),
-                        b.init=NULL,
-                        est.a=NULL,
-                        est.b=NULL,
-                        est.c=NULL, est.d=NULL,
-                        min.b=-99, max.b=99,
-                        min.a=-99, max.a=99,
-                        min.c=0, max.c=1,
-                        min.d=0, max.d=1,
-                        est.K=NULL, min.K=1, max.K=20,
-                        beta.init=NULL,
-                        min.beta=-8,
-                        pid=1:( nrow(dat) ), trait.weights=NULL,
-                        center.trait=TRUE, center.b=FALSE,
-                        alpha1=0, alpha2=0,
-                        est.alpha=FALSE, equal.alpha=FALSE,
-                        designmatrix=NULL, alpha.conv=parm.conv,
-                        numdiff.parm=0.00001, numdiff.alpha.parm=numdiff.parm,
-                        distribution.trait="normal",
-                        Qmatrix=NULL,
-                        variance.fixed=NULL,
-                        variance.init=NULL,
-                        mu.fixed=cbind( seq(1,ncol(Qmatrix)), rep(0,ncol(Qmatrix)) ),
-                        irtmodel="raschtype",
-                        npformula=NULL,
-                        npirt.monotone=TRUE,
-                        use.freqpatt=is.null(group), delta.miss=0, est.delta=rep(NA,ncol(dat)),
-                        ... ){
-    #******************************************************************************************##
-    # INPUT:                                                                                ***##
-    # dat           ... data frame with item responses
-    # theta.k       ... grid of theta values where the trait density is evaluated
-    # group         ... vector of group entries (numbered from 1 to G)
-    # weights       ... sample weights or absolute frequency of item response patterns
-    # glob.conv     ... global convergence criterion
-    # conv1         ... convergence of parameters
-    # mitermax      ... maximum number of iterations within the M step
-    # WLE           ... should WLEs be estimated?
-    # mmliter       ... maximum number of iterations during Maximum Likelihood Estimation
-    # progress      ... should the estimation progress being displayed?
-    # constraints   ... matrix with two columns: first column is item label (name or number),
-    #                        second column is fixed item difficulty value (b parameter)
-    # fixed.a       ... vector of fixed item discriminations
-    # fixed.c       ... vector of fixed guessing parameters
-    # b.init        ... initial estimates of item difficulties
-    # est.a            ... estimation of discrimination parameter
-    # est.c, est.d    ... estimated groups of parameters for lower and upper asymptote
-    # max.c, min.d  ... maximal c and minimal d parameters to be estimated
-    # pid           ... labels for subject ID's (-> pid ... person IDs)
-    # trait.weights ... vector of fixed trait distribution
-    # center.trait  ... set the mean of trait distribution equal to zero? (default=TRUE)
-    # nplausible    ... number of plausible values to be drawn for item fit estimation
-    # est.alpha     ... should alpha parameters be estimated?
-    # equal.alpha   ... should equal alpha's be estimated?
-    # designmatrix  ... Q matrix of item parameter restrictions
-    # numdiff.parm  ... step parameter for numerical differentiation
-    # normal.trait  ... normal distribution assumption of the trait
-    # ramsay.qm        ... estimate quotient model of ramsay?
-    #******************************************************************************************##
-    #****
+                constraints=NULL, glob.conv=10^(-5), parm.conv=10^(-4), mitermax=4,
+                mmliter=1000, progress=TRUE, fixed.a=rep(1,ncol(dat)), fixed.c=rep(0,ncol(dat)),
+                fixed.d=rep(1,ncol(dat)), fixed.K=rep(3,ncol(dat)),    b.init=NULL,
+                est.a=NULL,    est.b=NULL,    est.c=NULL, est.d=NULL,    min.b=-99, max.b=99,
+                min.a=-99, max.a=99, min.c=0, max.c=1, min.d=0, max.d=1, est.K=NULL, 
+                min.K=1, max.K=20, beta.init=NULL, min.beta=-8, pid=1:( nrow(dat) ), 
+                trait.weights=NULL, center.trait=TRUE, center.b=FALSE, alpha1=0, alpha2=0,
+                est.alpha=FALSE, equal.alpha=FALSE, designmatrix=NULL, alpha.conv=parm.conv,
+                numdiff.parm=0.00001, numdiff.alpha.parm=numdiff.parm, distribution.trait="normal",
+                Qmatrix=NULL, variance.fixed=NULL, variance.init=NULL,
+                mu.fixed=cbind( seq(1,ncol(Qmatrix)), rep(0,ncol(Qmatrix)) ),
+                irtmodel="raschtype", npformula=NULL, npirt.monotone=TRUE,
+                use.freqpatt=is.null(group), delta.miss=0, est.delta=rep(NA,ncol(dat)),
+                ... )
+{
+
     # specifications
     conv1 <- parm.conv
     nplausible=5
@@ -124,10 +71,10 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         dat.resp <- 1 - is.na( dat )
 
         # init b parameters
-        b.init <- - qlogis( colMeans( dat==1, na.rm=TRUE ) )
+        b.init <- - stats::qlogis( colMeans( dat==1, na.rm=TRUE ) )
         # init beta parameters
         if ( is.null(beta.init) ){
-            beta <-  qlogis( colMeans( dat==2, na.rm=TRUE ) +  1E-3 )
+            beta <-  stats::qlogis( colMeans( dat==2, na.rm=TRUE ) +  1E-3 )
                             } else {
             beta <- beta.init
                         }
@@ -317,8 +264,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                     }
         # probability weights at theta.k
         if (D==1){
-            pi.k <- stats::dnorm( theta.k )
-            pi.k <- pi.k / sum( pi.k )
+            pi.k <- sirt_dnorm_discrete( theta.k )
                 }
         if (D > 1){
             pi.k <- sirt_dmvnorm_discrete( theta.k, mean=rep(0,D), sigma=Sigma.cov )
@@ -340,8 +286,8 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
             b <- - stats::qlogis( colMeans( dat, na.rm=T ) )
                 if ( FALSE ){
 #                if ( ramsay.qm ){
-                        b <-   - log( ( fixed.K * colSums( dat, na.rm=T ) ) /
-                                    ( colSums( 1 - dat, na.rm=T ) ) )
+                        b <-   - log( ( fixed.K * colSums( dat, na.rm=TRUE ) ) /
+                                    ( colSums( 1 - dat, na.rm=TRUE ) ) )
                                 }
                         }
         if ( (!is.null(b.init) ) & is.null(est.b) ){
@@ -609,8 +555,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         d.change <- .est.mean( dat1.gg, f.yi.qk.gg, X1, pi.k, pi.k0, gg,
                                 mean.trait, sd.trait, theta.k, h)
                         mean.trait[gg] <- mean.trait[gg] + d.change
-                        pi.k[,gg] <- stats::dnorm( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] )
-                        pi.k[,gg] <- pi.k[,gg] / sum( pi.k[,gg] )
+                        pi.k[,gg] <- sirt_dnorm_discrete( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] )
                                                     }
                         if (center.trait){ mean.trait[1] <- 0 }
                         #*********************************
@@ -623,15 +568,14 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                     if ( ( ! is.null(est.a) ) | ( irtmodel=="npirt" )  ){
                             sd.trait[1] <- 1
                                     }
-                        pi.k[,gg] <- stats::dnorm( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] )
-                        pi.k[,gg] <- pi.k[,gg] / sum( pi.k[,gg] )
+                        pi.k[,gg] <- sirt_dnorm_discrete( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] )
                                 }
                         }  # end normal distribution
         #######################################
                if (distribution.trait!="normal" & D==1){
                for (gg in 1:G){
                     pik1 <-    n.k[,gg] / sum(n.k[,gg] )
-                    pik1 <- pik1 + 10^(-10)
+                    pik1 <- pik1 + 10e-10
                     lpik1 <- log( pik1 )
                     tk <- theta.k
                     if ( distribution.trait=="smooth2"){
@@ -1165,7 +1109,6 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                     "Sigma.cov"=Sigma.cov, "theta.k"=theta.k,
                     "trait.weights"=trait.weights, "pi.k"=pi.k,
                     "CALL"=CALL
-# collect results of npmodel
                             )
         class(res) <- "rasch.mml"
         res$ic <- ic

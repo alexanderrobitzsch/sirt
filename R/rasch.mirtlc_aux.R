@@ -1,5 +1,5 @@
 ## File Name: rasch.mirtlc_aux.R
-## File Version: 91.23
+## File Version: 91.24
 
 #*************************************************************************************
 # E Step Multidimensional Latent Class Rasch Model                                 #
@@ -238,8 +238,7 @@
                 pik1 <-    pi.k[,gg]
                 m1 <- sum( theta.k * pik1 )
                 sd1 <- sqrt( sum( theta.k^2 * pik1 ) - m1^2 )
-                pik2 <- stats::dnorm( theta.k, mean=m1, sd=sd1 )
-                pi.k[,gg] <- pik2 / sum(pik2)
+                pi.k[,gg] <- sirt_dnorm_discrete( theta.k, mean=m1, sd=sd1 )
                             }
                         }
         ############################################
