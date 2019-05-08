@@ -1,5 +1,5 @@
 ## File Name: marginal.truescore.reliability.R
-## File Version: 0.15
+## File Version: 0.16
 
 
 marginal.truescore.reliability <- function(  b, a=1+0*b, c=0*b, d=1+0*b,
@@ -46,7 +46,7 @@ marginal.truescore.reliability <- function(  b, a=1+0*b, c=0*b, d=1+0*b,
     cat("Reliability", "=", round( rel.test,3 ),"\n")
     # Formula (15)
     # sum( sqrt( outer( sig2.tau, sig2.tau ) ) )
-    res <- list(rel.test=rel.test, item=item, pi=mu/I, sig2.tau=sig2.total.tau, 
+    res <- list(rel.test=rel.test, item=item, pi=mu/I, sig2.tau=sig2.total.tau,
                     sig2.error=sig2.total.error )
     invisible(res)
 }

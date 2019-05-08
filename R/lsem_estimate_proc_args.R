@@ -1,10 +1,10 @@
 ## File Name: lsem_estimate_proc_args.R
-## File Version: 0.29
+## File Version: 0.38
 
 lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     pseudo_weights, lavmodel, data, use_lavaan_survey, est_joint=FALSE,
     par_invariant=NULL, par_linear=NULL, par_quadratic=NULL,
-    partable_joint=NULL, se=NULL, verbose=TRUE)
+    partable_joint=NULL, se=NULL, G=NULL, verbose=TRUE)
 {
     use_pseudo_weights <- pseudo_weights > 0
     if ( sufficient_statistics | use_pseudo_weights ){
@@ -15,7 +15,7 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     }
     lavaan_args_names <- names(lavaan.args)
     if ( "missing" %in% lavaan_args_names){
-        if ( lavaan.args[["missing"]] == "fiml" ){
+        if ( lavaan.args[["missing"]]=="fiml" ){
             sufficient_statistics <- FALSE
         }
     }
@@ -31,9 +31,9 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
             cat("Use joint estimation\n")
         }
         est_joint <- TRUE
-        sufficient_statistics <- TRUE
+        # sufficient_statistics <- TRUE
     }
-    if ( !is.null(partable_joint) ){
+    if ( ! is.null(partable_joint) ){
         est_joint <- TRUE
     }
     if (est_joint){
@@ -59,6 +59,11 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
         variables_ordered <- union(variables_ordered, names(data_ordered)[data_ordered] )
     }
     if (est_joint & ( ! sufficient_statistics)){
+        if (pseudo_weights==0){
+            G <- length(moderator.grid)
+            pseudo_weights <- 10*G*nrow(data)
+            use_pseudo_weights <- TRUE
+        }
         stop("Cannot perform joint estimation for non-continuous data.")
     }
     if (is.null(se)){
@@ -76,6 +81,6 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
                 variables_model=variables_model, use_pseudo_weights=use_pseudo_weights,
                 variables_ordered=variables_ordered, est_joint=est_joint,
                 partable=partable, has_meanstructure=has_meanstructure, se=se,
-                compute_se=compute_se)
+                compute_se=compute_se, pseudo_weights=pseudo_weights)
     return(res)
 }

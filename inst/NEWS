@@ -37,10 +37,11 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.5  |  2019-05-06  |  Last: sirt 3.5-1
+VERSIONS sirt 3.5  |  2019-05-08  |  Last: sirt 3.5-8
 ------------------------------------------------------------------------
 
-xxx   * ...
+NOTE  * rechanged default in lsem.estimate() to 'sufficient_statistics=FALSE'
+        (due to dicussions with Ingo Seifert and Luc Watrin)
 
 
 DATA  * included/modified datasets: ---

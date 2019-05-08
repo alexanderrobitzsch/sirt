@@ -1,5 +1,5 @@
 ## File Name: rasch.mml.raschtype.R
-## File Version: 2.57
+## File Version: 2.58
 
 ################################################
 # calculation of the likelihood
@@ -125,9 +125,9 @@ mml_raschtype_counts <- function (dat2,dat2resp,dat1,fqkyi,pik,fyiqk){
     abs.change <- 1
     miter <- 0
     # update pi.k
-    if (is.null( trait.weights) ){ 
-        pi.k <- n.k / n  
-    } else { 
+    if (is.null( trait.weights) ){
+        pi.k <- n.k / n
+    } else {
         pi.k <- sirt_dnorm_discrete(theta.k)
     }
     while( abs.change > conv1 & miter < mitermax ){

@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.423
+## File Version: 7.424
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model
@@ -9,8 +9,8 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                 mmliter=1000, progress=TRUE, fixed.a=rep(1,ncol(dat)), fixed.c=rep(0,ncol(dat)),
                 fixed.d=rep(1,ncol(dat)), fixed.K=rep(3,ncol(dat)),    b.init=NULL,
                 est.a=NULL,    est.b=NULL,    est.c=NULL, est.d=NULL,    min.b=-99, max.b=99,
-                min.a=-99, max.a=99, min.c=0, max.c=1, min.d=0, max.d=1, est.K=NULL, 
-                min.K=1, max.K=20, beta.init=NULL, min.beta=-8, pid=1:( nrow(dat) ), 
+                min.a=-99, max.a=99, min.c=0, max.c=1, min.d=0, max.d=1, est.K=NULL,
+                min.K=1, max.K=20, beta.init=NULL, min.beta=-8, pid=1:( nrow(dat) ),
                 trait.weights=NULL, center.trait=TRUE, center.b=FALSE, alpha1=0, alpha2=0,
                 est.alpha=FALSE, equal.alpha=FALSE, designmatrix=NULL, alpha.conv=parm.conv,
                 numdiff.parm=0.00001, numdiff.alpha.parm=numdiff.parm, distribution.trait="normal",

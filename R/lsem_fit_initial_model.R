@@ -1,14 +1,14 @@
 ## File Name: lsem_fit_initial_model.R
-## File Version: 0.193
+## File Version: 0.197
 
 lsem_fit_initial_model <- function(lavmodel__, lavaan_est_fun, dat, variables_model,
     sampling_weights, has_meanstructure, sufficient_statistics, est_joint=FALSE,
     se="standard", use_lavaan_survey=FALSE, ...)
 {
+    if (est_joint){
+        has_meanstructure <- TRUE
+    }
     if (sufficient_statistics) {
-        if (est_joint){
-            has_meanstructure <- TRUE
-        }
         #- compute sufficient statistics
         res <- lsem_fit_initial_model_sufficient_statistics(dat=dat,
                     variables_model=variables_model, sampling_weights=sampling_weights,
@@ -21,7 +21,7 @@ lsem_fit_initial_model <- function(lavmodel__, lavaan_est_fun, dat, variables_mo
     } else {
         if (! use_lavaan_survey){
             lavfit <- lavaan_est_fun(model=lavmodel__, data=dat, se=se, ...)
-        } else {        
+        } else {
             lavfit <- lavaan_est_fun(model=lavmodel__, data=dat, ...)
         }
     }

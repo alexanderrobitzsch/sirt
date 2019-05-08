@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.724
+%% File Version: 0.726
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -46,7 +46,7 @@ can be conducted via bootstrap using the function \code{lsem.bootstrap}.
 lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=NULL,
     residualize=TRUE, fit_measures=c("rmsea", "cfi", "tli", "gfi", "srmr"),
     standardized=FALSE, standardized_type="std.all", lavaan_fct="sem",
-    sufficient_statistics=TRUE, use_lavaan_survey=FALSE, pseudo_weights=0,
+    sufficient_statistics=FALSE, use_lavaan_survey=FALSE, pseudo_weights=0,
     sampling_weights=NULL, est_joint=FALSE, par_invariant=NULL, par_linear=NULL,
     par_quadratic=NULL, partable_joint=NULL, se=NULL, kernel="gaussian", eps=1e-08,
     verbose=TRUE, ...)
@@ -233,7 +233,7 @@ Alexander Robitzsch, Oliver Luedtke, Andrea Hildebrandt
 # EXAMPLE 1: data.lsem01 | Age differentiation
 #############################################################################
 
-data(data.lsem01)
+data(data.lsem01, package="sirt")
 dat <- data.lsem01
 
 # specify lavaan model

@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.5458
+## File Version: 0.5470
 
 lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
                 verbose, pars, standardized, variables_model, sufficient_statistics,
@@ -7,11 +7,11 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
                 est_joint=FALSE, par_invariant=NULL, par_linear=NULL, par_quadratic=NULL,
                 partable_joint=NULL, se="standard", ... )
 {
-
     parameters <- NULL
     fits <- NULL
     fitstats_joint <- NULL
     sample_stats <- NULL
+    data_joint <- NULL
     survey.fit <- lavfit
     pars0 <- pars
     lavaan_est_fun <- lsem_define_lavaan_est_fun(lavaan_fct=lavaan_fct)
@@ -28,6 +28,14 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
         sample_stats <- lsem_fitsem_compute_sufficient_statistics(G=G, dat=dat,
                     variables_model=variables_model, weights=weights)
     }
+    if (est_joint & (! sufficient_statistics)){
+        N <- nrow(dat)
+        ind <- rep(1:N, G)
+        data_joint <- dat[ind, ]
+        data_joint$group__ <- rep(1:G, each=N)
+        data_joint$weight <- as.vector(weights)
+        data_joint$case__ <- ind
+    }
 
     #-- joint estimation
     if (est_joint){
@@ -37,14 +45,12 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
                                 par_invariant=par_invariant, par_linear=par_linear,
                                 par_quadratic=par_quadratic)
         }
-
         #- fit model
-        if (sufficient_statistics){
-            survey.fit <- lsem_fitsem_joint_estimation_sufficient_statistics(
-                            partable_joint=partable_joint, is_meanstructure=is_meanstructure,
+        survey.fit <- lsem_fitsem_joint_estimation(    partable_joint=partable_joint,
+                            is_meanstructure=is_meanstructure, data_joint=data_joint,
                             sample_stats=sample_stats, lavaan_est_fun=lavaan_est_fun,
-                            verbose=verbose, se=se, ... )
-        }
+                            verbose=verbose, se=se, sufficient_statistics=sufficient_statistics,
+                            G=G, pseudo_weights=pseudo_weights, ... )
         fitstats_joint <- lsem_lavaan_fit_measures(object=survey.fit, fit_measures=fit_measures)
         fitstats_joint <- data.frame(stat=names(fitstats_joint), value=fitstats_joint)
     }
