@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 0.96599
+## File Version: 0.96601
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -30,7 +30,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                 use_lavaan_survey=use_lavaan_survey, est_joint=est_joint,
                 par_invariant=par_invariant, par_linear=par_linear,
                 par_quadratic=par_quadratic, partable_joint=partable_joint,
-                se=se, verbose=verbose )
+                moderator.grid=moderator.grid, se=se, verbose=verbose )
     sufficient_statistics <- res$sufficient_statistics
     use_lavaan_survey <- res$use_lavaan_survey
     variables_model <- res$variables_model

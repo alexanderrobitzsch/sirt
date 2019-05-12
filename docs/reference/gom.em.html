@@ -34,7 +34,8 @@
 
 <meta property="og:description" content="This function estimates the grade of membership model (Erosheva, Fienberg
 &amp;amp; Joutard, 2007; also called mixed membership model) by the EM algorithm
-assuming a discrete membership score distribution." />
+assuming a discrete membership score distribution. The function is restricted
+to dichotomous item responses." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,17 +111,18 @@ assuming a discrete membership score distribution." />
     
     <p>This function estimates the grade of membership model (Erosheva, Fienberg
 &amp; Joutard, 2007; also called mixed membership model) by the EM algorithm
-assuming a discrete membership score distribution.</p>
+assuming a discrete membership score distribution. The function is restricted
+to dichotomous item responses.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>gom.em</span>(<span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>problevels</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>, <span class='kw'>theta0.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>5</span>, <span class='fl'>5</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>),
     <span class='kw'>xsi0.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>exp</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>6</span>, <span class='fl'>3</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>)), <span class='kw'>max.increment</span><span class='kw'>=</span><span class='fl'>0.3</span>, <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>0.001</span>,
-    <span class='kw'>maxdevchange</span><span class='kw'>=</span><span class='fl'>10</span>^(-<span class='fl'>5</span>), <span class='kw'>globconv</span><span class='kw'>=</span><span class='fl'>0.001</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>msteps</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>mstepconv</span><span class='kw'>=</span><span class='fl'>0.001</span>,
-    <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+    <span class='kw'>maxdevchange</span><span class='kw'>=</span><span class='fl'>1e-6</span>, <span class='kw'>globconv</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>msteps</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>mstepconv</span><span class='kw'>=</span><span class='fl'>0.001</span>,
+    <span class='kw'>theta_adjust</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for gom</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for gom</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/anova'>anova</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
@@ -164,7 +166,9 @@ Model 2a).</p></td>
     <tr>
       <th>model</th>
       <td><p>The type of grade of membership model. The default <code>"GOM"</code>
-is the nonparametric grade of membership model. The probabilities and membership
+is the nonparametric grade of membership model. A parametric multivariate normal
+representation can be requested by <code>"GOMnormal"</code>.
+The probabilities and membership
 functions specifications described in Details are called via <code>"GOMRasch"</code>.</p></td>
     </tr>
     <tr>
@@ -204,12 +208,21 @@ functions specifications described in Details are called via <code>"GOMRasch"</c
       <td><p>Convergence criterion within a M step</p></td>
     </tr>
     <tr>
+      <th>theta_adjust</th>
+      <td><p>Logical indicating whether multivariate normal distribution
+should be adaptively chosen during the EM algorithm.</p></td>
+    </tr>
+    <tr>
       <th>progress</th>
       <td><p>Display iteration progress? Default is <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>object</th>
       <td><p>Object of class <code>gom</code></p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p>Optional file name for summary output</p></td>
     </tr>
     <tr>
       <th>&#8230;</th>
@@ -284,6 +297,7 @@ Bernoulli aspect model, see Bingham, Kaban and Fortelius (2009).</p>
 <dt>person</dt><dd><p>Data frame with person parameters</p></dd>
 <dt>EAP.rel</dt><dd><p>EAP reliability (only applies for <code>model="GOMRasch"</code>)</p></dd>
 <dt>MAP</dt><dd><p>Maximum aposteriori estimate of the membership function</p></dd>
+<dt>EAP</dt><dd><p>EAP estimate for individual membership scores</p></dd>
 <dt>classdesc</dt><dd><p>Descriptives for class membership</p></dd>
 <dt>lambda</dt><dd><p>Estimated response probabilities \(\lambda_{ik}\)</p></dd>
 <dt>se.lambda</dt><dd><p>Standard error for estimated response probabilities
@@ -362,6 +376,19 @@ Fortelius (2009).</p></div>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># }</span># NOT RUN {
+#-- some plots
+
+#* multivariate scatterplot
+car::scatterplotMatrix(mod1$EAP, regLine=FALSE, smooth=FALSE, pch=16, cex=.4)
+#* ternary plot
+vcd::ternaryplot(mod1$EAP, pch=16, col=1, cex=.3)
+
+#***
+# Model 1a: Multivariate normal distribution
+problevels <- seq( 0, 1, len=5 )
+mod1a <- sirt::gom.em( dat, K=3, theta0.k=seq(-15,15,len=21), model="GOMnormal" )
+summary(mod1a)
+
 #***
 # Model 2: Discrete GOM with 4 classes and 5 probability levels
 problevels <- seq( 0, 1, len=5 )
@@ -431,7 +458,7 @@ dat <- matrix( NA, nrow=N, ncol=I )
 for (ii in 1:I){
     dat[,ii] <- probs[ ii, latent.class ]
     dat[,ii] <- 1 * ( stats::runif(N) < dat[,ii] )
-        }
+}
 colnames(dat) <- paste0( "I", 1:I)
 
 # Model 1: estimate latent class model

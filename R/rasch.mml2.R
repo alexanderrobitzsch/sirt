@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.424
+## File Version: 7.437
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model
@@ -319,6 +319,8 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
             }
     old_increment_b <- rep( 2, I )
 
+    h <- numdiff.parm
+
     # initialize standard errors
     se.alpha <- se.K <- se.b <- se.a <- se.c <- se.d <- NULL
 
@@ -368,111 +370,110 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                 center.trait <- FALSE
                     }
 
-        #################################################
-        #--------------------------------#
-        # MML Iteration Algorithm        #
-        while ( ( dev.change > glob.conv | par.change > conv1 | maxalphachange > alpha.conv ) & iter < mmliter ){
+
+    #***********************
+    # MML Iteration Algorithm        #
+    while ( ( dev.change > glob.conv | par.change > conv1 | maxalphachange > alpha.conv ) & iter < mmliter ){
         if (progress){
-          cat(disp)
-          cat("Iteration", iter+1, "   ", paste( Sys.time() ), "\n" )
-          flush.console()
-                    }
- zz0 <- Sys.time()
+            cat(disp)
+            cat("Iteration", iter+1, "   ", paste( Sys.time() ), "\n" )
+            utils::flush.console()
+        }
+        zz0 <- Sys.time()
 
+        b0 <- b
+        if ( irtmodel=="missing1" ){ beta0 <- beta }
+        dev0 <- dev
 
-                b0 <- b
-                if ( irtmodel=="missing1" ){ beta0 <- beta }
-                dev0 <- dev
-                #~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-                # perform E Step
-                if ( irtmodel=="missing1"){
-                    e1 <- .e.step.missing1( dat2, dat2.resp, theta.k, b, beta, delta.miss, I, CC,
+        #-------------- E-step  --------------
+        if ( irtmodel=="missing1"){
+            e1 <- .e.step.missing1( dat2, dat2.resp, theta.k, b, beta, delta.miss, I, CC,
                         TP, group_, pi.k, pjk, weights )
-                    n.ik <- e1$n.ik
-                    e1$ll <- e1$LL
-
-                            }
-               if ( ramsay.qm ){
-                    e1 <- .e.step.ramsay( dat1, dat2, dat2.resp, theta.k, pi.k, I, n, b,
-                                    fixed.K, group, pow.qm=pow.qm, ind.ii.list )
-                                }
-                if (raschtype & D==1){
-                    e1 <- .e.step.raschtype( dat1, dat2, dat2.resp, theta.k, pi.k, I, n, b,
-                                    fixed.a, fixed.c, fixed.d,  alpha1, alpha2, group, pseudoll)
-                                     }
-                if (raschtype & D>1){
-                    e1 <- .e.step.raschtype.mirt( dat1, dat2, dat2.resp, theta.k, pi.k, I, n, b,
-                                    fixed.a, fixed.c, fixed.d,  alpha1, alpha2, group,
-                                     mu, Sigma.cov, Qmatrix, pseudoll)
-                                     }
-                if (npirt ){
-                    if (iter==0){
-                            pjk <- stats::plogis( outer( theta.k, b, "-" ) )
-                                }
-                    e1 <- .e.step.ramsay( dat1, dat2, dat2.resp, theta.k, pi.k, I, n, b,
+            n.ik <- e1$n.ik
+            e1$ll <- e1$LL
+        }
+        if ( ramsay.qm ){
+            e1 <- .e.step.ramsay( dat1, dat2, dat2.resp, theta.k, pi.k, I, n, b,
+                            fixed.K, group, pow.qm=pow.qm, ind.ii.list )
+        }
+        if (raschtype & D==1){
+            e1 <- rasch_mml2_estep_raschtype( dat1=dat1, dat2=dat2, dat2.resp=dat2.resp,
+                        theta.k=theta.k, pi.k=pi.k, I=I, n=n, b=b, fixed.a=fixed.a, fixed.c=fixed.c,
+                        fixed.d=fixed.d, alpha1=alpha1, alpha2=alpha2, group=group, pseudoll=pseudoll )
+        }
+        if (raschtype & D>1){
+            e1 <- .e.step.raschtype.mirt( dat1, dat2, dat2.resp, theta.k, pi.k, I, n, b,
+                            fixed.a, fixed.c, fixed.d,  alpha1, alpha2, group,
+                            mu, Sigma.cov, Qmatrix, pseudoll)
+        }
+        if (npirt){
+            if (iter==0){
+                pjk <- stats::plogis( outer( theta.k, b, "-" ) )
+            }
+            e1 <- .e.step.ramsay( dat1, dat2, dat2.resp, theta.k, pi.k, I, n, b,
                                     fixed.K, group, pow.qm=pow.qm, ind.ii.list,
                                     pjk=pjk )
-                            }
-                n.k <- e1$n.k
-                n.jk <- e1$n.jk
-                r.jk <- e1$r.jk
-                pjk <- e1$pjk
-                f.qk.yi <- e1$f.qk.yi
-                f.yi.qk <- e1$f.yi.qk
-                dev <- -2*e1$ll
+        }
+        n.k <- e1$n.k
+        n.jk <- e1$n.jk
+        r.jk <- e1$r.jk
+        pjk <- e1$pjk
+        f.qk.yi <- e1$f.qk.yi
+        f.yi.qk <- e1$f.yi.qk
+        dev <- -2*e1$ll
+
 # cat("e step") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1
-                #~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-                # perform M Step
-                #****
-                # Ramsay QM
-                 if ( ramsay.qm ){
-                    m1 <- .m.step.ramsay( theta.k, b, n.k, n, n.jk, r.jk, I,
+
+        #-------------- M-step  --------------
+
+        # Ramsay QM
+        if ( ramsay.qm ){
+            m1 <- .m.step.ramsay( theta.k, b, n.k, n, n.jk, r.jk, I,
                             conv1, constraints,
                             mitermax, pure.rasch,  trait.weights, fixed.K,
                             designmatrix=designmatrix, group=group,
                             numdiff.parm=numdiff.parm, pow.qm=pow.qm )
-                    se.b <- m1$se.b
-                                            }
-                 # generalized Rasch type model
-                 if (raschtype ){
-                    m1 <- .m.step.raschtype( theta.k, b, n.k, n, n.jk, r.jk, pi.k,
-                            I, conv1, constraints, mitermax, pure.rasch,
-                            trait.weights, fixed.a, fixed.c, fixed.d,  alpha1,
-                            alpha2, designmatrix=designmatrix,
-                            group=group, numdiff.parm=numdiff.parm,
-                            Qmatrix=Qmatrix, old_increment=old_increment_b,
-                            est.b=est.b, center.b=center.b, min.b=min.b, max.b=max.b )
-                    se.b <- m1$se.b
-                                }
+            se.b <- m1$se.b
+        }
 
-                # nonparametric IRT model
-                 if (npirt ){
-                    pjk0 <- pjk
-                    res <- .mstep.mml.npirt( pjk, r.jk, n.jk, theta.k,
+        # generalized Rasch type model
+        if (raschtype){
+            m1 <- rasch_mml2_mstep_raschtype( theta.k=theta.k, b=b, n.k=n.k, n=n, n.jk=n.jk,
+                        r.jk=r.jk, pi.k=pi.k, I=I, conv1=conv1, constraints=constraints,
+                        mitermax=mitermax, pure.rasch=pure.rasch, trait.weights=trait.weights,
+                        fixed.a=fixed.a, fixed.c=fixed.c, fixed.d=fixed.d, alpha1=alpha1,
+                        alpha2=alpha2, designmatrix=designmatrix, group=group,
+                        numdiff.parm=numdiff.parm, Qmatrix=Qmatrix, old_increment=old_increment_b,
+                        est.b=est.b, center.b=center.b, min.b=min.b, max.b=max.b )
+            se.b <- m1$se.b
+        }
+
+        # nonparametric IRT model
+        if (npirt ){
+            pjk0 <- pjk
+            res <- .mstep.mml.npirt( pjk, r.jk, n.jk, theta.k,
                                     npformula, npmodel, G, I, npirt.monotone,
                                     ICC_model_matrix )
-                    pjk <- res$pjk
-                    npmodel <- res$npmodel
-                    apmax <- max( pi.k[,1]*abs( pjk - pjk0)/.40 )
-                    m1 <- list( "b"=b, "G"=G,
-                        "pi.k"=pi.k, "center"=FALSE )
-                        }
-                # missing data IRT model
-                if ( irtmodel=="missing1" ){
-                    m1 <- .mstep.mml.missing1( theta.k, n.ik, mitermax, conv1,
+            pjk <- res$pjk
+            npmodel <- res$npmodel
+            apmax <- max( pi.k[,1]*abs( pjk - pjk0)/.40 )
+            m1 <- list( "b"=b, "G"=G, "pi.k"=pi.k, "center"=FALSE )
+        }
+        # missing data IRT model
+        if ( irtmodel=="missing1" ){
+            m1 <- .mstep.mml.missing1( theta.k, n.ik, mitermax, conv1,
                         b, beta, delta.miss, pjk, numdiff.parm,
                         constraints, est.delta, min.beta=min.beta, est_delta )
-                    b <- m1$b
-                    se.b <- m1$se.b
-                    beta <- m1$beta
-                    se.beta <- m1$se.beta
-                    delta.miss <- m1$delta.miss
-                    se.delta <- m1$se.delta
-                    m1$dev <- dev
-                    a1beta <- max( abs( beta - beta0 ) )
-                        }
+            b <- m1$b
+            se.b <- m1$se.b
+            beta <- m1$beta
+            se.beta <- m1$se.beta
+            delta.miss <- m1$delta.miss
+            se.delta <- m1$se.delta
+            m1$dev <- dev
+            a1beta <- max( abs( beta - beta0 ) )
+        }
 # cat("m step") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1
-
 
         #***************************************
         # update mean and covariance in multidimensional models
@@ -603,55 +604,57 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                             }
                          }  # end non-normal distribution
 # cat("trait distribution estimation") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1
-        ##############################
-        # estimation of alpha, c and d parameters
+
+        #---- estimation of alpha, c and d parameters
         alpha.change <- 0
         maxalphachange <- 0
         a1a <- a1b <- 0
         a1K <- a1c <- 0
-        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # estimation of a parameters
-        if ( sum( est.a ) > 0 & raschtype ){
-                h <- numdiff.parm
-                fixed.a0 <- fixed.a
-                # identify different a parameter groups
-                aG <- setdiff(unique( est.a ), 0 )
-                # a estimation
-                res <- .mml.raschtype.est.a( theta.k, b, fixed.a, fixed.c, fixed.d,
-                    pjk, alpha1, alpha2, h, G, I, r.jk, n.jk, est.a, Qmatrix,
-                    min.a, max.a )
-                fixed.a <- res$fixed.a
-                se.a <- res$se.a
-                a1a <- max( abs( fixed.a - fixed.a0 ) )
-                        }
-        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # estimation of c parameters
-        if ( sum( est.c ) > 0 & raschtype ){
-                h <- numdiff.parm
-                fixed.c0 <- fixed.c
-                # identify different c parameter groups
-                cG <- setdiff( unique( est.c ), 0 )
-                res <- .mml.raschtype.est.c( theta.k, b, fixed.a, fixed.c, fixed.d,
-                    pjk, alpha1, alpha2, h, G, I, r.jk, n.jk, est.c,
-                    min.c, max.c, iter, old_increment.c, Qmatrix)
-                fixed.c <- res$fixed.c
-                se.c <- res$se.c
-                a1b <- max( abs( fixed.c - fixed.c0 ) )
-                        }
+
+        #--- estimation of a parameters
+        if ( sum(est.a) > 0 & raschtype ){
+            fixed.a0 <- fixed.a
+            aG <- setdiff(unique( est.a ), 0 )
+            res <- rasch_mml2_raschtype_mstep_parameter_group( theta.k=theta.k,
+                        b=b, fixed.a=fixed.a, fixed.c=fixed.c, fixed.d=fixed.d,
+                        pjk=pjk, alpha1=alpha1, alpha2=alpha2, h=numdiff.parm, G=G, I=I,
+                        r.jk=r.jk, n.jk=n.jk, est_val=est.a, min_val=min.a,
+                        max_val=max.a, iter=iter, old_increment=.3,
+                        Qmatrix=Qmatrix, parameter="a")
+            fixed.a <- res$parm
+            se.a <- res$se
+            a1a <- max( abs( fixed.a - fixed.a0 ) )
+        }
+
+        #--- estimation of c parameter
+        if ( sum(est.c) > 0 & raschtype ){
+            fixed.c0 <- fixed.c
+            cG <- setdiff( unique(est.c), 0 )
+            res <- rasch_mml2_raschtype_mstep_parameter_group( theta.k=theta.k,
+                        b=b, fixed.a=fixed.a, fixed.c=fixed.c, fixed.d=fixed.d,
+                        pjk=pjk, alpha1=alpha1, alpha2=alpha2, h=numdiff.parm, G=G, I=I,
+                        r.jk=r.jk, n.jk=n.jk, est_val=est.c, min_val=min.c,
+                        max_val=max.c, iter=iter, old_increment=old_increment.c,
+                        Qmatrix=Qmatrix, parameter="c")
+            fixed.c <- res$parm
+            se.c <- res$se
+            a1b <- max( abs( fixed.c - fixed.c0 ) )
+        }
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # estimation of d parameters
         if ( sum( est.d ) > 0 & raschtype ){
-                h <- numdiff.parm
-                fixed.d0 <- fixed.d
-                # identify different c parameter groups
-                dG <- setdiff( unique( est.d ), 0 )
-                res <- .mml.raschtype.est.d( theta.k, b, fixed.a, fixed.c, fixed.d,
-                    pjk, alpha1, alpha2, h, G, I, r.jk, n.jk, est.d,
-                    min.d, max.d, iter, old_increment.d,Qmatrix)
-                fixed.d <- res$fixed.d
-                se.d <- res$se.d
-                a1c <- max( abs( fixed.d - fixed.d0 ) )
-                        }
+            fixed.d0 <- fixed.d
+            dG <- setdiff( unique( est.d ), 0 )
+            res <- rasch_mml2_raschtype_mstep_parameter_group( theta.k=theta.k,
+                        b=b, fixed.a=fixed.a, fixed.c=fixed.c, fixed.d=fixed.d,
+                        pjk=pjk, alpha1=alpha1, alpha2=alpha2, h=numdiff.parm, G=G, I=I,
+                        r.jk=r.jk, n.jk=n.jk, est_val=est.d, min_val=min.d,
+                        max_val=max.d, iter=iter, old_increment=old_increment.d,
+                        Qmatrix=Qmatrix, parameter="d")
+            fixed.d <- res$parm
+            se.d <- res$se
+            a1c <- max( abs( fixed.d - fixed.d0 ) )
+        }
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # estimation of K parameters in Ramsay's quotient model
         if ( sum( est.K ) > 0 & ramsay.qm ){
@@ -679,11 +682,11 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                             fixed.d=fixed.d, alpha1=alpha1, alpha2=alpha2, Qmatrix=Qmatrix )
             pjk.M <- do.call( "rasch_mml2_calc_prob", args=calc_prob_args )
             #-- alpha1 + h
-            pjk1.M <- do.call( "rasch_mml2_calc_prob", args=rasch_mml2_modify_list_element(
-                                    x=calc_prob_args, entry="alpha1", value=alpha1 + h ) )
+            calc_prob_args$alpha1 <- alpha1 +  h
+            pjk1.M <- do.call( "rasch_mml2_calc_prob", args=calc_prob_args )
             #-- alpha1 - h
-            pjk2.M <- do.call( "rasch_mml2_calc_prob", args=rasch_mml2_modify_list_element(
-                                    x=calc_prob_args, entry="alpha1", value=alpha1 - h ) )
+            calc_prob_args$alpha1 <- alpha1 -  h
+            pjk2.M <- do.call( "rasch_mml2_calc_prob", args=calc_prob_args )
 
             #-- log likelihood
             ll0a1 <- ll0 <- rasch_mml2_mstep_calc_likelihood( G=G, pjk.M=pjk.M, n.jk=n.jk, r.jk=r.jk )
@@ -702,14 +705,14 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
             se.alpha <- sqrt( 1 / abs(d2) )
 
             #-- alpha2
-            calc_prob_args <- rasch_mml2_modify_list_element( x=calc_prob_args, entry="alpha1", value=alpha1 )
+            calc_prob_args$alpha1 <- alpha1
             pjk.M <- do.call( "rasch_mml2_calc_prob", args=calc_prob_args )
             #-- alpha2 + h
-            pjk1.M <- do.call( "rasch_mml2_calc_prob", args=rasch_mml2_modify_list_element(
-                                    x=calc_prob_args, entry="alpha2", value=alpha2 + h ) )
+            calc_prob_args$alpha2 <- alpha2 + h
+            pjk1.M <- do.call( "rasch_mml2_calc_prob", args=calc_prob_args )
             #-- alpha2 - h
-            pjk2.M <- do.call( "rasch_mml2_calc_prob", args=rasch_mml2_modify_list_element(
-                                    x=calc_prob_args, entry="alpha2", value=alpha2 - h ) )
+            calc_prob_args$alpha2 <- alpha2 - h
+            pjk2.M <- do.call( "rasch_mml2_calc_prob", args=calc_prob_args )
 
             #-- log likelihood
             ll0a1 <- ll0 <- rasch_mml2_mstep_calc_likelihood( G=G, pjk.M=pjk.M, n.jk=n.jk, r.jk=r.jk )

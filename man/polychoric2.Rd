@@ -1,5 +1,5 @@
 %% File Name: polychoric2.Rd
-%% File Version: 0.28
+%% File Version: 0.291
 
 \name{polychoric2}
 \alias{polychoric2}
@@ -14,7 +14,7 @@ This function estimates the polychoric correlation coefficient
 using maximum likelihood estimation (Olsson, 1979).
 }
 \usage{
-polychoric2(dat, maxiter=100, cor.smooth=TRUE, use_pbv=TRUE, conv=1e-10,
+polychoric2(dat, maxiter=100, cor.smooth=TRUE, use_pbv=1, conv=1e-10,
       rho_init=NULL, weights=NULL)
 
 ## exported Rcpp function
@@ -32,8 +32,11 @@ Maximum number of iterations
 An optional logical indicating whether the polychoric correlation
 matrix should be smooth to ensure positive definiteness.
 }
-\item{use_pbv}{Logical indicating whether the \pkg{pbv} package is used
-for computation of bivariate normal distribution}
+\item{use_pbv}{Integer indicating whether the \pkg{pbv} package is used
+for computation of bivariate normal distribution. \code{0} stands for
+the simplest approximation in \pkg{sirt} while versions \code{1} and
+\code{2} uses the algorithm of \pkg{pbv} (the first one copied into
+the \pkg{sirt} package, the second one linking Rcpp code to \pkg{pbv}.}
 \item{conv}{Convergence criterion}
 \item{rho_init}{Optional matrix of initial values for polychoric correlations}
 \item{weights}{Optional vector of sampling weights}

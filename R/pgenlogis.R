@@ -1,10 +1,9 @@
 ## File Name: pgenlogis.R
-## File Version: 1.09
+## File Version: 1.11
 
-#............................................................
-# generalized logistic distribution
-##NS export(pgenlogis)
-pgenlogis <- function( x, alpha1=0, alpha2=0 ){
+#-- generalized logistic distribution
+pgenlogis <- function( x, alpha1=0, alpha2=0 )
+{
     x <- as.vector(x)
     xp <- x[ x >=0 ]
     xn <- x[ x < 0 ]
@@ -21,22 +20,11 @@ pgenlogis <- function( x, alpha1=0, alpha2=0 ){
     # rearrange entries
     w <- rep( 0, length(x) )
     if ( length(indp) >  0 ){ w[ indp ] <- y }
-    if ( length(indn) >  0 ){ w[ indn ] <- y1    }
+    if ( length(indn) >  0 ){ w[ indn ] <- y1 }
     # transform to inverse logistic probability
     y <- stats::plogis(w)
     return(y)
-        }
-#............................................................
-# moments of generalized logistic distribution
-genlogis.moments <- function( alpha1, alpha2){
-    x0 <- seq(-30,30, len=30000 )
-    y0 <- pgenlogis( x=x0, alpha1=alpha1, alpha2=alpha2 )
-    wgt <- y0[-1] - y0[ - length(y0) ]
-    wgt <- wgt / sum(wgt)
-    out <- ( x0[ -1 ] + x0[ - length(x0) ] ) / 2
-    M <- sum( wgt * out )
-    SD <- sqrt( sum( wgt*out^2 ) - M^2 )
-    moments <- c(M,SD,SD^2 )
-    names(moments) <- c("M", "SD", "Var" )
-    return(moments)
-        }
+}
+
+
+

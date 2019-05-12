@@ -1,14 +1,13 @@
 ## File Name: summary.rasch.mml2.R
-## File Version: 1.16
+## File Version: 1.20
 
 
 
-
-#*******************************************************
-# Summary for rasch.mml object                         *
-##NS S3method(summary,rasch.mml)
-summary.rasch.mml <- function( object, ... ){
-    # object      ... object from rasch.mml                #
+#-- Summary for rasch.mml object
+summary.rasch.mml <- function( object, file=NULL, ... )
+{
+    # open sink
+    sirt_osink( file=file )
 
     npirt <- object$irtmodel=="npirt"
     D <- object$D
@@ -118,8 +117,11 @@ summary.rasch.mml <- function( object, ... ){
         rownames(obji) <- NULL
         print( obji )
             }
-                }
-#*******************************************************
+
+    # close sink
+    sirt_csink( file=file )
+}
+
 
 
 

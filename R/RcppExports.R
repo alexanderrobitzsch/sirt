@@ -181,6 +181,30 @@ sirt_rcpp_noharm_sirt_optim_gr_rcpp <- function(gamma_val, NH, I, wgtm, pm, b0_j
     .Call('_sirt_sirt_rcpp_noharm_sirt_optim_gr_rcpp', PACKAGE = 'sirt', gamma_val, NH, I, wgtm, pm, b0_jk, b1_jk, b2_jk, b3_jk, npar, pt_matid, pt_index, pt_row, pt_col, FP, Fmat, Pmat, Psimat)
 }
 
+sirt_rcpp_pnorm0 <- function(z) {
+    .Call('_sirt_sirt_rcpp_pnorm0', PACKAGE = 'sirt', z)
+}
+
+sirt_rcpp_pnorm <- function(x) {
+    .Call('_sirt_sirt_rcpp_pnorm', PACKAGE = 'sirt', x)
+}
+
+sirt_rcpp_pbvnorm0 <- function(h1, hk, r) {
+    .Call('_sirt_sirt_rcpp_pbvnorm0', PACKAGE = 'sirt', h1, hk, r)
+}
+
+sirt_rcpp_pbvnorm <- function(x, y, rho) {
+    .Call('_sirt_sirt_rcpp_pbvnorm', PACKAGE = 'sirt', x, y, rho)
+}
+
+sirt_rcpp_dbvnorm0 <- function(x, y, rho, use_log) {
+    .Call('_sirt_sirt_rcpp_dbvnorm0', PACKAGE = 'sirt', x, y, rho, use_log)
+}
+
+sirt_rcpp_dbvnorm <- function(x, y, rho, use_log) {
+    .Call('_sirt_sirt_rcpp_dbvnorm', PACKAGE = 'sirt', x, y, rho, use_log)
+}
+
 sirt_rcpp_pbivnorm2 <- function(x, y, rho1) {
     .Call('_sirt_sirt_rcpp_pbivnorm2', PACKAGE = 'sirt', x, y, rho1)
 }

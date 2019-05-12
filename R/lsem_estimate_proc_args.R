@@ -1,10 +1,10 @@
 ## File Name: lsem_estimate_proc_args.R
-## File Version: 0.38
+## File Version: 0.391
 
 lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     pseudo_weights, lavmodel, data, use_lavaan_survey, est_joint=FALSE,
     par_invariant=NULL, par_linear=NULL, par_quadratic=NULL,
-    partable_joint=NULL, se=NULL, G=NULL, verbose=TRUE)
+    partable_joint=NULL, se=NULL, G=NULL, moderator.grid=NULL, verbose=TRUE)
 {
     use_pseudo_weights <- pseudo_weights > 0
     if ( sufficient_statistics | use_pseudo_weights ){

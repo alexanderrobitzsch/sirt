@@ -1,5 +1,5 @@
 %% File Name: gom.em.Rd
-%% File Version: 1.76
+%% File Version: 1.791
 
 \name{gom.em}
 \alias{gom.em}
@@ -20,15 +20,16 @@ Discrete (Rasch) Grade of Membership Model
 \description{
 This function estimates the grade of membership model (Erosheva, Fienberg
 & Joutard, 2007; also called mixed membership model) by the EM algorithm
-assuming a discrete membership score distribution.
+assuming a discrete membership score distribution. The function is restricted
+to dichotomous item responses.
 }
 \usage{
 gom.em(dat, K=NULL, problevels=NULL, model="GOM", theta0.k=seq(-5, 5, len=15),
     xsi0.k=exp(seq(-6, 3, len=15)), max.increment=0.3, numdiff.parm=0.001,
-    maxdevchange=10^(-5), globconv=0.001, maxiter=1000, msteps=4, mstepconv=0.001,
-    progress=TRUE)
+    maxdevchange=1e-6, globconv=1e-4, maxiter=1000, msteps=4, mstepconv=0.001,
+    theta_adjust=TRUE, progress=TRUE)
 
-\method{summary}{gom}(object,...)
+\method{summary}{gom}(object, file=NULL, ...)
 
 \method{anova}{gom}(object,...)
 
@@ -60,7 +61,9 @@ Model 2a).
 }
   \item{model}{
 The type of grade of membership model. The default \code{"GOM"}
-is the nonparametric grade of membership model. The probabilities and membership
+is the nonparametric grade of membership model. A parametric multivariate normal
+representation can be requested by \code{"GOMnormal"}.
+The probabilities and membership
 functions specifications described in Details are called via \code{"GOMRasch"}.
 }
   \item{theta0.k}{
@@ -90,16 +93,22 @@ Number of iterations within a M step
   \item{mstepconv}{
 Convergence criterion within a M step
 }
+\item{theta_adjust}{Logical indicating whether multivariate normal distribution
+should be adaptively chosen during the EM algorithm.}
   \item{progress}{
 Display iteration progress? Default is \code{TRUE}.
 }
   \item{object}{
 Object of class \code{gom}
 }
+\item{file}{Optional file name for summary output}
   \item{\dots}{
 Further arguments to be passed
 }
 }
+
+
+%--- details
 \details{
 The item response model of the grade of membership model
 (Erosheva, Fienberg & Junker, 2002;
@@ -176,6 +185,7 @@ A list with following entries:
 \item{EAP.rel}{EAP reliability (only applies for \code{model="GOMRasch"})}
 \item{MAP}{Maximum aposteriori estimate of the membership function
     }
+\item{EAP}{EAP estimate for individual membership scores}
 \item{classdesc}{Descriptives for class membership}
 \item{lambda}{Estimated response probabilities \eqn{\lambda_{ik}}}
 \item{se.lambda}{Standard error for estimated response probabilities
@@ -273,6 +283,19 @@ mod1 <- sirt::gom.em( dat, K=3, problevels,  model="GOM"  )
 summary(mod1)
 
 \dontrun{
+#-- some plots
+
+#* multivariate scatterplot
+car::scatterplotMatrix(mod1$EAP, regLine=FALSE, smooth=FALSE, pch=16, cex=.4)
+#* ternary plot
+vcd::ternaryplot(mod1$EAP, pch=16, col=1, cex=.3)
+
+#***
+# Model 1a: Multivariate normal distribution
+problevels <- seq( 0, 1, len=5 )
+mod1a <- sirt::gom.em( dat, K=3, theta0.k=seq(-15,15,len=21), model="GOMnormal" )
+summary(mod1a)
+
 #***
 # Model 2: Discrete GOM with 4 classes and 5 probability levels
 problevels <- seq( 0, 1, len=5 )
@@ -342,7 +365,7 @@ dat <- matrix( NA, nrow=N, ncol=I )
 for (ii in 1:I){
     dat[,ii] <- probs[ ii, latent.class ]
     dat[,ii] <- 1 * ( stats::runif(N) < dat[,ii] )
-        }
+}
 colnames(dat) <- paste0( "I", 1:I)
 
 # Model 1: estimate latent class model

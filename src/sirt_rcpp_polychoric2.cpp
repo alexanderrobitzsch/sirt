@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_polychoric2.cpp
-//// File Version: 3.396
+//// File Version: 3.408
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -10,6 +10,9 @@
 // [[RcppNOinterfaces(r, cpp)]]
 
 using namespace Rcpp;
+
+// [include_header_file]
+#include "sirt_rcpp_pbvnorm.h"
 
 #include <pbv.h>
 // # include "c:/Users/sunpn563/Dropbox/Eigene_Projekte/R-Routinen/IRT-Functions/pbv_package/0.3/pbv_work/inst/include/pbv.h"
@@ -123,12 +126,16 @@ double sirt_rcpp_dmvnorm_2dim( double x, double y, double rho)
 ///** sirt_rcpp_polychoric2_pbivnorm
 // [[Rcpp::export]]
 double sirt_rcpp_polychoric2_pbivnorm( Rcpp::NumericVector x,
-        Rcpp::NumericVector y, Rcpp::NumericVector rho, bool use_pbv)
+        Rcpp::NumericVector y, Rcpp::NumericVector rho, int use_pbv)
 {
     double val=0;
-    if (use_pbv){
+    if (use_pbv==2){
         val = pbv::pbv_rcpp_pbvnorm0( x[0], y[0], rho[0]);
-    } else {
+    }
+    if (use_pbv==1){
+        val = sirt_rcpp_pbvnorm0( x[0], y[0], rho[0]);
+    }
+    if (use_pbv==0){
         val = sirt_rcpp_pbivnorm2( x, y, rho )[0];
     }
     return val;
@@ -144,7 +151,7 @@ double sirt_rcpp_polychoric2_pbivnorm( Rcpp::NumericVector x,
 Rcpp::NumericVector sirt_rcpp_polychoric2_estimating_equation(
     Rcpp::NumericMatrix frtab, int maxK, Rcpp::NumericVector rho,
     Rcpp::NumericVector thresh1n, Rcpp::NumericVector thresh2n, int maxK1,
-    int maxK2, bool use_pbv )
+    int maxK2, int use_pbv )
 {
     // INPUT:
     // frtab, thresh1n, thresh2n, rho, maxK1, maxK2
@@ -185,7 +192,7 @@ Rcpp::NumericVector sirt_rcpp_polychoric2_estimating_equation(
 ///** sirt_rcpp_polychoric2_est_itempair
 // [[Rcpp::export]]
 Rcpp::List sirt_rcpp_polychoric2_est_itempair( Rcpp::NumericVector v1,
-    Rcpp::NumericVector v2, int maxK_, int maxiter, bool use_pbv,
+    Rcpp::NumericVector v2, int maxK_, int maxiter, int use_pbv,
     double conv, double rho_init, Rcpp::NumericVector weights )
 {
     int maxK = maxK_ + 1;
@@ -320,7 +327,7 @@ Rcpp::List sirt_rcpp_polychoric2_est_itempair( Rcpp::NumericVector v1,
 ///** sirt_rcpp_polychoric2
 // [[Rcpp::export]]
 Rcpp::List sirt_rcpp_polychoric2( Rcpp::NumericMatrix dat, int maxK,
-    int maxiter, bool use_pbv, double conv, Rcpp::IntegerMatrix rho_init,
+    int maxiter, int use_pbv, double conv, Rcpp::IntegerMatrix rho_init,
     Rcpp::NumericVector weights)
 {
     int I = dat.ncol();

@@ -1,15 +1,13 @@
 ## File Name: prior_model_pars_CleanString.R
-## File Version: 0.08
+## File Version: 0.09
 
 
-#################################################
-# clean string
+#-- clean string
 prior_model_pars_CleanString <- function( ps ){
     ps <- gsub( " ", "", ps )
     ps <- ps[ ps !="" ]
     NP <- length(ps)
     for (pp in 1:NP){
-        # pp <- 1
         ps_pp <- ps[pp]
         # locate comment symbol
         h1 <- gregexpr(pattern='#', text=ps_pp)
@@ -20,4 +18,3 @@ prior_model_pars_CleanString <- function( ps ){
     ps <- ps[ ps !="" ]
     return(ps)
 }
-##################################################

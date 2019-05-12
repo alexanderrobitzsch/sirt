@@ -1,10 +1,10 @@
 ## File Name: polychoric2.R
-## File Version: 0.328
+## File Version: 0.329
 
 
 #---- estimating polychoric correlation using the Olsson method
 # of maximum likelihood estimation
-polychoric2 <- function( dat, maxiter=100, cor.smooth=TRUE, use_pbv=TRUE,
+polychoric2 <- function( dat, maxiter=100, cor.smooth=TRUE, use_pbv=1,
     conv=1e-10, rho_init=NULL, weights=NULL )
 {
     dat1 <- as.matrix(dat)

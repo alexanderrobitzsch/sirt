@@ -1,5 +1,5 @@
 %% File Name: rasch.mml.Rd
-%% File Version: 3.99248
+%% File Version: 3.99249
 
 \name{rasch.mml2}
 \alias{rasch.mml2}
@@ -56,9 +56,9 @@ rasch.mml2( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
    use.freqpatt=is.null(group), delta.miss=0, est.delta=rep(NA,ncol(dat)),
    ... )
 
-\method{summary}{rasch.mml}(object,...)
+\method{summary}{rasch.mml}(object, file=NULL, ...)
 
-\method{plot}{rasch.mml}(x,items=NULL, xlim=NULL, main=NULL, ...)
+\method{plot}{rasch.mml}(x, items=NULL, xlim=NULL, main=NULL, ...)
 
 \method{anova}{rasch.mml}(object,...)
 
@@ -292,6 +292,7 @@ Object of class \code{rasch.mml}
 \item{items}{Vector of integer or item names which should be plotted}
 \item{xlim}{Specification for \code{xlim} in plot}
 \item{main}{Title of the plot}
+\item{file}{Optional file name for summary output}
   \item{\dots}{
 Further arguments to be passed
 }

@@ -1,23 +1,24 @@
 ## File Name: gom.em.R
-## File Version: 5.23
+## File Version: 5.296
 
-#################################################################
-# gom EM algorithm
+
+#-- gom EM algorithm
 gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
     theta0.k=seq(-5,5,len=15), xsi0.k=exp(seq(-6,3,len=15)),
-    max.increment=.3, numdiff.parm=.001, maxdevchange=10^(-5),
-    globconv=.001, maxiter=1000, msteps=4, mstepconv=.001,
-    progress=TRUE ){
-    #..........................................................
+    max.increment=.3, numdiff.parm=.001, maxdevchange=1e-6,
+    globconv=1e-4, maxiter=1000, msteps=4, mstepconv=.001,
+    theta_adjust=TRUE, progress=TRUE )
+{
+    CALL <- match.call()
     s1 <- Sys.time()
     e1 <- environment()
     s1 <- Sys.time()
     if ( model=="GOMRasch"){
         K <- length(theta0.k)
         max.increment <- 1
-                    }
-#    res <- .gom.proc( dat, K=K )
-#    .sirt.attach.environment( res, envir=e1 )
+    }
+
+    mu <- Sigma <- NULL
     dat0 <- dat
     dat.resp <- 1-is.na(dat)
     dat[ is.na(dat) ] <- 0
@@ -32,10 +33,10 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
     mu <- Sigma <- b <- NULL
     # design matrices
     if (model=="GOMRasch"){
-        b <- - stats::qlogis( colMeans(dat, na.rm=T)  )
+        b <- - stats::qlogis( colMeans(dat, na.rm=TRUE)  )
         theta.kM <- as.matrix( expand.grid( theta0.k, xsi0.k ))
         TP <- nrow(theta.kM)
-        m1 <- exp( - ( theta.kM[,1] - matrix( theta0.k, TP, K, byrow=T ) )^2 / ( 2*theta.kM[,2]^2 ) )
+        m1 <- exp( - ( theta.kM[,1] - matrix( theta0.k, TP, K, byrow=TRUE ) )^2 / ( 2*theta.kM[,2]^2 ) )
         theta.k <- m1 / rowSums( m1 )
         #***
         mu <- c(0, .7)
@@ -46,15 +47,34 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
 #        Z <- cbind( 1, theta.kM[,1], theta.kM[,1]^2, theta.kM[,1]^3,
 #                 theta.kM[,2], theta.kM[,2]^2, theta.kM[,2]^3,
 #                 theta.kM[,1]*theta.kM[,2], theta.kM[,1]^2*theta.kM[,2])
-                }
+    }
 
     if (model=="GOM"){
-        theta.k <- .gom.calc.theta(K, problevels)
+        theta.k <- gom_em_calc_theta(K=K, problevels=problevels)
         TP <- nrow(theta.k)
         pi.k <- as.vector(rep(1/TP, TP ))
-        lambda <- matrix( .75*seq( 1/(2*K), 1, 1/K), I, K, byrow=T )
+        lambda <- gom_em_inits_lambda(I=I, K=K)
         theta0.k <- NULL
-                    }
+    }
+
+    if (model=="GOMnormal"){
+        v1 <- list(theta0.k)
+        if (K>2){
+            for (kk in 2:(K-1)){
+                v1[[kk]] <- theta0.k
+            }
+        }
+        theta0 <- theta0.k
+        theta_grid0 <- theta_grid <- as.matrix(as.data.frame( expand.grid(v1) ))
+        TP <- nrow(theta_grid)
+        mu <- rep(0,K-1)
+        sigma <- rep(1,K-1)
+        pi.k <- rep(1/TP, TP)
+        theta.k <- gom_em_normal_to_membership_scores(theta_grid=theta_grid, K=K, TP=TP)
+        lambda <- gom_em_inits_lambda(I=I, K=K)
+        theta0.k <- NULL
+    }
+
     # inits
     se.b <- se.lambda <- NULL
     n.ik <- array( 0, dim=c(TP,I, 2) )
@@ -63,71 +83,83 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
     conv <- devchange <- 1000
     disp <- "...........................................................\n"
 
-
-    #****************************************************
-    # start EM algorithm
-    while( ( ( maxdevchange < devchange ) | (globconv < conv) ) &
-            ( iter < maxiter )
-                        ){
+    #---------- start EM algorithm --------------------
+    while( ( ( maxdevchange < devchange ) | (globconv < conv) ) & ( iter < maxiter ) ){
         if (progress){
             cat(disp)
             cat("Iteration", iter+1, "   ", paste( Sys.time() ), "\n" )
-                    }
+        }
         # previous values
         dev0 <- dev
         pi.k0 <- pi.k
         lambda0 <- lambda
         b0 <- b
         # calculate probabilities
-        res <- .gom.calcprobs( lambda, theta.k, b, theta0.k )
+        res <- gom_em_calc_probs( lambda=lambda, theta.k=theta.k, b=b,
+                        theta0.k=theta0.k )
         probs <- res$probs
-        probs <- problong2probarray( probs, I, TP )
+        probs <- problong2probarray( probres=probs, I=I, TP=TP )
 
         # calculate counts
         probsM <- matrix( aperm( probs, c(2,1,3) ), nrow=I*2, ncol=TP )
-        res1 <- calcpost( dat2, dat2.resp, probsM, dat2.ind, pi.k, K=1 )
+        res1 <- calcpost( dat2=dat2, dat2resp=dat2.resp, probs=probsM,
+                                dat2ind=dat2.ind, pik=pi.k, K=1 )
         f.yi.qk <- res1$fyiqk
         f.qk.yi <- res1$f.qk.yi
         pi.k <- res1$pi.k
         n.ik <- array( res1$n.ik, dim=dim(n.ik) )
         N.ik <- res1$N.ik
 
+        ## distribution smoothing for GOMnormal
+        if (model=="GOMnormal"){
+            res <- stats::cov.wt(x=theta_grid, wt=pi.k, method="ML")
+            mu <- res$center
+            Sigma <- res$cov
+            #- readjust theta_grid
+            if (theta_adjust){
+                mth <- max(theta0)
+                sig_max <- max( sqrt(diag(Sigma)))
+                fac1 <- sig_max * ( 6 / mth    )
+                theta_grid <- fac1*theta_grid0
+                theta.k <- gom_em_normal_to_membership_scores(theta_grid=theta_grid, K=K, TP=TP)
+            }
+            pi.k <- sirt_dmvnorm_discrete(theta_grid, mean=mu, sigma=Sigma)
+        }
+
         # maximize lambda
-        if (model=="GOM"){
-            res <- .gom.est.lambda( lambda, I, K, n.ik,
-                       numdiff.parm, max.increment=max.increment, theta.k, msteps,
-                       mstepconv, eps=.001, progress=progress )
+        if (model %in% c("GOM","GOMnormal") ){
+            res <- gom_em_est_lambda( lambda=lambda, I=I, K=K, n.ik=n.ik,
+                        numdiff.parm=numdiff.parm, max.increment=max.increment,
+                        theta.k=theta.k, msteps=msteps, mstepconv=mstepconv,
+                        eps=.001, progress=progress )
             lambda <- res$lambda
             se.lambda <- res$se.lambda
             max.increment <- max( abs(lambda-lambda0))/1.2
-                            }
+        }
         if (model=="GOMRasch"){
-            res <- .gom.est.b( lambda, I, K, n.ik, b, theta0.k,
-                    numdiff.parm=.001, max.increment=max.increment,theta.k, msteps,
-                    mstepconv, eps=.001, progress=progress)
+            res <- gom_em_est_b( lambda=lambda, I=I, K=K, n.ik=n.ik, b=b, theta0.k=theta0.k,
+                        numdiff.parm=.001, max.increment=max.increment, theta.k=theta.k,
+                        msteps=msteps, mstepconv=mstepconv, eps=.001, progress=progress )
             b <- res$b
             se.b <- res$se.b
-            lambda <- t( stats::plogis( outer( theta0.k, b, "-" )    ) )
+            lambda <- t( stats::plogis( outer( theta0.k, b, "-" ) ) )
             max.increment <- max( abs(b-b0))/1.2
-                            }
-        flush.console()
+        }
+        utils::flush.console()
 
-        #**
-        # calculate deviance
-#        pi.k <- matrix( pi.k, ncol=1 )
-        ll <- sum( log( rowSums( f.yi.qk * outer( rep(1,nrow(f.yi.qk)), pi.k ) ) ) )
-#        ll <- sum( log( rowSums( f.yi.qk * outer( rep(1,nrow(f.yi.qk)), pi.k[,1] ) ) ) )
+        #-- calculate deviance
+        ll <- sum( log( rowSums( f.yi.qk * sirt_matrix2( x=pi.k, nrow=N ) ) ) )
         dev <- -2*ll
         # convergence criteria
         conv <- max( abs(lambda-lambda0))
         iter <- iter+1
         devchange <- abs( ( dev - dev0 )/dev0 )
-        #****
-        # print progress
+
+        #**** print progress
         if (progress){
-            cat( paste( "   Deviance=", round( dev, 4 ),
+            cat( paste( "   Deviance", "=", round( dev, 4 ),
                 if (iter > 1 ){ " | Deviance change=" } else {""},
-                if( iter>1){round( - dev + dev0, 6 )} else { ""}    ,"\n",sep="") )
+                if( iter>1){round( - dev + dev0, 6 )} else { ""},"\n",sep="") )
             cat( paste( "    Maximum lambda parameter change=",
                     paste( round(max(abs(lambda-lambda0)),6), collapse=" " ), "\n", sep=""))
             cat( paste( "    Maximum distribution parameter change=",
@@ -135,57 +167,30 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
             if (model=="GOMRasch"){
                 cat( paste( "    Maximum b parameter change=",
                     paste( round(max(abs(b-b0)),6), collapse=" " ), "\n", sep=""))
-                        }
-                    }
-                }
-    # *********
-    # arrange OUTPUT
-    #---
-    # Information criteria
-    ic <- list( "deviance"=dev, "n"=nrow(dat2) )
-    ic$np.item <- I*K
-    if (model=="GOMRasch"){ ic$np.item <- I }
-    # trait matrix
-    ic$np.trait <- TP - 1
-    if (model=="GOMRasch"){ ic$np.trait <- 3 + 1 }
-    ic$np <- ic$np.item + ic$np.trait
-    # AIC
-    ic$AIC <- dev + 2*ic$np
-    # BIC
-    ic$BIC <- dev + ( log(ic$n) )*ic$np
-    # CAIC (conistent AIC)
-    ic$CAIC <- dev + ( log(ic$n) + 1 )*ic$np
-    # corrected AIC
-    ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )
-
-    #---
-    # person parameters
-    #---
-    # item
-    item <- data.frame("item"=colnames(dat))
-    item$N <- colSums( dat2.resp )
-    item$p <- colMeans( dat2, na.rm=TRUE)
-    item$b <- b
-    if (model !="GOMRaschxxx"){
-        for (kk in 1:K){
-            item[,paste0("lam.Cl",kk)] <- lambda[,kk]
-                    }
-                        }
-    obji <- item
-    for (vv in seq(2,ncol(obji) )){
-        obji[,vv] <- round( obji[,vv],3 ) }
-    if (progress){
-        cat("*********************************\n")
-        cat("Item Parameters\n")
-        print( obji )
             }
+        }
+    }
+
+    #--------------- arrange OUTPUT
+
+    #--- Information criteria
+    ic <- gom_em_ic( dev=dev, dat2=dat2, I=I, K=K, TP=TP, model=model )
+
+    #--- item parameters
+    item <- gom_em_item_parameters( dat2=dat2, dat2.resp=dat2.resp, model=model,
+                    b=b, lambda=lambda, K=K, progress=progress )
+
     EAP.rel <- NULL
     person <- NULL
     if ( model=="GOMRasch"){
-        res <- .gom.est.covariance( f.qk.yi, Sigma, theta.kM, N  )
-        .sirt.attach.environment( res, envir=e1 )
+        res <- gom_em_est_covariance( f.qk.yi=f.qk.yi, Sigma=Sigma,
+                    theta.kM=theta.kM, N=N )
+        mu <- res$mu
+        Sigma <- res$Sigma
+        pi.k <- res$pi.k
+
         #--- distribution parameters
-        c1 <- cov2cor(Sigma)
+        c1 <- stats::cov2cor(Sigma)
         if (progress){
             cat("*********************************\n")
             cat("Trait Distribution (Location, Variability)\n")
@@ -193,7 +198,7 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
             cat( " Standard deviations: ", round( sqrt(diag(Sigma)), 3 ), "\n")
             cat( " Correlation ", round( c1[lower.tri(c1)], 3 ), "\n")
             flush.console()
-                    }
+        }
         # person parameters
         pers <- .smirt.person.parameters( data=dat2, D=2, theta.k=theta.kM,
             p.xi.aj=f.yi.qk, p.aj.xi=f.qk.yi, weights=rep(1,N) )
@@ -202,47 +207,45 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         if (progress){
             cat("*********************************\n")
             cat("EAP Reliability=", round(EAP.rel,3), "\n")
-                    }
         }
-    #***
-    # MAP
-    maxval <- f.qk.yi[,1]
-    indval <- 1
-    for (tt in 2:TP){
-        #tt <- 2
-        m0 <- maxval
-        maxval <- ifelse( f.qk.yi[,tt] > m0, f.qk.yi[,tt], m0 )
-        indval <- ifelse( f.qk.yi[,tt] > m0, tt, indval )
-                }
-    MAP <- theta.k[ indval, ]
-    #***
-    # descriptives of classes
+    }
 
+    #--- MAP
+    MAP <- sirt_MAP(post=f.qk.yi, theta=theta.k)
+
+    #--- EAP
+    EAP <- sirt_EAP(post=f.qk.yi, theta=theta.k)
+    colnames(EAP) <- paste0("Class",1:K)
+
+    #--- descriptives of classes
     score <- rowSums( dat2 *dat2.resp ) / rowSums( dat2.resp )
     plmat <- FALSE
     if ( is.vector(problevels) ){
         PL <- length(problevels)
-            }
+    }
     if ( is.matrix(problevels) ){
         PL <- nrow(problevels)
         plmat <- TRUE
-            }
+    }
     theta.kk0 <- theta.k
     if ( model=="GOMRasch"){
         PL <- 5
         problevels <- seq(0,1,len=PL)
         problevels2 <- c( problevels - diff(problevels)[1]/2, 1.2 )
         for (kk in 1:K){
-        # kk <- 1
-        for (ll in 1:PL){
-    #        ll <- 1
-            ind.kk <- which( ( theta.k[, kk ] > problevels2[ll] ) &
-                ( theta.k[, kk ] <=problevels2[ll+1] ) )
-            theta.kk0[ ind.kk, kk ] <- problevels[ll]
-                        } }
+            for (ll in 1:PL){
+                ind.kk <- which( ( theta.k[, kk ] > problevels2[ll] ) &
+                    ( theta.k[, kk ] <=problevels2[ll+1] ) )
+                theta.kk0[ ind.kk, kk ] <- problevels[ll]
+            }
+        }
         pi.k <- pi.k[,1]
-            }  # end GOMRasch
-        classdesc <- NULL
+    }  # end GOMRasch
+
+    classdesc <- NULL
+    if ( model=="GOMnormal"){
+        plmat <- TRUE
+    }
     if ( ! plmat ){
         classdesc <- data.frame( matrix( 0, 2*PL+1, K ) )
         classdesc[1,] <- colSums( theta.kk0 * pi.k )
@@ -250,42 +253,32 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
             for (ll in 1:PL){
                 ll1 <- problevels[ll]
                 classdesc[ ll+1, kk ] <- sum( pi.k * ( theta.kk0[,kk]==ll1 ) )
-                # aggregate( pi.k, list( theta.kk0[,kk]  ), sum )[,2]
-                        }
-                }
-
-            rownames(classdesc)[1] <- "p.Class"
-            colnames(classdesc) <- paste0("Class", 1:K )
-            rownames(classdesc)[2:(PL+1)] <- paste0( "p.problevel", round( problevels, 3 ), ".class" )
-            rownames(classdesc)[PL+2:(PL+1)] <- paste0( "M.problevel", round( problevels, 3 ), ".class" )
+            }
+        }
+        rownames(classdesc)[1] <- "p.Class"
+        colnames(classdesc) <- paste0("Class", 1:K )
+        rownames(classdesc)[2:(PL+1)] <- paste0( "p.problevel", round( problevels, 3 ), ".class" )
+        rownames(classdesc)[PL+2:(PL+1)] <- paste0( "M.problevel", round( problevels, 3 ), ".class" )
         for (kk in 1:K){
-            # kk <- 1
             ll.kk <- problevels
             for (ll in 1:PL){
-                # ll <- 1
                 ind.ll <- which( theta.kk0[,kk]==problevels[ll] )
                 rll.wt <- rowSums( f.qk.yi[, ind.ll, drop=FALSE] )
                 ll.kk[ll] <- weighted.mean( score, rll.wt )
-                    }
-            classdesc[ PL + 2:(PL+1), kk ]  <- ll.kk
-                }
             }
-    #***
-    # output
+            classdesc[ PL + 2:(PL+1), kk ]  <- ll.kk
+        }
+    }
+
+    #--- output
     s2 <- Sys.time()
-    res <- list("deviance"=dev, "ic"=ic, "item"=item,
-        "person"=person, "EAP.rel"=EAP.rel,
-        "MAP"=MAP, "classdesc"=classdesc,
-        "lambda"=lambda, "se.lambda"=se.lambda,
-        "mu"=mu, "Sigma"=Sigma,
-        "b"=b, "se.b"=se.b,
-        "f.yi.qk"=f.yi.qk, "f.qk.yi"=f.qk.yi, "probs"=probs,
-        "n.ik"=n.ik,  "iter"=iter, "dat"=dat0, "dat2"=dat2, "dat2.resp"=dat2.resp,
-        "I"=I,  "K"=K,  "TP"=TP, "G"=1,  "theta.k"=theta.k, "pi.k"=pi.k,
-        "problevels"=problevels,
-        "model"=model, "s1"=s1, "s2"=s2, "plmat"=plmat
-                )
+    res <- list(deviance=dev, ic=ic, item=item, person=person, EAP.rel=EAP.rel,
+        MAP=MAP, EAP=EAP, classdesc=classdesc, lambda=lambda, se.lambda=se.lambda,
+        mu=mu, Sigma=Sigma, b=b, se.b=se.b, f.yi.qk=f.yi.qk, f.qk.yi=f.qk.yi,
+        probs=probs, n.ik=n.ik, iter=iter, dat=dat0, dat2=dat2, dat2.resp=dat2.resp,
+        I=I, K=K, TP=TP, G=1, theta.k=theta.k, pi.k=pi.k, problevels=problevels,
+        model=model, plmat=plmat, mu=mu, Sigma=Sigma, s1=s1, s2=s2,
+        time_diff=s2-s1, CALL=CALL)
     class(res) <- "gom"
     return(res)
-        }
-############################################################
+}

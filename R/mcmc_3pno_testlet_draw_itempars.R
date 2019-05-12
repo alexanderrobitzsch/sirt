@@ -1,9 +1,8 @@
 ## File Name: mcmc_3pno_testlet_draw_itempars.R
-## File Version: 0.09
+## File Version: 0.12
 
 
-##########################################
-# draw item parameters a and b
+#---- draw item parameters a and b
 mcmc_3pno_testlet_draw_itempars <- function( theta, Z, I, N, weights,
     gamma.testlet, testletgroups, param, TT, a.testletM)
 {
@@ -19,8 +18,7 @@ mcmc_3pno_testlet_draw_itempars <- function( theta, Z, I, N, weights,
     # because "the theta" is now item specific
     # loop over testlets tt=1,...,TT
     # maybe for TT+1 some adjustment has to be done
-    #''''''''''''''''''''''''''''''''''''''''
-    # parametrization param=1
+    #--- parametrization param=1
     if ( (param==1) | (param==3) ){
         #--------------
         # sampling without weights
@@ -53,8 +51,7 @@ mcmc_3pno_testlet_draw_itempars <- function( theta, Z, I, N, weights,
         a <- ipars[,1]
         b <- ipars[,2]
     }
-    #''''''''''''''''''''''''''''''''''''''''
-    # parametrization param=2
+    #--- parametrization param=2
     if (param==2){
         a <- rep(NA,I)
         b <- rep(NA,I)
@@ -102,11 +99,10 @@ mcmc_3pno_testlet_draw_itempars <- function( theta, Z, I, N, weights,
             b[ind.tt] <- ipars[,2]
         }            # end testlet tt
     } # end param=2
-    #******************************
+    #-- output
     res <- list( "a"=a, "b"=b)
     return(res)
 }
-############################################################
 
 
 .draw.itempars.3pno.testlet <- mcmc_3pno_testlet_draw_itempars

@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.34
+%% File Version: 0.385
 
 \name{data.sirt}
 
@@ -10,6 +10,8 @@
 \alias{data.si04}
 \alias{data.si05}
 \alias{data.si06}
+\alias{data.si07}
+
 
 \docType{data}
 
@@ -31,6 +33,7 @@ data(data.si03)
 data(data.si04)
 data(data.si05)
 data(data.si06)
+data(data.si07)
 }
 
 
@@ -64,7 +67,8 @@ parameters of two studies) is:
 
 \item The dataset \code{data.si04} is adapted from Bartolucci, Montanari
 and Pandolfi (2012; Table 4, Table 7). The data contains 4999 persons,
-79 items on 5 dimensions.
+79 items on 5 dimensions. See \code{\link{rasch.mirtlc}} for using the
+data in an analysis.
 
 \code{List of 3} \cr
 \code{ $ data        : num [1:4999, 1:79] 0 1 1 0 1 1 0 0 1 1 ...} \cr
@@ -116,6 +120,19 @@ are indicated by the codes 1, 2 or 3.
 \code{ $ WV13: num  3 1 1 3 0 0 3 0 0 0 ...} \cr
 \code{ $ WV14: num  3 1 2 3 0 3 1 3 3 0 ...} \cr
 
+\item The dataset \code{data.si07} contains parameters of the empirical illustration
+of DeCarlo (XXXX). The simulation function \code{sim_fun} can be used for
+simulating data from the IRSDT model (see DeCarlo, XXXX)
+
+\code{List of 3} \cr
+\code{ $ pars   :'data.frame':        16 obs. of  3 variables:} \cr
+\code{  ..$ item: Factor w/ 16 levels "I01","I02","I03",..: 1 2 3 4 5 6 7 8 9 10 ...} \cr
+\code{  ..$ b   : num [1:16] -1.1 -0.18 1.44 1.78 -1.19 0.45 -1.12 0.33 0.82 -0.43 ...} \cr
+\code{  ..$ d   : num [1:16] 2.69 4.6 6.1 3.11 3.2 ...} \cr
+\code{ $ trait  :'data.frame':        20 obs. of  2 variables:} \cr
+\code{  ..$ x   : num [1:20] 0.025 0.075 0.125 0.175 0.225 0.275 0.325 0.375 0.425 0.475 ...} \cr
+\code{  ..$ prob: num [1:20] 0.0238 0.1267 0.105 0.0594 0.0548 ...} \cr
+\code{ $ sim_fun:function (lambda, b, d, items)  } \cr
 }
 }
 
@@ -146,13 +163,18 @@ ALLBUS: http://www.gesis.org/allbus/allbus-home/
 \references{
 Bartolucci, F., Montanari, G. E., & Pandolfi, S. (2012).
 Dimensionality of the latent structure and item selection via latent
-class multidimensional IRT models.
-\emph{Psychometrika, 77}, 782-802.
+class multidimensional IRT models. \emph{Psychometrika, 77}, 782-802.
+http://dx.doi.org/10.1007/s11336-012-9278-0
+
+DeCarlo, L. T. (XXXX). An item response model for true-false exams based on signal
+detection theory. \emph{Applied Psychological Measurement (online first)}.
+http://dx.doi.org/10.1177/0146621619843823
 
 Lindsay, B., Clogg, C. C., & Grego, J. (1991).
 Semiparametric estimation in the Rasch model and related exponential response
 models, including a simple latent class model for item analysis.
 \emph{Journal of the American Statistical Association, 86}, 96-107.
+http://dx.doi.org/10.1080/01621459.1991.10475008
 }
 
 
@@ -162,7 +184,7 @@ models, including a simple latent class model for item analysis.
 # EXAMPLE 1: Nested logit model multiple choice dataset data.si06
 #############################################################################
 
-data(data.si06)
+data(data.si06, package="sirt")
 dat <- data.si06
 
 #** estimate 2PL nested logit model
@@ -186,6 +208,28 @@ ind <- which( colnames(cmod2) \%in\% ind )
 h1 <- cmod2[,ind ]
 cmod2[,ind] <- t( apply( h1, 1, FUN=function(ll){ ll - mean(ll) } ) )
 cmod2[,-1] <- round( cmod2[,-1], 3)
+
+#############################################################################
+# EXAMPLE 2: Item response modle based on signal detection theory (IRSDT model)
+#############################################################################
+
+data(data.si07, package="sirt")
+data <- data.si07
+
+#-- simulate data
+set.seed(98)
+N <- 2000 # define sample size
+# generate membership scores
+lambda <- base::sample(size=N, x=data$trait$x, prob=data$trait$prob, replace=TRUE)
+b <- data$pars$b
+d <- data$pars$d
+items <- data$pars$item
+dat <- data$sim_fun(lambda=lambda, b=b, d=d, items=items)
+
+#- estimate IRSDT model as a grade of membership model with two classes
+problevels <- seq( 0.025, 0.975, length=20 )
+mod1 <- sirt::gom.em( dat, K=2, problevels=problevels )
+summary(mod1)
 }
 }
 %% \keyword{datasets}

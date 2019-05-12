@@ -743,6 +743,82 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sirt_rcpp_pnorm0
+double sirt_rcpp_pnorm0(double z);
+RcppExport SEXP _sirt_sirt_rcpp_pnorm0(SEXP zSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type z(zSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_pnorm0(z));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sirt_rcpp_pnorm
+Rcpp::NumericVector sirt_rcpp_pnorm(Rcpp::NumericVector x);
+RcppExport SEXP _sirt_sirt_rcpp_pnorm(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_pnorm(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sirt_rcpp_pbvnorm0
+double sirt_rcpp_pbvnorm0(double h1, double hk, double r);
+RcppExport SEXP _sirt_sirt_rcpp_pbvnorm0(SEXP h1SEXP, SEXP hkSEXP, SEXP rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type h1(h1SEXP);
+    Rcpp::traits::input_parameter< double >::type hk(hkSEXP);
+    Rcpp::traits::input_parameter< double >::type r(rSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_pbvnorm0(h1, hk, r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sirt_rcpp_pbvnorm
+Rcpp::NumericVector sirt_rcpp_pbvnorm(Rcpp::NumericVector x, Rcpp::NumericVector y, Rcpp::NumericVector rho);
+RcppExport SEXP _sirt_sirt_rcpp_pbvnorm(SEXP xSEXP, SEXP ySEXP, SEXP rhoSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type rho(rhoSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_pbvnorm(x, y, rho));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sirt_rcpp_dbvnorm0
+double sirt_rcpp_dbvnorm0(double x, double y, double rho, bool use_log);
+RcppExport SEXP _sirt_sirt_rcpp_dbvnorm0(SEXP xSEXP, SEXP ySEXP, SEXP rhoSEXP, SEXP use_logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type y(ySEXP);
+    Rcpp::traits::input_parameter< double >::type rho(rhoSEXP);
+    Rcpp::traits::input_parameter< bool >::type use_log(use_logSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_dbvnorm0(x, y, rho, use_log));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sirt_rcpp_dbvnorm
+Rcpp::NumericVector sirt_rcpp_dbvnorm(Rcpp::NumericVector x, Rcpp::NumericVector y, Rcpp::NumericVector rho, bool use_log);
+RcppExport SEXP _sirt_sirt_rcpp_dbvnorm(SEXP xSEXP, SEXP ySEXP, SEXP rhoSEXP, SEXP use_logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type rho(rhoSEXP);
+    Rcpp::traits::input_parameter< bool >::type use_log(use_logSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_dbvnorm(x, y, rho, use_log));
+    return rcpp_result_gen;
+END_RCPP
+}
 // sirt_rcpp_pbivnorm2
 Rcpp::NumericVector sirt_rcpp_pbivnorm2(Rcpp::NumericVector x, Rcpp::NumericVector y, Rcpp::NumericVector rho1);
 RcppExport SEXP _sirt_sirt_rcpp_pbivnorm2(SEXP xSEXP, SEXP ySEXP, SEXP rho1SEXP) {
@@ -770,7 +846,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // sirt_rcpp_polychoric2_pbivnorm
-double sirt_rcpp_polychoric2_pbivnorm(Rcpp::NumericVector x, Rcpp::NumericVector y, Rcpp::NumericVector rho, bool use_pbv);
+double sirt_rcpp_polychoric2_pbivnorm(Rcpp::NumericVector x, Rcpp::NumericVector y, Rcpp::NumericVector rho, int use_pbv);
 RcppExport SEXP _sirt_sirt_rcpp_polychoric2_pbivnorm(SEXP xSEXP, SEXP ySEXP, SEXP rhoSEXP, SEXP use_pbvSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -778,13 +854,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y(ySEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type rho(rhoSEXP);
-    Rcpp::traits::input_parameter< bool >::type use_pbv(use_pbvSEXP);
+    Rcpp::traits::input_parameter< int >::type use_pbv(use_pbvSEXP);
     rcpp_result_gen = Rcpp::wrap(sirt_rcpp_polychoric2_pbivnorm(x, y, rho, use_pbv));
     return rcpp_result_gen;
 END_RCPP
 }
 // sirt_rcpp_polychoric2_estimating_equation
-Rcpp::NumericVector sirt_rcpp_polychoric2_estimating_equation(Rcpp::NumericMatrix frtab, int maxK, Rcpp::NumericVector rho, Rcpp::NumericVector thresh1n, Rcpp::NumericVector thresh2n, int maxK1, int maxK2, bool use_pbv);
+Rcpp::NumericVector sirt_rcpp_polychoric2_estimating_equation(Rcpp::NumericMatrix frtab, int maxK, Rcpp::NumericVector rho, Rcpp::NumericVector thresh1n, Rcpp::NumericVector thresh2n, int maxK1, int maxK2, int use_pbv);
 RcppExport SEXP _sirt_sirt_rcpp_polychoric2_estimating_equation(SEXP frtabSEXP, SEXP maxKSEXP, SEXP rhoSEXP, SEXP thresh1nSEXP, SEXP thresh2nSEXP, SEXP maxK1SEXP, SEXP maxK2SEXP, SEXP use_pbvSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -796,13 +872,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type thresh2n(thresh2nSEXP);
     Rcpp::traits::input_parameter< int >::type maxK1(maxK1SEXP);
     Rcpp::traits::input_parameter< int >::type maxK2(maxK2SEXP);
-    Rcpp::traits::input_parameter< bool >::type use_pbv(use_pbvSEXP);
+    Rcpp::traits::input_parameter< int >::type use_pbv(use_pbvSEXP);
     rcpp_result_gen = Rcpp::wrap(sirt_rcpp_polychoric2_estimating_equation(frtab, maxK, rho, thresh1n, thresh2n, maxK1, maxK2, use_pbv));
     return rcpp_result_gen;
 END_RCPP
 }
 // sirt_rcpp_polychoric2_est_itempair
-Rcpp::List sirt_rcpp_polychoric2_est_itempair(Rcpp::NumericVector v1, Rcpp::NumericVector v2, int maxK_, int maxiter, bool use_pbv, double conv, double rho_init, Rcpp::NumericVector weights);
+Rcpp::List sirt_rcpp_polychoric2_est_itempair(Rcpp::NumericVector v1, Rcpp::NumericVector v2, int maxK_, int maxiter, int use_pbv, double conv, double rho_init, Rcpp::NumericVector weights);
 RcppExport SEXP _sirt_sirt_rcpp_polychoric2_est_itempair(SEXP v1SEXP, SEXP v2SEXP, SEXP maxK_SEXP, SEXP maxiterSEXP, SEXP use_pbvSEXP, SEXP convSEXP, SEXP rho_initSEXP, SEXP weightsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -811,7 +887,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type v2(v2SEXP);
     Rcpp::traits::input_parameter< int >::type maxK_(maxK_SEXP);
     Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
-    Rcpp::traits::input_parameter< bool >::type use_pbv(use_pbvSEXP);
+    Rcpp::traits::input_parameter< int >::type use_pbv(use_pbvSEXP);
     Rcpp::traits::input_parameter< double >::type conv(convSEXP);
     Rcpp::traits::input_parameter< double >::type rho_init(rho_initSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type weights(weightsSEXP);
@@ -820,7 +896,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // sirt_rcpp_polychoric2
-Rcpp::List sirt_rcpp_polychoric2(Rcpp::NumericMatrix dat, int maxK, int maxiter, bool use_pbv, double conv, Rcpp::IntegerMatrix rho_init, Rcpp::NumericVector weights);
+Rcpp::List sirt_rcpp_polychoric2(Rcpp::NumericMatrix dat, int maxK, int maxiter, int use_pbv, double conv, Rcpp::IntegerMatrix rho_init, Rcpp::NumericVector weights);
 RcppExport SEXP _sirt_sirt_rcpp_polychoric2(SEXP datSEXP, SEXP maxKSEXP, SEXP maxiterSEXP, SEXP use_pbvSEXP, SEXP convSEXP, SEXP rho_initSEXP, SEXP weightsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -828,7 +904,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type dat(datSEXP);
     Rcpp::traits::input_parameter< int >::type maxK(maxKSEXP);
     Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
-    Rcpp::traits::input_parameter< bool >::type use_pbv(use_pbvSEXP);
+    Rcpp::traits::input_parameter< int >::type use_pbv(use_pbvSEXP);
     Rcpp::traits::input_parameter< double >::type conv(convSEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type rho_init(rho_initSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type weights(weightsSEXP);
@@ -1095,6 +1171,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sirt_sirt_rcpp_monoreg_rowwise", (DL_FUNC) &_sirt_sirt_rcpp_monoreg_rowwise, 2},
     {"_sirt_sirt_rcpp_noharm_sirt_optim_fn_rcpp", (DL_FUNC) &_sirt_sirt_rcpp_noharm_sirt_optim_fn_rcpp, 9},
     {"_sirt_sirt_rcpp_noharm_sirt_optim_gr_rcpp", (DL_FUNC) &_sirt_sirt_rcpp_noharm_sirt_optim_gr_rcpp, 18},
+    {"_sirt_sirt_rcpp_pnorm0", (DL_FUNC) &_sirt_sirt_rcpp_pnorm0, 1},
+    {"_sirt_sirt_rcpp_pnorm", (DL_FUNC) &_sirt_sirt_rcpp_pnorm, 1},
+    {"_sirt_sirt_rcpp_pbvnorm0", (DL_FUNC) &_sirt_sirt_rcpp_pbvnorm0, 3},
+    {"_sirt_sirt_rcpp_pbvnorm", (DL_FUNC) &_sirt_sirt_rcpp_pbvnorm, 3},
+    {"_sirt_sirt_rcpp_dbvnorm0", (DL_FUNC) &_sirt_sirt_rcpp_dbvnorm0, 4},
+    {"_sirt_sirt_rcpp_dbvnorm", (DL_FUNC) &_sirt_sirt_rcpp_dbvnorm, 4},
     {"_sirt_sirt_rcpp_pbivnorm2", (DL_FUNC) &_sirt_sirt_rcpp_pbivnorm2, 3},
     {"_sirt_sirt_rcpp_dmvnorm_2dim", (DL_FUNC) &_sirt_sirt_rcpp_dmvnorm_2dim, 3},
     {"_sirt_sirt_rcpp_polychoric2_pbivnorm", (DL_FUNC) &_sirt_sirt_rcpp_polychoric2_pbivnorm, 4},

@@ -112,7 +112,7 @@ using maximum likelihood estimation (Olsson, 1979).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>polychoric2</span>(<span class='no'>dat</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>cor.smooth</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>use_pbv</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>conv</span><span class='kw'>=</span><span class='fl'>1e-10</span>,
+    <pre class="usage"><span class='fu'>polychoric2</span>(<span class='no'>dat</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>cor.smooth</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>use_pbv</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>conv</span><span class='kw'>=</span><span class='fl'>1e-10</span>,
       <span class='kw'>rho_init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='kw'>NULL</span>)
 
 <span class='co'>## exported Rcpp function</span>
@@ -136,8 +136,11 @@ matrix should be smooth to ensure positive definiteness.</p></td>
     </tr>
     <tr>
       <th>use_pbv</th>
-      <td><p>Logical indicating whether the <span class="pkg">pbv</span> package is used
-for computation of bivariate normal distribution</p></td>
+      <td><p>Integer indicating whether the <span class="pkg">pbv</span> package is used
+for computation of bivariate normal distribution. <code>0</code> stands for
+the simplest approximation in <span class="pkg">sirt</span> while versions <code>1</code> and
+<code>2</code> uses the algorithm of <span class="pkg">pbv</span> (the first one copied into
+the <span class="pkg">sirt</span> package, the second one linking Rcpp code to <span class="pkg">pbv</span>.</p></td>
     </tr>
     <tr>
       <th>conv</th>

@@ -1,0 +1,16 @@
+## File Name: mml_calc_like.R
+## File Version: 0.02
+
+
+#-- calculation of the likelihood
+mml_calc_like <- function (dat2, dat2resp, probs, pseudoll=0)
+{
+    if ( pseudoll==0 ){
+        res <- MML2_CALCPOST_V1( DAT2=dat2, DAT2RESP=dat2resp, PROBS=probs)
+    }
+    if ( pseudoll==1 ){
+        res <- MML2_CALCPOST_V2( DAT2=dat2, DAT2RESP=dat2resp, PROBS=probs)
+    }
+    return(res)
+}
+
