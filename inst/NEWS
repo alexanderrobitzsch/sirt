@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.5  |  2019-05-12  |  Last: sirt 3.5-27
+VERSIONS sirt 3.5  |  2019-05-15  |  Last: sirt 3.5-36
 ------------------------------------------------------------------------
 
 NOTE  * rechanged default in lsem.estimate() to 'sufficient_statistics=FALSE'
@@ -47,10 +47,12 @@ NOTE  * changed functioning of argument 'use_pbv' in polychoric2().
         bivariate normal distribution.
 ADDED * added multivariate normal distribution representation of 
         membership function in gom.em(). Included output value 'EAP'.
+FIXED * fixed a bug in output of lsem.bootstrap()
+        (thanks to Ingo Seifert)
 
 
 DATA  * included/modified datasets: data.si07
-EXAMP * included/modified examples: gom.em (1)
+EXAMP * included/modified examples: gom.em (1), lsem.estimate (1)
 
 
 

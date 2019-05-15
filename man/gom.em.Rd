@@ -1,5 +1,5 @@
 %% File Name: gom.em.Rd
-%% File Version: 1.791
+%% File Version: 1.794
 
 \name{gom.em}
 \alias{gom.em}
@@ -25,9 +25,9 @@ to dichotomous item responses.
 }
 \usage{
 gom.em(dat, K=NULL, problevels=NULL, model="GOM", theta0.k=seq(-5, 5, len=15),
-    xsi0.k=exp(seq(-6, 3, len=15)), max.increment=0.3, numdiff.parm=0.001,
+    xsi0.k=exp(seq(-6, 3, len=15)), max.increment=0.3, numdiff.parm=1e-4,
     maxdevchange=1e-6, globconv=1e-4, maxiter=1000, msteps=4, mstepconv=0.001,
-    theta_adjust=TRUE, progress=TRUE)
+    theta_adjust=TRUE, lambda.inits=NULL, pi.k.inits=NULL, progress=TRUE)
 
 \method{summary}{gom}(object, file=NULL, ...)
 
@@ -98,6 +98,8 @@ should be adaptively chosen during the EM algorithm.}
   \item{progress}{
 Display iteration progress? Default is \code{TRUE}.
 }
+\item{lambda.inits}{Initial values for item parameters}
+\item{pi.k.inits}{Initial values for distribution parameters}
   \item{object}{
 Object of class \code{gom}
 }

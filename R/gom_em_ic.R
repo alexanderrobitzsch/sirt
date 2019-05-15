@@ -1,5 +1,5 @@
-## File Name: gome_em_ic.R
-## File Version: 0.02
+## File Name: gom_em_ic.R
+## File Version: 0.03
 
 gom_em_ic <- function(dev, dat2, I, K, TP, model)
 {

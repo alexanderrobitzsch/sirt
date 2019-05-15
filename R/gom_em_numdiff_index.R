@@ -1,11 +1,11 @@
 ## File Name: gom_em_numdiff_index.R
-## File Version: 0.13
+## File Version: 0.14
 
 
 #--- general function for numerical differentiation
 #--- diffindex aggregates across super items
 gom_em_numdiff_index <- function( pjk, pjk1, pjk2, an.ik, diffindex,
-        max.increment, numdiff.parm, eps=1e-20 )
+        max.increment, numdiff.parm, eps=1e-5 )
 {
     h <- numdiff.parm
     ll0 <- rowSums( an.ik * log(pjk+eps) )

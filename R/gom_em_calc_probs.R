@@ -1,5 +1,5 @@
 ## File Name: gom_em_calc_probs.R
-## File Version: 0.12
+## File Version: 0.13
 
 
 
@@ -14,7 +14,7 @@ gom_em_calc_probs <- function( lambda, theta.k, b=NULL, theta0.k=NULL )
     probsL <- array( 0, dim=c( nrow(lambda), 2, nrow(theta.k) ) )
     probsL[,2,] <- probs
     probsL[,1,] <- 1-probs
-    res <- list("probs"=probs, "probsL"=probsL)
+    res <- list(probs=probs, probsL=probsL)
     return(res)
 }
 

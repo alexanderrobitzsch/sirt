@@ -117,9 +117,9 @@ to dichotomous item responses.</p>
     </div>
 
     <pre class="usage"><span class='fu'>gom.em</span>(<span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>problevels</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>, <span class='kw'>theta0.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>5</span>, <span class='fl'>5</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>),
-    <span class='kw'>xsi0.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>exp</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>6</span>, <span class='fl'>3</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>)), <span class='kw'>max.increment</span><span class='kw'>=</span><span class='fl'>0.3</span>, <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>0.001</span>,
+    <span class='kw'>xsi0.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>exp</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>6</span>, <span class='fl'>3</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>)), <span class='kw'>max.increment</span><span class='kw'>=</span><span class='fl'>0.3</span>, <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>1e-4</span>,
     <span class='kw'>maxdevchange</span><span class='kw'>=</span><span class='fl'>1e-6</span>, <span class='kw'>globconv</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>msteps</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>mstepconv</span><span class='kw'>=</span><span class='fl'>0.001</span>,
-    <span class='kw'>theta_adjust</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+    <span class='kw'>theta_adjust</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>lambda.inits</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>pi.k.inits</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for gom</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
@@ -215,6 +215,14 @@ should be adaptively chosen during the EM algorithm.</p></td>
     <tr>
       <th>progress</th>
       <td><p>Display iteration progress? Default is <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>lambda.inits</th>
+      <td><p>Initial values for item parameters</p></td>
+    </tr>
+    <tr>
+      <th>pi.k.inits</th>
+      <td><p>Initial values for distribution parameters</p></td>
     </tr>
     <tr>
       <th>object</th>

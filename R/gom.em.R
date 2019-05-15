@@ -1,13 +1,13 @@
 ## File Name: gom.em.R
-## File Version: 5.296
+## File Version: 5.363
 
 
 #-- gom EM algorithm
 gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
     theta0.k=seq(-5,5,len=15), xsi0.k=exp(seq(-6,3,len=15)),
-    max.increment=.3, numdiff.parm=.001, maxdevchange=1e-6,
+    max.increment=.3, numdiff.parm=1e-4, maxdevchange=1e-6,
     globconv=1e-4, maxiter=1000, msteps=4, mstepconv=.001,
-    theta_adjust=TRUE, progress=TRUE )
+    theta_adjust=TRUE, lambda.inits=NULL, pi.k.inits=NULL, progress=TRUE )
 {
     CALL <- match.call()
     s1 <- Sys.time()
@@ -52,8 +52,12 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
     if (model=="GOM"){
         theta.k <- gom_em_calc_theta(K=K, problevels=problevels)
         TP <- nrow(theta.k)
-        pi.k <- as.vector(rep(1/TP, TP ))
-        lambda <- gom_em_inits_lambda(I=I, K=K)
+        if (is.null(pi.k.inits)){
+            pi.k <- as.vector(rep(1/TP, TP ))
+        } else {
+            pi.k <- pi.k.inits
+        }
+        lambda <- gom_em_inits_lambda(I=I, K=K, lambda.inits=lambda.inits)
         theta0.k <- NULL
     }
 
@@ -69,10 +73,15 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         TP <- nrow(theta_grid)
         mu <- rep(0,K-1)
         sigma <- rep(1,K-1)
-        pi.k <- rep(1/TP, TP)
+        if (is.null(pi.k.inits)){
+            pi.k <- as.vector(rep(1/TP, TP ))
+        } else {
+            pi.k <- pi.k.inits
+        }
         theta.k <- gom_em_normal_to_membership_scores(theta_grid=theta_grid, K=K, TP=TP)
-        lambda <- gom_em_inits_lambda(I=I, K=K)
+        lambda <- gom_em_inits_lambda(I=I, K=K, lambda.inits=lambda.inits)
         theta0.k <- NULL
+        fac1 <- 1
     }
 
     # inits
@@ -84,7 +93,7 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
     disp <- "...........................................................\n"
 
     #---------- start EM algorithm --------------------
-    while( ( ( maxdevchange < devchange ) | (globconv < conv) ) & ( iter < maxiter ) ){
+    while( ( ( maxdevchange < devchange ) & (globconv < conv) ) & ( iter < maxiter ) ){
         if (progress){
             cat(disp)
             cat("Iteration", iter+1, "   ", paste( Sys.time() ), "\n" )
@@ -94,11 +103,13 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         pi.k0 <- pi.k
         lambda0 <- lambda
         b0 <- b
+# a0 <- Sys.time()
         # calculate probabilities
         res <- gom_em_calc_probs( lambda=lambda, theta.k=theta.k, b=b,
                         theta0.k=theta0.k )
         probs <- res$probs
         probs <- problong2probarray( probres=probs, I=I, TP=TP )
+
 
         # calculate counts
         probsM <- matrix( aperm( probs, c(2,1,3) ), nrow=I*2, ncol=TP )
@@ -116,7 +127,8 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
             mu <- res$center
             Sigma <- res$cov
             #- readjust theta_grid
-            if (theta_adjust){
+            if (theta_adjust ){
+                fac1_old <- fac1
                 mth <- max(theta0)
                 sig_max <- max( sqrt(diag(Sigma)))
                 fac1 <- sig_max * ( 6 / mth    )
@@ -138,7 +150,7 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         }
         if (model=="GOMRasch"){
             res <- gom_em_est_b( lambda=lambda, I=I, K=K, n.ik=n.ik, b=b, theta0.k=theta0.k,
-                        numdiff.parm=.001, max.increment=max.increment, theta.k=theta.k,
+                        numdiff.parm=numdiff.parm, max.increment=max.increment, theta.k=theta.k,
                         msteps=msteps, mstepconv=mstepconv, eps=.001, progress=progress )
             b <- res$b
             se.b <- res$se.b
@@ -169,6 +181,46 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
                     paste( round(max(abs(b-b0)),6), collapse=" " ), "\n", sep=""))
             }
         }
+    } #--- end EM algorithm
+
+    #--- Newton-Raphson steps: include it later
+
+    if (FALSE){
+        lambda_logit <- as.vector( stats::qlogis(lambda) )
+        pi_k_logit <- sirt_logit_probs(y=pi.k)
+        ind_lambda <- seq(1,I*K)
+        ind_pi <- max(ind_lambda) + seq(1,TP-1)
+        x0 <- c(lambda_logit, pi_k_logit)
+        #- define optimization function
+        gom_em_loglike <- function(x, ...){
+            res <- gom_em_loglike_parameter_conversion(x=x, ind_lambda=ind_lambda,
+                        ind_pi=ind_pi, I=I, K=K)
+            lambda <- res$lambda
+            pi.k <- res$pi.k
+            res <- gom_em_calc_probs( lambda=lambda, theta.k=theta.k, b=NULL,
+                                        theta0.k=theta0.k )
+            probs <- res$probs
+            probs <- problong2probarray( probres=probs, I=I, TP=TP )
+            # calculate counts
+            probsM <- matrix( aperm( probs, c(2,1,3) ), nrow=I*2, ncol=TP )
+            res1 <- calcpost( dat2=dat2, dat2resp=dat2.resp, probs=probsM,
+                                        dat2ind=dat2.ind, pik=pi.k, K=1 )
+            f.yi.qk <- res1$fyiqk
+            pik_m <- sirt_matrix2(pi.k, nrow=nrow(dat2))
+            ll <- -2*sum( log( rowSums( f.yi.qk * pik_m ) ) )
+            return(ll)
+        }
+
+        #-- optimization
+        NP <- length(x0)
+        bound <- 8
+        lower <- rep(-bound,NP)
+        upper <- rep(bound, NP)
+        res <- stats::nlminb(start=x0, objective=gom_em_loglike, control=list(trace=1),
+                    lower=lower, upper=upper)
+        par <- res$par
+        lambda <- gom_em_extract_lambda_matrix(lambda_logit=par[ind_lambda], I=I, K=K)
+        pi.k <- sirt_logit_to_probs(y=par[ind_pi])
     }
 
     #--------------- arrange OUTPUT
@@ -282,3 +334,6 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
     class(res) <- "gom"
     return(res)
 }
+
+
+# a1 <- Sys.time(); cat("probs \n"); print(a1-a0); a0 <- a1

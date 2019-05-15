@@ -1,5 +1,5 @@
 ## File Name: lsem.bootstrap.R
-## File Version: 0.295
+## File Version: 0.300
 
 
 lsem.bootstrap <- function(object, R=100, verbose=TRUE)
@@ -48,7 +48,7 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE)
 
     #- include new objects in output
     object$parameters_boot <- parameters_boot
-    object$parameters <- object$parameters
+    object$parameters <- parameters
     object$R <- R
     object$class_boot <- TRUE
     object$fitstats_joint <- fitstats_joint

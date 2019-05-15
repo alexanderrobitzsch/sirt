@@ -1,7 +1,7 @@
 ## File Name: rasch_mml2_difference_quotient.R
-## File Version: 0.11
+## File Version: 0.12
 
-rasch_mml2_difference_quotient <- function(ll0, ll1, ll2, h, eps=1e-10)
+rasch_mml2_difference_quotient <- function(ll0, ll1, ll2, h, eps=1e-6)
 {
     # first order derivative
     # f(x+h) - f(x-h)=2*f'(x)*h
