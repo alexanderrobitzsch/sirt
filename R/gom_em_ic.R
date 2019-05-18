@@ -1,10 +1,13 @@
 ## File Name: gom_em_ic.R
-## File Version: 0.03
+## File Version: 0.05
 
-gom_em_ic <- function(dev, dat2, I, K, TP, model)
+gom_em_ic <- function(dev, dat2, I, K, TP, model, weights, lambda_partable=NULL)
 {
-    ic <- list( deviance=dev, n=nrow(dat2) )
+    ic <- list( deviance=dev, n=sum(weights) )
     ic$np.item <- I*K
+    if (!is.null(lambda_partable)){
+        ic$np.item <- max(lambda_partable$par_index)
+    }
     if (model=="GOMRasch"){
         ic$np.item <- I
     }

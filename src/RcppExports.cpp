@@ -467,6 +467,71 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sirt_rcpp_gom_em_calcpost
+Rcpp::List sirt_rcpp_gom_em_calcpost(Rcpp::IntegerMatrix DAT2, Rcpp::IntegerMatrix DAT2RESP, Rcpp::NumericMatrix PROBS, Rcpp::NumericMatrix DAT2IND, Rcpp::NumericVector PIK, Rcpp::NumericVector KK1, Rcpp::NumericVector weights);
+RcppExport SEXP _sirt_sirt_rcpp_gom_em_calcpost(SEXP DAT2SEXP, SEXP DAT2RESPSEXP, SEXP PROBSSEXP, SEXP DAT2INDSEXP, SEXP PIKSEXP, SEXP KK1SEXP, SEXP weightsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type DAT2(DAT2SEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type DAT2RESP(DAT2RESPSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type PROBS(PROBSSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type DAT2IND(DAT2INDSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type PIK(PIKSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type KK1(KK1SEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type weights(weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_gom_em_calcpost(DAT2, DAT2RESP, PROBS, DAT2IND, PIK, KK1, weights));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sirt_rcpp_gom_em_likelihood
+Rcpp::NumericMatrix sirt_rcpp_gom_em_likelihood(Rcpp::NumericVector probs, int ncat, int TP, Rcpp::IntegerMatrix dat2, Rcpp::LogicalMatrix dat2resp);
+RcppExport SEXP _sirt_sirt_rcpp_gom_em_likelihood(SEXP probsSEXP, SEXP ncatSEXP, SEXP TPSEXP, SEXP dat2SEXP, SEXP dat2respSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type probs(probsSEXP);
+    Rcpp::traits::input_parameter< int >::type ncat(ncatSEXP);
+    Rcpp::traits::input_parameter< int >::type TP(TPSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type dat2(dat2SEXP);
+    Rcpp::traits::input_parameter< Rcpp::LogicalMatrix >::type dat2resp(dat2respSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_gom_em_likelihood(probs, ncat, TP, dat2, dat2resp));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sirt_rcpp_gom_em_log_likelihood
+double sirt_rcpp_gom_em_log_likelihood(Rcpp::NumericMatrix fyiqk, Rcpp::NumericVector pik, Rcpp::NumericVector weights);
+RcppExport SEXP _sirt_sirt_rcpp_gom_em_log_likelihood(SEXP fyiqkSEXP, SEXP pikSEXP, SEXP weightsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type fyiqk(fyiqkSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pik(pikSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type weights(weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_gom_em_log_likelihood(fyiqk, pik, weights));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sirt_rcpp_gom_em_loglike_gradient
+Rcpp::NumericVector sirt_rcpp_gom_em_loglike_gradient(Rcpp::NumericVector probs, Rcpp::NumericVector probs_h, int ncat, int TP, Rcpp::IntegerMatrix dat2, Rcpp::LogicalMatrix dat2resp, Rcpp::NumericVector pik, Rcpp::IntegerVector items, Rcpp::NumericMatrix fyiqk, Rcpp::NumericVector weights);
+RcppExport SEXP _sirt_sirt_rcpp_gom_em_loglike_gradient(SEXP probsSEXP, SEXP probs_hSEXP, SEXP ncatSEXP, SEXP TPSEXP, SEXP dat2SEXP, SEXP dat2respSEXP, SEXP pikSEXP, SEXP itemsSEXP, SEXP fyiqkSEXP, SEXP weightsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type probs(probsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type probs_h(probs_hSEXP);
+    Rcpp::traits::input_parameter< int >::type ncat(ncatSEXP);
+    Rcpp::traits::input_parameter< int >::type TP(TPSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type dat2(dat2SEXP);
+    Rcpp::traits::input_parameter< Rcpp::LogicalMatrix >::type dat2resp(dat2respSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pik(pikSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type items(itemsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type fyiqk(fyiqkSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type weights(weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_gom_em_loglike_gradient(probs, probs_h, ncat, TP, dat2, dat2resp, pik, items, fyiqk, weights));
+    return rcpp_result_gen;
+END_RCPP
+}
 // sirt_rcpp_inference_jackknife
 Rcpp::List sirt_rcpp_inference_jackknife(Rcpp::NumericMatrix PARS);
 RcppExport SEXP _sirt_sirt_rcpp_inference_jackknife(SEXP PARSSEXP) {
@@ -1157,6 +1222,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sirt_sirt_rcpp_choppin_row_averaging", (DL_FUNC) &_sirt_sirt_rcpp_choppin_row_averaging, 3},
     {"_sirt_sirt_rcpp_evm_compute", (DL_FUNC) &_sirt_sirt_rcpp_evm_compute, 6},
     {"_sirt_sirt_rcpp_evm_comp_poly", (DL_FUNC) &_sirt_sirt_rcpp_evm_comp_poly, 9},
+    {"_sirt_sirt_rcpp_gom_em_calcpost", (DL_FUNC) &_sirt_sirt_rcpp_gom_em_calcpost, 7},
+    {"_sirt_sirt_rcpp_gom_em_likelihood", (DL_FUNC) &_sirt_sirt_rcpp_gom_em_likelihood, 5},
+    {"_sirt_sirt_rcpp_gom_em_log_likelihood", (DL_FUNC) &_sirt_sirt_rcpp_gom_em_log_likelihood, 3},
+    {"_sirt_sirt_rcpp_gom_em_loglike_gradient", (DL_FUNC) &_sirt_sirt_rcpp_gom_em_loglike_gradient, 10},
     {"_sirt_sirt_rcpp_inference_jackknife", (DL_FUNC) &_sirt_sirt_rcpp_inference_jackknife, 1},
     {"_sirt_sirt_rcpp_invariance_alignment_lambda_transformed", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_lambda_transformed, 2},
     {"_sirt_sirt_rcpp_invariance_alignment_nu_transformed", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_nu_transformed, 4},

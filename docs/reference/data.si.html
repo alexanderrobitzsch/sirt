@@ -116,7 +116,8 @@
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.si04</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.si05</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.si06</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.si07</span>)</pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.si07</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.si08</span>)</pre>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
@@ -202,6 +203,19 @@ simulating data from the IRSDT model (see DeCarlo, XXXX)</p>
 <code>  ..$ x   : num [1:20] 0.025 0.075 0.125 0.175 0.225 0.275 0.325 0.375 0.425 0.475 ...</code> <br />
 <code>  ..$ prob: num [1:20] 0.0238 0.1267 0.105 0.0594 0.0548 ...</code> <br />
 <code> $ sim_fun:function (lambda, b, d, items)  </code> <br /></p></li>
+<li><p>The dataset <code>data.si08</code> contains 5 items with respect to knowledge
+about lung cancer and the kind of information acquisition (Goodman, 1970;
+see also Rasch, Kubinger &amp; Yanagida, 2011).
+<code>L1</code>: reading newspapers, <code>L2</code>: listening radio,
+<code>L3</code>: reading books and magazines,
+<code>L4</code>: attending talks, <code>L5</code>: knowledge about lung cancer</p>
+<p><code>'data.frame':   32 obs. of  6 variables:</code> <br />
+<code> $ L1 : num  1 1 1 1 1 1 1 1 1 1 ...</code> <br />
+<code> $ L2 : num  1 1 1 1 1 1 1 1 0 0 ...</code> <br />
+<code> $ L3 : num  1 1 1 1 0 0 0 0 1 1 ...</code> <br />
+<code> $ L4 : num  1 1 0 0 1 1 0 0 1 1 ...</code> <br />
+<code> $ L5 : num  1 0 1 0 1 0 1 0 1 0 ...</code> <br />
+<code> $ wgt: num  23 8 102 67 8 4 35 59 27 18 ...</code> <br /></p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -218,15 +232,22 @@ ALLBUS: http://www.gesis.org/allbus/allbus-home/</p></div>
     <p>Bartolucci, F., Montanari, G. E., &amp; Pandolfi, S. (2012).
 Dimensionality of the latent structure and item selection via latent
 class multidimensional IRT models. <em>Psychometrika, 77</em>, 782-802.
-http://dx.doi.org/10.1007/s11336-012-9278-0</p>
+doi: <a href='http://doi.org/10.1007/s11336-012-9278-0'>10.1007/s11336-012-9278-0</a></p>
 <p>DeCarlo, L. T. (XXXX). An item response model for true-false exams based on signal
 detection theory. <em>Applied Psychological Measurement (online first)</em>.
-http://dx.doi.org/10.1177/0146621619843823</p>
+doi: <a href='http://doi.org/10.1177/0146621619843823'>10.1177/0146621619843823</a></p>
+<p>Goodman, L. A. (1970). The multivariate analysis of qualitative data: Interactions
+among multiple classifications.
+<em>Journal of the American Statistical Association, 65</em>(329), 226-256.
+doi: <a href='http://doi.org/10.1080/01621459.1970.10481076'>10.1080/01621459.1970.10481076</a></p>
 <p>Lindsay, B., Clogg, C. C., &amp; Grego, J. (1991).
 Semiparametric estimation in the Rasch model and related exponential response
 models, including a simple latent class model for item analysis.
 <em>Journal of the American Statistical Association, 86</em>, 96-107.
-http://dx.doi.org/10.1080/01621459.1991.10475008</p>
+doi: <a href='http://doi.org/10.1080/01621459.1991.10475008'>10.1080/01621459.1991.10475008</a></p>
+<p>Rasch, D., Kubinger, K. D., &amp; Yanagida, T. (2011).
+<em>Statistics in psychology using R and SPSS</em>. New York: Wiley.
+doi: <a href='http://doi.org/10.1002/9781119979630'>10.1002/9781119979630</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -271,7 +292,7 @@ http://dx.doi.org/10.1080/01621459.1991.10475008</p>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>98</span>)
 <span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>2000</span> <span class='co'># define sample size</span>
 <span class='co'># generate membership scores</span>
-<span class='no'>lambda</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>base</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sample'>sample</a></span>(<span class='kw'>size</span><span class='kw'>=</span><span class='no'>N</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>data</span>$<span class='no'>trait</span>$<span class='no'>x</span>, <span class='kw'>prob</span><span class='kw'>=</span><span class='no'>data</span>$<span class='no'>trait</span>$<span class='no'>prob</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>lambda</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sample'>sample</a></span>(<span class='kw'>size</span><span class='kw'>=</span><span class='no'>N</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>data</span>$<span class='no'>trait</span>$<span class='no'>x</span>, <span class='kw'>prob</span><span class='kw'>=</span><span class='no'>data</span>$<span class='no'>trait</span>$<span class='no'>prob</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>data</span>$<span class='no'>pars</span>$<span class='no'>b</span>
 <span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='no'>data</span>$<span class='no'>pars</span>$<span class='no'>d</span>
 <span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='no'>data</span>$<span class='no'>pars</span>$<span class='no'>item</span>

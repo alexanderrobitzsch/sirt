@@ -116,10 +116,11 @@ to dichotomous item responses.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>gom.em</span>(<span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>problevels</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>, <span class='kw'>theta0.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>5</span>, <span class='fl'>5</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>),
+    <pre class="usage"><span class='fu'>gom.em</span>(<span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>problevels</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>, <span class='kw'>theta0.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>5</span>,<span class='fl'>5</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>),
     <span class='kw'>xsi0.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>exp</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>6</span>, <span class='fl'>3</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>)), <span class='kw'>max.increment</span><span class='kw'>=</span><span class='fl'>0.3</span>, <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>1e-4</span>,
     <span class='kw'>maxdevchange</span><span class='kw'>=</span><span class='fl'>1e-6</span>, <span class='kw'>globconv</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>msteps</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>mstepconv</span><span class='kw'>=</span><span class='fl'>0.001</span>,
-    <span class='kw'>theta_adjust</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>lambda.inits</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>pi.k.inits</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+    <span class='kw'>theta_adjust</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lambda.inits</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>lambda.index</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>pi.k.inits</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+    <span class='kw'>newton_raphson</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"nlminb"</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for gom</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
@@ -162,6 +163,10 @@ to dichotomous item responses.</p>
 (only applies for <code>model="GOM"</code>). If a specific space of probability
 levels should be estimated, then a matrix can be supplied (see Example 1,
 Model 2a).</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p>Optional vector of sampling weights</p></td>
     </tr>
     <tr>
       <th>model</th>
@@ -213,16 +218,30 @@ functions specifications described in Details are called via <code>"GOMRasch"</c
 should be adaptively chosen during the EM algorithm.</p></td>
     </tr>
     <tr>
-      <th>progress</th>
-      <td><p>Display iteration progress? Default is <code>TRUE</code>.</p></td>
-    </tr>
-    <tr>
       <th>lambda.inits</th>
       <td><p>Initial values for item parameters</p></td>
     </tr>
     <tr>
+      <th>lambda.index</th>
+      <td><p>Optional integer matrix with integers indicating
+equality constraints among \(\lambda\) item parameters</p></td>
+    </tr>
+    <tr>
       <th>pi.k.inits</th>
       <td><p>Initial values for distribution parameters</p></td>
+    </tr>
+    <tr>
+      <th>newton_raphson</th>
+      <td><p>Logical indicating whether Newton-Raphson should be
+used for final iterations</p></td>
+    </tr>
+    <tr>
+      <th>optimizer</th>
+      <td><p>Type of optimizer. Can be <code>"optim"</code> or <code>"nlminb"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>progress</th>
+      <td><p>Display iteration progress? Default is <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -578,6 +597,29 @@ round(dfr,4)
   ##   4        0.0398       0.8093  0.0414  0.8094
   ##   5        0.1273       0.7244  0.1289  0.7243
   ##   [...]
+
+#############################################################################
+# EXAMPLE 3: Lung cancer dataset; using sampling weights
+#############################################################################
+
+data(data.si08, package="sirt")
+dat <- data.si08
+
+
+#- Latent class model with 3 classes
+problevels <- c(0,1)
+mod1 <- sirt::gom.em( dat[,1:5], weights=dat$wgt, K=3, problevels=problevels )
+summary(mod1)
+
+#- Grade of membership model with discrete distribution
+problevels <- seq(0,1,length=5)
+mod2 <- sirt::gom.em( dat[,1:5], weights=dat$wgt, K=3, problevels=problevels )
+summary(mod2)
+
+#- Grade of membership model with multivariate normal distribution
+mod3 <- sirt::gom.em( dat[,1:5], weights=dat$wgt, K=3, theta0.k=10*seq(-1,1,len=11),
+            model="GOMnormal", optimizer="nlminb" )
+summary(mod3)
 # }
 </pre>
   </div>

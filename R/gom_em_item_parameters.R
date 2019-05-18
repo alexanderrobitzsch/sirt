@@ -1,12 +1,13 @@
 ## File Name: gom_em_item_parameters.R
-## File Version: 0.02
+## File Version: 0.09
 
 
-gom_em_item_parameters <- function(dat2, dat2.resp, model, b, lambda, K, progress)
+gom_em_item_parameters <- function(dat2, dat2.resp, model, b, lambda, K,
+    weights, progress)
 {
     item <- data.frame("item"=colnames(dat2))
-    item$N <- colSums( dat2.resp )
-    item$p <- colMeans( dat2, na.rm=TRUE)
+    item$N <- colSums( weights*dat2.resp )
+    item$p <- colSums( weights*dat2, na.rm=TRUE) / item$N
     item$b <- b
     if (model !="GOMRaschxxx"){
         for (kk in 1:K){
@@ -15,7 +16,7 @@ gom_em_item_parameters <- function(dat2, dat2.resp, model, b, lambda, K, progres
     }
     obji <- item
     for (vv in seq(2,ncol(obji) )){
-        obji[,vv] <- round( obji[,vv],3 )
+        obji[,vv] <- round( obji[,vv], 3 )
     }
     if (progress){
         cat("*********************************\n")

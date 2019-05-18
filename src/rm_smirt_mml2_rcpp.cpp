@@ -1,5 +1,5 @@
 //// File Name: rm_smirt_mml2_rcpp.cpp
-//// File Version: 5.32
+//// File Version: 5.383
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -304,72 +304,71 @@ Rcpp::List SMIRT_CALCPOST( Rcpp::IntegerMatrix DAT2,
     Rcpp::NumericVector KK1 )
 {
 
-     int N=DAT2.nrow();
-     int I=DAT2.ncol();
-     int TP=PROBS.ncol();
-     int KK=KK1[0];
+    int N=DAT2.nrow();
+    int I=DAT2.ncol();
+    int TP=PROBS.ncol();
+    int KK=KK1[0];
 
-     //*****
-     // calculate individual likelihood
-     Rcpp::NumericMatrix fyiqk (N,TP);
-     fyiqk.fill(1);
-     for (int ii=0;ii<I;++ii){
-     for (int nn=0;nn<N;++nn){
-         if ( DAT2RESP(nn,ii)>0){
-         for (int tt=0;tt<TP;++tt){
-             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
-                         }
-                     }
-                 }
-             }
+    //***  posterior distribution
+    Rcpp::NumericVector pik1(TP);
 
-     //****
-     // calculate posterior
-     Rcpp::NumericMatrix fqkyi (N,TP);
-     for (int nn=0;nn<N;++nn){
-         double total = 0;
-         for (int tt=0;tt<TP;++tt){
-             fqkyi(nn,tt) = fyiqk(nn,tt)*PIK[tt];
-             total += fqkyi(nn,tt);
-                 }
-         for (int tt=0;tt<TP;++tt){
-             fqkyi(nn,tt) = fqkyi(nn,tt)/total;
-                 }
-             }
-     //*****
-     // calculate counts
-     for (int tt=0;tt<TP;++tt){
-         PIK[tt] = 0;
-         for (int nn=0;nn<N;++nn){
-             PIK[tt] += fqkyi(nn,tt);
-                     }
-         PIK[tt] = PIK[tt] / N;
-                 }
+    //---- calculate individual likelihood
+    Rcpp::NumericMatrix fyiqk (N,TP);
+    fyiqk.fill(1);
+    for (int ii=0;ii<I;++ii){
+        for (int nn=0;nn<N;++nn){
+            if ( DAT2RESP(nn,ii)>0){
+                for (int tt=0;tt<TP;++tt){
+                    fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
+                }
+            }
+        }
+    }
 
-     Rcpp::NumericMatrix nik (TP, I*(KK+1));
-     Rcpp::NumericMatrix NIK (TP, I);
-     for (int tt=0;tt<TP;++tt){
-     for (int ii=0; ii < I; ++ii){
-     for (int kk=0;kk<KK+1;++kk){
-         for (int nn=0;nn<N;++nn){
-     //            nik( tt, ii + kk*I  ) += DAT2RESP(nn,ii)*(DAT2(nn,ii)==kk)*fqkyi(nn,tt);
-                 nik( tt, ii + kk*I  ) += DAT2IND(nn,ii+kk*I) *fqkyi(nn,tt);
-                     }  // end nn
-             NIK(tt,ii) += nik(tt,ii+kk*I );
-                 } // end kk
-             }  // end ii
-         }  // end tt
+    //---- calculate posterior
+    Rcpp::NumericMatrix fqkyi (N,TP);
+    for (int nn=0;nn<N;++nn){
+        double total = 0;
+        for (int tt=0;tt<TP;++tt){
+            fqkyi(nn,tt) = fyiqk(nn,tt)*PIK[tt];
+            total += fqkyi(nn,tt);
+        }
+        for (int tt=0;tt<TP;++tt){
+            fqkyi(nn,tt) = fqkyi(nn,tt)/total;
+        }
+    }
 
-     ///////////////////////////////////////////////////////
-     ///////////// O U T P U T   ///////////////////////////
-     return Rcpp::List::create(
-        Rcpp::_["fyiqk"] = fyiqk,
-        Rcpp::_["f.qk.yi"]=fqkyi,
-         Rcpp::_["pi.k"] = PIK,
-        Rcpp::_["n.ik"] = nik,
-        Rcpp::_["N.ik"]=NIK
-                 );
+    //--- calculate counts
+    for (int tt=0;tt<TP;++tt){
+        pik1[tt] = 0;
+        for (int nn=0;nn<N;++nn){
+            pik1[tt] += fqkyi(nn,tt);
+        }
+        pik1[tt] = pik1[tt] / N;
+    }
 
+    Rcpp::NumericMatrix nik (TP, I*(KK+1));
+    Rcpp::NumericMatrix NIK (TP, I);
+    for (int tt=0;tt<TP;++tt){
+        for (int ii=0; ii < I; ++ii){
+            for (int kk=0;kk<KK+1;++kk){
+                for (int nn=0;nn<N;++nn){
+                    nik( tt, ii + kk*I  ) += DAT2IND(nn,ii+kk*I) *fqkyi(nn,tt);
+                }  // end nn
+                NIK(tt,ii) += nik(tt,ii+kk*I );
+            } // end kk
+        }  // end ii
+    }  // end tt
+
+    ///////////////////////////////////////////////////////
+    ///////////// O U T P U T   ///////////////////////////
+    return Rcpp::List::create(
+            Rcpp::Named("fyiqk") = fyiqk,
+            Rcpp::Named("fqkyi") = fqkyi,
+            Rcpp::Named("pik") = pik1,
+            Rcpp::Named("nik") = nik,
+            Rcpp::Named("Nik")=NIK
+        );
 }
 
 

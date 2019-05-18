@@ -125,6 +125,22 @@ sirt_rcpp_evm_comp_poly <- function(dat, dat_resp, weights, JJ, jackunits, powD,
     .Call('_sirt_sirt_rcpp_evm_comp_poly', PACKAGE = 'sirt', dat, dat_resp, weights, JJ, jackunits, powD, progress_, row_index, col_index)
 }
 
+sirt_rcpp_gom_em_calcpost <- function(DAT2, DAT2RESP, PROBS, DAT2IND, PIK, KK1, weights) {
+    .Call('_sirt_sirt_rcpp_gom_em_calcpost', PACKAGE = 'sirt', DAT2, DAT2RESP, PROBS, DAT2IND, PIK, KK1, weights)
+}
+
+sirt_rcpp_gom_em_likelihood <- function(probs, ncat, TP, dat2, dat2resp) {
+    .Call('_sirt_sirt_rcpp_gom_em_likelihood', PACKAGE = 'sirt', probs, ncat, TP, dat2, dat2resp)
+}
+
+sirt_rcpp_gom_em_log_likelihood <- function(fyiqk, pik, weights) {
+    .Call('_sirt_sirt_rcpp_gom_em_log_likelihood', PACKAGE = 'sirt', fyiqk, pik, weights)
+}
+
+sirt_rcpp_gom_em_loglike_gradient <- function(probs, probs_h, ncat, TP, dat2, dat2resp, pik, items, fyiqk, weights) {
+    .Call('_sirt_sirt_rcpp_gom_em_loglike_gradient', PACKAGE = 'sirt', probs, probs_h, ncat, TP, dat2, dat2resp, pik, items, fyiqk, weights)
+}
+
 sirt_rcpp_inference_jackknife <- function(PARS) {
     .Call('_sirt_sirt_rcpp_inference_jackknife', PACKAGE = 'sirt', PARS)
 }

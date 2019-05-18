@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.385
+%% File Version: 0.395
 
 \name{data.sirt}
 
@@ -11,6 +11,7 @@
 \alias{data.si05}
 \alias{data.si06}
 \alias{data.si07}
+\alias{data.si08}
 
 
 \docType{data}
@@ -34,6 +35,7 @@ data(data.si04)
 data(data.si05)
 data(data.si06)
 data(data.si07)
+data(data.si08)
 }
 
 
@@ -133,6 +135,21 @@ simulating data from the IRSDT model (see DeCarlo, XXXX)
 \code{  ..$ x   : num [1:20] 0.025 0.075 0.125 0.175 0.225 0.275 0.325 0.375 0.425 0.475 ...} \cr
 \code{  ..$ prob: num [1:20] 0.0238 0.1267 0.105 0.0594 0.0548 ...} \cr
 \code{ $ sim_fun:function (lambda, b, d, items)  } \cr
+
+\item The dataset \code{data.si08} contains 5 items with respect to knowledge
+about lung cancer and the kind of information acquisition (Goodman, 1970;
+see also Rasch, Kubinger & Yanagida, 2011).
+\code{L1}: reading newspapers, \code{L2}: listening radio,
+\code{L3}: reading books and magazines,
+\code{L4}: attending talks, \code{L5}: knowledge about lung cancer
+
+\code{'data.frame':   32 obs. of  6 variables:} \cr
+\code{ $ L1 : num  1 1 1 1 1 1 1 1 1 1 ...} \cr
+\code{ $ L2 : num  1 1 1 1 1 1 1 1 0 0 ...} \cr
+\code{ $ L3 : num  1 1 1 1 0 0 0 0 1 1 ...} \cr
+\code{ $ L4 : num  1 1 0 0 1 1 0 0 1 1 ...} \cr
+\code{ $ L5 : num  1 0 1 0 1 0 1 0 1 0 ...} \cr
+\code{ $ wgt: num  23 8 102 67 8 4 35 59 27 18 ...} \cr
 }
 }
 
@@ -164,17 +181,26 @@ ALLBUS: http://www.gesis.org/allbus/allbus-home/
 Bartolucci, F., Montanari, G. E., & Pandolfi, S. (2012).
 Dimensionality of the latent structure and item selection via latent
 class multidimensional IRT models. \emph{Psychometrika, 77}, 782-802.
-http://dx.doi.org/10.1007/s11336-012-9278-0
+\doi{10.1007/s11336-012-9278-0}
 
 DeCarlo, L. T. (XXXX). An item response model for true-false exams based on signal
 detection theory. \emph{Applied Psychological Measurement (online first)}.
-http://dx.doi.org/10.1177/0146621619843823
+\doi{10.1177/0146621619843823}
+
+Goodman, L. A. (1970). The multivariate analysis of qualitative data: Interactions
+among multiple classifications.
+\emph{Journal of the American Statistical Association, 65}(329), 226-256.
+\doi{10.1080/01621459.1970.10481076}
 
 Lindsay, B., Clogg, C. C., & Grego, J. (1991).
 Semiparametric estimation in the Rasch model and related exponential response
 models, including a simple latent class model for item analysis.
 \emph{Journal of the American Statistical Association, 86}, 96-107.
-http://dx.doi.org/10.1080/01621459.1991.10475008
+\doi{10.1080/01621459.1991.10475008}
+
+Rasch, D., Kubinger, K. D., & Yanagida, T. (2011).
+\emph{Statistics in psychology using R and SPSS}. New York: Wiley.
+\doi{10.1002/9781119979630}
 }
 
 
@@ -220,7 +246,7 @@ data <- data.si07
 set.seed(98)
 N <- 2000 # define sample size
 # generate membership scores
-lambda <- base::sample(size=N, x=data$trait$x, prob=data$trait$prob, replace=TRUE)
+lambda <- sample(size=N, x=data$trait$x, prob=data$trait$prob, replace=TRUE)
 b <- data$pars$b
 d <- data$pars$d
 items <- data$pars$item

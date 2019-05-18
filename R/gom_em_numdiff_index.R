@@ -1,5 +1,5 @@
 ## File Name: gom_em_numdiff_index.R
-## File Version: 0.14
+## File Version: 0.15
 
 
 #--- general function for numerical differentiation
@@ -19,7 +19,7 @@ gom_em_numdiff_index <- function( pjk, pjk1, pjk2, an.ik, diffindex,
     increment <- - d1 / d2
     increment <- sirt_trim_increment(increment=increment, max_increment=max.increment)
     #-- output
-    res <- list(increment=increment, d2=d2, ll0=ll0)
+    res <- list(increment=increment, d2=d2, d1=d1, ll0=ll0)
     return(res)
 }
 

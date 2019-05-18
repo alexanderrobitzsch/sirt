@@ -1,5 +1,5 @@
 ## File Name: sirt_logit_to_probs.R
-## File Version: 0.01
+## File Version: 0.03
 
 
 sirt_logit_to_probs <- function(y)

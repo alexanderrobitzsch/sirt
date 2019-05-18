@@ -1,26 +1,29 @@
 ## File Name: smirt_alg_noncomp.R
-## File Version: 2.402
+## File Version: 2.421
 
 ############################################
 # probability in noncompensatory model
-## extern "C" {
-## SEXP SMIRT_CALCPROB_NONCOMP( SEXP a, SEXP b, SEXP Q, SEXP thetak, SEXP cc, SEXP dd) ;
-calcprob.noncomp <- function (a,b,Q,thetak,cc,dd){
-    SMIRT_CALCPROB_NONCOMP( a,b,Q,thetak,cc,dd)
+calcprob.noncomp <- function (a,b,Q,thetak,cc,dd)
+{
+    res <- SMIRT_CALCPROB_NONCOMP( a,b,Q,thetak,cc,dd)
+    return(res)
 }
-#######################################
-# calculation of posterior distribution
-## extern "C" {
-## SEXP SMIRT_CALCPOST( SEXP dat2, SEXP dat2resp, SEXP probs, SEXP dat2ind, SEXP pik, SEXP K) ;
-calcpost <- function (dat2, dat2resp, probs, dat2ind, pik, K){
-    SMIRT_CALCPOST( dat2, dat2resp, probs, dat2ind, pik, K )
+
+#--- calculation of posterior distribution
+calcpost <- function (dat2, dat2resp, probs, dat2ind, pik, K)
+{
+    res0 <- SMIRT_CALCPOST( dat2, dat2resp, probs, dat2ind, PIK=pik, K )
+    res <- list(fyiqk=res0$fyiqk, f.qk.yi=res0$fqkyi, pi.k=res0$pik,
+                    n.ik=res0$nik, N.ik=res0$NIK )
+    return(res)
 }
+
 
 
 ######################################
 # estimation of covariance
 .smirt.est.covariance <- function( f.qk.yi, Sigma, theta.k, N,
-        mu.fixed, variance.fixed, D, est.corr, irtmodel     ){
+        mu.fixed, variance.fixed, D, est.corr, irtmodel ){
         Sigma.cov <- Sigma
         delta.theta <- 1
         hwt <- f.qk.yi

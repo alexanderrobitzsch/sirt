@@ -1,36 +1,44 @@
 ## File Name: gom.em.R
-## File Version: 5.363
+## File Version: 5.4012
 
 
 #-- gom EM algorithm
-gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
+gom.em <- function( dat, K=NULL, problevels=NULL, weights=NULL, model="GOM",
     theta0.k=seq(-5,5,len=15), xsi0.k=exp(seq(-6,3,len=15)),
     max.increment=.3, numdiff.parm=1e-4, maxdevchange=1e-6,
     globconv=1e-4, maxiter=1000, msteps=4, mstepconv=.001,
-    theta_adjust=TRUE, lambda.inits=NULL, pi.k.inits=NULL, progress=TRUE )
+    theta_adjust=FALSE, lambda.inits=NULL, lambda.index=NULL, pi.k.inits=NULL,
+    newton_raphson=TRUE, optimizer="nlminb", progress=TRUE )
 {
     CALL <- match.call()
     s1 <- Sys.time()
     e1 <- environment()
     s1 <- Sys.time()
+    optimization <- NULL
     if ( model=="GOMRasch"){
         K <- length(theta0.k)
         max.increment <- 1
     }
-
-    mu <- Sigma <- NULL
-    dat0 <- dat
-    dat.resp <- 1-is.na(dat)
-    dat[ is.na(dat) ] <- 0
-    N <- nrow(dat)
-    I <- ncol(dat)
-    dat2 <- as.matrix(dat)
-    dat2.resp <- as.matrix(dat.resp)
-    # indicator matrix
-    dat2.ind0 <- dat2.resp * 1*(dat2==0)
-    dat2.ind1 <- dat2.resp * 1*(dat2==1)
-    dat2.ind <- as.matrix( cbind( dat2.ind0, dat2.ind1 ) )
+    theta_grid <- NULL
     mu <- Sigma <- b <- NULL
+
+    #-- data preparation
+    res <- gom_em_prepare_data(dat=dat, weights=weights, model=model)
+    dat0 <- res$dat0
+    dat2 <- res$dat2
+    dat2.resp <- res$dat2.resp
+    dat2.ind <- res$dat2.ind
+    N <- res$N
+    I <- res$I
+    weights <- res$weights
+
+    #-- index table lambda matrix
+    res <- gom_em_prepare_lambda_index(lambda.index=lambda.index, I=I, K=K,
+                items=colnames(dat2))
+    lambda.index <- res$lambda.index
+    lambda_partable <- res$lambda_partable
+    lambda_index_blocks <- res$lambda_index_blocks
+
     # design matrices
     if (model=="GOMRasch"){
         b <- - stats::qlogis( colMeans(dat, na.rm=TRUE)  )
@@ -44,9 +52,10 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         pi.k <- sirt_dmvnorm_discrete( x=theta.kM, mean=mu, sigma=Sigma )
         lambda <- stats::plogis( - outer( b, theta0.k, "-" ) )
         # design matrix skill space
-#        Z <- cbind( 1, theta.kM[,1], theta.kM[,1]^2, theta.kM[,1]^3,
-#                 theta.kM[,2], theta.kM[,2]^2, theta.kM[,2]^3,
-#                 theta.kM[,1]*theta.kM[,2], theta.kM[,1]^2*theta.kM[,2])
+        #        Z <- cbind( 1, theta.kM[,1], theta.kM[,1]^2, theta.kM[,1]^3,
+        #                 theta.kM[,2], theta.kM[,2]^2, theta.kM[,2]^3,
+        #                 theta.kM[,1]*theta.kM[,2], theta.kM[,1]^2*theta.kM[,2])
+        newton_raphson <- FALSE
     }
 
     if (model=="GOM"){
@@ -57,7 +66,8 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         } else {
             pi.k <- pi.k.inits
         }
-        lambda <- gom_em_inits_lambda(I=I, K=K, lambda.inits=lambda.inits)
+        lambda <- gom_em_inits_lambda(I=I, K=K, lambda.inits=lambda.inits,
+                        lambda_partable=lambda_partable)
         theta0.k <- NULL
     }
 
@@ -79,7 +89,8 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
             pi.k <- pi.k.inits
         }
         theta.k <- gom_em_normal_to_membership_scores(theta_grid=theta_grid, K=K, TP=TP)
-        lambda <- gom_em_inits_lambda(I=I, K=K, lambda.inits=lambda.inits)
+        lambda <- gom_em_inits_lambda(I=I, K=K, lambda.inits=lambda.inits,
+                        lambda_partable=lambda_partable)
         theta0.k <- NULL
         fac1 <- 1
     }
@@ -110,11 +121,10 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         probs <- res$probs
         probs <- problong2probarray( probres=probs, I=I, TP=TP )
 
-
         # calculate counts
         probsM <- matrix( aperm( probs, c(2,1,3) ), nrow=I*2, ncol=TP )
-        res1 <- calcpost( dat2=dat2, dat2resp=dat2.resp, probs=probsM,
-                                dat2ind=dat2.ind, pik=pi.k, K=1 )
+        res1 <- sirt_rcpp_gom_em_calcpost( DAT2=dat2, DAT2RESP=dat2.resp, PROBS=probsM,
+                                DAT2IND=dat2.ind, PIK=pi.k, KK1=1, weights=weights )
         f.yi.qk <- res1$fyiqk
         f.qk.yi <- res1$f.qk.yi
         pi.k <- res1$pi.k
@@ -127,7 +137,7 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
             mu <- res$center
             Sigma <- res$cov
             #- readjust theta_grid
-            if (theta_adjust ){
+            if (theta_adjust){
                 fac1_old <- fac1
                 mth <- max(theta0)
                 sig_max <- max( sqrt(diag(Sigma)))
@@ -135,7 +145,7 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
                 theta_grid <- fac1*theta_grid0
                 theta.k <- gom_em_normal_to_membership_scores(theta_grid=theta_grid, K=K, TP=TP)
             }
-            pi.k <- sirt_dmvnorm_discrete(theta_grid, mean=mu, sigma=Sigma)
+            pi.k <- sirt_dmvnorm_discrete(x=theta_grid, mean=mu, sigma=Sigma)
         }
 
         # maximize lambda
@@ -143,7 +153,7 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
             res <- gom_em_est_lambda( lambda=lambda, I=I, K=K, n.ik=n.ik,
                         numdiff.parm=numdiff.parm, max.increment=max.increment,
                         theta.k=theta.k, msteps=msteps, mstepconv=mstepconv,
-                        eps=.001, progress=progress )
+                        lambda_partable=lambda_partable, eps=.001, progress=progress )
             lambda <- res$lambda
             se.lambda <- res$se.lambda
             max.increment <- max( abs(lambda-lambda0))/1.2
@@ -160,7 +170,8 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         utils::flush.console()
 
         #-- calculate deviance
-        ll <- sum( log( rowSums( f.yi.qk * sirt_matrix2( x=pi.k, nrow=N ) ) ) )
+        ll <- gom_em_compute_total_loglikelihood(f.yi.qk=f.yi.qk, pi.k=pi.k,
+                            weights=weights)
         dev <- -2*ll
         # convergence criteria
         conv <- max( abs(lambda-lambda0))
@@ -183,32 +194,33 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         }
     } #--- end EM algorithm
 
-    #--- Newton-Raphson steps: include it later
-
-    if (FALSE){
+    #--- Newton-Raphson steps
+    if (newton_raphson){
         lambda_logit <- as.vector( stats::qlogis(lambda) )
-        pi_k_logit <- sirt_logit_probs(y=pi.k)
-        ind_lambda <- seq(1,I*K)
-        ind_pi <- max(ind_lambda) + seq(1,TP-1)
-        x0 <- c(lambda_logit, pi_k_logit)
-        #- define optimization function
-        gom_em_loglike <- function(x, ...){
-            res <- gom_em_loglike_parameter_conversion(x=x, ind_lambda=ind_lambda,
-                        ind_pi=ind_pi, I=I, K=K)
-            lambda <- res$lambda
-            pi.k <- res$pi.k
-            res <- gom_em_calc_probs( lambda=lambda, theta.k=theta.k, b=NULL,
-                                        theta0.k=theta0.k )
-            probs <- res$probs
-            probs <- problong2probarray( probres=probs, I=I, TP=TP )
-            # calculate counts
-            probsM <- matrix( aperm( probs, c(2,1,3) ), nrow=I*2, ncol=TP )
-            res1 <- calcpost( dat2=dat2, dat2resp=dat2.resp, probs=probsM,
-                                        dat2ind=dat2.ind, pik=pi.k, K=1 )
-            f.yi.qk <- res1$fyiqk
-            pik_m <- sirt_matrix2(pi.k, nrow=nrow(dat2))
-            ll <- -2*sum( log( rowSums( f.yi.qk * pik_m ) ) )
-            return(ll)
+        lambda_logit <- stats::aggregate(lambda_logit, list(lambda_partable$par_index), mean)[,2]
+        ind_lambda <- seq(1, max(lambda_partable$par_index))
+        names(lambda_logit) <- lambda_partable$par_name[ lambda_partable$free ]
+        pi_k_logit <- sirt_probs_to_logit(y=pi.k)
+        names(pi_k_logit) <- paste0("pi_Cl", 1:(K-1) )
+        ind_pi <- NULL
+        ind_mu <- NULL
+        ind_sigma <- NULL
+        if (model=="GOM"){
+            ind_pi <- max(ind_lambda) + seq(1,TP-1)
+            x0 <- c(lambda_logit, pi_k_logit)
+        }
+        if (model=="GOMnormal"){
+            K1 <- K-1
+            ind_mu <- max(ind_lambda) + seq(1,K1)
+            names(mu) <- paste0("mu_",1:K1)
+            NC <- K1 * (K1+1) / 2
+            ind_sigma <- max(ind_mu) + seq(1,NC)
+            Sigma_chol <- t(chol(Sigma))
+            x1 <- Sigma_chol[!upper.tri(Sigma_chol)]
+            names(x1) <- paste0("sigmachol_",1:NC)
+            Sigma1 <- Sigma_chol %*% t(Sigma_chol)
+            x0 <- c(lambda_logit, mu, x1)
+            names(x0) <- NULL
         }
 
         #-- optimization
@@ -216,21 +228,68 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         bound <- 8
         lower <- rep(-bound,NP)
         upper <- rep(bound, NP)
-        res <- stats::nlminb(start=x0, objective=gom_em_loglike, control=list(trace=1),
-                    lower=lower, upper=upper)
+        if (model=="GOMnormal"){
+            bound2 <- 10
+            lower[ c(ind_mu, ind_sigma) ] <- - bound2
+            upper[ c(ind_mu, ind_sigma) ] <- bound2
+        }
+
+        if (lambda_partable$item_con[1]==0){
+            grad <- gom_em_loglike_grad
+        } else {
+            grad <- NULL
+        }
+        x0 <- sirt_squeeze(x=x0, lower=lower, upper=upper)
+
+        if (progress){
+            cat("\n\n*** Switching to Newton-Raphson Optimization ***\n\n")
+        }
+
+        #- optimization
+        res <- sirt_optimizer(optimizer=optimizer, par=x0, fn=gom_em_loglike_opt_fun,
+                    grad=grad, control=list(trace=2), lower=lower, upper=upper,
+                    ind_lambda=ind_lambda, ind_pi=ind_pi, I=I, K=K, theta.k=theta.k,
+                    theta0.k=theta0.k, dat2=dat2, dat2.resp=dat2.resp, TP=TP,
+                    ind_mu=ind_mu, ind_sigma=ind_sigma, theta_grid=theta_grid,
+                    model=model, weights=weights, lambda_partable=lambda_partable,
+                    lambda_index_blocks=lambda_index_blocks)
+        optimization <- res
         par <- res$par
-        lambda <- gom_em_extract_lambda_matrix(lambda_logit=par[ind_lambda], I=I, K=K)
-        pi.k <- sirt_logit_to_probs(y=par[ind_pi])
+
+        #- convert parameters
+        res <- gom_em_loglike_parameter_conversion(x=par, ind_lambda=ind_lambda,
+                        ind_pi=ind_pi, I=I, K=K, ind_mu=ind_mu, ind_sigma=ind_sigma,
+                        theta_grid=theta_grid, model=model, lambda_partable=lambda_partable)
+        lambda <- res$lambda
+        pi.k <- res$pi.k
+        mu <- res$mu
+        Sigma <- res$Sigma
+
+        #- recalculate posterior
+        res <- gom_em_calc_probs( lambda=lambda, theta.k=theta.k, b=b,
+                        theta0.k=theta0.k )
+        probs <- res$probs
+        probs <- problong2probarray( probres=probs, I=I, TP=TP )
+        probsM <- matrix( aperm( probs, c(2,1,3) ), nrow=I*2, ncol=TP )
+        res1 <- sirt_rcpp_gom_em_calcpost( DAT2=dat2, DAT2RESP=dat2.resp, PROBS=probsM,
+                            DAT2IND=dat2.ind, PIK=pi.k, KK1=1, weights=weights)
+        f.yi.qk <- res1$fyiqk
+        f.qk.yi <- res1$f.qk.yi
+        n.ik <- array( res1$n.ik, dim=dim(n.ik) )
+        N.ik <- res1$N.ik
+        ll <- gom_em_compute_total_loglikelihood(f.yi.qk=f.yi.qk, pi.k=pi.k,
+                            weights=weights)
+        dev <- -2*ll
     }
 
     #--------------- arrange OUTPUT
 
     #--- Information criteria
-    ic <- gom_em_ic( dev=dev, dat2=dat2, I=I, K=K, TP=TP, model=model )
+    ic <- gom_em_ic( dev=dev, dat2=dat2, I=I, K=K, TP=TP, model=model, weights=weights )
 
     #--- item parameters
     item <- gom_em_item_parameters( dat2=dat2, dat2.resp=dat2.resp, model=model,
-                    b=b, lambda=lambda, K=K, progress=progress )
+                    b=b, lambda=lambda, K=K, weights=weights, progress=progress )
 
     EAP.rel <- NULL
     person <- NULL
@@ -270,7 +329,7 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
     colnames(EAP) <- paste0("Class",1:K)
 
     #--- descriptives of classes
-    score <- rowSums( dat2 *dat2.resp ) / rowSums( dat2.resp )
+    score <- rowSums( weights*dat2 *dat2.resp ) / rowSums( weights*dat2.resp )
     plmat <- FALSE
     if ( is.vector(problevels) ){
         PL <- length(problevels)
@@ -329,8 +388,10 @@ gom.em <- function( dat, K=NULL, problevels=NULL, model="GOM",
         mu=mu, Sigma=Sigma, b=b, se.b=se.b, f.yi.qk=f.yi.qk, f.qk.yi=f.qk.yi,
         probs=probs, n.ik=n.ik, iter=iter, dat=dat0, dat2=dat2, dat2.resp=dat2.resp,
         I=I, K=K, TP=TP, G=1, theta.k=theta.k, pi.k=pi.k, problevels=problevels,
-        model=model, plmat=plmat, mu=mu, Sigma=Sigma, s1=s1, s2=s2,
-        time_diff=s2-s1, CALL=CALL)
+        model=model, plmat=plmat, mu=mu, Sigma=Sigma, weights=weights,
+        lambda.index=lambda.index, lambda_partable=lambda_partable,
+        optimization=optimization, newton_raphson=newton_raphson,
+        s1=s1, s2=s2, time_diff=s2-s1, CALL=CALL)
     class(res) <- "gom"
     return(res)
 }

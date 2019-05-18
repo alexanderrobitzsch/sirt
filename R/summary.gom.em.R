@@ -1,5 +1,5 @@
 ## File Name: summary.gom.em.R
-## File Version: 0.174
+## File Version: 0.177
 
 
 #--- summary for gom object
@@ -21,6 +21,12 @@ summary.gom <- function( object, file=NULL, ...)
 
     cat("  Function 'gom.em' \n")
 
+    #- Newton-Raphson optimization
+    if (object$newton_raphson){
+        sirt_optimizer_summary_print(res=object$optimization,
+                msg="Information about Newton-Raphson algorithm of optimization")
+    }
+
     if (object$model=="GOM"){
         cat("   Discrete Grade of Membership Model\n\n")
     }
@@ -35,7 +41,7 @@ summary.gom <- function( object, file=NULL, ...)
                 object$K, "Classes", ",", object$TP, "Discrete Integration Points\n")
 
     cat("-----------------------------------------------------------------\n")
-    cat( "Number of iterations", "=", object$iter, "\n" )
+    cat( "Number of EM iterations", "=", object$iter, "\n" )
     cat( "Deviance", "=", round( object$deviance, 2 ), " | " )
     cat( "Log Likelihood", "=", round( -object$deviance/2, 2 ), "\n" )
     cat( "Number of persons", "=", object$ic$n, "\n" )

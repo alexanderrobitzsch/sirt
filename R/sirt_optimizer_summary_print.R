@@ -1,10 +1,10 @@
 ## File Name: sirt_optimizer_summary_print.R
-## File Version: 0.09
+## File Version: 0.13
 
-sirt_optimizer_summary_print <- function(res)
+sirt_optimizer_summary_print <- function(res, msg="Information about optimization")
 {
     digits <- 6
-    cat("\n--- Information about optimization ---\n\n")
+    cat("\n---", msg, "---\n\n")
     cat( "Optimizer", "=", res$optimizer, "\n")
     cat( "Converged", "=", res$converged, "\n")
     cat("Optimization Function Value", "=", round(res$value,digits), "\n" )
