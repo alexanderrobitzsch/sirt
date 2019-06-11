@@ -1,5 +1,5 @@
 ## File Name: btm.R
-## File Version: 1.497
+## File Version: 1.498
 
 
 #--- Bradley-Terry model in sirt
@@ -240,6 +240,7 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
     effects$infit <- res0$infit
     multiple_judges <- res0$multiple_judges
     fit_judges <- res0$fit_judges
+    residuals <- res0$residuals
 
     # MLE reliability
     v2 <- mean(effects$se.theta^2)
@@ -249,7 +250,8 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
     # output list
     res <- list( effects=effects, pars=pars, summary.effects=summary.effects,
                 mle.rel=mle.rel, sepG=sep.rel, probs=probs, data=dat0,
-                multiple_judges=multiple_judges, fit_judges=fit_judges )
+                multiple_judges=multiple_judges, fit_judges=fit_judges,
+                residuals=residuals)
     res$CALL <- CALL
     res$iter <- iter
     ic <- list( "n"=length(teams), "D"=nrow(dat0) )

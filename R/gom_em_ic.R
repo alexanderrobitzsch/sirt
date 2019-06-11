@@ -1,5 +1,5 @@
 ## File Name: gom_em_ic.R
-## File Version: 0.05
+## File Version: 0.06
 
 gom_em_ic <- function(dev, dat2, I, K, TP, model, weights, lambda_partable=NULL)
 {

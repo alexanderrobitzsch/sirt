@@ -1,5 +1,5 @@
 %% File Name: btm.Rd
-%% File Version: 0.411
+%% File Version: 0.413
 
 \name{btm}
 \alias{btm}
@@ -119,6 +119,7 @@ List with following entries
    is provided. In addition, average agreement of the rating with the mode of
    the ratings is calculated for each judge (at least three ratings per dyad has
    to be available for computing the agreement).}
+\item{residuals}{Unstandardized and standardized residuals for each observation}
 }
 
 \references{

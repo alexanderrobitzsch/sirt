@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.5  |  2019-05-18  |  Last: sirt 3.5-45
+VERSIONS sirt 3.5  |  2019-06-11  |  Last: sirt 3.5-47
 ------------------------------------------------------------------------
 
 NOTE  * rechanged default in lsem.estimate() to 'sufficient_statistics=FALSE'
@@ -52,6 +52,8 @@ FIXED * fixed a bug in output of lsem.bootstrap()
 ADDED * added option for estimation with sampling weights in gom.em().
         Also included final Newton-Raphson iterations and argument
         for parameter constraints.
+ADDED * included unstandardized and standardized residuals in output
+        of btm () function (value 'residuals'; thanks to Milja Curcin)
 
 
 DATA  * included/modified datasets: data.si07, data.si08

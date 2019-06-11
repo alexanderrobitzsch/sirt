@@ -1,5 +1,5 @@
 %% File Name: gom.em.Rd
-%% File Version: 1.801
+%% File Version: 1.802
 
 \name{gom.em}
 \alias{gom.em}
@@ -494,7 +494,6 @@ round(dfr,4)
 
 data(data.si08, package="sirt")
 dat <- data.si08
-
 
 #- Latent class model with 3 classes
 problevels <- c(0,1)

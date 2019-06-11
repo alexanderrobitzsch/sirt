@@ -1,5 +1,5 @@
 ## File Name: btm_fit_statistics.R
-## File Version: 0.197
+## File Version: 0.203
 
 
 #**** item outfit and infit statistic
@@ -15,12 +15,16 @@ btm_fit_statistics <- function( probs, dat0, ind1, ind2, TP, judge=NULL,
     X_var1 <- 1*probs[,1] + 1/4*probs[,3]
     X_var1 <- X_var1 - X_exp1^2
     Z_1 <- ( dat0[,3] - X_exp1 ) / sqrt( X_var1 )
+    dat0$resid_home <- dat0[,3] - X_exp1
+    dat0$stand_resid_home <- Z_1
 
     # second individual
     X_exp2 <- probs[,2]*1 + 1/2*probs[,3]
     X_var2 <- 1*probs[,2] + 1/4*probs[,3]
     X_var2 <- X_var2 - X_exp2^2
     Z_2 <- ( 1 - dat0[,3] - X_exp2 ) / sqrt( X_var2 )
+    dat0$resid_away <- ( 1 - dat0[,3] - X_exp2 )
+    dat0$stand_resid_away <- Z_2
 
     # compute outfit statistic
     out1 <- rowsum( Z_1^2, dat0[,1] )
@@ -73,6 +77,6 @@ btm_fit_statistics <- function( probs, dat0, ind1, ind2, TP, judge=NULL,
 
     #--- output
     res0 <- list( outfit=outfit, infit=infit, multiple_judges=multiple_judges,
-                fit_judges=fit_judges)
+                fit_judges=fit_judges, residuals=dat0)
     return(res0)
 }

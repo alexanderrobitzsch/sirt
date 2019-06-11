@@ -605,7 +605,6 @@ round(dfr,4)
 data(data.si08, package="sirt")
 dat <- data.si08
 
-
 #- Latent class model with 3 classes
 problevels <- c(0,1)
 mod1 <- sirt::gom.em( dat[,1:5], weights=dat$wgt, K=3, problevels=problevels )
