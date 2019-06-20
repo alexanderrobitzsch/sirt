@@ -36,8 +36,21 @@ CHANGELOG sirt
 
 
 
+
 ------------------------------------------------------------------------
-VERSIONS sirt 3.5  |  2019-06-11  |  Last: sirt 3.5-47
+VERSIONS sirt 3.6  |  2019-06-20  |  Last: sirt 3.6-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 3.5  |  2019-06-20  |  Last: sirt 3.5-53
 ------------------------------------------------------------------------
 
 NOTE  * rechanged default in lsem.estimate() to 'sufficient_statistics=FALSE'
@@ -55,11 +68,9 @@ ADDED * added option for estimation with sampling weights in gom.em().
 ADDED * included unstandardized and standardized residuals in output
         of btm () function (value 'residuals'; thanks to Milja Curcin)
 
-
-DATA  * included/modified datasets: data.si07, data.si08
-EXAMP * included/modified examples: gom.em (1,3), lsem.estimate (1)
-
-
+DATA  * included/modified datasets: data.si07, data.si08, data.trees
+EXAMP * included/modified examples: gom.em (1,3), lsem.estimate (1),
+        data.trees (1)
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.4  |  2019-05-03  |  Last: sirt 3.4-64

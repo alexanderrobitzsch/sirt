@@ -1,5 +1,5 @@
 %% File Name: gom.em.Rd
-%% File Version: 1.802
+%% File Version: 1.803
 
 \name{gom.em}
 \alias{gom.em}
@@ -289,7 +289,7 @@ dat <- dat[, grep("M", colnames(dat)) ]
 #***
 # Model 1: Discrete GOM with 3 classes and 5 probability levels
 problevels <- seq( 0, 1, len=5 )
-mod1 <- sirt::gom.em( dat, K=3, problevels,  model="GOM"  )
+mod1 <- sirt::gom.em( dat, K=3, problevels, model="GOM")
 summary(mod1)
 
 \dontrun{

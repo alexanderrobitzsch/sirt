@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.395
+%% File Version: 0.396
 
 \name{data.sirt}
 
@@ -184,7 +184,7 @@ class multidimensional IRT models. \emph{Psychometrika, 77}, 782-802.
 \doi{10.1007/s11336-012-9278-0}
 
 DeCarlo, L. T. (XXXX). An item response model for true-false exams based on signal
-detection theory. \emph{Applied Psychological Measurement (online first)}.
+detection theory. \emph{Applied Psychological Measurement, xx}(xx).
 \doi{10.1177/0146621619843823}
 
 Goodman, L. A. (1970). The multivariate analysis of qualitative data: Interactions

@@ -1,16 +1,16 @@
 //// File Name: sirt_rcpp_gom_em.cpp
-//// File Version: 0.34
+//// File Version: 0.36
 
 
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
-#include <RcppArmadillo.h>
-// #include <Rcpp.h>
+// #include <RcppArmadillo.h>
+#include <Rcpp.h>
 
 using namespace Rcpp;
-using namespace arma;
+// using namespace arma;
 
 
 ///********************************************************************

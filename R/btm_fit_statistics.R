@@ -1,5 +1,5 @@
 ## File Name: btm_fit_statistics.R
-## File Version: 0.203
+## File Version: 0.206
 
 
 #**** item outfit and infit statistic
@@ -14,16 +14,18 @@ btm_fit_statistics <- function( probs, dat0, ind1, ind2, TP, judge=NULL,
     X_exp1 <- probs[,1]*1 + 1/2*probs[,3]
     X_var1 <- 1*probs[,1] + 1/4*probs[,3]
     X_var1 <- X_var1 - X_exp1^2
-    Z_1 <- ( dat0[,3] - X_exp1 ) / sqrt( X_var1 )
-    dat0$resid_home <- dat0[,3] - X_exp1
+    H_1 <- dat0[,3] - X_exp1
+    Z_1 <- H_1 / sqrt( X_var1 )
+    dat0$resid_home <- H_1
     dat0$stand_resid_home <- Z_1
 
     # second individual
     X_exp2 <- probs[,2]*1 + 1/2*probs[,3]
     X_var2 <- 1*probs[,2] + 1/4*probs[,3]
     X_var2 <- X_var2 - X_exp2^2
-    Z_2 <- ( 1 - dat0[,3] - X_exp2 ) / sqrt( X_var2 )
-    dat0$resid_away <- ( 1 - dat0[,3] - X_exp2 )
+    H_2 <- 1 - dat0[,3] - X_exp2
+    Z_2 <- H_2 / sqrt( X_var2 )
+    dat0$resid_away <- H_2
     dat0$stand_resid_away <- Z_2
 
     # compute outfit statistic
@@ -65,12 +67,12 @@ btm_fit_statistics <- function( probs, dat0, ind1, ind2, TP, judge=NULL,
             dat1$id2 <- ifelse(ind, dat0$id2, dat0$id1)
             dat1$result <- ifelse(ind, dat0$result, 1-dat0$result)
             dat1$dyad <- paste0(dat1$id1, "-", dat1$id2)
-            a1 <- aggregate( dat1$result, list(dat1$dyad), median )
+            a1 <- stats::aggregate( dat1$result, list(dat1$dyad), median )
             colnames(a1) <- c("dyad", "mode")
-            a1$N_dyad <- aggregate( 1+0*dat1$result, list(dat1$dyad), sum )[,2]
+            a1$N_dyad <- stats::aggregate( 1+0*dat1$result, list(dat1$dyad), sum )[,2]
             a1 <- a1[ ( a1$N_dyad > 2 ) & ( a1$mode %in% c(0,1) ), ]
             dat1$mode <- a1[ match(dat1$dyad, a1$dyad), "mode" ]
-            a2 <- aggregate( dat1$result==dat1$mode, list(dat1$judge), mean, na.rm=TRUE)
+            a2 <- stats::aggregate( dat1$result==dat1$mode, list(dat1$judge), mean, na.rm=TRUE)
             fit_judges$agree <- a2[ match(fit_judges$judge, a2[,1]), 2]
         }
     }

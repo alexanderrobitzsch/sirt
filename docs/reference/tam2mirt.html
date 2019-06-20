@@ -69,7 +69,7 @@ models!)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.5-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.6-vv</span>
       </span>
     </div>
 
@@ -114,7 +114,7 @@ models!)." />
     
     <p>Converts a fitted <code>TAM</code> object into a <code>mirt</code> object.
 As a by-product, <code>lavaan</code> syntax is generated which can
-be used with <code><a href='lavaan2mirt.html'>lavaan2mirt</a></code> for re-estimating
+be used with <code>lavaan2mirt</code> for re-estimating
 the model in the <span class="pkg">mirt</span> package.
 Up to now, only single group models are supported.
 There must not exist background covariates (no latent regression
@@ -154,9 +154,9 @@ with freed parameters for estimation.</p></dd>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See <code><a href='mirt.wrapper.html'>mirt.wrapper</a></code> for convenience wrapper functions
+    <div class='dont-index'><p>See <code>mirt.wrapper</code> for convenience wrapper functions
 for <code><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt</a></code> objects.</p>
-<p>See <code><a href='lavaan2mirt.html'>lavaan2mirt</a></code> for converting <code>lavaan</code>
+<p>See <code>lavaan2mirt</code> for converting <code>lavaan</code>
 syntax to <code>mirt</code> syntax.</p></div>
     
 
@@ -211,7 +211,7 @@ syntax to <code>mirt</code> syntax.</p></div>
 <span class='co'># compare estimates with estimated Rasch model in mirt</span>
 <span class='no'>mres1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt</a></span>(<span class='no'>dat</span>,<span class='fl'>1</span>,<span class='st'>"Rasch"</span> )
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>mres1</span>)
-<span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mres1</span>)
+<span class='fu'>mirt.wrapper.coef</span>(<span class='no'>mres1</span>)
 
 <span class='co'>#**************************************</span>
 <span class='co'>#*** Model 2: 2PL model</span>
@@ -325,7 +325,7 @@ syntax to <code>mirt</code> syntax.</p></div>
 <span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>, <span class='no'>res</span>$<span class='no'>lavaan.syntax.freed</span>,
             <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>), <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
                  <span class='co'># use only few cycles for illustrational purposes</span>
-<span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>res2</span>$<span class='no'>mirt</span>)
+<span class='fu'>mirt.wrapper.coef</span>(<span class='no'>res2</span>$<span class='no'>mirt</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>res2</span>$<span class='no'>mirt</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>res2</span>$<span class='no'>mirt</span>)
 
@@ -352,7 +352,7 @@ syntax to <code>mirt</code> syntax.</p></div>
 <span class='no'>rmod1</span> <span class='kw'>&lt;-</span> <span class='no'>mmod1</span>$<span class='no'>mirt</span>
 <span class='co'># coefficients in mirt</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>rmod1</span>)
-<span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>rmod1</span>)
+<span class='fu'>mirt.wrapper.coef</span>(<span class='no'>rmod1</span>)
 <span class='co'># model fit</span>
 <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mirt/topics/M2'>M2</a></span>(<span class='no'>rmod1</span>)
 <span class='co'># item fit</span>
@@ -370,7 +370,7 @@ syntax to <code>mirt</code> syntax.</p></div>
 <span class='no'>mmod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/tam2mirt'>tam2mirt</a></span>( <span class='no'>mod2</span> )
 <span class='no'>rmod2</span> <span class='kw'>&lt;-</span> <span class='no'>mmod2</span>$<span class='no'>mirt</span>
 <span class='co'># coefficients in mirt</span>
-<span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>rmod2</span>)
+<span class='fu'>mirt.wrapper.coef</span>(<span class='no'>rmod2</span>)
 <span class='co'># model fit</span>
 <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mirt/topics/M2'>M2</a></span>(<span class='no'>rmod2</span>)
 <span class='co'># item fit</span>

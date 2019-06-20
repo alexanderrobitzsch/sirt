@@ -66,7 +66,7 @@ to dichotomous item responses." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.5-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.6-vv</span>
       </span>
     </div>
 
@@ -374,7 +374,7 @@ theorem. In E. M. Airoldi, D. Blei, E. A. Erosheva, &amp; S. E. Fienberg (Eds.).
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>For joint maximum likelihood estimation of the grade of membership model
-see <code><a href='gom.jml.html'>gom.jml</a></code>.</p>
+see <code>gom.jml</code>.</p>
 <p>See also the <span class="pkg">mixedMem</span> package for estimating mixed membership
 models by a variational EM algorithm.</p>
 <p>The C code of Erosheva et al. (2007) can be downloaded from
@@ -399,7 +399,7 @@ Fortelius (2009).</p></div>
 <span class='co'>#***</span>
 <span class='co'># Model 1: Discrete GOM with 3 classes and 5 probability levels</span>
 <span class='no'>problevels</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>( <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>5</span> )
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/gom.em'>gom.em</a></span>( <span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='no'>problevels</span>,  <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>  )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/gom.em'>gom.em</a></span>( <span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='no'>problevels</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># }</span># NOT RUN {

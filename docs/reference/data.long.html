@@ -68,7 +68,7 @@ The first column in the dataset contains the student identifier." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.5-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.6-vv</span>
       </span>
     </div>
 
@@ -274,7 +274,7 @@ The first column in the dataset contains the student identifier.</p>
 <span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt</a></span>(<span class='no'>dat</span>, <span class='no'>mirtmodel</span>$<span class='no'>model</span>, <span class='kw'>itemtype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>( <span class='st'>"4PLbw"</span>,<span class='no'>I</span>),
                 <span class='kw'>customItems</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='st'>"4PLbw"</span><span class='kw'>=</span><span class='no'>fourPLbetw</span>), <span class='kw'>pars</span><span class='kw'>=</span><span class='no'>mod3.pars</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
                 <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>50</span>)  )
-<span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mod3</span>)
+<span class='fu'>mirt.wrapper.coef</span>(<span class='no'>mod3</span>)
 
 <span class='co'>#****** estimate model in lavaan</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>lavaan</span>)
