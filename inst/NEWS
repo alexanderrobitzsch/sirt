@@ -38,10 +38,11 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.6  |  2019-06-20  |  Last: sirt 3.6-1
+VERSIONS sirt 3.6  |  2019-06-24  |  Last: sirt 3.6-4
 ------------------------------------------------------------------------
 
-xxx   * ...
+FIXED * corrected a bug in lsem.bootstrap() (thanks to Ingo Seifert)
+
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---

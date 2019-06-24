@@ -33,8 +33,8 @@
 <meta property="og:title" content="Dataset Used in Stoyan, Pommerening and Wuensche (2018) — data.trees" />
 
 <meta property="og:description" content="Dataset used in Stoyan, Pommerening and Wuensche (2018; see also
-Pommerening et al., 2018). In the dataset, 15 forest managers classify 387 trees 
-either as trees to be maintained or as trees to be removed. They assign tree marks, 
+Pommerening et al., 2018). In the dataset, 15 forest managers classify 387 trees
+either as trees to be maintained or as trees to be removed. They assign tree marks,
 either 0 or 1, where mark 1 means remove." />
 <meta name="twitter:card" content="summary" />
 
@@ -110,8 +110,8 @@ either 0 or 1, where mark 1 means remove." />
     <div class="ref-description">
     
     <p>Dataset used in Stoyan, Pommerening and Wuensche (2018; see also
-Pommerening et al., 2018). In the dataset, 15 forest managers classify 387 trees 
-either as trees to be maintained or as trees to be removed. They assign tree marks, 
+Pommerening et al., 2018). In the dataset, 15 forest managers classify 387 trees
+either as trees to be maintained or as trees to be removed. They assign tree marks,
 either 0 or 1, where mark 1 means remove.</p>
     
     </div>
@@ -145,8 +145,8 @@ either 0 or 1, where mark 1 means remove.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Pommerening, A., Ramos, C. P., Kedziora, W., Haufe, J., &amp; Stoyan, D. (2018). 
-Rating experiments in forestry: How much agreement is there in tree marking? 
+    <p>Pommerening, A., Ramos, C. P., Kedziora, W., Haufe, J., &amp; Stoyan, D. (2018).
+Rating experiments in forestry: How much agreement is there in tree marking?
 <em>PloS ONE, 13</em>(3), e0194747. doi: <a href='http://doi.org/10.1371/journal.pone.0194747'>10.1371/journal.pone.0194747</a></p>
 <p>Stoyan, D., Pommerening, A., &amp; Wuensche, A. (2018).
 Rater classification by means of set-theoretic methods applied to forestry data.
@@ -167,8 +167,8 @@ Rater classification by means of set-theoretic methods applied to forestry data.
 <span class='co'>#** latent class models with 2, 3, and 4 classes</span>
 <span class='no'>problevels</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>( <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>2</span> )
 <span class='no'>mod02</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/gom.em'>gom.em</a></span>(<span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='no'>problevels</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>)
-<span class='no'>mod03</span> <span class='kw'>&lt;-</span> <span class='fu'>gom.em</span>(<span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='no'>problevels</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>)
-<span class='no'>mod04</span> <span class='kw'>&lt;-</span> <span class='fu'>gom.em</span>(<span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='no'>problevels</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>)
+<span class='no'>mod03</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/gom.em'>gom.em</a></span>(<span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='no'>problevels</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>)
+<span class='no'>mod04</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/gom.em'>gom.em</a></span>(<span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='no'>problevels</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOM"</span>)
 
 <span class='co'>#** grade of membership models</span>
 <span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/gom.em'>gom.em</a></span>(<span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>theta0.k</span><span class='kw'>=</span><span class='fl'>10</span>*<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>11</span>), <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"GOMnormal"</span>)

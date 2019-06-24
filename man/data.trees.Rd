@@ -1,5 +1,5 @@
 %% File Name: data.trees.Rd
-%% File Version: 0.11
+%% File Version: 0.13
 
 \name{data.trees}
 \alias{data.trees}
@@ -10,8 +10,8 @@ Dataset Used in Stoyan, Pommerening and Wuensche (2018)
 }
 \description{
 Dataset used in Stoyan, Pommerening and Wuensche (2018; see also
-Pommerening et al., 2018). In the dataset, 15 forest managers classify 387 trees 
-either as trees to be maintained or as trees to be removed. They assign tree marks, 
+Pommerening et al., 2018). In the dataset, 15 forest managers classify 387 trees
+either as trees to be maintained or as trees to be removed. They assign tree marks,
 either 0 or 1, where mark 1 means remove.
 }
 
@@ -50,8 +50,8 @@ The dataset has the following structure. \cr
 }
 
 \references{
-Pommerening, A., Ramos, C. P., Kedziora, W., Haufe, J., & Stoyan, D. (2018). 
-Rating experiments in forestry: How much agreement is there in tree marking? 
+Pommerening, A., Ramos, C. P., Kedziora, W., Haufe, J., & Stoyan, D. (2018).
+Rating experiments in forestry: How much agreement is there in tree marking?
 \emph{PloS ONE, 13}(3), e0194747. \doi{10.1371/journal.pone.0194747}
 
 Stoyan, D., Pommerening, A., & Wuensche, A. (2018).
@@ -74,8 +74,8 @@ I <- ncol(dat)
 #** latent class models with 2, 3, and 4 classes
 problevels <- seq( 0, 1, len=2 )
 mod02 <- sirt::gom.em(dat, K=2, problevels, model="GOM")
-mod03 <- gom.em(dat, K=3, problevels, model="GOM")
-mod04 <- gom.em(dat, K=4, problevels, model="GOM")
+mod03 <- sirt::gom.em(dat, K=3, problevels, model="GOM")
+mod04 <- sirt::gom.em(dat, K=4, problevels, model="GOM")
 
 #** grade of membership models
 mod11 <- sirt::gom.em(dat, K=2, theta0.k=10*seq(-1,1,len=11), model="GOMnormal")
@@ -95,12 +95,12 @@ mod31 <- sirt::rasch.mml2(dat)
 mod32 <- sirt::rasch.mml2(dat, est.a=1:I)
 
 #- model comparison
-IRT.compareModels(mod02, mod03, mod04, mod11, mod12, mod13, mod14, 
+IRT.compareModels(mod02, mod03, mod04, mod11, mod12, mod13, mod14,
                      mod22, mod23, mod24, mod31, mod32)
 
 #-- inspect model results
 summary(mod12)
-round( cbind( mod12$theta.k, mod12$pi.k ),3) 
+round( cbind( mod12$theta.k, mod12$pi.k ),3)
 
 summary(mod13)
 round(cbind( mod13$theta.k, mod13$pi.k ),3)
@@ -109,4 +109,4 @@ round(cbind( mod13$theta.k, mod13$pi.k ),3)
 
 
 
-\keyword{datasets}
+%% \keyword{datasets}
