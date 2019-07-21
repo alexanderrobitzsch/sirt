@@ -1,22 +1,36 @@
 
+
+
+#*** list of authors
+person_list1 <- c(
+                   person(given = "Alexander", family = "Robitzsch")
+                      )
+
+person_list2 <- "Robitzsch, A."
+
+
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
 vers <- paste("R package version", meta$Version)
-
 pkg <- meta$Package
-pkg_title <- "Supplementary item response theory models"
+
+#*** package and its name
+pkg_title <- meta$Title
+
+
+
+#*******************************************
+# automatic generation of citation key
 
 citHeader( paste0( "To cite the '", pkg , "' package in publications use:") )
 
-citEntry(entry="Manual",
+citEntry(key = paste0(pkg, "_", meta$Version), entry = "Manual",
          title = paste0( pkg , ": " , pkg_title ) ,
-         author = personList(as.person("Alexander Robitzsch")),
+         author = personList( person_list1 ),
          year = year,
          note = vers,
          url =  paste0( "https://CRAN.R-project.org/package=", pkg) ,
          textVersion =
-         paste0("Robitzsch, A. (",
-               year,
-               "). " , pkg , ": " , pkg_title , ". ",
+         paste0( person_list2 , " (",   year, "). " , 
+               pkg , ": " , pkg_title , ". ",
                vers, paste0( ". https://CRAN.R-project.org/package=", pkg) )
     )
-

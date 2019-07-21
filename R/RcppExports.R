@@ -149,24 +149,24 @@ sirt_rcpp_invariance_alignment_lambda_transformed <- function(lambda, psi0) {
     .Call('_sirt_sirt_rcpp_invariance_alignment_lambda_transformed', PACKAGE = 'sirt', lambda, psi0)
 }
 
-sirt_rcpp_invariance_alignment_nu_transformed <- function(nu, lambda, alpha0, psi0) {
-    .Call('_sirt_sirt_rcpp_invariance_alignment_nu_transformed', PACKAGE = 'sirt', nu, lambda, alpha0, psi0)
+sirt_rcpp_invariance_alignment_nu_transformed <- function(nu, lambda, alpha0, psi0, reparam) {
+    .Call('_sirt_sirt_rcpp_invariance_alignment_nu_transformed', PACKAGE = 'sirt', nu, lambda, alpha0, psi0, reparam)
 }
 
 sirt_rcpp_invariance_alignment_simplicity_function_value <- function(type, parm1, parm2, scale, power, eps) {
     .Call('_sirt_sirt_rcpp_invariance_alignment_simplicity_function_value', PACKAGE = 'sirt', type, parm1, parm2, scale, power, eps)
 }
 
-sirt_rcpp_invariance_alignment_opt_fct <- function(nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type) {
-    .Call('_sirt_sirt_rcpp_invariance_alignment_opt_fct', PACKAGE = 'sirt', nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type)
+sirt_rcpp_invariance_alignment_opt_fct <- function(nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type, reparam) {
+    .Call('_sirt_sirt_rcpp_invariance_alignment_opt_fct', PACKAGE = 'sirt', nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type, reparam)
 }
 
 sirt_rcpp_invariance_alignment_simplicity_function_gradient <- function(type, parm1, parm2, scale, power, eps) {
     .Call('_sirt_sirt_rcpp_invariance_alignment_simplicity_function_gradient', PACKAGE = 'sirt', type, parm1, parm2, scale, power, eps)
 }
 
-sirt_rcpp_invariance_alignment_opt_grad <- function(nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type) {
-    .Call('_sirt_sirt_rcpp_invariance_alignment_opt_grad', PACKAGE = 'sirt', nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type)
+sirt_rcpp_invariance_alignment_opt_grad <- function(nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type, reparam) {
+    .Call('_sirt_sirt_rcpp_invariance_alignment_opt_grad', PACKAGE = 'sirt', nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type, reparam)
 }
 
 sirt_rcpp_linking_haebara_fct_optim_one_item <- function(theta, prob_theta, aM, bM, a, b, mu, sigma, ii, ss, dist, eps) {

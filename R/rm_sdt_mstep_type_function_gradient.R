@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_mstep_type_function_gradient.R
-## File Version: 0.06
+## File Version: 0.11
 
 
 
@@ -36,5 +36,6 @@ rm_sdt_mstep_type_function_gradient <- function(x, par_index, partable, type,
     grad_ll <- - grad_out
     grad_prior <- rm_sdt_evaluate_prior_derivative(partable=partable1, h=numdiff.parm)
     grad_post <- grad_ll + grad_prior
+    grad_post <- ifelse(is.na(grad_post), 0, grad_post )
     return(grad_post)
 }

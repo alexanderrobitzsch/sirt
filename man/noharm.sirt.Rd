@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.535
+%% File Version: 0.538
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -135,9 +135,9 @@ The estimation relies on a Hermite series approximation of the normal ogive
 item response functions. In more detail, a series expansion
 \deqn{\Phi(x)=b_0 + b_1 H_1(x) + b_2 H_2(x) + b_3 H_3(x)} is used
 (McDonald, 1982a).
-This enables to express cross products \eqn{p_ij=P(X_i=1, X_j=1)} as a function of
+This enables to express cross products \eqn{p_{ij}=P(X_i=1, X_j=1)} as a function of
 unknown model parameters
-\deqn{\hat{p}_ij=b_{0i} b_{0j} + \sum_{m=1}^3 b_{mi} b_{mj}
+\deqn{\hat{p}_{ij}=b_{0i} b_{0j} + \sum_{m=1}^3 b_{mi} b_{mj}
 \left( \frac{\bold{f}_i \bold{P} \bold{f}_j }{\sqrt{ (1+\bold{f}_i \bold{P} \bold{f}_i)
 (1+\bold{f}_j \bold{P} \bold{f}_j)}} \right) ^m }
 where \eqn{b_{0i}=p_{i}=P(X_i=1)=c_i + (d_i - c_i) \Phi(\tau_i)},
@@ -195,28 +195,28 @@ A list. The most important entries are
 
 \references{
 Finch, H. (2011). Multidimensional item response theory parameter estimation with
-nonsimple structure items. \emph{Applied Psychological Measurement, 35}(1), 67-82. \cr
-https://doi.org/10.1177/0146621610367787
+nonsimple structure items. \emph{Applied Psychological Measurement, 35}(1), 67-82.
+\doi{10.1177/0146621610367787}
 
 Fraser, C., & McDonald, R. P. (1988). NOHARM: Least squares item factor analysis.
 \emph{Multivariate Behavioral Research, 23}, 267-269.
-https://doi.org/10.1207/s15327906mbr2302_9
+\doi{10.1207/s15327906mbr2302_9}
 
 Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}. \cr
 {http://noharm.niagararesearch.ca/nh4man/nhman.html}.
 
 Knol, D. L., & Berger, M. P. (1991). Empirical comparison between factor analysis
 and multidimensional item response models. \emph{Multivariate Behavioral Research, 26}(3),
-457-477. \cr https://doi.org/10.1207/s15327906mbr2603_5
+457-477. \doi{10.1207/s15327906mbr2603_5}
 
 Maydeu-Olivares, A. (2001). Multidimensional item response theory modeling of binary data:
 Large sample properties of NOHARM estimates.
 \emph{Journal of Educational and Behavioral Statistics, 26}(1), 51-71.
-https://doi.org/10.3102/10769986026001051
+\doi{10.3102/10769986026001051}
 
 McDonald, R. P. (1982a). Linear versus nonlinear models in item response theory.
 \emph{Applied Psychological Measurement, 6}, 379-396.
-https://doi.org/10.1177/014662168200600402
+\doi{10.1177/014662168200600402}
 
 McDonald, R. P. (1982b). \emph{Unidimensional and multidimensional models for
 item response theory}. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings.
@@ -224,16 +224,16 @@ item response theory}. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings
 McDonald, R. P. (1997). Normal-ogive multidimensional model.
 In W. van der Linden & R. K. Hambleton (1997):
 \emph{Handbook of modern item response theory} (pp. 257-269).
-New York: Springer. http://dx.doi.org/10.1007/978-1-4757-2691-6
+New York: Springer. \doi{10.1007/978-1-4757-2691-6}
 
 Svetina, D., & Levy, R. (2016). Dimensionality in compensatory MIRT when complex structure
 exists: Evaluation of DETECT and NOHARM. \emph{The Journal of Experimental Education, 84}(2),
-398-420. https://doi.org/10.1080/00220973.2015.1048845
+398-420. \doi{10.1080/00220973.2015.1048845}
 
 Swaminathan, H., & Rogers, H. J. (2016). Normal-ogive multidimensional models.
 In W. J. van der Linden (Ed.). \emph{Handbook of item response theory.
 Volume One: Models} (pp. 167-187). Boca Raton: CRC Press.
-http://dx.doi.org/10.1201/9781315374512
+\doi{10.1201/9781315374512}
 }
 
 

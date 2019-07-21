@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.616
+%% File Version: 1.631
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -17,8 +17,10 @@ Alignment Procedure for Linking under Approximate Invariance
 \description{
 The function \code{invariance.alignment} performs alignment under approximate
 invariance for \eqn{G} groups and \eqn{I} items
-(Asparouhov & Muthen, 2014; Byrne & van de Vijver, 2017; Marsh et al., 2018;
-Muthen & Asparouhov, 2014, 2018). It is assumed that item loadings and intercepts are
+(Asparouhov & Muthen, 2014; Byrne & van de Vijver, 2017; DeMars, xxxx; Finch, 2016;
+Fischer & Karl, 2019; Flake & McCoach, 2018; Kim et al., 2017; Marsh et al., 2018;
+Muthen & Asparouhov, 2014, 2018; Pokropek, Davidov & Schmidt, xxxx).
+It is assumed that item loadings and intercepts are
 previously estimated as a unidimensional factor model under the assumption of a factor
 with zero mean and a variance of one.
 
@@ -41,8 +43,8 @@ argument \code{weights}.
 
 \usage{
 invariance.alignment(lambda, nu, wgt=NULL, align.scale=c(1, 1),
-    align.pow=c(.25, .25), eps=.0001, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
-    optimizer="optim", ...)
+    align.pow=c(.5, .5), eps=.0001, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
+    optimizer="optim", reparam=TRUE, ...)
 
 \method{summary}{invariance.alignment}(object, digits=3, file=NULL, ...)
 
@@ -52,7 +54,7 @@ invariance_alignment_constraints(model, lambda_parm_tol, nu_parm_tol )
 
 invariance_alignment_simulate(nu, lambda, err_var, mu, sigma, N)
 
-invariance_alignment_cfa_config(dat, group, weights=NULL, ...)
+invariance_alignment_cfa_config(dat, group, weights=NULL, verbose=FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -90,6 +92,8 @@ be centered.
 \item{optimizer}{Name of the optimizer chosen for alignment. Options are
    \code{"optim"} (using \code{\link[stats:optim]{stats::optim}})
    or \code{"nlminb"} (using \code{\link[stats:nlminb]{stats::nlminb}}).}
+\item{reparam}{Logical indicating whether repameterization of parameters
+should be used in model optimization}
   \item{object}{
 Object of class \code{invariance.alignment}
   }
@@ -107,6 +111,7 @@ Further optional arguments to be passed}
 \item{dat}{Dataset with items}
 \item{group}{Vector containing group indicators}
 \item{weights}{Optional vector of sampling weights}
+\item{verbose}{Logical indicating whether progress should be printed}
 }
 
 \details{
@@ -129,9 +134,11 @@ and \eqn{\nu_{i g,1}} are defined such that
     \nu_{i g,1}=\nu_{i g 0} -  \alpha_{g0} \lambda_{ig0} / \psi_{g0}
             }
 and the optimization functions are defined as
-\deqn{ f_\lambda (x)=[ ( x/ a_\lambda )^2 + \varepsilon ]^{p_\lambda}
+\deqn{ f_\lambda (x)=| x/ a_\lambda | ^{p_\lambda}
+\approx [ ( x/ a_\lambda )^2 + \varepsilon ]^{p_\lambda / 2}
     \qquad \mbox{and} \qquad
-    f_\nu (x)=[ ( x/ a_\nu )^2 + \varepsilon ]^{p_\nu}
+    f_\nu (x)=|  x/ a_\nu ]^{p_\nu}
+    \approx [ ( x/ a_\nu )^2 + \varepsilon ]^{p_\nu / 2}
             }
 using a small \eqn{ \varepsilon > 0} (e.g. .0001) to obtain
 a differentiable optimization function. For \eqn{p_\nu=0} or \eqn{p_\lambda=0}, the
@@ -147,9 +154,9 @@ of all group standard deviations is set to one. The mean
 
 Note that Asparouhov and Muthen (2014) use \eqn{a_\lambda=a_\nu=1}
 (which can be modified in \code{align.scale})
-and \eqn{p_\lambda=p_\nu=1/4} (which can be modified in \code{align.pow}).
-In case of \eqn{p_\lambda=1}, the penalty is approximately
-\eqn{f_\lambda(x)=x^2 }, in case of \eqn{p_\lambda=1/4}
+and \eqn{p_\lambda=p_\nu=0.5} (which can be modified in \code{align.pow}).
+In case of \eqn{p_\lambda=2}, the penalty is approximately
+\eqn{f_\lambda(x)=x^2 }, in case of \eqn{p_\lambda=0.5}
 it is approximately \eqn{f_\lambda(x)=\sqrt{|x|} }.
 
 Effect sizes of approximate invariance based on \eqn{R^2} have
@@ -188,38 +195,67 @@ A list with following entries
 \references{
 Asparouhov, T., & Muthen, B. (2014). Multiple-group factor analysis alignment.
 \emph{Structural Equation Modeling, 21}, 1-14.
-http://dx.doi.org/10.1080/10705511.2014.919210
+\doi{10.1080/10705511.2014.919210}
 
 Byrne, B. M., & van de Vijver, F. J. R. (2017). The maximum likelihood alignment
 approach to testing for approximate measurement invariance:
 A paradigmatic cross-cultural application. \emph{Psicothema, 29}(4), 539-551.
-http://dx.doi.org/10.7334/psicothema2017.178
+\doi{10.7334/psicothema2017.178}
+
+DeMars, C. E. (2019). Alignment as an alternative to anchor purification in DIF analyses.
+\emph{Structural Equation Modeling, xxx}(x), xxx-xxx.
+\doi{10.1080/10705511.2019.1617151}
+
+Finch, W. H. (2016). Detection of differential item functioning for more
+than two groups: A Monte Carlo comparison of methods.
+\emph{Applied Measurement in Education, 29},(1), 30-45,
+\doi{10.1080/08957347.2015.1102916}
+
+Fischer, R., & Karl, J. A. (2019). A primer to (cross-cultural) multi-group invariance
+testing possibilities in R.
+\emph{Frontiers in Psychology | Cultural Psychology, 10}:1507.
+\doi{10.3389/fpsyg.2019.01507}
+
+Flake, J. K., & McCoach, D. B. (2018). An investigation of the alignment method with
+polytomous indicators under conditions of partial measurement invariance.
+\emph{Structural Equation Modeling, 25}(1), 56-70.
+\doi{10.1080/10705511.2017.1374187}
+
+Kim, E. S., Cao, C., Wang, Y., & Nguyen, D. T. (2017). Measurement invariance testing
+with many groups: A comparison of five approaches.
+\emph{Structural Equation Modeling, 24}(4), 524-544.
+\doi{10.1080/10705511.2017.1304822}
 
 Marsh, H. W., Guo, J., Parker, P. D., Nagengast, B., Asparouhov, T., Muthen, B.,
 & Dicke, T. (2018). What to do when scalar invariance fails: The extended alignment
 method for multi-group factor analysis comparison of latent means across many groups.
 \emph{Psychological Methods, 23}(3), 524-545.
-http://dx.doi.org/10.1037/met0000113
+\doi{10.1037/met0000113}
 
 Muthen, B., & Asparouhov, T. (2014). IRT studies of many groups: The alignment method.
-\emph{Frontiers in Psychology | Quantitative Psychology and Measurement, 5}:978. \cr
-http://dx.doi.org/10.3389/fpsyg.2014.00978
+\emph{Frontiers in Psychology | Quantitative Psychology and Measurement, 5}:978.
+\doi{10.3389/fpsyg.2014.00978}
 
 Muthen, B., & Asparouhov, T. (2018). Recent methods for the study of measurement
 invariance with many groups: Alignment and random effects.
 \emph{Sociological Methods & Research, 47}(4), 637-664.
-http://dx.doi.org/10.1177/0049124117701488
+\doi{10.1177/0049124117701488}
 
 Oelker, M. R., & Tutz, G. (2017). A uniform framework for the combination of penalties in
 generalized structured models. \emph{Advances in Data Analysis and Classification, 11}(1),
-97-120. \cr
-https://doi.org/10.1007/s11634-015-0205-y
+97-120.
+\doi{10.1007/s11634-015-0205-y}
+
+Pokropek, A., Davidov, E., & Schmidt, P. (xxxx). A Monte Carlo simulation study to
+assess the appropriateness of traditional and newer approaches to test for
+measurement invariance. \emph{Structural Equation Modeling, xx}(xx), xxx-xxx.
+\doi{10.1080/10705511.2018.1561293}
 
 Vandenberg, R. J., & Lance, C. E. (2000). A review and synthesis of the
 measurement invariance literature: Suggestions, practices, and
 recommendations for organizational research. \emph{Organizational Research
 Methods, 3}, 4-70.
-http://dx.doi.org/10.1177/109442810031002
+\doi{10.1177/109442810031002}s
 }
 
 %\author{
@@ -253,18 +289,12 @@ wgt <- matrix( sqrt(Ng), length(Ng), ncol(nu) )
 
 #***
 # Model 1: Alignment using a quadratic loss function
-#   -> use the default of align.pow=c(1,1) and align.scale=c(1,1)
 mod1 <- sirt::invariance.alignment( lambda, nu, wgt )
 summary(mod1)
-  ##   Effect Sizes of Approximate Invariance
-  ##          loadings intercepts
-  ##   R2       0.9944     0.9988
-  ##   sqrtU2   0.0748     0.0346
-  ##   rbar     0.9265     0.9735
 
 #****
 # Model 2: Different powers for alignment
-mod2 <- sirt::invariance.alignment( lambda, nu, wgt,  align.pow=c(.25,1/2),
+mod2 <- sirt::invariance.alignment( lambda, nu, wgt,  align.pow=c(.5,1),
               align.scale=c(.95,.95))
 summary(mod2)
 
@@ -281,11 +311,10 @@ mod2b <- sirt::invariance.alignment( lambda, nu, wgt,  align.pow=c(0,0),
               align.scale=c(.3,.3))
 summary(mod2b)
 
-
 #****
 # Model 3: Low powers for alignment of scale and power
 # Note that setting increment.factor larger than 1 seems necessary
-mod3 <- sirt::invariance.alignment( lambda, nu, wgt, align.pow=c(.25,.35),
+mod3 <- sirt::invariance.alignment( lambda, nu, wgt, align.pow=c(.5,.75),
             align.scale=c(.55,.55), psi0.init=mod1$psi0, alpha0.init=mod1$alpha0 )
 summary(mod3)
 
@@ -373,7 +402,7 @@ summary(mod1)
   ##   4  0.171 0.935
 
 # Model 2: sparse target function
-mod2 <- sirt::invariance.alignment( lambda=lambda, nu=nu, align.pow=c(1/4,1/4) )
+mod2 <- sirt::invariance.alignment( lambda=lambda, nu=nu, align.pow=c(.5,.5) )
 summary(mod2)
   ##   Effect Sizes of Approximate Invariance
   ##          loadings intercepts
@@ -401,7 +430,7 @@ mod1 <- sirt::invariance.alignment( lambda=lambda, nu=nu )
 summary(mod1)
 
 # Model 2: sparse target function and definition of scales
-mod2 <- sirt::invariance.alignment( lambda=lambda, nu=nu, align.pow=c(1/4,1/4),
+mod2 <- sirt::invariance.alignment( lambda=lambda, nu=nu, align.pow=c(.5,.5),
             align.scale=c( .2, .3)  )
 summary(mod2)
 
@@ -473,7 +502,7 @@ summary(mod1)
   ##   study2  0.286    1
 
 # linking using powers of .5
-mod2 <- sirt::invariance.alignment( lambda=lambda, nu=nu, align.pow=c(.5,.5) )
+mod2 <- sirt::invariance.alignment( lambda=lambda, nu=nu, align.pow=c(1,1) )
 summary(mod2)
   ##   Group Means and Standard Deviations
   ##          alpha0 psi0
@@ -481,7 +510,7 @@ summary(mod2)
   ##   study2  0.213    1
 
 # linking using powers of .25
-mod3 <- sirt::invariance.alignment( lambda=lambda, nu=nu, align.pow=c(.25,.25) )
+mod3 <- sirt::invariance.alignment( lambda=lambda, nu=nu, align.pow=c(.5,.5) )
 summary(mod3)
   ##   Group Means and Standard Deviations
   ##          alpha0 psi0
@@ -517,7 +546,7 @@ summary(res1a)
 
 # Linking using optimization with absolute value function (pow=.5)
 res1b <- sirt::invariance.alignment( lambda, nu, align.scale=c( .3, .5 ),
-                align.pow=c( .5, .5 ) )
+                align.pow=c(1,1) )
 summary(res1b)
 
 #-- compare results with Haberman linking
@@ -555,7 +584,7 @@ res2a <- sirt::invariance.alignment( lambda, nu, align.scale=c( .3, .5 ) )
 summary(res2a)
 
 res2b <- sirt::invariance.alignment( lambda, nu, align.scale=c( .3, .5 ),
-                align.pow=c( .5, .5 ) )
+                align.pow=c(1,1) )
 summary(res2b)
 
 # compare results with Haberman linking
@@ -598,7 +627,7 @@ lambda[gg,] <- lambda[gg,] * sigma
 # define alignment scale
 align.scale <- c(.2,.4)   # Asparouhov and Muthen use c(1,1)
 # define alignment powers
-align.pow <- c(.25,.25)   # as in Asparouhov and Muthen
+align.pow <- c(.5,.5)   # as in Asparouhov and Muthen
 
 #*** estimate alignment parameters
 mod1 <- sirt::invariance.alignment( lambda, nu, eps=.01, optimizer="optim",
@@ -651,7 +680,7 @@ print(pars)
 # define alignment scale
 align.scale <- c(.2,.4)
 # define alignment powers
-align.pow <- c(.25,.25)
+align.pow <- c(.5,.5)
 mod1 <- sirt::invariance.alignment( lambda=pars$lambda, nu=pars$nu, eps=.01,
             optimizer="optim", align.scale=align.scale, align.pow=align.pow, center=FALSE)
 #* find parameter constraints for prespecified tolerance

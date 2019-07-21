@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.396
+%% File Version: 0.406
 
 \name{data.sirt}
 
@@ -12,7 +12,8 @@
 \alias{data.si06}
 \alias{data.si07}
 \alias{data.si08}
-
+\alias{data.si09}
+\alias{data.si10}
 
 \docType{data}
 
@@ -36,6 +37,8 @@ data(data.si05)
 data(data.si06)
 data(data.si07)
 data(data.si08)
+data(data.si09)
+data(data.si10)
 }
 
 
@@ -150,6 +153,55 @@ see also Rasch, Kubinger & Yanagida, 2011).
 \code{ $ L4 : num  1 1 0 0 1 1 0 0 1 1 ...} \cr
 \code{ $ L5 : num  1 0 1 0 1 0 1 0 1 0 ...} \cr
 \code{ $ wgt: num  23 8 102 67 8 4 35 59 27 18 ...} \cr
+
+
+\item The dataset \code{data.si09} was used in Fischer and Karl (2019) and they
+asked employees in a eight countries, to report whether they typically help
+other employees (helping behavior, seven items, \code{help}) and whether
+they make suggestions to improve work conditions and products
+(voice behavior, five items, \code{voice}). Individuals responded to these items
+on a 1-7 Likert-type scale. The dataset was downloaded from \url{https://osf.io/wkx8c/}.
+
+\code{'data.frame':   5201 obs. of  13 variables:} \cr
+\code{ $ country: Factor w/ 8 levels "BRA","CAN","KEN",..: 5 5 5 5 5 5 5 5 5 5 ...} \cr
+\code{ $ help1  : int  6 6 5 5 5 6 6 6 4 6 ...} \cr
+\code{ $ help2  : int  3 6 5 6 6 6 6 6 6 7 ...} \cr
+\code{ $ help3  : int  5 6 6 7 7 6 5 6 6 7 ...} \cr
+\code{ $ help4  : int  7 6 5 6 6 7 7 6 6 7 ...} \cr
+\code{ $ help5  : int  5 5 5 6 6 6 6 6 6 7 ...} \cr
+\code{ $ help6  : int  3 4 5 6 6 7 7 6 6 5 ...} \cr
+\code{ $ help7  : int  5 4 4 5 5 7 7 6 6 6 ...} \cr
+\code{ $ voice1 : int  3 6 5 6 4 7 6 6 5 7 ...} \cr
+\code{ $ voice2 : int  3 6 4 7 6 5 6 6 4 7 ...} \cr
+\code{ $ voice3 : int  6 6 5 7 6 5 6 6 6 5 ...} \cr
+\code{ $ voice4 : int  6 6 6 5 5 7 5 6 6 6 ...} \cr
+\code{ $ voice5 : int  6 7 4 7 6 6 6 6 5 7 ...} \cr
+
+
+\item The dataset \code{data.si10} contains votes of 435 members of the U.S. House of
+Representatives, 267 Democrates and 168 Republicans. The dataset was
+used by Fop and Murphy (2017). 
+
+\code{'data.frame':   435 obs. of  17 variables:} \cr
+\code{ $ party : Factor w/ 2 levels "democrat","republican": 2 2 1 1 1 1 1 2 2 1 ...} \cr
+\code{ $ vote01: num  0 0 NA 0 1 0 0 0 0 1 ...} \cr
+\code{ $ vote02: num  1 1 1 1 1 1 1 1 1 1 ...} \cr
+\code{ $ vote03: num  0 0 1 1 1 1 0 0 0 1 ...} \cr
+\code{ $ vote04: num  1 1 NA 0 0 0 1 1 1 0 ...} \cr
+\code{ $ vote05: num  1 1 1 NA 1 1 1 1 1 0 ...} \cr
+\code{ $ vote06: num  1 1 1 1 1 1 1 1 1 0 ...} \cr
+\code{ $ vote07: num  0 0 0 0 0 0 0 0 0 1 ...} \cr
+\code{ $ vote08: num  0 0 0 0 0 0 0 0 0 1 ...} \cr
+\code{ $ vote09: num  0 0 0 0 0 0 0 0 0 1 ...} \cr
+\code{ $ vote10: num  1 0 0 0 0 0 0 0 0 0 ...} \cr
+\code{ $ vote11: num  NA 0 1 1 1 0 0 0 0 0 ...} \cr
+\code{ $ vote12: num  1 1 0 0 NA 0 0 0 1 0 ...} \cr
+\code{ $ vote13: num  1 1 1 1 1 1 NA 1 1 0 ...} \cr
+\code{ $ vote14: num  1 1 1 0 1 1 1 1 1 0 ...} \cr
+\code{ $ vote15: num  0 0 0 0 1 1 1 NA 0 NA ...} \cr
+\code{ $ vote16: num  1 NA 0 1 1 1 1 1 1 NA ...} \cr
+
+
 }
 }
 
@@ -186,6 +238,14 @@ class multidimensional IRT models. \emph{Psychometrika, 77}, 782-802.
 DeCarlo, L. T. (XXXX). An item response model for true-false exams based on signal
 detection theory. \emph{Applied Psychological Measurement, xx}(xx).
 \doi{10.1177/0146621619843823}
+
+Fischer, R., & Karl, J. A. (2019). A primer to (cross-cultural) multi-group invariance
+testing possibilities in R.
+\emph{Frontiers in Psychology | Cultural Psychology, 10}:1507.
+\doi{10.3389/fpsyg.2019.01507}
+
+Fop, M., & Murphy, T. B. (2018). Variable selection methods for model-based clustering. 
+\emph{Statistics Surveys, 12}, 18-65. \doi{10.1214/18-SS119}
 
 Goodman, L. A. (1970). The multivariate analysis of qualitative data: Interactions
 among multiple classifications.

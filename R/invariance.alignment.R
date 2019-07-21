@@ -1,14 +1,17 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.626
+## File Version: 3.662
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
-    align.scale=c(1,1), align.pow=c(.25,.25), eps=.0001,
-    psi0.init=NULL, alpha0.init=NULL, center=FALSE, optimizer="optim", ... )
+    align.scale=c(1,1), align.pow=c(.5,.5), eps=.0001,
+    psi0.init=NULL, alpha0.init=NULL, center=FALSE, optimizer="optim",
+    reparam=TRUE, ... )
 {
     CALL <- match.call()
     s1 <- Sys.time()
     type <- "AM"
+    align.pow0 <- align.pow
+    align.pow <- align.pow / 2
 
     #-- labels for groups and items
     lambda <- invariance_alignment_proc_labels(x=lambda)
@@ -41,12 +44,11 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
 
     #--- initial estimates means and SDs
     psi0 <- apply(lambda, 1, stats::median)
-    psi0 <- psi0 / psi0[1]
     alpha0 <- apply(nu, 1, stats::median, na.rm=TRUE)
+    psi0 <- psi0 / psi0[1]
     alpha0 <- alpha0 - alpha0[1]
     if ( ! is.null( psi0.init) ){ psi0 <- psi0.init }
     if ( ! is.null( alpha0.init) ){ alpha0 <- alpha0.init }
-
     lambda <- as.matrix(lambda)
     wgt <- as.matrix(wgt)
     wgt_combi <- matrix(NA, nrow=nrow(group.combis), ncol=ncol(lambda) )
@@ -61,10 +63,12 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
 
     #-- define optimization functions
     fct_optim <- function(x){
-        res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha, ind_psi=ind_psi)
+        res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha,
+                    ind_psi=ind_psi, reparam=reparam)
         val <- sirt_rcpp_invariance_alignment_opt_fct( nu=nu, lambda=lambda, alpha0=res$alpha0,
                     psi0=res$psi0, group_combis=group_combis, wgt=wgt, align_scale=align.scale,
-                    align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type )
+                    align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type,
+                    reparam=reparam)
         val <- val$fopt
         return(val)
     }
@@ -73,43 +77,49 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         grad <- sirt_rcpp_invariance_alignment_opt_grad( nu=nu, lambda=lambda,
                         alpha0=res$alpha0, psi0=res$psi0, group_combis=group_combis, wgt=wgt,
                         align_scale=align.scale, align_pow=align.pow, eps=eps, wgt_combi=wgt_combi,
-                        type=type )
+                        type=type, reparam=reparam )
         grad <- grad[-c(1,G+1)]
         return(grad)
     }
     # if ( align.pow[1]==0){ grad_optim <- NULL }
 
     #* estimate alignment parameters
-    lower <- c(rep(-Inf,G1), rep(.01, G1))
+    min_val <- .01
+    lower <- c(rep(-Inf,G1), rep(min_val, G1))
     par <- c( alpha0[-1], psi0[-1] )
+    if (reparam){
+        grad_optim <- NULL
+    }
+
     res_optim <- sirt_optimizer(optimizer=optimizer, par=par, fn=fct_optim, grad=grad_optim,
                         lower=lower, hessian=FALSE, ...)
-    res <- invariance_alignment_define_parameters(x=res_optim$par, ind_alpha=ind_alpha, ind_psi=ind_psi)
+    res <- invariance_alignment_define_parameters(x=res_optim$par, ind_alpha=ind_alpha,
+                    ind_psi=ind_psi, reparam=reparam)
     alpha0 <- res$alpha0
     psi0 <- res$psi0
 
     # center parameters
-    res <- invariance_alignment_center_parameters(alpha0=alpha0, psi0=psi0, center=center)
+    res <- invariance_alignment_center_parameters(alpha0=alpha0, psi0=psi0,
+                    center=center)
     alpha0 <- res$alpha0
     psi0 <- res$psi0
 
     # define aligned parameters
     res <- sirt_rcpp_invariance_alignment_opt_fct( nu=nu, lambda=lambda, alpha0=alpha0,
                     psi0=psi0, group_combis=group_combis, wgt=wgt, align_scale=align.scale,
-                    align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type )
+                    align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type,
+                    reparam=reparam)
     lambda.aligned <- sirt_matrix_names(x=res$lambda, extract_names=lambda)
     nu.aligned <- sirt_matrix_names(x=res$nu, extract_names=nu)
     fopt <- res$fopt
 
-    #*****************************
-    # calculate item statistics and R-squared measures
+    #**** calculate item statistics and R-squared measures
     # groupwise aligned loading
     # average aligned parameter
     itempars.aligned <- data.frame(
                             invariance_alignment_aligned_parameters_summary(x=lambda.aligned, label="lambda"),
                             invariance_alignment_aligned_parameters_summary(x=nu.aligned, label="nu"),
                             row.names=colnames(lambda) )
-
     M.lambda_matr <- sirt_matrix2( itempars.aligned$M.lambda, nrow=G)
     M.nu_matr <- sirt_matrix2( itempars.aligned$M.nu, nrow=G)
     lambda.resid <- lambda.aligned - M.lambda_matr
@@ -144,7 +154,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     res <- list( pars=pars, itempars.aligned=itempars.aligned,
             es.invariance=es.invariance, center=center, lambda.aligned=lambda.aligned,
             lambda.resid=lambda.resid, nu.aligned=nu.aligned,
-            nu.resid=nu.resid, fopt=fopt, align.scale=align.scale, align.pow=align.pow,
+            nu.resid=nu.resid, fopt=fopt, align.scale=align.scale, align.pow=align.pow0,
             res_optim=res_optim, eps=eps, wgt=wgt, miss_items=missM, numb_items=numb_items,
             s1=s1, s2=s2, time_diff=time_diff, CALL=CALL)
     class(res) <- 'invariance.alignment'

@@ -1,5 +1,5 @@
 ## File Name: rm.sdt.R
-## File Version: 8.877
+## File Version: 8.886
 
 #################################################################
 # Hierarchical rater model
@@ -275,8 +275,13 @@ rm.sdt <- function( dat, pid, rater,Qmatrix=NULL, theta.k=seq(-9,9,len=30),
 
         #*** optimization rater level
         parm0 <- rm_sdt_extract_par_from_partable(partable=partable_rater)
-        res <- sirt_optimizer(optimizer=optimizer, par=parm0, fn=expected_loglike_rater,
+        L0 <- length(parm0)
+        if (L0>0){
+            res <- sirt_optimizer(optimizer=optimizer, par=parm0, fn=expected_loglike_rater,
                         grad=gradient_loglike_rater, control=ctl)
+        } else {
+            res <- list()
+        }
         parm0 <- res$par
 
         #-- fill parameter table

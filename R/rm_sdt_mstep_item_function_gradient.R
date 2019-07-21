@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_mstep_item_function_gradient.R
-## File Version: 0.09
+## File Version: 0.16
 
 
 rm_sdt_mstep_item_function_gradient <- function(x, par_index, partable_item, Qmatrix, theta.k,
@@ -16,6 +16,7 @@ rm_sdt_mstep_item_function_gradient <- function(x, par_index, partable_item, Qma
     args$use_log <- TRUE
     prob_D1_dim <- c(VV, K+1, TP)
     prob_D1 <- array(0, dim=prob_D1_dim )
+
     #*** loop over pargroups
     grad_out <- rep(NA, pargroup_item$np)
     for (pp in seq_len(pargroup_item$max_pargroup) ){

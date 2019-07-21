@@ -38,17 +38,21 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.6  |  2019-06-24  |  Last: sirt 3.6-4
+VERSIONS sirt 3.6  |  2019-07-21  |  Last: sirt 3.6-12
 ------------------------------------------------------------------------
 
 FIXED * corrected a bug in lsem.bootstrap() (thanks to Ingo Seifert)
+NOTE  * added utility function scale_group_means()
+NOTE  * included argument 'reparam' in invariance.alignment() which
+        should lead to more stable estimates in case of many groups
+NOTE  * changed parameterization of powers in invariance alignment 
+        to have clear correspondence to regularization methods
+        (e.g., old: p=.25; new: p=.5)
+FIXED * fixed parameter labeling issues in rm.sdt()
+        (thanks to Wenjing Guo)
 
-
-DATA  * included/modified datasets: ---
+DATA  * included/modified datasets: data.si09, data.si10
 EXAMP * included/modified examples: ---
-
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.5  |  2019-06-20  |  Last: sirt 3.5-53

@@ -1,5 +1,5 @@
 ## File Name: sirt_optimizer.R
-## File Version: 0.302
+## File Version: 0.304
 
 sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
         hessian=TRUE, ...)

@@ -1,8 +1,9 @@
 ## File Name: invariance_alignment_cfa_config.R
-## File Version: 0.221
+## File Version: 0.224
 
 
-invariance_alignment_cfa_config <- function(dat, group, weights=NULL, ...)
+invariance_alignment_cfa_config <- function(dat, group, weights=NULL,
+    verbose=FALSE, ...)
 {
     CALL <- match.call()
     groups <- unique(group)
@@ -25,6 +26,8 @@ invariance_alignment_cfa_config <- function(dat, group, weights=NULL, ...)
         if (!is.null(weights)){
             weights_gg <- weights[group==groups[gg]]
         }
+        cat( paste0("Compute CFA for group ", gg, "\n") )
+        utils::flush.console()
         res <- invariance_alignment_cfa_config_estimate(dat_gg=dat_gg,
                         weights_gg=weights_gg, ...)
         nu[gg, ind_gg] <- res$nu

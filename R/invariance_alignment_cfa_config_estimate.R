@@ -1,11 +1,15 @@
 ## File Name: invariance_alignment_cfa_config_estimate.R
-## File Version: 0.12
+## File Version: 0.15
 
 invariance_alignment_cfa_config_estimate <- function(dat_gg, weights_gg=NULL, ...)
 {
     I_gg <- ncol(dat_gg)
     items_gg <- colnames(dat_gg)
-    lavmodel <- paste0("F=~", paste0(items_gg, collapse="+") )
+    label_F <- "F"
+    while (label_F %in% items_gg){
+        label_F <- paste0( label_F, "F")
+    }
+    lavmodel <- paste0(label_F, "=~", paste0(items_gg, collapse="+") )
     if (is.null(weights_gg)){
         weights_name <- NULL
     } else {

@@ -1,5 +1,5 @@
 ## File Name: rm_sdt_create_partable.R
-## File Version: 0.497
+## File Version: 0.502
 
 
 rm_sdt_create_partable <- function( item.index, rater.index,
@@ -71,7 +71,6 @@ rm_sdt_create_partable <- function( item.index, rater.index,
                             pg1="tau", pg2="a")
     partable_rater <- rm_sdt_create_partable_define_pargroups(partable=partable_rater,
                             pg1="c", pg2="d")
-
     #--- diffindex pargroups
     pargroup_item <- rm_sdt_create_partable_pargroup_indices( partable=partable_item,
                     item.index=item.index, diffindex=diffindex )

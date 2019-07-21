@@ -556,8 +556,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // sirt_rcpp_invariance_alignment_nu_transformed
-Rcpp::NumericMatrix sirt_rcpp_invariance_alignment_nu_transformed(Rcpp::NumericMatrix nu, Rcpp::NumericMatrix lambda, Rcpp::NumericVector alpha0, Rcpp::NumericVector psi0);
-RcppExport SEXP _sirt_sirt_rcpp_invariance_alignment_nu_transformed(SEXP nuSEXP, SEXP lambdaSEXP, SEXP alpha0SEXP, SEXP psi0SEXP) {
+Rcpp::NumericMatrix sirt_rcpp_invariance_alignment_nu_transformed(Rcpp::NumericMatrix nu, Rcpp::NumericMatrix lambda, Rcpp::NumericVector alpha0, Rcpp::NumericVector psi0, bool reparam);
+RcppExport SEXP _sirt_sirt_rcpp_invariance_alignment_nu_transformed(SEXP nuSEXP, SEXP lambdaSEXP, SEXP alpha0SEXP, SEXP psi0SEXP, SEXP reparamSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -565,7 +565,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type lambda(lambdaSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type alpha0(alpha0SEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type psi0(psi0SEXP);
-    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_invariance_alignment_nu_transformed(nu, lambda, alpha0, psi0));
+    Rcpp::traits::input_parameter< bool >::type reparam(reparamSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_invariance_alignment_nu_transformed(nu, lambda, alpha0, psi0, reparam));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -586,8 +587,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // sirt_rcpp_invariance_alignment_opt_fct
-Rcpp::List sirt_rcpp_invariance_alignment_opt_fct(Rcpp::NumericMatrix nu, Rcpp::NumericMatrix lambda, Rcpp::NumericVector alpha0, Rcpp::NumericVector psi0, Rcpp::IntegerMatrix group_combis, Rcpp::NumericMatrix wgt, Rcpp::NumericVector align_scale, Rcpp::NumericVector align_pow, double eps, Rcpp::NumericMatrix wgt_combi, Rcpp::CharacterVector type);
-RcppExport SEXP _sirt_sirt_rcpp_invariance_alignment_opt_fct(SEXP nuSEXP, SEXP lambdaSEXP, SEXP alpha0SEXP, SEXP psi0SEXP, SEXP group_combisSEXP, SEXP wgtSEXP, SEXP align_scaleSEXP, SEXP align_powSEXP, SEXP epsSEXP, SEXP wgt_combiSEXP, SEXP typeSEXP) {
+Rcpp::List sirt_rcpp_invariance_alignment_opt_fct(Rcpp::NumericMatrix nu, Rcpp::NumericMatrix lambda, Rcpp::NumericVector alpha0, Rcpp::NumericVector psi0, Rcpp::IntegerMatrix group_combis, Rcpp::NumericMatrix wgt, Rcpp::NumericVector align_scale, Rcpp::NumericVector align_pow, double eps, Rcpp::NumericMatrix wgt_combi, Rcpp::CharacterVector type, bool reparam);
+RcppExport SEXP _sirt_sirt_rcpp_invariance_alignment_opt_fct(SEXP nuSEXP, SEXP lambdaSEXP, SEXP alpha0SEXP, SEXP psi0SEXP, SEXP group_combisSEXP, SEXP wgtSEXP, SEXP align_scaleSEXP, SEXP align_powSEXP, SEXP epsSEXP, SEXP wgt_combiSEXP, SEXP typeSEXP, SEXP reparamSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -602,7 +603,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type wgt_combi(wgt_combiSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type type(typeSEXP);
-    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_invariance_alignment_opt_fct(nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type));
+    Rcpp::traits::input_parameter< bool >::type reparam(reparamSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_invariance_alignment_opt_fct(nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type, reparam));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -623,8 +625,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // sirt_rcpp_invariance_alignment_opt_grad
-Rcpp::NumericVector sirt_rcpp_invariance_alignment_opt_grad(Rcpp::NumericMatrix nu, Rcpp::NumericMatrix lambda, Rcpp::NumericVector alpha0, Rcpp::NumericVector psi0, Rcpp::IntegerMatrix group_combis, Rcpp::NumericMatrix wgt, Rcpp::NumericVector align_scale, Rcpp::NumericVector align_pow, double eps, Rcpp::NumericMatrix wgt_combi, Rcpp::CharacterVector type);
-RcppExport SEXP _sirt_sirt_rcpp_invariance_alignment_opt_grad(SEXP nuSEXP, SEXP lambdaSEXP, SEXP alpha0SEXP, SEXP psi0SEXP, SEXP group_combisSEXP, SEXP wgtSEXP, SEXP align_scaleSEXP, SEXP align_powSEXP, SEXP epsSEXP, SEXP wgt_combiSEXP, SEXP typeSEXP) {
+Rcpp::NumericVector sirt_rcpp_invariance_alignment_opt_grad(Rcpp::NumericMatrix nu, Rcpp::NumericMatrix lambda, Rcpp::NumericVector alpha0, Rcpp::NumericVector psi0, Rcpp::IntegerMatrix group_combis, Rcpp::NumericMatrix wgt, Rcpp::NumericVector align_scale, Rcpp::NumericVector align_pow, double eps, Rcpp::NumericMatrix wgt_combi, Rcpp::CharacterVector type, bool reparam);
+RcppExport SEXP _sirt_sirt_rcpp_invariance_alignment_opt_grad(SEXP nuSEXP, SEXP lambdaSEXP, SEXP alpha0SEXP, SEXP psi0SEXP, SEXP group_combisSEXP, SEXP wgtSEXP, SEXP align_scaleSEXP, SEXP align_powSEXP, SEXP epsSEXP, SEXP wgt_combiSEXP, SEXP typeSEXP, SEXP reparamSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -639,7 +641,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type wgt_combi(wgt_combiSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type type(typeSEXP);
-    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_invariance_alignment_opt_grad(nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type));
+    Rcpp::traits::input_parameter< bool >::type reparam(reparamSEXP);
+    rcpp_result_gen = Rcpp::wrap(sirt_rcpp_invariance_alignment_opt_grad(nu, lambda, alpha0, psi0, group_combis, wgt, align_scale, align_pow, eps, wgt_combi, type, reparam));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1228,11 +1231,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sirt_sirt_rcpp_gom_em_loglike_gradient", (DL_FUNC) &_sirt_sirt_rcpp_gom_em_loglike_gradient, 10},
     {"_sirt_sirt_rcpp_inference_jackknife", (DL_FUNC) &_sirt_sirt_rcpp_inference_jackknife, 1},
     {"_sirt_sirt_rcpp_invariance_alignment_lambda_transformed", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_lambda_transformed, 2},
-    {"_sirt_sirt_rcpp_invariance_alignment_nu_transformed", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_nu_transformed, 4},
+    {"_sirt_sirt_rcpp_invariance_alignment_nu_transformed", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_nu_transformed, 5},
     {"_sirt_sirt_rcpp_invariance_alignment_simplicity_function_value", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_simplicity_function_value, 6},
-    {"_sirt_sirt_rcpp_invariance_alignment_opt_fct", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_opt_fct, 11},
+    {"_sirt_sirt_rcpp_invariance_alignment_opt_fct", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_opt_fct, 12},
     {"_sirt_sirt_rcpp_invariance_alignment_simplicity_function_gradient", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_simplicity_function_gradient, 6},
-    {"_sirt_sirt_rcpp_invariance_alignment_opt_grad", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_opt_grad, 11},
+    {"_sirt_sirt_rcpp_invariance_alignment_opt_grad", (DL_FUNC) &_sirt_sirt_rcpp_invariance_alignment_opt_grad, 12},
     {"_sirt_sirt_rcpp_linking_haebara_fct_optim_one_item", (DL_FUNC) &_sirt_sirt_rcpp_linking_haebara_fct_optim_one_item, 12},
     {"_sirt_sirt_rcpp_linking_haebara_fct_optim", (DL_FUNC) &_sirt_sirt_rcpp_linking_haebara_fct_optim, 14},
     {"_sirt_sirt_rcpp_linking_haebara_grad_optim_one_item", (DL_FUNC) &_sirt_sirt_rcpp_linking_haebara_grad_optim_one_item, 20},
