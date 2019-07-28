@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.406
+%% File Version: 0.407
 
 \name{data.sirt}
 
@@ -180,7 +180,7 @@ on a 1-7 Likert-type scale. The dataset was downloaded from \url{https://osf.io/
 
 \item The dataset \code{data.si10} contains votes of 435 members of the U.S. House of
 Representatives, 267 Democrates and 168 Republicans. The dataset was
-used by Fop and Murphy (2017). 
+used by Fop and Murphy (2017).
 
 \code{'data.frame':   435 obs. of  17 variables:} \cr
 \code{ $ party : Factor w/ 2 levels "democrat","republican": 2 2 1 1 1 1 1 2 2 1 ...} \cr
@@ -244,7 +244,7 @@ testing possibilities in R.
 \emph{Frontiers in Psychology | Cultural Psychology, 10}:1507.
 \doi{10.3389/fpsyg.2019.01507}
 
-Fop, M., & Murphy, T. B. (2018). Variable selection methods for model-based clustering. 
+Fop, M., & Murphy, T. B. (2018). Variable selection methods for model-based clustering.
 \emph{Statistics Surveys, 12}, 18-65. \doi{10.1214/18-SS119}
 
 Goodman, L. A. (1970). The multivariate analysis of qualitative data: Interactions

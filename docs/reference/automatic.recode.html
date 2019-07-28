@@ -178,7 +178,7 @@ of all items</p></dd>
 <span class='co'># EXAMPLE 2: data.timssAusTwn from TAM package</span>
 <span class='co'>#############################################################################</span>
 
-<span class='kw pkg'>miceadds</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/miceadds/topics/library_install'>library_install</a></span>(<span class='st'>"TAM"</span>)
+<span class='kw pkg'>miceadds</span><span class='kw ns'>::</span><span class='fu'>library_install</span>(<span class='st'>"TAM"</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.timssAusTwn</span>,<span class='kw'>package</span><span class='kw'>=</span><span class='st'>"TAM"</span>)
 <span class='no'>raw.resp</span> <span class='kw'>&lt;-</span> <span class='no'>data.timssAusTwn</span>[,<span class='fl'>1</span>:<span class='fl'>11</span>]
 <span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/automatic.recode'>automatic.recode</a></span>( <span class='kw'>data</span><span class='kw'>=</span><span class='no'>raw.resp</span> )

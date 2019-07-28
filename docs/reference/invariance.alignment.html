@@ -145,8 +145,8 @@ argument <code>weights</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>invariance.alignment</span>(<span class='no'>lambda</span>, <span class='no'>nu</span>, <span class='kw'>wgt</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>align.scale</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>),
-    <span class='kw'>align.pow</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.5</span>, <span class='fl'>.5</span>), <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>.0001</span>, <span class='kw'>psi0.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>alpha0.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>center</span><span class='kw'>=</span><span class='fl'>FALSE</span>,
-    <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"optim"</span>, <span class='kw'>reparam</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
+    <span class='kw'>align.pow</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.5</span>, <span class='fl'>.5</span>), <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>psi0.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>alpha0.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>center</span><span class='kw'>=</span><span class='fl'>FALSE</span>,
+    <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"optim"</span>, <span class='kw'>fixed</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for invariance.alignment</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
@@ -210,9 +210,9 @@ be centered.</p></td>
    or <code>"nlminb"</code> (using <code><a href='https://www.rdocumentation.org/packages/stats/topics/nlminb'>stats::nlminb</a></code>).</p></td>
     </tr>
     <tr>
-      <th>reparam</th>
-      <td><p>Logical indicating whether repameterization of parameters
-should be used in model optimization</p></td>
+      <th>fixed</th>
+      <td><p>Logical indicating whether SD of first group should
+be fixed to one. If <code>fixed=FALSE</code>, the product of all SDs is set to one.</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -477,7 +477,7 @@ see <code><a href='mcmc.2pno.ml.html'>mcmc.2pno.ml</a></code>.</p></div>
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.inv4gr</span>)
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.inv4gr</span>
-<span class='kw pkg'>miceadds</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/miceadds/topics/library_install'>library_install</a></span>(<span class='st'>"semTools"</span>)
+<span class='kw pkg'>miceadds</span><span class='kw ns'>::</span><span class='fu'>library_install</span>(<span class='st'>"semTools"</span>)
 
 <span class='no'>model1</span> <span class='kw'>&lt;-</span> <span class='st'>"
     F=~ I01 + I02 + I03 + I04 + I05 + I06 + I07 + I08 + I09 + I10 + I11

@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.631
+%% File Version: 1.634
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -43,8 +43,8 @@ argument \code{weights}.
 
 \usage{
 invariance.alignment(lambda, nu, wgt=NULL, align.scale=c(1, 1),
-    align.pow=c(.5, .5), eps=.0001, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
-    optimizer="optim", reparam=TRUE, ...)
+    align.pow=c(.5, .5), eps=1e-4, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
+    optimizer="optim", fixed=TRUE, ...)
 
 \method{summary}{invariance.alignment}(object, digits=3, file=NULL, ...)
 
@@ -92,8 +92,8 @@ be centered.
 \item{optimizer}{Name of the optimizer chosen for alignment. Options are
    \code{"optim"} (using \code{\link[stats:optim]{stats::optim}})
    or \code{"nlminb"} (using \code{\link[stats:nlminb]{stats::nlminb}}).}
-\item{reparam}{Logical indicating whether repameterization of parameters
-should be used in model optimization}
+\item{fixed}{Logical indicating whether SD of first group should
+be fixed to one. If \code{fixed=FALSE}, the product of all SDs is set to one.}
   \item{object}{
 Object of class \code{invariance.alignment}
   }

@@ -1,17 +1,18 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.662
+## File Version: 3.691
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
-    align.scale=c(1,1), align.pow=c(.5,.5), eps=.0001,
+    align.scale=c(1,1), align.pow=c(.5,.5), eps=1e-4,
     psi0.init=NULL, alpha0.init=NULL, center=FALSE, optimizer="optim",
-    reparam=TRUE, ... )
+    fixed=TRUE, ... )
 {
     CALL <- match.call()
     s1 <- Sys.time()
     type <- "AM"
     align.pow0 <- align.pow
     align.pow <- align.pow / 2
+    reparam <- ! fixed
 
     #-- labels for groups and items
     lambda <- invariance_alignment_proc_labels(x=lambda)
@@ -68,14 +69,17 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         val <- sirt_rcpp_invariance_alignment_opt_fct( nu=nu, lambda=lambda, alpha0=res$alpha0,
                     psi0=res$psi0, group_combis=group_combis, wgt=wgt, align_scale=align.scale,
                     align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type,
-                    reparam=reparam)
+                    reparam=FALSE)
         val <- val$fopt
         return(val)
     }
     grad_optim <- function(x){
-        res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha, ind_psi=ind_psi)
+        res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha, ind_psi=ind_psi,
+                        reparam=reparam)
+        alpha0 <- res$alpha0
+        psi0 <- res$psi0
         grad <- sirt_rcpp_invariance_alignment_opt_grad( nu=nu, lambda=lambda,
-                        alpha0=res$alpha0, psi0=res$psi0, group_combis=group_combis, wgt=wgt,
+                        alpha0=alpha0, psi0=psi0, group_combis=group_combis, wgt=wgt,
                         align_scale=align.scale, align_pow=align.pow, eps=eps, wgt_combi=wgt_combi,
                         type=type, reparam=reparam )
         grad <- grad[-c(1,G+1)]
@@ -91,12 +95,22 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         grad_optim <- NULL
     }
 
-    res_optim <- sirt_optimizer(optimizer=optimizer, par=par, fn=fct_optim, grad=grad_optim,
-                        lower=lower, hessian=FALSE, ...)
-    res <- invariance_alignment_define_parameters(x=res_optim$par, ind_alpha=ind_alpha,
-                    ind_psi=ind_psi, reparam=reparam)
-    alpha0 <- res$alpha0
-    psi0 <- res$psi0
+
+    #* define sequence of epsilon values
+    eps_vec <- 10^seq(0,-10, by=-1)
+    eps_vec <- unique(c(eps_vec, eps))
+    eps_vec <- eps_vec[ order(eps_vec, decreasing=TRUE) ]
+    eps_vec <- eps_vec[ eps_vec >=eps ]
+    #- optimize (with useful starting values)
+    for (eps in eps_vec){
+        res_optim <- sirt_optimizer(optimizer=optimizer, par=par, fn=fct_optim, grad=grad_optim,
+                            lower=lower, hessian=FALSE, ...)
+        par <- res_optim$par
+        res <- invariance_alignment_define_parameters(x=res_optim$par, ind_alpha=ind_alpha,
+                        ind_psi=ind_psi, reparam=reparam)
+        alpha0 <- res$alpha0
+        psi0 <- res$psi0
+    }
 
     # center parameters
     res <- invariance_alignment_center_parameters(alpha0=alpha0, psi0=psi0,
@@ -142,11 +156,6 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     pars <- data.frame(alpha0=alpha0, psi0=psi0)
     rownames(pars) <- rownames(lambda)
 
-    # psi0 <- psi0.min
-    # alpha0 <- alpha0.min * psi0.min
-    # original in Muthen paper: alpha / psi
-    # but in this optimization alpha=alpha / psi
-    # and therefore alpha=alpha* x psi
     s2 <- Sys.time()
     time_diff <- s2-s1
 
@@ -156,7 +165,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
             lambda.resid=lambda.resid, nu.aligned=nu.aligned,
             nu.resid=nu.resid, fopt=fopt, align.scale=align.scale, align.pow=align.pow0,
             res_optim=res_optim, eps=eps, wgt=wgt, miss_items=missM, numb_items=numb_items,
-            s1=s1, s2=s2, time_diff=time_diff, CALL=CALL)
+            fixed=fixed, s1=s1, s2=s2, time_diff=time_diff, CALL=CALL)
     class(res) <- 'invariance.alignment'
     return(res)
 }
