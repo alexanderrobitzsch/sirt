@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.6  |  2019-07-28  |  Last: sirt 3.6-16
+VERSIONS sirt 3.6  |  2019-07-29  |  Last: sirt 3.6-17
 ------------------------------------------------------------------------
 
 FIXED * corrected a bug in lsem.bootstrap() (thanks to Ingo Seifert)

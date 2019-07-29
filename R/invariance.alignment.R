@@ -1,5 +1,5 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.691
+## File Version: 3.693
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
@@ -95,9 +95,8 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         grad_optim <- NULL
     }
 
-
     #* define sequence of epsilon values
-    eps_vec <- 10^seq(0,-10, by=-1)
+    eps_vec <- 10^seq(0,-10, by=-.5)
     eps_vec <- unique(c(eps_vec, eps))
     eps_vec <- eps_vec[ order(eps_vec, decreasing=TRUE) ]
     eps_vec <- eps_vec[ eps_vec >=eps ]
