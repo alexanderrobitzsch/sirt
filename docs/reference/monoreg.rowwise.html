@@ -64,7 +64,7 @@ columns (monoreg.colwise) in a matrix." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.6-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.7-vv</span>
       </span>
     </div>
 
@@ -161,7 +161,7 @@ package.</p></div>
 <span class='fu'>monoreg.rowwise</span>( <span class='no'>yM</span>, <span class='no'>wM</span> )
 <span class='co'># compare results with monoreg function from fdrtool package</span>
 <span class='co'># }</span><span class='co'># NOT RUN {</span>
-<span class='kw pkg'>miceadds</span><span class='kw ns'>::</span><span class='fu'>library_install</span>(<span class='st'>"fdrtool"</span>)
+<span class='kw pkg'>miceadds</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/miceadds/topics/library_install'>library_install</a></span>(<span class='st'>"fdrtool"</span>)
 <span class='kw pkg'>fdrtool</span><span class='kw ns'>::</span><span class='fu'>monoreg</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>yM</span>[<span class='fl'>1</span>,], <span class='kw'>w</span><span class='kw'>=</span><span class='no'>wM</span>[<span class='fl'>1</span>,])$<span class='no'>yf</span>
 <span class='kw pkg'>fdrtool</span><span class='kw ns'>::</span><span class='fu'>monoreg</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>yM</span>[<span class='fl'>2</span>,], <span class='kw'>w</span><span class='kw'>=</span><span class='no'>wM</span>[<span class='fl'>2</span>,])$<span class='no'>yf</span>
 <span class='co'># }</span></pre>

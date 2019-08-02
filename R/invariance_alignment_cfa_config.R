@@ -1,11 +1,18 @@
 ## File Name: invariance_alignment_cfa_config.R
-## File Version: 0.224
+## File Version: 0.227
 
 
 invariance_alignment_cfa_config <- function(dat, group, weights=NULL,
     verbose=FALSE, ...)
 {
     CALL <- match.call()
+    #- reordering
+    ind <- order(group)
+    dat <- dat[ ind, ]
+    group <- group[ind]
+    if (!is.null(weights)){
+        weights <- weights[ind]
+    }
     groups <- unique(group)
     G <- length(groups)
     I <- ncol(dat)

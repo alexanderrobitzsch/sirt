@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.634
+%% File Version: 1.636
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -43,7 +43,7 @@ argument \code{weights}.
 
 \usage{
 invariance.alignment(lambda, nu, wgt=NULL, align.scale=c(1, 1),
-    align.pow=c(.5, .5), eps=1e-4, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
+    align.pow=c(.5, .5), eps=1e-3, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
     optimizer="optim", fixed=TRUE, ...)
 
 \method{summary}{invariance.alignment}(object, digits=3, file=NULL, ...)
@@ -140,7 +140,7 @@ and the optimization functions are defined as
     f_\nu (x)=|  x/ a_\nu ]^{p_\nu}
     \approx [ ( x/ a_\nu )^2 + \varepsilon ]^{p_\nu / 2}
             }
-using a small \eqn{ \varepsilon > 0} (e.g. .0001) to obtain
+using a small \eqn{ \varepsilon > 0} (e.g. .001) to obtain
 a differentiable optimization function. For \eqn{p_\nu=0} or \eqn{p_\lambda=0}, the
 optimization function essentially counts the number of different parameter
 and mimicks a \eqn{L_0} penalty which is zero iff the argument is zero
@@ -157,7 +157,11 @@ Note that Asparouhov and Muthen (2014) use \eqn{a_\lambda=a_\nu=1}
 and \eqn{p_\lambda=p_\nu=0.5} (which can be modified in \code{align.pow}).
 In case of \eqn{p_\lambda=2}, the penalty is approximately
 \eqn{f_\lambda(x)=x^2 }, in case of \eqn{p_\lambda=0.5}
-it is approximately \eqn{f_\lambda(x)=\sqrt{|x|} }.
+it is approximately \eqn{f_\lambda(x)=\sqrt{|x|} }. Note that \pkg{sirt} used a 
+different parametrization in versions up to 3.5. The \eqn{p} parameters have to be halved 
+for consistency with previous versions (e.g., the Asparouhov & Muthen parametrization
+corresponds to \eqn{p=.25}; see also Fischer & Karl, 2019, for an application of
+the previous parametrization).
 
 Effect sizes of approximate invariance based on \eqn{R^2} have
 been proposed by Asparouhov and Muthen (2014). These are

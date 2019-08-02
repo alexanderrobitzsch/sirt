@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.6-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.7-vv</span>
       </span>
     </div>
 
@@ -168,7 +168,7 @@ Dirichlet distribution</p></td>
 <span class='no'>alpha</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>( <span class='no'>alpha</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='no'>N</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>alpha</span>), <span class='kw'>byrow</span><span class='kw'>=</span><span class='fl'>TRUE</span>  )
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/dirichlet.simul'>dirichlet.simul</a></span>( <span class='no'>alpha</span> )
 <span class='no'>htitle</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>( <span class='no'>alpha</span>[<span class='fl'>0</span>], <span class='st'>"=.2, "</span>, <span class='no'>p</span>[<span class='fl'>1</span>], <span class='st'>"=.7"</span>   ) )
-<span class='kw pkg'>miceadds</span><span class='kw ns'>::</span><span class='fu'>library_install</span>(<span class='st'>"ade4"</span>)
+<span class='kw pkg'>miceadds</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/miceadds/topics/library_install'>library_install</a></span>(<span class='st'>"ade4"</span>)
 <span class='kw pkg'>ade4</span><span class='kw ns'>::</span><span class='fu'>triangle.plot</span>(<span class='no'>x</span>, <span class='kw'>label</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>clabel</span><span class='kw'>=</span><span class='fl'>1</span>)
 
 <span class='co'>#*** alpha0=3</span>

@@ -1,9 +1,9 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.693
+## File Version: 3.694
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
-    align.scale=c(1,1), align.pow=c(.5,.5), eps=1e-4,
+    align.scale=c(1,1), align.pow=c(.5,.5), eps=1e-3,
     psi0.init=NULL, alpha0.init=NULL, center=FALSE, optimizer="optim",
     fixed=TRUE, ... )
 {
