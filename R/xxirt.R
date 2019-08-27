@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 0.9183
+## File Version: 0.9186
 
 
 #--- user specified item response model
@@ -190,7 +190,8 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 p.xi.aj=p.xi.aj, p.aj.xi=p.aj.xi, n.ik=n.ik, EAP=EAP, dat=dat, dat_resp=dat_resp,
                 weights=weights, item_index=item_index, G=G, group=group, group_orig=group0,
                 ncat=ncat, mstepItem_method=mstep_method, partable_index=partable_index,
-                items=items, dat1=dat1, group_index=group_index, maxK=maxK, weights=weights,
+                items=items, dat1=dat1, dat1_resp=dat1_resp, dat_resp_bool=dat_resp_bool,
+                group_index=group_index, maxK=maxK, weights=weights,
                 resp_index=resp_index, converged=converged, iter=iter-1, CALL=CALL, s1=s1, s2=s2 )
     class(res) <- 'xxirt'
     return(res)

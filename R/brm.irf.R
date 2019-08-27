@@ -1,7 +1,7 @@
 ## File Name: brm.irf.R
-## File Version: 0.10
-#############################################################
-# item response function (discretized) beta response model
+## File Version: 0.11
+
+#--- item response function (discretized) beta response model
 brm.irf <- function( Theta, delta, tau, ncat, thdim=1, eps=1E-10 )
 {
     TP <- nrow(Theta)
@@ -22,4 +22,4 @@ brm.irf <- function( Theta, delta, tau, ncat, thdim=1, eps=1E-10 )
     probs <- probs / rowSums(probs)
     return(probs)
 }
-################################################################
+

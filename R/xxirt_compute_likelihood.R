@@ -1,8 +1,8 @@
 ## File Name: xxirt_compute_likelihood.R
-## File Version: 0.24
+## File Version: 0.26
 
 
-###########################################################################
+##-- xxirt compute likelihood
 xxirt_compute_likelihood <- function( probs_items, dat, resp_index,
         dat_resp_bool=NULL )
 {
@@ -16,4 +16,4 @@ xxirt_compute_likelihood <- function( probs_items, dat, resp_index,
                     probs=probs, TP=TP, maxK=maxK )
     return(p.xi.aj)
 }
-###########################################################################
+

@@ -146,7 +146,7 @@ argument <code>weights</code>.</p>
 
     <pre class="usage"><span class='fu'>invariance.alignment</span>(<span class='no'>lambda</span>, <span class='no'>nu</span>, <span class='kw'>wgt</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>align.scale</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>),
     <span class='kw'>align.pow</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.5</span>, <span class='fl'>.5</span>), <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-3</span>, <span class='kw'>psi0.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>alpha0.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>center</span><span class='kw'>=</span><span class='fl'>FALSE</span>,
-    <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"optim"</span>, <span class='kw'>fixed</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
+    <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"optim"</span>, <span class='kw'>fixed</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for invariance.alignment</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
@@ -212,7 +212,9 @@ be centered.</p></td>
     <tr>
       <th>fixed</th>
       <td><p>Logical indicating whether SD of first group should
-be fixed to one. If <code>fixed=FALSE</code>, the product of all SDs is set to one.</p></td>
+be fixed to one. If <code>fixed=FALSE</code>, the product of all SDs is set to one.
+If <code>NULL</code>, then <code>fixed</code> is automatically chosen by default. For many groups,
+<code>fixed=FALSE</code> is chosen.</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -316,8 +318,8 @@ of all group standard deviations is set to one. The mean
 and \(p_\lambda=p_\nu=0.5\) (which can be modified in <code>align.pow</code>).
 In case of \(p_\lambda=2\), the penalty is approximately
 \(f_\lambda(x)=x^2 \), in case of \(p_\lambda=0.5\)
-it is approximately \(f_\lambda(x)=\sqrt{|x|} \). Note that <span class="pkg">sirt</span> used a 
-different parametrization in versions up to 3.5. The \(p\) parameters have to be halved 
+it is approximately \(f_\lambda(x)=\sqrt{|x|} \). Note that <span class="pkg">sirt</span> used a
+different parametrization in versions up to 3.5. The \(p\) parameters have to be halved
 for consistency with previous versions (e.g., the Asparouhov &amp; Muthen parametrization
 corresponds to \(p=.25\); see also Fischer &amp; Karl, 2019, for an application of
 the previous parametrization).</p>
@@ -566,53 +568,12 @@ see <code><a href='mcmc.2pno.ml.html'>mcmc.2pno.ml</a></code>.</p></div>
 <span class='no'>nu</span> <span class='kw'>&lt;-</span> <span class='no'>data.ess2005</span>$<span class='no'>nu</span>
 
 <span class='co'># Model 1: least squares optimization</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/invariance.alignment'>invariance.alignment</a></span>( <span class='kw'>lambda</span><span class='kw'>=</span><span class='no'>lambda</span>, <span class='kw'>nu</span><span class='kw'>=</span><span class='no'>nu</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/invariance.alignment'>invariance.alignment</a></span>( <span class='kw'>lambda</span><span class='kw'>=</span><span class='no'>lambda</span>, <span class='kw'>nu</span><span class='kw'>=</span><span class='no'>nu</span>, <span class='kw'>align.pow</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>) )
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># Model 2: sparse target function and definition of scales</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/invariance.alignment'>invariance.alignment</a></span>( <span class='kw'>lambda</span><span class='kw'>=</span><span class='no'>lambda</span>, <span class='kw'>nu</span><span class='kw'>=</span><span class='no'>nu</span>, <span class='kw'>align.pow</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.5</span>,<span class='fl'>.5</span>),
-            <span class='kw'>align.scale</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>( <span class='fl'>.2</span>, <span class='fl'>.3</span>)  )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/invariance.alignment'>invariance.alignment</a></span>( <span class='kw'>lambda</span><span class='kw'>=</span><span class='no'>lambda</span>, <span class='kw'>nu</span><span class='kw'>=</span><span class='no'>nu</span>, <span class='kw'>control</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>trace</span><span class='kw'>=</span><span class='fl'>2</span>) )
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod2</span>)
-
-<span class='co'># compare results of Model 1 and Model 2</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>( <span class='no'>mod1</span>$<span class='no'>pars</span>, <span class='no'>mod2</span>$<span class='no'>pars</span> ), <span class='fl'>2</span> )
-  <span class='co'>##      alpha0 psi0 alpha0 psi0</span>
-  <span class='co'>##   1    0.06 0.87   0.05 0.91</span>
-  <span class='co'>##   2   -0.51 1.03  -0.37 0.99</span>
-  <span class='co'>##   3    0.18 0.97   0.25 1.04</span>
-  <span class='co'>##   4   -0.67 0.90  -0.53 0.90</span>
-  <span class='co'>##   5    0.09 0.98   0.10 0.99</span>
-  <span class='co'>##   6    0.23 1.03   0.28 1.00</span>
-  <span class='co'>##   7    0.27 0.97   0.14 1.10</span>
-  <span class='co'>##   8    0.18 0.90   0.07 0.89</span>
-  <span class='co'>##   [...]</span>
-
-<span class='co'># look at nu residuals to explain differences in means</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>( <span class='no'>mod1</span>$<span class='no'>nu.resid</span>, <span class='fl'>2</span>)
-  <span class='co'>##         ipfrule ipmodst ipbhprp imptrad</span>
-  <span class='co'>##    [1,]    0.15   -0.25   -0.01    0.01</span>
-  <span class='co'>##    [2,]   -0.18    0.23    0.10   -0.24</span>
-  <span class='co'>##    [3,]    0.22   -0.34    0.05   -0.02</span>
-  <span class='co'>##    [4,]    0.29   -0.04    0.12   -0.53</span>
-  <span class='co'>##    [5,]   -0.32    0.19    0.00    0.13</span>
-  <span class='co'>##    [6,]    0.05   -0.21    0.05    0.04</span>
-  <span class='co'>##    [7,]   -0.26    0.54   -0.15   -0.02</span>
-  <span class='co'>##    [8,]    0.07   -0.05   -0.10    0.12</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>( <span class='no'>mod2</span>$<span class='no'>nu.resid</span>, <span class='fl'>2</span>)
-  <span class='co'>##         ipfrule ipmodst ipbhprp imptrad</span>
-  <span class='co'>##    [1,]    0.16   -0.25    0.00    0.02</span>
-  <span class='co'>##    [2,]   -0.27    0.14    0.00   -0.30</span>
-  <span class='co'>##    [3,]    0.18   -0.37    0.00   -0.05</span>
-  <span class='co'>##    [4,]    0.19   -0.13    0.00   -0.60</span>
-  <span class='co'>##    [5,]   -0.33    0.19   -0.01    0.12</span>
-  <span class='co'>##    [6,]    0.00   -0.23    0.00    0.01</span>
-  <span class='co'>##    [7,]   -0.16    0.64   -0.01    0.04</span>
-  <span class='co'>##    [8,]    0.15    0.02   -0.02    0.19</span>
-
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colSums'>rowMeans</a></span>( <span class='no'>mod1</span>$<span class='no'>nu.resid</span> )[<span class='fl'>1</span>:<span class='fl'>8</span>], <span class='fl'>2</span> )
-  <span class='co'>##   [1] -0.02 -0.02 -0.02 -0.04  0.00 -0.02  0.03  0.01</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colSums'>rowMeans</a></span>( <span class='no'>mod2</span>$<span class='no'>nu.resid</span> )[<span class='fl'>1</span>:<span class='fl'>8</span>], <span class='fl'>2</span> )
-  <span class='co'>##   [1] -0.02 -0.11 -0.06 -0.14 -0.01 -0.06  0.13  0.09</span>
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 4: Linking with item parameters containing outliers</span>

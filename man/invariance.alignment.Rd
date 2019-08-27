@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.636
+%% File Version: 1.642
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -44,7 +44,7 @@ argument \code{weights}.
 \usage{
 invariance.alignment(lambda, nu, wgt=NULL, align.scale=c(1, 1),
     align.pow=c(.5, .5), eps=1e-3, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
-    optimizer="optim", fixed=TRUE, ...)
+    optimizer="optim", fixed=NULL, ...)
 
 \method{summary}{invariance.alignment}(object, digits=3, file=NULL, ...)
 
@@ -93,7 +93,9 @@ be centered.
    \code{"optim"} (using \code{\link[stats:optim]{stats::optim}})
    or \code{"nlminb"} (using \code{\link[stats:nlminb]{stats::nlminb}}).}
 \item{fixed}{Logical indicating whether SD of first group should
-be fixed to one. If \code{fixed=FALSE}, the product of all SDs is set to one.}
+be fixed to one. If \code{fixed=FALSE}, the product of all SDs is set to one.
+If \code{NULL}, then \code{fixed} is automatically chosen by default. For many groups,
+\code{fixed=FALSE} is chosen.}
   \item{object}{
 Object of class \code{invariance.alignment}
   }
@@ -157,8 +159,8 @@ Note that Asparouhov and Muthen (2014) use \eqn{a_\lambda=a_\nu=1}
 and \eqn{p_\lambda=p_\nu=0.5} (which can be modified in \code{align.pow}).
 In case of \eqn{p_\lambda=2}, the penalty is approximately
 \eqn{f_\lambda(x)=x^2 }, in case of \eqn{p_\lambda=0.5}
-it is approximately \eqn{f_\lambda(x)=\sqrt{|x|} }. Note that \pkg{sirt} used a 
-different parametrization in versions up to 3.5. The \eqn{p} parameters have to be halved 
+it is approximately \eqn{f_\lambda(x)=\sqrt{|x|} }. Note that \pkg{sirt} used a
+different parametrization in versions up to 3.5. The \eqn{p} parameters have to be halved
 for consistency with previous versions (e.g., the Asparouhov & Muthen parametrization
 corresponds to \eqn{p=.25}; see also Fischer & Karl, 2019, for an application of
 the previous parametrization).
@@ -430,53 +432,12 @@ lambda <- data.ess2005$lambda
 nu <- data.ess2005$nu
 
 # Model 1: least squares optimization
-mod1 <- sirt::invariance.alignment( lambda=lambda, nu=nu )
+mod1 <- sirt::invariance.alignment( lambda=lambda, nu=nu, align.pow=c(2,2) )
 summary(mod1)
 
 # Model 2: sparse target function and definition of scales
-mod2 <- sirt::invariance.alignment( lambda=lambda, nu=nu, align.pow=c(.5,.5),
-            align.scale=c( .2, .3)  )
+mod2 <- sirt::invariance.alignment( lambda=lambda, nu=nu, control=list(trace=2) )
 summary(mod2)
-
-# compare results of Model 1 and Model 2
-round( cbind( mod1$pars, mod2$pars ), 2 )
-  ##      alpha0 psi0 alpha0 psi0
-  ##   1    0.06 0.87   0.05 0.91
-  ##   2   -0.51 1.03  -0.37 0.99
-  ##   3    0.18 0.97   0.25 1.04
-  ##   4   -0.67 0.90  -0.53 0.90
-  ##   5    0.09 0.98   0.10 0.99
-  ##   6    0.23 1.03   0.28 1.00
-  ##   7    0.27 0.97   0.14 1.10
-  ##   8    0.18 0.90   0.07 0.89
-  ##   [...]
-
-# look at nu residuals to explain differences in means
-round( mod1$nu.resid, 2)
-  ##         ipfrule ipmodst ipbhprp imptrad
-  ##    [1,]    0.15   -0.25   -0.01    0.01
-  ##    [2,]   -0.18    0.23    0.10   -0.24
-  ##    [3,]    0.22   -0.34    0.05   -0.02
-  ##    [4,]    0.29   -0.04    0.12   -0.53
-  ##    [5,]   -0.32    0.19    0.00    0.13
-  ##    [6,]    0.05   -0.21    0.05    0.04
-  ##    [7,]   -0.26    0.54   -0.15   -0.02
-  ##    [8,]    0.07   -0.05   -0.10    0.12
-round( mod2$nu.resid, 2)
-  ##         ipfrule ipmodst ipbhprp imptrad
-  ##    [1,]    0.16   -0.25    0.00    0.02
-  ##    [2,]   -0.27    0.14    0.00   -0.30
-  ##    [3,]    0.18   -0.37    0.00   -0.05
-  ##    [4,]    0.19   -0.13    0.00   -0.60
-  ##    [5,]   -0.33    0.19   -0.01    0.12
-  ##    [6,]    0.00   -0.23    0.00    0.01
-  ##    [7,]   -0.16    0.64   -0.01    0.04
-  ##    [8,]    0.15    0.02   -0.02    0.19
-
-round( rowMeans( mod1$nu.resid )[1:8], 2 )
-  ##   [1] -0.02 -0.02 -0.02 -0.04  0.00 -0.02  0.03  0.01
-round( rowMeans( mod2$nu.resid )[1:8], 2 )
-  ##   [1] -0.02 -0.11 -0.06 -0.14 -0.01 -0.06  0.13  0.09
 
 #############################################################################
 # EXAMPLE 4: Linking with item parameters containing outliers

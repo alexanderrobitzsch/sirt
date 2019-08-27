@@ -38,13 +38,20 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.7  |  2019-08-02  |  Last: sirt 3.7-2
+VERSIONS sirt 3.7  |  2019-08-27  |  Last: sirt 3.7-5
 ------------------------------------------------------------------------
 
-xxx   * ...
+FIXED * fixed a bug in computation of vcov() for xxirt objects
+NOTE  * added utility function resp_groupwise()
+NOTE  * included default method in invariance.alignment() for
+        choosing fixed=TRUE or fixed=FALSE
+FIXED * corrected wrong sign of thresholds in noharm.sirt()
+        (thanks to Asghar Minaei)
+
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: resp_groupwise (1),
+        invariance.alignment (3)
 
 
 

@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.921
+## File Version: 0.922
 
 
 ########################################
@@ -146,7 +146,7 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
     #**** arrange output list
     res <- list( tanaka=tanaka, rmsr=rmsr, N.itempair=ss, pm=pm0, wgtm=wgtm, sumwgtm=sumwgtm,
                 lower=lower, upper=upper, residuals=residuals, final.constants=f0,
-                factor.cor=Pval, thresholds=betaj, uniquenesses=uqn, loadings=loadingsF,
+                factor.cor=Pval, thresholds=-betaj, uniquenesses=uqn, loadings=loadingsF,
                 loadings.theta=Fval, residcorr=Psival, model.type=model.type, modtype=modtype,
                 Nobs=N, Nitems=I, Fpatt=Fpatt, Ppatt=Ppatt, Psipatt=Psipatt,
                 dat=dat0, systime=Sys.time(), dimensions=D, display.fit=5,

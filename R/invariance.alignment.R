@@ -1,18 +1,17 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.694
+## File Version: 3.698
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
     align.scale=c(1,1), align.pow=c(.5,.5), eps=1e-3,
     psi0.init=NULL, alpha0.init=NULL, center=FALSE, optimizer="optim",
-    fixed=TRUE, ... )
+    fixed=NULL, ... )
 {
     CALL <- match.call()
     s1 <- Sys.time()
     type <- "AM"
     align.pow0 <- align.pow
     align.pow <- align.pow / 2
-    reparam <- ! fixed
 
     #-- labels for groups and items
     lambda <- invariance_alignment_proc_labels(x=lambda)
@@ -24,6 +23,10 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     if ( is.null(wgt) ){
         wgt <- 1+0*nu
     }
+
+    #- choose fixed value
+    fixed <- invariance_alignment_choose_fixed(fixed=fixed, G=G, Gmax=8)
+    reparam <- ! fixed
 
     W1 <- dim(wgt)
     wgtM <- matrix( colSums(wgt,na.rm=TRUE), nrow=W1[1], ncol=W1[2], byrow=TRUE )

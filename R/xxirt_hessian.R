@@ -1,8 +1,7 @@
 ## File Name: xxirt_hessian.R
-## File Version: 0.30
+## File Version: 0.362
 
-#############################################
-# computation of hessian matrix
+#--- computation of hessian matrix
 xxirt_hessian <- function( object )
 {
     item_list <- object$item_list
@@ -11,9 +10,11 @@ xxirt_hessian <- function( object )
     ncat <- object$ncat
     partable <- object$partable
     partable_index <- object$partable_index
-    dat <- object$dat
+    dat <- as.matrix(object$dat)
     dat_resp <- object$dat_resp
+    dat_resp_bool <- object$dat_resp_bool
     dat1 <- object$dat1
+    dat1_resp <- object$dat1_resp
     resp_index <- object$resp_index
     G <- object$G
     group <- object$group
@@ -38,14 +39,15 @@ xxirt_hessian <- function( object )
                                 partable=partable, partable_index=partable_index )
         #*** compute individual likelihood
         p.xi.aj <- xxirt_compute_likelihood( probs_items=probs_items, dat=dat,
-                             resp_index=resp_index )
+                             resp_index=resp_index, dat_resp_bool=dat_resp_bool )
         #*** compute prior distribution
         prior_Theta <- xxirt_compute_priorDistribution( Theta=Theta,
                                   customTheta=customTheta, G=G )
         #*** compute posterior distribution and expected counts
         res <- xxirt_compute_posterior( prior_Theta=prior_Theta, p.xi.aj=p.xi.aj,
                             group=group,G=G, weights=weights, dat1=dat1,
-                            dat_resp=dat_resp, maxK=maxK,group_index=group_index )
+                            dat_resp=dat_resp, maxK=maxK,group_index=group_index,
+                            dat1_resp=dat1_resp)
         n.ik <- res$n.ik
         p.aj.xi <- res$p.aj.xi
         N.ik <- res$N.ik
