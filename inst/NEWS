@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.7  |  2019-08-27  |  Last: sirt 3.7-5
+VERSIONS sirt 3.7  |  2019-09-10  |  Last: sirt 3.7-8
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in computation of vcov() for xxirt objects

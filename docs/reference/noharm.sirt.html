@@ -407,6 +407,13 @@ the link seems to be broken in the meanwhile).</p></div>
 <span class='co'># model fit</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/modelfit.sirt'>modelfit.sirt</a></span>( <span class='no'>mod1</span> ))
 
+<span class='co'>#*** compare results with NOHARM software</span>
+<span class='no'>noharm.path</span> <span class='kw'>&lt;-</span> <span class='st'>"c:/NOHARM"</span>   <span class='co'># specify path for noharm software</span>
+<span class='no'>mod1a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2noharm'>R2noharm</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>model.type</span><span class='kw'>=</span><span class='st'>"CFA"</span>,  <span class='kw'>F.pattern</span><span class='kw'>=</span><span class='no'>Fpatt</span>, <span class='kw'>F.init</span><span class='kw'>=</span><span class='no'>Fval</span>,
+             <span class='kw'>P.pattern</span><span class='kw'>=</span><span class='no'>Ppatt</span>, <span class='kw'>P.init</span><span class='kw'>=</span><span class='no'>Pval</span>, <span class='kw'>writename</span><span class='kw'>=</span><span class='st'>"r2noharm_example"</span>,
+             <span class='kw'>noharm.path</span><span class='kw'>=</span><span class='no'>noharm.path</span>, <span class='kw'>dec</span><span class='kw'>=</span><span class='st'>","</span> )
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1a</span>)
+
 <span class='co'>#**** Model 1c: put some equality constraints</span>
 <span class='no'>Fpatt</span>[ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>4</span>),<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>3</span>
 <span class='no'>Fpatt</span>[ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>7</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>)) ] <span class='kw'>&lt;-</span> <span class='fl'>4</span>

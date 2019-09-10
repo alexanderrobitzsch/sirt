@@ -1,5 +1,5 @@
 %% File Name: rasch.mirtlc.Rd
-%% File Version: 2.934
+%% File Version: 2.944
 
 \name{rasch.mirtlc}
 \alias{rasch.mirtlc}
@@ -188,35 +188,41 @@ A list with following entries
 \references{
 Bartolucci, F. (2007). A class of multidimensional
 IRT models for testing unidimensionality and clustering
-items. \emph{Psychometrika, 72}, 141-157.
+items. \emph{Psychometrika, 72}(2), 141-157.
+\doi{10.1007/s11336-005-1376-9}
 
 Bartolucci, F., Montanari, G. E., & Pandolfi, S. (2012).
 Dimensionality of the latent structure and item selection via latent
 class multidimensional IRT models.
-\emph{Psychometrika, 77}, 782-802.
+\emph{Psychometrika, 77}(4), 782-802.
+\doi{10.1007/s11336-012-9278-0}
 
 De Leeuw, J., & Verhelst, N. (1986). Maximum likelihood estimation in
-generalized Rasch models. \emph{Journal of Educational and Behavioral Statistics,
-11}, 183-196.
+generalized Rasch models. \emph{Journal of Educational and Behavioral Statistics, 11}(3), 
+183-196. \doi{10.3102/10769986011003183}
 
 Formann, A. K. (2007). (Almost) Equivalence between conditional and mixture
 maximum likelihood estimates for some models of the Rasch type.
 In M. von Davier & C. H. Carstensen:
 \emph{Multivariate and Mixture Distribution Rasch Models} (pp. 177-189).
 Springer: New York.
+\doi{10.1007/978-0-387-49839-3_11}
 
 Goodman, L. A. (1974). Exploratory latent structure
 analysis using both identifiable and unidentifiable
-models. \emph{Biometrika, 61}, 215-231.
+models. \emph{Biometrika, 61}(2), 215-231.
+\doi{10.1093/biomet/61.2.215}
 
 Lindsay, B., Clogg, C. C., & Grego, J. (1991).
 Semiparametric estimation in the Rasch model and related exponential response
 models, including a simple latent class model for item analysis.
-\emph{Journal of the American Statistical Association, 86}, 96-107.
+\emph{Journal of the American Statistical Association, 86}(413), 96-107.
+\doi{10.1080/01621459.1991.10475008}
 
 Xu, X., & von Davier, M. (2008). \emph{Fitting the structured general
 diagnostic model to NAEP data}. ETS Research Report ETS RR-08-27.
 Princeton, ETS.
+\doi{10.1002/j.2333-8504.2008.tb02113.x}
 }
 
 
@@ -230,11 +236,11 @@ Princeton, ETS.
 For the estimation of latent class models,
 rerunning the model with different starting values
 (different random seeds) is recommended.
-
-For fixed theta estimation in the multidimensional
-case, large vectors are generated during estimation
-leading to memory overflow in \R.
 }
+
+% For fixed theta estimation in the multidimensional
+% case, large vectors are generated during estimation
+% leading to memory overflow in \R.
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 

@@ -1,36 +1,31 @@
 ## File Name: rasch.mirtlc.R
-## File Version: 91.38
+## File Version: 91.53
 
-##########################################################
-# Muiltidimensional Latent Class IRT models
+
+#*** Multidimensional Latent Class IRT models
 rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
-    dimensions=NULL, group=NULL,
-    weights=rep(1,nrow(dat)),
-    theta.k=NULL, ref.item=NULL,
-    distribution.trait=FALSE,  range.b=c(-8,8), range.a=c(.2, 6 ),
-    progress=TRUE, glob.conv=10^(-5),
-    conv1=10^(-5), mmliter=1000, mstep.maxit=3, seed=0, nstarts=1,
-    fac.iter=.35 ){
-    #..................................................
-    # preliminaries
+    dimensions=NULL, group=NULL, weights=rep(1,nrow(dat)),
+    theta.k=NULL, ref.item=NULL, distribution.trait=FALSE,  range.b=c(-8,8), range.a=c(.2, 6 ),
+    progress=TRUE, glob.conv=10^(-5), conv1=10^(-5), mmliter=1000, mstep.maxit=3,
+    seed=0, nstarts=1, fac.iter=.35 )
+{
+    #--- preliminaries
     dat <- as.matrix(dat)
     theta.normal <- FALSE
     a <- c(1)
     # handle warnings
     warn_temp <- options()$warn
-#    ref.item <- NULL
     if ( is.null(theta.k) ){
-          theta.fixed<-FALSE  } else {
-          theta.fixed <- TRUE
-          if( is.vector(theta.k) ){ Nclasses <- length(theta.k) }
-          if( is.matrix(theta.k) ){ Nclasses <- nrow(theta.k) }
-            }
+        theta.fixed<-FALSE
+    } else {
+        theta.fixed <- TRUE
+        if( is.vector(theta.k) ){ Nclasses <- length(theta.k) }
+        if( is.matrix(theta.k) ){ Nclasses <- nrow(theta.k) }
+    }
     s1 <- Sys.time()
     if ( is.null(group)){ group <- rep(1, nrow(dat)) }
     G <- length( unique( group ))
-    #    rescale weights
 
-#    weights <- nrow(dat) * weights / sum(weights )
     dat2 <- dat
     dat2.resp <- 1* ( 1- is.na(dat ))
     dat2[ is.na(dat) ] <- 0
@@ -39,8 +34,8 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
     dat1[,2] <- weights
     I <- ncol(dat2)     # number of items
     n <- nrow(dat2)     # number of persons
-    # initialize probabilities
-    #******************
+
+    #***initialize probabilities
     if ( modeltype=="LC"){
         D <- 1
         pi.k <- rep( 1/Nclasses, Nclasses )
@@ -50,51 +45,54 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
         theta.k <- stats::qnorm( ( seq( 1, Nclasses, 1 ) - .5 ) / Nclasses )
         for (cc in 1:Nclasses ){
             lc.probs[ cc, ] <- stats::plogis( theta.k[cc] - b )
-                    }
+        }
         pjk <- lc.probs
-                        }  # end LC
-    #******************
-    # MLC
+    }  # end LC
+
+    #*** MLC
     if ( modeltype %in% c("MLC1","MLC2") ){
-        if ( is.null( dimensions ) ){ D <- 1 } else {
+        if ( is.null( dimensions ) ){
+            D <- 1
+        } else {
             D <- length( unique( dimensions ) )
             dimensions <- match( dimensions, unique( dimensions ) )
             distribution.trait <- FALSE
-                                        }
+        }
         inut <- is.null(theta.k)
         if (inut){
             theta.k <- 2* stats::qnorm( seq( 1 / Nclasses / 2, 1, 1/Nclasses ) )
-                            } else {
-                    if (D==1){ Nclasses <- length(theta.k )  }    # works for D=1
-                    if (D>1){ Nclasses <- nrow(theta.k )  }
-                            }
-
-        if ( D==1){ pi.k <- dnorm( theta.k ) ; Qmatrix <- NULL }
+        } else {
+            if (D==1){ Nclasses <- length(theta.k )  }    # works for D=1
+            if (D>1){ Nclasses <- nrow(theta.k )  }
+        }
+        if ( D==1){
+            pi.k <- stats::dnorm(theta.k)
+            Qmatrix <- NULL
+        }
         if ( D > 1 ){
             Qmatrix <- matrix( 0, I, D )
             Qmatrix[ cbind( 1:I, dimensions ) ] <- 1
             if ( inut ){
-                 theta.k <-
-                        matrix( theta.k, nrow=Nclasses, ncol=D, byrow=FALSE)
-                 theta.kstart <- theta.k
-                 if ( seed[1] !=0 ){
-                 if (seed[1] >0){  set.seed( seed[1] ) } else{ set.seed( Sys.time() ) }
-                     theta.k <- theta.k + matrix( rnorm( Nclasses*D, sd=2 ), ncol=D )
-                                }
-                        } # end inut (is.null(theta.k))
+                theta.k <- matrix( theta.k, nrow=Nclasses, ncol=D, byrow=FALSE)
+                theta.kstart <- theta.k
+                if ( seed[1] !=0 ){
+                    if (seed[1] >0){  set.seed( seed[1] ) } else{ set.seed( Sys.time() ) }
+                    theta.k <- theta.k + matrix( rnorm( Nclasses*D, sd=2 ), ncol=D )
+                }
+            } # end inut (is.null(theta.k))
             if ( D > 1 ){ Nclasses <- nrow( theta.k ) }
             pi.k <- rep(1/Nclasses, Nclasses )
-                                } # end if D > 1
+        } # end if D > 1
         pi.k <- pi.k / sum( pi.k )
         b <- - stats::qlogis( colMeans( dat, na.rm=T ) )
         a <- rep(1,I)
         if (G>1){ pi.k <- matrix( pi.k, nrow=Nclasses, ncol=G ) }
         lc.probs <- matrix( NA, nrow=Nclasses, ncol=I )
         if (D==1){
-        for (cc in 1:Nclasses ){
-            lc.probs[ cc, ] <- stats::plogis( theta.k[cc] - b )
-                    }
-                }
+            for (cc in 1:Nclasses ){
+                lc.probs[ cc, ] <- stats::plogis( theta.k[cc] - b )
+            }
+        }
         pjk <- lc.probs
         # design matrix theta
         des1 <- matrix( 0, nrow=I*Nclasses, ncol=Nclasses )
@@ -105,15 +103,14 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
         if ( D > 1 ){
             des.theta <- NULL
             for (dd in 1:D){
-                # dd <- 1
                 ind.dd <- which( dimensions !=dd )
                 sel.dd <- ( 1:( nrow(des1) ) ) %% I
                 sel.dd[ sel.dd==0 ] <- I
                 des1.dd <- des1
                 des1.dd[ sel.dd %in% ind.dd, ] <- 0
                 des.theta <- cbind( des.theta, des1.dd )
-                            }
-                }
+            }
+        }
         # design matrix item difficulties
         des2 <- matrix( 0, nrow=I*Nclasses, ncol=I )
         g1 <- cbind( seq(1,I*Nclasses), rep( 1:I, Nclasses ) )
@@ -152,7 +149,7 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
             seed <- round( stats::runif( nstarts, 1, 10000 ))
                     }
         devL <- rep(NA, nstarts )
-        NN1dev <-  1*10^90
+        NN1dev <-  1e90
         #####################################
         # different starts
         for (nn in 1:nstarts ){
@@ -180,106 +177,119 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
     disp <- "...........................................................\n"
     NN1dev <-  1*10^90
 
-
-    ######################################
+    #--------------------------------------------------------------
     # begin EM algorithm
     while ( ( dev.change > glob.conv | par.change > conv1 ) & iter < mmliter ){
-            if (progress){
-              cat(disp)
-              cat("Iteration", iter+1, "   ", paste( Sys.time() ), "\n" )
-              flush.console()
-                        }
-    pjk0 <- pjk
-    pi.k0 <- pi.k
-    theta.k0 <- theta.k
-    dev0 <- dev
-#     b0 <- b
-# a0 <- Sys.time()
-    # E step latent class analysis
-    if ( modeltype=="LC"){
-        res1 <- .e.step.mirtlc.lc( dat1, dat2, dat2.resp, pi.k, pjk, I,
-                           group, G,  theta.k, f.qk.yi=NULL  )
-                            }
-    if ( modeltype %in% c("MLC1","MLC2")){
-        res1 <- .e.step.mirtlc.mlc1( dat1, dat2, dat2.resp, pi.k, pjk, I,
-                           b, a, group, G,  theta.k,
-                           D, dimensions, Qmatrix, f.qk.yi=NULL  )
-                            }
+        if (progress){
+            cat(disp)
+            cat("Iteration", iter+1, "   ", paste( Sys.time() ), "\n" )
+            utils::flush.console()
+        }
+        pjk0 <- pjk
+        pi.k0 <- pi.k
+        theta.k0 <- theta.k
+        dev0 <- dev
+        # E step latent class analysis
+        if ( modeltype=="LC"){
+            res1 <- .e.step.mirtlc.lc( dat1, dat2, dat2.resp, pi.k, pjk, I,
+                            group, G,  theta.k, f.qk.yi=NULL  )
+        }
+        if ( modeltype %in% c("MLC1","MLC2")){
+            res1 <- .e.step.mirtlc.mlc1( dat1, dat2, dat2.resp, pi.k, pjk, I,
+                            b, a, group, G,  theta.k,
+                            D, dimensions, Qmatrix, f.qk.yi=NULL  )
+        }
 # a1 <- Sys.time() ; adiff <- a1-a0 ; cat("\ne step", adiff ) ; a0 <- a1
-
-    n.k <- res1$n.k ; n.jk <- res1$n.jk
-    r.jk <-  res1$r.jk ; f.qk.yi <- res1$f.qk.yi
-    pjk <- res1$pjk   ; f.yi.qk <- res1$f.yi.qk
-    ll <- res1$ll   ; dev <- -2*ll
-    # Mstep:
-    if ( modeltype=="LC"){
-        res2 <- .m.step.mirtlc.lc( pjk, n.k, r.jk, n.jk, G, Nclasses)
-                          }
-    if ( modeltype%in%c("MLC1","MLC2") ){
-    options(warn=-1)
-        res2 <- .m.step.mirtlc.mlc1( pjk, n.k, r.jk, n.jk, G, Nclasses,
-                theta.k, b, a, I, ref.item, mstep.maxit,
-                des.theta, des.b, theta.fixed, theta.normal,
-                f.qk.yi    , D, distribution.trait, est.a, Qmatrix, modeltype,
-                 range.b, range.a, iter, fac.iter )
-        b <- res2$b ; theta.k <- res2$theta.k ; pi.k <- res2$pi.k
-        a <- res2$a
-    options(warn=warn_temp)
-                            }
-
+        n.k <- res1$n.k
+        n.jk <- res1$n.jk
+        r.jk <-  res1$r.jk
+        f.qk.yi <- res1$f.qk.yi
+        pjk <- res1$pjk
+        f.yi.qk <- res1$f.yi.qk
+        ll <- res1$ll
+        dev <- -2*ll
+        # Mstep:
+        if ( modeltype=="LC"){
+            res2 <- .m.step.mirtlc.lc( pjk, n.k, r.jk, n.jk, G, Nclasses)
+        }
+        if ( modeltype %in% c("MLC1","MLC2") ){
+            options(warn=-1)
+            res2 <- rasch_mirtlc_mstep_mlc1( pjk=pjk, n.k=n.k, r.jk=r.jk, n.jk=n.jk, G=G,
+                        Nclasses=Nclasses, theta.k=theta.k, b=b, a=a, I=I, ref.item=ref.item,
+                        mstep.maxit=mstep.maxit, des.theta=des.theta, des.b=des.b,
+                        theta.fixed=theta.fixed, theta.normal=theta.normal, f.qk.yi=f.qk.yi, D=D,
+                        distribution.trait=distribution.trait, est.a=est.a, Qmatrix=Qmatrix,
+                        modeltype=modeltype, range.b=range.b, range.a=range.a, iter=iter,
+                        fac.iter=fac.iter )
+            b <- res2$b
+            theta.k <- res2$theta.k
+            pi.k <- res2$pi.k
+            a <- res2$a
+            options(warn=warn_temp)
+        }
 
 # a1 <- Sys.time() ; adiff <- a1-a0 ; cat("\nm step", adiff ) ; a0 <- a1
-    pi.k <- res2$pi.k ;  pjk <- res2$pjk
-    # prevent label switching (modeltype=="LC")
-    if ( modeltype=="LC"){
-        ind <- order( rowMeans( pjk ) )
-        pjk <- pjk[ ind,, drop=FALSE]
-        if (G==1){ pi.k <- pi.k[ ind ] }
-        if (G>1){ pi.k <- pi.k[ ind, ] }
-                            }
+        pi.k <- res2$pi.k
+        pjk <- res2$pjk
+        # prevent label switching (modeltype=="LC")
+        if ( modeltype=="LC"){
+            ind <- order( rowMeans( pjk ) )
+            pjk <- pjk[ ind,, drop=FALSE]
+            if (G==1){ pi.k <- pi.k[ ind ] }
+            if (G>1){ pi.k <- pi.k[ ind, ] }
+        }
 
+        # convergence criteria
+        a1 <- max( abs( pjk - pjk0 ) )
+        a2 <- max( abs( pi.k - pi.k0 ) )
+        if ( modeltype %in% c("MLC1","MLC2") ){
+            a3 <- max( abs( theta.k - theta.k0 ))
+        } else {
+            a3 <- 0
+        }
+        dev.change <- abs( ( dev - dev0)/ dev0 )
+        par.change <- max( c(a1,a2,a3))
+        iter <- iter + 1
 
-
-    # convergence criteria
-    a1 <- max( abs( pjk - pjk0 ) )
-    a2 <- max( abs( pi.k - pi.k0 ) )
-    if ( modeltype%in%c("MLC1","MLC2") ){
-            a3 <- max( abs( theta.k - theta.k0 ))  } else { a3 <- 0 }
-    dev.change <- abs( ( dev - dev0)/ dev0 )
-    par.change <- max( c(a1,a2,a3))
-    iter <- iter + 1
-
-    # settings
-    if ( dev < NN1dev ){
-        NN1pjk <- pjk ;         NN1pi.k <- pi.k
-        NN1dev <- dev ;         NN1ll <- ll
-        NN1res1 <- res1 ; NN1theta.k <- theta.k
-        NN1a <- a ; NN1b <- b ; NN1iter <- iter
-                        }
-
-        if ( progress  ){
-                   cat( paste( "   Deviance=",
+        # settings
+        if ( dev < NN1dev ){
+            NN1pjk <- pjk
+            NN1pi.k <- pi.k
+            NN1dev <- dev
+            NN1ll <- ll
+            NN1res1 <- res1
+            NN1theta.k <- theta.k
+            NN1a <- a
+            NN1b <- b
+            NN1iter <- iter
+        }
+        if (progress){
+            cat( paste( "   Deviance=",
                     round( dev, 4 ),
                     if (iter > 0 ){ " | Deviance change=" } else {""},
                     if( iter>0){round( - dev + dev0, 6 )} else { ""},
-                     "  START ", nn, " (Seed ", seed.nn, ")\n",sep="") )
-                    # maximum probability change
-                    cat( paste( "    Maximum item parameter change=",
+                    "  START ", nn, " (Seed ", seed.nn, ")\n",sep="") )
+            # maximum probability change
+            cat( paste( "    Maximum item parameter change=",
                             paste( round(a1,6), collapse=" " ), "\n", sep=""))
-                    # maximum probability distribution parameter change
-                    cat( paste( "    Maximum probability distribution change=",
+            # maximum probability distribution parameter change
+            cat( paste( "    Maximum probability distribution change=",
                             paste( round(a2,6), collapse=" " ), "\n", sep=""))
-                    cat( paste( "    Maximum theta parameter change=",
+            cat( paste( "    Maximum theta parameter change=",
                             paste( round(a3,6), collapse=" " ), "\n", sep=""))
-                            }
-    #    print( paste( iter, ll) ) ; flush.console()
         }
-    ##### end algorithm  #***************************
+    }
+    #---------------- end EM algorithm  -------------------------------
 
-        NN1pjk -> pjk ;         NN1pi.k -> pi.k
-        NN1dev -> dev ;         NN1ll -> ll
-        NN1res1 -> res1 ; NN1theta.k -> theta.k
-        NN1a -> a ; NN1b -> b ; NN1iter -> iter
+    NN1pjk -> pjk
+    NN1pi.k -> pi.k
+    NN1dev -> dev
+    NN1ll -> ll
+    NN1res1 -> res1
+    NN1theta.k -> theta.k
+    NN1a -> a
+    NN1b -> b
+    NN1iter -> iter
 
     ##############################################################
     # collect results of nstarts
@@ -429,26 +439,19 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
     rprobs[,2,] <- t( pjk )
     rprobs[,1,] <- 1 - t(pjk)
 
-
-    ###########################
-    # collect results
+    #--- OUTPUT
     s2 <- Sys.time()
-    res <- list( "pjk"=pjk, "rprobs"=rprobs, "pi.k"=pi.k, "theta.k"=theta.k,
-            "item"=item, "trait"=trait, "mean.trait"=mean.trait,
-            "sd.trait"=sd.trait, "skewness.trait"=skewness.trait,
-            "cor.trait"=cor.trait,
-            "ic"=ic, "D"=D, "G"=G,
-            "deviance"=dev, "ll"=ll, "Nclasses"=Nclasses,
-            "modeltype"=modeltype, "estep.res"=res1, "dat"=dat,
-            "devL"=devL, "seedL"=seed,  "iter"=iter, "s1"=s1, "s2"=s2,
-            "distribution.trait"=distribution.trait)
+    res <- list( pjk=pjk, rprobs=rprobs, pi.k=pi.k, theta.k=theta.k,
+            item=item, trait=trait, mean.trait=mean.trait,
+            sd.trait=sd.trait, skewness.trait=skewness.trait,
+            cor.trait=cor.trait, ic=ic, D=D, G=G,
+            deviance=dev, ll=ll, Nclasses=Nclasses,
+            modeltype=modeltype, estep.res=res1, dat=dat,
+            devL=devL, seedL=seed,  iter=iter, s1=s1, s2=s2,
+            distribution.trait=distribution.trait)
     class(res) <- "rasch.mirtlc"
     return(res)
         }
 ####################################################################
-
-
-
-
 
 
