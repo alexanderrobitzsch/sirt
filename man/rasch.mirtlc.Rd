@@ -1,5 +1,5 @@
 %% File Name: rasch.mirtlc.Rd
-%% File Version: 2.944
+%% File Version: 2.945
 
 \name{rasch.mirtlc}
 \alias{rasch.mirtlc}
@@ -198,7 +198,7 @@ class multidimensional IRT models.
 \doi{10.1007/s11336-012-9278-0}
 
 De Leeuw, J., & Verhelst, N. (1986). Maximum likelihood estimation in
-generalized Rasch models. \emph{Journal of Educational and Behavioral Statistics, 11}(3), 
+generalized Rasch models. \emph{Journal of Educational and Behavioral Statistics, 11}(3),
 183-196. \doi{10.3102/10769986011003183}
 
 Formann, A. K. (2007). (Almost) Equivalence between conditional and mixture

@@ -1,5 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.46
+%% File Version: 1.475
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -96,33 +96,42 @@ and MCOV100}
 \item{ccovtable}{Individual contributions to conditional covariance}
 \item{ccov.matrix}{Evaluated conditional covariance}
 }
+
+
 \references{
 Bonifay, W. E., Reise, S. P., Scheines, R., & Meijer, R. R. (2015).
 When are multidimensional data unidimensional enough for structural
 equation modeling? An evaluation of the DETECT multidimensionality index.
-\emph{Structural Equation Modeling, 22}, 504-516.
+\emph{Structural Equation Modeling, 22}(4), 504-516.
+\doi{10.1080/10705511.2014.938596}
 
 Jang, E. E., & Roussos, L. (2007). An investigation into the dimensionality
 of TOEFL using conditional covariance-based nonparametric approach.
-\emph{Journal of Educational Measurement, 44}, 1-21.
+\emph{Journal of Educational Measurement, 44}(1), 1-21.
+\doi{10.1111/j.1745-3984.2007.00024.x}
 
 Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996).
 Conditional covariance-based nonparametric multidimensionality assessment.
-\emph{Applied Psychological Measurement, 20}, 331-354.
+\emph{Applied Psychological Measurement}, \bold{20}(4), 331-354.
+\doi{10.1177/014662169602000403}
 
 Zhang, J., & Stout, W. (1999a). Conditional covariance structure
 of generalized compensatory multidimensional items.
-\emph{Psychometrika, 64}, 129-152.
+\emph{Psychometrika}, \bold{64}(2), 129-152.
+\doi{10.1007/BF02294532}
 
 Zhang, J., & Stout, W. (1999b). The theoretical DETECT index of
 dimensionality and its application to approximate simple structure.
-\emph{Psychometrika, 64}, 213-249.
+\emph{Psychometrika, 64}(2), 213-249.
+\doi{10.1007/BF02294536}
 
 Zhang, J. (2007). Conditional covariance theory and DETECT for
-polytomous items. \emph{Psychometrika, 72}, 69-91.
+polytomous items. \emph{Psychometrika, 72}(1), 69-91.
+\doi{10.1007/s11336-004-1257-7}
 
 Zhang, J. (2013). A procedure for dimensionality analyses of
-response data from various test designs. \emph{Psychometrika, 78}, 37-58.
+response data from various test designs. \emph{Psychometrika, 78}(1), 37-58.
+\doi{10.1007/s11336-012-9287-z}
 }
 
 

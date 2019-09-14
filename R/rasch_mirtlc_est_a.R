@@ -1,24 +1,25 @@
 ## File Name: rasch_mirtlc_est_a.R
-## File Version: 0.14
+## File Version: 0.16
 
 
 #-- estimation of a parameter (discrimination parameter)
 rasch_mirtlc_est_a <- function( theta.k, b, fixed.a, pjk, alpha1, alpha2, h,
         G, I, r.jk, n.jk, est.a, Qmatrix, iter, fac.iter, dimensions=NULL )
 {
-    eps <- 000000005
+    eps <- 0.000000005
     #** a
-    pjk <- .prob.raschtype.genlogis( theta.k, b, alpha1, alpha2, fixed.a, Qmatrix)
-    pjk <- squeeze_probs(probs=pjk, eps=eps)
+    pjk <- prob_raschtype_genlogis( theta.k, b, alpha1, alpha2, fixed.a, Qmatrix)
+    pjk <- sirt_squeeze_probs(probs=pjk, eps=eps)
     pjk.M <- t(pjk)
     qjk.M <- 1 - pjk.M
-    pjk1 <- .prob.raschtype.genlogis( theta.k, b, alpha1, alpha2, fixed.a + h,Qmatrix)
-    pjk1 <- squeeze_probs(probs=pjk1, eps=eps)
+    pjk1 <- prob_raschtype_genlogis( theta.k, b, alpha1, alpha2, fixed.a + h,Qmatrix)
+    pjk1 <- sirt_squeeze_probs(probs=pjk1, eps=eps)
     pjk1.M <- t(pjk1)
     qjk1.M <- 1 - pjk1.M
-    pjk2 <- .prob.raschtype.genlogis( theta.k, b, alpha1, alpha2, fixed.a - h,Qmatrix)
-    pjk2 <- squeeze_probs(probs=pjk2, eps=eps)
-    pjk2.M <- t(pjk2) ; qjk2.M <- 1 - pjk2.M
+    pjk2 <- prob_raschtype_genlogis( theta.k, b, alpha1, alpha2, fixed.a - h,Qmatrix)
+    pjk2 <- sirt_squeeze_probs(probs=pjk2, eps=eps)
+    pjk2.M <- t(pjk2)
+    qjk2.M <- 1 - pjk2.M
     # first order derivative
     # f(x+h) - f(x-h)=2* f'(x) * h
     ll0 <- ll1 <- ll2 <- matrix(0, I, G)
@@ -32,7 +33,7 @@ rasch_mirtlc_est_a <- function( theta.k, b, fixed.a, pjk, alpha1, alpha2, h,
     ll1 <- rowSums(ll1)
     ll2 <- rowSums(ll2)
     # aggregate with respect to estimation of a
-    a1 <- stats::aggregate( cbind( ll0, ll1, ll2 ), list(est.a), sum, na.rm=T)
+    a1 <- stats::aggregate( cbind( ll0, ll1, ll2 ), list(est.a), sum, na.rm=TRUE)
     a1 <- a1[ a1[,1] > 0, ]
     ll0 <- a1[,2]
     ll1 <- a1[,3]

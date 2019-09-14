@@ -19,7 +19,7 @@ IPN - Leibniz Institute for Science and Mathematics Education
 at Kiel University
 
 Questions or suggestions about sirt can be sent to:
-robitzsch@ipn.uni-kiel.de
+robitzsch@leibniz-ipn.de
 
 For reporting a bug, please provide always a reproducible R script 
 and (if necessary) a corresponding dataset.
@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.7  |  2019-09-10  |  Last: sirt 3.7-8
+VERSIONS sirt 3.7  |  2019-09-14  |  Last: sirt 3.7-15
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in computation of vcov() for xxirt objects
@@ -47,6 +47,8 @@ NOTE  * included default method in invariance.alignment() for
         choosing fixed=TRUE or fixed=FALSE
 FIXED * corrected wrong sign of thresholds in noharm.sirt()
         (thanks to Asghar Minaei)
+FIXED * fixed a bug in rasch.mirtlc() for multiple dimensions
+        (thanks to @andreanorcinipala, issue #10)
 
 
 DATA  * included/modified datasets: ---
@@ -63,7 +65,6 @@ VERSIONS sirt 3.6  |  2019-08-01  |  Last: sirt 3.6-21
 
 FIXED * corrected a bug in lsem.bootstrap() (thanks to Ingo Seifert)
 NOTE  * added utility function scale_group_means()
-NOTE  * included utility function scale_group_means()
 NOTE  * changed parameterization of powers in invariance alignment 
         to have clear correspondence to regularization methods
         (e.g., old: p=.25; new: p=.5)

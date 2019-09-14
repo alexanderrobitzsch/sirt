@@ -1,5 +1,5 @@
 ## File Name: rasch.mirtlc.R
-## File Version: 91.53
+## File Version: 91.645
 
 
 #*** Multidimensional Latent Class IRT models
@@ -131,190 +131,187 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
                 ind.dd <- h1[ which.min( pval[h1] - 1/2 )[1] ]
                 ref.item <- c( ref.item, ind.dd )
                     }
-                    }
+        }
 
 #        if ( theta.normal ){ ref.item <- NULL }
-#        if ( ! is.null(ref.item ) ){
-        des2 <- des2[, - ref.item ]#        }
+        des2 <- des2[, - ref.item ]
         # reference item
         b[ ref.item ] <- 0
         est.a <- seq(1,I)
         est.a[ref.item] <- 0
-#        des.theta <- des1
         des.b <- des2
-                        }  # end MLC
+    }  # end MLC
     #***************
-        # iterate over different starts
-        if ( ( seed[1] < 0) | ( length(seed) < nstarts) ){
-            seed <- round( stats::runif( nstarts, 1, 10000 ))
-                    }
+
+    #** iterate over different starts
+    if ( ( seed[1] < 0) | ( length(seed) < nstarts) ){
+        seed <- round( stats::runif( nstarts, 1, 10000 ))
+    }
         devL <- rep(NA, nstarts )
         NN1dev <-  1e90
-        #####################################
-        # different starts
-        for (nn in 1:nstarts ){
-            seed.nn <- seed[nn]
-            if ( seed[nn] > 0 ){
-                set.seed( seed.nn )
-                pjk <- matrix( stats::runif( I*Nclasses ), nrow=Nclasses, ncol=I )
-#                theta.k <- theta.k + matrix( rnorm( Nclasses*D, sd=.7 ), ncol=D
-#                theta.k <- theta.kstart + matrix( rnorm( Nclasses*D, sd=.07 ), ncol=D )
+
+    #---- different starts
+    for (nn in 1:nstarts ){
+        seed.nn <- seed[nn]
+        if ( seed[nn] > 0 ){
+            set.seed( seed.nn )
+            pjk <- matrix( stats::runif( I*Nclasses ), nrow=Nclasses, ncol=I )
+            theta.k <- theta.k + matrix( rnorm( Nclasses*D, sd=.7 ), ncol=D)
             if (modeltype%in%c("MLC1","MLC2") & ( nstarts > 1 ) & ( ! theta.fixed ) & (D>1) ){
-                    pi.k <- stats::runif( Nclasses, 0, 1 )
-                    pi.k <- pi.k / sum( pi.k )
-                    theta.k <- .7*theta.k + matrix( stats::rnorm( Nclasses*D, sd=.97 ), ncol=D )
-                                }
+                pi.k <- stats::runif( Nclasses, 0, 1 )
+                pi.k <- pi.k / sum( pi.k )
+                theta.k <- .7*theta.k + matrix( stats::rnorm( Nclasses*D, sd=.97 ), ncol=D )
+            }
             if (modeltype%in%c("MLC1","MLC2") & ( nstarts > 1 ) & ( ! theta.fixed ) & (D==1) ){
                     pi.k <- stats::runif( Nclasses, 0, 1 )
                     pi.k <- pi.k / sum( pi.k )
                     theta.k <- .7*theta.k + stats::rnorm( Nclasses*D, sd=.97 )
-                                }
-                                }
-    dev <- 1
-    iter <- 0
-    dev.change <- par.change <- 1000
-    # display
-    disp <- "...........................................................\n"
-    NN1dev <-  1*10^90
+            }
+        }
+        dev <- 1
+        iter <- 0
+        dev.change <- par.change <- 1000
+        # display
+        disp <- "...........................................................\n"
+        NN1dev <-  1e90
 
-    #--------------------------------------------------------------
-    # begin EM algorithm
-    while ( ( dev.change > glob.conv | par.change > conv1 ) & iter < mmliter ){
-        if (progress){
-            cat(disp)
-            cat("Iteration", iter+1, "   ", paste( Sys.time() ), "\n" )
-            utils::flush.console()
-        }
-        pjk0 <- pjk
-        pi.k0 <- pi.k
-        theta.k0 <- theta.k
-        dev0 <- dev
-        # E step latent class analysis
-        if ( modeltype=="LC"){
-            res1 <- .e.step.mirtlc.lc( dat1, dat2, dat2.resp, pi.k, pjk, I,
-                            group, G,  theta.k, f.qk.yi=NULL  )
-        }
-        if ( modeltype %in% c("MLC1","MLC2")){
-            res1 <- .e.step.mirtlc.mlc1( dat1, dat2, dat2.resp, pi.k, pjk, I,
-                            b, a, group, G,  theta.k,
-                            D, dimensions, Qmatrix, f.qk.yi=NULL  )
-        }
-# a1 <- Sys.time() ; adiff <- a1-a0 ; cat("\ne step", adiff ) ; a0 <- a1
-        n.k <- res1$n.k
-        n.jk <- res1$n.jk
-        r.jk <-  res1$r.jk
-        f.qk.yi <- res1$f.qk.yi
-        pjk <- res1$pjk
-        f.yi.qk <- res1$f.yi.qk
-        ll <- res1$ll
-        dev <- -2*ll
-        # Mstep:
-        if ( modeltype=="LC"){
-            res2 <- .m.step.mirtlc.lc( pjk, n.k, r.jk, n.jk, G, Nclasses)
-        }
-        if ( modeltype %in% c("MLC1","MLC2") ){
-            options(warn=-1)
-            res2 <- rasch_mirtlc_mstep_mlc1( pjk=pjk, n.k=n.k, r.jk=r.jk, n.jk=n.jk, G=G,
-                        Nclasses=Nclasses, theta.k=theta.k, b=b, a=a, I=I, ref.item=ref.item,
-                        mstep.maxit=mstep.maxit, des.theta=des.theta, des.b=des.b,
-                        theta.fixed=theta.fixed, theta.normal=theta.normal, f.qk.yi=f.qk.yi, D=D,
-                        distribution.trait=distribution.trait, est.a=est.a, Qmatrix=Qmatrix,
-                        modeltype=modeltype, range.b=range.b, range.a=range.a, iter=iter,
-                        fac.iter=fac.iter )
-            b <- res2$b
-            theta.k <- res2$theta.k
+        #--------------------------------------------------------------
+        #------------------ begin EM algorithm -------------------------
+        while ( ( dev.change > glob.conv | par.change > conv1 ) & iter < mmliter ){
+            if (progress){
+                cat(disp)
+                cat("Iteration", iter+1, "   ", paste( Sys.time() ), "\n" )
+                utils::flush.console()
+            }
+            pjk0 <- pjk
+            pi.k0 <- pi.k
+            theta.k0 <- theta.k
+            dev0 <- dev
+            # E step latent class analysis
+            if ( modeltype=="LC"){
+                res1 <- rasch_mirtlc_estep_lc( dat1=dat1, dat2=dat2, dat2.resp=dat2.resp,
+                            pi.k=pi.k, pjk=pjk, I=I, group=group, G=G, theta.k=theta.k,
+                            f.qk.yi=NULL )
+            }
+            if ( modeltype %in% c("MLC1","MLC2")){
+                res1 <- rasch_mirtlc_estep_mlc1( dat1=dat1, dat2=dat2, dat2.resp=dat2.resp,
+                                pi.k=pi.k, pjk=pjk, I=I, b=b, a=a, group=group, G=G,
+                                theta.k=theta.k, D=D, dimensions=dimensions,
+                                Qmatrix=Qmatrix, f.qk.yi=NULL )
+            }
+    # a1 <- Sys.time() ; adiff <- a1-a0 ; cat("\ne step", adiff ) ; a0 <- a1
+            n.k <- res1$n.k
+            n.jk <- res1$n.jk
+            r.jk <-  res1$r.jk
+            f.qk.yi <- res1$f.qk.yi
+            pjk <- res1$pjk
+            f.yi.qk <- res1$f.yi.qk
+            ll <- res1$ll
+            dev <- -2*ll
+            # Mstep:
+            if ( modeltype=="LC"){
+                res2 <- rasch_mirtlc_mstep_lc( pjk=pjk, n.k=n.k, r.jk=r.jk, n.jk=n.jk, G=G,
+                                Nclasses=Nclasses )
+            }
+            if ( modeltype %in% c("MLC1","MLC2") ){
+                options(warn=-1)
+                res2 <- rasch_mirtlc_mstep_mlc1( pjk=pjk, n.k=n.k, r.jk=r.jk, n.jk=n.jk, G=G,
+                            Nclasses=Nclasses, theta.k=theta.k, b=b, a=a, I=I, ref.item=ref.item,
+                            mstep.maxit=mstep.maxit, des.theta=des.theta, des.b=des.b,
+                            theta.fixed=theta.fixed, theta.normal=theta.normal, f.qk.yi=f.qk.yi, D=D,
+                            distribution.trait=distribution.trait, est.a=est.a, Qmatrix=Qmatrix,
+                            modeltype=modeltype, range.b=range.b, range.a=range.a, iter=iter,
+                            fac.iter=fac.iter )
+                b <- res2$b
+                theta.k <- res2$theta.k
+                pi.k <- res2$pi.k
+                a <- res2$a
+                options(warn=warn_temp)
+            }
+
+    # a1 <- Sys.time() ; adiff <- a1-a0 ; cat("\nm step", adiff ) ; a0 <- a1
             pi.k <- res2$pi.k
-            a <- res2$a
-            options(warn=warn_temp)
-        }
-
-# a1 <- Sys.time() ; adiff <- a1-a0 ; cat("\nm step", adiff ) ; a0 <- a1
-        pi.k <- res2$pi.k
-        pjk <- res2$pjk
-        # prevent label switching (modeltype=="LC")
-        if ( modeltype=="LC"){
-            ind <- order( rowMeans( pjk ) )
-            pjk <- pjk[ ind,, drop=FALSE]
-            if (G==1){ pi.k <- pi.k[ ind ] }
-            if (G>1){ pi.k <- pi.k[ ind, ] }
-        }
-
-        # convergence criteria
-        a1 <- max( abs( pjk - pjk0 ) )
-        a2 <- max( abs( pi.k - pi.k0 ) )
-        if ( modeltype %in% c("MLC1","MLC2") ){
-            a3 <- max( abs( theta.k - theta.k0 ))
-        } else {
-            a3 <- 0
-        }
-        dev.change <- abs( ( dev - dev0)/ dev0 )
-        par.change <- max( c(a1,a2,a3))
-        iter <- iter + 1
-
-        # settings
-        if ( dev < NN1dev ){
-            NN1pjk <- pjk
-            NN1pi.k <- pi.k
-            NN1dev <- dev
-            NN1ll <- ll
-            NN1res1 <- res1
-            NN1theta.k <- theta.k
-            NN1a <- a
-            NN1b <- b
-            NN1iter <- iter
-        }
-        if (progress){
-            cat( paste( "   Deviance=",
-                    round( dev, 4 ),
-                    if (iter > 0 ){ " | Deviance change=" } else {""},
-                    if( iter>0){round( - dev + dev0, 6 )} else { ""},
-                    "  START ", nn, " (Seed ", seed.nn, ")\n",sep="") )
-            # maximum probability change
-            cat( paste( "    Maximum item parameter change=",
-                            paste( round(a1,6), collapse=" " ), "\n", sep=""))
-            # maximum probability distribution parameter change
-            cat( paste( "    Maximum probability distribution change=",
-                            paste( round(a2,6), collapse=" " ), "\n", sep=""))
-            cat( paste( "    Maximum theta parameter change=",
-                            paste( round(a3,6), collapse=" " ), "\n", sep=""))
-        }
-    }
-    #---------------- end EM algorithm  -------------------------------
-
-    NN1pjk -> pjk
-    NN1pi.k -> pi.k
-    NN1dev -> dev
-    NN1ll -> ll
-    NN1res1 -> res1
-    NN1theta.k -> theta.k
-    NN1a -> a
-    NN1b -> b
-    NN1iter -> iter
-
-    ##############################################################
-    # collect results of nstarts
-    if ( ( nn==1 ) ){
-        NNpjk <- pjk ;         NNpi.k <- pi.k
-        NNdev <- dev ;         NNll <- ll ;
-        NNres1 <- res1 ; NNtheta.k <- theta.k
-        NNa <- a ; NNb <- b ; NNiter <- iter
-                    }
-    devL[nn] <- dev
-    if ( ( nn > 1 ) & ( dev < NNdev ) ){
-        NNpjk <- pjk ;         NNpi.k <- pi.k
-        NNdev <- dev ;         NNll <- ll
-        NNres1 <- res1 ; NNtheta.k <- theta.k
-        NNa <- a ; NNb <- b ; NNiter <- iter
-                    }
-
+            pjk <- res2$pjk
+            # prevent label switching (modeltype=="LC")
+            if ( modeltype=="LC"){
+                ind <- order( rowMeans( pjk ) )
+                pjk <- pjk[ ind,, drop=FALSE]
+                if (G==1){
+                    pi.k <- pi.k[ ind ]
                 }
+                if (G>1){
+                    pi.k <- pi.k[ ind, ]
+                }
+            }
+
+            # convergence criteria
+            a1 <- max( abs( pjk - pjk0 ) )
+            a2 <- max( abs( pi.k - pi.k0 ) )
+            if ( modeltype %in% c("MLC1","MLC2") ){
+                a3 <- max( abs( theta.k - theta.k0 ))
+            } else {
+                a3 <- 0
+            }
+            dev.change <- abs( ( dev - dev0)/ dev0 )
+            par.change <- max( c(a1,a2,a3))
+            iter <- iter + 1
+
+            # settings
+            if ( dev < NN1dev ){
+                NN1pjk <- pjk
+                NN1pi.k <- pi.k
+                NN1dev <- dev
+                NN1ll <- ll
+                NN1res1 <- res1
+                NN1theta.k <- theta.k
+                NN1a <- a
+                NN1b <- b
+                NN1iter <- iter
+            }
+            if (progress){
+                cat( paste( "   Deviance=",
+                        round( dev, 4 ),
+                        if (iter > 0 ){ " | Deviance change=" } else {""},
+                        if( iter>0){round( - dev + dev0, 6 )} else { ""},
+                        "  START ", nn, " (Seed ", seed.nn, ")\n",sep="") )
+                # maximum probability change
+                cat( paste( "    Maximum item parameter change=",
+                                paste( round(a1,6), collapse=" " ), "\n", sep=""))
+                # maximum probability distribution parameter change
+                cat( paste( "    Maximum probability distribution change=",
+                                paste( round(a2,6), collapse=" " ), "\n", sep=""))
+                cat( paste( "    Maximum theta parameter change=",
+                                paste( round(a3,6), collapse=" " ), "\n", sep=""))
+            }
+        }
+        #---------------- end EM algorithm  -------------------------------
+
+        NN1pjk -> pjk
+        NN1pi.k -> pi.k
+        NN1dev -> dev
+        NN1ll -> ll
+        NN1res1 -> res1
+        NN1theta.k -> theta.k
+        NN1a -> a
+        NN1b -> b
+        NN1iter -> iter
+
+        #----- collect results of nstarts
+        if ( ( nn==1 ) | ( ( nn > 1 ) & ( dev < NNdev ) )  ){
+            NNpjk <- pjk ;         NNpi.k <- pi.k
+            NNdev <- dev ;         NNll <- ll ;
+            NNres1 <- res1 ; NNtheta.k <- theta.k
+            NNa <- a ; NNb <- b ; NNiter <- iter
+        }
+        devL[nn] <- dev
+    } #-- end multiple starts
 
     if (nstarts > 1){
-            NNpjk -> pjk ;         NNpi.k -> pi.k
-            NNdev -> dev ;         NNll -> ll
-            NNres1 -> res1 ; NNtheta.k -> theta.k
-            NNa -> a ; NNb -> b ; NNiter -> iter
-                    }
+        NNpjk -> pjk ;         NNpi.k -> pi.k
+        NNdev -> dev ;         NNll -> ll
+        NNres1 -> res1 ; NNtheta.k -> theta.k
+        NNa -> a ; NNb -> b ; NNiter -> iter
+    }
     #############################################
     # labels for pjk
     colnames(pjk) <- colnames(dat)
@@ -451,7 +448,6 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
             distribution.trait=distribution.trait)
     class(res) <- "rasch.mirtlc"
     return(res)
-        }
-####################################################################
+}
 
 

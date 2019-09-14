@@ -6,7 +6,6 @@
 prob_raschtype_genlogis <- function( theta, b, alpha1, alpha2, fixed.a=1+0*b,
         Qmatrix=NULL, dimensions=NULL )
 {
-
     LT <- length(theta)
     if (is.matrix(theta)){
         LT <- nrow(theta)

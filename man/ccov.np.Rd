@@ -1,5 +1,5 @@
 %% File Name: ccov.np.Rd
-%% File Version: 0.17
+%% File Version: 0.19
 
 \name{ccov.np}
 \alias{ccov.np}
@@ -44,11 +44,13 @@ conditional covariances}
 \references{
 Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996).
 Conditional covariance-based nonparametric multidimensionality assessment.
-\emph{Applied Psychological Measurement}, \bold{20}, 331-354.
+\emph{Applied Psychological Measurement}, \bold{20}(4), 331-354.
+\doi{10.1177/014662169602000403}
 
 Zhang, J., & Stout, W. (1999). Conditional covariance structure
-of generalized compensatory multidimensional items,
-\emph{Psychometrika}, \bold{64}, 129-152.
+of generalized compensatory multidimensional items.
+\emph{Psychometrika}, \bold{64}(2), 129-152.
+\doi{10.1007/BF02294532}
 }
 
 %\author{

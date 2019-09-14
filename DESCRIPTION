@@ -1,10 +1,10 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 3.7-8
-Date: 2019-09-10 17:26:08
+Version: 3.7-15
+Date: 2019-09-14 17:47:26
 Author: Alexander Robitzsch [aut,cre] (<https://orcid.org/0000-0002-8226-3132>)
-Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
+Maintainer: Alexander Robitzsch <robitzsch@leibniz-ipn.de>
 Description: 
     Supplementary functions for item response models aiming
     to complement existing R packages. The functionality includes among others

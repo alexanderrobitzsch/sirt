@@ -1,5 +1,5 @@
 %% File Name: btm.Rd
-%% File Version: 0.413
+%% File Version: 0.414
 
 \name{btm}
 \alias{btm}
@@ -129,7 +129,7 @@ via fuzzy empirical probability functions. In D. Vicari, A. Okada, G. Ragozini
 and Social Sciences}. Springer.
 
 Hunter, D. R. (2004). MM algorithms for generalized Bradley-Terry models.
-\emph{Annals of Statistics, 32}, 384-406.
+\emph{Annals of Statistics, 32}, 384-406. \doi{10.1214/aos/1079120141}
 }
 
 %\author{
