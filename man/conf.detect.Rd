@@ -1,5 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.475
+%% File Version: 1.476
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -115,6 +115,14 @@ Conditional covariance-based nonparametric multidimensionality assessment.
 \emph{Applied Psychological Measurement}, \bold{20}(4), 331-354.
 \doi{10.1177/014662169602000403}
 
+Zhang, J. (2007). Conditional covariance theory and DETECT for
+polytomous items. \emph{Psychometrika, 72}(1), 69-91.
+\doi{10.1007/s11336-004-1257-7}
+
+Zhang, J. (2013). A procedure for dimensionality analyses of
+response data from various test designs. \emph{Psychometrika, 78}(1), 37-58.
+\doi{10.1007/s11336-012-9287-z}
+
 Zhang, J., & Stout, W. (1999a). Conditional covariance structure
 of generalized compensatory multidimensional items.
 \emph{Psychometrika}, \bold{64}(2), 129-152.
@@ -124,14 +132,6 @@ Zhang, J., & Stout, W. (1999b). The theoretical DETECT index of
 dimensionality and its application to approximate simple structure.
 \emph{Psychometrika, 64}(2), 213-249.
 \doi{10.1007/BF02294536}
-
-Zhang, J. (2007). Conditional covariance theory and DETECT for
-polytomous items. \emph{Psychometrika, 72}(1), 69-91.
-\doi{10.1007/s11336-004-1257-7}
-
-Zhang, J. (2013). A procedure for dimensionality analyses of
-response data from various test designs. \emph{Psychometrika, 78}(1), 37-58.
-\doi{10.1007/s11336-012-9287-z}
 }
 
 

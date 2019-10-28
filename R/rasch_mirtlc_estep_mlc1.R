@@ -1,5 +1,5 @@
 ## File Name: rasch_mirtlc_estep_mlc1.R
-## File Version: 0.21
+## File Version: 0.22
 
 
 # E Step Multidimensional Latent Class Rasch Model
@@ -35,8 +35,8 @@ rasch_mirtlc_estep_mlc1  <- function( dat1, dat2, dat2.resp, pi.k, pjk, I,
     if (G>1){
         for ( gg in 1:G){
             ind.gg <- which( group==gg )
-            pikM <- sirt_matrix2(x=pi.k[,gg], nrow=length(ind_gg))
-            f.qk.yi[ ind_gg, ] <- f.yi.qk[ ind_gg, ] * pikM
+            pikM <- sirt_matrix2(x=pi.k[,gg], nrow=length(ind.gg))
+            f.qk.yi[ ind.gg, ] <- f.yi.qk[ ind.gg, ] * pikM
         }
     }
     if (G==1){

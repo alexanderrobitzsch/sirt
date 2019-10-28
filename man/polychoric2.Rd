@@ -1,5 +1,5 @@
 %% File Name: polychoric2.Rd
-%% File Version: 0.291
+%% File Version: 0.295
 
 \name{polychoric2}
 \alias{polychoric2}
@@ -34,9 +34,11 @@ matrix should be smooth to ensure positive definiteness.
 }
 \item{use_pbv}{Integer indicating whether the \pkg{pbv} package is used
 for computation of bivariate normal distribution. \code{0} stands for
-the simplest approximation in \pkg{sirt} while versions \code{1} and
+the simplest approximation in \pkg{sirt} (Cox & Wermuth, 1991, as
+implemented in \code{\link{polychoric2}})
+while versions \code{1} and
 \code{2} uses the algorithm of \pkg{pbv} (the first one copied into
-the \pkg{sirt} package, the second one linking Rcpp code to \pkg{pbv}.}
+the \pkg{sirt} package, the second one linking Rcpp code to \pkg{pbv}.)}
 \item{conv}{Convergence criterion}
 \item{rho_init}{Optional matrix of initial values for polychoric correlations}
 \item{weights}{Optional vector of sampling weights}
@@ -57,8 +59,14 @@ A list with following entries
 
 
 \references{
+Cox, D. R., & Wermuth, N. (1991). A simple approximation for bivariate and
+trivariate normal integrals.
+\emph{International Statistical Review, 59}(2), 263-269.
+\doi{10.2307/1403446}
+
 Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation
-coefficient. \emph{Psychometrika, 44}, 443-460.
+coefficient. \emph{Psychometrika, 44}(4), 443-460.
+\doi{10.1007/BF02296207}
 }
 
 

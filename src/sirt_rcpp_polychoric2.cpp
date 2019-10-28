@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_polychoric2.cpp
-//// File Version: 3.408
+//// File Version: 3.448
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -70,6 +70,7 @@ Rcpp::NumericVector sirt_rcpp_pbivnorm2( Rcpp::NumericVector x, Rcpp::NumericVec
     //        a1[ind] <- t1[ind]
     //            }
     // int ind=0;
+    double eps1 = 1e-3;
     double t1 = b1;
     if ( a1 < b1 ){
         b1 = a1;
@@ -77,15 +78,17 @@ Rcpp::NumericVector sirt_rcpp_pbivnorm2( Rcpp::NumericVector x, Rcpp::NumericVec
     }
     //    t1 <- pnorm( - a1 )
     t1 = ::Rf_pnorm5( -a1, 0.0, 1.0, 1, 0);
+    if (t1 < eps1){ t1 = eps1; }
     //    mu <- dnorm( a1 ) / pnorm( - a1 )
     double mu = ::Rf_dnorm4(a1, 0.0, 1.0, FALSE) / t1;
     //    xi <-  ( rho * mu - b1 ) / sqrt( 1 - rho^2 )
     double rho2 = rho*rho;
-    double xi = ( rho * mu - b1 ) / std::sqrt(1 - rho2);
+    double rho21 = 1 + 1e-5 - rho2;
+    double xi = ( rho * mu - b1 ) / std::sqrt(rho21);
     //    sig2 <- 1 + a1*mu - mu^2
     double sig2 = 1 + a1*mu - mu*mu;
     // prob1 <- t1 * ( pnorm(  xi ) - 1/2 * rho^2 / ( 1 - rho^2 ) * xi * dnorm( xi ) * sig2  )
-    double prob1 = t1 * ( ::Rf_pnorm5(  xi, 0.0, 1.0, 1, 0) - 0.5*rho2 / ( 1 - rho2 ) *
+    double prob1 = t1 * ( ::Rf_pnorm5(  xi, 0.0, 1.0, 1, 0) - 0.5*rho2 / rho21  *
                         xi * ::Rf_dnorm4(xi, 0.0, 1.0, FALSE) * sig2 );
     //    if ( length(ind2) > 0 ){
     //        prob1[ind2] <- 1 - pnorm( -a1[ind2] ) - pnorm( -b1[ind2] ) + prob1[ind2]
@@ -113,10 +116,11 @@ Rcpp::NumericVector sirt_rcpp_pbivnorm2( Rcpp::NumericVector x, Rcpp::NumericVec
 double sirt_rcpp_dmvnorm_2dim( double x, double y, double rho)
 {
     double tmp1 = 0;
+    double eps = 1e-10;
     tmp1 = x*x - 2*rho*x*y + y*y;
-    tmp1 = tmp1 / ( 2*(1-rho*rho) );
+    tmp1 = tmp1 / ( 2*(1+eps-rho*rho) );
     tmp1 = std::exp( - tmp1 );
-    tmp1 = tmp1 / ( 2*pi1*std::sqrt(1-rho*rho) );
+    tmp1 = tmp1 / ( 2*pi1*std::sqrt(1+eps-rho*rho) );
     return tmp1;
 }
 //**********************************************************************
@@ -264,6 +268,7 @@ Rcpp::List sirt_rcpp_polychoric2_est_itempair( Rcpp::NumericVector v1,
     //////////*********** ALGORITHM POLYCHORIC ************************//////
     Rcpp::NumericVector rho(1);
     Rcpp::NumericVector rho1(1);
+    Rcpp::NumericVector rho2(1);
     rho1[0] = rho_init;
     rho[0] = rho_init;
 
@@ -276,24 +281,25 @@ Rcpp::List sirt_rcpp_polychoric2_est_itempair( Rcpp::NumericVector v1,
             rho[0] = rho[0] - h*1.5;
         }
         rho1[0] = rho[0] + h;
-        ll0 = sirt_rcpp_polychoric2_estimating_equation( frtab, maxK, rho, thresh1n,
+        rho2(0) = rho(0) - h;
+        ll0 = sirt_rcpp_polychoric2_estimating_equation( frtab, maxK, rho2, thresh1n,
                             thresh2n, maxK1, maxK2, use_pbv)[0];
         ll1 = sirt_rcpp_polychoric2_estimating_equation( frtab, maxK, rho1, thresh1n,
                             thresh2n, maxK1, maxK2, use_pbv)[0];
-        der = (ll1-ll0)/h;
+        der = (ll1-ll0)/(2*h);
         incr = ll0 / der;
         rho[0] = rho[0] - incr;
-        if (rho[0] > 1- eps ){
-            rho[0] = .90 + .01 * iter;
+        if (rho[0] > 1-eps ){
+            rho[0] = .90 + .01*iter;
         }
-        if (rho[0] < -1+ eps ){
-            rho[0] = -.90 - .01 * iter;
+        if (rho[0] < -1+eps ){
+            rho[0] = -.90 - .01*iter;
         }
-        if (rho[0] < -1 + eps){
-            rho[0] = -1 + eps;
+        if (rho[0] < -1+eps){
+            rho[0] = -1+eps;
         }
         if (rho[0] > 1 ){
-            rho[0] = 1 - eps;
+            rho[0] = 1-eps;
         }
         aincr = std::abs(incr);
         iter ++;
@@ -322,6 +328,7 @@ Rcpp::List sirt_rcpp_polychoric2_est_itempair( Rcpp::NumericVector v1,
 
 
 // Rcout << "iter " << iter << "rho " << rho0[0]  << std::endl;
+// Rcout << "iter " << iter << " incr=" << incr  << std::endl;
 
 ///********************************************************************
 ///** sirt_rcpp_polychoric2

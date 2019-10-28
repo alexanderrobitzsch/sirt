@@ -1,13 +1,11 @@
 ## File Name: rasch_mml2_raschtype_mstep_parameter_group.R
-## File Version: 0.14
-
-
+## File Version: 0.160
 
 
 #--- estimation of c parameter
 rasch_mml2_raschtype_mstep_parameter_group <- function( theta.k, b, fixed.a,
             fixed.c, fixed.d, pjk, alpha1, alpha2, h, G, I, r.jk, n.jk, est_val,
-            min_val, max_val, iter, old_increment, Qmatrix, parameter)
+            min_val, max_val, iter, old_increment, Qmatrix, parameter, prior=NULL)
 {
     numdiff.parm <- h
     old_increment.c <- old_increment
@@ -57,16 +55,39 @@ rasch_mml2_raschtype_mstep_parameter_group <- function( theta.k, b, fixed.a,
     ll1 <- a1[,3]
     ll2 <- a1[,4]
 
+    #** evaluate prior distribution
+    prior_fct <- NULL
+    parm <- NULL
+    if (parameter=="a"){
+        parm <- fixed.a
+        prior_fct <- stats::dnorm
+    }
+    if (parameter=="c"){
+        parm <- fixed.c
+        parm[ parm < h] <- 2*h
+        prior_fct <- stats::dbeta
+    }
+    if (parameter=="d"){
+        parm <- fixed.d
+        parm[ parm > 1-h] <- 1-2*h
+        prior_fct <- stats::dbeta
+    }
+    res <- rasch_mml2_raschtype_mstep_parameter_group_evaluate_prior(parm=parm,
+                h=h, prior=prior, ll0=ll0, ll1=ll1, ll2=ll2, prior_fct=prior_fct )
+    ll0 <- res$ll0
+    ll1 <- res$ll1
+    ll2 <- res$ll2
+
     #- derivatives
     res <- rasch_mml2_difference_quotient(ll0=ll0, ll1=ll1, ll2=ll2, h=h)
     d1 <- res$d1
     d2 <- res$d2
-
     # change in item difficulty
     parm_change <- - d1 / d2
     parm_change <- sirt_trim_increment(increment=parm_change,
                             max_increment=max(abs(old_increment.c)))
     parm_change <- parm_change[ match( est.c, a1[,1] ) ]
+
     if ( any(est.c==0) ){
         parm_change[est.c==0] <- 0
     }
@@ -84,7 +105,6 @@ rasch_mml2_raschtype_mstep_parameter_group <- function( theta.k, b, fixed.a,
     }
     parm[ parm > max.c ] <- max.c
     parm[ parm < min.c ] <- min.c
-
     #--- output
     res <- list("parm"=parm, "se"=sqrt( 1 /abs(d2) ) )
     return(res)

@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.437
+## File Version: 7.455
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model
@@ -8,9 +8,10 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                 constraints=NULL, glob.conv=10^(-5), parm.conv=10^(-4), mitermax=4,
                 mmliter=1000, progress=TRUE, fixed.a=rep(1,ncol(dat)), fixed.c=rep(0,ncol(dat)),
                 fixed.d=rep(1,ncol(dat)), fixed.K=rep(3,ncol(dat)),    b.init=NULL,
-                est.a=NULL,    est.b=NULL,    est.c=NULL, est.d=NULL,    min.b=-99, max.b=99,
-                min.a=-99, max.a=99, min.c=0, max.c=1, min.d=0, max.d=1, est.K=NULL,
-                min.K=1, max.K=20, beta.init=NULL, min.beta=-8, pid=1:( nrow(dat) ),
+                est.a=NULL, est.b=NULL,    est.c=NULL, est.d=NULL,    min.b=-99, max.b=99,
+                min.a=-99, max.a=99, min.c=0, max.c=1, min.d=0, max.d=1,
+                prior.b=NULL, prior.a=NULL, prior.c=NULL, prior.d=NULL, est.K=NULL,
+                min.K=1, max.K=20, beta.init=NULL, min.beta=-8, pid=1:(nrow(dat)),
                 trait.weights=NULL, center.trait=TRUE, center.b=FALSE, alpha1=0, alpha2=0,
                 est.alpha=FALSE, equal.alpha=FALSE, designmatrix=NULL, alpha.conv=parm.conv,
                 numdiff.parm=0.00001, numdiff.alpha.parm=numdiff.parm, distribution.trait="normal",
@@ -165,8 +166,12 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         }
                 }
     # set starting values for estimated c and d parameters
-    if ( sum(est.c) > 0 ){    fixed.c[ est.c > 0 ] <- .10 }
-    if ( sum(est.d) > 0 ){    fixed.d[ est.d > 0 ] <- .95 }
+    if ( ( sum(est.c) > 0 ) & is.null(fixed.c) ){
+        fixed.c[ est.c > 0 ] <- .10
+    }
+    if ( ( sum(est.d) > 0 ) & is.null(fixed.d) ){
+        fixed.d[ est.d > 0 ] <- .95
+    }
 
 
     #****************************************************************************************
@@ -213,13 +218,15 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
       }
     # revise guessing parameter (if necessary)
     if ( !is.null(fixed.c) ){
-        # calculate itemmeans
-        itemmean <- colMeans( dat,  na.rm=T )
+        # calculate item means
+        itemmean <- colMeans( dat,  na.rm=TRUE )
         if ( any( itemmean < fixed.c) ){
                 cat ( "revise fixed guessing estimates\n")
                 fixed.c[ itemmean < fixed.c] <- 0
                 }
             }
+
+
         # data preparations
         if ( ! is.null( group ) ){ use.freqpatt <- FALSE }
         if ( irtmodel !="missing1" ){
@@ -370,9 +377,11 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                 center.trait <- FALSE
                     }
 
+    #-- indicators of estimated parameters
+    est_parameters <- list( a=sum(est.a)>0, c=sum(est.c)>0, d=sum(est.d)>0)
 
-    #***********************
-    # MML Iteration Algorithm        #
+    #******************************************************
+    #*************** MML Iteration Algorithm **************
     while ( ( dev.change > glob.conv | par.change > conv1 | maxalphachange > alpha.conv ) & iter < mmliter ){
         if (progress){
             cat(disp)
@@ -444,7 +453,8 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         fixed.a=fixed.a, fixed.c=fixed.c, fixed.d=fixed.d, alpha1=alpha1,
                         alpha2=alpha2, designmatrix=designmatrix, group=group,
                         numdiff.parm=numdiff.parm, Qmatrix=Qmatrix, old_increment=old_increment_b,
-                        est.b=est.b, center.b=center.b, min.b=min.b, max.b=max.b )
+                        est.b=est.b, center.b=center.b, min.b=min.b, max.b=max.b,
+                        prior.b=prior.b)
             se.b <- m1$se.b
         }
 
@@ -620,7 +630,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         pjk=pjk, alpha1=alpha1, alpha2=alpha2, h=numdiff.parm, G=G, I=I,
                         r.jk=r.jk, n.jk=n.jk, est_val=est.a, min_val=min.a,
                         max_val=max.a, iter=iter, old_increment=.3,
-                        Qmatrix=Qmatrix, parameter="a")
+                        Qmatrix=Qmatrix, parameter="a", prior=prior.a)
             fixed.a <- res$parm
             se.a <- res$se
             a1a <- max( abs( fixed.a - fixed.a0 ) )
@@ -635,7 +645,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         pjk=pjk, alpha1=alpha1, alpha2=alpha2, h=numdiff.parm, G=G, I=I,
                         r.jk=r.jk, n.jk=n.jk, est_val=est.c, min_val=min.c,
                         max_val=max.c, iter=iter, old_increment=old_increment.c,
-                        Qmatrix=Qmatrix, parameter="c")
+                        Qmatrix=Qmatrix, parameter="c", prior=prior.c)
             fixed.c <- res$parm
             se.c <- res$se
             a1b <- max( abs( fixed.c - fixed.c0 ) )
@@ -650,7 +660,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         pjk=pjk, alpha1=alpha1, alpha2=alpha2, h=numdiff.parm, G=G, I=I,
                         r.jk=r.jk, n.jk=n.jk, est_val=est.d, min_val=min.d,
                         max_val=max.d, iter=iter, old_increment=old_increment.d,
-                        Qmatrix=Qmatrix, parameter="d")
+                        Qmatrix=Qmatrix, parameter="d", prior=prior.d)
             fixed.d <- res$parm
             se.d <- res$se
             a1c <- max( abs( fixed.d - fixed.d0 ) )
@@ -1093,49 +1103,42 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                     }
         dimnames(rprobs)[[1]] <- colnames(dat)
 
-        ##################################################
-        # result
-        res <- list( "dat"=dat, "item"=item, "item2"=item2,
-                    "trait.distr"=trait.distr, "mean.trait"=mean.trait,
-                    "sd.trait"=sd.trait, "skewness.trait"=skewness.trait,
-                    "deviance"=dev,  "pjk"=pjk,   "rprobs"=rprobs,
-                    "person"=ability.est2, "pid"=pid,
-                    "ability.est.pattern"=ability.est, "f.qk.yi"=f.qk.yi, "f.yi.qk"=f.yi.qk,
-                    "pure.rasch"=pure.rasch, "fixed.a"=fixed.a, "fixed.c"=fixed.c,
-                    "G"=G,"alpha1"=alpha1, "alpha2"=alpha2,
-                    "se.b"=se.b, "se.a"=se.a, "se.c"=se.c, "se.d"=se.d,
-                    "se.alpha"=se.alpha, "se.K"=se.K,
-                    "se.delta"=se.delta,
-                    "iter"=iter,
-                    "reliability"=reliability, "ramsay.qm"=ramsay.qm,
-                    "irtmodel"=irtmodel, "D"=D, "mu"=mu,
-                    "Sigma.cov"=Sigma.cov, "theta.k"=theta.k,
-                    "trait.weights"=trait.weights, "pi.k"=pi.k,
-                    "CALL"=CALL
-                            )
-        class(res) <- "rasch.mml"
-        res$ic <- ic
-        res$est.c <- est.c
-        res$groupindex <- ag1
-        res$n.jk <- n.jk
-        res$r.jk <- r.jk
-        res$esttype <- "ll"
-        if ( pseudoll ){ res$esttype <- "pseudoll" }
-        # computation time
-        s2 <- Sys.time()
-        res$s1 <- s1
-        res$s2 <- s2
-        res$Rfcttype <- "rasch.mml2"
-        if (progress){
-                cat("------------------------------------------------------------\n")
-                cat("Start:", paste( s1), "\n")
-                cat("End:", paste(s2), "\n")
-                cat("Difference:", print(s2 -s1), "\n")
-                cat("------------------------------------------------------------\n")
-                    }
-        #..................
-        return( res )
-        }
+    #- collect information about priors
+    priors <- rasch_mml2_prior_information(prior.a, prior.b, prior.c, prior.d)
+
+    #--- result
+    res <- list( dat=dat, item=item, item2=item2, trait.distr=trait.distr,
+                mean.trait=mean.trait, sd.trait=sd.trait, skewness.trait=skewness.trait,
+                deviance=dev, pjk=pjk, rprobs=rprobs, person=ability.est2, pid=pid,
+                ability.est.pattern=ability.est, f.qk.yi=f.qk.yi, f.yi.qk=f.yi.qk,
+                pure.rasch=pure.rasch, fixed.a=fixed.a, fixed.c=fixed.c, G=G, alpha1=alpha1,
+                alpha2=alpha2, se.b=se.b, se.a=se.a, se.c=se.c, se.d=se.d, se.alpha=se.alpha,
+                se.K=se.K, se.delta=se.delta, iter=iter, reliability=reliability,
+                ramsay.qm=ramsay.qm, irtmodel=irtmodel, D=D, mu=mu, Sigma.cov=Sigma.cov,
+                est_parameters=est_parameters, priors=priors,
+                theta.k=theta.k, trait.weights=trait.weights, pi.k=pi.k, CALL=CALL )
+    class(res) <- "rasch.mml"
+    res$ic <- ic
+    res$est.c <- est.c
+    res$groupindex <- ag1
+    res$n.jk <- n.jk
+    res$r.jk <- r.jk
+    res$esttype <- "ll"
+    if ( pseudoll ){ res$esttype <- "pseudoll" }
+    # computation time
+    s2 <- Sys.time()
+    res$s1 <- s1
+    res$s2 <- s2
+    res$Rfcttype <- "rasch.mml2"
+    if (progress){
+        cat("------------------------------------------------------------\n")
+        cat("Start:", paste( s1), "\n")
+        cat("End:", paste(s2), "\n")
+        cat("Difference:", print(s2 -s1), "\n")
+        cat("------------------------------------------------------------\n")
+    }
+    return(res)
+}
 #---------------------------------------------------------------------------
 
 

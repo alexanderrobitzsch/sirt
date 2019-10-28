@@ -1,5 +1,5 @@
 ## File Name: rasch_mml2_mstep_raschtype.R
-## File Version: 0.12
+## File Version: 0.154
 
 
 #--- M-Step Rasch Type Model
@@ -7,7 +7,7 @@ rasch_mml2_mstep_raschtype <- function( theta.k, b, n.k, n, n.jk, r.jk, pi.k, I,
                     conv1, constraints, mitermax, pure.rasch, trait.weights, fixed.a,
                     fixed.c, fixed.d, alpha1, alpha2, h=.0025, designmatrix, group,
                     numdiff.parm, Qmatrix=NULL, old_increment, est.b, center.b,
-                    min.b, max.b )
+                    min.b, max.b, prior.b=NULL )
 {
     abs.change <- 1
     miter <- 0
@@ -69,6 +69,17 @@ rasch_mml2_mstep_raschtype <- function( theta.k, b, n.k, n, n.jk, r.jk, pi.k, I,
         ll0 <- rowSums(ll0)
         ll1 <- rowSums(ll1)
         ll2 <- rowSums(ll2)
+
+        # evaluate prior distribution
+        parm <- b
+        prior_fct <- stats::dnorm
+        prior <- prior.b
+        res <- rasch_mml2_raschtype_mstep_parameter_group_evaluate_prior(parm=parm,
+                h=h, prior=prior, ll0=ll0, ll1=ll1, ll2=ll2, prior_fct=prior_fct )
+        ll0 <- res$ll0
+        ll1 <- res$ll1
+        ll2 <- res$ll2
+
         #- derivatives
         res <- rasch_mml2_difference_quotient(ll0=ll0, ll1=ll1, ll2=ll2, h=h)
         d1 <- res$d1

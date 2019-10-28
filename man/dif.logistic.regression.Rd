@@ -1,5 +1,5 @@
 %% File Name: dif.logistic.regression.Rd
-%% File Version: 0.36
+%% File Version: 0.375
 
 \name{dif.logistic.regression}
 \alias{dif.logistic.regression}
@@ -7,9 +7,8 @@
 Differential Item Functioning using Logistic Regression Analysis
 }
 \description{
-This function estimates differential item
-functioning using a logistic regression analysis
-(Zumbo, 1999).
+This function assesses differential item
+functioning using logistic regression analysis (Zumbo, 1999).
 }
 \usage{
 dif.logistic.regression(dat, group, score,quant=1.645)
@@ -42,8 +41,7 @@ A data frame with following variables:
 
 \item{itemnr}{Numeric index of the item}
 \item{sortDIFindex}{Rank of item with respect to the uniform DIF
-    (from negative to positive values)
-}
+    (from negative to positive values)}
 \item{item}{Item name}
 \item{N}{Sample size per item}
 \item{R}{Value of \code{group} variable for reference group}
@@ -60,8 +58,7 @@ A data frame with following variables:
 \item{t.uniformDIF}{The \eqn{t} value for uniform DIF}
 \item{sig.uniformDIF}{Significance label for uniform DIF}
 \item{DIF.ETS}{DIF classification according to the ETS classification
-    system (see Details)
-}
+    system (see Details)}
 \item{uniform.EBDIF}{Empirical Bayes estimate of uniform DIF (Longford,
     Holland & Thayer, 1993) which takes degree of DIF standard error
         into account}
@@ -79,10 +76,16 @@ Stability of the MH D-DIF statistics across populations.
 In P. W. Holland & H. Wainer (Eds.). \emph{Differential
 Item Functioning} (pp. 171-196). Hillsdale, NJ: Erlbaum.
 
+Magis, D., Beland, S., Tuerlinckx, F., & De Boeck, P. (2010). A general framework and an
+\R package for the detection of dichotomous differential item functioning.
+\emph{Behavior Research Methods, 42}(3), 847-862.
+\doi{10.3758/BRM.42.3.847}
+
 Monahan, P. O., McHorney, C. A., Stump, T. E., & Perkins, A. J. (2007).
 Odds ratio, delta, ETS classification, and standardization measures of
 DIF magnitude for binary logistic regression.
-\emph{Journal of Educational and Behavioral Statistics, 32}, 92-109.
+\emph{Journal of Educational and Behavioral Statistics, 32}(1), 92-109.
+\doi{10.3102/1076998606298035}
 
 Zumbo, B. D. (1999). \emph{A handbook on the theory and methods of differential
 item functioning (DIF): Logistic regression modeling as a unitary framework
@@ -103,7 +106,7 @@ See also \code{\link{rasch.evm.pcm}} for assessing differential item
 functioning in the partial credit model.
 
 See the \pkg{difR} package for a large collection of DIF detection
-methods.
+methods (Magis, Beland, Tuerlinckx, & De Boeck, 2010).
 
 For a download of the free \emph{DIF-Pack} software (SIBTEST, ...) see
 \emph{http://psychometrictools.measuredprogress.org/home}.

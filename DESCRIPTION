@@ -1,8 +1,8 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 3.7-15
-Date: 2019-09-14 17:47:26
+Version: 3.7-24
+Date: 2019-10-28 08:38:35
 Author: Alexander Robitzsch [aut,cre] (<https://orcid.org/0000-0002-8226-3132>)
 Maintainer: Alexander Robitzsch <robitzsch@leibniz-ipn.de>
 Description: 

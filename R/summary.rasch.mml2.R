@@ -1,5 +1,5 @@
 ## File Name: summary.rasch.mml2.R
-## File Version: 1.20
+## File Version: 1.244
 
 
 
@@ -15,10 +15,10 @@ summary.rasch.mml <- function( object, file=NULL, ... )
     a5 <- 1*( npirt & ncol( object$item)==5 )
 
     cat("------------------------------------------------------------\n")
-        d1 <- utils::packageDescription("sirt")
-        cat( paste( d1$Package, " ", d1$Version, " (", d1$Date, ")", sep=""), "\n\n" )
-        cat( "Date of Analysis:", paste( object$s2 ), "\n" )
-        cat("Computation time:", print(object$s2 - object$s1), "\n\n")
+    d1 <- utils::packageDescription("sirt")
+    cat( paste( d1$Package, " ", d1$Version, " (", d1$Date, ")", sep=""), "\n\n" )
+    cat( "Date of Analysis:", paste( object$s2 ), "\n" )
+    cat("Computation time:", print(object$s2 - object$s1), "\n\n")
 
     cat("Call:\n", paste(deparse(object$CALL), sep="\n", collapse="\n"),
                 "\n\n", sep="")
@@ -28,19 +28,32 @@ summary.rasch.mml <- function( object, file=NULL, ... )
     if ( object$Rfcttype=="rasch.mml2" ){ cat("Function 'rasch.mml2' \n\n") }
     if ( ! object$ramsay.qm ){
         cat("Rasch Type Model with Fixed Discrimination, Guessing and Slipping Parameters \n")
-        cat("alpha1=",round(object$alpha1,3)," alpha2=", round(object$alpha2,3), " \n")
+        cat("alpha1", "=", round(object$alpha1,3)," alpha2", "=", round(object$alpha2,3), " \n")
         moments <- genlogis.moments( alpha1=object$alpha1, alpha2=object$alpha2)
-        cat("Moments: \n" ); print(round(moments,2)) ; cat("\n")
-                            }
-        if ( object$ramsay.qm ){  cat("Quotient Model (Ramsay, 1989) \n")     }
-        if ( object$irtmodel=="npirt" ){  cat("Nonparametric IRT \n")     }
-        if ( object$irtmodel=="missing1"){ cat("Missing Data IRT Model \n")        }
-        utils::flush.console()
-    if ( sum(object$est.c) > 0){ cat(paste( "Estimated guessing parameter groups \n") )}
-                ## estimated guessing parameters
-    if ( object$G > 1 ){ cat("\nMultiple Group Estmation with",object$G, "Groups \n")
-            print(object$groupindex) ; cat("\n")
+        cat("Moments: \n" )
+        print(round(moments,2))
+        cat("\n")
+    }
+    if ( object$ramsay.qm ){ cat("Quotient Model (Ramsay, 1989) \n")     }
+    if ( object$irtmodel=="npirt" ){  cat("Nonparametric IRT \n")     }
+    if ( object$irtmodel=="missing1"){ cat("Missing Data IRT Model \n")        }
+
+    #- prior distributions
+    if (object$irtmodel=="raschtype"){
+        est_parameters <- object$est_parameters
+        cat("Prior distributions\n")
+        cat(paste0(" b parameters: ", object$priors$b, "\n"))
+        for (pp in c("a", "c", "d")){
+            if (est_parameters[[pp]]){
+                cat(paste0(" ", pp, " parameters: ", object$priors[[pp]], "\n"))
             }
+        }
+        cat("\n")
+    }
+
+    if ( object$G > 1 ){ cat("\nMultiple Group Estmation with",object$G, "Groups \n")
+        print(object$groupindex) ; cat("\n")
+    }
     cat("------------------------------------------------------------\n")
     cat( "Number of iterations=", object$iter, "\n" )
     cat( "Deviance=", round( object$deviance, 2 ), " | " )

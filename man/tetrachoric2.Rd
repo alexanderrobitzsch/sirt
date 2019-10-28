@@ -1,5 +1,5 @@
 %% File Name: tetrachoric2.Rd
-%% File Version: 1.35
+%% File Version: 1.363
 
 \name{tetrachoric2}
 \alias{tetrachoric2}
@@ -59,17 +59,20 @@ A list with following entries
 \references{
 Bonett, D. G., & Price, R. M. (2005). Inferential methods for the tetrachoric
 correlation coefficient. \emph{Journal of Educational and Behavioral Statistics,
-30}, 213-225.
+30}(2), 213-225. \doi{10.3102/10769986030002213}
 
 Divgi, D. R. (1979). Calculation of the tetrachoric correlation coefficient.
-\emph{Psychometrika, 44}, 169-172.
+\emph{Psychometrika, 44}(2), 169-172.
+\doi{10.1007/BF02293968}
 
 Froemel, E. C. (1971). A comparison of computer routines for the
 calculation of the tetrachoric correlation coefficient.
-\emph{Psychometrika, 36}, 165-174.
+\emph{Psychometrika, 36}(2), 165-174.
+\doi{10.1007/BF02291396}
 
 Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation
-coefficient. \emph{Psychometrika, 44}, 443-460.
+coefficient. \emph{Psychometrika, 44}(4), 443-460.
+\doi{10.1007/BF02296207}
 }
 
 
@@ -88,7 +91,7 @@ See \emph{http://sites.education.miami.edu/zopluoglu/software-programs/}.
 \seealso{
 See also the \code{\link[psych:tetrachoric]{psych::tetrachoric}}
 function in the \pkg{psych} package
- and the function \code{tet} in the \pkg{irtoys} package.
+ and the function \code{irtoys::tet} in the \pkg{irtoys} package.
 
 See \code{\link{polychoric2}} for estimating polychoric correlations.
 }

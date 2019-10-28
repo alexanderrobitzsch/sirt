@@ -1,5 +1,5 @@
 ## File Name: rasch_mirtlc_mstep_mlc1.R
-## File Version: 0.16
+## File Version: 0.17
 
 
 #-- M-step rasch mirtlc
@@ -7,7 +7,7 @@ rasch_mirtlc_mstep_mlc1 <- function( pjk, n.k, r.jk, n.jk, G, Nclasses,
             theta.k, b, a, I, ref.item, mstep.maxit,
             des.theta, des.b, theta.fixed, theta.normal, f.qk.yi,D,
             distribution.trait, est.a, Qmatrix,modeltype, range.b, range.a,
-            iter, fac.iter)
+            iter, fac.iter, dimensions=NULL)
 {
     if (G==1){
         pi.k <- n.k / sum(n.k)

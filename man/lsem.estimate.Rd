@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.726
+%% File Version: 0.727
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -263,7 +263,7 @@ mod1b <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.gri
                lavmodel=lavmodel, h=2, std.lv=TRUE, pseudo_weights=50 )
 summary(mod1b)
 
-#** estimation with samppling weights
+#** estimation with sampling weights
 
 # generate random sampling weights
 set.seed(987)

@@ -1,5 +1,5 @@
 ## File Name: rasch.mirtlc.R
-## File Version: 91.645
+## File Version: 91.651
 
 
 #*** Multidimensional Latent Class IRT models
@@ -147,8 +147,8 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
     if ( ( seed[1] < 0) | ( length(seed) < nstarts) ){
         seed <- round( stats::runif( nstarts, 1, 10000 ))
     }
-        devL <- rep(NA, nstarts )
-        NN1dev <-  1e90
+    devL <- rep(NA, nstarts )
+    NNdev <- NN1dev <-  1e90
 
     #---- different starts
     for (nn in 1:nstarts ){
@@ -221,7 +221,7 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
                             theta.fixed=theta.fixed, theta.normal=theta.normal, f.qk.yi=f.qk.yi, D=D,
                             distribution.trait=distribution.trait, est.a=est.a, Qmatrix=Qmatrix,
                             modeltype=modeltype, range.b=range.b, range.a=range.a, iter=iter,
-                            fac.iter=fac.iter )
+                            fac.iter=fac.iter, dimensions=dimensions )
                 b <- res2$b
                 theta.k <- res2$theta.k
                 pi.k <- res2$pi.k
@@ -306,6 +306,7 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
         devL[nn] <- dev
     } #-- end multiple starts
 
+
     if (nstarts > 1){
         NNpjk -> pjk ;         NNpi.k -> pi.k
         NNdev -> dev ;         NNll -> ll
@@ -345,18 +346,16 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
 
     ic$n <- n # number of persons
     # AIC
-        ic$AIC <- dev + 2*ic$np
-        # BIC
-        ic$BIC <- dev + ( log(ic$n) )*ic$np
-        # CAIC (conistent AIC)
-        ic$CAIC <- dev + ( log(ic$n) + 1 )*ic$np
-        # corrected AIC
-        ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )
+    ic$AIC <- dev + 2*ic$np
+    # BIC
+    ic$BIC <- dev + ( log(ic$n) )*ic$np
+    # CAIC (conistent AIC)
+    ic$CAIC <- dev + ( log(ic$n) + 1 )*ic$np
+    # corrected AIC
+    ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )
 
-    ###########################
-    # item and trait parameter
-    cor.trait <- skewness.trait <- mean.trait <-
-            sd.trait <- trait <- item <- NULL
+    #---- item and trait parameter
+    cor.trait <- skewness.trait <- mean.trait <- sd.trait <- trait <- item <- NULL
     if (modeltype%in%c("MLC1","MLC2") ){
         mean.trait <- rep(NA,G)
         if (D>1){ skewness.trait <- sd.trait <- mean.trait <- matrix(NA, D, G ) }
@@ -426,7 +425,7 @@ rasch.mirtlc <- function( dat, Nclasses=NULL, modeltype="LC",
     # output LC
     if ( modeltype=="LC"){
         theta.k <- diag( length( theta.k) )
-                            }
+    }
 
     ##################################################
     # item response probabilities

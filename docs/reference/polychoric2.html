@@ -138,9 +138,11 @@ matrix should be smooth to ensure positive definiteness.</p></td>
       <th>use_pbv</th>
       <td><p>Integer indicating whether the <span class="pkg">pbv</span> package is used
 for computation of bivariate normal distribution. <code>0</code> stands for
-the simplest approximation in <span class="pkg">sirt</span> while versions <code>1</code> and
+the simplest approximation in <span class="pkg">sirt</span> (Cox &amp; Wermuth, 1991, as
+implemented in <code>polychoric2</code>)
+while versions <code>1</code> and
 <code>2</code> uses the algorithm of <span class="pkg">pbv</span> (the first one copied into
-the <span class="pkg">sirt</span> package, the second one linking Rcpp code to <span class="pkg">pbv</span>.</p></td>
+the <span class="pkg">sirt</span> package, the second one linking Rcpp code to <span class="pkg">pbv</span>.)</p></td>
     </tr>
     <tr>
       <th>conv</th>
@@ -171,8 +173,13 @@ the <span class="pkg">sirt</span> package, the second one linking Rcpp code to <
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation
-coefficient. <em>Psychometrika, 44</em>, 443-460.</p>
+    <p>Cox, D. R., &amp; Wermuth, N. (1991). A simple approximation for bivariate and
+trivariate normal integrals.
+<em>International Statistical Review, 59</em>(2), 263-269.
+doi: <a href='http://doi.org/10.2307/1403446'>10.2307/1403446</a></p>
+<p>Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation
+coefficient. <em>Psychometrika, 44</em>(4), 443-460.
+doi: <a href='http://doi.org/10.1007/BF02296207'>10.1007/BF02296207</a></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
