@@ -8,21 +8,25 @@
 
 <title>Differential Item Functioning using Logistic Regression Analysis — dif.logistic.regression • sirt</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +34,12 @@
 
 
 
-<meta property="og:title" content="Differential Item Functioning using Logistic Regression Analysis — dif.logistic.regression" />
 
+<meta property="og:title" content="Differential Item Functioning using Logistic Regression Analysis — dif.logistic.regression" />
 <meta property="og:description" content="This function assesses differential item
 functioning using logistic regression analysis (Zumbo, 1999)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -46,6 +51,7 @@ functioning using logistic regression analysis (Zumbo, 1999)." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -64,7 +70,7 @@ functioning using logistic regression analysis (Zumbo, 1999)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.7-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.8-vv</span>
       </span>
     </div>
 
@@ -72,7 +78,7 @@ functioning using logistic regression analysis (Zumbo, 1999)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,11 +86,10 @@ functioning using logistic regression analysis (Zumbo, 1999)." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexanderrobitzsch/sirt">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -95,6 +100,7 @@ functioning using logistic regression analysis (Zumbo, 1999)." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -106,14 +112,12 @@ functioning using logistic regression analysis (Zumbo, 1999)." />
     </div>
 
     <div class="ref-description">
-    
     <p>This function assesses differential item
 functioning using logistic regression analysis (Zumbo, 1999).</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>dif.logistic.regression</span>(<span class='no'>dat</span>, <span class='no'>group</span>, <span class='no'>score</span>,<span class='kw'>quant</span><span class='kw'>=</span><span class='fl'>1.645</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -135,7 +139,7 @@ functioning using logistic regression analysis (Zumbo, 1999).</p>
 for assessing statistical significance</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Items are classified into A (negligible DIF), B (moderate DIF) and
@@ -143,7 +147,6 @@ C (large DIF) levels according to the
 ETS classification system (Longford, Holland &amp; Thayer, 1993, p. 175).
 See also Monahan, McHorney, Stump and Perkins (2007) for further DIF effect size
 classifications.</p>
-    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A data frame with following variables:</p>
@@ -176,7 +179,6 @@ classifications.</p>
 <dt>t.nonuniformDIF</dt><dd><p>The \(t\) value for nonuniform DIF</p></dd>
 <dt>sig.nonuniformDIF</dt><dd><p>Significance label for nonuniform DIF</p></dd>
 
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Longford, N. T., Holland, P. W., &amp; Thayer, D. T. (1993).
@@ -186,18 +188,17 @@ Item Functioning</em> (pp. 171-196). Hillsdale, NJ: Erlbaum.</p>
 <p>Magis, D., Beland, S., Tuerlinckx, F., &amp; De Boeck, P. (2010). A general framework and an
 <span style="R">R</span> package for the detection of dichotomous differential item functioning.
 <em>Behavior Research Methods, 42</em>(3), 847-862.
-doi: <a href='http://doi.org/10.3758/BRM.42.3.847'>10.3758/BRM.42.3.847</a></p>
+doi: <a href='https://doi.org/10.3758/BRM.42.3.847'>10.3758/BRM.42.3.847</a></p>
 <p>Monahan, P. O., McHorney, C. A., Stump, T. E., &amp; Perkins, A. J. (2007).
 Odds ratio, delta, ETS classification, and standardization measures of
 DIF magnitude for binary logistic regression.
 <em>Journal of Educational and Behavioral Statistics, 32</em>(1), 92-109.
-doi: <a href='http://doi.org/10.3102/1076998606298035'>10.3102/1076998606298035</a></p>
+doi: <a href='https://doi.org/10.3102/1076998606298035'>10.3102/1076998606298035</a></p>
 <p>Zumbo, B. D. (1999). <em>A handbook on the theory and methods of differential
 item functioning (DIF): Logistic regression modeling as a unitary framework
 for binary and Likert-type (ordinal) item scores</em>.
 Ottawa ON: Directorate of Human Resources Research and Evaluation,
 Department of National Defense.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>For assessing DIF variance see <code><a href='dif.variance.html'>dif.variance</a></code> and
@@ -208,96 +209,94 @@ functioning in the partial credit model.</p>
 methods (Magis, Beland, Tuerlinckx, &amp; De Boeck, 2010).</p>
 <p>For a download of the free <em>DIF-Pack</em> software (SIBTEST, ...) see
 <em>http://psychometrictools.measuredprogress.org/home</em>.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>#############################################################################</span>
+    <pre class="examples"><span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 1: Mathematics data | Gender DIF</span>
 <span class='co'>#############################################################################</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>( <span class='no'>data.math</span> )
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>( <span class='no'>data.math</span> )
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.math</span>$<span class='no'>data</span>
-<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/grep'>grep</a></span>( <span class='st'>"M"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>dat</span>))
+<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>( <span class='st'>"M"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>))
 
 <span class='co'># estimate item parameters and WLEs</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rasch.mml'>rasch.mml2</a></span>( <span class='no'>dat</span>[,<span class='no'>items</span>] )
-<span class='no'>wle</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/wle.rasch'>wle.rasch</a></span>( <span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> )$<span class='no'>theta</span>
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span>[,<span class='no'>items</span>] )
+<span class='no'>wle</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/wle.rasch.html'>wle.rasch</a></span>( <span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> )$<span class='no'>theta</span>
 
 <span class='co'># assess DIF by logistic regression</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/dif.logistic.regression'>dif.logistic.regression</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>score</span><span class='kw'>=</span><span class='no'>wle</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>female</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/dif.logistic.regression.html'>dif.logistic.regression</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>score</span><span class='kw'>=</span><span class='no'>wle</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>female</span>)
 
 <span class='co'># calculate DIF variance</span>
-<span class='no'>dif1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/dif.variance'>dif.variance</a></span>( <span class='kw'>dif</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>uniformDIF</span>, <span class='kw'>se.dif</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>se.uniformDIF</span> )
+<span class='no'>dif1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/dif.variance.html'>dif.variance</a></span>( <span class='kw'>dif</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>uniformDIF</span>, <span class='kw'>se.dif</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>se.uniformDIF</span> )
 <span class='no'>dif1</span>$<span class='no'>unweighted.DIFSD</span>
   <span class='co'>## &gt; dif1$unweighted.DIFSD</span>
   <span class='co'>## [1] 0.1963958</span>
 
 <span class='co'># calculate stratified DIF variance</span>
 <span class='co'># stratification based on domains</span>
-<span class='no'>dif2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/dif.strata.variance'>dif.strata.variance</a></span>( <span class='kw'>dif</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>uniformDIF</span>, <span class='kw'>se.dif</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>se.uniformDIF</span>,
+<span class='no'>dif2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/dif.strata.variance.html'>dif.strata.variance</a></span>( <span class='kw'>dif</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>uniformDIF</span>, <span class='kw'>se.dif</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>se.uniformDIF</span>,
               <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>data.math</span>$<span class='no'>item</span>$<span class='no'>domain</span> )
   <span class='co'>## $unweighted.DIFSD</span>
   <span class='co'>## [1] 0.1455916</span>
 
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>#****</span>
 <span class='co'># Likelihood ratio test and graphical model test in eRm package</span>
-<span class='kw pkg'>miceadds</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/miceadds/topics/library_install'>library_install</a></span>(<span class='st'>"eRm"</span>)
+<span class='kw pkg'>miceadds</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/miceadds/man/library_install.html'>library_install</a></span>(<span class='st'>"eRm"</span>)
 <span class='co'># estimate Rasch model</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>eRm</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/eRm/topics/RM'>RM</a></span>( <span class='no'>dat</span>[,<span class='no'>items</span>] )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>res</span>)
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>eRm</span><span class='kw ns'>::</span><span class='fu'>RM</span>( <span class='no'>dat</span>[,<span class='no'>items</span>] )
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>res</span>)
 <span class='co'># LR-test with respect to female</span>
-<span class='no'>lrres</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>eRm</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/eRm/topics/LRtest'>LRtest</a></span>(<span class='no'>res</span>, <span class='kw'>splitcr</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>female</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>lrres</span>)
+<span class='no'>lrres</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>eRm</span><span class='kw ns'>::</span><span class='fu'>LRtest</span>(<span class='no'>res</span>, <span class='kw'>splitcr</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>female</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>lrres</span>)
 <span class='co'># graphical model test</span>
-<span class='kw pkg'>eRm</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/eRm/topics/LRtest'>plotGOF</a></span>(<span class='no'>lrres</span>)
+<span class='kw pkg'>eRm</span><span class='kw ns'>::</span><span class='fu'>plotGOF</span>(<span class='no'>lrres</span>)
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 2: Comparison with Mantel-Haenszel test</span>
 <span class='co'>#############################################################################</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>TAM</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>difR</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>TAM</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>difR</span>)
 
 <span class='co'>#*** (1) simulate data</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>776</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>776</span>)
 <span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>1500</span>   <span class='co'># number of persons per group</span>
 <span class='no'>I</span> <span class='kw'>&lt;-</span> <span class='fl'>12</span>     <span class='co'># number of items</span>
 <span class='no'>mu2</span> <span class='kw'>&lt;-</span> <span class='fl'>.5</span>   <span class='co'># impact (group difference)</span>
 <span class='no'>sd2</span> <span class='kw'>&lt;-</span> <span class='fl'>1.3</span>  <span class='co'># standard deviation group 2</span>
 
 <span class='co'># define item difficulties</span>
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>( -<span class='fl'>1.5</span>, <span class='fl'>1.5</span>, <span class='kw'>length</span><span class='kw'>=</span><span class='no'>I</span>)
+<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>1.5</span>, <span class='fl'>1.5</span>, <span class='kw'>length</span><span class='kw'>=</span><span class='no'>I</span>)
 <span class='co'># simulate DIF effects</span>
-<span class='no'>bdif</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='no'>I</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>.6</span> ), <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>FALSE</span> )[,<span class='fl'>1</span>]
+<span class='no'>bdif</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>I</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>.6</span> ), <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>FALSE</span> )[,<span class='fl'>1</span>]
 <span class='co'># item difficulties per group</span>
 <span class='no'>b1</span> <span class='kw'>&lt;-</span> <span class='no'>b</span> + <span class='fl'>1</span>/<span class='fl'>2</span> * <span class='no'>bdif</span>
 <span class='no'>b2</span> <span class='kw'>&lt;-</span> <span class='no'>b</span> - <span class='fl'>1</span>/<span class='fl'>2</span> * <span class='no'>bdif</span>
 <span class='co'># simulate item responses</span>
-<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/sim.raschtype'>sim.raschtype</a></span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b1</span> )
-<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/sim.raschtype'>sim.raschtype</a></span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='no'>mu2</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='no'>sd2</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b2</span> )
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>rbind</a></span>( <span class='no'>dat1</span>, <span class='no'>dat2</span> )
-<span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>), <span class='kw'>each</span><span class='kw'>=</span><span class='no'>N</span> ) <span class='co'># define group indicator</span>
+<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b1</span> )
+<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='no'>mu2</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='no'>sd2</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b2</span> )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>( <span class='no'>dat1</span>, <span class='no'>dat2</span> )
+<span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>), <span class='kw'>each</span><span class='kw'>=</span><span class='no'>N</span> ) <span class='co'># define group indicator</span>
 
 <span class='co'>#*** (2) scale data</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>TAM</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/TAM/topics/tam.mml'>tam.mml</a></span>( <span class='no'>dat</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span> )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod</span>)
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>TAM</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/TAM/man/tam.mml.html'>tam.mml</a></span>( <span class='no'>dat</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span> )
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod</span>)
 
 <span class='co'>#*** (3) extract person parameter estimates</span>
 <span class='no'>mod_eap</span> <span class='kw'>&lt;-</span> <span class='no'>mod</span>$<span class='no'>person</span>$<span class='no'>EAP</span>
-<span class='no'>mod_wle</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/TAM/topics/tam.wle'>tam.wle</a></span>( <span class='no'>mod</span> )$<span class='no'>theta</span>
+<span class='no'>mod_wle</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/TAM/man/tam.wle.html'>tam.wle</a></span>( <span class='no'>mod</span> )$<span class='no'>theta</span>
 
 <span class='co'>#*********************************</span>
 <span class='co'># (4) techniques for assessing differential item functioning</span>
 
 <span class='co'># Model 1: assess DIF by logistic regression and WLEs</span>
-<span class='no'>dif1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/dif.logistic.regression'>dif.logistic.regression</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>mod_wle</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span>)
+<span class='no'>dif1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/dif.logistic.regression.html'>dif.logistic.regression</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>mod_wle</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span>)
 <span class='co'># Model 2: assess DIF by logistic regression and EAPs</span>
-<span class='no'>dif2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/dif.logistic.regression'>dif.logistic.regression</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>mod_eap</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span>)
+<span class='no'>dif2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/dif.logistic.regression.html'>dif.logistic.regression</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>mod_eap</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span>)
 <span class='co'># Model 3: assess DIF by Mantel-Haenszel statistic</span>
 <span class='no'>dif3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>difR</span><span class='kw ns'>::</span><span class='fu'>difMH</span>(<span class='kw'>Data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span>, <span class='kw'>focal.name</span><span class='kw'>=</span><span class='st'>"1"</span>,  <span class='kw'>purify</span><span class='kw'>=</span><span class='fl'>FALSE</span> )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>dif3</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>dif3</span>)
   <span class='co'>##  Mantel-Haenszel Chi-square statistic:</span>
   <span class='co'>##</span>
   <span class='co'>##        Stat.    P-value</span>
@@ -329,41 +328,37 @@ methods (Magis, Beland, Tuerlinckx, &amp; De Boeck, 2010).</p>
   <span class='co'>##   (for absolute values of 'deltaMH')</span>
 
 <span class='co'># recompute DIF parameter from alphaMH</span>
-<span class='no'>uniformDIF3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>log</a></span>(<span class='no'>dif3</span>$<span class='no'>alphaMH</span>)
+<span class='no'>uniformDIF3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>dif3</span>$<span class='no'>alphaMH</span>)
 
 <span class='co'># compare different DIF statistics</span>
-<span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>( <span class='st'>"bdif"</span><span class='kw'>=</span><span class='no'>bdif</span>, <span class='st'>"LR_wle"</span><span class='kw'>=</span><span class='no'>dif1</span>$<span class='no'>uniformDIF</span>,
+<span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"bdif"</span><span class='kw'>=</span><span class='no'>bdif</span>, <span class='st'>"LR_wle"</span><span class='kw'>=</span><span class='no'>dif1</span>$<span class='no'>uniformDIF</span>,
         <span class='st'>"LR_eap"</span><span class='kw'>=</span><span class='no'>dif2</span>$<span class='no'>uniformDIF</span>, <span class='st'>"MH"</span><span class='kw'>=</span><span class='no'>uniformDIF3</span> )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>( <span class='no'>dfr</span>, <span class='fl'>3</span> )
+<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>( <span class='no'>dfr</span>, <span class='fl'>3</span> )
   <span class='co'>##       bdif LR_wle LR_eap     MH</span>
   <span class='co'>##  1   0.236  0.319  0.278  0.330</span>
   <span class='co'>##  2  -1.149 -1.473 -1.523 -1.453</span>
   <span class='co'>##  3   0.140  0.122  0.038  0.132</span>
   <span class='co'>##  4   0.957  1.048  0.938  1.048</span>
   <span class='co'>##  [...]</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colSums'>colMeans</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>abs</a></span>( <span class='no'>dfr</span>[,-<span class='fl'>1</span>] - <span class='no'>bdif</span> ))
+<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span>( <span class='no'>dfr</span>[,-<span class='fl'>1</span>] - <span class='no'>bdif</span> ))
   <span class='co'>##      LR_wle     LR_eap         MH</span>
   <span class='co'>##  0.07759187 0.19085743 0.07501708</span>
-<span class='co'># }</span></pre>
+}</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#value">Value</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -371,13 +366,16 @@ methods (Magis, Beland, Tuerlinckx, &amp; De Boeck, 2010).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

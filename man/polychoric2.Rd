@@ -1,5 +1,5 @@
 %% File Name: polychoric2.Rd
-%% File Version: 0.295
+%% File Version: 0.296
 
 \name{polychoric2}
 \alias{polychoric2}
@@ -62,13 +62,12 @@ A list with following entries
 Cox, D. R., & Wermuth, N. (1991). A simple approximation for bivariate and
 trivariate normal integrals.
 \emph{International Statistical Review, 59}(2), 263-269.
-\doi{10.2307/1403446}
 
 Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation
 coefficient. \emph{Psychometrika, 44}(4), 443-460.
 \doi{10.1007/BF02296207}
 }
-
+% Cox: \doi{10.2307/1403446}
 
 %\author{
 %Alexander Robitzsch

@@ -1,5 +1,5 @@
 %% File Name: data.reck.Rd
-%% File Version: 0.28
+%% File Version: 0.29
 
 \name{data.reck}
 
@@ -152,6 +152,7 @@ Simulated datasets
 \references{
 Reckase, M. (2009). \emph{Multidimensional item response theory}.
 New York: Springer.
+\doi{10.1007/978-0-387-89976-3}
 }
 
 \examples{

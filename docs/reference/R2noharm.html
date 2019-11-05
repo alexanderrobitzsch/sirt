@@ -8,21 +8,25 @@
 
 <title>Estimation of a NOHARM Analysis from within <span style="R">R</span> — R2noharm • sirt</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,14 +34,15 @@
 
 
 
-<meta property="og:title" content="Estimation of a NOHARM Analysis from within <span style="R">R</span> — R2noharm" />
 
+<meta property="og:title" content="Estimation of a NOHARM Analysis from within <span style="R">R</span> — R2noharm" />
 <meta property="og:description" content="This function enables the estimation of a NOHARM analysis
 (Fraser &amp;amp; McDonald, 1988; McDonald, 1982a, 1982b, 1997) from within R.
 NOHARM estimates a compensatory multidimensional factor analysis for dichotomous
 response data. Arguments of this function strictly follow
 the rules of the NOHARM manual (see Fraser &amp;amp; McDonald, 2012; Lee &amp;amp; Lee, 2016)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -49,6 +54,7 @@ the rules of the NOHARM manual (see Fraser &amp;amp; McDonald, 2012; Lee &amp;am
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -67,7 +73,7 @@ the rules of the NOHARM manual (see Fraser &amp;amp; McDonald, 2012; Lee &amp;am
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.7-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.8-vv</span>
       </span>
     </div>
 
@@ -75,7 +81,7 @@ the rules of the NOHARM manual (see Fraser &amp;amp; McDonald, 2012; Lee &amp;am
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -83,11 +89,10 @@ the rules of the NOHARM manual (see Fraser &amp;amp; McDonald, 2012; Lee &amp;am
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexanderrobitzsch/sirt">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -98,6 +103,7 @@ the rules of the NOHARM manual (see Fraser &amp;amp; McDonald, 2012; Lee &amp;am
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -109,23 +115,21 @@ the rules of the NOHARM manual (see Fraser &amp;amp; McDonald, 2012; Lee &amp;am
     </div>
 
     <div class="ref-description">
-    
     <p>This function enables the estimation of a NOHARM analysis
 (Fraser &amp; McDonald, 1988; McDonald, 1982a, 1982b, 1997) from within <span style="R">R</span>.
 NOHARM estimates a compensatory multidimensional factor analysis for dichotomous
 response data. Arguments of this function strictly follow
 the rules of the NOHARM manual (see Fraser &amp; McDonald, 2012; Lee &amp; Lee, 2016).</p>
-    
     </div>
 
-    <pre class="usage">R2noharm(dat=NULL,pm=NULL, n=NULL, model.type, weights=NULL, dimensions=NULL,
-      guesses=NULL, noharm.path, F.pattern=NULL, F.init=NULL,
-      P.pattern=NULL, P.init=NULL, digits.pm=4, writename=NULL,
-      display.fit=5,  dec=".", display=TRUE)
+    <pre class="usage"><span class='fu'>R2noharm</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>pm</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>n</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>model.type</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+      <span class='kw'>guesses</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>noharm.path</span>, <span class='kw'>F.pattern</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>F.init</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+      <span class='kw'>P.pattern</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>P.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>digits.pm</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>writename</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+      <span class='kw'>display.fit</span><span class='kw'>=</span><span class='fl'>5</span>,  <span class='kw'>dec</span><span class='kw'>=</span><span class='st'>"."</span>, <span class='kw'>display</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
-# S3 method for R2noharm
-summary(object, logfile=NULL, &#8230;)</pre>
-    
+<span class='co'># S3 method for R2noharm</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>logfile</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -213,11 +217,11 @@ for printing results on the <span style="R">R</span> console?</p></td>
       <td><p>File name if the summary should be sunk into a file</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>Further arguments to be passed</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>NOHARM estimates a multidimensional compensatory
@@ -237,7 +241,6 @@ from (some links may be broken in the meantime) <br /> <br />
 http://noharm.niagararesearch.ca/nh4cldl.html <br />
 https://noharm.software.informer.com/4.0/   <br />
 https://cehs.unl.edu/edpsych/software-urls-and-other-interesting-sites/ <br /></p>
-    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list with following entries</p>
@@ -279,7 +282,6 @@ https://cehs.unl.edu/edpsych/software-urls-and-other-interesting-sites/ <br /></
 <dt>rmsea</dt><dd><p>RMSEA statistic</p></dd>
 <dt>p.chisquare</dt><dd><p>Significance for \(\chi^2\) statistic</p></dd>
 
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Fraser, C., &amp; McDonald, R. P. (1988). NOHARM: Least squares item factor analysis.
@@ -292,330 +294,42 @@ robust method (NOHARM) approach to item response theory.
 <em>Tutorials in Quantitative Methods for Psychology, 12</em>(1), 1-8.
 https://doi.org/10.20982/tqmp.12.1.p001</p>
 <p>McDonald, R. P. (1982a). Linear versus nonlinear models in item response theory.
-<em>Applied Psychological Measurement, 6</em>, 379-396.
-https://doi.org/10.1177/014662168200600402</p>
+<em>Applied Psychological Measurement, 6</em>(4), 379-396.
+doi: <a href='https://doi.org/10.1177/014662168200600402'>10.1177/014662168200600402</a></p>
 <p>McDonald, R. P. (1982b). <em>Unidimensional and multidimensional models for
 item response theory</em>. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings.</p>
 <p>McDonald, R. P. (1997). Normal-ogive multidimensional model.
 In W. van der Linden &amp; R. K. Hambleton (1997):
 <em>Handbook of modern item response theory</em> (pp. 257-269).
 New York: Springer. http://dx.doi.org/10.1007/978-1-4757-2691-6</p>
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Possible errors often occur due to wrong <code>dec</code>
 specification.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>For estimating standard errors see <code><a href='R2noharm.jackknife.html'>R2noharm.jackknife</a></code>.</p>
 <p>For EAP person parameter estimates see <code><a href='R2noharm.EAP.html'>R2noharm.EAP</a></code>.</p>
 <p>For an <span style="R">R</span> implementation of the NOHARM model see <code><a href='noharm.sirt.html'>noharm.sirt</a></code>.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"># NOT RUN {
-#############################################################################
-# EXAMPLE 1: Data data.noharm18 with 18 items
-#############################################################################
-
-# load data
-data( data.noharm18 )
-dat <- data.noharm18
-I <- ncol(dat) # number of items
-
-# locate noharm.path
-noharm.path <- "c:/NOHARM"
-
-#****************************************
-# Model 1: 1-dimensional Rasch model (1-PL model)
-
-# estimate one factor variance
-P.pattern <- matrix( 1, ncol=1, nrow=1 )
-P.init <- P.pattern
-# fix all entries in the loading matrix to 1
-F.pattern <- matrix( 0, nrow=I, ncol=1 )
-F.init <- 1 + 0*F.pattern       #
-# estimate model
-mod <- sirt::R2noharm( dat=dat, model.type="CFA",
-           F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
-           P.init=P.init, writename="ex1__1dim_1pl",
-       noharm.path=noharm.path, dec="," )
-# summary
-summary(mod, logfile="ex1__1dim_1pl__SUMMARY")
-# jackknife
-jmod <- sirt::R2noharm.jackknife( mod, jackunits=20 )
-summary(jmod, logfile="ex1__1dim_1pl__JACKKNIFE")
-# compute factor scores (EAPs)
-emod <- sirt::R2noharm.EAP(mod)
-
-#*****-----
-# Model 1b: Include student weights in estimation
-N <- nrow(dat)
-weights <- stats::runif( N, 1, 5 )
-mod1b <- sirt::R2noharm( dat=dat, model.type="CFA",  weights=weights,
-            F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
-            P.init=P.init, writename="ex1__1dim_1pl_w",
-            noharm.path=noharm.path, dec="," )
-summary(mod1b)
-
-#****************************************
-# Model 2: 1-dimensional 2PL Model
-
-# set trait variance equal to 1
-P.pattern <- matrix( 0, ncol=1, nrow=1 )
-P.init <- 1+0*P.pattern
-# loading matrix
-F.pattern <- matrix( 1, nrow=I, ncol=1 )
-F.init <- 1 + 0*F.pattern
-
-mod <- sirt::R2noharm( dat=dat, model.type="CFA",
-            F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
-            P.init=P.init, writename="ex2__1dim_2pl",
-            noharm.path=noharm.path, dec="," )
-
-summary(mod)
-jmod <- sirt::R2noharm.jackknife( mod, jackunits=20 )
-summary(jmod)
-
-#****************************************
-# Model 3: 1-dimensional 3PL Model with fixed guessing parameters
-
-# set trait variance equal to 1
-P.pattern <- matrix( 0, ncol=1, nrow=1 )
-P.init <- 1+0*P.pattern
-# loading matrix
-F.pattern <- matrix( 1, nrow=I, ncol=1 )
-F.init <- 1 + 0*F.pattern       #
-# fix guessing parameters equal to .2 (for all items)
-guesses <- rep( .1, I )
-
-mod <- sirt::R2noharm( dat=dat, model.type="CFA",
-          F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
-          P.init=P.init, guesses=guesses,
-          writename="ex3__1dim_3pl", noharm.path=noharm.path, dec=","  )
-summary(mod)
-jmod <- sirt::R2noharm.jackknife( mod, jackunits=20 )
-summary(jmod)
-
-#****************************************
-# Model 4: 3-dimensional Rasch model
-
-# estimate one factor variance
-P.pattern <- matrix( 1, ncol=3, nrow=3 )
-P.init <- .8*P.pattern
-diag(P.init) <- 1
-# fix all entries in the loading matrix to 1
-F.init <- F.pattern <- matrix( 0, nrow=I, ncol=3 )
-F.init[1:6,1] <- 1
-F.init[7:12,2] <- 1
-F.init[13:18,3] <- 1
-
-mod <- sirt::R2noharm( dat=dat, model.type="CFA",
-          F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
-          P.init=P.init, writename="ex4__3dim_1pl",
-          noharm.path=noharm.path, dec="," )
-# write output from R console in a file
-summary(mod, logfile="ex4__3dim_1pl__SUMMARY.Rout")
-
-jmod <- sirt::R2noharm.jackknife( mod, jackunits=20 )
-summary(jmod)
-
-# extract factor scores
-emod <- sirt::R2noharm.EAP(mod)
-
-#****************************************
-# Model 5: 3-dimensional 2PL model
-
-# estimate one factor variance
-P.pattern <- matrix( 1, ncol=3, nrow=3 )
-P.init <- .8*P.pattern
-diag(P.init) <- 0
-# fix all entries in the loading matrix to 1
-F.pattern <- matrix( 0, nrow=I, ncol=3 )
-F.pattern[1:6,1] <- 1
-F.pattern[7:12,2] <- 1
-F.pattern[13:18,3] <- 1
-F.init <- F.pattern
-
-mod <- sirt::R2noharm( dat=dat, model.type="CFA",
-          F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
-          P.init=P.init, writename="ex5__3dim_2pl",
-          noharm.path=noharm.path, dec="," )
-summary(mod)
-# use 50 jackknife units with 4 persons within a unit
-jmod <- sirt::R2noharm.jackknife( mod, jackunits=seq( 1:50, each=4 ) )
-summary(jmod)
-
-#****************************************
-# Model 6: Exploratory Factor Analysis with 3 factors
-
-mod <- sirt::R2noharm( dat=dat, model.type="EFA",  dimensions=3,
-           writename="ex6__3dim_efa", noharm.path=noharm.path,dec=",")
-summary(mod)
-
-jmod <- sirt::R2noharm.jackknife( mod, jackunits=20 )
-
-#############################################################################
-# EXAMPLE 2: NOHARM manual Example A
-#############################################################################
-
-# See NOHARM manual: http://noharm.niagararesearch.ca/nh4man/nhman.html
-# The following text and data is copied from this manual.
-#
-# In the first example, we demonstrate how to prepare the input for a 2-dimensional
-# model using exploratory analysis. Data from a 9 item test were collected from
-# 200 students and the 9x9 product-moment matrix of the responses was computed.
-#
-# Our hypothesis is for a 2-dimensional model with no guessing,
-# i.e., all guesses are equal to zero. However, because we are unsure of any
-# particular pattern for matrix F, we wish to prescribe an exploratory analysis, i.e.,
-# set EX=1. Also, we will content ourselves with letting the program supply all
-# initial values.
-#
-# We would like both the sample product-moment matrix and the residual matrix to
-# be included in the output.
-
-# scan product-moment matrix copied from the NOHARM manual
-pm <- scan()
-     0.8967
-     0.2278 0.2356
-     0.6857 0.2061 0.7459
-     0.8146 0.2310 0.6873 0.8905
-     0.4505 0.1147 0.3729 0.4443 0.5000
-     0.7860 0.2080 0.6542 0.7791 0.4624 0.8723
-     0.2614 0.0612 0.2140 0.2554 0.1914 0.2800 0.2907
-     0.7549 0.1878 0.6236 0.7465 0.4505 0.7590 0.2756 0.8442
-     0.6191 0.1588 0.5131 0.6116 0.3845 0.6302 0.2454 0.6129 0.6879
-
-ex2 <- sirt::R2noharm( pm=pm, n=200, model.type="EFA", dimensions=2,
-         noharm.path=noharm.path, writename="ex2_noharmExA", dec=",")
-summary(ex2)
-
-#############################################################################
-# EXAMPLE 3: NOHARM manual Example B
-#############################################################################
-
-# See NOHARM manual: http://noharm.niagararesearch.ca/nh4man/nhman.html
-# The following text and data is copied from this manual.
-
-# Suppose we have the product-moment matrix of data from 125 students on 9 items.
-# Our hypothesis is for 2 dimensions with simple structure. In this case,
-# items 1 to 5 have coefficients of theta which are to be estimated for one
-# latent trait but are to be fixed at zero for the other one.
-# For the latent trait for which items 1 to 5 have zero coefficients,
-# items 6 to 9 have coefficients which are to be estimated. For the other
-# latent trait, items 6 to 9 will have zero coefficients.
-# We also wish to estimate the correlation between the latent traits,
-# so we prescribe P as a 2x2 correlation matrix.
-#
-# Our hypothesis prescribes that there was no guessing involved, i.e.,
-# all guesses are equal to zero. For demonstration purposes,
-# let us not have the program print out the sample product-moment matrix.
-# Also let us not supply any starting values but, rather, use the defaults
-# supplied by the program.
-
-pm <- scan()
-    0.930
-    0.762 0.797
-    0.541 0.496 0.560
-    0.352 0.321 0.261 0.366
-    0.205 0.181 0.149 0.110 0.214
-    0.858 0.747 0.521 0.336 0.203 0.918
-    0.773 0.667 0.465 0.308 0.184 0.775 0.820
-    0.547 0.474 0.347 0.233 0.132 0.563 0.524 0.579
-    0.329 0.290 0.190 0.140 0.087 0.333 0.308 0.252 0.348
-
-I <- 9    # number of items
-# define loading matrix
-F.pattern <- matrix(0,I,2)
-F.pattern[1:5,1] <- 1
-F.pattern[6:9,2] <- 1
-F.init <- F.pattern
-# define covariance matrix
-P.pattern <- matrix(1,2,2)
-diag(P.pattern) <- 0
-P.init <- 1+P.pattern
-
-ex3 <- sirt::R2noharm( pm=pm, n=125,, model.type="CFA",
-           F.pattern=F.pattern, F.init=F.init, P.pattern=P.pattern,
-           P.init=P.init, writename="ex3_noharmExB",
-           noharm.path=noharm.path, dec="," )
-summary(ex3)
-
-#############################################################################
-# EXAMPLE 4: NOHARM manual Example C
-#############################################################################
-
-data(data.noharmExC)
-# See NOHARM manual: http://noharm.niagararesearch.ca/nh4man/nhman.html
-# The following text and data is copied from this manual.
-
-# In this example, suppose that from 300 respondents we have item
-# responses scored dichotomously, 1 or 0, for 8 items.
-#
-# Our hypothesis is for a unidimensional model where all eight items
-# have coefficients of theta which are to be estimated.
-# Suppose that since the items were multiple choice with 5 options each,
-# we set the fixed guesses all to 0.2 (not necessarily good reasoning!)
-#
-# Let's supply initial values for the coefficients of theta (F matrix)
-# as .75 for items 1 to 4 and .6 for items 5 to 8.
-
-I <- 8
-guesses <- rep(.2,I)
-F.pattern <- matrix(1,I,1)
-F.init <- F.pattern
-F.init[1:4,1] <- .75
-F.init[5:8,1] <- .6
-P.pattern <- matrix(0,1,1)
-P.init <- 1 + 0 * P.pattern
-
-ex4 <- sirt::R2noharm( dat=data.noharmExC,, model.type="CFA",
-           guesses=guesses, F.pattern=F.pattern, F.init=F.init,
-           P.pattern=P.pattern, P.init=P.init, writename="ex3_noharmExC",
-           noharm.path=noharm.path, dec="," )
-summary(ex4)
-
-# modify F pattern matrix
-# f11=f51 (since both have equal pattern values of 2),
-# f21=f61 (since both have equal pattern values of 3),
-# f31=f71 (since both have equal pattern values of 4),
-# f41=f81 (since both have equal pattern values of 5).
-F.pattern[ c(1,5) ] <- 2
-F.pattern[ c(2,6) ] <- 3
-F.pattern[ c(3,7) ] <- 4
-F.pattern[ c(4,8) ] <- 5
-F.init <- .5+0*F.init
-
-ex4a <- sirt::R2noharm( dat=data.noharmExC,, model.type="CFA",
-           guesses=guesses, F.pattern=F.pattern, F.init=F.init,
-           P.pattern=P.pattern, P.init=P.init, writename="ex3_noharmExC1",
-           noharm.path=noharm.path, dec="," )
-summary(ex4a)
-# }
-</pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#value">Value</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#note">Note</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -623,13 +337,16 @@ summary(ex4a)
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

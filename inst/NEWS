@@ -19,7 +19,7 @@ IPN - Leibniz Institute for Science and Mathematics Education
 at Kiel University
 
 Questions or suggestions about sirt can be sent to:
-robitzsch@leibniz-ipn.de
+robitzsch@ipn.uni-kiel.de
 
 For reporting a bug, please provide always a reproducible R script 
 and (if necessary) a corresponding dataset.
@@ -36,9 +36,20 @@ CHANGELOG sirt
 
 
 
+------------------------------------------------------------------------
+VERSIONS sirt 3.8  |  2019-11-05  |  Last: sirt 3.8-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.7  |  2019-10-28  |  Last: sirt 3.7-24
+VERSIONS sirt 3.7  |  2019-11-04  |  Last: sirt 3.7-40
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in computation of vcov() for xxirt objects
@@ -53,15 +64,19 @@ FIXED * try to fix numerical issues in polychoric2() for
         'use_pbv=0' (thanks to Njaal Foldnes)
 ADDED * added prior distributions in rasch.mml2() (arguments
         'prior.b', 'prior.a', 'prior.c', 'prior.d')
-
+FIXED * bug fix in mirt.wrapper.coef()
+ADDED * added mirt_summary() function for producing summary output
+        for mirt objects
+ADDED * extended S3 methods IRT.irfprob, IRT.likelihood and 
+        IRT.posterior for objects of class MultipleGroupClass 
+        (models fitted in mirt package)
+ADDED * added S3 method IRT.expectedCounts for objects fitted in
+        mirt package
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: resp_groupwise (1),
-        invariance.alignment (3), rasch.mml2 (1)
-
-
-
-
+        invariance.alignment (3), rasch.mml2 (1),
+        mirt.wrapper.coef (1)
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.6  |  2019-08-01  |  Last: sirt 3.6-21

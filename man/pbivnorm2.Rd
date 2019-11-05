@@ -1,5 +1,5 @@
 %% File Name: pbivnorm2.Rd
-%% File Version: 0.262
+%% File Version: 0.263
 
 \name{pbivnorm2}
 \alias{pbivnorm2}
@@ -36,11 +36,12 @@ Vector of correlations between random normal variates
 Vector of probabilities
 }
 
+%% Cox: 10.2307/1403446
+%% \doi{10.2307/1403446}
 \references{
 Cox, D. R., & Wermuth, N. (1991). A simple approximation for bivariate and
 trivariate normal integrals.
 \emph{International Statistical Review, 59}(2), 263-269.
-\doi{10.2307/1403446}
 
 Hong, H. P. (1999). An approximation to bivariate and trivariate normal
 integrals. \emph{Engineering and Environmental Systems, 16}(2), 115-127.

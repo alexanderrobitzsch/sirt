@@ -1,5 +1,5 @@
 %% File Name: sirt-package.Rd
-%% File Version: 2.68
+%% File Version: 2.703
 
 \name{sirt-package}
 \alias{sirt-package}
@@ -190,20 +190,22 @@ analysis and aims at obtaining approximate invariance.
 
 
 \references{
-Asparouhov, T., & Muthen, B. (2014).
-Multiple-group factor analysis alignment.
-\emph{Structural Equation Modeling, 21}, 1-14.
+Asparouhov, T., & Muthen, B. (2014). Multiple-group factor analysis alignment.
+\emph{Structural Equation Modeling, 21}(4), 1-14.
+\doi{10.1080/10705511.2014.919210}
 
 Bartolucci, F. (2007). A class of multidimensional
 IRT models for testing unidimensionality and clustering
 items. \emph{Psychometrika, 72}, 141-157.
 
 Braeken, J. (2011). A boundary mixture approach to violations of conditional
-independence. \emph{Psychometrika, 76}, 57-76.
+independence. \emph{Psychometrika, 76}(1), 57-76.
+\doi{10.1007/s11336-010-9190-4}
 
 DeCarlo, T., Kim, Y., & Johnson, M. S. (2011).
 A hierarchical rater model for constructed responses, with a signal detection
-rater model. \emph{Journal of Educational Measurement, 48}, 333-356.
+rater model. \emph{Journal of Educational Measurement, 48}(3), 333-356.
+\doi{10.1111/j.1745-3984.2011.00143.x}
 
 Dimitrov, D. (2003). Marginal true-score measures and reliability
 for binary items as a function of their IRT parameters.
@@ -219,6 +221,7 @@ for multivariate binary data. \emph{Annals of Applied Statistics,
 1}, 502-537.
 
 Fox, J.-P. (2010). \emph{Bayesian item response modeling}. New York: Springer.
+\doi{10.1007/978-1-4419-0742-4}
 
 Fox, J.-P., & Verhagen, A.-J. (2010). Random item effects modeling for
 cross-national survey data.
@@ -239,11 +242,13 @@ coefficient alpha. \emph{Psychometrika, 74}, 155-167.
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
 from an item response model through separate calibrations}.
 ETS Research Report ETS RR-09-40. Princeton, ETS.
+\doi{10.1002/j.2333-8504.2009.tb02197.x}
 
 Hildebrandt, A., Luedtke, O., Robitzsch, A., Sommer, C., &
 Wilhelm, O. (2016). Exploring factor model parameters across continuous variables
 with local structural equation models.
-\emph{Multivariate Behavioral Research, 51}, 257-278.
+\emph{Multivariate Behavioral Research, 51}(2-3), 257-278.
+\doi{10.1080/00273171.2016.1142856}
 
 Ip, E. H., Molenberghs, G., Chen, S. H., Goegebeur, Y., &
 De Boeck, P. (2013). Functionally unidimensional item
@@ -256,7 +261,7 @@ A hierarchical IRT model for criterion-referenced measurement.
 
 Jeon, M., & Rijmen, F. (2016). A modular approach for item response theory modeling with 
 the \R package \pkg{flirt}. \emph{Behavior Research Methods, 48}(2), 742-755.
-http://dx.doi.org/10.3758/s13428-015-0606-z
+\doi{10.3758/s13428-015-0606-z}
 
 Linacre, J. M. (1994). \emph{Many-Facet Rasch Measurement}.
 Chicago: MESA Press.
@@ -266,13 +271,14 @@ item response theory model. \emph{British Journal of Mathematical
 and Statistical Psychology, 63}, 509-525.
 
 McDonald, R. P. (1982). Linear versus nonlinear models in item response theory.
-\emph{Applied Psychological Measurement, 6}, 379-396.
-https://doi.org/10.1177/014662168200600402
+\emph{Applied Psychological Measurement, 6}(4), 379-396.
+\doi{10.1177/014662168200600402}
 
 McDonald, R. P. (1997). Normal-ogive multidimensional model.
 In W. van der Linden & R. K. Hambleton (1997):
 \emph{Handbook of modern item response theory} (pp. 257-269).
 New York: Springer.
+\doi{10.1007/978-1-4757-2691-6_15}
 
 Meijer, R. R., & Sijtsma, K. (2001). Methodology
 review: Evaluating person fit. \emph{Applied Psychological
@@ -288,17 +294,16 @@ Ramsay, J. O. (1991). Kernel smoothing approaches to
 nonparametric item characteristic curve estimation.
 \emph{Psychometrika, 56}, 611-630.
 
-Reckase, M.D. (2009). \emph{Multidimensional item response theory}.
-New York: Springer.
-
-Rijmen, F., & Vomlel, J. (2008). Assessing the performance of
-variational methods for mixed logistic regression models.
-\emph{Journal of Statistical Computation and Simulation,
-78}, 765-779.
+Reckase, M. (2009). \emph{Multidimensional item response theory}.
+New York: Springer. \doi{10.1007/978-0-387-89976-3}
 
 Renard, D., Molenberghs, G., & Geys, H. (2004). A pairwise likelihood
 approach to estimation in multilevel probit models. \emph{Computational Statistics
 & Data Analysis, 44}, 649-667.
+
+Rijmen, F., & Vomlel, J. (2008). Assessing the performance of
+variational methods for mixed logistic regression models.
+\emph{Journal of Statistical Computation and Simulation, 78}, 765-779.
 
 Robitzsch, A., & Steinfeld, J. (2018). Item response models for human ratings: Overview,
 estimation methods, and implementation in R.
@@ -306,15 +311,15 @@ estimation methods, and implementation in R.
 
 Rossi, N., Wang, X. & Ramsay, J. O. (2002). Nonparametric item response function
 estimates with the EM algorithm.
-\emph{Journal of Educational and Behavioral Statistics,
-27}, 291-317.
+\emph{Journal of Educational and Behavioral Statistics, 27}, 291-317.
 
 Rusch, T., Mair, P., & Hatzinger, R. (2013).
 \emph{Psychometrics with \R: A Review of CRAN Packages for Item Response Theory.}
 http://epub.wu.ac.at/4010/1/resrepIRThandbook.pdf
 
 Scheiblechner, H. (1995). Isotonic ordinal
-probabilistic models (ISOP). \emph{Psychometrika, 60}, 281-304.
+probabilistic models (ISOP). \emph{Psychometrika, 60}(2), 281-304.
+\doi{10.1007/BF02301417}
 
 Scheiblechner, H. (1999). Additive conjoint isotonic
 probabilistic models (ADISOP). \emph{Psychometrika, 64}, 295-316.
@@ -322,19 +327,21 @@ probabilistic models (ADISOP). \emph{Psychometrika, 64}, 295-316.
 Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014). A comparison of different
 psychometric approaches to modeling testlet structures: An example with C-tests.
 \emph{Journal of Educational Measurement, 51}(4), 400-418.
+\doi{10.1111/jedm.12054}
 
 Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996).
 Conditional covariance-based nonparametric multidimensionality assessment.
-\emph{Applied Psychological Measurement, 20}, 331-354.
+\emph{Applied Psychological Measurement, 20}(4), 331-354.
+\doi{10.1177/014662169602000403}
 
 Stukel, T. A. (1988). Generalized logistic models.
-\emph{Journal of the American Statistical Association,
-83}, 426-431.
+\emph{Journal of the American Statistical Association, 83}(402), 426-431.
+\doi{10.1080/01621459.1988.10478613}
 
 Uenlue, A., & Yanagida, T. (2011). \R you ready for \R?:
 The CRAN psychometrics task view.
-\emph{British Journal of Mathematical and Statistical Psychology,
-64}, 182-186.
+\emph{British Journal of Mathematical and Statistical Psychology, 64}(1), 182-186.
+\doi{10.1348/000711010X519320}
 
 van den Noortgate, W., De Boeck, P., & Meulders, M. (2003).
 Cross-classification multilevel logistic models in psychometrics.

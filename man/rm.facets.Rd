@@ -1,5 +1,5 @@
 %% File Name: rm.facets.Rd
-%% File Version: 0.823
+%% File Version: 0.824
 
 \name{rm.facets}
 \alias{rm.facets}
@@ -168,10 +168,10 @@ This function models ratings \eqn{X_{pri}}
 for person \eqn{p}, rater \eqn{r} and item \eqn{i}
 and category \eqn{k} (see also Robitzsch & Steinfeld, 2018; Uto & Ueno, 2010; Wu, 2017)
 \deqn{P( X_{pri}=k | \theta_p ) \propto
-    exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r -   \tau_{ik} ) \quad,
+    \exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r -   \tau_{ik} ) \quad,
     \quad \theta_p \sim N( 0, \sigma^2 )}{%
     P( X_{pri}=k | \theta_p ) \propto
-    exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r - \tau_{ik} ),
+    \exp( a_i a_r q_{ik} \theta_p - q_{ik} b_r - \tau_{ik} ),
             \theta_p ~ N( 0, \sigma^2 )}
 By default, the scores in the \eqn{Q} matrix are
 \eqn{q_{ik}=k}. Item slopes \eqn{a_i} and rater slopes

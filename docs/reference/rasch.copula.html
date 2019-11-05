@@ -8,21 +8,25 @@
 
 <title>Multidimensional IRT Copula Model — rasch.copula2 • sirt</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Multidimensional IRT Copula Model — rasch.copula2" />
 
+<meta property="og:title" content="Multidimensional IRT Copula Model — rasch.copula2" />
 <meta property="og:description" content="This function handles local dependence by specifying
 copulas for residuals in multidimensional item response
 models for dichotomous item responses
@@ -45,6 +49,7 @@ models while rasch.copula2 only handles unidimensional models." />
 
 
 
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -53,6 +58,7 @@ models while rasch.copula2 only handles unidimensional models." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -71,7 +77,7 @@ models while rasch.copula2 only handles unidimensional models." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.7-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.8-vv</span>
       </span>
     </div>
 
@@ -79,7 +85,7 @@ models while rasch.copula2 only handles unidimensional models." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -87,11 +93,10 @@ models while rasch.copula2 only handles unidimensional models." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexanderrobitzsch/sirt">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -102,6 +107,7 @@ models while rasch.copula2 only handles unidimensional models." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -113,7 +119,6 @@ models while rasch.copula2 only handles unidimensional models." />
     </div>
 
     <div class="ref-description">
-    
     <p>This function handles local dependence by specifying
 copulas for residuals in multidimensional item response
 models for dichotomous item responses
@@ -123,39 +128,38 @@ Estimation is allowed for item difficulties, item slopes and
 a generalized logistic link function (Stukel, 1988).</p>
 <p>The function <code>rasch.copula3</code> allows the estimation of multidimensional
 models while <code>rasch.copula2</code> only handles unidimensional models.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>rasch.copula2</span>(<span class='no'>dat</span>, <span class='no'>itemcluster</span>, <span class='kw'>copula.type</span><span class='kw'>=</span><span class='st'>"bound.mixt"</span>,
     <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='kw'>NULL</span>,
-    <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>21</span>), <span class='kw'>alpha1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>alpha2</span><span class='kw'>=</span><span class='fl'>0</span>,
-    <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>1e-06</span>,  <span class='kw'>est.b</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>ncol</a></span>(<span class='no'>dat</span>)),
-    <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>ncol</a></span>(<span class='no'>dat</span>)), <span class='kw'>est.delta</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>b.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>a.init</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+    <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>21</span>), <span class='kw'>alpha1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>alpha2</span><span class='kw'>=</span><span class='fl'>0</span>,
+    <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>1e-06</span>,  <span class='kw'>est.b</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)),
+    <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)), <span class='kw'>est.delta</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>b.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>a.init</span><span class='kw'>=</span><span class='kw'>NULL</span>,
     <span class='kw'>est.alpha</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>glob.conv</span><span class='kw'>=</span><span class='fl'>0.0001</span>, <span class='kw'>alpha.conv</span><span class='kw'>=</span><span class='fl'>1e-04</span>, <span class='kw'>conv1</span><span class='kw'>=</span><span class='fl'>0.001</span>,
     <span class='kw'>dev.crit</span><span class='kw'>=</span><span class='fl'>.2</span>, <span class='kw'>increment.factor</span><span class='kw'>=</span><span class='fl'>1.01</span>)
 
 <span class='fu'>rasch.copula3</span>(<span class='no'>dat</span>, <span class='no'>itemcluster</span>, <span class='kw'>dims</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>copula.type</span><span class='kw'>=</span><span class='st'>"bound.mixt"</span>,
     <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='kw'>NULL</span>,
-    <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>21</span>), <span class='kw'>alpha1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>alpha2</span><span class='kw'>=</span><span class='fl'>0</span>,
-    <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>1e-06</span>,  <span class='kw'>est.b</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>ncol</a></span>(<span class='no'>dat</span>)),
-    <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>ncol</a></span>(<span class='no'>dat</span>)), <span class='kw'>est.delta</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>b.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>a.init</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+    <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>21</span>), <span class='kw'>alpha1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>alpha2</span><span class='kw'>=</span><span class='fl'>0</span>,
+    <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>1e-06</span>,  <span class='kw'>est.b</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)),
+    <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)), <span class='kw'>est.delta</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>b.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>a.init</span><span class='kw'>=</span><span class='kw'>NULL</span>,
     <span class='kw'>est.alpha</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>glob.conv</span><span class='kw'>=</span><span class='fl'>0.0001</span>, <span class='kw'>alpha.conv</span><span class='kw'>=</span><span class='fl'>1e-04</span>, <span class='kw'>conv1</span><span class='kw'>=</span><span class='fl'>0.001</span>,
     <span class='kw'>dev.crit</span><span class='kw'>=</span><span class='fl'>.2</span>, <span class='kw'>rho.init</span><span class='kw'>=</span><span class='fl'>.5</span>, <span class='kw'>increment.factor</span><span class='kw'>=</span><span class='fl'>1.01</span>)
 
 <span class='co'># S3 method for rasch.copula2</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for rasch.copula3</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for rasch.copula2</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/anova'>anova</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
 <span class='co'># S3 method for rasch.copula3</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/anova'>anova</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
 
 <span class='co'># S3 method for rasch.copula2</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/logLik'>logLik</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/logLik.html'>logLik</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
 <span class='co'># S3 method for rasch.copula3</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/logLik'>logLik</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/logLik.html'>logLik</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
 
 <span class='co'># S3 method for rasch.copula2</span>
 <span class='fu'>IRT.likelihood</span>(<span class='no'>object</span>,<span class='no'>...</span>)
@@ -166,7 +170,7 @@ models while <code>rasch.copula2</code> only handles unidimensional models.</p>
 <span class='fu'>IRT.posterior</span>(<span class='no'>object</span>,<span class='no'>...</span>)
 <span class='co'># S3 method for rasch.copula3</span>
 <span class='fu'>IRT.posterior</span>(<span class='no'>object</span>,<span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -237,7 +241,7 @@ to the logistic link function.</p></td>
     </tr>
     <tr>
       <th>est.delta</th>
-      <td><p>Integer vector of length <code><a href='https://www.rdocumentation.org/packages/base/topics/length'>length(itemcluster)</a></code>. Nonzero integers
+      <td><p>Integer vector of length <code><a href='https://rdrr.io/r/base/length.html'>length(itemcluster)</a></code>. Nonzero integers
 correspond to <code>delta</code> parameters which are estimated.
 Equal integers indicate parameter equality constraints.</p></td>
     </tr>
@@ -292,11 +296,11 @@ Equal integers indicate parameter equality constraints.</p></td>
       <td><p>Number of digits after decimal in <code>summary</code> output</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>Further arguments to be passed</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list with following entries</p>
@@ -324,32 +328,31 @@ distribution</p></dd>
 <dt>summary.delta</dt><dd><p>Summary for estimated \(\delta\) parameters</p></dd>
 <dt>f.qk.yi</dt><dd><p>Individual posterior</p></dd>
 <dt>f.yi.qk</dt><dd><p>Individual likelihood</p></dd>
-<dt>&#8230;</dt><dd><p>Further values</p></dd>
+<dt>...</dt><dd><p>Further values</p></dd>
 
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Braeken, J. (2011). A boundary mixture approach to violations
-of conditional independence. <em>Psychometrika, 76</em>, 57-76.
-http://dx.doi.org/10.1007/s11336-010-9190-4</p>
+    <p>Braeken, J. (2011). A boundary mixture approach to violations of conditional
+independence. <em>Psychometrika, 76</em>(1), 57-76.
+doi: <a href='https://doi.org/10.1007/s11336-010-9190-4'>10.1007/s11336-010-9190-4</a></p>
 <p>Braeken, J., Kuppens, P., De Boeck, P., &amp; Tuerlinckx, F. (2013).
 Contextualized personality questionnaires: A case for copulas in structural
-equation models for categorical data. <em>Multivariate Behavioral Research, 48</em>,
-845-870. http://dx.doi.org/10.1080/00273171.2013.827965</p>
+equation models for categorical data. <em>Multivariate Behavioral Research, 48</em>(6),
+845-870.
+doi: <a href='https://doi.org/10.1080/00273171.2013.827965'>10.1080/00273171.2013.827965</a></p>
 <p>Braeken, J., &amp; Tuerlinckx, F. (2009). Investigating latent constructs with item
-response models: A MATLAB IRTm toolbox. <em>Behavior Research Methods, 41</em>, 1127-1137.
-http://dx.doi.org/10.3758/BRM.41.4.1127</p>
+response models: A MATLAB IRTm toolbox.
+<em>Behavior Research Methods, 41</em>(4), 1127-1137.</p>
 <p>Braeken, J., Tuerlinckx, F., &amp; De Boeck, P. (2007).
-Copula functions for residual dependency. <em>Psychometrika, 72</em>, 393-411.
-http://dx.doi.org/10.1007/s11336-007-9005-4</p>
+Copula functions for residual dependency. <em>Psychometrika, 72</em>(3), 393-411.
+doi: <a href='https://doi.org/10.1007/s11336-007-9005-4'>10.1007/s11336-007-9005-4</a></p>
 <p>Schroeders, U., Robitzsch, A., &amp; Schipolowski, S. (2014). A comparison of different
 psychometric approaches to modeling testlet structures: An example with C-tests.
 <em>Journal of Educational Measurement, 51</em>(4), 400-418.
-http://dx.doi.org/10.1111/jedm.12054</p>
+doi: <a href='https://doi.org/10.1111/jedm.12054'>10.1111/jedm.12054</a></p>
 <p>Stukel, T. A. (1988). Generalized logistic models.
-<em>Journal of the American Statistical Association, 83</em>, 426-431.
-http://dx.doi.org/10.1080/01621459.1988.10478613</p>
-    
+<em>Journal of the American Statistical Association, 83</em>(402), 426-431.
+doi: <a href='https://doi.org/10.1080/01621459.1988.10478613'>10.1080/01621459.1988.10478613</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>For a summary see <code>summary.rasch.copula2</code>.</p>
@@ -361,314 +364,23 @@ copula models implemented in the MATLAB software. See
 <a href='http://ppw.kuleuven.be/okp/software/irtm/'>http://ppw.kuleuven.be/okp/software/irtm/</a>.</p>
 <p>See Braeken, Kuppens, De Boeck and Tuerlinckx (2013) for an extension of the
 copula modeling approach to polytomous data.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>#############################################################################</span>
-<span class='co'># EXAMPLE 1: Reading Data</span>
-<span class='co'>#############################################################################</span>
-
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.read</span>)
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.read</span>
-
-<span class='co'># define item clusters</span>
-<span class='no'>itemcluster</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>( <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>4</span> )
-
-<span class='co'># estimate Copula model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rasch.copula'>rasch.copula2</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span>)
-
-<span class='co'># }</span># NOT RUN {
-# estimate Rasch model
-mod2 <- sirt::rasch.copula2( dat=dat, itemcluster=itemcluster,
-        delta=rep(0,3), est.delta=rep(0,3) )
-summary(mod1)
-summary(mod2)
-
-# estimate copula 2PL model
-I <- ncol(dat)
-mod3 <- sirt::rasch.copula2( dat=dat, itemcluster=itemcluster, est.a=1:I,
-                increment.factor=1.05)
-summary(mod3)
-
-#############################################################################
-# EXAMPLE 2: 11 items nested within 2 item clusters (testlets)
-#    with 2 resp. 3 dependent and 6 independent items
-#############################################################################
-
-set.seed(5698)
-I <- 11                             # number of items
-n <- 3000                           # number of persons
-b <- seq(-2,2, len=I)               # item difficulties
-theta <- stats::rnorm( n, sd=1 ) # person abilities
-# define item clusters
-itemcluster <- rep(0,I)
-itemcluster[ c(3,5 )] <- 1
-itemcluster[c(2,4,9)] <- 2
-# residual correlations
-rho <- c( .7, .5 )
-
-# simulate data
-dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
-colnames(dat) <- paste("I", seq(1,ncol(dat)), sep="")
-
-# estimate Rasch copula model
-mod1 <- sirt::rasch.copula2( dat, itemcluster=itemcluster )
-summary(mod1)
-
-# both item clusters have Cook-Johnson copula as dependency
-mod1c <- sirt::rasch.copula2( dat, itemcluster=itemcluster,
-            copula.type="cook.johnson")
-summary(mod1c)
-
-# first item boundary mixture and second item Cook-Johnson copula
-mod1d <- sirt::rasch.copula2( dat, itemcluster=itemcluster,
-            copula.type=c( "bound.mixt", "cook.johnson" ) )
-summary(mod1d)
-
-# compare result with Rasch model estimation in rasch.copula2
-# delta must be set to zero
-mod2 <- sirt::rasch.copula2( dat, itemcluster=itemcluster, delta=c(0,0),
-            est.delta=c(0,0) )
-summary(mod2)
-
-#############################################################################
-# EXAMPLE 3: 12 items nested within 3 item clusters (testlets)
-#   Cluster 1 -> Items 1-4; Cluster 2 -> Items 6-9;  Cluster 3 -> Items 10-12
-#############################################################################
-
-set.seed(967)
-I <- 12                             # number of items
-n <- 450                            # number of persons
-b <- seq(-2,2, len=I)               # item difficulties
-b <- sample(b)                      # sample item difficulties
-theta <- stats::rnorm( n, sd=1 ) # person abilities
-# itemcluster
-itemcluster <- rep(0,I)
-itemcluster[ 1:4 ] <- 1
-itemcluster[ 6:9 ] <- 2
-itemcluster[ 10:12 ] <- 3
-# residual correlations
-rho <- c( .35, .25, .30 )
-
-# simulate data
-dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
-colnames(dat) <- paste("I", seq(1,ncol(dat)), sep="")
-
-# estimate Rasch copula model
-mod1 <- sirt::rasch.copula2( dat, itemcluster=itemcluster )
-summary(mod1)
-
-# person parameter estimation assuming the Rasch copula model
-pmod1 <- sirt::person.parameter.rasch.copula(raschcopula.object=mod1 )
-
-# Rasch model estimation
-mod2 <- sirt::rasch.copula2( dat, itemcluster=itemcluster,
-             delta=rep(0,3), est.delta=rep(0,3) )
-summary(mod1)
-summary(mod2)
-
-#############################################################################
-# EXAMPLE 4: Two-dimensional copula model
-#############################################################################
-
-set.seed(5698)
-I <- 9
-n <- 1500                           # number of persons
-b <- seq(-2,2, len=I)               # item difficulties
-theta0 <- stats::rnorm( n, sd=sqrt( .6 ) )
-
-#*** Dimension 1
-theta <- theta0 + stats::rnorm( n, sd=sqrt( .4 ) )   # person abilities
-# itemcluster
-itemcluster <- rep(0,I)
-itemcluster[ c(3,5 )] <- 1
-itemcluster[c(2,4,9)] <- 2
-itemcluster1 <- itemcluster
-# residual correlations
-rho <- c( .7, .5 )
-# simulate data
-dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
-colnames(dat) <- paste("A", seq(1,ncol(dat)), sep="")
-dat1 <- dat
-# estimate model of dimension 1
-mod0a <- sirt::rasch.copula2( dat1, itemcluster=itemcluster1)
-summary(mod0a)
-
-#*** Dimension 2
-theta <- theta0 + stats::rnorm( n, sd=sqrt( .8 ) )        # person abilities
-# itemcluster
-itemcluster <- rep(0,I)
-itemcluster[ c(3,7,8 )] <- 1
-itemcluster[c(4,6)] <- 2
-itemcluster2 <- itemcluster
-# residual correlations
-rho <- c( .2, .4 )
-# simulate data
-dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
-colnames(dat) <- paste("B", seq(1,ncol(dat)), sep="")
-dat2 <- dat
-# estimate model of dimension 2
-mod0b <- sirt::rasch.copula2( dat2, itemcluster=itemcluster2)
-summary(mod0b)
-
-# both dimensions
-dat <- cbind( dat1, dat2 )
-itemcluster2 <- ifelse( itemcluster2 > 0, itemcluster2 + 2, 0 )
-itemcluster <- c( itemcluster1, itemcluster2 )
-dims <- rep( 1:2, each=I)
-
-# estimate two-dimensional copula model
-mod1 <- sirt::rasch.copula3( dat, itemcluster=itemcluster, dims=dims, est.a=dims,
-            theta.k=seq(-5,5,len=15) )
-summary(mod1)
-
-#############################################################################
-# EXAMPLE 5: Subset of data Example 2
-#############################################################################
-
-set.seed(5698)
-I <- 11                             # number of items
-n <- 3000                           # number of persons
-b <- seq(-2,2, len=I)               # item difficulties
-theta <- stats::rnorm( n, sd=1.3 )  # person abilities
-# define item clusters
-itemcluster <- rep(0,I)
-itemcluster[ c(3,5)] <- 1
-itemcluster[c(2,4,9)] <- 2
-# residual correlations
-rho <- c( .7, .5 )
-# simulate data
-dat <- sirt::sim.rasch.dep( theta, b, itemcluster, rho )
-colnames(dat) <- paste("I", seq(1,ncol(dat)), sep="")
-
-# select subdataset with only one dependent item cluster
-item.sel <- scan( what="character", nlines=1 )
-    I1 I6 I7 I8 I10 I11 I3 I5
-dat1 <- dat[,item.sel]
-
-#******************
-#*** Model 1a: estimate Copula model in sirt
-itemcluster <- rep(0,8)
-itemcluster[c(7,8)] <- 1
-mod1a <- sirt::rasch.copula2( dat3, itemcluster=itemcluster )
-summary(mod1a)
-
-#******************
-#*** Model 1b: estimate Copula model in mirt
-library(mirt)
-#*** redefine dataset for estimation in mirt
-dat2 <- dat1[, itemcluster==0 ]
-dat2 <- as.data.frame(dat2)
-# combine items 3 and 5
-dat2$C35 <- dat1[,"I3"] + 2*dat1[,"I5"]
-table( dat2$C35, paste0( dat1[,"I3"],dat1[,"I5"]) )
-#* define mirt model
-mirtmodel <- mirt::mirt.model("
-      F=1-7
-      CONSTRAIN=(1-7,a1)
-      " )
-#-- Copula function with two dependent items
-# define item category function for pseudo-items like C35
-P.copula2 <- function(par,Theta, ncat){
-     b1 <- par[1]
-     b2 <- par[2]
-     a1 <- par[3]
-     ldelta <- par[4]
-     P1 <- stats::plogis( a1*(Theta - b1 ) )
-     P2 <- stats::plogis( a1*(Theta - b2 ) )
-     Q1 <- 1-P1
-     Q2 <- 1-P2
-     # define vector-wise minimum function
-     minf2 <- function( x1, x2 ){
-         ifelse( x1 < x2, x1, x2 )
-                                }
-     # distribution under independence
-     F00 <- Q1*Q2
-     F10 <- Q1*Q2 + P1*Q2
-     F01 <- Q1*Q2 + Q1*P2
-     F11 <- 1+0*Q1
-     F_ind <- c(F00,F10,F01,F11)
-     # distribution under maximal dependence
-     F00 <- minf2(Q1,Q2)
-     F10 <- Q2              #=minf2(1,Q2)
-     F01 <- Q1              #=minf2(Q1,1)
-     F11 <- 1+0*Q1          #=minf2(1,1)
-     F_dep <- c(F00,F10,F01,F11)
-     # compute mixture distribution
-     delta <- stats::plogis(ldelta)
-     F_tot <- (1-delta)*F_ind + delta * F_dep
-     # recalculate probabilities of mixture distribution
-     L1 <- length(Q1)
-     v1 <- 1:L1
-     F00 <- F_tot[v1]
-     F10 <- F_tot[v1+L1]
-     F01 <- F_tot[v1+2*L1]
-     F11 <- F_tot[v1+3*L1]
-     P00 <- F00
-     P10 <- F10 - F00
-     P01 <- F01 - F00
-     P11 <- 1 - F10 - F01 + F00
-     prob_tot <- c( P00, P10, P01, P11 )
-     return(prob_tot)
-        }
-# create item
-copula2 <- mirt::createItem(name="copula2", par=c(b1=0, b2=0.2, a1=1, ldelta=0),
-                est=c(TRUE,TRUE,TRUE,TRUE), P=P.copula2,
-                lbound=c(-Inf,-Inf,0,-Inf), ubound=c(Inf,Inf,Inf,Inf) )
-# define item types
-itemtype <- c( rep("2PL",6), "copula2" )
-customItems <- list("copula2"=copula2)
-# parameter table
-mod.pars <- mirt::mirt(dat2, 1, itemtype=itemtype,
-                customItems=customItems, pars='values')
-# estimate model
-mod1b <- mirt::mirt(dat2, mirtmodel, itemtype=itemtype, customItems=customItems,
-                verbose=TRUE, pars=mod.pars,
-                technical=list(customTheta=as.matrix(seq(-4,4,len=21)) ) )
-# estimated coefficients
-cmod <- sirt::mirt.wrapper.coef(mod)$coef
-
-# compare common item discrimination
-round( c("sirt"=mod1a$item$a[1], "mirt"=cmod$a1[1] ), 4 )
-  ##     sirt   mirt
-  ##   1.2845 1.2862
-# compare delta parameter
-round( c("sirt"=mod1a$item$delta[7], "mirt"=stats::plogis( cmod$ldelta[7] ) ), 4 )
-  ##     sirt   mirt
-  ##   0.6298 0.6297
-# compare thresholds a*b
-dfr <- cbind( "sirt"=mod1a$item$thresh,
-               "mirt"=c(- cmod$d[-7],cmod$b1[7]*cmod$a1[1], cmod$b2[7]*cmod$a1[1]))
-round(dfr,4)
-  ##           sirt    mirt
-  ##   [1,] -1.9236 -1.9231
-  ##   [2,] -0.0565 -0.0562
-  ##   [3,]  0.3993  0.3996
-  ##   [4,]  0.8058  0.8061
-  ##   [5,]  1.5293  1.5295
-  ##   [6,]  1.9569  1.9572
-  ##   [7,] -1.1414 -1.1404
-  ##   [8,] -0.4005 -0.3996
-# }
-</pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -676,13 +388,16 @@ round(dfr,4)
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

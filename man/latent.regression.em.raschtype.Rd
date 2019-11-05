@@ -1,5 +1,5 @@
 %% File Name: latent.regression.em.raschtype.Rd
-%% File Version: 1.46
+%% File Version: 1.481
 
 \name{latent.regression.em.raschtype}
 \alias{latent.regression.em.raschtype}
@@ -130,18 +130,22 @@ A list with following entries
   \item{totalvar}{Total variance in latent regression}
   \item{rsquared}{Explained variance \eqn{R^2} in latent regression}
 }
+
 \references{
 Adams, R., & Wu. M. (2007). The mixed-coefficients multinomial
 logit model: A generalized form of the Rasch model.
-In M. von Davier & C. H. Carstensen: \emph{Multivariate and Mixture
-Distribution Rasch Models: Extensions and Applications} (pp. 57-76).
+In M. von Davier & C. H. Carstensen (Eds.). \emph{Multivariate and mixture
+distribution Rasch models: Extensions and applications} (pp. 57-76).
 New York: Springer.
+\doi{10.1007/978-0-387-49839-3_4}
 
 Mislevy, R. J. (1991). Randomization-based inference about latent variables
-from complex samples. \emph{Psychometrika, 56}, 177-196.
+from complex samples. \emph{Psychometrika, 56}(2), 177-196.
+\doi{10.1007/BF02294457}
 
 Stukel, T. A. (1988). Generalized logistic models.
-\emph{Journal of the American Statistical Association, 83}, 426-431.
+\emph{Journal of the American Statistical Association, 83}(402), 426-431.
+\doi{10.1080/01621459.1988.10478613}
 }
 
 %\author{
@@ -162,12 +166,13 @@ See also \code{\link{plausible.value.imputation.raschtype}}
 for plausible value imputation of generalized logistic
 item type models.
 }
+
 \examples{
 #############################################################################
 #  EXAMPLE 1: PISA Reading | Rasch model for dichotomous data
 #############################################################################
 
-data( data.pisaRead)
+data(data.pisaRead, package="sirt")
 dat <- data.pisaRead$data
 items <- grep("R", colnames(dat))
 # define matrix of covariates

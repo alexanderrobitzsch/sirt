@@ -1,5 +1,5 @@
 %% File Name: R2noharm.Rd
-%% File Version: 2.356
+%% File Version: 2.358
 
 \name{R2noharm}
 \alias{R2noharm}
@@ -175,8 +175,8 @@ robust method (NOHARM) approach to item response theory.
 https://doi.org/10.20982/tqmp.12.1.p001
 
 McDonald, R. P. (1982a). Linear versus nonlinear models in item response theory.
-\emph{Applied Psychological Measurement, 6}, 379-396.
-https://doi.org/10.1177/014662168200600402
+\emph{Applied Psychological Measurement, 6}(4), 379-396.
+\doi{10.1177/014662168200600402}
 
 McDonald, R. P. (1982b). \emph{Unidimensional and multidimensional models for
 item response theory}. I.R.T., C.A.T. conference, Minneapolis, 1982, Proceedings.
@@ -223,7 +223,7 @@ For an \R implementation of the NOHARM model see \code{\link{noharm.sirt}}.
 #############################################################################
 
 # load data
-data( data.noharm18 )
+data(data.noharm18)
 dat <- data.noharm18
 I <- ncol(dat) # number of items
 

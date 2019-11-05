@@ -8,21 +8,25 @@
 
 <title>Converting a <code>lavaan</code> Model into a <code>mirt</code> Model — lavaan2mirt • sirt</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Converting a <code>lavaan</code> Model into a <code>mirt</code> Model — lavaan2mirt" />
 
+<meta property="og:title" content="Converting a <code>lavaan</code> Model into a <code>mirt</code> Model — lavaan2mirt" />
 <meta property="og:description" content="Converts a lavaan model into a mirt model.
 Optionally, the model can be estimated with the
 mirt::mirt function
@@ -45,6 +49,7 @@ See TAM::lavaanify.IRT for more details." />
 
 
 
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -53,6 +58,7 @@ See TAM::lavaanify.IRT for more details." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -71,7 +77,7 @@ See TAM::lavaanify.IRT for more details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.7-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.8-vv</span>
       </span>
     </div>
 
@@ -79,7 +85,7 @@ See TAM::lavaanify.IRT for more details." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -87,11 +93,10 @@ See TAM::lavaanify.IRT for more details." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexanderrobitzsch/sirt">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -102,6 +107,7 @@ See TAM::lavaanify.IRT for more details." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -113,21 +119,19 @@ See TAM::lavaanify.IRT for more details." />
     </div>
 
     <div class="ref-description">
-    
     <p>Converts a <code>lavaan</code> model into a <code>mirt</code> model.
 Optionally, the model can be estimated with the
-<code><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt::mirt</a></code> function
+<code><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt::mirt</a></code> function
 (<code>est.mirt=TRUE</code>) or just <code>mirt</code> syntax
 is generated (<code>est.mirt=FALSE</code>).</p>
 <p>Extensions of the <code>lavaan</code> syntax include guessing and slipping
 parameters (operators <code>?=g1</code> and <code>?=s1</code>)
 and a shortage operator for item groups (see <code>__</code>).
-See <code><a href='https://www.rdocumentation.org/packages/TAM/topics/lavaanify.IRT'>TAM::lavaanify.IRT</a></code> for more details.</p>
-    
+See <code><a href='https://rdrr.io/pkg/TAM/man/lavaanify.IRT.html'>TAM::lavaanify.IRT</a></code> for more details.</p>
     </div>
 
     <pre class="usage"><span class='fu'>lavaan2mirt</span>(<span class='no'>dat</span>, <span class='no'>lavmodel</span>, <span class='kw'>est.mirt</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>poly.itemtype</span><span class='kw'>=</span><span class='st'>"gpcm"</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -138,12 +142,12 @@ See <code><a href='https://www.rdocumentation.org/packages/TAM/topics/lavaanify.
     <tr>
       <th>lavmodel</th>
       <td><p>Model specified in <code>lavaan</code> syntax
-(see <code><a href='https://www.rdocumentation.org/packages/lavaan/topics/model.syntax'>lavaan::lavaanify</a></code>)</p></td>
+(see <code><a href='https://rdrr.io/pkg/lavaan/man/model.syntax.html'>lavaan::lavaanify</a></code>)</p></td>
     </tr>
     <tr>
       <th>est.mirt</th>
       <td><p>An optional logical indicating whether the model
-should be estimated with <code><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt::mirt</a></code></p></td>
+should be estimated with <code><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt::mirt</a></code></p></td>
     </tr>
     <tr>
       <th>poly.itemtype</th>
@@ -152,18 +156,17 @@ should be estimated with <code><a href='https://www.rdocumentation.org/packages/
       or <code>graded</code> for the graded response model.</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>Further arguments to be passed for estimation in
-<code><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt</a></code></p></td>
+<code><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt</a></code></p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function uses the <code><a href='https://www.rdocumentation.org/packages/lavaan/topics/model.syntax'>lavaan::lavaanify</a></code>
+    <p>This function uses the <code><a href='https://rdrr.io/pkg/lavaan/man/model.syntax.html'>lavaan::lavaanify</a></code>
 (<span class="pkg">lavaan</span>) function.</p>
 <p>Only single group models are supported (for now).</p>
-    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list with following entries</p>
@@ -178,28 +181,26 @@ should be estimated with <code><a href='https://www.rdocumentation.org/packages/
 <dt>dat</dt><dd><p>Used dataset. If necessary, only items used in the
 model are included in the dataset.</p></dd>
 
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>See <a href='http://lavaan.ugent.be/'>http://lavaan.ugent.be/</a> for <span class="pkg">lavaan</span> resources.</p>
 <p>See <a href='https://groups.google.com/forum/#!forum/lavaan'>https://groups.google.com/forum/#!forum/lavaan</a>
 for discussion about the <span class="pkg">lavaan</span> package. <br /></p>
 <p>See <code><a href='mirt.wrapper.html'>mirt.wrapper</a></code> for convenience wrapper functions
-for <code><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt::mirt</a></code> objects.</p>
-<p>See <code><a href='https://www.rdocumentation.org/packages/TAM/topics/lavaanify.IRT'>TAM::lavaanify.IRT</a></code>
+for <code><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt::mirt</a></code> objects.</p>
+<p>See <code><a href='https://rdrr.io/pkg/TAM/man/lavaanify.IRT.html'>TAM::lavaanify.IRT</a></code>
 for extensions of <code>lavaanify</code>.</p>
 <p>See <code><a href='tam2mirt.html'>tam2mirt</a></code> for converting fitted objects in the <span class="pkg">TAM</span>
-package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt::mirt</a></code> objects.</p></div>
-    
+package into fitted <code><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt::mirt</a></code> objects.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 1: Convert some lavaan syntax to mirt syntax for data.read</span>
 <span class='co'>#############################################################################</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>mirt</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.read</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mirt</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.read</span>)
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.read</span>
 
 <span class='co'>#******************</span>
@@ -211,12 +212,12 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
             "</span>
 
 <span class='co'># convert syntax and estimate model</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>) )
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>) )
 <span class='co'># inspect coefficients</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
 <span class='co'># converted mirt model and parameter table</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
 <span class='no'>res</span>$<span class='no'>mirt.pars</span>
 
 <span class='co'>#******************</span>
@@ -226,13 +227,13 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
      F ~~ 1*F
             "</span>
 <span class='co'># convert syntax and estimate model</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>est.mirt</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>est.mirt</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
 <span class='co'># converted mirt model</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
 <span class='co'># mirt parameter table</span>
 <span class='no'>res</span>$<span class='no'>mirt.pars</span>
 <span class='co'># estimate model using generated objects</span>
-<span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt</a></span>( <span class='no'>res</span>$<span class='no'>dat</span>, <span class='no'>res</span>$<span class='no'>mirt.model</span>, <span class='kw'>pars</span><span class='kw'>=</span><span class='no'>res</span>$<span class='no'>mirt.pars</span> )
+<span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt</a></span>( <span class='no'>res</span>$<span class='no'>dat</span>, <span class='no'>res</span>$<span class='no'>mirt.model</span>, <span class='kw'>pars</span><span class='kw'>=</span><span class='no'>res</span>$<span class='no'>mirt.pars</span> )
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>res2</span>)     <span class='co'># parameter estimates</span>
 
 <span class='co'>#******************</span>
@@ -247,9 +248,9 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
      B ~~ 1*B
      C ~~ 1*C
             "</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>est.mirt</span><span class='kw'>=</span><span class='fl'>FALSE</span> )
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>est.mirt</span><span class='kw'>=</span><span class='fl'>FALSE</span> )
 <span class='co'># mirt syntax and mirt model</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
 <span class='no'>res</span>$<span class='no'>mirt.model</span>
 <span class='no'>res</span>$<span class='no'>mirt.pars</span>
 
@@ -276,13 +277,13 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
      # estimate mean of B
      B ~ 1
             "</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>) )
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>) )
 <span class='co'># estimated parameters</span>
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
 <span class='co'># generated mirt syntax</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
 <span class='co'># mirt parameter table</span>
-<span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mirt/topics/mod2values'>mod2values</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
+<span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/mod2values.html'>mod2values</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
 
 <span class='co'>#******************</span>
 <span class='co'>#*** Model 5: 3-dimensional model with some parameter constraints and</span>
@@ -304,7 +305,7 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
      A ~ .5*1       # set mean of A to .5
      B ~ 1          # estimate mean of B
             "</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>) )
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>) )
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
 
 <span class='co'>#******************</span>
@@ -328,18 +329,18 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
      F ~~ 1*F   # fix variance of F
             "</span>
 <span class='co'># convert syntax and estimate model</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>) )
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>) )
 <span class='co'># coefficients</span>
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
 <span class='co'># converted mirt model</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 2: Convert some lavaan syntax to mirt syntax for</span>
 <span class='co'>#            longitudinal data data.long</span>
 <span class='co'>#############################################################################</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.long</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.long</span>)
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.long</span>[,-<span class='fl'>1</span>]
 
 <span class='co'>#******************</span>
@@ -349,11 +350,11 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
      F ~~ F
             "</span>
 <span class='co'># convert syntax and estimate model</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>20</span>) )
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>20</span>) )
 <span class='co'># inspect coefficients</span>
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
 <span class='co'># converted mirt model</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
 
 <span class='co'>#******************</span>
 <span class='co'>#*** Model 2: Rasch model for two time points</span>
@@ -377,40 +378,40 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
      F2 ~ 0*1
             "</span>
 <span class='co'># convert syntax and estimate model</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>20</span>) )
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>,  <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>20</span>) )
 <span class='co'># inspect coefficients</span>
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
 <span class='co'># converted mirt model</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
 
 <span class='co'>#-- compare estimation with smirt function</span>
 <span class='co'># define Q-matrix</span>
-<span class='no'>I</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>ncol</a></span>(<span class='no'>dat</span>)
-<span class='no'>Q</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fl'>0</span>,<span class='no'>I</span>,<span class='fl'>2</span>)
+<span class='no'>I</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)
+<span class='no'>Q</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>0</span>,<span class='no'>I</span>,<span class='fl'>2</span>)
 <span class='no'>Q</span>[<span class='fl'>1</span>:<span class='fl'>6</span>,<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>Q</span>[<span class='fl'>7</span>:<span class='fl'>12</span>,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a></span>(<span class='no'>Q</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>dat</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>Q</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"T1"</span>,<span class='st'>"T2"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>Q</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>Q</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"T1"</span>,<span class='st'>"T2"</span>)
 <span class='co'># vector with same items</span>
-<span class='no'>itemnr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/substr'>substring</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>dat</span>),<span class='fl'>2</span>,<span class='fl'>2</span>) )
+<span class='no'>itemnr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substring</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>),<span class='fl'>2</span>,<span class='fl'>2</span>) )
 <span class='co'># fix mean at T2 to zero</span>
-<span class='no'>mu.fixed</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>( <span class='fl'>2</span>,<span class='fl'>0</span> )
+<span class='no'>mu.fixed</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='fl'>2</span>,<span class='fl'>0</span> )
 <span class='co'># estimate model in smirt</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/smirt'>smirt</a></span>(<span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>est.b</span><span class='kw'>=</span><span class='no'>itemnr</span>, <span class='kw'>mu.fixed</span><span class='kw'>=</span><span class='no'>mu.fixed</span> )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>(<span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>est.b</span><span class='kw'>=</span><span class='no'>itemnr</span>, <span class='kw'>mu.fixed</span><span class='kw'>=</span><span class='no'>mu.fixed</span> )
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 3: Converting lavaan syntax for polytomous data</span>
 <span class='co'>#############################################################################</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.big5</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.big5</span>)
 <span class='co'># select some items</span>
-<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/grep'>grep</a></span>( <span class='st'>"O"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>data.big5</span>), <span class='kw'>value</span><span class='kw'>=</span><span class='fl'>TRUE</span> )[<span class='fl'>1</span>:<span class='fl'>6</span>],
-            <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/grep'>grep</a></span>( <span class='st'>"N"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>data.big5</span>), <span class='kw'>value</span><span class='kw'>=</span><span class='fl'>TRUE</span> )[<span class='fl'>1</span>:<span class='fl'>4</span>] )
+<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>( <span class='st'>"O"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data.big5</span>), <span class='kw'>value</span><span class='kw'>=</span><span class='fl'>TRUE</span> )[<span class='fl'>1</span>:<span class='fl'>6</span>],
+            <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>( <span class='st'>"N"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data.big5</span>), <span class='kw'>value</span><span class='kw'>=</span><span class='fl'>TRUE</span> )[<span class='fl'>1</span>:<span class='fl'>4</span>] )
 <span class='co'>#  O3  O8  O13 O18 O23 O28 N1  N6  N11 N16</span>
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.big5</span>[, <span class='no'>items</span> ]
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>psych</span>)
-<span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/psych/topics/describe'>describe</a></span>(<span class='no'>dat</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>psych</span>)
+<span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/psych/man/describe.html'>describe</a></span>(<span class='no'>dat</span>)
 
 <span class='co'>#******************</span>
 <span class='co'>#*** Model 1: Partial credit model</span>
@@ -419,22 +420,22 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
       O ~~ O
          "</span>
 <span class='co'># estimate model in mirt</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>, <span class='no'>lavmodel</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>20</span>), <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>, <span class='no'>lavmodel</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>20</span>), <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='co'># estimated mirt model</span>
 <span class='no'>mres</span> <span class='kw'>&lt;-</span> <span class='no'>res</span>$<span class='no'>mirt</span>
 <span class='co'># mirt syntax</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>res</span>$<span class='no'>mirt.syntax</span>)
   <span class='co'>##   O=1,2,3,4,5,6</span>
   <span class='co'>##   COV=O*O</span>
 <span class='co'># estimated parameters</span>
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mres</span>)
 <span class='co'># some plots</span>
-<span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mirt/topics/itemplot'>itemplot</a></span>( <span class='no'>mres</span>, <span class='fl'>3</span> )   <span class='co'># third item</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>mres</span>)   <span class='co'># item information</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>mres</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"trace"</span>)  <span class='co'># item category functions</span>
+<span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/itemplot.html'>itemplot</a></span>( <span class='no'>mres</span>, <span class='fl'>3</span> )   <span class='co'># third item</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>mres</span>)   <span class='co'># item information</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>mres</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"trace"</span>)  <span class='co'># item category functions</span>
 
 <span class='co'># graded response model with equal slopes</span>
-<span class='no'>res1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>, <span class='no'>lavmodel</span>, <span class='kw'>poly.itemtype</span><span class='kw'>=</span><span class='st'>"graded"</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>20</span>),
+<span class='no'>res1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>, <span class='no'>lavmodel</span>, <span class='kw'>poly.itemtype</span><span class='kw'>=</span><span class='st'>"graded"</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>20</span>),
               <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span> )
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>res1</span>$<span class='no'>mirt</span>)
 
@@ -452,7 +453,7 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
       O28 | (-0.5)*t1
          "</span>
 <span class='co'># estimate model in mirt</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/lavaan2mirt'>lavaan2mirt</a></span>( <span class='no'>dat</span>, <span class='no'>lavmodel</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>5</span>), <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>, <span class='no'>lavmodel</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>5</span>), <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='co'># estimated mirt model</span>
 <span class='no'>mres</span> <span class='kw'>&lt;-</span> <span class='no'>res</span>$<span class='no'>mirt</span>
 <span class='co'># estimated parameters</span>
@@ -460,7 +461,7 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
 
 <span class='co'>#*** generate syntax for mirt for this model and estimate it in mirt package</span>
 <span class='co'># Items: O3  O8  O13 O18 O23 O28</span>
-<span class='no'>mirtmodel</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt.model'>mirt.model</a></span>( <span class='st'>"
+<span class='no'>mirtmodel</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/mirt.model.html'>mirt.model</a></span>( <span class='st'>"
              O=1-6
              # a(O18)=a(O23), t1(O3)=t1(O18), t2(O3)=t2(O8)
              CONSTRAIN=(4,5,a1), (1,3,d1), (1,2,d2)
@@ -468,38 +469,35 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
              COV=O*O
                "</span>)
 <span class='co'># initial table of parameters in mirt</span>
-<span class='no'>mirt.pars</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt</a></span>( <span class='no'>dat</span>[,<span class='fl'>1</span>:<span class='fl'>6</span>], <span class='no'>mirtmodel</span>, <span class='kw'>itemtype</span><span class='kw'>=</span><span class='st'>"gpcm"</span>, <span class='kw'>pars</span><span class='kw'>=</span><span class='st'>"values"</span>)
+<span class='no'>mirt.pars</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt</a></span>( <span class='no'>dat</span>[,<span class='fl'>1</span>:<span class='fl'>6</span>], <span class='no'>mirtmodel</span>, <span class='kw'>itemtype</span><span class='kw'>=</span><span class='st'>"gpcm"</span>, <span class='kw'>pars</span><span class='kw'>=</span><span class='st'>"values"</span>)
 <span class='co'># fix slope of item O28 to 1.2</span>
-<span class='no'>ind</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/which'>which</a></span>( ( <span class='no'>mirt.pars</span>$<span class='no'>item</span><span class='kw'>==</span><span class='st'>"O28"</span> ) <span class='kw'>&amp;</span> ( <span class='no'>mirt.pars</span>$<span class='no'>name</span><span class='kw'>==</span><span class='st'>"a1"</span>) )
+<span class='no'>ind</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span>( ( <span class='no'>mirt.pars</span>$<span class='no'>item</span><span class='kw'>==</span><span class='st'>"O28"</span> ) <span class='kw'>&amp;</span> ( <span class='no'>mirt.pars</span>$<span class='no'>name</span><span class='kw'>==</span><span class='st'>"a1"</span>) )
 <span class='no'>mirt.pars</span>[ <span class='no'>ind</span>, <span class='st'>"est"</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
 <span class='no'>mirt.pars</span>[ <span class='no'>ind</span>, <span class='st'>"value"</span>] <span class='kw'>&lt;-</span> <span class='fl'>1.2</span>
 <span class='co'># fix d1 of item O28 to -0.5</span>
-<span class='no'>ind</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/which'>which</a></span>( ( <span class='no'>mirt.pars</span>$<span class='no'>item</span><span class='kw'>==</span><span class='st'>"O28"</span> ) <span class='kw'>&amp;</span> ( <span class='no'>mirt.pars</span>$<span class='no'>name</span><span class='kw'>==</span><span class='st'>"d1"</span>) )
+<span class='no'>ind</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span>( ( <span class='no'>mirt.pars</span>$<span class='no'>item</span><span class='kw'>==</span><span class='st'>"O28"</span> ) <span class='kw'>&amp;</span> ( <span class='no'>mirt.pars</span>$<span class='no'>name</span><span class='kw'>==</span><span class='st'>"d1"</span>) )
 <span class='no'>mirt.pars</span>[ <span class='no'>ind</span>, <span class='st'>"est"</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
 <span class='no'>mirt.pars</span>[ <span class='no'>ind</span>, <span class='st'>"value"</span>] <span class='kw'>&lt;-</span> -<span class='fl'>0.5</span>
 <span class='co'># estimate model</span>
-<span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/mirt/topics/mirt'>mirt</a></span>( <span class='no'>dat</span>[,<span class='fl'>1</span>:<span class='fl'>6</span>], <span class='no'>mirtmodel</span>, <span class='kw'>pars</span><span class='kw'>=</span><span class='no'>mirt.pars</span>,
-             <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>4</span>) )
+<span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt</a></span>( <span class='no'>dat</span>[,<span class='fl'>1</span>:<span class='fl'>6</span>], <span class='no'>mirtmodel</span>, <span class='kw'>pars</span><span class='kw'>=</span><span class='no'>mirt.pars</span>,
+             <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>4</span>) )
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>res2</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>res2</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"trace"</span>)
-<span class='co'># }</span></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>res2</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"trace"</span>)
+}</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -507,13 +505,16 @@ package into fitted <code><a href='https://www.rdocumentation.org/packages/mirt/
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

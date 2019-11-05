@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.733
+%% File Version: 1.736
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -189,33 +189,35 @@ distribution}
 }
 
 \references{
-Braeken, J. (2011). A boundary mixture approach to violations
-of conditional independence. \emph{Psychometrika, 76}, 57-76.
-http://dx.doi.org/10.1007/s11336-010-9190-4
+Braeken, J. (2011). A boundary mixture approach to violations of conditional
+independence. \emph{Psychometrika, 76}(1), 57-76.
+\doi{10.1007/s11336-010-9190-4}
 
 Braeken, J., Kuppens, P., De Boeck, P., & Tuerlinckx, F. (2013).
 Contextualized personality questionnaires: A case for copulas in structural
-equation models for categorical data. \emph{Multivariate Behavioral Research, 48},
-845-870. http://dx.doi.org/10.1080/00273171.2013.827965
+equation models for categorical data. \emph{Multivariate Behavioral Research, 48}(6),
+845-870.
+\doi{10.1080/00273171.2013.827965}
 
 Braeken, J., & Tuerlinckx, F. (2009). Investigating latent constructs with item
-response models: A MATLAB IRTm toolbox. \emph{Behavior Research Methods, 41}, 1127-1137.
-http://dx.doi.org/10.3758/BRM.41.4.1127
+response models: A MATLAB IRTm toolbox.
+\emph{Behavior Research Methods, 41}(4), 1127-1137.
 
 Braeken, J., Tuerlinckx, F., & De Boeck, P. (2007).
-Copula functions for residual dependency. \emph{Psychometrika, 72}, 393-411.
-http://dx.doi.org/10.1007/s11336-007-9005-4
+Copula functions for residual dependency. \emph{Psychometrika, 72}(3), 393-411.
+\doi{10.1007/s11336-007-9005-4}
 
 Schroeders, U., Robitzsch, A., & Schipolowski, S. (2014). A comparison of different
 psychometric approaches to modeling testlet structures: An example with C-tests.
 \emph{Journal of Educational Measurement, 51}(4), 400-418.
-http://dx.doi.org/10.1111/jedm.12054
+\doi{10.1111/jedm.12054}
 
 Stukel, T. A. (1988). Generalized logistic models.
-\emph{Journal of the American Statistical Association, 83}, 426-431.
-http://dx.doi.org/10.1080/01621459.1988.10478613
+\emph{Journal of the American Statistical Association, 83}(402), 426-431.
+\doi{10.1080/01621459.1988.10478613}
 }
 
+%% Braeken & Tuerlinckx (2009). 10.3758/BRM.41.4.1127   \doi{10.3758/BRM.41.4.1127}
 
 %\author{
 %Alexander Robitzsch

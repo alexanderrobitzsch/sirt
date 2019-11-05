@@ -1,5 +1,5 @@
 %% File Name: mirt.wrapper.Rd
-%% File Version: 1.84
+%% File Version: 1.864
 
 \name{mirt.wrapper}
 \alias{mirt.wrapper}
@@ -8,8 +8,16 @@
 \alias{mirt.wrapper.fscores}
 \alias{mirt.wrapper.itemplot}
 \alias{IRT.irfprob.SingleGroupClass}
+\alias{IRT.irfprob.MultipleGroupClass}
 \alias{IRT.likelihood.SingleGroupClass}
 \alias{IRT.posterior.SingleGroupClass}
+\alias{IRT.likelihood.MultipleGroupClass}
+\alias{IRT.posterior.MultipleGroupClass}
+\alias{IRT.expectedCounts.SingleGroupClass}
+\alias{IRT.expectedCounts.MultipleGroupClass}
+
+
+\alias{mirt_summary}
 
 % SingleGroupClass
 
@@ -24,16 +32,24 @@ Some functions for wrapping with the \pkg{mirt} package.
 # extract coefficients
 mirt.wrapper.coef(mirt.obj)
 
+# summary output
+mirt_summary(object, digits=4, file=NULL, ...)
+
 # extract posterior, likelihood, ...
-mirt.wrapper.posterior(mirt.obj,weights=NULL)
+mirt.wrapper.posterior(mirt.obj, weights=NULL, group=NULL)
 \method{IRT.likelihood}{SingleGroupClass}(object, \dots)
+\method{IRT.likelihood}{MultipleGroupClass}(object, \dots)
 \method{IRT.posterior}{SingleGroupClass}(object, \dots)
+\method{IRT.posterior}{MultipleGroupClass}(object, \dots)
+\method{IRT.expectedCounts}{SingleGroupClass}(object, \dots)
+\method{IRT.expectedCounts}{MultipleGroupClass}(object, \dots)
 
 # S3 method for extracting item response functions
 \method{IRT.irfprob}{SingleGroupClass}(object, \dots)
+\method{IRT.irfprob}{MultipleGroupClass}(object, group=1, \dots)
 
 # compute factor scores
-mirt.wrapper.fscores(mirt.obj,weights=NULL)
+mirt.wrapper.fscores(mirt.obj, weights=NULL)
 
 # convenience function for itemplot
 mirt.wrapper.itemplot( mirt.obj, ask=TRUE, ...)
@@ -46,6 +62,10 @@ A fitted model in \pkg{mirt} package
 \item{object}{A fitted object in \pkg{mirt} package of class
     \code{SingleGroupClass} or \code{MultipleGroupClass}.
 }
+\item{group}{Group index for \code{IRT.irfprob} (only
+applicable for object of class \code{MultipleGroupClass})}
+\item{digits}{Number of digits after decimal used for rounding}
+\item{file}{File name for sinking summary output}
 \item{weights}{Optional vector of student weights}
 \item{ask}{Optional logical indicating whether each new plot should be
 confirmed.}
@@ -90,8 +110,7 @@ Function \code{mirt.wrapper.posterior} -- List with entries
 Function \code{mirt.wrapper.fscores} -- List with entries
 
 \item{person}{Data frame with person parameter estimates (factor scores)
-    EAP, MAP and MLE for all dimensions.
-}
+    EAP, MAP and MLE for all dimensions.}
 \item{EAP.rel}{EAP reliabilities}
 }
 
@@ -235,18 +254,20 @@ summary(mod1)
 # extracting coefficients
 coef(mod1)
 mirt.wrapper.coef(mod1)$coef
+# summary output
+mirt_summary(mod1)
 # extract parameter values in mirt
 mirt::mod2values(mod1)
 # extract posterior
 post1 <- sirt::mirt.wrapper.posterior(mod1)
 # extract item response functions
-probs1 <- IRT.irfprob( mod1 )
+probs1 <- IRT.irfprob(mod1)
 str(probs1)
 # extract individual likelihood
-likemod1 <- IRT.likelihood( mod1 )
+likemod1 <- IRT.likelihood(mod1)
 str(likemod1)
 # extract individual posterior
-postmod1 <- IRT.posterior( mod1 )
+postmod1 <- IRT.posterior(mod1)
 str(postmod1)
 
 #*** Model 2: Confirmatory model with two factors
@@ -327,7 +348,7 @@ mirt.wrapper.coef(mod_scalar)
 
 # full constraint
 mod_fullconstrain <- mirt::multipleGroup(dat, model, group=group,
-             invariance=c("slopes", "intercepts"), verbose=TRUE )
+             invariance=c("slopes", "intercepts", "free_means", "free_var"), verbose=TRUE )
 mirt.wrapper.coef(mod_fullconstrain)
 
 #############################################################################

@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.642
+%% File Version: 1.644
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -19,7 +19,7 @@ The function \code{invariance.alignment} performs alignment under approximate
 invariance for \eqn{G} groups and \eqn{I} items
 (Asparouhov & Muthen, 2014; Byrne & van de Vijver, 2017; DeMars, xxxx; Finch, 2016;
 Fischer & Karl, 2019; Flake & McCoach, 2018; Kim et al., 2017; Marsh et al., 2018;
-Muthen & Asparouhov, 2014, 2018; Pokropek, Davidov & Schmidt, xxxx).
+Muthen & Asparouhov, 2014, 2018; Pokropek, Davidov & Schmidt, 2019).
 It is assumed that item loadings and intercepts are
 previously estimated as a unidimensional factor model under the assumption of a factor
 with zero mean and a variance of one.
@@ -200,7 +200,7 @@ A list with following entries
 
 \references{
 Asparouhov, T., & Muthen, B. (2014). Multiple-group factor analysis alignment.
-\emph{Structural Equation Modeling, 21}, 1-14.
+\emph{Structural Equation Modeling, 21}(4), 1-14.
 \doi{10.1080/10705511.2014.919210}
 
 Byrne, B. M., & van de Vijver, F. J. R. (2017). The maximum likelihood alignment
@@ -252,9 +252,9 @@ generalized structured models. \emph{Advances in Data Analysis and Classificatio
 97-120.
 \doi{10.1007/s11634-015-0205-y}
 
-Pokropek, A., Davidov, E., & Schmidt, P. (xxxx). A Monte Carlo simulation study to
+Pokropek, A., Davidov, E., & Schmidt, P. (2019). A Monte Carlo simulation study to
 assess the appropriateness of traditional and newer approaches to test for
-measurement invariance. \emph{Structural Equation Modeling, xx}(xx), xxx-xxx.
+measurement invariance. \emph{Structural Equation Modeling, 26}(5), 724-744.
 \doi{10.1080/10705511.2018.1561293}
 
 Vandenberg, R. J., & Lance, C. E. (2000). A review and synthesis of the

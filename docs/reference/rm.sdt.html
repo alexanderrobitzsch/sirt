@@ -8,21 +8,25 @@
 
 <title>Hierarchical Rater Model Based on Signal Detection Theory (HRM-SDT) — rm.sdt • sirt</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,14 +34,15 @@
 
 
 
-<meta property="og:title" content="Hierarchical Rater Model Based on Signal Detection Theory (HRM-SDT) — rm.sdt" />
 
+<meta property="og:title" content="Hierarchical Rater Model Based on Signal Detection Theory (HRM-SDT) — rm.sdt" />
 <meta property="og:description" content="This function estimates a version of the hierarchical rater
 model (HRM) based on signal detection theory (HRM-SDT; DeCarlo, 2005;
 DeCarlo, Kim &amp;amp; Johnson, 2011; Robitzsch &amp;amp; Steinfeld, 2018).
 The model is estimated by means of an EM algorithm adapted from
 multilevel latent class analysis (Vermunt, 2008)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -49,6 +54,7 @@ multilevel latent class analysis (Vermunt, 2008)." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -67,7 +73,7 @@ multilevel latent class analysis (Vermunt, 2008)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.7-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.8-vv</span>
       </span>
     </div>
 
@@ -75,7 +81,7 @@ multilevel latent class analysis (Vermunt, 2008)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -83,11 +89,10 @@ multilevel latent class analysis (Vermunt, 2008)." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexanderrobitzsch/sirt">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -98,6 +103,7 @@ multilevel latent class analysis (Vermunt, 2008)." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -109,34 +115,32 @@ multilevel latent class analysis (Vermunt, 2008)." />
     </div>
 
     <div class="ref-description">
-    
     <p>This function estimates a version of the hierarchical rater
 model (HRM) based on signal detection theory (HRM-SDT; DeCarlo, 2005;
 DeCarlo, Kim &amp; Johnson, 2011; Robitzsch &amp; Steinfeld, 2018).
 The model is estimated by means of an EM algorithm adapted from
 multilevel latent class analysis (Vermunt, 2008).</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>rm.sdt</span>(<span class='no'>dat</span>, <span class='no'>pid</span>, <span class='no'>rater</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(-<span class='fl'>9</span>, <span class='fl'>9</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>30</span>),
+    <pre class="usage"><span class='fu'>rm.sdt</span>(<span class='no'>dat</span>, <span class='no'>pid</span>, <span class='no'>rater</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>9</span>, <span class='fl'>9</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>30</span>),
     <span class='kw'>est.a.item</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>est.c.rater</span><span class='kw'>=</span><span class='st'>"n"</span>, <span class='kw'>est.d.rater</span><span class='kw'>=</span><span class='st'>"n"</span>, <span class='kw'>est.mean</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>est.sigma</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
     <span class='kw'>skillspace</span><span class='kw'>=</span><span class='st'>"normal"</span>, <span class='kw'>tau.item.fixed</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>a.item.fixed</span><span class='kw'>=</span><span class='kw'>NULL</span>,
     <span class='kw'>d.min</span><span class='kw'>=</span><span class='fl'>0.5</span>, <span class='kw'>d.max</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>d.start</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>c.start</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>tau.start</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>sd.start</span><span class='kw'>=</span><span class='fl'>1</span>,
-    <span class='kw'>d.prior</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>100</span>), <span class='kw'>c.prior</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>100</span>), <span class='kw'>tau.prior</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1000</span>), <span class='kw'>a.prior</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>100</span>),
+    <span class='kw'>d.prior</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>100</span>), <span class='kw'>c.prior</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>100</span>), <span class='kw'>tau.prior</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1000</span>), <span class='kw'>a.prior</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>100</span>),
     <span class='kw'>link_item</span><span class='kw'>=</span><span class='st'>"GPCM"</span>, <span class='kw'>max.increment</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>0.00001</span>, <span class='kw'>maxdevchange</span><span class='kw'>=</span><span class='fl'>0.1</span>,
     <span class='kw'>globconv</span><span class='kw'>=</span><span class='fl'>.001</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>msteps</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>mstepconv</span><span class='kw'>=</span><span class='fl'>0.001</span>, <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"nlminb"</span> )
 
 <span class='co'># S3 method for rm.sdt</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for rm.sdt</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for rm.sdt</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/anova'>anova</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
 
 <span class='co'># S3 method for rm.sdt</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/logLik'>logLik</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/logLik.html'>logLik</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
 
 <span class='co'># S3 method for rm.sdt</span>
 <span class='fu'>IRT.factor.scores</span>(<span class='no'>object</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"EAP"</span>, <span class='no'>...</span>)
@@ -154,8 +158,8 @@ multilevel latent class analysis (Vermunt, 2008).</p>
 <span class='fu'>IRT.modelfit</span>(<span class='no'>object</span>,<span class='no'>...</span>)
 
 <span class='co'># S3 method for IRT.modelfit.rm.sdt</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)</pre>
-    
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -308,8 +312,8 @@ Can be <code>"GPCM"</code> for the generalized partial credit model or
     <tr>
       <th>optimizer</th>
       <td><p>Choice of optimization function in M-step for
-item parameters. Options are <code>"nlminb"</code> for <code><a href='https://www.rdocumentation.org/packages/stats/topics/nlminb'>stats::nlminb</a></code>
-and <code>"optim"</code> for <code><a href='https://www.rdocumentation.org/packages/stats/topics/optim'>stats::optim</a></code>.</p></td>
+item parameters. Options are <code>"nlminb"</code> for <code><a href='https://rdrr.io/r/stats/nlminb.html'>stats::nlminb</a></code>
+and <code>"optim"</code> for <code><a href='https://rdrr.io/r/stats/optim.html'>stats::optim</a></code>.</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -333,11 +337,11 @@ and <code>"optim"</code> for <code><a href='https://www.rdocumentation.org/packa
     only <code>type="EAP"</code> is supported.</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>Further arguments to be passed</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The specification of the model follows DeCarlo et al. (2011).
@@ -363,7 +367,6 @@ G(   d_{ir} \eta_{pi} - c_{irk})$$</p>
 \(c_{irk}=c_{ik}\) (<code>est.c.rater='i'</code>) or
 \(c_{irk}=c_{ir}\) (<code>est.c.rater='r'</code>). The same
 holds for rater precision parameters \(d_{ir}\).</p>
-    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list with following entries:</p>
@@ -406,9 +409,8 @@ errors</p></dd>
 <dt>maxK</dt><dd><p>Maximum number of categories</p></dd>
 <dt>procdata</dt><dd><p>Processed data</p></dd>
 <dt>iter</dt><dd><p>Number of iterations</p></dd>
-<dt>&#8230;</dt><dd><p>Further values</p></dd>
+<dt>...</dt><dd><p>Further values</p></dd>
 
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>DeCarlo, L. T. (2005). A model of rater behavior in essay grading
@@ -426,110 +428,103 @@ estimation methods, and implementation in R.
 <em>Psychological Test and Assessment Modeling, 60</em>(1), 101-139.</p>
 <p>Vermunt, J. K. (2008). Latent class and finite mixture models for
 multilevel data sets. <em>Statistical Methods in Medical Research, 17</em>, 33-51.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>The facets rater model can be estimated with <code><a href='rm.facets.html'>rm.facets</a></code>.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>#############################################################################</span>
+    <pre class="examples"><span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 1: Hierarchical rater model (HRM-SDT) data.ratings1</span>
 <span class='co'>#############################################################################</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.ratings1</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.ratings1</span>)
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.ratings1</span>
 
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Model 1: Partial Credit Model: no rater effects</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rm.sdt'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>( <span class='st'>"k"</span>,<span class='fl'>1</span>:<span class='fl'>5</span>) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rm.sdt.html'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>( <span class='st'>"k"</span>,<span class='fl'>1</span>:<span class='fl'>5</span>) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>est.c.rater</span><span class='kw'>=</span><span class='st'>"n"</span>, <span class='kw'>d.start</span><span class='kw'>=</span><span class='fl'>100</span>,  <span class='kw'>est.d.rater</span><span class='kw'>=</span><span class='st'>"n"</span> )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># Model 2: Generalized Partial Credit Model: no rater effects</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rm.sdt'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>( <span class='st'>"k"</span>,<span class='fl'>1</span>:<span class='fl'>5</span>) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rm.sdt.html'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>( <span class='st'>"k"</span>,<span class='fl'>1</span>:<span class='fl'>5</span>) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>est.c.rater</span><span class='kw'>=</span><span class='st'>"n"</span>, <span class='kw'>est.d.rater</span><span class='kw'>=</span><span class='st'>"n"</span>,
             <span class='kw'>est.a.item</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>d.start</span><span class='kw'>=</span><span class='fl'>100</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># Model 3: Equal effects in SDT</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rm.sdt'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>( <span class='st'>"k"</span>,<span class='fl'>1</span>:<span class='fl'>5</span>) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rm.sdt.html'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>( <span class='st'>"k"</span>,<span class='fl'>1</span>:<span class='fl'>5</span>) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>est.c.rater</span><span class='kw'>=</span><span class='st'>"e"</span>, <span class='kw'>est.d.rater</span><span class='kw'>=</span><span class='st'>"e"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod3</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'># Model 4: Rater effects in SDT</span>
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rm.sdt'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>( <span class='st'>"k"</span>,<span class='fl'>1</span>:<span class='fl'>5</span>) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rm.sdt.html'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>( <span class='st'>"k"</span>,<span class='fl'>1</span>:<span class='fl'>5</span>) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>est.c.rater</span><span class='kw'>=</span><span class='st'>"r"</span>, <span class='kw'>est.d.rater</span><span class='kw'>=</span><span class='st'>"r"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod4</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod4</span>)
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 2: HRM-SDT data.ratings3</span>
 <span class='co'>#############################################################################</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.ratings3</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.ratings3</span>)
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.ratings3</span>
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>dat</span>[ <span class='no'>dat</span>$<span class='no'>rater</span> <span class='kw'>&lt;</span> <span class='fl'>814</span>, ]
-<span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/psych/topics/describe'>describe</a></span>(<span class='no'>dat</span>)
+<span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/psych/man/describe.html'>describe</a></span>(<span class='no'>dat</span>)
 
 <span class='co'># Model 1: item- and rater-specific effects</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rm.sdt'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>( <span class='st'>"crit"</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>:<span class='fl'>4</span>)) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rm.sdt.html'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>( <span class='st'>"crit"</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>:<span class='fl'>4</span>)) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>est.c.rater</span><span class='kw'>=</span><span class='st'>"a"</span>, <span class='kw'>est.d.rater</span><span class='kw'>=</span><span class='st'>"a"</span> )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>mod1</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># Model 2: Differing number of categories per variable</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rm.sdt'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>( <span class='st'>"crit"</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>:<span class='fl'>4</span>,<span class='fl'>6</span>)) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rm.sdt.html'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>( <span class='st'>"crit"</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>:<span class='fl'>4</span>,<span class='fl'>6</span>)) ], <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>est.c.rater</span><span class='kw'>=</span><span class='st'>"a"</span>, <span class='kw'>est.d.rater</span><span class='kw'>=</span><span class='st'>"a"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod2</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>mod2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 3: Hierarchical rater model with discrete skill spaces</span>
 <span class='co'>#############################################################################</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.ratings3</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.ratings3</span>)
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.ratings3</span>
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>dat</span>[ <span class='no'>dat</span>$<span class='no'>rater</span> <span class='kw'>&lt;</span> <span class='fl'>814</span>, ]
-<span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/psych/topics/describe'>describe</a></span>(<span class='no'>dat</span>)
+<span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/psych/man/describe.html'>describe</a></span>(<span class='no'>dat</span>)
 
 <span class='co'># Model 1: Discrete theta skill space with values of 0,1,2 and 3</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rm.sdt'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>( <span class='st'>"crit"</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>:<span class='fl'>4</span>)) ], <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>3</span>, <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rm.sdt.html'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>( <span class='st'>"crit"</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>:<span class='fl'>4</span>)) ], <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>3</span>, <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>est.c.rater</span><span class='kw'>=</span><span class='st'>"a"</span>, <span class='kw'>est.d.rater</span><span class='kw'>=</span><span class='st'>"a"</span>, <span class='kw'>skillspace</span><span class='kw'>=</span><span class='st'>"discrete"</span> )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>mod1</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># Model 2: Modelling of one item by using a discrete skill space and</span>
 <span class='co'>#          fixed item parameters</span>
 
 <span class='co'># fixed tau and a parameters</span>
-<span class='no'>tau.item.fixed</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>( <span class='fl'>1</span>, <span class='fl'>1</span>:<span class='fl'>3</span>,  <span class='fl'>100</span>*<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cumsum'>cumsum</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>( <span class='fl'>0.5</span>, <span class='fl'>1.5</span>, <span class='fl'>2.5</span>)) )
-<span class='no'>a.item.fixed</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>( <span class='fl'>1</span>, <span class='fl'>100</span> )
+<span class='no'>tau.item.fixed</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='fl'>1</span>, <span class='fl'>1</span>:<span class='fl'>3</span>,  <span class='fl'>100</span>*<span class='fu'><a href='https://rdrr.io/r/base/cumsum.html'>cumsum</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='fl'>0.5</span>, <span class='fl'>1.5</span>, <span class='fl'>2.5</span>)) )
+<span class='no'>a.item.fixed</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='fl'>1</span>, <span class='fl'>100</span> )
 <span class='co'># fit HRM-SDT</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rm.sdt'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='st'>"crit2"</span>, <span class='kw'>drop</span><span class='kw'>=</span><span class='fl'>FALSE</span>], <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>3</span>, <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rm.sdt.html'>rm.sdt</a></span>( <span class='no'>dat</span>[, <span class='st'>"crit2"</span>, <span class='kw'>drop</span><span class='kw'>=</span><span class='fl'>FALSE</span>], <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>3</span>, <span class='kw'>rater</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>rater</span>,
             <span class='kw'>tau.item.fixed</span><span class='kw'>=</span><span class='no'>tau.item.fixed</span>,<span class='kw'>a.item.fixed</span><span class='kw'>=</span><span class='no'>a.item.fixed</span>, <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>,
             <span class='kw'>est.c.rater</span><span class='kw'>=</span><span class='st'>"a"</span>, <span class='kw'>est.d.rater</span><span class='kw'>=</span><span class='st'>"a"</span>, <span class='kw'>skillspace</span><span class='kw'>=</span><span class='st'>"discrete"</span> )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod2</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>mod2</span>)
-<span class='co'># }</span></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>mod2</span>)
+}</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#value">Value</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -537,13 +532,16 @@ multilevel data sets. <em>Statistical Methods in Medical Research, 17</em>, 33-5
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

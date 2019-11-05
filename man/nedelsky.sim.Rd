@@ -1,5 +1,5 @@
 %% File Name: nedelsky.sim.Rd
-%% File Version: 0.24
+%% File Version: 0.25
 
 \name{nedelsky-methods}
 
@@ -17,7 +17,8 @@ Functions for simulating and estimating the Nedelsky model
 (Bechger et al., 2003, 2005). \code{nedelsky.sim} can be used for
 simulating the model, \code{nedelsky.irf} computes the item response
 function and can be used for example when estimating the
-Nedelsky model in the \pkg{mirt} package.
+Nedelsky model in the \pkg{mirt} package or using the
+\code{\link{xxirt}} function in the \pkg{sirt} package.
 }
 
 \usage{

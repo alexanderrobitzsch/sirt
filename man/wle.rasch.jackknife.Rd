@@ -1,5 +1,5 @@
 %% File Name: wle.rasch.jackknife.Rd
-%% File Version: 1.25
+%% File Version: 1.272
 
 \name{wle.rasch.jackknife}
 \alias{wle.rasch.jackknife}
@@ -54,19 +54,25 @@ A list with following entries:
   }
   \item{wle.rel}{WLE reliability (Adams, 2005)}
 }
+
+
 \references{
 Adams, R. J. (2005). Reliability as a measurement design effect.
-\emph{Studies in Educational Evaluation, 31}, 162-172.
+\emph{Studies in Educational Evaluation, 31}(2-3), 162-172.
+\doi{10.1016/j.stueduc.2005.05.008}
 
 Gershunskaya, J., Jiang, J., & Lahiri, P. (2009). Resampling methods in surveys.
 In D. Pfeffermann and C.R. Rao (Eds.). \emph{Handbook of Statistics 29B; Sample
 Surveys: Inference and Analysis} (pp. 121-151). Amsterdam: North Holland.
+\doi{10.1016/S0169-7161(09)00228-4}
 
 Wainer, H., & Wright, B. D. (1980). Robust estimation of ability in the Rasch
-model. \emph{Psychometrika, 45}, 373-391.
+model. \emph{Psychometrika, 45}(3), 373-391.
+\doi{10.1007/BF02293910}
 
 Warm, T. A. (1989). Weighted likelihood estimation of ability in item response theory.
-\emph{Psychometrika, 54}, 427-450.
+\emph{Psychometrika, 54}(3), 427-450.
+\doi{10.1007/BF02294627}
 }
 
 

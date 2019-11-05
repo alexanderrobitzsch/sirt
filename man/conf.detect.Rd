@@ -1,5 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.476
+%% File Version: 1.477
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -112,7 +112,7 @@ of TOEFL using conditional covariance-based nonparametric approach.
 
 Stout, W., Habing, B., Douglas, J., & Kim, H. R. (1996).
 Conditional covariance-based nonparametric multidimensionality assessment.
-\emph{Applied Psychological Measurement}, \bold{20}(4), 331-354.
+\emph{Applied Psychological Measurement, 20}(4), 331-354.
 \doi{10.1177/014662169602000403}
 
 Zhang, J. (2007). Conditional covariance theory and DETECT for
@@ -125,7 +125,7 @@ response data from various test designs. \emph{Psychometrika, 78}(1), 37-58.
 
 Zhang, J., & Stout, W. (1999a). Conditional covariance structure
 of generalized compensatory multidimensional items.
-\emph{Psychometrika}, \bold{64}(2), 129-152.
+\emph{Psychometrika, 64}(2), 129-152.
 \doi{10.1007/BF02294532}
 
 Zhang, J., & Stout, W. (1999b). The theoretical DETECT index of

@@ -1,10 +1,10 @@
 ## File Name: nedelsky.sim.R
-## File Version: 0.13
+## File Version: 0.14
 
 
-################################################################
-# simulate data according to the Nedelsky model
-nedelsky.sim <- function( theta, b, a=NULL, tau=NULL ){
+#---- simulate data according to the Nedelsky model
+nedelsky.sim <- function( theta, b, a=NULL, tau=NULL )
+{
     Theta <- matrix( theta, ncol=1 )
     N <- length(theta)
     # generate all combinations
@@ -13,16 +13,14 @@ nedelsky.sim <- function( theta, b, a=NULL, tau=NULL ){
     I <- nrow(b)
     if ( is.null(a) ){
         a <- rep(1,I)
-                }
-    combis <- as.matrix( expand.grid( as.data.frame( matrix( rep(nodes, ndim),
-            ncol=ndim ) ) ) )
+    }
+    combis <- as.matrix( expand.grid( as.data.frame( matrix( rep(nodes, ndim), ncol=ndim))))
     if ( is.null(tau) ){
         tau <- matrix( 1, nrow=I, ncol=K+1 )
-                        }
+    }
     # dataset
     dat <- matrix( NA, nrow=N, ncol=I)
     for (ii in 1:I){
-        # ii <- 1
         b0 <- as.vector(b[ii,])
         a0 <- a[ii]
         thdim <- 1
@@ -31,9 +29,8 @@ nedelsky.sim <- function( theta, b, a=NULL, tau=NULL ){
         cprobs <- rowCumsums.sirt(matr=probs)
         rn1 <- stats::runif(N)
         dat[,ii] <- rowIntervalIndex.sirt(matr=cprobs,rn=rn1) - 1
-                    }
+    }
     colnames(dat) <- paste0( "I", 100+1:I )
     return(dat)
-        }
-################################################################
+}
 

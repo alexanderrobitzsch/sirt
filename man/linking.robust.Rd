@@ -1,5 +1,5 @@
 %% File Name: linking.robust.Rd
-%% File Version: 0.272
+%% File Version: 0.273
 
 \name{linking.robust}
 \alias{linking.robust}
@@ -62,12 +62,12 @@ A list with following entries
 Magis, D., & De Boeck, P. (2011). Identification of differential item functioning in
 multiple-group settings: A multivariate outlier detection approach.
 \emph{Multivariate Behavioral Research, 46}(5), 733-755.
-http://dx.doi.org/10.1080/00273171.2011.606757
+\doi{10.1080/00273171.2011.606757}
 
 Magis, D., & De Boeck, P. (2012). A robust outlier approach to prevent type I error
 inflation in differential item functioning.
 \emph{Educational and Psychological Measurement, 72}(2), 291-311.
-http://dx.doi.org/10.1177/0013164411416975
+\doi{10.1177/0013164411416975}
 }
 
 

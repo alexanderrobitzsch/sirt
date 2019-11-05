@@ -8,21 +8,25 @@
 
 <title>Estimation of the Partial Credit Model using the Eigenvector Method — rasch.evm.pcm • sirt</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Estimation of the Partial Credit Model using the Eigenvector Method — rasch.evm.pcm" />
 
+<meta property="og:title" content="Estimation of the Partial Credit Model using the Eigenvector Method — rasch.evm.pcm" />
 <meta property="og:description" content="This function performs the eigenvector approach to estimate item
 parameters which is based on a pairwise estimation approach
 (Garner &amp;amp; Engelhard, 2002). No assumption about person parameters
@@ -39,6 +43,7 @@ is required for item parameter estimation. Statistical inference is performed by
 Jackknifing. If a group identifier is provided, tests for differential item
 functioning are performed." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -50,6 +55,7 @@ functioning are performed." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -68,7 +74,7 @@ functioning are performed." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.7-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.8-vv</span>
       </span>
     </div>
 
@@ -76,7 +82,7 @@ functioning are performed." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -84,11 +90,10 @@ functioning are performed." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexanderrobitzsch/sirt">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -99,6 +104,7 @@ functioning are performed." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -110,28 +116,26 @@ functioning are performed." />
     </div>
 
     <div class="ref-description">
-    
     <p>This function performs the eigenvector approach to estimate item
 parameters which is based on a pairwise estimation approach
 (Garner &amp; Engelhard, 2002). No assumption about person parameters
 is required for item parameter estimation. Statistical inference is performed by
 Jackknifing. If a group identifier is provided, tests for differential item
 functioning are performed.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>rasch.evm.pcm</span>(<span class='no'>dat</span>, <span class='kw'>jackunits</span><span class='kw'>=</span><span class='fl'>20</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>pid</span><span class='kw'>=</span><span class='kw'>NULL</span>,
     <span class='kw'>group</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>powB</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>adj_eps</span><span class='kw'>=</span><span class='fl'>0.3</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span> )
 
 <span class='co'># S3 method for rasch.evm.pcm</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for rasch.evm.pcm</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)
 
 <span class='co'># S3 method for rasch.evm.pcm</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/vcov'>vcov</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)</pre>
-    
+<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span>(<span class='no'>object</span>,<span class='no'>...</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -184,11 +188,11 @@ estimated and tests for differential item functioning are performed.</p></td>
       <td><p>Optional file name if <code>summary</code> should be sunk into a file.</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>Further arguments to be passed</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list with following entries</p>
@@ -211,7 +215,6 @@ estimated and tests for differential item functioning are performed.</p></td>
 is provided as an argument</p></dd>
 
 
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Choppin, B. (1985). A fully conditional estimation procedure for Rasch Model
@@ -221,193 +224,28 @@ estimating item parameters of the dichotomous and polytomous Rasch models.
 <em>Journal of Applied Measurement, 3</em>, 107-128.</p>
 <p>Wang, J., &amp; Engelhard, G. (2014). A pairwise algorithm in <span style="R">R</span> for rater-mediated
 assessments. <em>Rasch Measurement Transactions, 28</em>(1), 1457-1459.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>See the <span class="pkg">pairwise</span> package for the alternative row averaging
 approach of Choppin (1985) and Wang and Engelhard (2014) for an
 alternative <span style="R">R</span> implementation.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>#############################################################################</span>
-<span class='co'># EXAMPLE 1: Dataset Liking for Science</span>
-<span class='co'>#############################################################################</span>
-
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.liking.science</span>)
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.liking.science</span>
-
-<span class='co'># estimate partial credit model using 10 Jackknife units</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/rasch.evm.pcm'>rasch.evm.pcm</a></span>( <span class='no'>dat</span>, <span class='kw'>jackunits</span><span class='kw'>=</span><span class='fl'>10</span> )
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
-
-<span class='co'># }</span># NOT RUN {
-# compare results with TAM
-library(TAM)
-mod2 <- TAM::tam.mml( dat )
-r1 <- mod2$xsi$xsi
-r1 <- r1 - mean(r1)
-# item parameters are similar
-dfr <- data.frame( "b_TAM"=r1, mod1$item[,c( "est","est_jack") ] )
-round( dfr, 3 )
-  ##      b_TAM    est est_jack
-  ##  1  -2.496 -2.599   -2.511
-  ##  2   0.687  0.824    1.030
-  ##  3  -0.871 -0.975   -0.943
-  ##  4  -0.360 -0.320   -0.131
-  ##  5  -0.833 -0.970   -0.856
-  ##  6   1.298  1.617    1.444
-  ##  7   0.476  0.465    0.646
-  ##  8   2.808  3.194    3.439
-  ##  9   1.611  1.460    1.433
-  ##  10  2.396  1.230    1.095
-  ##  [...]
-
-# partial credit model in eRm package
-miceadds::library_install("eRm")
-mod3 <- eRm::PCM(X=dat)
-summary(mod3)
-eRm::plotINFO(mod3)      # plot item and test information
-eRm::plotICC(mod3)       # plot ICCs
-eRm::plotPImap(mod3)     # plot person-item maps
-
-#############################################################################
-# EXAMPLE 2: Garner and Engelhard (2002) toy example dichotomous data
-#############################################################################
-
-dat <- scan()
-   1 0 1 1   1 1 0 0   1 0 0 0   0 1 1 1   1 1 1 0
-   1 1 0 1   1 1 1 1   1 0 1 0   1 1 1 1   1 1 0 0
-
-dat <- matrix( dat, 10, 4, byrow=TRUE)
-colnames(dat) <- paste0("I", 1:4 )
-
-# estimate Rasch model with no jackknifing
-mod1 <- sirt::rasch.evm.pcm( dat, jackunits=0 )
-
-# paired comparison matrix
-mod1$B
-  ##          I1_Cat1 I2_Cat1 I3_Cat1 I4_Cat1
-  ##  I1_Cat1       0       3       4       5
-  ##  I2_Cat1       1       0       3       3
-  ##  I3_Cat1       1       2       0       2
-  ##  I4_Cat1       1       1       1       0
-
-#############################################################################
-# EXAMPLE 3: Garner and Engelhard (2002) toy example polytomous data
-#############################################################################
-
-dat <- scan()
-   2 2 1 1 1   2 1 2 0 0   1 0 0 0 0   0 1 1 2 0   1 2 2 1 1
-   2 2 0 2 1   2 2 1 1 0   1 0 1 0 0   2 1 2 2 2   2 1 0 0 1
-
-dat <- matrix( dat, 10, 5, byrow=TRUE)
-colnames(dat) <- paste0("I", 1:5 )
-
-# estimate partial credit model with no jackknifing
-mod1 <- sirt::rasch.evm.pcm( dat, jackunits=0, powB=3 )
-
-# paired comparison matrix
-mod1$B
-  ##          I1_Cat1 I1_Cat2 I2_Cat1 I2_Cat2 I3_Cat1 I3_Cat2 I4_Cat1 I4_Cat2 I5_Cat1 I5_Cat2
-  ##  I1_Cat1       0       0       2       0       1       1       2       1       2       1
-  ##  I1_Cat2       0       0       0       3       2       2       2       2       2       3
-  ##  I2_Cat1       1       0       0       0       1       1       2       0       2       1
-  ##  I2_Cat2       0       1       0       0       1       2       0       3       1       3
-  ##  I3_Cat1       1       1       1       1       0       0       1       2       3       1
-  ##  I3_Cat2       0       1       0       2       0       0       1       1       1       1
-  ##  I4_Cat1       0       1       0       0       0       2       0       0       1       2
-  ##  I4_Cat2       1       0       0       2       1       1       0       0       1       1
-  ##  I5_Cat1       0       1       0       1       2       1       1       2       0       0
-  ##  I5_Cat2       0       0       0       1       0       0       0       0       0       0
-
-#############################################################################
-# EXAMPLE 4: Partial credit model for dataset data.mg from CDM package
-#############################################################################
-
-library(CDM)
-data(data.mg,package="CDM")
-dat <- data.mg[, paste0("I",1:11) ]
-
-#*** Model 1: estimate partial credit model
-mod1 <- sirt::rasch.evm.pcm( dat )
-# item parameters
-round( mod1$b, 3 )
-  ##        Cat1   Cat2  Cat3
-  ##  I1  -1.537     NA    NA
-  ##  I2  -2.360     NA    NA
-  ##  I3  -0.574     NA    NA
-  ##  I4  -0.971 -2.086    NA
-  ##  I5  -0.104  0.201    NA
-  ##  I6   0.470  0.806    NA
-  ##  I7  -1.027  0.756 1.969
-  ##  I8   0.897     NA    NA
-  ##  I9   0.766     NA    NA
-  ##  I10  0.069     NA    NA
-  ##  I11 -1.122  1.159 2.689
-
-#*** Model 2: estimate PCM with pairwise package
-miceadds::library_install("pairwise")
-mod2 <- pairwise::pair(daten=dat)
-summary(mod2)
-plot(mod2)
-# compute standard errors
-semod2 <- pairwise::pairSE(daten=dat,  nsample=20)
-semod2
-
-#############################################################################
-# EXAMPLE 5: Differential item functioning for dataset data.mg
-#############################################################################
-
-library(CDM)
-data(data.mg,package="CDM")
-dat <- data.mg[ data.mg$group %in% c(2,3,11), ]
-# define items
-items <- paste0("I",1:11)
-# estimate model
-mod1 <- sirt::rasch.evm.pcm( dat[,items], weights=dat$weight, group=dat$group )
-summary(mod1)
-
-#############################################################################
-# EXAMPLE 6: Differential item functioning for Rasch model
-#############################################################################
-
-# simulate some data
-set.seed(9776)
-N <- 1000    # number of persons
-I <- 10        # number of items
-# simulate data for first group
-b <- seq(-1.5,1.5,len=I)
-dat1 <- sirt::sim.raschtype( stats::rnorm(N), b )
-# simulate data for second group
-b1 <- b
-b1[4] <- b1[4] + .5 # introduce DIF for fourth item
-dat2 <- sirt::sim.raschtype( stats::rnorm(N,mean=.3), b1 )
-dat <- rbind(dat1, dat2 )
-group <- rep( 1:2, each=N )
-# estimate model
-mod1 <- sirt::rasch.evm.pcm( dat, group=group )
-summary(mod1)
-# }
-</pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -415,13 +253,16 @@ summary(mod1)
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

@@ -8,21 +8,25 @@
 
 <title>Running ConQuest From Within <span style="R">R</span> — R2conquest • sirt</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,13 +34,14 @@
 
 
 
-<meta property="og:title" content="Running ConQuest From Within <span style="R">R</span> — R2conquest" />
 
+<meta property="og:title" content="Running ConQuest From Within <span style="R">R</span> — R2conquest" />
 <meta property="og:description" content="The function R2conquest runs the IRT software ConQuest
 (Wu, Adams, Wilson &amp;amp; Haldane, 2007) from within R.
 Other functions are utility functions for reading item parameters, plausible
 values or person-item maps." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -48,6 +53,7 @@ values or person-item maps." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -66,7 +72,7 @@ values or person-item maps." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.7-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.8-vv</span>
       </span>
     </div>
 
@@ -74,7 +80,7 @@ values or person-item maps." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -82,11 +88,10 @@ values or person-item maps." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexanderrobitzsch/sirt">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -97,6 +102,7 @@ values or person-item maps." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -108,42 +114,40 @@ values or person-item maps." />
     </div>
 
     <div class="ref-description">
-    
     <p>The function <code>R2conquest</code> runs the IRT software ConQuest
 (Wu, Adams, Wilson &amp; Haldane, 2007) from within <span style="R">R</span>.</p>
 <p>Other functions are utility functions for reading item parameters, plausible
 values or person-item maps.</p>
-    
     </div>
 
-    <pre class="usage">R2conquest(dat, path.conquest, conquest.name="console", converge=0.001,
-    deviancechange=1e-04, iter=800, nodes=20, minnode=-6, maxnode=6,
-    show.conquestoutput=FALSE, name="rasch", pid=1:(nrow(dat)), wgt=NULL, X=NULL,
-    set.constraints=NULL, model="item", regression=NULL,
-    itemcodes=seq(0,max(dat,na.rm=TRUE)), constraints=NULL, digits=5, onlysyntax=FALSE,
-    qmatrix=NULL, import.regression=NULL, anchor.regression=NULL,
-    anchor.covariance=NULL, pv=TRUE, designmatrix=NULL, only.calibration=FALSE,
-    init_parameters=NULL, n_plausible=10,  persons.elim=TRUE, est.wle=TRUE,
-    save.bat=TRUE, use.bat=FALSE, read.output=TRUE, ignore.pid=FALSE)
+    <pre class="usage"><span class='fu'>R2conquest</span>(<span class='no'>dat</span>, <span class='no'>path.conquest</span>, <span class='kw'>conquest.name</span><span class='kw'>=</span><span class='st'>"console"</span>, <span class='kw'>converge</span><span class='kw'>=</span><span class='fl'>0.001</span>,
+    <span class='kw'>deviancechange</span><span class='kw'>=</span><span class='fl'>1e-04</span>, <span class='kw'>iter</span><span class='kw'>=</span><span class='fl'>800</span>, <span class='kw'>nodes</span><span class='kw'>=</span><span class='fl'>20</span>, <span class='kw'>minnode</span><span class='kw'>=</span>-<span class='fl'>6</span>, <span class='kw'>maxnode</span><span class='kw'>=</span><span class='fl'>6</span>,
+    <span class='kw'>show.conquestoutput</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"rasch"</span>, <span class='kw'>pid</span><span class='kw'>=</span><span class='fl'>1</span>:(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>dat</span>)), <span class='kw'>wgt</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+    <span class='kw'>set.constraints</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item"</span>, <span class='kw'>regression</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+    <span class='kw'>itemcodes</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>,<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>dat</span>,<span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)), <span class='kw'>constraints</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>5</span>, <span class='kw'>onlysyntax</span><span class='kw'>=</span><span class='fl'>FALSE</span>,
+    <span class='kw'>qmatrix</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>import.regression</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>anchor.regression</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+    <span class='kw'>anchor.covariance</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>pv</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>designmatrix</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>only.calibration</span><span class='kw'>=</span><span class='fl'>FALSE</span>,
+    <span class='kw'>init_parameters</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>n_plausible</span><span class='kw'>=</span><span class='fl'>10</span>,  <span class='kw'>persons.elim</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>est.wle</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
+    <span class='kw'>save.bat</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>use.bat</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>read.output</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>ignore.pid</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
 
-# S3 method for R2conquest
-summary(object, &#8230;)
+<span class='co'># S3 method for R2conquest</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
-# read all terms in a show file or only some terms
-read.show(showfile)
-read.show.term(showfile, term)
+<span class='co'># read all terms in a show file or only some terms</span>
+<span class='fu'>read.show</span>(<span class='no'>showfile</span>)
+<span class='fu'>read.show.term</span>(<span class='no'>showfile</span>, <span class='no'>term</span>)
 
-# read regression parameters in a show file
-read.show.regression(showfile)
+<span class='co'># read regression parameters in a show file</span>
+<span class='fu'>read.show.regression</span>(<span class='no'>showfile</span>)
 
-# read unidimensional plausible values form a pv file
-read.pv(pvfile, npv=5)
-# read multidimensional plausible values
-read.multidimpv(pvfile, ndim, npv=5)
+<span class='co'># read unidimensional plausible values form a pv file</span>
+<span class='fu'>read.pv</span>(<span class='no'>pvfile</span>, <span class='kw'>npv</span><span class='kw'>=</span><span class='fl'>5</span>)
+<span class='co'># read multidimensional plausible values</span>
+<span class='fu'>read.multidimpv</span>(<span class='no'>pvfile</span>, <span class='no'>ndim</span>, <span class='kw'>npv</span><span class='kw'>=</span><span class='fl'>5</span>)
 
-# read person-item map
-read.pimap(showfile)</pre>
-    
+<span class='co'># read person-item map</span>
+<span class='fu'>read.pimap</span>(<span class='no'>showfile</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -223,7 +227,7 @@ or <code>"none"</code></p></td>
     <tr>
       <th>itemcodes</th>
       <td><p>Vector of valid codes for item responses. E.g. for partial credit
-data with at most 3 points it must be <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c(0,1,2,3)</a></code>.</p></td>
+data with at most 3 points it must be <code><a href='https://rdrr.io/r/base/c.html'>c(0,1,2,3)</a></code>.</p></td>
     </tr>
     <tr>
       <th>constraints</th>
@@ -332,16 +336,15 @@ should be processed in ConQuest input syntax.</p></td>
       <td><p>Number of plausible values</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>Further arguments to be passed</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Consult the ConQuest manual (Wu et al., 2007) for specification
 details.</p>
-    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list with several entries</p>
@@ -349,15 +352,13 @@ details.</p>
 <dt>person</dt><dd><p>Data frame with person parameters</p></dd>
 <dt>shw.itemparameter</dt><dd><p>ConQuest output table for item parameters</p></dd>
 <dt>shw.regrparameter</dt><dd><p>ConQuest output table for regression parameters</p></dd>
-<dt>&#8230;</dt><dd><p>More values</p></dd>
+<dt>...</dt><dd><p>More values</p></dd>
 
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Wu, M. L., Adams, R. J., Wilson, M. R. &amp; Haldane, S. (2007).
 <em>ACER ConQuest Version 2.0</em>. Mulgrave.
 https://shop.acer.edu.au/acer-shop/group/CON3.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>See also the <span class="pkg">eat</span> package (<a href='http://r-forge.r-project.org/projects/eat/'>http://r-forge.r-project.org/projects/eat/</a>)
@@ -366,132 +367,127 @@ the <span class="pkg">conquestr</span> package for another <span style="R">R</sp
 (at least version 4 of ConQuest has to be installed).</p>
 <p>See also the <span class="pkg">TAM</span> package for similar (and even extended)
 functionality for specifying item response models.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># define ConQuest path</span>
 <span class='no'>path.conquest</span> <span class='kw'>&lt;-</span> <span class='st'>"C:/Conquest/"</span>
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 1: Dichotomous data (data.pisaMath)</span>
 <span class='co'>#############################################################################</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>sirt</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.pisaMath</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sirt</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.pisaMath</span>)
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.pisaMath</span>$<span class='no'>data</span>
 
 <span class='co'># select items</span>
-<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>dat</span>)[ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/which'>which</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/substr'>substring</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>dat</span>), <span class='fl'>1</span>, <span class='fl'>1</span>)<span class='kw'>==</span><span class='st'>"M"</span> ) ]
+<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>)[ <span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substring</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>), <span class='fl'>1</span>, <span class='fl'>1</span>)<span class='kw'>==</span><span class='st'>"M"</span> ) ]
 
 <span class='co'>#***</span>
 <span class='co'># Model 11: Rasch model</span>
-<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
              <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod11"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod11</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod11</span>)
 <span class='co'># read show file</span>
-<span class='no'>shw11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>read.show</a></span>( <span class='st'>"mod11.shw"</span> )
+<span class='no'>shw11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>read.show</a></span>( <span class='st'>"mod11.shw"</span> )
 <span class='co'># read person-item map</span>
-<span class='no'>pi11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>read.pimap</a></span>(<span class='kw'>showfile</span><span class='kw'>=</span><span class='st'>"mod11.shw"</span>)
+<span class='no'>pi11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>read.pimap</a></span>(<span class='kw'>showfile</span><span class='kw'>=</span><span class='st'>"mod11.shw"</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 12: Rasch model with fixed item difficulties (from Model 1)</span>
-<span class='no'>mod12</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
-             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>constraints</span><span class='kw'>=</span><span class='no'>mod11</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"item"</span>,<span class='st'>"itemdiff"</span>)],
+<span class='no'>mod12</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>constraints</span><span class='kw'>=</span><span class='no'>mod11</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"item"</span>,<span class='st'>"itemdiff"</span>)],
              <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod12"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod12</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod12</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 13: Latent regression model with predictors female, hisei and migra</span>
-<span class='no'>mod13a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
-             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='no'>dat</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"female"</span>, <span class='st'>"hisei"</span>, <span class='st'>"migra"</span>) ],
+<span class='no'>mod13a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"female"</span>, <span class='st'>"hisei"</span>, <span class='st'>"migra"</span>) ],
              <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod13a"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod13a</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod13a</span>)
 
 <span class='co'># latent regression with a subset of predictors</span>
-<span class='no'>mod13b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
-             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='no'>dat</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"female"</span>, <span class='st'>"hisei"</span>, <span class='st'>"migra"</span>) ],
+<span class='no'>mod13b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"female"</span>, <span class='st'>"hisei"</span>, <span class='st'>"migra"</span>) ],
              <span class='kw'>regression</span><span class='kw'>=</span><span class='st'>"hisei migra"</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod13b"</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 14: Differential item functioning (female)</span>
-<span class='no'>mod14</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
-             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='no'>dat</span>[, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"female"</span>), <span class='kw'>drop</span><span class='kw'>=</span><span class='fl'>FALSE</span>],
+<span class='no'>mod14</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+             <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"female"</span>), <span class='kw'>drop</span><span class='kw'>=</span><span class='fl'>FALSE</span>],
              <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+female+item*female"</span>,  <span class='kw'>regression</span><span class='kw'>=</span><span class='st'>""</span>,  <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod14"</span>)
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 2: Polytomous data (data.Students)</span>
 <span class='co'>#############################################################################</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>CDM</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.Students</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>CDM</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.Students</span>)
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.Students</span>
 
 <span class='co'># select items</span>
-<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'>grep.vec</span>( <span class='st'>"act"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>dat</span>) )$<span class='no'>x</span>
+<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'>grep.vec</span>( <span class='st'>"act"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) )$<span class='no'>x</span>
 
 <span class='co'>#***</span>
 <span class='co'># Model 21: Partial credit model</span>
-<span class='no'>mod21</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod21</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
               <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+item*step"</span>,  <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod21"</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 22: Rating scale model</span>
-<span class='no'>mod22</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod22</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
               <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+step"</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod22"</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 23: Multidimensional model</span>
-<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'>grep.vec</span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"act"</span>, <span class='st'>"sc"</span> ), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>dat</span>),  <span class='st'>"OR"</span> )$<span class='no'>x</span>
-<span class='no'>qmatrix</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>( <span class='fl'>0</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>items</span>), <span class='fl'>2</span> )
+<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'>grep.vec</span>( <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"act"</span>, <span class='st'>"sc"</span> ), <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>),  <span class='st'>"OR"</span> )$<span class='no'>x</span>
+<span class='no'>qmatrix</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>( <span class='fl'>0</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>items</span>), <span class='fl'>2</span> )
 <span class='no'>qmatrix</span>[<span class='fl'>1</span>:<span class='fl'>5</span>,<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>qmatrix</span>[<span class='fl'>6</span>:<span class='fl'>9</span>,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
-<span class='no'>mod23</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod23</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
             <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+item*step"</span>, <span class='kw'>qmatrix</span><span class='kw'>=</span><span class='no'>qmatrix</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod23"</span>)
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 3: Multi facet models (data.ratings1)</span>
 <span class='co'>#############################################################################</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>sirt</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.ratings1</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sirt</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.ratings1</span>)
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.ratings1</span>
 
-<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"k"</span>,<span class='fl'>1</span>:<span class='fl'>5</span>)
+<span class='no'>items</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"k"</span>,<span class='fl'>1</span>:<span class='fl'>5</span>)
 
 <span class='co'># use numeric rater ID's</span>
-<span class='no'>raters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/substr'>substring</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>( <span class='no'>dat</span>$<span class='no'>rater</span> ), <span class='fl'>3</span> ) )
+<span class='no'>raters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substring</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>( <span class='no'>dat</span>$<span class='no'>rater</span> ), <span class='fl'>3</span> ) )
 
 <span class='co'>#***</span>
 <span class='co'># Model 31: Rater model 'item+item*step+rater'</span>
-<span class='no'>mod31</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod31</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
               <span class='kw'>itemcodes</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>3</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+item*step+rater"</span>,
-              <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='st'>"rater"</span><span class='kw'>=</span><span class='no'>raters</span>),
+              <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='st'>"rater"</span><span class='kw'>=</span><span class='no'>raters</span>),
               <span class='kw'>regression</span><span class='kw'>=</span><span class='st'>""</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod31"</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 32: Rater model 'item+item*step+rater+item*rater'</span>
-<span class='no'>mod32</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sirt/topics/R2conquest'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod32</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
               <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+item*step+rater+item*rater"</span>,
-              <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='st'>"rater"</span><span class='kw'>=</span><span class='no'>raters</span>),
+              <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='st'>"rater"</span><span class='kw'>=</span><span class='no'>raters</span>),
               <span class='kw'>regression</span><span class='kw'>=</span><span class='st'>""</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod32"</span>)
-<span class='co'># }</span></pre>
+}</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#value">Value</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -499,13 +495,16 @@ functionality for specifying item response models.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

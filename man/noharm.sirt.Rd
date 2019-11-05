@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.540
+%% File Version: 0.542
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -215,7 +215,7 @@ Large sample properties of NOHARM estimates.
 \doi{10.3102/10769986026001051}
 
 McDonald, R. P. (1982a). Linear versus nonlinear models in item response theory.
-\emph{Applied Psychological Measurement, 6}, 379-396.
+\emph{Applied Psychological Measurement, 6}(4), 379-396.
 \doi{10.1177/014662168200600402}
 
 McDonald, R. P. (1982b). \emph{Unidimensional and multidimensional models for
@@ -307,8 +307,9 @@ summary(mod1)
 # EAP ability estimates
 pmod1 <- sirt::R2noharm.EAP(mod1, theta.k=seq(-4,4,len=10) )
 # model fit
-summary( sirt::modelfit.sirt( mod1 ))
+summary( sirt::modelfit.sirt(mod1) )
 
+\dontrun{
 #*** compare results with NOHARM software
 noharm.path <- "c:/NOHARM"   # specify path for noharm software
 mod1a <- sirt::R2noharm( dat=dat, model.type="CFA",  F.pattern=Fpatt, F.init=Fval,
@@ -322,7 +323,6 @@ Fpatt[ cbind( c(3,7), c(1,2)) ] <- 4
 mod1c <- sirt::noharm.sirt( dat=dat, Ppatt=Ppatt, Fpatt=Fpatt, Fval=Fval, Pval=Pval)
 summary(mod1c)
 
-\dontrun{
 #**** Model 2: Two-dimensional CFA with correlated residuals
 # define pattern matrix for residual correlation
 Psipatt <- 0*diag(I)

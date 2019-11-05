@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.407
+%% File Version: 0.409
 
 \name{data.sirt}
 
@@ -232,11 +232,11 @@ ALLBUS: http://www.gesis.org/allbus/allbus-home/
 \references{
 Bartolucci, F., Montanari, G. E., & Pandolfi, S. (2012).
 Dimensionality of the latent structure and item selection via latent
-class multidimensional IRT models. \emph{Psychometrika, 77}, 782-802.
+class multidimensional IRT models. \emph{Psychometrika, 77}(4), 782-802.
 \doi{10.1007/s11336-012-9278-0}
 
 DeCarlo, L. T. (XXXX). An item response model for true-false exams based on signal
-detection theory. \emph{Applied Psychological Measurement, xx}(xx).
+detection theory. \emph{Applied Psychological Measurement, xx}(xx). xxx-xxx.
 \doi{10.1177/0146621619843823}
 
 Fischer, R., & Karl, J. A. (2019). A primer to (cross-cultural) multi-group invariance
@@ -255,7 +255,7 @@ among multiple classifications.
 Lindsay, B., Clogg, C. C., & Grego, J. (1991).
 Semiparametric estimation in the Rasch model and related exponential response
 models, including a simple latent class model for item analysis.
-\emph{Journal of the American Statistical Association, 86}, 96-107.
+\emph{Journal of the American Statistical Association, 86}(413), 96-107.
 \doi{10.1080/01621459.1991.10475008}
 
 Rasch, D., Kubinger, K. D., & Yanagida, T. (2011).

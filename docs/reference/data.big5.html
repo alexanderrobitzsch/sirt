@@ -8,21 +8,25 @@
 
 <title>Dataset Big 5 from <span class="pkg">qgraph</span> Package — data.big5 • sirt</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +34,12 @@
 
 
 
-<meta property="og:title" content="Dataset Big 5 from <span class="pkg">qgraph</span> Package — data.big5" />
 
+<meta property="og:title" content="Dataset Big 5 from <span class="pkg">qgraph</span> Package — data.big5" />
 <meta property="og:description" content="This is a Big 5 dataset from the qgraph package (Dolan, Oorts,
 Stoel, Wicherts, 2009). It contains 500 subjects on 240 items." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -46,6 +51,7 @@ Stoel, Wicherts, 2009). It contains 500 subjects on 240 items." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -64,7 +70,7 @@ Stoel, Wicherts, 2009). It contains 500 subjects on 240 items." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.7-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.8-vv</span>
       </span>
     </div>
 
@@ -72,7 +78,7 @@ Stoel, Wicherts, 2009). It contains 500 subjects on 240 items." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,11 +86,10 @@ Stoel, Wicherts, 2009). It contains 500 subjects on 240 items." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexanderrobitzsch/sirt">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -95,6 +100,7 @@ Stoel, Wicherts, 2009). It contains 500 subjects on 240 items." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -106,18 +112,18 @@ Stoel, Wicherts, 2009). It contains 500 subjects on 240 items." />
     </div>
 
     <div class="ref-description">
-    
     <p>This is a Big 5 dataset from the <span class="pkg">qgraph</span> package (Dolan, Oorts,
 Stoel, Wicherts, 2009). It contains 500 subjects on 240 items.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.big5</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.big5.qgraph</span>)</pre>
-        
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.big5</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.big5.qgraph</span>)</pre>
+
+
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <ul>
+    
+<ul>
 <li><p>The format of <code>data.big5</code> is: <br />
 <code> num [1:500, 1:240] 1 0 0 0 0 1 1 2 0 1 ...</code> <br />
 <code> - attr(*, "dimnames")=List of 2</code> <br />
@@ -129,7 +135,7 @@ Stoel, Wicherts, 2009). It contains 500 subjects on 240 items.</p>
 <code>  ..$ : NULL</code> <br />
 <code>  ..$ : chr [1:240] "N1" "E2" "O3" "A4" ...</code> <br /></p></li>
 </ul>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>In these datasets, there exist 48 items for each dimension. The Big 5
@@ -138,234 +144,31 @@ Openness (<code>O</code>), Agreeableness (<code>A</code>) and
 Conscientiousness (<code>C</code>). Note that the <code>data.big5</code> differs from
 <code>data.big5.qgraph</code> in a way that original items were recoded into
 three categories 0,1 and 2.</p>
-    
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>See <code>big5</code> in <span class="pkg">qgraph</span> package.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Dolan, C. V., Oort, F. J., Stoel, R. D., &amp; Wicherts, J. M. (2009).
 Testing measurement invariance in the target rotates multigroup exploratory
 factor model. <em>Structural Equation Modeling, 16</em>, 295-314.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"># NOT RUN {
-# list of needed packages for the following examples
-packages <- scan(what="character")
-     sirt   TAM   eRm   CDM   mirt  ltm   mokken  psychotools  psychomix
-     psych
-
-# load packages. make an installation if necessary
-miceadds::library_install(packages)
-
-#############################################################################
-# EXAMPLE 1: Unidimensional models openness scale
-#############################################################################
-
-data(data.big5)
-# extract first 10 openness items
-items <- which( substring( colnames(data.big5), 1, 1 )=="O"  )[1:10]
-dat <- data.big5[, items ]
-I <- ncol(dat)
-summary(dat)
-  ##   > colnames(dat)
-  ##    [1] "O3"  "O8"  "O13" "O18" "O23" "O28" "O33" "O38" "O43" "O48"
-# descriptive statistics
-psych::describe(dat)
-
-#****************
-# Model 1: Partial credit model
-#****************
-
-#-- M1a: rm.facets (in sirt)
-m1a <- sirt::rm.facets( dat )
-summary(m1a)
-
-#-- M1b: tam.mml (in TAM)
-m1b <- TAM::tam.mml( resp=dat )
-summary(m1b)
-
-#-- M1c: gdm (in CDM)
-theta.k <- seq(-6,6,len=21)
-m1c <- CDM::gdm( dat, irtmodel="1PL",theta.k=theta.k, skillspace="normal")
-summary(m1c)
-# compare results with loglinear skillspace
-m1c2 <- CDM::gdm( dat, irtmodel="1PL",theta.k=theta.k, skillspace="loglinear")
-summary(m1c2)
-
-#-- M1d: PCM (in eRm)
-m1d <- eRm::PCM( dat )
-summary(m1d)
-
-#-- M1e: gpcm (in ltm)
-m1e <- ltm::gpcm( dat, constraint="1PL", control=list(verbose=TRUE))
-summary(m1e)
-
-#-- M1f: mirt (in mirt)
-m1f <- mirt::mirt( dat, model=1, itemtype="1PL", verbose=TRUE)
-summary(m1f)
-coef(m1f)
-
-#-- M1g: PCModel.fit (in psychotools)
-mod1g <- psychotools::PCModel.fit(dat)
-summary(mod1g)
-plot(mod1g)
-
-#****************
-# Model 2: Generalized partial credit model
-#****************
-
-#-- M2a: rm.facets (in sirt)
-m2a <- sirt::rm.facets( dat, est.a.item=TRUE)
-summary(m2a)
-# Note that in rm.facets the mean of item discriminations is fixed to 1
-
-#-- M2b: tam.mml.2pl (in TAM)
-m2b <- TAM::tam.mml.2pl( resp=dat, irtmodel="GPCM")
-summary(m2b)
-
-#-- M2c: gdm (in CDM)
-m2c <- CDM::gdm( dat, irtmodel="2PL",theta.k=seq(-6,6,len=21),
-                   skillspace="normal", standardized.latent=TRUE)
-summary(m2c)
-
-#-- M2d: gpcm (in ltm)
-m2d <- ltm::gpcm( dat, control=list(verbose=TRUE))
-summary(m2d)
-
-#-- M2e: mirt (in mirt)
-m2e <- mirt::mirt( dat, model=1,  itemtype="GPCM", verbose=TRUE)
-summary(m2e)
-coef(m2e)
-
-#****************
-# Model 3: Nonparametric item response model
-#****************
-
-#-- M3a: ISOP and ADISOP model - isop.poly (in sirt)
-m3a <- sirt::isop.poly( dat )
-summary(m3a)
-plot(m3a)
-
-#-- M3b: Mokken scale analysis (in mokken)
-# Scalability coefficients
-mokken::coefH(dat)
-# Assumption of monotonicity
-monotonicity.list <- mokken::check.monotonicity(dat)
-summary(monotonicity.list)
-plot(monotonicity.list)
-# Assumption of non-intersecting ISRFs using method restscore
-restscore.list <- mokken::check.restscore(dat)
-summary(restscore.list)
-plot(restscore.list)
-
-#****************
-# Model 4: Graded response model
-#****************
-
-#-- M4a: mirt (in mirt)
-m4a <- mirt::mirt( dat, model=1,  itemtype="graded", verbose=TRUE)
-print(m4a)
-mirt.wrapper.coef(m4a)
-
-#----  M4b: WLSMV estimation with cfa (in lavaan)
-lavmodel <- "F=~ O3__O48
-             F ~~ 1*F
-                "
-# transform lavaan syntax with lavaanify.IRT
-lavmodel <- TAM::lavaanify.IRT( lavmodel, items=colnames(dat) )$lavaan.syntax
-mod4b <- lavaan::cfa( data=as.data.frame(dat), model=lavmodel, std.lv=TRUE,
-                 ordered=colnames(dat),  parameterization="theta")
-summary(mod4b, standardized=TRUE, fit.measures=TRUE, rsquare=TRUE)
-coef(mod4b)
-
-#****************
-# Model 5: Normally distributed residuals
-#****************
-
-#----  M5a: cfa (in lavaan)
-lavmodel <- "F=~ O3__O48
-             F ~~ 1*F
-             F ~ 0*1
-             O3__O48 ~ 1
-                "
-lavmodel <- TAM::lavaanify.IRT( lavmodel, items=colnames(dat) )$lavaan.syntax
-mod5a <- lavaan::cfa( data=as.data.frame(dat), model=lavmodel, std.lv=TRUE,
-                 estimator="MLR" )
-summary(mod5a, standardized=TRUE, fit.measures=TRUE, rsquare=TRUE)
-
-#----  M5b: mirt (in mirt)
-
-# create user defined function
-name <- 'normal'
-par <- c("d"=1, "a1"=0.8, "vy"=1)
-est <- c(TRUE, TRUE,FALSE)
-P.normal <- function(par,Theta,ncat){
-     d <- par[1]
-     a1 <- par[2]
-     vy <- par[3]
-     psi <- vy - a1^2
-     # expected values given Theta
-     mui <- a1*Theta[,1] + d
-     TP <- nrow(Theta)
-     probs <- matrix( NA, nrow=TP, ncol=ncat )
-     eps <- .01
-     for (cc in 1:ncat){
-        probs[,cc] <- stats::dnorm( cc, mean=mui, sd=sqrt( abs( psi + eps) ) )
-                    }
-     psum <- matrix( rep(rowSums( probs ),each=ncat), nrow=TP, ncol=ncat, byrow=TRUE)
-     probs <- probs / psum
-     return(probs)
-}
-
-# create item response function
-normal <- mirt::createItem(name, par=par, est=est, P=P.normal)
-customItems <- list("normal"=normal)
-itemtype <- rep( "normal",I)
-# define parameters to be estimated
-mod5b.pars <- mirt::mirt(dat, 1, itemtype=itemtype,
-                   customItems=customItems, pars="values")
-ind <- which( mod5b.pars$name=="vy")
-vy <- apply( dat, 2, var, na.rm=TRUE )
-mod5b.pars[ ind, "value" ] <- vy
-ind <- which( mod5b.pars$name=="a1")
-mod5b.pars[ ind, "value" ] <- .5* sqrt(vy)
-ind <- which( mod5b.pars$name=="d")
-mod5b.pars[ ind, "value" ] <- colMeans( dat, na.rm=TRUE )
-
-# estimate model
-mod5b <- mirt::mirt(dat, 1, itemtype=itemtype, customItems=customItems,
-                 pars=mod5b.pars, verbose=TRUE    )
-sirt::mirt.wrapper.coef(mod5b)$coef
-
-# some item plots
-    par(ask=TRUE)
-plot(mod5b, type='trace', layout=c(1,1))
-    par(ask=FALSE)
-# Alternatively:
-sirt::mirt.wrapper.itemplot(mod5b)
-# }
-</pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
       <li><a href="#format">Format</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#source">Source</a></li>
-
       <li><a href="#references">References</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -373,13 +176,16 @@ sirt::mirt.wrapper.itemplot(mod5b)
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

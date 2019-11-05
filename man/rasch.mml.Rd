@@ -1,5 +1,5 @@
 %% File Name: rasch.mml.Rd
-%% File Version: 3.99257
+%% File Version: 3.99258
 
 \name{rasch.mml2}
 \alias{rasch.mml2}
@@ -462,10 +462,10 @@ Loken, E., & Rulison, K. L. (2010). Estimation of a four-parameter
 item response theory model. \emph{British Journal of Mathematical
 and Statistical Psychology, 63}, 509-525.
 
-Mislevy, R. J., & Wu, P. K. (1996). \emph{Missing Responses and IRT Ability
-Estimation: Omits, Choice, Time Limits, and Adaptive Testing}.
-ETS Research Report ETS RR-96-30.
-Princeton, ETS.
+Mislevy, R. J., & Wu, P. K. (1996). \emph{Missing responses and IRT ability
+estimation: Omits, choice, time Limits, and adaptive testing}.
+ETS Research Report ETS RR-96-30. Princeton, ETS.
+\doi{10.1002/j.2333-8504.1996.tb01708.x}
 
 Pohl, S., Graefe, L., & Rose, N. (2014). Dealing with omitted and
 not-reached items in competence tests evaluating approaches accounting for
@@ -480,8 +480,8 @@ function estimates with the EM algorithm.
 \emph{Journal of Educational and Behavioral Statistics, 27}, 291-317.
 
 Stukel, T. A. (1988). Generalized logistic models.
-\emph{Journal of the American Statistical Association,
-83}, 426-431.
+\emph{Journal of the American Statistical Association, 83}(402), 426-431.
+\doi{10.1080/01621459.1988.10478613}
 
 van der Maas, H. J. L., Molenaar, D., Maris, G., Kievit, R. A., &
 Borsboom, D. (2011).

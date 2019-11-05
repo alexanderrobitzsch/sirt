@@ -1,5 +1,5 @@
 %% File Name: pgenlogis.Rd
-%% File Version: 0.27
+%% File Version: 0.281
 
 \name{pgenlogis}
 \alias{pgenlogis}
@@ -67,8 +67,8 @@ Vector of probabilities or moments
 
 \references{
 Stukel, T. A. (1988). Generalized logistic models.
-\emph{Journal of the American Statistical Association,
-83}, 426-431.
+\emph{Journal of the American Statistical Association, 83}(402), 426-431.
+\doi{10.1080/01621459.1988.10478613}
 }
 
 

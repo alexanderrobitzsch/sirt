@@ -1,5 +1,5 @@
 %% File Name: lsem.permutationTest.Rd
-%% File Version: 0.29
+%% File Version: 0.31
 
 \name{lsem.permutationTest}
 \alias{lsem.permutationTest}
@@ -124,7 +124,8 @@ did not converge}
 Hildebrandt, A., Luedtke, O., Robitzsch, A., Sommer, C., &
 Wilhelm, O. (2016). Exploring factor model parameters across continuous variables
 with local structural equation models.
-\emph{Multivariate Behavioral Research, 51}, 257-278.
+\emph{Multivariate Behavioral Research, 51}(2-3), 257-278.
+\doi{10.1080/00273171.2016.1142856}
 
 Hildebrandt, A., Wilhelm, O., & Robitzsch, A. (2009). Complementary and
 competing factor analytic approaches for the investigation of measurement invariance.

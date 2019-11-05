@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.735
+%% File Version: 0.738
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -188,45 +188,46 @@ A list with following entries
 
 \references{
 Asparouhov, T., & Muthen, B. (2014). Multiple-group factor analysis alignment.
-\emph{Structural Equation Modeling, 21}, 1-14.
-http://dx.doi.org/10.1080/10705511.2014.919210
+\emph{Structural Equation Modeling, 21}(4), 1-14.
+\doi{10.1080/10705511.2014.919210}
 
 Battauz, M. (2017). Multiple equating of separate IRT calibrations.
-\emph{Psychometrika, 82}, 610-636.
-http://dx.doi.org/10.1007/s11336-016-9517-x
+\emph{Psychometrika, 82}(3), 610-636.
+\doi{10.1007/s11336-016-9517-x}
 
 Davies, P. L. (2012). Interactions in the analysis of variance.
 \emph{Journal of the American Statistical Association, 107}(500), 1502-1509.
-http://dx.doi.org/10.1080/01621459.2012.726895
+\doi{10.1080/01621459.2012.726895}
 
 Fox, J. (2015). \emph{Applied regression analysis and generalized linear models}.
 Thousand Oaks: Sage.
 
 Haberman, S. J. (2009). \emph{Linking parameter estimates derived
 from an item response model through separate calibrations}.
-ETS Research Report ETS RR-09-40. Princeton, ETS. \cr
-https://doi.org/10.1002/j.2333-8504.2009.tb02197.x
+ETS Research Report ETS RR-09-40. Princeton, ETS.
+\doi{10.1002/j.2333-8504.2009.tb02197.x}
 
 Kolen, M. J., & Brennan, R. L. (2014). \emph{Test equating, scaling, and linking:
 Methods and practices}. New York: Springer.
+\doi{10.1007/978-1-4939-0317-7}
 
 Magis, D., & De Boeck, P. (2012). A robust outlier approach to prevent type I error
 inflation in differential item functioning.
 \emph{Educational and Psychological Measurement, 72}(2), 291-311.
-http://dx.doi.org/10.1177/0013164411416975
+\doi{10.1177/0013164411416975}
 
 Maronna, R. A., Martin, R. D., & Yohai, V. J. (2006). \emph{Robust statistics}.
-West Sussex: Wiley. \cr http://dx.doi.org/10.1002/0470010940
+West Sussex: Wiley. \doi{10.1002/0470010940}
 
 Terbeck, W., & Davies, P. L. (1998). Interactions and outliers in the two-way
 analysis of variance. \emph{Annals of Statistics, 26}(4), 1279-1305.
-http://dx.doi.org/10.1214/aos/1024691243
+\doi{10.1214/aos/1024691243}
 
 Tukey, J. W. (1977). \emph{Exploratory data analysis}. Addison-Wesley.
 
 Weeks, J. P. (2010). \pkg{plink}: An \R package for linking mixed-format tests
 using IRT-based methods. \code{Journal of Statistical Software, 35}(12), 1-33.
-https://doi.org/10.18637/jss.v035.i12
+\doi{10.18637/jss.v035.i12}
 }
 
 

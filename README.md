@@ -2,13 +2,13 @@
 #### Supplementary Item Response Theory Models
 
 
-If you use `sirt` and have suggestions for improvement or have found bugs, please email me at robitzsch@leibniz-ipn.de.
+If you use `sirt` and have suggestions for improvement or have found bugs, please email me at robitzsch@ipn.uni-kiel.de.
 
 #### Manual
 
 The manual may be found here [https://alexanderrobitzsch.github.io/sirt/](https://alexanderrobitzsch.github.io/sirt/) 
 
-#### CRAN version `sirt` 3.6-21 (2019-08-01)
+#### CRAN version `sirt` 3.7-40 (2019-11-04)
 
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version-last-release/sirt)](https://cran.r-project.org/package=sirt)
@@ -22,9 +22,9 @@ The CRAN version can be installed from within R using:
 utils::install.packages("sirt")
 ```
 
-#### GitHub version `sirt` 3.7-24 (2019-10-28)
+#### GitHub version `sirt` 3.8-1 (2019-11-05)
 
-[![](https://img.shields.io/badge/github%20version-3.7--24-orange.svg)](https://github.com/alexanderrobitzsch/sirt)&#160;&#160;
+[![](https://img.shields.io/badge/github%20version-3.8--1-orange.svg)](https://github.com/alexanderrobitzsch/sirt)&#160;&#160;
 
 The version hosted [here](https://github.com/alexanderrobitzsch/sirt) is the development version of `sirt`. 
 The GitHub version can be installed using `devtools` as:

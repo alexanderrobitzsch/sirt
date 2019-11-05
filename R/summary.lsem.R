@@ -1,5 +1,5 @@
 ## File Name: summary.lsem.R
-## File Version: 0.398
+## File Version: 0.399
 
 
 #-- summary lsem
@@ -52,7 +52,6 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
             v1 <- paste0("\nStatistical inference based on ", object$R, " bootstrap samples.")
             cat(v1,"\n")
         }
-
     }
 
     if ( object$type=="MGM"){

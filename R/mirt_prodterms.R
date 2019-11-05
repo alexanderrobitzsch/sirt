@@ -1,8 +1,7 @@
 ## File Name: mirt_prodterms.R
-## File Version: 0.07
+## File Version: 0.091
 
 
-##########################################################################
 # prodterms function from mirt package
 # This function is not exported and hence redefined in sirt
 mirt_prodterms <- function (theta0, prodlist)

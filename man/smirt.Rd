@@ -1,5 +1,5 @@
 %% File Name: smirt.Rd
-%% File Version: 2.39
+%% File Version: 2.411
 
 \name{smirt}
 \alias{smirt}
@@ -266,8 +266,8 @@ Pan, J., & Thompson, R. (2007). Quasi-Monte Carlo estimation in
 generalized linear mixed models. \emph{Computational Statistics &
 Data Analysis, 51}, 5765-5775.
 
-Reckase, M.D. (2009). \emph{Multidimensional Item Response Theory}.
-New York: Springer.
+Reckase, M. (2009). \emph{Multidimensional item response theory}.
+New York: Springer. \doi{10.1007/978-0-387-89976-3}
 
 Spray, J. A., Davey, T. C., Reckase, M. D., Ackerman, T. A., & Carlson, J. E. (1990).
 \emph{Comparison of two logistic multidimensional item response theory models}.
