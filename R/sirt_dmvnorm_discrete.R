@@ -1,5 +1,5 @@
 ## File Name: sirt_dmvnorm_discrete.R
-## File Version: 0.06
+## File Version: 0.07
 
 sirt_dmvnorm_discrete <- function(x, mean=NULL, sigma=NULL, as_matrix=FALSE,
     eps=0, ...)

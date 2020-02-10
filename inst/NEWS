@@ -37,10 +37,14 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.8  |  2019-11-05  |  Last: sirt 3.8-1
+VERSIONS sirt 3.8  |  2020-02-10  |  Last: sirt 3.8-8
 ------------------------------------------------------------------------
 
-xxx   * ...
+FIXED * handle missing data in stratified.cronbach.alpha()
+        (thanks to Murat Dogan Sahin)
+FIXED * fixed a recently introduced bug in rasch.mml2() using the
+        argument irtmodel='missing1' (thanks to Thomas Deribo)
+       
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---

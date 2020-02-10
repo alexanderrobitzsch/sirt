@@ -38,7 +38,7 @@
 <meta property="og:title" content="Stratified Cronbach's Alpha — stratified.cronbach.alpha" />
 <meta property="og:description" content="This function computes the stratified Cronbach's Alpha
 for composite scales (Cronbach, Schoenemann &amp;amp; McKie, 1965;
-Meyer, 2010)." />
+He, 2010; Meyer, 2010)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,7 +115,7 @@ Meyer, 2010)." />
     <div class="ref-description">
     <p>This function computes the stratified Cronbach's Alpha
 for composite scales (Cronbach, Schoenemann &amp; McKie, 1965;
-Meyer, 2010).</p>
+He, 2010; Meyer, 2010).</p>
     </div>
 
     <pre class="usage"><span class='fu'>stratified.cronbach.alpha</span>(<span class='no'>data</span>, <span class='kw'>itemstrata</span><span class='kw'>=</span><span class='kw'>NULL</span>)</pre>
@@ -139,28 +139,29 @@ for the whole scale.</p></td>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Cronbach, L.J., Schoenemann, P., &amp; McKie, D. (1965).
+    <p>Cronbach, L. J., Schoenemann, P., &amp; McKie, D. (1965).
 Alpha coefficient for stratified-parallel tests.
-<em>Educational and Psychological Measurement,
-25</em>, 291-312.</p>
-<p>Meyer, P. (2010). <em>Reliability</em>. Cambridge:
-Oxford University Press.</p>
+<em>Educational and Psychological Measurement, 25</em>, 291-312.
+doi: <a href='https://doi.org/10.1177/001316446502500201'>10.1177/001316446502500201</a></p>
+<p>He, Q. (2010). <em>Estimating the reliability of composite scores</em>.
+Ofqual/10/4703. Coventry: The Office of Qualifications and Examinations Regulation.</p>
+<p>Meyer, P. (2010). <em>Reliability</em>. Cambridge: Oxford University Press.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 1: data.read</span>
 <span class='co'>#############################################################################</span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>( <span class='no'>data.read</span> )
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.read</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"sirt"</span>)
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.read</span>
 <span class='no'>I</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)
 
 <span class='co'># apply function without defining item strata</span>
-<span class='fu'>stratified.cronbach.alpha</span>( <span class='no'>data.read</span>  )
+<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/stratified.cronbach.alpha.html'>stratified.cronbach.alpha</a></span>( <span class='no'>data.read</span>  )
 
 <span class='co'># define item strata</span>
 <span class='no'>itemstrata</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>), <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substring</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>), <span class='fl'>1</span>,<span class='fl'>1</span> ) )
-<span class='fu'>stratified.cronbach.alpha</span>( <span class='no'>data.read</span>, <span class='kw'>itemstrata</span><span class='kw'>=</span><span class='no'>itemstrata</span> )
+<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/stratified.cronbach.alpha.html'>stratified.cronbach.alpha</a></span>( <span class='no'>dat</span>, <span class='kw'>itemstrata</span><span class='kw'>=</span><span class='no'>itemstrata</span> )
   <span class='co'>##   scale  I alpha mean.tot var.tot alpha.stratified</span>
   <span class='co'>## 1 total 12 0.677    8.680   5.668            0.703</span>
   <span class='co'>## 2     A  4 0.545    2.616   1.381               NA</span>
@@ -172,7 +173,7 @@ Oxford University Press.</p>
 <span class='co'># reliability analysis in psych package</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>psych</span>)
 <span class='co'># Cronbach's alpha and item discriminations</span>
-<span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/psych/man/alpha.html'>alpha</a></span>( <span class='no'>dat</span> )
+<span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/psych/man/alpha.html'>alpha</a></span>(<span class='no'>dat</span>)
 <span class='co'># McDonald's omega</span>
 <span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/psych/man/omega.html'>omega</a></span>(<span class='no'>dat</span>, <span class='kw'>nfactors</span><span class='kw'>=</span><span class='fl'>1</span>)     <span class='co'># 1 factor</span>
   <span class='co'>##   Alpha:                 0.69</span>

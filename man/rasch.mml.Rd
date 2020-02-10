@@ -1,5 +1,5 @@
 %% File Name: rasch.mml.Rd
-%% File Version: 3.99258
+%% File Version: 3.992596
 
 \name{rasch.mml2}
 \alias{rasch.mml2}
@@ -455,12 +455,13 @@ extended to accommodate all categories}
 \references{
 Holman, R., & Glas, C. A. (2005). Modelling non-ignorable missing-data mechanisms
 with item response theory models.
-\emph{British Journal of Mathematical and Statistical Psychology,
-58}, 1-17.
+\emph{British Journal of Mathematical and Statistical Psychology, 58}(1), 1-17.
+\doi{10.1348/000711005X47168}
 
 Loken, E., & Rulison, K. L. (2010). Estimation of a four-parameter
 item response theory model. \emph{British Journal of Mathematical
-and Statistical Psychology, 63}, 509-525.
+and Statistical Psychology, 63}(3), 509-525.
+\doi{10.1348/000711009X474502}
 
 Mislevy, R. J., & Wu, P. K. (1996). \emph{Missing responses and IRT ability
 estimation: Omits, choice, time Limits, and adaptive testing}.
@@ -470,14 +471,17 @@ ETS Research Report ETS RR-96-30. Princeton, ETS.
 Pohl, S., Graefe, L., & Rose, N. (2014). Dealing with omitted and
 not-reached items in competence tests evaluating approaches accounting for
 missing responses in item response theory models.
-\emph{Educational and Psychological Measurement, 74}, 423-452.
+\emph{Educational and Psychological Measurement, 74}(3), 423-452.
+\doi{10.1177/0013164413504926}
 
 Ramsay, J. O. (1989). A comparison of three simple test theory models.
 \emph{Psychometrika, 54}, 487-499.
+\doi{10.1007/BF02294631}
 
 Rossi, N., Wang, X., & Ramsay, J. O. (2002). Nonparametric item response
 function estimates with the EM algorithm.
-\emph{Journal of Educational and Behavioral Statistics, 27}, 291-317.
+\emph{Journal of Educational and Behavioral Statistics, 27}(3), 291-317.
+\doi{10.3102/10769986027003291}
 
 Stukel, T. A. (1988). Generalized logistic models.
 \emph{Journal of the American Statistical Association, 83}(402), 426-431.
@@ -488,7 +492,8 @@ Borsboom, D. (2011).
 Cognitive psychology meets psychometric theory: On the relation between
 process models for decision making and latent variable models for
 individual differences.
-\emph{Psychological Review, 318}, 339-356.
+\emph{Psychological Review, 118}(2), 339-356.
+\doi{10.1037/a0022749}
 }
 
 
@@ -964,21 +969,20 @@ summary(mod6)
 #*** Model 7: reestimate model with constrained item difficulties
 I <- length(items)
 constraints <- cbind( 1:I, mod6$item$b )
-mod7 <- sirt::rasch.mml2( dat1[,items], constraints=constraints, mmliter=50 )
+mod7 <- sirt::rasch.mml2( dat1[,items], constraints=constraints)
 summary(mod7)
 
 #*** Model 8: score all missings responses as missing items
 dat2 <- dat[,items]
 dat2[ dat2==9 ] <- NA
-mod8 <- sirt::rasch.mml2( dat2, constraints=constraints, mmliter=50, mu.fixed=NULL )
+mod8 <- sirt::rasch.mml2( dat2, constraints=constraints, mu.fixed=NULL )
 summary(mod8)
 
 #*** Model 9: estimate missing data model 'missing1' assuming a missingness
 #       parameter delta.miss of zero
 dat2 <-  dat[,items]    # note that missing item responses must be defined by 9
 mod9 <- sirt::rasch.mml2( dat2, constraints=constraints, irtmodel="missing1",
-            theta.k=seq(-5,5,len=10), delta.miss=0, mitermax=4, mmliter=200,
-            mu.fixed=NULL )
+            theta.k=seq(-5,5,len=10), delta.miss=0, mitermax=4, mu.fixed=NULL )
 summary(mod9)
 
 #*** Model 10: estimate missing data model with a large negative missing delta parameter

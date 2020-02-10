@@ -1,5 +1,5 @@
 %% File Name: stratified.cronbach.alpha.Rd
-%% File Version: 0.27
+%% File Version: 0.296
 
 \name{stratified.cronbach.alpha}
 \alias{stratified.cronbach.alpha}
@@ -10,7 +10,7 @@ Stratified Cronbach's Alpha
 \description{
 This function computes the stratified Cronbach's Alpha
 for composite scales (Cronbach, Schoenemann & McKie, 1965;
-Meyer, 2010).
+He, 2010; Meyer, 2010).
 }
 \usage{
 stratified.cronbach.alpha(data, itemstrata=NULL)
@@ -39,13 +39,15 @@ for the whole scale.
 %% ...
 %}
 \references{
-Cronbach, L.J., Schoenemann, P., & McKie, D. (1965).
+Cronbach, L. J., Schoenemann, P., & McKie, D. (1965).
 Alpha coefficient for stratified-parallel tests.
-\emph{Educational and Psychological Measurement,
-25}, 291-312.
+\emph{Educational and Psychological Measurement, 25}, 291-312.
+\doi{10.1177/001316446502500201}
 
-Meyer, P. (2010). \emph{Reliability}. Cambridge:
-Oxford University Press.
+He, Q. (2010). \emph{Estimating the reliability of composite scores}.
+Ofqual/10/4703. Coventry: The Office of Qualifications and Examinations Regulation.
+
+Meyer, P. (2010). \emph{Reliability}. Cambridge: Oxford University Press.
 }
 
 
@@ -68,16 +70,16 @@ Oxford University Press.
 # EXAMPLE 1: data.read
 #############################################################################
 
-data( data.read )
+data(data.read, package="sirt")
 dat <- data.read
 I <- ncol(dat)
 
 # apply function without defining item strata
-stratified.cronbach.alpha( data.read  )
+sirt::stratified.cronbach.alpha( data.read  )
 
 # define item strata
 itemstrata <- cbind( colnames(dat), substring( colnames(dat), 1,1 ) )
-stratified.cronbach.alpha( data.read, itemstrata=itemstrata )
+sirt::stratified.cronbach.alpha( dat, itemstrata=itemstrata )
   ##   scale  I alpha mean.tot var.tot alpha.stratified
   ## 1 total 12 0.677    8.680   5.668            0.703
   ## 2     A  4 0.545    2.616   1.381               NA
@@ -89,7 +91,7 @@ stratified.cronbach.alpha( data.read, itemstrata=itemstrata )
 # reliability analysis in psych package
 library(psych)
 # Cronbach's alpha and item discriminations
-psych::alpha( dat )
+psych::alpha(dat)
 # McDonald's omega
 psych::omega(dat, nfactors=1)     # 1 factor
   ##   Alpha:                 0.69

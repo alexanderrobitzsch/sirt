@@ -1,25 +1,26 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.455
+## File Version: 7.4619
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model
 # item discrimination and guessing parameter can be fixed
 rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
-                constraints=NULL, glob.conv=10^(-5), parm.conv=10^(-4), mitermax=4,
-                mmliter=1000, progress=TRUE, fixed.a=rep(1,ncol(dat)), fixed.c=rep(0,ncol(dat)),
-                fixed.d=rep(1,ncol(dat)), fixed.K=rep(3,ncol(dat)),    b.init=NULL,
-                est.a=NULL, est.b=NULL,    est.c=NULL, est.d=NULL,    min.b=-99, max.b=99,
-                min.a=-99, max.a=99, min.c=0, max.c=1, min.d=0, max.d=1,
-                prior.b=NULL, prior.a=NULL, prior.c=NULL, prior.d=NULL, est.K=NULL,
-                min.K=1, max.K=20, beta.init=NULL, min.beta=-8, pid=1:(nrow(dat)),
-                trait.weights=NULL, center.trait=TRUE, center.b=FALSE, alpha1=0, alpha2=0,
-                est.alpha=FALSE, equal.alpha=FALSE, designmatrix=NULL, alpha.conv=parm.conv,
-                numdiff.parm=0.00001, numdiff.alpha.parm=numdiff.parm, distribution.trait="normal",
-                Qmatrix=NULL, variance.fixed=NULL, variance.init=NULL,
-                mu.fixed=cbind( seq(1,ncol(Qmatrix)), rep(0,ncol(Qmatrix)) ),
-                irtmodel="raschtype", npformula=NULL, npirt.monotone=TRUE,
-                use.freqpatt=is.null(group), delta.miss=0, est.delta=rep(NA,ncol(dat)),
-                ... )
+        constraints=NULL, glob.conv=10^(-5), parm.conv=10^(-4), mitermax=4,
+        mmliter=1000, progress=TRUE, fixed.a=rep(1,ncol(dat)),
+        fixed.c=rep(0,ncol(dat)), fixed.d=rep(1,ncol(dat)), fixed.K=rep(3,ncol(dat)),
+        b.init=NULL, est.a=NULL, est.b=NULL, est.c=NULL, est.d=NULL, min.b=-99,
+        max.b=99, min.a=-99, max.a=99, min.c=0, max.c=1, min.d=0, max.d=1,
+        prior.b=NULL, prior.a=NULL, prior.c=NULL, prior.d=NULL, est.K=NULL,
+        min.K=1, max.K=20, beta.init=NULL, min.beta=-8, pid=1:(nrow(dat)),
+        trait.weights=NULL, center.trait=TRUE, center.b=FALSE, alpha1=0, alpha2=0,
+        est.alpha=FALSE, equal.alpha=FALSE, designmatrix=NULL, alpha.conv=parm.conv,
+        numdiff.parm=0.00001, numdiff.alpha.parm=numdiff.parm,
+        distribution.trait="normal", Qmatrix=NULL,
+        variance.fixed=NULL, variance.init=NULL,
+        mu.fixed=cbind(seq(1,ncol(Qmatrix)),rep(0,ncol(Qmatrix))),
+        irtmodel="raschtype", npformula=NULL, npirt.monotone=TRUE,
+        use.freqpatt=is.null(group), delta.miss=0, est.delta=rep(NA,ncol(dat)),
+        ... )
 {
 
     # specifications
@@ -69,17 +70,16 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         D <- 2
         theta.k <- expand.grid( theta.k, theta.k )
         dat[ dat==9 ] <- 2
-        dat.resp <- 1 - is.na( dat )
-
+        dat.resp <- 1 - is.na(dat)
         # init b parameters
         b.init <- - stats::qlogis( colMeans( dat==1, na.rm=TRUE ) )
         # init beta parameters
         if ( is.null(beta.init) ){
             beta <-  stats::qlogis( colMeans( dat==2, na.rm=TRUE ) +  1E-3 )
-                            } else {
+        } else {
             beta <- beta.init
-                        }
-            }
+        }
+    }
     # multidimensional model
     if ( ! is.null( Qmatrix ) ){
         D <- ncol(Qmatrix)
@@ -93,7 +93,10 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         if ( D==9){ theta.k <- expand.grid( theta.k, theta.k, theta.k, theta.k, theta.k, theta.k, theta.k, theta.k, theta.k) }
 #        Qmatrix <- sapply( 1:max(item.dim), FUN=function(dd){
 #                        1*(item.dim==dd) } )
-                    }
+    }
+    if (is.data.frame(theta.k)){
+        theta.k <- as.matrix(theta.k)
+    }
     if (D > 1){
         if ( is.null(variance.fixed) & ( sum(est.a) > 0) ){
             variance.fixed <- as.matrix( cbind( 1:D, 1:D, 1 ) )
@@ -120,12 +123,12 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
             if (is.null(alpha1) ){ alpha1 <- 0 }
             if (is.null(alpha2) ){ alpha2 <- 0 }
                 }
-    #**************************************************************************************
-    # some data checks
+
+    #*** some data checks
     ag1 <- NULL
     if( max( colMeans( is.na( dat ) ) )==1 ){
         stop("Remove items which have no observations!")
-                    }
+    }
     if ( ! is.null(group) ){
             t1 <- table(sort(group) )
             group.orig <- group
@@ -226,58 +229,63 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                 }
             }
 
-
-        # data preparations
-        if ( ! is.null( group ) ){ use.freqpatt <- FALSE }
-        if ( irtmodel !="missing1" ){
-            dp <- .data.prep( dat, weights=weights, use.freqpatt=use.freqpatt)
-            dat1 <- dp$dat1
-            dat2 <- dp$dat2
-            dat2.resp <- dp$dat2.resp
-            freq.patt <- dp$freq.patt
-            n <- dp$n
-            I <- dp$I
-                }
-        se.delta <- NULL
-        if ( irtmodel=="missing1" ){
+    # data preparations
+    if ( ! is.null(group) ){
+        use.freqpatt <- FALSE
+    }
+    if ( irtmodel !="missing1" ){
+        dp <- .data.prep( dat, weights=weights, use.freqpatt=use.freqpatt)
+        dat1 <- dp$dat1
+        dat2 <- dp$dat2
+        dat2.resp <- dp$dat2.resp
+        freq.patt <- dp$freq.patt
+        n <- dp$n
+        I <- dp$I
+    }
+    se.delta <- NULL
+    if ( irtmodel=="missing1" ){
 #            dat1 <- dp$dat  # frequency patterns
-            dat1 <- as.data.frame( cbind( "P", weights ) )
-            for (ii in 1:I){
-                l1 <- dat[,ii]
-                l1 <- ifelse ( dat.resp[,ii]==0, 9, l1 )
-                dat1[, 1 ] <- paste0( dat1[,1], l1 )
-                            }
-            colnames(dat1) <- c("pattern","Freq"    )
-            dat1 <- as.data.frame(dat1)
-            freq.patt <- dat1$pattern
-            dat1$Freq <- weights
-            dat1$mean <- rowMeans( dat==1 )
-            dat2 <- dat
-            dat2.resp <- dat.resp
-            n <- nrow(dat2)
-            I <- ncol(dat2)
-                }
-        #*** pseudolikelihood estimation?
-        fracresp <- "pseudoll"
-        pseudoll <- 0
-        i1 <- sum( ( dat2 > 0 ) * ( dat2 < 1), na.rm=TRUE )
-        if (i1 > 10E-10 ){
-            if ( fracresp=="pseudoll") { pseudoll <- 1 }
-            if ( fracresp=="fuzzyll") { pseudoll <- 2 }
-            if ( is.null(group) ){
-                group <- rep( 1, nrow(dat2) )
-                                }
+        dat1 <- as.data.frame( cbind( "P", weights ) )
+        for (ii in 1:I){
+            l1 <- dat[,ii]
+            l1 <- ifelse ( dat.resp[,ii]==0, 9, l1 )
+            dat1[, 1 ] <- paste0( dat1[,1], l1 )
+        }
+        colnames(dat1) <- c("pattern","Freq")
+        dat1 <- as.data.frame(dat1)
+        freq.patt <- dat1$pattern
+        dat1$Freq <- weights
+        dat1$mean <- rowMeans( dat==1 )
+        dat2 <- dat
+        dat2.resp <- dat.resp
+        n <- nrow(dat2)
+        I <- ncol(dat2)
+    }
 
-                    }
-        # probability weights at theta.k
-        if (D==1){
-            pi.k <- sirt_dnorm_discrete( theta.k )
-                }
-        if (D > 1){
-            pi.k <- sirt_dmvnorm_discrete( theta.k, mean=rep(0,D), sigma=Sigma.cov )
-                }
-        G <- 1
-        pi.k <- matrix( pi.k, nrow=length(pi.k), ncol=G )
+    #*** pseudolikelihood estimation?
+    fracresp <- "pseudoll"
+    pseudoll <- 0
+    i1 <- sum( ( dat2 > 0 ) * ( dat2 < 1), na.rm=TRUE )
+    if (i1 > 10E-10 ){
+        if ( fracresp=="pseudoll"){
+            pseudoll <- 1
+        }
+        if ( fracresp=="fuzzyll"){
+            pseudoll <- 2
+        }
+        if ( is.null(group) ){
+            group <- rep( 1, nrow(dat2) )
+        }
+    }
+    # probability weights at theta.k
+    if (D==1){
+        pi.k <- sirt_dnorm_discrete( x=theta.k )
+    }
+    if (D > 1){
+        pi.k <- sirt_dmvnorm_discrete( x=theta.k, mean=rep(0,D), sigma=Sigma.cov )
+    }
+    G <- 1
+    pi.k <- matrix( pi.k, nrow=length(pi.k), ncol=G )
         # group calculations
         if ( !is.null( group )){
             G <- length( unique( group ) )
@@ -379,6 +387,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
 
     #-- indicators of estimated parameters
     est_parameters <- list( a=sum(est.a)>0, c=sum(est.c)>0, d=sum(est.d)>0)
+
 
     #******************************************************
     #*************** MML Iteration Algorithm **************
@@ -758,52 +767,49 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
 #
 
 
-            ############################
-                # possibly incorrect deviance calculated at the M step
-                #                dev <- -2*m1$ll
-                # iteration index
-                dev.change <- abs( ( dev - dev0)/ dev0 )
-                par.change <- max( c( abs(b - b0 ), abs(alpha.change ), a1a, a1b, a1c, a1K,
-                                apmax) )
-                if (irtmodel=="missing1"){
-                    par.change <- max( c( par.change, a1beta ))
-                                        }
-                # display convergence
-                if ( progress  ){
-                        cat( paste( "   Deviance=",
-                             round( dev, 4 ),
+        ##***** output
+        # iteration index
+        dev.change <- abs( ( dev - dev0)/ dev0 )
+        par.change <- max( c( abs(b - b0 ), abs(alpha.change ), a1a, a1b,
+                        a1c, a1K, apmax) )
+        if (irtmodel=="missing1"){
+            par.change <- max( c( par.change, a1beta ))
+        }
+        # display convergence
+        if (progress){
+            cat( paste( "   Deviance=", round( dev, 4 ),
                              if (iter > 0 ){ " | Deviance change=" } else {""},
                              if( iter>0){round( - dev + dev0, 6 )} else { ""}    ,"\n",sep=""))
                     if ( ! npirt ){
-                        cat( paste( "    Maximum b parameter change=",
+                        cat( paste0( "    Maximum b parameter change", "=",
                              round( max(abs(b - b0 )), 6 ),  " \n"   )  )
                                     }
                                     if ( est.alpha ){
-                                        cat( paste( "    alpha1=", round(alpha1,3), " | alpha2=", round( alpha2,3),
+                                        cat( paste0( "    alpha1=", round(alpha1,3), " | alpha2=", round( alpha2,3),
                                                     " | max alpha change ", round( maxalphachange,7 ), "\n", sep=""))
                                                 }
                                     if ( sum(est.a) > 0  ){
-                                        cat( paste( "    Maximum a parameter change=",
+                                        cat( paste0( "    Maximum a parameter change", "=",
                                                 paste( round(a1a,6), collapse=" " ), "\n", sep=""))
                                                 }
                                     if ( irtmodel=="missing1" ){
-                                        cat( paste( "    Maximum beta parameter change=",
-                                                paste( round(a1beta,6), collapse=" " ), "\n", sep=""))
+                                        cat( paste0( "    Maximum beta parameter change=",
+                                                paste0( round(a1beta,6), collapse=" " ), "\n", sep=""))
                                                 }
                                     if ( sum(est.c) > 0  ){
-                                        cat( paste( "    Maximum c parameter change=",
+                                        cat( paste0( "    Maximum c parameter change=",
                                                 paste( round(a1b,6), collapse=" " ), "\n", sep=""))
                                                 }
                                     if ( sum(est.d) > 0  ){
-                                        cat( paste( "    Maximum d parameter change=",
+                                        cat( paste0( "    Maximum d parameter change=",
                                                 paste( round(a1c,6), collapse=" " ), "\n", sep=""))
                                                 }
                                     if ( npirt  ){
-                                        cat( paste( "    Maximum weighted ICC change=",
+                                        cat( paste0( "    Maximum weighted ICC change=",
                                                 paste( round(apmax,6), collapse=" " ), "\n", sep=""))
                                                 }
                                     if ( sum(est.K) > 0  ){
-                                        cat( paste( "    Maximum K parameter change=",
+                                        cat( paste0( "    Maximum K parameter change=",
                                                 paste( round(a1K,6), collapse=" " ), "\n", sep=""))
                                                 }
                                 if ( D > 1 ){
@@ -827,11 +833,10 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                                                             }
 
 
-                                    flush.console()
-                                    }
-                iter <- iter + 1
-
-                     }
+            utils::flush.console()
+        }
+        iter <- iter + 1
+    }
         ####################################### end iterations #####################
         ############################################################################
         ##**************************************************************************

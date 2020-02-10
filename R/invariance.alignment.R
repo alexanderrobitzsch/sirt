@@ -1,5 +1,5 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.698
+## File Version: 3.702
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
@@ -103,6 +103,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     eps_vec <- unique(c(eps_vec, eps))
     eps_vec <- eps_vec[ order(eps_vec, decreasing=TRUE) ]
     eps_vec <- eps_vec[ eps_vec >=eps ]
+
     #- optimize (with useful starting values)
     for (eps in eps_vec){
         res_optim <- sirt_optimizer(optimizer=optimizer, par=par, fn=fct_optim, grad=grad_optim,
