@@ -38,7 +38,10 @@
 <meta property="og:title" content="Nonparametric Estimation of Conditional Covariances of Item Pairs — ccov.np" />
 <meta property="og:description" content="This function estimates conditional covariances of itempairs
 (Stout, Habing, Douglas &amp;amp; Kim, 1996; Zhang &amp;amp; Stout,
-1999a). The function is used for the estimation of the DETECT index." />
+1999a). The function is used for the estimation of the DETECT index.
+The ccov.np function has the (default) option to smooth item response
+functions (argument smooth) in the computation of conditional covariances
+(Douglas, Kim, Habing, &amp;amp; Gao, 1998)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,11 +118,14 @@
     <div class="ref-description">
     <p>This function estimates conditional covariances of itempairs
 (Stout, Habing, Douglas &amp; Kim, 1996; Zhang &amp; Stout,
-1999a). The function is used for the estimation of the DETECT index.</p>
+1999a). The function is used for the estimation of the DETECT index.
+The <code>ccov.np</code> function has the (default) option to smooth item response
+functions (argument <code>smooth</code>) in the computation of conditional covariances
+(Douglas, Kim, Habing, &amp; Gao, 1998).</p>
     </div>
 
     <pre class="usage"><span class='fu'>ccov.np</span>(<span class='no'>data</span>, <span class='no'>score</span>, <span class='kw'>bwscale</span><span class='kw'>=</span><span class='fl'>1.1</span>, <span class='kw'>thetagrid</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>200</span>),
-    <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>scale_score</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</pre>
+    <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>scale_score</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>adjust_thetagrid</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>smooth</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,11 +159,25 @@ covariances are evaluated.</p></td>
 should be z standardized in advance of the calculation of
 conditional covariances</p></td>
     </tr>
+    <tr>
+      <th>adjust_thetagrid</th>
+      <td><p>Logical indicating whether <code>thetagrid</code> should be
+adjusted if observed values in <code>score</code> are outside of <code>thetagrid</code>.</p></td>
+    </tr>
+    <tr>
+      <th>smooth</th>
+      <td><p>Logical indicating whether smoothing should be
+applied for conditional covariance estimation</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Stout, W., Habing, B., Douglas, J., &amp; Kim, H. R. (1996).
+    <p>Douglas, J., Kim, H. R., Habing, B., &amp; Gao, F. (1998). Investigating local dependence
+with conditional covariance functions.
+<em>Journal of Educational and Behavioral Statistics, 23</em>(2), 129-151.
+doi: <a href='https://doi.org/10.3102/10769986023002129'>10.3102/10769986023002129</a></p>
+<p>Stout, W., Habing, B., Douglas, J., &amp; Kim, H. R. (1996).
 Conditional covariance-based nonparametric multidimensionality assessment.
 <em>Applied Psychological Measurement, 20</em>(4), 331-354.
 doi: <a href='https://doi.org/10.1177/014662169602000403'>10.1177/014662169602000403</a></p>
@@ -169,6 +189,27 @@ doi: <a href='https://doi.org/10.1007/BF02294532'>10.1007/BF02294532</a></p>
 
     <p>This function is used in <code><a href='conf.detect.html'>conf.detect</a></code> and <code><a href='expl.detect.html'>expl.detect</a></code>.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'>#############################################################################</span>
+<span class='co'># EXAMPLE 1: data.read | different settings for computing conditional covariance</span>
+<span class='co'>#############################################################################</span>
+
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.read</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"sirt"</span>)
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.read</span>
+
+<span class='co'>#* fit Rasch model</span>
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>(<span class='no'>dat</span>)
+<span class='no'>score</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/wle.rasch.html'>wle.rasch</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span>)$<span class='no'>theta</span>
+
+<span class='co'>#* ccov with smoothing</span>
+<span class='no'>cmod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/ccov.np.html'>ccov.np</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>score</span>, <span class='kw'>bwscale</span><span class='kw'>=</span><span class='fl'>1.1</span>)
+<span class='co'>#* ccov without smoothing</span>
+<span class='no'>cmod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/ccov.np.html'>ccov.np</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>score</span>, <span class='kw'>smooth</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+
+<span class='co'>#- compare results</span>
+<span class='fl'>100</span>*<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='no'>cmod1</span>$<span class='no'>ccov.table</span>[<span class='fl'>1</span>:<span class='fl'>6</span>, <span class='st'>"ccov"</span>], <span class='no'>cmod2</span>$<span class='no'>ccov.table</span>[<span class='fl'>1</span>:<span class='fl'>6</span>, <span class='st'>"ccov"</span>])
+}</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -176,6 +217,7 @@ doi: <a href='https://doi.org/10.1007/BF02294532'>10.1007/BF02294532</a></p>
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#references">References</a></li>
       <li><a href="#note">Note</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

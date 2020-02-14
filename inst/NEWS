@@ -37,16 +37,20 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.8  |  2020-02-10  |  Last: sirt 3.8-8
+VERSIONS sirt 3.8  |  2020-02-14  |  Last: sirt 3.8-11
 ------------------------------------------------------------------------
 
 FIXED * handle missing data in stratified.cronbach.alpha()
         (thanks to Murat Dogan Sahin)
 FIXED * fixed a recently introduced bug in rasch.mml2() using the
         argument irtmodel='missing1' (thanks to Thomas Deribo)
-       
+ADDED * added argument 'smooth' in ccov.np() function that switches
+        between using smoothed and non-smoothed item response functions
+        in conditional covariance estimation (thanks to a discussion
+        with @iago-pssjd, Github Issue #11)
 
-DATA  * included/modified datasets: ---
+
+DATA  * included/modified datasets: ccov.np (1)
 EXAMP * included/modified examples: ---
 
 
