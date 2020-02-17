@@ -36,8 +36,19 @@ CHANGELOG sirt
 
 
 
+
+
 ------------------------------------------------------------------------
-VERSIONS sirt 3.8  |  2020-02-14  |  Last: sirt 3.8-11
+VERSIONS sirt 3.9  |  2020-02-17  |  Last: sirt 3.9-4
+------------------------------------------------------------------------
+
+FIXED * fixed a bug in ccov.np() that was introduced in sirt 3.8
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+------------------------------------------------------------------------
+VERSIONS sirt 3.8  |  2020-02-15  |  Last: sirt 3.8-11
 ------------------------------------------------------------------------
 
 FIXED * handle missing data in stratified.cronbach.alpha()
@@ -49,12 +60,8 @@ ADDED * added argument 'smooth' in ccov.np() function that switches
         in conditional covariance estimation (thanks to a discussion
         with @iago-pssjd, Github Issue #11)
 
-
 DATA  * included/modified datasets: ccov.np (1)
 EXAMP * included/modified examples: ---
-
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.7  |  2019-11-04  |  Last: sirt 3.7-40
