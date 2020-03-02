@@ -70,7 +70,7 @@ and latent trait distributions can be specified by the user (see Details)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.9-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.10-vv</span>
       </span>
     </div>
 
@@ -119,7 +119,7 @@ and latent trait distributions can be specified by the user (see Details).</p>
     <pre class="usage"><span class='fu'>xxirt</span>(<span class='no'>dat</span>, <span class='kw'>Theta</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>itemtype</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>customItems</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>partable</span><span class='kw'>=</span><span class='kw'>NULL</span>,
        <span class='kw'>customTheta</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>globconv</span><span class='kw'>=</span><span class='fl'>1e-06</span>, <span class='kw'>conv</span><span class='kw'>=</span><span class='fl'>1e-04</span>,
        <span class='kw'>maxit</span><span class='kw'>=</span><span class='fl'>200</span>, <span class='kw'>mstep_iter</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>mstep_reltol</span><span class='kw'>=</span><span class='fl'>1e-06</span>, <span class='kw'>h</span><span class='kw'>=</span><span class='fl'>1E-4</span>, <span class='kw'>use_grad</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
-       <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+       <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>penalty_fun_item</span><span class='kw'>=</span><span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for xxirt</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
@@ -242,6 +242,11 @@ to <code><a href='https://rdrr.io/r/stats/optim.html'>stats::optim</a></code></p
       <td><p>Logical indicating whether iteration progress should be displayed</p></td>
     </tr>
     <tr>
+      <th>penalty_fun_item</th>
+      <td><p>Optional penalty function used in regularized
+estimation</p></td>
+    </tr>
+    <tr>
       <th>object</th>
       <td><p>Object of class <code>xxirt</code></p></td>
     </tr>
@@ -284,8 +289,12 @@ to <code><a href='https://rdrr.io/r/stats/optim.html'>stats::optim</a></code></p
 The item response model is estimated under the assumption of
 local stochastic independence of items. Equality constraints of
 item parameters \(\bold{\delta}_i\) among items are allowed.</p>
-<p>Probability distribution \(P(\bold{\theta})\) are specified as functions
+<p>The probability distribution \(P(\bold{\theta})\) are specified as functions
 of an unknown parameter vector \(\bold{\gamma}\).</p>
+<p>A penalty function for item parameters can be specified in
+<code>penalty_fun_item</code>. The penalty function should be differentiable and
+non-differentiable function (e.g., the absolute value function) should
+be approximated by a differentiable function.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>List with following entries</p>

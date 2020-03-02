@@ -1,11 +1,12 @@
 ## File Name: xxirt_mstep_itemParameters.R
-## File Version: 0.35
+## File Version: 0.3679
 
-##############################################################
-# M-step item parameters
+
+#--- M-step item parameters
 xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
             ncat, partable_index, N.ik, mstep_iter, par0, eps,
-            mstep_reltol, mstep_method, item_index, h, use_grad )
+            mstep_reltol, mstep_method, item_index, h, use_grad,
+            penalty_fun_item=NULL)
 {
     #-------------------------------------------------
     #**** define likelihood function
@@ -17,9 +18,13 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
         # log likelihood value
         ll <- - sum( N.ik * log_probs1 )
         # add prior distributions
-        pen <- xxirt_mstep_itemParameters_evalPrior(partable, h=0)
+        pen <- xxirt_mstep_itemParameters_evalPrior(partable=partable, h=0)
         # add penalty
         ll <- ll + sum(pen)
+        # add penalty function
+        if (!is.null(penalty_fun_item)){
+            ll <- ll + penalty_fun_item(x=x)
+        }
         return(2*ll)
     }
     #**** end definition likelihood
@@ -33,7 +38,12 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
         probs1 <- xxirt_compute_itemprobs( item_list=item_list, items=items, Theta=Theta, ncat=ncat,
                             partable=partable0, partable_index=partable_index )
         NP <- sum( partable$parfree==1)
-        grad1 <- rep(0,NP)
+        pen1 <- grad1 <- rep(0,NP)
+        pen0 <- 0
+        #-- penalty function
+        if (!is.null(penalty_fun_item)){
+            pen0 <- penalty_fun_item(x=x)
+        }
         for (pp in 1:NP){
             item_index_pp <- item_index[[pp]]
             xh <- x
@@ -47,9 +57,17 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
             grad1[pp] <- ( ll1 - ll0 )
         }
         #--- prior distributions
-        pen <- xxirt_mstep_itemParameters_evalPrior(partable0, h=0)
-        pen_h <- xxirt_mstep_itemParameters_evalPrior(partable0, h=h)
-        grad1 <- ( grad1 +  pen_h - pen)/h
+        pen <- xxirt_mstep_itemParameters_evalPrior(partable=partable0, h=0)
+        pen_h <- xxirt_mstep_itemParameters_evalPrior(partable=partable0, h=h)
+        #-- penalty function
+        if (!is.null(penalty_fun_item)){
+            for (pp in 1:NP){
+                xh <- x
+                xh[pp] <- xh[pp] + h
+                pen1[pp] <- penalty_fun_item(x=xh)
+            }
+        }
+        grad1 <- ( grad1 +  pen_h - pen + pen1 - pen0 )/h
         return(grad1)
     }
     #**** end definition gradient
@@ -73,9 +91,14 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
         arg_list$lower <- partable[ partable$parfree==1, "lower"]
         arg_list$upper <- partable[ partable$parfree==1, "upper"]
     }
-    mod <- do.call( stats::optim, arg_list )
+    mod <- do.call( what=stats::optim, args=arg_list )
     partable <- xxirt_partable_include_freeParameters( partable=partable, x=mod$par )
-    res <- list( ll1=mod$value, partable=partable, par0=mod$par  )
+    pen_val <- 0
+    if (!is.null(penalty_fun_item)){
+        pen_val <- penalty_fun_item(x=mod$par)
+    }
+
+    #-- output
+    res <- list( ll1=mod$value, partable=partable, par0=mod$par, pen_val=pen_val )
     return(res)
 }
-###############################################################################

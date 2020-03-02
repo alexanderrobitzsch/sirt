@@ -37,6 +37,22 @@ CHANGELOG sirt
 
 
 
+------------------------------------------------------------------------
+VERSIONS sirt 3.10  |  2020-03-02  |  Last: sirt 3.10-10
+------------------------------------------------------------------------
+
+ADDED * included option for regularization penalties in xxirt()
+        using the argument 'penalty_fun_item'
+NOTE  * included additional information for data source in
+        data.pisaMath and data.pisaRead (requested by Paul De Boeck)
+
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.9  |  2020-02-17  |  Last: sirt 3.9-4
@@ -60,8 +76,8 @@ ADDED * added argument 'smooth' in ccov.np() function that switches
         in conditional covariance estimation (thanks to a discussion
         with @iago-pssjd, Github Issue #11)
 
-DATA  * included/modified datasets: ccov.np (1)
-EXAMP * included/modified examples: ---
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ccov.np (1)
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.7  |  2019-11-04  |  Last: sirt 3.7-40

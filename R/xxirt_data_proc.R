@@ -1,7 +1,7 @@
 ## File Name: xxirt_data_proc.R
-## File Version: 0.19
+## File Version: 0.211
 
-##############################################################
+#-- data processing xxirt
 xxirt_data_proc <- function(dat, group=NULL, weights=NULL )
 {
     ncat <- apply( dat, 2, max, na.rm=TRUE ) + 1
@@ -42,4 +42,4 @@ xxirt_data_proc <- function(dat, group=NULL, weights=NULL )
                     resp_index=resp_index, dat1=dat1, dat_resp_bool=dat_resp_bool )
     return(res)
 }
-##############################################################
+

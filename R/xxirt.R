@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 0.9186
+## File Version: 0.9214
 
 
 #--- user specified item response model
@@ -7,7 +7,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 partable=NULL, customTheta=NULL, group=NULL, weights=NULL,
                 globconv=1E-6, conv=1E-4, maxit=200, mstep_iter=4,
                 mstep_reltol=1E-6, h=1E-4, use_grad=TRUE,
-                verbose=TRUE )
+                verbose=TRUE, penalty_fun_item=NULL, verbose_index=NULL )
 {
     #*** preliminaries
     CALL <- match.call()
@@ -68,6 +68,10 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     par0 <- xxirt_partable_extract_freeParameters( partable=partable )
     par1 <- xxirt_ThetaDistribution_extract_freeParameters( customTheta=customTheta )
 
+    #*** verbose
+    verbose1 <- verbose==1
+    verbose2 <- verbose==2
+
     disp <- "...........................................................\n"
     iter <- 1
     dev <- 1E100
@@ -80,7 +84,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
             ( iter < ( maxit + 1 ) ) & ( ! converged )
                 ){
 
-        if ( verbose){
+        if (verbose1){
             cat(disp)
             cat("Iteration", iter, "   ", paste( Sys.time() ), "\n" )
         }
@@ -117,10 +121,12 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                         partable_index=partable_index, N.ik=N.ik,
                         mstep_iter=mstep_iter, par0=par0, eps=eps,
                         mstep_reltol=mstep_reltol, mstep_method=mstep_method,
-                        item_index=item_index, h=h, use_grad=use_grad )
+                        item_index=item_index, h=h, use_grad=use_grad,
+                        penalty_fun_item=penalty_fun_item)
         ll1 <- res$ll1
         partable <- res$partable
         par0 <- res$par0
+        pen_val <- res$pen_val
 
         #*** M-step theta distribution
         par10 <- par1
@@ -133,7 +139,9 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
 
         #*** compute deviance
         dev <- - 2 * sum( weights * log( rowSums( post_unnorm ) ) )
-        globconv_temp <- abs( ( - dev + dev0    ) / dev0 )
+        dev00 <- dev
+        dev <- dev + pen_val
+        globconv_temp <- abs( ( - dev + dev0 ) / dev0 )
 
         conv0 <- 0
         if ( length(par0) > 0){
@@ -147,21 +155,16 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         converged <- ( globconv_temp < globconv ) & ( conv_temp < conv )
 
         #-- print progress
-        if (verbose){
-            cat( paste( "   Deviance=", round( dev, 4 ),
-                if (iter > 1 ){ " | Deviance change=" } else {""},
-                if( iter > 1){ round( - dev + dev0, 6 )} else { ""}    ,"\n",sep="") )
-            cat( paste( "    Maximum item parameter change=",
-                    paste( round( conv0,6), collapse=" " ), "\n", sep=""))
-            cat( paste( "    Maximum theta distribution parameter change=",
-                    paste( round( conv1,6), collapse=" " ), "\n", sep=""))
-            utils::flush.console()
-        }
+        res <- xxirt_print_progress( dev=dev, dev0=dev0,
+                    dev00=dev00, pen_val=pen_val, conv0=conv0, conv1=conv1, iter=iter,
+                    verbose1=verbose1, verbose2=verbose2, verbose_index=verbose_index )
         iter <- iter + 1
     }
     ################### end EM algorithm ####################
 
     #**** post processing
+    opt_val <- dev
+    dev <- dev00
 
     #-- parameters
     res <- xxirt_postproc_parameters( partable=partable, customTheta=customTheta,
@@ -185,8 +188,10 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     res <- list( partable=partable, par_items=par_items,
                 par_items_summary=par_items_summary, par_items_bounds=par_items_bounds,
                 par_Theta=par_Theta, Theta=Theta, probs_items=probs_items,
-                probs_Theta=prior_Theta, deviance=dev, loglike=-dev/2, ic=ic,
-                item_list=item_list, customItems=customItems, customTheta=customTheta,
+                probs_Theta=prior_Theta, deviance=dev, loglike=-dev/2,
+                opt_val=opt_val, pen_val=pen_val, ic=ic,
+                item_list=item_list, customItems=customItems,
+                customTheta=customTheta,
                 p.xi.aj=p.xi.aj, p.aj.xi=p.aj.xi, n.ik=n.ik, EAP=EAP, dat=dat, dat_resp=dat_resp,
                 weights=weights, item_index=item_index, G=G, group=group, group_orig=group0,
                 ncat=ncat, mstepItem_method=mstep_method, partable_index=partable_index,
