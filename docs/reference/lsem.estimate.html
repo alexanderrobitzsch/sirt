@@ -58,7 +58,8 @@ names can be speicified which are assumed to be invariant (in par_invariant).
 In addition, linear or quadratic constraints can be imposed on
 parameters (par_linear or par_quadratic).
 Statistical inference in case of joint estimation (but also for separate estimation)
-can be conducted via bootstrap using the function lsem.bootstrap." />
+can be conducted via bootstrap using the function lsem.bootstrap.
+Bootstrap at the level of a cluster identifier is allowed (argument cluster)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -155,7 +156,8 @@ names can be speicified which are assumed to be invariant (in <code>par_invarian
 In addition, linear or quadratic constraints can be imposed on
 parameters (<code>par_linear</code> or <code>par_quadratic</code>).</p>
 <p>Statistical inference in case of joint estimation (but also for separate estimation)
-can be conducted via bootstrap using the function <code>lsem.bootstrap</code>.</p>
+can be conducted via bootstrap using the function <code>lsem.bootstrap</code>.
+Bootstrap at the level of a cluster identifier is allowed (argument <code>cluster</code>).</p>
     </div>
 
     <pre class="usage"><span class='fu'>lsem.estimate</span>(<span class='no'>data</span>, <span class='no'>moderator</span>, <span class='no'>moderator.grid</span>, <span class='no'>lavmodel</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"LSEM"</span>, <span class='kw'>h</span><span class='kw'>=</span><span class='fl'>1.1</span>, <span class='kw'>bw</span><span class='kw'>=</span><span class='kw'>NULL</span>,
@@ -180,7 +182,7 @@ can be conducted via bootstrap using the function <code>lsem.bootstrap</code>.</
 <span class='fu'>lsem_local_weights</span>(<span class='no'>data.mod</span>, <span class='no'>moderator.grid</span>, <span class='no'>h</span>, <span class='kw'>sampling_weights</span><span class='kw'>=</span><span class='kw'>NULL</span>,  <span class='kw'>bw</span><span class='kw'>=</span><span class='kw'>NULL</span>,
      <span class='kw'>kernel</span><span class='kw'>=</span><span class='st'>"gaussian"</span>)
 
-<span class='fu'>lsem.bootstrap</span>(<span class='no'>object</span>, <span class='kw'>R</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</pre>
+<span class='fu'>lsem.bootstrap</span>(<span class='no'>object</span>, <span class='kw'>R</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>cluster</span><span class='kw'>=</span><span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -381,6 +383,10 @@ the <span class="pkg">lavaan</span> default is used.</p></td>
     <tr>
       <th>R</th>
       <td><p>Number of bootstrap samples</p></td>
+    </tr>
+    <tr>
+      <th>cluster</th>
+      <td><p>Optional variable name for bootstrap at the level of a cluster identifier</p></td>
     </tr>
     </table>
 

@@ -1,5 +1,5 @@
 ## File Name: penalty_D1_mcp.R
-## File Version: 0.02
+## File Version: 0.03
 
 
 penalty_D1_mcp <- function(x, lambda, eps, a=2.7)

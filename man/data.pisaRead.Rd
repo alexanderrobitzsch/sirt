@@ -1,5 +1,5 @@
 %% File Name: data.pisaRead.Rd
-%% File Version: 0.12
+%% File Version: 0.13
 
 \name{data.pisaRead}
 \alias{data.pisaRead}
@@ -8,9 +8,9 @@
 Dataset PISA Reading
 }
 \description{
-This is an example PISA dataset of reading items from the PISA 
+This is an example PISA dataset of reading items from the PISA
 2009 study of students from Austria. The
-dataset contains 623 students who worked on the 12 reading items 
+dataset contains 623 students who worked on the 12 reading items
 from item cluster R7.
 }
 \usage{

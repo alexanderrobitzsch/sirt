@@ -38,13 +38,17 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2020-03-02  |  Last: sirt 3.10-10
+VERSIONS sirt 3.10  |  2020-03-04  |  Last: sirt 3.10-12
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()
         using the argument 'penalty_fun_item'
 NOTE  * included additional information for data source in
         data.pisaMath and data.pisaRead (requested by Paul De Boeck)
+NOTE  * included try-error functionality in lsem.bootstrap() to
+        skip nonconvergent cases (thanks to Ulrich Schroeders)
+NOTE  * included argument 'cluster' in lsem.bootstrap() for 
+        option of bootstrap of clusters (suggested by Ulrich Schroeders)
 
 
 DATA  * included/modified datasets: ---

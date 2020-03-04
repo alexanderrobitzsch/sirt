@@ -1,8 +1,8 @@
 ## File Name: lsem.bootstrap.R
-## File Version: 0.300
+## File Version: 0.304
 
 
-lsem.bootstrap <- function(object, R=100, verbose=TRUE)
+lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL)
 {
     lsem_args <- object$lsem_args
     lsem_args$se <- "none"
@@ -27,16 +27,21 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE)
 
     #-- loop over bootstrap samples
     lsem_bootstrap_print_start(verbose=verbose)
-    for (rr in 1:R){
+    rr <- 1
+    while (rr<=R){
         lsem_bootstrap_print_progress(rr=rr, verbose=verbose, R=R)
         #- draw bootstrap sample
         lsem_args1 <- lsem_bootstrap_draw_bootstrap_sample(data=data,
-                            sampling_weights=sampling_weights, lsem_args=lsem_args)
+                            sampling_weights=sampling_weights, lsem_args=lsem_args,
+                            cluster=cluster)
         #- fit model
-        mod1 <- do.call(what=lsem.estimate, args=lsem_args1)
+        mod1 <- try( do.call(what=lsem.estimate, args=lsem_args1), silent=TRUE)
         #- output collection
-        parameters_boot[,rr] <- mod1$parameters$est
-        fitstats_joint_boot[,rr] <- mod1$fitstats_joint$value
+        if ( class(mod1) !="try-error" ){
+            parameters_boot[,rr] <- mod1$parameters$est
+            fitstats_joint_boot[,rr] <- mod1$fitstats_joint$value
+            rr <- rr + 1
+        }
     }
 
     #- modify output objects

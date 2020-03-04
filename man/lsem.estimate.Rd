@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.728
+%% File Version: 0.732
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -41,6 +41,7 @@ parameters (\code{par_linear} or \code{par_quadratic}).
 
 Statistical inference in case of joint estimation (but also for separate estimation)
 can be conducted via bootstrap using the function \code{lsem.bootstrap}.
+Bootstrap at the level of a cluster identifier is allowed (argument \code{cluster}).
 }
 \usage{
 lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=NULL,
@@ -63,7 +64,7 @@ lsem.MGM.stepfunctions( object, moderator.grid )
 lsem_local_weights(data.mod, moderator.grid, h, sampling_weights=NULL,  bw=NULL,
      kernel="gaussian")
 
-lsem.bootstrap(object, R=100, verbose=TRUE)
+lsem.bootstrap(object, R=100, verbose=TRUE, cluster=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -160,6 +161,7 @@ Further arguments to be passed to \code{\link[lavaan:sem]{lavaan::sem}} or
 }
 \item{data.mod}{Observed values of the moderator}
 \item{R}{Number of bootstrap samples}
+\item{cluster}{Optional variable name for bootstrap at the level of a cluster identifier}
 }
 
 %\details{

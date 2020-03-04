@@ -1,8 +1,8 @@
 ## File Name: lsem.permutationTest.R
-## File Version: 0.44
+## File Version: 0.451
 
-############################################
-# permutation test for LSEM model
+
+#*** permutation test for LSEM model
 lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
             verbose=TRUE )
 {
