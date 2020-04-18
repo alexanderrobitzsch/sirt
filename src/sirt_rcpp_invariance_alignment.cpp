@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_invariance_alignment.cpp
-//// File Version: 2.575
+//// File Version: 2.57826
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -18,7 +18,7 @@ using namespace Rcpp;
 ///** sirt_rcpp_invariance_alignment_lambda_transformed
 // [[Rcpp::export]]
 Rcpp::NumericMatrix sirt_rcpp_invariance_alignment_lambda_transformed(
-        Rcpp::NumericMatrix lambda, Rcpp::NumericVector psi0)
+        Rcpp::NumericMatrix lambda, Rcpp::NumericVector psi0, int meth)
 {
     int I = lambda.ncol();
     int G = lambda.nrow();
@@ -26,6 +26,9 @@ Rcpp::NumericMatrix sirt_rcpp_invariance_alignment_lambda_transformed(
     for (int ii=0; ii<I; ii++){
         for (int gg=0; gg<G; gg++){
             lambda1(gg,ii) = lambda(gg,ii) / psi0[gg];
+            if ((meth==2)|(meth==3)){
+                lambda1(gg,ii) = std::log(lambda1(gg,ii));
+            }
         }
     }
     //--- output
@@ -39,7 +42,7 @@ Rcpp::NumericMatrix sirt_rcpp_invariance_alignment_lambda_transformed(
 Rcpp::NumericMatrix sirt_rcpp_invariance_alignment_nu_transformed(
         Rcpp::NumericMatrix nu, Rcpp::NumericMatrix lambda,
         Rcpp::NumericVector alpha0, Rcpp::NumericVector psi0,
-        bool reparam)
+        bool reparam, int meth)
 {
     int I = nu.ncol();
     int G = nu.nrow();
@@ -88,13 +91,13 @@ Rcpp::List sirt_rcpp_invariance_alignment_opt_fct(
         Rcpp::IntegerMatrix group_combis, Rcpp::NumericMatrix wgt,
         Rcpp::NumericVector align_scale, Rcpp::NumericVector align_pow,
         double eps, Rcpp::NumericMatrix wgt_combi, Rcpp::CharacterVector type,
-        bool reparam)
+        bool reparam, int meth)
 {
     int I = lambda.ncol();
     Rcpp::NumericMatrix lambda1 = sirt_rcpp_invariance_alignment_lambda_transformed(
-                                        lambda, psi0);
+                                        lambda, psi0, meth);
     Rcpp::NumericMatrix nu1 = sirt_rcpp_invariance_alignment_nu_transformed(
-                                    nu, lambda, alpha0, psi0, reparam);
+                                    nu, lambda, alpha0, psi0, reparam, meth);
     int GC = group_combis.nrow();
     double fopt=0;
     double parm1, parm2, parm3, parm4, fval;
@@ -159,14 +162,14 @@ Rcpp::NumericVector sirt_rcpp_invariance_alignment_opt_grad(
         Rcpp::IntegerMatrix group_combis, Rcpp::NumericMatrix wgt,
         Rcpp::NumericVector align_scale, Rcpp::NumericVector align_pow,
         double eps, Rcpp::NumericMatrix wgt_combi, Rcpp::CharacterVector type,
-        bool reparam)
+        bool reparam, int meth)
 {
     int I = lambda.ncol();
     int G = lambda.nrow();
     Rcpp::NumericMatrix lambda1 = sirt_rcpp_invariance_alignment_lambda_transformed(
-                                        lambda, psi0);
+                                        lambda, psi0, meth);
     Rcpp::NumericMatrix nu1 = sirt_rcpp_invariance_alignment_nu_transformed(
-                                    nu, lambda, alpha0, psi0, reparam);
+                                    nu, lambda, alpha0, psi0, reparam, meth);
     Rcpp::NumericVector grad(2*G);
     grad.fill(0);
     int GC = group_combis.nrow();

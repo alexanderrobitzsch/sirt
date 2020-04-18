@@ -1,8 +1,9 @@
 ## File Name: linking.haebara.R
-## File Version: 0.423
+## File Version: 0.4272
 
 linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
-        optimizer="optim", center=FALSE, eps=1e-5, use_rcpp=TRUE, ...)
+        optimizer="optim", center=FALSE, eps=1e-3, par_init=NULL,
+        use_rcpp=TRUE, pow=2, use_der=TRUE, ...)
 {
     CALL <- match.call()
     s1 <- Sys.time()
@@ -20,7 +21,6 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
     est_pars <- res$est_pars
     weights_exist <- res$weights_exist
     is_1pl <- res$is_1pl
-
     a.orig <- aM
     b.orig <- bM
     prob_theta <- sirt_dnorm_discrete(x=theta, mean=0, sd=1)
@@ -41,7 +41,9 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
     par[index_mu] <- - ( b_mean - b_mean[1] )[-1]
     bM_centered <- apply( bM, 2, FUN=function(vv){ vv - mean(vv, na.rm=TRUE) } )
     par[index_b] <- rowMeans(bM_centered, na.rm=TRUE)
-
+    if (!is.null(par_init)){
+        par <- par_init
+    }
 
     #-- define optimization function
     if (use_rcpp){
@@ -71,7 +73,7 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         }
         args <- list( NI=NI, NS=NS, dist=dist, aM=aM, bM=bM,
                     theta=theta, prob_theta=prob_theta, est_pars=est_pars, wgtM=wgtM,
-                    a=a, b=b, mu=mu, sigma=sigma, eps=eps )
+                    a=a, b=b, mu=mu, sigma=sigma, eps=eps, pow=pow )
         val <- do.call(what=fct_optim_call, args=args)
         return(val)
     }
@@ -88,7 +90,7 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
                     prob_theta=prob_theta, est_pars=est_pars, wgtM=wgtM, a=a, b=b,
                     mu=mu, sigma=sigma, eps=eps, index_a=index_a_, index_b=index_b_,
                     index_mu=index_mu_, index_sigma=index_sigma_,
-                    parnames=parnames, NP=NP )
+                    parnames=parnames, NP=NP, pow=pow )
         grad <- do.call(what=grad_optim_call, args=args)
         if (is_1pl){
             grad[index_a] <- 0
@@ -97,12 +99,38 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         names(grad) <- parnames
         return(grad)
     }
+    if (!use_der){
+        grad_optim <- NULL
+    }
 
     #-- do optimization
     lower <- rep(-Inf, NP)
-    lower[index_sigma] <- .001
-    res_optim <- sirt_optimizer(optimizer=optimizer, par=par, fn=fct_optim, grad=grad_optim,
-                        lower=lower, hessian=FALSE, ... )
+    upper <- rep(Inf, NP)
+    b_max <- Inf
+    a_min <- -Inf
+    lower[index_sigma] <- 1e-3
+    lower[index_a] <- a_min
+    lower[index_b] <- -b_max
+    upper[index_b] <- b_max
+    args <- list(...)
+    args$optimizer <- optimizer
+    args$par <- par
+    args$fn <- fct_optim
+    args$grad <- grad_optim
+    args$hessian <- FALSE
+    if ( ! ( "lower" %in% names(args) ) ){
+        args$lower <- lower
+    }
+    if ( ! ( "upper" %in% names(args) ) ){
+        args$upper <- upper
+    }
+    if ("method" %in% (names(args)) ){
+        if (! ( args$method %in% c("L-BFGS-B","Brent"))) {
+            args$lower <- NULL
+            args$upper <- NULL
+        }
+    }
+    res_optim <- do.call(what=sirt_optimizer, args=args )
     x <- res_optim$par
     a <- x[index_a]
     b <- x[index_b]

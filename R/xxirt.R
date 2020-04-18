@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 0.9214
+## File Version: 0.9216
 
 
 #--- user specified item response model
@@ -138,7 +138,8 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         par1 <- res$par1
 
         #*** compute deviance
-        dev <- - 2 * sum( weights * log( rowSums( post_unnorm ) ) )
+        ll_case <- log( rowSums( post_unnorm ) )
+        dev <- - 2 * sum( weights * ll_case )
         dev00 <- dev
         dev <- dev + pen_val
         globconv_temp <- abs( ( - dev + dev0 ) / dev0 )
@@ -192,7 +193,8 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 opt_val=opt_val, pen_val=pen_val, ic=ic,
                 item_list=item_list, customItems=customItems,
                 customTheta=customTheta,
-                p.xi.aj=p.xi.aj, p.aj.xi=p.aj.xi, n.ik=n.ik, EAP=EAP, dat=dat, dat_resp=dat_resp,
+                p.xi.aj=p.xi.aj, p.aj.xi=p.aj.xi, ll_case=ll_case,
+                n.ik=n.ik, EAP=EAP, dat=dat, dat_resp=dat_resp,
                 weights=weights, item_index=item_index, G=G, group=group, group_orig=group0,
                 ncat=ncat, mstepItem_method=mstep_method, partable_index=partable_index,
                 items=items, dat1=dat1, dat1_resp=dat1_resp, dat_resp_bool=dat_resp_bool,

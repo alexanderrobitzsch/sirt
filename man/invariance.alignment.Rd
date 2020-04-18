@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.644
+%% File Version: 1.648
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -44,7 +44,7 @@ argument \code{weights}.
 \usage{
 invariance.alignment(lambda, nu, wgt=NULL, align.scale=c(1, 1),
     align.pow=c(.5, .5), eps=1e-3, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
-    optimizer="optim", fixed=NULL, ...)
+    optimizer="optim", fixed=NULL, meth=1, ...)
 
 \method{summary}{invariance.alignment}(object, digits=3, file=NULL, ...)
 
@@ -96,6 +96,8 @@ be centered.
 be fixed to one. If \code{fixed=FALSE}, the product of all SDs is set to one.
 If \code{NULL}, then \code{fixed} is automatically chosen by default. For many groups,
 \code{fixed=FALSE} is chosen.}
+\item{meth}{Type of method used for optimization function. \code{meth=1} is the default
+and the optimization function used in Mplus.}
   \item{object}{
 Object of class \code{invariance.alignment}
   }
@@ -295,7 +297,7 @@ wgt <- matrix( sqrt(Ng), length(Ng), ncol(nu) )
 
 #***
 # Model 1: Alignment using a quadratic loss function
-mod1 <- sirt::invariance.alignment( lambda, nu, wgt )
+mod1 <- sirt::invariance.alignment( lambda, nu, wgt, align.pow=(2,2) )
 summary(mod1)
 
 #****

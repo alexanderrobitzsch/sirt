@@ -1,5 +1,5 @@
 %% File Name: data.read.Rd
-%% File Version: 1.999
+%% File Version: 2.001
 
 \name{data.read}
 \alias{data.read}
@@ -14,7 +14,10 @@ text stimulus) labeled as
 A, B and C. The allocation of items to testlets is indicated by their
 variable names.
 }
-\usage{data(data.read)}
+\usage{
+data(data.read)
+}
+
 \format{
   A data frame with 328 persons on the following 12 variables.
   Rows correspond to persons and columns to items. The following items are

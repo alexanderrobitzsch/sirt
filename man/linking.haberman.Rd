@@ -1,10 +1,13 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.738
+%% File Version: 0.741
 
 \name{linking.haberman}
 \alias{linking.haberman}
 \alias{summary.linking.haberman}
+\alias{linking.haberman.lq}
+\alias{summary.linking.haberman.lq}
 \alias{linking_haberman_itempars_prepare}
+\alias{linking_haberman_itempars_convert}
 \alias{L0_polish}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -26,8 +29,15 @@ linking.haberman(itempars, personpars, estimation="OLS", a_trim=Inf, b_trim=Inf,
 
 \method{summary}{linking.haberman}(object, digits=3, file=NULL, ...)
 
+linking.haberman.lq(itempars, pow=2, eps=1e-3, a_log=TRUE, use_nu=FALSE)
+
+\method{summary}{linking.haberman.lq}(object, digits=3, file=NULL, ...)
+
 ## prepare 'itempars' argument for linking.haberman()
 linking_haberman_itempars_prepare(b, a=NULL, wgt=NULL)
+
+## conversion of different parameterizations of item parameters
+linking_haberman_itempars_convert(itempars=NULL, lambda=NULL, nu=NULL, a=NULL, b=NULL)
 
 ## L0 polish precedure minimizing number of interactions in two-way table
 L0_polish(x, tol, eps=0.01, maxiter=30, type=1, verbose=TRUE)
@@ -73,6 +83,8 @@ should be displayed.
 }
 \item{adjust_main_effects}{Logical indicating whether all elements in the vector
 of main effects should be simultaneously adjusted}
+\item{pow}{Power \eqn{q}}
+\item{eps}{Epsilon value used in differentiable approximating function}
 \item{object}{Object of class \code{linking.haberman}.}
 \item{digits}{Number of digits after decimals for rounding in \code{summary}.}
 \item{file}{Optional file name if \code{summary} should be sunk into a file.}
@@ -149,6 +161,9 @@ Effect sizes of invariance are calculated as R-squared measures
 of explained item slopes and intercepts after linking
 in comparison to item parameters across groups
 (Asparouhov & Muthen, 2014).
+
+The function \eqn{linking.haberman.lq} uses the loss function \eqn{\rho(x)=|x|^q}.
+The originally proposed Haberman linking can be obtained with \code{pow=2} (\eqn{q=2}).
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

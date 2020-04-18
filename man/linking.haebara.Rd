@@ -1,5 +1,5 @@
 %% File Name: linking.haebara.Rd
-%% File Version: 0.195
+%% File Version: 0.201
 
 \name{linking.haebara}
 \alias{linking.haebara}
@@ -25,7 +25,8 @@ Hu, Rogers, & Vukmirovic, 2008).
 
 \usage{
 linking.haebara(itempars, dist="L2", theta=seq(-4,4, length=61),
-        optimizer="optim", center=FALSE, eps=1e-5, use_rcpp=TRUE, ...)
+        optimizer="optim", center=FALSE, eps=1e-3, par_init=NULL, use_rcpp=TRUE,
+        pow=2, use_der=TRUE, ...)
 
 \method{summary}{linking.haebara}(object, digits=3, file=NULL, ...)
 }
@@ -49,7 +50,10 @@ The fifth column is an optional weight for every item and every study. See
 \item{center}{Logical indicating whether means and standard deviations should
 be centered after estimation}
 \item{eps}{Small value for smooth approximation of the absolute value function}
+\item{par_init}{Optional vector of initial parameter estimates}
 \item{use_rcpp}{Logical indicating whether \pkg{Rcpp} is used for computation}
+\item{pow}{Power for method \code{dist="Lq"}}
+\item{use_der}{Logical indicating whether analytical derivative should be used}
 \item{object}{Object of class \code{linking.haabara}.}
 \item{digits}{Number of digits after decimals for rounding in \code{summary}.}
 \item{file}{Optional file name if \code{summary} should be sunk into a file.}
@@ -81,6 +85,9 @@ Two loss functions are implemented. The quadratic loss of Haebara linking
 was originally proposed by Haebara. A robustified version (\code{dist="L1"})
 uses the optimization function (He et al., 2015)
 \deqn{f_{opt, L1}=\sum_t \sum_i \int | P_{it} (\theta ) - P_{it}^\ast (\theta ) |  w(\theta)}
+As a further generalization, the follwing distance function (\code{dist="Lp"})
+can be minimized:
+\deqn{f_{opt, Lp}=\sum_t \sum_i \int | P_{it} (\theta ) - P_{it}^\ast (\theta ) |^p  w(\theta)}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,12 +118,12 @@ Battauz, M. (2017). Multiple equating of separate IRT calibrations.
 
 He, Y., Cui, Z., & Osterlind, S. J. (2015). New robust scale transformation methods
 in the presence of outlying common items. \emph{Applied Psychological Measurement, 39}(8),
-613-626.                     
+613-626.
 \doi{10.1177/0146621615587003}
 
-He, Y., & Cui, Z. (XXXX). Evaluating robust scale transformation methods with multiple 
-outlying common items under IRT true score equating. 
-\emph{Applied Psychological Measurement, XX}(xx). 
+He, Y., & Cui, Z. (XXXX). Evaluating robust scale transformation methods with multiple
+outlying common items under IRT true score equating.
+\emph{Applied Psychological Measurement, XX}(xx).
 \doi{10.1177/0146621619886050}
 
 Hu, H., Rogers, W. T., & Vukmirovic, Z. (2008). Investigation of IRT-based equating
@@ -189,12 +196,21 @@ summary(mod1)
 mod2 <- sirt::linking.haebara( itempars, dist="L1", control=list(trace=2) )
 summary(mod2)
 
+#* using initial parameter estimates
+par_init <- mod1$res_optim$par
+mod2b <- sirt::linking.haebara( itempars, dist="L1", par_init=par_init)
+summary(mod2b)
+
+#* power p=.25
+mod2c <- sirt::linking.haebara( itempars, dist="Lp", pow=.25, par_init=par_init)
+summary(mod2c)
+
 #* Haberman linking non-robust
 mod3 <- sirt::linking.haberman(itempars)
 summary(mod3)
 
 #* Haberman linking robust
-mod4 <- sirt::linking.haberman(itempars, a_trim=.25, b_trim=.5)
+mod4 <- sirt::linking.haberman(itempars, estimation="BSQ", a_trim=.25, b_trim=.5)
 summary(mod4)
 
 #* compare transformation parameters (means and standard deviations)

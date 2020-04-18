@@ -1,9 +1,10 @@
 %% File Name: btm.Rd
-%% File Version: 0.414
+%% File Version: 0.421
 
 \name{btm}
 \alias{btm}
 \alias{summary.btm}
+\alias{predict.btm}
 \alias{btm_sim}
 
 
@@ -22,9 +23,11 @@ The function \code{btm_sim} simulated data from the extended Bradley-Terry model
 
 \usage{
 btm(data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NULL, fix.theta=NULL,
-       maxiter=100, conv=1e-04, eps=0.3)
+       maxiter=100, conv=1e-04, eps=0.3, wgt.ties=.5)
 
 \method{summary}{btm}(object, file=NULL, digits=4,...)
+
+\method{predict}{btm}(object, data=NULL, ...)
 
 btm_sim(theta, eta=0, delta=-99, repeated=FALSE)
 }
@@ -62,6 +65,8 @@ method (see Bertoli-Barsotti, Lando & Punzo, 2014) which reduces bias
 in ability estimates. In case of \eqn{\varepsilon=0}, persons with
 extreme scores are removed from the pairwise comparison.
 }
+\item{wgt.ties}{Weighting parameter for ties, see formula in Details.
+The default is .5}
 \item{object}{Object of class \code{btm}}
 \item{file}{Optional file name for sinking the summary into}
 \item{digits}{Number of digits after decimal to print}
@@ -78,10 +83,11 @@ The extended Bradley-Terry model for the comparison of individuals
 \eqn{i} and \eqn{j} is defined as
 \deqn{P(X_{ij}=1 ) \propto \exp( \eta + \theta_i ) }
 \deqn{P(X_{ij}=0 ) \propto \exp(  \theta_j ) }
-\deqn{P(X_{ij}=0.5) \propto \exp( \delta + ( \eta  + \theta_i +\theta_j )/2 ) }
+\deqn{P(X_{ij}=0.5) \propto \exp( \delta + w_T ( \eta  + \theta_i +\theta_j ) ) }
 The parameters \eqn{\theta_i} denote the abilities, \eqn{\delta} is the
 tendency of the occurrence of ties and \eqn{\eta} is the home-advantage
-effect.
+effect. The weighting parameter \eqn{w_T} governs the importance of ties and can be
+chosen in the argument \code{wgt.ties}.
 
 A joint maximum likelihood (JML) estimation is applied for simulataneous
 estimation of \eqn{\eta}, \eqn{\delta} and all \eqn{\theta_i} parameters.
@@ -127,6 +133,7 @@ Bertoli-Barsotti, L., Lando, T., & Punzo, A. (2014). Estimating a Rasch Model
 via fuzzy empirical probability functions. In D. Vicari, A. Okada, G. Ragozini
 & C. Weihs (Eds.). \emph{Analysis and Modeling of Complex Data in Behavioral
 and Social Sciences}. Springer.
+\doi{10.1007/978-3-319-06692-9_4}
 
 Hunter, D. R. (2004). MM algorithms for generalized Bradley-Terry models.
 \emph{Annals of Statistics, 32}, 384-406. \doi{10.1214/aos/1079120141}
@@ -168,25 +175,26 @@ mod1 <- sirt::btm( dat)
 summary(mod1)
 
 \dontrun{
-#********************
-# Model 2: Estimation with ties, no epsilon adjustment
-mod2 <- sirt::btm( dat, eps=0, fix.eta=0)
+#*** Model 2: Estimation with ties, no epsilon adjustment
+mod2 <- sirt::btm( dat, eps=0)
 summary(mod2)
 
-#********************
-# Model 3: Some fixed abilities
-fix.theta <- c("Anhalt Dessau"=-1 )
-mod3 <- sirt::btm( dat, eps=0, fix.theta=fix.theta)
+#*** Model 3: Estimation with ties, no epsilon adjustment, weight for ties of .333 which
+#    corresponds to the rule of 3 points for a victory and 1 point of a draw in football
+mod3 <- sirt::btm( dat, eps=0, wgt.ties=1/3)
 summary(mod3)
 
-#********************
-# Model 4: Ignoring ties, no home advantage effect
-mod4 <- sirt::btm( dat, ignore.ties=TRUE, fix.eta=0)
+#*** Model 4: Some fixed abilities
+fix.theta <- c("Anhalt Dessau"=-1 )
+mod4 <- sirt::btm( dat, eps=0, fix.theta=fix.theta)
 summary(mod4)
 
-#********************
-# Model 5: Ignoring ties, no home advantage effect (JML approach and eps=0)
-mod5 <- sirt::btm( dat, ignore.ties=TRUE, fix.eta=0, eps=0)
+#*** Model 5: Ignoring ties, no home advantage effect
+mod5 <- sirt::btm( dat, ignore.ties=TRUE, fix.eta=0)
+summary(mod5)
+
+#*** Model 6: Ignoring ties, no home advantage effect (JML approach and eps=0)
+mod6 <- sirt::btm( dat, ignore.ties=TRUE, fix.eta=0, eps=0)
 summary(mod5)
 
 #############################################################################

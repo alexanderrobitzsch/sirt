@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.4744
+%% File Version: 0.481
 
 \name{xxirt}
 \alias{xxirt}
@@ -173,6 +173,7 @@ List with following entries
 \item{customTheta}{Used customized theta distribution}
 \item{p.xi.aj}{Individual likelihood}
 \item{p.aj.xi}{Individual posterior}
+\item{ll_case}{Case-wise log-likelihood values}
 \item{n.ik}{Array of expected counts}
 \item{EAP}{EAP person parameter estimates}
 \item{dat}{Used dataset with item responses}

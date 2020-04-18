@@ -1,10 +1,10 @@
 ## File Name: linking_haebara_gradient_function_R.R
-## File Version: 0.28
+## File Version: 0.292
 
 
 linking_haebara_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
     prob_theta, est_pars, wgtM, a, b, mu, sigma, eps, index_a, index_b,
-    index_mu, index_sigma, parnames, NP )
+    index_mu, index_sigma, parnames, NP, pow=1 )
 {
 
     # logit(p)=a*(th-b)
@@ -26,6 +26,11 @@ linking_haebara_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
                     diff2 <- p_obs - p_exp
                     dist2 <- diff2^2
                     der_basis <- -(dist2+eps)^(-.5)*diff2*prob_theta*der
+                }
+                if (dist=="Lp"){
+                    diff2 <- p_obs - p_exp
+                    dist2 <- diff2^2
+                    der_basis <- -pow*(dist2+eps)^(pow/2-1)*diff2*prob_theta*der
                 }
                 w_t <- wgtM[ii,ss]
                 #- a

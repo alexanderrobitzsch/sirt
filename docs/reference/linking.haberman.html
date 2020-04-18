@@ -131,8 +131,16 @@ model is assumed for the original item loadings (see Details; Battauz, 2017)</p>
 <span class='co'># S3 method for linking.haberman</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
 
+<span class='fu'>linking.haberman.lq</span>(<span class='no'>itempars</span>, <span class='kw'>pow</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-3</span>, <span class='kw'>a_log</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>use_nu</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+
+<span class='co'># S3 method for linking.haberman.lq</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
+
 <span class='co'>## prepare 'itempars' argument for linking.haberman()</span>
 <span class='fu'>linking_haberman_itempars_prepare</span>(<span class='no'>b</span>, <span class='kw'>a</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>wgt</span><span class='kw'>=</span><span class='kw'>NULL</span>)
+
+<span class='co'>## conversion of different parameterizations of item parameters</span>
+<span class='fu'>linking_haberman_itempars_convert</span>(<span class='kw'>itempars</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>lambda</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>nu</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>a</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='kw'>NULL</span>)
 
 <span class='co'>## L0 polish precedure minimizing number of interactions in two-way table</span>
 <span class='fu'>L0_polish</span>(<span class='no'>x</span>, <span class='no'>tol</span>, <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>0.01</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>30</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</pre>
@@ -201,6 +209,14 @@ should be displayed.</p></td>
       <th>adjust_main_effects</th>
       <td><p>Logical indicating whether all elements in the vector
 of main effects should be simultaneously adjusted</p></td>
+    </tr>
+    <tr>
+      <th>pow</th>
+      <td><p>Power \(q\)</p></td>
+    </tr>
+    <tr>
+      <th>eps</th>
+      <td><p>Epsilon value used in differentiable approximating function</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -303,6 +319,8 @@ omitted (Davies, 2012; Terbeck &amp; Davies, 1998).</p>
 of explained item slopes and intercepts after linking
 in comparison to item parameters across groups
 (Asparouhov &amp; Muthen, 2014).</p>
+<p>The function \(linking.haberman.lq\) uses the loss function \(\rho(x)=|x|^q\).
+The originally proposed Haberman linking can be obtained with <code>pow=2</code> (\(q=2\)).</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list with following entries</p>

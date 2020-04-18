@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_linking_haebara.cpp
-//// File Version: 0.385
+//// File Version: 0.3879
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -34,9 +34,11 @@ Rcpp::NumericVector sirt_rcpp_linking_haebara_irf_2pl( Rcpp::NumericVector theta
 double sirt_rcpp_linking_haebara_fct_optim_one_item( Rcpp::NumericVector theta,
     Rcpp::NumericVector prob_theta, Rcpp::NumericMatrix aM, Rcpp::NumericMatrix bM,
     Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu,
-    Rcpp::NumericVector sigma, int ii, int ss, Rcpp::CharacterVector dist, double eps)
+    Rcpp::NumericVector sigma, int ii, int ss, Rcpp::CharacterVector dist,
+    double eps, double pow)
 {
     double val=0;
+    double pow1=pow/2.0;
 
     //** observed IRF
     Rcpp::NumericVector p_obs = sirt_rcpp_linking_haebara_irf_2pl( theta, aM(ii,ss), bM(ii,ss) );
@@ -59,6 +61,11 @@ double sirt_rcpp_linking_haebara_fct_optim_one_item( Rcpp::NumericVector theta,
         diff1 = Rcpp::sqrt( diff1 + eps);
         val = Rcpp::sum( diff1*prob_theta );
     }
+    if (dist[0]=="Lp"){
+        diff1 = diff1 + eps;
+        diff1 = Rcpp::pow( diff1, pow1);
+        val = Rcpp::sum( diff1*prob_theta );
+    }
     //--- output
     return val;
 }
@@ -71,7 +78,7 @@ double sirt_rcpp_linking_haebara_fct_optim( int NI, int NS, Rcpp::CharacterVecto
         Rcpp::NumericMatrix aM, Rcpp::NumericMatrix bM, Rcpp::NumericVector theta,
         Rcpp::NumericVector prob_theta, Rcpp::LogicalMatrix est_pars, Rcpp::NumericMatrix wgtM,
         Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu,
-        Rcpp::NumericVector sigma, double eps )
+        Rcpp::NumericVector sigma, double eps, double pow )
 {
     double val=0;
     double dist1;
@@ -79,7 +86,8 @@ double sirt_rcpp_linking_haebara_fct_optim( int NI, int NS, Rcpp::CharacterVecto
         for (int ss=0; ss<NS; ss++){
             if (est_pars(ii,ss)){
                 dist1 = sirt_rcpp_linking_haebara_fct_optim_one_item( theta,
-                            prob_theta, aM, bM, a, b, mu, sigma, ii, ss, dist, eps );
+                            prob_theta, aM, bM, a, b, mu, sigma, ii, ss, dist,
+                            eps, pow );
                 val += wgtM(ii,ss)*dist1;
             }  // end est_pars(ii,ss)
         }  // end ss
@@ -99,12 +107,13 @@ Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim_one_item( Rcpp::Numeric
     Rcpp::NumericVector sigma, int ii, int ss, Rcpp::CharacterVector dist, double eps,
     int NI, int NS, Rcpp::IntegerVector index_a, Rcpp::IntegerVector index_b,
     Rcpp::IntegerVector index_mu, Rcpp::IntegerVector index_sigma, Rcpp::NumericMatrix wgtM,
-    Rcpp::NumericVector grad0)
+    Rcpp::NumericVector grad0, double pow)
 {
     Rcpp::NumericVector grad = Rcpp::clone(grad0);
     Rcpp::NumericVector der_basis, der_t, diff2, dist2;
     int ind;
     double der_t1;
+    double pow1 = pow/2.0 - 1.0;
 
     //* observed IRF
     Rcpp::NumericVector p_obs = sirt_rcpp_linking_haebara_irf_2pl( theta, aM(ii,ss), bM(ii,ss) );
@@ -120,6 +129,10 @@ Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim_one_item( Rcpp::Numeric
     if (dist[0]=="L1"){
         dist2 = diff2*diff2;
         der_basis = - diff2*prob_theta*der / Rcpp::sqrt(dist2+eps);
+    }
+    if (dist[0]=="Lp"){
+        dist2 = diff2*diff2+eps;
+        der_basis = - diff2*prob_theta*der*pow*Rcpp::pow(dist2, pow1);
     }
     double w_t = wgtM(ii,ss);
     //- a
@@ -159,7 +172,7 @@ Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim( int NI, int NS,
     Rcpp::NumericMatrix wgtM, Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu,
     Rcpp::NumericVector sigma, double eps, Rcpp::IntegerVector index_a, Rcpp::IntegerVector index_b,
     Rcpp::IntegerVector index_mu, Rcpp::IntegerVector index_sigma, Rcpp::CharacterVector parnames,
-    int NP )
+    int NP, double pow )
 {
     Rcpp::NumericVector grad(NP, 0.0);
     for (int ii=0; ii<NI; ii++){
@@ -168,7 +181,7 @@ Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim( int NI, int NS,
                 grad = sirt_rcpp_linking_haebara_grad_optim_one_item( theta,
                             prob_theta, aM,  bM, a, b, mu, sigma, ii, ss, dist, eps,
                             NI, NS, index_a, index_b, index_mu, index_sigma,
-                            wgtM, grad);
+                            wgtM, grad, pow);
             }  // end est_pars(ii,ss)
         }  // end ss
     } // end ii

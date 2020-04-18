@@ -129,7 +129,8 @@ Hu, Rogers, &amp; Vukmirovic, 2008).</p>
     </div>
 
     <pre class="usage"><span class='fu'>linking.haebara</span>(<span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L2"</span>, <span class='kw'>theta</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>, <span class='kw'>length</span><span class='kw'>=</span><span class='fl'>61</span>),
-        <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"optim"</span>, <span class='kw'>center</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-5</span>, <span class='kw'>use_rcpp</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
+        <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"optim"</span>, <span class='kw'>center</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-3</span>, <span class='kw'>par_init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>use_rcpp</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
+        <span class='kw'>pow</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>use_der</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for linking.haebara</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
@@ -169,8 +170,20 @@ be centered after estimation</p></td>
       <td><p>Small value for smooth approximation of the absolute value function</p></td>
     </tr>
     <tr>
+      <th>par_init</th>
+      <td><p>Optional vector of initial parameter estimates</p></td>
+    </tr>
+    <tr>
       <th>use_rcpp</th>
       <td><p>Logical indicating whether <span class="pkg">Rcpp</span> is used for computation</p></td>
+    </tr>
+    <tr>
+      <th>pow</th>
+      <td><p>Power for method <code>dist="Lq"</code></p></td>
+    </tr>
+    <tr>
+      <th>use_der</th>
+      <td><p>Logical indicating whether analytical derivative should be used</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -206,7 +219,10 @@ deviations \(\sigma_t\) are estimated.</p>
 $$f_{opt, L2}=\sum_t \sum_i \int ( P_{it} (\theta ) - P_{it}^\ast (\theta ) )^2 w(\theta)$$
 was originally proposed by Haebara. A robustified version (<code>dist="L1"</code>)
 uses the optimization function (He et al., 2015)
-$$f_{opt, L1}=\sum_t \sum_i \int | P_{it} (\theta ) - P_{it}^\ast (\theta ) |  w(\theta)$$</p>
+$$f_{opt, L1}=\sum_t \sum_i \int | P_{it} (\theta ) - P_{it}^\ast (\theta ) |  w(\theta)$$
+As a further generalization, the follwing distance function (<code>dist="Lp"</code>)
+can be minimized:
+$$f_{opt, Lp}=\sum_t \sum_i \int | P_{it} (\theta ) - P_{it}^\ast (\theta ) |^p  w(\theta)$$</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list with following entries</p>
@@ -225,11 +241,11 @@ $$f_{opt, L1}=\sum_t \sum_i \int | P_{it} (\theta ) - P_{it}^\ast (\theta ) |  w
 doi: <a href='https://doi.org/10.1007/s11336-016-9517-x'>10.1007/s11336-016-9517-x</a></p>
 <p>He, Y., Cui, Z., &amp; Osterlind, S. J. (2015). New robust scale transformation methods
 in the presence of outlying common items. <em>Applied Psychological Measurement, 39</em>(8),
-613-626.                     
+613-626.
 doi: <a href='https://doi.org/10.1177/0146621615587003'>10.1177/0146621615587003</a></p>
-<p>He, Y., &amp; Cui, Z. (XXXX). Evaluating robust scale transformation methods with multiple 
-outlying common items under IRT true score equating. 
-<em>Applied Psychological Measurement, XX</em>(xx). 
+<p>He, Y., &amp; Cui, Z. (XXXX). Evaluating robust scale transformation methods with multiple
+outlying common items under IRT true score equating.
+<em>Applied Psychological Measurement, XX</em>(xx).
 doi: <a href='https://doi.org/10.1177/0146621619886050'>10.1177/0146621619886050</a></p>
 <p>Hu, H., Rogers, W. T., &amp; Vukmirovic, Z. (2008). Investigation of IRT-based equating
 methods in the presence of outlier common items. <em>Applied Psychological Measurement,
@@ -278,12 +294,21 @@ and the <span style="R">R</span> packages <span class="pkg">plink</span>, <span 
 <span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haebara.html'>linking.haebara</a></span>( <span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L1"</span>, <span class='kw'>control</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>trace</span><span class='kw'>=</span><span class='fl'>2</span>) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
+<span class='co'>#* using initial parameter estimates</span>
+<span class='no'>par_init</span> <span class='kw'>&lt;-</span> <span class='no'>mod1</span>$<span class='no'>res_optim</span>$<span class='no'>par</span>
+<span class='no'>mod2b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haebara.html'>linking.haebara</a></span>( <span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L1"</span>, <span class='kw'>par_init</span><span class='kw'>=</span><span class='no'>par_init</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2b</span>)
+
+<span class='co'>#* power p=.25</span>
+<span class='no'>mod2c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haebara.html'>linking.haebara</a></span>( <span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"Lp"</span>, <span class='kw'>pow</span><span class='kw'>=</span><span class='fl'>.25</span>, <span class='kw'>par_init</span><span class='kw'>=</span><span class='no'>par_init</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2c</span>)
+
 <span class='co'>#* Haberman linking non-robust</span>
 <span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'>#* Haberman linking robust</span>
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>a_trim</span><span class='kw'>=</span><span class='fl'>.25</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.5</span>)
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>a_trim</span><span class='kw'>=</span><span class='fl'>.25</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.5</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod4</span>)
 
 <span class='co'>#* compare transformation parameters (means and standard deviations)</span>

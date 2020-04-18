@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2020-03-04  |  Last: sirt 3.10-12
+VERSIONS sirt 3.10  |  2020-04-18  |  Last: sirt 3.10-31
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()
@@ -49,11 +49,23 @@ NOTE  * included try-error functionality in lsem.bootstrap() to
         skip nonconvergent cases (thanks to Ulrich Schroeders)
 NOTE  * included argument 'cluster' in lsem.bootstrap() for 
         option of bootstrap of clusters (suggested by Ulrich Schroeders)
+NOTE  * included argument 'par_init' in linking.haeabara()
+NOTE  * included general distance function dist='Lp' in
+        linking.haebara. Added arguments 'pow' and 'use_der'.
+NOTE  * included argument 'meth' in invariance.alignment()
+ADDED * included utility function lq_fit() for fitting regression
+        models using the L_q norm
+NOTE  * included utility function linking_haberman_itempars_convert()
+ADDED * included alternative loss function |x|^q (L_q distance) for
+        Haberman linking in linking.haberman.lq()
+NOTE  * included argument 'wgt.ties' in btm() that allows a weighting
+        of ties different from .5
+ADDED * included predict method for objects of class 'btm'
 
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
-
+EXAMP * included/modified examples: linking.haebara (1),
+        lq_fit (1), btm (1)
 
 
 

@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.4619
+## File Version: 7.472
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model

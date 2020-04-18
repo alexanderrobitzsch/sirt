@@ -1,5 +1,5 @@
 ## File Name: xxirt_irf_lca.R
-## File Version: 0.06
+## File Version: 0.071
 
 xxirt_irf_lca <- function(par, Theta, ncat)
 {

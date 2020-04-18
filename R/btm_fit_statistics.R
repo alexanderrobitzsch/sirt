@@ -1,18 +1,18 @@
 ## File Name: btm_fit_statistics.R
-## File Version: 0.206
+## File Version: 0.2071
 
 
 #**** item outfit and infit statistic
 btm_fit_statistics <- function( probs, dat0, ind1, ind2, TP, judge=NULL,
-    compute_agreement=TRUE)
+    compute_agreement=TRUE, wgt.ties=.5)
 {
     multiple_judges <- TRUE
     if (is.null(judge)){
         multiple_judges <- FALSE
     }
     # first individual
-    X_exp1 <- probs[,1]*1 + 1/2*probs[,3]
-    X_var1 <- 1*probs[,1] + 1/4*probs[,3]
+    X_exp1 <- probs[,1]*1 + wgt.ties*probs[,3]
+    X_var1 <- 1*probs[,1] + wgt.ties^2*probs[,3]
     X_var1 <- X_var1 - X_exp1^2
     H_1 <- dat0[,3] - X_exp1
     Z_1 <- H_1 / sqrt( X_var1 )
@@ -20,8 +20,8 @@ btm_fit_statistics <- function( probs, dat0, ind1, ind2, TP, judge=NULL,
     dat0$stand_resid_home <- Z_1
 
     # second individual
-    X_exp2 <- probs[,2]*1 + 1/2*probs[,3]
-    X_var2 <- 1*probs[,2] + 1/4*probs[,3]
+    X_exp2 <- probs[,2]*1 + wgt.ties*probs[,3]
+    X_var2 <- 1*probs[,2] + wgt.ties^2*probs[,3]
     X_var2 <- X_var2 - X_exp2^2
     H_2 <- 1 - dat0[,3] - X_exp2
     Z_2 <- H_2 / sqrt( X_var2 )

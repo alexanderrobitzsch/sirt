@@ -1,5 +1,5 @@
 ## File Name: summary.btm.R
-## File Version: 0.262
+## File Version: 0.268
 
 
 #--- summary.btm
@@ -16,6 +16,7 @@ summary.btm <- function( object, file=NULL, digits=4,... )
 
     #-- print computation time
     sirt_summary_print_computation_time_s1(object=object)
+    cat("Computation Time Algorithm", print(object$time_alg), "\n\n")
 
     #- print call
     sirt_summary_print_call(CALL=object$CALL)
@@ -23,11 +24,15 @@ summary.btm <- function( object, file=NULL, digits=4,... )
     cat("Bradley-Terry Model with Ties and Home Advantage Parameters\n")
 
     cat("------------------------------------------------------------\n")
+    cat( "Log-likelihood value", "=", round(object$ll,2), "\n" )
     cat( "Number of iterations", "=", object$iter, "\n" )
     #    cat( "Deviance=", round( object$deviance, 2 ), " | " )
     #    cat( "Log Likelihood=", round( -object$deviance/2, 2 ), "\n" )
     cat( "Number of individuals", "=", object$ic$n, "\n" )
     cat( "Number of pairwise comparisons", "=", object$ic$D, "\n" )
+    cat( "Epsilon value", "=", object$eps, "\n" )
+    cat( "ignore.ties", "=", object$ignore.ties, "\n" )
+    cat( "wgt.ties", "=", round(object$wgt.ties,3), "\n" )
     #    cat( "Number of estimated parameters=", object$ic$np, "\n" )
 
     cat("------------------------------------------------------------\n")
