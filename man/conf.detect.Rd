@@ -1,5 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.477
+%% File Version: 1.479
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -22,7 +22,7 @@ An exploratory DETECT analysis can be conducted using the
 }
 \usage{
 conf.detect(data, score, itemcluster, bwscale=1.1, progress=TRUE,
-        thetagrid=seq(-3, 3, len=200))
+        thetagrid=seq(-3, 3, len=200), smooth=TRUE, use_sum_score=FALSE)
 
 \method{summary}{conf.detect}(object, digits=3, file=NULL, ...)
 }
@@ -46,10 +46,15 @@ Bandwidth factor for calculation of conditional covariance
   \item{progress}{
 Display progress?
 }
+\item{smooth}{Logical indicating whether smoothing should be
+applied for conditional covariance estimation}
   \item{thetagrid}{
 A vector which contains theta values where conditional
 covariances are evaluated.
 }
+\item{use_sum_score}{Logical indicating whether sum score should be used.
+With this option, the bias corrected conditional covariance of Zhang and
+Stout (1999) is used.}
 \item{object}{Object of class \code{conf.detect}}
 \item{digits}{Number of digits for rounding in \code{summary}}
 \item{file}{Optional file name to be sunk for \code{summary}}

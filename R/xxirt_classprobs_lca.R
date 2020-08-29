@@ -1,5 +1,5 @@
 ## File Name: xxirt_classprobs_lca.R
-## File Version: 0.07
+## File Version: 0.08
 
 xxirt_classprobs_lca <- function(par, Theta, G)
 {

@@ -1,8 +1,8 @@
 ## File Name: linking.haberman.lq.R
-## File Version: 0.174
+## File Version: 0.185
 
 linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
-    use_nu=FALSE)
+    use_nu=FALSE, est_pow=FALSE, lower_pow=.1, upper_pow=3)
 {
     CALL <- match.call()
     s1 <- Sys.time()
@@ -50,8 +50,11 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
         X[ ind_items==ii, ii+G-1] <- 1
     }
     #- fit
-    res_optim$slopes <- mod0 <- lq_fit(y=y, X=X, w=w, pow=pow, eps=eps, eps_vec=eps_vec)
+    res_optim$slopes <- mod0 <- lq_fit(y=y, X=X, w=w, pow=pow, eps=eps,
+                eps_vec=eps_vec, est_pow=est_pow, lower_pow=lower_pow,
+                upper_pow=upper_pow)
     coef0 <- mod0$coefficients
+    pow_slopes <- mod0$pow
     ind_groups <- 1:(G-1)
     coef0_A <- coef0[ind_groups]
     a_joint <- coef0[-c(ind_groups)]
@@ -75,8 +78,11 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
         }
     }
     #- fit
-    res_optim$intercepts <- mod0 <- lq_fit(y=y, X=X, w=w, pow=pow, eps=eps, eps_vec=eps_vec)
+    res_optim$intercepts <- mod0 <- lq_fit(y=y, X=X, w=w, pow=pow, eps=eps,
+                eps_vec=eps_vec, est_pow=est_pow, lower_pow=lower_pow,
+                upper_pow=upper_pow)
     coef0 <- mod0$coefficients
+    pow_intercepts <- mod0$pow
     coef0_B <- -coef0[ind_groups]
     b_joint <- coef0[-c(ind_groups)]
     if (use_nu){
@@ -98,10 +104,12 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     time <- list(s1=s1, s2=s2)
 
     #-- output list
+    description <- 'Linking based on L_q distance according to Haberman (2009)'
     res <- list( transf.personpars=transf.personpars, transf.itempars=transf.itempars,
-                    pow=pow, eps=eps, item=item,
-                    description='Linking based on L_q distance according to Haberman (2009)',
-                    converged=converged, a_log=a_log, use_nu=use_nu, CALL=CALL, time=time)
+                    pow=pow, eps=eps, item=item, description=description,
+                    converged=converged, a_log=a_log, use_nu=use_nu, est_pow=est_pow,
+                    pow_slopes=pow_slopes, pow_intercepts=pow_intercepts,
+                    CALL=CALL, time=time)
     class(res) <- "linking.haberman.lq"
     return(res)
 

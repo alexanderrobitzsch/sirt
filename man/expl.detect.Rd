@@ -1,5 +1,5 @@
 %% File Name: expl.detect.Rd
-%% File Version: 1.19
+%% File Version: 1.22
 
 \name{expl.detect}
 \alias{expl.detect}
@@ -15,7 +15,8 @@ matrix such that items are clustered by the hierarchical Ward
 algorithm (Roussos, Stout & Marden, 1998).
 }
 \usage{
-expl.detect(data, score, nclusters, N.est=NULL, seed=NULL, bwscale=1.1)
+expl.detect(data, score, nclusters, N.est=NULL, seed=NULL, bwscale=1.1,
+    use_sum_score=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -39,6 +40,9 @@ Random seed
   \item{bwscale}{
 Bandwidth scale factor
 }
+\item{use_sum_score}{Logical indicating whether sum score should be used.
+With this option, the bias corrected conditional covariance of Zhang and
+Stout (1999) is used.}
 }
 %\details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -50,6 +54,7 @@ A list with following entries
 proportionally to sample sizes of item pairs.}
 \item{clusterfit}{Fit of the cluster method}
 \item{itemcluster}{Cluster allocations}
+use_sum_score
 }
 \references{
 Roussos, L. A., Stout, W. F., & Marden, J. I. (1998). Using new proximity

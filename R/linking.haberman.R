@@ -1,11 +1,12 @@
 ## File Name: linking.haberman.R
-## File Version: 2.637
+## File Version: 2.639
 
 
 #**** Linking Haberman: ETS Research Report 2009
 linking.haberman <- function( itempars, personpars=NULL,
         estimation="OLS", a_trim=Inf, b_trim=Inf, lts_prop=.5,
-        a_log=TRUE, conv=.00001, maxiter=1000, progress=TRUE, adjust_main_effects=TRUE)
+        a_log=TRUE, conv=.00001, maxiter=1000, progress=TRUE,
+        adjust_main_effects=TRUE)
 {
     CALL <- match.call()
     s1 <- Sys.time()

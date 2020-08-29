@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.741
+%% File Version: 0.749
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -29,7 +29,8 @@ linking.haberman(itempars, personpars, estimation="OLS", a_trim=Inf, b_trim=Inf,
 
 \method{summary}{linking.haberman}(object, digits=3, file=NULL, ...)
 
-linking.haberman.lq(itempars, pow=2, eps=1e-3, a_log=TRUE, use_nu=FALSE)
+linking.haberman.lq(itempars, pow=2, eps=1e-3, a_log=TRUE, use_nu=FALSE,
+      est_pow=FALSE, lower_pow=.1, upper_pow=3)
 
 \method{summary}{linking.haberman.lq}(object, digits=3, file=NULL, ...)
 
@@ -40,7 +41,7 @@ linking_haberman_itempars_prepare(b, a=NULL, wgt=NULL)
 linking_haberman_itempars_convert(itempars=NULL, lambda=NULL, nu=NULL, a=NULL, b=NULL)
 
 ## L0 polish precedure minimizing number of interactions in two-way table
-L0_polish(x, tol, eps=0.01, maxiter=30, type=1, verbose=TRUE)
+L0_polish(x, tol, conv=0.01, maxiter=30, type=1, verbose=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -85,6 +86,13 @@ should be displayed.
 of main effects should be simultaneously adjusted}
 \item{pow}{Power \eqn{q}}
 \item{eps}{Epsilon value used in differentiable approximating function}
+\item{use_nu}{Logical indicating whether item intercepts instead of
+item difficulties are used in linking}
+\item{est_pow}{Logical indicating whether power values should be estimated}
+\item{lower_pow}{Lower bound for estimated power}
+\item{upper_pow}{Upper bound for estimated power}
+\item{lambda}{Matrix containing item loadings}
+\item{nu}{Matrix containing item intercepts}
 \item{object}{Object of class \code{linking.haberman}.}
 \item{digits}{Number of digits after decimals for rounding in \code{summary}.}
 \item{file}{Optional file name if \code{summary} should be sunk into a file.}
@@ -94,7 +102,6 @@ of main effects should be simultaneously adjusted}
 \item{wgt}{Matrix of weights}
 \item{x}{Matrix}
 \item{tol}{Tolerance value}
-\item{eps}{Convergence criterion}
 \item{type}{Can be \code{1} (using Tukey's median polish) or
 \code{2} (alternating median regression).}
 \item{verbose}{Logical indicating whether iteration progress should be displayed}
@@ -164,6 +171,7 @@ in comparison to item parameters across groups
 
 The function \eqn{linking.haberman.lq} uses the loss function \eqn{\rho(x)=|x|^q}.
 The originally proposed Haberman linking can be obtained with \code{pow=2} (\eqn{q=2}).
+The powers can also be estimated (argument \code{est_pow=TRUE}).
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

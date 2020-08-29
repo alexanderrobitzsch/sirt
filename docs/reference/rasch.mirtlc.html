@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -40,7 +44,6 @@
 Rasch (1PL) and 2PL model (Bartolucci, 2007; Bartolucci, Montanari &amp;amp; Pandolfi,
 2012) for dichotomous data which emerges from the original latent class model
 (Goodman, 1974) and a multidimensional IRT model." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -58,7 +61,7 @@ Rasch (1PL) and 2PL model (Bartolucci, 2007; Bartolucci, Montanari &amp;amp; Pan
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,7 +93,7 @@ Rasch (1PL) and 2PL model (Bartolucci, 2007; Bartolucci, Montanari &amp;amp; Pan
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexanderrobitzsch/sirt">
+  <a href="https://github.com/alexanderrobitzsch/sirt/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -369,16 +372,16 @@ package. Latent class analysis can be carried out with
 <span class='co'># latent class models</span>
 
 <span class='co'># latent class model with 1 class</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>1</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>1</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># latent class model with 2 classes</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>2</span> )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>2</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># latent class model with 3 classes</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>seed</span><span class='kw'>=</span>- <span class='fl'>30</span>)
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>seed</span><span class='kw'>=</span>- <span class='fl'>30</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'># extract individual likelihood</span>
@@ -399,7 +402,7 @@ package. Latent class analysis can be carried out with
 <span class='fu'><a href='https://rdrr.io/pkg/CDM/man/IRT.compareModels.html'>IRT.compareModels</a></span>(<span class='no'>smod2</span>,<span class='no'>smod3</span>)
 
 <span class='co'># latent class model with 4 classes and 3 starts with different seeds</span>
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>4</span>,<span class='kw'>seed</span><span class='kw'>=</span>-<span class='fl'>30</span>,  <span class='kw'>nstarts</span><span class='kw'>=</span><span class='fl'>3</span> )
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>4</span>,<span class='kw'>seed</span><span class='kw'>=</span>-<span class='fl'>30</span>,  <span class='kw'>nstarts</span><span class='kw'>=</span><span class='fl'>3</span> )
 <span class='co'># display different solutions</span>
 <span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>(<span class='no'>mod4</span>$<span class='no'>devL</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod4</span>)
@@ -408,41 +411,41 @@ package. Latent class analysis can be carried out with
 <span class='co'># define group identifier</span>
 <span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>( <span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>dat</span>))
 <span class='no'>group</span>[ <span class='fl'>1</span>:<span class='fl'>150</span> ] <span class='kw'>&lt;-</span> <span class='fl'>2</span>
-<span class='no'>mod5</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span> )
+<span class='no'>mod5</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod5</span>)
 
 <span class='co'>#*************</span>
 <span class='co'># Unidimensional IRT models with ordered trait</span>
 
 <span class='co'># 1PL model with 3 classes</span>
-<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>)
+<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod11</span>)
 
 <span class='co'># 1PL model with 11 classes</span>
-<span class='no'>mod12</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>11</span>,<span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>)
+<span class='no'>mod12</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>11</span>,<span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod12</span>)
 
 <span class='co'># 1PL model with 11 classes and fixed specified theta values</span>
-<span class='no'>mod13</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>,  <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>,
+<span class='no'>mod13</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>,  <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>,
              <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>11</span> ), <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>100</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod13</span>)
 
 <span class='co'># 1PL model with fixed theta values and normal distribution</span>
-<span class='no'>mod14</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>,  <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>,
+<span class='no'>mod14</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>,  <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>,
              <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>11</span> ), <span class='kw'>distribution.trait</span><span class='kw'>=</span><span class='st'>"normal"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod14</span>)
 
 <span class='co'># 1PL model with a smoothed trait distribution (up to 3 moments)</span>
-<span class='no'>mod15</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>,  <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>,
+<span class='no'>mod15</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>,  <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>,
              <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>11</span> ),  <span class='kw'>distribution.trait</span><span class='kw'>=</span><span class='st'>"smooth3"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod15</span>)
 
 <span class='co'># 2PL with 3 classes</span>
-<span class='no'>mod16</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC2"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span> )
+<span class='no'>mod16</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC2"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod16</span>)
 
 <span class='co'># 2PL with fixed theta and smoothed distribution</span>
-<span class='no'>mod17</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>12</span>), <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>,
+<span class='no'>mod17</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>12</span>), <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>,
              <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC2"</span>, <span class='kw'>distribution.trait</span><span class='kw'>=</span><span class='st'>"smooth4"</span>  )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod17</span>)
 
@@ -450,7 +453,7 @@ package. Latent class analysis can be carried out with
 <span class='co'># define group identifier</span>
 <span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>( <span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>dat</span>))
 <span class='no'>group</span>[ <span class='fl'>1</span>:<span class='fl'>150</span> ] <span class='kw'>&lt;-</span> <span class='fl'>2</span>
-<span class='no'>mod21</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>8</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span> )
+<span class='no'>mod21</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>8</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='no'>group</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod21</span>)
 
 <span class='co'>#***************</span>
@@ -460,12 +463,12 @@ package. Latent class analysis can be carried out with
 <span class='no'>dimensions</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>( <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>4</span> )
 
 <span class='co'># 3-dimensional model with 8 classes and seed 145</span>
-<span class='no'>mod31</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>8</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>,
+<span class='no'>mod31</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>8</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>,
              <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>seed</span><span class='kw'>=</span><span class='fl'>145</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='no'>dimensions</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod31</span>)
 
 <span class='co'># try the model above with different starting values</span>
-<span class='no'>mod31s</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>8</span>,
+<span class='no'>mod31s</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>8</span>,
              <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>seed</span><span class='kw'>=</span>-<span class='fl'>30</span>, <span class='kw'>nstarts</span><span class='kw'>=</span><span class='fl'>30</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='no'>dimensions</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod31s</span>)
 
@@ -473,12 +476,12 @@ package. Latent class analysis can be carried out with
 <span class='co'>#=&gt; 4^3=216 classes</span>
 <span class='no'>theta.k</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>6</span> )
 <span class='no'>theta.k</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span>( <span class='no'>theta.k</span>, <span class='no'>theta.k</span>, <span class='no'>theta.k</span> ) )
-<span class='no'>mod32</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>,  <span class='kw'>dimensions</span><span class='kw'>=</span><span class='no'>dimensions</span>,
+<span class='no'>mod32</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>,  <span class='kw'>dimensions</span><span class='kw'>=</span><span class='no'>dimensions</span>,
               <span class='kw'>theta.k</span><span class='kw'>=</span><span class='no'>theta.k</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>  )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod32</span>)
 
 <span class='co'># 3-dimensional 2PL model</span>
-<span class='no'>mod33</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='no'>dimensions</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='no'>theta.k</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC2"</span>)
+<span class='no'>mod33</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='no'>dimensions</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='no'>theta.k</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC2"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod33</span>)
 
 <span class='co'>#############################################################################</span>
@@ -492,18 +495,18 @@ package. Latent class analysis can be carried out with
 <span class='co'># calculate skewness of theta distribution</span>
 <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>( <span class='no'>theta</span>^<span class='fl'>3</span> ) / <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span>(<span class='no'>theta</span>)^<span class='fl'>3</span>
 <span class='co'># simulate item responses</span>
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/sim.raschtype.html'>sim.raschtype</a></span>( <span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='no'>I</span> ) )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='no'>I</span> ) )
 
 <span class='co'># normal distribution</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>), <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>,
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>), <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>,
                <span class='kw'>distribution.trait</span><span class='kw'>=</span><span class='st'>"normal"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>)
 
 <span class='co'># allow for skew distribution with smoothed distribution</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>), <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>,
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>), <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>,
                <span class='kw'>distribution.trait</span><span class='kw'>=</span><span class='st'>"smooth3"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>)
 
 <span class='co'># nonparametric distribution</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>), <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>)
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>), <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span>)
 
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
@@ -518,21 +521,21 @@ package. Latent class analysis can be carried out with
 <span class='no'>weights</span> <span class='kw'>&lt;-</span> <span class='no'>data.si02</span>$<span class='no'>weights</span>   <span class='co'># extract weights</span>
 
 <span class='co'># Model 1: 2 classes Rasch model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='no'>weights</span>,
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='no'>weights</span>,
                  <span class='kw'>ref.item</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>nstarts</span><span class='kw'>=</span><span class='fl'>5</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># Model 2: 3 classes Rasch model: not all parameters are identified</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='no'>weights</span>,
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='no'>weights</span>,
                 <span class='kw'>ref.item</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>nstarts</span><span class='kw'>=</span><span class='fl'>5</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># Model 3: Latent class model with 2 classes</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"LC"</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='no'>weights</span>, <span class='kw'>nstarts</span><span class='kw'>=</span><span class='fl'>5</span>)
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"LC"</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='no'>weights</span>, <span class='kw'>nstarts</span><span class='kw'>=</span><span class='fl'>5</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'># Model 4: Rasch model with normal distribution</span>
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>,  <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='no'>weights</span>,
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>,  <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='no'>weights</span>,
             <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>6</span>, <span class='fl'>6</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>21</span> ), <span class='kw'>distribution.trait</span><span class='kw'>=</span><span class='st'>"normal"</span>, <span class='kw'>ref.item</span><span class='kw'>=</span><span class='fl'>4</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod4</span>)
 }
@@ -563,7 +566,7 @@ package. Latent class analysis can be carried out with
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>( <span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>3</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='no'>I</span> ), <span class='fl'>1</span>:(<span class='fl'>3</span>*<span class='no'>I</span>) )
 
 <span class='co'># estimate model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='no'>Nclasses</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='no'>dimensions</span>,
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='no'>Nclasses</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='no'>dimensions</span>,
              <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>ref.item</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>14</span>,<span class='fl'>23</span>), <span class='kw'>glob.conv</span><span class='kw'>=</span><span class='fl'>.0005</span>, <span class='kw'>conv1</span><span class='kw'>=</span><span class='fl'>.0005</span>)
 
 <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='no'>mod1</span>$<span class='no'>theta.k</span>, <span class='no'>mod1</span>$<span class='no'>pi.k</span> ), <span class='fl'>3</span> )
@@ -582,7 +585,7 @@ package. Latent class analysis can be carried out with
   <span class='co'>##   [5,] -1.1 -0.7  0.9 0.15</span>
 
 <span class='co'># plot class locations</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>( <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='no'>mod1</span>$<span class='no'>theta.k</span>[<span class='fl'>1</span>,], <span class='kw'>xlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>), <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>5</span>,<span class='fl'>3</span>), <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"n"</span>,
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>( <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='no'>mod1</span>$<span class='no'>theta.k</span>[<span class='fl'>1</span>,], <span class='kw'>xlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>), <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>5</span>,<span class='fl'>3</span>), <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"n"</span>,
     <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Dimension"</span>, <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Location"</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/axis.html'>axis</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>:<span class='fl'>3</span> ) ;  <span class='fu'><a href='https://rdrr.io/r/graphics/axis.html'>axis</a></span>(<span class='fl'>2</span>) ; <span class='fu'><a href='https://rdrr.io/r/graphics/axis.html'>axis</a></span>(<span class='fl'>4</span>)
 <span class='kw'>for</span> (<span class='no'>cc</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='no'>Nclasses</span>){ <span class='co'># cc &lt;- 1</span>
@@ -695,7 +698,7 @@ package. Latent class analysis can be carried out with
 <span class='no'>mod4</span>@<span class='kw'>nest</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>mod.pars</span>$<span class='no'>est</span>) + <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>Theta</span>)-<span class='fl'>1</span> )
 <span class='co'># extract coefficients</span>
 <span class='co'># source.all(pfsirt)</span>
-<span class='no'>cmod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mod4</span>)
+<span class='no'>cmod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mod4</span>)
 
 <span class='co'># estimated item difficulties</span>
 <span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"sim"</span><span class='kw'>=</span><span class='no'>b</span>, <span class='st'>"mirt"</span><span class='kw'>=</span>-<span class='no'>cmod4</span>$<span class='no'>coef</span>$<span class='no'>d</span>, <span class='st'>"sirt"</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>item</span>$<span class='no'>thresh</span> )
@@ -755,7 +758,7 @@ package. Latent class analysis can be carried out with
 <span class='no'>dimensions</span> <span class='kw'>&lt;-</span> <span class='no'>data.si04</span>$<span class='no'>itempars</span>$<span class='no'>dim</span>
 
 <span class='co'># estimate a Rasch latent class with 9 classes</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mirtlc.html'>rasch.mirtlc</a></span>( <span class='no'>data.si04</span>$<span class='no'>data</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>9</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='no'>dimensions</span>,
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>data.si04</span>$<span class='no'>data</span>, <span class='kw'>Nclasses</span><span class='kw'>=</span><span class='fl'>9</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='no'>dimensions</span>,
              <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>, <span class='kw'>ref.item</span><span class='kw'>=</span><span class='no'>ref.item</span>, <span class='kw'>glob.conv</span><span class='kw'>=</span><span class='fl'>.005</span>, <span class='kw'>conv1</span><span class='kw'>=</span><span class='fl'>.005</span>,
              <span class='kw'>nstarts</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>200</span> )
 
@@ -785,18 +788,10 @@ package. Latent class analysis can be carried out with
   <span class='co'>##    [9,]     9  4.466  0.700 -1.334  1.439  2.161 0.1343</span>
 }</pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -807,7 +802,7 @@ package. Latent class analysis can be carried out with
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

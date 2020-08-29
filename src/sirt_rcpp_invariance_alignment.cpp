@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_invariance_alignment.cpp
-//// File Version: 2.57826
+//// File Version: 2.579
 
 
 // [[Rcpp::depends(RcppArmadillo)]]

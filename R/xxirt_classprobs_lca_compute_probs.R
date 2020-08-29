@@ -1,5 +1,5 @@
 ## File Name: xxirt_classprobs_lca_compute_probs.R
-## File Version: 0.03
+## File Version: 0.04
 
 xxirt_classprobs_lca_compute_probs <- function(logitprobs)
 {

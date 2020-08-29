@@ -1,5 +1,5 @@
 ## File Name: linking.haebara.R
-## File Version: 0.4272
+## File Version: 0.431
 
 linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         optimizer="optim", center=FALSE, eps=1e-3, par_init=NULL,

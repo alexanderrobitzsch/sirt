@@ -1,5 +1,5 @@
 ## File Name: summary.regpolca.R
-## File Version: 0.06
+## File Version: 0.09
 
 
 #--- summary for regpolca object
@@ -16,7 +16,8 @@ summary.regpolca <- function( object, digits=3, file=NULL, ...)
     sirt_display_function(length=len_disp)
     cat("Regularized polytomous latent class analysis (regpolca)\n\n")
     cat( "Regularization type","=", object$regular_type, "\n" )
-    cat( "Regularization parameter","=", object$regular_lam, "\n" )
+    cat( "Group regularization","=", object$regular_grouped, "\n" )
+    cat( "Regularization parameter(s)","=", object$regular_lam, "\n" )
     cat( "Number of regularized parameters","=", object$n_reg, "\n\n" )
 
     #* class probabilities

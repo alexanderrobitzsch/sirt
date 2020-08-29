@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -42,7 +46,6 @@ Haberman (2009). This method is a generalization of log-mean-mean
 linking from one study to several studies. The default a_log=TRUE
 logarithmizes item slopes for linking while otherwise an additive regression
 model is assumed for the original item loadings (see Details; Battauz, 2017)" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -60,7 +63,7 @@ model is assumed for the original item loadings (see Details; Battauz, 2017)" />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -92,7 +95,7 @@ model is assumed for the original item loadings (see Details; Battauz, 2017)" />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexanderrobitzsch/sirt">
+  <a href="https://github.com/alexanderrobitzsch/sirt/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -131,7 +134,8 @@ model is assumed for the original item loadings (see Details; Battauz, 2017)</p>
 <span class='co'># S3 method for linking.haberman</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
 
-<span class='fu'>linking.haberman.lq</span>(<span class='no'>itempars</span>, <span class='kw'>pow</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-3</span>, <span class='kw'>a_log</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>use_nu</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+<span class='fu'>linking.haberman.lq</span>(<span class='no'>itempars</span>, <span class='kw'>pow</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-3</span>, <span class='kw'>a_log</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>use_nu</span><span class='kw'>=</span><span class='fl'>FALSE</span>,
+      <span class='kw'>est_pow</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lower_pow</span><span class='kw'>=</span><span class='fl'>.1</span>, <span class='kw'>upper_pow</span><span class='kw'>=</span><span class='fl'>3</span>)
 
 <span class='co'># S3 method for linking.haberman.lq</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
@@ -143,7 +147,7 @@ model is assumed for the original item loadings (see Details; Battauz, 2017)</p>
 <span class='fu'>linking_haberman_itempars_convert</span>(<span class='kw'>itempars</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>lambda</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>nu</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>a</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='kw'>NULL</span>)
 
 <span class='co'>## L0 polish precedure minimizing number of interactions in two-way table</span>
-<span class='fu'>L0_polish</span>(<span class='no'>x</span>, <span class='no'>tol</span>, <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>0.01</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>30</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</pre>
+<span class='fu'>L0_polish</span>(<span class='no'>x</span>, <span class='no'>tol</span>, <span class='kw'>conv</span><span class='kw'>=</span><span class='fl'>0.01</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>30</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -219,6 +223,31 @@ of main effects should be simultaneously adjusted</p></td>
       <td><p>Epsilon value used in differentiable approximating function</p></td>
     </tr>
     <tr>
+      <th>use_nu</th>
+      <td><p>Logical indicating whether item intercepts instead of
+item difficulties are used in linking</p></td>
+    </tr>
+    <tr>
+      <th>est_pow</th>
+      <td><p>Logical indicating whether power values should be estimated</p></td>
+    </tr>
+    <tr>
+      <th>lower_pow</th>
+      <td><p>Lower bound for estimated power</p></td>
+    </tr>
+    <tr>
+      <th>upper_pow</th>
+      <td><p>Upper bound for estimated power</p></td>
+    </tr>
+    <tr>
+      <th>lambda</th>
+      <td><p>Matrix containing item loadings</p></td>
+    </tr>
+    <tr>
+      <th>nu</th>
+      <td><p>Matrix containing item intercepts</p></td>
+    </tr>
+    <tr>
       <th>object</th>
       <td><p>Object of class <code>linking.haberman</code>.</p></td>
     </tr>
@@ -253,10 +282,6 @@ of main effects should be simultaneously adjusted</p></td>
     <tr>
       <th>tol</th>
       <td><p>Tolerance value</p></td>
-    </tr>
-    <tr>
-      <th>eps</th>
-      <td><p>Convergence criterion</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -320,7 +345,8 @@ of explained item slopes and intercepts after linking
 in comparison to item parameters across groups
 (Asparouhov &amp; Muthen, 2014).</p>
 <p>The function \(linking.haberman.lq\) uses the loss function \(\rho(x)=|x|^q\).
-The originally proposed Haberman linking can be obtained with <code>pow=2</code> (\(q=2\)).</p>
+The originally proposed Haberman linking can be obtained with <code>pow=2</code> (\(q=2\)).
+The powers can also be estimated (argument <code>est_pow=TRUE</code>).</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list with following entries</p>
@@ -396,7 +422,7 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 
 <span class='co'># Model 1: Linking three studies calibrated by the Rasch model</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.pars1.rasch</span>)
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>data.pars1.rasch</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>data.pars1.rasch</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># Model 1b: Linking these studies but weigh these studies by</span>
@@ -407,16 +433,16 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 <span class='no'>itempars</span>$<span class='no'>wgt</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>itempars</span>[ <span class='no'>itempars</span>$<span class='no'>study</span><span class='kw'>==</span><span class='st'>"study1"</span>,<span class='st'>"wgt"</span>] <span class='kw'>&lt;-</span> <span class='fl'>3</span>
 <span class='no'>itempars</span>[ <span class='no'>itempars</span>$<span class='no'>study</span><span class='kw'>==</span><span class='st'>"study2"</span>,<span class='st'>"wgt"</span>] <span class='kw'>&lt;-</span> <span class='fl'>.5</span>
-<span class='no'>mod1b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span> )
+<span class='no'>mod1b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1b</span>)
 
 <span class='co'># Model 2: Linking three studies calibrated by the 2PL model</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.pars1.2pl</span>)
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>data.pars1.2pl</span> )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>data.pars1.2pl</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># additive model instead of logarithmic model for item slopes</span>
-<span class='no'>mod2b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>data.pars1.2pl</span>, <span class='kw'>a_log</span><span class='kw'>=</span><span class='fl'>FALSE</span> )
+<span class='no'>mod2b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>data.pars1.2pl</span>, <span class='kw'>a_log</span><span class='kw'>=</span><span class='fl'>FALSE</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2b</span>)
 
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -430,35 +456,35 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 
 <span class='co'># scaling at T1</span>
 <span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='no'>data.long</span>[, <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>(<span class='st'>"T1"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data.long</span>) ) ]
-<span class='no'>resT1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span> )
+<span class='no'>resT1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span> )
 <span class='no'>itempartable1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"study"</span><span class='kw'>=</span><span class='st'>"T1"</span>, <span class='no'>resT1</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"item"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span> ) ] )
 <span class='co'># scaling at T2</span>
 <span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='no'>data.long</span>[, <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>(<span class='st'>"T2"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data.long</span>) ) ]
-<span class='no'>resT2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span> )
+<span class='no'>resT2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>resT2</span>)
 <span class='no'>itempartable2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"study"</span><span class='kw'>=</span><span class='st'>"T2"</span>, <span class='no'>resT2</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"item"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span> ) ] )
 <span class='no'>itempartable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>( <span class='no'>itempartable1</span>, <span class='no'>itempartable2</span> )
 <span class='no'>itempartable</span>[,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substring</a></span>( <span class='no'>itempartable</span>[,<span class='fl'>2</span>], <span class='fl'>1</span>, <span class='fl'>2</span> )
 <span class='co'># estimate linking parameters</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempartable</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempartable</span> )
 
 <span class='co'>#******</span>
 <span class='co'># Model 2: Scaling with the 2PL model</span>
 
 <span class='co'># scaling at T1</span>
 <span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='no'>data.long</span>[, <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>(<span class='st'>"T1"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data.long</span>) ) ]
-<span class='no'>resT1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>6</span>)
+<span class='no'>resT1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>6</span>)
 <span class='no'>itempartable1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"study"</span><span class='kw'>=</span><span class='st'>"T1"</span>, <span class='no'>resT1</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"item"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span> ) ] )
 
 <span class='co'># scaling at T2</span>
 <span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='no'>data.long</span>[, <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>(<span class='st'>"T2"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data.long</span>) ) ]
-<span class='no'>resT2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>6</span>)
+<span class='no'>resT2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>6</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>resT2</span>)
 <span class='no'>itempartable2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"study"</span><span class='kw'>=</span><span class='st'>"T2"</span>, <span class='no'>resT2</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"item"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span> ) ] )
 <span class='no'>itempartable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>( <span class='no'>itempartable1</span>, <span class='no'>itempartable2</span> )
 <span class='no'>itempartable</span>[,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substring</a></span>( <span class='no'>itempartable</span>[,<span class='fl'>2</span>], <span class='fl'>1</span>, <span class='fl'>2</span> )
 <span class='co'># estimate linking parameters</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempartable</span> )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempartable</span> )
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 3: 2 Studies - 1PL and 2PL linking</span>
@@ -469,15 +495,15 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 <span class='co'># define item parameters</span>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>1.5</span>, <span class='fl'>1.5</span>, <span class='kw'>length</span><span class='kw'>=</span><span class='no'>I</span> )
 <span class='co'># simulate data</span>
-<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
-<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0.5</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.50</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0.5</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.50</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
 
 <span class='co'>#*** Model 1: 1PL</span>
 <span class='co'># 1PL Study 1</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='no'>I</span>) )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='no'>I</span>) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='co'># 1PL Study 2</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='no'>I</span>) )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='no'>I</span>) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># collect item parameters</span>
@@ -487,7 +513,7 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 <span class='no'>itempars</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>( <span class='no'>dfr1</span>, <span class='no'>dfr2</span> )
 
 <span class='co'># Haberman linking</span>
-<span class='no'>linkhab1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>)
+<span class='no'>linkhab1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>)
   <span class='co'>## Transformation parameters (Haberman linking)</span>
   <span class='co'>##    study    At     Bt</span>
   <span class='co'>## 1 study1 1.000  0.000</span>
@@ -510,10 +536,10 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 
 <span class='co'>#*** Model 2: 2PL</span>
 <span class='co'># 2PL Study 1</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='no'>I</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='no'>I</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='co'># 2PL Study 2</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='no'>I</span> )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='no'>I</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># collect item parameters</span>
@@ -523,7 +549,7 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 <span class='no'>itempars</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>( <span class='no'>dfr1</span>, <span class='no'>dfr2</span> )
 
 <span class='co'># Haberman linking</span>
-<span class='no'>linkhab2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>)
+<span class='no'>linkhab2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>)
   <span class='co'>## Transformation parameters (Haberman linking)</span>
   <span class='co'>##    study    At     Bt</span>
   <span class='co'>## 1 study1 1.000  0.000</span>
@@ -553,22 +579,22 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 <span class='co'># define item parameters</span>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>1.5</span>, <span class='fl'>1.5</span>, <span class='kw'>length</span><span class='kw'>=</span><span class='no'>I</span> )
 <span class='co'># simulate data</span>
-<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
-<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0.5</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.50</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
-<span class='no'>dat3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span>-<span class='fl'>0.2</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>0.8</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0.5</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.50</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span>-<span class='fl'>0.2</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>0.8</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
 <span class='co'># set some items to non-administered</span>
 <span class='no'>dat3</span> <span class='kw'>&lt;-</span> <span class='no'>dat3</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>4</span>) ]
 <span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='no'>dat2</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>) ]
 
 <span class='co'>#*** Model 1: 1PL in sirt</span>
 <span class='co'># 1PL Study 1</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat1</span>)) )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat1</span>)) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='co'># 1PL Study 2</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat2</span>)) )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat2</span>)) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 <span class='co'># 1PL Study 3</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat3</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat3</span>)) )
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat3</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat3</span>)) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'># collect item parameters</span>
@@ -583,7 +609,7 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
     <span class='no'>mod3</span>$<span class='no'>person</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"EAP"</span>,<span class='st'>"SE.EAP"</span>) ] )
 
 <span class='co'># Haberman linking</span>
-<span class='no'>linkhab1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>personpars</span><span class='kw'>=</span><span class='no'>personpars</span>)
+<span class='no'>linkhab1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>personpars</span><span class='kw'>=</span><span class='no'>personpars</span>)
 <span class='co'># compare item parameters</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='no'>linkhab1</span>$<span class='no'>joint.itempars</span>[,-<span class='fl'>1</span>], <span class='no'>linkhab1</span>$<span class='no'>b.trans</span> )[<span class='fl'>1</span>:<span class='fl'>5</span>,], <span class='fl'>3</span> )
   <span class='co'>##            aj     bj study1 study2 study3</span>
@@ -630,7 +656,7 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 <span class='no'>personpars</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(  <span class='no'>pvmod1</span>$<span class='no'>pv</span>[,-<span class='fl'>1</span>], <span class='no'>pvmod2</span>$<span class='no'>pv</span>[,-<span class='fl'>1</span>], <span class='no'>pvmod3</span>$<span class='no'>pv</span>[,-<span class='fl'>1</span>] )
 
 <span class='co'># Haberman linking</span>
-<span class='no'>linkhab2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>,<span class='kw'>personpars</span><span class='kw'>=</span><span class='no'>personpars</span>)
+<span class='no'>linkhab2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>,<span class='kw'>personpars</span><span class='kw'>=</span><span class='no'>personpars</span>)
   <span class='co'>##   Linear transformation for person parameters theta</span>
   <span class='co'>##      study A_theta B_theta</span>
   <span class='co'>##   1 study1   1.000   0.000</span>
@@ -656,15 +682,15 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
                  <span class='st'>"b"</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='no'>b</span>, <span class='no'>b</span> + <span class='no'>bdif</span>  )  )
 
 <span class='co'>#*** Model 1: Haberman linking with least squares regression</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'>#*** Model 2: Haberman linking with robust bisquare regression with fixed trimming value</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.4</span>)
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.4</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'>#*** Model 2: Haberman linking with robust bisquare regression with estimated trimming value</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>)
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'>## see also Example 3 of ?sirt::robust.linking</span>
@@ -679,23 +705,23 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 <span class='no'>itempars</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>study</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>4</span>), <span class='kw'>item</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>4</span>,<span class='fl'>2</span>), <span class='kw'>a</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>b1</span>,<span class='no'>b2</span>) )
 
 <span class='co'>#- Least squares regression</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"OLS"</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"OLS"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'>#- Bisquare regression with estimated and fixed trimming factors</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>)
-<span class='no'>mod2a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.4</span>)
-<span class='no'>mod2b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>1.2</span>)
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>)
+<span class='no'>mod2a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.4</span>)
+<span class='no'>mod2b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>1.2</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2a</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2b</span>)
 
 <span class='co'>#- Least squares trimmed regression</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"LTS"</span>)
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"LTS"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'>#- median regression</span>
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"MED"</span>)
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>( <span class='kw'>itempars</span><span class='kw'>=</span><span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"MED"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod4</span>)
 
 <span class='co'>#############################################################################</span>
@@ -715,20 +741,20 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 <span class='co'># median polish (=stats::medpolish())</span>
 <span class='no'>tmod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>:::</span><span class='fu'>L1_polish</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>pars</span>)
 <span class='co'># L0 polish with tolerance criterion of .3</span>
-<span class='no'>tmod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>L0_polish</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>pars</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>.3</span>)
+<span class='no'>tmod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>L0_polish</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>pars</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>.3</span>)
 
 <span class='co'>#- prepare itempars input</span>
-<span class='no'>itempars</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking_haberman_itempars_prepare</a></span>(<span class='kw'>b</span><span class='kw'>=</span><span class='no'>pars</span>)
+<span class='no'>itempars</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking_haberman_itempars_prepare</span>(<span class='kw'>b</span><span class='kw'>=</span><span class='no'>pars</span>)
 
 <span class='co'>#- compare different estimation functions for Haberman linking</span>
-<span class='no'>mod01</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"L1"</span>)
-<span class='no'>mod02</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"L0"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.3</span>)
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"OLS"</span>)
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>)
-<span class='no'>mod2a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.4</span>)
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"MED"</span>)
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"LTS"</span>)
-<span class='no'>mod5</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"HUB"</span>)
+<span class='no'>mod01</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"L1"</span>)
+<span class='no'>mod02</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"L0"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.3</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"OLS"</span>)
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>)
+<span class='no'>mod2a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.4</span>)
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"MED"</span>)
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"LTS"</span>)
+<span class='no'>mod5</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"HUB"</span>)
 <span class='no'>mod01</span>$<span class='no'>transf.pars</span>
 <span class='no'>mod02</span>$<span class='no'>transf.pars</span>
 <span class='no'>mod1</span>$<span class='no'>transf.pars</span>
@@ -763,15 +789,15 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 <span class='no'>pars</span> - <span class='no'>pars0</span>
 
 <span class='co'>#* estimate models</span>
-<span class='no'>itempars</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking_haberman_itempars_prepare</a></span>(<span class='kw'>b</span><span class='kw'>=</span><span class='no'>pars</span>)
-<span class='no'>mod0</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"L0"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.2</span>)
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"OLS"</span>)
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>)
-<span class='no'>mod2a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.4</span>)
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"MED"</span>)
-<span class='no'>mod3a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"L1"</span>)
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"LTS"</span>)
-<span class='no'>mod5</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"HUB"</span>)
+<span class='no'>itempars</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking_haberman_itempars_prepare</span>(<span class='kw'>b</span><span class='kw'>=</span><span class='no'>pars</span>)
+<span class='no'>mod0</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"L0"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.2</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"OLS"</span>)
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>)
+<span class='no'>mod2a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.4</span>)
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"MED"</span>)
+<span class='no'>mod3a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"L1"</span>)
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"LTS"</span>)
+<span class='no'>mod5</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"HUB"</span>)
 <span class='no'>mod0</span>$<span class='no'>transf.pars</span>
 <span class='no'>mod1</span>$<span class='no'>transf.pars</span>
 <span class='no'>mod2</span>$<span class='no'>transf.pars</span>
@@ -782,23 +808,16 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 <span class='no'>mod5</span>$<span class='no'>transf.pars</span>
 
 <span class='co'>#* compare results with Haebara linking</span>
-<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haebara.html'>linking.haebara</a></span>(<span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L2"</span>)
-<span class='no'>mod12</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/linking.haebara.html'>linking.haebara</a></span>(<span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L1"</span>)
+<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='linking.haebara.html'>linking.haebara</a></span>(<span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L2"</span>)
+<span class='no'>mod12</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='linking.haebara.html'>linking.haebara</a></span>(<span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L1"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod11</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod12</span>)
 }</pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -809,7 +828,7 @@ see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

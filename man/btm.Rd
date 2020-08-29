@@ -1,5 +1,5 @@
 %% File Name: btm.Rd
-%% File Version: 0.421
+%% File Version: 0.422
 
 \name{btm}
 \alias{btm}
@@ -84,6 +84,7 @@ The extended Bradley-Terry model for the comparison of individuals
 \deqn{P(X_{ij}=1 ) \propto \exp( \eta + \theta_i ) }
 \deqn{P(X_{ij}=0 ) \propto \exp(  \theta_j ) }
 \deqn{P(X_{ij}=0.5) \propto \exp( \delta + w_T ( \eta  + \theta_i +\theta_j ) ) }
+
 The parameters \eqn{\theta_i} denote the abilities, \eqn{\delta} is the
 tendency of the occurrence of ties and \eqn{\eta} is the home-advantage
 effect. The weighting parameter \eqn{w_T} governs the importance of ties and can be

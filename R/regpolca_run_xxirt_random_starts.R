@@ -1,7 +1,8 @@
 ## File Name: regpolca_run_xxirt_random_starts.R
-## File Version: 0.03
+## File Version: 0.14
 
-regpolca_run_xxirt_random_starts <- function(args, random_starts, sd_noise_init)
+regpolca_run_xxirt_random_starts <- function(args, random_starts, sd_noise_init,
+    par_item_init=NULL)
 {
     partable1 <- partable <- args$partable
     customTheta1 <- customTheta <- args$customTheta
@@ -11,9 +12,13 @@ regpolca_run_xxirt_random_starts <- function(args, random_starts, sd_noise_init)
     partable_opt <- NULL
     par_Theta_opt <- NULL
     rr_opt <- NULL
+    if (!is.null(par_item_init)){
+        args$partable$value <- par_item_init
+    }
     if (random_starts>0){
         for (rr in 1L:random_starts){
-            sd_rr <- sd_noise_init*rr/random_starts
+            fac_rr <- sqrt(rr-1)
+            sd_rr <- sd_noise_init*fac_rr/random_starts
             partable1$value <- partable$value + partable$est*stats::rnorm(NR, sd=sd_rr)
             args$verbose_index <- paste0("Random start ",rr)
             args$partable <- partable1

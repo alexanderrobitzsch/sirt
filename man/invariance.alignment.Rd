@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.648
+%% File Version: 1.651
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -297,7 +297,7 @@ wgt <- matrix( sqrt(Ng), length(Ng), ncol(nu) )
 
 #***
 # Model 1: Alignment using a quadratic loss function
-mod1 <- sirt::invariance.alignment( lambda, nu, wgt, align.pow=(2,2) )
+mod1 <- sirt::invariance.alignment( lambda, nu, wgt, align.pow=c(2,2) )
 summary(mod1)
 
 #****

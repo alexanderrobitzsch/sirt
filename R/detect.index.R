@@ -1,5 +1,5 @@
 ## File Name: detect.index.R
-## File Version: 0.30
+## File Version: 0.34
 
 
 
@@ -15,7 +15,7 @@ detect.index <- function( ccovtable, itemcluster )
     N <- ccovtable$N
     sqrt_N <- sqrt(N)
     sign_ccov <- sign(ccov)
-    abs_ccov <- abs( ccov )
+    abs_ccov <- abs(ccov)
     # number of parameters
     np <- 5
     parnames <- weighted.indizes <- indizes <- rep(NA,np)

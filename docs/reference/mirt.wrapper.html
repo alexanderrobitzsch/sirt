@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,7 +41,6 @@
 
 <meta property="og:title" content="Some Functions for Wrapping with the <span class="pkg">mirt</span> Package — mirt.wrapper" />
 <meta property="og:description" content="Some functions for wrapping with the mirt package." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -55,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -87,7 +90,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexanderrobitzsch/sirt">
+  <a href="https://github.com/alexanderrobitzsch/sirt/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -297,7 +300,7 @@ Examples 1, 2)</p>
 <span class='co'># A development version can be installed from GitHub</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>){ <span class='co'># default is set to FALSE, use the installed version</span>
    <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>devtools</span>)
-   <span class='kw pkg'>devtools</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/devtools/man/remote-reexports.html'>install_github</a></span>(<span class='st'>"philchalmers/mirt"</span>)
+   <span class='kw pkg'>devtools</span><span class='kw ns'>::</span><span class='fu'><a href='https://devtools.r-lib.org//reference/remote-reexports.html'>install_github</a></span>(<span class='st'>"philchalmers/mirt"</span>)
           }
 <span class='co'># now, load mirt</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mirt</span>)
@@ -321,7 +324,7 @@ Examples 1, 2)</p>
 <span class='co'># extract parameter values in mirt</span>
 <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/mod2values.html'>mod2values</a></span>(<span class='no'>mod1</span>)
 <span class='co'># extract posterior</span>
-<span class='no'>post1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/mirt.wrapper.html'>mirt.wrapper.posterior</a></span>(<span class='no'>mod1</span>)
+<span class='no'>post1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.posterior</span>(<span class='no'>mod1</span>)
 <span class='co'># extract item response functions</span>
 <span class='no'>probs1</span> <span class='kw'>&lt;-</span> <span class='fu'>IRT.irfprob</span>(<span class='no'>mod1</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>probs1</span>)
@@ -344,7 +347,7 @@ Examples 1, 2)</p>
 <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mod2</span>)
 <span class='fu'>mirt.wrapper.coef</span>(<span class='no'>mod2</span>)$<span class='no'>coef</span>
 <span class='co'># extract posterior</span>
-<span class='no'>post2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/mirt.wrapper.html'>mirt.wrapper.posterior</a></span>(<span class='no'>mod2</span>)
+<span class='no'>post2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.posterior</span>(<span class='no'>mod2</span>)
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 2: Extracting item parameters and posterior for differering</span>
@@ -367,7 +370,7 @@ Examples 1, 2)</p>
 <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mod1</span>)
 <span class='fu'>mirt.wrapper.coef</span>(<span class='no'>mod1</span>)$<span class='no'>coef</span>
 <span class='co'># extract posterior</span>
-<span class='no'>post1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/mirt.wrapper.html'>mirt.wrapper.posterior</a></span>(<span class='no'>mod1</span>)
+<span class='no'>post1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.posterior</span>(<span class='no'>mod1</span>)
 
 <span class='co'>#############################################################################</span>
 <span class='co'># EXAMPLE 3: Multiple group model; simulated dataset from mirt package</span>
@@ -459,11 +462,11 @@ Examples 1, 2)</p>
     A ~ .5*1                      # set mean of A to .5
     B ~ 1                         # estimate mean of B
     "</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>, <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>) )
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='lavaan2mirt.html'>lavaan2mirt</a></span>( <span class='no'>dat</span>, <span class='no'>lavmodel</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>technical</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NCYCLES</span><span class='kw'>=</span><span class='fl'>3</span>) )
 <span class='co'># estimated coefficients</span>
 <span class='fu'>mirt.wrapper.coef</span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
 <span class='co'># extract factor scores</span>
-<span class='no'>fres</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/mirt.wrapper.html'>mirt.wrapper.fscores</a></span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
+<span class='no'>fres</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.fscores</span>(<span class='no'>res</span>$<span class='no'>mirt</span>)
 <span class='co'># look at factor scores</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>fres</span>$<span class='no'>person</span>,<span class='fl'>2</span>))
   <span class='co'>##     case    M EAP.Var1 SE.EAP.Var1 EAP.Var2 SE.EAP.Var2 EAP.Var3 SE.EAP.Var3 MLE.Var1</span>
@@ -486,17 +489,10 @@ Examples 1, 2)</p>
   <span class='co'>##   0.574 0.452 0.541</span>
 }</pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples-for-the-mirt-package">Examples for the <span class="pkg">mirt</span> Package</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -507,7 +503,7 @@ Examples 1, 2)</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

@@ -1,5 +1,5 @@
 %% File Name: sirt-utilities.Rd
-%% File Version: 0.397
+%% File Version: 0.402
 
 \name{sirt-utilities}
 \alias{sirt-utilities}
@@ -30,6 +30,7 @@
 \alias{sirt_dnorm_discrete}
 \alias{sirt_abs_smooth}
 \alias{sirt_permutations}
+\alias{sirt_rcpp_discrete_inverse}
 
 
 \title{Utility Functions in \pkg{sirt}}
@@ -102,6 +103,9 @@ sirt_summary_print_package(pack)
 sirt_summary_print_rsession()
 # print call
 sirt_summary_print_call(CALL)
+
+# discrete inverse function
+sirt_rcpp_discrete_inverse(x0, y0, y)
 }
 
 \arguments{
@@ -139,6 +143,8 @@ sirt_summary_print_call(CALL)
 \item{grep_string}{String}
 \item{pack}{Package name}
 \item{CALL}{Call statement}
+\item{x0}{Vector}
+\item{y0}{Vector}
 }
 
 %\details{

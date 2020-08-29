@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.481
+%% File Version: 0.484
 
 \name{xxirt}
 \alias{xxirt}
@@ -34,7 +34,7 @@ and latent trait distributions can be specified by the user (see Details).
 xxirt(dat, Theta=NULL, itemtype=NULL, customItems=NULL, partable=NULL,
        customTheta=NULL, group=NULL, weights=NULL, globconv=1e-06, conv=1e-04,
        maxit=200, mstep_iter=4, mstep_reltol=1e-06, h=1E-4, use_grad=TRUE,
-       verbose=TRUE, penalty_fun_item=NULL)
+       verbose=TRUE, penalty_fun_item=NULL, verbose_index=NULL)
 
 \method{summary}{xxirt}(object, digits=3, file=NULL, ...)
 
@@ -128,6 +128,8 @@ estimation}
 \item{file}{Optional file name to which \code{summary} output is written}
 \item{parm}{Optional vector of parameters}
 \item{level}{Confidence level}
+\item{verbose_index}{Logical indicating whether item index should be
+printed in estimation output}
 \item{x}{Object of class \code{xxirt}}
 \item{type}{Type of person parameter estimate. Currently, only
 \code{EAP} is implemented.}

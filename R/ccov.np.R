@@ -1,13 +1,18 @@
 ## File Name: ccov.np.R
-## File Version: 1.190
+## File Version: 1.208
 
 
 #---- nonparametric estimation of conditional covariance
 ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
-        progress=TRUE, scale_score=TRUE, adjust_thetagrid=TRUE, smooth=TRUE )
+        progress=TRUE, scale_score=TRUE, adjust_thetagrid=TRUE, smooth=TRUE,
+        use_sum_score=FALSE)
 {
     # number of Items I
     I <- ncol(data)
+    if (use_sum_score){
+        smooth <- FALSE
+        score <- rowSums(data)
+    }
     # z-standardization of score
     if (scale_score){
         score <- scale(score)[,1]
@@ -67,8 +72,9 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
     # smoothing all item pairs
     # calculate conditional covariances
     FF <- nrow(ccov.table)
-    ccov.matrix <- prod.matrix <- matrix( 0, nrow=length(thetagrid ), ncol=FF )
+    ccov.matrix <- prod.matrix <- matrix( 0, nrow=length(thetagrid), ncol=FF )
     ii <- 1
+    ccov_sum_score <- rep(NA, FF)
     for (ff in 1:FF){
         if (FF>20){
             display <- seq( 1, FF, floor( FF/20 ) )[ 2:20 ]
@@ -78,19 +84,35 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
         data.ff <- data[, c( ccov.table[ff,1], ccov.table[ff,2] ) ]
         which.ff <- which( rowSums( is.na(data.ff) )==0  )
         data.ff <- data.ff[ which.ff, ]
-        prod.matrix[,ff] <- ccov_np_regression(x=score[ which.ff], y=data.ff[,1]*data.ff[,2],
+        score.ff <- score[which.ff]
+        prod.matrix[,ff] <- ccov_np_regression(x=score.ff, y=data.ff[,1]*data.ff[,2],
                         xgrid=thetagrid, bwscale=bwscale, smooth=smooth, score=score)
         m12 <- icc_items[, ccov.table[ff,1] ]*icc_items[, ccov.table[ff,2] ]
         ccov.matrix[,ff] <- prod.matrix[,ff] - m12
+
+        #- computations based on sum score
+        if (use_sum_score){
+            res1 <- ccov_np_compute_ccov_sum_score(score=score.ff, data=data.ff)
+            score_ff2 <- score.ff - data.ff[,1] - data.ff[,2]
+            res2 <- ccov_np_compute_ccov_sum_score(score=score_ff2, data=data.ff)
+            ccov_sum_score[ff] <- ( res1$ccov_aggr + res2$ccov_aggr ) / 2
+        }
+
         # print progress
         ii <- ccov_np_print_progress(progress=progress, i=ii, ii=ff, display=display)
     }
     # remove NAs from ccov.matrix
     ccov.matrix[ is.na(ccov.matrix) ] <- 0
     sirt_progress_cat(progress=progress)
+
     # calculate (weighted) conditional covariance
     ccov.table$ccov <- apply( ccov.matrix, 2, FUN=function(sp){
                         stats::weighted.mean( x=sp, w=wgt_thetagrid ) } )
+    if (use_sum_score){
+        ccov_sum_score[ is.na(ccov_sum_score) ] <- 0
+        ccov.table$ccov <- ccov_sum_score
+    }
+
     #--- output
     res <- list( ccov.table=ccov.table, ccov.matrix=ccov.matrix,
                     data=data, score=score, icc.items=icc_items,

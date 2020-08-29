@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2020-04-18  |  Last: sirt 3.10-31
+VERSIONS sirt 3.10  |  2020-08-29  |  Last: sirt 3.10-64
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()
@@ -54,18 +54,26 @@ NOTE  * included general distance function dist='Lp' in
         linking.haebara. Added arguments 'pow' and 'use_der'.
 NOTE  * included argument 'meth' in invariance.alignment()
 ADDED * included utility function lq_fit() for fitting regression
-        models using the L_q norm
+        models using the L_q norm. Also exported function
+        lq_fit_estimate_power() for estimating power values.
 NOTE  * included utility function linking_haberman_itempars_convert()
 ADDED * included alternative loss function |x|^q (L_q distance) for
         Haberman linking in linking.haberman.lq()
+ADDED * included function dexppow() and rexppow() for exponential
+        power function distribution       
 NOTE  * included argument 'wgt.ties' in btm() that allows a weighting
         of ties different from .5
 ADDED * included predict method for objects of class 'btm'
+NOTE  * exported utility function sirt_rcpp_discrete_inverse()
+NOTE  * added argument 'use_sum_score' in conf.detect(), expl.detect()
+        and ccov.np(). With use_sum_score=TRUE, the bias-corrected
+        DETECT estimator of Zhang and Stout (1999) can be obtained
+        (requested by Cengiz Zopluoglu)
 
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: linking.haebara (1),
-        lq_fit (1), btm (1)
+        lq_fit (1,2), btm (1)
 
 
 

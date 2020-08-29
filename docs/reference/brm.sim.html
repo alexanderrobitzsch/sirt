@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -42,7 +46,6 @@ simulating the model, brm.irf computes the item response
 function. The Beta item response model is estimated as a discrete
 version to enable estimation in standard IRT software like
 mirt or TAM packages." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -60,7 +63,7 @@ mirt or TAM packages." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -92,7 +95,7 @@ mirt or TAM packages." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexanderrobitzsch/sirt">
+  <a href="https://github.com/alexanderrobitzsch/sirt/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -247,7 +250,7 @@ regression models in <span style="R">R</span> (Gruen, Kosmidis &amp; Zeileis, 20
 
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>865</span>)
 <span class='no'>theta</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span> )
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/brm.sim.html'>brm.sim</a></span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='no'>theta</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='no'>delta</span>, <span class='kw'>tau</span><span class='kw'>=</span><span class='no'>tau</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='no'>K</span>)
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>brm.sim</span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='no'>theta</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='no'>delta</span>, <span class='kw'>tau</span><span class='kw'>=</span><span class='no'>tau</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='no'>K</span>)
 <span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/psych/man/describe.html'>describe</a></span>(<span class='no'>dat</span>)
 
 <span class='co'>#*** (2) some preliminaries for estimation of the model in mirt</span>
@@ -257,7 +260,7 @@ regression models in <span style="R">R</span> (Gruen, Kosmidis &amp; Zeileis, 20
 
 <span class='co'># compute item response function</span>
 <span class='no'>ii</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>     <span class='co'># item ii=1</span>
-<span class='no'>b1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/brm.sim.html'>brm.irf</a></span>( <span class='kw'>Theta</span><span class='kw'>=</span><span class='no'>Theta</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='no'>delta</span>[<span class='no'>ii</span>], <span class='kw'>tau</span><span class='kw'>=</span><span class='no'>tau</span>[<span class='no'>ii</span>],  <span class='kw'>ncat</span><span class='kw'>=</span><span class='no'>K</span> )
+<span class='no'>b1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>brm.irf</span>( <span class='kw'>Theta</span><span class='kw'>=</span><span class='no'>Theta</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='no'>delta</span>[<span class='no'>ii</span>], <span class='kw'>tau</span><span class='kw'>=</span><span class='no'>tau</span>[<span class='no'>ii</span>],  <span class='kw'>ncat</span><span class='kw'>=</span><span class='no'>K</span> )
 <span class='co'># plot item response functions</span>
 <span class='kw pkg'>graphics</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/graphics/matplot.html'>matplot</a></span>( <span class='no'>Theta</span>[,<span class='fl'>1</span>], <span class='no'>b1</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"l"</span> )
 
@@ -270,7 +273,7 @@ regression models in <span style="R">R</span> (Gruen, Kosmidis &amp; Zeileis, 20
      <span class='no'>delta</span> <span class='kw'>&lt;-</span> <span class='no'>par</span>[<span class='fl'>1</span>]
      <span class='no'>tau</span> <span class='kw'>&lt;-</span> <span class='no'>par</span>[<span class='fl'>2</span>]
      <span class='no'>thdim</span> <span class='kw'>&lt;-</span> <span class='no'>par</span>[<span class='fl'>3</span>]
-     <span class='no'>probs</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/brm.sim.html'>brm.irf</a></span>( <span class='kw'>Theta</span><span class='kw'>=</span><span class='no'>Theta</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='no'>delta</span>, <span class='kw'>tau</span><span class='kw'>=</span><span class='no'>tau</span>,  <span class='kw'>ncat</span><span class='kw'>=</span><span class='no'>ncat</span>,
+     <span class='no'>probs</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>brm.irf</span>( <span class='kw'>Theta</span><span class='kw'>=</span><span class='no'>Theta</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='no'>delta</span>, <span class='kw'>tau</span><span class='kw'>=</span><span class='no'>tau</span>,  <span class='kw'>ncat</span><span class='kw'>=</span><span class='no'>ncat</span>,
             <span class='kw'>thdim</span><span class='kw'>=</span><span class='no'>thdim</span>)
      <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='no'>probs</span>)
             }
@@ -297,7 +300,7 @@ regression models in <span style="R">R</span> (Gruen, Kosmidis &amp; Zeileis, 20
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mod1</span>)
 <span class='co'># estimated coefficients and comparison with simulated data</span>
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/mirt.wrapper.html'>mirt.wrapper.coef</a></span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>, <span class='no'>delta</span>, <span class='no'>tau</span> )
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>, <span class='no'>delta</span>, <span class='no'>tau</span> )
 <span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.itemplot</a></span>(<span class='no'>mod1</span>,<span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
 <span class='co'>#---------------------------</span>
@@ -347,23 +350,16 @@ regression models in <span style="R">R</span> (Gruen, Kosmidis &amp; Zeileis, 20
 <span class='no'>m1</span>$<span class='no'>tau.TAM</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>( <span class='no'>m1</span>$<span class='no'>a</span> * <span class='no'>m1</span>$<span class='no'>b</span> )
 
 <span class='co'># compare estimated parameter</span>
-<span class='no'>m2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/mirt.wrapper.html'>mirt.wrapper.coef</a></span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>, <span class='no'>delta</span>, <span class='no'>tau</span> )[,-<span class='fl'>1</span>]
+<span class='no'>m2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>, <span class='no'>delta</span>, <span class='no'>tau</span> )[,-<span class='fl'>1</span>]
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>m2</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(  <span class='st'>"delta.mirt"</span>, <span class='st'>"tau.mirt"</span>, <span class='st'>"thdim"</span>,<span class='st'>"delta.true"</span>,<span class='st'>"tau.true"</span>   )
 <span class='no'>m2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>m1</span>,<span class='no'>m2</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>( <span class='no'>m2</span>, <span class='fl'>3</span> )
 }</pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -374,7 +370,7 @@ regression models in <span style="R">R</span> (Gruen, Kosmidis &amp; Zeileis, 20
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

@@ -1,5 +1,5 @@
 ## File Name: summary.linking.haberman.lq.R
-## File Version: 0.08
+## File Version: 0.11
 
 
 
@@ -26,7 +26,9 @@ summary.linking.haberman.lq <- function( object, digits=3, file=NULL, ... )
     sirt_summary_print_computation_time_s1(object=object$time)
 
     cat("Converged", "=", object$converged, "\n" )
-    cat("Loss function power","=", object$pow, "\n")
+    cat("Estimated power values","=", object$est_pow, "\n")
+    cat("Loss function power slopes","=", object$pow_slopes, "\n")
+    cat("Loss function power intercepts","=", object$pow_intercepts, "\n")
     cat("Epsilon Value", "=", object$eps, "\n" )
     cat("a_log", "=", object$a_log, "\n" )
     cat("use_nu", "=", object$use_nu, "\n" )

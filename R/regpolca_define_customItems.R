@@ -1,5 +1,5 @@
 ## File Name: regpolca_define_customItems.R
-## File Version: 0.03
+## File Version: 0.05
 
 regpolca_define_customItems <- function(ncats, K, dat, par_item_max)
 {
@@ -17,6 +17,7 @@ regpolca_define_customItems <- function(ncats, K, dat, par_item_max)
                     customItems=customItems)
     partable$lower <- -par_item_max
     partable$upper <- par_item_max
+
     #- output
     res <- list(customItems=customItems, partable=partable,
                     itemtype=itemtype)

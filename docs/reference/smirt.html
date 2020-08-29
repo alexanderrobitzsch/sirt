@@ -11,23 +11,27 @@ Compensatory Item Response Model — smirt • sirt</title>
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -42,7 +46,6 @@ Compensatory Item Response Model — smirt" />
 item response model (Bolt &amp;amp; Lall, 2003; Reckase, 2009) as well as
 the partially compensatory item response model (Spray et al., 1990)
 for dichotomous data." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -60,7 +63,7 @@ for dichotomous data." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -92,7 +95,7 @@ for dichotomous data." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexanderrobitzsch/sirt">
+  <a href="https://github.com/alexanderrobitzsch/sirt/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -474,17 +477,17 @@ compensatory multidimensional item response models.</p></div>
 
 <span class='co'>#***</span>
 <span class='co'># Model 1: Noncompensatory 1PL model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>(<span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>10</span> ) <span class='co'># change number of iterations</span>
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>(<span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>10</span> ) <span class='co'># change number of iterations</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>#***</span>
 <span class='co'># Model 2: Noncompensatory 2PL model</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>15</span> )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>15</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># Model 2a: avoid convergence problems with increment.factor</span>
-<span class='no'>mod2a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>30</span>, <span class='kw'>increment.factor</span><span class='kw'>=</span><span class='fl'>1.03</span>)
+<span class='no'>mod2a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>30</span>, <span class='kw'>increment.factor</span><span class='kw'>=</span><span class='fl'>1.03</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2a</span>)
 
 <span class='co'>#***</span>
@@ -493,7 +496,7 @@ compensatory multidimensional item response models.</p></div>
 <span class='no'>c.init</span>[ <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>7</span>)] <span class='kw'>&lt;-</span> <span class='fl'>.2</span>
 <span class='no'>d.init</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='no'>I</span>)
 <span class='no'>d.init</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>8</span>)] <span class='kw'>&lt;-</span> <span class='fl'>.95</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>c.init</span><span class='kw'>=</span><span class='no'>c.init</span>, <span class='kw'>d.init</span><span class='kw'>=</span><span class='no'>d.init</span> )
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>c.init</span><span class='kw'>=</span><span class='no'>c.init</span>, <span class='kw'>d.init</span><span class='kw'>=</span><span class='no'>d.init</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'>#***</span>
@@ -507,19 +510,19 @@ compensatory multidimensional item response models.</p></div>
 <span class='no'>d.estpars</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>,<span class='fl'>9</span>)
 <span class='no'>d.init</span>[ <span class='no'>d.estpars</span> ] <span class='kw'>&lt;-</span> <span class='fl'>.95</span>
 <span class='no'>est.d</span>[ <span class='no'>d.estpars</span> ] <span class='kw'>&lt;-</span> <span class='no'>d.estpars</span>   <span class='co'># different d parameters</span>
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>est.c</span><span class='kw'>=</span><span class='no'>est.c</span>, <span class='kw'>c.init</span><span class='kw'>=</span><span class='no'>c.init</span>,
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>est.c</span><span class='kw'>=</span><span class='no'>est.c</span>, <span class='kw'>c.init</span><span class='kw'>=</span><span class='no'>c.init</span>,
             <span class='kw'>est.d</span><span class='kw'>=</span><span class='no'>est.d</span>, <span class='kw'>d.init</span><span class='kw'>=</span><span class='no'>d.init</span>  )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod4</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 5: Unidimensional 1PL model</span>
 <span class='no'>Qmatrix</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>( <span class='fl'>1</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='no'>I</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>1</span> )
-<span class='no'>mod5</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span> )
+<span class='no'>mod5</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod5</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 6: Unidimensional 2PL model</span>
-<span class='no'>mod6</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span> )
+<span class='no'>mod6</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod6</span>)
 
 <span class='co'>#***</span>
@@ -528,7 +531,7 @@ compensatory multidimensional item response models.</p></div>
 <span class='co'># Therefore Model 7 should have a worse model fit than Model 1</span>
 <span class='no'>Q1</span> <span class='kw'>&lt;-</span> <span class='no'>Q</span>
 <span class='no'>Q1</span>[ <span class='fl'>6</span>:<span class='fl'>10</span>, <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>0</span>
-<span class='no'>mod7</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q1</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>30</span>)
+<span class='no'>mod7</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q1</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>30</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod7</span>)
 
 <span class='co'>#***</span>
@@ -536,7 +539,7 @@ compensatory multidimensional item response models.</p></div>
 <span class='co'>#         assuming zero correlation between dimensions</span>
 <span class='no'>variance.fixed</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>0</span>) )
 <span class='co'># set the covariance between the first and second dimension to zero</span>
-<span class='no'>mod8</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>variance.fixed</span><span class='kw'>=</span><span class='no'>variance.fixed</span>,
+<span class='no'>mod8</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>variance.fixed</span><span class='kw'>=</span><span class='no'>variance.fixed</span>,
             <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>30</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod8</span>)
 
@@ -548,7 +551,7 @@ compensatory multidimensional item response models.</p></div>
 <span class='co'># provide starting values for slopes of first three items on Dimension 1</span>
 <span class='no'>a.init</span>[<span class='fl'>1</span>:<span class='fl'>3</span>,<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='fl'>.55</span>, <span class='fl'>.32</span>, <span class='fl'>1.3</span>)
 
-<span class='no'>mod8b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>variance.fixed</span><span class='kw'>=</span><span class='no'>variance.fixed</span>,
+<span class='no'>mod8b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>variance.fixed</span><span class='kw'>=</span><span class='no'>variance.fixed</span>,
               <span class='kw'>b.init</span><span class='kw'>=</span><span class='no'>b.init</span>, <span class='kw'>a.init</span><span class='kw'>=</span><span class='no'>a.init</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod8b</span>)
 
@@ -565,7 +568,7 @@ compensatory multidimensional item response models.</p></div>
 <span class='no'>Qmatrix</span>[ <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>6</span>,<span class='fl'>7</span>), <span class='fl'>2</span> ] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>Qmatrix</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"F1"</span>, <span class='st'>"F1sq"</span> )
 <span class='co'># estimate model</span>
-<span class='no'>mod9</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>50</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>,
+<span class='no'>mod9</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>50</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>,
            <span class='kw'>theta.k</span><span class='kw'>=</span><span class='no'>theta.k</span>, <span class='kw'>theta.kDES</span><span class='kw'>=</span><span class='no'>theta.kDES</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod9</span>)
 
@@ -582,14 +585,14 @@ compensatory multidimensional item response models.</p></div>
 <span class='no'>Qmatrix</span>[ <span class='fl'>6</span>:<span class='fl'>10</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>) ] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>Qmatrix</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"F1"</span>, <span class='st'>"F2"</span>, <span class='st'>"F1iF2"</span> )
 <span class='co'># estimate model</span>
-<span class='no'>mod10</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>,<span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='no'>theta.k</span>,
+<span class='no'>mod10</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>(<span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>,<span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='no'>theta.k</span>,
             <span class='kw'>theta.kDES</span><span class='kw'>=</span><span class='no'>theta.kDES</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod10</span>)
 
 <span class='co'>#****</span>
 <span class='co'># Model 11: Example Quasi Monte Carlo integration</span>
 <span class='no'>Qmatrix</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>( <span class='fl'>1</span>, <span class='no'>I</span>, <span class='fl'>1</span> )
-<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>qmcnodes</span><span class='kw'>=</span><span class='fl'>1000</span> )
+<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>qmcnodes</span><span class='kw'>=</span><span class='fl'>1000</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod11</span>)
 
 <span class='co'>#############################################################################</span>
@@ -611,13 +614,13 @@ compensatory multidimensional item response models.</p></div>
 <span class='no'>Qmatrix</span>[<span class='fl'>9</span>:<span class='fl'>12</span>,<span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 
 <span class='co'># estimate model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>,
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>,
             <span class='kw'>qmcnodes</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 2: 3-dimensional Rasch model</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>,
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>,
               <span class='kw'>qmcnodes</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
@@ -628,7 +631,7 @@ compensatory multidimensional item response models.</p></div>
 <span class='co'># set the following covariances to zero: cov[1,2]=cov[1,3]=cov[2,3]=0</span>
 
 <span class='co'># estimate model</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>,
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>,
              <span class='kw'>variance.fixed</span><span class='kw'>=</span><span class='no'>variance.fixed</span>, <span class='kw'>qmcnodes</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
@@ -646,7 +649,7 @@ compensatory multidimensional item response models.</p></div>
 <span class='co'># Cov[1,2]=Cov[1,3]=Cov[1,4]=Cov[2,3]=Cov[2,4]=Cov[3,4]=0</span>
 
 <span class='co'># estimate model</span>
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix1</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>,
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix1</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"comp"</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>,
              <span class='kw'>variance.fixed</span><span class='kw'>=</span><span class='no'>variance.fixed</span>, <span class='kw'>qmcnodes</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod4</span>)
 
@@ -687,26 +690,19 @@ compensatory multidimensional item response models.</p></div>
 <span class='co'>#*** Model 1: Joint mu.i parameter for all items</span>
 <span class='no'>est.mu.i</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>,<span class='fl'>3</span>*<span class='no'>I</span>)
 <span class='no'>est.mu.i</span>[ <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>2</span>*<span class='no'>I</span>+<span class='fl'>1</span>,<span class='fl'>3</span>*<span class='no'>I</span>)] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"partcomp"</span>, <span class='kw'>est.mu.i</span><span class='kw'>=</span><span class='no'>est.mu.i</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"partcomp"</span>, <span class='kw'>est.mu.i</span><span class='kw'>=</span><span class='no'>est.mu.i</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'>#*** Model 2: Separate mu.i parameter for all items</span>
 <span class='no'>est.mu.i</span>[ <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>2</span>*<span class='no'>I</span>+<span class='fl'>1</span>,<span class='fl'>3</span>*<span class='no'>I</span>)] <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='no'>I</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"partcomp"</span>, <span class='kw'>est.mu.i</span><span class='kw'>=</span><span class='no'>est.mu.i</span>)
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>irtmodel</span><span class='kw'>=</span><span class='st'>"partcomp"</span>, <span class='kw'>est.mu.i</span><span class='kw'>=</span><span class='no'>est.mu.i</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 }</pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -717,7 +713,7 @@ compensatory multidimensional item response models.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_itemParameters.R
-## File Version: 0.3679
+## File Version: 0.373
 
 
 #--- M-step item parameters
@@ -40,10 +40,6 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
         NP <- sum( partable$parfree==1)
         pen1 <- grad1 <- rep(0,NP)
         pen0 <- 0
-        #-- penalty function
-        if (!is.null(penalty_fun_item)){
-            pen0 <- penalty_fun_item(x=x)
-        }
         for (pp in 1:NP){
             item_index_pp <- item_index[[pp]]
             xh <- x
@@ -61,6 +57,7 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
         pen_h <- xxirt_mstep_itemParameters_evalPrior(partable=partable0, h=h)
         #-- penalty function
         if (!is.null(penalty_fun_item)){
+            pen0 <- penalty_fun_item(x=x)
             for (pp in 1:NP){
                 xh <- x
                 xh[pp] <- xh[pp] + h

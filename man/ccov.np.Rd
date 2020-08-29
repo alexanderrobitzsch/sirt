@@ -1,5 +1,5 @@
 %% File Name: ccov.np.Rd
-%% File Version: 0.228
+%% File Version: 0.229
 
 \name{ccov.np}
 \alias{ccov.np}
@@ -17,7 +17,8 @@ functions (argument \code{smooth}) in the computation of conditional covariances
 }
 \usage{
 ccov.np(data, score, bwscale=1.1, thetagrid=seq(-3, 3, len=200),
-    progress=TRUE, scale_score=TRUE, adjust_thetagrid=TRUE, smooth=TRUE)
+    progress=TRUE, scale_score=TRUE, adjust_thetagrid=TRUE, smooth=TRUE,
+    use_sum_score=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -48,6 +49,9 @@ adjusted if observed values in \code{score} are outside of \code{thetagrid}.
 }
 \item{smooth}{Logical indicating whether smoothing should be
 applied for conditional covariance estimation}
+\item{use_sum_score}{Logical indicating whether sum score should be used.
+With this option, the bias corrected conditional covariance of Zhang and
+Stout (1999) is used.}
 }
 
 \references{

@@ -1,10 +1,10 @@
 ## File Name: conf.detect.R
-## File Version: 1.16
+## File Version: 1.198
 
 
 # Confirmatory DETECT analysis
 conf.detect <- function( data, score, itemcluster, bwscale=1.1, progress=TRUE,
-                        thetagrid=seq( -3,3,len=200))
+                thetagrid=seq( -3,3,len=200), smooth=TRUE, use_sum_score=FALSE)
 {
     CALL <- match.call()
     cat("-----------------------------------------------------------\n" )
@@ -15,7 +15,7 @@ conf.detect <- function( data, score, itemcluster, bwscale=1.1, progress=TRUE,
         PP <- ncol(score)
     }
     is_one_score <- TRUE
-    if (! h1  ){
+    if (! h1 ){
         cat("Conditioning on 1 Score\n" )
     } else {
         cat(paste("Conditioning on ",PP, " Scores\n", sep="") )
@@ -24,26 +24,32 @@ conf.detect <- function( data, score, itemcluster, bwscale=1.1, progress=TRUE,
     cat(paste("Bandwidth Scale:", bwscale, "\n" ) )
     utils::flush.console()
     if ( ! h1 ){
-        ccovtable <- ccov.np( data, score=score, bwscale=bwscale,
-                            progress=progress, thetagrid=thetagrid )
-        res <- detect.index( ccovtable, itemcluster=itemcluster )
+        scale_score <- TRUE
+        if (!smooth){
+            scale_score <- FALSE
+        }
+        ccovtable <- ccov.np( data=data, score=score, bwscale=bwscale,
+                            progress=progress, thetagrid=thetagrid, smooth=smooth,
+                            scale_score=scale_score, use_sum_score=use_sum_score)
+        res <- detect.index( ccovtable=ccovtable, itemcluster=itemcluster )
     } else {
         ccovtable.list <- list()
         for (pp in 1:PP){
             cat( paste( "DETECT Calculation Score ", pp, "\n", sep="") ) ;
             utils::flush.console()
-            ccovtable.list[[pp]] <- ccov.np( data, score=score[,pp],
-                                        bwscale=bwscale, progress=FALSE )
+            ccovtable.list[[pp]] <- ccov.np( data=data, score=score[,pp],
+                                    bwscale=bwscale, smooth=smooth, progress=FALSE,
+                                    scale_score=scale_score, thetagrid=thetagrid,
+                                    use_sum_score=use_sum_score)
         }
-        detect.list <- lapply( ccovtable.list, FUN=function( ccovtable ){
+        detect.list <- lapply( ccovtable.list, FUN=function(ccovtable){
                     detect.index( ccovtable, itemcluster=itemcluster ) } )
         detect.matrix <- matrix( unlist( lapply( detect.list, FUN=function( ll){
                                 c( ll[1,], ll[2,], ll[3,] ) } ) ), nrow=PP, byrow=TRUE)
         detect.summary <- data.frame( "NScores"=PP, "Mean"=colMeans( detect.matrix ),
                                 "SD"=apply( detect.matrix, 2, stats::sd ),
                                 "Min"=apply( detect.matrix, 2, min ),
-                                "Max"=apply( detect.matrix, 2, max )
-                )
+                                "Max"=apply( detect.matrix, 2, max ) )
         rownames(detect.summary) <- c("DETECT Unweighted", "DETECT Weighted", "ASSI Unweighted", "ASSI Weighted",
                     "RATIO Unweighted", "RATIO Weighted" )
     }
@@ -59,6 +65,7 @@ conf.detect <- function( data, score, itemcluster, bwscale=1.1, progress=TRUE,
     res$CALL <- CALL
     res$bwscale <- bwscale
     res$itemcluster <- itemcluster
+    res$smooth <- smooth
     #--- print
     print(round(res$detect.summary,3))
     #--- return

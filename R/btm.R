@@ -1,5 +1,5 @@
 ## File Name: btm.R
-## File Version: 1.532
+## File Version: 1.535
 
 
 #--- Bradley-Terry model in sirt
@@ -243,6 +243,7 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
 
     # log-likelihood
     NObs <- nrow(dat0)
+    dat0$result <- dat0[,3]
     ll <- rep(0,NObs)
     ll <- ll+log(probs[,1])*(dat0$result==1)
     ll <- ll+log(probs[,2])*(dat0$result==0)
