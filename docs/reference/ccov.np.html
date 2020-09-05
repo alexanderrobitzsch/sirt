@@ -129,7 +129,7 @@ functions (argument <code>smooth</code>) in the computation of conditional covar
 
     <pre class="usage"><span class='fu'>ccov.np</span>(<span class='no'>data</span>, <span class='no'>score</span>, <span class='kw'>bwscale</span><span class='kw'>=</span><span class='fl'>1.1</span>, <span class='kw'>thetagrid</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>200</span>),
     <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>scale_score</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>adjust_thetagrid</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>smooth</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
-    <span class='kw'>use_sum_score</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</pre>
+    <span class='kw'>use_sum_score</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>bias_corr</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,6 +178,11 @@ applied for conditional covariance estimation</p></td>
       <td><p>Logical indicating whether sum score should be used.
 With this option, the bias corrected conditional covariance of Zhang and
 Stout (1999) is used.</p></td>
+    </tr>
+    <tr>
+      <th>bias_corr</th>
+      <td><p>Logical indicating whether bias correction (Zhang &amp; Stout, 1999)
+should be utilized if <code>use_sum_score=TRUE</code>.</p></td>
     </tr>
     </table>
 

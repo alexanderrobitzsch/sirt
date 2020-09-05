@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2020-08-29  |  Last: sirt 3.10-64
+VERSIONS sirt 3.10  |  2020-09-05  |  Last: sirt 3.10-67
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()
@@ -68,7 +68,11 @@ NOTE  * exported utility function sirt_rcpp_discrete_inverse()
 NOTE  * added argument 'use_sum_score' in conf.detect(), expl.detect()
         and ccov.np(). With use_sum_score=TRUE, the bias-corrected
         DETECT estimator of Zhang and Stout (1999) can be obtained
-        (requested by Cengiz Zopluoglu)
+        (requested by Cengiz Zopluoglu, Github Issue #13)
+NOTE  * included argument 'bias_corr' in ccov.np() and conf.detect()
+NOTE  * added arguments 'smooth', 'hclust_method', and 'estsample'
+        in expl.detect() (related to Github Issue #15)
+
 
 
 DATA  * included/modified datasets: ---

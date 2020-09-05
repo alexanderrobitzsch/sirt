@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_pbvnorm.cpp
-//// File Version: 0.03
+//// File Version: 0.05
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -98,7 +98,6 @@ double sirt_rcpp_pbvnorm0( double h1, double hk, double r)
         if (r < 0){
             bv = sirt_rcpp_pnorm0(h1) - bv;
         }
-
     } else {
         h3=h1*h2;
         for (int ii=0; ii<NX; ii++){
@@ -117,7 +116,7 @@ double sirt_rcpp_pbvnorm0( double h1, double hk, double r)
 ///** sirt_rcpp_pbvnorm
 // [[Rcpp::export]]
 Rcpp::NumericVector sirt_rcpp_pbvnorm( Rcpp::NumericVector x, Rcpp::NumericVector y,
-        Rcpp::NumericVector rho)
+            Rcpp::NumericVector rho)
 {
     int N = x.size();
     Rcpp::NumericVector res(N);
@@ -153,7 +152,7 @@ double sirt_rcpp_dbvnorm0( double x, double y, double rho, bool use_log)
 ///** sirt_rcpp_dbvnorm
 // [[Rcpp::export]]
 Rcpp::NumericVector sirt_rcpp_dbvnorm( Rcpp::NumericVector x, Rcpp::NumericVector y,
-        Rcpp::NumericVector rho, bool use_log)
+            Rcpp::NumericVector rho, bool use_log)
 {
     int N = x.size();
     Rcpp::NumericVector res(N);

@@ -1,11 +1,11 @@
 ## File Name: ccov.np.R
-## File Version: 1.208
+## File Version: 1.216
 
 
 #---- nonparametric estimation of conditional covariance
 ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
         progress=TRUE, scale_score=TRUE, adjust_thetagrid=TRUE, smooth=TRUE,
-        use_sum_score=FALSE)
+        use_sum_score=FALSE, bias_corr=TRUE)
 {
     # number of Items I
     I <- ncol(data)
@@ -94,7 +94,11 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
         if (use_sum_score){
             res1 <- ccov_np_compute_ccov_sum_score(score=score.ff, data=data.ff)
             score_ff2 <- score.ff - data.ff[,1] - data.ff[,2]
-            res2 <- ccov_np_compute_ccov_sum_score(score=score_ff2, data=data.ff)
+            if (bias_corr){
+                res2 <- ccov_np_compute_ccov_sum_score(score=score_ff2, data=data.ff)
+            } else {
+                res2 <- res1
+            }
             ccov_sum_score[ff] <- ( res1$ccov_aggr + res2$ccov_aggr ) / 2
         }
 
@@ -116,7 +120,8 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
     #--- output
     res <- list( ccov.table=ccov.table, ccov.matrix=ccov.matrix,
                     data=data, score=score, icc.items=icc_items,
-                    wgt.thetagrid=wgt_thetagrid)
+                    wgt.thetagrid=wgt_thetagrid, use_sum_score=use_sum_score,
+                    bias_corr=bias_corr, scale_score=scale_score)
     return(res)
 }
 

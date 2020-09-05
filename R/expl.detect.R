@@ -1,41 +1,47 @@
 ## File Name: expl.detect.R
-## File Version: 1.24
+## File Version: 1.308
 
 
 #**** Exploratory DETECT analysis
 expl.detect <- function( data, score, nclusters, N.est=NULL, seed=NULL,
-        bwscale=1.1, use_sum_score=FALSE )
+        bwscale=1.1, smooth=TRUE, use_sum_score=FALSE, hclust_method="ward.D",
+        estsample=NULL)
 {
     if ( ! is.null(seed) ){
         set.seed(seed)
     }
-    smooth <- TRUE
     # number of items
     I <- ncol(data)
     if (use_sum_score){
         smooth <- FALSE
         score <- rowSums(data)
     }
+    if (!smooth){
+        scale_score <- FALSE
+    }
     # sample for estimation
     N <- nrow(data)
     if ( is.null( N.est ) ){
         N.est <- floor(N/2)
     }
-    estsample <- sort( sample( 1:N, floor( N.est ) ) )
+    if (is.null(estsample)){
+        estsample <- sort( sample( 1:N, floor( N.est ) ) )
+    }
     # validation sample
     valsample <- setdiff( 1:N, estsample )
-    #**********************************
-    # Maximizing DETECT index
-    #**********************************
+
+    #--- Maximizing DETECT index
     # nonparametric estimation of conditional covariance
-    cc <- ccov.np( data=data[ estsample,], score=score[estsample], bwscale=bwscale,
-                smooth=smooth, use_sum_score=use_sum_score)
+    ccov_np_args <- list( data=data[ estsample,], score=score[estsample],
+                        bwscale=bwscale, smooth=smooth, use_sum_score=use_sum_score,
+                        scale_score=scale_score)
+    cc_est <- cc <- do.call( what=ccov.np, args=ccov_np_args)
     ccov.matrix <- create.ccov( cc=cc, data=data[ estsample,]  )
     # create distance matrix
     cc1 <- max(ccov.matrix) - ccov.matrix
     # Ward Hierarchical Clustering
     d <- stats::as.dist(cc1)
-    fit <- stats::hclust(d, method="ward.D")         # hierarchical cluster analysis
+    fit <- stats::hclust(d, method=hclust_method)         # hierarchical cluster analysis
     clusterfit <- fit
     itemcluster <- data.frame( matrix( 0, I, nclusters ) )
     itemcluster[,1] <- colnames(data)
@@ -59,12 +65,12 @@ expl.detect <- function( data, score, nclusters, N.est=NULL, seed=NULL,
                         } )
     detu <- data.frame( dfr1, detect.unweighted )
     detw <- data.frame( dfr1, detect.weighted )
-    #************************************
-    # Validating DETECT index
-    #************************************
+
+    #--- Validating DETECT index
     if ( length(valsample) > 0 ){
-        cc <- ccov.np( data=data[ valsample,], score=score[valsample],
-                    bwscale=bwscale, smooth=smooth, use_sum_score=use_sum_score )
+        ccov_np_args$data=data[ valsample,]
+        ccov_np_args$score=score[valsample]
+        cc <- do.call( what=ccov.np, args=ccov_np_args)
         detect.unweighted <- detect.weighted <- NULL
         for (k in 2:nclusters){
             h1 <- detect.index( ccovtable=cc, itemcluster=itemcluster[,k] )

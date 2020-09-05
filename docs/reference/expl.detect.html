@@ -44,7 +44,8 @@
 Zhang &amp;amp; Stout, 1999a, 1999b) in an exploratory way.
 Conditional covariances of itempairs are transformed into a distance
 matrix such that items are clustered by the hierarchical Ward
-algorithm (Roussos, Stout &amp;amp; Marden, 1998)." />
+algorithm (Roussos, Stout &amp;amp; Marden, 1998). Note that the function will not
+provide the same output as the original DETECT software." />
 
 
 
@@ -122,11 +123,12 @@ algorithm (Roussos, Stout &amp;amp; Marden, 1998)." />
 Zhang &amp; Stout, 1999a, 1999b) in an exploratory way.
 Conditional covariances of itempairs are transformed into a distance
 matrix such that items are clustered by the hierarchical Ward
-algorithm (Roussos, Stout &amp; Marden, 1998).</p>
+algorithm (Roussos, Stout &amp; Marden, 1998). Note that the function will not
+provide the same output as the original DETECT software.</p>
     </div>
 
     <pre class="usage"><span class='fu'>expl.detect</span>(<span class='no'>data</span>, <span class='no'>score</span>, <span class='no'>nclusters</span>, <span class='kw'>N.est</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>seed</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>bwscale</span><span class='kw'>=</span><span class='fl'>1.1</span>,
-    <span class='kw'>use_sum_score</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</pre>
+    <span class='kw'>smooth</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>use_sum_score</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>hclust_method</span><span class='kw'>=</span><span class='st'>"ward.D"</span>, <span class='kw'>estsample</span><span class='kw'>=</span><span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,7 +144,7 @@ Missing responses are allowed.</p></td>
     </tr>
     <tr>
       <th>nclusters</th>
-      <td><p>Number of clusters in the analysis</p></td>
+      <td><p>Maximum number of clusters used in the exploratory analysis</p></td>
     </tr>
     <tr>
       <th>N.est</th>
@@ -158,10 +160,25 @@ Missing responses are allowed.</p></td>
       <td><p>Bandwidth scale factor</p></td>
     </tr>
     <tr>
+      <th>smooth</th>
+      <td><p>Logical indicating whether smoothing should be
+applied for conditional covariance estimation</p></td>
+    </tr>
+    <tr>
       <th>use_sum_score</th>
       <td><p>Logical indicating whether sum score should be used.
 With this option, the bias corrected conditional covariance of Zhang and
 Stout (1999) is used.</p></td>
+    </tr>
+    <tr>
+      <th>hclust_method</th>
+      <td><p>Clustering method used as the argument
+<code>method</code> in <code><a href='https://rdrr.io/r/stats/hclust.html'>stats::hclust</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>estsample</th>
+      <td><p>Optional vector of subject indices that defines the
+estimation sample</p></td>
     </tr>
     </table>
 
@@ -192,8 +209,7 @@ dimensionality and its application to approximate simple structure,
 <em>Psychometrika, 64</em>, 213-249.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>For examples see <code><a href='conf.detect.html'>conf.detect</a></code>.
-<!-- %% ~~objects to See Also as \code{\link{help}}, ~~~ --></p></div>
+    <div class='dont-index'><p>For examples see <code><a href='conf.detect.html'>conf.detect</a></code>.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

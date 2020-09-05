@@ -1,5 +1,5 @@
 %% File Name: expl.detect.Rd
-%% File Version: 1.22
+%% File Version: 1.274
 
 \name{expl.detect}
 \alias{expl.detect}
@@ -12,11 +12,12 @@ This function estimates the DETECT index (Stout, Habing, Douglas & Kim, 1996;
 Zhang & Stout, 1999a, 1999b) in an exploratory way.
 Conditional covariances of itempairs are transformed into a distance
 matrix such that items are clustered by the hierarchical Ward
-algorithm (Roussos, Stout & Marden, 1998).
+algorithm (Roussos, Stout & Marden, 1998). Note that the function will not
+provide the same output as the original DETECT software.
 }
 \usage{
 expl.detect(data, score, nclusters, N.est=NULL, seed=NULL, bwscale=1.1,
-    use_sum_score=FALSE)
+    smooth=TRUE, use_sum_score=FALSE, hclust_method="ward.D", estsample=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,7 +29,7 @@ Missing responses are allowed.
 An ability estimate, e.g. the WLE, sum score or mean score
 }
   \item{nclusters}{
-Number of clusters in the analysis
+Maximum number of clusters used in the exploratory analysis
 }
   \item{N.est}{
 Number of students in a (possible) validation of the DETECT index.
@@ -40,9 +41,16 @@ Random seed
   \item{bwscale}{
 Bandwidth scale factor
 }
+\item{smooth}{Logical indicating whether smoothing should be
+applied for conditional covariance estimation}
 \item{use_sum_score}{Logical indicating whether sum score should be used.
 With this option, the bias corrected conditional covariance of Zhang and
 Stout (1999) is used.}
+\item{hclust_method}{Clustering method used as the argument
+\code{method} in \code{\link[stats:hclust]{stats::hclust}}.
+}
+\item{estsample}{Optional vector of subject indices that defines the
+estimation sample}
 }
 %\details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -83,7 +91,7 @@ dimensionality and its application to approximate simple structure,
 
 \seealso{
 For examples see \code{\link{conf.detect}}.
-%% ~~objects to See Also as \code{\link{help}}, ~~~
 }
+%% ~~objects to See Also as \code{\link{help}}, ~~~
 %% \keyword{DETECT}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

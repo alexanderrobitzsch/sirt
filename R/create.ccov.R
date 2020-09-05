@@ -1,5 +1,5 @@
 ## File Name: create.ccov.R
-## File Version: 1.07
+## File Version: 1.08
 
 
 #**** auxiliary function for creating a covariance matrix
@@ -15,7 +15,7 @@ create.ccov <- function( cc, data )
         ccov.matrix[ ccc$item2ID[ll], ccc$item1ID[ll] ] <-
                         ccov.matrix[ ccc$item1ID[ll], ccc$item2ID[ll] ]
     }
-    return( ccov.matrix)
+    return(ccov.matrix)
 }
 
 

@@ -1,5 +1,5 @@
 %% File Name: conf.detect.Rd
-%% File Version: 1.479
+%% File Version: 1.484
 
 \name{conf.detect}
 \alias{conf.detect}
@@ -22,7 +22,7 @@ An exploratory DETECT analysis can be conducted using the
 }
 \usage{
 conf.detect(data, score, itemcluster, bwscale=1.1, progress=TRUE,
-        thetagrid=seq(-3, 3, len=200), smooth=TRUE, use_sum_score=FALSE)
+        thetagrid=seq(-3, 3, len=200), smooth=TRUE, use_sum_score=FALSE, bias_corr=TRUE)
 
 \method{summary}{conf.detect}(object, digits=3, file=NULL, ...)
 }
@@ -55,6 +55,8 @@ covariances are evaluated.
 \item{use_sum_score}{Logical indicating whether sum score should be used.
 With this option, the bias corrected conditional covariance of Zhang and
 Stout (1999) is used.}
+\item{bias_corr}{Logical indicating whether bias correction (Zhang & Stout, 1999)
+should be utilized if \code{use_sum_score=TRUE}.}
 \item{object}{Object of class \code{conf.detect}}
 \item{digits}{Number of digits for rounding in \code{summary}}
 \item{file}{Optional file name to be sunk for \code{summary}}

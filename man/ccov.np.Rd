@@ -1,5 +1,5 @@
 %% File Name: ccov.np.Rd
-%% File Version: 0.229
+%% File Version: 0.232
 
 \name{ccov.np}
 \alias{ccov.np}
@@ -18,7 +18,7 @@ functions (argument \code{smooth}) in the computation of conditional covariances
 \usage{
 ccov.np(data, score, bwscale=1.1, thetagrid=seq(-3, 3, len=200),
     progress=TRUE, scale_score=TRUE, adjust_thetagrid=TRUE, smooth=TRUE,
-    use_sum_score=FALSE)
+    use_sum_score=FALSE, bias_corr=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -52,6 +52,8 @@ applied for conditional covariance estimation}
 \item{use_sum_score}{Logical indicating whether sum score should be used.
 With this option, the bias corrected conditional covariance of Zhang and
 Stout (1999) is used.}
+\item{bias_corr}{Logical indicating whether bias correction (Zhang & Stout, 1999)
+should be utilized if \code{use_sum_score=TRUE}.}
 }
 
 \references{

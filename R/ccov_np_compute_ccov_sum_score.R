@@ -1,5 +1,5 @@
 ## File Name: ccov_np_compute_ccov_sum_score.R
-## File Version: 0.10
+## File Version: 0.15
 
 ccov_np_compute_ccov_sum_score <- function(score, data, use_rcpp=TRUE)
 {
@@ -13,6 +13,7 @@ ccov_np_compute_ccov_sum_score <- function(score, data, use_rcpp=TRUE)
             s1 <- stats::cov.wt(x=data[i1,], method="ML")
             ccov_ff[ss] <- s1$cov[1,2]
         }
+        ccov_ff[is.na(ccov_ff)] <- 0
     } else {
         index <- match(score, scores)-1
         ccov_ff <- sirt_rcpp_ccov_np_compute_ccov_sum_score( index=index,
