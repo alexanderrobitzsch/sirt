@@ -1,5 +1,5 @@
 ## File Name: expl.detect.R
-## File Version: 1.308
+## File Version: 1.309
 
 
 #**** Exploratory DETECT analysis
@@ -16,6 +16,7 @@ expl.detect <- function( data, score, nclusters, N.est=NULL, seed=NULL,
         smooth <- FALSE
         score <- rowSums(data)
     }
+    scale_score <- TRUE
     if (!smooth){
         scale_score <- FALSE
     }
