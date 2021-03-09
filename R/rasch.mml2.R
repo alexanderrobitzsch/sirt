@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.472
+## File Version: 7.507
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model
@@ -234,7 +234,8 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         use.freqpatt <- FALSE
     }
     if ( irtmodel !="missing1" ){
-        dp <- .data.prep( dat, weights=weights, use.freqpatt=use.freqpatt)
+        dp <- data.prep( dat=dat, weights=weights, use.freqpatt=use.freqpatt,
+                    standardize_weights=FALSE)
         dat1 <- dp$dat1
         dat2 <- dp$dat2
         dat2.resp <- dp$dat2.resp
@@ -417,7 +418,8 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         if (raschtype & D==1){
             e1 <- rasch_mml2_estep_raschtype( dat1=dat1, dat2=dat2, dat2.resp=dat2.resp,
                         theta.k=theta.k, pi.k=pi.k, I=I, n=n, b=b, fixed.a=fixed.a, fixed.c=fixed.c,
-                        fixed.d=fixed.d, alpha1=alpha1, alpha2=alpha2, group=group, pseudoll=pseudoll )
+                        fixed.d=fixed.d, alpha1=alpha1, alpha2=alpha2, group=group, pseudoll=pseudoll,
+                        weights=weights)
         }
         if (raschtype & D>1){
             e1 <- .e.step.raschtype.mirt( dat1, dat2, dat2.resp, theta.k, pi.k, I, n, b,
@@ -468,7 +470,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         }
 
         # nonparametric IRT model
-        if (npirt ){
+        if (npirt){
             pjk0 <- pjk
             res <- .mstep.mml.npirt( pjk, r.jk, n.jk, theta.k,
                                     npformula, npmodel, G, I, npirt.monotone,
@@ -940,6 +942,9 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         ic$CAIC <- dev + ( log(ic$n) + 1 )*ic$np
         # corrected AIC
         ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )
+        # log penalty
+        ic$GHP <- ic$AIC / ( sum(weights*(!is.na(dat)))) / 2
+
         # item statistics
         if ( npirt & ( ! is.null(npformula ) ) ){ item0 <- item }
         item <- data.frame( "item"=colnames(dat), "N"=colSums( weights*(1 - is.na(dat)) ),
@@ -1109,10 +1114,11 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         dimnames(rprobs)[[1]] <- colnames(dat)
 
     #- collect information about priors
-    priors <- rasch_mml2_prior_information(prior.a, prior.b, prior.c, prior.d)
+    priors <- rasch_mml2_prior_information( prior.a=prior.a, prior.b=prior.b,
+                    prior.c=prior.c, prior.d=prior.d )
 
     #--- result
-    res <- list( dat=dat, item=item, item2=item2, trait.distr=trait.distr,
+    res <- list( dat=dat, weights=weights, item=item, item2=item2, trait.distr=trait.distr,
                 mean.trait=mean.trait, sd.trait=sd.trait, skewness.trait=skewness.trait,
                 deviance=dev, pjk=pjk, rprobs=rprobs, person=ability.est2, pid=pid,
                 ability.est.pattern=ability.est, f.qk.yi=f.qk.yi, f.yi.qk=f.yi.qk,
@@ -1121,7 +1127,8 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                 se.K=se.K, se.delta=se.delta, iter=iter, reliability=reliability,
                 ramsay.qm=ramsay.qm, irtmodel=irtmodel, D=D, mu=mu, Sigma.cov=Sigma.cov,
                 est_parameters=est_parameters, priors=priors,
-                theta.k=theta.k, trait.weights=trait.weights, pi.k=pi.k, CALL=CALL )
+                theta.k=theta.k, trait.weights=trait.weights, pi.k=pi.k,
+                CALL=CALL )
     class(res) <- "rasch.mml"
     res$ic <- ic
     res$est.c <- est.c

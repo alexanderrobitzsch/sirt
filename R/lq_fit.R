@@ -1,5 +1,5 @@
 ## File Name: lq_fit.R
-## File Version: 0.147
+## File Version: 0.152
 
 lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
         est_pow=FALSE, optimizer="optim", eps_vec=10^seq(0,-10, by=-.5),
@@ -11,7 +11,7 @@ lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
     }
     ind <- ! is.na(y)
     y <- y[ind]
-    X <- X[ind,]
+    X <- X[ind,,drop=FALSE]
     w <- w[ind]
     if (is.null(beta_init)){
         mod <- stats::lm.wfit(y=y, x=X, w=w)

@@ -1,39 +1,23 @@
 ## File Name: rasch.copula2.R
-## File Version: 6.292
+## File Version: 6.317
 
 
 
-#------------------------------------------------------------------
-# Copula estimation in a raschtype model
-rasch.copula2 <- function( dat, itemcluster,
-                        copula.type="bound.mixt",
-                        progress=TRUE, mmliter=1000, delta=NULL,
-                        theta.k=seq(-4,4,len=21), alpha1=0, alpha2=0, numdiff.parm=.000001,
-                        est.b=seq(1,ncol(dat)), est.a=rep(1,ncol(dat)), est.delta=NULL,
-                        b.init=NULL, a.init=NULL,
-                        est.alpha=FALSE,
-                        glob.conv=.0001, alpha.conv=.0001, conv1=.001,
-                        dev.crit=.2, increment.factor=1.01
-                                        ){
-    ###############################################################
-    # INPUT:
-    # dat    ... data frame
-    # itemcluster ... vector of integers
-    # progress    ... display progress?
-    # mmliter     ... see rasch.mml
-    # delta ... initial delta estimate (is relevant for fixing delta parameters)
-    # theta.k... number of grid theta points
-    # alpha1, alpha2 ... rasch type parameter
-    # numdiff.parm ... numerical differentiation parameter
-    # est.b    ... which b parameters shall be estimated
-    ###############################################################
-# vv0 <- Sys.time()
+#----- Copula estimation in a Rasch type model
+rasch.copula2 <- function( dat, itemcluster, weights=NULL,
+        copula.type="bound.mixt", progress=TRUE, mmliter=1000, delta=NULL,
+        theta.k=seq(-4,4,len=21), alpha1=0, alpha2=0, numdiff.parm=.000001,
+        est.b=seq(1,ncol(dat)), est.a=rep(1,ncol(dat)), est.delta=NULL,
+        b.init=NULL, a.init=NULL, est.alpha=FALSE,
+        glob.conv=.0001, alpha.conv=.0001, conv1=.001,
+        dev.crit=.2, increment.factor=1.01)
+{
     s1 <- Sys.time()
     CALL <- match.call()
     group <- NULL
     # arrange item clusters item clusters
     t1 <- table(itemcluster)
-    itemcluster[ which( itemcluster %in% names(t1)[ t1==1     ] ) ] <- 0
+    itemcluster[ which( itemcluster %in% names(t1)[ t1==1 ] ) ] <- 0
     itemcluster <- match( itemcluster, unique( sort(itemcluster[itemcluster!=0]) ) )
     itemcluster[ is.na( itemcluster ) ] <- 0
     t1 <- table(itemcluster)
@@ -46,21 +30,23 @@ rasch.copula2 <- function( dat, itemcluster,
                                     }
             x1 <- seq( 1, max(t1b) )
             x2 <- sort(setdiff( as.numeric(sort(names(t1))), 0 ))
-            if ( sum( abs( x1-x2) ) > 10^(-10) ){
+            if ( sum( abs( x1-x2) ) > 1e-10 ){
                stop( "Item cluster identifiers must be recoded to 1, ..., C\n" )
                                  }
     CC <- length(x1) # number of clusters
     # calculation of number of itemclusters
-    if ( progress  ){
+    if (progress){
         cat("-----------------------------------------------------------------\n")
         cat("Marginal Maximum Likelihood Estimation \n")
         cat(paste( "Raschtype Copula Model with generalized logistic link function: Estimation of alpha1 and alpha2 \n") )
         cat("Function 'rasch.copula2'\n")
         cat("-----------------------------------------------------------------\n")
-        flush.console()
+        utils::flush.console()
       }
      # arrange copula types
-    if ( length( copula.type )==1 ){ copula.type <- rep( copula.type, CC ) }
+    if ( length( copula.type )==1 ){
+        copula.type <- rep( copula.type, CC )
+    }
 
     I <- ncol(dat)
     if ( is.null( colnames(dat))){
@@ -90,16 +76,26 @@ rasch.copula2 <- function( dat, itemcluster,
     for (ii in 2:I){ patt <- paste( patt, dat10[,ii],sep="") }
     pattern <- data.frame( table(patt) )
     colnames(pattern) <- c("pattern", "freqwgt")
-    # patttern in data
+
+    use_weights <- FALSE
+    if (!is.null(weights)){
+        use_weights <- TRUE
+        rs <- rowsum(weights, patt)
+        ind <- match(rownames(rs), pattern$pattern)
+        pattern$freqwgt <- rs[ind,1]
+    }
+
+
+    # pattern in data
 #    pattern.in.data <- data.frame(match( patt, pattern$pattern )
     pattern.in.data <- patt
 
     # calculate frequencies in multiple group case
-    if (G > 1 ){
+    if (G > 1){
         for (gg in 1:G){
         # gg <- 1
         t1 <- table( patt[ group==gg  ] )
-        pattern <- merge( pattern, t1, by.x=1, by.y=1, all=T )
+        pattern <- merge( pattern, t1, by.x=1, by.y=1, all=TRUE )
                     }
         pattern[ is.na(pattern) ] <- 0
         colnames(pattern)[-c(1:2)]     <- paste("freqwgt", 1:G, sep="")
@@ -679,31 +675,29 @@ rasch.copula2 <- function( dat, itemcluster,
     MVar.EAP <- weighted.mean( pattern$PostVar, pattern$freqwgt )
     EAP.Rel <- Var.EAP / ( Var.EAP + MVar.EAP )
 
+    #**** information criteria
+    n <- nrow(dat00)
+    w <- rep(1,n)
+    if (use_weights){
+        w <- weights
+        n <- sum(w)
+    }
+    ic <- list( deviance=dev, n=n )
+    bG <- setdiff( unique(est.b), 0 )
+    aG <- setdiff( unique(est.a), 0 )
+    dG <- setdiff( unique(est.delta ), 0 )
+    ic[[ "np" ]] <- length(bG) + length(aG) + length(dG) + 2*est.alpha
+    ic$AIC <- dev + 2*ic$np
+    ic$BIC <- dev + ( log(ic$n) )*ic$np
+    ic$CAIC <- dev + ( log(ic$n) + 1 )*ic$np
+    ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )
 
-    #********************************************************
-    # information criteria
-        # calculations for information criteria
-        ic <- list( "deviance"=dev, "n"=nrow(dat00) )
-        # number of parameters to be estimated
-        # these formulas hold when assuming normal distributions
-        bG <- setdiff( unique( est.b ), 0 )
-        aG <- setdiff( unique( est.a ), 0 )
-        dG <- setdiff( unique( est.delta ), 0 )
-        ic[[ "np" ]] <- length(bG) + length(aG) + length(dG) + 2*est.alpha
-        # AIC
-        ic$AIC <- dev + 2*ic$np
-        # BIC
-        ic$BIC <- dev + ( log(ic$n) )*ic$np
-        # CAIC
-        ic$CAIC <- dev + ( log(ic$n) + 1 )*ic$np
-        # corrected AIC
-        ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )
-    #**********************************************************************************
-    # results item parameters
-    item <- data.frame( "item"=colnames(dat),
-                "N"=colSums(!is.na(dat00)),
-                "p"=colMeans( dat00, na.rm=T ),
-                "b"=b, "est.b"=est.b, "a"=a, "est.a"=est.a )
+    #---- results item parameters
+    N_item <- colSums((!is.na(dat00))*w)
+    item <- data.frame( item=colnames(dat),
+                N=N_item,
+                p=colSums( w*dat00, na.rm=TRUE )/N_item,
+                b=b, est.b=est.b, a=a, est.a=est.a )
     item$thresh <- item$a * item$b
     # add results dependency parameter for item clusters
     item$itemcluster <- itemcluster
@@ -723,18 +717,18 @@ rasch.copula2 <- function( dat, itemcluster,
     # print item summary
     if (progress){
         cat("Parameter summary\n")
-        sirt_print_helper( item, digits=3 )        # print item statistics
-                    }
+        sirt_print_helper( item, digits=3 )
+    }
     # dependency parameter
     if (progress){
         cat("\nDependency parameters\n")
-                }
+    }
     summary.delta <- data.frame( "cluster"=1:CC, "delta"=delta,
-                "est.delta"=est.delta, "copula.type"=copula.type     )
+                "est.delta"=est.delta, "copula.type"=copula.type )
     summary.delta$items <- sapply( 1:CC, FUN=function(cc){
         paste( colnames(dat)[ itemcluster==cc ], collapse="-" )
                 } )
-        s2 <- Sys.time()
+    s2 <- Sys.time()
     if (progress){
         sirt_print_helper(summary.delta, digits=3)
         cat(paste("\nEAP Reliability:", round( EAP.Rel,3)),"\n\n")
@@ -768,17 +762,13 @@ rasch.copula2 <- function( dat, itemcluster,
                     "delta"=delta, "b"=b, "a"=a, "mu"=mu, "sigma"=sigma,
                     "alpha1"=alpha1, "alpha2"=alpha2, "ic"=ic, "theta.k"=theta.k,
                     "pi.k"=wgt.theta, "deviance"=dev,
-                    "pattern"=pattern    , "person"=person,
-                    "datalist"=datalist    , "EAP.Rel"=EAP.Rel    ,
-                    "copula.type"=copula.type    , "summary.delta"=summary.delta,
+                    "pattern"=pattern, "person"=person,
+                    "datalist"=datalist, "EAP.Rel"=EAP.Rel,
+                    "copula.type"=copula.type, "summary.delta"=summary.delta,
                     "f.qk.yi"=(res.posterior$post)[ patternindex,],
                     "f.yi.qk"=(res.posterior$post.unnorm)[ patternindex,],
-                    "s2"=s2, "s1"=s1, CALL=CALL
-                                )
+                    weights=weights, "s2"=s2, "s1"=s1, CALL=CALL )
     class(res) <- "rasch.copula2"
     return(res)
-        }
-#----------------------------------------------------------------------------------
-
-
+}
 

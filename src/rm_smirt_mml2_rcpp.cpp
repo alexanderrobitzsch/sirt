@@ -1,5 +1,5 @@
 //// File Name: rm_smirt_mml2_rcpp.cpp
-//// File Version: 5.383
+//// File Version: 5.389
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -544,63 +544,58 @@ Rcpp::NumericMatrix SMIRT_CALCPROB_PARTCOMP( Rcpp::NumericMatrix A,
 Rcpp::List MML2_RASCHTYPE_COUNTS( Rcpp::NumericMatrix DAT2,
     Rcpp::NumericMatrix DAT2RESP, Rcpp::NumericVector DAT1,
     Rcpp::NumericMatrix FQKYI, Rcpp::NumericVector PIK,
-    Rcpp::NumericMatrix FYIQK )
+    Rcpp::NumericMatrix FYIQK)
 {
 
-     int N=DAT2.nrow();
-     int I=DAT2.ncol();
-     int TP=FQKYI.ncol();
+    int N=DAT2.nrow();
+    int I=DAT2.ncol();
+    int TP=FQKYI.ncol();
 
-     //**********************************
-     // calculate total counts n.k
-     Rcpp::NumericVector NK (TP);
-     NK.fill(0);
-     for (int tt=0;tt<TP;++tt){
-         for (int nn=0;nn<N;++nn){
-     //        NK[tt] = NK[tt] + FQKYI(nn,tt)*DAT1[nn];
-               NK[tt] += FQKYI(nn,tt)*DAT1[nn];
-                         } // end nn
-                     }  // end tt
+    //*** calculate total counts n.k
+    Rcpp::NumericVector NK (TP);
+    NK.fill(0);
+    for (int tt=0;tt<TP;++tt){
+        for (int nn=0;nn<N;++nn){
+            NK[tt] += FQKYI(nn,tt)*DAT1[nn];
+        } // end nn
+    }  // end tt
 
-     //**********************************
-     // calculate n.jk and r.jk
-     Rcpp::NumericMatrix NJK (I,TP);
-     Rcpp::NumericMatrix RJK (I,TP);
-     NJK.fill(0);
-     RJK.fill(0);
+    //*** calculate n.jk and r.jk
+    Rcpp::NumericMatrix NJK (I,TP);
+    Rcpp::NumericMatrix RJK (I,TP);
+    NJK.fill(0);
+    RJK.fill(0);
 
-     for (int ii=0;ii<I;++ii){
-     for (int tt=0;tt<TP;++tt){
-         for (int nn=0;nn<N;++nn){
-             if (DAT2RESP(nn,ii)>0){
-                 NJK(ii,tt) += DAT1[nn] * FQKYI(nn,tt);
-                 RJK(ii,tt) += DAT1[nn] * FQKYI(nn,tt) * DAT2(nn,ii);
-                             }       // end if ...
-             }           //     end nn
-         } // end tt
-     }    // end ii
+    for (int ii=0;ii<I;++ii){
+        for (int tt=0;tt<TP;++tt){
+            for (int nn=0;nn<N;++nn){
+                if (DAT2RESP(nn,ii)>0){
+                    NJK(ii,tt) += DAT1[nn] * FQKYI(nn,tt);
+                    RJK(ii,tt) += DAT1[nn] * FQKYI(nn,tt) * DAT2(nn,ii);
+                }       // end if ...
+            }           //     end nn
+        } // end tt
+    }    // end ii
 
-     //*****************
-     // calculate loglikelihood
-     double LL=0;
-     //        ll[gg] <- sum( dat1[group==gg,2] * log( rowSums( f.yi.qk[group==gg,] *
-     //                    outer( rep(1,nrow(f.yi.qk[group==gg,])), pi.k[,gg] ) ) ) )
-     for (int nn=0;nn<N;++nn){
-         double total = 0;
-         for (int tt=0;tt<TP;++tt){
-               total += FYIQK(nn,tt) * PIK[tt];
-                             } // end tt
-         LL += log( total )*DAT1[nn];
-                 }  // end nn
+    //*** calculate loglikelihood
+    double LL=0;
+    double total=0;
+    for (int nn=0;nn<N;++nn){
+        total = 0;
+        for (int tt=0;tt<TP;++tt){
+            total += FYIQK(nn,tt) * PIK[tt];
+        } // end tt
+        LL += std::log(total)*DAT1[nn];
+    }  // end nn
 
-     ///////////////////////////////////////////////////////
-     ///////////// O U T P U T   ///////////////////////////
-     return Rcpp::List::create(
-         Rcpp::_["nk"] = NK,
-         Rcpp::_["njk"] = NJK,
-         Rcpp::_["rjk"] = RJK,
-         Rcpp::_["ll"] = LL
-                 );
+    ///////////////////////////////////////////////////////
+    ///////////// O U T P U T   ///////////////////////////
+    return Rcpp::List::create(
+                Rcpp::Named("nk") = NK,
+                Rcpp::Named("njk") = NJK,
+                Rcpp::Named("rjk") = RJK,
+                Rcpp::Named("ll") = LL
+            );
 }
 
 

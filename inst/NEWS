@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2020-09-05  |  Last: sirt 3.10-70
+VERSIONS sirt 3.10  |  2021-03-09  |  Last: sirt 3.10-79
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()
@@ -72,8 +72,14 @@ NOTE  * added argument 'use_sum_score' in conf.detect(), expl.detect()
 NOTE  * included argument 'bias_corr' in ccov.np() and conf.detect()
 NOTE  * added arguments 'smooth', 'hclust_method', and 'estsample'
         in expl.detect() (related to Github Issue #15)
-
-
+NOTE  * included S3 method IRT.expectedCounts() for rasch.mml2()
+        (objects of class 'rasch.mml')
+NOTE  * included argument 'prior_sd' in rasch.jml() for penalized JML
+NOTE  * included argument 'weights' for sampling weights in
+        rasch.pairwise.itemcluster(), rasch.pairwise(), and
+        rasch.copula2()
+NOTE  * adapted smirt() funtion in cases in which dat has no column
+        names (thanks to Burga Leon Andres Alberto)
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: linking.haebara (1),

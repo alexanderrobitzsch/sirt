@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.736
+%% File Version: 1.738
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -32,7 +32,7 @@ The function \code{rasch.copula3} allows the estimation of multidimensional
 models while \code{rasch.copula2} only handles unidimensional models.
 }
 \usage{
-rasch.copula2(dat, itemcluster, copula.type="bound.mixt",
+rasch.copula2(dat, itemcluster, weights=NULL, copula.type="bound.mixt",
     progress=TRUE, mmliter=1000, delta=NULL,
     theta.k=seq(-4, 4, len=21), alpha1=0, alpha2=0,
     numdiff.parm=1e-06,  est.b=seq(1, ncol(dat)),
@@ -75,6 +75,7 @@ the same integers define a joint item cluster of (positively) locally
 dependent items. Values of zero indicate that the corresponding item
 is not included in any item cluster of dependent responses.
 }
+\item{weights}{Optional vector of sampling weights}
 \item{dims}{
 A vector indicating to which dimension an item is allocated.
 The default is that all items load on the first dimension.

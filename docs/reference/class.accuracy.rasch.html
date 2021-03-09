@@ -160,11 +160,6 @@ which means that no simulation is performed.</p></td>
   column <code>agree0</code> refers to absolute agreement, <code>agree1</code> to
   the agreement of at most a difference of one level.</p></dd>
   <dt>class.prob</dt><dd><p>Probability table of classification</p></dd>
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -187,9 +182,9 @@ can be obtained with the <span style="R">R</span> package <span class="pkg">cacI
 
 <span class='co'># estimate classification accuracy (3 levels)</span>
 <span class='no'>cutscores</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( -<span class='fl'>1</span>, <span class='fl'>.3</span> )    <span class='co'># cut scores at theta=-1 and theta=.3</span>
-<span class='fu'>class.accuracy.rasch</span>( <span class='kw'>cutscores</span><span class='kw'>=</span><span class='no'>cutscores</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span>,
+<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>class.accuracy.rasch</span>( <span class='kw'>cutscores</span><span class='kw'>=</span><span class='no'>cutscores</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span>,
            <span class='kw'>meantheta</span><span class='kw'>=</span><span class='fl'>0</span>,  <span class='kw'>sdtheta</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>sd.trait</span>,
-           <span class='kw'>theta.l</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>200</span> ), <span class='kw'>n.sims</span><span class='kw'>=</span><span class='fl'>3000</span>)
+           <span class='kw'>theta.l</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>200</span>), <span class='kw'>n.sims</span><span class='kw'>=</span><span class='fl'>3000</span>)
   <span class='co'>##   Cut Scores</span>
   <span class='co'>##   [1] -1.0  0.3</span>
   <span class='co'>##</span>

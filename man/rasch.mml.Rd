@@ -1,5 +1,5 @@
 %% File Name: rasch.mml.Rd
-%% File Version: 4.001
+%% File Version: 4.006
 
 \name{rasch.mml2}
 \alias{rasch.mml2}
@@ -11,6 +11,7 @@
 \alias{IRT.likelihood.rasch.mml}
 \alias{IRT.posterior.rasch.mml}
 \alias{IRT.modelfit.rasch.mml}
+\alias{IRT.expectedCounts.rasch.mml}
 \alias{summary.IRT.modelfit.rasch.mml}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -71,6 +72,8 @@ rasch.mml2( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
 \method{IRT.posterior}{rasch.mml}(object,...)
 
 \method{IRT.modelfit}{rasch.mml}(object,...)
+
+\method{IRT.expectedCounts}{rasch.mml}(object,...)
 
 \method{summary}{IRT.modelfit.rasch.mml}(object,...)
 }

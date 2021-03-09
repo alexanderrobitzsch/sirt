@@ -1,5 +1,5 @@
 %% File Name: class.accuracy.rasch.Rd
-%% File Version: 0.25
+%% File Version: 0.261
 
 \name{class.accuracy.rasch}
 \alias{class.accuracy.rasch}
@@ -47,12 +47,9 @@ A list with following entries:
   the agreement of at most a difference of one level.
      }
   \item{class.prob}{Probability table of classification}
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
 }
+
+
 \references{
 Rudner, L.M. (2001). Computing the expected proportions of misclassified examinees.
 \emph{Practical Assessment, Research & Evaluation, 7}(14).
@@ -71,6 +68,7 @@ Rudner, L.M. (2001). Computing the expected proportions of misclassified examine
 Classification accuracy of other IRT models
 can be obtained with the \R package \pkg{cacIRT}.
 }
+
 \examples{
 #############################################################################
 # EXAMPLE 1: Reading dataset
@@ -83,9 +81,9 @@ mod <- sirt::rasch.mml2( dat )
 
 # estimate classification accuracy (3 levels)
 cutscores <- c( -1, .3 )    # cut scores at theta=-1 and theta=.3
-class.accuracy.rasch( cutscores=cutscores, b=mod$item$b,
+sirt::class.accuracy.rasch( cutscores=cutscores, b=mod$item$b,
            meantheta=0,  sdtheta=mod$sd.trait,
-           theta.l=seq(-4,4,len=200 ), n.sims=3000)
+           theta.l=seq(-4,4,len=200), n.sims=3000)
   ##   Cut Scores
   ##   [1] -1.0  0.3
   ##

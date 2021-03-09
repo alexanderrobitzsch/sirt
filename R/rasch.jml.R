@@ -1,11 +1,11 @@
 ## File Name: rasch.jml.R
-## File Version: 3.300
+## File Version: 3.315
 
 
 rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights=NULL,
                     center="persons", glob.conv=10^(-6), conv1=0.00001, conv2=0.001, progress=TRUE,
                     bsteps=4, thetasteps=2, wle.adj=0, jmliter=100, prox=TRUE, proxiter=30, proxconv=0.01,
-                    dp=NULL, theta.init=NULL, calc.fit=TRUE)
+                    dp=NULL, theta.init=NULL, calc.fit=TRUE, prior_sd=NULL)
 {
     CALL <- match.call()
     s1 <- Sys.time()
@@ -22,6 +22,14 @@ rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights
         cat("Rasch Model \n")
         cat("-----------------------------------------------------------------\n")
     }
+
+    # prior for ability
+    if (! is.null(prior_sd) ){
+        is_prior <- TRUE
+    } else {
+        is_prior <- FALSE
+    }
+
     #--- centering of parameters
     centeritems <- FALSE
     centerpersons <- FALSE
@@ -38,8 +46,14 @@ rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights
     }
 
     # data preparations
+    use_weights <- FALSE
+    if (!is.null(weights)){
+        use_weights <- TRUE
+        prox <- FALSE
+    }
     if ( is.null(dp) ){
-        dp <- .data.prep( dat, weights=weights, use.freqpatt=FALSE )
+        dp <- data.prep( dat, weights=weights, use.freqpatt=FALSE,
+                standardize_weights=FALSE)
     }
     dat1 <- dp$dat1
     dat2 <- dp$dat2
@@ -49,7 +63,7 @@ rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights
     N <- n <- dp$n
 
     # exclude extreme item response pattern (if method==MLE)
-    if ( method=="MLE" ){
+    if ( ( method=="MLE" ) & ( ! is_prior ) ){
         ind <- which( ! dat1$mean %in% c(0,1) )
         dat1 <- dat1[ ind,]
         dat2 <- dat2[ ind,]
@@ -79,7 +93,8 @@ rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights
     if ( some.missings ){
         freq.dat.resp.thetapattern <- rowsum( dat1$Freq  * dat2.resp, dat1$theta.index )
     } else {
-        freq.dat.resp.thetapattern <- matrix( freq.thetapattern, nrow=length(freq.thetapattern), ncol=I ) }
+        freq.dat.resp.thetapattern <- matrix( freq.thetapattern, nrow=length(freq.thetapattern), ncol=I )
+    }
 
     #** compute sufficient statistic
     suffB <- colSums(  - dat1[,2] * dat2.resp * dat2 )
@@ -148,13 +163,13 @@ rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights
         # ability estimate (method==MLE or method==WLE)
         ind <- theta.pattern$caseid
         if (method=="WLE" ){
-            m1 <- wle.rasch( dat=dat2[ind,], b=b, theta=theta[ ind ],
-                        dat.resp=dat2.resp[ ind, ], conv=conv2, progress=progress, maxit=thetasteps,
-                        wle.adj=wle.adj )
+            m1 <- wle.rasch( dat=dat2[ind,], b=b, theta=theta[ind],
+                        dat.resp=dat2.resp[ind, ], conv=conv2, progress=progress,
+                        maxit=thetasteps, wle.adj=wle.adj )
         }
         if (method=="MLE" ){
-            m1 <- mle.rasch( dat=dat2[ind,], b=b, theta=theta[ind], dat.resp=dat2.resp[ind,],  conv=conv2,
-                            progress=progress )
+            m1 <- mle.rasch( dat=dat2[ind,], b=b, theta=theta[ind], dat.resp=dat2.resp[ind,],
+                            conv=conv2,    progress=progress, prior_sd=prior_sd )
         }
         theta <- m1$theta
         theta <- theta[ dat1$theta.index ]
@@ -162,7 +177,7 @@ rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights
         theta <- rasch_jml_centerpersons(theta=theta, dat1=dat1, centerpersons=centerpersons)
         # calculate Log-Likelihood and Deviance
         p.ia <- (m1$p.ia)[ dat1$theta.index, ]
-        dev1 <- -2*sum( rowSums( ( d2d2r * log( p.ia ) + d2d2m * log( 1 - p.ia ) ) ) * dat1[,2]  )
+        dev1 <- -2*sum( rowSums( ( d2d2r*log(p.ia) + d2d2m*log( 1 - p.ia ))) * dat1[,2] )
         # relative deviance change
         dev1a <- - (dev1 - dev0)
         dev.change <- abs( dev1 - dev0 ) / dev0 ;
@@ -219,14 +234,15 @@ rasch.jml <- function( dat, method="MLE", b.init=NULL, constraints=NULL, weights
 
 
     # standard error for item parameter
-    se.b <- .se.item.rasch( theta=theta, b=b, dat.resp=dat2.resp, freq=dat1[,2], constraints=constraints)
+    se.b <- .se.item.rasch( theta=theta, b=b, dat.resp=dat2.resp, freq=dat1[,2],
+                    constraints=constraints)
 
     # Data frame for "item side"
     I <- length(b)
     # item parameter constraints and correction formula
     UJJ <- 0
     # item summary
-    dfr <- data.frame(  N=colSums(dat2.resp*dat1[,2]),
+    dfr <- data.frame( N=colSums(dat2.resp*dat1[,2]),
                 p=colMeans( dat, na.rm=TRUE ), itemdiff=b,
                 itemdiff.correction=b*(I-1)/I, se=se.b, discr=a.i )
     if ( ! is.null(constraints)    ){
@@ -285,42 +301,6 @@ rasch.info.mle <- function( dat, theta, b){
     sqrt( 1 / info )
     }
 #------------------------------------------------------
-
-#------------------------------------------------------------------------------------###
-# Maximum Likelihood Estimation (Rasch model)                                        ###
-##NS # export(mle.rasch)
-mle.rasch <- function( dat, dat.resp=1-is.na(dat), b, theta, conv=.001,
-                        progress=FALSE){
-    #-------------------------------------------------------#
-    # INPUT:                                                #
-    # dat   ... data frame with item response pattern       #
-    #               (no NAs allowed!!)                      #
-    # dat.resp ... response pattern (non-missing items)     #
-    # theta ... initial values for ability estimation       #
-    # b     ... item difficulty parameters                  #
-    # conv  ... convergence criterion                       #
-    # NOTE: Extreme item response must be excluded!!!!      #
-    #-------------------------------------------------------#
-    theta.change <- 1
-    if ( progress){ cat("\n  MLE estimation  |" ) }
-    while( max( abs( theta.change) > conv )){
-        # calculate P and Q
-#        p.ia <- plogis( outer( theta, b, "-" ) ) ;
-        p.ia <- stats::plogis( theta, matrix( b, nrow=length(theta), length(b), byrow=T ) )
-        q.ia <- 1 - p.ia
-        # Likelihood
-        l1 <- rowSums( dat.resp* ( dat - p.ia ) )
-        # derivative of the objective function
-        f1.obj <- rowSums( - dat.resp * p.ia * q.ia  )
-        # theta change
-        theta.change <- - l1 / f1.obj
-        theta <- theta + theta.change
-        if ( progress){  cat("-") }
-        }
-    res <- list( "theta"=theta, "p.ia"=p.ia )
-    return(res)
-    }
-#--------------------------------------------------------------------------------------###
 
 # auxiliary functions
 #-----------------------------------------------------------------------------------------------------------#

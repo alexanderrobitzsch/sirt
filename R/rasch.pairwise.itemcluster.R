@@ -1,10 +1,10 @@
 ## File Name: rasch.pairwise.itemcluster.R
-## File Version: 0.27
+## File Version: 0.32
 
 
 #***** Pairwise estimation with itemclusters
 rasch.pairwise.itemcluster <- function( dat, itemcluster=NULL,
-            b.fixed=NULL, conv=.00001, maxiter=3000,
+            b.fixed=NULL, weights=NULL, conv=.00001, maxiter=3000,
             progress=TRUE, b.init=NULL, zerosum=FALSE)
 {
     s1 <- Sys.time()
@@ -12,10 +12,13 @@ rasch.pairwise.itemcluster <- function( dat, itemcluster=NULL,
     if ( is.null(b.init) ){
         b.init <- - stats::qlogis( colMeans( dat, na.rm=TRUE ) )
     }
-
+    if (is.null(weights)){
+        weights <- rep(1,nrow(dat))
+    }
+    weights0 <- weights
     I <- ncol(dat)
     dat <- as.matrix(dat)
-    dat0 <- dat
+    dat00 <- dat
     dat[ is.na(dat) ] <- 9
     b <- b.init
     if ( ! is.null(b.fixed) ){
@@ -24,8 +27,10 @@ rasch.pairwise.itemcluster <- function( dat, itemcluster=NULL,
         zerosum <- FALSE
     }
     # create count tables
-    dat0 <- dat==0
-    dat1 <- dat==1
+    weights <- weights / sum(weights) * nrow(dat)
+    sw <- sqrt(weights)
+    dat0 <- sw*(dat==0)
+    dat1 <- sw*(dat==1)
     Aij <- crossprod(dat0, dat1)
     Aji <- t(Aij)
     # set some entries to zero for itemclusters
@@ -68,7 +73,8 @@ rasch.pairwise.itemcluster <- function( dat, itemcluster=NULL,
     }  #** end algorithm
 
     #** post-processing
-    item <- data.frame( N=colSums(1-is.na(dat0)), p=colMeans( dat0, na.rm=TRUE), b=log(eps) )
+    item <- data.frame( N=colSums(1-is.na(dat00)),
+                    p=colMeans(dat00, na.rm=TRUE), b=log(eps) )
     if ( is.null(itemcluster) ){
         itemcluster <- rep(0,I)
     }
@@ -76,7 +82,7 @@ rasch.pairwise.itemcluster <- function( dat, itemcluster=NULL,
 
     #-- output
     s2 <- Sys.time()
-    res <- list( b=b, eps=eps, iter=iter, conv=conv, dat=dat0,item=item,
+    res <- list( b=b, eps=eps, iter=iter, conv=conv, dat=dat00,item=item,
             fct='rasch.pairwise.itemcluster', itemcluster=itemcluster,
             s1=s1, s2=s2, CALL=CALL )
     class(res) <- 'rasch.pairwise'

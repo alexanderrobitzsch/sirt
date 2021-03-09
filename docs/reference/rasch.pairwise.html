@@ -121,7 +121,7 @@ square estimation method (cited in Fischer, 2007, p. 544)
 which is a pairwise conditional likelihood estimation approach.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rasch.pairwise</span>(<span class='no'>dat</span>, <span class='kw'>conv</span><span class='kw'>=</span><span class='fl'>1e-04</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>3000</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>rasch.pairwise</span>(<span class='no'>dat</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>conv</span><span class='kw'>=</span><span class='fl'>1e-04</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>3000</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
         <span class='kw'>b.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>zerosum</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for rasch.pairwise</span>
@@ -133,6 +133,10 @@ which is a pairwise conditional likelihood estimation approach.</p>
     <tr>
       <th>dat</th>
       <td><p>An \(N \times I\) data frame of dichotomous item responses</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p>Optional vector of sampling weights</p></td>
     </tr>
     <tr>
       <th>conv</th>

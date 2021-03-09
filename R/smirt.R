@@ -1,9 +1,9 @@
 ## File Name: smirt.R
-## File Version: 7.28
+## File Version: 7.301
 
-#################################################################
-# smirt model
-# noncompensatory and compensatory IRT models
+
+#--- smirt model
+#--- noncompensatory and compensatory IRT models
 smirt <- function( dat, Qmatrix, irtmodel="noncomp",
     est.b=NULL, est.a=NULL,
     est.c=NULL, est.d=NULL, est.mu.i=NULL, b.init=NULL, a.init=NULL,
@@ -14,9 +14,13 @@ smirt <- function( dat, Qmatrix, irtmodel="noncomp",
     mu.fixed=NULL, variance.fixed=NULL,
     est.corr=FALSE, max.increment=1, increment.factor=1,
     numdiff.parm=.0001, maxdevchange=.10,
-    globconv=.001, maxiter=1000, msteps=4, mstepconv=.001){
-    #..........................................................
+    globconv=.001, maxiter=1000, msteps=4, mstepconv=.001)
+{
+
     s1 <- Sys.time()
+    if (is.null(colnames(dat))){
+        colnames(dat) <- paste0("I", 1:ncol(dat))
+    }
     dat0 <- dat <- as.matrix(dat)
     N <- nrow(dat)
     # check inits for item parameters
@@ -306,22 +310,22 @@ smirt <- function( dat, Qmatrix, irtmodel="noncomp",
                 }
 
 
-    # *********
-    # arrange OUTPUT
-    #---
-    # Information criteria
+    #*** arrange OUTPUT
+
+    #-- Information criteria
     ic <- list( "deviance"=dev, "n"=nrow(dat2) )
     ic$np.item <- 0
     ic$np.item.b <- ic$np.item.a <- ic$np.item.c <- ic$np.item.d <- 0
     if (irtmodel=="noncomp"){
-    for (dd in 1:D){
-        ic$np.item.b <- ic$np.item.b + length( setdiff( unique( est.b[,dd] ), 0 )  )
-                }    } else {
+        for (dd in 1:D){
+            ic$np.item.b <- ic$np.item.b + length( setdiff( unique( est.b[,dd] ), 0 )  )
+        }
+    } else {
         ic$np.item.b <- ic$np.item.b + length( setdiff( unique( est.b ), 0 )  )
-                        }
+    }
     for (dd in 1:TD){
         ic$np.item.a <- ic$np.item.a + length( setdiff( unique( est.a[,dd] ), 0 ) )
-            }
+    }
     ic$np.item.c <- length( setdiff( unique( est.c ), 0 ) )
     ic$np.item.d <- length( setdiff( unique( est.d ), 0 ) )
     ic$np.item.mu.i <- length( setdiff( unique( est.mu.i ), 0 ) )
@@ -331,30 +335,30 @@ smirt <- function( dat, Qmatrix, irtmodel="noncomp",
     ic$np.cov <- 0
 
     ic$np.cov.covM <- D*(D+1)/2
-    if ( est.corr ){ ic$np.cov.covM <- ic$np.cov.covM - D }
+    if ( est.corr ){ 
+        ic$np.cov.covM <- ic$np.cov.covM - D 
+    }
     if ( ! is.null(variance.fixed) ){
-            ic$np.cov.covM <- ic$np.cov.covM - nrow(variance.fixed)
-                                    }
+        ic$np.cov.covM <- ic$np.cov.covM - nrow(variance.fixed)
+    }
     ic$np.cov.mu <- D
-    if ( ! is.null(mu.fixed) ){ ic$np.cov.mu <- ic$np.cov.mu - nrow(mu.fixed) }
+    if ( ! is.null(mu.fixed) ){ 
+        ic$np.cov.mu <- ic$np.cov.mu - nrow(mu.fixed) 
+    }
     ic$np.cov <- ic$np.cov.covM + ic$np.cov.mu
     ic$np <- ic$np.item + ic$np.cov
-    # AIC
     ic$AIC <- dev + 2*ic$np
-    # BIC
     ic$BIC <- dev + ( log(ic$n) )*ic$np
-    # CAIC (conistent AIC)
     ic$CAIC <- dev + ( log(ic$n) + 1 )*ic$np
-    # corrected AIC
     ic$AICc <- ic$AIC + 2*ic$np * ( ic$np + 1 ) / ( ic$n - ic$np - 1 )
-    #---
-    # person parameters
+
+    #*** person parameters
     pers <- .smirt.person.parameters( data=dat2, D=D, theta.k=theta.k,
         p.xi.aj=f.yi.qk, p.aj.xi=f.qk.yi, weights=rep(1,N) )
     person <- pers$person
     EAP.rel <- pers$EAP.rel
-    #---
-    # item
+
+    #--- item
     item <- data.frame("item"=colnames(dat))
     item$N <- colSums( dat2.resp )
     item$p <- colSums( dat2, na.rm=TRUE) / item$N
@@ -363,29 +367,29 @@ smirt <- function( dat, Qmatrix, irtmodel="noncomp",
             b[ Qmatrix[,dd]==0, dd ] <- NA
             se.b[ est.b[,dd]==0, dd ] <- NA
             item[, paste0("b.",colnames(Qmatrix)[dd]) ] <- b[,dd]
-                        }
-                } else {    # end irtmodel=="noncomp"
+        }
+    } else {    # end irtmodel=="noncomp"
         item$b <- b
         se.b[ est.b==0 ] <- NA
-                } # end irtmodel !="noncomp"
+    } # end irtmodel !="noncomp"
     for (dd in 1:( ncol(Qmatrix)) ){
         a[ Qmatrix[,dd]==0, dd ] <- NA
         if ( sum( est.a) !=0 ){
             se.a[ est.a[,dd]==0, dd ] <- NA
-                        }
+        }
         item[, paste0("a.",colnames(Qmatrix)[dd]) ] <- a[,dd]
-                    }
+    }
     item$c <- c
     item$d <- d
     if ( irtmodel=="partcomp" ){
         mu.i[ rowSums( Qmatrix > 0 )==1 ] <- NA
         item$mu.i <- mu.i
-                }
-
+    }
 
     obji <- item
     for (vv in seq(2,ncol(obji) )){
-        obji[,vv] <- round( obji[,vv],3 ) }
+        obji[,vv] <- round( obji[,vv],3 ) 
+    }
     cat("*********************************\n")
     cat("Item Parameters\n")
     print( obji )
@@ -395,20 +399,17 @@ smirt <- function( dat, Qmatrix, irtmodel="noncomp",
 
     s2 <- Sys.time()
 
-    res <- list("deviance"=dev, "ic"=ic, "item"=item,
-        "person"=person, "EAP.rel"=EAP.rel,
-        "mean.trait"=mu, "sd.trait"=sqrt( diag(Sigma ) ),
-        "Sigma"=Sigma, "cor.trait"=cov2cor(Sigma ),
-        "b"=b, "se.b"=se.b, "a"=a, "se.a"=se.a,
-        "c"=c, "se.c"=se.c, "d"=d, "se.d"=se.d,
-        "mu.i"=mu.i,     "se.mu.i"=se.mu.i,
-        "f.yi.qk"=f.yi.qk, "f.qk.yi"=f.qk.yi, "probs"=probs,
-        "n.ik"=n.ik,  "iter"=iter, "dat2"=dat2, "dat2.resp"=dat2.resp,
-        "dat"=dat0,
-        "I"=I, "D"=D, "K"=K,  "G"=1, "theta.k"=theta.k, "pi.k"=pi.k,
-        "irtmodel"=irtmodel, "Qmatrix"=Qmatrix, "s1"=s1, "s2"=s2
-                )
+    res <- list(deviance=dev, ic=ic, item=item,
+                person=person, EAP.rel=EAP.rel,
+                mean.trait=mu, sd.trait=sqrt(diag(Sigma)),
+                Sigma=Sigma, cor.trait=stats::cov2cor(Sigma),
+                b=b, se.b=se.b, a=a, se.a=se.a,
+                c=c, se.c=se.c, d=d, se.d=se.d,
+                mu.i=mu.i, se.mu.i=se.mu.i,
+                f.yi.qk=f.yi.qk, f.qk.yi=f.qk.yi, probs=probs,
+                n.ik=n.ik,  iter=iter, dat2=dat2, dat2.resp=dat2.resp,
+                dat=dat0, I=I, D=D, K=K,  G=1, theta.k=theta.k, pi.k=pi.k,
+                irtmodel=irtmodel, Qmatrix=Qmatrix, s1=s1, s2=s2 )
     class(res) <- "smirt"
     return(res)
-        }
-############################################################
+}

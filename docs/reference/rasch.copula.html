@@ -133,7 +133,7 @@ a generalized logistic link function (Stukel, 1988).</p>
 models while <code>rasch.copula2</code> only handles unidimensional models.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rasch.copula2</span>(<span class='no'>dat</span>, <span class='no'>itemcluster</span>, <span class='kw'>copula.type</span><span class='kw'>=</span><span class='st'>"bound.mixt"</span>,
+    <pre class="usage"><span class='fu'>rasch.copula2</span>(<span class='no'>dat</span>, <span class='no'>itemcluster</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>copula.type</span><span class='kw'>=</span><span class='st'>"bound.mixt"</span>,
     <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='kw'>NULL</span>,
     <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>, <span class='fl'>4</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>21</span>), <span class='kw'>alpha1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>alpha2</span><span class='kw'>=</span><span class='fl'>0</span>,
     <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>1e-06</span>,  <span class='kw'>est.b</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)),
@@ -188,6 +188,10 @@ are removed from the analysis.</p></td>
 the same integers define a joint item cluster of (positively) locally
 dependent items. Values of zero indicate that the corresponding item
 is not included in any item cluster of dependent responses.</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p>Optional vector of sampling weights</p></td>
     </tr>
     <tr>
       <th>dims</th>

@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.itemcluster.Rd
-%% File Version: 0.44
+%% File Version: 0.453
 
 \name{rasch.pairwise.itemcluster}
 \alias{rasch.pairwise.itemcluster}
@@ -12,7 +12,7 @@ This function uses pairwise conditional likelihood estimation
 for estimating item parameters in the Rasch model.
 }
 \usage{
-rasch.pairwise.itemcluster(dat, itemcluster=NULL, b.fixed=NULL,
+rasch.pairwise.itemcluster(dat, itemcluster=NULL, b.fixed=NULL, weights=NULL,
     conv=1e-05, maxiter=3000, progress=TRUE, b.init=NULL, zerosum=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -29,6 +29,7 @@ is set as default.
 Matrix for fixing item parameters. The first columns contains the item
 (number or name), the second column the parameter to be fixed.
 }
+\item{weights}{Optional Vector of sampling weights}
   \item{conv}{
 Convergence criterion in maximal absolute parameter change
 }

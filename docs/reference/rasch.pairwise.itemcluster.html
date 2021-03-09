@@ -119,7 +119,7 @@ for estimating item parameters in the Rasch model." />
 for estimating item parameters in the Rasch model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rasch.pairwise.itemcluster</span>(<span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>b.fixed</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>rasch.pairwise.itemcluster</span>(<span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>b.fixed</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='kw'>NULL</span>,
     <span class='kw'>conv</span><span class='kw'>=</span><span class='fl'>1e-05</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>3000</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>b.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>zerosum</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -140,6 +140,10 @@ is set as default.</p></td>
       <th>b.fixed</th>
       <td><p>Matrix for fixing item parameters. The first columns contains the item
 (number or name), the second column the parameter to be fixed.</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p>Optional Vector of sampling weights</p></td>
     </tr>
     <tr>
       <th>conv</th>

@@ -1,11 +1,11 @@
 ## File Name: rasch_mml2_estep_raschtype.R
-## File Version: 0.06
+## File Version: 0.135
 
 
 #--- E Step Raschtype Model
 rasch_mml2_estep_raschtype <- function( dat1, dat2, dat2.resp,
         theta.k, pi.k, I, n, b, fixed.a, fixed.c,  fixed.d, alpha1, alpha2,
-        group, pseudoll, f.qk.yi=NULL )
+        group, pseudoll, f.qk.yi=NULL, weights=NULL )
 {
     # arrange groups
     if ( is.null(group) ){
@@ -53,14 +53,13 @@ rasch_mml2_estep_raschtype <- function( dat1, dat2, dat2.resp,
     for (gg in 1:G){
         ind.gg <- which(group==gg)
         res <- mml_raschtype_counts( dat2=dat2[ind.gg,], dat2resp=dat2.resp[ind.gg,],
-                    dat1=dat1[ind.gg,2], fqkyi=f.qk.yi[ind.gg,],
-                    pik=pi.k[,gg], fyiqk=f.yi.qk[ind.gg,]  )
+                    dat1=dat1[ind.gg,2], fqkyi=f.qk.yi[ind.gg,], pik=pi.k[,gg],
+                    fyiqk=f.yi.qk[ind.gg,])
         n.k[,gg] <- res$nk
         n.jk[,,gg] <- res$njk
         r.jk[,,gg] <- res$rjk
         ll[gg] <- res$ll
     }
-
 #cat("   calc expected counts") ; vv1 <- Sys.time(); print(vv1-vv0) ; vv0 <- vv1
 
     #-- output

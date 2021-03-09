@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.Rd
-%% File Version: 0.34
+%% File Version: 0.351
 
 \name{rasch.pairwise}
 \alias{rasch.pairwise}
@@ -14,7 +14,7 @@ square estimation method (cited in Fischer, 2007, p. 544)
 which is a pairwise conditional likelihood estimation approach.
 }
 \usage{
-rasch.pairwise(dat, conv=1e-04, maxiter=3000, progress=TRUE,
+rasch.pairwise(dat, weights=NULL, conv=1e-04, maxiter=3000, progress=TRUE,
         b.init=NULL, zerosum=FALSE)
 
 \method{summary}{rasch.pairwise}(object, digits=3, file=NULL, ...)
@@ -24,6 +24,7 @@ rasch.pairwise(dat, conv=1e-04, maxiter=3000, progress=TRUE,
   \item{dat}{
 An \eqn{N \times I} data frame of dichotomous item responses
 }
+\item{weights}{Optional vector of sampling weights}
   \item{conv}{
 Convergence criterion
 }

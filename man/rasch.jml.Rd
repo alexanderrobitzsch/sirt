@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.Rd
-%% File Version: 1.461
+%% File Version: 1.467
 
 \name{rasch.jml}
 \alias{rasch.jml}
@@ -16,8 +16,9 @@ for the generation of starting values of item parameters.
 \usage{
 rasch.jml(dat, method="MLE", b.init=NULL, constraints=NULL, weights=NULL,
     center="persons", glob.conv=10^(-6), conv1=1e-05, conv2=0.001, progress=TRUE,
-    bsteps=4,thetasteps=2, wle.adj=0, jmliter=100, prox=TRUE,
-    proxiter=30, proxconv=0.01, dp=NULL, theta.init=NULL, calc.fit=TRUE)
+    bsteps=4, thetasteps=2, wle.adj=0, jmliter=100, prox=TRUE,
+    proxiter=30, proxconv=0.01, dp=NULL, theta.init=NULL, calc.fit=TRUE,
+    prior_sd=NULL)
 
 \method{summary}{rasch.jml}(object, digits=3, ...)
 }
@@ -96,6 +97,10 @@ Convergence criterion for PROX iterations
 \item{calc.fit}{
  Should itemfit being calculated?
  }
+ \item{prior_sd}{
+ Optional value for standard deviation of prior distribution for
+ ability values if penalized JML should be utilized
+ }
   \item{object}{
 Object of class \code{rasch.jml}
 }
@@ -159,7 +164,7 @@ For a bias correction of the JML method try \code{\link{rasch.jml.jackknife1}}.
 
 JML estimation can also be conducted with the \pkg{TAM}
 (\code{\link[TAM:tam.jml]{TAM::tam.jml}})
-and \pkg{mixRasch} (\code{mixRasch::mixRasch})
+and \pkg{immer} (\code{immer::immer_jml})
 packages.
 
 See also marginal maximum likelihood estimation with \code{\link{rasch.mml2}}
@@ -173,6 +178,7 @@ or the \R package \pkg{ltm}.
 #############################################################################
 # EXAMPLE 1: Simulated data from the Rasch model
 #############################################################################
+
 set.seed(789)
 N <- 500    # number of persons
 I <- 11     # number of items
@@ -199,13 +205,7 @@ summary(mod3)
 # JML estimation in TAM
 \dontrun{
 library(TAM)
-mod4 <- TAM::tam.jml2( resp=dat )
-
-# JML estimation in mixRasch package
-library(mixRasch)
-mod5 <- mixRasch::mixRasch( dat, steps=1, n.c=1, max.iter=50)
-print(mod5)
-mod5$item.par       # extract item parameters
+mod4 <- TAM::tam.jml( resp=dat )
 
 #******
 # item parameter constraints in JML estimation

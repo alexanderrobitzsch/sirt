@@ -1,5 +1,5 @@
 ## File Name: rasch.pairwise.R
-## File Version: 0.38
+## File Version: 0.401
 
 
 #------ Rasch estimation (Approximate Method)
@@ -7,7 +7,7 @@
 # Handbook of Statistics Vol. 26
 # Chapter of G. Fischer: p. 544 ff.
 # pairwise likelihood method
-rasch.pairwise <- function( dat, conv=0.0001, maxiter=3000,
+rasch.pairwise <- function( dat, weights=NULL, conv=0.0001, maxiter=3000,
         progress=TRUE, b.init=NULL, zerosum=FALSE )
 {
     s1 <- Sys.time()
@@ -25,7 +25,11 @@ rasch.pairwise <- function( dat, conv=0.0001, maxiter=3000,
     dat.9 <- dat
     dat.9[ is.na(dat) ] <- 9
     # calculate n_{ij}
-    n.ij <- crossprod( dat.9 * dat.resp, ( 1 - dat.9 ) * dat.resp  )
+    if (is.null(weights)){
+        weights <- rep(1,nrow(dat))
+    }
+    sw <- sqrt(weights)
+    n.ij <- crossprod( dat.9 * dat.resp * sw, ( 1 - dat.9 ) * dat.resp *sw )
     # which item pairs occur in estimation procedure
     delta.ij <- 1 * ( n.ij + t( n.ij ) > 0 )
 

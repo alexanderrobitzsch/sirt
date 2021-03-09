@@ -1,5 +1,5 @@
 %% File Name: lq_fit.Rd
-%% File Version: 0.16
+%% File Version: 0.17
 
 \name{lq_fit}
 \alias{lq_fit}
