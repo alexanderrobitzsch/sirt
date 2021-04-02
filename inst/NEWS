@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2021-03-09  |  Last: sirt 3.10-79
+VERSIONS sirt 3.10  |  2021-04-02  |  Last: sirt 3.10-91
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()
@@ -80,6 +80,12 @@ NOTE  * included argument 'weights' for sampling weights in
         rasch.copula2()
 NOTE  * adapted smirt() funtion in cases in which dat has no column
         names (thanks to Burga Leon Andres Alberto)
+ADDED * included argument 'power' in rasch.pairwise() function
+        (thanks to Joerg-Henrik Heine)
+ADDED * added alternative optimization function for MINCHI method
+        in rasch.pairwise() which can be requested by 'direct_optim=TRUE'.
+        Direct optimization is now the default in rasch.pairwise().
+
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: linking.haebara (1),

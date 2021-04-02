@@ -1,5 +1,5 @@
 ## File Name: smirt.R
-## File Version: 7.301
+## File Version: 7.302
 
 
 #--- smirt model
@@ -335,15 +335,15 @@ smirt <- function( dat, Qmatrix, irtmodel="noncomp",
     ic$np.cov <- 0
 
     ic$np.cov.covM <- D*(D+1)/2
-    if ( est.corr ){ 
-        ic$np.cov.covM <- ic$np.cov.covM - D 
+    if ( est.corr ){
+        ic$np.cov.covM <- ic$np.cov.covM - D
     }
     if ( ! is.null(variance.fixed) ){
         ic$np.cov.covM <- ic$np.cov.covM - nrow(variance.fixed)
     }
     ic$np.cov.mu <- D
-    if ( ! is.null(mu.fixed) ){ 
-        ic$np.cov.mu <- ic$np.cov.mu - nrow(mu.fixed) 
+    if ( ! is.null(mu.fixed) ){
+        ic$np.cov.mu <- ic$np.cov.mu - nrow(mu.fixed)
     }
     ic$np.cov <- ic$np.cov.covM + ic$np.cov.mu
     ic$np <- ic$np.item + ic$np.cov
@@ -388,7 +388,7 @@ smirt <- function( dat, Qmatrix, irtmodel="noncomp",
 
     obji <- item
     for (vv in seq(2,ncol(obji) )){
-        obji[,vv] <- round( obji[,vv],3 ) 
+        obji[,vv] <- round( obji[,vv],3 )
     }
     cat("*********************************\n")
     cat("Item Parameters\n")

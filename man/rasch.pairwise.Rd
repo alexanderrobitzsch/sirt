@@ -1,5 +1,5 @@
 %% File Name: rasch.pairwise.Rd
-%% File Version: 0.351
+%% File Version: 0.356
 
 \name{rasch.pairwise}
 \alias{rasch.pairwise}
@@ -15,7 +15,7 @@ which is a pairwise conditional likelihood estimation approach.
 }
 \usage{
 rasch.pairwise(dat, weights=NULL, conv=1e-04, maxiter=3000, progress=TRUE,
-        b.init=NULL, zerosum=FALSE)
+        b.init=NULL, zerosum=FALSE, power=1, direct_optim=TRUE)
 
 \method{summary}{rasch.pairwise}(object, digits=3, file=NULL, ...)
 }
@@ -40,6 +40,11 @@ An optional vector of length \eqn{I} of item difficulties
 \item{zerosum}{Optional logical indicating whether item difficulties
     should be centered in each iteration. The default is that
         no centering is conducted.}
+\item{power}{Power used for computing pairwise response probabilities like
+in row averaging approach}
+\item{direct_optim}{Logical indicating whether least squares criterion
+funcion should be minimized with \code{\link[stats:nlminb]{stats::nlminb}}
+}
   \item{object}{
 Object of class \code{rasch.pairwise}
 }

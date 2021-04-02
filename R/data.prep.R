@@ -1,5 +1,5 @@
 ## File Name: data.prep.R
-## File Version: 1.144
+## File Version: 1.145
 
 #----- data preparations for rasch.jml and rasch.mml
 data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
@@ -56,16 +56,6 @@ data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
                 "freq.patt"=freq.patt, "I"=I, "n"=n, "dat9"=dat.9 )
 }
 
-#*******************
-    #   OUTPUT:
-    #   dat         ... original data
-    #   dat2        ... reduced original data. Each different item resonse is represented by one row.
-    #   dat2.resp   ... indicator response matrix for each item response pattern
-    #   dat1        ...     --- ADD AN EXPLANATION HERE     ----
-    #   freq.patt   ... absolute frequency of each item response pattern
-    #   I           ... number of items
-    #   n           ... number of subjects
-    #   dat9        ... This is the original data exact from the fact that missings are recoded by 9.
 
 .data.prep <- data.prep
 
@@ -80,9 +70,6 @@ data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
     }
     print(matr)
 }
-
-
-
 
 
 #-- Function for calculation of a response pattern

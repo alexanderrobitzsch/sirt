@@ -122,7 +122,7 @@ which is a pairwise conditional likelihood estimation approach.</p>
     </div>
 
     <pre class="usage"><span class='fu'>rasch.pairwise</span>(<span class='no'>dat</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>conv</span><span class='kw'>=</span><span class='fl'>1e-04</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>3000</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
-        <span class='kw'>b.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>zerosum</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+        <span class='kw'>b.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>zerosum</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>power</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>direct_optim</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for rasch.pairwise</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
@@ -159,6 +159,16 @@ which is a pairwise conditional likelihood estimation approach.</p>
       <td><p>Optional logical indicating whether item difficulties
     should be centered in each iteration. The default is that
         no centering is conducted.</p></td>
+    </tr>
+    <tr>
+      <th>power</th>
+      <td><p>Power used for computing pairwise response probabilities like
+in row averaging approach</p></td>
+    </tr>
+    <tr>
+      <th>direct_optim</th>
+      <td><p>Logical indicating whether least squares criterion
+funcion should be minimized with <code><a href='https://rdrr.io/r/stats/nlminb.html'>stats::nlminb</a></code></p></td>
     </tr>
     <tr>
       <th>object</th>
