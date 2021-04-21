@@ -70,7 +70,7 @@ modelfit.sirt <- function( object )
 
     #*******
     # mirt
-    if (class(object)=="ConfirmatoryClass" | class(object)=="ExploratoryClass" ){
+    if (class(object)=="ConfirmatoryClass" | class(object)=="ExploratoryClass" | class(object) == "SingleGroupClass"){
         mod <- object
         mod <- mirt.wrapper.posterior(mod)
         probs <- mod$probs
