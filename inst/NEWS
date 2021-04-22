@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2021-04-02  |  Last: sirt 3.10-91
+VERSIONS sirt 3.10  |  2021-04-22  |  Last: sirt 3.10-92
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()
@@ -85,6 +85,8 @@ ADDED * included argument 'power' in rasch.pairwise() function
 ADDED * added alternative optimization function for MINCHI method
         in rasch.pairwise() which can be requested by 'direct_optim=TRUE'.
         Direct optimization is now the default in rasch.pairwise().
+NOTE  * added object class 'SingleGroupClass' in modelfit.sirt()
+        (thanks to @seonghobae, Github issue #17)
 
 
 DATA  * included/modified datasets: ---

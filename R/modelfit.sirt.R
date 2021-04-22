@@ -1,5 +1,5 @@
 ## File Name: modelfit.sirt.R
-## File Version: 1.10
+## File Version: 1.12
 
 
 # model fit in sirt
@@ -70,7 +70,7 @@ modelfit.sirt <- function( object )
 
     #*******
     # mirt
-    if (class(object)=="ConfirmatoryClass" | class(object)=="ExploratoryClass" ){
+    if (class(object) %in% c("ConfirmatoryClass","ExploratoryClass","SingleGroupClass")){
         mod <- object
         mod <- mirt.wrapper.posterior(mod)
         probs <- mod$probs

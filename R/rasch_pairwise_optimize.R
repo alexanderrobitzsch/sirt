@@ -1,5 +1,5 @@
 ## File Name: rasch_pairwise_optimize.R
-## File Version: 0.221
+## File Version: 0.222
 
 
 rasch_pairwise_optimize <- function(n.ij, n.ji, beta, zerosum, optimizer="nlminb",
@@ -24,7 +24,7 @@ rasch_pairwise_optimize <- function(n.ij, n.ji, beta, zerosum, optimizer="nlminb
     if (estimator=="ULS"){
         y.ij <- n.ij
         y.ji <- n.ji
-    }    
+    }
     opt_fun2 <- function(x)
     {
         eps <- rasch_pairwise_compute_eps(x=x)
