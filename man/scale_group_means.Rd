@@ -1,5 +1,5 @@
 %% File Name: scale_group_means.Rd
-%% File Version: 0.03
+%% File Version: 0.05
 
 \name{scale_group_means}
 \alias{scale_group_means}
@@ -31,13 +31,14 @@ scale_group_means(M, SD, probs=NULL)
 %}
 
 \value{
-For \code{categorize}, it is a list with entries
-  \item{data}{Converted data frame}
-  \item{categ_design}{Data frame containing some informations
-    about categorization}
-
-For \code{decategorize} it is a data frame.
+List with entries
+  \item{M1}{total mean}
+  \item{SD1}{total standard deviation}
+\item{M_z}{standardized means}
+\item{SD_z}{standardized standard deviations}
 }
+
+%% list(M1=M1, SD1=SD1, M_z=M_z, SD_z=SD_z)
 
 %\references{
 %% ~put references to the literature/web site here ~

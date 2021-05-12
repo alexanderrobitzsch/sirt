@@ -1,5 +1,5 @@
 ## File Name: rasch_mml2_estep_raschtype.R
-## File Version: 0.135
+## File Version: 0.136
 
 
 #--- E Step Raschtype Model
@@ -64,7 +64,7 @@ rasch_mml2_estep_raschtype <- function( dat1, dat2, dat2.resp,
 
     #-- output
     res <- list( n.k=n.k, n.jk=n.jk, r.jk=r.jk, f.qk.yi=f.qk.yi, pjk=pjk,
-                f.yi.qk=f.yi.qk, ll=sum(ll) )
+                f.yi.qk=f.yi.qk, ll=sum(ll), theta.k=theta.k )
     return(res)
 }
 
