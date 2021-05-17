@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.663
+## File Version: 7.671
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model
@@ -69,8 +69,12 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                                 }
                 npmodel <- list(1:I)
                 }
-    D <- 1
     dat.resp <- 1 - is.na(dat)
+    if (is.null(Qmatrix)){
+        D <- 1
+    } else {
+        D <- ncol(Qmatrix)
+    }
     if (irtmodel %in% irtmodel_missing){
         D <- 2
         if (is.vector(theta.k)){
@@ -429,7 +433,6 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
             e1 <- .e.step.ramsay( dat1, dat2, dat2.resp, theta.k, pi.k, I, n, b,
                             fixed.K, group, pow.qm=pow.qm, ind.ii.list )
         }
-
         if (raschtype & D==1){
             e1 <- rasch_mml2_estep_raschtype( dat1=dat1, dat2=dat2, dat2.resp=dat2.resp,
                         theta.k=theta.k, pi.k=pi.k, I=I, n=n, b=b, fixed.a=fixed.a, fixed.c=fixed.c,
@@ -437,9 +440,11 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         weights=weights)
         }
         if (raschtype & D>1){
-            e1 <- .e.step.raschtype.mirt( dat1, dat2, dat2.resp, theta.k, pi.k, I, n, b,
-                            fixed.a, fixed.c, fixed.d,  alpha1, alpha2, group,
-                            mu, Sigma.cov, Qmatrix, pseudoll)
+            e1 <- rasch_mml2_estep_raschtype_mirt( dat1=dat1, dat2=dat2, 
+                        dat2.resp=dat2.resp, theta.k=theta.k, pi.k=pi.k, I=I, n=n, b=b, 
+                        fixed.a=fixed.a, fixed.c=fixed.c, fixed.d=fixed.d, alpha1=alpha1, 
+                        alpha2=alpha2, group=group, mu=mu, Sigma.cov=Sigma.cov, 
+                        Qmatrix=Qmatrix, pseudoll=pseudoll ) 
         }
         if (npirt){
             if (iter==0){
@@ -1184,7 +1189,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                 ramsay.qm=ramsay.qm, irtmodel=irtmodel, D=D, mu=mu, Sigma.cov=Sigma.cov,
                 est_parameters=est_parameters, priors=priors,
                 theta.k=theta.k, trait.weights=trait.weights, pi.k=pi.k,
-                dat_implist=dat_implist, CALL=CALL )
+                dat_implist=dat_implist, variance.fixed=variance.fixed, CALL=CALL )
     class(res) <- "rasch.mml"
     res$ic <- ic
     res$est.c <- est.c
