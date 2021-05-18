@@ -1,5 +1,5 @@
 ## File Name: summary.rasch.mml2.R
-## File Version: 1.249
+## File Version: 1.252
 
 
 #-- Summary for rasch.mml object
@@ -26,6 +26,7 @@ summary.rasch.mml <- function( object, file=NULL, ... )
     cat("Semiparametric Marginal Maximum Likelihood Estimation \n")
     if ( object$Rfcttype=="rasch.mml" ){ cat("Function 'rasch.mml' \n\n") }
     if ( object$Rfcttype=="rasch.mml2" ){ cat("Function 'rasch.mml2' \n\n") }
+    cat("irtmodel=", object$irtmodel, "\n")
     if ( ! object$ramsay.qm ){
         cat("Rasch Type Model with Fixed Discrimination, Guessing and Slipping Parameters \n")
         cat("alpha1", "=", round(object$alpha1,3)," alpha2", "=", round(object$alpha2,3), " \n")

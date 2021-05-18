@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.671
+## File Version: 7.681
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model
@@ -47,7 +47,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
 #        m1r <- TRUE
 #        irtmodel <- "missing1"
 #            }
-    if (nimps>0){
+    if ((nimps>0) | (irtmodel=="pseudoll") ){
         use.freqpatt <- FALSE
     }
     if ( irtmodel=="ramsay.qm" ){
@@ -75,7 +75,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
     } else {
         D <- ncol(Qmatrix)
     }
-    if (irtmodel %in% irtmodel_missing){
+    if (irtmodel %in% c(irtmodel_missing) ){
         D <- 2
         if (is.vector(theta.k)){
             theta.k <- expand.grid( theta.k, theta.k )
@@ -283,13 +283,12 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         if ( fracresp=="pseudoll"){
             pseudoll <- 1
         }
-        if ( fracresp=="fuzzyll"){
-            pseudoll <- 2
-        }
+        irtmodel <- "pseudoll"
         if ( is.null(group) ){
             group <- rep( 1, nrow(dat2) )
         }
     }
+
     # probability weights at theta.k
     if (D==1){
         pi.k <- sirt_dnorm_discrete( x=theta.k )
@@ -417,9 +416,10 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         zz0 <- Sys.time()
 
         b0 <- b
-        if ( irtmodel %in% irtmodel_missing ){ beta0 <- beta }
+        if ( irtmodel %in% irtmodel_missing ){ 
+            beta0 <- beta 
+        }
         dev0 <- dev
-
         #-------------- E-step  --------------
         if ( irtmodel %in% irtmodel_missing ){
             e1 <- rasch_mml2_estep_missing1( dat2=dat2, dat2.resp=dat2.resp, theta.k=theta.k,

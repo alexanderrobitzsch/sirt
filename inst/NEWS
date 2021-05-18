@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2021-05-16  |  Last: sirt 3.10-104
+VERSIONS sirt 3.10  |  2021-05-18  |  Last: sirt 3.10-108
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()

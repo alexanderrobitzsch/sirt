@@ -1,5 +1,5 @@
 //// File Name: rm_smirt_mml2_rcpp.cpp
-//// File Version: 5.389
+//// File Version: 5.392
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -644,42 +644,41 @@ Rcpp::List MML2_CALCPOST_V1( Rcpp::NumericMatrix DAT2,
 /// rasch.mml2 - calculation of posterior distribution (V2)
 
 ///********************************************************************
-///** MML2_CALCPOST_V2
+///** old file name: MML2_CALCPOST_V2
+///** new file name: sirt_rcpp_rasch_mml2_calcpost_pseudoll
 // [[Rcpp::export]]
-Rcpp::List MML2_CALCPOST_V2( Rcpp::NumericMatrix DAT2,
+Rcpp::List sirt_rcpp_rasch_mml2_calcpost_pseudoll( Rcpp::NumericMatrix DAT2,
     Rcpp::NumericMatrix DAT2RESP, Rcpp::NumericMatrix PROBS )
 {
 
-     int N=DAT2.nrow();
-     int I=DAT2.ncol();
-     int TP=PROBS.ncol();
-     //*****
-     // calculate individual likelihood
-     Rcpp::NumericMatrix fyiqk (N,TP);
-     fyiqk.fill(1);
-     for (int ii=0;ii<I;++ii){
-     for (int nn=0;nn<N;++nn){
-         if ( DAT2RESP(nn,ii)>0){
-         for (int tt=0;tt<TP;++tt){
-//             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
-    if ( ( DAT2(nn,ii) < 1 ) & ( DAT2(nn,ii) > 0 ) ){
-             fyiqk(nn,tt) = fyiqk(nn,tt) * pow( PROBS(2*ii+1,tt),DAT2(nn,ii) )*
-                    pow( PROBS( 2*ii, tt ), 1 - DAT2(nn,ii) );
-         } else {
-             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
-                        }
-                         }
-                     }
-                 }
-             }
+    int N=DAT2.nrow();
+    int I=DAT2.ncol();
+    int TP=PROBS.ncol();
 
-     ///////////////////////////////////////////////////////
-     ///////////// O U T P U T   ///////////////////////////
-     return Rcpp::List::create(
-        Rcpp::_["fyiqk"] = fyiqk
-           );
+    //*** calculate individual likelihood
+    Rcpp::NumericMatrix fyiqk (N,TP);
+    fyiqk.fill(1);
+    for (int ii=0;ii<I;++ii){
+        for (int nn=0;nn<N;++nn){
+            if ( DAT2RESP(nn,ii)>0){
+                for (int tt=0;tt<TP;++tt){
+                    if ( ( DAT2(nn,ii) < 1 ) & ( DAT2(nn,ii) > 0 ) ){
+                        fyiqk(nn,tt) = fyiqk(nn,tt) * std::pow( PROBS(2*ii+1,tt),DAT2(nn,ii) )*
+                                            std::pow( PROBS( 2*ii, tt ), 1 - DAT2(nn,ii) );
+                    } else {
+                        fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
+                    }
+                }
+            }
+        }
+    }
+
+    //**** output
+    return Rcpp::List::create(
+        Rcpp::Named("fyiqk") = fyiqk
+    );
 }
-
+///********************************************************************
 
 
 
