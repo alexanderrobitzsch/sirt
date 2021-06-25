@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2021-05-18  |  Last: sirt 3.10-108
+VERSIONS sirt 3.10  |  2021-06-25  |  Last: sirt 3.10-111
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()
@@ -88,6 +88,9 @@ ADDED * added alternative optimization function for MINCHI method
 NOTE  * added object class 'SingleGroupClass' in modelfit.sirt()
         (thanks to @seonghobae, Github issue #17)
 NOTE  * extended irtmodel='missing1' in rasch.mml2() to the 2PL model
+NOTE  * included arguments 'M_target' and 'SD_target' in 
+        scale_group_means()
+NOTE  * included predict functions predict_scale_group_means()
 
 
 DATA  * included/modified datasets: ---

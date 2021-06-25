@@ -1,8 +1,9 @@
 %% File Name: scale_group_means.Rd
-%% File Version: 0.05
+%% File Version: 0.08
 
 \name{scale_group_means}
 \alias{scale_group_means}
+\alias{predict_scale_group_means}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 
@@ -16,7 +17,10 @@ Scales a vector of means and standard deviations containing group values.
 
 
 \usage{
-scale_group_means(M, SD, probs=NULL)
+scale_group_means(M, SD, probs=NULL, M_target=0, SD_target=1)
+
+## predict method
+predict_scale_group_means(object, M, SD)
 }
 %- maybe also 'usage' for other objects documented here.
 
@@ -24,6 +28,9 @@ scale_group_means(M, SD, probs=NULL)
 \item{M}{Vector of means}
 \item{SD}{Vector of standard deviations}
 \item{probs}{Optional vector containing probabilities}
+ \item{M_target}{Target value for mean}
+ \item{SD_target}{Target value for standard deviation}
+ \item{object}{Fitted object from \code{scale_group_means}}
 }
 
 %\details{
@@ -36,6 +43,8 @@ List with entries
   \item{SD1}{total standard deviation}
 \item{M_z}{standardized means}
 \item{SD_z}{standardized standard deviations}
+\item{M_trafo}{transformed means}
+\item{SD_trafo}{transformed standard deviations}
 }
 
 %% list(M1=M1, SD1=SD1, M_z=M_z, SD_z=SD_z)

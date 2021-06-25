@@ -1,5 +1,5 @@
 %% File Name: data.math.Rd
-%% File Version: 0.12
+%% File Version: 0.14
 
 \name{data.math}
 \alias{data.math}
@@ -8,13 +8,15 @@
 Dataset Mathematics
 }
 \description{
-This is an example Mathematics dataset. The
-dataset contains 664 students on 30 items.
+This is an example dataset involving Mathematics items for
+German fourth graders. Items are classified into several domains and 
+subdomains (see Section Format).
+The dataset contains 664 students on 30 items.
 }
 \usage{data(data.math)}
 \format{
 The dataset is a list. The list element \code{data}
-contains the dataset with the demographical variables
+contains the dataset with the demographic variables
 student ID (\code{idstud}) and a dummy variable
 for female students (\code{female}). The remaining
 variables (starting with \code{M} in the name) are

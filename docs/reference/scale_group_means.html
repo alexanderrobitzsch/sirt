@@ -117,7 +117,10 @@
     <p>Scales a vector of means and standard deviations containing group values.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>scale_group_means</span>(<span class='no'>M</span>, <span class='no'>SD</span>, <span class='kw'>probs</span><span class='kw'>=</span><span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>scale_group_means</span>(<span class='no'>M</span>, <span class='no'>SD</span>, <span class='kw'>probs</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>M_target</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>SD_target</span><span class='kw'>=</span><span class='fl'>1</span>)
+
+<span class='co'>## predict method</span>
+<span class='fu'>predict_scale_group_means</span>(<span class='no'>object</span>, <span class='no'>M</span>, <span class='no'>SD</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -134,6 +137,18 @@
       <th>probs</th>
       <td><p>Optional vector containing probabilities</p></td>
     </tr>
+    <tr>
+      <th>M_target</th>
+      <td><p>Target value for mean</p></td>
+    </tr>
+    <tr>
+      <th>SD_target</th>
+      <td><p>Target value for standard deviation</p></td>
+    </tr>
+    <tr>
+      <th>object</th>
+      <td><p>Fitted object from <code>scale_group_means</code></p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -143,6 +158,8 @@
   <dt>SD1</dt><dd><p>total standard deviation</p></dd>
 <dt>M_z</dt><dd><p>standardized means</p></dd>
 <dt>SD_z</dt><dd><p>standardized standard deviations</p></dd>
+<dt>M_trafo</dt><dd><p>transformed means</p></dd>
+<dt>SD_trafo</dt><dd><p>transformed standard deviations</p></dd>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
