@@ -1,5 +1,5 @@
 %% File Name: data.trees.Rd
-%% File Version: 0.13
+%% File Version: 0.14
 
 \name{data.trees}
 \alias{data.trees}
@@ -46,7 +46,7 @@ The dataset has the following structure. \cr
 %%  ~~ If necessary, more details than the __description__ above ~~
 %}
 \source{
-\url{http://www.pommerening.org/wiki/images/d/dc/CoedyBreninSortedforPublication.txt}
+\url{https://www.pommerening.org/wiki/images/d/dc/CoedyBreninSortedforPublication.txt}
 }
 
 \references{

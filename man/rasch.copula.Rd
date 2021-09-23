@@ -1,5 +1,5 @@
 %% File Name: rasch.copula.Rd
-%% File Version: 1.738
+%% File Version: 1.739
 
 \name{rasch.copula2}
 \alias{rasch.copula2}
@@ -250,7 +250,7 @@ See \code{\link{rasch.mml2}} for the generalized logistic link function.
 
 See also Braeken and Tuerlinckx (2009) for alternative (and more expanded)
 copula models implemented in the MATLAB software. See
-\url{http://ppw.kuleuven.be/okp/software/irtm/}.
+\url{https://ppw.kuleuven.be/okp/software/irtm/}.
 
 See Braeken, Kuppens, De Boeck and Tuerlinckx (2013) for an extension of the
 copula modeling approach to polytomous data.

@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.749
+%% File Version: 0.751
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -244,7 +244,7 @@ West Sussex: Wiley. \doi{10.1002/0470010940}
 
 Terbeck, W., & Davies, P. L. (1998). Interactions and outliers in the two-way
 analysis of variance. \emph{Annals of Statistics, 26}(4), 1279-1305.
-\doi{10.1214/aos/1024691243}
+\doi{10/d66r8s}
 
 Tukey, J. W. (1977). \emph{Exploratory data analysis}. Addison-Wesley.
 

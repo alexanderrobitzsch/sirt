@@ -1,5 +1,5 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.398
+## File Version: 0.402
 
 
 #**** residualize data
@@ -27,6 +27,9 @@ lsem_residualize <- function( data, moderator, moderator.grid,
     sampling_weights <- res$sampling_weights
     no_sampling_weights <- res$no_sampling_weights
 
+    sampling_weights <- sampling_weights / sum(sampling_weights) * N
+    weights <- weights * sampling_weights
+
     # residualize
     dat2 <- data
     V <- length(vars)
@@ -47,7 +50,8 @@ lsem_residualize <- function( data, moderator, moderator.grid,
             for (gg in 1:G){
                 x <- dat2[,moderator]
                 res_formula <- data[, var.vv ] ~  x + I( x^2 )
-                mod <- stats::lm( res_formula, weights=weights[,gg]  )
+                weights_gg <- weights[,gg]
+                mod <- stats::lm( res_formula, weights=weights_gg )
                 m1 <- stats::predict( mod, data.frame( x=moderator.grid[gg] ) )
                 residualized_intercepts[gg,vv] <- m1
                 y <- stats::resid(mod)

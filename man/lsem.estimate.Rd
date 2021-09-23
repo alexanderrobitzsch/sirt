@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.732
+%% File Version: 0.740
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -64,7 +64,8 @@ lsem.MGM.stepfunctions( object, moderator.grid )
 lsem_local_weights(data.mod, moderator.grid, h, sampling_weights=NULL,  bw=NULL,
      kernel="gaussian")
 
-lsem.bootstrap(object, R=100, verbose=TRUE, cluster=NULL)
+lsem.bootstrap(object, R=100, verbose=TRUE, cluster=NULL, seed=1,
+     repl_design=NULL, repl_factor=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -162,6 +163,14 @@ Further arguments to be passed to \code{\link[lavaan:sem]{lavaan::sem}} or
 \item{data.mod}{Observed values of the moderator}
 \item{R}{Number of bootstrap samples}
 \item{cluster}{Optional variable name for bootstrap at the level of a cluster identifier}
+\item{seed}{Used random seed in bootstrap. Note that the seed is only
+defined locally in this function, it does not affect the seed in the global
+R environment.}
+\item{repl_design}{Optional matrix containing replication weights for computation of
+standard errors. Note that sampling weights have to be already included in
+\code{repl_design}.}
+\item{repl_factor}{Replication factor in variance formula for statistical
+inference, e.g., 0.05 in PISA.}
 }
 
 %\details{
@@ -353,6 +362,17 @@ summary(mod5b)
 bmod5b <- sirt::lsem.bootstrap(mod5b, R=100)
 # inspect parameter values and standard errors
 bmod5b$parameters
+
+#- user-defined replication design
+R <- 100    # bootstrap samples
+N <- nrow(dat)
+repl_design <- matrix(0, nrow=N, ncol=R)
+for (rr in 1:R){
+    indices <- sort( sample(1:N, replace=TRUE) )
+    repl_design[,rr] <- sapply(1:N, FUN=function(ii){ sum(indices==ii) } )
+}
+head(repl_design)
+bmod5b1 <- sirt::lsem.bootstrap(mod5a, repl_design=repl_design, repl_factor=1/R)
 
 #- compare model mod5b with joint estimation without constraints
 mod5c <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,

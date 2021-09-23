@@ -1,9 +1,18 @@
 ## File Name: lsem.bootstrap.R
-## File Version: 0.304
+## File Version: 0.315
 
 
-lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL)
+lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL, seed=1,
+        repl_design=NULL, repl_factor=NULL)
 {
+    # fix seed locally
+    old <- .Random.seed
+    on.exit({.Random.seed <<- old})
+    set.seed(seed)
+    if (!is.null(repl_design)){
+        R <- ncol(repl_design)
+    }
+
     lsem_args <- object$lsem_args
     lsem_args$se <- "none"
     lsem_args$verbose <- FALSE
@@ -33,11 +42,11 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL)
         #- draw bootstrap sample
         lsem_args1 <- lsem_bootstrap_draw_bootstrap_sample(data=data,
                             sampling_weights=sampling_weights, lsem_args=lsem_args,
-                            cluster=cluster)
+                            cluster=cluster, repl_design=repl_design, rr=rr)
         #- fit model
         mod1 <- try( do.call(what=lsem.estimate, args=lsem_args1), silent=TRUE)
         #- output collection
-        if ( class(mod1) !="try-error" ){
+        if ( class(mod1)!="try-error" ){
             parameters_boot[,rr] <- mod1$parameters$est
             fitstats_joint_boot[,rr] <- mod1$fitstats_joint$value
             rr <- rr + 1
@@ -47,7 +56,8 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL)
     #- modify output objects
     res <- lsem_bootstrap_postproc_output( parameters=parameters,
                 parameters_boot=parameters_boot, fitstats_joint=fitstats_joint,
-                fitstats_joint_boot=fitstats_joint_boot, est_joint=est_joint )
+                fitstats_joint_boot=fitstats_joint_boot, est_joint=est_joint,
+                repl_factor=repl_factor )
     parameters <- res$parameters
     fitstats_joint <- res$fitstats_joint
 

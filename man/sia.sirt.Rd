@@ -1,5 +1,5 @@
 %% File Name: sia.sirt.Rd
-%% File Version: 0.23
+%% File Version: 0.242
 
 \name{sia.sirt}
 \alias{sia.sirt}
@@ -92,7 +92,7 @@ For an implementation of statistical implicative analysis in the
 C.H.I.C. (Classification Hierarchique, Implicative et Cohesitive)
 software.
 
-See \url{http://www.ardm.eu/contenu/logiciel-d-analyse-de-donnees-chic}.
+See \url{https://ardm.eu/partenaires/logiciel-danalyse-de-donnees-c-h-i-c/}.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~

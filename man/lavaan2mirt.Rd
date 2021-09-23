@@ -1,5 +1,5 @@
 %% File Name: lavaan2mirt.Rd
-%% File Version: 0.43
+%% File Version: 0.441
 
 \name{lavaan2mirt}
 \alias{lavaan2mirt}
@@ -88,7 +88,7 @@ model are included in the dataset.}
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See \url{http://lavaan.ugent.be/} for \pkg{lavaan} resources.
+See \url{https://lavaan.ugent.be/} for \pkg{lavaan} resources.
 
 See \url{https://groups.google.com/forum/#!forum/lavaan}
 for discussion about the \pkg{lavaan} package. \cr

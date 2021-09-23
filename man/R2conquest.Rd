@@ -1,5 +1,5 @@
 %% File Name: R2conquest.Rd
-%% File Version: 3.25
+%% File Version: 3.261
 
 \name{R2conquest}
 \alias{R2conquest}
@@ -227,7 +227,7 @@ Wu, M. L., Adams, R. J., Wilson, M. R. & Haldane, S. (2007).
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See also the \pkg{eat} package (\url{http://r-forge.r-project.org/projects/eat/})
+See also the \pkg{eat} package (\url{https://r-forge.r-project.org/projects/eat/})
 for elaborate functionality of using ConQuest from within \R. See also
 the \pkg{conquestr} package for another \R wrapper to the ConQuest software
 (at least version 4 of ConQuest has to be installed).

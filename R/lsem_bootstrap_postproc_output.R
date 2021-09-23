@@ -1,11 +1,12 @@
 ## File Name: lsem_bootstrap_postproc_output.R
-## File Version: 0.02
+## File Version: 0.05
 
 lsem_bootstrap_postproc_output <- function(parameters, parameters_boot,
-    fitstats_joint, fitstats_joint_boot, est_joint=FALSE)
+    fitstats_joint, fitstats_joint_boot, est_joint=FALSE, repl_factor=NULL)
 {
     #* parameters
-    res <- lsem_bootstrap_inference(parameters_boot=parameters_boot, est=parameters$est)
+    res <- lsem_bootstrap_inference(parameters_boot=parameters_boot, est=parameters$est,
+                repl_factor=repl_factor)
     parameters$est_bc <- res$est_bc
     parameters$se <- res$se_boot
     parameters$z <- parameters$est / parameters$se
@@ -17,7 +18,7 @@ lsem_bootstrap_postproc_output <- function(parameters, parameters_boot,
     #* fitstats_joint
     if (est_joint){
         res <- lsem_bootstrap_inference(parameters_boot=fitstats_joint_boot,
-                    est=fitstats_joint$value)
+                    est=fitstats_joint$value, repl_factor=repl_factor)
         fitstats_joint$value_bc <- res$est_bc
         fitstats_joint$se <- res$se_boot
     }

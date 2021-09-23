@@ -1,25 +1,25 @@
 ## File Name: rasch_mml2_estep_raschtype_mirt.R
-## File Version: 1.071
+## File Version: 1.072
 
 
 #*** E Step Raschtype Model: multidimensional version
 rasch_mml2_estep_raschtype_mirt <- function( dat1, dat2, dat2.resp, theta.k, pi.k, I,
-                n, b, fixed.a, fixed.c,  fixed.d, alpha1, alpha2, group,  mu,  Sigma.cov, 
+                n, b, fixed.a, fixed.c,  fixed.d, alpha1, alpha2, group,  mu,  Sigma.cov,
                 Qmatrix, pseudoll )
 {
     aa0 <- Sys.time()
-    if ( is.null(group) ){ 
-        group <- rep( 1, nrow(dat1)) 
+    if ( is.null(group) ){
+        group <- rep( 1, nrow(dat1))
     }
     G <- length( unique( group) )
-    pjk <- prob_raschtype_genlogis( theta=theta.k, b=b, alpha1=alpha1, 
-                    alpha2=alpha2, fixed.a=fixed.a, Qmatrix=Qmatrix ) 
+    pjk <- prob_raschtype_genlogis( theta=theta.k, b=b, alpha1=alpha1,
+                    alpha2=alpha2, fixed.a=fixed.a, Qmatrix=Qmatrix )
     TP <- nrow(pjk)
-# cat("- probs") ; aa1 <- Sys.time(); print(aa1-aa0) ; aa0 <- aa1    
+# cat("- probs") ; aa1 <- Sys.time(); print(aa1-aa0) ; aa0 <- aa1
     fixed.c.M  <- sirt_matrix2(fixed.c, nrow=TP)
     fixed.d.M  <- sirt_matrix2(fixed.d, nrow=TP)
     pjk <- fixed.c.M + ( fixed.d.M - fixed.c.M) * pjk
-    
+
     TP <- dim(pjk)[1]
     pjkt <- t(pjk)
     pjkL <- array( NA, dim=c( I, 2, TP))

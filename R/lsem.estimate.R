@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 0.971
+## File Version: 0.982
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -59,6 +59,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     data <- out$data
     weights <- out$weights
     residualized_intercepts <- out$residualized_intercepts
+
     N <- out$N
     bw <- out$bw
     h <- out$h
@@ -108,6 +109,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     par_invariant=par_invariant, par_linear=par_linear,
                     par_quadratic=par_quadratic, partable_joint=partable_joint,
                     se=se, ... )
+
     parameters <- out2$parameters
     is_meanstructure <- out2$is_meanstructure
     fitstats_joint <- out2$fitstats_joint

@@ -1,5 +1,5 @@
 %% File Name: data.math.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{data.math}
 \alias{data.math}
@@ -9,7 +9,7 @@ Dataset Mathematics
 }
 \description{
 This is an example dataset involving Mathematics items for
-German fourth graders. Items are classified into several domains and 
+German fourth graders. Items are classified into several domains and
 subdomains (see Section Format).
 The dataset contains 664 students on 30 items.
 }

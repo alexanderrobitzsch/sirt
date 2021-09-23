@@ -185,7 +185,8 @@ Bootstrap at the level of a cluster identifier is allowed (argument <code>cluste
 <span class='fu'>lsem_local_weights</span>(<span class='no'>data.mod</span>, <span class='no'>moderator.grid</span>, <span class='no'>h</span>, <span class='kw'>sampling_weights</span><span class='kw'>=</span><span class='kw'>NULL</span>,  <span class='kw'>bw</span><span class='kw'>=</span><span class='kw'>NULL</span>,
      <span class='kw'>kernel</span><span class='kw'>=</span><span class='st'>"gaussian"</span>)
 
-<span class='fu'>lsem.bootstrap</span>(<span class='no'>object</span>, <span class='kw'>R</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>cluster</span><span class='kw'>=</span><span class='kw'>NULL</span>)</pre>
+<span class='fu'>lsem.bootstrap</span>(<span class='no'>object</span>, <span class='kw'>R</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>cluster</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>seed</span><span class='kw'>=</span><span class='fl'>1</span>,
+     <span class='kw'>repl_design</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>repl_factor</span><span class='kw'>=</span><span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -391,6 +392,23 @@ the <span class="pkg">lavaan</span> default is used.</p></td>
       <th>cluster</th>
       <td><p>Optional variable name for bootstrap at the level of a cluster identifier</p></td>
     </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>Used random seed in bootstrap. Note that the seed is only
+defined locally in this function, it does not affect the seed in the global
+R environment.</p></td>
+    </tr>
+    <tr>
+      <th>repl_design</th>
+      <td><p>Optional matrix containing replication weights for computation of
+standard errors. Note that sampling weights have to be already included in
+<code>repl_design</code>.</p></td>
+    </tr>
+    <tr>
+      <th>repl_factor</th>
+      <td><p>Replication factor in variance formula for statistical
+inference, e.g., 0.05 in PISA.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -561,6 +579,17 @@ competing factor analytic approaches for the investigation of measurement invari
 <span class='no'>bmod5b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>lsem.bootstrap</span>(<span class='no'>mod5b</span>, <span class='kw'>R</span><span class='kw'>=</span><span class='fl'>100</span>)
 <span class='co'># inspect parameter values and standard errors</span>
 <span class='no'>bmod5b</span>$<span class='no'>parameters</span>
+
+<span class='co'>#- user-defined replication design</span>
+<span class='no'>R</span> <span class='kw'>&lt;-</span> <span class='fl'>100</span>    <span class='co'># bootstrap samples</span>
+<span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>dat</span>)
+<span class='no'>repl_design</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>0</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='no'>N</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='no'>R</span>)
+<span class='kw'>for</span> (<span class='no'>rr</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='no'>R</span>){
+    <span class='no'>indices</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='no'>N</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>) )
+    <span class='no'>repl_design</span>[,<span class='no'>rr</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fl'>1</span>:<span class='no'>N</span>, <span class='kw'>FUN</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>ii</span>){ <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>indices</span><span class='kw'>==</span><span class='no'>ii</span>) } )
+}
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>repl_design</span>)
+<span class='no'>bmod5b1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>lsem.bootstrap</span>(<span class='no'>mod5a</span>, <span class='kw'>repl_design</span><span class='kw'>=</span><span class='no'>repl_design</span>, <span class='kw'>repl_factor</span><span class='kw'>=</span><span class='fl'>1</span>/<span class='no'>R</span>)
 
 <span class='co'>#- compare model mod5b with joint estimation without constraints</span>
 <span class='no'>mod5c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>lsem.estimate</span>( <span class='no'>dat</span>, <span class='kw'>moderator</span><span class='kw'>=</span><span class='st'>"age"</span>, <span class='kw'>moderator.grid</span><span class='kw'>=</span><span class='no'>moderator.grid</span>,

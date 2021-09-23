@@ -38,7 +38,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2021-06-25  |  Last: sirt 3.10-111
+VERSIONS sirt 3.10  |  2021-09-22  |  Last: sirt 3.10-118
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()
@@ -90,15 +90,18 @@ NOTE  * added object class 'SingleGroupClass' in modelfit.sirt()
 NOTE  * extended irtmodel='missing1' in rasch.mml2() to the 2PL model
 NOTE  * included arguments 'M_target' and 'SD_target' in 
         scale_group_means()
-NOTE  * included predict functions predict_scale_group_means()
-
+NOTE  * included predict function predict_scale_group_means()
+FIXED * fixed bug in lsem.estimate() when sampling weights were used
+        (thanks to Oliver Luedtke and Geetanjali Basarkod)
+NOTE  * included argument 'seed' in lsem.bootstrap() for replicating
+        results in this function
+ADDED * included option for input of replication designs in 
+        lsem.bootstrap() like balanced repeated replication designs
+        in PISA implemented in arguments 'repl_design' and 'repl_factor'
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: linking.haebara (1),
         lq_fit (1,2), btm (1)
-
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.9  |  2020-02-17  |  Last: sirt 3.9-4

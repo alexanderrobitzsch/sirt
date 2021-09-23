@@ -1,5 +1,5 @@
 %% File Name: matrixfunctions.sirt.Rd
-%% File Version: 1.15
+%% File Version: 1.161
 
 \name{matrixfunctions.sirt}
 
@@ -79,7 +79,7 @@ Alexander Robitzsch
 
 The \pkg{Rcpp} code for \code{rowCumsums.sirt} is copied from code of
 Romain Francois
-(\url{http://lists.r-forge.r-project.org/pipermail/rcpp-devel/2010-October/001198.html}).
+(\url{https://lists.r-forge.r-project.org/pipermail/rcpp-devel/2010-October/001198.html}).
 }
 
 %\note{

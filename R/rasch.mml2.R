@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.681
+## File Version: 7.688
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model
@@ -174,7 +174,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
     if ( ( sum(est.d) > 0 ) & is.null(fixed.d) ){
         fixed.d[ est.d > 0 ] <- .95
     }
-    
+
     #* estimate SD
     est_sd <- FALSE
     if (! is.null(est.a)){
@@ -416,8 +416,8 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         zz0 <- Sys.time()
 
         b0 <- b
-        if ( irtmodel %in% irtmodel_missing ){ 
-            beta0 <- beta 
+        if ( irtmodel %in% irtmodel_missing ){
+            beta0 <- beta
         }
         dev0 <- dev
         #-------------- E-step  --------------
@@ -440,11 +440,11 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         weights=weights)
         }
         if (raschtype & D>1){
-            e1 <- rasch_mml2_estep_raschtype_mirt( dat1=dat1, dat2=dat2, 
-                        dat2.resp=dat2.resp, theta.k=theta.k, pi.k=pi.k, I=I, n=n, b=b, 
-                        fixed.a=fixed.a, fixed.c=fixed.c, fixed.d=fixed.d, alpha1=alpha1, 
-                        alpha2=alpha2, group=group, mu=mu, Sigma.cov=Sigma.cov, 
-                        Qmatrix=Qmatrix, pseudoll=pseudoll ) 
+            e1 <- rasch_mml2_estep_raschtype_mirt( dat1=dat1, dat2=dat2,
+                        dat2.resp=dat2.resp, theta.k=theta.k, pi.k=pi.k, I=I, n=n, b=b,
+                        fixed.a=fixed.a, fixed.c=fixed.c, fixed.d=fixed.d, alpha1=alpha1,
+                        alpha2=alpha2, group=group, mu=mu, Sigma.cov=Sigma.cov,
+                        Qmatrix=Qmatrix, pseudoll=pseudoll )
         }
         if (npirt){
             if (iter==0){
@@ -607,10 +607,10 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         hwt <- e1$f.qk.yi[ group==gg, ]
                         hwt <- hwt / rowSums(hwt)
                         thetabar <- hwt%*%theta.k
-            
+
                         # calculation of mu
                         mu <- colSums( thetabar * dat1.gg ) / sum( dat1.gg )
-                        mean.trait[gg] <- mu        
+                        mean.trait[gg] <- mu
 
                         pi.k[,gg] <- sirt_dnorm_discrete( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] )
                                                     }
@@ -618,16 +618,17 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         #*********************************
                         # SD estimation
                         if ( ( gg > 1 ) | ( sum(est.a)==0 ) | est_sd ){
-                        #        d.change <- .est.sd( dat1.gg, f.yi.qk.gg, X1, pi.k, pi.k0, gg,
-                        #        mean.trait, sd.trait, theta.k, h )
-                        #    sd.trait[gg] <- sd.trait[gg] + d.change
-                        theta.k.adj <- theta.k - matrix( mu, nrow=length(theta.k), ncol=1, byrow=TRUE)
-                        tk <- theta.k.adj[,1]*theta.k.adj[,1]
-                        h1 <- dat1.gg * ( hwt %*% tk ) * delta.theta
-                        Sigma.cov <- sum( h1 ) / sum( dat1.gg )
-                        sd.trait[gg] <- sqrt(Sigma.cov)
-                                            }
-                    if ( ( ( ! is.null(est.a) ) | ( irtmodel=="npirt" ) ) & ( ! est_sd ) ){            
+                            #        d.change <- .est.sd( dat1.gg, f.yi.qk.gg, X1, pi.k, pi.k0, gg,
+                            #        mean.trait, sd.trait, theta.k, h )
+                            #    sd.trait[gg] <- sd.trait[gg] + d.change
+                            hwt <- e1$f.qk.yi
+                            theta.k.adj <- theta.k - matrix( mu, nrow=length(theta.k), ncol=1, byrow=TRUE)
+                            tk <- theta.k.adj[,1]*theta.k.adj[,1]
+                            h1 <- dat1.gg * ( hwt %*% tk ) * delta.theta
+                            Sigma.cov <- sum( h1 ) / sum( dat1.gg )
+                            sd.trait[gg] <- sqrt(Sigma.cov)
+                        }
+                    if ( ( ( ! is.null(est.a) ) | ( irtmodel=="npirt" ) ) & ( ! est_sd ) ){
                             sd.trait[1] <- 1
                                     }
                         pi.k[,gg] <- sirt_dnorm_discrete( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] )
@@ -995,7 +996,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
     item <- data.frame( item=colnames(dat),
                         N=colSums( weights*(1 - is.na(dat)) ),
                         p=colSums( weights*(dat==1), na.rm=TRUE) / colSums( weights*(1-is.na(dat))),
-                        b=b)                                            
+                        b=b)
     if ( ! is.null( constraints) ){
         est.b <- 1:I
         est.b[ constraints[,1] ] <- 0

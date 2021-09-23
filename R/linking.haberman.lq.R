@@ -1,5 +1,5 @@
 ## File Name: linking.haberman.lq.R
-## File Version: 0.197
+## File Version: 0.198
 
 linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     use_nu=FALSE, est_pow=FALSE, lower_pow=.1, upper_pow=3)
@@ -57,9 +57,9 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     pow_slopes <- mod0$pow
     ind_groups <- 1:(G-1)
     coef0_A <- coef0[ind_groups]
-    a_joint <- coef0[-c(ind_groups)]    
+    a_joint <- coef0[-c(ind_groups)]
     ar <- y - X %*% coef0
-    
+
     if (a_log){
         coef0_A <- exp(c(0,coef0_A))
         a_joint <- exp(a_joint)
@@ -69,11 +69,11 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     }
     resid <- itempars1
     resid$adif <- ar
-    
+
     At <- coef0_A
     transf.personpars <- data.frame(study=studies, A_theta=coef0_A, se_A_theta=NA)
     item$a <- a_joint
-    
+
     #**** estimation of B
     y <- itempars1[,4] * coef0_A[ ind_studies ]
     if (use_nu){
@@ -95,17 +95,17 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
         coef0_B <- -coef0_B
         b_joint <- -b_joint
     }
-    resid$b_resid <- y - X %*% coef0    
+    resid$b_resid <- y - X %*% coef0
     Bt <- coef0_B <- c(0, coef0_B)
     transf.personpars$B_theta <- coef0_B
     transf.personpars$se_B_theta <- NA
     rownames(transf.personpars) <- NULL
     item$b <- b_joint
-    
+
     #- include joint item parameters
     resid$a_joint <- item[ind_items, "a"]
     resid$b_joint <- item[ind_items, "b"]
-    
+
     # transformation for item parameters
     transf.itempars <- data.frame( study=studies, At=1/At, se_At=NA,
                             Bt=-Bt, se_Bt=NA )
