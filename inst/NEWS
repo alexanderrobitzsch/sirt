@@ -35,10 +35,20 @@ CHANGELOG sirt
 
 
 
+------------------------------------------------------------------------
+VERSIONS sirt 3.11  |  2021-09-24  |  Last: sirt 3.11-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.10  |  2021-09-22  |  Last: sirt 3.10-118
+VERSIONS sirt 3.10  |  2021-09-23  |  Last: sirt 3.10-119
 ------------------------------------------------------------------------
 
 ADDED * included option for regularization penalties in xxirt()

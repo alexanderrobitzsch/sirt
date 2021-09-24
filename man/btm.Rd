@@ -1,5 +1,5 @@
 %% File Name: btm.Rd
-%% File Version: 0.423
+%% File Version: 0.424
 
 \name{btm}
 \alias{btm}
@@ -137,7 +137,7 @@ and Social Sciences}. Springer.
 \doi{10.1007/978-3-319-06692-9_4}
 
 Hunter, D. R. (2004). MM algorithms for generalized Bradley-Terry models.
-\emph{Annals of Statistics, 32}, 384-406. \doi{10/dqh8r8}
+\emph{Annals of Statistics, 32}, 384-406. \url{https://doi.org/dqh8r8}
 }
 
 %\author{

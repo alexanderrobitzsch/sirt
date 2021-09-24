@@ -1,5 +1,5 @@
 ## File Name: lsem_bootstrap_draw_bootstrap_sample.R
-## File Version: 0.056
+## File Version: 0.057
 
 lsem_bootstrap_draw_bootstrap_sample <- function(data, sampling_weights,
     lsem_args, cluster=NULL, repl_design=NULL, rr=NULL)
@@ -25,7 +25,7 @@ lsem_bootstrap_draw_bootstrap_sample <- function(data, sampling_weights,
         lsem_args1$data <- data[ind,]
         lsem_args1$sampling_weights <- sampling_weights[ind]
     } else { # replication design
-        lsem_args1$sampling_weights    <- repl_design[,rr]
+        lsem_args1$sampling_weights <- repl_design[,rr]
     }
 
     return(lsem_args1)

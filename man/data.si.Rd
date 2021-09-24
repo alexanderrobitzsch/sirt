@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.411
+%% File Version: 0.415
 
 \name{data.sirt}
 
@@ -126,8 +126,8 @@ are indicated by the codes 1, 2 or 3.
 \code{ $ WV14: num  3 1 2 3 0 3 1 3 3 0 ...} \cr
 
 \item The dataset \code{data.si07} contains parameters of the empirical illustration
-of DeCarlo (XXXX). The simulation function \code{sim_fun} can be used for
-simulating data from the IRSDT model (see DeCarlo, XXXX)
+of DeCarlo (2020). The simulation function \code{sim_fun} can be used for
+simulating data from the IRSDT model (see DeCarlo, 2020)
 
 \code{List of 3} \cr
 \code{ $ pars   :'data.frame':        16 obs. of  3 variables:} \cr
@@ -235,8 +235,8 @@ Dimensionality of the latent structure and item selection via latent
 class multidimensional IRT models. \emph{Psychometrika, 77}(4), 782-802.
 \doi{10.1007/s11336-012-9278-0}
 
-DeCarlo, L. T. (XXXX). An item response model for true-false exams based on signal
-detection theory. \emph{Applied Psychological Measurement, xx}(xx). xxx-xxx.
+DeCarlo, L. T. (2020). An item response model for true-false exams based on signal
+detection theory. \emph{Applied Psychological Measurement, 34}(3). 234-248.
 \doi{10.1177/0146621619843823}
 
 Fischer, R., & Karl, J. A. (2019). A primer to (cross-cultural) multi-group invariance
@@ -245,7 +245,7 @@ testing possibilities in R.
 \doi{10.3389/fpsyg.2019.01507}
 
 Fop, M., & Murphy, T. B. (2018). Variable selection methods for model-based clustering.
-\emph{Statistics Surveys, 12}, 18-65. \doi{10/gktwch}
+\emph{Statistics Surveys, 12}, 18-65. \url{https://doi.org/gktwch}
 
 Goodman, L. A. (1970). The multivariate analysis of qualitative data: Interactions
 among multiple classifications.

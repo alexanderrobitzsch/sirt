@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.651
+%% File Version: 1.653
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -17,7 +17,7 @@ Alignment Procedure for Linking under Approximate Invariance
 \description{
 The function \code{invariance.alignment} performs alignment under approximate
 invariance for \eqn{G} groups and \eqn{I} items
-(Asparouhov & Muthen, 2014; Byrne & van de Vijver, 2017; DeMars, xxxx; Finch, 2016;
+(Asparouhov & Muthen, 2014; Byrne & van de Vijver, 2017; DeMars, 2020; Finch, 2016;
 Fischer & Karl, 2019; Flake & McCoach, 2018; Kim et al., 2017; Marsh et al., 2018;
 Muthen & Asparouhov, 2014, 2018; Pokropek, Davidov & Schmidt, 2019).
 It is assumed that item loadings and intercepts are
@@ -210,8 +210,8 @@ approach to testing for approximate measurement invariance:
 A paradigmatic cross-cultural application. \emph{Psicothema, 29}(4), 539-551.
 \doi{10.7334/psicothema2017.178}
 
-DeMars, C. E. (2019). Alignment as an alternative to anchor purification in DIF analyses.
-\emph{Structural Equation Modeling, xxx}(x), xxx-xxx.
+DeMars, C. E. (2020). Alignment as an alternative to anchor purification in DIF analyses.
+\emph{Structural Equation Modeling, 27}(1), 56-72.
 \doi{10.1080/10705511.2019.1617151}
 
 Finch, W. H. (2016). Detection of differential item functioning for more
@@ -271,7 +271,7 @@ Methods, 3}, 4-70.
 %}
 
 %\note{
-%xxxx
+%vvv
 %}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~

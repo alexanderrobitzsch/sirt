@@ -1,5 +1,5 @@
 %% File Name: linking.haebara.Rd
-%% File Version: 0.201
+%% File Version: 0.203
 
 \name{linking.haebara}
 \alias{linking.haebara}
@@ -18,7 +18,7 @@ for a similar approach). The optimization estimates transformation parameters fo
 means and standard deviations of the groups and joint item parameters.
 The function allows two different distance functions \code{dist="L2"} and
 \code{dist="L1"} where the latter is a robustified version of
-Haebara linking (see Details; He, Cui, & Osterlind, 2015; He & Cui, XXXX;
+Haebara linking (see Details; He, Cui, & Osterlind, 2015; He & Cui, 2020;
 Hu, Rogers, & Vukmirovic, 2008).
 }
 
@@ -121,9 +121,9 @@ in the presence of outlying common items. \emph{Applied Psychological Measuremen
 613-626.
 \doi{10.1177/0146621615587003}
 
-He, Y., & Cui, Z. (XXXX). Evaluating robust scale transformation methods with multiple
+He, Y., & Cui, Z. (2020). Evaluating robust scale transformation methods with multiple
 outlying common items under IRT true score equating.
-\emph{Applied Psychological Measurement, XX}(xx).
+\emph{Applied Psychological Measurement, 44}(4), 296-310.
 \doi{10.1177/0146621619886050}
 
 Hu, H., Rogers, W. T., & Vukmirovic, Z. (2008). Investigation of IRT-based equating
