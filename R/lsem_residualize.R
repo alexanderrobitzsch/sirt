@@ -1,5 +1,5 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.402
+## File Version: 0.403
 
 
 #**** residualize data
@@ -65,7 +65,7 @@ lsem_residualize <- function( data, moderator, moderator.grid,
             moderator.density=moderator.density, sd.moderator=sd.moderator, G=G, N=N,
             residualized_intercepts=residualized_intercepts,
             sampling_weights=sampling_weights, no_sampling_weights=no_sampling_weights,
-            m.moderator=m.moderator)
+            m.moderator=m.moderator, residualize=residualize )
     return(res)
 }
 

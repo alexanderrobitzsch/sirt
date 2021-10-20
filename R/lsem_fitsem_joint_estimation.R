@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem_joint_estimation.R
-## File Version: 0.174
+## File Version: 0.175
 
 lsem_fitsem_joint_estimation <- function(partable_joint,
     is_meanstructure, sample_stats, lavaan_est_fun, se,
@@ -21,7 +21,7 @@ lsem_fitsem_joint_estimation <- function(partable_joint,
         # pseudo weights
         res <- lsem_fitsem_raw_data_define_pseudo_weights(dat=data_joint, pseudo_weights=pseudo_weights)
         dat1 <- res$dat
-        ## this seems to be buggy, test statistics cannot be computed
+        ## this function seems to be buggy, test statistics cannot be computed
         survey.fit <- lavaan_est_fun(partable_joint, data=dat1, verbose=verbose,
                             group=group, se=se, test="standard",... )
     }

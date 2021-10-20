@@ -58,7 +58,7 @@ The argument pseudo_weights provides an ad hoc solution to estimate
 an LSEM for any model which can be fitted in lavaan.
 It is also possible to constrain some of the parameters along the values
 of the moderator in a joint estimation approach (est_joint=TRUE). Parameter
-names can be speicified which are assumed to be invariant (in par_invariant).
+names can be specified which are assumed to be invariant (in par_invariant).
 In addition, linear or quadratic constraints can be imposed on
 parameters (par_linear or par_quadratic).
 Statistical inference in case of joint estimation (but also for separate estimation)
@@ -155,7 +155,7 @@ moderator, specified in <code>moderator.grid</code>.</p>
 an LSEM for any model which can be fitted in <span class="pkg">lavaan</span>.</p>
 <p>It is also possible to constrain some of the parameters along the values
 of the moderator in a joint estimation approach (<code>est_joint=TRUE</code>). Parameter
-names can be speicified which are assumed to be invariant (in <code>par_invariant</code>).
+names can be specified which are assumed to be invariant (in <code>par_invariant</code>).
 In addition, linear or quadratic constraints can be imposed on
 parameters (<code>par_linear</code> or <code>par_quadratic</code>).</p>
 <p>Statistical inference in case of joint estimation (but also for separate estimation)
@@ -167,9 +167,9 @@ Bootstrap at the level of a cluster identifier is allowed (argument <code>cluste
     <span class='kw'>residualize</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>fit_measures</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"rmsea"</span>, <span class='st'>"cfi"</span>, <span class='st'>"tli"</span>, <span class='st'>"gfi"</span>, <span class='st'>"srmr"</span>),
     <span class='kw'>standardized</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>standardized_type</span><span class='kw'>=</span><span class='st'>"std.all"</span>, <span class='kw'>lavaan_fct</span><span class='kw'>=</span><span class='st'>"sem"</span>,
     <span class='kw'>sufficient_statistics</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>use_lavaan_survey</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>pseudo_weights</span><span class='kw'>=</span><span class='fl'>0</span>,
-    <span class='kw'>sampling_weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>est_joint</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>par_invariant</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>par_linear</span><span class='kw'>=</span><span class='kw'>NULL</span>,
-    <span class='kw'>par_quadratic</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>partable_joint</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>se</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>kernel</span><span class='kw'>=</span><span class='st'>"gaussian"</span>, <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-08</span>,
-    <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
+    <span class='kw'>sampling_weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>loc_linear_smooth</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>est_joint</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>par_invariant</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+    <span class='kw'>par_linear</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>par_quadratic</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>partable_joint</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>se</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>kernel</span><span class='kw'>=</span><span class='st'>"gaussian"</span>,
+    <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-08</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for lsem</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='no'>...</span>)
@@ -280,6 +280,12 @@ that the sum of local weights at each focal point is <code>30000</code>.</p></td
     <tr>
       <th>sampling_weights</th>
       <td><p>Optional vector of sampling weights</p></td>
+    </tr>
+    <tr>
+      <th>loc_linear_smooth</th>
+      <td><p>Logical indicating whether local linear
+smoothing should be used for computing sufficient statistics for
+means and covariances. The default is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>est_joint</th>

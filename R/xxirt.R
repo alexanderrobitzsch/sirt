@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 0.931
+## File Version: 0.934
 
 
 #--- user specified item response model
@@ -14,7 +14,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     s1 <- Sys.time()
 
     #*** some data processing of dat
-    res <- xxirt_data_proc(dat=dat, group=group )
+    res <- xxirt_data_proc(dat=dat, group=group, weights=weights )
     N <- res$N
     G <- res$G
     group <- res$group

@@ -1,5 +1,5 @@
 %% File Name: tetrachoric2.Rd
-%% File Version: 1.363
+%% File Version: 1.364
 
 \name{tetrachoric2}
 \alias{tetrachoric2}
@@ -89,7 +89,7 @@ See \emph{http://sites.education.miami.edu/zopluoglu/software-programs/}.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See also the \code{\link[psych:tetrachoric]{psych::tetrachoric}}
+See also the \code{psych::tetrachoric}
 function in the \pkg{psych} package
  and the function \code{irtoys::tet} in the \pkg{irtoys} package.
 

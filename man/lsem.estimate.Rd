@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.740
+%% File Version: 0.743
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -35,7 +35,7 @@ an LSEM for any model which can be fitted in \pkg{lavaan}.
 
 It is also possible to constrain some of the parameters along the values
 of the moderator in a joint estimation approach (\code{est_joint=TRUE}). Parameter
-names can be speicified which are assumed to be invariant (in \code{par_invariant}).
+names can be specified which are assumed to be invariant (in \code{par_invariant}).
 In addition, linear or quadratic constraints can be imposed on
 parameters (\code{par_linear} or \code{par_quadratic}).
 
@@ -48,9 +48,9 @@ lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=
     residualize=TRUE, fit_measures=c("rmsea", "cfi", "tli", "gfi", "srmr"),
     standardized=FALSE, standardized_type="std.all", lavaan_fct="sem",
     sufficient_statistics=FALSE, use_lavaan_survey=FALSE, pseudo_weights=0,
-    sampling_weights=NULL, est_joint=FALSE, par_invariant=NULL, par_linear=NULL,
-    par_quadratic=NULL, partable_joint=NULL, se=NULL, kernel="gaussian", eps=1e-08,
-    verbose=TRUE, ...)
+    sampling_weights=NULL, loc_linear_smooth=FALSE, est_joint=FALSE, par_invariant=NULL, 
+    par_linear=NULL, par_quadratic=NULL, partable_joint=NULL, se=NULL, kernel="gaussian", 
+    eps=1e-08, verbose=TRUE, ...)
 
 \method{summary}{lsem}(object, file=NULL, digits=3, ...)
 
@@ -128,6 +128,9 @@ For example, using \code{pseudo_weights=30000} implies
 that the sum of local weights at each focal point is \code{30000}.
 }
 \item{sampling_weights}{Optional vector of sampling weights}
+\item{loc_linear_smooth}{Logical indicating whether local linear
+smoothing should be used for computing sufficient statistics for
+means and covariances. The default is \code{FALSE}.}
 \item{est_joint}{Logical indicating whether LSEM should be estimated in a
 joint estimation approach. This options only works wih continuous data and
 sufficient statistics.}

@@ -1,5 +1,5 @@
 ## File Name: summary.lsem.R
-## File Version: 0.399
+## File Version: 0.404
 
 
 #-- summary lsem
@@ -33,8 +33,9 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
     # space between equality sign
     sp_eq <- paste0( c(" ", "=", " "), collapse="")
 
-    cat( paste0( "Number of observations", sp_eq, round(object$N,digits) ), "\n")
-    cat("Used samping weights:", ! object$no_sampling_weights, "\n")
+    cat( paste0( "Number of observations in datasets", sp_eq, round(object$N,digits) ), "\n")
+    cat( paste0( "Used observations in analysis", sp_eq, round(object$nobs,digits) ), "\n")
+    cat("Used sampling weights:", ! object$no_sampling_weights, "\n")
     if ( object$type=="LSEM"){
         cat( paste0( "Bandwidth factor", sp_eq, round(object$h,digits) ), "\n")
         cat( paste0( "Bandwidth", sp_eq, round(object$bw,digits) ), "\n")
@@ -43,6 +44,7 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
         cat("\n")
         cat("Used joint estimation:", object$est_joint, "\n")
         cat("Used sufficient statistics:", object$sufficient_statistics, "\n")
+        cat("Used local linear smoothing:", object$loc_linear_smooth, "\n")        
         cat("Used pseudo weights:", object$use_pseudo_weights, "\n")
         cat("Used lavaan package:", TRUE, "\n")
         cat("Used lavaan.survey package:", object$use_lavaan_survey, "\n\n")

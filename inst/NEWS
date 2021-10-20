@@ -36,10 +36,14 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.11  |  2021-09-24  |  Last: sirt 3.11-1
+VERSIONS sirt 3.11  |  2021-10-20  |  Last: sirt 3.11-7
 ------------------------------------------------------------------------
 
-xxx   * ...
+NOTE  * included argument 'loc_linear_smooth' in lsem.estimate() for
+        local linear smoothing for computation of conditional means
+        and covariances when 'sufficient_statistics=TRUE'
+FIXED * corrected handling of sampling weights in xxirt(). In previous
+        sirt versions, they were simply ignored.
 
 
 DATA  * included/modified datasets: ---
