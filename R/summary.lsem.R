@@ -1,5 +1,5 @@
 ## File Name: summary.lsem.R
-## File Version: 0.404
+## File Version: 0.405
 
 
 #-- summary lsem
@@ -44,7 +44,7 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
         cat("\n")
         cat("Used joint estimation:", object$est_joint, "\n")
         cat("Used sufficient statistics:", object$sufficient_statistics, "\n")
-        cat("Used local linear smoothing:", object$loc_linear_smooth, "\n")        
+        cat("Used local linear smoothing:", object$loc_linear_smooth, "\n")
         cat("Used pseudo weights:", object$use_pseudo_weights, "\n")
         cat("Used lavaan package:", TRUE, "\n")
         cat("Used lavaan.survey package:", object$use_lavaan_survey, "\n\n")

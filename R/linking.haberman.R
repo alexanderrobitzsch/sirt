@@ -1,12 +1,12 @@
 ## File Name: linking.haberman.R
-## File Version: 2.639
+## File Version: 2.647
 
 
 #**** Linking Haberman: ETS Research Report 2009
 linking.haberman <- function( itempars, personpars=NULL,
         estimation="OLS", a_trim=Inf, b_trim=Inf, lts_prop=.5,
         a_log=TRUE, conv=.00001, maxiter=1000, progress=TRUE,
-        adjust_main_effects=TRUE)
+        adjust_main_effects=TRUE, vcov=TRUE)
 {
     CALL <- match.call()
     s1 <- Sys.time()
@@ -37,7 +37,7 @@ linking.haberman <- function( itempars, personpars=NULL,
     resA <- linking_haberman_als(logaM=logaM, wgtM=wgtM, maxiter=maxiter, conv=conv,
                     progress=progress, est.type=est_type, cutoff=a_trim,
                     reference_value=1-a_log, adjust_main_effects=adjust_main_effects,
-                    estimation=estimation, lts_prop=lts_prop)
+                    estimation=estimation, lts_prop=lts_prop, vcov=vcov)
     if (a_log){
         aj <- exp(resA$logaj)
         At <- exp(resA$logaAt)
@@ -66,7 +66,7 @@ linking.haberman <- function( itempars, personpars=NULL,
     resB <- linking_haberman_als(logaM=bMadj, wgtM=wgtM, maxiter=maxiter,
                     conv=conv, progress=progress, est.type=est_type,
                     cutoff=b_trim, reference_value=0, adjust_main_effects=adjust_main_effects,
-                    estimation=estimation, lts_prop=lts_prop)
+                    estimation=estimation, lts_prop=lts_prop, vcov=vcov)
     Bj <- resB$logaj
     Bt <- resB$logaAt
     Bj_resid <- resB$loga_resid

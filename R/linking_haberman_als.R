@@ -1,12 +1,12 @@
 ## File Name: linking_haberman_als.R
-## File Version: 0.644
+## File Version: 0.654
 
 
 
 #--- alternating least squares for Haberman linking
 linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
             progress, est.type, cutoff, reference_value=0, adjust_main_effects=FALSE,
-            estimation="OLS", lts_prop=.5)
+            estimation="OLS", lts_prop=.5, vcov=TRUE)
 {
     non_null <- sum( abs(logaM) > 0, na.rm=TRUE)
     iter <- 0
@@ -99,7 +99,6 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
                 logaAt[ss] <- linking_haberman_compute_median(x=logaMadj[,ss], w=wgtM[,ss])
             }
         }
-
         if ( ! adjust_main_effects){
             logaAt[1] <- reference_value
         } else {
@@ -139,18 +138,21 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
     selitems <- which( rowSums( 1 - is.na( loga_resid ) ) > 1 )
 
     #--- calculation of standard errors of regression coefficients
-    if ( stats::sd(logaAt) < 1E-10 ){
+    sd_loga <- stats::sd(logaAt)
+    if ( sd_loga < 1E-10 ){
         res <- list( vcov=0*diag(NS-1), se=rep(0,NS-1)  )
     } else {
         res <- linking_haberman_als_vcov( regr_resid=loga_resid,
                     regr_wgt=wgtM, selitems=selitems, transf_pars=logaAt,
-                    estimation=estimation)
+                    estimation=estimation, vcov=vcov, NS=NS)
     }
     #--- item statistics
     item_stat <- data.frame( study=colnames(wgtM0) )
     item_stat$N_items <- colSums( wgtM0 > 0, na.rm=TRUE)
     item_stat$sumwgt_items <- colSums( (wgtM0 > 0)*wgt_adj, na.rm=TRUE )
-    if (estimation!="LTS"){ lts_prop <- 1}
+    if (estimation!="LTS"){
+        lts_prop <- 1
+    }
     #*** end algorithm
     res <- list( logaAt=logaAt, logaj=logaj, loga_resid=loga_resid, loga_wgt=wgtM,
                 loga_wgt_adj=wgt_adj, vcov=res$vcov, se=c(NA, res$se),

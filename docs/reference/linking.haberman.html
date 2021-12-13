@@ -77,7 +77,7 @@ model is assumed for the original item loadings (see Details; Battauz, 2017)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.11-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.12-vv</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@ model is assumed for the original item loadings (see Details; Battauz, 2017)</p>
 
     <pre class="usage"><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='no'>personpars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"OLS"</span>, <span class='kw'>a_trim</span><span class='kw'>=</span><span class='fl'>Inf</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>Inf</span>,
     <span class='kw'>lts_prop</span><span class='kw'>=</span><span class='fl'>.5</span>, <span class='kw'>a_log</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>conv</span><span class='kw'>=</span><span class='fl'>1e-05</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
-    <span class='kw'>adjust_main_effects</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+    <span class='kw'>adjust_main_effects</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>vcov</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for linking.haberman</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
@@ -213,6 +213,11 @@ should be displayed.</p></td>
       <th>adjust_main_effects</th>
       <td><p>Logical indicating whether all elements in the vector
 of main effects should be simultaneously adjusted</p></td>
+    </tr>
+    <tr>
+      <th>vcov</th>
+      <td><p>Optional indicating whether covariance matrix for linking errors
+should be computed</p></td>
     </tr>
     <tr>
       <th>pow</th>
@@ -398,7 +403,7 @@ doi: <a href='https://doi.org/10.1177/0013164411416975'>10.1177/0013164411416975
 West Sussex: Wiley. doi: <a href='https://doi.org/10.1002/0470010940'>10.1002/0470010940</a></p>
 <p>Terbeck, W., &amp; Davies, P. L. (1998). Interactions and outliers in the two-way
 analysis of variance. <em>Annals of Statistics, 26</em>(4), 1279-1305.
-<a href='https://doi.org/d66r8s'>https://doi.org/d66r8s</a></p>
+doi: 10.1214/aos/1024691243</p>
 <p>Tukey, J. W. (1977). <em>Exploratory data analysis</em>. Addison-Wesley.</p>
 <p>Weeks, J. P. (2010). <span class="pkg">plink</span>: An <span style="R">R</span> package for linking mixed-format tests
 using IRT-based methods. <code>Journal of Statistical Software, 35</code>(12), 1-33.

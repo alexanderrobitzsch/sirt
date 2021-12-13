@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.752
+%% File Version: 0.755
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -25,7 +25,7 @@ model is assumed for the original item loadings (see Details; Battauz, 2017)
 \usage{
 linking.haberman(itempars, personpars, estimation="OLS", a_trim=Inf, b_trim=Inf,
     lts_prop=.5, a_log=TRUE, conv=1e-05, maxiter=1000, progress=TRUE,
-    adjust_main_effects=TRUE)
+    adjust_main_effects=TRUE, vcov=TRUE)
 
 \method{summary}{linking.haberman}(object, digits=3, file=NULL, ...)
 
@@ -84,6 +84,8 @@ should be displayed.
 }
 \item{adjust_main_effects}{Logical indicating whether all elements in the vector
 of main effects should be simultaneously adjusted}
+\item{vcov}{Optional indicating whether covariance matrix for linking errors
+should be computed}
 \item{pow}{Power \eqn{q}}
 \item{eps}{Epsilon value used in differentiable approximating function}
 \item{use_nu}{Logical indicating whether item intercepts instead of
@@ -244,7 +246,7 @@ West Sussex: Wiley. \doi{10.1002/0470010940}
 
 Terbeck, W., & Davies, P. L. (1998). Interactions and outliers in the two-way
 analysis of variance. \emph{Annals of Statistics, 26}(4), 1279-1305.
-\url{https://doi.org/d66r8s}
+doi: 10.1214/aos/1024691243
 
 Tukey, J. W. (1977). \emph{Exploratory data analysis}. Addison-Wesley.
 

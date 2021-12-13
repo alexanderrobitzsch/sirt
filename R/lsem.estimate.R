@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 1.007
+## File Version: 1.008
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -7,8 +7,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
         fit_measures=c("rmsea","cfi","tli","gfi","srmr"), standardized=FALSE,
         standardized_type="std.all", lavaan_fct="sem", sufficient_statistics=FALSE,
         use_lavaan_survey=FALSE, pseudo_weights=0, sampling_weights=NULL,
-        loc_linear_smooth=FALSE, est_joint=FALSE, par_invariant=NULL, par_linear=NULL, 
-        par_quadratic=NULL,    partable_joint=NULL, se=NULL, kernel="gaussian", eps=1E-8, 
+        loc_linear_smooth=FALSE, est_joint=FALSE, par_invariant=NULL, par_linear=NULL,
+        par_quadratic=NULL,    partable_joint=NULL, se=NULL, kernel="gaussian", eps=1E-8,
         verbose=TRUE, ... )
 {
     lsem_args <- c(as.list(environment()), list(...))
@@ -25,7 +25,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     data <- as.data.frame(data)
     data <- data[ ! is.na(data[,moderator]), ]
     moderator_variable <- data[,moderator]
-    
+
     #- process arguments
     res <- lsem_estimate_proc_args( lavaan.args=lavaan.args, sufficient_statistics=sufficient_statistics,
                 pseudo_weights=pseudo_weights, lavmodel=lavmodel, data=data,
@@ -60,7 +60,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     G <- out$G
     data <- out$data
     weights <- out$weights
-    residualized_intercepts <- out$residualized_intercepts    
+    residualized_intercepts <- out$residualized_intercepts
     N <- out$N
     bw <- out$bw
     h <- out$h
@@ -110,7 +110,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     pseudo_weights=pseudo_weights, est_joint=est_joint,
                     par_invariant=par_invariant, par_linear=par_linear,
                     par_quadratic=par_quadratic, partable_joint=partable_joint,
-                    se=se, moderator_variable=moderator_variable, 
+                    se=se, moderator_variable=moderator_variable,
                     loc_linear_smooth=loc_linear_smooth, ... )
 
     parameters <- out2$parameters
@@ -161,7 +161,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     no_sampling_weights=no_sampling_weights, is_meanstructure=is_meanstructure,
                     par_invariant=par_invariant, par_linear=par_linear, par_quadratic=par_quadratic,
                     est_joint=est_joint, fitstats_joint=fitstats_joint, partable_joint=partable_joint,
-                    sample_stats=sample_stats, loc_linear_smooth=loc_linear_smooth, 
+                    sample_stats=sample_stats, loc_linear_smooth=loc_linear_smooth,
                     se=se, compute_se=compute_se,
                     class_boot=FALSE, type=type, CALL=CALL )
     class(res) <- "lsem"

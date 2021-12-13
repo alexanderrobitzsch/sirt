@@ -1,5 +1,5 @@
 ## File Name: equating.rasch.R
-## File Version: 0.23
+## File Version: 0.242
 
 
 #---- Equating (linking) in the Rasch model
@@ -43,7 +43,7 @@ equating.rasch <- function( x, y, theta=seq( -4, 4, len=100),
     # calculate variance and linking error
     des <- data.frame( "N.Items"=nrow(b.xy), "SD"=stats::sd( b.xy$TransfItempar.Gr1 - b.xy$Itempar.Gr2 ) )
     des$Var <- des$SD^2
-    des$linkerror <- as.vector( sqrt( des["SD"]^2 / des["N.Items"] ) )[1,1]
+    des$linkerror <- sqrt( des["SD"]^2 / des["N.Items"] )[1,1]
     #--- output
     res <- list( "B.est"=B.est, "descriptives"=des,
                         "anchor"=b.xy[, c(1,2,4,3)], "transf.par"=transf.par )

@@ -1,5 +1,5 @@
 %% File Name: data.si.Rd
-%% File Version: 0.415
+%% File Version: 0.416
 
 \name{data.sirt}
 
@@ -245,7 +245,7 @@ testing possibilities in R.
 \doi{10.3389/fpsyg.2019.01507}
 
 Fop, M., & Murphy, T. B. (2018). Variable selection methods for model-based clustering.
-\emph{Statistics Surveys, 12}, 18-65. \url{https://doi.org/gktwch}
+\emph{Statistics Surveys, 12}, 18-65. https://doi.org/10.1214/18-SS119
 
 Goodman, L. A. (1970). The multivariate analysis of qualitative data: Interactions
 among multiple classifications.

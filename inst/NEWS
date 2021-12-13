@@ -36,20 +36,33 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.11  |  2021-10-20  |  Last: sirt 3.11-7
+VERSIONS sirt 3.12  |  2021-12-10  |  Last: sirt 3.12-1
 ------------------------------------------------------------------------
 
-NOTE  * included argument 'loc_linear_smooth' in lsem.estimate() for
-        local linear smoothing for computation of conditional means
-        and covariances when 'sufficient_statistics=TRUE'
-FIXED * corrected handling of sampling weights in xxirt(). In previous
-        sirt versions, they were simply ignored.
+xxx   * ...
 
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---
 
 
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 3.11  |  2021-12-09  |  Last: sirt 3.11-21
+------------------------------------------------------------------------
+
+NOTE  * included argument 'loc_linear_smooth' in lsem.estimate() for
+        local linear smoothing for computation of conditional means
+        and covariances when 'sufficient_statistics=TRUE'
+FIXED * corrected handling of sampling weights in xxirt(). In previous
+        sirt versions, sampling weights were ignored.
+NOTE  * added argument 'vcov' in linking.haberman()
+NOTE  * avoided calling as.vector() in data.frame due to a CRAN request 
+        by Martin Maechler
+
+DATA  * included/modified datasets: data.lsem02, data.lsem03
+EXAMP * included/modified examples: ---
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.10  |  2021-09-23  |  Last: sirt 3.10-119

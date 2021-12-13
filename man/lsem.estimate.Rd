@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.743
+%% File Version: 0.744
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -48,8 +48,8 @@ lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=
     residualize=TRUE, fit_measures=c("rmsea", "cfi", "tli", "gfi", "srmr"),
     standardized=FALSE, standardized_type="std.all", lavaan_fct="sem",
     sufficient_statistics=FALSE, use_lavaan_survey=FALSE, pseudo_weights=0,
-    sampling_weights=NULL, loc_linear_smooth=FALSE, est_joint=FALSE, par_invariant=NULL, 
-    par_linear=NULL, par_quadratic=NULL, partable_joint=NULL, se=NULL, kernel="gaussian", 
+    sampling_weights=NULL, loc_linear_smooth=FALSE, est_joint=FALSE, par_invariant=NULL,
+    par_linear=NULL, par_quadratic=NULL, partable_joint=NULL, se=NULL, kernel="gaussian",
     eps=1e-08, verbose=TRUE, ...)
 
 \method{summary}{lsem}(object, file=NULL, digits=3, ...)

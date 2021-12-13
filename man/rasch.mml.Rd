@@ -1,5 +1,5 @@
 %% File Name: rasch.mml.Rd
-%% File Version: 4.018
+%% File Version: 4.019
 
 \name{rasch.mml2}
 \alias{rasch.mml2}
@@ -496,7 +496,7 @@ Cognitive psychology meets psychometric theory: On the relation between
 process models for decision making and latent variable models for
 individual differences.
 \emph{Psychological Review, 118}(2), 339-356.
-\doi{10.1037/a0022749}
+doi: 10.1037/a0022749
 }
 
 

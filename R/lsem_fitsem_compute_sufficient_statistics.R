@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem_compute_sufficient_statistics.R
-## File Version: 0.091
+## File Version: 0.092
 
 lsem_fitsem_compute_sufficient_statistics <- function(G, dat, variables_model,
     weights, moderator_variable=NULL, loc_linear_smooth=NULL, moderator.grid=NULL)
@@ -11,8 +11,8 @@ lsem_fitsem_compute_sufficient_statistics <- function(G, dat, variables_model,
         weights_gg <- weights[,gg]
         # res <- lsem_weighted_mean( x=data_suff, weights=weights_gg, x_resp=dat_resp)
         res <- lsem_weighted_cov( x=data_suff, weights=weights_gg, x_resp=dat_resp,
-                    moderator_variable=moderator_variable, 
-                    loc_linear_smooth=loc_linear_smooth, 
+                    moderator_variable=moderator_variable,
+                    loc_linear_smooth=loc_linear_smooth,
                     moderator_value=moderator.grid[gg])
         wmean[[gg]] <- res$mean
         wcov[[gg]] <- res$cov

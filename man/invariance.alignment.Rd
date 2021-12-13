@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.653
+%% File Version: 1.654
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -238,7 +238,7 @@ Marsh, H. W., Guo, J., Parker, P. D., Nagengast, B., Asparouhov, T., Muthen, B.,
 & Dicke, T. (2018). What to do when scalar invariance fails: The extended alignment
 method for multi-group factor analysis comparison of latent means across many groups.
 \emph{Psychological Methods, 23}(3), 524-545.
-\doi{10.1037/met0000113}
+doi: 10.1037/met0000113
 
 Muthen, B., & Asparouhov, T. (2014). IRT studies of many groups: The alignment method.
 \emph{Frontiers in Psychology | Quantitative Psychology and Measurement, 5}:978.

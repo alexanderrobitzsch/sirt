@@ -1,11 +1,11 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.565
+## File Version: 0.566
 
 lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
                 verbose, pars, standardized, variables_model, sufficient_statistics,
                 lavaan_fct, lavmodel, use_lavaan_survey=TRUE, pseudo_weights=0,
                 est_joint=FALSE, par_invariant=NULL, par_linear=NULL, par_quadratic=NULL,
-                partable_joint=NULL, se="standard", moderator_variable=NULL, 
+                partable_joint=NULL, se="standard", moderator_variable=NULL,
                 loc_linear_smooth=NULL, ... )
 {
 
@@ -29,7 +29,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
     if (sufficient_statistics){
         sample_stats <- lsem_fitsem_compute_sufficient_statistics(G=G, dat=dat,
                     variables_model=variables_model, weights=weights,
-                    moderator_variable=moderator_variable, 
+                    moderator_variable=moderator_variable,
                     loc_linear_smooth=loc_linear_smooth, moderator.grid=moderator.grid)
     }
     if (est_joint & (! sufficient_statistics)){
@@ -69,7 +69,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
                 survey.fit <- lsem_fitsem_raw_data_lavaan_survey(dat=dat,
                                     lavmodel=lavmodel, lavfit=lavfit)
             }
-            if (! use_lavaan_survey){  # fit in lavaan        
+            if (! use_lavaan_survey){  # fit in lavaan
                 survey.fit <- lsem_fitsem_raw_data_lavaan(dat=dat, pseudo_weights=pseudo_weights,
                                     survey.fit=survey.fit, lavaan_est_fun=lavaan_est_fun,
                                     se=se, ...)

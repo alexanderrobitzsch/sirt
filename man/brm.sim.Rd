@@ -1,5 +1,5 @@
 %% File Name: brm.sim.Rd
-%% File Version: 0.52
+%% File Version: 0.533
 
 \name{brm-Methods}
 \alias{brm.sim}
@@ -124,7 +124,8 @@ bounded responses. \emph{Applied Psychological Measurement,
 
 Smithson, M., & Verkuilen, J. (2006). A better lemon squeezer?
 Maximum-likelihood regression with beta-distributed dependent variables.
-\emph{Psychological Methods, 11}(1), 54-71. \doi{10.1037/1082-989X.11.1.54}
+\emph{Psychological Methods, 11}(1), 54-71.
+doi: 10.1037/1082-989X.11.1.54
 }
 
 %\author{
