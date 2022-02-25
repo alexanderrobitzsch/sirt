@@ -1,5 +1,5 @@
 //// File Name: matrixfunctions_sirt_rcpp.cpp
-//// File Version: 2.21
+//// File Version: 2.221
 
 
 
@@ -77,6 +77,7 @@ Rcpp::NumericMatrix rowCumsums2_source( Rcpp::NumericMatrix input )
           }
       return output;
 }
+
 
 
 

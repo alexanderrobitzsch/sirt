@@ -1,5 +1,5 @@
 ## File Name: matrixfunctions_sirt.R
-## File Version: 0.18
+## File Version: 0.22
 
 ##########################################################################
 # rowwise maximum and minimum function
@@ -22,8 +22,11 @@ rowMins.sirt <- function(matr){
 rowCumsums.sirt <- function(matr){
     rowCumsums2_source( matr )
                     }
+
 # The C code was posted by Romain Francois at
 # http://lists.r-forge.r-project.org/pipermail/rcpp-devel/2010-October/001198.html
+
+
 
 ##########################################################################
 # rowwise cumulative sum

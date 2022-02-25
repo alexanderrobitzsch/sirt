@@ -1,10 +1,12 @@
 ## File Name: xxirt_ic_compute_criteria.R
-## File Version: 0.04
+## File Version: 0.05
 
-xxirt_ic_compute_criteria <- function(ic)
+xxirt_ic_compute_criteria <- function(ic, compute_np=TRUE)
 {
     dev <- ic$deviance
-    ic$np <- ic$np.item + ic$np.Theta
+    if (compute_np){
+        ic$np <- ic$np.item + ic$np.Theta
+    }
     ic$AIC <- dev + 2*ic$np
     log_n <- log(ic$n)
     ic$BIC <- dev + log_n * ic$np

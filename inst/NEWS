@@ -36,14 +36,22 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.12  |  2021-12-10  |  Last: sirt 3.12-1
+VERSIONS sirt 3.12  |  2022-02-25  |  Last: sirt 3.12-41
 ------------------------------------------------------------------------
 
-xxx   * ...
+ADDED * added argument 'model' in invariance_alignment_cfa_config() which
+        now also covers the one-parameter factor model
+ADDED * added argument 'output' in invariance_alignment_simulate()
+NOTE  * sufficient statistics now also allowed as arguments in
+        invariance_alignment_cfa_config()
+ADDED * added optimizer 'nloptr', 'bobyqa' and 'Rvmmin' in 
+        sirt_optimizer()
+FIXED * fixed incorrect handling of missing="fiml" in lsem.estimate()
+        if est_joint=TRUE was requested
 
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: invariance.alignment (7)
 
 
 

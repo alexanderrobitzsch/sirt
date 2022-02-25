@@ -1,23 +1,46 @@
 ## File Name: invariance_alignment_cfa_config_estimate.R
-## File Version: 0.15
+## File Version: 0.189
 
-invariance_alignment_cfa_config_estimate <- function(dat_gg, weights_gg=NULL, ...)
+invariance_alignment_cfa_config_estimate <- function(dat_gg, weights_gg=NULL,
+    model="2PM", ...)
 {
-    I_gg <- ncol(dat_gg)
-    items_gg <- colnames(dat_gg)
-    label_F <- "F"
-    while (label_F %in% items_gg){
-        label_F <- paste0( label_F, "F")
+    is_data <- sirt_is_data(dat=dat_gg)
+    #-- create lavaan model
+    if (is_data){
+        I_gg <- ncol(dat_gg)
+        items_gg <- colnames(dat_gg)
+    } else {
+        mu <- dat_gg[[1]]
+        Sigma <- dat_gg[[2]]
+        I_gg <- length(mu)
+        items_gg <- names(mu)
+        if (is.null(items_gg)){
+            items_gg <- paste0("I",1:I)
+        }
+        names(mu) <- items_gg
+        rownames(Sigma) <- items_gg
+        colnames(Sigma) <- items_gg
     }
-    lavmodel <- paste0(label_F, "=~", paste0(items_gg, collapse="+") )
+    lavmodel <- invariance_alignment_cfa_config_estimate_define_lavaan_model(
+                    items_gg=items_gg, label_F="F", model=model)
     if (is.null(weights_gg)){
         weights_name <- NULL
     } else {
         dat_gg$weights <- weights_gg
         weights_name <- "weights"
     }
-    mod <- sirt_import_lavaan_cfa(data=dat_gg, model=lavmodel, std.lv=TRUE,
-                meanstructure=TRUE, sampling.weights=weights_name, ...)
+
+    #-- estimate lavaan model
+    args <- list( model=lavmodel, std.lv=TRUE, meanstructure=TRUE, ...)
+    if (is_data){
+        args$data <- dat_gg
+        args$sampling.weights <- weights_name
+    } else {
+        args$sample.cov <- Sigma
+        args$sample.mean <- mu
+        args$sample.nobs <- min(1e20,N)
+    }
+    mod <- do.call(what="sirt_import_lavaan_cfa", args=args)
     partable <- sirt_import_lavaan_parameterTable(object=mod)
     lambda <- partable[ partable$op=="=~", "est"]
     nu <- partable[ partable$op=="~1", "est"][1:I_gg]

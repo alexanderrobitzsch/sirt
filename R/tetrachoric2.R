@@ -1,5 +1,5 @@
 ## File Name: tetrachoric2.R
-## File Version: 1.29
+## File Version: 1.33
 
 tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
     cor.smooth=TRUE, progress=TRUE)
@@ -7,7 +7,7 @@ tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
     # process data
     dat <- as.matrix(dat)
     if (method=="Ol"){
-        res <- polychoric2( dat=dat, cor.smooth=cor.smooth, maxiter=100)
+        res <- polychoric2( dat=dat, cor.smooth=cor.smooth, maxiter=maxit)
     }
     if ( method !="Ol" ){
 
@@ -47,8 +47,7 @@ tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
         if ( method=="Di"){
             dfr2 <- as.matrix(dfr)
             numdiffparm <- 1e-5
-            maxiter <- 100
-            dfr$r0 <- sirt_rcpp_tetrachoric2_rcpp( dfr=dfr2, h=numdiffparm, maxiter=maxiter )
+            dfr$r0 <- sirt_rcpp_tetrachoric2_rcpp( dfr=dfr2, h=numdiffparm, maxiter=maxit )
         }
         #******************
         # method of Tucker

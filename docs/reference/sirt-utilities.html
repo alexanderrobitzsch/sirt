@@ -265,7 +265,10 @@
     </tr>
     <tr>
       <th>optimizer</th>
-      <td><p>Can be <code>optim</code> or <code>nlminb</code></p></td>
+      <td><p>Can be one of the following optimizers: <code>optim</code>, <code>nlminb</code>,
+<code>bobyqa</code> (from the <span class="pkg">minqa</span> packlage), <code>Rvmmin</code> (from the
+<span class="pkg">optimx</span> package) or <code>nloptr</code> (from the <span class="pkg">nloptr</span> package using
+the argument <code>opts$algorithm="NLOPT_LD_MMA"</code>).</p></td>
     </tr>
     <tr>
       <th>par</th>

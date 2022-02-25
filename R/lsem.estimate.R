@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 1.008
+## File Version: 1.015
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -44,6 +44,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     se <- res$se
     compute_se <- res$compute_se
     pseudo_weights <- res$pseudo_weights
+    some_ordinal <- res$some_ordinal
 
     # group moderator if type="MGM"
     out <- lsem_group_moderator( data=data, type=type, moderator.grid=moderator.grid,

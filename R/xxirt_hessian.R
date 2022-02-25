@@ -1,5 +1,5 @@
 ## File Name: xxirt_hessian.R
-## File Version: 0.362
+## File Version: 0.363
 
 #--- computation of hessian matrix
 xxirt_hessian <- function( object )
@@ -59,8 +59,8 @@ xxirt_hessian <- function( object )
     #*******************************
 
     #--- compute Hessian matrix
-    par1 <- xxirt_partable_extract_freeParameters( partable )
-    par2 <- xxirt_parTheta_extract_freeParameters( customTheta )
+    par1 <- xxirt_partable_extract_freeParameters( partable=partable )
+    par2 <- xxirt_parTheta_extract_freeParameters( customTheta=customTheta )
     par <- c(par1, par2)
     hess <- CDM::numerical_Hessian( par=par, FUN=fct_irt )
     rownames(hess) <- colnames(hess) <- names(par)
