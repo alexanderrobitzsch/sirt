@@ -1,10 +1,7 @@
 ## File Name: tam2mirt_freed.R
-## File Version: 0.14
+## File Version: 0.151
 
-
-
-##################################################################
-# return lavaan syntax with freed parameters
+#*** return lavaan syntax with freed parameters
 tam2mirt_freed <- function( D, factors, B, dat, AXsi,
         mean.trait, cov.trait, tamobj )
 {
@@ -45,13 +42,13 @@ tam2mirt_freed <- function( D, factors, B, dat, AXsi,
     syn0 <- paste0( syn0, collapse="\n")
     lavsyn <- paste0( lavsyn, "\n", syn0 )
     # syntax for variances
-    if (class(tamobj)=="tam.mml"){
+    if (inherits(tamobj,"tam.mml")){
         g1 <- paste0( "Cov_", 1:D, 1:D )
         syn0 <- paste0( factors, " ~~ ", g1, "*",factors  )
         syn0 <- paste0( syn0, collapse="\n")
         lavsyn <- paste0( lavsyn, "\n", syn0 )
     }
-    if (class(tamobj)=="tam.mml.2pl"){
+    if (inherits(tamobj,"tam.mml.2pl")){
         syn0 <- paste0( factors, " ~~ ", round( as.vector(diag(cov.trait)),4), "*",factors  )
         syn0 <- paste0( syn0, collapse="\n")
         lavsyn <- paste0( lavsyn, "\n", syn0 )
@@ -71,4 +68,3 @@ tam2mirt_freed <- function( D, factors, B, dat, AXsi,
     lavsyn <- paste0( lavsyn, " \n")
     return(lavsyn)
 }
-##################################################################

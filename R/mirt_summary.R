@@ -1,5 +1,5 @@
 ## File Name: mirt_summary.R
-## File Version: 0.14
+## File Version: 0.151
 
 
 mirt_summary <- function(object, digits=4, file=NULL, ...)
@@ -8,7 +8,7 @@ mirt_summary <- function(object, digits=4, file=NULL, ...)
 
     sirt_osink(file=file)
 
-    is_mg <- class(object)=="MultipleGroupClass"
+    is_mg <- inherits(object,"MultipleGroupClass")
 
     #- print mirt object
     print(object)

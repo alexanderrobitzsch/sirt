@@ -36,7 +36,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.12  |  2022-02-25  |  Last: sirt 3.12-41
+VERSIONS sirt 3.12  |  2022-04-04  |  Last: sirt 3.12-43
 ------------------------------------------------------------------------
 
 ADDED * added argument 'model' in invariance_alignment_cfa_config() which

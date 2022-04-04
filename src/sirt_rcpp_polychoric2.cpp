@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_polychoric2.cpp
-//// File Version: 3.448
+//// File Version: 3.449
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -56,7 +56,7 @@ Rcpp::NumericVector sirt_rcpp_pbivnorm2( Rcpp::NumericVector x, Rcpp::NumericVec
     //        b1[ ind2 ] <- - b1[ind2]
     //                }
     int ind2 = 0;
-    if ( (a1 < 0) & ( b1 < 0 ) ){
+    if ( (a1 < 0) && ( b1 < 0 ) ){
         ind2 = 1;
         a1 = -a1;
         b1 = -b1;
@@ -209,7 +209,7 @@ Rcpp::List sirt_rcpp_polychoric2_est_itempair( Rcpp::NumericVector v1,
     int Ntotal = 0; // Ntotal
     Rcpp::NumericMatrix frtab(maxK,maxK);
     for (int cc = 0; cc < CC; cc++){
-        if ( ( ! R_IsNA( v1[cc] ) ) & ( ! R_IsNA( v2[cc] ) ) ){
+        if ( ( ! R_IsNA( v1[cc] ) ) && ( ! R_IsNA( v2[cc] ) ) ){
             frtab( v1[cc], v2[cc] ) += weights[cc];
             Ntotal += weights[cc];
         }
@@ -276,7 +276,7 @@ Rcpp::List sirt_rcpp_polychoric2_est_itempair( Rcpp::NumericVector v1,
     double incr, der;
     int iter =0;
     double aincr=1;
-    while ( ( iter < maxiter ) & ( aincr > conv) & ( Ntotal > 0 )  ){
+    while ( ( iter < maxiter ) && ( aincr > conv) && ( Ntotal > 0 )  ){
         if (rho[0] > 1 - h ){
             rho[0] = rho[0] - h*1.5;
         }
@@ -429,7 +429,7 @@ Rcpp::NumericVector sirt_rcpp_tetrachoric2_rcpp( Rcpp::NumericMatrix dfr,
         y[0] = dfr(zz,11);
         rho[0] = dfr(zz,15);
         p11[0] = dfr(zz,7);
-        while ( ( iter < maxiter ) & ( aincr > maxincr ) ){
+        while ( ( iter < maxiter ) && ( aincr > maxincr ) ){
             L0 = sirt_rcpp_pbivnorm2( x, y, rho-h );
             L0h = sirt_rcpp_pbivnorm2( x, y, rho+h );
             L1 = ( L0h[0] - L0[0] ) / (2*h);

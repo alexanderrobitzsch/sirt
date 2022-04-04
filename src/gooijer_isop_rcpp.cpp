@@ -1,5 +1,5 @@
 //// File Name: gooijer_isop_rcpp.cpp
-//// File Version: 5.34
+//// File Version: 5.351
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -153,7 +153,7 @@ Rcpp::List gooijer_csn_table( Rcpp::NumericMatrix dat, Rcpp::NumericMatrix dat_p
         // compute statistic for permuted data;
         s1 = gta(sampleM );
         stat_perm[rr] = s1[0];
-        if ( (progress==1) & ( rr==progress_vec[zz] ) ){
+        if ( (progress==1) && ( rr==progress_vec[zz] ) ){
             zz = zz+1;
             if ( zz==10){ zz = 9; }
             Rcpp::Rcout << "-" <<   std::flush;
@@ -207,28 +207,28 @@ Rcpp::List isop_tests_C( Rcpp::NumericMatrix dat,
                 if (mm!=nn){
                     for (int jj=0;jj<I;jj++){
                         if ( jj != ii ){
-                            if ( ( dat(nn,ii) > dat(mm,ii) ) & ( dat(nn,jj) > dat(mm,jj) ) ){
+                            if ( ( dat(nn,ii) > dat(mm,ii) ) && ( dat(nn,jj) > dat(mm,jj) ) ){
                                 Esi.row(ii) = Esi.row(ii) + weights[nn];
                                 Esi(ii, jackunits[nn]+1 ) +=  - weights[nn];
                                 if ( jackunits[nn] != jackunits[mm] ){
                                     Esi( ii, jackunits[mm] + 1 ) += - weights[nn];
                                 }
                             }
-                            if ( ( dat(nn,ii) < dat(mm,ii) ) & ( dat(nn,jj) < dat(mm,jj) ) ){
+                            if ( ( dat(nn,ii) < dat(mm,ii) ) && ( dat(nn,jj) < dat(mm,jj) ) ){
                                 Esi.row(ii) = Esi.row(ii) + weights[nn];
                                 Esi(ii, jackunits[nn]+1 ) +=  - weights[nn];
                                 if ( jackunits[nn] != jackunits[mm] ){
                                     Esi( ii, jackunits[mm] + 1 ) += - weights[nn];
                                 }
                             }
-                            if ( ( dat(nn,ii) < dat(mm,ii) ) & ( dat(nn,jj) > dat(mm,jj) ) ){
+                            if ( ( dat(nn,ii) < dat(mm,ii) ) && ( dat(nn,jj) > dat(mm,jj) ) ){
                                 Edi.row(ii) = Edi.row(ii) + weights[nn];
                                 Edi(ii, jackunits[nn]+1 ) +=  - weights[nn];
                                 if ( jackunits[nn] != jackunits[mm] ){
                                     Edi( ii, jackunits[mm] + 1 ) += - weights[nn];
                                 }
                             }
-                            if ( ( dat(nn,ii) > dat(mm,ii) ) & ( dat(nn,jj) < dat(mm,jj) ) ){
+                            if ( ( dat(nn,ii) > dat(mm,ii) ) && ( dat(nn,jj) < dat(mm,jj) ) ){
                                 Edi.row(ii) = Edi.row(ii) + weights[nn];
                                 Edi(ii, jackunits[nn]+1 ) +=  - weights[nn];
                                 if ( jackunits[nn] != jackunits[mm] ){

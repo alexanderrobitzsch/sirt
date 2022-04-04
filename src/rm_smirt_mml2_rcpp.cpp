@@ -1,5 +1,5 @@
 //// File Name: rm_smirt_mml2_rcpp.cpp
-//// File Version: 5.392
+//// File Version: 5.393
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -662,7 +662,7 @@ Rcpp::List sirt_rcpp_rasch_mml2_calcpost_pseudoll( Rcpp::NumericMatrix DAT2,
         for (int nn=0;nn<N;++nn){
             if ( DAT2RESP(nn,ii)>0){
                 for (int tt=0;tt<TP;++tt){
-                    if ( ( DAT2(nn,ii) < 1 ) & ( DAT2(nn,ii) > 0 ) ){
+                    if ( ( DAT2(nn,ii) < 1 ) && ( DAT2(nn,ii) > 0 ) ){
                         fyiqk(nn,tt) = fyiqk(nn,tt) * std::pow( PROBS(2*ii+1,tt),DAT2(nn,ii) )*
                                             std::pow( PROBS( 2*ii, tt ), 1 - DAT2(nn,ii) );
                     } else {
@@ -706,7 +706,7 @@ Rcpp::List MML2_CALCPOST_V3( Rcpp::NumericMatrix DAT2,
          if ( DAT2RESP(nn,ii)>0){
          for (int tt=0;tt<TP;++tt){
 //             fyiqk(nn,tt) = fyiqk(nn,tt) * PROBS( 2*ii + DAT2(nn,ii), tt );
-    if ( ( DAT2(nn,ii) < 1 ) & ( DAT2(nn,ii) > 0 ) ){
+    if ( ( DAT2(nn,ii) < 1 ) && ( DAT2(nn,ii) > 0 ) ){
              fyiqk(nn,tt) = fyiqk(nn,tt) *
               (PROBS(2*ii+1,tt) * DAT2(nn,ii) + (PROBS( 2*ii, tt ) *(1-DAT2(nn,ii))) );
                         } else {

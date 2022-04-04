@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_evm_comp_poly.cpp
-//// File Version: 3.639
+//// File Version: 3.641
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -142,7 +142,7 @@ Rcpp::List sirt_rcpp_evm_comp_poly( Rcpp::NumericMatrix dat,
             if ( ii != jj ){
                 for (int nn=0;nn<N;nn++){
                     if ( dat_resp(nn,ii) * dat_resp(nn,jj) == 1 ){
-                        if ( ( dat(nn,ii)==row_index(rr,1) ) & ( ( dat(nn,jj)==col_index(cc,1))) ){
+                        if ( ( dat(nn,ii)==row_index(rr,1) ) && ( ( dat(nn,jj)==col_index(cc,1))) ){
                             B(rr,cc) += weights[nn];
                             Bjack(rr,cc + I*jackunits[nn] ) += weights[nn];
                         }

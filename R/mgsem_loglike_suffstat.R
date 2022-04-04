@@ -1,5 +1,5 @@
 ## File Name: mgsem_loglike_suffstat.R
-## File Version: 0.134
+## File Version: 0.135
 
 mgsem_loglike_suffstat <- function(suffstat, Mu, Sigma, output_all=FALSE )
 {
@@ -15,7 +15,7 @@ mgsem_loglike_suffstat <- function(suffstat, Mu, Sigma, output_all=FALSE )
     S1 <- MASS::ginv(Sigma)
     p <- length(Mu)
     m1 <- M-Mu
-    
+
     #*** mean structure
     # t1 <- ( t(M-Mu) %*% S1 %*% (M-Mu) )[1,1]
     # t1 <- ( crossprod(m1, S1) %*% m1 )[1,1]

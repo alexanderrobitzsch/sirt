@@ -1,12 +1,12 @@
 ## File Name: summary.rasch.copula2.R
-## File Version: 0.204
+## File Version: 0.205
 
 
 #** Summary for rasch.copula object
 summary.rasch.copula2 <- function( object, file=NULL, digits=3, ... )
 {
-    is_copula2 <- class(object)=="rasch.copula2"
-    is_copula3 <- class(object)=="rasch.copula3"
+    is_copula2 <- inherits(object,"rasch.copula2")
+    is_copula3 <- inherits(object,"rasch.copula3")
 
     # open sink for a file
     sirt_osink(file=file)
