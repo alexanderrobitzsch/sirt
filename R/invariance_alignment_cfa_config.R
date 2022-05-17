@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_cfa_config.R
-## File Version: 0.247
+## File Version: 0.252
 
 
 invariance_alignment_cfa_config <- function(dat, group, weights=NULL,
@@ -44,11 +44,13 @@ invariance_alignment_cfa_config <- function(dat, group, weights=NULL,
             if (!is.null(weights)){
                 weights_gg <- weights[group==groups[gg]]
             }
-            args <- list(dat_gg=dat_gg, weights_gg=weights_gg, model=model, ...)
+            args <- list(dat_gg=dat_gg, weights_gg=weights_gg, model=model,
+                            N=nrow(dat_gg),...)
         }
         if (!is_data){
             dat_gg <- list(mu=mu_list[[gg]], Sigma=Sigma_list[[gg]], N=N_list[[gg]])
             args <- list(dat_gg=dat_gg, weights_gg=NULL, model=model)
+            args$N <- dat_gg$N
             ind_gg <- 1:I
         }
         cat( paste0("Compute CFA for group ", gg, " | model ", model, "\n") )

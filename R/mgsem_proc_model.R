@@ -1,8 +1,9 @@
 ## File Name: mgsem_proc_model.R
-## File Version: 0.256
+## File Version: 0.273
 
 mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
-        prior_list=NULL, pen_type="lasso", fixed_parms=FALSE)
+        prior_list=NULL, pen_type="lasso", fixed_parms=FALSE,
+        partable_start=NULL)
 {
 
     dfr <- NULL
@@ -17,8 +18,10 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
         types <- c(types, "B")
     }
 
-    I <- mgsem_proc_model_extract_dimension(model=model, entry="est", type="LAM", nrow=TRUE)
-    D <- mgsem_proc_model_extract_dimension(model=model, entry="est", type="LAM", nrow=FALSE)
+    I <- mgsem_proc_model_extract_dimension(model=model, entry="est",
+                            type="LAM", nrow=TRUE)
+    D <- mgsem_proc_model_extract_dimension(model=model, entry="est",
+                            type="LAM", nrow=FALSE)
 
     #--- loop over groups
     for (gg in 0:G){
@@ -80,7 +83,8 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
                             dfr1 <- mgsem_proc_model_add_specs_all(model=model_hh,
                                             entries=entries, type=type, ii=ii, jj=jj,
                                             dfr1=dfr1, names_prior_list=names_prior_list,
-                                            group=group, N_group=N_group)
+                                            group=group, N_group=N_group,
+                                            pen_type=pen_type)
                             dfr1$unique <- 0
                             dfr1$recycle <- 0
                             #- append to previous parameters
@@ -117,6 +121,9 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
     dfr <- as.data.frame(dfr)
 
     #** coefficient vector of estimated parameters
+    if ( ! is.null(partable_start) ){
+        dfr$start <- dfr$est <- partable_start
+    }
     coef <- mgsem_partable2coef(partable=dfr)
 
     #** induce some randomness in starting values

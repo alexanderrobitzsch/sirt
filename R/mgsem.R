@@ -1,10 +1,10 @@
 ## File Name: mgsem.R
-## File Version: 0.366
+## File Version: 0.394
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",
         a_scad=3.7, eps_approx=1e-3, comp_se=TRUE, prior_list=NULL, hessian=TRUE,
-        fixed_parms=FALSE, technical=NULL, control=list() )
+        fixed_parms=FALSE, partable_start=NULL, technical=NULL, control=list() )
 {
     #- pen_type: lasso, scad or none
 
@@ -28,11 +28,13 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
 
     #*** process technical defaults
     res <- mgsem_proc_technical(technical=technical, control=control, p_me=p_me,
-                p_pen=p_pen, eps_approx=eps_approx, suffstat=suffstat)
+                p_pen=p_pen, eps_approx=eps_approx, suffstat=suffstat,
+                estimator=estimator)
     technical <- res$technical
     technical$estimator <- estimator
     control <- res$control
     eps_approx <- res$eps_approx
+    p <- res$p
 
     #*** process sufficient statistics
     res <- mgsem_proc_suffstat(suffstat=suffstat)
@@ -43,12 +45,13 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     N_group <- res$N_group
 
     random_sd <- -9
-    random_sd <- 1e-1
+    # random_sd <- 1e-1
 
     #*** process model specification
     res <- mgsem_proc_model(model=model, G=G, prior_list=prior_list,
                     technical=technical, N_group=N_group, random_sd=random_sd,
-                    pen_type=pen_type, fixed_parms=fixed_parms)
+                    pen_type=pen_type, fixed_parms=fixed_parms,
+                    partable_start=partable_start)
     model <- res$model
     partable <- res$partable
     NP <- res$NP
@@ -83,9 +86,10 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
                         partable=partable, G=G, I=I, D=D, is_B=is_B,
                         N=N, N_group=N_group,
                         estimator=estimator, eval_fun=eval_fun,
-                        grad_param_fun=grad_param_fun, grad_suffstat_fun=grad_suffstat_fun,
+                        grad_param_fun=grad_param_fun,
+                        grad_suffstat_fun=grad_suffstat_fun,
                         technical=technical, p_pen=p_pen, p_me=p_me,
-                        eps_approx=eps_approx,
+                        p=p, eps_approx=eps_approx,
                         prior_list=prior_list, use_penalty=TRUE, types=types,
                         difflp_info=difflp_info, loop_parms=loop_parms,
                         pen_type=pen_type, a_scad=a_scad )
@@ -114,7 +118,6 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         ll <- mgsem_opt_fun(x=x, opt_fun_args=opt_fun_args)
         opt_res <- list(par=x, opt_value=ll)
     }
-
 
     #-- collect results
     coef <- opt_res$par
@@ -155,13 +158,13 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     res <- list(coef=coef, vcov=vcov, se=se,
                     partable=partable, model=model, suffstat=suffstat,
                     opt_res=opt_res, opt_value=opt_value, implied=implied,
-                    est_tot=est_tot, residuals=residuals, opt_fun_output=opt_fun_output, ic=ic,
-                    info_loglike=info_loglike, info_loglike_pen=info_loglike_pen,
+                    est_tot=est_tot, residuals=residuals, opt_fun_output=opt_fun_output,
+                    ic=ic, info_loglike=info_loglike, info_loglike_pen=info_loglike_pen,
                     estimator=estimator, p_pen=p_pen, p_me=p_me,
                     pen_type=pen_type, eps_approx=eps_approx,
-                    technical=technical,
-                    comp_se=comp_se, groups=groups, group=group, data=data, data_proc=data_proc,
-                    case_ll=case_ll, CALL=CALL, s1=s1, s2=s2)
+                    technical=technical, comp_se=comp_se, groups=groups, group=group,
+                    data=data, data_proc=data_proc, case_ll=case_ll,
+                    CALL=CALL, s1=s1, s2=s2)
     class(res) <- "mgsem"
     return(res)
 }

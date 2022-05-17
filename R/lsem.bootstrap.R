@@ -1,5 +1,5 @@
 ## File Name: lsem.bootstrap.R
-## File Version: 0.315
+## File Version: 0.316
 
 
 lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL, seed=1,
@@ -46,7 +46,7 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL, seed=1,
         #- fit model
         mod1 <- try( do.call(what=lsem.estimate, args=lsem_args1), silent=TRUE)
         #- output collection
-        if ( class(mod1)!="try-error" ){
+        if ( ! inherits(mod1,"try-error" ) ){
             parameters_boot[,rr] <- mod1$parameters$est
             fitstats_joint_boot[,rr] <- mod1$fitstats_joint$value
             rr <- rr + 1

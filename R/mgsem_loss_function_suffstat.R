@@ -1,5 +1,5 @@
 ## File Name: mgsem_loss_function_suffstat.R
-## File Version: 0.177
+## File Version: 0.184
 
 mgsem_loss_function_suffstat <- function(suffstat, Mu, Sigma, p=2, eps=1e-3,
         deriv=FALSE, approx_method="lp", only_deriv=FALSE, output_all=FALSE )

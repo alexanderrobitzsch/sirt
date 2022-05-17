@@ -1,12 +1,15 @@
 ## File Name: invariance_alignment_simulate.R
-## File Version: 0.108
+## File Version: 0.118
 
 invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
-    output="data", groupwise=FALSE)
+    output="data", groupwise=FALSE, exact=FALSE)
 {
     if (length(N)==1 & nrow(nu)>1){
         N <- rep(N, nrow(nu))
     }
+    nu <- as.matrix(nu)
+    lambda <- as.matrix(lambda)
+    err_var <- as.matrix(err_var)
     N_tot <- sum(N)
     G <- nrow(nu)
     I <- ncol(nu)
@@ -26,11 +29,19 @@ invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
         for (gg in 1:G){
             N_gg <- N[gg]
             ind_gg <- seq(n_start[gg], n_end[gg])
-            fac <- stats::rnorm(N_gg, mean=mu[gg], sd=sigma[gg])
+            fac <- ruvn(N=N_gg, mean=mu[gg], sd=sigma[gg], exact=FALSE)
             for (ii in 1:I){
-                err_ii <- stats::rnorm(N_gg, mean=0, sd=sqrt(err_var[gg,ii]) )
+                err_ii <- ruvn(N=N_gg, mean=0, sd=sqrt(err_var[gg,ii]), exact=FALSE )
                 dat[ind_gg, ii+1] <- nu[gg,ii] + lambda[gg,ii]*fac + err_ii
             }
+            #* exact distribution
+            if (exact){
+                mu_gg <- nu[gg,] + lambda[gg,] * mu[gg]
+                Sigma_gg <- sigma[gg]^2 *( lambda[gg,]%*%t(lambda[gg,]) ) + diag(err_var[gg,])
+                dat_gg <- rmvn(N=N_gg, mu=mu_gg, Sigma=Sigma_gg, exact=TRUE )
+                dat[ind_gg,-1] <- dat_gg
+            }
+
         }
         #-- output
         res <- dat

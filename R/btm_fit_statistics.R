@@ -1,5 +1,5 @@
 ## File Name: btm_fit_statistics.R
-## File Version: 0.2071
+## File Version: 0.209
 
 
 #**** item outfit and infit statistic
@@ -72,7 +72,8 @@ btm_fit_statistics <- function( probs, dat0, ind1, ind2, TP, judge=NULL,
             a1$N_dyad <- stats::aggregate( 1+0*dat1$result, list(dat1$dyad), sum )[,2]
             a1 <- a1[ ( a1$N_dyad > 2 ) & ( a1$mode %in% c(0,1) ), ]
             dat1$mode <- a1[ match(dat1$dyad, a1$dyad), "mode" ]
-            a2 <- stats::aggregate( dat1$result==dat1$mode, list(dat1$judge), mean, na.rm=TRUE)
+            a2 <- stats::aggregate( dat1$result==dat1$mode, list(dat1$judge),
+                                        mean, na.rm=TRUE)
             fit_judges$agree <- a2[ match(fit_judges$judge, a2[,1]), 2]
         }
     }

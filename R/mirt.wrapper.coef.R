@@ -1,5 +1,5 @@
 ## File Name: mirt.wrapper.coef.R
-## File Version: 3.152
+## File Version: 3.154
 
 mirt.wrapper.coef <- function(mirt.obj)
 {
@@ -17,7 +17,7 @@ mirt.wrapper.coef <- function(mirt.obj)
         IP <- length(itempars)
     }
     #-- single group case
-    if (class(mirt.obj)=="SingleGroupClass"){
+    if (inherits(mirt.obj,"SingleGroupClass")){
         dfr <- matrix(NA, nrow=I, ncol=IP)
         colnames(dfr) <- itempars
         dfr <- as.data.frame(dfr)
@@ -36,7 +36,7 @@ mirt.wrapper.coef <- function(mirt.obj)
         res <- list(coef=dfr, GroupPars=h2, G=1)
     }
     #-- multiple group case
-    if (class(mirt.obj)=="MultipleGroupClass") {
+    if (inherits(mirt.obj,"MultipleGroupClass") ) {
         groups <- sort(unique(tmod$group))
         G <- length(groups)
         dfr0 <- NULL

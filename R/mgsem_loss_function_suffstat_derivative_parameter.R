@@ -1,10 +1,11 @@
 ## File Name: mgsem_loss_function_suffstat_derivative_parameter.R
-## File Version: 0.108
+## File Version: 0.115
 
 mgsem_loss_function_suffstat_derivative_parameter <- function(est, dermoments, suffstat,
-        type, i1, i2, h, is_B=FALSE, num_approx=FALSE, eps=1e-12, vech_rcpp=TRUE,
+        type, i1, i2, h, is_B=FALSE, num_approx=FALSE, eps=1e-12, p=2, vech_rcpp=TRUE,
         output_all=FALSE)
 {
+
     #** derivative of moments with respect to parameter
     res <- mgsem_moments_derivative_parameter( est=est, type=type, i1=i1, i2=i2,
                 h=h, is_B=is_B, num_approx=num_approx, eps=eps )

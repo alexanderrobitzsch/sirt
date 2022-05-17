@@ -1,7 +1,7 @@
 ## File Name: invariance_alignment_cfa_config_estimate.R
-## File Version: 0.189
+## File Version: 0.191
 
-invariance_alignment_cfa_config_estimate <- function(dat_gg, weights_gg=NULL,
+invariance_alignment_cfa_config_estimate <- function(dat_gg, N, weights_gg=NULL,
     model="2PM", ...)
 {
     is_data <- sirt_is_data(dat=dat_gg)

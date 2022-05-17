@@ -1,5 +1,5 @@
 ## File Name: sirt_optimizer.R
-## File Version: 0.361
+## File Version: 0.365
 
 sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
         hessian=TRUE, control=list(), ...)
@@ -84,7 +84,7 @@ sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
     #-- compute Hessian
     comp_hess_optimizers <- c("nlminb", "bobyqa")
     if (hessian & ( optimizer %in% comp_hess_optimizers ) ){
-        res <- sirt_optimizer_hessian(res=res, fn=fn, grad=grad, h=h)
+        res <- sirt_optimizer_hessian(res=res, fn=fn, grad=grad, h=h, ...)
     }
 
     #-- names for Hessian

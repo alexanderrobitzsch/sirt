@@ -1,11 +1,11 @@
 ## File Name: xxirt.R
-## File Version: 0.934
+## File Version: 0.939
 
 
 #--- user specified item response model
 xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 partable=NULL, customTheta=NULL, group=NULL, weights=NULL,
-                globconv=1E-6, conv=1E-4, maxit=200, mstep_iter=4,
+                globconv=1E-6, conv=1E-4, maxit=1000, mstep_iter=4,
                 mstep_reltol=1E-6, h=1E-4, use_grad=TRUE,
                 verbose=TRUE, penalty_fun_item=NULL, verbose_index=NULL )
 {
@@ -183,8 +183,8 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     #-- compute EAP
     EAP <- xxirt_EAP(p.aj.xi=p.aj.xi, Theta=Theta )
 
-    #*********************************************#
-    # output
+
+    #--- output
     s2 <- Sys.time()
     res <- list( partable=partable, par_items=par_items,
                 par_items_summary=par_items_summary, par_items_bounds=par_items_bounds,

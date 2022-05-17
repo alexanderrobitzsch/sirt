@@ -1,5 +1,5 @@
 ## File Name: mgsem_grad_fun.R
-## File Version: 0.169
+## File Version: 0.171
 
 
 mgsem_grad_fun <- function(x, opt_fun_args, output_all=FALSE)
@@ -59,7 +59,7 @@ mgsem_grad_fun <- function(x, opt_fun_args, output_all=FALSE)
                 grad_param_fun_args <- list(est=est_total0[[gg]],
                             dermoments=dermoments, suffstat=opt_fun_args$suffstat[[gg]],
                             type=type_dd, i1=i1_dd, i2=i2_dd, h=opt_fun_args$technical$h,
-                            is_B=opt_fun_args$is_B,    eps=opt_fun_args$technical$eps_zero,
+                            is_B=opt_fun_args$is_B, eps=opt_fun_args$technical$eps_zero,
                             num_approx=opt_fun_args$technical$num_approx )
                 gr1 <- do.call(what=opt_fun_args$grad_param_fun,
                                 args=grad_param_fun_args)

@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_xxirt.cpp
-//// File Version: 0.27
+//// File Version: 0.282
 
 
 
@@ -15,7 +15,8 @@ using namespace Rcpp;
 ///** sirt_rcpp_xxirt_compute_posterior_expected_counts
 // [[Rcpp::export]]
 Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_posterior_expected_counts(
-        Rcpp::LogicalMatrix dat1_resp_gg, Rcpp::NumericMatrix p_aj_xi_gg )
+        Rcpp::LogicalMatrix dat1_resp_gg, Rcpp::NumericMatrix p_aj_xi_gg,
+        Rcpp::NumericVector weights_gg)
 {
     int N = dat1_resp_gg.nrow();
     int I = dat1_resp_gg.ncol();
@@ -30,7 +31,7 @@ Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_posterior_expected_counts(
             val=0;
             for (int nn=0;nn<N;nn++){
                 if ( dat1_resp_gg(nn,ii) ){
-                    val +=  p_aj_xi_gg(nn,tt);
+                    val +=  weights_gg(nn)*p_aj_xi_gg(nn,tt);
                 }
             }  // end nn
             nij(ii,tt) = val;

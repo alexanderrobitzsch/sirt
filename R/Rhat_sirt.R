@@ -1,5 +1,5 @@
 ## File Name: Rhat_sirt.R
-## File Version: 1.09
+## File Version: 1.12
 
 
 ####################################
@@ -12,7 +12,8 @@
     # Source: Statistical Science, Vol. 7, No. 4 (Nov., 1992), pp. 457-472
     # Stable URL: http://www.jstor.org/stable/2246093
     ## Matches gelman.diag() from package "coda", but not WinBUGS() "summary" component.
-    ## Better than gelman.diag() because multivariate stat is not bothered to be calculated
+    ## Better than gelman.diag() because multivariate stat is not
+    ## bothered to be calculated
 Rhat1 <- function(mat)
 {
     m <- ncol(mat)

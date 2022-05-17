@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.484
+%% File Version: 0.494
 
 \name{xxirt}
 \alias{xxirt}
@@ -33,7 +33,7 @@ and latent trait distributions can be specified by the user (see Details).
 \usage{
 xxirt(dat, Theta=NULL, itemtype=NULL, customItems=NULL, partable=NULL,
        customTheta=NULL, group=NULL, weights=NULL, globconv=1e-06, conv=1e-04,
-       maxit=200, mstep_iter=4, mstep_reltol=1e-06, h=1E-4, use_grad=TRUE,
+       maxit=1000, mstep_iter=4, mstep_reltol=1e-06, h=1E-4, use_grad=TRUE,
        verbose=TRUE, penalty_fun_item=NULL, verbose_index=NULL)
 
 \method{summary}{xxirt}(object, digits=3, file=NULL, ...)
@@ -151,7 +151,7 @@ of an unknown parameter vector \eqn{\bold{\gamma}}.
 
 A penalty function for item parameters can be specified in
 \code{penalty_fun_item}. The penalty function should be differentiable and
-non-differentiable function (e.g., the absolute value function) should
+a non-differentiable function (e.g., the absolute value function) should
 be approximated by a differentiable function.
 }
 
@@ -537,7 +537,7 @@ par_Theta <- c(0,0,1,1)
 names(par_Theta) <- c("mu1","mu2","sigma1","sigma2")
 customTheta2  <- sirt::xxirt_createThetaDistribution( par=par_Theta,
                     est=c(FALSE,TRUE,TRUE,TRUE), P=P_Theta2  )
-customTheta2
+print(customTheta2)
 
 #*** estimate model
 mod2 <- sirt::xxirt( dat=dat[,items], group=dat$female, Theta=Theta, partable=partable,
@@ -550,6 +550,178 @@ library(TAM)
 mod2b <- TAM::tam.mml( resp=dat[,items], group=dat$female )
 summary(mod2b)
 IRT.compareModels(mod1, mod2, mod2b)
+
+#############################################################################
+## EXAMPLE 3: Regularized 2PL model
+#############################################################################
+
+data(data.read, package="sirt"")
+dat <- data.read
+
+#------ Definition of item response functions
+
+#*** IRF 2PL
+P_2PL <- function( par, Theta, ncat){
+    a <- par[1]
+    b <- par[2]
+    TP <- nrow(Theta)
+    P <- matrix( NA, nrow=TP, ncol=ncat)
+    P[,1] <- 1
+    for (cc in 2:ncat){
+        P[,cc] <- exp( (cc-1) * a * Theta[,1] - b )
+    }
+    P <- P / rowSums(P)
+    return(P)
+}
+
+#** created item classes of 1PL and 2PL models
+par <- c( "a"=1, "b"=0 )
+# define some slightly informative prior of 2PL
+item_2PL <- sirt::xxirt_createDiscItem( name="2PL", par=par, est=c(TRUE,TRUE),
+               P=P_2PL, prior=c(a="dlnorm"), prior_par1=c( a=0 ),
+               prior_par2=c(a=5) )
+customItems <- list( item_2PL )
+
+#---- definition theta distribution
+
+#** theta grid
+Theta <- matrix( seq(-6,6,length=21), ncol=1 )
+
+#** theta distribution
+P_Theta1 <- function( par, Theta, G){
+    mu <- par[1]
+    sigma <- max( par[2], .01 )
+    TP <- nrow(Theta)
+    pi_Theta <- matrix( 0, nrow=TP, ncol=G)
+    pi1 <- dnorm( Theta[,1], mean=mu, sd=sigma )
+    pi1 <- pi1 / sum(pi1)
+    pi_Theta[,1] <- pi1
+    return(pi_Theta)
+}
+#** create distribution class
+par_Theta <- c( "mu"=0, "sigma"=1 )
+customTheta  <- sirt::xxirt_createThetaDistribution( par=par_Theta, est=c(FALSE,FALSE),
+                       P=P_Theta1 )
+
+#****************************************************************************
+#******* Model 1: 2PL model
+
+itemtype <- rep( "2PL", 12 )
+partable <- sirt::xxirt_createParTable( dat, itemtype=itemtype,
+                        customItems=customItems )
+
+mod1 <- sirt::xxirt( dat=dat, Theta=Theta, partable=partable,
+                   customItems=customItems, customTheta=customTheta)
+summary(mod1)
+
+#****************************************************************************
+#******* Model 2: Regularized 2PL model with regularization on item loadings
+
+# define regularized estimation of item loadings
+parindex <- partable[ partable$parname=="a","parindex"]
+
+#** penalty is defined by -N*lambda*sum_i (a_i-1)^2
+N <- nrow(dat)
+lambda <- .02
+penalty_fun_item <- function(x)
+{
+    val <- N*lambda*sum( ( x[parindex]-1)^2)
+    return(val)
+}
+# estimate standard deviation
+customTheta1  <- sirt::xxirt_createThetaDistribution( par=par_Theta, est=c(FALSE,TRUE),
+                       P=P_Theta1 )
+mod2 <- sirt::xxirt( dat=dat, Theta=Theta, partable=partable,
+                   customItems=customItems, customTheta=customTheta1,
+                   penalty_fun_item=penalty_fun_item)
+summary(mod2)
+
+#############################################################################
+## EXAMPLE 4: 2PL mixture model
+#############################################################################
+
+#*** simulate data
+set.seed(123)
+N <- 4000   # number of persons
+I <- 15     # number of items
+prop <- .25 # mixture proportion for second class
+
+# discriminations and difficulties in first class
+a1 <- rep(1,I)
+b1 <- seq(-2,2,len=I)
+# distribution in second class
+mu2 <- 1
+sigma2 <- 1.2
+# compute parameters with constraint N(0,1) in second class
+# a*(sigma*theta+mu-b)=a*sigma*(theta-(b-mu)/sigma)
+#=> a2=a*sigma and b2=(b-mu)/sigma
+a2 <- a1
+a2[c(2,4,6,8)] <- 0.2  # some items with different discriminations
+a2 <- a2*sigma2
+b2 <- b1
+b2[1:5] <- 1   # first 5 item with different difficulties
+b2 <- (b2-mu2)/sigma2
+dat1 <- sirt::sim.raschtype(theta=stats::rnorm(N*(1-prop)), b=b1, fixed.a=a1)
+dat2 <- sirt::sim.raschtype(theta=stats::rnorm(N*prop), b=b2, fixed.a=a2)
+dat <- rbind(dat1, dat2)
+
+
+#**** model specification
+
+#*** define theta distribution
+TP <- 21
+theta <- seq(-6,6,length=TP)
+# stack theta vectors below each others=> 2 latent classes
+Theta <- matrix( c(theta, theta ), ncol=1 )
+# distribution of theta (i.e., N(0,1))
+w_theta <- dnorm(theta)
+w_theta <- w_theta / sum(w_theta)
+
+P_Theta1 <- function( par, Theta, G){
+    p2_logis <- par[1]
+    p2 <- stats::plogis( p2_logis )
+    p1 <- 1-p2
+    pi_Theta <- c( p1*w_theta, p2*w_theta)
+    pi_Theta <- matrix(pi_Theta, ncol=1)
+    return(pi_Theta)
+}
+
+par_Theta <- c( p2_logis=qlogis(.25))
+customTheta  <- sirt::xxirt_createThetaDistribution( par=par_Theta, est=c(TRUE),
+                       P=P_Theta1)
+
+# IRF for 2-class mixture 2PL model
+par <- c(a1=1, a2=1, b1=0, b2=.5)
+
+P_2PLmix <- function( par, Theta, ncat)
+{
+    a1 <- par[1]
+    a2 <- par[2]
+    b1 <- par[3]
+    b2 <- par[4]
+    P <- matrix( NA, nrow=2*TP, ncol=ncat)
+    TP <- nrow(Theta)/2
+    P1 <- stats::plogis( a1*(Theta[1:TP,1]-b1) )
+    P2 <- stats::plogis( a2*(Theta[TP+1:TP,1]-b2) )
+    P[,2] <- c(P1, P2)
+    P[,1] <- 1-P[,2]
+    return(P)
+}
+
+# define some slightly informative prior of 2PL
+item_2PLmix <- sirt::xxirt_createDiscItem( name="2PLmix", par=par,
+               est=c(TRUE,TRUE,TRUE,TRUE), P=P_2PLmix )
+customItems <- list( item_2PLmix )
+
+#****************************************************************************
+#******* Model 1: 2PL mixture model
+
+itemtype <- rep( "2PLmix", I )
+partable <- sirt::xxirt_createParTable( dat, itemtype=itemtype,
+                        customItems=customItems )
+mod1 <- sirt::xxirt( dat=dat, Theta=Theta, partable=partable,
+                   customItems=customItems, customTheta=customTheta)
+summary(mod1)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

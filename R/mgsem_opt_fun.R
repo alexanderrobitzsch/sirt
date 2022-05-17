@@ -1,5 +1,5 @@
 ## File Name: mgsem_opt_fun.R
-## File Version: 0.216
+## File Version: 0.218
 
 
 mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
@@ -22,7 +22,8 @@ mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
     for (gg in seq_len(G) ){
         est0 <- model[[1]]$est
         est_gg <- model[[gg+1]]$est
-        est_tot_gg <- mgsem_add_list_entries(list1=est0, add_list=est_gg, output_list=est0)
+        est_tot_gg <- mgsem_add_list_entries(list1=est0, add_list=est_gg,
+                            output_list=est0)
         implied <- mgsem_compute_model_implied_moments(est=est_tot_gg,
                             is_B=opt_fun_args$is_B, calc_Sigma=TRUE, calc_Mu=TRUE)
         if (output_all){

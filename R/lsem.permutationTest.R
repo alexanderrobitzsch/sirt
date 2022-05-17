@@ -1,5 +1,5 @@
 ## File Name: lsem.permutationTest.R
-## File Version: 0.451
+## File Version: 0.453
 
 
 #*** permutation test for LSEM model
@@ -57,7 +57,7 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
         data1[, moderator ] <- sample( data0[, moderator ] )
         arglist$data <- data1
         res0 <- try( do.call( what="lsem.estimate", args=arglist ), silent=TRUE )
-        if ( class(res0) !="try-error" ){
+        if ( ! inherits(res0,"try-error") ){
             parameters_permutation[, bb] <- res0$parameters$est
             parameters_summary_M[,bb] <- res0$parameters_summary$M
             parameters_summary_SD[,bb] <- res0$parameters_summary$SD
@@ -117,22 +117,21 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
 
     res <- list( teststat=teststat,
                     parameters_pointwise_test=parameters_pointwise_test,
-                     parameters=parameters,
-                     parameters_permutation=parameters_permutation,
-                     parameters_summary=parameters_summary,
-                     parameters_summary_M=parameters_summary_M,
-                     parameters_summary_SD=parameters_summary_SD,
-                     parameters_summary_MAD=parameters_summary_MAD,
-                     parameters_summary_lin_slo=parameters_summary_lin_slo,
-                     par_pointwise_perm=par_pointwise_perm,
-                     moderator.density=object$moderator.density,
-                     moderator=object$moderator,
-                     moderator.grid=object$moderator.grid,
-                     h=object$h, bw=object$bw, N=object$N,
-                     nonconverged_rate=nonconverged_rate,
-                     use_lavaan_survey=use_lavaan_survey,
-                     B=B, s1=s1, s2=s2, lavmodel=object$lavmodel, CALL=CALL
-                            )
+                    parameters=parameters,
+                    parameters_permutation=parameters_permutation,
+                    parameters_summary=parameters_summary,
+                    parameters_summary_M=parameters_summary_M,
+                    parameters_summary_SD=parameters_summary_SD,
+                    parameters_summary_MAD=parameters_summary_MAD,
+                    parameters_summary_lin_slo=parameters_summary_lin_slo,
+                    par_pointwise_perm=par_pointwise_perm,
+                    moderator.density=object$moderator.density,
+                    moderator=object$moderator,
+                    moderator.grid=object$moderator.grid,
+                    h=object$h, bw=object$bw, N=object$N,
+                    nonconverged_rate=nonconverged_rate,
+                    use_lavaan_survey=use_lavaan_survey,
+                    B=B, s1=s1, s2=s2, lavmodel=object$lavmodel, CALL=CALL )
     class(res) <- "lsem.permutationTest"
     return(res)
 }

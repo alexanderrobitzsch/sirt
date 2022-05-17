@@ -1,5 +1,5 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.741
+## File Version: 3.755
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
@@ -12,6 +12,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     type <- "AM"
     align.pow0 <- align.pow
     align.pow <- align.pow / 2
+    overparam <- FALSE
 
     #-- labels for groups and items
     lambda0 <- lambda <- invariance_alignment_proc_labels(x=lambda)
@@ -66,7 +67,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     ind_psi <- G1 + ind_alpha
 
     #-- define optimization functions
-    fct_optim <- function(x,lambda,nu){
+    fct_optim <- function(x,lambda,nu, overparam){
         res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha,
                     ind_psi=ind_psi, reparam=reparam)
         val <- sirt_rcpp_invariance_alignment_opt_fct( nu=nu, lambda=lambda, alpha0=res$alpha0,
@@ -74,9 +75,13 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
                     align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type,
                     reparam=FALSE, meth=meth)
         val <- val$fopt
+        if (overparam){
+            G <- nrow(lambda)
+            val <- val+sum(wgt[,1]*x[1:G]^2 + wgt[,1]*x[G+(1:G)]^2 )
+        }
         return(val)
     }
-    grad_optim <- function(x,lambda,nu){
+    grad_optim <- function(x,lambda,nu, overparam){
         res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha, ind_psi=ind_psi,
                         reparam=reparam)
         alpha0 <- res$alpha0
@@ -84,7 +89,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         grad <- sirt_rcpp_invariance_alignment_opt_grad( nu=nu, lambda=lambda,
                         alpha0=alpha0, psi0=psi0, group_combis=group_combis, wgt=wgt,
                         align_scale=align.scale, align_pow=align.pow, eps=eps, wgt_combi=wgt_combi,
-                        type=type, reparam=reparam, meth=meth )
+                        type=type, reparam=reparam, meth=meth)
         grad <- grad[-c(1,G+1)]
         return(grad)
     }
@@ -93,10 +98,16 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         grad_optim <- NULL
     }
 
+
     #* estimate alignment parameters
     min_val <- .01
-    lower <- c(rep(-Inf,G1), rep(min_val, G1))
+    GL <- G1
     par <- c( alpha0[-1], psi0[-1] )
+    if (overparam){
+        GL <- G
+        par <- c( alpha0, psi0 )
+    }
+    lower <- c(rep(-Inf,GL), rep(min_val, GL))
     if (reparam){
         grad_optim <- NULL
     }
@@ -113,7 +124,8 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     while(est_loop>=1){
         for (eps in eps_vec){
             res_optim <- sirt_optimizer(optimizer=optimizer, par=par, fn=fct_optim, grad=grad_optim,
-                                lower=lower, hessian=FALSE, lambda=lambda1, nu=nu1, ...)
+                                lower=lower, hessian=FALSE, lambda=lambda1, nu=nu1,
+                                overparam=overparam, ...)
             par <- res_optim$par
             res <- invariance_alignment_define_parameters(x=res_optim$par, ind_alpha=ind_alpha,
                             ind_psi=ind_psi, reparam=reparam)

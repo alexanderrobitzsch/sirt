@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_linking_haebara.cpp
-//// File Version: 0.388
+//// File Version: 0.392
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -41,7 +41,8 @@ double sirt_rcpp_linking_haebara_fct_optim_one_item( Rcpp::NumericVector theta,
     double pow1=pow/2.0;
 
     //** observed IRF
-    Rcpp::NumericVector p_obs = sirt_rcpp_linking_haebara_irf_2pl( theta, aM(ii,ss), bM(ii,ss) );
+    Rcpp::NumericVector p_obs = sirt_rcpp_linking_haebara_irf_2pl( theta, aM(ii,ss),
+                    bM(ii,ss) );
 
     //** expected IRF
     //    a_exp <- a[ii] * sigma[ss]
@@ -76,9 +77,9 @@ double sirt_rcpp_linking_haebara_fct_optim_one_item( Rcpp::NumericVector theta,
 // [[Rcpp::export]]
 double sirt_rcpp_linking_haebara_fct_optim( int NI, int NS, Rcpp::CharacterVector dist,
         Rcpp::NumericMatrix aM, Rcpp::NumericMatrix bM, Rcpp::NumericVector theta,
-        Rcpp::NumericVector prob_theta, Rcpp::LogicalMatrix est_pars, Rcpp::NumericMatrix wgtM,
-        Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu,
-        Rcpp::NumericVector sigma, double eps, double pow )
+        Rcpp::NumericVector prob_theta, Rcpp::LogicalMatrix est_pars,
+        Rcpp::NumericMatrix wgtM, Rcpp::NumericVector a, Rcpp::NumericVector b,
+        Rcpp::NumericVector mu, Rcpp::NumericVector sigma, double eps, double pow )
 {
     double val=0;
     double dist1;
@@ -101,13 +102,15 @@ double sirt_rcpp_linking_haebara_fct_optim( int NI, int NS, Rcpp::CharacterVecto
 ///********************************************************************
 ///** sirt_rcpp_linking_haebara_grad_optim_one_item
 // [[Rcpp::export]]
-Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim_one_item( Rcpp::NumericVector theta,
-    Rcpp::NumericVector prob_theta, Rcpp::NumericMatrix aM, Rcpp::NumericMatrix bM,
-    Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu,
-    Rcpp::NumericVector sigma, int ii, int ss, Rcpp::CharacterVector dist, double eps,
-    int NI, int NS, Rcpp::IntegerVector index_a, Rcpp::IntegerVector index_b,
-    Rcpp::IntegerVector index_mu, Rcpp::IntegerVector index_sigma, Rcpp::NumericMatrix wgtM,
-    Rcpp::NumericVector grad0, double pow)
+Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim_one_item(
+            Rcpp::NumericVector theta, Rcpp::NumericVector prob_theta,
+            Rcpp::NumericMatrix aM, Rcpp::NumericMatrix bM,
+            Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu,
+            Rcpp::NumericVector sigma, int ii, int ss, Rcpp::CharacterVector dist,
+            double eps, int NI, int NS, Rcpp::IntegerVector index_a,
+            Rcpp::IntegerVector index_b, Rcpp::IntegerVector index_mu,
+            Rcpp::IntegerVector index_sigma, Rcpp::NumericMatrix wgtM,
+            Rcpp::NumericVector grad0, double pow)
 {
     Rcpp::NumericVector grad = Rcpp::clone(grad0);
     Rcpp::NumericVector der_basis, der_t, diff2, dist2;
@@ -116,7 +119,8 @@ Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim_one_item( Rcpp::Numeric
     double pow1 = pow/2.0 - 1.0;
 
     //* observed IRF
-    Rcpp::NumericVector p_obs = sirt_rcpp_linking_haebara_irf_2pl( theta, aM(ii,ss), bM(ii,ss) );
+    Rcpp::NumericVector p_obs = sirt_rcpp_linking_haebara_irf_2pl( theta, aM(ii,ss),
+                                    bM(ii,ss) );
     //* expected IRF
     double a_exp = a[ii] * sigma[ss];
     double b_exp = ( b[ii] - mu[ss] ) / sigma[ss];
@@ -167,12 +171,14 @@ Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim_one_item( Rcpp::Numeric
 ///** sirt_rcpp_linking_haebara_grad_optim
 // [[Rcpp::export]]
 Rcpp::NumericVector sirt_rcpp_linking_haebara_grad_optim( int NI, int NS,
-    Rcpp::CharacterVector dist, Rcpp::NumericMatrix aM, Rcpp::NumericMatrix bM,
-    Rcpp::NumericVector theta, Rcpp::NumericVector prob_theta, Rcpp::LogicalMatrix est_pars,
-    Rcpp::NumericMatrix wgtM, Rcpp::NumericVector a, Rcpp::NumericVector b, Rcpp::NumericVector mu,
-    Rcpp::NumericVector sigma, double eps, Rcpp::IntegerVector index_a, Rcpp::IntegerVector index_b,
-    Rcpp::IntegerVector index_mu, Rcpp::IntegerVector index_sigma, Rcpp::CharacterVector parnames,
-    int NP, double pow )
+            Rcpp::CharacterVector dist, Rcpp::NumericMatrix aM,
+            Rcpp::NumericMatrix bM, Rcpp::NumericVector theta,
+            Rcpp::NumericVector prob_theta, Rcpp::LogicalMatrix est_pars,
+            Rcpp::NumericMatrix wgtM, Rcpp::NumericVector a, Rcpp::NumericVector b,
+            Rcpp::NumericVector mu, Rcpp::NumericVector sigma, double eps,
+            Rcpp::IntegerVector index_a, Rcpp::IntegerVector index_b,
+            Rcpp::IntegerVector index_mu, Rcpp::IntegerVector index_sigma,
+            Rcpp::CharacterVector parnames, int NP, double pow )
 {
     Rcpp::NumericVector grad(NP, 0.0);
     for (int ii=0; ii<NI; ii++){

@@ -1,5 +1,5 @@
 %% File Name: sirt-utilities.Rd
-%% File Version: 0.403
+%% File Version: 0.406
 
 \name{sirt-utilities}
 \alias{sirt-utilities}
@@ -90,7 +90,8 @@ sirt_permutations(r,v)
 sirt_attach_list_elements(x, envir)
 
 # switch between stats::optim and stats::nlminb
-sirt_optimizer(optimizer, par, fn, grad=NULL, method="L-BFGS-B", hessian=TRUE, ...)
+sirt_optimizer(optimizer, par, fn, grad=NULL, method="L-BFGS-B", hessian=TRUE,
+                   control=list(), ...)
 
 # print objects in a summary
 sirt_summary_print_objects(obji, from=NULL, to=NULL, digits=3, rownames_null=TRUE,
@@ -138,6 +139,7 @@ the argument \code{opts$algorithm="NLOPT_LD_MMA"}).
 \item{grad}{Gradient function}
 \item{method}{Optimization method}
 \item{hessian}{Logical}
+\item{control}{Control list for R optimizers}
 \item{\ldots}{Further arguments to be passed}
 \item{obji}{Data frame}
 \item{from}{Integer}

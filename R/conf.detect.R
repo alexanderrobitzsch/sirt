@@ -1,5 +1,5 @@
 ## File Name: conf.detect.R
-## File Version: 1.206
+## File Version: 1.208
 
 
 # Confirmatory DETECT analysis
@@ -52,8 +52,9 @@ conf.detect <- function( data, score, itemcluster, bwscale=1.1, progress=TRUE,
                                 "SD"=apply( detect.matrix, 2, stats::sd ),
                                 "Min"=apply( detect.matrix, 2, min ),
                                 "Max"=apply( detect.matrix, 2, max ) )
-        rownames(detect.summary) <- c("DETECT Unweighted", "DETECT Weighted", "ASSI Unweighted", "ASSI Weighted",
-                    "RATIO Unweighted", "RATIO Weighted" )
+        rownames(detect.summary) <- c("DETECT Unweighted", "DETECT Weighted",
+                                        "ASSI Unweighted", "ASSI Weighted",
+                                        "RATIO Unweighted", "RATIO Weighted" )
     }
     cat("-----------------------------------------------------------\n" )
     if ( ! h1){

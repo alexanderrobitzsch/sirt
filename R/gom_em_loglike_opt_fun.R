@@ -1,5 +1,5 @@
 ## File Name: gom_em_loglike_opt_fun.R
-## File Version: 0.267
+## File Version: 0.271
 
 
 
@@ -9,8 +9,8 @@ gom_em_loglike_opt_fun <- function(x, ind_lambda, ind_pi, I, K, theta.k, theta0.
 {
     ncat <- 2
     res <- gom_em_loglike_parameter_conversion( x=x, ind_lambda=ind_lambda,
-        ind_pi=ind_pi, I=I, K=K, ind_mu=ind_mu, ind_sigma=ind_sigma, model=model,
-        theta_grid=theta_grid, lambda_partable=lambda_partable )
+                ind_pi=ind_pi, I=I, K=K, ind_mu=ind_mu, ind_sigma=ind_sigma, model=model,
+                theta_grid=theta_grid, lambda_partable=lambda_partable )
     lambda <- res$lambda
     pi.k <- res$pi.k
     mu <- res$mu

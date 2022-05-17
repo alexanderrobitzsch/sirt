@@ -1,7 +1,8 @@
 ## File Name: mgsem_proc_technical.R
-## File Version: 0.166
+## File Version: 0.169
 
-mgsem_proc_technical <- function(technical, control, p_me, p_pen, eps_approx, suffstat)
+mgsem_proc_technical <- function(technical, control, p_me, p_pen, eps_approx, suffstat,
+            estimator)
 {
     #*** defaults technical; update list
     technical0 <- list(maxiter=1000, h=1e-5, eps_zero=1e-12, optimizer="nlminb",
@@ -38,7 +39,12 @@ mgsem_proc_technical <- function(technical, control, p_me, p_pen, eps_approx, su
         control$maxeval <- technical$maxiter
     }
 
+    p <- p_pen
+    if (estimator=="ME"){
+        p <- p_me
+    }
+
     #--- output
-    res <- list(control=control, technical=technical, eps_approx=eps_approx)
+    res <- list(control=control, technical=technical, eps_approx=eps_approx, p=p)
     return(res)
 }

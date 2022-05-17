@@ -1,5 +1,5 @@
 ## File Name: tam2mirt_freed.R
-## File Version: 0.151
+## File Version: 0.154
 
 #*** return lavaan syntax with freed parameters
 tam2mirt_freed <- function( D, factors, B, dat, AXsi,
@@ -13,11 +13,12 @@ tam2mirt_freed <- function( D, factors, B, dat, AXsi,
         fac.dd <- factors[dd]
         # create terms for loadings
         B2.dd <- round( B[,2,dd], 4)
-        if (class(tamobj)=="tam.mml"){
-            syn0 <- paste0( paste0( B2.dd[ B2.dd!=0], "*", colnames(dat)[ B2.dd!=0] ), collapse="+" )
+        if (inherits(tamobj,"tam.mml")){
+            syn0 <- paste0( paste0( B2.dd[ B2.dd!=0], "*",
+                            colnames(dat)[ B2.dd!=0] ), collapse="+" )
             syn0 <- paste0( fac.dd, "=~ ", syn0, "\n")
         }
-        if (class(tamobj)=="tam.mml.2pl"){
+        if (inherits(tamobj,"tam.mml.2pl")){
             d4 <- paste0( B2.dd[ B2.dd!=0] )
             d4 <- paste0( "a", dd, "_", seq(1,length(d4) ) )
             syn0 <- paste0( paste0( d4, "*", colnames(dat)[ B2.dd!=0] ),
@@ -49,7 +50,8 @@ tam2mirt_freed <- function( D, factors, B, dat, AXsi,
         lavsyn <- paste0( lavsyn, "\n", syn0 )
     }
     if (inherits(tamobj,"tam.mml.2pl")){
-        syn0 <- paste0( factors, " ~~ ", round( as.vector(diag(cov.trait)),4), "*",factors  )
+        syn0 <- paste0( factors, " ~~ ",
+                        round( as.vector(diag(cov.trait)),4), "*",factors  )
         syn0 <- paste0( syn0, collapse="\n")
         lavsyn <- paste0( lavsyn, "\n", syn0 )
     }

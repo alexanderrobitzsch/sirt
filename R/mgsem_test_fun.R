@@ -1,5 +1,5 @@
 ## File Name: mgsem_test_fun.R
-## File Version: 0.05
+## File Version: 0.11
 
 
 mgsem_test_fun <- function(test, coef, opt_fun_args)
@@ -11,8 +11,10 @@ mgsem_test_fun <- function(test, coef, opt_fun_args)
         #- numerical gradient
         grad1 <- mgsem_grad_fun_numeric_approx(x=coef, opt_fun_args=opt_fun_args)
         #- analytical gradient
-        grad <- do.call( what=mgsem_grad_fun, args=list(x=coef, opt_fun_args=opt_fun_args) )
+        args <- list(x=coef, opt_fun_args=opt_fun_args)
+        grad <- do.call( what=mgsem_grad_fun, args=args)
         #- print
-        miceadds::Revalpr("ll"); miceadds::Revalpr_maxabs("grad","grad1")
+        miceadds::Revalpr("ll")
+        miceadds::Revalpr_maxabs("grad","grad1")
     }
 }

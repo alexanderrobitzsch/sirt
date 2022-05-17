@@ -1,5 +1,5 @@
 ## File Name: xxirt_prepare_response_data.R
-## File Version: 0.08
+## File Version: 0.094
 
 xxirt_prepare_response_data <- function(G, group_index, weights, dat1,
             dat_resp, maxK )

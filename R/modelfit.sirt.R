@@ -1,5 +1,5 @@
 ## File Name: modelfit.sirt.R
-## File Version: 1.134
+## File Version: 1.135
 
 
 # model fit in sirt
@@ -39,13 +39,13 @@ modelfit.sirt <- function( object )
     }
 
     #--- rasch.pml
-    if ( ! inherits(object,"rasch.pml") ){ 
-        pmlobject <- NULL 
+    if ( ! inherits(object,"rasch.pml") ){
+        pmlobject <- NULL
     } else {
         data <- NULL
         posterior <- NULL
         probs <- NULL
-        pmlobject <- object 
+        pmlobject <- object
     }
 
     #--- smirt
@@ -108,7 +108,7 @@ modelfit.sirt <- function( object )
     } else {
         res <- CDM::modelfit.cor2( data=dat, posterior=posterior, probs=probs )
     }
-    
+
     #--- model output
     class(res) <- "modelfit.sirt"
     return(res)

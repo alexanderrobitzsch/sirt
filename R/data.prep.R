@@ -1,5 +1,5 @@
 ## File Name: data.prep.R
-## File Version: 1.145
+## File Version: 1.147
 
 #----- data preparations for rasch.jml and rasch.mml
 data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
@@ -43,10 +43,11 @@ data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
     }
     # item pattern corresponding to frequency pattern
     if ( use.freqpatt){
-        dat2 <- matrix( as.numeric( unlist( strsplit( paste(dat1[,1]), "" ) ) ), ncol=ncol(dat), byrow=T)
+        dat2 <- matrix( as.numeric( unlist( strsplit( paste(dat1[,1]), "" ) ) ),
+                            ncol=ncol(dat), byrow=TRUE)
     } else {
         dat2 <- dat.9 }
-        dat2.resp <- 1 * ( dat2 !=9 )
+        dat2.resp <- 1*( dat2 !=9 )
         dat2[ dat2==9 ] <- 0
         # mean right
         dat1$mean <- rowSums( dat2 * dat2.resp )  / rowSums( dat2.resp )

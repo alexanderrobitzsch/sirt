@@ -1,5 +1,5 @@
 ## File Name: ccov.np.R
-## File Version: 1.216
+## File Version: 1.218
 
 
 #---- nonparametric estimation of conditional covariance
@@ -52,7 +52,8 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
 
     sirt_progress_cat(progress=progress)
     #-- weights thetagrid
-    wgt_thetagrid <- ccov_np_score_density(score=score, thetagrid=thetagrid, smooth=smooth)
+    wgt_thetagrid <- ccov_np_score_density(score=score, thetagrid=thetagrid,
+                            smooth=smooth)
 
     #-- display progress
     if (progress){

@@ -1,5 +1,5 @@
 ## File Name: mgsem_moments_derivative_parameter.R
-## File Version: 0.346
+## File Version: 0.348
 
 mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
         i1, i2, h, is_B, eps=1e-12, num_approx=FALSE)
@@ -26,8 +26,8 @@ mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
         num_approx <- FALSE
     }
 
-
-    # leave always numerical approximation because est is a function of different components
+    # leave always numerical approximation because est is a function of
+    # different components
 
     #*** numerical approximation
     #if (TRUE){

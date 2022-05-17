@@ -1,7 +1,7 @@
 ## File Name: sirt_optimizer_hessian.R
-## File Version: 0.03
+## File Version: 0.04
 
-sirt_optimizer_hessian <- function(res, fn, grad, h)
+sirt_optimizer_hessian <- function(res, fn, grad, h, ...)
 {
     a1 <- list(...)
     arglist <- list(...)

@@ -1,5 +1,5 @@
 ## File Name: gom.em.R
-## File Version: 5.411
+## File Version: 5.420
 
 
 #-- gom EM algorithm
@@ -197,7 +197,8 @@ gom.em <- function( dat, K=NULL, problevels=NULL, weights=NULL, model="GOM",
     #--- Newton-Raphson steps
     if (newton_raphson){
         lambda_logit <- as.vector( stats::qlogis(lambda) )
-        lambda_logit <- stats::aggregate(lambda_logit, list(lambda_partable$par_index), mean)[,2]
+        lambda_logit <- stats::aggregate(lambda_logit,
+                                list(lambda_partable$par_index), mean)[,2]
         ind_lambda <- seq(1, max(lambda_partable$par_index))
         names(lambda_logit) <- lambda_partable$par_name[ lambda_partable$free ]
         pi_k_logit <- sirt_probs_to_logit(y=pi.k)
@@ -299,7 +300,6 @@ gom.em <- function( dat, K=NULL, problevels=NULL, weights=NULL, model="GOM",
         mu <- res$mu
         Sigma <- res$Sigma
         pi.k <- res$pi.k
-
         #--- distribution parameters
         c1 <- stats::cov2cor(Sigma)
         if (progress){
@@ -384,14 +384,14 @@ gom.em <- function( dat, K=NULL, problevels=NULL, weights=NULL, model="GOM",
     #--- output
     s2 <- Sys.time()
     res <- list(deviance=dev, ic=ic, item=item, person=person, EAP.rel=EAP.rel,
-        MAP=MAP, EAP=EAP, classdesc=classdesc, lambda=lambda, se.lambda=se.lambda,
-        mu=mu, Sigma=Sigma, b=b, se.b=se.b, f.yi.qk=f.yi.qk, f.qk.yi=f.qk.yi,
-        probs=probs, n.ik=n.ik, iter=iter, dat=dat0, dat2=dat2, dat2.resp=dat2.resp,
-        I=I, K=K, TP=TP, G=1, theta.k=theta.k, pi.k=pi.k, problevels=problevels,
-        model=model, plmat=plmat, mu=mu, Sigma=Sigma, weights=weights,
-        lambda.index=lambda.index, lambda_partable=lambda_partable,
-        optimization=optimization, newton_raphson=newton_raphson,
-        s1=s1, s2=s2, time_diff=s2-s1, CALL=CALL)
+                MAP=MAP, EAP=EAP, classdesc=classdesc, lambda=lambda, se.lambda=se.lambda,
+                mu=mu, Sigma=Sigma, b=b, se.b=se.b, f.yi.qk=f.yi.qk, f.qk.yi=f.qk.yi,
+                probs=probs, n.ik=n.ik, iter=iter, dat=dat0, dat2=dat2, dat2.resp=dat2.resp,
+                I=I, K=K, TP=TP, G=1, theta.k=theta.k, pi.k=pi.k, problevels=problevels,
+                model=model, plmat=plmat, mu=mu, Sigma=Sigma, weights=weights,
+                lambda.index=lambda.index, lambda_partable=lambda_partable,
+                optimization=optimization, newton_raphson=newton_raphson,
+                s1=s1, s2=s2, time_diff=s2-s1, CALL=CALL)
     class(res) <- "gom"
     return(res)
 }

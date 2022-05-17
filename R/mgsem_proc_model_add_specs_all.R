@@ -1,9 +1,9 @@
 ## File Name: mgsem_proc_model_add_specs_all.R
-## File Version: 0.093
+## File Version: 0.096
 
 
 mgsem_proc_model_add_specs_all <- function(model, entries, type, ii, jj, dfr1,
-        group, N_group, names_prior_list=NULL)
+        group, N_group, names_prior_list=NULL, pen_type="scad")
 {
     # N1 <- N_group[group]
     # if (group==0){
@@ -19,8 +19,8 @@ mgsem_proc_model_add_specs_all <- function(model, entries, type, ii, jj, dfr1,
         if (entry=="pen_lp"){ default <- 0 }
         if (entry=="pen_difflp"){ default <- 0 }
 
-        val <- mgsem_proc_model_add_specs(model=model, entry=entry, type=type, ii=ii, jj=jj,
-                    default=default)
+        val <- mgsem_proc_model_add_specs(model=model, entry=entry, type=type,
+                    ii=ii, jj=jj, default=default)
         if (entry=="prior"){ val <- paste(val) }
         if (entry %in% c("pen_l2","pen_lp","pen_difflp")){
             val <- N1*val

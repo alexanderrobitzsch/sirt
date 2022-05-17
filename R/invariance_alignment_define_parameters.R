@@ -1,8 +1,8 @@
 ## File Name: invariance_alignment_define_parameters.R
-## File Version: 0.16
+## File Version: 0.18
 
 invariance_alignment_define_parameters <- function(x, ind_alpha, ind_psi,
-        fix_first_psi=TRUE, reparam=FALSE, constraint="prod")
+        fix_first_psi=TRUE, reparam=FALSE, constraint="prod", overparam=FALSE)
 {
     alpha0 <- c(0, x[ind_alpha])
     if (fix_first_psi){

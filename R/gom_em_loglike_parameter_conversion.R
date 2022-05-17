@@ -1,9 +1,9 @@
 ## File Name: gom_em_loglike_parameter_conversion.R
-## File Version: 0.18
+## File Version: 0.192
 
 
 gom_em_loglike_parameter_conversion <- function(x, ind_lambda, ind_pi, I, K,
-    ind_mu, ind_sigma, model, theta_grid, lambda_partable)
+            ind_mu, ind_sigma, model, theta_grid, lambda_partable)
 {
     mu <- NULL
     Sigma <- NULL

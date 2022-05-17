@@ -34,9 +34,21 @@ CHANGELOG sirt
 
 
 
+------------------------------------------------------------------------
+VERSIONS sirt 3.13  |  2022-05-17  |  Last: sirt 3.13-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.12  |  2022-04-04  |  Last: sirt 3.12-43
+VERSIONS sirt 3.12  |  2022-05-16  |  Last: sirt 3.12-66
 ------------------------------------------------------------------------
 
 ADDED * added argument 'model' in invariance_alignment_cfa_config() which
@@ -48,13 +60,22 @@ ADDED * added optimizer 'nloptr', 'bobyqa' and 'Rvmmin' in
         sirt_optimizer()
 FIXED * fixed incorrect handling of missing="fiml" in lsem.estimate()
         if est_joint=TRUE was requested
-
+FIXED * fixed an issue in using sampling weights in xxirt()
+ADDED * included simulation functions rmvn() and ruvn() that simulate 
+        from a multivariate or univariate normal distribution with exactly 
+        reproduced prespecified means and covariances 
+ADDED * included argument 'exact' in invariance_alignment_simulate() for
+        simulating CFA data with exactly preserved distributions
+NOTE  * included an example (Example 3) of regularized estimation of an
+        item response model in xxirt()
+NOTE  * included Example 4 for a 2PL mixture model in xxirt()
+ADDED * added fitting function cfa_meas_inv() that estimates the
+        CFA model under full and partial measurement invariance by
+        successively freeing parameters based on modification indices
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: invariance.alignment (7)
-
-
-
+EXAMP * included/modified examples: invariance.alignment (7),
+        rmvn (1,2), xxirt (3,4), cfa_meas_inv (1)
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.11  |  2021-12-09  |  Last: sirt 3.11-21

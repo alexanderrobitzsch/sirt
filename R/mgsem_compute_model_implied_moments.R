@@ -1,5 +1,5 @@
 ## File Name: mgsem_compute_model_implied_moments.R
-## File Version: 0.163
+## File Version: 0.165
 
 
 mgsem_compute_model_implied_moments <- function(est, is_B=FALSE, calc_Sigma=TRUE,
@@ -11,6 +11,7 @@ mgsem_compute_model_implied_moments <- function(est, is_B=FALSE, calc_Sigma=TRUE
         requireNamespace("MASS")
         D <- ncol(est$PHI)
         ID <- diag(rep(1,D))
+        B <- res$B
         B1 <- MASS::ginv(ID-B)
         LAMB <- est$LAM %*% B1
         Mu <- LAMB %*% est$ALPHA + est$NU

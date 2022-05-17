@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sirt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.12-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">3.13-vv</span>
       </span>
     </div>
 
@@ -167,7 +167,8 @@
 <span class='fu'>sirt_attach_list_elements</span>(<span class='no'>x</span>, <span class='no'>envir</span>)
 
 <span class='co'># switch between stats::optim and stats::nlminb</span>
-<span class='fu'>sirt_optimizer</span>(<span class='no'>optimizer</span>, <span class='no'>par</span>, <span class='no'>fn</span>, <span class='kw'>grad</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"L-BFGS-B"</span>, <span class='kw'>hessian</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'>sirt_optimizer</span>(<span class='no'>optimizer</span>, <span class='no'>par</span>, <span class='no'>fn</span>, <span class='kw'>grad</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"L-BFGS-B"</span>, <span class='kw'>hessian</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
+                   <span class='kw'>control</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='no'>...</span>)
 
 <span class='co'># print objects in a summary</span>
 <span class='fu'>sirt_summary_print_objects</span>(<span class='no'>obji</span>, <span class='kw'>from</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>to</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>rownames_null</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
@@ -289,6 +290,10 @@ the argument <code>opts$algorithm="NLOPT_LD_MMA"</code>).</p></td>
     <tr>
       <th>hessian</th>
       <td><p>Logical</p></td>
+    </tr>
+    <tr>
+      <th>control</th>
+      <td><p>Control list for R optimizers</p></td>
     </tr>
     <tr>
       <th>...</th>
