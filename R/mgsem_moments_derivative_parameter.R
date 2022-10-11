@@ -1,9 +1,10 @@
 ## File Name: mgsem_moments_derivative_parameter.R
-## File Version: 0.348
+## File Version: 0.393
 
 mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
         i1, i2, h, is_B, eps=1e-12, num_approx=FALSE)
 {
+
     calc_Sigma <- TRUE
     calc_Mu <- TRUE
     symm <- FALSE
@@ -29,8 +30,26 @@ mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
     # leave always numerical approximation because est is a function of
     # different components
 
+    num_approx <- TRUE
+
+    if (type %in% c("ALPHA","NU","PSI") ) {
+        num_approx <- FALSE
+    }
+
+
+    # issue is for LAM and PHI
+    if (type %in% c("PHI") ) {
+        if (i1==i2){
+            num_approx <- FALSE
+        }
+    }
+
+    if (type %in% c("LAM") ) {
+        # num_approx <- FALSE
+    }
+
+
     #*** numerical approximation
-    #if (TRUE){
     if (num_approx){
         est1 <- est
         est1[[type]] <- mgsem_add_increment(x=est[[type]],h=h,i1=i1,i2=i2, symm=symm)
@@ -87,31 +106,56 @@ mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
         if (type=="NU"){
             Mu_der[i1,1] <- 1
         }
+
         if (type=="PSI"){
             Sigma_der <- mgsem_add_increment(x=mat0,h=1,i1=i1,i2=i2, symm=symm)
             Sigma_der_logical[i1,i2] <- TRUE
             Sigma_der_logical[i2,i1] <- TRUE
         }
+
         if (type=="LAM"){
-            Mu_der[i1,i2] <- est$ALPHA[i2,1]
-            D1 <- matrix(0, nrow=I, ncol=ncol(est$LAM))
-            D1[i1,i2] <- 1
-            LP <- est$LAM %*% est$PHI
+            Mu_der[i1,1] <- est$ALPHA[i2,1]
+            # D1 <- matrix(0, nrow=I, ncol=ncol(est$LAM))
+            # D1[i1,i2] <- 1
+            # LP <- est$LAM %*% est$PHI
             # Sigma_der <- D1 %*% est$PHI %*% t(est$LAM) + est$LAM %*% est$PHI %*% t(D1)
             # Sigma_der <- D1 %*% t(LP) + LP %*% t(D1)
             # G1 <- D1 %*% t(LP)
-            G1 <- tcrossprod(D1, LP)
-            Sigma_der <- G1 + t(G1)
+            # G1 <- tcrossprod(D1, LP)
+            # Sigma_der <- G1 + t(G1)
+
+            H1 <- est$LAM %*% est$PHI
+            H2 <- t(H1)
+            ONE_H1 <- matrix(0, nrow=ncol(est$LAM), ncol=nrow(est$LAM))
+            ONE_H2 <- matrix(0, nrow=nrow(est$LAM), ncol=ncol(est$LAM))
+            ONE_H1[i2,i1] <- 1
+            ONE_H2[i1,i2] <- 1
+            t1 <- H1 %*% ONE_H1
+            t2 <- ONE_H2 %*% H2
+            Sigma_der <- t1 + t2
+
             Sigma_der_logical[i1,] <- TRUE
             Sigma_der_logical[,i1] <- TRUE
         }
         if (type=="PHI"){
-            D <- nrow(est$PHI)
-            D1 <- matrix(0, nrow=D, ncol=D)
-            D1[i1,i2] <- 1
-            D1[i2,i1] <- 1
+            # D <- nrow(est$PHI)
+            # D1 <- matrix(0, nrow=D, ncol=D)
+            # D1[i1,i2] <- 1
+            # D1[i2,i1] <- 1
             # Sigma_der <- est$LAM %*% D1 %*% t(est$LAM)
-            Sigma_der <- est$LAM %*% tcrossprod(D1, est$LAM)
+            # Sigma_der <- est$LAM %*% tcrossprod(D1, est$LAM)
+            # H1 <- D1 + t(D1) - D1*t(D1)
+            # H1 <- D1 + t(D1) - D1*t(D1)
+            #    Sigma_der <- est$LAM %*% H1 %*% t(est$LAM)
+            l1 <- est$LAM[,i1]
+            l2 <- est$LAM[,i2]
+            A1 <- outer(l1,l2)
+            if (i1==i2){
+                Sigma_der <- A1
+            }
+            if (i1!=i2){
+                Sigma_der <- A1+outer(l2,l1)
+            }
             Sigma_der_logical <- mgsem_differ_from_zero(x=Sigma_der, eps=eps)
         }
     }

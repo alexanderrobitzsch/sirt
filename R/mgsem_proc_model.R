@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_model.R
-## File Version: 0.273
+## File Version: 0.279
 
 mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
         prior_list=NULL, pen_type="lasso", fixed_parms=FALSE,
@@ -36,18 +36,21 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
         est <- model_hh$est
         index <- model_hh$index
 
+
+
         for (type in types){
+
             if (type %in% symm_types){
                 symm <- TRUE
             } else {
                 symm <- FALSE
             }
+            symm0 <- symm
             M1 <- est[[type]]
             if (!is.null(M1)){
                 M2 <- index[[type]]
                 n1 <- nrow(M1)
                 n2 <- ncol(M2)
-
                 for (ii in 1:n1){
                     if (symm){
                         hh <- ii
@@ -62,6 +65,7 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
                                                 "_G", dfr1$group)
                             dfr1$name2 <- paste0(dfr1$type, dfr1$i1, "-", dfr1$i2,
                                                 "_G", dfr1$group)
+                            symm <- symm0
                             if (ii==jj){
                                 symm <- FALSE
                             }
@@ -94,6 +98,7 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
                 }  # end ii  (i1)
             } # !is.null(M1)
         } #end types
+
     }    # end gg
 
     if (any(duplicated(dfr$name))){

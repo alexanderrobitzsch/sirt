@@ -1,11 +1,12 @@
 ## File Name: lsem.bootstrap.R
-## File Version: 0.316
+## File Version: 0.323
 
 
 lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL, seed=1,
-        repl_design=NULL, repl_factor=NULL)
+        repl_design=NULL, repl_factor=NULL, use_starting_values=TRUE)
 {
     # fix seed locally
+    s1 <- Sys.time()
     old <- .Random.seed
     on.exit({.Random.seed <<- old})
     set.seed(seed)
@@ -17,6 +18,16 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL, seed=1,
     lsem_args$se <- "none"
     lsem_args$verbose <- FALSE
     lsem_args$sampling_weights <- object$sampling_weights
+
+    #- use starting values
+    if (use_starting_values){
+        partable_joint <- object$partable_joint
+        if ( !is.null(partable_joint)){
+            partable_joint$start <- partable_joint$est
+            lsem_args$partable_joint <- partable_joint
+        }
+    }
+
     sampling_weights <- object$sampling_weights
     data <- object$data
     est_joint <- object$est_joint
@@ -67,6 +78,10 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL, seed=1,
     object$R <- R
     object$class_boot <- TRUE
     object$fitstats_joint <- fitstats_joint
+    s2 <- Sys.time()
+    object$s1 <- s1
+    object$s2 <- s2
+    object$time <- s2-s1
 
     #--- output
     class(object) <- c("lsem","lsem.boot")

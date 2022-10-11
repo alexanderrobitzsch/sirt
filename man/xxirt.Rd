@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.494
+%% File Version: 0.497
 
 \name{xxirt}
 \alias{xxirt}
@@ -34,7 +34,7 @@ and latent trait distributions can be specified by the user (see Details).
 xxirt(dat, Theta=NULL, itemtype=NULL, customItems=NULL, partable=NULL,
        customTheta=NULL, group=NULL, weights=NULL, globconv=1e-06, conv=1e-04,
        maxit=1000, mstep_iter=4, mstep_reltol=1e-06, h=1E-4, use_grad=TRUE,
-       verbose=TRUE, penalty_fun_item=NULL, verbose_index=NULL)
+       verbose=TRUE, penalty_fun_item=NULL, np_fun_item=NULL, verbose_index=NULL)
 
 \method{summary}{xxirt}(object, digits=3, file=NULL, ...)
 
@@ -122,7 +122,9 @@ to \code{\link[stats:optim]{stats::optim}}}
 Logical indicating whether iteration progress should be displayed
 }
 \item{penalty_fun_item}{Optional penalty function used in regularized
-estimation}
+estimation. Used as a function of \code{x} (vector of item parameters)}
+\item{np_fun_item}{Function that counts the number of item parameters in regularized
+estimation. Used as a function of \code{x} (vector of item parameters)}
 \item{object}{Object of class \code{xxirt}}
 \item{digits}{Number of digits to be rounded}
 \item{file}{Optional file name to which \code{summary} output is written}

@@ -1,9 +1,13 @@
 ## File Name: lsem_weighted_cov.R
-## File Version: 0.215
+## File Version: 0.226
 
 lsem_weighted_cov <- function( x, weights, x_resp=NULL,
-        moderator_variable=NULL, loc_linear_smooth=NULL, moderator_value=NULL )
+        moderator_variable=NULL, loc_linear_smooth=NULL, moderator_value=NULL,
+        pd=FALSE)
 {
+    if (pd){
+        requireNamespace("Matrix")
+    }
     if (is.null(loc_linear_smooth)){
         loc_linear_smooth <- FALSE
     }
@@ -17,8 +21,9 @@ lsem_weighted_cov <- function( x, weights, x_resp=NULL,
     x[ ! x_resp ] <- 0
 
     res <- lsem_weighted_mean( x=x, weights=weights, x_resp=x_resp,
-                moderator_variable=moderator_variable, loc_linear_smooth=loc_linear_smooth,
-                moderator_value=moderator_value)
+                        moderator_variable=moderator_variable,
+                        loc_linear_smooth=loc_linear_smooth,
+                        moderator_value=moderator_value)
     x_center <- res$mean
     XC <- matrix( x_center, nrow=nrow(x), ncol=ncol(x), byrow=TRUE )
     x <- x - XC
@@ -48,7 +53,12 @@ lsem_weighted_cov <- function( x, weights, x_resp=NULL,
             }
         }
         covw <- covw2
+    }  # end fit loc_linear_smooth
+
+    if (pd){
+        covw <- as.matrix(Matrix::nearPD(x=covw)$mat)
     }
+
     Nobs <- mean( weightsN[ ! upper.tri(weightsN) ] )
 
     #-- output

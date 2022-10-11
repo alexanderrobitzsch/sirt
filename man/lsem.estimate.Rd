@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.744
+%% File Version: 0.756
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -48,8 +48,9 @@ lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=
     residualize=TRUE, fit_measures=c("rmsea", "cfi", "tli", "gfi", "srmr"),
     standardized=FALSE, standardized_type="std.all", lavaan_fct="sem",
     sufficient_statistics=FALSE, use_lavaan_survey=FALSE, pseudo_weights=0,
-    sampling_weights=NULL, loc_linear_smooth=FALSE, est_joint=FALSE, par_invariant=NULL,
-    par_linear=NULL, par_quadratic=NULL, partable_joint=NULL, se=NULL, kernel="gaussian",
+    sampling_weights=NULL, loc_linear_smooth=TRUE, est_joint=FALSE, par_invariant=NULL,
+    par_linear=NULL, par_quadratic=NULL, partable_joint=NULL, pw_linear=1,
+    pw_quadratic=1, pd=TRUE, est_DIF=FALSE, se=NULL, kernel="gaussian",
     eps=1e-08, verbose=TRUE, ...)
 
 \method{summary}{lsem}(object, file=NULL, digits=3, ...)
@@ -65,7 +66,7 @@ lsem_local_weights(data.mod, moderator.grid, h, sampling_weights=NULL,  bw=NULL,
      kernel="gaussian")
 
 lsem.bootstrap(object, R=100, verbose=TRUE, cluster=NULL, seed=1,
-     repl_design=NULL, repl_factor=NULL)
+     repl_design=NULL, repl_factor=NULL, use_starting_values=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -139,6 +140,14 @@ sufficient statistics.}
 \item{par_quadratic}{Vector of parameters with quadratic function}
 \item{partable_joint}{User-defined parameter table if joint estimation is
 used (\code{est_joint=TRUE}).}
+\item{pw_linear}{Number of segments if piecewise linear estimation of parameters is used}
+\item{pw_quadratic}{Number of segments if piecewise quadratic estimation of parameters
+is used}
+\item{pd}{Logical indicating whether nearest positive definite covariance matrix
+should be computed if sufficient statistics are used}
+\item{est_DIF}{Logical indicating whether parameters under differential
+item functioning (DIF) should be additionally
+computed for invariant item parameters}
 \item{se}{Type of standard error used in \code{lavaan::lavaan}. If \code{NULL},
 the \pkg{lavaan} default is used.}
 \item{kernel}{Type of kernel function. Can be \code{"gaussian"},
@@ -174,6 +183,8 @@ standard errors. Note that sampling weights have to be already included in
 \code{repl_design}.}
 \item{repl_factor}{Replication factor in variance formula for statistical
 inference, e.g., 0.05 in PISA.}
+\item{use_starting_values}{Logical indicating whether starting values should be
+used from the original sample}
 }
 
 %\details{
@@ -208,6 +219,7 @@ residualization.}
 (for \code{lsem.bootstrap})}
 \item{fitstats_joint_boot}{Fit statistics in each bootstrap sample
 (for \code{lsem.bootstrap})}
+\item{dif_effects}{Estimated item parameters under DIF}
 }
 
 

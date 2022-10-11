@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 0.939
+## File Version: 0.947
 
 
 #--- user specified item response model
@@ -7,7 +7,8 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 partable=NULL, customTheta=NULL, group=NULL, weights=NULL,
                 globconv=1E-6, conv=1E-4, maxit=1000, mstep_iter=4,
                 mstep_reltol=1E-6, h=1E-4, use_grad=TRUE,
-                verbose=TRUE, penalty_fun_item=NULL, verbose_index=NULL )
+                verbose=TRUE, penalty_fun_item=NULL,
+                np_fun_item=NULL, verbose_index=NULL )
 {
     #*** preliminaries
     CALL <- match.call()
@@ -169,16 +170,18 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
 
     #-- parameters
     res <- xxirt_postproc_parameters( partable=partable, customTheta=customTheta,
-                    items=items, probs_items=probs_items )
+                    items=items, probs_items=probs_items, np_fun_item=np_fun_item )
     par_items <- res$par_items
     par_Theta <- res$par_Theta
     probs_items <- res$probs_items
     par_items_summary <- res$par_items_summary
     par_items_bounds <- res$par_items_bounds
+    np_item <- res$np_item
 
     #-- information criteria
     ic <- xxirt_ic( dev=dev, N=sum(weights), par_items=par_items,
-                par_Theta=par_Theta, I=I, par_items_bounds=par_items_bounds )
+                par_Theta=par_Theta, I=I, par_items_bounds=par_items_bounds,
+                np_item=np_item)
 
     #-- compute EAP
     EAP <- xxirt_EAP(p.aj.xi=p.aj.xi, Theta=Theta )

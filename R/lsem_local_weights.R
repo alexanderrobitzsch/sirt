@@ -1,5 +1,5 @@
 ## File Name: lsem_local_weights.R
-## File Version: 0.196
+## File Version: 0.198
 
 lsem_local_weights <- function(data.mod, moderator.grid, h,
         sampling_weights=NULL, bw=NULL, kernel="gaussian")
@@ -46,7 +46,8 @@ lsem_local_weights <- function(data.mod, moderator.grid, h,
     res <- list(weights=weights, N=N, G=G, modgrid_index=modgrid_index,
                 m.moderator=m.moderator, sd.moderator=sd.moderator, bw=bw, h=h,
                 moderator.density=moderator.density,
-                sampling_weights=sampling_weights, no_sampling_weights=no_sampling_weights)
+                sampling_weights=sampling_weights,
+                no_sampling_weights=no_sampling_weights)
     return(res)
 }
 

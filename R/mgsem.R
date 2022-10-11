@@ -1,5 +1,5 @@
 ## File Name: mgsem.R
-## File Version: 0.394
+## File Version: 0.412
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",
@@ -11,6 +11,9 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     #*** preliminaries
     CALL <- match.call()
     s1 <- Sys.time()
+
+    test <- FALSE
+    # test <- TRUE
 
     #*** process data if suffstat not available
     if (missing(suffstat)){
@@ -45,7 +48,9 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     N_group <- res$N_group
 
     random_sd <- -9
-    # random_sd <- 1e-1
+    if (test){
+        random_sd <- 1e-1
+    }
 
     #*** process model specification
     res <- mgsem_proc_model(model=model, G=G, prior_list=prior_list,
@@ -89,18 +94,15 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
                         grad_param_fun=grad_param_fun,
                         grad_suffstat_fun=grad_suffstat_fun,
                         technical=technical, p_pen=p_pen, p_me=p_me,
-                        p=p, eps_approx=eps_approx,
+                        p=p, eps_approx=eps_approx, num_approx=num_approx,
                         prior_list=prior_list, use_penalty=TRUE, types=types,
                         difflp_info=difflp_info, loop_parms=loop_parms,
                         pen_type=pen_type, a_scad=a_scad )
 
-    #- test functions
-    test <- FALSE
-    # test <- TRUE
+    #- test function
     res <- mgsem_test_fun(test=test, coef=coef, opt_fun_args=opt_fun_args)
 
-    #******************
-    #*** estimation
+    #**** estimation
     if (! fixed_parms){
 
         #- define lower and upper bounds

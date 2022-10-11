@@ -1,5 +1,5 @@
 ## File Name: linking.haberman.R
-## File Version: 2.647
+## File Version: 2.652
 
 
 #**** Linking Haberman: ETS Research Report 2009
@@ -65,7 +65,8 @@ linking.haberman <- function( itempars, personpars=NULL,
     bMadj <- bM * At_m
     resB <- linking_haberman_als(logaM=bMadj, wgtM=wgtM, maxiter=maxiter,
                     conv=conv, progress=progress, est.type=est_type,
-                    cutoff=b_trim, reference_value=0, adjust_main_effects=adjust_main_effects,
+                    cutoff=b_trim, reference_value=0,
+                    adjust_main_effects=adjust_main_effects,
                     estimation=estimation, lts_prop=lts_prop, vcov=vcov)
     Bj <- resB$logaj
     Bt <- resB$logaAt
@@ -135,7 +136,8 @@ linking.haberman <- function( itempars, personpars=NULL,
     aj1 <- aj * AtM
     a.res <- a.orig - aj1
 
-    Rsquared.invariance["slopes"] <- 1 - sirt_sum( a.res[ selitems,]^2 ) / sirt_sum( a.orig[ selitems, ]^2 )
+    Rsquared.invariance["slopes"] <- 1 - sirt_sum( a.res[ selitems,]^2 ) /
+                                            sirt_sum( a.orig[ selitems, ]^2 )
     Rsquared.partial.invariance["slopes"] <- 1 -
         sirt_sum( a.res[ selitems,]^2 * aj_wgtM[selitems,]  ) /
         sirt_sum( a.orig[ selitems, ]^2 * aj_wgtM[selitems, ]  )

@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_als.R
-## File Version: 0.654
+## File Version: 0.657
 
 
 
@@ -61,7 +61,8 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
         }
         if (estimation %in% c("MED")){
             for (ii in 1:I){
-                logaj[ii] <- linking_haberman_compute_median(x=logaM_adj1[ii,], w=wgtM[ii,])
+                logaj[ii] <- linking_haberman_compute_median(x=logaM_adj1[ii,],
+                                            w=wgtM[ii,])
             }
         }
         if (estimation %in% c("L0","L1")){
@@ -74,8 +75,8 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
         }
         if (estimation %in% c("LTS")){
             for (ii in 1:I){
-                logaj[ii] <- linking_haberman_compute_lts_mean(x=logaM_adj1[ii,], w=wgtM[ii,],
-                                    lts_prop=lts_prop)
+                logaj[ii] <- linking_haberman_compute_lts_mean(x=logaM_adj1[ii,],
+                                        w=wgtM[ii,], lts_prop=lts_prop)
             }
         }
 
@@ -96,7 +97,8 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
         }
         if (estimation %in% c("MED")){
             for (ss in 1:NS){
-                logaAt[ss] <- linking_haberman_compute_median(x=logaMadj[,ss], w=wgtM[,ss])
+                logaAt[ss] <- linking_haberman_compute_median(x=logaMadj[,ss],
+                                            w=wgtM[,ss])
             }
         }
         if ( ! adjust_main_effects){
@@ -110,7 +112,8 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
         #- stabilize convergence
         if (iter>50){
             if (max(abs(a_change)) >=abs_a_change ){
-                a_change <- ifelse( abs(a_change) >=abs_a_change, .95*abs_a_change, a_change )
+                a_change <- ifelse( abs(a_change) >=abs_a_change, .95*abs_a_change,
+                                        a_change )
                 logaAt <- logaAt0 + a_change
             }
         }
@@ -156,8 +159,8 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
     #*** end algorithm
     res <- list( logaAt=logaAt, logaj=logaj, loga_resid=loga_resid, loga_wgt=wgtM,
                 loga_wgt_adj=wgt_adj, vcov=res$vcov, se=c(NA, res$se),
-                item_stat=item_stat, iter=iter, cutoff=cutoff_used, estimation=estimation,
-                k_estimate=k_estimate, lts_prop=lts_prop)
+                item_stat=item_stat, iter=iter, cutoff=cutoff_used,
+                estimation=estimation, k_estimate=k_estimate, lts_prop=lts_prop)
     return(res)
 }
 

@@ -1,5 +1,5 @@
 ## File Name: noharm_sirt_preproc_parameter_table_matrix.R
-## File Version: 0.07
+## File Version: 0.09
 
 noharm_sirt_preproc_parameter_table_matrix <- function(pattmat, valmat, patt_id,
     patt_label, minval, symm=FALSE)
@@ -8,7 +8,8 @@ noharm_sirt_preproc_parameter_table_matrix <- function(pattmat, valmat, patt_id,
                     symm=symm)
     I <- nrow(pattmat)
     D <- ncol(pattmat)
-    parm1 <- data.frame(mat=patt_label, matid=patt_id, row=rep(1:I,D), col=rep(1:D, each=I) )
+    parm1 <- data.frame(mat=patt_label, matid=patt_id, row=rep(1:I,D),
+                            col=rep(1:D, each=I) )
     parm1$index <- as.vector(pattmat)
     parm1$starts <- as.vector(valmat)
     parm1$est_par <- 1 - is.na(parm1$index)

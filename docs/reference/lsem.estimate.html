@@ -167,8 +167,9 @@ Bootstrap at the level of a cluster identifier is allowed (argument <code>cluste
     <span class='kw'>residualize</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>fit_measures</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"rmsea"</span>, <span class='st'>"cfi"</span>, <span class='st'>"tli"</span>, <span class='st'>"gfi"</span>, <span class='st'>"srmr"</span>),
     <span class='kw'>standardized</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>standardized_type</span><span class='kw'>=</span><span class='st'>"std.all"</span>, <span class='kw'>lavaan_fct</span><span class='kw'>=</span><span class='st'>"sem"</span>,
     <span class='kw'>sufficient_statistics</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>use_lavaan_survey</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>pseudo_weights</span><span class='kw'>=</span><span class='fl'>0</span>,
-    <span class='kw'>sampling_weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>loc_linear_smooth</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>est_joint</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>par_invariant</span><span class='kw'>=</span><span class='kw'>NULL</span>,
-    <span class='kw'>par_linear</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>par_quadratic</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>partable_joint</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>se</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>kernel</span><span class='kw'>=</span><span class='st'>"gaussian"</span>,
+    <span class='kw'>sampling_weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>loc_linear_smooth</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>est_joint</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>par_invariant</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+    <span class='kw'>par_linear</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>par_quadratic</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>partable_joint</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>pw_linear</span><span class='kw'>=</span><span class='fl'>1</span>,
+    <span class='kw'>pw_quadratic</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>pd</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>est_DIF</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>se</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>kernel</span><span class='kw'>=</span><span class='st'>"gaussian"</span>,
     <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-08</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for lsem</span>
@@ -186,7 +187,7 @@ Bootstrap at the level of a cluster identifier is allowed (argument <code>cluste
      <span class='kw'>kernel</span><span class='kw'>=</span><span class='st'>"gaussian"</span>)
 
 <span class='fu'>lsem.bootstrap</span>(<span class='no'>object</span>, <span class='kw'>R</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>cluster</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>seed</span><span class='kw'>=</span><span class='fl'>1</span>,
-     <span class='kw'>repl_design</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>repl_factor</span><span class='kw'>=</span><span class='kw'>NULL</span>)</pre>
+     <span class='kw'>repl_design</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>repl_factor</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>use_starting_values</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -311,6 +312,26 @@ sufficient statistics.</p></td>
 used (<code>est_joint=TRUE</code>).</p></td>
     </tr>
     <tr>
+      <th>pw_linear</th>
+      <td><p>Number of segments if piecewise linear estimation of parameters is used</p></td>
+    </tr>
+    <tr>
+      <th>pw_quadratic</th>
+      <td><p>Number of segments if piecewise quadratic estimation of parameters
+is used</p></td>
+    </tr>
+    <tr>
+      <th>pd</th>
+      <td><p>Logical indicating whether nearest positive definite covariance matrix
+should be computed if sufficient statistics are used</p></td>
+    </tr>
+    <tr>
+      <th>est_DIF</th>
+      <td><p>Logical indicating whether parameters under differential
+item functioning (DIF) should be additionally
+computed for invariant item parameters</p></td>
+    </tr>
+    <tr>
       <th>se</th>
       <td><p>Type of standard error used in <code><a href='https://rdrr.io/pkg/lavaan/man/lavaan.html'>lavaan::lavaan</a></code>. If <code>NULL</code>,
 the <span class="pkg">lavaan</span> default is used.</p></td>
@@ -415,6 +436,11 @@ standard errors. Note that sampling weights have to be already included in
       <td><p>Replication factor in variance formula for statistical
 inference, e.g., 0.05 in PISA.</p></td>
     </tr>
+    <tr>
+      <th>use_starting_values</th>
+      <td><p>Logical indicating whether starting values should be
+used from the original sample</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -446,6 +472,7 @@ residualization.</p></dd>
 (for <code>lsem.bootstrap</code>)</p></dd>
 <dt>fitstats_joint_boot</dt><dd><p>Fit statistics in each bootstrap sample
 (for <code>lsem.bootstrap</code>)</p></dd>
+<dt>dif_effects</dt><dd><p>Estimated item parameters under DIF</p></dd>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 

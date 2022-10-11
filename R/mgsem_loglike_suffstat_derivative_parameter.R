@@ -1,9 +1,12 @@
 ## File Name: mgsem_loglike_suffstat_derivative_parameter.R
-## File Version: 0.210
+## File Version: 0.218
 
 mgsem_loglike_suffstat_derivative_parameter <- function(est, dermoments, suffstat,
         type, i1, i2, h, is_B=FALSE, eps=1e-12, num_approx=FALSE)
 {
+
+    #  num_approx <- TRUE
+
     #** derivative of moments with respect to parameter
     res <- mgsem_moments_derivative_parameter( est=est, type=type, i1=i1, i2=i2,
                 h=h, is_B=is_B, eps=eps, num_approx=num_approx )
@@ -25,6 +28,7 @@ mgsem_loglike_suffstat_derivative_parameter <- function(est, dermoments, suffsta
 
     if (res$calc_Sigma){
 
+
         # t2 <- -( t(y) %*% Sigma_der %*% y )[1,1]
         # t2 <- -sirt_rcpp_mgsem_quadform_logical(y=y, A=Sigma_der,
         #                A_logical=Sigma_der_logical)
@@ -43,6 +47,7 @@ mgsem_loglike_suffstat_derivative_parameter <- function(est, dermoments, suffsta
     } else {
         der2 <- 0
     }
+
     # output
     res <- der1+der2
     return(res)

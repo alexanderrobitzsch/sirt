@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_ThetaParameters.R
-## File Version: 0.15
+## File Version: 0.182
 
 #######################################################################
 xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
@@ -14,10 +14,11 @@ xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
         NP <- length(customTheta$prior)
         pen <- 0
         if ( NP > 0 ){
-            for (pp in 1:NP){
+            for (pp in 1:NP){            
                 if ( ! is.na( customTheta$prior[pp] ) ) {
                     prior_pp <- customTheta$prior[pp]
-                    val <- par1[ names(customTheta$prior) ]
+                    # val <- par1[ names(customTheta$prior) ]
+                    val <- par1[pp]
                     arg_list <- list( val,customTheta$prior_par1[pp],
                                                 customTheta$prior_par2[pp]  )
                     prior_val <- do.call( prior_pp, arg_list )

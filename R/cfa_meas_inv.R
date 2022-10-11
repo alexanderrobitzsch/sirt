@@ -1,5 +1,5 @@
 ## File Name: cfa_meas_inv.R
-## File Version: 0.157
+## File Version: 0.158
 
 
 cfa_meas_inv <- function(dat, group, weights=NULL, alpha=0.01, verbose=FALSE,
@@ -57,6 +57,7 @@ cfa_meas_inv <- function(dat, group, weights=NULL, alpha=0.01, verbose=FALSE,
             }
 
         }
+        mod1 <- mod2
     }
 
     pars_pi <- meas_inv_cfa_proc_partable(partable=partable1, items=items)

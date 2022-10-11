@@ -35,10 +35,24 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.13  |  2022-05-17  |  Last: sirt 3.13-1
+VERSIONS sirt 3.13  |  2022-10-11  |  Last: sirt 3.13-11
 ------------------------------------------------------------------------
 
-xxx   * ...
+NOTE  * included arguments 'pw_linear', 'pw_quadratic' that allow 
+        piecewise linear or quadratric parameter functions
+NOTE  * included argument 'pd' in lsem.estimate() that performs
+        estimation of a positive definite covariance matrix if
+        sufficient statistics are used
+NOTE  * changed defaults to 'loc_linear_smooth=TRUE' and 'pd=TRUE'
+        in lsem.estimate()
+NOTE  * included argument 'est_DIF' in lsem.estimate() that also
+        assesses parameter heterogeneity for parameters that are
+        assumed to be invariant
+NOTE  * included argument 'use_starting_values' in lsem.bootstrap()
+NOTE  * included argument 'np_fun_item' in xxirt() that counts the
+        number of item parameters
+FIXED * fixed a bug in cfa_meas_inv() (thanks to @mbluemke,
+        https://github.com/alexanderrobitzsch/sirt/issues/19)
 
 
 DATA  * included/modified datasets: ---

@@ -1,8 +1,7 @@
 ## File Name: xxirt_createParTable.R
-## File Version: 0.23
+## File Version: 0.24
 
-##################################################
-# create parameter table
+#*** create parameter table
 xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
 {
     I <- ncol(dat)
@@ -44,7 +43,7 @@ xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
             ind_ii <- match( item_ii_prior, dfr1$parname )
             dfr1[ ind_ii, "prior" ] <- item_ii$prior
             dfr1[ ind_ii, "prior_par1" ] <- item_ii$prior_par1
-            dfr1[ ind_ii, "prior_par2" ] <-     item_ii$prior_par2
+            dfr1[ ind_ii, "prior_par2" ] <- item_ii$prior_par2
         }
         dfr <- rbind( dfr, dfr1 )
     }
@@ -59,4 +58,3 @@ xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
     attr(dfr, "items" ) <- items
     return(dfr)
 }
-##################################################
