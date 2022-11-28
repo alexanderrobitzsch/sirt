@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_rm_sdt.cpp
-//// File Version: 0.415
+//// File Version: 0.416
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -54,7 +54,8 @@ Rcpp::List sirt_rcpp_rm_sdt_posterior( Rcpp::NumericVector prob_item,
     double p1=0;
     double temp=0;
     double ll=0;
-
+    double eps_like=1e-300;
+    
     for (int nn=0; nn<N; nn++){
         //*** hjikl
             //    xjikl <- hjikl <- array(0, dim=c(I0,K1,TP) )
@@ -111,7 +112,7 @@ Rcpp::List sirt_rcpp_rm_sdt_posterior( Rcpp::NumericVector prob_item,
             temp2 += wjl[tt];
         }
         like[nn] = temp2;
-        ll += std::log( like[nn] );
+        ll += std::log( like[nn]+eps_like );
         for (int tt=0; tt<TP; tt++){
             fyiqk(nn,tt) = wjl[tt];
             wjl[tt] = wjl[tt] / ( temp2 + eps );

@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.13  |  2022-10-11  |  Last: sirt 3.13-11
+VERSIONS sirt 3.13  |  2022-11-28  |  Last: sirt 3.13-24
 ------------------------------------------------------------------------
 
 NOTE  * included arguments 'pw_linear', 'pw_quadratic' that allow 
@@ -53,6 +53,8 @@ NOTE  * included argument 'np_fun_item' in xxirt() that counts the
         number of item parameters
 FIXED * fixed a bug in cfa_meas_inv() (thanks to @mbluemke,
         https://github.com/alexanderrobitzsch/sirt/issues/19)
+FIXED * fixed a bug in rm.sdt() caused by numeric instabilities in
+        deviance computation (thanks to Yusuke Shono)
 
 
 DATA  * included/modified datasets: ---

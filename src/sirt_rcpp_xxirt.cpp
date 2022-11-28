@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_xxirt.cpp
-//// File Version: 0.282
+//// File Version: 0.337
 
 
 
@@ -69,6 +69,54 @@ Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_likelihood(
 
     //---- OUTPUT
     return p_xi_aj;
+}
+///********************************************************************
+
+
+
+///********************************************************************
+///** sirt_rcpp_xxirt_hessian_reduced_probs
+// [[Rcpp::export]]
+Rcpp::NumericMatrix sirt_rcpp_xxirt_hessian_reduced_probs(
+        Rcpp::IntegerMatrix dat, Rcpp::LogicalMatrix dat_resp_bool,
+        Rcpp::NumericMatrix probs_ratio, int TP, int maxK,
+        int itemnr, int itemnr2, bool use_itemnr2, Rcpp::NumericMatrix p_xi_aj )
+{
+    int N = dat.nrow();
+    Rcpp::NumericMatrix t1(N, TP);
+
+    int ii=itemnr;
+    
+    for (int nn=0;nn<N;nn++){
+        if (dat_resp_bool(nn,itemnr)){
+            for (int tt=0; tt<TP; tt++){
+                t1(nn,tt) = probs_ratio(ii, dat(nn,ii) + tt*maxK );
+            }
+        } else {
+            for (int tt=0; tt<TP; tt++){
+                t1(nn,tt) = 1;            
+            }
+        }
+    }
+    if (use_itemnr2){
+        ii = itemnr2;
+        for (int nn=0;nn<N;nn++){
+            if (dat_resp_bool(nn,itemnr2)){
+                for (int tt=0; tt<TP; tt++){
+                    t1(nn,tt) = t1(nn,tt) * probs_ratio(ii, dat(nn,ii) + tt*maxK );                        
+                }
+            }
+        }
+    }
+
+    for (int nn=0;nn<N;nn++){
+        for (int tt=0; tt<TP; tt++){
+            t1(nn,tt) = t1(nn,tt)*p_xi_aj(nn,tt);
+        }
+    }    
+
+    //---- OUTPUT
+    return t1;
 }
 ///********************************************************************
 

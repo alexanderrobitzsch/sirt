@@ -1,5 +1,5 @@
 ## File Name: rasch.copula2.R
-## File Version: 6.317
+## File Version: 6.319
 
 
 
@@ -290,11 +290,14 @@ rasch.copula2 <- function( dat, itemcluster, weights=NULL,
                 rescop <- .ll.rasch.copula20( theta.k, b0, alpha1, alpha2, a, dat2.li, itemcluster0,
                             CC, dp.ld, dat2.ld, dat3.ld, dat2.ld.resp, dat2.li.resp, delta, wgt.theta, I,
                             bdat2.li, bdat2.li.resp, pattern, GG, copula.type,
-                            Ncat.ld    )
+                            Ncat.ld)
                 res.posterior <- rescop
-                            }
+            }
             # is this really necessary?
 #            wgt.theta <- rescop$pik
+Revalprstr("res.posterior")
+
+stop()
 
             rest1 <- .update.ll.rasch.copula21( theta.k, b0 + h*est.bb, alpha1, alpha2,
                 a, dat2.li, itemcluster0,
@@ -694,8 +697,7 @@ rasch.copula2 <- function( dat, itemcluster, weights=NULL,
 
     #---- results item parameters
     N_item <- colSums((!is.na(dat00))*w)
-    item <- data.frame( item=colnames(dat),
-                N=N_item,
+    item <- data.frame( item=colnames(dat), N=N_item,
                 p=colSums( w*dat00, na.rm=TRUE )/N_item,
                 b=b, est.b=est.b, a=a, est.a=est.a )
     item$thresh <- item$a * item$b

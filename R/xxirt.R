@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 0.947
+## File Version: 0.950
 
 
 #--- user specified item response model

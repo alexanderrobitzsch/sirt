@@ -1,5 +1,5 @@
 ## File Name: rasch_mml2_mstep_missing1.R
-## File Version: 0.156
+## File Version: 0.159
 
 
 #*** M-step for missing data model
@@ -65,7 +65,7 @@ rasch_mml2_mstep_missing1 <- function( theta.k, n.ik, mitermax, conv1,
                         n.ik=n.ik, diffindex=diffindex, max.increment=max.increment,
                         numdiff.parm=numdiff.parm)
         args0 <- res$args0
-        beta <- args0[[entry]]
+        beta <- sirt_squeeze(args0[[entry]], lower=min.beta)
         max_incr_beta <- res$max_increment
         se.beta <- res$se
 
@@ -84,7 +84,7 @@ rasch_mml2_mstep_missing1 <- function( theta.k, n.ik, mitermax, conv1,
             max_incr_delta <- res$max_increment
             se.delta <- res$se
         }
-        #--- update delta
+        #--- update a
         if (est_a){
             a0 <- fixed.a
             max.increment <- max_incr_a

@@ -1,8 +1,8 @@
 ## File Name: mcmcirt_create_partable_Theta.R
-## File Version: 0.12
+## File Version: 0.13
 
 
-mcmcirt_create_partable_Theta <- function(par, est, prior=NULL, 
+mcmcirt_create_partable_Theta <- function(par, est, prior=NULL,
         prior_par1=NULL, prior_par2=NULL, sd_proposal=NULL)
 {
     NP <- length(par)

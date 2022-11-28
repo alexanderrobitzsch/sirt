@@ -1,5 +1,5 @@
 //// File Name: probs_multcat_items_counts_rcpp.cpp
-//// File Version: 3.175
+//// File Version: 3.178
 
 
 #include <Rcpp.h>
@@ -258,3 +258,5 @@ Rcpp::List sirt_rcpp_calccounts_pcm_groups_C( Rcpp::IntegerMatrix dat,
         );
 }
 ///********************************************************************
+
+

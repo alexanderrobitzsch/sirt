@@ -1,5 +1,5 @@
 ## File Name: rm.sdt.R
-## File Version: 8.886
+## File Version: 8.888
 
 #################################################################
 # Hierarchical rater model

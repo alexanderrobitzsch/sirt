@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.688
+## File Version: 7.699
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model
@@ -404,6 +404,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
     #-- indicators of estimated parameters
     est_parameters <- list( a=sum(est.a)>0, c=sum(est.c)>0, d=sum(est.d)>0)
 
+    aa0 <- Sys.time()
 
     #******************************************************
     #*************** MML Iteration Algorithm **************
@@ -522,6 +523,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
             a_change <- m1$a_change
         }
 # cat("m step") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1
+
 
         #***************************************
         # update mean and covariance in multidimensional models
@@ -669,8 +671,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                                     }
                             }
                          }  # end non-normal distribution
-  #cat("trait distribution estimation") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1
-
+#  cat("trait distribution estimation") ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1
 
         #---- estimation of alpha, c and d parameters
         alpha.change <- 0
@@ -892,6 +893,8 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
         ####################################### end iterations #####################
         ############################################################################
         ##**************************************************************************
+
+# cat(" ++++ total estimation time") ; aa1 <- Sys.time(); print(aa1-aa0) ; aa0 <- aa1
 
             if ( irtmodel %in% irtmodel_missing){
                 m1$center <- FALSE

@@ -1,5 +1,5 @@
 ## File Name: IRT.likelihood_sirt.R
-## File Version: 0.17
+## File Version: 0.18
 
 
 ################################################
@@ -20,6 +20,7 @@
 
 ########################################################
 # likelihood rasch.copula2
+# @ checked ARb 2022-10-13
 IRT.likelihood.rasch.copula2 <- function( object, ... )
 {
     ll <- object$f.yi.qk
