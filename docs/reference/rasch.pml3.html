@@ -313,10 +313,10 @@ Machine Intelligence, 24</em>, 1517-1520.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Get a summary of <code>rasch.pml3</code> with <code>summary.rasch.pml</code>.</p>
-<p>For simulation of locally dependent items see <code><a href='sim.rasch.dep.html'>sim.rasch.dep</a></code>.</p>
-<p>For pairwise conditional likelihood estimation see <code><a href='rasch.pairwise.html'>rasch.pairwise</a></code>
-or <code><a href='rasch.pairwise.itemcluster.html'>rasch.pairwise.itemcluster</a></code>.</p>
-<p>For an assessment of global model fit see <code><a href='modelfit.sirt.html'>modelfit.sirt</a></code>.</p></div>
+<p>For simulation of locally dependent items see <code>sim.rasch.dep</code>.</p>
+<p>For pairwise conditional likelihood estimation see <code>rasch.pairwise</code>
+or <code>rasch.pairwise.itemcluster</code>.</p>
+<p>For an assessment of global model fit see <code>modelfit.sirt</code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'>#############################################################################</span>
@@ -426,14 +426,14 @@ or <code><a href='rasch.pairwise.itemcluster.html'>rasch.pairwise.itemcluster</a
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='kw'>length</span><span class='kw'>=</span><span class='no'>I</span>) <span class='co'># item difficulties</span>
 
 <span class='co'># simulate data from the Rasch model</span>
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
 
 <span class='co'># estimation with rasch.pml and probit link</span>
 <span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.pml3</span>( <span class='no'>dat</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># estimation with rasch.mml2 function</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span> )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span> )
 
 <span class='co'># estimate item parameters for groups with five item parameters each</span>
 <span class='no'>est.b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>( <span class='fl'>1</span>:(<span class='no'>I</span>/<span class='fl'>2</span>), <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>2</span> )
@@ -462,7 +462,7 @@ or <code><a href='rasch.pairwise.itemcluster.html'>rasch.pairwise.itemcluster</a
 <span class='no'>rho</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='fl'>.7</span>, <span class='fl'>.5</span> )
 
 <span class='co'># simulate data (under the logit link)</span>
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.rasch.dep.html'>sim.rasch.dep</a></span>( <span class='no'>theta</span>, <span class='no'>b</span>, <span class='no'>itemcluster</span>, <span class='no'>rho</span> )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.rasch.dep</span>( <span class='no'>theta</span>, <span class='no'>b</span>, <span class='no'>itemcluster</span>, <span class='no'>rho</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"I"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)), <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>)
 
 <span class='co'>#***</span>
@@ -546,7 +546,7 @@ or <code><a href='rasch.pairwise.itemcluster.html'>rasch.pairwise.itemcluster</a
 <span class='no'>rho</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='fl'>.55</span>, <span class='fl'>.35</span>, <span class='fl'>.45</span>)
 
 <span class='co'># simulate data</span>
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.rasch.dep.html'>sim.rasch.dep</a></span>( <span class='no'>theta</span>, <span class='no'>b</span>, <span class='no'>itemcluster</span>, <span class='no'>rho</span> )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.rasch.dep</span>( <span class='no'>theta</span>, <span class='no'>b</span>, <span class='no'>itemcluster</span>, <span class='no'>rho</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"I"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)), <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>)
 
 <span class='co'>#***</span>

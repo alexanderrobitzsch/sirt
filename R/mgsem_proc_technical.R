@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_technical.R
-## File Version: 0.169
+## File Version: 0.172
 
 mgsem_proc_technical <- function(technical, control, p_me, p_pen, eps_approx, suffstat,
             estimator)

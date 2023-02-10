@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.756
+%% File Version: 0.760
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -16,8 +16,7 @@ Local Structural Equation Models (LSEM)
 \description{
 Local structural equation models (LSEM) are structural equation models (SEM)
 which are evaluated for each value of a pre-defined moderator variable
-(Hildebrandt, Wilhelm, & Robitzsch, 2009; Hildebrandt, Luedtke, Robitzsch,
-Sommer & Wilhelm, 2016).
+(Hildebrandt et al., 2009, 2016).
 As in nonparametric regression models, observations near a focal point - at
 which the model is evaluated - obtain higher weights, far distant observations
 obtain lower weights. The LSEM can be specified by making use of \pkg{lavaan} syntax.
@@ -47,7 +46,7 @@ Bootstrap at the level of a cluster identifier is allowed (argument \code{cluste
 lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=NULL,
     residualize=TRUE, fit_measures=c("rmsea", "cfi", "tli", "gfi", "srmr"),
     standardized=FALSE, standardized_type="std.all", lavaan_fct="sem",
-    sufficient_statistics=FALSE, use_lavaan_survey=FALSE, pseudo_weights=0,
+    sufficient_statistics=TRUE, use_lavaan_survey=FALSE, pseudo_weights=0,
     sampling_weights=NULL, loc_linear_smooth=TRUE, est_joint=FALSE, par_invariant=NULL,
     par_linear=NULL, par_quadratic=NULL, partable_joint=NULL, pw_linear=1,
     pw_quadratic=1, pd=TRUE, est_DIF=FALSE, se=NULL, kernel="gaussian",
@@ -65,7 +64,7 @@ lsem.MGM.stepfunctions( object, moderator.grid )
 lsem_local_weights(data.mod, moderator.grid, h, sampling_weights=NULL,  bw=NULL,
      kernel="gaussian")
 
-lsem.bootstrap(object, R=100, verbose=TRUE, cluster=NULL, seed=1,
+lsem.bootstrap(object, R=100, verbose=TRUE, cluster=NULL,
      repl_design=NULL, repl_factor=NULL, use_starting_values=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -117,8 +116,10 @@ should be used.
 }
 \item{sufficient_statistics}{Logical whether sufficient statistics of weighted
 means and covariances should be used for model fitting. This option
-must be used if the data contain missing values. Note that this approach is
-only valid for missing completely at random (MCAR) data.
+can be set to \code{sufficient_statistics=FALSE}
+if the data contain missing values. Note that the option
+\code{sufficient_statistics=TRUE} is
+only valid for (approximate) missing completely at random (MCAR) data.
 The option can only be used for continuous data.}
 \item{use_lavaan_survey}{Logical indicating whether estimation should be
 conducted with \pkg{lavaan.survey} package.}
@@ -175,9 +176,6 @@ Further arguments to be passed to \code{\link[lavaan:sem]{lavaan::sem}} or
 \item{data.mod}{Observed values of the moderator}
 \item{R}{Number of bootstrap samples}
 \item{cluster}{Optional variable name for bootstrap at the level of a cluster identifier}
-\item{seed}{Used random seed in bootstrap. Note that the seed is only
-defined locally in this function, it does not affect the seed in the global
-R environment.}
 \item{repl_design}{Optional matrix containing replication weights for computation of
 standard errors. Note that sampling weights have to be already included in
 \code{repl_design}.}
@@ -428,8 +426,8 @@ data(data.lsem01)
 dat <- data.lsem01
 # induce artifical missing values
 set.seed(98)
-dat[ runif(nrow(dat)) < .5, c("v1")] <- NA
-dat[ runif(nrow(dat)) < .25, c("v2")] <- NA
+dat[ stats::runif(nrow(dat)) < .5, c("v1")] <- NA
+dat[ stats::runif(nrow(dat)) < .25, c("v2")] <- NA
 
 # specify lavaan model
 lavmodel1 <- "

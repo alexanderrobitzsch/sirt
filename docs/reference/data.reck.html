@@ -247,13 +247,13 @@ doi: <a href='https://doi.org/10.1007/978-0-387-89976-3'>10.1007/978-0-387-89976
 <span class='co'># Model 1: 3PL estimation using rasch.mml2</span>
 <span class='no'>est.c</span> <span class='kw'>&lt;-</span> <span class='no'>est.a</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='no'>I</span>
 <span class='no'>est.c</span>[ <span class='no'>guess0</span> ] <span class='kw'>&lt;-</span> <span class='fl'>0</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='no'>est.a</span>, <span class='kw'>est.c</span><span class='kw'>=</span><span class='no'>est.c</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>300</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='no'>est.a</span>, <span class='kw'>est.c</span><span class='kw'>=</span><span class='no'>est.c</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>300</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 2: 3PL estimation using smirt</span>
 <span class='no'>Q</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>1</span>,<span class='no'>I</span>,<span class='fl'>1</span>)
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='smirt.html'>smirt</a></span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>, <span class='kw'>est.c</span><span class='kw'>=</span><span class='no'>est.c</span>, <span class='kw'>increment.factor</span><span class='kw'>=</span><span class='fl'>1.01</span>)
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>, <span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Q</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>, <span class='kw'>est.c</span><span class='kw'>=</span><span class='no'>est.c</span>, <span class='kw'>increment.factor</span><span class='kw'>=</span><span class='fl'>1.01</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'>#***</span>
@@ -289,17 +289,17 @@ doi: <a href='https://doi.org/10.1007/978-0-387-89976-3'>10.1007/978-0-387-89976
 <span class='fu'><a href='https://rdrr.io/r/stats/varimax.html'>varimax</a></span>(<span class='no'>mod1a</span>$<span class='no'>B.stand</span>)
 
 <span class='co'># Model 1b: EFA in NOHARM (Promax rotation)</span>
-<span class='no'>mod1b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='R2noharm.html'>R2noharm</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>model.type</span><span class='kw'>=</span><span class='st'>"EFA"</span>,  <span class='kw'>dimensions</span><span class='kw'>=</span><span class='fl'>3</span>,
+<span class='no'>mod1b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2noharm</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>model.type</span><span class='kw'>=</span><span class='st'>"EFA"</span>,  <span class='kw'>dimensions</span><span class='kw'>=</span><span class='fl'>3</span>,
               <span class='kw'>writename</span><span class='kw'>=</span><span class='st'>"reck61__3dim_efa"</span>, <span class='kw'>noharm.path</span><span class='kw'>=</span><span class='st'>"c:/NOHARM"</span>,<span class='kw'>dec</span><span class='kw'>=</span><span class='st'>","</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1b</span>)
 
 <span class='co'># Model 1c: EFA with noharm.sirt</span>
-<span class='no'>mod1c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='noharm.sirt.html'>noharm.sirt</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='fl'>3</span>  )
+<span class='no'>mod1c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>noharm.sirt</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='fl'>3</span>  )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1c</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mod1c</span>)
 
 <span class='co'># Model 1d: EFA with 2 dimensions in noharm.sirt</span>
-<span class='no'>mod1d</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='noharm.sirt.html'>noharm.sirt</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='fl'>2</span>  )
+<span class='no'>mod1d</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>noharm.sirt</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>dimensions</span><span class='kw'>=</span><span class='fl'>2</span>  )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1d</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mod1d</span>, <span class='kw'>efa.load.min</span><span class='kw'>=</span><span class='fl'>.2</span>)   <span class='co'># plot loadings of at least .20</span>
 
@@ -315,11 +315,11 @@ doi: <a href='https://doi.org/10.1007/978-0-387-89976-3'>10.1007/978-0-387-89976
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2a</span>)
 
 <span class='co'>#-- Model 2b: smirt in sirt</span>
-<span class='no'>mod2b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='smirt.html'>smirt</a></span>( <span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>, <span class='kw'>qmcnodes</span><span class='kw'>=</span><span class='fl'>1000</span> )
+<span class='no'>mod2b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>smirt</span>( <span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='st'>"2PL"</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>, <span class='kw'>qmcnodes</span><span class='kw'>=</span><span class='fl'>1000</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2b</span>)
 
 <span class='co'>#-- Model 2c: rasch.mml2 in sirt</span>
-<span class='no'>mod2c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>30</span>,
+<span class='no'>mod2c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span>,<span class='kw'>Qmatrix</span><span class='kw'>=</span><span class='no'>Qmatrix</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>30</span>,
                 <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>200</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>5</span>,<span class='fl'>5</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>11</span>) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2c</span>)
 
@@ -346,13 +346,13 @@ doi: <a href='https://doi.org/10.1007/978-0-387-89976-3'>10.1007/978-0-387-89976
 <span class='no'>F.pattern</span>[<span class='fl'>11</span>:<span class='fl'>20</span>,<span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>F.init</span> <span class='kw'>&lt;-</span> <span class='no'>F.pattern</span>
 <span class='co'># estimate model</span>
-<span class='no'>mod2e</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='R2noharm.html'>R2noharm</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>model.type</span><span class='kw'>=</span><span class='st'>"CFA"</span>, <span class='kw'>P.pattern</span><span class='kw'>=</span><span class='no'>P.pattern</span>,
+<span class='no'>mod2e</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2noharm</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>model.type</span><span class='kw'>=</span><span class='st'>"CFA"</span>, <span class='kw'>P.pattern</span><span class='kw'>=</span><span class='no'>P.pattern</span>,
             <span class='kw'>P.init</span><span class='kw'>=</span><span class='no'>P.init</span>, <span class='kw'>F.pattern</span><span class='kw'>=</span><span class='no'>F.pattern</span>, <span class='kw'>F.init</span><span class='kw'>=</span><span class='no'>F.init</span>,
             <span class='kw'>writename</span><span class='kw'>=</span><span class='st'>"reck61__3dim_cfa"</span>, <span class='kw'>noharm.path</span><span class='kw'>=</span><span class='st'>"c:/NOHARM"</span>,<span class='kw'>dec</span><span class='kw'>=</span><span class='st'>","</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2e</span>)
 
 <span class='co'>#-- Model 2f: CFA with noharm.sirt</span>
-<span class='no'>mod2f</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='noharm.sirt.html'>noharm.sirt</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>Fval</span><span class='kw'>=</span><span class='no'>F.init</span>, <span class='kw'>Fpatt</span><span class='kw'>=</span><span class='no'>F.pattern</span>,
+<span class='no'>mod2f</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>noharm.sirt</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>Fval</span><span class='kw'>=</span><span class='no'>F.init</span>, <span class='kw'>Fpatt</span><span class='kw'>=</span><span class='no'>F.pattern</span>,
                  <span class='kw'>Pval</span><span class='kw'>=</span><span class='no'>P.init</span>, <span class='kw'>Ppatt</span><span class='kw'>=</span><span class='no'>P.pattern</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2f</span>)
 
@@ -371,14 +371,14 @@ doi: <a href='https://doi.org/10.1007/978-0-387-89976-3'>10.1007/978-0-387-89976
 <span class='co'>#- extract item cluster</span>
 <span class='no'>itemcluster</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substring</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>), <span class='fl'>1</span>, <span class='fl'>1</span> )
 <span class='co'>#- confirmatory DETECT Item cluster</span>
-<span class='no'>detectA</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='conf.detect.html'>conf.detect</a></span>( <span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>score</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
+<span class='no'>detectA</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>conf.detect</span>( <span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>score</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
   <span class='co'>##          unweighted weighted</span>
   <span class='co'>##   DETECT      0.571    0.571</span>
   <span class='co'>##   ASSI        0.523    0.523</span>
   <span class='co'>##   RATIO       0.757    0.757</span>
 
 <span class='co'>#- exploratory DETECT analysis</span>
-<span class='no'>detect_explA</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='expl.detect.html'>expl.detect</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='no'>score</span>, <span class='kw'>nclusters</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>N.est</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>dat</span>)/<span class='fl'>2</span>  )
+<span class='no'>detect_explA</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>expl.detect</span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='no'>score</span>, <span class='kw'>nclusters</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>N.est</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>dat</span>)/<span class='fl'>2</span>  )
   <span class='co'>##  Optimal Cluster Size is  5  (Maximum of DETECT Index)</span>
   <span class='co'>##     N.Cluster N.items N.est N.val         size.cluster DETECT.est ASSI.est</span>
   <span class='co'>##   1         2      50  1250  1250                31-19      0.531    0.404</span>
@@ -413,14 +413,14 @@ doi: <a href='https://doi.org/10.1007/978-0-387-89976-3'>10.1007/978-0-387-89976
 <span class='co'>#- extract item cluster</span>
 <span class='no'>itemcluster</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substring</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>), <span class='fl'>1</span>, <span class='fl'>1</span> )
 <span class='co'>#- confirmatory DETECT Item cluster</span>
-<span class='no'>detectB</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='conf.detect.html'>conf.detect</a></span>( <span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>score</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
+<span class='no'>detectB</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>conf.detect</span>( <span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>score</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
   <span class='co'>##          unweighted weighted</span>
   <span class='co'>##   DETECT      0.715    0.715</span>
   <span class='co'>##   ASSI        0.624    0.624</span>
   <span class='co'>##   RATIO       0.855    0.855</span>
 
 <span class='co'>#- exploratory DETECT analysis</span>
-<span class='no'>detect_explB</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='expl.detect.html'>expl.detect</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='no'>score</span>, <span class='kw'>nclusters</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>N.est</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>dat</span>)/<span class='fl'>2</span>  )
+<span class='no'>detect_explB</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>expl.detect</span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='no'>score</span>, <span class='kw'>nclusters</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>N.est</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>dat</span>)/<span class='fl'>2</span>  )
   <span class='co'>##   Optimal Cluster Size is  4  (Maximum of DETECT Index)</span>
   <span class='co'>##</span>
   <span class='co'>##     N.Cluster N.items N.est N.val         size.cluster DETECT.est ASSI.est</span>

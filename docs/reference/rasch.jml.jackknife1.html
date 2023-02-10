@@ -159,8 +159,8 @@ jackknife units.</p>
 nonlinear panel models. <em>Econometrica, 72</em>, 1295-1319.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>For JML estimation <code><a href='rasch.jml.html'>rasch.jml</a></code>.</p>
-<p>For analytical bias correction methods see <code><a href='rasch.jml.biascorr.html'>rasch.jml.biascorr</a></code>.</p></div>
+    <div class='dont-index'><p>For JML estimation <code>rasch.jml</code>.</p>
+<p>For analytical bias correction methods see <code>rasch.jml.biascorr</code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'>#############################################################################</span>
@@ -170,11 +170,11 @@ nonlinear panel models. <em>Econometrica, 72</em>, 1295-1319.</p>
 <span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>5000</span>    <span class='co'># number of persons</span>
 <span class='no'>I</span> <span class='kw'>&lt;-</span> <span class='fl'>11</span>      <span class='co'># number of items</span>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='kw'>length</span><span class='kw'>=</span><span class='no'>I</span> )
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span> ), <span class='no'>b</span> )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span> ), <span class='no'>b</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>( <span class='st'>"I"</span>, <span class='fl'>1</span>:<span class='no'>I</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>)
 
 <span class='co'># estimate the Rasch model with JML</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.jml.html'>rasch.jml</a></span>( <span class='no'>dat</span>  )
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.jml</span>( <span class='no'>dat</span>  )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod</span>)
 
 <span class='co'># re-estimate the Rasch model using Jackknife</span>

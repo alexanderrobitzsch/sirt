@@ -155,7 +155,7 @@ parameters of two studies) is:</p>
 <code> $ b_study2: num  0.72 1.118 0.351 -0.861 -1.593 ...</code> <br /></p></li>
 <li><p>The dataset <code>data.si04</code> is adapted from Bartolucci, Montanari
 and Pandolfi (2012; Table 4, Table 7). The data contains 4999 persons,
-79 items on 5 dimensions. See <code><a href='rasch.mirtlc.html'>rasch.mirtlc</a></code> for using the
+79 items on 5 dimensions. See <code>rasch.mirtlc</code> for using the
 data in an analysis.</p>
 <p><code>List of 3</code> <br />
 <code> $ data        : num [1:4999, 1:79] 0 1 1 0 1 1 0 0 1 1 ...</code> <br />
@@ -320,7 +320,7 @@ doi: <a href='https://doi.org/10.1002/9781119979630'>10.1002/9781119979630</a></
 <span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt</a></span>( <span class='no'>dat</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>itemtype</span><span class='kw'>=</span><span class='st'>"2PLNRM"</span>, <span class='kw'>key</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>) ),
             <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>  )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
-<span class='no'>cmod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mod1</span>)$<span class='no'>coef</span>
+<span class='no'>cmod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.coef</span>(<span class='no'>mod1</span>)$<span class='no'>coef</span>
 <span class='no'>cmod1</span>[,-<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>( <span class='no'>cmod1</span>[,-<span class='fl'>1</span>], <span class='fl'>3</span>)
 
 <span class='co'>#** normalize item parameters according Suh and Bolt (2010)</span>
@@ -356,7 +356,7 @@ doi: <a href='https://doi.org/10.1002/9781119979630'>10.1002/9781119979630</a></
 
 <span class='co'>#- estimate IRSDT model as a grade of membership model with two classes</span>
 <span class='no'>problevels</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( <span class='fl'>0.025</span>, <span class='fl'>0.975</span>, <span class='kw'>length</span><span class='kw'>=</span><span class='fl'>20</span> )
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='gom.em.html'>gom.em</a></span>( <span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>problevels</span><span class='kw'>=</span><span class='no'>problevels</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>gom.em</span>( <span class='no'>dat</span>, <span class='kw'>K</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>problevels</span><span class='kw'>=</span><span class='no'>problevels</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 }</pre>
   </div>

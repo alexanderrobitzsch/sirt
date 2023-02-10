@@ -1,5 +1,5 @@
 %% File Name: sirt-utilities.Rd
-%% File Version: 0.406
+%% File Version: 0.408
 
 \name{sirt-utilities}
 \alias{sirt-utilities}
@@ -31,7 +31,7 @@
 \alias{sirt_abs_smooth}
 \alias{sirt_permutations}
 \alias{sirt_rcpp_discrete_inverse}
-
+\alias{move_variables_df}
 
 \title{Utility Functions in \pkg{sirt}}
 
@@ -107,7 +107,9 @@ sirt_summary_print_call(CALL)
 
 # discrete inverse function
 sirt_rcpp_discrete_inverse(x0, y0, y)
-}
+
+# move variables in a data frame
+move_variables_df(x, after_var, move_vars)}
 
 \arguments{
 \item{pars}{Numeric vector}
@@ -151,6 +153,9 @@ the argument \code{opts$algorithm="NLOPT_LD_MMA"}).
 \item{CALL}{Call statement}
 \item{x0}{Vector}
 \item{y0}{Vector}
+\item{after_var}{String indicating variable name after which variable specified
+variables in \code{move_vars} should be moved}
+\item{move_vars}{Variables which should be moved after \code{after_var}}
 }
 
 %\details{

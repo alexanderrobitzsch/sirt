@@ -174,7 +174,7 @@ review: Evaluating person fit. <em>Applied Psychological
 Measurement, 25</em>, 107-135.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See <code><a href='pcm.fit.html'>pcm.fit</a></code> for person fit in the partial credit model.</p>
+    <div class='dont-index'><p>See <code>pcm.fit</code> for person fit in the partial credit model.</p>
 <p>See the <span class="pkg">irtProb</span> and <span class="pkg">PerFit</span> packages for person fit statistics
 and person response curves and functions included in other packages:
 <code><a href='https://rdrr.io/pkg/mirt/man/personfit.html'>mirt::personfit</a></code>,
@@ -190,9 +190,9 @@ and person response curves and functions included in other packages:
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.read</span>
 
 <span class='co'># estimate Rasch model</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span> )
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span> )
 <span class='co'># WLE</span>
-<span class='no'>wle1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='wle.rasch.html'>wle.rasch</a></span>( <span class='no'>dat</span>,<span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> )$<span class='no'>theta</span>
+<span class='no'>wle1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>wle.rasch</span>( <span class='no'>dat</span>,<span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> )$<span class='no'>theta</span>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> <span class='co'># item difficulty</span>
 
 <span class='co'># evaluate person fit</span>

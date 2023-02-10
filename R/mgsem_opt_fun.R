@@ -1,5 +1,5 @@
 ## File Name: mgsem_opt_fun.R
-## File Version: 0.218
+## File Version: 0.222
 
 
 mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
@@ -74,11 +74,9 @@ mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
     res <- ll
     if (output_all){
         res <- list(loglike=ll0, eval_pen_res=eval_pen_res, opt_val=ll,
-                pen_all=eval_pen_res$pen_all,
-                implied=implied_list, est_tot=est_tot_list,
-                S1=S1_list,
-                suffstat=opt_fun_args$suffstat, mean_residual=mean_residual_list,
-                G=G, estimator=estimator )
+                pen_all=eval_pen_res$pen_all, implied=implied_list, est_tot=est_tot_list,
+                S1=S1_list, suffstat=opt_fun_args$suffstat,
+                mean_residual=mean_residual_list, G=G, estimator=estimator )
     }
 
     #-- output

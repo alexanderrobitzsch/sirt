@@ -355,7 +355,7 @@ rerunning the model with different starting values
 
     <div class='dont-index'><p>See also the <code><a href='https://rdrr.io/pkg/CDM/man/gdm.html'>CDM::gdm</a></code>
 function in the <span class="pkg">CDM</span> package.</p>
-<p>For an assessment of global model fit see <code><a href='modelfit.sirt.html'>modelfit.sirt</a></code>.</p>
+<p>For an assessment of global model fit see <code>modelfit.sirt</code>.</p>
 <p>The estimation of the multidimensional latent class item response
 model for polytomous data can be conducted in the <span class="pkg">MultiLCIRT</span>
 package. Latent class analysis can be carried out with
@@ -495,7 +495,7 @@ package. Latent class analysis can be carried out with
 <span class='co'># calculate skewness of theta distribution</span>
 <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>( <span class='no'>theta</span>^<span class='fl'>3</span> ) / <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span>(<span class='no'>theta</span>)^<span class='fl'>3</span>
 <span class='co'># simulate item responses</span>
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='no'>I</span> ) )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='no'>I</span> ) )
 
 <span class='co'># normal distribution</span>
 <span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mirtlc</span>( <span class='no'>dat</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>), <span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"MLC1"</span>,
@@ -698,7 +698,7 @@ package. Latent class analysis can be carried out with
 <span class='no'>mod4</span>@<span class='kw'>nest</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>mod.pars</span>$<span class='no'>est</span>) + <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>Theta</span>)-<span class='fl'>1</span> )
 <span class='co'># extract coefficients</span>
 <span class='co'># source.all(pfsirt)</span>
-<span class='no'>cmod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mod4</span>)
+<span class='no'>cmod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.coef</span>(<span class='no'>mod4</span>)
 
 <span class='co'># estimated item difficulties</span>
 <span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"sim"</span><span class='kw'>=</span><span class='no'>b</span>, <span class='st'>"mirt"</span><span class='kw'>=</span>-<span class='no'>cmod4</span>$<span class='no'>coef</span>$<span class='no'>d</span>, <span class='st'>"sirt"</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>item</span>$<span class='no'>thresh</span> )

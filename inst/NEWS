@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.13  |  2022-11-28  |  Last: sirt 3.13-24
+VERSIONS sirt 3.13  |  2023-02-10  |  Last: sirt 3.13-35
 ------------------------------------------------------------------------
 
 NOTE  * included arguments 'pw_linear', 'pw_quadratic' that allow 
@@ -55,6 +55,11 @@ FIXED * fixed a bug in cfa_meas_inv() (thanks to @mbluemke,
         https://github.com/alexanderrobitzsch/sirt/issues/19)
 FIXED * fixed a bug in rm.sdt() caused by numeric instabilities in
         deviance computation (thanks to Yusuke Shono)
+NOTE  * removed argument 'seed' from lsem.bootstrap()
+NOTE  * changed default in lsem.estimate() to
+        'sufficient_statistics=TRUE'
+NOTE  * included utility function move_variables_df() that reorders
+        variables in a data frame
 
 
 DATA  * included/modified datasets: ---

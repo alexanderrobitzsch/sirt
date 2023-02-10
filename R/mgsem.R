@@ -1,10 +1,11 @@
 ## File Name: mgsem.R
-## File Version: 0.412
+## File Version: 0.423
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",
         a_scad=3.7, eps_approx=1e-3, comp_se=TRUE, prior_list=NULL, hessian=TRUE,
-        fixed_parms=FALSE, partable_start=NULL, technical=NULL, control=list() )
+        fixed_parms=FALSE, partable_start=NULL,
+        num_approx=FALSE, technical=NULL, control=list() )
 {
     #- pen_type: lasso, scad or none
 
@@ -46,7 +47,6 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     I <- res$I
     N <- res$N
     N_group <- res$N_group
-
     random_sd <- -9
     if (test){
         random_sd <- 1e-1

@@ -388,36 +388,36 @@ functionality for specifying item response models.</p></div>
 
 <span class='co'>#***</span>
 <span class='co'># Model 11: Rasch model</span>
-<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2conquest</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
              <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod11"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod11</span>)
 <span class='co'># read show file</span>
-<span class='no'>shw11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>read.show</span>( <span class='st'>"mod11.shw"</span> )
+<span class='no'>shw11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>read.show</a></span>( <span class='st'>"mod11.shw"</span> )
 <span class='co'># read person-item map</span>
-<span class='no'>pi11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>read.pimap</span>(<span class='kw'>showfile</span><span class='kw'>=</span><span class='st'>"mod11.shw"</span>)
+<span class='no'>pi11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>read.pimap</a></span>(<span class='kw'>showfile</span><span class='kw'>=</span><span class='st'>"mod11.shw"</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 12: Rasch model with fixed item difficulties (from Model 1)</span>
-<span class='no'>mod12</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2conquest</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod12</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
              <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>constraints</span><span class='kw'>=</span><span class='no'>mod11</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"item"</span>,<span class='st'>"itemdiff"</span>)],
              <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod12"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod12</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 13: Latent regression model with predictors female, hisei and migra</span>
-<span class='no'>mod13a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2conquest</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod13a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
              <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"female"</span>, <span class='st'>"hisei"</span>, <span class='st'>"migra"</span>) ],
              <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod13a"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod13a</span>)
 
 <span class='co'># latent regression with a subset of predictors</span>
-<span class='no'>mod13b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2conquest</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod13b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
              <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"female"</span>, <span class='st'>"hisei"</span>, <span class='st'>"migra"</span>) ],
              <span class='kw'>regression</span><span class='kw'>=</span><span class='st'>"hisei migra"</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod13b"</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 14: Differential item functioning (female)</span>
-<span class='no'>mod14</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2conquest</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod14</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
              <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='no'>dat</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"female"</span>), <span class='kw'>drop</span><span class='kw'>=</span><span class='fl'>FALSE</span>],
              <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+female+item*female"</span>,  <span class='kw'>regression</span><span class='kw'>=</span><span class='st'>""</span>,  <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod14"</span>)
 
@@ -433,12 +433,12 @@ functionality for specifying item response models.</p></div>
 
 <span class='co'>#***</span>
 <span class='co'># Model 21: Partial credit model</span>
-<span class='no'>mod21</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2conquest</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod21</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
               <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+item*step"</span>,  <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod21"</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 22: Rating scale model</span>
-<span class='no'>mod22</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2conquest</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod22</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
               <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+step"</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod22"</span>)
 
 <span class='co'>#***</span>
@@ -447,7 +447,7 @@ functionality for specifying item response models.</p></div>
 <span class='no'>qmatrix</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>( <span class='fl'>0</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>items</span>), <span class='fl'>2</span> )
 <span class='no'>qmatrix</span>[<span class='fl'>1</span>:<span class='fl'>5</span>,<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>qmatrix</span>[<span class='fl'>6</span>:<span class='fl'>9</span>,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
-<span class='no'>mod23</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2conquest</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod23</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
             <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+item*step"</span>, <span class='kw'>qmatrix</span><span class='kw'>=</span><span class='no'>qmatrix</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod23"</span>)
 
 <span class='co'>#############################################################################</span>
@@ -464,14 +464,14 @@ functionality for specifying item response models.</p></div>
 
 <span class='co'>#***</span>
 <span class='co'># Model 31: Rater model 'item+item*step+rater'</span>
-<span class='no'>mod31</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2conquest</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod31</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
               <span class='kw'>itemcodes</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>3</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+item*step+rater"</span>,
               <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='st'>"rater"</span><span class='kw'>=</span><span class='no'>raters</span>),
               <span class='kw'>regression</span><span class='kw'>=</span><span class='st'>""</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod31"</span>)
 
 <span class='co'>#***</span>
 <span class='co'># Model 32: Rater model 'item+item*step+rater+item*rater'</span>
-<span class='no'>mod32</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2conquest</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
+<span class='no'>mod32</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sirt/man/R2conquest.html'>R2conquest</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>path.conquest</span><span class='kw'>=</span><span class='no'>path.conquest</span>,
               <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"item+item*step+rater+item*rater"</span>,
               <span class='kw'>pid</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>idstud</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='st'>"rater"</span><span class='kw'>=</span><span class='no'>raters</span>),
               <span class='kw'>regression</span><span class='kw'>=</span><span class='st'>""</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"mod32"</span>)

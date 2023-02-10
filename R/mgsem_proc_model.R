@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_model.R
-## File Version: 0.279
+## File Version: 0.286
 
 mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
         prior_list=NULL, pen_type="lasso", fixed_parms=FALSE,
@@ -22,6 +22,9 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
                             type="LAM", nrow=TRUE)
     D <- mgsem_proc_model_extract_dimension(model=model, entry="est",
                             type="LAM", nrow=FALSE)
+
+    #** process case of single model
+    model <- mgsem_proc_model_single_group(model=model)
 
     #--- loop over groups
     for (gg in 0:G){

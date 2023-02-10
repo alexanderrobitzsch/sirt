@@ -1,5 +1,5 @@
 ## File Name: xxirt_hessian.R
-## File Version: 0.568
+## File Version: 0.569
 
 #--- computation of hessian matrix
 xxirt_hessian <- function( object )
@@ -92,7 +92,7 @@ xxirt_hessian <- function( object )
                 probs_items <- xxirt_compute_itemprobs( item_list=item_list,
                                     items=items, Theta=Theta, ncat=ncat,
                                     partable=partable, partable_index=partable_index )
-            }        
+            }
             p.xi.aj <- xxirt_compute_likelihood( probs_items=probs_items, dat=dat,
                              resp_index=resp_index, dat_resp_bool=dat_resp_bool )
         } else {
@@ -113,7 +113,7 @@ xxirt_hessian <- function( object )
                     itemnr2 <- 2
                 }
             }
-            
+
             item_index <- c(itemnr, itemnr2)
             if (item_index[2]==item_index[1]){
                 if (item_index[1]==1){
@@ -125,12 +125,12 @@ xxirt_hessian <- function( object )
             probs_items_temp <- xxirt_compute_itemprobs( item_list=item_list,
                                     items=items, Theta=Theta, ncat=ncat,
                                     partable=partable, partable_index=partable_index,
-                                    item_index=item_index)            
+                                    item_index=item_index)
             probs_ratio1 <- probs_items0
 
-            probs_ratio1[item_index,,] <- probs_items_temp/( probs_items0[item_index,,]+eps)            
+            probs_ratio1[item_index,,] <- probs_items_temp/( probs_items0[item_index,,]+eps)
             probs_ratio1 <- matrix( probs_ratio1, nrow=I, ncol=maxK*TP )
-            
+
             p.xi.aj <- sirt_rcpp_xxirt_hessian_reduced_probs(dat=dat,
                             dat_resp_bool=dat_resp_bool, probs_ratio=probs_ratio1,
                             TP=TP, maxK=maxK, itemnr=itemnr-1, itemnr2=itemnr2-1,

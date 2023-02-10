@@ -186,9 +186,9 @@ A list with following entries</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>For standard errors of weighted likelihood estimates estimated via jackknife
-see <code><a href='wle.rasch.jackknife.html'>wle.rasch.jackknife</a></code>.</p>
+see <code>wle.rasch.jackknife</code>.</p>
 <p>For a joint estimation of item and person parameters see the joint maximum
-likelihood estimation method in <code><a href='rasch.jml.html'>rasch.jml</a></code>.</p></div>
+likelihood estimation method in <code>rasch.jml</code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'>#############################################################################</span>
@@ -197,7 +197,7 @@ likelihood estimation method in <code><a href='rasch.jml.html'>rasch.jml</a></co
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.read</span>)
 
 <span class='co'># estimate the Rasch model</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>(<span class='no'>data.read</span>)
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>(<span class='no'>data.read</span>)
 <span class='no'>mod</span>$<span class='no'>item</span>
 
 <span class='co'># estmate WLEs</span>

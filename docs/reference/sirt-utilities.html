@@ -183,7 +183,10 @@
 <span class='fu'>sirt_summary_print_call</span>(<span class='no'>CALL</span>)
 
 <span class='co'># discrete inverse function</span>
-<span class='fu'>sirt_rcpp_discrete_inverse</span>(<span class='no'>x0</span>, <span class='no'>y0</span>, <span class='no'>y</span>)</pre>
+<span class='fu'>sirt_rcpp_discrete_inverse</span>(<span class='no'>x0</span>, <span class='no'>y0</span>, <span class='no'>y</span>)
+
+<span class='co'># move variables in a data frame</span>
+<span class='fu'>move_variables_df</span>(<span class='no'>x</span>, <span class='no'>after_var</span>, <span class='no'>move_vars</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -338,6 +341,15 @@ the argument <code>opts$algorithm="NLOPT_LD_MMA"</code>).</p></td>
     <tr>
       <th>y0</th>
       <td><p>Vector</p></td>
+    </tr>
+    <tr>
+      <th>after_var</th>
+      <td><p>String indicating variable name after which variable specified
+variables in <code>move_vars</code> should be moved</p></td>
+    </tr>
+    <tr>
+      <th>move_vars</th>
+      <td><p>Variables which should be moved after <code>after_var</code></p></td>
     </tr>
     </table>
 

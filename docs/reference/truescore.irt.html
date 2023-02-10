@@ -250,7 +250,7 @@ divided by the maximum true score</p></dd>
 
 <span class='co'>#****</span>
 <span class='co'># Model 1: estimate difficulty + guessing model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>data.read</span>, <span class='kw'>fixed.c</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>.25</span>,<span class='fl'>12</span>) )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>data.read</span>, <span class='kw'>fixed.c</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>.25</span>,<span class='fl'>12</span>) )
 <span class='no'>mod1</span>$<span class='no'>person</span> <span class='kw'>&lt;-</span> <span class='no'>mod1</span>$<span class='no'>person</span>[ <span class='fu'><a href='https://rdrr.io/r/base/order.html'>order</a></span>( <span class='no'>mod1</span>$<span class='no'>person</span>$<span class='no'>EAP</span>), ]
 <span class='co'># person parameters and standard errors</span>
 <span class='no'>theta</span> <span class='kw'>&lt;-</span> <span class='no'>mod1</span>$<span class='no'>person</span>$<span class='no'>EAP</span>
@@ -268,7 +268,7 @@ divided by the maximum true score</p></dd>
 
 <span class='co'>#****</span>
 <span class='co'># Model 2: Rasch model</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>data.read</span>  )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>data.read</span>  )
 <span class='co'># person parameters and standard errors</span>
 <span class='no'>theta</span> <span class='kw'>&lt;-</span> <span class='no'>mod2</span>$<span class='no'>person</span>$<span class='no'>EAP</span>
 <span class='no'>error</span> <span class='kw'>&lt;-</span> <span class='no'>mod2</span>$<span class='no'>person</span>$<span class='no'>SE.EAP</span>

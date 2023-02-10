@@ -1,11 +1,11 @@
 ## File Name: lsem.estimate.R
-## File Version: 1.042
+## File Version: 1.051
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
         lavmodel, type="LSEM", h=1.1, bw=NULL, residualize=TRUE,
         fit_measures=c("rmsea","cfi","tli","gfi","srmr"), standardized=FALSE,
-        standardized_type="std.all", lavaan_fct="sem", sufficient_statistics=FALSE,
+        standardized_type="std.all", lavaan_fct="sem", sufficient_statistics=TRUE,
         use_lavaan_survey=FALSE, pseudo_weights=0, sampling_weights=NULL,
         loc_linear_smooth=TRUE, est_joint=FALSE, par_invariant=NULL, par_linear=NULL,
         par_quadratic=NULL, partable_joint=NULL, pw_linear=1,
@@ -140,11 +140,12 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     obji$moderator <- obji$moderator
     obji$wgt <- obji$wgt
     obji$Neff <- obji$Neff
-    dfr <- data.frame( M=colMeans( obji0[,-1] ), SD=apply( obji0[,-1], 2, stats::sd ),
-                        min=apply( obji0[,-1], 2, min ), max=apply( obji0[,-1], 2, max ))
-    dfr0 <- data.frame(M=mean( data[,moderator], na.rm=TRUE ), SD=out$sd.moderator,
-                        min=min( data[, moderator], na.rm=TRUE ),
-                        max=max( data[, moderator], na.rm=TRUE ) )
+    Y <- obji0[,-1]
+    dfr <- data.frame( M=colMeans(Y), SD=apply( Y, 2, stats::sd ),
+                            min=apply( Y, 2, min ), max=apply( Y, 2, max ) )
+    x <- data[,moderator]
+    dfr0 <- data.frame(M=mean( x, na.rm=TRUE ), SD=out$sd.moderator,
+                        min=min( x, na.rm=TRUE ), max=max( x, na.rm=TRUE ) )
     obji <- rbind( dfr0, dfr )
     rownames(obji) <- NULL
     moderator.stat <- data.frame(variable=c("moderator","wgt", "Neff"), obji )

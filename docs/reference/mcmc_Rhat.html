@@ -145,7 +145,7 @@
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.read</span>)
 
 <span class='co'># estimate 2PNO with MCMC with 3000 iterations and 500 burn-in iterations</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mcmc.2pno.html'>mcmc.2pno</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>data.read</span>, <span class='kw'>iter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>burnin</span><span class='kw'>=</span><span class='fl'>100</span> )
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mcmc.2pno</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>data.read</span>, <span class='kw'>iter</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>burnin</span><span class='kw'>=</span><span class='fl'>100</span> )
 <span class='co'># plot MCMC chains</span>
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>( <span class='no'>mod</span>$<span class='no'>mcmcobj</span>, <span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span> )
 <span class='co'># compute Rhat statistics</span>

@@ -189,7 +189,7 @@ doi: <a href='https://doi.org/10.1007/BF02293910'>10.1007/BF02293910</a></p>
 doi: <a href='https://doi.org/10.1007/BF02294627'>10.1007/BF02294627</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='wle.rasch.html'>wle.rasch</a></code></p></div>
+    <div class='dont-index'><p><code>wle.rasch</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'>#############################################################################</span>
@@ -199,10 +199,10 @@ doi: <a href='https://doi.org/10.1007/BF02294627'>10.1007/BF02294627</a></p>
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.read</span>
 
 <span class='co'># estimation of the Rasch model</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span>, <span class='kw'>parm.conv</span><span class='kw'>=</span><span class='fl'>.001</span>)
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span>, <span class='kw'>parm.conv</span><span class='kw'>=</span><span class='fl'>.001</span>)
 
 <span class='co'># WLE estimation</span>
-<span class='no'>wle1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='wle.rasch.html'>wle.rasch</a></span>(<span class='no'>dat</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>res</span>$<span class='no'>item</span>$<span class='no'>thresh</span> )
+<span class='no'>wle1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>wle.rasch</span>(<span class='no'>dat</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>res</span>$<span class='no'>item</span>$<span class='no'>thresh</span> )
 
 <span class='co'># simple jackknife WLE estimation</span>
 <span class='no'>wle2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>wle.rasch.jackknife</span>(<span class='no'>dat</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>res</span>$<span class='no'>item</span>$<span class='no'>thresh</span> )

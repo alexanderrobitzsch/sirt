@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_mgsem_functions.cpp
-//// File Version: 0.358
+//// File Version: 0.365
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -136,18 +136,13 @@ Rcpp::NumericMatrix sirt_rcpp_mgsem_compute_cov(Rcpp::NumericMatrix LAM,
 {
     int I=LAM.nrow();
     int D=LAM.ncol();
-    double fac=1.0;
     Rcpp::NumericMatrix covmat(I,I);
     for (int ii=0; ii<I; ii++){
         for (int jj=ii; jj<I; jj++){
             covmat(ii,jj)=PSI(ii,jj);
             for (int dd=0; dd<D; dd++){
-                for (int ee=dd; ee<D; ee++){
-                    fac=1.0;
-                    if (dd<ee){
-                        fac=2.0;
-                    }
-                    covmat(ii,jj) += fac*LAM(ii,dd)*PHI(dd,ee)*LAM(jj,ee);
+                for (int ee=0; ee<D; ee++){
+                    covmat(ii,jj) += LAM(ii,dd)*PHI(dd,ee)*LAM(jj,ee);
                 } //  end ee
             }    // end dd
             if (ii<jj){

@@ -254,7 +254,7 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span class='no'>pp1b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/fscores.html'>fscores</a></span>(<span class='no'>mod1b</span>, <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"WLE"</span>)
 
 <span class='co'># extract coefficients</span>
-<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mod1b</span>)
+<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.coef</span>(<span class='no'>mod1b</span>)
 
 <span class='co'># plot item response functions</span>
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mod1b</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"trace"</span> )
@@ -272,7 +272,7 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span class='co'>#-- 1c: estimation with sirt package</span>
 
 <span class='co'># estimation with rasch.mml2</span>
-<span class='no'>mod1c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>(<span class='no'>dat</span>)
+<span class='no'>mod1c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>(<span class='no'>dat</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1c</span>)
 
 <span class='co'># person parameters (EAP)</span>
@@ -282,7 +282,7 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mod1c</span>, <span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span> )
 
 <span class='co'># model fit</span>
-<span class='no'>modf1c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='modelfit.sirt.html'>modelfit.sirt</a></span>(<span class='no'>mod1c</span>)
+<span class='no'>modf1c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>modelfit.sirt</span>(<span class='no'>mod1c</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>modf1c</span>)
 
 <span class='co'>#-----------</span>
@@ -359,7 +359,7 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span class='no'>mod2b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt</a></span>(<span class='no'>dat</span>,<span class='fl'>1</span>,<span class='kw'>itemtype</span><span class='kw'>=</span><span class='st'>"2PL"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2b</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>mod2b</span>)
-<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mod2b</span>)
+<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.coef</span>(<span class='no'>mod2b</span>)
 
 <span class='co'># model fit</span>
 <span class='no'>modf2b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/M2.html'>M2</a></span>(<span class='no'>mod2b</span>)
@@ -370,11 +370,11 @@ Modelle mit <span style="R">R</span></em>. Available at
 
 <span class='no'>I</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)
 <span class='co'># estimation</span>
-<span class='no'>mod2c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>(<span class='no'>dat</span>,<span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='no'>I</span>)
+<span class='no'>mod2c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>(<span class='no'>dat</span>,<span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='no'>I</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2c</span>)
 
 <span class='co'># model fit</span>
-<span class='no'>modf2c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='modelfit.sirt.html'>modelfit.sirt</a></span>(<span class='no'>mod2c</span>)
+<span class='no'>modf2c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>modelfit.sirt</span>(<span class='no'>mod2c</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>modf2c</span>)
 
 <span class='co'>#-----------</span>
@@ -469,7 +469,7 @@ ITEM TYPE:
 <span class='no'>mod1b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt</a></span>( <span class='no'>dat</span>, <span class='fl'>1</span>, <span class='kw'>itemtype</span><span class='kw'>=</span><span class='st'>"Rasch"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1b</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>mod1b</span>)
-<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mod1b</span>)
+<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.coef</span>(<span class='no'>mod1b</span>)
 
 <span class='co'># plot item response functions</span>
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mod1b</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"trace"</span> )
@@ -483,7 +483,7 @@ ITEM TYPE:
 <span class='co'>#-- 1c: estimation with sirt package</span>
 
 <span class='co'># estimation with rm.facets</span>
-<span class='no'>mod1c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rm.facets.html'>rm.facets</a></span>(<span class='no'>dat</span>)
+<span class='no'>mod1c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rm.facets</span>(<span class='no'>dat</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1c</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1a</span>)
 
@@ -534,13 +534,13 @@ ITEM TYPE:
 <span class='no'>mod2b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mirt</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/mirt/man/mirt.html'>mirt</a></span>( <span class='no'>dat</span>, <span class='fl'>1</span>, <span class='kw'>itemtype</span><span class='kw'>=</span><span class='st'>"gpcm"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2b</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>mod2b</span>)
-<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>(<span class='no'>mod2b</span>)
+<span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.coef</span>(<span class='no'>mod2b</span>)
 
 <span class='co'>#-----------</span>
 <span class='co'>#-- 2c: estimation with sirt package</span>
 
 <span class='co'># estimation with rm.facets</span>
-<span class='no'>mod2c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rm.facets.html'>rm.facets</a></span>(<span class='no'>dat</span>, <span class='kw'>est.a.item</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>mod2c</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rm.facets</span>(<span class='no'>dat</span>, <span class='kw'>est.a.item</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2c</span>)
 
 <span class='co'>#-----------</span>

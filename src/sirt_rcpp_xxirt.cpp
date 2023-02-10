@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_xxirt.cpp
-//// File Version: 0.337
+//// File Version: 0.338
 
 
 
@@ -86,7 +86,7 @@ Rcpp::NumericMatrix sirt_rcpp_xxirt_hessian_reduced_probs(
     Rcpp::NumericMatrix t1(N, TP);
 
     int ii=itemnr;
-    
+
     for (int nn=0;nn<N;nn++){
         if (dat_resp_bool(nn,itemnr)){
             for (int tt=0; tt<TP; tt++){
@@ -94,7 +94,7 @@ Rcpp::NumericMatrix sirt_rcpp_xxirt_hessian_reduced_probs(
             }
         } else {
             for (int tt=0; tt<TP; tt++){
-                t1(nn,tt) = 1;            
+                t1(nn,tt) = 1;
             }
         }
     }
@@ -103,7 +103,7 @@ Rcpp::NumericMatrix sirt_rcpp_xxirt_hessian_reduced_probs(
         for (int nn=0;nn<N;nn++){
             if (dat_resp_bool(nn,itemnr2)){
                 for (int tt=0; tt<TP; tt++){
-                    t1(nn,tt) = t1(nn,tt) * probs_ratio(ii, dat(nn,ii) + tt*maxK );                        
+                    t1(nn,tt) = t1(nn,tt) * probs_ratio(ii, dat(nn,ii) + tt*maxK );
                 }
             }
         }
@@ -113,7 +113,7 @@ Rcpp::NumericMatrix sirt_rcpp_xxirt_hessian_reduced_probs(
         for (int tt=0; tt<TP; tt++){
             t1(nn,tt) = t1(nn,tt)*p_xi_aj(nn,tt);
         }
-    }    
+    }
 
     //---- OUTPUT
     return t1;

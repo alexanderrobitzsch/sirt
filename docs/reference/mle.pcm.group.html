@@ -239,7 +239,7 @@ partial credit model. <em>Applied Psychological Measurement,
 
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.read</span>)
 <span class='co'># estimate Rasch model</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>data.read</span> )
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>data.read</span> )
 <span class='no'>score</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>rowSums</a></span>( <span class='no'>data.read</span> )
 <span class='no'>data.read</span> <span class='kw'>&lt;-</span> <span class='no'>data.read</span>[ <span class='fu'><a href='https://rdrr.io/r/base/order.html'>order</a></span>(<span class='no'>score</span>), ]
 <span class='no'>score</span> <span class='kw'>&lt;-</span> <span class='no'>score</span>[ <span class='fu'><a href='https://rdrr.io/r/base/order.html'>order</a></span>(<span class='no'>score</span>) ]

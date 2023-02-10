@@ -1,5 +1,5 @@
 ## File Name: lsem_parameter_summary.R
-## File Version: 0.22
+## File Version: 0.232
 
 
 ## lsem parameter summary
@@ -18,6 +18,7 @@ lsem_parameter_summary <- function( parameters, moderator.density, verbose ){
         x <- par.pp[,"est"]
         pars1$M <- stats::weighted.mean( x, mod.density[,2] )
         pars1$SD <- lsem_wtdSD( x, mod.density[,2] )
+        # pars1$Var <- pars1$SD^2
         pars1$MAD <- sum( mod.density[,2] * abs( x - pars1$M ) )
         pars1$Min <- min(x)
         pars1$Max <- max(x)
