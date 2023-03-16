@@ -1,6 +1,5 @@
 ## File Name: mcmc_WaldTest.R
 ## File Version: 0.25
-## File Last Change: 2019-04-26
 
 
 #** Wald Test for a set of hypotheses

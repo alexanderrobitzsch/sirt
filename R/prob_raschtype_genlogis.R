@@ -1,6 +1,5 @@
 ## File Name: prob_raschtype_genlogis.R
 ## File Version: 0.13
-## File Last Change: 2019-09-12
 
 
 # probability raschtype models

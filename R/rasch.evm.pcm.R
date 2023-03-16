@@ -1,6 +1,5 @@
 ## File Name: rasch.evm.pcm.R
 ## File Version: 1.59
-## File Last Change: 2018-12-30
 
 
 # estimation of the partial credit model employing the eigenvector method

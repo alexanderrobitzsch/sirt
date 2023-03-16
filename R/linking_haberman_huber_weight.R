@@ -1,6 +1,5 @@
 ## File Name: linking_haberman_huber_weight.R
 ## File Version: 0.04
-## File Last Change: 2019-01-14
 
 linking_haberman_huber_weight <- function(x, cutoff)
 {

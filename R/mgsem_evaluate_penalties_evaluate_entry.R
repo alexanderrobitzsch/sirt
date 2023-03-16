@@ -1,6 +1,5 @@
 ## File Name: mgsem_evaluate_penalties_evaluate_entry.R
 ## File Version: 0.188
-## File Last Change: 2022-05-16
 
 
 mgsem_evaluate_penalties_evaluate_entry <- function(x, res, dd, index, partable,

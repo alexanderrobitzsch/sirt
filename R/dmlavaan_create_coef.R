@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_create_coef.R
 ## File Version: 0.01
-## File Last Change: 2023-03-10
 
 dmlavaan_create_coef <- function(partable)
 {

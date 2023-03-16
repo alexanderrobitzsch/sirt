@@ -1,6 +1,5 @@
 ## File Name: mgsem_partable2model.R
 ## File Version: 0.14
-## File Last Change: 2023-02-06
 
 
 mgsem_partable2model <- function(partable, model, index=FALSE)

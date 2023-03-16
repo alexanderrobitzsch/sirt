@@ -1,6 +1,5 @@
 ## File Name: xxirt_classprobs_lca_init_par.R
 ## File Version: 0.091
-## File Last Change: 2023-03-08
 
 
 xxirt_classprobs_lca_init_par <- function(K, G, random_sd=0, par_Theta_init=NULL)

@@ -1,6 +1,5 @@
 ## File Name: gom_em_loglike_opt_fun.R
 ## File Version: 0.271
-## File Last Change: 2022-05-16
 
 
 

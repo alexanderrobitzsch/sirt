@@ -1,6 +1,5 @@
 ## File Name: mgsem_evaluate_penalties_evaluate_entry_fun_eval.R
 ## File Version: 0.10
-## File Last Change: 2022-02-25
 
 
 mgsem_evaluate_penalties_evaluate_entry_fun_eval <- function(x, fun_eval,

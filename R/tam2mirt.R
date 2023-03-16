@@ -1,6 +1,5 @@
 ## File Name: tam2mirt.R
 ## File Version: 0.292
-## File Last Change: 2023-03-08
 
 
 # convert a fitted tam object into a mirt object

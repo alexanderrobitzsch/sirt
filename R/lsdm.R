@@ -1,6 +1,5 @@
 ## File Name: lsdm.R
 ## File Version: 1.387
-## File Last Change: 2023-03-08
 
 
 # LSDM - Least Squares Distance Method

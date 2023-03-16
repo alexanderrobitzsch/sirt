@@ -1,6 +1,5 @@
 ## File Name: rasch_mml2_mstep_missing1.R
 ## File Version: 0.159
-## File Last Change: 2022-10-18
 
 
 #*** M-step for missing data model

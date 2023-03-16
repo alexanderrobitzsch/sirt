@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_est_model_bread_matrix_score_derivatives.R
 ## File Version: 0.112
-## File Last Change: 2023-03-11
 
 
 dmlavaan_est_model_bread_matrix_score_derivatives <- function(fun, args,

@@ -1,6 +1,5 @@
 ## File Name: invariance_alignment_constraints_summary_print_item_summary.R
 ## File Version: 0.08
-## File Last Change: 2019-03-06
 
 invariance_alignment_constraints_summary_print_item_summary <- function(x, digits)
 {

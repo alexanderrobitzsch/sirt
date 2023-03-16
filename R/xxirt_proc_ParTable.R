@@ -1,6 +1,5 @@
 ## File Name: xxirt_proc_ParTable.R
 ## File Version: 0.457
-## File Last Change: 2023-03-08
 
 #-- process parameter table
 xxirt_proc_ParTable <- function( itemtype, partable, items )

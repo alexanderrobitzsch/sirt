@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_mstep_type_function_gradient.R
 ## File Version: 0.11
-## File Last Change: 2019-07-21
 
 
 

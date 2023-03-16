@@ -1,6 +1,5 @@
 ## File Name: rm_numdiff_index.R
 ## File Version: 0.24
-## File Last Change: 2019-05-03
 
 
 ####################################################################

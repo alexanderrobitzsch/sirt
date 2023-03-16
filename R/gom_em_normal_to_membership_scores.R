@@ -1,6 +1,5 @@
 ## File Name: gom_em_normal_to_membership_scores.R
 ## File Version: 0.03
-## File Last Change: 2019-05-11
 
 
 gom_em_normal_to_membership_scores <- function(theta_grid, K, TP)

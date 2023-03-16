@@ -1,6 +1,5 @@
 ## File Name: lsdm_irf_distance_mad.R
 ## File Version: 0.04
-## File Last Change: 2019-01-01
 
 lsdm_irf_distance_mad <- function(data, data_fitted, wgt_theta, use_abs=TRUE)
 {

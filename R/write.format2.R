@@ -1,6 +1,5 @@
 ## File Name: write.format2.R
 ## File Version: 1.12
-## File Last Change: 2019-02-25
 
 
 

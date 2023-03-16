@@ -1,6 +1,5 @@
 ## File Name: L1_polish.R
 ## File Version: 0.26
-## File Last Change: 2019-01-14
 
 
 

@@ -1,6 +1,5 @@
 ## File Name: dm_m_est.R
 ## File Version: 0.106
-## File Last Change: 2023-03-11
 
 dm_m_est <- function(mod1, mod2)
 {

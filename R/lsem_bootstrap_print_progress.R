@@ -1,6 +1,5 @@
 ## File Name: lsem_bootstrap_print_progress.R
 ## File Version: 0.091
-## File Last Change: 2023-03-15
 
 lsem_bootstrap_print_progress <- function(rr, verbose, R)
 {

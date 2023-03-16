@@ -1,6 +1,5 @@
 ## File Name: rasch.mml.ramsay.R
 ## File Version: 2.17
-## File Last Change: 2019-05-03
 
 
 ######################################################

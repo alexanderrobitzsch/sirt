@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_est_model.R
 ## File Version: 0.293
-## File Last Change: 2023-03-11
 
 dmlavaan_est_model <- function(fun, args, h=1e-5, use_observed_info_lavaan=FALSE,
             method="sandwich")

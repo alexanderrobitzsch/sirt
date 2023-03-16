@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_calc_gradient_likelihood_item_llgrad.R
 ## File Version: 0.06
-## File Last Change: 2018-12-30
 
 rm_sdt_calc_gradient_likelihood_item_llgrad <- function(logprob_D1, nik.item, diffindex, K)
 {

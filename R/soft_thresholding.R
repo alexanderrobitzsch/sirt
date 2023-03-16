@@ -1,6 +1,5 @@
 ## File Name: soft_thresholding.R
 ## File Version: 0.07
-## File Last Change: 2018-12-30
 
 
 soft_thresholding <- function( x, lambda )

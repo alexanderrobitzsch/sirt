@@ -1,6 +1,5 @@
 ## File Name: marginal.truescore.reliability.R
 ## File Version: 0.171
-## File Last Change: 2023-03-15
 
 
 marginal.truescore.reliability <- function(  b, a=1+0*b, c=0*b, d=1+0*b,

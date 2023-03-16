@@ -1,6 +1,5 @@
 ## File Name: xxirt_irf_lca_init_par.R
 ## File Version: 0.04
-## File Last Change: 2023-03-08
 
 
 xxirt_irf_lca_init_par <- function(K, ncat, random_sd=0, rg_val=1.5)

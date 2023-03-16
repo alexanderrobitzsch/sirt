@@ -1,6 +1,5 @@
 ## File Name: prob.guttman.R
 ## File Version: 1.17
-## File Last Change: 2018-12-30
 
 
 

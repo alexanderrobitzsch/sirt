@@ -1,6 +1,5 @@
 ## File Name: m_est.R
 ## File Version: 0.150
-## File Last Change: 2023-03-15
 
 m_est <- function(data, par, optfun_case=NULL, gradfun_case=NULL,
                 bread=TRUE, optimizer="optim",

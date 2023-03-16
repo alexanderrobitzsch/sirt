@@ -1,6 +1,5 @@
 ## File Name: expl.detect.R
 ## File Version: 1.313
-## File Last Change: 2023-03-10
 
 
 #**** Exploratory DETECT analysis

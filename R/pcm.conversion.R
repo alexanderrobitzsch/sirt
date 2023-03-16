@@ -1,6 +1,5 @@
 ## File Name: pcm.conversion.R
 ## File Version: 0.12
-## File Last Change: 2018-12-30
 
 
 #*** conversion of the partial credit parametrization

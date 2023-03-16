@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_fill_init_partables.R
 ## File Version: 0.04
-## File Last Change: 2018-12-30
 
 
 rm_sdt_fill_init_partables <- function(partable_item, partable_rater,

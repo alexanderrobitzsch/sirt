@@ -1,6 +1,5 @@
 ## File Name: rm_proc_fixed_values_reference_rater.R
 ## File Version: 0.09
-## File Last Change: 2018-12-30
 
 rm_proc_fixed_values_reference_rater <- function( rater.index1, b.rater.fixed, a.rater.fixed, rater_item_int,
         reference_rater, est.b.rater, est.a.rater )

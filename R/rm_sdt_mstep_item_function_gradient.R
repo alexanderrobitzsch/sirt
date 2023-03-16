@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_mstep_item_function_gradient.R
 ## File Version: 0.16
-## File Last Change: 2019-07-21
 
 
 rm_sdt_mstep_item_function_gradient <- function(x, par_index, partable_item, Qmatrix, theta.k,

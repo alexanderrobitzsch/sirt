@@ -1,6 +1,5 @@
 ## File Name: truescore.irt.R
 ## File Version: 0.24
-## File Last Change: 2019-02-25
 
 
 #--- true score item response function

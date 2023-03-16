@@ -1,6 +1,5 @@
 ## File Name: noharm_sirt_optim_gradient_R.R
 ## File Version: 0.03
-## File Last Change: 2019-01-07
 
 noharm_sirt_optim_gradient_R <- function(parm_table_free, Fmat, Pmat, Psimat, FP,
     npar, NH, I, gamma_val, pm, wgtm, b0.jk, b1.jk, b2.jk, b3.jk)

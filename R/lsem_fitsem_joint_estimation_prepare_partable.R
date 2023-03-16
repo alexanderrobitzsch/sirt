@@ -1,6 +1,5 @@
 ## File Name: lsem_fitsem_joint_estimation_prepare_partable.R
 ## File Version: 0.318
-## File Last Change: 2023-03-11
 
 lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
     par_invariant=NULL, par_linear=NULL, par_quadratic=NULL, pw_linear=1,

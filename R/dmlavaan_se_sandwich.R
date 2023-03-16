@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_se_sandwich.R
 ## File Version: 0.113
-## File Last Change: 2023-03-11
 
 dmlavaan_se_sandwich <- function(mod1, mod2, partable, label_parnames="parnames0",
         label_NPU="NPU", label_B="B", is_dmlavaan=TRUE)

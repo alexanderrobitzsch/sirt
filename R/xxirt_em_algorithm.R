@@ -1,6 +1,5 @@
 ## File Name: xxirt_em_algorithm.R
 ## File Version: 0.042
-## File Last Change: 2023-03-08
 
 xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_list,
             items, Theta, ncat, partable, partable_index, dat, resp_index,

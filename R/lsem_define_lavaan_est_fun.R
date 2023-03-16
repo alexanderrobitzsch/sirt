@@ -1,6 +1,5 @@
 ## File Name: lsem_define_lavaan_est_fun.R
 ## File Version: 0.101
-## File Last Change: 2023-03-15
 
 lsem_define_lavaan_est_fun <- function(lavaan_fct)
 {

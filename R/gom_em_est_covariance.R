@@ -1,6 +1,5 @@
 ## File Name: gom_em_est_covariance.R
 ## File Version: 0.04
-## File Last Change: 2023-03-15
 
 
 #-- GOM: estimation of covariance

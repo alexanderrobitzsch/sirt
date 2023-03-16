@@ -1,6 +1,5 @@
 ## File Name: xxirt_hessian.R
 ## File Version: 0.572
-## File Last Change: 2023-03-08
 
 #--- computation of hessian matrix
 xxirt_hessian <- function( object )

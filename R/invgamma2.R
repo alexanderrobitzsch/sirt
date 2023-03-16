@@ -1,6 +1,5 @@
 ## File Name: invgamma2.R
 ## File Version: 0.201
-## File Last Change: 2023-03-09
 
 
 

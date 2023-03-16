@@ -1,6 +1,5 @@
 ## File Name: smirt.R
 ## File Version: 7.302
-## File Last Change: 2021-03-28
 
 
 #--- smirt model

@@ -1,6 +1,5 @@
 ## File Name: mirt.wrapper.itemplot.R
 ## File Version: 0.08
-## File Last Change: 2019-04-25
 
 
 

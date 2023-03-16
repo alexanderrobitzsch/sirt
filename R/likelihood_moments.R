@@ -1,6 +1,5 @@
 ## File Name: likelihood_moments.R
 ## File Version: 0.09
-## File Last Change: 2018-12-30
 
 ##############################################################
 likelihood_moments <- function( likelihood, theta=NULL ){

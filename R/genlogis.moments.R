@@ -1,6 +1,5 @@
 ## File Name: genlogis.moments.R
 ## File Version: 0.02
-## File Last Change: 2023-03-08
 
 
 #-- moments of generalized logistic distribution

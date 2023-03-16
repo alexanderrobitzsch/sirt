@@ -1,6 +1,5 @@
 ## File Name: lsem_bootstrap_draw_bootstrap_sample.R
 ## File Version: 0.068
-## File Last Change: 2023-03-15
 
 lsem_bootstrap_draw_bootstrap_sample <- function(data, sampling_weights,
     lsem_args, cluster=NULL, repl_design=NULL, rr=NULL)

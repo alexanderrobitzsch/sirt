@@ -1,6 +1,5 @@
 ## File Name: linking.haberman.lq.R
 ## File Version: 0.198
-## File Last Change: 2021-09-22
 
 linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     use_nu=FALSE, est_pow=FALSE, lower_pow=.1, upper_pow=3)

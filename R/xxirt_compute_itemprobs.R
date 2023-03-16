@@ -1,6 +1,5 @@
 ## File Name: xxirt_compute_itemprobs.R
 ## File Version: 0.201
-## File Last Change: 2023-03-08
 
 
 # compute item probabilities

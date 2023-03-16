@@ -1,6 +1,5 @@
 ## File Name: mgsem.R
 ## File Version: 0.423
-## File Last Change: 2023-02-06
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",

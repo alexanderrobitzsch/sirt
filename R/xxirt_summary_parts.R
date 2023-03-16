@@ -1,6 +1,5 @@
 ## File Name: xxirt_summary_parts.R
 ## File Version: 0.05
-## File Last Change: 2023-03-08
 
 xxirt_summary_parts <- function(object, digits, len_disp=66)
 {

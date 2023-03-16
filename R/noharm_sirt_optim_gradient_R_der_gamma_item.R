@@ -1,6 +1,5 @@
 ## File Name: noharm_sirt_optim_gradient_R_der_gamma_item.R
 ## File Version: 0.05
-## File Last Change: 2019-01-07
 
 
 noharm_sirt_optim_gradient_R_der_gamma_item <- function(parm_table_free, Fmat,

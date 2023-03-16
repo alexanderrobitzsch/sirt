@@ -1,6 +1,5 @@
 ## File Name: L0_polish_one_iteration.R
 ## File Version: 0.354
-## File Last Change: 2019-01-14
 
 
 L0_polish_one_iteration <- function(x, tol, eps=0.01, maxiter=30, type=1)

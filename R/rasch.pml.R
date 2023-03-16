@@ -1,6 +1,5 @@
 ## File Name: rasch.pml.R
 ## File Version: 2.24
-## File Last Change: 2018-12-30
 
 
 #####################################################

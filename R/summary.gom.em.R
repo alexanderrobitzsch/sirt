@@ -1,6 +1,5 @@
 ## File Name: summary.gom.em.R
 ## File Version: 0.177
-## File Last Change: 2019-05-17
 
 
 #--- summary for gom object

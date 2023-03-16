@@ -1,6 +1,5 @@
 ## File Name: gom_em_est_b.R
 ## File Version: 0.06
-## File Last Change: 2019-05-12
 
 
 

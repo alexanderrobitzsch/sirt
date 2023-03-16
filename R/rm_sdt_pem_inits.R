@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_pem_inits.R
 ## File Version: 0.06
-## File Last Change: 2018-12-30
 
 rm_sdt_pem_inits <- function( tau.item, a.item, c.rater, d.rater, est.a.item, a.item.fixed, skillspace, PEM )
 {

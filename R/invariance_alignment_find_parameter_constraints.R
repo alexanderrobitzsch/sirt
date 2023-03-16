@@ -1,6 +1,5 @@
 ## File Name: invariance_alignment_find_parameter_constraints.R
 ## File Version: 0.416
-## File Last Change: 2023-02-19
 
 invariance_alignment_find_parameter_constraints <- function(parm,
     parm_tol, miss_items, wgt=NULL, maxiter=10, conv=1E-4)

@@ -1,6 +1,5 @@
 ## File Name: lsem_fitsem_raw_data_lavaan.R
 ## File Version: 0.136
-## File Last Change: 2022-07-27
 
 lsem_fitsem_raw_data_lavaan <- function(dat, pseudo_weights, survey.fit,
         lavaan_est_fun, se, ...)

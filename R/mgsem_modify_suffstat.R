@@ -1,6 +1,5 @@
 ## File Name: mgsem_modify_suffstat.R
 ## File Version: 0.01
-## File Last Change: 2022-04-19
 
 
 mgsem_modify_suffstat <- function(model, group, entry, value)

@@ -1,6 +1,5 @@
 ## File Name: print.xxirt.R
 ## File Version: 0.11
-## File Last Change: 2018-12-30
 
 
 print.xxirt <- function(x, ... )

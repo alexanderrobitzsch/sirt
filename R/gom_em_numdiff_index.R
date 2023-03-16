@@ -1,6 +1,5 @@
 ## File Name: gom_em_numdiff_index.R
 ## File Version: 0.15
-## File Last Change: 2019-05-18
 
 
 #--- general function for numerical differentiation

@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_print_progress.R
 ## File Version: 0.05
-## File Last Change: 2018-12-30
 
 rm_sdt_print_progress <- function( dev, dev0, c.rater, c.rater0, d.rater, d.rater0,
     tau.item, tau.item0, a.item, a.item0, mu, sigma, iter, digits_parm=6, digits_trait=3, digits_deviance=4 )

@@ -1,6 +1,5 @@
 ## File Name: noharm_sirt_optim_function_R.R
 ## File Version: 0.02
-## File Last Change: 2019-01-07
 
 
 noharm_sirt_optim_function_R <- function(gamma_val, delta, I, wgtm, pm,

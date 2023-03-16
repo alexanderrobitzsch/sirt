@@ -1,6 +1,5 @@
 ## File Name: linking.haberman.R
 ## File Version: 2.652
-## File Last Change: 2022-07-29
 
 
 #**** Linking Haberman: ETS Research Report 2009

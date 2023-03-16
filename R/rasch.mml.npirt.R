@@ -1,6 +1,5 @@
 ## File Name: rasch.mml.npirt.R
 ## File Version: 2.13
-## File Last Change: 2018-12-30
 
 
 

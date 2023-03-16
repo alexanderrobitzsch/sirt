@@ -1,6 +1,5 @@
 ## File Name: sirt_print_helper.R
 ## File Version: 2.145
-## File Last Change: 2019-01-04
 
 
 # This is an auxiliary function which helps for printing some progress

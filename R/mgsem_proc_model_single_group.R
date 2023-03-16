@@ -1,6 +1,5 @@
 ## File Name: mgsem_proc_model_single_group.R
 ## File Version: 0.07
-## File Last Change: 2023-02-06
 
 mgsem_proc_model_single_group <- function(model)
 {

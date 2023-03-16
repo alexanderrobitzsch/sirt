@@ -1,6 +1,5 @@
 ## File Name: mgsem_proc_model_extract_dimension.R
 ## File Version: 0.09
-## File Last Change: 2022-02-25
 
 
 mgsem_proc_model_extract_dimension <- function(model, entry="est", type, nrow=TRUE)

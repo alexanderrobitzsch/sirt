@@ -1,6 +1,5 @@
 ## File Name: linking.robust.R
 ## File Version: 1.25
-## File Last Change: 2022-07-28
 
 
 #*** Robust linking

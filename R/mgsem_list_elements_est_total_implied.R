@@ -1,6 +1,5 @@
 ## File Name: mgsem_list_elements_est_total_implied.R
 ## File Version: 0.02
-## File Last Change: 2022-02-25
 
 mgsem_list_elements_est_total_implied <- function(model, is_B)
 {

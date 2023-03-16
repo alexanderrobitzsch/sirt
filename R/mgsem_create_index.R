@@ -1,6 +1,5 @@
 ## File Name: mgsem_create_index.R
 ## File Version: 0.03
-## File Last Change: 2022-02-25
 
 
 mgsem_create_index <- function(x, all=TRUE, start=0, symm=FALSE, onlydiag=FALSE)

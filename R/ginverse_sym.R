@@ -1,6 +1,5 @@
 ## File Name: ginverse_sym.R
 ## File Version: 0.08
-## File Last Change: 2019-04-30
 
 
 #--- code from Eugene Demidenko: book mixed effects models

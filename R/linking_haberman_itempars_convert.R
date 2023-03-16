@@ -1,6 +1,5 @@
 ## File Name: linking_haberman_itempars_convert.R
 ## File Version: 0.092
-## File Last Change: 2020-03-31
 
 
 linking_haberman_itempars_convert <- function(itempars=NULL, lambda=NULL,

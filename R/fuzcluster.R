@@ -1,6 +1,5 @@
 ## File Name: fuzcluster.R
 ## File Version: 0.163
-## File Last Change: 2021-03-28
 
 
 #*** Clustering for continuous fuzzy data

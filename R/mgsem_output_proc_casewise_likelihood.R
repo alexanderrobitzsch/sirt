@@ -1,6 +1,5 @@
 ## File Name: mgsem_output_proc_casewise_likelihood.R
 ## File Version: 0.06
-## File Last Change: 2022-02-25
 
 
 mgsem_output_proc_casewise_likelihood <- function(data_proc, implied, estimator="ML")

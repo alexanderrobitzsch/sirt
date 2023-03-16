@@ -1,6 +1,5 @@
 ## File Name: zzz.R
 ## File Version: 1.241
-## File Last Change: 2023-03-08
 
 
 #  zzz.R

@@ -1,6 +1,5 @@
 ## File Name: penalty_D1_scad.R
 ## File Version: 0.05
-## File Last Change: 2022-01-26
 
 
 penalty_D1_scad <- function(x, lambda, eps, a=3.7)

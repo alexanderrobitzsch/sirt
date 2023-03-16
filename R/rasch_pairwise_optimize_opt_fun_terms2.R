@@ -1,6 +1,5 @@
 ## File Name: rasch_pairwise_optimize_opt_fun_terms2.R
 ## File Version: 0.12
-## File Last Change: 2021-04-22
 
 rasch_pairwise_optimize_opt_fun_terms2 <- function(eps_horiz, eps_vert, y.ij, y.ji,
         estimator="MINCHI")

@@ -1,6 +1,5 @@
 ## File Name: IRT.irfprob.mirt.R
 ## File Version: 0.27
-## File Last Change: 2019-10-29
 
 
 #--- irfprob singleGroup

@@ -1,6 +1,5 @@
 ## File Name: ccov_np_score_density.R
 ## File Version: 0.07
-## File Last Change: 2020-02-17
 
 ccov_np_score_density <- function(score, thetagrid, smooth=TRUE)
 {

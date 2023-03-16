@@ -1,6 +1,5 @@
 ## File Name: xxirt_ic.R
 ## File Version: 0.191
-## File Last Change: 2023-03-08
 
 
 #-- information criteria xxirt

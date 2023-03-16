@@ -1,6 +1,5 @@
 ## File Name: rm_ic_criteria.R
 ## File Version: 0.05
-## File Last Change: 2018-12-30
 
 rm_ic_criteria <- function(ic)
 {

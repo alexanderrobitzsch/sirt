@@ -1,6 +1,5 @@
 ## File Name: normal2.cw.R
 ## File Version: 0.16
-## File Last Change: 2019-05-03
 
 
 #** approximation of the bivariate normal integral

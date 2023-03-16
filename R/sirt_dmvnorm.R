@@ -1,6 +1,5 @@
 ## File Name: sirt_dmvnorm.R
 ## File Version: 0.114
-## File Last Change: 2023-03-08
 
 sirt_dmvnorm <- function(x, mean=NULL, sigma=NULL, ... )
 {

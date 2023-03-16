@@ -1,6 +1,5 @@
 ## File Name: Rhat_sirt.R
 ## File Version: 1.12
-## File Last Change: 2022-05-16
 
 
 ####################################

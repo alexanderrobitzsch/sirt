@@ -1,6 +1,5 @@
 ## File Name: mcmc_rename_undo_parameter_names.R
 ## File Version: 0.05
-## File Last Change: 2018-12-30
 
 mcmc_rename_undo_parameter_names <- function( vec, orig, trans)
 {

@@ -1,6 +1,5 @@
 ## File Name: invariance_alignment_cfa_config.R
 ## File Version: 0.253
-## File Last Change: 2023-03-08
 
 
 invariance_alignment_cfa_config <- function(dat, group, weights=NULL,

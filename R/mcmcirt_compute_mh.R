@@ -1,6 +1,5 @@
 ## File Name: mcmcirt_compute_mh.R
 ## File Version: 0.04
-## File Last Change: 2022-09-15
 
 
 mcmcirt_compute_mh <- function(ll_old, ll_new)

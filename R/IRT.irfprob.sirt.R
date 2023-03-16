@@ -1,6 +1,5 @@
 ## File Name: IRT.irfprob.sirt.R
 ## File Version: 0.16
-## File Last Change: 2018-12-30
 
 ########################################################
 # convert theta.k into a matrix

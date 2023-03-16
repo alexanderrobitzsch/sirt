@@ -1,6 +1,5 @@
 ## File Name: rasch.pml3_aux.R
 ## File Version: 5.12
-## File Last Change: 2018-12-30
 
 
 

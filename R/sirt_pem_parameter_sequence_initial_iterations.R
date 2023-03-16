@@ -1,6 +1,5 @@
 ## File Name: sirt_pem_parameter_sequence_initial_iterations.R
 ## File Version: 0.07
-## File Last Change: 2023-03-08
 
 sirt_pem_parameter_sequence_initial_iterations <- function( pem_parm,
             pem_parameter_sequence, iter )

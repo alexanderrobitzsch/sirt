@@ -1,6 +1,5 @@
 ## File Name: rasch_pairwise_compute_eps.R
 ## File Version: 0.02
-## File Last Change: 2021-03-28
 
 
 rasch_pairwise_compute_eps <- function(x)

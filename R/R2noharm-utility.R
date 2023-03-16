@@ -1,6 +1,5 @@
 ## File Name: R2noharm-utility.R
 ## File Version: 1.14
-## File Last Change: 2018-12-30
 
 
 

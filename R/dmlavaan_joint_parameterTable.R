@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_joint_parameterTable.R
 ## File Version: 0.06
-## File Last Change: 2023-03-11
 
 dmlavaan_joint_parameterTable <- function(mod1, mod2, label_parnames="parnames0")
 {

@@ -1,6 +1,5 @@
 ## File Name: L0_polish.R
 ## File Version: 0.12
-## File Last Change: 2020-04-26
 
 
 L0_polish <- function(x, tol, conv=0.01, maxiter=30, type=1, verbose=TRUE)

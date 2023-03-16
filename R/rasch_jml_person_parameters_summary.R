@@ -1,6 +1,5 @@
 ## File Name: rasch_jml_person_parameters_summary.R
 ## File Version: 0.04
-## File Last Change: 2018-12-30
 
 rasch_jml_person_parameters_summary <- function(x)
 {

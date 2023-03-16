@@ -1,6 +1,5 @@
 ## File Name: btm_fit_statistics.R
 ## File Version: 0.209
-## File Last Change: 2022-04-17
 
 
 #**** item outfit and infit statistic

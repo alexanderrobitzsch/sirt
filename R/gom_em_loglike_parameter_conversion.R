@@ -1,6 +1,5 @@
 ## File Name: gom_em_loglike_parameter_conversion.R
 ## File Version: 0.192
-## File Last Change: 2022-05-16
 
 
 gom_em_loglike_parameter_conversion <- function(x, ind_lambda, ind_pi, I, K,

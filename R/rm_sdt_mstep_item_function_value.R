@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_mstep_item_function_value.R
 ## File Version: 0.06
-## File Last Change: 2018-12-30
 
 
 rm_sdt_mstep_item_function_value <- function(x, par_index, partable_item, nik.item,

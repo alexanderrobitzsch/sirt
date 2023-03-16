@@ -1,6 +1,5 @@
 ## File Name: gom_em_prepare_lambda_index.R
 ## File Version: 0.133
-## File Last Change: 2023-03-15
 
 gom_em_prepare_lambda_index <- function(lambda.index, I, K, items)
 {

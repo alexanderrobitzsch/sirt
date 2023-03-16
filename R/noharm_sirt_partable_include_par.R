@@ -1,6 +1,5 @@
 ## File Name: noharm_sirt_partable_include_par.R
 ## File Version: 0.01
-## File Last Change: 2019-01-05
 
 noharm_sirt_partable_include_par <- function(par, parm_table)
 {

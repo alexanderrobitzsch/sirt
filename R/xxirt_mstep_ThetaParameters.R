@@ -1,6 +1,5 @@
 ## File Name: xxirt_mstep_ThetaParameters.R
 ## File Version: 0.185
-## File Last Change: 2023-03-08
 
 
 xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,

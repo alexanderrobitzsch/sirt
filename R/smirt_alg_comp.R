@@ -1,6 +1,5 @@
 ## File Name: smirt_alg_comp.R
 ## File Version: 1.15
-## File Last Change: 2018-12-30
 
 ############################################
 # probability in compensatory model

@@ -1,6 +1,5 @@
 ## File Name: rm_facets_pp_mle_calc_pcm.R
 ## File Version: 0.13
-## File Last Change: 2019-01-02
 
 
 #--- calculate item response probabilities

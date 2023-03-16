@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_calc_probs_grm_rcpp.R
 ## File Version: 0.05
-## File Last Change: 2018-12-30
 
 
 rm_sdt_calc_probs_grm_rcpp <- function(c.rater, d.rater, I, K, eps=0, use_log=FALSE)

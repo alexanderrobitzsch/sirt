@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_joint_parameterTable_merge_table.R
 ## File Version: 0.04
-## File Last Change: 2023-03-09
 
 dmlavaan_joint_parameterTable_merge_table <- function(partable, mod, model_index=1)
 {

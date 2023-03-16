@@ -1,6 +1,5 @@
 ## File Name: lsem_fitsem_joint_estimation_partable.R
 ## File Version: 0.05
-## File Last Change: 2022-07-27
 
 
 lsem_fitsem_joint_estimation_partable <- function(lavfit, G, par_invariant=NULL,

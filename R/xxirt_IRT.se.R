@@ -1,6 +1,5 @@
 ## File Name: xxirt_IRT.se.R
 ## File Version: 0.11
-## File Last Change: 2023-03-08
 
 
 IRT.se.xxirt <- function( object, ...)

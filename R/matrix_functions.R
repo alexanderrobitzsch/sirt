@@ -1,6 +1,5 @@
 ## File Name: matrix_functions.R
 ## File Version: 0.19
-## File Last Change: 2018-12-30
 
 
 #############################################################

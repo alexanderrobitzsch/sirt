@@ -1,6 +1,5 @@
 ## File Name: sirt_digamma1.R
 ## File Version: 0.01
-## File Last Change: 2019-05-18
 
 
 #-- derivative of digamma function

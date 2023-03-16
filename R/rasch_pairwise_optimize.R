@@ -1,6 +1,5 @@
 ## File Name: rasch_pairwise_optimize.R
 ## File Version: 0.222
-## File Last Change: 2021-04-22
 
 
 rasch_pairwise_optimize <- function(n.ij, n.ji, beta, zerosum, optimizer="nlminb",

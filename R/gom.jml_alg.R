@@ -1,6 +1,5 @@
 ## File Name: gom.jml_alg.R
 ## File Version: 0.15
-## File Last Change: 2018-12-30
 
 ###############################
 # attach objects in the local environment

@@ -1,6 +1,5 @@
 ## File Name: gom_em_item_parameters.R
 ## File Version: 0.09
-## File Last Change: 2019-05-17
 
 
 gom_em_item_parameters <- function(dat2, dat2.resp, model, b, lambda, K,

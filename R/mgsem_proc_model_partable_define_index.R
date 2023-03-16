@@ -1,6 +1,5 @@
 ## File Name: mgsem_proc_model_partable_define_index.R
 ## File Version: 0.11
-## File Last Change: 2022-02-25
 
 
 mgsem_proc_model_partable_define_index <- function(partable)

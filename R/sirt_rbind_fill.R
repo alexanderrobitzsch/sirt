@@ -1,6 +1,5 @@
 ## File Name: sirt_rbind_fill.R
 ## File Version: 0.05
-## File Last Change: 2018-12-30
 
 ## reimplementation of plyr::rbind.fill
 

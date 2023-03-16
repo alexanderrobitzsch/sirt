@@ -1,6 +1,5 @@
 ## File Name: invariance_alignment_cfa_config_estimate_define_lavaan_model.R
 ## File Version: 0.08
-## File Last Change: 2022-01-12
 
 
 invariance_alignment_cfa_config_estimate_define_lavaan_model <-

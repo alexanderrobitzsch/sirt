@@ -1,6 +1,5 @@
 ## File Name: lsem.permutationTest.R
 ## File Version: 0.454
-## File Last Change: 2023-03-15
 
 
 #*** permutation test for LSEM model

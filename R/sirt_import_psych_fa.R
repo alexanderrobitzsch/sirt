@@ -1,6 +1,5 @@
 ## File Name: sirt_import_psych_fa.R
 ## File Version: 0.03
-## File Last Change: 2023-03-08
 
 sirt_import_psych_fa <- function(r, nfactors, ...)
 {

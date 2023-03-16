@@ -1,6 +1,5 @@
 ## File Name: weighted_rowSums.R
 ## File Version: 0.08
-## File Last Change: 2018-12-30
 
 
 weighted_rowSums <- function( mat, wgt=NULL)

@@ -1,6 +1,5 @@
 ## File Name: pgenlogis.R
 ## File Version: 1.11
-## File Last Change: 2019-05-10
 
 #-- generalized logistic distribution
 pgenlogis <- function( x, alpha1=0, alpha2=0 )

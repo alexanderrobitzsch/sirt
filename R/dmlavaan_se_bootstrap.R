@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_se_bootstrap.R
 ## File Version: 0.135
-## File Last Change: 2023-03-10
 
 dmlavaan_se_bootstrap <- function(mod1, mod2, partable, R)
 {

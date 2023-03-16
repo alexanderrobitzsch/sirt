@@ -1,6 +1,5 @@
 ## File Name: linking_haberman_als.R
 ## File Version: 0.657
-## File Last Change: 2022-07-28
 
 
 

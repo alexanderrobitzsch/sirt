@@ -1,6 +1,5 @@
 ## File Name: summary.rm.sdt.R
 ## File Version: 1.34
-## File Last Change: 2018-12-30
 
 
 #*******************************************************

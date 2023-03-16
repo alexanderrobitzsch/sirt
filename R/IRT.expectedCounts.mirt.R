@@ -1,6 +1,5 @@
 ## File Name: IRT.expectedCounts.mirt.R
 ## File Version: 0.07
-## File Last Change: 2019-10-29
 
 # IRT.expectedCounts.mirt
 

@@ -1,6 +1,5 @@
 ## File Name: rasch_mirtlc_est_a.R
 ## File Version: 0.16
-## File Last Change: 2019-09-12
 
 
 #-- estimation of a parameter (discrimination parameter)

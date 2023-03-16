@@ -1,6 +1,5 @@
 ## File Name: noharm_sirt_optim_function.R
 ## File Version: 0.18
-## File Last Change: 2019-01-07
 
 
 noharm_sirt_optim_function <- function(x, parm_table, parm_index, I, D,

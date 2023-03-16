@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_sandwich_formula.R
 ## File Version: 0.06
-## File Last Change: 2023-03-08
 
 dmlavaan_sandwich_formula <- function(A, B, parnames=NULL)
 {

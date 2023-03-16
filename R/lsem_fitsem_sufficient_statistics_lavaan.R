@@ -1,6 +1,5 @@
 ## File Name: lsem_fitsem_sufficient_statistics_lavaan.R
 ## File Version: 0.06
-## File Last Change: 2019-05-02
 
 lsem_fitsem_sufficient_statistics_lavaan <- function(gg, lavmodel, lavaan_est_fun,
     survey.fit, sample_stats, is_meanstructure, se, ...)

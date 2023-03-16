@@ -1,6 +1,5 @@
 ## File Name: isop.poly.R
 ## File Version: 2.15
-## File Last Change: 2018-12-30
 ######################################################################
 # Fitting the ISOP and ADISOP model
 isop.poly <- function( dat, score.breaks=seq(0,1,len=10 ),

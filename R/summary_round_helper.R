@@ -1,6 +1,5 @@
 ## File Name: summary_round_helper.R
 ## File Version: 0.09
-## File Last Change: 2019-01-07
 
 summary_round_helper <- function( obji, digits, exclude=NULL, print=TRUE)
 {

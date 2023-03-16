@@ -1,6 +1,5 @@
 ## File Name: sirt_add_list_elements.R
 ## File Version: 0.02
-## File Last Change: 2020-02-24
 
 sirt_add_list_elements <- function(res, res2)
 {

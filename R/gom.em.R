@@ -1,6 +1,5 @@
 ## File Name: gom.em.R
 ## File Version: 5.420
-## File Last Change: 2022-05-16
 
 
 #-- gom EM algorithm

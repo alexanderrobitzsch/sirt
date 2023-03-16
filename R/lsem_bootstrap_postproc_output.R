@@ -1,6 +1,5 @@
 ## File Name: lsem_bootstrap_postproc_output.R
 ## File Version: 0.098
-## File Last Change: 2023-03-15
 
 lsem_bootstrap_postproc_output <- function(parameters, parameters_boot,
     fitstats_joint, fitstats_joint_boot, est_joint=FALSE, repl_factor=NULL,

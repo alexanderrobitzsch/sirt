@@ -1,6 +1,5 @@
 ## File Name: linking_haberman_als_residual_weights.R
 ## File Version: 0.371
-## File Last Change: 2019-02-12
 
 
 linking_haberman_als_residual_weights <- function( logaj, logaAt,

@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_est_model_include_partable.R
 ## File Version: 0.06
-## File Last Change: 2023-03-09
 
 dmlavaan_est_model_include_partable <- function(partable, se_sw)
 {

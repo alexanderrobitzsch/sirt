@@ -1,6 +1,5 @@
 ## File Name: rasch_mirtlc_estep_mlc1.R
 ## File Version: 0.22
-## File Last Change: 2019-10-27
 
 
 # E Step Multidimensional Latent Class Rasch Model

@@ -1,6 +1,5 @@
 ## File Name: xxirt_EAP.R
 ## File Version: 0.116
-## File Last Change: 2023-03-08
 
 
 #--- compute EAP and its standard deviation

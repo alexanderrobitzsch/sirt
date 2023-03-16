@@ -1,6 +1,5 @@
 ## File Name: rmvn.R
 ## File Version: 0.04
-## File Last Change: 2022-04-17
 
 rmvn <- function(N, mu, Sigma, exact=TRUE)
 {

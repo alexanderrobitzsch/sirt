@@ -1,6 +1,5 @@
 ## File Name: sim.raschtype.R
 ## File Version: 0.23
-## File Last Change: 2018-12-30
 
 
 

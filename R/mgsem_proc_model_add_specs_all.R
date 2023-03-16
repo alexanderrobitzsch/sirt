@@ -1,6 +1,5 @@
 ## File Name: mgsem_proc_model_add_specs_all.R
 ## File Version: 0.096
-## File Last Change: 2022-05-16
 
 
 mgsem_proc_model_add_specs_all <- function(model, entries, type, ii, jj, dfr1,

@@ -1,6 +1,5 @@
 ## File Name: tam2mirt_freed.R
 ## File Version: 0.154
-## File Last Change: 2022-05-16
 
 #*** return lavaan syntax with freed parameters
 tam2mirt_freed <- function( D, factors, B, dat, AXsi,

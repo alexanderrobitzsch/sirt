@@ -1,6 +1,5 @@
 ## File Name: rm_facets_print_progress.R
 ## File Version: 0.08
-## File Last Change: 2018-12-30
 
 rm_facets_print_progress <- function(dev, dev0, b.rater, b.rater0, a.rater, a.rater0,
         tau.item, tau.item0, a.item, a.item0, mu, sigma, iter,

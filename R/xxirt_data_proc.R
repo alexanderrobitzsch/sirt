@@ -1,6 +1,5 @@
 ## File Name: xxirt_data_proc.R
 ## File Version: 0.213
-## File Last Change: 2023-02-15
 
 #-- data processing xxirt
 xxirt_data_proc <- function(dat, group=NULL, weights=NULL )

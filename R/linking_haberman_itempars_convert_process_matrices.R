@@ -1,6 +1,5 @@
 ## File Name: linking_haberman_itempars_convert_process_matrices.R
 ## File Version: 0.01
-## File Last Change: 2020-03-29
 
 
 linking_haberman_itempars_convert_process_matrices <- function(mat, est_pars)

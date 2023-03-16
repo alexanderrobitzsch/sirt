@@ -1,6 +1,5 @@
 ## File Name: mgsem_partable2coef.R
 ## File Version: 0.04
-## File Last Change: 2022-02-25
 
 mgsem_partable2coef <- function(partable)
 {

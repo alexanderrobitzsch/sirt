@@ -1,6 +1,5 @@
 ## File Name: greenyang.reliability.R
 ## File Version: 1.236
-## File Last Change: 2023-03-15
 
 
 #---- reliability from a multidimensional nonlinear SEM for dichotomous data

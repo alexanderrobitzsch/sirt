@@ -1,6 +1,5 @@
 ## File Name: IRT.likelihood.mirt.R
 ## File Version: 0.284
-## File Last Change: 2019-10-29
 
 
 IRT_likelihood_mirt_singleGroup <- function( object, type, ... )

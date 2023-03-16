@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_mstep_type_function_value.R
 ## File Version: 0.16
-## File Last Change: 2018-12-30
 
 
 rm_sdt_mstep_type_function_value <- function(x, par_index, partable, type,

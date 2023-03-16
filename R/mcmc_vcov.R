@@ -1,6 +1,5 @@
 ## File Name: mcmc_vcov.R
 ## File Version: 0.13
-## File Last Change: 2019-04-26
 
 
 #--- variance covariance matrix

@@ -1,6 +1,5 @@
 ## File Name: sirt_summary_print_package_rsession.R
 ## File Version: 0.07
-## File Last Change: 2023-03-08
 
 sirt_summary_print_package_rsession <- function(pack)
 {

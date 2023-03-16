@@ -1,6 +1,5 @@
 ## File Name: summary.rasch.mirtlc.R
 ## File Version: 7.13
-## File Last Change: 2018-12-30
 #*******************************************************
 # Summary for rasch.mirtlc object                         *
 summary.rasch.mirtlc <- function( object,... ){

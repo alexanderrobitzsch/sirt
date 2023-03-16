@@ -1,6 +1,5 @@
 ## File Name: lsem.bootstrap.R
 ## File Version: 0.347
-## File Last Change: 2023-03-16
 
 
 lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,

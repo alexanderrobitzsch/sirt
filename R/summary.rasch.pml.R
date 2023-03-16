@@ -1,6 +1,5 @@
 ## File Name: summary.rasch.pml.R
 ## File Version: 0.161
-## File Last Change: 2019-01-02
 
 
 #*******************************************************

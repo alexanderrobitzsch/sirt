@@ -1,6 +1,5 @@
 ## File Name: mgsem_proc_data.R
 ## File Version: 0.04
-## File Last Change: 2022-02-25
 
 mgsem_proc_data <- function(data, group, weights)
 {

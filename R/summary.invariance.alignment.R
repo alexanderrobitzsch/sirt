@@ -1,6 +1,5 @@
 ## File Name: summary.invariance.alignment.R
 ## File Version: 0.282
-## File Last Change: 2018-12-30
 
 
 

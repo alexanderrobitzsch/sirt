@@ -1,6 +1,5 @@
 ## File Name: noharm_sirt_compute_chi_square_statistics.R
 ## File Version: 0.04
-## File Last Change: 2018-12-30
 
 noharm_sirt_compute_chi_square_statistics <- function(res, residuals, pm,
     N, I, sumwgtm, modesttype, Nestpars)

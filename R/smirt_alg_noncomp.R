@@ -1,6 +1,5 @@
 ## File Name: smirt_alg_noncomp.R
 ## File Version: 2.421
-## File Last Change: 2019-05-17
 
 ############################################
 # probability in noncompensatory model

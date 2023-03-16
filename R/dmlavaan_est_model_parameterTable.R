@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_est_model_parameterTable.R
 ## File Version: 0.072
-## File Last Change: 2023-03-09
 
 dmlavaan_est_model_parameterTable <- function(mod, parnames, coef1, vcov1)
 {

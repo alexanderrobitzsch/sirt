@@ -1,6 +1,5 @@
 ## File Name: rasch_mml2_prob_genlogis_4pl_evaluate.R
 ## File Version: 0.08
-## File Last Change: 2019-05-10
 
 
 rasch_mml2_prob_genlogis_4pl_evaluate <- function(theta.k, b, fixed.a, fixed.c,

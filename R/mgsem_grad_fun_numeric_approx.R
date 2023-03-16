@@ -1,6 +1,5 @@
 ## File Name: mgsem_grad_fun_numeric_approx.R
 ## File Version: 0.06
-## File Last Change: 2022-02-25
 
 
 mgsem_grad_fun_numeric_approx <- function(x, opt_fun_args)

@@ -1,6 +1,5 @@
 ## File Name: qmc.nodes.R
 ## File Version: 0.15
-## File Last Change: 2019-02-28
 
 qmc.nodes <- function( snodes, ndim )
 {

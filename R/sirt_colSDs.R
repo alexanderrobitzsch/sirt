@@ -1,6 +1,5 @@
 ## File Name: sirt_colSDs.R
 ## File Version: 0.04
-## File Last Change: 2018-12-30
 
 sirt_colSDs <- function(x, na.rm=TRUE)
 {

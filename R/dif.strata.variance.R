@@ -1,6 +1,5 @@
 ## File Name: dif.strata.variance.R
 ## File Version: 0.151
-## File Last Change: 2023-03-08
 
 
 

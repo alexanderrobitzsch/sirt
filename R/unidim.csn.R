@@ -1,6 +1,5 @@
 ## File Name: unidim.csn.R
 ## File Version: 0.204
-## File Last Change: 2023-02-16
 
 ##*** unidimensionality test
 unidim.test.csn <- function( dat, RR=400, prop.perm=.75,

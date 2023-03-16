@@ -1,6 +1,5 @@
 ## File Name: data.prep.R
 ## File Version: 1.147
-## File Last Change: 2022-04-17
 
 #----- data preparations for rasch.jml and rasch.mml
 data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,

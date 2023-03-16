@@ -1,6 +1,5 @@
 ## File Name: invariance_alignment_define_parameters.R
 ## File Version: 0.18
-## File Last Change: 2022-05-16
 
 invariance_alignment_define_parameters <- function(x, ind_alpha, ind_psi,
         fix_first_psi=TRUE, reparam=FALSE, constraint="prod", overparam=FALSE)

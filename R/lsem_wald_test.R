@@ -1,6 +1,5 @@
 ## File Name: lsem_wald_test.R
 ## File Version: 0.04
-## File Last Change: 2023-03-15
 
 lsem_wald_test <- function(theta, V, A)
 {

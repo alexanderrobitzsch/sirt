@@ -1,6 +1,5 @@
 ## File Name: summary.regpolca.R
 ## File Version: 0.09
-## File Last Change: 2020-07-04
 
 
 #--- summary for regpolca object

@@ -1,6 +1,5 @@
 ## File Name: print_digits.R
 ## File Version: 0.03
-## File Last Change: 2023-03-16
 
 print_digits <- function(x, digits=NULL)
 {

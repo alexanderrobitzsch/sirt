@@ -1,6 +1,5 @@
 ## File Name: mml_raschtype_counts.R
 ## File Version: 0.08
-## File Last Change: 2021-03-07
 
 
 

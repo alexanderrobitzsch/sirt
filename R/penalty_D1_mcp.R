@@ -1,6 +1,5 @@
 ## File Name: penalty_D1_mcp.R
 ## File Version: 0.03
-## File Last Change: 2020-03-04
 
 
 penalty_D1_mcp <- function(x, lambda, eps, a=2.7)

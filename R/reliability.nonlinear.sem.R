@@ -1,6 +1,5 @@
 ## File Name: reliability.nonlinear.sem.R
 ## File Version: 1.19
-## File Last Change: 2019-04-30
 
 
 

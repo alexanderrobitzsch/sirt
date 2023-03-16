@@ -1,6 +1,5 @@
 ## File Name: summary.conf.detect.R
 ## File Version: 0.15
-## File Last Change: 2018-12-30
 
 #**** Summary for conf.detect object
 summary.conf.detect <- function( object, digits=3, file=NULL, ...)

@@ -1,6 +1,5 @@
 ## File Name: mcmc.3pno.testlet_output.R
 ## File Version: 1.21
-## File Last Change: 2019-05-03
 
 ######################################################
 # compute deviance

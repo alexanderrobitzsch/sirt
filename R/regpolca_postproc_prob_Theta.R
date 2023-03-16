@@ -1,6 +1,5 @@
 ## File Name: regpolca_postproc_prob_Theta.R
 ## File Version: 0.07
-## File Last Change: 2020-02-24
 
 regpolca_postproc_prob_Theta <- function(probs_Theta)
 {

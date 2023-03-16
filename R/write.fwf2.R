@@ -1,6 +1,5 @@
 ## File Name: write.fwf2.R
 ## File Version: 1.11
-## File Last Change: 2019-02-25
 
 
 write.fwf2 <- function( dat, format.full, format.round, savename )

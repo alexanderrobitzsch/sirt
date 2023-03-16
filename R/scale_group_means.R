@@ -1,6 +1,5 @@
 ## File Name: scale_group_means.R
 ## File Version: 0.08
-## File Last Change: 2021-06-02
 
 scale_group_means <- function(M, SD, probs=NULL, M_target=0, SD_target=1)
 {

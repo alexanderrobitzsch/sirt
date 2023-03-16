@@ -1,6 +1,5 @@
 ## File Name: wle.rasch.R
 ## File Version: 1.297
-## File Last Change: 2023-03-08
 
 
 #-- WLE ability estimation

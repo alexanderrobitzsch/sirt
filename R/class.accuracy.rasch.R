@@ -1,6 +1,5 @@
 ## File Name: class.accuracy.rasch.R
 ## File Version: 0.17
-## File Last Change: 2019-05-02
 
 
 #*** classification accuracy in the Rasch model

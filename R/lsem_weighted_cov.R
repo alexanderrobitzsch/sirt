@@ -1,6 +1,5 @@
 ## File Name: lsem_weighted_cov.R
 ## File Version: 0.227
-## File Last Change: 2023-03-11
 
 lsem_weighted_cov <- function( x, weights, x_resp=NULL,
         moderator_variable=NULL, loc_linear_smooth=NULL, moderator_value=NULL,

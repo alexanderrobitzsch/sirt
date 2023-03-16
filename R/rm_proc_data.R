@@ -1,6 +1,5 @@
 ## File Name: rm_proc_data.R
 ## File Version: 0.65
-## File Last Change: 2018-12-30
 
 ##########################################
 # Data preprocessing rater models

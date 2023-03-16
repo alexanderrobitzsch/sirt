@@ -1,6 +1,5 @@
 ## File Name: gom_em_loglike_grad.R
 ## File Version: 0.278
-## File Last Change: 2023-03-15
 
 
 

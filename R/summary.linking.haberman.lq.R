@@ -1,6 +1,5 @@
 ## File Name: summary.linking.haberman.lq.R
 ## File Version: 0.11
-## File Last Change: 2020-04-26
 
 
 

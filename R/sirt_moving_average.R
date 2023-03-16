@@ -1,6 +1,5 @@
 ## File Name: sirt_moving_average.R
 ## File Version: 0.14
-## File Last Change: 2018-12-30
 
 
 #----- moving window average for time series

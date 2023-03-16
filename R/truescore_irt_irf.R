@@ -1,6 +1,5 @@
 ## File Name: truescore_irt_irf.R
 ## File Version: 0.03
-## File Last Change: 2023-02-16
 
 
 #---- true score IRT - item response function

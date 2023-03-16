@@ -1,6 +1,5 @@
 ## File Name: regpolca_define_customItems.R
 ## File Version: 0.05
-## File Last Change: 2020-06-30
 
 regpolca_define_customItems <- function(ncats, K, dat, par_item_max)
 {

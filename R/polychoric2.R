@@ -1,6 +1,5 @@
 ## File Name: polychoric2.R
 ## File Version: 0.332
-## File Last Change: 2019-10-27
 
 
 #---- estimating polychoric correlation using the Olsson method

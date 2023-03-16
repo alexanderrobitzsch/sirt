@@ -1,6 +1,5 @@
 ## File Name: rasch.pml3.R
 ## File Version: 6.131
-## File Last Change: 2019-01-02
 
 
 

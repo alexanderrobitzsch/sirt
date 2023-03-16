@@ -1,6 +1,5 @@
 ## File Name: noharm_sirt_number_estimated_parameters.R
 ## File Version: 0.03
-## File Last Change: 2018-12-30
 
 noharm_sirt_number_estimated_parameters <- function(I, Fpatt, Ppatt, Psipatt)
 {

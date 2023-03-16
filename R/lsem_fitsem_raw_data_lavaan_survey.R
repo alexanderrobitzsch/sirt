@@ -1,6 +1,5 @@
 ## File Name: lsem_fitsem_raw_data_lavaan_survey.R
 ## File Version: 0.091
-## File Last Change: 2023-03-11
 
 lsem_fitsem_raw_data_lavaan_survey <- function(dat, lavmodel, lavfit)
 {

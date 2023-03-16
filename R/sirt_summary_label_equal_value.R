@@ -1,6 +1,5 @@
 ## File Name: sirt_summary_label_equal_value.R
 ## File Version: 0.07
-## File Last Change: 2023-03-08
 
 sirt_summary_label_equal_value <- function( label, value, label2="", digits=NULL )
 {

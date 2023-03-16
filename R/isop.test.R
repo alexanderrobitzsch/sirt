@@ -1,6 +1,5 @@
 ## File Name: isop.test.R
 ## File Version: 0.20
-## File Last Change: 2018-12-30
 
 ############################################################
 # testing the ISOP model

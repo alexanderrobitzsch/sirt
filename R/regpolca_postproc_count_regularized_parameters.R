@@ -1,6 +1,5 @@
 ## File Name: regpolca_postproc_count_regularized_parameters.R
 ## File Version: 0.28
-## File Last Change: 2020-07-04
 
 regpolca_postproc_count_regularized_parameters <- function(item, set_equal,
         lca_dich, probs_items, nclasses, ncats)

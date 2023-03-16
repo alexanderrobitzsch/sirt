@@ -1,6 +1,5 @@
 ## File Name: xxirt_print_progress.R
 ## File Version: 0.061
-## File Last Change: 2023-03-08
 
 xxirt_print_progress <- function(dev, dev0, dev00, pen_val, conv0, conv1,
         iter, verbose1, verbose2, verbose_index, verbose3=FALSE)

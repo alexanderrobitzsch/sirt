@@ -1,6 +1,5 @@
 ## File Name: rasch.pairwise.R
 ## File Version: 0.446
-## File Last Change: 2021-03-29
 
 
 #------ Rasch estimation (Approximate Method)

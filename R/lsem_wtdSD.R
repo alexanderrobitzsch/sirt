@@ -1,6 +1,5 @@
 ## File Name: lsem_wtdSD.R
 ## File Version: 0.16
-## File Last Change: 2019-04-26
 
 
 lsem_wtdSD <- function( x, w )

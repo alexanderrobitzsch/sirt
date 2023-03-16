@@ -1,6 +1,5 @@
 ## File Name: xxirt_compute_posterior.R
 ## File Version: 0.288
-## File Last Change: 2022-05-15
 
 
 ##-- xxirt: compute posterior

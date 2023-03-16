@@ -1,6 +1,5 @@
 ## File Name: detect.index.R
 ## File Version: 0.34
-## File Last Change: 2020-08-29
 
 
 

@@ -1,6 +1,5 @@
 ## File Name: lsem_group_moderator.R
 ## File Version: 0.172
-## File Last Change: 2023-03-11
 
 
 #***** grouping a moderator variable

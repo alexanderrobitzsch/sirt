@@ -1,6 +1,5 @@
 ## File Name: mgsem_proc_model.R
 ## File Version: 0.286
-## File Last Change: 2023-02-06
 
 mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
         prior_list=NULL, pen_type="lasso", fixed_parms=FALSE,

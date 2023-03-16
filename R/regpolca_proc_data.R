@@ -1,6 +1,5 @@
 ## File Name: regpolca_proc_data.R
 ## File Version: 0.03
-## File Last Change: 2020-02-24
 
 regpolca_proc_data <- function(dat, group)
 {

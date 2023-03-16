@@ -1,6 +1,5 @@
 ## File Name: mcmc.list.descriptives.R
 ## File Version: 0.19
-## File Last Change: 2019-05-03
 
 ########################################################
 # mcmclist descriptives

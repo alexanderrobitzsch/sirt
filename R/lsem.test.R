@@ -1,6 +1,5 @@
 ## File Name: lsem.test.R
 ## File Version: 0.118
-## File Last Change: 2023-03-16
 
 #**** test LSEM model based on bootstrap
 lsem.test <- function( mod, bmod, models=NULL )

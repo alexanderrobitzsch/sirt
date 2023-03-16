@@ -1,6 +1,5 @@
 ## File Name: lsem_estimate_proc_args.R
 ## File Version: 0.403
-## File Last Change: 2023-03-15
 
 lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     pseudo_weights, lavmodel, data, use_lavaan_survey, est_joint=FALSE,

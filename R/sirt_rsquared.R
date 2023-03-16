@@ -1,6 +1,5 @@
 ## File Name: sirt_rsquared.R
 ## File Version: 0.03
-## File Last Change: 2018-12-30
 
 sirt_rsquared <- function(x, expl, na.rm=TRUE)
 {

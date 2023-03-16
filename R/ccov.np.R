@@ -1,6 +1,5 @@
 ## File Name: ccov.np.R
 ## File Version: 1.218
-## File Last Change: 2022-04-17
 
 
 #---- nonparametric estimation of conditional covariance

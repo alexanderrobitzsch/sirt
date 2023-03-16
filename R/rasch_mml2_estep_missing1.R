@@ -1,6 +1,5 @@
 ## File Name: rasch_mml2_estep_missing1.R
 ## File Version: 1.119
-## File Last Change: 2022-10-23
 
 
 

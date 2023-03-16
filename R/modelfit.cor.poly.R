@@ -1,6 +1,5 @@
 ## File Name: modelfit.cor.poly.R
 ## File Version: 0.08
-## File Last Change: 2018-12-30
 
 
 ##########################################################################

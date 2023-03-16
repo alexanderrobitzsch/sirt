@@ -1,6 +1,5 @@
 ## File Name: rm_summary_trait_distribution.R
 ## File Version: 0.07
-## File Last Change: 2018-12-30
 
 rm_summary_trait_distribution <- function(object)
 {

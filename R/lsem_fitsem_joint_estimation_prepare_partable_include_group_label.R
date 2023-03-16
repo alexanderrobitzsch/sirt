@@ -1,6 +1,5 @@
 ## File Name: lsem_fitsem_joint_estimation_prepare_partable_include_group_label.R
 ## File Version: 0.111
-## File Last Change: 2023-03-11
 
 
 lsem_fitsem_joint_estimation_prepare_partable_include_group_label <- function(

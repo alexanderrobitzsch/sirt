@@ -1,6 +1,5 @@
 ## File Name: rm_facets_calcprobs.R
 ## File Version: 0.09
-## File Last Change: 2018-12-30
 
 
 #############################################################################

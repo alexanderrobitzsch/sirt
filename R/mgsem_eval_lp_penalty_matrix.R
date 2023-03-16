@@ -1,6 +1,5 @@
 ## File Name: mgsem_eval_lp_penalty_matrix.R
 ## File Version: 0.083
-## File Last Change: 2023-02-06
 
 mgsem_eval_lp_penalty_matrix <- function(x, fac, p, n, h, eps_approx,
     pen_type="lasso", a_scad=3.7)

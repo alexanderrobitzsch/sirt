@@ -1,6 +1,5 @@
 ## File Name: amh_plot.R
 ## File Version: 0.336
-## File Last Change: 2023-03-15
 
 
 #*** plot results of objects of class amh

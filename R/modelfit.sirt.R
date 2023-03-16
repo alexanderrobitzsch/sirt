@@ -1,6 +1,5 @@
 ## File Name: modelfit.sirt.R
 ## File Version: 1.138
-## File Last Change: 2023-03-08
 
 
 # model fit in sirt

@@ -1,6 +1,5 @@
 ## File Name: sirt_optimizer_summary_print.R
 ## File Version: 0.141
-## File Last Change: 2023-03-08
 
 sirt_optimizer_summary_print <- function(res, msg="Information about optimization")
 {

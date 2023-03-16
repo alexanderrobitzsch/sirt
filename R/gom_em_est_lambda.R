@@ -1,6 +1,5 @@
 ## File Name: gom_em_est_lambda.R
 ## File Version: 0.206
-## File Last Change: 2019-05-18
 
 
 # estimation of lambda parameters

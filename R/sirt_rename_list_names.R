@@ -1,6 +1,5 @@
 ## File Name: sirt_rename_list_names.R
 ## File Version: 0.03
-## File Last Change: 2022-02-25
 
 
 sirt_rename_list_names <- function(x, old, new)

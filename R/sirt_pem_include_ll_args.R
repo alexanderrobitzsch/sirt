@@ -1,6 +1,5 @@
 ## File Name: sirt_pem_include_ll_args.R
 ## File Version: 0.06
-## File Last Change: 2023-02-19
 
 sirt_pem_include_ll_args <- function(ll_args, pem_parm, pem_pars, pem_parameter_index)
 {

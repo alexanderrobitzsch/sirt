@@ -1,6 +1,5 @@
 ## File Name: sirt_EAP.R
 ## File Version: 0.01
-## File Last Change: 2019-05-11
 
 sirt_EAP <- function(post, theta)
 {

@@ -1,6 +1,5 @@
 ## File Name: mgsem_scad_penalty.R
 ## File Version: 0.02
-## File Last Change: 2022-02-25
 
 mgsem_scad_penalty <- function(x, lambda, a=3.7)
 {

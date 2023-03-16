@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_adjust_numdiff_h.R
 ## File Version: 0.03
-## File Last Change: 2023-03-09
 
 dmlavaan_adjust_numdiff_h <- function(h, val)
 {

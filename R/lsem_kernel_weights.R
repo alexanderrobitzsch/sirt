@@ -1,6 +1,5 @@
 ## File Name: lsem_kernel_weights.R
 ## File Version: 0.061
-## File Last Change: 2023-03-11
 
 lsem_kernel_weights <- function(x, x0, bw, kernel="gaussian")
 {

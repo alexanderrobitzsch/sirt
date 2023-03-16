@@ -1,6 +1,5 @@
 ## File Name: xxirt_postproc_parameters.R
 ## File Version: 0.231
-## File Last Change: 2023-03-08
 
 
 

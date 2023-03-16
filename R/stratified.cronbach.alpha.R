@@ -1,6 +1,5 @@
 ## File Name: stratified.cronbach.alpha.R
 ## File Version: 0.253
-## File Last Change: 2023-02-19
 
 
 # stratified Cronbach's Alpha

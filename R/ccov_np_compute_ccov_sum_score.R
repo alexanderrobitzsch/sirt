@@ -1,6 +1,5 @@
 ## File Name: ccov_np_compute_ccov_sum_score.R
 ## File Version: 0.15
-## File Last Change: 2020-08-30
 
 ccov_np_compute_ccov_sum_score <- function(score, data, use_rcpp=TRUE)
 {

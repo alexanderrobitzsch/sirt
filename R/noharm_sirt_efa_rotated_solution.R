@@ -1,6 +1,5 @@
 ## File Name: noharm_sirt_efa_rotated_solution.R
 ## File Version: 0.05
-## File Last Change: 2018-12-30
 
 
 noharm_sirt_efa_rotated_solution <- function(res, items, F_dimnames)

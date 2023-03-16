@@ -1,6 +1,5 @@
 ## File Name: f1d.irt.R
 ## File Version: 1.295
-## File Last Change: 2023-03-10
 
 #--- Functional unidimensional model (Ip et al., 2013)
 f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,

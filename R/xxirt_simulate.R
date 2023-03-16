@@ -1,6 +1,5 @@
 ## File Name: xxirt_simulate.R
 ## File Version: 0.142
-## File Last Change: 2023-03-08
 
 xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
                     method="random")

@@ -1,6 +1,5 @@
 ## File Name: IRT.mle.R
 ## File Version: 0.34
-## File Last Change: 2023-03-08
 
 
 #--- IRT.mle

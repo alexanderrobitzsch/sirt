@@ -1,6 +1,5 @@
 ## File Name: plot.lsem.permutationTest.R
 ## File Version: 0.21
-## File Last Change: 2018-12-30
 
 #############################################################
 # plot p values permutation test for LSEM

@@ -1,6 +1,5 @@
 ## File Name: rm_facets_center_value.R
 ## File Version: 0.04
-## File Last Change: 2018-12-30
 
 rm_facets_center_value <- function(x, value=0)
 {

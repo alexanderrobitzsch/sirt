@@ -1,6 +1,5 @@
 ## File Name: lsem_fitsem_raw_data_define_pseudo_weights.R
 ## File Version: 0.141
-## File Last Change: 2023-03-10
 
 lsem_fitsem_raw_data_define_pseudo_weights <- function(dat, pseudo_weights)
 {

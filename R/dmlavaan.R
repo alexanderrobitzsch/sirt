@@ -1,6 +1,5 @@
 ## File Name: dmlavaan.R
 ## File Version: 0.164
-## File Last Change: 2023-03-10
 
 
 dmlavaan <- function( fun1, args1, fun2, args2, method="sandwich", R=50)

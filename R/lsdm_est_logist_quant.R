@@ -1,6 +1,5 @@
 ## File Name: lsdm_est_logist_quant.R
 ## File Version: 0.192
-## File Last Change: 2023-03-08
 
 
 #--- Function for calculating logistic functions and probability quantiles

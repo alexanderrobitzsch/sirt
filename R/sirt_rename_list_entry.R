@@ -1,6 +1,5 @@
 ## File Name: sirt_rename_list_entry.R
 ## File Version: 0.09
-## File Last Change: 2022-02-25
 
 sirt_rename_list_entry <- function(model, name1, name2)
 {

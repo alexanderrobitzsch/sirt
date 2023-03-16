@@ -1,6 +1,5 @@
 ## File Name: summary.rasch.copula2.R
 ## File Version: 0.205
-## File Last Change: 2022-04-04
 
 
 #** Summary for rasch.copula object

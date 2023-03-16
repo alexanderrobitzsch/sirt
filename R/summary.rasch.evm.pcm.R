@@ -1,6 +1,5 @@
 ## File Name: summary.rasch.evm.pcm.R
 ## File Version: 0.18
-## File Last Change: 2018-12-30
 
 summary.rasch.evm.pcm <- function( object, digits=3, file=NULL, ... )
 {

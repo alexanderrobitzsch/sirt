@@ -1,6 +1,5 @@
 ## File Name: fuzdiscr.R
 ## File Version: 0.093
-## File Last Change: 2020-03-28
 
 fuzdiscr <- function( X, theta0=NULL, maxiter=200, conv=.0001 )
 {

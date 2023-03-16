@@ -1,6 +1,5 @@
 ## File Name: sirt_define_eps_sequence.R
 ## File Version: 0.01
-## File Last Change: 2020-03-29
 
 sirt_define_eps_sequence <- function(eps, eps_vec)
 {

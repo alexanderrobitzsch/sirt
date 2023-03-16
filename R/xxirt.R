@@ -1,6 +1,5 @@
 ## File Name: xxirt.R
 ## File Version: 1.022
-## File Last Change: 2023-03-08
 
 
 #--- user specified item response model

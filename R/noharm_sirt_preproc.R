@@ -1,6 +1,5 @@
 ## File Name: noharm_sirt_preproc.R
 ## File Version: 0.398
-## File Last Change: 2019-01-09
 
 
 #**** data preprocessing noharm.sirt

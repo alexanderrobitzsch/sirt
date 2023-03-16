@@ -1,6 +1,5 @@
 ## File Name: mgsem_observed_information.R
 ## File Version: 0.13
-## File Last Change: 2022-02-25
 
 
 mgsem_observed_information <- function(coef, opt_fun_args, technical, comp_se=TRUE)

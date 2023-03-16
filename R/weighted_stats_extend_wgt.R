@@ -1,6 +1,5 @@
 ## File Name: weighted_stats_extend_wgt.R
 ## File Version: 0.09
-## File Last Change: 2018-12-30
 
 weighted_stats_extend_wgt <- function( wgt, mat )
 {

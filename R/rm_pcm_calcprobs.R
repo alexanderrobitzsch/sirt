@@ -1,6 +1,5 @@
 ## File Name: rm_pcm_calcprobs.R
 ## File Version: 0.13
-## File Last Change: 2019-01-04
 
 
 

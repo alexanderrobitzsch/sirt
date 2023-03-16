@@ -1,6 +1,5 @@
 ## File Name: rm_numdiff_trim_increment.R
 ## File Version: 0.12
-## File Last Change: 2019-01-02
 
 rm_numdiff_trim_increment <- function( increment, max.increment, eps2 )
 {

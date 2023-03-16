@@ -1,6 +1,5 @@
 ## File Name: rm_facets_calc_loglikelihood.R
 ## File Version: 0.14
-## File Last Change: 2022-05-16
 
 rm_facets_calc_loglikelihood <- function( tau.item, a.rater, Qmatrix, b.item, VV,
             K, I, TP, a.item, b.rater, item.index, rater.index, theta.k, RR, dat2,

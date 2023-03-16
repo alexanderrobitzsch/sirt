@@ -1,6 +1,5 @@
 ## File Name: noharm_sirt_est_residuals.R
 ## File Version: 0.183
-## File Last Change: 2023-03-08
 
 
 #**** estimate residuals

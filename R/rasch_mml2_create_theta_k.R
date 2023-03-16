@@ -1,6 +1,5 @@
 ## File Name: rasch_mml2_create_theta_k.R
 ## File Version: 0.06
-## File Last Change: 2021-05-02
 
 rasch_mml2_create_theta_k <- function(Qmatrix, theta.k)
 {

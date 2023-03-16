@@ -1,6 +1,5 @@
 ## File Name: sirt_logit_to_probs.R
 ## File Version: 0.03
-## File Last Change: 2019-05-17
 
 
 sirt_logit_to_probs <- function(y)

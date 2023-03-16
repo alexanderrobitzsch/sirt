@@ -1,6 +1,5 @@
 ## File Name: rm_sdt_calc_probs_gpcm.R
 ## File Version: 0.11
-## File Last Change: 2019-01-02
 
 rm_sdt_calc_probs_gpcm <- function(a.item, tau.item, Qmatrix, theta.k, VV, K, TP,
     eps=0, use_log=FALSE)

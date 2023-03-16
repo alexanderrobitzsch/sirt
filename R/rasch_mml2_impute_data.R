@@ -1,6 +1,5 @@
 ## File Name: rasch_mml2_impute_data.R
 ## File Version: 0.127
-## File Last Change: 2021-05-08
 
 
 rasch_mml2_impute_data <- function(e1, b, beta, delta.miss, pjk, fixed.a,

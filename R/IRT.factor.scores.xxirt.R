@@ -1,6 +1,5 @@
 ## File Name: IRT.factor.scores.xxirt.R
 ## File Version: 0.07
-## File Last Change: 2018-12-30
 
 
 ###########################################################

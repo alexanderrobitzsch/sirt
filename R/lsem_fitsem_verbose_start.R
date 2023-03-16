@@ -1,6 +1,5 @@
 ## File Name: lsem_fitsem_verbose_start.R
 ## File Version: 0.05
-## File Last Change: 2023-03-11
 
 lsem_fitsem_verbose_start <- function(G, verbose)
 {

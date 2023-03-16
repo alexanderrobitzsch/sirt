@@ -1,6 +1,5 @@
 ## File Name: mgsem_loss_function_suffstat_derivative_parameter.R
 ## File Version: 0.115
-## File Last Change: 2022-04-19
 
 mgsem_loss_function_suffstat_derivative_parameter <- function(est, dermoments, suffstat,
         type, i1, i2, h, is_B=FALSE, num_approx=FALSE, eps=1e-12, p=2, vech_rcpp=TRUE,

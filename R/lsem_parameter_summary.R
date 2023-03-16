@@ -1,6 +1,5 @@
 ## File Name: lsem_parameter_summary.R
 ## File Version: 0.235
-## File Last Change: 2023-03-11
 
 
 ## lsem parameter summary

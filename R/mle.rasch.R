@@ -1,6 +1,5 @@
 ## File Name: mle.rasch.R
 ## File Version: 1.03
-## File Last Change: 2020-12-07
 
 
 

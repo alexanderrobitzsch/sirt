@@ -1,6 +1,5 @@
 ## File Name: IRT.expectedCounts_sirt.R
 ## File Version: 0.16
-## File Last Change: 2020-12-07
 
 
 

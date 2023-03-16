@@ -1,6 +1,5 @@
 ## File Name: ruvn.R
 ## File Version: 0.02
-## File Last Change: 2022-04-17
 
 ruvn <- function(N, mean=0, sd=1, exact=TRUE)
 {

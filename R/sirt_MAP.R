@@ -1,6 +1,5 @@
 ## File Name: sirt_MAP.R
 ## File Version: 0.01
-## File Last Change: 2019-05-11
 
 sirt_MAP <- function(post, theta)
 {

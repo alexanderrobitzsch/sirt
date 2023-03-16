@@ -1,6 +1,5 @@
 ## File Name: lsem_fitsem_compute_sufficient_statistics.R
 ## File Version: 0.094
-## File Last Change: 2022-07-27
 
 lsem_fitsem_compute_sufficient_statistics <- function(G, dat, variables_model,
     weights, moderator_variable=NULL, loc_linear_smooth=NULL, moderator.grid=NULL,

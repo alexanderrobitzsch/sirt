@@ -1,6 +1,5 @@
 ## File Name: mgsem_add_list_entries.R
 ## File Version: 0.06
-## File Last Change: 2022-01-19
 
 
 mgsem_add_list_entries <- function(list1, add_list, output_list, elements=NULL)

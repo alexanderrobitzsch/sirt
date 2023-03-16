@@ -1,6 +1,5 @@
 ## File Name: dmlavaan_se_bootstrap_create_est_boot.R
 ## File Version: 0.05
-## File Last Change: 2023-03-10
 
 
 dmlavaan_se_bootstrap_create_est_boot <- function(est_boot1, est_boot2)

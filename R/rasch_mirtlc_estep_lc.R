@@ -1,6 +1,5 @@
 ## File Name: rasch_mirtlc_estep_lc.R
 ## File Version: 0.24
-## File Last Change: 2019-09-14
 
 
 #--- E Step rasch_mirtlc

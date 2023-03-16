@@ -1,6 +1,5 @@
 ## File Name: mle.pcm.group.R
 ## File Version: 0.182
-## File Last Change: 2023-03-08
 
 
 #***** MLE of person parameters for individuals and groups

@@ -1,6 +1,5 @@
 ## File Name: rasch_mml2_estep_raschtype.R
 ## File Version: 0.136
-## File Last Change: 2021-05-02
 
 
 #--- E Step Raschtype Model

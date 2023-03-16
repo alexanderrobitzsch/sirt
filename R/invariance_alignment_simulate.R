@@ -1,6 +1,5 @@
 ## File Name: invariance_alignment_simulate.R
 ## File Version: 0.121
-## File Last Change: 2023-02-19
 
 invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
     output="data", groupwise=FALSE, exact=FALSE)

@@ -1,6 +1,5 @@
 ## File Name: lsem_fitsem_joint_estimation.R
 ## File Version: 0.181
-## File Last Change: 2023-03-15
 
 lsem_fitsem_joint_estimation <- function(partable_joint,
     is_meanstructure, sample_stats, lavaan_est_fun, se,

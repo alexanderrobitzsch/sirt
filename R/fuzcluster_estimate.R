@@ -1,6 +1,5 @@
 ## File Name: fuzcluster_estimate.R
 ## File Version: 0.265
-## File Last Change: 2021-03-28
 
 
 fuzcluster_estimate <- function(K, dat_m, dat_s, dat_resp,

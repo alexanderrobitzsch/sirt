@@ -1,6 +1,5 @@
 ## File Name: mcmc.2pno.ml_alg.R
 ## File Version: 3.25
-## File Last Change: 2018-12-30
 
 #***********************************************
 # parts of algorithm:

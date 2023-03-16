@@ -1,6 +1,5 @@
 ## File Name: likelihood_adjustment_aux.R
 ## File Version: 0.19
-## File Last Change: 2019-05-03
 
 
 #######################################################
