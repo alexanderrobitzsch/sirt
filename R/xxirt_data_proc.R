@@ -1,5 +1,6 @@
 ## File Name: xxirt_data_proc.R
-## File Version: 0.211
+## File Version: 0.213
+## File Last Change: 2023-02-15
 
 #-- data processing xxirt
 xxirt_data_proc <- function(dat, group=NULL, weights=NULL )
@@ -14,6 +15,7 @@ xxirt_data_proc <- function(dat, group=NULL, weights=NULL )
     if ( is.null(weights) ){
         weights <- rep(1,N)
     }
+    W <- sum(weights)
     group0 <- group
     groups_unique <- sort( unique( group ) )
     G <- length(groups_unique)
@@ -39,7 +41,8 @@ xxirt_data_proc <- function(dat, group=NULL, weights=NULL )
                     group0=group0, G=G, groups_unique=groups_unique,
                     maxK=maxK, ncat=ncat, weights=weights,
                     group_index=group_index, dat_resp=dat_resp,
-                    resp_index=resp_index, dat1=dat1, dat_resp_bool=dat_resp_bool )
+                    resp_index=resp_index, dat1=dat1, dat_resp_bool=dat_resp_bool,
+                    W=W)
     return(res)
 }
 

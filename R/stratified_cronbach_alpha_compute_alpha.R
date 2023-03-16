@@ -1,5 +1,6 @@
 ## File Name: stratified_cronbach_alpha_compute_alpha.R
 ## File Version: 0.06
+## File Last Change: 2020-02-10
 
 
 #** compute alpha

@@ -1,5 +1,6 @@
 ## File Name: mcmc.aux.R
 ## File Version: 0.08
+## File Last Change: 2018-12-30
 
 ###################################################################
 # draw variances from inverse chi square distribution

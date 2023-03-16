@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.497
+%% File Version: 0.501
 
 \name{xxirt}
 \alias{xxirt}
@@ -34,7 +34,8 @@ and latent trait distributions can be specified by the user (see Details).
 xxirt(dat, Theta=NULL, itemtype=NULL, customItems=NULL, partable=NULL,
        customTheta=NULL, group=NULL, weights=NULL, globconv=1e-06, conv=1e-04,
        maxit=1000, mstep_iter=4, mstep_reltol=1e-06, h=1E-4, use_grad=TRUE,
-       verbose=TRUE, penalty_fun_item=NULL, np_fun_item=NULL, verbose_index=NULL)
+       verbose=TRUE, penalty_fun_item=NULL, np_fun_item=NULL, verbose_index=NULL,
+       cv_kfold=0, cv_maxit=10)
 
 \method{summary}{xxirt}(object, digits=3, file=NULL, ...)
 
@@ -132,6 +133,9 @@ estimation. Used as a function of \code{x} (vector of item parameters)}
 \item{level}{Confidence level}
 \item{verbose_index}{Logical indicating whether item index should be
 printed in estimation output}
+\item{cv_kfold}{Number of k folds in cross validation. The default is 0 (no
+cross-validation)}
+\item{cv_maxit}{Maximum number of iterations for each cross-validation sample}
 \item{x}{Object of class \code{xxirt}}
 \item{type}{Type of person parameter estimate. Currently, only
 \code{EAP} is implemented.}
@@ -175,6 +179,7 @@ List with following entries
 \item{item_list}{List with item functions}
 \item{customItems}{Used customized item response functions}
 \item{customTheta}{Used customized theta distribution}
+\item{cv_loglike}{Cross-validated log-likelihood value (if \code{cv_kfold>0})}
 \item{p.xi.aj}{Individual likelihood}
 \item{p.aj.xi}{Individual posterior}
 \item{ll_case}{Case-wise log-likelihood values}

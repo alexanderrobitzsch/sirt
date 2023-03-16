@@ -1,9 +1,10 @@
 ## File Name: lsem_fitsem_raw_data_define_pseudo_weights.R
-## File Version: 0.13
+## File Version: 0.141
+## File Last Change: 2023-03-10
 
 lsem_fitsem_raw_data_define_pseudo_weights <- function(dat, pseudo_weights)
 {
-    sampling_weights <- "weight"
+    sampling_weights <- 'weight'
     W <- sum(dat[,sampling_weights])
     if (pseudo_weights>0){
         weights <- dat$weight

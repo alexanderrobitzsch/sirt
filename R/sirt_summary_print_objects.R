@@ -1,5 +1,6 @@
 ## File Name: sirt_summary_print_objects.R
-## File Version: 0.19
+## File Version: 0.21
+## File Last Change: 2023-03-08
 
 sirt_summary_print_objects <- function(obji, from=NULL, to=NULL,
         digits=3, rownames_null=TRUE, grep_string=NULL)
@@ -9,7 +10,7 @@ sirt_summary_print_objects <- function(obji, from=NULL, to=NULL,
         include_names <- FALSE
         if ( is.null(colnames(obji) ) ){
             include_names <- TRUE
-            colnames(obji) <- paste0("V",seq_len(ncol(obji)) )
+            colnames(obji) <- paste0('V',seq_len(ncol(obji)) )
         }
         if ( ! is.null(grep_string) ){
             obji <- obji[, grep( grep_string, colnames(obji)) ]

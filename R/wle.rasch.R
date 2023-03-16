@@ -1,5 +1,6 @@
 ## File Name: wle.rasch.R
-## File Version: 1.294
+## File Version: 1.297
+## File Last Change: 2023-03-08
 
 
 #-- WLE ability estimation
@@ -29,7 +30,7 @@ wle.rasch <- function( dat, dat.resp=NULL, b, itemweights=1+0*b,
         }
     }
     if ( progress){
-        cat("\n  WLE estimation  |" )
+        cat('\n  WLE estimation  |' )
     }
     old_increment <- rep( 5, length(theta))
     eps <- 1E-10
@@ -54,15 +55,16 @@ wle.rasch <- function( dat, dat.resp=NULL, b, itemweights=1+0*b,
         theta.change <- - f.obj / ( f1.obj + eps )
         # define damped increment!!
         max_increment <- abs(old_increment)
-        theta.change <- sirt_trim_increment(increment=theta.change, max_increment=max_increment)
+        theta.change <- sirt_trim_increment(increment=theta.change,
+                                max_increment=max_increment)
         old_increment <- abs(theta.change)
         theta <- theta + theta.change
         iter <- iter + 1
         if ( any( is.nan( theta.change ) ) ){
-            stop( "Numerical problems occur during WLE estimation procedure.")
+            stop( 'Numerical problems occur during WLE estimation procedure.')
         }
         if ( progress){
-            cat("-")
+            cat('-')
         }
     }
     res <- list( theta=theta, se.theta=1/sqrt(abs(f1.obj)),
@@ -71,7 +73,7 @@ wle.rasch <- function( dat, dat.resp=NULL, b, itemweights=1+0*b,
     v1 <- stats::var(res$theta)
     v2 <- mean(res$se.theta^2 )
     wle.rel <- ( v1 - v2 ) / v1
-    cat("\nWLE Reliability=", round(wle.rel,3), "\n")
+    cat('\nWLE Reliability=', round(wle.rel,3), '\n')
     res$wle.rel <- wle.rel
     return(res)
 }

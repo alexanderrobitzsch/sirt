@@ -1,5 +1,6 @@
 ## File Name: mgsem_proc_model_is_B.R
 ## File Version: 0.02
+## File Last Change: 2022-01-20
 
 
 mgsem_proc_model_is_B <- function(model)

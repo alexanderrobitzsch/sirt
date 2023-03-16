@@ -1,5 +1,6 @@
 ## File Name: rasch_mml2_rmsd.R
 ## File Version: 0.02
+## File Last Change: 2020-12-07
 
 rasch_mml2_rmsd <- function(n.jk, r.jk, rprobs, pi.k, dat)
 {

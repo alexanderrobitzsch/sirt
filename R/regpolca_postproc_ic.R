@@ -1,5 +1,6 @@
 ## File Name: regpolca_postproc_ic.R
 ## File Version: 0.05
+## File Last Change: 2020-03-04
 
 
 regpolca_postproc_ic <- function(ic, n_reg)

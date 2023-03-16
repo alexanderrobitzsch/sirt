@@ -1,5 +1,6 @@
 ## File Name: testlet.marginalized.R
-## File Version: 0.15
+## File Version: 0.164
+## File Last Change: 2023-03-08
 
 
 testlet.marginalized <- function( tam.fa.obj=NULL, a1=NULL, d1=NULL, testlet=NULL,
@@ -25,16 +26,17 @@ testlet.marginalized <- function( tam.fa.obj=NULL, a1=NULL, d1=NULL, testlet=NUL
         itemlabel <- colnames(mod1$resp)
     }
     # compute marginalized item intercepts and item slopes
-    k <- 16*sqrt(3) / ( 15*pi )     # multiplication constant
+    k <- 16*sqrt(3)/( 15*pi )     # multiplication constant
             # 1 / k=1.700
     # compute lambda_logit
     multfac <- 1 - is.na(testlet)
     testlet1 <- testlet
     testlet1[ is.na(testlet1) ] <- 1
     a.testlet[ is.na(testlet) ] <- 0
-    lambda.logit <- 1 / sqrt( 1 + k^2 * multfac * a.testlet[ testlet1 ]^2 * var.testlet[ testlet1 ] )
+    lambda.logit <- 1 / sqrt( 1 + k^2 * multfac * a.testlet[ testlet1 ]^2 *
+                                    var.testlet[ testlet1 ] )
     # compute item parameters
-    dfr <- data.frame("item"=itemlabel )
+    dfr <- data.frame('item'=itemlabel )
     dfr$testlet <- testlet
     dfr$a1 <- a1
     dfr$d1 <- d1

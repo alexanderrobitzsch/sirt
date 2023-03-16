@@ -1,5 +1,6 @@
 ## File Name: noharm_sirt_preproc_pattern_matrix.R
 ## File Version: 0.17
+## File Last Change: 2019-01-09
 
 noharm_sirt_preproc_pattern_matrix <- function(pattmat, minval=0, symm=FALSE)
 {

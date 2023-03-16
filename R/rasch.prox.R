@@ -1,5 +1,6 @@
 ## File Name: rasch.prox.R
 ## File Version: 1.14
+## File Last Change: 2018-12-30
 
 
 

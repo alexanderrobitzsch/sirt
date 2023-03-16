@@ -1,5 +1,6 @@
 ## File Name: cfa_meas_inv.R
 ## File Version: 0.158
+## File Last Change: 2022-10-11
 
 
 cfa_meas_inv <- function(dat, group, weights=NULL, alpha=0.01, verbose=FALSE,

@@ -1,5 +1,6 @@
 ## File Name: xxirt_coef.R
 ## File Version: 0.09
+## File Last Change: 2018-12-30
 
 ##########################################
 # coef S3 method for xxirt objects

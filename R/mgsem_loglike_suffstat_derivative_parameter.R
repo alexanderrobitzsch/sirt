@@ -1,5 +1,6 @@
 ## File Name: mgsem_loglike_suffstat_derivative_parameter.R
 ## File Version: 0.218
+## File Last Change: 2022-07-27
 
 mgsem_loglike_suffstat_derivative_parameter <- function(est, dermoments, suffstat,
         type, i1, i2, h, is_B=FALSE, eps=1e-12, num_approx=FALSE)

@@ -133,7 +133,7 @@ item responses</p></td>
     <tr>
       <th>theta</th>
       <td><p>Estimated theta values, for example weighted likelihood
-estimates from <code>wle.rasch</code></p></td>
+estimates from <code><a href='wle.rasch.html'>wle.rasch</a></code></p></td>
     </tr>
     <tr>
       <th>thetagrid</th>
@@ -182,9 +182,9 @@ nonparametric item characteristic curve estimation.
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.read</span>
 
 <span class='co'># estimate Rasch model</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span> )
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span> )
 <span class='co'># WLE estimation</span>
-<span class='no'>wle1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>wle.rasch</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> )$<span class='no'>theta</span>
+<span class='no'>wle1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='wle.rasch.html'>wle.rasch</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> )$<span class='no'>theta</span>
 <span class='co'># nonparametric function estimation</span>
 <span class='no'>np1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>np.dich</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>theta</span><span class='kw'>=</span><span class='no'>wle1</span>, <span class='kw'>thetagrid</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>2.5</span>, <span class='fl'>2.5</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>100</span> ) )
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>( <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>np1</span>))

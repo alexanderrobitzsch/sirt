@@ -202,7 +202,7 @@ of generalized compensatory multidimensional items.
 doi: <a href='https://doi.org/10.1007/BF02294532'>10.1007/BF02294532</a></p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>This function is used in <code>conf.detect</code> and <code>expl.detect</code>.</p>
+    <p>This function is used in <code><a href='conf.detect.html'>conf.detect</a></code> and <code><a href='expl.detect.html'>expl.detect</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -214,8 +214,8 @@ doi: <a href='https://doi.org/10.1007/BF02294532'>10.1007/BF02294532</a></p>
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.read</span>
 
 <span class='co'>#* fit Rasch model</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>(<span class='no'>dat</span>)
-<span class='no'>score</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>wle.rasch</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span>)$<span class='no'>theta</span>
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>(<span class='no'>dat</span>)
+<span class='no'>score</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='wle.rasch.html'>wle.rasch</a></span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span>)$<span class='no'>theta</span>
 
 <span class='co'>#* ccov with smoothing</span>
 <span class='no'>cmod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>ccov.np</span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='no'>score</span>, <span class='kw'>bwscale</span><span class='kw'>=</span><span class='fl'>1.1</span>)

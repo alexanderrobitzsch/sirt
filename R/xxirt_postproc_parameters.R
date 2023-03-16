@@ -1,5 +1,6 @@
 ## File Name: xxirt_postproc_parameters.R
-## File Version: 0.226
+## File Version: 0.231
+## File Last Change: 2023-03-08
 
 
 
@@ -25,16 +26,16 @@ xxirt_postproc_parameters <- function( partable, customTheta,
         m1[ p1$item, parnames[pp] ] <- p1$value
     }
     p1 <- partable[ ! duplicated(partable$item ), ]
-    dfr <- data.frame( "item"=items, "type"=paste(p1$type), m1  )
+    dfr <- data.frame( item=items, type=paste(p1$type), m1  )
     rownames(dfr) <- NULL
 
     #*** probabilities item parameters
     pi_dim <- dim(probs_items)
     dimnames(probs_items)[[1]] <- items
-    dimnames(probs_items)[[2]] <- paste0("Cat", seq(0,pi_dim[2]-1) )
+    dimnames(probs_items)[[2]] <- paste0('Cat', seq(0,pi_dim[2]-1) )
     #*** lower and upper bounds
-    p1 <- partable[ partable$parfree==1, c("item", "type", "parname",
-                "value", "lower", "upper", "parindex", "parlabel" ) ]
+    p1 <- partable[ partable$parfree==1, c('item', 'type', 'parname',
+                        'value', 'lower', 'upper', 'parindex', 'parlabel' ) ]
     p1$active <- 1 * ( p1$value > p1$lower )
     p1$active <- p1$active * ( p1$value < p1$upper )
     par_items_bounds <- p1

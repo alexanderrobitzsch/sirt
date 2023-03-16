@@ -1,5 +1,6 @@
 ## File Name: mgsem_proc_model_difflp_information.R
 ## File Version: 0.186
+## File Last Change: 2022-02-25
 
 
 mgsem_proc_model_difflp_information <- function(partable)

@@ -124,7 +124,7 @@ xxirt function in the sirt package." />
 simulating the model, <code>nedelsky.irf</code> computes the item response
 function and can be used for example when estimating the
 Nedelsky model in the <span class="pkg">mirt</span> package or using the
-<code>xxirt</code> function in the <span class="pkg">sirt</span> package.</p>
+<code><a href='xxirt.html'>xxirt</a></code> function in the <span class="pkg">sirt</span> package.</p>
     </div>
 
     <pre class="usage"><span class='co'># simulating the Nedelsky model</span>
@@ -267,14 +267,14 @@ sciences</em>, pp. 187-206. Mahwah, Lawrence Erlbaum.</p>
 <span class='co'># model summaries</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>mod1</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
-<span class='fu'>mirt.wrapper.coef</span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>
-<span class='fu'>mirt.wrapper.itemplot</span>(<span class='no'>mod1</span>,<span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>
+<span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.itemplot</a></span>(<span class='no'>mod1</span>,<span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
 <span class='co'>#******************************************************</span>
 <span class='co'># fit Nedelsky model with xxirt function in sirt</span>
 
 <span class='co'># define item class for xxirt</span>
-<span class='no'>item_nedelsky</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>xxirt_createDiscItem</span>( <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"nedelsky"</span>, <span class='kw'>par</span><span class='kw'>=</span><span class='no'>par</span>,
+<span class='no'>item_nedelsky</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='xxirt_createParTable.html'>xxirt_createDiscItem</a></span>( <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"nedelsky"</span>, <span class='kw'>par</span><span class='kw'>=</span><span class='no'>par</span>,
                 <span class='kw'>est</span><span class='kw'>=</span><span class='no'>est</span>, <span class='kw'>P</span><span class='kw'>=</span><span class='no'>nedelsky.icc</span>,
                 <span class='kw'>prior</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='kw'>b1</span><span class='kw'>=</span><span class='st'>"dnorm"</span>, <span class='kw'>b2</span><span class='kw'>=</span><span class='st'>"dnorm"</span>, <span class='kw'>b3</span><span class='kw'>=</span><span class='st'>"dnorm"</span> ),
                 <span class='kw'>prior_par1</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='kw'>b1</span><span class='kw'>=</span>-<span class='fl'>1</span>, <span class='kw'>b2</span><span class='kw'>=</span>-<span class='fl'>1</span>, <span class='kw'>b3</span><span class='kw'>=</span>-<span class='fl'>1</span>),
@@ -297,15 +297,15 @@ sciences</em>, pp. 187-206. Mahwah, Lawrence Erlbaum.</p>
 }
 <span class='co'>#** create distribution class</span>
 <span class='no'>par_Theta</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='st'>"mu"</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='st'>"sigma"</span><span class='kw'>=</span><span class='fl'>1</span> )
-<span class='no'>customTheta</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>xxirt_createThetaDistribution</span>( <span class='kw'>par</span><span class='kw'>=</span><span class='no'>par_Theta</span>, <span class='kw'>est</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>,<span class='fl'>TRUE</span>),
+<span class='no'>customTheta</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='xxirt_createThetaDistribution.html'>xxirt_createThetaDistribution</a></span>( <span class='kw'>par</span><span class='kw'>=</span><span class='no'>par_Theta</span>, <span class='kw'>est</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>,<span class='fl'>TRUE</span>),
                    <span class='kw'>P</span><span class='kw'>=</span><span class='no'>P_Theta1</span> )
 
 <span class='co'>#-- create parameter table</span>
 <span class='no'>itemtype</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>( <span class='st'>"nedelsky"</span>, <span class='no'>I</span> )
-<span class='no'>partable</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>xxirt_createParTable</span>( <span class='no'>dat</span>, <span class='kw'>itemtype</span><span class='kw'>=</span><span class='no'>itemtype</span>, <span class='kw'>customItems</span><span class='kw'>=</span><span class='no'>customItems</span>)
+<span class='no'>partable</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='xxirt_createParTable.html'>xxirt_createParTable</a></span>( <span class='no'>dat</span>, <span class='kw'>itemtype</span><span class='kw'>=</span><span class='no'>itemtype</span>, <span class='kw'>customItems</span><span class='kw'>=</span><span class='no'>customItems</span>)
 
 <span class='co'># estimate model</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>xxirt</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>Theta</span><span class='kw'>=</span><span class='no'>Theta</span>, <span class='kw'>partable</span><span class='kw'>=</span><span class='no'>partable</span>, <span class='kw'>customItems</span><span class='kw'>=</span><span class='no'>customItems</span>,
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='xxirt.html'>xxirt</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>Theta</span><span class='kw'>=</span><span class='no'>Theta</span>, <span class='kw'>partable</span><span class='kw'>=</span><span class='no'>partable</span>, <span class='kw'>customItems</span><span class='kw'>=</span><span class='no'>customItems</span>,
                     <span class='kw'>customTheta</span><span class='kw'>=</span><span class='no'>customTheta</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 <span class='co'># compare sirt::xxirt and mirt::mirt</span>
@@ -362,8 +362,8 @@ sciences</em>, pp. 187-206. Mahwah, Lawrence Erlbaum.</p>
 <span class='co'>#*** summaries</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>mod1</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
-<span class='fu'>mirt.wrapper.coef</span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>
-<span class='fu'>mirt.wrapper.itemplot</span>(<span class='no'>mod1</span>,<span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>
+<span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.itemplot</a></span>(<span class='no'>mod1</span>,<span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 }</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

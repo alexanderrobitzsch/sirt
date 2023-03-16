@@ -1,5 +1,6 @@
 ## File Name: sirt_remove_arguments_function.R
 ## File Version: 0.02
+## File Last Change: 2019-05-17
 
 sirt_remove_arguments_function <- function(fun, args)
 {

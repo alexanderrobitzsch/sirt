@@ -1,5 +1,6 @@
 ## File Name: mgsem_evaluate_penalties.R
 ## File Version: 0.294
+## File Last Change: 2022-02-25
 
 
 mgsem_evaluate_penalties <- function(x, partable, prior_list, technical,

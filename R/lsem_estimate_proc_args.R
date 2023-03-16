@@ -1,5 +1,6 @@
 ## File Name: lsem_estimate_proc_args.R
-## File Version: 0.402
+## File Version: 0.403
+## File Last Change: 2023-03-15
 
 lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     pseudo_weights, lavmodel, data, use_lavaan_survey, est_joint=FALSE,
@@ -18,13 +19,13 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     #- variables in model
     partable <- sirt_import_lavaan_lavaanify(model=lavmodel)
     variables_model <- intersect( union( partable$lhs, partable$rhs ), colnames(data) )
-    has_meanstructure <- "~" %in% partable$op
+    has_meanstructure <- '~' %in% partable$op
 
     #- joint estimation
     par_vec <- union(union(par_invariant, par_linear), par_quadratic)
     if (length(par_vec)>0){
         if (verbose){
-            cat("Use joint estimation\n")
+            cat('Use joint estimation\n')
         }
         est_joint <- TRUE
         # sufficient_statistics <- TRUE
@@ -37,15 +38,15 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     }
 
     lavaan_args_names <- names(lavaan.args)
-    if ( "missing" %in% lavaan_args_names){
-        if ( lavaan.args[["missing"]]=="fiml" ){
+    if ( 'missing' %in% lavaan_args_names){
+        if ( lavaan.args[['missing']]=='fiml' ){
             sufficient_statistics <- FALSE
         }
     }
 
     #- ordered variables
     variables_ordered <- NULL
-    if ("ordered" %in% names(lavaan.args)){
+    if ('ordered' %in% names(lavaan.args)){
         sufficient_statistics <- FALSE
         variables_ordered <- lavaan.args$ordered
     }
@@ -70,18 +71,18 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
             use_pseudo_weights <- TRUE
         }
         if (some_ordinal){
-            stop("Cannot perform joint estimation for non-continuous data.")
+            stop('Cannot perform joint estimation for non-continuous data.')
         }
     }
     if (is.null(se)){
         if (est_joint){
-            se <- "none"
+            se <- 'none'
         } else {
-            se <- "standard"
+            se <- 'standard'
 
         }
     }
-    compute_se <- se !="none"
+    compute_se <- se!='none'
 
     #-- output
     res <- list(sufficient_statistics=sufficient_statistics,

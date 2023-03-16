@@ -1,5 +1,6 @@
 ## File Name: regpolca_penalty_fun.R
 ## File Version: 0.04
+## File Last Change: 2020-07-04
 
 
 regpolca_penalty_fun <- function(x, regular_grouped, I, partable,

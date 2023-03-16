@@ -1,5 +1,6 @@
 ## File Name: mgsem_proc_suffstat.R
 ## File Version: 0.097
+## File Last Change: 2022-02-25
 
 
 mgsem_proc_suffstat <- function(suffstat)

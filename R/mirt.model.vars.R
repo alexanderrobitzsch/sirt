@@ -1,5 +1,6 @@
 ## File Name: mirt.model.vars.R
 ## File Version: 0.24
+## File Last Change: 2019-04-30
 
 
 #-- Input is a mirt syntax specified with variable names instead of numbers

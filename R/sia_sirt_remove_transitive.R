@@ -1,5 +1,6 @@
 ## File Name: sia_sirt_remove_transitive.R
 ## File Version: 0.13
+## File Last Change: 2018-12-30
 
 
 #**** remove transitive relations

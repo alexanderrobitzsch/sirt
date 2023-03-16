@@ -1,5 +1,6 @@
 ## File Name: mgsem_opt_fun.R
 ## File Version: 0.222
+## File Last Change: 2023-02-06
 
 
 mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)

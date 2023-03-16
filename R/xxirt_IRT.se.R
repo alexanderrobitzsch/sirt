@@ -1,5 +1,6 @@
 ## File Name: xxirt_IRT.se.R
-## File Version: 0.10
+## File Version: 0.11
+## File Last Change: 2023-03-08
 
 
 IRT.se.xxirt <- function( object, ...)
@@ -10,7 +11,7 @@ IRT.se.xxirt <- function( object, ...)
     par2 <- xxirt_parTheta_extract_freeParameters( object$customTheta )
     N1 <- length(par1)
     N2 <- length(par2)
-    dfr <- data.frame("partype"=c( rep("item",N1), rep("Theta",N2) ) )
+    dfr <- data.frame(partype=c( rep('item',N1), rep('Theta',N2) ))
     dfr$parlabel <- names(c1)
     dfr$value <- c1
     dfr$se <- sqrt( diag(v1) )

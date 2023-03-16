@@ -1,5 +1,6 @@
 ## File Name: package_version_date.R
 ## File Version: 0.08
+## File Last Change: 2018-12-30
 
 package_version_date <- function(package)
 {

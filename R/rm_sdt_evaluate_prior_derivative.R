@@ -1,5 +1,6 @@
 ## File Name: rm_sdt_evaluate_prior_derivative.R
 ## File Version: 0.08
+## File Last Change: 2019-07-21
 
 
 rm_sdt_evaluate_prior_derivative <- function(partable, h)

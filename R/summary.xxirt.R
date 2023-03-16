@@ -1,5 +1,6 @@
 ## File Name: summary.xxirt.R
 ## File Version: 0.275
+## File Last Change: 2020-02-24
 
 
 #--- summary for xxirt object

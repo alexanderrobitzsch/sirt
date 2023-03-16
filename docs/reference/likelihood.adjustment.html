@@ -224,7 +224,7 @@ Princeton, NJ: Educational Testing Service.</p>
 
 <span class='co'>#*** Model 2: fit Rasch copula model</span>
 <span class='no'>testlets</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substring</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>), <span class='fl'>1</span>, <span class='fl'>1</span> )
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.copula2</span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>testlets</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='no'>theta.k</span>)
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.copula.html'>rasch.copula2</a></span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>testlets</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='no'>theta.k</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># model comparison</span>

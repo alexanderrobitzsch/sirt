@@ -122,7 +122,8 @@ and latent trait distributions can be specified by the user (see Details).</p>
     <pre class="usage"><span class='fu'>xxirt</span>(<span class='no'>dat</span>, <span class='kw'>Theta</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>itemtype</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>customItems</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>partable</span><span class='kw'>=</span><span class='kw'>NULL</span>,
        <span class='kw'>customTheta</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>group</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>globconv</span><span class='kw'>=</span><span class='fl'>1e-06</span>, <span class='kw'>conv</span><span class='kw'>=</span><span class='fl'>1e-04</span>,
        <span class='kw'>maxit</span><span class='kw'>=</span><span class='fl'>1000</span>, <span class='kw'>mstep_iter</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>mstep_reltol</span><span class='kw'>=</span><span class='fl'>1e-06</span>, <span class='kw'>h</span><span class='kw'>=</span><span class='fl'>1E-4</span>, <span class='kw'>use_grad</span><span class='kw'>=</span><span class='fl'>TRUE</span>,
-       <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>penalty_fun_item</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>np_fun_item</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>verbose_index</span><span class='kw'>=</span><span class='kw'>NULL</span>)
+       <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>penalty_fun_item</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>np_fun_item</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>verbose_index</span><span class='kw'>=</span><span class='kw'>NULL</span>,
+       <span class='kw'>cv_kfold</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>cv_maxit</span><span class='kw'>=</span><span class='fl'>10</span>)
 
 <span class='co'># S3 method for xxirt</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
@@ -190,18 +191,18 @@ and latent trait distributions can be specified by the user (see Details).</p>
     <tr>
       <th>customItems</th>
       <td><p>List containing types of item response functions created by
-<code>xxirt_createDiscItem</code>.</p></td>
+<code><a href='xxirt_createParTable.html'>xxirt_createDiscItem</a></code>.</p></td>
     </tr>
     <tr>
       <th>partable</th>
       <td><p>Item parameter table which is initially created by
-<code>xxirt_createParTable</code> and which can be modified by
-<code>xxirt_modifyParTable</code>.</p></td>
+<code><a href='xxirt_createParTable.html'>xxirt_createParTable</a></code> and which can be modified by
+<code><a href='xxirt_createParTable.html'>xxirt_modifyParTable</a></code>.</p></td>
     </tr>
     <tr>
       <th>customTheta</th>
       <td><p>User defined \(\bold{\theta}\) distribution created by
-<code>xxirt_createThetaDistribution</code>.</p></td>
+<code><a href='xxirt_createThetaDistribution.html'>xxirt_createThetaDistribution</a></code>.</p></td>
     </tr>
     <tr>
       <th>group</th>
@@ -280,6 +281,15 @@ estimation. Used as a function of <code>x</code> (vector of item parameters)</p>
 printed in estimation output</p></td>
     </tr>
     <tr>
+      <th>cv_kfold</th>
+      <td><p>Number of k folds in cross validation. The default is 0 (no
+cross-validation)</p></td>
+    </tr>
+    <tr>
+      <th>cv_maxit</th>
+      <td><p>Maximum number of iterations for each cross-validation sample</p></td>
+    </tr>
+    <tr>
       <th>x</th>
       <td><p>Object of class <code>xxirt</code></p></td>
     </tr>
@@ -326,6 +336,7 @@ be approximated by a differentiable function.</p>
 <dt>item_list</dt><dd><p>List with item functions</p></dd>
 <dt>customItems</dt><dd><p>Used customized item response functions</p></dd>
 <dt>customTheta</dt><dd><p>Used customized theta distribution</p></dd>
+<dt>cv_loglike</dt><dd><p>Cross-validated log-likelihood value (if <code>cv_kfold&gt;0</code>)</p></dd>
 <dt>p.xi.aj</dt><dd><p>Individual likelihood</p></dd>
 <dt>p.aj.xi</dt><dd><p>Individual posterior</p></dd>
 <dt>ll_case</dt><dd><p>Case-wise log-likelihood values</p></dd>

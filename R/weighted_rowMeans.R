@@ -1,5 +1,6 @@
 ## File Name: weighted_rowMeans.R
 ## File Version: 0.09
+## File Last Change: 2018-12-30
 
 weighted_rowMeans <- function( mat, wgt=NULL)
 {

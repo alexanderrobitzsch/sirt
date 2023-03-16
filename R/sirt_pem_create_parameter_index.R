@@ -1,5 +1,6 @@
 ## File Name: sirt_pem_create_parameter_index.R
-## File Version: 0.09
+## File Version: 0.11
+## File Last Change: 2023-03-08
 
 
 sirt_pem_create_parameter_index <- function( parmlist )
@@ -7,7 +8,7 @@ sirt_pem_create_parameter_index <- function( parmlist )
     NP <- length(parmlist)
     parm_index <- list()
     parmlist_names <- names(parmlist)
-    parm_index_names <- rep("", NP)
+    parm_index_names <- rep('', NP)
     last_index <- 0
     for (pp in 1:NP){
         x <- parmlist[[pp]]
@@ -23,7 +24,7 @@ sirt_pem_create_parameter_index <- function( parmlist )
     }
     names(parm_index) <- parm_index_names
     #-- more meta-information about parameters
-    parm_index[["__n_parameters"]] <- NP
-    parm_index[["__length_parameter_vector"]] <- last_index
+    parm_index[['__n_parameters']] <- NP
+    parm_index[['__length_parameter_vector']] <- last_index
     return(parm_index)
 }

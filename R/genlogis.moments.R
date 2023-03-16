@@ -1,5 +1,6 @@
 ## File Name: genlogis.moments.R
-## File Version: 0.01
+## File Version: 0.02
+## File Last Change: 2023-03-08
 
 
 #-- moments of generalized logistic distribution
@@ -13,6 +14,6 @@ genlogis.moments <- function( alpha1, alpha2)
     M <- sum( wgt * out )
     SD <- sqrt( sum( wgt*out^2 ) - M^2 )
     moments <- c(M, SD, SD^2 )
-    names(moments) <- c("M", "SD", "Var" )
+    names(moments) <- c('M','SD','Var')
     return(moments)
 }

@@ -1,5 +1,6 @@
 ## File Name: invariance_alignment_summary_optimization.R
 ## File Version: 0.082
+## File Last Change: 2020-03-28
 
 invariance_alignment_summary_optimization <- function(object, digits)
 {

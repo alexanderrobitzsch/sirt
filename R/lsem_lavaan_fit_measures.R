@@ -1,5 +1,6 @@
 ## File Name: lsem_lavaan_fit_measures.R
 ## File Version: 0.07
+## File Last Change: 2019-04-26
 
 lsem_lavaan_fit_measures <- function(object, fit_measures)
 {

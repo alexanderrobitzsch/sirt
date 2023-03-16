@@ -1,5 +1,6 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.622
+## File Version: 0.623
+## File Last Change: 2023-03-15
 
 lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
                 verbose, pars, standardized, variables_model, sufficient_statistics,
@@ -67,18 +68,18 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
 
         #*** assessment of DIF effects
         partable_dif <- partable_joint
-        partable_dif[ partable_dif$free > 0, "free"] <- 0
-        partable_dif[ partable_dif$par %in% par_invariant, "free"] <- 1
-        ind1 <- intersect( grep("=~", partable_dif$par), which( partable_joint$free==0) )
+        partable_dif[ partable_dif$free > 0, 'free'] <- 0
+        partable_dif[ partable_dif$par %in% par_invariant, 'free'] <- 1
+        ind1 <- intersect( grep('=~', partable_dif$par), which( partable_joint$free==0) )
         ind2 <- NULL
         if (has_meanstructure){
-            ind2 <- intersect( grep("~1", partable_dif$par),
+            ind2 <- intersect( grep('~1', partable_dif$par),
                                     which( partable_joint$free==0) )
         }
-        ind3 <- intersect( grep("~~", partable_dif$par), which( partable_joint$free==0) )
-        partable_dif[ c(ind1,ind2, ind3), "free"] <- 1
+        ind3 <- intersect( grep('~~', partable_dif$par), which( partable_joint$free==0) )
+        partable_dif[ c(ind1,ind2, ind3), 'free'] <- 1
 
-        partable_dif <- partable_dif[ - grep( "_con", partable_dif$par), ]
+        partable_dif <- partable_dif[ - grep( '_con', partable_dif$par), ]
         partable_dif$start <- partable_dif$est
         partable_dif$free <- cumsum(partable_dif$free)*(partable_dif$free>0)
         if ( sum(partable_dif$free)==0 ){
@@ -125,8 +126,8 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
 
         if (standardized){
             sol <- sirt_import_lavaan_standardizedSolution(object=survey.fit)
-            colnames(sol)[ which( colnames(sol)=="est.std" ) ] <- "est"
-            sol$lhs <- paste0( "std__", sol$lhs)
+            colnames(sol)[ which( colnames(sol)=='est.std' ) ] <- 'est'
+            sol$lhs <- paste0( 'std__', sol$lhs)
             pars <- sirt_rbind_fill( x=pars, y=sol )
             dfr.gg <- pars
         }
@@ -172,24 +173,23 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
             NP <- max(parameters$parindex)
             parameters1 <- parameters[ parameters$par %in% pars1, ]
             parameters1$est <- dif1$est
-            parameters1$par <- paste0("dif__", parameters1$par)
+            parameters1$par <- paste0('dif__', parameters1$par)
             parameters1$parindex <- match( parameters1$parindex,
                                             unique( parameters1$parindex ) ) + NP
             parameters <- rbind( parameters, parameters1)
         }
 
-
         #- verbose
         res <- lsem_fitsem_verbose_progress(gg=gg, G=G, pr=pr, verbose=verbose)
         if (est_joint){ break }
     }
-    if ( sum(colnames(parameters)=="se")==0){
+    if ( sum(colnames(parameters)=='se')==0){
         parameters$se <- NA
     }
 
     res <- lsem_fitsem_verbose_progress(gg=G+1, G=G, pr=pr, verbose=verbose)
     parameters <- parameters[ order(parameters$parindex), ]
-    rownames(parameters) <- paste0( parameters$par, "__", parameters$grid_index )
+    rownames(parameters) <- paste0( parameters$par, '__', parameters$grid_index )
 
     #--- OUTPUT
     res <- list( parameters=parameters, is_meanstructure=is_meanstructure,

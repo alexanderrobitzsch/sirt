@@ -1,5 +1,6 @@
 ## File Name: rexppow.R
 ## File Version: 0.22
+## File Last Change: 2020-04-27
 
 
 rexppow <- function (n, mu=0, sigmap=1, pow=2, xbound=100, xdiff=.01)

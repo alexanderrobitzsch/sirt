@@ -1,5 +1,6 @@
 ## File Name: sirt_fisherz.R
 ## File Version: 0.07
+## File Last Change: 2019-04-30
 
 
 ### just a copy of fisherz from psych package

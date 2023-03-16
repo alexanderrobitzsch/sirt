@@ -1,5 +1,6 @@
 ## File Name: rm_sdt_fill_init_partable.R
 ## File Version: 0.11
+## File Last Change: 2018-12-30
 
 
 rm_sdt_fill_init_partable <- function(partable, par_index, tau.item, a.item,

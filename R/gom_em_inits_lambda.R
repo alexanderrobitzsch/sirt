@@ -1,5 +1,6 @@
 ## File Name: gom_em_inits_lambda.R
 ## File Version: 0.05
+## File Last Change: 2019-05-18
 
 gom_em_inits_lambda <- function(I, K, lambda.inits=NULL, lambda_partable=NULL)
 {

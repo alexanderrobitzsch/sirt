@@ -1,5 +1,6 @@
 ## File Name: invariance_alignment_find_parameter_constraints.R
-## File Version: 0.415
+## File Version: 0.416
+## File Last Change: 2023-02-19
 
 invariance_alignment_find_parameter_constraints <- function(parm,
     parm_tol, miss_items, wgt=NULL, maxiter=10, conv=1E-4)
@@ -44,7 +45,8 @@ invariance_alignment_find_parameter_constraints <- function(parm,
     N_unique_parm_items <- colSums( abs(parm_est-pj)>eps, na.rm=TRUE )
     names(N_unique_parm_items) <- parm_names
 
-    N_parm_items <- ( colSums( abs(parm_est-pj)<=eps, na.rm=TRUE ) > 0 ) + N_unique_parm_items
+    N0 <- ( colSums( abs(parm_est-pj)<=eps, na.rm=TRUE ) > 0 )
+    N_parm_items <- N0 + N_unique_parm_items
     names(N_parm_items) <- parm_names
 
     N_parm_all <- sum(N_parm_items)

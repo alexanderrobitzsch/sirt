@@ -1,5 +1,6 @@
 ## File Name: mirt_prodterms.R
 ## File Version: 0.091
+## File Last Change: 2019-10-30
 
 
 # prodterms function from mirt package

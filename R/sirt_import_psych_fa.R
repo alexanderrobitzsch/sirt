@@ -1,9 +1,10 @@
 ## File Name: sirt_import_psych_fa.R
-## File Version: 0.02
+## File Version: 0.03
+## File Last Change: 2023-03-08
 
 sirt_import_psych_fa <- function(r, nfactors, ...)
 {
-    TAM::require_namespace_msg("psych")
+    TAM::require_namespace_msg('psych')
     y <- psych::fa( r=r, nfactors=nfactors, ...)
     return(y)
 }

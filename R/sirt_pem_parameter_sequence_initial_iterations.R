@@ -1,12 +1,14 @@
 ## File Name: sirt_pem_parameter_sequence_initial_iterations.R
-## File Version: 0.04
+## File Version: 0.07
+## File Last Change: 2023-03-08
 
-sirt_pem_parameter_sequence_initial_iterations <- function( pem_parm, pem_parameter_sequence, iter )
+sirt_pem_parameter_sequence_initial_iterations <- function( pem_parm,
+            pem_parameter_sequence, iter )
 {
     if (iter < 3){
         for (ii in 0:2){
             if (iter==ii){
-                pem_parameter_sequence[[ paste0("P",ii) ]] <- pem_parm
+                pem_parameter_sequence[[ paste0('P',ii) ]] <- pem_parm
             }
         }
     }

@@ -1,5 +1,6 @@
 ## File Name: rasch_mml2_prior_information.R
 ## File Version: 0.04
+## File Last Change: 2019-10-27
 
 rasch_mml2_prior_information <- function(prior.a, prior.b, prior.c,
     prior.d)

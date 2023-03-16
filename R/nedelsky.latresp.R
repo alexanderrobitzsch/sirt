@@ -1,5 +1,6 @@
 ## File Name: nedelsky.latresp.R
 ## File Version: 0.10
+## File Last Change: 2018-12-30
 
 
 #---- latent responses for Nedelksy function

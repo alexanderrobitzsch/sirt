@@ -146,7 +146,7 @@ Hu, Rogers, &amp; Vukmirovic, 2008).</p>
       <td><p>A data frame with four or five columns. The first four columns contain
 in the order: study name, item name, \(a\) parameter, \(b\) parameter.
 The fifth column is an optional weight for every item and every study. See
-<code>linking.haberman</code> for a function which uses the same argument.</p></td>
+<code><a href='linking.haberman.html'>linking.haberman</a></code> for a function which uses the same argument.</p></td>
     </tr>
     <tr>
       <th>dist</th>
@@ -256,7 +256,7 @@ methods in the presence of outlier common items. <em>Applied Psychological Measu
 doi: <a href='https://doi.org/10.1177/0146621606292215'>10.1177/0146621606292215</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See <code>invariance.alignment</code> and <code>linking.haberman</code>
+    <div class='dont-index'><p>See <code><a href='invariance.alignment.html'>invariance.alignment</a></code> and <code><a href='linking.haberman.html'>linking.haberman</a></code>
 for alternative linking methods in the <span class="pkg">sirt</span> package. See also
 <code><a href='https://rdrr.io/pkg/TAM/man/tam.linking.html'>TAM::tam.linking</a></code> in the <span class="pkg">TAM</span> package for more linking functionality
 and the <span style="R">R</span> packages <span class="pkg">plink</span>, <span class="pkg">equateIRT</span>, <span class="pkg">equateMultiple</span> and
@@ -307,11 +307,11 @@ and the <span style="R">R</span> packages <span class="pkg">plink</span>, <span 
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2c</span>)
 
 <span class='co'>#* Haberman linking non-robust</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>)
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'>#* Haberman linking robust</span>
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haberman</span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>a_trim</span><span class='kw'>=</span><span class='fl'>.25</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.5</span>)
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='linking.haberman.html'>linking.haberman</a></span>(<span class='no'>itempars</span>, <span class='kw'>estimation</span><span class='kw'>=</span><span class='st'>"BSQ"</span>, <span class='kw'>a_trim</span><span class='kw'>=</span><span class='fl'>.25</span>, <span class='kw'>b_trim</span><span class='kw'>=</span><span class='fl'>.5</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod4</span>)
 
 <span class='co'>#* compare transformation parameters (means and standard deviations)</span>

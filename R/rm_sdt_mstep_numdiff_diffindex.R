@@ -1,5 +1,6 @@
 ## File Name: rm_sdt_mstep_numdiff_diffindex.R
 ## File Version: 0.04
+## File Last Change: 2018-12-30
 
 
 rm_sdt_mstep_numdiff_diffindex <- function(ll1, ll2, numdiff.parm,

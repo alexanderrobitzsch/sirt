@@ -1,5 +1,6 @@
 ## File Name: mgsem_power_fun_differentiable_approx.R
 ## File Version: 0.08
+## File Last Change: 2022-02-25
 
 mgsem_power_fun_differentiable_approx <- function(x, p, eps, deriv=FALSE,
         approx_method="lp")

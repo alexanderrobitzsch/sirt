@@ -1,5 +1,6 @@
 ## File Name: lsdm_extract_probquantile.R
 ## File Version: 0.14
+## File Last Change: 2019-01-01
 
 
 # auxiliary function for extracting quantiles of curves

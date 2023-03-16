@@ -1,5 +1,6 @@
 ## File Name: invariance_alignment_cfa_config.R
-## File Version: 0.252
+## File Version: 0.253
+## File Last Change: 2023-03-08
 
 
 invariance_alignment_cfa_config <- function(dat, group, weights=NULL,
@@ -53,9 +54,9 @@ invariance_alignment_cfa_config <- function(dat, group, weights=NULL,
             args$N <- dat_gg$N
             ind_gg <- 1:I
         }
-        cat( paste0("Compute CFA for group ", gg, " | model ", model, "\n") )
+        cat( paste0('Compute CFA for group ', gg, ' | model ', model, '\n') )
         utils::flush.console()
-        res <- do.call(what="invariance_alignment_cfa_config_estimate", args=args)
+        res <- do.call(what='invariance_alignment_cfa_config_estimate', args=args)
         nu[gg, ind_gg] <- res$nu
         lambda[gg, ind_gg] <- res$lambda
         err_var[gg, ind_gg] <- res$err_var

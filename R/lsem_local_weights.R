@@ -1,5 +1,6 @@
 ## File Name: lsem_local_weights.R
-## File Version: 0.198
+## File Version: 0.202
+## File Last Change: 2023-03-03
 
 lsem_local_weights <- function(data.mod, moderator.grid, h,
         sampling_weights=NULL, bw=NULL, kernel="gaussian")

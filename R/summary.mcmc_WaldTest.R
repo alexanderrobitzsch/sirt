@@ -1,5 +1,6 @@
 ## File Name: summary.mcmc_WaldTest.R
 ## File Version: 0.01
+## File Last Change: 2019-04-26
 
 # summary of Wald Test based on MCMC output
 summary.mcmc_WaldTest <- function( object, digits=3, ... )

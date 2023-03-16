@@ -1,5 +1,6 @@
 ## File Name: sirt_eigenvalues.R
 ## File Version: 0.25
+## File Last Change: 2022-05-16
 
 
 # calculation of first D eigenvalues

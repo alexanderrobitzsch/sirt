@@ -1,5 +1,6 @@
 ## File Name: rasch.copula2.R
-## File Version: 6.319
+## File Version: 6.321
+## File Last Change: 2023-03-08
 
 
 
@@ -295,9 +296,6 @@ rasch.copula2 <- function( dat, itemcluster, weights=NULL,
             }
             # is this really necessary?
 #            wgt.theta <- rescop$pik
-Revalprstr("res.posterior")
-
-stop()
 
             rest1 <- .update.ll.rasch.copula21( theta.k, b0 + h*est.bb, alpha1, alpha2,
                 a, dat2.li, itemcluster0,

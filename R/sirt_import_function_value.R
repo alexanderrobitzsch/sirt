@@ -1,11 +1,12 @@
 ## File Name: sirt_import_function_value.R
-## File Version: 0.08
+## File Version: 0.091
+## File Last Change: 2023-03-08
 
 sirt_import_function_value <- function(fun, pkg, ...)
 {
     TAM::require_namespace_msg(pkg)
     fun1 <- NULL
-    eval(parse(text=paste0("fun1 <- ", pkg,"::", fun)))
+    eval(parse(text=paste0('fun1 <- ', pkg,'::', fun)))
     res <- fun1(...)
     return(res)
 }

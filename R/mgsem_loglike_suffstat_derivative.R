@@ -1,5 +1,6 @@
 ## File Name: mgsem_loglike_suffstat_derivative.R
 ## File Version: 0.16
+## File Last Change: 2022-02-25
 
 
 mgsem_loglike_suffstat_derivative <- function(suffstat, Mu, Sigma )

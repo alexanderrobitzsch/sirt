@@ -1,5 +1,6 @@
 ## File Name: lsdm_est_logist_rasch.R
 ## File Version: 0.283
+## File Last Change: 2019-01-02
 
 
 lsdm_est_logist_rasch <- function( y, theta, wgt_theta, method="L-BFGS-B" )

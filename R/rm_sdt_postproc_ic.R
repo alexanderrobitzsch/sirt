@@ -1,5 +1,6 @@
 ## File Name: rm_sdt_postproc_ic.R
 ## File Version: 0.12
+## File Last Change: 2018-12-30
 
 rm_sdt_postproc_ic <- function(dev, dat2, VV, RR, est.mean, est.sigma,
     partable_item, partable_rater, skillspace, theta.k)

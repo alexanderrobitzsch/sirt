@@ -1,5 +1,6 @@
 ## File Name: mgsem_test_fun.R
 ## File Version: 0.15
+## File Last Change: 2022-07-27
 
 
 mgsem_test_fun <- function(test, coef, opt_fun_args)

@@ -161,16 +161,16 @@ variational methods for mixed logistic regression models.
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>8706</span>)
 <span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>5000</span>
 <span class='no'>I</span> <span class='kw'>&lt;-</span> <span class='fl'>20</span>
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>N</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.3</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='no'>I</span>) )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>N</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.3</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='no'>I</span>) )
 
 <span class='co'># estimation via variational approximation</span>
 <span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.va</span>(<span class='no'>dat</span>)
 
 <span class='co'># estimation via marginal maximum likelihood</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>(<span class='no'>dat</span>)
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>(<span class='no'>dat</span>)
 
 <span class='co'># estmation via joint maximum likelihood</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.jml</span>(<span class='no'>dat</span>)
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.jml.html'>rasch.jml</a></span>(<span class='no'>dat</span>)
 
 <span class='co'># compare sigma</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='no'>mod1</span>$<span class='no'>sig</span>, <span class='no'>mod2</span>$<span class='no'>sd.trait</span> ), <span class='fl'>3</span> )

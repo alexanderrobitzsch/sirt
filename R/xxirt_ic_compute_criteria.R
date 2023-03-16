@@ -1,5 +1,6 @@
 ## File Name: xxirt_ic_compute_criteria.R
 ## File Version: 0.05
+## File Last Change: 2022-01-26
 
 xxirt_ic_compute_criteria <- function(ic, compute_np=TRUE)
 {

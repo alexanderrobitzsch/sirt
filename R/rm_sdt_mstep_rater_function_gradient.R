@@ -1,5 +1,6 @@
 ## File Name: rm_sdt_mstep_rater_function_gradient.R
 ## File Version: 0.11
+## File Last Change: 2018-12-30
 
 
 rm_sdt_mstep_rater_function_gradient <- function(x, par_index, partable_rater,

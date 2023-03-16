@@ -158,7 +158,7 @@
 <li><p>Multidimensional marginal maximum likelihood estimation (MML)
       of generalized logistic Rasch type models using the
       generalized logistic link function (Stukel, 1988) can be conducted
-      with <code>rasch.mml2</code> and the argument <code>itemtype="raschtype"</code>.
+      with <code><a href='rasch.mml.html'>rasch.mml2</a></code> and the argument <code>itemtype="raschtype"</code>.
       This model also allows the estimation of the 4PL item
       response model (Loken &amp; Rulison, 2010).
       Multiple group estimation, latent regression models and
@@ -167,123 +167,123 @@
 <p><!-- %% M-dim noncompensatory and compensatory IRT model --></p></li>
 <li><p>Multidimensional noncompensatory, compensatory and partially compensatory
 item response models for dichotomous item responses (Reckase, 2009) can be estimated
-with the <code>smirt</code> function and the options <code>irtmodel="noncomp"</code>
+with the <code><a href='smirt.html'>smirt</a></code> function and the options <code>irtmodel="noncomp"</code>
 , <code>irtmodel="comp"</code> and <code>irtmodel="partcomp"</code>.</p>
 <p><!-- %% 1-dim Ramsay type model --></p></li>
 <li><p>The unidimensional quotient model (Ramsay, 1989) can be estimated
-using <code>rasch.mml2</code> with <code>itemtype="ramsay.qm"</code>.</p>
+using <code><a href='rasch.mml.html'>rasch.mml2</a></code> with <code>itemtype="ramsay.qm"</code>.</p>
 <p><!-- %% 1-dim nonparametric IRT models --></p></li>
 <li><p>Unidimensional nonparametric item response models can be estimated
  employing MML estimation (Rossi, Wang &amp; Ramsay, 2002) by making use of
- <code>rasch.mml2</code> with <code>itemtype="npirt"</code>.
+ <code><a href='rasch.mml.html'>rasch.mml2</a></code> with <code>itemtype="npirt"</code>.
  Kernel smoothing for item response function estimation (Ramsay, 1991)
- is implemented in <code>np.dich</code>.</p>
+ is implemented in <code><a href='np.dich.html'>np.dich</a></code>.</p>
 <p><!-- %% 1-dim Copula model --></p></li>
 <li><p>The multidimensional IRT copula model (Braeken, 2011) can be applied
-    for handling local dependencies, see <code>rasch.copula3</code>.</p>
+    for handling local dependencies, see <code><a href='rasch.copula.html'>rasch.copula3</a></code>.</p>
 <p><!-- %% 1-dim JML --></p></li>
 <li><p>Unidimensional joint maximum likelihood estimation (JML) of the Rasch model
-is possible with the <code>rasch.jml</code> function. Bias correction methods
-    for item parameters are included in <code>rasch.jml.jackknife1</code>
-    and <code>rasch.jml.biascorr</code>.</p>
+is possible with the <code><a href='rasch.jml.html'>rasch.jml</a></code> function. Bias correction methods
+    for item parameters are included in <code><a href='rasch.jml.jackknife1.html'>rasch.jml.jackknife1</a></code>
+    and <code><a href='rasch.jml.biascorr.html'>rasch.jml.biascorr</a></code>.</p>
 <p><!-- %% M-dim LC Rasch model --></p></li>
 <li><p>The multidimensional latent class Rasch and 2PL model (Bartolucci, 2007)
 which employs a discrete trait distribution can be estimated
-with <code>rasch.mirtlc</code>.</p>
+with <code><a href='rasch.mirtlc.html'>rasch.mirtlc</a></code>.</p>
 <p><!-- %% Rater Models --></p></li>
 <li><p>The unidimensional 2PL rater facets model (Lincare, 1994) can be estimated
-with <code>rm.facets</code>. A hierarchical rater model based on
+with <code><a href='rm.facets.html'>rm.facets</a></code>. A hierarchical rater model based on
 signal detection theory (DeCarlo, Kim &amp; Johnson, 2011) can be conducted
-with <code>rm.sdt</code>. A simple latent class model for two exchangeable
-raters is implemented in <code>lc.2raters</code>. See Robitzsch and Steinfeld (2018)
+with <code><a href='rm.sdt.html'>rm.sdt</a></code>. A simple latent class model for two exchangeable
+raters is implemented in <code><a href='lc.2raters.html'>lc.2raters</a></code>. See Robitzsch and Steinfeld (2018)
 for more details.</p>
 <p><!-- %% Grade of membership model --></p></li>
 <li><p>The discrete grade of membership model (Erosheva, Fienberg &amp; Joutard, 2007)
-and the Rasch grade of membership model can be estimated by <code>gom.em</code>.</p>
+and the Rasch grade of membership model can be estimated by <code><a href='gom.em.html'>gom.em</a></code>.</p>
 <p><!-- %% MCMC estimation multilevel IRT models --></p></li>
 <li><p>Some hierarchical IRT models and random item models for dichotomous
 and normally distributed data (van den Noortgate, de Boeck &amp; Meulders, 2003;
-Fox &amp; Verhagen, 2010) can be estimated with <code>mcmc.2pno.ml</code>.</p>
+Fox &amp; Verhagen, 2010) can be estimated with <code><a href='mcmc.2pno.ml.html'>mcmc.2pno.ml</a></code>.</p>
 <p><!-- %% 1-dim PCML --></p></li>
 <li><p>Unidimensional pairwise conditional likelihood estimation
-    (PCML; Zwinderman, 1995) is implemented in <code>rasch.pairwise</code> or
-    <code>rasch.pairwise.itemcluster</code>.</p>
+    (PCML; Zwinderman, 1995) is implemented in <code><a href='rasch.pairwise.html'>rasch.pairwise</a></code> or
+    <code><a href='rasch.pairwise.itemcluster.html'>rasch.pairwise.itemcluster</a></code>.</p>
 <p><!-- %% 1-dim PMML --></p></li>
 <li><p>Unidimensional pairwise marginal likelihood estimation
    (PMML; Renard, Molenberghs &amp; Geys, 2004)
-    can be conducted using <code>rasch.pml3</code>. In this function
+    can be conducted using <code><a href='rasch.pml3.html'>rasch.pml3</a></code>. In this function
     local dependence can be handled by imposing residual error structure
     or omitting item pairs within a dependent item cluster from the
     estimation. <br />
-    The function <code>rasch.evm.pcm</code> estimates the multiple group
+    The function <code><a href='rasch.evm.pcm.html'>rasch.evm.pcm</a></code> estimates the multiple group
     partial credit model based on the pairwise eigenvector approach
     which avoids iterative estimation.</p>
 <p><!-- %% MCMC estimation of some models --></p></li>
 <li><p>Some item response models in <span class="pkg">sirt</span> can be estimated via
-Markov Chain Monte Carlo (MCMC) methods. In <code>mcmc.2pno</code>
+Markov Chain Monte Carlo (MCMC) methods. In <code><a href='mcmc.2pno.html'>mcmc.2pno</a></code>
 the two-parameter normal ogive model can be estimated. A hierarchical
 version of this model (Janssen, Tuerlinckx, Meulders &amp; de Boeck, 2000)
-is implemented in <code>mcmc.2pnoh</code>. The 3PNO testlet model
+is implemented in <code><a href='mcmc.2pnoh.html'>mcmc.2pnoh</a></code>. The 3PNO testlet model
 (Wainer, Bradlow &amp; Wang, 2007; Glas, 2012) can be estimated with
-<code>mcmc.3pno.testlet</code>.
+<code><a href='mcmc.3pno.testlet.html'>mcmc.3pno.testlet</a></code>.
 Some hierarchical IRT models and random item models
 (van den Noortgate, de Boeck &amp; Meulders, 2003) can be estimated
-with <code>mcmc.2pno.ml</code>.</p>
+with <code><a href='mcmc.2pno.ml.html'>mcmc.2pno.ml</a></code>.</p>
 <p><!-- %% NOHARM --></p></li>
 <li><p>For dichotomous response data, the free NOHARM software
 (McDonald, 1982, 1997) estimates the multidimensional compensatory 3PL model and the function
-<code>R2noharm</code> runs NOHARM from within <span style="R">R</span>. Note that NOHARM must be
+<code><a href='R2noharm.html'>R2noharm</a></code> runs NOHARM from within <span style="R">R</span>. Note that NOHARM must be
 downloaded from <em>http://noharm.niagararesearch.ca/nh4cldl.html</em>
 at first. A pure <span style="R">R</span> implementation of the NOHARM model with some extensions
-can be found in <code>noharm.sirt</code>.</p>
+can be found in <code><a href='noharm.sirt.html'>noharm.sirt</a></code>.</p>
 <p><!-- %% Nonparametric item response theory / ISOP model --></p></li>
 <li><p>The measurement theoretic founded nonparametric item
 response models of Scheiblechner (1995, 1999) -- the ISOP
 and the ADISOP model -- can be estimated with
-<code>isop.dich</code> or <code>isop.poly</code>.
+<code><a href='isop.html'>isop.dich</a></code> or <code><a href='isop.html'>isop.poly</a></code>.
 Item scoring within this theory can be conducted with
-<code>isop.scoring</code>.</p>
+<code><a href='isop.scoring.html'>isop.scoring</a></code>.</p>
 <p><!-- %% Functional unidimensional item response model --></p></li>
 <li><p>The functional unidimensional item response model
-(Ip et al., 2013) can be estimated with <code>f1d.irt</code>.</p>
+(Ip et al., 2013) can be estimated with <code><a href='f1d.irt.html'>f1d.irt</a></code>.</p>
 <p><!-- %% 1-dim Rasch model variational approximation --></p></li>
 <li><p>The Rasch model can be estimated by variational approximation
-(Rijmen &amp; Vomlel, 2008) using <code>rasch.va</code>.</p>
+(Rijmen &amp; Vomlel, 2008) using <code><a href='rasch.va.html'>rasch.va</a></code>.</p>
 <p><!-- %% 1-dim Guttman model --></p></li>
 <li><p>The unidimensional probabilistic Guttman model (Proctor, 1970) can be
-    specified with <code>prob.guttman</code>.</p>
+    specified with <code><a href='prob.guttman.html'>prob.guttman</a></code>.</p>
 <p><!-- %% jackknife WLE --></p></li>
 <li><p>A jackknife method for the estimation of standard errors of the
     weighted likelihood trait estimate (Warm, 1989) is available in
-    <code>wle.rasch.jackknife</code>.</p>
+    <code><a href='wle.rasch.jackknife.html'>wle.rasch.jackknife</a></code>.</p>
 <p><!-- %% reliability --></p></li>
 <li><p>Model based reliability for dichotomous data can be calculated by the method
-of Green and Yang (2009) with <code>greenyang.reliability</code> and the
+of Green and Yang (2009) with <code><a href='greenyang.reliability.html'>greenyang.reliability</a></code> and the
 marginal true score method of Dimitrov (2003) using the function
-<code>marginal.truescore.reliability</code>.</p>
+<code><a href='marginal.truescore.reliability.html'>marginal.truescore.reliability</a></code>.</p>
 <p><!-- %% DETECT --></p></li>
 <li><p>Essential unidimensionality can be assessed by the DETECT
     index (Stout, Habing, Douglas &amp; Kim, 1996), see the function
-    <code>conf.detect</code>.</p>
+    <code><a href='conf.detect.html'>conf.detect</a></code>.</p>
 <p><!-- %% linking / alignment --></p></li>
 <li><p>Item parameters from several studies can be linked using the Haberman
-method (Haberman, 2009) in <code>linking.haberman</code>. See also
-<code>equating.rasch</code> and <code>linking.robust</code>.
+method (Haberman, 2009) in <code><a href='linking.haberman.html'>linking.haberman</a></code>. See also
+<code><a href='equating.rasch.html'>equating.rasch</a></code> and <code><a href='linking.robust.html'>linking.robust</a></code>.
 The alignment procedure (Asparouhov &amp; Muthen, 2013)
-<code>invariance.alignment</code> is originally for comfirmatory factor
+<code><a href='invariance.alignment.html'>invariance.alignment</a></code> is originally for comfirmatory factor
 analysis and aims at obtaining approximate invariance.</p>
 
 <p><!-- %% Person Fit --></p></li>
 <li><p>Some person fit statistics in the Rasch model (Meijer &amp; Sijtsma, 2001)
-    are included in <code>personfit.stat</code>.</p>
+    are included in <code><a href='personfit.stat.html'>personfit.stat</a></code>.</p>
 <p><!-- %% LSDM --></p></li>
 <li><p>An alternative to the linear logistic test model (LLTM), the
     so called least squares distance model for cognitive diagnosis
     (LSDM; Dimitrov, 2007), can be estimated with the function
-    <code>lsdm</code>.</p>
+    <code><a href='lsdm.html'>lsdm</a></code>.</p>
 <p><!-- %% LSEM --></p></li>
 <li><p>Local structural equation models (LSEM) can be estimated with the
-<code>lsem.estimate</code> function (Hildebrandt et al., 2016).</p></li>
+<code><a href='lsem.estimate.html'>lsem.estimate</a></code> function (Hildebrandt et al., 2016).</p></li>
 </ul>
 
 

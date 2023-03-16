@@ -1,5 +1,6 @@
 ## File Name: sirt_trim_increment.R
 ## File Version: 0.02
+## File Last Change: 2019-02-27
 
 sirt_trim_increment <- function(increment, max_increment)
 {

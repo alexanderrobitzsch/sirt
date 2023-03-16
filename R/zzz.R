@@ -1,5 +1,6 @@
 ## File Name: zzz.R
-## File Version: 1.23
+## File Version: 1.241
+## File Last Change: 2023-03-08
 
 
 #  zzz.R
@@ -10,10 +11,10 @@
 # on attach sirt
 .onAttach <- function(libname,pkgname)
 {
-    d <- utils::packageDescription("sirt")
+    d <- utils::packageDescription('sirt')
     d1 <- d$Version
     packageStartupMessage(
-        paste("- ", d$Package," ", d1," (",d$Date,")",sep="")  )
+        paste('- ', d$Package,' ', d1,' (',d$Date,')',sep='')  )
 }
 
 
@@ -32,8 +33,8 @@ version <- function(pkg="sirt")
 
 xx <- function(f1=1, f2=1)
 {
-    v1 <- paste0( rep(" ",f1), collapse="" )
-    v2 <- paste0( rep(" ",f2), collapse="" )
-    res <- paste0( v1, "=", v2)
+    v1 <- paste0( rep(' ',f1), collapse='' )
+    v2 <- paste0( rep(' ',f2), collapse='' )
+    res <- paste0( v1, '=', v2)
     return(res)
 }

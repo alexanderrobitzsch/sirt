@@ -413,12 +413,12 @@ doi: <a href='https://doi.org/10.18637/jss.v035.i12'>10.18637/jss.v035.i12</a></
     <div class='dont-index'><p>See the <span class="pkg">plink</span> package (Weeks, 2010) for a diversity of linking methods.</p>
 <p>Mean-mean linking, Stocking-Lord and Haebara linking (see Kolen &amp; Brennan, 2014,
 for an overview) in the generalized logistic item response model can be conducted with
-<code>equating.rasch</code>. See also <code><a href='https://rdrr.io/pkg/TAM/man/tam.linking.html'>TAM::tam.linking</a></code>
+<code><a href='equating.rasch.html'>equating.rasch</a></code>. See also <code><a href='https://rdrr.io/pkg/TAM/man/tam.linking.html'>TAM::tam.linking</a></code>
 in the <span class="pkg">TAM</span> package. Haebara linking and a robustified version of it can be
-found in <code>linking.haebara</code>.</p>
+found in <code><a href='linking.haebara.html'>linking.haebara</a></code>.</p>
 <p>The invariance alignment method employs an optimization function based on
 pairwise loss functions of item parameters (Asparouhov &amp; Muthen, 2014),
-see <code>invariance.alignment</code>.</p></div>
+see <code><a href='invariance.alignment.html'>invariance.alignment</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'>#############################################################################</span>
@@ -461,11 +461,11 @@ see <code>invariance.alignment</code>.</p></div>
 
 <span class='co'># scaling at T1</span>
 <span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='no'>data.long</span>[, <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>(<span class='st'>"T1"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data.long</span>) ) ]
-<span class='no'>resT1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat1</span> )
+<span class='no'>resT1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span> )
 <span class='no'>itempartable1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"study"</span><span class='kw'>=</span><span class='st'>"T1"</span>, <span class='no'>resT1</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"item"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span> ) ] )
 <span class='co'># scaling at T2</span>
 <span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='no'>data.long</span>[, <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>(<span class='st'>"T2"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data.long</span>) ) ]
-<span class='no'>resT2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat2</span> )
+<span class='no'>resT2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>resT2</span>)
 <span class='no'>itempartable2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"study"</span><span class='kw'>=</span><span class='st'>"T2"</span>, <span class='no'>resT2</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"item"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span> ) ] )
 <span class='no'>itempartable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>( <span class='no'>itempartable1</span>, <span class='no'>itempartable2</span> )
@@ -478,12 +478,12 @@ see <code>invariance.alignment</code>.</p></div>
 
 <span class='co'># scaling at T1</span>
 <span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='no'>data.long</span>[, <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>(<span class='st'>"T1"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data.long</span>) ) ]
-<span class='no'>resT1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>6</span>)
+<span class='no'>resT1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>6</span>)
 <span class='no'>itempartable1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"study"</span><span class='kw'>=</span><span class='st'>"T1"</span>, <span class='no'>resT1</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"item"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span> ) ] )
 
 <span class='co'># scaling at T2</span>
 <span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='no'>data.long</span>[, <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>(<span class='st'>"T2"</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data.long</span>) ) ]
-<span class='no'>resT2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>6</span>)
+<span class='no'>resT2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>6</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>resT2</span>)
 <span class='no'>itempartable2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='st'>"study"</span><span class='kw'>=</span><span class='st'>"T2"</span>, <span class='no'>resT2</span>$<span class='no'>item</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"item"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span> ) ] )
 <span class='no'>itempartable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>( <span class='no'>itempartable1</span>, <span class='no'>itempartable2</span> )
@@ -500,15 +500,15 @@ see <code>invariance.alignment</code>.</p></div>
 <span class='co'># define item parameters</span>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>1.5</span>, <span class='fl'>1.5</span>, <span class='kw'>length</span><span class='kw'>=</span><span class='no'>I</span> )
 <span class='co'># simulate data</span>
-<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
-<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0.5</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.50</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0.5</span>,<span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.50</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
 
 <span class='co'>#*** Model 1: 1PL</span>
 <span class='co'># 1PL Study 1</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='no'>I</span>) )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='no'>I</span>) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='co'># 1PL Study 2</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='no'>I</span>) )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='no'>I</span>) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># collect item parameters</span>
@@ -541,10 +541,10 @@ see <code>invariance.alignment</code>.</p></div>
 
 <span class='co'>#*** Model 2: 2PL</span>
 <span class='co'># 2PL Study 1</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='no'>I</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='no'>I</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='co'># 2PL Study 2</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='no'>I</span> )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='no'>I</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># collect item parameters</span>
@@ -584,22 +584,22 @@ see <code>invariance.alignment</code>.</p></div>
 <span class='co'># define item parameters</span>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>1.5</span>, <span class='fl'>1.5</span>, <span class='kw'>length</span><span class='kw'>=</span><span class='no'>I</span> )
 <span class='co'># simulate data</span>
-<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
-<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0.5</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.50</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
-<span class='no'>dat3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span>-<span class='fl'>0.2</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>0.8</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>0.5</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.50</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N</span>, <span class='kw'>mean</span><span class='kw'>=</span>-<span class='fl'>0.2</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>0.8</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
 <span class='co'># set some items to non-administered</span>
 <span class='no'>dat3</span> <span class='kw'>&lt;-</span> <span class='no'>dat3</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>4</span>) ]
 <span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='no'>dat2</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>) ]
 
 <span class='co'>#*** Model 1: 1PL in sirt</span>
 <span class='co'># 1PL Study 1</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat1</span>)) )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat1</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat1</span>)) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='co'># 1PL Study 2</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat2</span>)) )
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat2</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat2</span>)) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 <span class='co'># 1PL Study 3</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat3</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat3</span>)) )
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat3</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat3</span>)) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'># collect item parameters</span>
@@ -813,8 +813,8 @@ see <code>invariance.alignment</code>.</p></div>
 <span class='no'>mod5</span>$<span class='no'>transf.pars</span>
 
 <span class='co'>#* compare results with Haebara linking</span>
-<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haebara</span>(<span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L2"</span>)
-<span class='no'>mod12</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>linking.haebara</span>(<span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L1"</span>)
+<span class='no'>mod11</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='linking.haebara.html'>linking.haebara</a></span>(<span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L2"</span>)
+<span class='no'>mod12</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='linking.haebara.html'>linking.haebara</a></span>(<span class='no'>itempars</span>, <span class='kw'>dist</span><span class='kw'>=</span><span class='st'>"L1"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod11</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod12</span>)
 }</pre>

@@ -1,5 +1,6 @@
 ## File Name: sirt_optimizer_hessian.R
 ## File Version: 0.04
+## File Last Change: 2022-05-15
 
 sirt_optimizer_hessian <- function(res, fn, grad, h, ...)
 {

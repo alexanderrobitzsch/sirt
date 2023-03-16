@@ -1,5 +1,6 @@
 ## File Name: regpolca.R
 ## File Version: 0.192
+## File Last Change: 2020-07-06
 
 
 #- Regularized polytomous latent class analysis

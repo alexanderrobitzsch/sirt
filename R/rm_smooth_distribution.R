@@ -1,5 +1,6 @@
 ## File Name: rm_smooth_distribution.R
 ## File Version: 0.25
+## File Last Change: 2018-12-30
 
 rm_smooth_distribution <- function( theta.k, pi.k, est.mean=FALSE,
             skillspace="normal", est.sigma=TRUE, sigma=NULL )

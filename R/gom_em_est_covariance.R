@@ -1,8 +1,6 @@
 ## File Name: gom_em_est_covariance.R
-## File Version: 0.02
-
-
-
+## File Version: 0.04
+## File Last Change: 2023-03-15
 
 
 #-- GOM: estimation of covariance
@@ -17,7 +15,8 @@ gom_em_est_covariance <- function( f.qk.yi, Sigma, theta.kM, N  )
     mu <- colSums( thetabar ) / N
     mu[1] <- 0
     # calculation of the covariance matrix
-    theta.k.adj <- theta.k - matrix( mu, nrow=nrow(theta.k), ncol=ncol(theta.k), byrow=TRUE)
+    theta.k.adj <- theta.k - matrix( mu, nrow=nrow(theta.k),
+                                            ncol=ncol(theta.k), byrow=TRUE)
     D <- 2
     for (dd1 in 1:D){
         for (dd2 in dd1:D){

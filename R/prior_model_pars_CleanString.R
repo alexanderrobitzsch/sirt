@@ -1,5 +1,6 @@
 ## File Name: prior_model_pars_CleanString.R
 ## File Version: 0.09
+## File Last Change: 2019-05-11
 
 
 #-- clean string

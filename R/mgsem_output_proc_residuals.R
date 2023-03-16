@@ -1,5 +1,6 @@
 ## File Name: mgsem_output_proc_residuals.R
 ## File Version: 0.05
+## File Last Change: 2022-02-25
 
 
 mgsem_output_proc_residuals <- function(implied, suffstat)

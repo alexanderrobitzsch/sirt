@@ -1,5 +1,6 @@
 ## File Name: linking_haberman_bisquare_weight.R
 ## File Version: 0.02
+## File Last Change: 2019-01-14
 
 linking_haberman_bisquare_weight <- function(x, cutoff)
 {

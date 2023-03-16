@@ -1,5 +1,6 @@
 ## File Name: regpolca_penalty_fun_value_grouped.R
 ## File Version: 0.01
+## File Last Change: 2020-07-04
 
 regpolca_penalty_fun_value_grouped <- function(x_ii, combis_ii,
     regular_lam, eps, penalty_used)

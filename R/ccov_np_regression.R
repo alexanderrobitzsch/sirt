@@ -1,5 +1,6 @@
 ## File Name: ccov_np_regression.R
 ## File Version: 0.12
+## File Last Change: 2020-08-29
 
 ccov_np_regression <- function(x, y, xgrid, bwscale=1.1, smooth=TRUE, score=NULL)
 {

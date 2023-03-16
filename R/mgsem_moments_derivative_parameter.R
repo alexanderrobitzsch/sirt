@@ -1,5 +1,6 @@
 ## File Name: mgsem_moments_derivative_parameter.R
 ## File Version: 0.393
+## File Last Change: 2022-07-27
 
 mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
         i1, i2, h, is_B, eps=1e-12, num_approx=FALSE)

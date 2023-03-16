@@ -1,5 +1,6 @@
 ## File Name: sim.rasch.dep.R
 ## File Version: 0.22
+## File Last Change: 2018-12-30
 
 
 #**** simulation of Rasch copula model

@@ -1,5 +1,6 @@
 ## File Name: plot.linking.robust.R
 ## File Version: 0.04
+## File Last Change: 2018-12-30
 
 
 #--- linking.robust S3 plot method

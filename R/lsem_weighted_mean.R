@@ -1,5 +1,6 @@
 ## File Name: lsem_weighted_mean.R
 ## File Version: 0.173
+## File Last Change: 2021-12-09
 
 lsem_weighted_mean <- function( x, weights, x_resp=NULL,
         moderator_variable=NULL, loc_linear_smooth=NULL, moderator_value=NULL )

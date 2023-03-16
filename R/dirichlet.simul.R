@@ -1,5 +1,6 @@
 ## File Name: dirichlet.simul.R
 ## File Version: 0.12
+## File Last Change: 2019-05-18
 
 
 #-- simulate from a Dirichlet distribution

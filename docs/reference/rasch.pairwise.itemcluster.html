@@ -204,12 +204,12 @@ methods for conducting statistical inference.</p>
 described in Zwinderman (1995).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>rasch.pairwise</code>, <code>summary.rasch.pairwise</code>,</p>
+    <div class='dont-index'><p><code><a href='rasch.pairwise.html'>rasch.pairwise</a></code>, <code><a href='rasch.pairwise.html'>summary.rasch.pairwise</a></code>,</p>
 <p>Pairwise marginal likelihood estimation (also labeled as pseudolikelihood
-estimation) can be conducted with <code>rasch.pml3</code>.</p>
-<p>Other estimation methods are implemented in <code>rasch.copula2</code> or
-<code>rasch.mml2</code>.</p>
-<p>For simulation of locally dependent data see <code>sim.rasch.dep</code>.</p></div>
+estimation) can be conducted with <code><a href='rasch.pml3.html'>rasch.pml3</a></code>.</p>
+<p>Other estimation methods are implemented in <code><a href='rasch.copula.html'>rasch.copula2</a></code> or
+<code><a href='rasch.mml.html'>rasch.mml2</a></code>.</p>
+<p>For simulation of locally dependent data see <code><a href='sim.rasch.dep.html'>sim.rasch.dep</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'>#############################################################################</span>
@@ -234,11 +234,11 @@ estimation) can be conducted with <code>rasch.pml3</code>.</p>
 <span class='no'>rho</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='fl'>.55</span>, <span class='fl'>.25</span>, <span class='fl'>.45</span> )
 
 <span class='co'># simulate data</span>
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.rasch.dep</span>( <span class='no'>theta</span>, <span class='no'>b</span>, <span class='no'>itemcluster</span>, <span class='no'>rho</span> )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.rasch.dep.html'>sim.rasch.dep</a></span>( <span class='no'>theta</span>, <span class='no'>b</span>, <span class='no'>itemcluster</span>, <span class='no'>rho</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"I"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)), <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>)
 
 <span class='co'># estimation with pairwise Rasch model</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.pairwise</span>( <span class='no'>dat</span> )
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.pairwise.html'>rasch.pairwise</a></span>( <span class='no'>dat</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='co'># use item cluster in rasch pairwise estimation</span>
@@ -247,11 +247,11 @@ estimation) can be conducted with <code>rasch.pml3</code>.</p>
 
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Rasch MML estimation</span>
-<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span> )
+<span class='no'>mod4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod4</span>)
 
 <span class='co'># Rasch Copula estimation</span>
-<span class='no'>mod5</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.copula2</span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
+<span class='no'>mod5</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.copula.html'>rasch.copula2</a></span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod5</span>)
 
 <span class='co'># compare different item parameter estimates</span>

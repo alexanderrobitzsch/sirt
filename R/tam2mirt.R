@@ -1,7 +1,8 @@
 ## File Name: tam2mirt.R
-## File Version: 0.28
+## File Version: 0.292
+## File Last Change: 2023-03-08
 
-##########################################################
+
 # convert a fitted tam object into a mirt object
 tam2mirt <- function( tamobj )
 {
@@ -19,7 +20,7 @@ tam2mirt <- function( tamobj )
     dat <- tamobj$resp
     # factors
     if (D==1){
-        factors <- "F1"
+        factors <- 'F1'
     }
     if (D>1){
         factors <- dimnames(tamobj$B)[[3]]
@@ -48,4 +49,3 @@ tam2mirt <- function( tamobj )
     # res$tamobj <- tamobj
     return(res)
 }
-################################################################

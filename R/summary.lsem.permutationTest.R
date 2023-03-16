@@ -1,5 +1,6 @@
 ## File Name: summary.lsem.permutationTest.R
-## File Version: 0.292
+## File Version: 0.294
+## File Last Change: 2023-02-19
 ######################################################
 summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... )
 {
@@ -25,7 +26,8 @@ summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... )
     cat("Computation Time:", print(object$s2 - object$s1), "\n\n")
 
     cat( "Number of permutations", "=", object$B, "\n")
-    cat( "Percentage of non-converged datasets",  "=", round(object$nonconverged_rate, digits=digits), "\n")
+    cat( "Percentage of non-converged datasets",  "=",
+                round(object$nonconverged_rate, digits=digits), "\n")
     cat( paste0( "Number of observations",  "=", round(object$N,digits) ), "\n")
     cat( paste0( "Bandwidth factor",  "=", round(object$h,digits) ), "\n")
     cat( paste0( "Bandwidth",  "=", round(object$bw,digits) ), "\n")

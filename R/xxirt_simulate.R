@@ -1,5 +1,6 @@
 ## File Name: xxirt_simulate.R
-## File Version: 0.141
+## File Version: 0.142
+## File Last Change: 2023-03-08
 
 xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
                     method="random")
@@ -11,15 +12,15 @@ xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
     probs_Theta <- do.call(what=customTheta$P, args=args_Theta)[,1]
     TP <- nrow(Theta)
     indices <- as.data.frame(matrix(NA, nrow=TP, ncol=3))
-    colnames(indices) <- c("start", "end", "N")
-    if (method=="random"){
+    colnames(indices) <- c('start', 'end', 'N')
+    if (method=='random'){
         Theta_sim <- stats::rmultinom(n=N, size=1, prob=probs_Theta)
         N_Theta <- rowSums(Theta_sim)
         indices$N <- N_Theta
         indices$start <- c(1,cumsum(N_Theta)[-TP]+1)
         indices$end <- cumsum(N_Theta)
     }
-    if (method=="quasiexact"){
+    if (method=='quasiexact'){
         N_Theta <- N*probs_Theta
         N_Theta1 <- cumsum(N_Theta)
         N_Theta2 <- floor(N_Theta1)
@@ -47,7 +48,7 @@ xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
     mu <- rep(0,I)
     Sigma <- diag(I)
     exact <- TRUE
-    if (method=="random"){ exact <- FALSE }
+    if (method=='random'){ exact <- FALSE }
     rn <- rmvn(N=N, mu=mu, Sigma=Sigma, exact=exact)
     colnames(rn) <- items
     rn <- stats::pnorm(q=rn)
@@ -89,7 +90,7 @@ xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
             V <- 1-eps
             probs_tt[ probs_tt > V ] <- V
             quants <- stats::quantile( rn_tt, probs=probs_tt)
-            if (method=="random"){
+            if (method=='random'){
                 quants <- cumsum(probs[tt,])
             }
             vals <- rep(0,N_tt)

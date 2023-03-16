@@ -1,5 +1,6 @@
 ## File Name: rasch_pairwise_optimize_opt_fun_terms.R
 ## File Version: 0.03
+## File Last Change: 2021-03-28
 
 rasch_pairwise_optimize_opt_fun_terms <- function(eps_horiz, eps_vert, n.ij, n.ji)
 {

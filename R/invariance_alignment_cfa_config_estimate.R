@@ -1,5 +1,6 @@
 ## File Name: invariance_alignment_cfa_config_estimate.R
 ## File Version: 0.191
+## File Last Change: 2022-05-15
 
 invariance_alignment_cfa_config_estimate <- function(dat_gg, N, weights_gg=NULL,
     model="2PM", ...)

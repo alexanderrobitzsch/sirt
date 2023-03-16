@@ -1,5 +1,6 @@
 ## File Name: create.ccov.R
 ## File Version: 1.08
+## File Last Change: 2020-09-05
 
 
 #**** auxiliary function for creating a covariance matrix

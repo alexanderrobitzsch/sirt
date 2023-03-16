@@ -1,5 +1,6 @@
 ## File Name: summary.lsem.R
-## File Version: 0.405
+## File Version: 0.408
+## File Last Change: 2023-02-19
 
 
 #-- summary lsem
@@ -33,8 +34,10 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
     # space between equality sign
     sp_eq <- paste0( c(" ", "=", " "), collapse="")
 
-    cat( paste0( "Number of observations in datasets", sp_eq, round(object$N,digits) ), "\n")
-    cat( paste0( "Used observations in analysis", sp_eq, round(object$nobs,digits) ), "\n")
+    cat( paste0( "Number of observations in datasets", sp_eq,
+                    round(object$N, digits) ), "\n")
+    cat( paste0( "Used observations in analysis", sp_eq,
+                    round(object$nobs, digits) ), "\n")
     cat("Used sampling weights:", ! object$no_sampling_weights, "\n")
     if ( object$type=="LSEM"){
         cat( paste0( "Bandwidth factor", sp_eq, round(object$h,digits) ), "\n")
@@ -51,7 +54,8 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
         cat("Mean structure modelled:", object$is_meanstructure, "\n")
 
         if (object$class_boot){
-            v1 <- paste0("\nStatistical inference based on ", object$R, " bootstrap samples.")
+            v1 <- paste0("\nStatistical inference based on ", object$R,
+                                " bootstrap samples.")
             cat(v1,"\n")
         }
     }

@@ -1,5 +1,6 @@
 ## File Name: mcmc_Rhat.R
 ## File Version: 0.11
+## File Last Change: 2018-12-30
 
 mcmc_Rhat <- function( mcmc_object, n_splits=3 )
 {

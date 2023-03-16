@@ -1,5 +1,6 @@
 ## File Name: invgamma2.R
-## File Version: 0.19
+## File Version: 0.201
+## File Last Change: 2023-03-09
 
 
 
@@ -18,7 +19,7 @@ dinvgamma2 <- function( x, n0, var0 ){
 sirt_dinvgamma <- function (x, shape, scale=1)
 {
     if (shape <=0 | scale <=0) {
-        stop("Shape or scale parameter negative in dinvgamma().\n")
+        stop('Shape or scale parameter negative in dinvgamma().\n')
     }
     alpha <- shape
     beta <- scale

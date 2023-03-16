@@ -1,5 +1,6 @@
 ## File Name: rm_facets_pem_acceleration.R
 ## File Version: 0.17
+## File Last Change: 2018-12-30
 
 rm_facets_pem_acceleration <- function( iter, pem_parameter_index, pem_parameter_sequence,
         a.rater, Qmatrix, tau.item, VV, K, I, TP, a.item, b.item, b.rater, item.index, rater.index, theta.k, RR,

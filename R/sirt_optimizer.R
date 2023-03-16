@@ -1,5 +1,6 @@
 ## File Name: sirt_optimizer.R
-## File Version: 0.365
+## File Version: 0.371
+## File Last Change: 2023-03-11
 
 sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
         hessian=TRUE, control=list(), ...)
@@ -8,28 +9,28 @@ sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
     h <- 1e-5
 
     #-- optim
-    if (optimizer=="optim"){
+    if (optimizer=='optim'){
         res <- stats::optim(par=par, fn=fn, gr=grad, method=method,
                         hessian=hessian, control=control, ...)
         res$iter <- res$counts['function']
     }
 
     #-- Rvmmin
-    if (optimizer=="Rvmmin"){
-        requireNamespace("optimx")
+    if (optimizer=='Rvmmin'){
+        requireNamespace('optimx')
         args <- list(...)
         NP <- length(par)
-        if ( ! ( "lower" %in% names(args) ) ){
+        if ( ! ( 'lower' %in% names(args) ) ){
             args$lower <- rep(-Inf,NP)
         }
-        if ( ! ( "upper" %in% names(args) ) ){
+        if ( ! ( 'upper' %in% names(args) ) ){
             args$upper <- rep(Inf,NP)
         }
         # args$bdmsk <- 1*( ( args$lower > - Inf ) + ( args$upper < Inf )==0 )
         args$par <- par
         args$fn <- fn
         args$gr <- grad
-        args$method <- "Rvmmin"
+        args$method <- 'Rvmmin'
         args$control <- control
         optimx_fun <- optimx::optimx
         res0 <- do.call(what=optimx_fun, args=args)
@@ -43,7 +44,7 @@ sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
     }
 
     #-- nlminb
-    if (optimizer=="nlminb"){
+    if (optimizer=='nlminb'){
         res <- stats::nlminb(start=par, objective=fn, gradient=grad,
                         control=control, ...)
         res$value <- res$objective
@@ -51,8 +52,8 @@ sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
     }
 
     #-- bobyqa
-    if (optimizer=="bobyqa"){
-        requireNamespace("minqa")
+    if (optimizer=='bobyqa'){
+        requireNamespace('minqa')
         # control=list(iprint=2, maxfun=10000, ...)
         res <- minqa::bobyqa(par=par, fn=fn, control=control, ...)
         res$value <- res$fval
@@ -61,14 +62,14 @@ sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
     }
 
     #-- nloptr
-    if (optimizer=="nloptr"){
-        requireNamespace("nloptr")
+    if (optimizer=='nloptr'){
+        requireNamespace('nloptr')
         # print_level, maxevel
-        # control$algorithm <- "NLOPT_LD_LBFGS"
-        control$algorithm <- "NLOPT_LD_MMA"
+        # control$algorithm <- 'NLOPT_LD_LBFGS'
+        control$algorithm <- 'NLOPT_LD_MMA'
         args <- list(...)
-        args <- sirt_rename_list_names(x=args, old="lower", new="lb")
-        args <- sirt_rename_list_names(x=args, old="upper", new="ub")
+        args <- sirt_rename_list_names(x=args, old='lower', new='lb')
+        args <- sirt_rename_list_names(x=args, old='upper', new='ub')
         args$x0 <- par
         args$eval_f <- fn
         args$eval_grad_f <- grad
@@ -82,7 +83,7 @@ sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
 
     #*****
     #-- compute Hessian
-    comp_hess_optimizers <- c("nlminb", "bobyqa")
+    comp_hess_optimizers <- c('nlminb', 'bobyqa')
     if (hessian & ( optimizer %in% comp_hess_optimizers ) ){
         res <- sirt_optimizer_hessian(res=res, fn=fn, grad=grad, h=h, ...)
     }

@@ -1,5 +1,6 @@
 ## File Name: dif.strata.variance.R
-## File Version: 0.14
+## File Version: 0.151
+## File Last Change: 2023-03-08
 
 
 
@@ -10,13 +11,13 @@ dif.strata.variance <- function( dif, se.dif, itemcluster )
     # means in differential item functioning
     # itemcluster is a vector of strata corresponding to items
     stratadif <- stats::aggregate( 1+0*dif, list(itemcluster), sum, na.rm=TRUE )
-    colnames(stratadif) <- c("strata", "N.Items" )
+    colnames(stratadif) <- c('strata', 'N.Items' )
     stratadif <- data.frame(stratadif)
     stratadif$M.DIF <- stats::aggregate( dif, list(itemcluster), mean, na.rm=TRUE )[,2]
     # DIF in strata
     SS <- nrow(stratadif)
     for (ss in 1:SS){
-        items.ss <- which( itemcluster==stratadif[ss,"strata"]  )
+        items.ss <- which( itemcluster==stratadif[ss,'strata']  )
         dif.ss <- dif[ items.ss ]
         difv.ss <- dif.variance( dif=dif.ss, se.dif=se.dif[ items.ss ] )
         stratadif$weighted.tau[ss] <- difv.ss$weighted.DIFSD

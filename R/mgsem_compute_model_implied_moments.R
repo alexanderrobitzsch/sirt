@@ -1,5 +1,6 @@
 ## File Name: mgsem_compute_model_implied_moments.R
 ## File Version: 0.168
+## File Last Change: 2023-02-06
 
 
 mgsem_compute_model_implied_moments <- function(est, is_B=FALSE, calc_Sigma=TRUE,

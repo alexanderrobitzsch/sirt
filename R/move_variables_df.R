@@ -1,5 +1,6 @@
 ## File Name: move_variables_df.R
 ## File Version: 0.02
+## File Last Change: 2023-01-26
 
 ##-- move variables in a data frame
 move_variables_df <- function(x, after_var, move_vars)

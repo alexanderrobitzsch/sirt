@@ -1,5 +1,6 @@
 ## File Name: invariance_alignment_center_parameters.R
 ## File Version: 0.10
+## File Last Change: 2019-07-21
 
 invariance_alignment_center_parameters <- function(alpha0, psi0, center,
     reparam=FALSE, convert=FALSE)

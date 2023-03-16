@@ -1,5 +1,6 @@
 ## File Name: invariance.alignment.R
 ## File Version: 3.755
+## File Last Change: 2022-05-16
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,

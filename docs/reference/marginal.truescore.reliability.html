@@ -120,7 +120,7 @@ the four-parameter logistic item response model
     <p>This function computes the marginal true-score reliability for
 dichotomous data (Dimitrov, 2003; May &amp; Nicewander, 1994) for
 the four-parameter logistic item response model
-(see <code>rasch.mml2</code> for details regarding this IRT model).</p>
+(see <code><a href='rasch.mml.html'>rasch.mml2</a></code> for details regarding this IRT model).</p>
     </div>
 
     <pre class="usage"><span class='fu'>marginal.truescore.reliability</span>(<span class='no'>b</span>, <span class='kw'>a</span><span class='kw'>=</span><span class='fl'>1</span>+<span class='fl'>0</span>*<span class='no'>b</span>,<span class='kw'>c</span><span class='kw'>=</span><span class='fl'>0</span>*<span class='no'>b</span>,<span class='kw'>d</span><span class='kw'>=</span><span class='fl'>1</span>+<span class='fl'>0</span>*<span class='no'>b</span>,
@@ -181,7 +181,7 @@ functions for percentile ranks. <em>Journal of Educational
 Measurement, 31</em>, 313-325.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See <code>greenyang.reliability</code> for calculating the reliability
+    <div class='dont-index'><p>See <code><a href='greenyang.reliability.html'>greenyang.reliability</a></code> for calculating the reliability
 for multidimensional measures.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -225,13 +225,13 @@ for multidimensional measures.</p></div>
 
 <span class='co'>#***</span>
 <span class='co'># Model 1: 1PL</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>data.read</span> )
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>data.read</span> )
 <span class='fu'>marginal.truescore.reliability</span>( <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> )
   <span class='co'>##   Reliability=0.653</span>
 
 <span class='co'>#***</span>
 <span class='co'># Model 2: 2PL</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>data.read</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>12</span> )
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>data.read</span>, <span class='kw'>est.a</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>12</span> )
 <span class='fu'>marginal.truescore.reliability</span>( <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span>, <span class='kw'>a</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>a</span>)
   <span class='co'>##   Reliability=0.696</span>
 

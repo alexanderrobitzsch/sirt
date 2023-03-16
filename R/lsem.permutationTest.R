@@ -1,5 +1,6 @@
 ## File Name: lsem.permutationTest.R
-## File Version: 0.453
+## File Version: 0.454
+## File Last Change: 2023-03-15
 
 
 #*** permutation test for LSEM model
@@ -11,8 +12,8 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
     CALL <- match.call()
 
     lavaan.args <- lsem.object$lavaan.args
-    entr <- c( "lavmodel", "data", "h", "moderator.grid", "moderator", "eps",
-            "fit_measures")
+    entr <- c( 'lavmodel', 'data', 'h', 'moderator.grid', 'moderator', 'eps',
+                    'fit_measures')
     object <- lsem.object
     arglist <- list()
     EE <- length(entr)
@@ -48,7 +49,7 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
     parameters_summary_lin_slo <- parameters_summary_M
 
     if ( verbose ){
-        cat("Permutation test LSEM \n")
+        cat('Permutation test LSEM \n')
     }
     #** estimate model for each permutation
     bb <- 1
@@ -56,17 +57,17 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
     while (bb <=B){
         data1[, moderator ] <- sample( data0[, moderator ] )
         arglist$data <- data1
-        res0 <- try( do.call( what="lsem.estimate", args=arglist ), silent=TRUE )
-        if ( ! inherits(res0,"try-error") ){
+        res0 <- try( do.call( what='lsem.estimate', args=arglist ), silent=TRUE )
+        if ( ! inherits(res0,'try-error') ){
             parameters_permutation[, bb] <- res0$parameters$est
             parameters_summary_M[,bb] <- res0$parameters_summary$M
             parameters_summary_SD[,bb] <- res0$parameters_summary$SD
             parameters_summary_MAD[,bb] <- res0$parameters_summary$MAD
             parameters_summary_lin_slo[,bb] <- res0$parameters_summary$lin_slo
             if (verbose){
-                cat( bb, " ")
+                cat( bb, ' ')
                 if ( bb %% 20==0 ){
-                    cat("\n")
+                    cat('\n')
                 }
                 utils::flush.console();
             }
@@ -74,16 +75,16 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
         } else {
             nn <- nn + 1
             if (verbose){
-                cat( "\n Delete permutation dataset due to non-convergence\n")
+                cat( '\n Delete permutation dataset due to non-convergence\n')
                 utils::flush.console()
             }
         }
     }
-    if (verbose){ cat("\n") }
+    if (verbose){ cat('\n') }
 
     #*****************
     # create global test statistics
-    teststat <- data.frame( "par"=parameters_summary$par )
+    teststat <- data.frame( 'par'=parameters_summary$par )
     teststat$M <- parameters_summary$M
     teststat$SD <- parameters_summary$SD
     teststat$SD_p <- rowMeans( parameters_summary_SD >=parameters_summary$SD )
@@ -98,8 +99,8 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
     # pointwise statistics
     rownames(parameters_permutation) <- rownames(parameters)
 
-    parameters_pointwise_test <- parameters[, c("grid_index",
-                                    "moderator","par","parindex" ) ]
+    parameters_pointwise_test <- parameters[, c('grid_index',
+                                    'moderator','par','parindex' ) ]
     parindex_ <- parameters$parindex
     parameters_pointwise_test$est <- parameters$est - parameters_summary$M[ parindex_ ]
     par_pointwise_perm <- parameters_permutation -     parameters_summary_M[ parindex_, ]
@@ -132,7 +133,6 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
                     nonconverged_rate=nonconverged_rate,
                     use_lavaan_survey=use_lavaan_survey,
                     B=B, s1=s1, s2=s2, lavmodel=object$lavmodel, CALL=CALL )
-    class(res) <- "lsem.permutationTest"
+    class(res) <- 'lsem.permutationTest'
     return(res)
 }
-################################################################

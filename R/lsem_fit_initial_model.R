@@ -1,5 +1,6 @@
 ## File Name: lsem_fit_initial_model.R
 ## File Version: 0.202
+## File Last Change: 2022-02-24
 
 lsem_fit_initial_model <- function(lavmodel__, lavaan_est_fun, dat, variables_model,
     sampling_weights, has_meanstructure, sufficient_statistics, est_joint=FALSE,

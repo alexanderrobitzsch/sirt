@@ -1,5 +1,6 @@
 ## File Name: gom_em_prepare_data.R
 ## File Version: 0.05
+## File Last Change: 2019-05-18
 
 gom_em_prepare_data <- function(dat, weights, model)
 {

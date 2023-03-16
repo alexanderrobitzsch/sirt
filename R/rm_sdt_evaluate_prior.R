@@ -1,5 +1,6 @@
 ## File Name: rm_sdt_evaluate_prior.R
 ## File Version: 0.07
+## File Last Change: 2019-05-03
 
 rm_sdt_evaluate_prior <- function(partable)
 {

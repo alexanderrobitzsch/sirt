@@ -1,5 +1,6 @@
 ## File Name: mgsem_loglike_suffstat.R
 ## File Version: 0.135
+## File Last Change: 2022-04-04
 
 mgsem_loglike_suffstat <- function(suffstat, Mu, Sigma, output_all=FALSE )
 {

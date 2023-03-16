@@ -1,5 +1,6 @@
 ## File Name: xxirt_classprobs_lca.R
 ## File Version: 0.08
+## File Last Change: 2020-04-27
 
 xxirt_classprobs_lca <- function(par, Theta, G)
 {

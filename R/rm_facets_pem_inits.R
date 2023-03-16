@@ -1,5 +1,6 @@
 ## File Name: rm_facets_pem_inits.R
 ## File Version: 0.08
+## File Last Change: 2018-12-30
 
 rm_facets_pem_inits <- function( tau.item, a.item, a.rater, b.rater, skillspace, PEM,
         a.item.fixed, est.a.item)

@@ -1,12 +1,13 @@
 ## File Name: xxirt_ic.R
-## File Version: 0.189
+## File Version: 0.191
+## File Last Change: 2023-03-08
 
 
 #-- information criteria xxirt
 xxirt_ic <- function( dev, N, par_items, par_Theta, I, par_items_bounds, np_item=NULL )
 {
     # Information criteria
-    ic <- list( "deviance"=dev, "n"=N, "I"=I )
+    ic <- list( deviance=dev, n=N, I=I )
     ic$np.items <- sum(par_items_bounds$active)
     if ( ! is.null(np_item) ){
         ic$np.items <- np_item

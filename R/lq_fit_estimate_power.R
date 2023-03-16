@@ -1,5 +1,6 @@
 ## File Name: lq_fit_estimate_power.R
 ## File Version: 0.14
+## File Last Change: 2020-04-27
 
 
 lq_fit_estimate_power <- function(e, pow_init=2, lower_pow=.1, upper_pow=10)

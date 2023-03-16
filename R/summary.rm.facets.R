@@ -1,5 +1,6 @@
 ## File Name: summary.rm.facets.R
 ## File Version: 0.26
+## File Last Change: 2019-01-02
 
 
 # Summary for rm.facets object

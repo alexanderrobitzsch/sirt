@@ -1,5 +1,6 @@
 ## File Name: resp_groupwise.R
 ## File Version: 0.11
+## File Last Change: 2019-08-04
 
 resp_groupwise <- function(resp, group, items_group)
 {

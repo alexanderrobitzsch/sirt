@@ -1,5 +1,6 @@
 ## File Name: lsem_bootstrap_draw_bootstrap_sample.R
-## File Version: 0.067
+## File Version: 0.068
+## File Last Change: 2023-03-15
 
 lsem_bootstrap_draw_bootstrap_sample <- function(data, sampling_weights,
     lsem_args, cluster=NULL, repl_design=NULL, rr=NULL)
@@ -36,7 +37,7 @@ lsem_bootstrap_draw_bootstrap_sample <- function(data, sampling_weights,
         rownames(t1) <- NULL
 
         t2 <- data.frame(index=1:N1, weight=sampling_weights)
-        t1 <- merge(x=t1, y=t2, by="index", all=TRUE)
+        t1 <- merge(x=t1, y=t2, by='index', all=TRUE)
         t1$freq <- ifelse( is.na(t1$freq), 0, t1$freq )
         t1$repl_vector <- t1$freq * t1$weight
         repl_vector <- t1$repl_vector

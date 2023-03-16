@@ -1,5 +1,6 @@
 ## File Name: brm.irf.R
 ## File Version: 0.11
+## File Last Change: 2019-08-04
 
 #--- item response function (discretized) beta response model
 brm.irf <- function( Theta, delta, tau, ncat, thdim=1, eps=1E-10 )

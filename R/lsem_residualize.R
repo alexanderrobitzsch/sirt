@@ -1,5 +1,6 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.403
+## File Version: 0.428
+## File Last Change: 2023-03-11
 
 
 #**** residualize data
@@ -39,7 +40,7 @@ lsem_residualize <- function( data, moderator, moderator.grid,
 
     if (residualize){
         if (verbose){
-            cat("** Residualize Data\n")
+            cat('** Residualize Data\n')
             utils::flush.console()
         }
         N <- nrow(data)
@@ -49,10 +50,15 @@ lsem_residualize <- function( data, moderator, moderator.grid,
             y0 <- rep(NA,N)
             for (gg in 1:G){
                 x <- dat2[,moderator]
-                res_formula <- data[, var.vv ] ~  x + I( x^2 )
+                data1 <- data
+                data1$x <- x
+                res_formula <- paste0( var.vv, ' ~ x + I(x^2)' )
                 weights_gg <- weights[,gg]
-                mod <- stats::lm( res_formula, weights=weights_gg )
-                m1 <- stats::predict( mod, data.frame( x=moderator.grid[gg] ) )
+                data1$weights_gg <- weights_gg
+                mod <- stats::lm( formula=res_formula, data=data1,
+                                        weights=weights_gg )
+                dfr_pred <- data.frame( x=moderator.grid[gg] )
+                m1 <- stats::predict( mod, dfr_pred )
                 residualized_intercepts[gg,vv] <- m1
                 y <- stats::resid(mod)
                 y0[ ind_vv ] <- y
@@ -60,6 +66,7 @@ lsem_residualize <- function( data, moderator, moderator.grid,
             }
         }
     }
+
     #--- OUTPUT
     res <- list( resid_vars=vars, data=dat2, weights_grid=weights, bw=bw, h=h,
             moderator.density=moderator.density, sd.moderator=sd.moderator, G=G, N=N,

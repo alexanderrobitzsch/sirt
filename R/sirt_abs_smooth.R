@@ -1,5 +1,6 @@
 ## File Name: sirt_abs_smooth.R
 ## File Version: 0.07
+## File Last Change: 2019-01-02
 
 sirt_abs_smooth <- function(x, deriv=0, eps=1e-4)
 {

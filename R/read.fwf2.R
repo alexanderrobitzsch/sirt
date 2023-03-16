@@ -1,5 +1,6 @@
 ## File Name: read.fwf2.R
 ## File Version: 1.11
+## File Last Change: 2019-02-27
 
 
 # This function reads fwf files

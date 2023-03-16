@@ -1,5 +1,6 @@
 ## File Name: rm_sdt_calc_expected_likelihood_item.R
 ## File Version: 0.16
+## File Last Change: 2018-12-30
 
 
 rm_sdt_calc_expected_likelihood_item <- function( nik.item, a.item, tau.item, Qmatrix,

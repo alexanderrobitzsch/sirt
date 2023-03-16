@@ -1,5 +1,6 @@
 ## File Name: btm_sim.R
 ## File Version: 0.03
+## File Last Change: 2019-03-10
 
 btm_sim <- function(theta, eta=0, delta=-99, repeated=FALSE)
 {

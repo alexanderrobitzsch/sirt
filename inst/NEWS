@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.13  |  2023-02-10  |  Last: sirt 3.13-35
+VERSIONS sirt 3.13  |  2023-03-16  |  Last: sirt 3.13-92
 ------------------------------------------------------------------------
 
 NOTE  * included arguments 'pw_linear', 'pw_quadratic' that allow 
@@ -60,10 +60,17 @@ NOTE  * changed default in lsem.estimate() to
         'sufficient_statistics=TRUE'
 NOTE  * included utility function move_variables_df() that reorders
         variables in a data frame
-
+NOTE  * included argument 'cv_kfold' in xxirt() for computing
+        cross-validated log-likelihood values
+ADDED * included function lsem.test() for testing of no parameter change
+        based on a fitted bootstrap object
+NOTE  * included utility function print_digits() that prints a data frame
+        with a fixed number of digits
+ 
+         
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: lsem.test (1)
 
 
 

@@ -1,5 +1,6 @@
 ## File Name: lsem_bootstrap_inference.R
 ## File Version: 0.112
+## File Last Change: 2023-01-26
 
 lsem_bootstrap_inference <- function(parameters_boot, est, repl_factor=NULL,
         bc_square=NULL)

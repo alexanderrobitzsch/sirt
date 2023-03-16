@@ -1,14 +1,15 @@
 ## File Name: xxirt_mstep_ThetaParameters.R
-## File Version: 0.183
+## File Version: 0.185
+## File Last Change: 2023-03-08
 
-#######################################################################
+
 xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
             mstep_iter, N.k, par1, mstep_reltol, Theta )
 {
     like_Theta <- function( x, ... ){
         par1 <- customTheta$par
         par1[ customTheta$est ] <- x
-        arg_list <- list( "par"=par1, "Theta"=Theta, "G"=G )
+        arg_list <- list( par=par1, Theta=Theta, G=G )
         mod1 <- do.call( customTheta$P, arg_list )
         ll2 <- - sum( N.k * log( mod1 + eps ) )
         NP <- length(customTheta$prior)
@@ -31,9 +32,9 @@ xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
     }
     #----- end definition likelihood function
 
-    mstep_method <- "BFGS"
+    mstep_method <- 'BFGS'
     arg_control <- list(maxit=mstep_iter)
-    if ( mstep_method=="BFGS"){
+    if ( mstep_method=='BFGS'){
         arg_control$reltol <- mstep_reltol
     }
     # method L-BFGS-B uses 'factr' (and 'pgtol') instead of 'reltol' and 'abstol'
@@ -46,4 +47,3 @@ xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
     res <- list( par1=par1, ll2=ll2, customTheta=customTheta)
     return(res)
 }
-#######################################################################

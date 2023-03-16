@@ -1,5 +1,6 @@
 ## File Name: summary.isop.R
 ## File Version: 0.13
+## File Last Change: 2019-02-07
 
 
 #*** Summary for isop object

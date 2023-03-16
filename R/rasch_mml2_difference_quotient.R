@@ -1,5 +1,6 @@
 ## File Name: rasch_mml2_difference_quotient.R
 ## File Version: 0.12
+## File Last Change: 2019-05-13
 
 rasch_mml2_difference_quotient <- function(ll0, ll1, ll2, h, eps=1e-6)
 {

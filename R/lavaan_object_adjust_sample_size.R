@@ -1,5 +1,6 @@
 ## File Name: lavaan_object_adjust_sample_size.R
 ## File Version: 0.106
+## File Last Change: 2019-04-25
 
 #- adjust standard errors in lavaan object for modified sample size
 lavaan_object_adjust_sample_size <- function(object, n_used)

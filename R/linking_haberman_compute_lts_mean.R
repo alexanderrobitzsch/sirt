@@ -1,5 +1,6 @@
 ## File Name: linking_haberman_compute_lts_mean.R
 ## File Version: 0.08
+## File Last Change: 2019-01-11
 
 linking_haberman_compute_lts_mean <- function(x, w, lts_prop, maxiter=10)
 {

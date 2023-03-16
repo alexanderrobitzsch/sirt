@@ -1,5 +1,6 @@
 ## File Name: lsem_bootstrap_postproc_output.R
-## File Version: 0.097
+## File Version: 0.098
+## File Last Change: 2023-03-15
 
 lsem_bootstrap_postproc_output <- function(parameters, parameters_boot,
     fitstats_joint, fitstats_joint_boot, est_joint=FALSE, repl_factor=NULL,
@@ -19,8 +20,8 @@ lsem_bootstrap_postproc_output <- function(parameters, parameters_boot,
     #* fitstats_joint: bootstrap inference for fit statistics
     if (est_joint){
         fjb <- fitstats_joint_boot
-        # bc_square <- which( rownames(fjb) %in% c("rmsea","srmr") )
-        bc_square <- which( rownames(fjb) %in% c("srmr") )
+        # bc_square <- which( rownames(fjb) %in% c('rmsea','srmr') )
+        bc_square <- which( rownames(fjb) %in% c('srmr') )
         val <- fitstats_joint$value
         res <- lsem_bootstrap_inference(parameters_boot=fjb,
                         est=val, repl_factor=repl_factor,
@@ -40,7 +41,7 @@ lsem_bootstrap_postproc_output <- function(parameters, parameters_boot,
     parameters_summary$SD_t <- h
 
     parameters_summary <- move_variables_df(x=parameters_summary,
-                                after_var="SD", move_vars=c("SD_bc", "SD_se", "SD_t"))
+                                after_var='SD', move_vars=c('SD_bc', 'SD_se', 'SD_t'))
 
     #-- output
     res <- list(parameters=parameters, fitstats_joint=fitstats_joint,

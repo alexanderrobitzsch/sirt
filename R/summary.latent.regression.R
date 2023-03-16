@@ -1,5 +1,6 @@
 ## File Name: summary.latent.regression.R
 ## File Version: 0.12
+## File Last Change: 2019-02-07
 
 
 summary.latent.regression <- function( object, ... )

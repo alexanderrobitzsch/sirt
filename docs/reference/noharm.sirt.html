@@ -358,9 +358,9 @@ Volume One: Models</em> (pp. 167-187). Boca Raton: CRC Press.
 doi: <a href='https://doi.org/10.1201/9781315374512'>10.1201/9781315374512</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>EAP person parameter estimates can be obtained by <code>R2noharm.EAP</code>.</p>
-<p>Model fit can be assessed by <code>modelfit.sirt</code>.</p>
-<p>See <code>R2noharm</code> for running the NOHARM software from within <span style="R">R</span>.</p>
+    <div class='dont-index'><p>EAP person parameter estimates can be obtained by <code><a href='R2noharm.EAP.html'>R2noharm.EAP</a></code>.</p>
+<p>Model fit can be assessed by <code><a href='modelfit.sirt.html'>modelfit.sirt</a></code>.</p>
+<p>See <code><a href='R2noharm.html'>R2noharm</a></code> for running the NOHARM software from within <span style="R">R</span>.</p>
 <p>See Fraser and McDonald (1988, 2012) for an implementation of the NOHARM model which
 is available as freeware (http://noharm.niagararesearch.ca/;
 the link seems to be broken in the meanwhile).</p></div>
@@ -405,14 +405,14 @@ the link seems to be broken in the meanwhile).</p></div>
 <span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>noharm.sirt</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>Ppatt</span><span class='kw'>=</span><span class='no'>Ppatt</span>, <span class='kw'>Fpatt</span><span class='kw'>=</span><span class='no'>Fpatt</span>, <span class='kw'>Fval</span><span class='kw'>=</span><span class='no'>Fval</span>, <span class='kw'>Pval</span><span class='kw'>=</span><span class='no'>Pval</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='co'># EAP ability estimates</span>
-<span class='no'>pmod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2noharm.EAP</span>(<span class='no'>mod1</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>10</span>) )
+<span class='no'>pmod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='R2noharm.EAP.html'>R2noharm.EAP</a></span>(<span class='no'>mod1</span>, <span class='kw'>theta.k</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='kw'>len</span><span class='kw'>=</span><span class='fl'>10</span>) )
 <span class='co'># model fit</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>modelfit.sirt</span>(<span class='no'>mod1</span>) )
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='modelfit.sirt.html'>modelfit.sirt</a></span>(<span class='no'>mod1</span>) )
 
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>#*** compare results with NOHARM software</span>
 <span class='no'>noharm.path</span> <span class='kw'>&lt;-</span> <span class='st'>"c:/NOHARM"</span>   <span class='co'># specify path for noharm software</span>
-<span class='no'>mod1a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2noharm</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>model.type</span><span class='kw'>=</span><span class='st'>"CFA"</span>,  <span class='kw'>F.pattern</span><span class='kw'>=</span><span class='no'>Fpatt</span>, <span class='kw'>F.init</span><span class='kw'>=</span><span class='no'>Fval</span>,
+<span class='no'>mod1a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='R2noharm.html'>R2noharm</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>model.type</span><span class='kw'>=</span><span class='st'>"CFA"</span>,  <span class='kw'>F.pattern</span><span class='kw'>=</span><span class='no'>Fpatt</span>, <span class='kw'>F.init</span><span class='kw'>=</span><span class='no'>Fval</span>,
              <span class='kw'>P.pattern</span><span class='kw'>=</span><span class='no'>Ppatt</span>, <span class='kw'>P.init</span><span class='kw'>=</span><span class='no'>Pval</span>, <span class='kw'>writename</span><span class='kw'>=</span><span class='st'>"r2noharm_example"</span>,
              <span class='kw'>noharm.path</span><span class='kw'>=</span><span class='no'>noharm.path</span>, <span class='kw'>dec</span><span class='kw'>=</span><span class='st'>","</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1a</span>)
@@ -444,13 +444,13 @@ the link seems to be broken in the meanwhile).</p></div>
 <span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>noharm.sirt</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>Ppatt</span><span class='kw'>=</span><span class='no'>Ppatt</span>,<span class='kw'>Fpatt</span><span class='kw'>=</span><span class='no'>Fpatt</span>, <span class='kw'>Fval</span><span class='kw'>=</span><span class='no'>Fval</span>, <span class='kw'>Pval</span><span class='kw'>=</span><span class='no'>Pval</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 <span class='co'># model fit</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>modelfit.sirt</span>( <span class='no'>mod3</span> ))
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='modelfit.sirt.html'>modelfit.sirt</a></span>( <span class='no'>mod3</span> ))
 
 <span class='co'>#** compare fit with NOHARM</span>
 <span class='no'>noharm.path</span> <span class='kw'>&lt;-</span> <span class='st'>"c:/NOHARM"</span>
 <span class='no'>P.pattern</span> <span class='kw'>&lt;-</span> <span class='no'>Ppatt</span> ; <span class='no'>P.init</span> <span class='kw'>&lt;-</span> <span class='no'>Pval</span>
 <span class='no'>F.pattern</span> <span class='kw'>&lt;-</span> <span class='no'>Fpatt</span> ; <span class='no'>F.init</span> <span class='kw'>&lt;-</span> <span class='no'>Fval</span>
-<span class='no'>mod3b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>R2noharm</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>model.type</span><span class='kw'>=</span><span class='st'>"CFA"</span>,
+<span class='no'>mod3b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='R2noharm.html'>R2noharm</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>model.type</span><span class='kw'>=</span><span class='st'>"CFA"</span>,
              <span class='kw'>F.pattern</span><span class='kw'>=</span><span class='no'>F.pattern</span>, <span class='kw'>F.init</span><span class='kw'>=</span><span class='no'>F.init</span>, <span class='kw'>P.pattern</span><span class='kw'>=</span><span class='no'>P.pattern</span>,
              <span class='kw'>P.init</span><span class='kw'>=</span><span class='no'>P.init</span>, <span class='kw'>writename</span><span class='kw'>=</span><span class='st'>"example_sim_2dim_rasch"</span>,
              <span class='kw'>noharm.path</span><span class='kw'>=</span><span class='no'>noharm.path</span>, <span class='kw'>dec</span><span class='kw'>=</span><span class='st'>","</span> )
@@ -529,7 +529,7 @@ the link seems to be broken in the meanwhile).</p></div>
 <span class='no'>mod5b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>noharm.sirt</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>Ppatt</span><span class='kw'>=</span><span class='no'>Ppatt</span>,<span class='kw'>Fpatt</span><span class='kw'>=</span><span class='no'>Fpatt</span>, <span class='kw'>Fval</span><span class='kw'>=</span><span class='no'>Fval</span>, <span class='kw'>Pval</span><span class='kw'>=</span><span class='no'>Pval</span>,
               <span class='kw'>pos.loading</span><span class='kw'>=</span><span class='fl'>TRUE</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod5b</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>modelfit.sirt</span>(<span class='no'>mod5b</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='modelfit.sirt.html'>modelfit.sirt</a></span>(<span class='no'>mod5b</span>))
 
 <span class='co'>#**** Model 6: 3-dimensional Rasch model</span>
 <span class='no'>Fval</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>( <span class='fl'>0</span>, <span class='no'>I</span>, <span class='fl'>3</span> )
@@ -542,7 +542,7 @@ the link seems to be broken in the meanwhile).</p></div>
 <span class='co'># estimation</span>
 <span class='no'>mod6</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>noharm.sirt</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>Ppatt</span><span class='kw'>=</span><span class='no'>Ppatt</span>,<span class='kw'>Fpatt</span><span class='kw'>=</span><span class='no'>Fpatt</span>, <span class='kw'>Fval</span><span class='kw'>=</span><span class='no'>Fval</span>, <span class='kw'>Pval</span><span class='kw'>=</span><span class='no'>Pval</span>  )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod6</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>modelfit.sirt</span>(<span class='no'>mod6</span>) )  <span class='co'># model fit</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='modelfit.sirt.html'>modelfit.sirt</a></span>(<span class='no'>mod6</span>) )  <span class='co'># model fit</span>
 
 <span class='co'>#**** Model 7: 3-dimensional 2PL model</span>
 <span class='no'>Fval</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>( <span class='fl'>0</span>, <span class='no'>I</span>, <span class='fl'>3</span> )
@@ -556,7 +556,7 @@ the link seems to be broken in the meanwhile).</p></div>
 <span class='co'># estimation</span>
 <span class='no'>mod7</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>noharm.sirt</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>, <span class='kw'>Ppatt</span><span class='kw'>=</span><span class='no'>Ppatt</span>,<span class='kw'>Fpatt</span><span class='kw'>=</span><span class='no'>Fpatt</span>, <span class='kw'>Fval</span><span class='kw'>=</span><span class='no'>Fval</span>, <span class='kw'>Pval</span><span class='kw'>=</span><span class='no'>Pval</span>  )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod7</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>modelfit.sirt</span>(<span class='no'>mod7</span>) )
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='modelfit.sirt.html'>modelfit.sirt</a></span>(<span class='no'>mod7</span>) )
 
 <span class='co'>#**** Model 8: Exploratory factor analysis with 3 dimensions</span>
 <span class='co'># estimation</span>

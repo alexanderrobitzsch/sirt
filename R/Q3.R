@@ -1,5 +1,6 @@
 ## File Name: Q3.R
 ## File Version: 1.21
+## File Last Change: 2018-12-30
 
 ###############################################################
 # Yen's Q3 statistic (1984)

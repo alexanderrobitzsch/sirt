@@ -301,8 +301,8 @@ regression models in <span style="R">R</span> (Gruen, Kosmidis &amp; Zeileis, 20
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mod1</span>)
 <span class='co'># estimated coefficients and comparison with simulated data</span>
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.coef</span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>, <span class='no'>delta</span>, <span class='no'>tau</span> )
-<span class='fu'>mirt.wrapper.itemplot</span>(<span class='no'>mod1</span>,<span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>, <span class='no'>delta</span>, <span class='no'>tau</span> )
+<span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.itemplot</a></span>(<span class='no'>mod1</span>,<span class='kw'>ask</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
 <span class='co'>#---------------------------</span>
 <span class='co'># estimate beta item response model in TAM</span>
@@ -351,7 +351,7 @@ regression models in <span style="R">R</span> (Gruen, Kosmidis &amp; Zeileis, 20
 <span class='no'>m1</span>$<span class='no'>tau.TAM</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>( <span class='no'>m1</span>$<span class='no'>a</span> * <span class='no'>m1</span>$<span class='no'>b</span> )
 
 <span class='co'># compare estimated parameter</span>
-<span class='no'>m2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>mirt.wrapper.coef</span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>, <span class='no'>delta</span>, <span class='no'>tau</span> )[,-<span class='fl'>1</span>]
+<span class='no'>m2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>( <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='mirt.wrapper.html'>mirt.wrapper.coef</a></span>( <span class='no'>mod1</span> )$<span class='no'>coef</span>, <span class='no'>delta</span>, <span class='no'>tau</span> )[,-<span class='fl'>1</span>]
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>m2</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(  <span class='st'>"delta.mirt"</span>, <span class='st'>"tau.mirt"</span>, <span class='st'>"thdim"</span>,<span class='st'>"delta.true"</span>,<span class='st'>"tau.true"</span>   )
 <span class='no'>m2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>m1</span>,<span class='no'>m2</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>( <span class='no'>m2</span>, <span class='fl'>3</span> )

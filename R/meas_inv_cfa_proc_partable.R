@@ -1,5 +1,6 @@
 ## File Name: meas_inv_cfa_proc_partable.R
 ## File Version: 0.04
+## File Last Change: 2022-04-17
 
 
 meas_inv_cfa_proc_partable <- function(partable, items)

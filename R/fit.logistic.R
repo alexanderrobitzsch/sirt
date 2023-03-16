@@ -1,5 +1,6 @@
 ## File Name: fit.logistic.R
 ## File Version: 2.15
+## File Last Change: 2019-04-30
 
 
 

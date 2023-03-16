@@ -1,5 +1,6 @@
 ## File Name: mgsem_ic.R
 ## File Version: 0.133
+## File Last Change: 2023-02-06
 
 mgsem_ic <- function(opt_fun_output, opt_fun_args, partable, technical)
 {

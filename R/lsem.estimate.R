@@ -1,5 +1,6 @@
 ## File Name: lsem.estimate.R
-## File Version: 1.051
+## File Version: 1.057
+## File Last Change: 2023-03-15
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -17,8 +18,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     s1 <- Sys.time()
     lavaan.args <- list(...)
     if (standardized){
-        if ( type=="MGM"){
-            stop("standardized=TRUE cannot be applied for type='MGM'")
+        if ( type=='MGM'){
+            stop('standardized=TRUE cannot be applied for type=\'MGM\'')
         }
     }
 
@@ -48,7 +49,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     pseudo_weights <- res$pseudo_weights
     some_ordinal <- res$some_ordinal
 
-    # group moderator if type="MGM"
+    # group moderator if type='MGM'
     out <- lsem_group_moderator( data=data, type=type, moderator.grid=moderator.grid,
                 moderator=moderator, residualize=residualize, h=h )
     data <- out$data
@@ -56,6 +57,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     h <- out$h
     residualize <- out$residualize
     moderator.grid <- out$moderator.grid
+
     # residualize input data
     out <- lsem_residualize( data=data, moderator=moderator,
                     moderator.grid=moderator.grid,
@@ -102,11 +104,11 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     if (standardized){
         sol <- sirt_import_lavaan_standardizedSolution( object=lavfit,
                             type=standardized_type)
-        colnames(sol)[ which( colnames(sol)=="est.std" ) ] <- "est"
-        sol$lhs <- paste0( "std__", sol$lhs)
+        colnames(sol)[ which( colnames(sol)=='est.std' ) ] <- 'est'
+        sol$lhs <- paste0( 'std__', sol$lhs)
         pars <- sirt_rbind_fill( x=pars, y=sol )
     }
-    pars <- apply( pars[, c("lhs", "op", "rhs" ) ], 1, FUN=function(ll){
+    pars <- apply( pars[, c('lhs', 'op', 'rhs' ) ], 1, FUN=function(ll){
                         paste0( ll[1], ll[2], ll[3] ) } )
     # fit LSEM for all moderator groups
     out2 <- lsem_fitsem( dat=dat, weights=weights, lavfit=lavfit,
@@ -148,7 +150,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                         min=min( x, na.rm=TRUE ), max=max( x, na.rm=TRUE ) )
     obji <- rbind( dfr0, dfr )
     rownames(obji) <- NULL
-    moderator.stat <- data.frame(variable=c("moderator","wgt", "Neff"), obji )
+    moderator.stat <- data.frame(variable=c('moderator','wgt', 'Neff'), obji )
 
     #-- model parameters
     model_parameters <- setdiff( paste(parameters_summary$par), fit_measures)
@@ -185,6 +187,6 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     loc_linear_smooth=loc_linear_smooth,
                     se=se, compute_se=compute_se,
                     class_boot=FALSE, type=type, CALL=CALL )
-    class(res) <- "lsem"
+    class(res) <- 'lsem'
     return(res)
 }

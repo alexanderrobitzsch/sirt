@@ -1,5 +1,6 @@
 ## File Name: nr.numdiff.R
 ## File Version: 0.09
+## File Last Change: 2018-12-30
 
 
 nr.numdiff <- function( ll0, ll1, ll2, h, eps=10^(-10) )

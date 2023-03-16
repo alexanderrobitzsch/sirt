@@ -1,5 +1,6 @@
 ## File Name: linking_haebara_gradient_function_R.R
 ## File Version: 0.292
+## File Last Change: 2020-03-24
 
 
 linking_haebara_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,

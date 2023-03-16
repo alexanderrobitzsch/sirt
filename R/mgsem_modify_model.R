@@ -1,5 +1,6 @@
 ## File Name: mgsem_modify_model.R
 ## File Version: 0.04
+## File Last Change: 2022-04-19
 
 
 mgsem_modify_model <- function(model, group, entry, type, value)

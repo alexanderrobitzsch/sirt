@@ -1,5 +1,6 @@
 ## File Name: noharm_sirt_est_residuals.R
-## File Version: 0.17
+## File Version: 0.183
+## File Last Change: 2023-03-08
 
 
 #**** estimate residuals
@@ -24,14 +25,15 @@ noharm_sirt_est_residuals <- function( Fval, Pval, Fpatt, Ppatt,
     pd.fk <- Fval %*% Pval
     Fval_old <- Fval
     Pval_old <- Pval
-    residuals <- ( wgtm * ( pm - v0.jk - v1.jk*gamma.jk - v2.jk*gamma.jk^2 - v3.jk*gamma.jk^3 ) )
+    residuals <- ( wgtm * ( pm - v0.jk - v1.jk*gamma.jk -
+                                    v2.jk*gamma.jk^2 - v3.jk*gamma.jk^3 ) )
 
     #* fit statistics
     rmsr <- sqrt( sum( residuals^2 * wgtm ) / sum(wgtm) )
     RMW <- residuals * wgtm
     PMW <- pm * wgtm
     tanaka <- 1 - sum( diag( RMW %*% RMW ) ) /  sum(diag( PMW %*% PMW ))
-    if ( modesttype==2){
+    if (modesttype==2){
         tanaka <- rmsr <- NA
     }
 

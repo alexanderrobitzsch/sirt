@@ -1,5 +1,6 @@
 ## File Name: rasch_mirtlc_mstep_lc.R
 ## File Version: 0.04
+## File Last Change: 2019-09-14
 
 
 #---- calculate class probabilities

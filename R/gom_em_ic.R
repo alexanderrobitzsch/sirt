@@ -1,5 +1,6 @@
 ## File Name: gom_em_ic.R
 ## File Version: 0.06
+## File Last Change: 2019-06-11
 
 gom_em_ic <- function(dev, dat2, I, K, TP, model, weights, lambda_partable=NULL)
 {

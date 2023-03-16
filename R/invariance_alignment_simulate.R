@@ -1,5 +1,6 @@
 ## File Name: invariance_alignment_simulate.R
-## File Version: 0.118
+## File Version: 0.121
+## File Last Change: 2023-02-19
 
 invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
     output="data", groupwise=FALSE, exact=FALSE)
@@ -37,7 +38,7 @@ invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
             #* exact distribution
             if (exact){
                 mu_gg <- nu[gg,] + lambda[gg,] * mu[gg]
-                Sigma_gg <- sigma[gg]^2 *( lambda[gg,]%*%t(lambda[gg,]) ) + diag(err_var[gg,])
+                Sigma_gg <- sigma[gg]^2 *tcrossprod(lambda[gg,]) + diag(err_var[gg,])
                 dat_gg <- rmvn(N=N_gg, mu=mu_gg, Sigma=Sigma_gg, exact=TRUE )
                 dat[ind_gg,-1] <- dat_gg
             }

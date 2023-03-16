@@ -32,6 +32,8 @@
 \alias{sirt_permutations}
 \alias{sirt_rcpp_discrete_inverse}
 \alias{move_variables_df}
+\alias{print_digits}
+
 
 \title{Utility Functions in \pkg{sirt}}
 
@@ -104,6 +106,9 @@ sirt_summary_print_package(pack)
 sirt_summary_print_rsession()
 # print call
 sirt_summary_print_call(CALL)
+
+# print a data frame x with fixed numbers of digits after the decimal
+print_digits(x, digits=NULL)
 
 # discrete inverse function
 sirt_rcpp_discrete_inverse(x0, y0, y)

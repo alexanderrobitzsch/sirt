@@ -1,5 +1,6 @@
 ## File Name: rm_sdt_calc_probs_grm_item_rcpp.R
 ## File Version: 0.05
+## File Last Change: 2018-12-30
 
 
 rm_sdt_calc_probs_grm_item_rcpp <- function( tau.item, a.item, theta.k, VV,

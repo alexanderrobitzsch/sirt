@@ -168,7 +168,7 @@ to local dependence</p></dd>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See <code>rasch.copula2</code> for estimating Rasch copula models.
+    <div class='dont-index'><p>See <code><a href='rasch.copula.html'>rasch.copula2</a></code> for estimating Rasch copula models.
 <!-- %% ~~objects to See Also as \code{\link{help}}, ~~~ --></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -181,7 +181,7 @@ to local dependence</p></dd>
 
 <span class='co'># define item cluster</span>
 <span class='no'>itemcluster</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>( <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>4</span> )
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.copula2</span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.copula.html'>rasch.copula2</a></span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># person parameter estimation under the Rasch copula model</span>
@@ -211,11 +211,11 @@ to local dependence</p></dd>
 <span class='no'>rho</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='fl'>.35</span>, <span class='fl'>.25</span>, <span class='fl'>.30</span> )
 
 <span class='co'># simulate data</span>
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.rasch.dep</span>( <span class='no'>theta</span>, <span class='no'>b</span>, <span class='no'>itemcluster</span>, <span class='no'>rho</span> )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.rasch.dep.html'>sim.rasch.dep</a></span>( <span class='no'>theta</span>, <span class='no'>b</span>, <span class='no'>itemcluster</span>, <span class='no'>rho</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"I"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)), <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>)
 
 <span class='co'># estimate Rasch copula model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.copula2</span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.copula.html'>rasch.copula2</a></span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># person parameter estimation under the Rasch copula model</span>

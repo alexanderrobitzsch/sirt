@@ -1,5 +1,6 @@
 ## File Name: meas_inv_cfa_modify_partable.R
 ## File Version: 0.136
+## File Last Change: 2022-05-16
 
 meas_inv_cfa_modify_partable <- function(partable, mimod, critval)
 {

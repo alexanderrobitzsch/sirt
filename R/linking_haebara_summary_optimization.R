@@ -1,5 +1,6 @@
 ## File Name: linking_haebara_summary_optimization.R
 ## File Version: 0.08
+## File Last Change: 2018-12-30
 
 linking_haebara_summary_optimization <- function(object, digits)
 {

@@ -1,5 +1,6 @@
 ## File Name: lsem.bootstrap.R
-## File Version: 0.333
+## File Version: 0.347
+## File Last Change: 2023-03-16
 
 
 lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
@@ -20,7 +21,7 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
     }
 
     lsem_args <- object$lsem_args
-    lsem_args$se <- "none"
+    lsem_args$se <- 'none'
     lsem_args$verbose <- FALSE
     lsem_args$sampling_weights <- object$sampling_weights
 
@@ -54,6 +55,10 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
         fitstats_joint_boot <- NULL
     }
 
+    #- moderator grid
+    NG <- nrow(object$moderator.density)
+    moderator_density_boot <- matrix(NA, nrow=NG, ncol=R)
+
     #-- loop over bootstrap samples
     lsem_bootstrap_print_start(verbose=verbose)
 
@@ -69,12 +74,14 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
         lsem_args1 <- res$lsem_args1
         #- fit model
         mod1 <- try( do.call(what=lsem.estimate, args=lsem_args1), silent=TRUE)
+
         #- output collection
-        if ( ! inherits(mod1,"try-error" ) ){
+        if ( ! inherits(mod1,'try-error' ) ){
             parameters_boot[,rr] <- mod1$parameters$est
             fitstats_joint_boot[,rr] <- mod1$fitstats_joint$value
             parameters_var_boot[,rr] <- mod1$parameters_summary$SD^2
             repl_design_used[,rr] <- res$repl_vector
+            moderator_density_boot[,rr] <- mod1$moderator.density$wgt
             rr <- rr + 1
         }
     }
@@ -93,6 +100,7 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
     object$parameters_boot <- parameters_boot
     object$fitstats_joint_boot <- fitstats_joint_boot
     object$parameters <- parameters
+    object$moderator_density_boot <- moderator_density_boot
     object$R <- R
     object$class_boot <- TRUE
     object$fitstats_joint <- fitstats_joint
@@ -104,6 +112,6 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
     object$time <- s2-s1
 
     #--- output
-    class(object) <- c("lsem","lsem.boot")
+    class(object) <- c('lsem','lsem.boot')
     return(object)
 }

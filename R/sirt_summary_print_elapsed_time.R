@@ -1,13 +1,14 @@
 ## File Name: sirt_summary_print_elapsed_time.R
-## File Version: 0.03
+## File Version: 0.04
+## File Last Change: 2023-03-08
 
 sirt_summary_print_elapsed_time <- function(object)
 {
-    cat( "Elapsed time pre-processing", "=", " ")
+    cat( 'Elapsed time pre-processing', '=', ' ')
     print(object$time$time_pre)
-    cat( "Elapsed time optimization", "=", " ")
+    cat( 'Elapsed time optimization', '=', ' ')
     print(object$time$time_opt)
-    cat( "Elapsed time post-processing", "=", " ")
+    cat( 'Elapsed time post-processing', '=', ' ')
     print(object$time$time_post)
-    cat("\n")
+    cat('\n')
 }

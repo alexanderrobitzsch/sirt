@@ -133,11 +133,11 @@ which is the correlation between item residuals after fitting the Rasch model.</
     <tr>
       <th>theta</th>
       <td><p>Vector of length \(N\) of person parameter estimates (e.g. obtained from
-    <code>wle.rasch</code>)</p></td>
+    <code><a href='wle.rasch.html'>wle.rasch</a></code>)</p></td>
     </tr>
     <tr>
       <th>b</th>
-      <td><p>Vector of length \(I\) (e.g. obtained from <code>rasch.mml2</code>)</p></td>
+      <td><p>Vector of length \(I\) (e.g. obtained from <code><a href='rasch.mml.html'>rasch.mml2</a></code>)</p></td>
     </tr>
     <tr>
       <th>progress</th>
@@ -165,11 +165,11 @@ performance of the three-parameter logistic model.
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>For the estimation of the average \(Q_3\) statistic within testlets see
-<code>Q3.testlet</code>.</p>
-<p>For modeling testlet effects see <code>mcmc.3pno.testlet</code>.</p>
+<code><a href='Q3.testlet.html'>Q3.testlet</a></code>.</p>
+<p>For modeling testlet effects see <code><a href='mcmc.3pno.testlet.html'>mcmc.3pno.testlet</a></code>.</p>
 <p>For handling local dependencies in IRT models see
-<code>rasch.copula2</code>, <code>rasch.pml3</code> or <br />
-<code>rasch.pairwise.itemcluster</code>.</p></div>
+<code><a href='rasch.copula.html'>rasch.copula2</a></code>, <code><a href='rasch.pml3.html'>rasch.pml3</a></code> or <br />
+<code><a href='rasch.pairwise.itemcluster.html'>rasch.pairwise.itemcluster</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'>#############################################################################</span>
@@ -178,9 +178,9 @@ performance of the three-parameter logistic model.
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.read</span>)
 
 <span class='co'># estimate the Rasch model</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>data.read</span>)
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>data.read</span>)
 <span class='co'># estmate WLEs</span>
-<span class='no'>mod.wle</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>wle.rasch</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>data.read</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> )
+<span class='no'>mod.wle</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='wle.rasch.html'>wle.rasch</a></span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>data.read</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> )
 <span class='co'># calculate Yen's Q3 statistic</span>
 <span class='no'>mod.q3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>Q3</span>( <span class='kw'>dat</span><span class='kw'>=</span><span class='no'>data.read</span>, <span class='kw'>theta</span><span class='kw'>=</span><span class='no'>mod.wle</span>$<span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod</span>$<span class='no'>item</span>$<span class='no'>b</span> )
   <span class='co'>##   Yen's Q3 Statistic based on an estimated theta score</span>
@@ -199,7 +199,7 @@ performance of the three-parameter logistic model.
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># obtain Q3 statistic from modelfit.sirt function which is based on the</span>
 <span class='co'># posterior distribution of theta and not on observed values</span>
-<span class='no'>fitmod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>modelfit.sirt</span>( <span class='no'>mod</span> )
+<span class='no'>fitmod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='modelfit.sirt.html'>modelfit.sirt</a></span>( <span class='no'>mod</span> )
 <span class='co'># extract Q3 statistic</span>
 <span class='no'>q3stat</span> <span class='kw'>&lt;-</span> <span class='no'>fitmod</span>$<span class='no'>itempairs</span>$<span class='no'>Q3</span>
   <span class='co'>##  &gt; summary(q3stat)</span>

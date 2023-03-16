@@ -1,16 +1,17 @@
 ## File Name: lsem_group_moderator.R
-## File Version: 0.16
+## File Version: 0.172
+## File Last Change: 2023-03-11
 
-####################################################
-# grouping a moderator variable
+
+#***** grouping a moderator variable
 lsem_group_moderator <- function( data, type, moderator.grid,
             moderator, residualize, h )
 {
     moderator.grouped <- NULL
-    if (type=="MGM"){
+    if (type=='MGM'){
         G1 <- length(moderator.grid)
-        moderator.grouped <- data.frame( "min"=moderator.grid[-G1],
-                "max"=moderator.grid[-1] )
+        moderator.grouped <- data.frame( min=moderator.grid[-G1],
+                                            max=moderator.grid[-1] )
         moderator.grouped$mid <- rowMeans( moderator.grouped)
         v1 <- data[, moderator ]
         v2 <- moderator.grouped$mid[1]
@@ -28,6 +29,6 @@ lsem_group_moderator <- function( data, type, moderator.grid,
                 moderator.grid=moderator.grid )
     return(res)
 }
-#########################################################
+
 
 lsem.group.moderator <- lsem_group_moderator

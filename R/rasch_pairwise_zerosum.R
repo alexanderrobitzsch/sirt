@@ -1,5 +1,6 @@
 ## File Name: rasch_pairwise_zerosum.R
 ## File Version: 0.02
+## File Last Change: 2021-03-28
 
 
 rasch_pairwise_zerosum <- function(eps)

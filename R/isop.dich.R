@@ -1,5 +1,6 @@
 ## File Name: isop.dich.R
 ## File Version: 3.17
+## File Last Change: 2018-12-30
 ######################################################################
 # Fitting the ISOP and ADISOP model
 isop.dich <- function( dat, score.breaks=NULL, merge.extreme=TRUE,

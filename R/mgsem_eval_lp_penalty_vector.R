@@ -1,5 +1,6 @@
 ## File Name: mgsem_eval_lp_penalty_vector.R
 ## File Version: 0.198
+## File Last Change: 2022-02-25
 
 
 mgsem_eval_lp_penalty_vector <- function(x, fac, n, p, eps_approx, deriv, h, a=3.7,

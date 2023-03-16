@@ -1,5 +1,6 @@
 ## File Name: regpolca_postproc_irf.R
 ## File Version: 0.04
+## File Last Change: 2020-02-24
 
 
 regpolca_postproc_irf <- function(probs_items, dat, lca_dich)

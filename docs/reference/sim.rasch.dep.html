@@ -153,15 +153,15 @@ to the number of itemclusters.</p></td>
 of the latent trait. Local dependencies are only interpreted as nuisance
 and not of substantive interest. If local dependencies should be substantively
 interpreted, a testlet model seems preferable
-(see <code>mcmc.3pno.testlet</code>).</p>
+(see <code><a href='mcmc.3pno.testlet.html'>mcmc.3pno.testlet</a></code>).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>To simulate the generalized logistic item response model see
-<code>sim.raschtype</code>. Ramsay's quotient model can be simulated
-using <code>sim.qm.ramsay</code>.</p>
+<code><a href='sim.raschtype.html'>sim.raschtype</a></code>. Ramsay's quotient model can be simulated
+using <code><a href='sim.qm.ramsay.html'>sim.qm.ramsay</a></code>.</p>
 <p>Marginal item reponse models for locally dependent item responses can be
-estimated with <code>rasch.copula2</code>, <code>rasch.pairwise</code> or
-<code>rasch.pairwise.itemcluster</code>.</p></div>
+estimated with <code><a href='rasch.copula.html'>rasch.copula2</a></code>, <code><a href='rasch.pairwise.html'>rasch.pairwise</a></code> or
+<code><a href='rasch.pairwise.itemcluster.html'>rasch.pairwise.itemcluster</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'>#############################################################################</span>
@@ -186,17 +186,17 @@ estimated with <code>rasch.copula2</code>, <code>rasch.pairwise</code> or
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"I"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)), <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>)
 
 <span class='co'># estimate Rasch copula model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.copula2</span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.copula.html'>rasch.copula2</a></span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># compare result with Rasch model estimation in rasch.copula</span>
 <span class='co'># delta must be set to zero</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.copula2</span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>),
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.copula.html'>rasch.copula2</a></span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span>, <span class='kw'>delta</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>),
             <span class='kw'>est.delta</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>)  )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># estimate Rasch model with rasch.mml2 function</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span> )
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -224,16 +224,16 @@ estimated with <code>rasch.copula2</code>, <code>rasch.pairwise</code> or
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"I"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>dat</span>)), <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>)
 
 <span class='co'># estimate Rasch copula model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.copula2</span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span>, <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>.001</span> )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.copula.html'>rasch.copula2</a></span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span>, <span class='kw'>numdiff.parm</span><span class='kw'>=</span><span class='fl'>.001</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'># Rasch model estimation</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.copula2</span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span>,
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.copula.html'>rasch.copula2</a></span>( <span class='no'>dat</span>, <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemcluster</span>,
             <span class='kw'>delta</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>,<span class='fl'>3</span>), <span class='kw'>est.delta</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>,<span class='fl'>3</span>) )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod2</span>)
 
 <span class='co'># estimation with pairwise Rasch model</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.pairwise</span>( <span class='no'>dat</span> )
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.pairwise.html'>rasch.pairwise</a></span>( <span class='no'>dat</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod3</span>)
 }</pre>
   </div>

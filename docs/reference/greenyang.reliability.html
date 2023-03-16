@@ -192,9 +192,9 @@ multidimensional data yield univocal scale scores,
     <p>This function needs the <span class="pkg">psych</span> package.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See <code>f1d.irt</code> for estimating the functional unidimensional
+    <div class='dont-index'><p>See <code><a href='f1d.irt.html'>f1d.irt</a></code> for estimating the functional unidimensional
 item response model.</p>
-<p>This function uses <code>reliability.nonlinearSEM</code>.</p>
+<p>This function uses <code><a href='reliability.nonlinearSEM.html'>reliability.nonlinearSEM</a></code>.</p>
 <p>See also the <code><a href='https://rdrr.io/pkg/MBESS/man/ci.reliability.html'>MBESS::ci.reliability</a></code> function for estimating
 reliability for polytomous item responses.</p></div>
 
@@ -210,7 +210,7 @@ reliability for polytomous item responses.</p></div>
 
 <span class='co'># calculate matrix of tetrachoric correlations</span>
 <span class='no'>dat.tetra</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/psych/man/tetrachor.html'>tetrachoric</a></span>(<span class='no'>dat</span>)      <span class='co'># using tetrachoric from psych package</span>
-<span class='no'>dat.tetra2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>tetrachoric2</span>(<span class='no'>dat</span>)       <span class='co'># using tetrachoric2 from sirt package</span>
+<span class='no'>dat.tetra2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='tetrachoric2.html'>tetrachoric2</a></span>(<span class='no'>dat</span>)       <span class='co'># using tetrachoric2 from sirt package</span>
 
 <span class='co'># perform parallel factor analysis</span>
 <span class='no'>fap</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>psych</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/psych/man/fa.parallel.html'>fa.parallel.poly</a></span>(<span class='no'>dat</span>, <span class='kw'>n.iter</span><span class='kw'>=</span><span class='fl'>1</span> )

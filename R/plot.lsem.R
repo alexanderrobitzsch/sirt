@@ -1,5 +1,6 @@
 ## File Name: plot.lsem.R
 ## File Version: 0.367
+## File Last Change: 2023-01-26
 
 #**** plot function for objects of class lsem
 plot.lsem <- function( x, parindex=NULL, ask=TRUE, ci=TRUE,

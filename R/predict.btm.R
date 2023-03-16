@@ -1,5 +1,6 @@
 ## File Name: predict.btm.R
 ## File Version: 0.07
+## File Last Change: 2020-04-18
 
 predict.btm <- function(object, data=NULL, ...)
 {

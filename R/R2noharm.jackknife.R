@@ -1,5 +1,6 @@
 ## File Name: R2noharm.jackknife.R
 ## File Version: 1.13
+## File Last Change: 2018-12-30
 
 
 #**** jackknife R2noharm

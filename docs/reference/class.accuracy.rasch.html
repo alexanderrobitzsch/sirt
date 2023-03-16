@@ -178,7 +178,7 @@ can be obtained with the <span style="R">R</span> package <span class="pkg">cacI
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.read</span>
 
 <span class='co'># estimate the Rasch model</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span> )
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span> )
 
 <span class='co'># estimate classification accuracy (3 levels)</span>
 <span class='no'>cutscores</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( -<span class='fl'>1</span>, <span class='fl'>.3</span> )    <span class='co'># cut scores at theta=-1 and theta=.3</span>

@@ -1,5 +1,6 @@
 ## File Name: rasch_pairwise_iterations.R
 ## File Version: 0.10
+## File Last Change: 2021-03-28
 
 
 rasch_pairwise_iterations <- function(eps, y.ij, delta.ij, conv, maxiter,

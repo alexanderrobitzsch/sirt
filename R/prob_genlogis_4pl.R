@@ -1,5 +1,6 @@
 ## File Name: prob_genlogis_4pl.R
 ## File Version: 0.08
+## File Last Change: 2019-05-10
 
 
 prob_genlogis_4pl <- function(theta, b, a, c, d, alpha1, alpha2, Qmatrix)

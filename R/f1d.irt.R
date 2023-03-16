@@ -1,7 +1,8 @@
 ## File Name: f1d.irt.R
-## File Version: 1.28
+## File Version: 1.295
+## File Last Change: 2023-03-10
 
-#--- Functional Unidimensional Model (Ip et al., 2013)
+#--- Functional unidimensional model (Ip et al., 2013)
 f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
             A=NULL, intercept=NULL, mu=NULL, Sigma=NULL, maxiter=100,
             conv=10^(-5), progress=TRUE )
@@ -9,12 +10,12 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
     if ( ! is.null(dat) ){
         # estimate tetrachoric correlation matrix
         if (progress){
-            cat("*** Estimate tetrachoric correlation\n")
+            cat('*** Estimate tetrachoric correlation\n')
         }
         tetra <- res <- tetrachoric2(dat=dat, progress=progress)
         # estimate factor analysis
-        fac1 <- sirt_import_psych_fa( r=res$rho, nfactors=nfactors, rotate="none" )
-        fac0 <- sirt_import_psych_fa( r=res$rho, nfactors=1, rotate="none" )
+        fac1 <- sirt_import_psych_fa( r=res$rho, nfactors=nfactors, rotate='none' )
+        fac0 <- sirt_import_psych_fa( r=res$rho, nfactors=1, rotate='none' )
         # extract standardized loadings
         A_stand <- as.matrix( fac1$loadings )
         # calculate communality
@@ -66,8 +67,7 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
     iter <- 0
     parchange <- 1
 
-    #*****************************************
-    # begin algorithm
+    #***** begin algorithm
     while( ( iter < maxiter ) & ( parchange > conv ) ){
 
         thetaast0 <- thetaast
@@ -75,8 +75,8 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
         diast0 <- diast
 
         # (1) update theta_p using ( a_i, theta_p, d_i, a_i*, d_i* )
-        Ypi <- Zpi - matrix( diast, TP, I, byrow=TRUE)
-        aiastM <- matrix( aiast, TP, I, byrow=TRUE )
+        Ypi <- Zpi - matrix( diast, nrow=TP, ncol=I, byrow=TRUE)
+        aiastM <- matrix( aiast, nrow=TP, ncol=I, byrow=TRUE )
         thetaast <- rowSums( Ypi * aiastM ) / rowSums( aiastM^2 )
         wM <- stats::weighted.mean( thetaast, wgt_theta )
         sdM <- sqrt( sum( ( thetaast - wM )^2 * wgt_theta ) )
@@ -89,20 +89,20 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
 
         # compute approximation error
         errpi <- Zpi - thetaast * matrix(aiast,TP, I, byrow=TRUE )  -
-                 matrix(diast,TP, I, byrow=TRUE )
+                            matrix(diast,TP, I, byrow=TRUE )
         approx.error <- sum( errpi^2 * wgt_theta ) / I
         # parameter change
         parchange <- max( abs( c(diast - diast0,aiast-aiast0,thetaast-thetaast0) ))
         iter <- iter + 1
         if (progress){
-            cat( paste0( "Iteration ", iter,
-                " | Approximation error ", "=", " ", round( approx.error, 5 ),
-                " | Max. parameter change ", "=", " ", round( parchange, 5),
-                 "\n") )
+            cat( paste0( 'Iteration ', iter,
+                ' | Approximation error ', '=', ' ', round( approx.error, 5 ),
+                ' | Max. parameter change ', '=', ' ', round( parchange, 5),
+                '\n') )
             utils::flush.console()
         }
     }
-    #**************************************************
+    #***** end algorithm
 
     if ( ! is.null(dat) ){
         # unstandardized loadings 1 factor model

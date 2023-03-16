@@ -551,7 +551,7 @@ on parameters \(\alpha_1\) and \(\alpha_2\).</p>
 probit link function: \(\alpha_1=0.165\) and \(\alpha_2=0.165\) <br />
 loglog link function: \(\alpha_1=-0.037\) and \(\alpha_2=0.62\) <br />
 cloglog link function: \(\alpha_1=0.62\) and \(\alpha_2=-0.037\)</p>
-<p>See <code>pgenlogis</code> for exact transformation formulas of
+<p>See <code><a href='pgenlogis.html'>pgenlogis</a></code> for exact transformation formulas of
 the mentioned link functions. <br /></p>
 <p>A \(D\)-dimensional model can also be specified
 but only allows for between item dimensionality
@@ -699,10 +699,10 @@ doi: 10.1037/a0022749</p>
 Ramsay's quotient model and multdimensional models.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Simulate the generalized logistic Rasch model with <code>sim.raschtype</code>.</p>
-<p>Simulate Ramsay's quotient model with <code>sim.qm.ramsay</code>.</p>
-<p>Simulate locally dependent item response data using <code>sim.rasch.dep</code>.</p>
-<p>For an assessment of global model fit see <code>modelfit.sirt</code>.</p>
+    <div class='dont-index'><p>Simulate the generalized logistic Rasch model with <code><a href='sim.raschtype.html'>sim.raschtype</a></code>.</p>
+<p>Simulate Ramsay's quotient model with <code><a href='sim.qm.ramsay.html'>sim.qm.ramsay</a></code>.</p>
+<p>Simulate locally dependent item response data using <code><a href='sim.rasch.dep.html'>sim.rasch.dep</a></code>.</p>
+<p>For an assessment of global model fit see <code><a href='modelfit.sirt.html'>modelfit.sirt</a></code>.</p>
 <p>See <code><a href='https://rdrr.io/pkg/CDM/man/itemfit.sx2.html'>CDM::itemfit.sx2</a></code> for item fit
 statistics.</p></div>
 
@@ -841,7 +841,7 @@ statistics.</p></div>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>( -<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='kw'>len</span><span class='kw'>=</span><span class='fl'>15</span>)
 
 <span class='co'># simulate data</span>
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span>, <span class='kw'>alpha1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>alpha2</span><span class='kw'>=</span>-<span class='fl'>0.3</span> )
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span>, <span class='kw'>alpha1</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>alpha2</span><span class='kw'>=</span>-<span class='fl'>0.3</span> )
 
 <span class='co'>#  estimating alpha parameters</span>
 <span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span>, <span class='kw'>est.alpha</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>mmliter</span><span class='kw'>=</span><span class='fl'>30</span> )
@@ -914,9 +914,9 @@ statistics.</p></div>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>8765</span>)
 <span class='no'>N1</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>     <span class='co'># N1=1000 persons in group 1</span>
 <span class='no'>N2</span> <span class='kw'>&lt;-</span> <span class='fl'>500</span>      <span class='co'># N2=500 persons in group 2</span>
-<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N1</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.5</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span>,
+<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N1</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.5</span> ), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span>,
             <span class='kw'>alpha1</span><span class='kw'>=</span>-<span class='fl'>0.3</span>, <span class='kw'>alpha2</span><span class='kw'>=</span><span class='fl'>0</span>)
-<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N2</span>, <span class='kw'>mean</span><span class='kw'>=</span>-<span class='fl'>.5</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>.75</span>),
+<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>N2</span>, <span class='kw'>mean</span><span class='kw'>=</span>-<span class='fl'>.5</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>.75</span>),
             <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span>, <span class='kw'>alpha1</span><span class='kw'>=</span>-<span class='fl'>0.3</span>, <span class='kw'>alpha2</span><span class='kw'>=</span><span class='fl'>0</span>)
 <span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>( <span class='no'>dat1</span>, <span class='no'>dat2</span> )
 <span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='no'>N1</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>2</span>,<span class='no'>N2</span>))
@@ -995,7 +995,7 @@ statistics.</p></div>
 <span class='co'># item slopes group 1</span>
 <span class='no'>a1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='no'>I</span>)
 <span class='co'># simulate data group 1</span>
-<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n1</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b1</span>, <span class='kw'>fixed.a</span><span class='kw'>=</span><span class='no'>a1</span> )
+<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n1</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b1</span>, <span class='kw'>fixed.a</span><span class='kw'>=</span><span class='no'>a1</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat1</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"I"</span>, <span class='fl'>1</span>:<span class='no'>I</span>, <span class='st'>"des1"</span> )
 <span class='co'># group 2</span>
 <span class='no'>b2</span> <span class='kw'>&lt;-</span> <span class='no'>b1</span> - <span class='fl'>.15</span>
@@ -1004,7 +1004,7 @@ statistics.</p></div>
 <span class='co'># compared to the first group. This indicates possible item context effects.</span>
 
 <span class='co'># simulate data group 2</span>
-<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n2</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b2</span>, <span class='kw'>fixed.a</span><span class='kw'>=</span><span class='no'>a2</span> )
+<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n2</span>), <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b2</span>, <span class='kw'>fixed.a</span><span class='kw'>=</span><span class='no'>a2</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat2</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"I"</span>, <span class='fl'>1</span>:<span class='no'>I</span>, <span class='st'>"des2"</span> )
 <span class='co'># define joint dataset</span>
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>( <span class='fl'>NA</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='no'>n1</span>+<span class='no'>n2</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>*<span class='no'>I</span>)
@@ -1212,7 +1212,7 @@ statistics.</p></div>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1a</span>)
 
 <span class='co'>#*** Model 1b: PCM in sirt</span>
-<span class='no'>mod1b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rm.facets</span>( <span class='no'>dat</span> )
+<span class='no'>mod1b</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rm.facets.html'>rm.facets</a></span>( <span class='no'>dat</span> )
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>mod1b</span>)
 
 <span class='co'>#*** Model 1c: PCM in mirt</span>

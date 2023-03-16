@@ -1,5 +1,6 @@
 ## File Name: mgsem_numerical_gradient.R
 ## File Version: 0.05
+## File Last Change: 2022-02-25
 
 
 mgsem_numerical_gradient <- function(par, FUN, h, symmetrize=FALSE, ...)

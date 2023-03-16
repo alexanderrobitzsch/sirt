@@ -1,5 +1,6 @@
 ## File Name: summary.R2noharm.R
 ## File Version: 0.14
+## File Last Change: 2018-12-30
 
 #..........................................................
 # R2Noharm summary function

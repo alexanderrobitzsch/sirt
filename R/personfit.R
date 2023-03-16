@@ -1,5 +1,6 @@
 ## File Name: personfit.R
 ## File Version: 1.29
+## File Last Change: 2018-12-30
 
 
 

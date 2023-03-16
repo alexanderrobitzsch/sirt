@@ -1,5 +1,6 @@
 ## File Name: lsem_fit_initial_model_sufficient_statistics.R
 ## File Version: 0.05
+## File Last Change: 2022-07-27
 
 lsem_fit_initial_model_sufficient_statistics <- function(dat, variables_model,
     sampling_weights, has_meanstructure)

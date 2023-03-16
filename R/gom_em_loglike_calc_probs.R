@@ -1,5 +1,6 @@
 ## File Name: gom_em_loglike_calc_probs.R
 ## File Version: 0.03
+## File Last Change: 2019-05-15
 
 gom_em_loglike_calc_probs <- function(x, ind_pi, ind_lambda, I, K, theta.k,
     theta0.k)

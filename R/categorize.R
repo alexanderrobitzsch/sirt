@@ -1,5 +1,6 @@
 ## File Name: categorize.R
 ## File Version: 0.18
+## File Last Change: 2018-12-30
 
 #################################################################
 # categorize variables into classes

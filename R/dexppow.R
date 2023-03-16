@@ -1,5 +1,6 @@
 ## File Name: dexppow.R
 ## File Version: 0.04
+## File Last Change: 2020-04-27
 
 
 ## copied from normalp::dnormp

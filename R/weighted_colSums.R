@@ -1,5 +1,6 @@
 ## File Name: weighted_colSums.R
 ## File Version: 0.08
+## File Last Change: 2018-12-30
 
 
 weighted_colSums <- function( mat, wgt=NULL)

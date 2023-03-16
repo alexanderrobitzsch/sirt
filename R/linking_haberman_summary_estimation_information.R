@@ -1,5 +1,6 @@
 ## File Name: linking_haberman_summary_estimation_information.R
 ## File Version: 0.04
+## File Last Change: 2019-01-14
 
 linking_haberman_summary_estimation_information <- function(res_opt)
 {

@@ -1,10 +1,12 @@
 ## File Name: IRT.mle.R
-## File Version: 0.32
+## File Version: 0.34
+## File Last Change: 2023-03-08
 
 
 #--- IRT.mle
 IRT.mle <- function(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
-        mu=0, sigma=1, maxiter=20, maxincr=3, h=0.001, convP=1e-04, maxval=9, progress=TRUE)
+        mu=0, sigma=1, maxiter=20, maxincr=3, h=0.001, convP=1e-04, maxval=9,
+        progress=TRUE)
 {
     N <- length(theta)
     I <- ncol(data)

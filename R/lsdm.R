@@ -1,5 +1,6 @@
 ## File Name: lsdm.R
-## File Version: 1.384
+## File Version: 1.387
+## File Last Change: 2023-03-08
 
 
 # LSDM - Least Squares Distance Method
@@ -16,7 +17,7 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
     # display progress
     cat(display.separate, "\n" )
     cat( "LSDM -- Least Squares Distance Method of Cognitive Validation \n")
-    cat("Reference: Dimitrov, D. (2007) Applied Psychological Measurement, 31, 367-387.\n")
+    cat("Dimitrov, D. (2007) Applied Psychological Measurement, 31, 367-387.\n")
     cat(display.separate, "\n")
     TP <- length(theta)
     I <- nrow(Qmatrix)
@@ -143,20 +144,28 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
     data0.fitted <- exp( Qmatrix %*% log.arc0 )
     rownames(data.lltm) <- rownames(data0.fitted) <- rownames(data)
     # MAD for original model (Dimitrov)
-    mad0 <- lsdm_irf_distance_mad(data=data, data_fitted=data0.fitted, wgt_theta=wgt_theta, use_abs=TRUE)
-    md0 <- lsdm_irf_distance_mad(data=data, data_fitted=data0.fitted, wgt_theta=wgt_theta, use_abs=FALSE)
+    mad0 <- lsdm_irf_distance_mad(data=data, data_fitted=data0.fitted,
+                            wgt_theta=wgt_theta, use_abs=TRUE)
+    md0 <- lsdm_irf_distance_mad(data=data, data_fitted=data0.fitted,
+                            wgt_theta=wgt_theta, use_abs=FALSE)
     mm0 <- mean(mad0)
 
-    mad.lltm <- lsdm_irf_distance_mad(data=data, data_fitted=data.lltm, wgt_theta=wgt_theta, use_abs=TRUE)
-    md.lltm <- lsdm_irf_distance_mad(data=data, data_fitted=data.lltm, wgt_theta=wgt_theta, use_abs=FALSE)
+    mad.lltm <- lsdm_irf_distance_mad(data=data, data_fitted=data.lltm,
+                            wgt_theta=wgt_theta, use_abs=TRUE)
+    md.lltm <- lsdm_irf_distance_mad(data=data, data_fitted=data.lltm,
+                            wgt_theta=wgt_theta, use_abs=FALSE)
     mm.lltm <- mean(mad.lltm)
 
     #* model fit LSDM
-    cat(paste( "Model Fit LSDM   -  Mean MAD:", formatC( round( mm0, 3 ),digits=3, width=6),
-                "    Median MAD:", formatC( round( median(mad0), 3 ),digits=3, width=6), "\n") )
-    cat(paste( "Model Fit LLTM   -  Mean MAD:", formatC( round( mm.lltm, 3 ),digits=3, width=6),
-                    "    Median MAD:", formatC( round( median(mad.lltm), 3 ),digits=3, width=6),
-                    "   R^2=", format( round( slltm.res1$r.squared, 3 ),digits=3),   "\n") )
+    cat(paste( "Model Fit LSDM   -  Mean MAD:",
+                    formatC( round( mm0, 3 ),digits=3, width=6),
+                    "    Median MAD:", formatC( round( median(mad0), 3 ),
+                                digits=3, width=6), "\n") )
+    cat(paste( "Model Fit LLTM   -  Mean MAD:",
+                    formatC( round( mm.lltm, 3 ),digits=3, width=6),
+                    "    Median MAD:", formatC( round( median(mad.lltm), 3 ),
+                                    digits=3, width=6),
+                    "   R^2=", format( round( slltm.res1$r.squared, 3 ),digits=3), "\n") )
     item <- data.frame( N.skills=rowSums(Qmatrix), mad.lsdm=mad0,
                         mad.lltm=mad.lltm, md.lsdm=md0, md.lltm=md.lltm, icc.pars )
     colnames(W) <- colnames(Qmatrix)

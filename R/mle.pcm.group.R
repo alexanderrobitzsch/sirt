@@ -1,5 +1,6 @@
 ## File Name: mle.pcm.group.R
-## File Version: 0.17
+## File Version: 0.182
+## File Last Change: 2023-03-08
 
 
 #***** MLE of person parameters for individuals and groups
@@ -39,7 +40,8 @@ mle.pcm.group <- function( dat, b, a=rep(1,ncol(dat)), group=NULL, pid=NULL,
     # compute person scores
     personScore <- rowSums( dat * dat_resp )
     # compute person maximum score
-    personMax <- rowSums( matrix( maxK, nrow=nrow(dat), ncol=ncol(dat), byrow=TRUE ) * dat_resp )
+    personMax <- rowSums( matrix( maxK, nrow=nrow(dat),
+                                ncol=ncol(dat), byrow=TRUE ) * dat_resp )
 
     #******
     # epsilon adjustment for groups

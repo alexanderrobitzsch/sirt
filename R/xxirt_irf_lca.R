@@ -1,5 +1,6 @@
 ## File Name: xxirt_irf_lca.R
 ## File Version: 0.071
+## File Last Change: 2020-04-18
 
 xxirt_irf_lca <- function(par, Theta, ncat)
 {

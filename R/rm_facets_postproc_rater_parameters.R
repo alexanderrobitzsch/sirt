@@ -1,5 +1,6 @@
 ## File Name: rm_facets_postproc_rater_parameters.R
 ## File Version: 0.09
+## File Last Change: 2018-12-30
 
 rm_facets_postproc_rater_parameters <- function( rater.index, dat2, dat2.resp, b.rater, a.rater,
         rater.index1, rater_item_int )

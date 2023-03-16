@@ -1,5 +1,6 @@
 ## File Name: linking_haebara_optim_function_R.R
 ## File Version: 0.170
+## File Last Change: 2020-03-28
 
 
 linking_haebara_optim_function_R <- function(NI, NS, dist, aM, bM, theta,

@@ -1,8 +1,9 @@
 ## File Name: sirt_summary_print_display.R
-## File Version: 0.03
+## File Version: 0.04
+## File Last Change: 2023-03-08
 
 sirt_summary_print_display <- function(symbol="-", len=65)
 {
-    res <- paste0( paste0(rep(symbol, len), collapse=""), "\n" )
+    res <- paste0( paste0(rep(symbol, len), collapse=''), '\n' )
     return(res)
 }

@@ -154,8 +154,8 @@ Item parameters are treated as fixed in the estimation.</p>
     <tr>
       <th>f.yi.qk</th>
       <td><p>An optional matrix which contains the individual likelihood.
-  This matrix is produced by <code>rasch.mml2</code> or
-  <code>rasch.copula2</code>. The use of this argument allows the
+  This matrix is produced by <code><a href='rasch.mml.html'>rasch.mml2</a></code> or
+  <code><a href='rasch.copula.html'>rasch.copula2</a></code>. The use of this argument allows the
   estimation of the latent regression model independent of the
   parameters of the used item response model.</p></td>
     </tr>
@@ -289,7 +289,7 @@ doi: <a href='https://doi.org/10.1080/01621459.1988.10478613'>10.1080/01621459.1
 Rasch model.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See also <code>plausible.value.imputation.raschtype</code>
+    <div class='dont-index'><p>See also <code><a href='plausible.value.imputation.raschtype.html'>plausible.value.imputation.raschtype</a></code>
 for plausible value imputation of generalized logistic
 item type models.</p></div>
 
@@ -307,7 +307,7 @@ item type models.</p></div>
 <span class='co'>#***</span>
 <span class='co'># Model 1: Latent regression model in the Rasch model</span>
 <span class='co'># estimate Rasch model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span>[,<span class='no'>items</span>] )
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span>[,<span class='no'>items</span>] )
 <span class='co'># latent regression model</span>
 <span class='no'>lm1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>latent.regression.em.raschtype</span>( <span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat</span>[,<span class='no'>items</span> ], <span class='kw'>X</span><span class='kw'>=</span><span class='no'>X</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>mod1</span>$<span class='no'>item</span>$<span class='no'>b</span> )
 
@@ -315,7 +315,7 @@ item type models.</p></div>
 <span class='co'>#***</span>
 <span class='co'># Model 2: Latent regression with generalized link function</span>
 <span class='co'># estimate alpha parameters for link function</span>
-<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.mml2</span>( <span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>est.alpha</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.mml.html'>rasch.mml2</a></span>( <span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>est.alpha</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='co'># use model estimated likelihood for latent regression model</span>
 <span class='no'>lm2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>latent.regression.em.raschtype</span>( <span class='kw'>f.yi.qk</span><span class='kw'>=</span><span class='no'>mod2</span>$<span class='no'>f.yi.qk</span>,
             <span class='kw'>X</span><span class='kw'>=</span><span class='no'>X</span>, <span class='kw'>theta.list</span><span class='kw'>=</span><span class='no'>mod2</span>$<span class='no'>theta.k</span>)
@@ -325,7 +325,7 @@ item type models.</p></div>
 <span class='no'>testlets</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>( <span class='no'>data.pisaRead</span>$<span class='no'>item</span>$<span class='no'>testlet</span>)
 <span class='no'>itemclusters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/match.html'>match</a></span>( <span class='no'>testlets</span>, <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='no'>testlets</span>) )
 <span class='co'># estimate Rasch copula model</span>
-<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>rasch.copula2</span>( <span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemclusters</span> )
+<span class='no'>mod3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='rasch.copula.html'>rasch.copula2</a></span>( <span class='no'>dat</span>[,<span class='no'>items</span>], <span class='kw'>itemcluster</span><span class='kw'>=</span><span class='no'>itemclusters</span> )
 <span class='co'># use model estimated likelihood for latent regression model</span>
 <span class='no'>lm3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>latent.regression.em.raschtype</span>( <span class='kw'>f.yi.qk</span><span class='kw'>=</span><span class='no'>mod3</span>$<span class='no'>f.yi.qk</span>,
                 <span class='kw'>X</span><span class='kw'>=</span><span class='no'>X</span>, <span class='kw'>theta.list</span><span class='kw'>=</span><span class='no'>mod3</span>$<span class='no'>theta.k</span>)
@@ -346,7 +346,7 @@ item type models.</p></div>
 <span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>( <span class='no'>theta</span>, <span class='fl'>1</span>, <span class='no'>x</span>, <span class='no'>y</span> )
 
 <span class='co'># simulate Rasch model</span>
-<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>sim.raschtype</span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
+<span class='no'>dat1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'><a href='sim.raschtype.html'>sim.raschtype</a></span>( <span class='kw'>theta</span><span class='kw'>=</span><span class='no'>theta</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )
 
 <span class='co'># estimate latent regression</span>
 <span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>latent.regression.em.raschtype</span>( <span class='kw'>data</span><span class='kw'>=</span><span class='no'>dat1</span>, <span class='kw'>X</span><span class='kw'>=</span><span class='no'>dfr</span>[,-<span class='fl'>1</span>], <span class='kw'>b</span><span class='kw'>=</span><span class='no'>b</span> )

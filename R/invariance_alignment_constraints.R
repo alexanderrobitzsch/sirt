@@ -1,5 +1,6 @@
 ## File Name: invariance_alignment_constraints.R
 ## File Version: 0.251
+## File Last Change: 2019-03-06
 
 invariance_alignment_constraints <- function(model, lambda_parm_tol, nu_parm_tol )
 {

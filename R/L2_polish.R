@@ -1,5 +1,6 @@
 ## File Name: L2_polish.R
 ## File Version: 0.07
+## File Last Change: 2019-01-14
 
 L2_polish <- function(x, eps=1e-4, maxiter=20)
 {

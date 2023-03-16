@@ -1,5 +1,6 @@
 ## File Name: greenyang.reliability.R
-## File Version: 1.22
+## File Version: 1.236
+## File Last Change: 2023-03-15
 
 
 #---- reliability from a multidimensional nonlinear SEM for dichotomous data
@@ -9,28 +10,28 @@ greenyang.reliability <- function( object.tetra, nfactors)
     cat("Green & Yang (2009, Psychometrika). Reliability of summed item scores\n")
     cat("  using structural equation modeling: An alternative to coefficient alpha\n\n")
     mod.omega1 <- sirt_import_psych_omega( m=object.tetra$rho, nfactors=1)
+
+    facloadings <- matrix( mod.omega1$schmid$sl[,1], ncol=1 )
+    thresh <- object.tetra$tau
+
     # reliability for one factor
-    rel1 <- reliability.nonlinearSEM( facloadings=matrix( mod.omega1$schmid$sl[,1], ncol=1 ),
-                                thresh=object.tetra$tau )$omega.rel
+    rel1 <- reliability.nonlinearSEM( facloadings=facloadings, thresh=thresh )$omega.rel
     # reliability for f factors
     mod.omega <- sirt_import_psych_omega( m=object.tetra$rho, nfactors=nfactors)
-    rel1h <- reliability.nonlinearSEM( facloadings=matrix( mod.omega$schmid$sl[,1], ncol=1 ),
-                                thresh=object.tetra$tau )
+    rel1h <- reliability.nonlinearSEM( facloadings=facloadings, thresh=thresh )
     relf <- reliability.nonlinearSEM( facloadings=mod.omega$schmid$orthog,
-                                thresh=object.tetra$tau )
-    #'''''''''
-    # calculate Omega Hierarchical Asymptotic
+                                        thresh=thresh )
+
+    #--- calculate Omega Hierarchical Asymptotic
         pthresh <- relf$pthresh
         I <- length(pthresh)
         # create matrix of multiplied facloadings (expected correlation)
-        rho.exp <- matrix( 0, I, I )
+        rho.exp <- matrix( 0, nrow=I, ncol=I )
         # colnames(rho.exp) <- rownames(rho.exp) <- rownames(facloadings)
         # reliability matrix
         rel.matrix3 <- rel.matrix2 <- rel.matrix <- rho.exp
         for (ii1 in 1:I){
             for (ii2 in 1:ii1){
-                #        ii1 <- 2
-                #        ii2 <- 4
                 rho.exp[ii1,ii2] <- rel1h$rho.exp[ii1,ii2]
                 rho.exp[ii2,ii1] <- rho.exp[ii1,ii2]
                 r1 <- rho.exp[ii1,ii2]
@@ -66,8 +67,7 @@ greenyang.reliability <- function( object.tetra, nfactors)
 #    rel1h <- rel1h$omega.rel
     relf <- relf$omega.rel
     dfr <- data.frame( "coefficient"=c( "omega_1", "omega_h", "omega_t",
-            "omega_ha","ECV",
-                "ExplVar", "EigenvalRatio"),
+                                        "omega_ha","ECV", "ExplVar", "EigenvalRatio"),
                     "dimensions"=c(1,nfactors, nfactors,nfactors,
                         nfactors, NA, NA),
                     "estimate"=c( rel1, rel1h, relf, omega.relha,
