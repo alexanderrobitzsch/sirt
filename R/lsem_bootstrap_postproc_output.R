@@ -1,5 +1,5 @@
 ## File Name: lsem_bootstrap_postproc_output.R
-## File Version: 0.098
+## File Version: 0.104
 
 lsem_bootstrap_postproc_output <- function(parameters, parameters_boot,
     fitstats_joint, fitstats_joint_boot, est_joint=FALSE, repl_factor=NULL,
@@ -38,9 +38,10 @@ lsem_bootstrap_postproc_output <- function(parameters, parameters_boot,
     h <- parameters_summary$SD_bc / (parameters_summary$SD_se+1e-100)
     h <- ifelse( abs(parameters_summary$SD) < 1e-5*abs(parameters_summary$M), 0, h )
     parameters_summary$SD_t <- h
+    parameters_summary$SD_p <- stats::pnorm(-abs(h))
 
-    parameters_summary <- move_variables_df(x=parameters_summary,
-                                after_var='SD', move_vars=c('SD_bc', 'SD_se', 'SD_t'))
+    parameters_summary <- move_variables_df(x=parameters_summary, after_var='SD',
+                                move_vars=c('SD_bc', 'SD_se', 'SD_t', 'SD_p') )
 
     #-- output
     res <- list(parameters=parameters, fitstats_joint=fitstats_joint,
