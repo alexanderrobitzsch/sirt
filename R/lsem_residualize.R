@@ -1,5 +1,5 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.428
+## File Version: 0.433
 
 
 #**** residualize data
@@ -36,7 +36,6 @@ lsem_residualize <- function( data, moderator, moderator.grid,
     residualized_intercepts <- matrix( 0, nrow=G, ncol=V)
     colnames(residualized_intercepts) <- vars
     rownames(residualized_intercepts) <- round( moderator.grid, 3 )
-
     if (residualize){
         if (verbose){
             cat('** Residualize Data\n')

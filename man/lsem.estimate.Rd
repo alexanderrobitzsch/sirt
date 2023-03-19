@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.760
+%% File Version: 0.762
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -248,7 +248,8 @@ Alexander Robitzsch, Oliver Luedtke, Andrea Hildebrandt
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{lsem.permutationTest}}
+See \code{\link{lsem.permutationTest}} for conducting a permutation test
+and \code{\link{lsem.test}} for applying a Wald test to a bootstrapped LSEM model.
 }
 
 \examples{

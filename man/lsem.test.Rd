@@ -1,5 +1,5 @@
 %% File Name: lsem.test.Rd
-%% File Version: 0.07
+%% File Version: 0.081
 
 \name{lsem.test}
 \alias{lsem.test}
@@ -59,7 +59,8 @@ a particular parameter using a regression model specified in \code{models}.}
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-See also \code{\link{lsem.estimate}}.
+See also \code{\link{lsem.estimate}} for estimating LSEM models and
+\code{\link{lsem.bootstrap}} for bootstrapping LSEM models.
 }
 
 

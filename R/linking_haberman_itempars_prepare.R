@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_itempars_prepare.R
-## File Version: 0.12
+## File Version: 0.131
 
 
 linking_haberman_itempars_prepare <- function(b, a=NULL, wgt=NULL)
@@ -8,7 +8,7 @@ linking_haberman_itempars_prepare <- function(b, a=NULL, wgt=NULL)
     NS <- ncol(b)
     if ( is.null(rownames(b) )){
         i0 <- ceiling( log10(I) + 1 )
-        rownames(b) <- paste0("I", 10^i0 + 1:I)
+        rownames(b) <- paste0('I', 10^i0 + 1:I)
     }
     if ( is.null(colnames(b) )){
         colnames(b) <- 1:NS

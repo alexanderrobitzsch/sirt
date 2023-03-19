@@ -1,5 +1,5 @@
 ## File Name: lsem_estimate_proc_args.R
-## File Version: 0.403
+## File Version: 0.406
 
 lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     pseudo_weights, lavmodel, data, use_lavaan_survey, est_joint=FALSE,
@@ -18,7 +18,7 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     #- variables in model
     partable <- sirt_import_lavaan_lavaanify(model=lavmodel)
     variables_model <- intersect( union( partable$lhs, partable$rhs ), colnames(data) )
-    has_meanstructure <- '~' %in% partable$op
+    has_meanstructure <- '~1' %in% paste(partable$op)
 
     #- joint estimation
     par_vec <- union(union(par_invariant, par_linear), par_quadratic)

@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 1.057
+## File Version: 1.067
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -59,9 +59,9 @@ lsem.estimate <- function( data, moderator, moderator.grid,
 
     # residualize input data
     out <- lsem_residualize( data=data, moderator=moderator,
-                    moderator.grid=moderator.grid,
-                    lavmodel=lavmodel, h=h, bw=bw, residualize=residualize, eps=eps,
-                    verbose=verbose, sampling_weights=sampling_weights, kernel=kernel,
+                    moderator.grid=moderator.grid, lavmodel=lavmodel, h=h, bw=bw,
+                    residualize=residualize, eps=eps, verbose=verbose,
+                    sampling_weights=sampling_weights, kernel=kernel,
                     variables_model=variables_model)
     G <- out$G
     data <- out$data
@@ -123,7 +123,9 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     pw_linear=pw_linear, pw_quadratic=pw_quadratic,
                     se=se, moderator_variable=moderator_variable,
                     loc_linear_smooth=loc_linear_smooth, pd=pd,
-                    has_meanstructure=has_meanstructure, est_DIF=est_DIF, ... )
+                    residualized_intercepts=residualized_intercepts,
+                    has_meanstructure=has_meanstructure, est_DIF=est_DIF,
+                    residualize=residualize, ... )
     dif_effects <- out2$dif_effects
     parameters <- out2$parameters
     is_meanstructure <- out2$is_meanstructure

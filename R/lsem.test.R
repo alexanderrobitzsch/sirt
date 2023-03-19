@@ -1,10 +1,15 @@
 ## File Name: lsem.test.R
-## File Version: 0.118
+## File Version: 0.133
 
 #**** test LSEM model based on bootstrap
 lsem.test <- function( mod, bmod, models=NULL )
 {
     parameters <- mod$parameters
+    repl_factor <- bmod$repl_factor
+    R <- bmod$R
+    if (is.null(repl_factor)){
+        repl_factor <- 1/(R-1)
+    }
 
     parnames <- unique(paste(parameters$par))
     w <- mod$moderator.density$wgt
@@ -31,7 +36,8 @@ lsem.test <- function( mod, bmod, models=NULL )
             ind_pp <- which( parameters$par==pp )
             parameters_pp <- parameters[ind_pp, ]
             theta <- parameters_pp$est
-            V <- stats::cov( t( parameters_boot[ind_pp, ] ) )
+            par_boot_pp <- t( parameters_boot[ind_pp, ] )
+            V <- stats::cov( par_boot_pp )*(R-1)*repl_factor
             M <- TAM::weighted_mean(x=theta, w=w)
             SD <- TAM::weighted_sd(x=theta, w=w)
             dfr1 <- data.frame(par=pp, M=M, SD=SD, chisq=NA, df=NA, p=NA)

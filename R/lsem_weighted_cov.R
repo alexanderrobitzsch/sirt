@@ -1,9 +1,10 @@
 ## File Name: lsem_weighted_cov.R
-## File Version: 0.227
+## File Version: 0.252
 
 lsem_weighted_cov <- function( x, weights, x_resp=NULL,
         moderator_variable=NULL, loc_linear_smooth=NULL, moderator_value=NULL,
-        pd=FALSE)
+        pd=FALSE, residualized_intercepts=NULL,    has_meanstructure=FALSE,
+        residualize=TRUE)
 {
     if (pd){
         requireNamespace('Matrix')
@@ -20,7 +21,9 @@ lsem_weighted_cov <- function( x, weights, x_resp=NULL,
     weights_m <- sqrt( weights + eps ) * x_resp
     x[ ! x_resp ] <- 0
 
-    res <- lsem_weighted_mean( x=x, weights=weights, x_resp=x_resp,
+    #*** estimate mean for covariance structure
+    x0 <- x
+    res <- lsem_weighted_mean( x=x0, weights=weights, x_resp=x_resp,
                         moderator_variable=moderator_variable,
                         loc_linear_smooth=loc_linear_smooth,
                         moderator_value=moderator_value)
@@ -60,6 +63,7 @@ lsem_weighted_cov <- function( x, weights, x_resp=NULL,
     }
 
     Nobs <- mean( weightsN[ ! upper.tri(weightsN) ] )
+
 
     #-- output
     res <- list( weightsN=weightsN, cov=covw, raw_cov=covw_raw,

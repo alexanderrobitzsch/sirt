@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem_joint_estimation.R
-## File Version: 0.181
+## File Version: 0.184
 
 lsem_fitsem_joint_estimation <- function(partable_joint,
     is_meanstructure, sample_stats, lavaan_est_fun, se,
@@ -9,6 +9,7 @@ lsem_fitsem_joint_estimation <- function(partable_joint,
     wmean <- sample_stats$wmean
     wcov <- sample_stats$wcov
     Nobs <- sample_stats$Nobs
+
     if (is_meanstructure){
         sample_mean <- wmean
     } else {

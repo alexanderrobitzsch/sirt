@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.623
+## File Version: 0.639
 
 lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
                 verbose, pars, standardized, variables_model, sufficient_statistics,
@@ -8,7 +8,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
                 partable_joint=NULL, pw_linear=1, pw_quadratic=1,
                 se="standard", moderator_variable=NULL,
                 loc_linear_smooth=NULL, pd=FALSE, has_meanstructure=FALSE,
-                est_DIF=FALSE, ... )
+                est_DIF=FALSE, residualized_intercepts=NULL, residualize=TRUE, ... )
 {
     parameters <- NULL
     fits <- NULL
@@ -33,7 +33,9 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
                     variables_model=variables_model, weights=weights,
                     moderator_variable=moderator_variable,
                     loc_linear_smooth=loc_linear_smooth, moderator.grid=moderator.grid,
-                    pd=pd)
+                    pd=pd, residualized_intercepts=residualized_intercepts,
+                    has_meanstructure=has_meanstructure,
+                    residualize=residualize)
     }
     if (est_joint & (! sufficient_statistics)){
         N <- nrow(dat)
@@ -53,6 +55,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
                                 par_quadratic=par_quadratic, pw_linear=pw_linear,
                                 pw_quadratic=pw_quadratic)
         }
+
         #- fit model
         fit_args <- list( partable_joint=partable_joint,
                             is_meanstructure=is_meanstructure, data_joint=data_joint,

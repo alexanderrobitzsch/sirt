@@ -1,5 +1,5 @@
 ## File Name: linking_haebara_optim_function_R.R
-## File Version: 0.170
+## File Version: 0.171
 
 
 linking_haebara_optim_function_R <- function(NI, NS, dist, aM, bM, theta,
@@ -19,13 +19,13 @@ linking_haebara_optim_function_R <- function(NI, NS, dist, aM, bM, theta,
                 ## a_exp[ii]=a[ii]*sigma[ss]
                 ## a_exp[ii] * b_exp[ii]=a[ii]*(b[ii]-mu[ss])
                 dist2 <- (p_obs - p_exp)^2
-                if (dist=="L2"){
+                if (dist=='L2'){
                     dist1 <- sum( dist2*prob_theta )
                 }
-                if (dist=="L1"){
+                if (dist=='L1'){
                     dist1 <- sum( sqrt( dist2 + eps )*prob_theta )
                 }
-                if (dist=="Lp"){
+                if (dist=='Lp'){
                     dist1 <- sum( ( dist2 + eps )^(pow/2)*prob_theta )
                 }
                 val <- val + wgtM[ii,ss]*dist1

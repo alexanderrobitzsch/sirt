@@ -1,5 +1,5 @@
 ## File Name: lsem.bootstrap.R
-## File Version: 0.347
+## File Version: 0.351
 
 
 lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
@@ -104,6 +104,7 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
     object$class_boot <- TRUE
     object$fitstats_joint <- fitstats_joint
     object$repl_design <- repl_design
+    object$repl_factor <- repl_factor
     object$repl_design_used <- repl_design_used
     s2 <- Sys.time()
     object$s1 <- s1

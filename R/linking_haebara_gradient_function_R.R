@@ -1,5 +1,5 @@
 ## File Name: linking_haebara_gradient_function_R.R
-## File Version: 0.292
+## File Version: 0.293
 
 
 linking_haebara_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
@@ -19,15 +19,15 @@ linking_haebara_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
                 b_exp <- ( b[ii] - mu[ss] ) / sigma[ss]
                 p_exp <- stats::plogis( a_exp * (theta - b_exp ) )
                 der <- p_exp*(1-p_exp)
-                if (dist=="L2"){
+                if (dist=='L2'){
                     der_basis <- -2*(p_obs - p_exp)*prob_theta*der
                 }
-                if (dist=="L1"){
+                if (dist=='L1'){
                     diff2 <- p_obs - p_exp
                     dist2 <- diff2^2
                     der_basis <- -(dist2+eps)^(-.5)*diff2*prob_theta*der
                 }
-                if (dist=="Lp"){
+                if (dist=='Lp'){
                     diff2 <- p_obs - p_exp
                     dist2 <- diff2^2
                     der_basis <- -pow*(dist2+eps)^(pow/2-1)*diff2*prob_theta*der
