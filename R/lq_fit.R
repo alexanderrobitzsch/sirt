@@ -1,5 +1,5 @@
 ## File Name: lq_fit.R
-## File Version: 0.152
+## File Version: 0.154
 
 lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
         est_pow=FALSE, optimizer="optim", eps_vec=10^seq(0,-10, by=-.5),
@@ -71,7 +71,7 @@ lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
                 iterate_powers <- FALSE
             }
             iter <- iter + 1
-            # cat( paste0("eps=",eps, " | pow=",pow,"\n"))
+            # cat( paste0('eps=',eps, ' | pow=',pow,'\n'))
         }
     }
 

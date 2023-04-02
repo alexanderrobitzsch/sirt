@@ -1,5 +1,5 @@
 ## File Name: mgsem_evaluate_penalties_evaluate_entry.R
-## File Version: 0.188
+## File Version: 0.189
 
 
 mgsem_evaluate_penalties_evaluate_entry <- function(x, res, dd, index, partable,
@@ -16,15 +16,15 @@ mgsem_evaluate_penalties_evaluate_entry <- function(x, res, dd, index, partable,
         null_vec <- 0
     }
 
-    # res[["pen_l2"]] <- null_vec
+    # res[['pen_l2']] <- null_vec
 
-    # fun_eval="none" produces a value of zero
+    # fun_eval='none' produces a value of zero
 
     #*** priors
     if (technical$is_prior){
-        pen_entry <- "pen_prior"
-        prior <- partable[dd,"prior"]
-        if (prior!="none"){
+        pen_entry <- 'pen_prior'
+        prior <- partable[dd,'prior']
+        if (prior!='none'){
             fun_eval <- prior_list[[prior]]
             args_eval <- list()
             val <- mgsem_evaluate_penalties_evaluate_entry_fun_eval(x=x,

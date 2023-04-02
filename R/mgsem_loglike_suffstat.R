@@ -1,9 +1,8 @@
 ## File Name: mgsem_loglike_suffstat.R
-## File Version: 0.135
+## File Version: 0.136
 
 mgsem_loglike_suffstat <- function(suffstat, Mu, Sigma, output_all=FALSE )
 {
-    requireNamespace("MASS")
     N <- suffstat$N
     M <- suffstat$M
     S <- suffstat$S
@@ -12,7 +11,7 @@ mgsem_loglike_suffstat <- function(suffstat, Mu, Sigma, output_all=FALSE )
         Mu <- res$Mu
         Sigma <- res$Sigma
     }
-    S1 <- MASS::ginv(Sigma)
+    S1 <- mgsem_ginv(X=Sigma)
     p <- length(Mu)
     m1 <- M-Mu
 

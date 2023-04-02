@@ -1,5 +1,5 @@
 ## File Name: lq_fit_estimate_power.R
-## File Version: 0.14
+## File Version: 0.15
 
 
 lq_fit_estimate_power <- function(e, pow_init=2, lower_pow=.1, upper_pow=10)
@@ -20,7 +20,7 @@ lq_fit_estimate_power <- function(e, pow_init=2, lower_pow=.1, upper_pow=10)
             (vi - sqrt(gamma(1/p) * gamma(3/p))/gamma(2/p))^2
         }
         res <- stats::optim(par=pow0, fn=fvi, lower=lower_pow, upper=upper_pow,
-                            method="L-BFGS-B")
+                            method='L-BFGS-B')
         p <- res$par
     }
     return(p)

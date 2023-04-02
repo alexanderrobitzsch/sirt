@@ -1,5 +1,5 @@
 ## File Name: mgsem_opt_fun.R
-## File Version: 0.222
+## File Version: 0.224
 
 
 mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
@@ -35,14 +35,14 @@ mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
         eval_args <- list(suffstat=opt_fun_args$suffstat[[gg]],
                             Mu=implied$Mu, Sigma=implied$Sigma,
                             output_all=output_all)
-        if (estimator=="ME"){
+        if (estimator=='ME'){
             eval_args$p <- opt_fun_args$p_me
             eval_args$eps <- opt_fun_args$eps_approx
             eval_args$deriv <- FALSE
             eval_args$approx_method <- opt_fun_args$technical$approx_method
         }
         ll_gg <- do.call(what=opt_fun_args$eval_fun, args=eval_args)
-        if (output_all & (estimator=="ML") ){
+        if (output_all & (estimator=='ML') ){
             S1_list[[gg]] <- ll_gg$S1
             mean_residual_list[[gg]] <- ll_gg$mean_residual
             ll_gg <- ll_gg$loglike

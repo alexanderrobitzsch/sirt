@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_model_difflp_information.R
-## File Version: 0.186
+## File Version: 0.187
 
 
 mgsem_proc_model_difflp_information <- function(partable)
@@ -10,11 +10,11 @@ mgsem_proc_model_difflp_information <- function(partable)
     lpdiff_diff_indices <- list()
     pen_difflp_factor <- list()
 
-    pen_entry <- "pen_difflp"
+    pen_entry <- 'pen_difflp'
     loop_parms <- which(partable$unique==1 & partable$group>0)
 
     for (dd in loop_parms){
-        index_dd <- partable[dd,"index"]
+        index_dd <- partable[dd,'index']
         ind <- which( partable$type==partable$type[dd] & partable$i1==partable$i1[dd] &
                 partable$i2==partable$i2[dd] & (partable$group > 0) & (partable$rid!=dd) &
                 partable$unique==1)
@@ -23,7 +23,7 @@ mgsem_proc_model_difflp_information <- function(partable)
         }
         if ( (length(ind)>0) & (partable$pen_difflp[dd]>0)  ){
             is_lpdiff_entry[dd] <- TRUE
-            lpdiff_diff_indices[[dd]] <- partable[ind, "index"]
+            lpdiff_diff_indices[[dd]] <- partable[ind, 'index']
             fac <- sqrt(partable[dd,pen_entry]*partable[ind,pen_entry])
             pen_difflp_factor[[dd]] <- fac
         } else {
@@ -32,17 +32,17 @@ mgsem_proc_model_difflp_information <- function(partable)
     }
 
     #--- design matrices
-    cp <- partable[ partable$unique==1, "name"]
+    cp <- partable[ partable$unique==1, 'name']
     lpdiff_facmat <- matrix(0, nrow=NP, ncol=NP)
     rownames(lpdiff_facmat) <- colnames(lpdiff_facmat) <- cp
     lpdiff_n <- lpdiff_facmat
     for (dd in loop_parms){
         if (is_lpdiff_entry[dd]){
-            i1 <- partable[dd,"index"]
+            i1 <- partable[dd,'index']
             i2 <- lpdiff_diff_indices[[dd]]
             lpdiff_facmat[i1,i2] <- pen_difflp_factor[[dd]]
-            n1 <- partable[partable$index==i1,"N_group"]
-            n2 <- partable[partable$index%in%i2,"N_group"]
+            n1 <- partable[partable$index==i1,'N_group']
+            n2 <- partable[partable$index%in%i2,'N_group']
             lpdiff_n[i1,i2] <- 0.5*sqrt(n1*n2)
         }
     }

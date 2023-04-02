@@ -1,5 +1,5 @@
 ## File Name: mgsem_compute_model_implied_moments.R
-## File Version: 0.168
+## File Version: 0.169
 
 
 mgsem_compute_model_implied_moments <- function(est, is_B=FALSE, calc_Sigma=TRUE,
@@ -8,11 +8,10 @@ mgsem_compute_model_implied_moments <- function(est, is_B=FALSE, calc_Sigma=TRUE
     Mu <- NULL
     Sigma <- NULL
     if (is_B){
-        requireNamespace("MASS")
         D <- ncol(est$PHI)
         ID <- diag(rep(1,D))
         B <- res$B
-        B1 <- MASS::ginv(ID-B)
+        B1 <- mgsem_ginv(ID-B)
         LAMB <- est$LAM %*% B1
         Mu <- LAMB %*% est$ALPHA + est$NU
         # Sigma <- LAMB %*% tcrossprod(est$PHI, LAMB) + est$PSI

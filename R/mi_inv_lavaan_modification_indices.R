@@ -1,9 +1,9 @@
 ## File Name: mi_inv_lavaan_modification_indices.R
-## File Version: 0.05
+## File Version: 0.06
 
 mi_inv_lavaan_modification_indices <- function(mod, op=c("~1","=~"))
 {
-    requireNamespace("lavaan")
+    requireNamespace('lavaan')
     res <- lavaan::modificationIndices(object=mod, free.remove=FALSE,
                     op=op, sort=TRUE)
     return(res)

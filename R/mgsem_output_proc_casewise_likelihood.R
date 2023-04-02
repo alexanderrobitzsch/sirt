@@ -1,12 +1,12 @@
 ## File Name: mgsem_output_proc_casewise_likelihood.R
-## File Version: 0.06
+## File Version: 0.07
 
 
 mgsem_output_proc_casewise_likelihood <- function(data_proc, implied, estimator="ML")
 {
     case_ll <- NULL
-    if (estimator=="ML" & ( ! is.null(data_proc) ) ){
-        requireNamespace("mvtnorm")
+    if (estimator=='ML' & ( ! is.null(data_proc) ) ){
+        requireNamespace('mvtnorm')
         N <- data_proc$N
         G <- data_proc$G
         data <- data_proc$data

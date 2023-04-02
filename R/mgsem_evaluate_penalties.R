@@ -1,5 +1,5 @@
 ## File Name: mgsem_evaluate_penalties.R
-## File Version: 0.294
+## File Version: 0.329
 
 
 mgsem_evaluate_penalties <- function(x, partable, prior_list, technical,
@@ -22,7 +22,7 @@ mgsem_evaluate_penalties <- function(x, partable, prior_list, technical,
 
     #- loop over parameters
     for (dd in loop_parms){
-        index <- partable[dd,"index"]
+        index <- partable[dd,'index']
         res <- mgsem_evaluate_penalties_evaluate_entry(
                     x=x, res=res, dd=dd, index=index,
                     partable=partable, technical=technical,
@@ -108,7 +108,45 @@ mgsem_evaluate_penalties <- function(x, partable, prior_list, technical,
         res$pen_difflp <- z
     }
 
-    res$pen_all <- res$pen_prior - res$pen_l2 - res$pen_lp - res$pen_difflp
+    #*** penalty for diffpar
+    res$pen_diffpar_lp <- 0
+    if (technical$is_diffpar_pen){
+        diffpar_pen_list_entries <- technical$diffpar_pen$diffpar_pen_list_entries
+        NDP <- nrow(diffpar_pen_list_entries)
+        p <- technical$diffpar_pen$p
+        n <- partable2$N_group
+        # vector of differences of parameter
+        z <- x[ diffpar_pen_list_entries$index1 ] - x[ diffpar_pen_list_entries$index2 ]
+        n2 <- sqrt(n[ diffpar_pen_list_entries$index1 ] *
+                            n[ diffpar_pen_list_entries$index2 ] )
+        args_pen <- list(x=z, fac=diffpar_pen_list_entries$W, n=n2, p=p,
+                        eps_approx=eps_approx, pen_type=pen_type, h=h, deriv=deriv)
+        fun_pen <- 'mgsem_eval_lp_penalty_vector'
+        val <- do.call(what=fun_pen, args=args_pen)
+
+        #* no derivative
+        if (!deriv){
+            val <- sum(val)
+        }
+
+        #* derivative
+        if (deriv){
+            der_z <- val
+            NP <- length(x)
+            val <- rep(0,NP)
+            for (hh in 1:NDP){
+                i1 <- diffpar_pen_list_entries$index1[hh]
+                val[i1] <- val[i1] + der_z[hh]
+                i2 <- diffpar_pen_list_entries$index2[hh]
+                val[i2] <- val[i2] - der_z[hh]
+            }
+        }
+        res$pen_diffpar_lp <- val
+    }
+
+    #*** sum all penalties
+    res$pen_all <- res$pen_prior - res$pen_l2 - res$pen_lp - res$pen_difflp -
+                            res$pen_diffpar_lp
 
     #--- output
     return(res)

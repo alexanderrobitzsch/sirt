@@ -1,11 +1,11 @@
 ## File Name: mgsem_proc_model_single_group.R
-## File Version: 0.07
+## File Version: 0.081
 
 mgsem_proc_model_single_group <- function(model)
 {
     H <- length(model)
     if (H==1){
-        entries <- c("est","index")
+        entries <- c('est','index')
         group1 <- list()
         group0 <- model[[1]]
         for (ee in entries){

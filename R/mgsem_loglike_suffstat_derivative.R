@@ -1,10 +1,9 @@
 ## File Name: mgsem_loglike_suffstat_derivative.R
-## File Version: 0.16
+## File Version: 0.171
 
 
 mgsem_loglike_suffstat_derivative <- function(suffstat, Mu, Sigma )
 {
-    requireNamespace("MASS")
     N <- suffstat$N
     M <- suffstat$M
     S <- suffstat$S
@@ -13,7 +12,7 @@ mgsem_loglike_suffstat_derivative <- function(suffstat, Mu, Sigma )
         Mu <- res$Mu
         Sigma <- res$Sigma
     }
-    S1 <- MASS::ginv(Sigma)
+    S1 <- mgsem_ginv(X=Sigma)
     p <- length(Mu)
     m1 <- M-Mu
 

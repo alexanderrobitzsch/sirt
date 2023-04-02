@@ -1,5 +1,5 @@
 ## File Name: mgsem_grad_fun.R
-## File Version: 0.171
+## File Version: 0.172
 
 
 mgsem_grad_fun <- function(x, opt_fun_args, output_all=FALSE)
@@ -25,7 +25,7 @@ mgsem_grad_fun <- function(x, opt_fun_args, output_all=FALSE)
     for (gg in 1:G){
         grad_suffstat_fun_args <- list(suffstat=opt_fun_args$suffstat[[gg]],
                                         Mu=implied0[[gg]])
-        if (estimator=="ME"){
+        if (estimator=='ME'){
             grad_suffstat_fun_args$p <- opt_fun_args$p
             grad_suffstat_fun_args$eps <- opt_fun_args$eps_approx
             grad_suffstat_fun_args$deriv <- TRUE

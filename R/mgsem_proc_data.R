@@ -1,11 +1,14 @@
 ## File Name: mgsem_proc_data.R
-## File Version: 0.04
+## File Version: 0.055
 
 mgsem_proc_data <- function(data, group, weights)
 {
+    N <- nrow(data)
+    if (is.null(group)){
+        group <- rep(1,N)
+    }
     groups <- unique(group)
     G <- length(groups)
-    N <- nrow(data)
     if (is.null(weights)){
         weights <- rep(1,N)
     }
@@ -15,7 +18,7 @@ mgsem_proc_data <- function(data, group, weights)
         ind_gg <- which(group==groups[gg])
         dat_gg <- data[ ind_gg, ]
         w <- weights[ind_gg]
-        res <- stats::cov.wt( x=dat_gg, w=w, method="ML")
+        res <- stats::cov.wt( x=dat_gg, w=w, method='ML')
         s_gg <- list(M=res$center, S=res$cov, N=sum(w) )
         suffstat[[gg]] <- s_gg
     }

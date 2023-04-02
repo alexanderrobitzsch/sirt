@@ -1,5 +1,5 @@
 ## File Name: stratified.cronbach.alpha.R
-## File Version: 0.253
+## File Version: 0.257
 
 
 # stratified Cronbach's Alpha
@@ -23,7 +23,9 @@ stratified.cronbach.alpha <- function( data, itemstrata=NULL )
     # stratified alpha
     dfr$alpha.stratified <- NA
     var_tot <- dfr[ -1, "var.tot" ]
-    dfr$alpha.stratified[1] <- 1 - sum (( 1 - dfr[ -1, "alpha" ] )*var_tot ) / var_tot
+    dfr_alpha <- dfr[ -1, "alpha" ]
+    # dfr$alpha.stratified[1] <- 1 - sum (( 1 - dfr_alpha )*var_tot ) / var_tot
+    dfr$alpha.stratified[1] <- 1 - sum (( 1 - dfr_alpha )*var_tot ) / dfr[ 1, "var.tot"]
     obji <- dfr
     obji[, -c(1:2)] <- round( obji[,-c(1:2) ], 3 )
     if ( ! stratcomp ){

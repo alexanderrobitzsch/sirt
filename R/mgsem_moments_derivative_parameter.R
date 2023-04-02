@@ -1,5 +1,5 @@
 ## File Name: mgsem_moments_derivative_parameter.R
-## File Version: 0.393
+## File Version: 0.395
 
 mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
         i1, i2, h, is_B, eps=1e-12, num_approx=FALSE)
@@ -11,11 +11,11 @@ mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
     I <- nrow(est$LAM)
     log0 <- Sigma_der_logical <- matrix(FALSE, nrow=I, ncol=I)
 
-    if (type %in% c("PHI","PSI")){
+    if (type %in% c('PHI','PSI')){
         symm <- TRUE
         calc_Mu <- FALSE
     }
-    if (type %in% c("NU","ALPHA")){
+    if (type %in% c('NU','ALPHA')){
         calc_Sigma <- FALSE
     }
 
@@ -23,7 +23,7 @@ mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
     if (is_B){
         num_approx <- TRUE
     }
-    if (type %in% c("LAM","PHI")){
+    if (type %in% c('LAM','PHI')){
         num_approx <- FALSE
     }
 
@@ -32,19 +32,19 @@ mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
 
     num_approx <- TRUE
 
-    if (type %in% c("ALPHA","NU","PSI") ) {
+    if (type %in% c('ALPHA','NU','PSI') ) {
         num_approx <- FALSE
     }
 
 
     # issue is for LAM and PHI
-    if (type %in% c("PHI") ) {
+    if (type %in% c('PHI') ) {
         if (i1==i2){
             num_approx <- FALSE
         }
     }
 
-    if (type %in% c("LAM") ) {
+    if (type %in% c('LAM') ) {
         # num_approx <- FALSE
     }
 
@@ -76,14 +76,14 @@ mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
         }
         if (calc_Sigma){
             Sigma_der <- (implied1$Sigma-implied2$Sigma)/(2*h)
-            if (type %in% c("B","PHI")){
+            if (type %in% c('B','PHI')){
                 Sigma_der_logical <- mgsem_differ_from_zero(x=Sigma_der, eps=eps)
             }
-            if (type %in% c("PSI")){
+            if (type %in% c('PSI')){
                 Sigma_der_logical[i1,i2] <- TRUE
                 Sigma_der_logical[i2,i1] <- TRUE
             }
-            if (type %in% c("LAM")){
+            if (type %in% c('LAM')){
                 Sigma_der_logical[i1,] <- TRUE
                 Sigma_der_logical[,i1] <- TRUE
             }
@@ -100,20 +100,20 @@ mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
         Sigma_der <- mat0
         Sigma_der_logical <- log0
 
-        if (type=="ALPHA"){
+        if (type=='ALPHA'){
             Mu_der <- est$LAM[,i1,drop=FALSE]
         }
-        if (type=="NU"){
+        if (type=='NU'){
             Mu_der[i1,1] <- 1
         }
 
-        if (type=="PSI"){
+        if (type=='PSI'){
             Sigma_der <- mgsem_add_increment(x=mat0,h=1,i1=i1,i2=i2, symm=symm)
             Sigma_der_logical[i1,i2] <- TRUE
             Sigma_der_logical[i2,i1] <- TRUE
         }
 
-        if (type=="LAM"){
+        if (type=='LAM'){
             Mu_der[i1,1] <- est$ALPHA[i2,1]
             # D1 <- matrix(0, nrow=I, ncol=ncol(est$LAM))
             # D1[i1,i2] <- 1
@@ -137,7 +137,7 @@ mgsem_moments_derivative_parameter <- function(est, est_add=NULL, type,
             Sigma_der_logical[i1,] <- TRUE
             Sigma_der_logical[,i1] <- TRUE
         }
-        if (type=="PHI"){
+        if (type=='PHI'){
             # D <- nrow(est$PHI)
             # D1 <- matrix(0, nrow=D, ncol=D)
             # D1[i1,i2] <- 1

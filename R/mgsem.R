@@ -1,9 +1,11 @@
 ## File Name: mgsem.R
-## File Version: 0.423
+## File Version: 0.497
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",
-        a_scad=3.7, eps_approx=1e-3, comp_se=TRUE, prior_list=NULL, hessian=TRUE,
+        diffpar_pen=NULL, a_scad=3.7, eps_approx=1e-3, comp_se=TRUE,
+        se_delta_formula=FALSE,
+        prior_list=NULL, hessian=TRUE,
         fixed_parms=FALSE, partable_start=NULL,
         num_approx=FALSE, technical=NULL, control=list() )
 {
@@ -23,17 +25,25 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         suffstat <- data_proc$suffstat
         weights <- data_proc$weights
         is_data <- TRUE
+        G <- length(groups)
     } else {
         groups <- names(suffstat)
+        G <- length(groups)
+        if (is.null(groups)){
+            groups <- paste0('Group',1:G)
+        }
         data_proc <- NULL
         is_data <- FALSE
     }
     technical$is_data <- is_data
 
+    #*** compute covariance matrix of sufficient statistics
+    suffstat_vcov <- mgsem_suffstat_covariance_matrix(suffstat=suffstat)
+
     #*** process technical defaults
     res <- mgsem_proc_technical(technical=technical, control=control, p_me=p_me,
                 p_pen=p_pen, eps_approx=eps_approx, suffstat=suffstat,
-                estimator=estimator)
+                estimator=estimator, diffpar_pen=diffpar_pen)
     technical <- res$technical
     technical$estimator <- estimator
     control <- res$control
@@ -56,7 +66,7 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     res <- mgsem_proc_model(model=model, G=G, prior_list=prior_list,
                     technical=technical, N_group=N_group, random_sd=random_sd,
                     pen_type=pen_type, fixed_parms=fixed_parms,
-                    partable_start=partable_start)
+                    partable_start=partable_start, diffpar_pen=diffpar_pen)
     model <- res$model
     partable <- res$partable
     NP <- res$NP
@@ -69,12 +79,12 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     difflp_info <- res$difflp_info
     loop_parms <- res$loop_parms
 
-    if (estimator=="ML"){
+    if (estimator=='ML'){
         eval_fun <- 'mgsem_loglike_suffstat'
         grad_param_fun <- 'mgsem_loglike_suffstat_derivative_parameter'
         grad_suffstat_fun <- 'mgsem_loglike_suffstat_derivative'
     }
-    if (estimator=="ME"){
+    if (estimator=='ME'){
         eval_fun <- 'mgsem_loss_function_suffstat'
         grad_param_fun <- 'mgsem_loss_function_suffstat_derivative_parameter'
         grad_suffstat_fun <- 'mgsem_loss_function_suffstat'
@@ -107,13 +117,13 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
 
         #- define lower and upper bounds
         ind <- which(partable$unique>0)
-        lower <- partable[ ind, "lower" ]
-        upper <- partable[ ind, "upper" ]
+        lower <- partable[ ind, 'lower' ]
+        upper <- partable[ ind, 'upper' ]
 
         #- use optimizer
         opt_res <- sirt_optimizer(optimizer=technical$optimizer, par=x, fn=mgsem_opt_fun,
                         grad=grad_fun, opt_fun_args=opt_fun_args,
-                        method="L-BFGS-B", lower=lower, upper=upper,
+                        method='L-BFGS-B', lower=lower, upper=upper,
                         hessian=hessian, control=control )
     } else {
         #**** no estimation
@@ -135,6 +145,14 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     est_tot <- opt_fun_output$est_tot
     grad_fun_output <- mgsem_grad_fun(x=coef, opt_fun_args=opt_fun_args, output_all=TRUE)
 
+    #-- vcov for estimator='ME'
+    res <- mgsem_vcov_me(coef=coef, opt_fun_args=opt_fun_args,
+                            suffstat_vcov=suffstat_vcov, comp_se=comp_se,
+                            se_delta_formula=se_delta_formula)
+    vcov <- res$vcov
+    se <- res$se
+    comp_se_me <- res$comp_se_me
+
     #-- residual statistics
     residuals <- mgsem_output_proc_residuals(implied=implied, suffstat=suffstat)
 
@@ -144,10 +162,12 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
 
     #-- computation of standard errors
     res <- mgsem_observed_information(coef=coef, opt_fun_args=opt_fun_args,
-                    technical=technical, comp_se=comp_se)
-    vcov <- res$vcov
-    comp_se <- res$comp_se
-    se <- res$se
+                    technical=technical, comp_se=comp_se, comp_se_me=comp_se_me)
+    if (!comp_se_me){
+        vcov <- res$vcov
+        comp_se <- res$comp_se
+        se <- res$se
+    }
     info_loglike <- res$info_loglike
     info_loglike_pen <- res$info_loglike_pen
 
@@ -166,7 +186,7 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
                     pen_type=pen_type, eps_approx=eps_approx,
                     technical=technical, comp_se=comp_se, groups=groups, group=group,
                     data=data, data_proc=data_proc, case_ll=case_ll,
-                    CALL=CALL, s1=s1, s2=s2)
-    class(res) <- "mgsem"
+                    suffstat_vcov=suffstat_vcov, CALL=CALL, s1=s1, s2=s2)
+    class(res) <- 'mgsem'
     return(res)
 }
