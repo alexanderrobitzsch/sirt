@@ -35,7 +35,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 3.13  |  2023-04-02  |  Last: sirt 3.13-128
+VERSIONS sirt 3.13  |  2023-04-16  |  Last: sirt 3.13-143
 ------------------------------------------------------------------------
 
 NOTE  * included arguments 'pw_linear', 'pw_quadratic' that allow 

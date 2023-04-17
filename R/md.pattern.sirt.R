@@ -1,12 +1,12 @@
 ## File Name: md.pattern.sirt.R
-## File Version: 0.11
+## File Version: 0.121
 
 #----- Function for analyzing response patterns
 md.pattern.sirt <- function(dat)
 {
     dat <- as.matrix(dat)
     if ( ncol(dat)>1000 ){
-        stop("Function only works for datasets with fewer than 1000 variables!\n")
+        stop('Function only works for datasets with fewer than 1000 variables!\n')
     }
     res <- md_pattern_rcpp( dat_=dat )
     rp_unique <- unique(res$unique_resp_patt)

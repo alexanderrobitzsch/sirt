@@ -1,5 +1,5 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.755
+## File Version: 3.762
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
@@ -9,7 +9,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
 {
     CALL <- match.call()
     s1 <- Sys.time()
-    type <- "AM"
+    type <- 'AM'
     align.pow0 <- align.pow
     align.pow <- align.pow / 2
     overparam <- FALSE
@@ -69,11 +69,12 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     #-- define optimization functions
     fct_optim <- function(x,lambda,nu, overparam){
         res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha,
-                    ind_psi=ind_psi, reparam=reparam)
-        val <- sirt_rcpp_invariance_alignment_opt_fct( nu=nu, lambda=lambda, alpha0=res$alpha0,
-                    psi0=res$psi0, group_combis=group_combis, wgt=wgt, align_scale=align.scale,
-                    align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type,
-                    reparam=FALSE, meth=meth)
+                        ind_psi=ind_psi, reparam=reparam)
+        val <- sirt_rcpp_invariance_alignment_opt_fct( nu=nu, lambda=lambda,
+                        alpha0=res$alpha0, psi0=res$psi0, group_combis=group_combis,
+                        wgt=wgt, align_scale=align.scale,
+                        align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type,
+                        reparam=FALSE, meth=meth)
         val <- val$fopt
         if (overparam){
             G <- nrow(lambda)
@@ -82,14 +83,14 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         return(val)
     }
     grad_optim <- function(x,lambda,nu, overparam){
-        res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha, ind_psi=ind_psi,
-                        reparam=reparam)
+        res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha,
+                            ind_psi=ind_psi, reparam=reparam)
         alpha0 <- res$alpha0
         psi0 <- res$psi0
         grad <- sirt_rcpp_invariance_alignment_opt_grad( nu=nu, lambda=lambda,
                         alpha0=alpha0, psi0=psi0, group_combis=group_combis, wgt=wgt,
-                        align_scale=align.scale, align_pow=align.pow, eps=eps, wgt_combi=wgt_combi,
-                        type=type, reparam=reparam, meth=meth)
+                        align_scale=align.scale, align_pow=align.pow, eps=eps,
+                        wgt_combi=wgt_combi, type=type, reparam=reparam, meth=meth)
         grad <- grad[-c(1,G+1)]
         return(grad)
     }
@@ -123,12 +124,12 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     psi_list <- list()
     while(est_loop>=1){
         for (eps in eps_vec){
-            res_optim <- sirt_optimizer(optimizer=optimizer, par=par, fn=fct_optim, grad=grad_optim,
-                                lower=lower, hessian=FALSE, lambda=lambda1, nu=nu1,
-                                overparam=overparam, ...)
+            res_optim <- sirt_optimizer(optimizer=optimizer, par=par, fn=fct_optim,
+                                grad=grad_optim, lower=lower, hessian=FALSE,
+                                lambda=lambda1, nu=nu1, overparam=overparam, ...)
             par <- res_optim$par
-            res <- invariance_alignment_define_parameters(x=res_optim$par, ind_alpha=ind_alpha,
-                            ind_psi=ind_psi, reparam=reparam)
+            res <- invariance_alignment_define_parameters(x=res_optim$par,
+                            ind_alpha=ind_alpha, ind_psi=ind_psi, reparam=reparam)
             alpha0 <- res$alpha0
             psi0 <- res$psi0
         }
@@ -158,20 +159,21 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
 
     # define aligned parameters
     res <- sirt_rcpp_invariance_alignment_opt_fct( nu=nu, lambda=lambda, alpha0=alpha0,
-                    psi0=psi0, group_combis=group_combis, wgt=wgt, align_scale=align.scale,
-                    align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type,
-                    reparam=reparam, meth=1)
-    lambda.aligned <- invariance_alignment_process_parameters(par.aligned=res$lambda, par=lambda0)
+                        psi0=psi0, group_combis=group_combis, wgt=wgt,
+                        align_scale=align.scale, align_pow=align.pow, eps=eps,
+                        wgt_combi=wgt_combi, type=type, reparam=reparam, meth=1)
+    lambda.aligned <- invariance_alignment_process_parameters(par.aligned=res$lambda,
+                            par=lambda0)
     nu.aligned <- invariance_alignment_process_parameters(par.aligned=res$nu, par=nu0)
     fopt <- res$fopt
 
     #**** calculate item statistics and R-squared measures
     # groupwise aligned loading
     # average aligned parameter
-    itempars.aligned <- data.frame(
-                            invariance_alignment_aligned_parameters_summary(x=lambda.aligned, label="lambda"),
-                            invariance_alignment_aligned_parameters_summary(x=nu.aligned, label="nu"),
-                            row.names=colnames(lambda) )
+    c1 <- invariance_alignment_aligned_parameters_summary(x=lambda.aligned,
+                    label='lambda')
+    c2 <- invariance_alignment_aligned_parameters_summary(x=nu.aligned, label='nu')
+    itempars.aligned <- data.frame(c1, c2, row.names=colnames(lambda) )
     M.lambda_matr <- sirt_matrix2( itempars.aligned$M.lambda, nrow=G)
     M.nu_matr <- sirt_matrix2( itempars.aligned$M.nu, nrow=G)
     lambda.resid <- lambda.aligned - M.lambda_matr
@@ -179,17 +181,17 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
 
     # R-squared measures
     Rsquared.invariance <- c(NA,NA)
-    names(Rsquared.invariance) <- c("loadings", "intercepts" )
+    names(Rsquared.invariance) <- c('loadings', 'intercepts' )
     expl <- psi0 * M.lambda_matr
-    Rsquared.invariance["loadings"] <- sirt_rsquared(x=lambda, expl=expl)
+    Rsquared.invariance['loadings'] <- sirt_rsquared(x=lambda, expl=expl)
     expl <- M.nu_matr + alpha0 * M.lambda_matr
-    Rsquared.invariance["intercepts"] <- sirt_rsquared(x=nu, expl=expl)
+    Rsquared.invariance['intercepts'] <- sirt_rsquared(x=nu, expl=expl)
 
     # correlations aligned parameters
     rbar <- c( invariance_alignment_calc_corr(t(lambda.aligned)),
                     invariance_alignment_calc_corr(t(nu.aligned)) )
     es.invariance <- rbind( Rsquared.invariance, sqrt(1-Rsquared.invariance), rbar)
-    rownames(es.invariance) <- c("R2", "sqrtU2", "rbar")
+    rownames(es.invariance) <- c('R2', 'sqrtU2', 'rbar')
 
     pars <- data.frame(alpha0=alpha0, psi0=psi0)
     rownames(pars) <- rownames(lambda)

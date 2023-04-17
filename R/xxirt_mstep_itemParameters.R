@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_itemParameters.R
-## File Version: 0.384
+## File Version: 0.385
 
 
 #--- M-step item parameters

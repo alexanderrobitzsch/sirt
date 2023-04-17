@@ -1,13 +1,13 @@
 ## File Name: mgsem.R
-## File Version: 0.497
+## File Version: 0.538
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",
         diffpar_pen=NULL, a_scad=3.7, eps_approx=1e-3, comp_se=TRUE,
-        se_delta_formula=FALSE,
-        prior_list=NULL, hessian=TRUE,
-        fixed_parms=FALSE, partable_start=NULL,
-        num_approx=FALSE, technical=NULL, control=list() )
+        se_delta_formula=FALSE, prior_list=NULL, hessian=TRUE,
+        fixed_parms=FALSE, cd=FALSE,
+        cd_control=list(maxiter=20, tol=5*1e-4, interval_length=0.05, method="lqa"),
+        partable_start=NULL, num_approx=FALSE, technical=NULL, control=list() )
 {
     #- pen_type: lasso, scad or none
 
@@ -17,6 +17,11 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
 
     test <- FALSE
     # test <- TRUE
+
+    #** coordinate decent
+    if (cd){
+        fixed_parms <- TRUE
+    }
 
     #*** process data if suffstat not available
     if (missing(suffstat)){
@@ -43,12 +48,13 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     #*** process technical defaults
     res <- mgsem_proc_technical(technical=technical, control=control, p_me=p_me,
                 p_pen=p_pen, eps_approx=eps_approx, suffstat=suffstat,
-                estimator=estimator, diffpar_pen=diffpar_pen)
+                estimator=estimator, diffpar_pen=diffpar_pen, cd_control=cd_control)
     technical <- res$technical
     technical$estimator <- estimator
     control <- res$control
     eps_approx <- res$eps_approx
     p <- res$p
+    cd_control <- res$cd_control
 
     #*** process sufficient statistics
     res <- mgsem_proc_suffstat(suffstat=suffstat)
@@ -129,6 +135,13 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         #**** no estimation
         ll <- mgsem_opt_fun(x=x, opt_fun_args=opt_fun_args)
         opt_res <- list(par=x, opt_value=ll)
+
+        #--- coordinate descent
+        if (cd){
+            opt_res <- mgsem_cd_opt(x=x, opt_fun_args=opt_fun_args, tol=cd_control$tol,
+                                maxiter=cd_control$maxiter, method=cd_control$method,
+                                interval_length=cd_control$interval_length)
+        }
     }
 
     #-- collect results

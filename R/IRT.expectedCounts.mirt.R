@@ -1,18 +1,18 @@
 ## File Name: IRT.expectedCounts.mirt.R
-## File Version: 0.07
+## File Version: 0.081
 
 # IRT.expectedCounts.mirt
 
 #- counts single group
 IRT.expectedCounts.SingleGroupClass <- function( object, ... )
 {
-    type <- "exp_counts"
+    type <- 'exp_counts'
     object <- mirt.wrapper.posterior(mirt.obj=object)
     ll <- object[[type]]
-    attr(ll,"theta") <- object$theta.k
-    attr(ll,"prob.theta") <- object$pi.k
-    attr(ll,"G") <- 1
-    attr(ll,"pweights") <- object$pweights
+    attr(ll,'theta') <- object$theta.k
+    attr(ll,'prob.theta') <- object$pi.k
+    attr(ll,'G') <- 1
+    attr(ll,'pweights') <- object$pweights
     return(ll)
 }
 
@@ -27,7 +27,7 @@ IRT.expectedCounts.MultipleGroupClass <- function( object, ... )
     ll_list <- list()
     ind_group <- list()
     pweights <- list()
-    type <- "exp_counts"
+    type <- 'exp_counts'
     for (gg in 1:G){
         object <- mirt.wrapper.posterior(mirt.obj=mobj, group=groups[gg])
         if (gg==1){
@@ -47,9 +47,9 @@ IRT.expectedCounts.MultipleGroupClass <- function( object, ... )
         ll_pw[ ind_group[[gg]] ] <- pweights[[gg]]
     }
     prob.theta <- matrix( unlist(prob.theta), nrow=TP, ncol=G)
-    attr(ll,"theta") <- theta
-    attr(ll,"prob.theta") <- prob.theta
-    attr(ll,"G") <- G
-    attr(ll,"pweights") <- ll_pw
+    attr(ll,'theta') <- theta
+    attr(ll,'prob.theta') <- prob.theta
+    attr(ll,'G') <- G
+    attr(ll,'pweights') <- ll_pw
     return(ll)
 }

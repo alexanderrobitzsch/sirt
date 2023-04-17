@@ -1,8 +1,8 @@
 ## File Name: mgsem_proc_technical.R
-## File Version: 0.174
+## File Version: 0.180
 
 mgsem_proc_technical <- function(technical, control, p_me, p_pen, eps_approx, suffstat,
-            estimator, diffpar_pen=NULL)
+            estimator, diffpar_pen=NULL, cd_control=NULL)
 {
     #*** defaults technical; update list
     technical0 <- list(maxiter=1000, h=1e-5, eps_zero=1e-12, optimizer='nlminb',
@@ -11,6 +11,11 @@ mgsem_proc_technical <- function(technical, control, p_me, p_pen, eps_approx, su
                         approx_method='lp', use_rcpp_penalty=TRUE)
     use_approx_method <- ! is.null(technical$approx_method)
     technical <- mgsem_update_list_entries(add_list=technical, output_list=technical0)
+
+    #*** update list cd_control
+    cd_control0 <- list(maxiter=20, tol=5*1e-4, interval_length=0.05,
+                            method="exact")
+    cd_control <- mgsem_update_list_entries(add_list=cd_control, output_list=cd_control0)
 
     if ((p_pen==2) & (p_me==2) & ( ! use_approx_method) ){
         technical$approx_method    <- 'l2'
@@ -45,6 +50,7 @@ mgsem_proc_technical <- function(technical, control, p_me, p_pen, eps_approx, su
     }
 
     #--- output
-    res <- list(control=control, technical=technical, eps_approx=eps_approx, p=p)
+    res <- list(control=control, technical=technical, eps_approx=eps_approx, p=p,
+                    cd_control=cd_control)
     return(res)
 }

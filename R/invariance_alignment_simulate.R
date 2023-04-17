@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_simulate.R
-## File Version: 0.121
+## File Version: 0.122
 
 invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
     output="data", groupwise=FALSE, exact=FALSE)
@@ -15,7 +15,7 @@ invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
     I <- ncol(nu)
     items <- colnames(nu)
     if (is.null(items)){
-        items <- paste0("I",1:I)
+        items <- paste0('I',1:I)
     }
     n_end <- cumsum(N)
     n_start <- c(1,n_end+1)[-c(G+1)]
@@ -23,7 +23,7 @@ invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
     if (N[1]<Inf){
         group <- rep(1:G, N)
         dat <- matrix(NA, nrow=N_tot, ncol=I+1)
-        colnames(dat) <- c("group",items)
+        colnames(dat) <- c('group',items)
         dat <- as.data.frame(dat)
         dat$group <- group
         for (gg in 1:G){
@@ -45,12 +45,12 @@ invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
         }
         #-- output
         res <- dat
-        if (output=="suffstat"){
+        if (output=='suffstat'){
             res <- list(mu=list(), Sigma=list(), N=list() )
             for (gg in 1:G){
                 ind_gg <- which(dat$group==gg)
                 res$mu[[gg]] <- colMeans(dat[ ind_gg, -1])
-                res$Sigma[[gg]] <- stats::cov.wt(dat[ ind_gg, -1], method="ML")$cov
+                res$Sigma[[gg]] <- stats::cov.wt(dat[ ind_gg, -1], method='ML')$cov
                 res$N[[gg]] <- N[gg]
             }
         }
@@ -66,10 +66,10 @@ invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
             res$Sigma[[gg]] <- lam_gg %*% sig2_gg %*% t(lam_gg) + diag(err_var[gg,])
             res$N[[gg]] <- N[gg]
         }
-        output <- "suffstat"
+        output <- 'suffstat'
     }
     #*** group-wise output
-    if ( (output=="suffstat") & groupwise ){
+    if ( (output=='suffstat') & groupwise ){
         res1 <- res
         res <- as.list(1:G)
         for (gg in 1:G){

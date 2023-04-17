@@ -1,11 +1,11 @@
 ## File Name: linking_haberman_als_residual_weights.R
-## File Version: 0.371
+## File Version: 0.372
 
 
 linking_haberman_als_residual_weights <- function( logaj, logaAt,
         logaM, cutoff, wgtM0, eps, estimation="OLS", lts_prop=.5 )
 {
-    loga_expected <- TAM::tam_outer( x=logaj, y=logaAt, op="+" )
+    loga_expected <- TAM::tam_outer( x=logaj, y=logaAt, op='+' )
     loga_resid <- logaM - loga_expected
     NS <- ncol(wgtM0)
     NI <- nrow(wgtM0)
@@ -15,18 +15,18 @@ linking_haberman_als_residual_weights <- function( logaj, logaAt,
     eps_k <- 1e-5
 
     #*--- settings
-    if (estimation=="BSQ"){
+    if (estimation=='BSQ'){
         k_fac <- 4.685
         wgt_fn <- linking_haberman_bisquare_weight
     }
-    if (estimation=="HUB"){
+    if (estimation=='HUB'){
         k_fac <- 1.345
         wgt_fn <- linking_haberman_huber_weight
     }
 
     #********************
     #-- estimation BSQ or HUB
-    if (estimation %in% c("BSQ","HUB") ){
+    if (estimation %in% c('BSQ','HUB') ){
         if (cutoff==Inf ){
             k <- k_fac*mad_normalized(x=loga_resid)
             k_estimate <- TRUE
@@ -41,7 +41,7 @@ linking_haberman_als_residual_weights <- function( logaj, logaAt,
         }
     }
     #-- estimation LTS
-    if (estimation=="LTS"){
+    if (estimation=='LTS'){
         for (ss in 1:NS){
             e <- loga_resid[,ss]
             e <- e - median(e, na.rm=TRUE)

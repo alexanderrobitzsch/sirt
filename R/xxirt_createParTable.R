@@ -1,5 +1,5 @@
 ## File Name: xxirt_createParTable.R
-## File Version: 0.254
+## File Version: 0.258
 
 #*** create parameter table
 xxirt_createParTable <- function( dat, itemtype, customItems=NULL )

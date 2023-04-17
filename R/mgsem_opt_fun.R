@@ -1,5 +1,5 @@
 ## File Name: mgsem_opt_fun.R
-## File Version: 0.224
+## File Version: 0.227
 
 
 mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
@@ -50,7 +50,6 @@ mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
         ll <- ll+ll_gg
     }
     ll0 <- ll
-
     #-- penalty function
     if (opt_fun_args$use_penalty){
         res <- mgsem_evaluate_penalties(x=x, partable=partable,
@@ -65,7 +64,6 @@ mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
         eval_pen_res <- res
         ll <- ll + res$pen_all
     }
-
 
     #-- negative function (minimization problem)
     ll <- - ll

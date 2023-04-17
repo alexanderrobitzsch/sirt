@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_cfa_config_estimate.R
-## File Version: 0.191
+## File Version: 0.192
 
 invariance_alignment_cfa_config_estimate <- function(dat_gg, N, weights_gg=NULL,
     model="2PM", ...)
@@ -15,19 +15,19 @@ invariance_alignment_cfa_config_estimate <- function(dat_gg, N, weights_gg=NULL,
         I_gg <- length(mu)
         items_gg <- names(mu)
         if (is.null(items_gg)){
-            items_gg <- paste0("I",1:I)
+            items_gg <- paste0('I',1:I)
         }
         names(mu) <- items_gg
         rownames(Sigma) <- items_gg
         colnames(Sigma) <- items_gg
     }
     lavmodel <- invariance_alignment_cfa_config_estimate_define_lavaan_model(
-                    items_gg=items_gg, label_F="F", model=model)
+                    items_gg=items_gg, label_F='F', model=model)
     if (is.null(weights_gg)){
         weights_name <- NULL
     } else {
         dat_gg$weights <- weights_gg
-        weights_name <- "weights"
+        weights_name <- 'weights'
     }
 
     #-- estimate lavaan model
@@ -40,11 +40,11 @@ invariance_alignment_cfa_config_estimate <- function(dat_gg, N, weights_gg=NULL,
         args$sample.mean <- mu
         args$sample.nobs <- min(1e20,N)
     }
-    mod <- do.call(what="sirt_import_lavaan_cfa", args=args)
+    mod <- do.call(what='sirt_import_lavaan_cfa', args=args)
     partable <- sirt_import_lavaan_parameterTable(object=mod)
-    lambda <- partable[ partable$op=="=~", "est"]
-    nu <- partable[ partable$op=="~1", "est"][1:I_gg]
-    err_var <- partable[ partable$op=="~~", "est"][1:I_gg]
+    lambda <- partable[ partable$op=='=~', 'est']
+    nu <- partable[ partable$op=='~1', 'est'][1:I_gg]
+    err_var <- partable[ partable$op=='~~', 'est'][1:I_gg]
     nobs <- mod@Data@nobs[[1]]
     #--- output
     res <- list(lambda=lambda, nu=nu, err_var=err_var, nobs=nobs)

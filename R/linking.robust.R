@@ -1,5 +1,5 @@
 ## File Name: linking.robust.R
-## File Version: 1.25
+## File Version: 1.261
 
 
 #*** Robust linking
@@ -24,7 +24,7 @@ linking.robust <- function(  itempars )
         x0 <- x[ indkk ]
         # compute winsorized mean
         trim.mean <- mean( x0 )
-        swk2 <- k * ( x[ k] - trim.mean ) ^2 + sum( ( x0 - trim.mean )^2 )
+        swk2 <- k * ( x[ k] - trim.mean )^2 + sum( ( x0 - trim.mean )^2 )
                                     + k * ( x[ N - k + 1] - trim.mean )^2
         # standard error
         se.trimmean <- sqrt( swk2 ) / sqrt( (N-2*k) * ( N - 2*k - 1 ) )
@@ -33,7 +33,7 @@ linking.robust <- function(  itempars )
         se[kk] <- se.trimmean
     }
 
-    v1 <- paste0("k", 0:KK)
+    v1 <- paste0('k', 0:KK)
     meanpars <- c( mean(x), meanpars )
     se <- c( stats::sd(x) / sqrt(I), se )
     names(meanpars) <- v1
