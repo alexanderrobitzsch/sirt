@@ -1,5 +1,5 @@
 ## File Name: btm.R
-## File Version: 1.535
+## File Version: 1.537
 
 
 #--- Bradley-Terry model in sirt
@@ -85,8 +85,8 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
     if ( ! is.null( fix.theta) ){
         fix.theta.index <- match( names(fix.theta), teams )
         if ( sum( is.na( fix.theta.index ) ) > 0 ){
-            stop( paste0( "Cannot find all individuals with fixed values\n",
-                    "  in 'fixed.theta'\n") )
+            stop( paste0( 'Cannot find all individuals with fixed values\n',
+                    '  in \'fixed.theta\'\n') )
         }
         some.fixed.theta <- TRUE
         center.theta <- FALSE
@@ -204,15 +204,15 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
         eta.change <- max( abs( eta - eta0 ))
         max.change <- max( c(theta.change,delta.change, eta.change) )
 
-        cat( paste0("**** Iteration ", iter,
-                        " | Maximum parameter change=", round(max.change, 7), "\n") )
+        cat( paste0('**** Iteration ', iter,
+                        ' | Maximum parameter change=', round(max.change, 7), '\n') )
         utils::flush.console()
 
     }  #---- end algorithm
     time_alg <- Sys.time() - c0
 
     # arrange output
-    pars <- data.frame("parlabel"=c("Ties", "Home"), "par"=c("delta", "eta") )
+    pars <- data.frame('parlabel'=c('Ties', 'Home'), 'par'=c('delta', 'eta') )
     pars$est <- c( delta, eta )
     pars$se <- c( se.delta, se.eta )
 
@@ -239,7 +239,7 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
 
     # probabilities
     probs <- M1
-    colnames(probs) <- c("p1", "p0", "pD")
+    colnames(probs) <- c('p1', 'p0', 'pD')
 
     # log-likelihood
     NObs <- nrow(dat0)
@@ -278,6 +278,6 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
     s2 <- Sys.time()
     res$s1 <- s1
     res$s2 <- s2
-    class(res) <- "btm"
+    class(res) <- 'btm'
     return(res)
 }

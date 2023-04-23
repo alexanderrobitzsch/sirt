@@ -1,5 +1,5 @@
 ## File Name: mgsem_cd_opt.R
-## File Version: 0.170
+## File Version: 0.177
 
 mgsem_cd_opt <- function(x, opt_fun_args, tol=1e-4, eps_approx=1e-20,
                 maxiter=100, h=1e-4, verbose=TRUE, interval_length=0.025,
@@ -75,6 +75,7 @@ mgsem_cd_opt <- function(x, opt_fun_args, tol=1e-4, eps_approx=1e-20,
                 utils::flush.console()
             }
         } # end pp
+
         maxdiff <- max( abs(x-x0) )
         if (verbose){
             cat( ' | Max. diff.=', round(maxdiff, 7), '\n')

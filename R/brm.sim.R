@@ -1,16 +1,15 @@
 ## File Name: brm.sim.R
-## File Version: 0.11
+## File Version: 0.121
 
 
-##################################################################
-# brm.sim
+#-- brm.sim
 brm.sim <- function( theta, delta, tau, K=NULL)
 {
     I <- length(delta)
     N <- length(theta)
     dat <- matrix( 0, nrow=N, ncol=I )
-    colnames(dat) <- paste0( "I", 1:9 )
-    if ( ! is.null( K ) ){
+    colnames(dat) <- paste0( 'I', 1:9 )
+    if ( ! is.null(K) ){
         br <- seq( 0, 1, len=K+1 )
     }
     for (ii in 1:I){
@@ -24,4 +23,3 @@ brm.sim <- function( theta, delta, tau, K=NULL)
     }
     return(dat)
 }
-##################################################################

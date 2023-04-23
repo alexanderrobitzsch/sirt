@@ -1,5 +1,5 @@
 ## File Name: amh_plot.R
-## File Version: 0.336
+## File Version: 0.339
 
 
 #*** plot results of objects of class amh
@@ -8,16 +8,15 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
     col.ci="orange", cex.summ=1, ask=FALSE, ... )
 {
 
-    # x <- mcmcobj
     object <- x    # rename x into object
-    mcmcobj <- (object$mcmcobj)
+    mcmcobj <- object$mcmcobj
     lag.max <- round( nrow(mcmcobj) * lag.max )
     round.summ <- digits
 
     # mcmcobj <- (object$mcmcobj)[[1]]
     lag.max <- min( nrow(mcmcobj), lag.max )
     # index vector
-    a1 <- attr(mcmcobj,"mcpar")
+    a1 <- attr(mcmcobj,'mcpar')
     iterindex <- seq(a1[1], a1[2], a1[3] )
 
     # smcmcobj <- object$summary.mcmcobj
@@ -32,9 +31,9 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
         sparm.vv <- smcmcobj[ smcmcobj$parameter==parm.vv, ]
 
         #*** traceplot
-        graphics::plot( iterindex, x.vv, type="l",
-                            main=paste0( "Traceplot of ", parm.vv ),
-                            xlab="Iterations", ylab="", ... )
+        graphics::plot( iterindex, x.vv, type='l',
+                            main=paste0( 'Traceplot of ', parm.vv ),
+                            xlab='Iterations', ylab='', ... )
         x1 <- as.numeric( x.vv )
         xmin <- min(x1)
         xmax <- max(x1)
@@ -55,7 +54,7 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
         graphics::lines( iterindex, l1, col=col.smooth, lwd=lwd.smooth )
 
         #*** density estimate
-        graphics::plot( stats::density( x.vv ), main=paste0( "Density of ", parm.vv ) )
+        graphics::plot( stats::density( x.vv ), main=paste0( 'Density of ', parm.vv ) )
 
         c1 <- stats::quantile( x1, ( 1 - conflevel  ) / 2 )
         c2 <- stats::quantile( x1, 1 - ( 1 - conflevel  ) / 2 )
@@ -63,7 +62,7 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
         graphics::points( sparm.vv$Mean, 0, pch=17, col=col.ci, cex=1.5)
 
         #*** plot autocorrelation function
-        mtitle <- paste0( "Autocorrelation of ", parm.vv )
+        mtitle <- paste0( 'Autocorrelation of ', parm.vv )
         m1 <- stats::acf( x.vv, lag.max=lag.max, plot=FALSE)
         acf1 <- m1$acf[,1,1]
         # iter_vv <- c(0,iterindex[ 1:lag.max])
@@ -72,40 +71,39 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
         # blue dashed line at
         bd <- .05
         ylim <- c( min( acf1, - bd), 1 )
-        graphics::plot( iter_vv, acf1, xlab="Lag", ylab="ACF",
-                            main=mtitle, type="n", ylim=ylim)
+        graphics::plot( iter_vv, acf1, xlab='Lag', ylab='ACF',
+                            main=mtitle, type='n', ylim=ylim)
         NL <- length(iter_vv)
         for (hh in 1:NL){
             graphics::lines( rep( iter_vv[hh],2), c(0, acf1[hh]) )
         }
-        graphics::abline( h=bd, col="blue", lty=2)
-        graphics::abline( h=-bd, col="blue", lty=2)
-        #@@@@@@
+        graphics::abline( h=bd, col='blue', lty=2)
+        graphics::abline( h=-bd, col='blue', lty=2)
 
         #***
         # numerical summary
-        graphics::plot( c(0,1), c(0,1), axes=FALSE, xlab="", ylab="",
-                    main=paste0( "Summary of ", parm.vv ), type="n", ...)
+        graphics::plot( c(0,1), c(0,1), axes=FALSE, xlab='', ylab='',
+                    main=paste0( 'Summary of ', parm.vv ), type='n', ...)
         x0 <- 0
         y0 <- 0
-        heights.summ=c( .05,  .15, .25,  .35, .45, .55, .65, .75)
-        graphics::text( x0 + .0015, y0 + heights.summ[8], "Posterior Mean=",
+        heights.summ <- c( .05,  .15, .25,  .35, .45, .55, .65, .75)
+        graphics::text( x0 + .0015, y0 + heights.summ[8], 'Posterior Mean=',
                                 cex=cex.summ, pos=4)
         graphics::text( x0 + .5, y0 + heights.summ[8],
                 paste0( sirt_format_numb( x=mean( x1 ), digits=round.summ) ), pos=4 )
         hvv <- heights.summ[7]
-        graphics::text( x0 + .0015, y0 + hvv, "Posterior Mode=", cex=cex.summ, pos=4)
+        graphics::text( x0 + .0015, y0 + hvv, 'Posterior Mode=', cex=cex.summ, pos=4)
         graphics::text( x0 + .5, y0 + hvv,
                 paste0( sirt_format_numb( x=sparm.vv$MAP, digits=round.summ) ), pos=4 )
 
-        graphics::text( x0 + .0015, y0 + heights.summ[6], "Posterior SD=",
+        graphics::text( x0 + .0015, y0 + heights.summ[6], 'Posterior SD=',
                             cex=cex.summ, pos=4)
         graphics::text( x0 + .5, y0 + heights.summ[6],
                 paste0( sirt_format_numb( x=stats::sd( x1 ), digits=round.summ) ), pos=4 )
 
         hvv <- heights.summ[5]
         graphics::text( x0 + .0015, y0 + hvv,
-                        paste( round(100*conflevel ), "% Credibility Interval=",sep=""),
+                        paste( round(100*conflevel ), '% Credibility Interval=',sep=''),
                         cex=cex.summ, pos=4 )
 
         hvv <- heights.summ[4]
@@ -114,19 +112,19 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
         ci.upper <- sirt_format_numb( stats::quantile( x1, 1-( 1 - conflevel  ) / 2 ),
                                             digits=round.summ )
         graphics::text( x0 + .25, y0 + hvv,
-                            paste( "[", ci.lower,    ",", ci.upper, "]",  sep=""),
+                            paste( '[', ci.lower,    ',', ci.upper, ']',  sep=''),
                             cex=cex.summ, pos=4)
         hvv <- heights.summ[3]
-        graphics::text( x0 + .0015, y0 + hvv, "Rhat=", cex=cex.summ, pos=4)
+        graphics::text( x0 + .0015, y0 + hvv, 'Rhat=', cex=cex.summ, pos=4)
         graphics::text( x0 + .5, y0 + hvv,
                 paste0( sirt_format_numb( x=sparm.vv$Rhat, digits=3)  ), pos=4 )
         hvv <- heights.summ[2]
-        graphics::text( x0 + .0015, y0 + hvv, "SERatio=", cex=cex.summ, pos=4)
+        graphics::text( x0 + .0015, y0 + hvv, 'SERatio=', cex=cex.summ, pos=4)
         graphics::text( x0 + .5, y0 + hvv,
                         paste0( sirt_format_numb( x=sparm.vv$SERatio, digits=3)), pos=4 )
 
         hvv <- heights.summ[1]
-        graphics::text( x0 + .0015, y0 + hvv, "Effective Sample Size=",
+        graphics::text( x0 + .0015, y0 + hvv, 'Effective Sample Size=',
                         cex=cex.summ, pos=4)
         graphics::text( x0 + .705, y0 + hvv,
                         paste0( sirt_format_numb( x=sparm.vv$effSize, digits=1)), pos=4 )
@@ -134,4 +132,3 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
     }
     graphics::par(mfrow=c(1,1))
 }
-

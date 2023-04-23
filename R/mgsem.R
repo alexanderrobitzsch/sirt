@@ -1,12 +1,12 @@
 ## File Name: mgsem.R
-## File Version: 0.538
+## File Version: 0.539
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",
         diffpar_pen=NULL, a_scad=3.7, eps_approx=1e-3, comp_se=TRUE,
         se_delta_formula=FALSE, prior_list=NULL, hessian=TRUE,
         fixed_parms=FALSE, cd=FALSE,
-        cd_control=list(maxiter=20, tol=5*1e-4, interval_length=0.05, method="lqa"),
+        cd_control=list(maxiter=20, tol=5*1e-4, interval_length=0.05, method="exact"),
         partable_start=NULL, num_approx=FALSE, technical=NULL, control=list() )
 {
     #- pen_type: lasso, scad or none

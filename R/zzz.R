@@ -1,5 +1,5 @@
 ## File Name: zzz.R
-## File Version: 1.241
+## File Version: 1.242
 
 
 #  zzz.R
@@ -17,17 +17,12 @@
 }
 
 
-version <- function(pkg="sirt")
+version <- function(pkg='sirt')
 {
-    lib <- dirname( system.file(package=pkg))
+    lib <- dirname(system.file(package=pkg))
     d <- utils::packageDescription(pkg)
     return( paste(d$Package,d$Version,d$Date,lib))
 }
-
-# .First.lib <- function(lib, pkg){
-#          library.dynam("sirt", package=pkg, lib.loc=lib)
-#          return(invisible(0))
-#        }
 
 
 xx <- function(f1=1, f2=1)
