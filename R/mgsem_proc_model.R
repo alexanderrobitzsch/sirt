@@ -1,9 +1,9 @@
 ## File Name: mgsem_proc_model.R
-## File Version: 0.298
+## File Version: 0.306
 
 mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
         prior_list=NULL, pen_type="lasso", fixed_parms=FALSE,
-        partable_start=NULL, diffpar_pen=NULL)
+        partable_start=NULL, diffpar_pen=NULL, pen_sample_size=TRUE)
 {
 
     dfr <- NULL
@@ -94,6 +94,7 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
                                             pen_type=pen_type)
                             dfr1$unique <- 0
                             dfr1$recycle <- 0
+
                             #- append to previous parameters
                             dfr <- rbind(dfr, dfr1)
                         }
@@ -103,6 +104,8 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
         } #end types
 
     }    # end gg
+
+    dfr$ss <- 1*pen_sample_size
 
     if (any(duplicated(dfr$name))){
         dfr$name <- dfr$name2

@@ -1,5 +1,5 @@
 ## File Name: mgsem_evaluate_penalties.R
-## File Version: 0.332
+## File Version: 0.345
 
 
 mgsem_evaluate_penalties <- function(x, partable, prior_list, technical,
@@ -33,6 +33,9 @@ mgsem_evaluate_penalties <- function(x, partable, prior_list, technical,
 
     partable2 <- partable[ loop_parms, ]
     n <- partable2$N_group
+    if (partable$ss[1]==0){
+        n <- 1+0*n
+    }
 
     #*** L2 penalty
     if (technical$is_pen_l2){
@@ -53,7 +56,7 @@ mgsem_evaluate_penalties <- function(x, partable, prior_list, technical,
         args_pen <- list(x=x, p=p, n=n, fac=fac, eps=eps_approx, deriv=deriv,
                         pen_type=pen_type, a=a_scad, h=h)
 
-        if (!use_rcpp_penalty){
+        if (!use_rcpp_penalty | (pen_type%in%c('smoothic','L0')) ){
             fun_pen <- 'mgsem_eval_lp_penalty_vector'
         } else {
             fun_pen <- 'sirt_rcpp_mgsem_eval_lp_penalty'

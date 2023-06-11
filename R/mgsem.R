@@ -1,9 +1,9 @@
 ## File Name: mgsem.R
-## File Version: 0.539
+## File Version: 0.545
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",
-        diffpar_pen=NULL, a_scad=3.7, eps_approx=1e-3, comp_se=TRUE,
+        diffpar_pen=NULL, pen_sample_size=TRUE, a_scad=3.7, eps_approx=1e-3, comp_se=TRUE,
         se_delta_formula=FALSE, prior_list=NULL, hessian=TRUE,
         fixed_parms=FALSE, cd=FALSE,
         cd_control=list(maxiter=20, tol=5*1e-4, interval_length=0.05, method="exact"),
@@ -72,7 +72,8 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     res <- mgsem_proc_model(model=model, G=G, prior_list=prior_list,
                     technical=technical, N_group=N_group, random_sd=random_sd,
                     pen_type=pen_type, fixed_parms=fixed_parms,
-                    partable_start=partable_start, diffpar_pen=diffpar_pen)
+                    partable_start=partable_start, diffpar_pen=diffpar_pen,
+                    pen_sample_size=pen_sample_size)
     model <- res$model
     partable <- res$partable
     NP <- res$NP
@@ -154,6 +155,7 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     opt_fun_args$partable <- partable
     opt_fun_args$model <- model
     opt_fun_output <- mgsem_opt_fun(x=coef, opt_fun_args=opt_fun_args, output_all=TRUE)
+
     implied <- opt_fun_output$implied
     est_tot <- opt_fun_output$est_tot
     grad_fun_output <- mgsem_grad_fun(x=coef, opt_fun_args=opt_fun_args, output_all=TRUE)

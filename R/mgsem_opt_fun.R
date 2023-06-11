@@ -1,5 +1,5 @@
 ## File Name: mgsem_opt_fun.R
-## File Version: 0.266
+## File Version: 0.272
 
 
 mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
@@ -34,7 +34,7 @@ mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
         }
         S_gg <- suffstat[[gg]]$S
         p <- nrow(S_gg)
-        
+
         #- function evaluation
         eval_args <- list(suffstat=opt_fun_args$suffstat[[gg]],
                             Mu=implied$Mu, Sigma=implied$Sigma,
@@ -86,7 +86,7 @@ mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
         # chi square statistic and RMSEA
         p_mu <- 0
         for (gg in 1:G){
-            mu1 <- suffstat[[gg]]$mu
+            mu1 <- suffstat[[gg]]$M
             p_mu <- p_mu + sum(abs(mu1)>1e-14)
         }
         chisq_df <- p_mu + G*p*(p+1)/2 - max(partable$index)
