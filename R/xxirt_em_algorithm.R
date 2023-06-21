@@ -1,5 +1,5 @@
 ## File Name: xxirt_em_algorithm.R
-## File Version: 0.042
+## File Version: 0.056
 
 xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_list,
             items, Theta, ncat, partable, partable_index, dat, resp_index,
@@ -14,7 +14,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
     while (
             ( iter < ( maxit + 1 ) ) & ( ! converged )
                 ){
-
+                
         if (verbose1){
             cat(disp)
             cat('Iteration', iter, '   ', paste( Sys.time() ), '\n' )
@@ -29,7 +29,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         #*** compute individual likelihood
         p.xi.aj <- xxirt_compute_likelihood( probs_items=probs_items, dat=dat,
                              resp_index=resp_index, dat_resp_bool=dat_resp_bool )
-
+                             
         #*** compute prior distribution
         prior_Theta <- xxirt_compute_priorDistribution( Theta=Theta,
                               customTheta=customTheta, G=G )
@@ -44,7 +44,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         N.ik <- res$N.ik
         N.k <- res$N.k
         post_unnorm <- res$post_unnorm
-
+        
         #*** M-step item parameters
         par00 <- par0
         res <- xxirt_mstep_itemParameters( partable=partable, item_list=item_list,
@@ -67,7 +67,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         ll2 <- res$ll2
         customTheta <- res$customTheta
         par1 <- res$par1
-
+        
         #*** compute deviance
         ll_case <- log( rowSums( post_unnorm ) )
         dev <- - 2 * sum( weights * ll_case )

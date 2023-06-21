@@ -1,18 +1,22 @@
 ## File Name: xxirt_compute_posterior.R
-## File Version: 0.288
+## File Version: 0.293
 
 
 ##-- xxirt: compute posterior
 xxirt_compute_posterior <- function( prior_Theta, p.xi.aj, group,
-                G, weights, dat1, dat_resp, maxK, group_index, dat1_resp )
+                G, weights, dat1, dat_resp, maxK, group_index, dat1_resp,
+                eps=1e-100)
 {
     N <- nrow(dat_resp)
     TP <- ncol(p.xi.aj)
     I <- ncol(dat1)
     # posterior distribution
     prior1 <- t( prior_Theta[, group ] )
-    p1 <- p.aj.xi <- prior1 * p.xi.aj
+    # p.xi.aj[ is.na(p.xi.aj) ] <- eps
+    p.aj.xi <- prior1 * p.xi.aj
+    p1 <- p.aj.xi
     p.aj.xi <- p.aj.xi / rowSums( p.aj.xi )
+
     # expected counts
     n.ik <- array( 0, dim=c(I,maxK, TP,G) )
     N.ik <- array( 0, dim=c(I,maxK, TP) )

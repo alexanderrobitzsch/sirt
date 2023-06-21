@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_itemParameters.R
-## File Version: 0.385
+## File Version: 0.391
 
 
 #--- M-step item parameters
@@ -10,7 +10,8 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
 {
     #-------------------------------------------------
     #**** define likelihood function
-    like_items1 <- function( x, ... ){
+    like_items1 <- function( x, ... )
+    {
         partable <- xxirt_partable_include_freeParameters( partable=partable, x=x )
         probs1 <- xxirt_compute_itemprobs( item_list=item_list, items=items,
                             Theta=Theta, ncat=ncat, partable=partable,

@@ -1,11 +1,12 @@
 ## File Name: xxirt_mstep_ThetaParameters.R
-## File Version: 0.185
+## File Version: 0.189
 
 
 xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
             mstep_iter, N.k, par1, mstep_reltol, Theta )
 {
-    like_Theta <- function( x, ... ){
+    like_Theta <- function( x, ... )
+    {
         par1 <- customTheta$par
         par1[ customTheta$est ] <- x
         arg_list <- list( par=par1, Theta=Theta, G=G )
