@@ -1,5 +1,5 @@
 ## File Name: matrix_functions.R
-## File Version: 0.19
+## File Version: 0.202
 
 
 #############################################################
@@ -66,7 +66,10 @@ rowSds <- function( mat, na.rm=FALSE){ sqrt(rowVars( mat, na.rm ) ) }
 #*****
 colSds <- function( mat, na.rm=FALSE){ sqrt(colVars( mat, na.rm ) ) }
 #-------------------------------------------------------------------
-min.vec <- function(a,b){ifelse( a >=b, b, a ) }
+min_vec <- function(a,b)
+{
+    ifelse( a >=b, b, a )
+}
 #*********************************
 rowMins2 <- function(matr)
 {

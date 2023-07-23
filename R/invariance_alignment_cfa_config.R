@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_cfa_config.R
-## File Version: 0.253
+## File Version: 0.259
 
 
 invariance_alignment_cfa_config <- function(dat, group, weights=NULL,
@@ -35,6 +35,15 @@ invariance_alignment_cfa_config <- function(dat, group, weights=NULL,
     lambda <- nu
     err_var <- nu
     weights_gg <- NULL
+    vcov <- matrix(0, nrow=2*I*G, ncol=2*I*G)
+    names1 <- c()
+    for (gg in 1:G){
+        names2 <- c( paste0(items, '_lam_Gr',gg), paste0(items, '_nu_Gr',gg) )
+        names1 <- c( names1, names2)
+    }
+    colnames(vcov) <- rownames(vcov) <- names1
+
+    vcov_ind0 <- 0
     for (gg in 1:G){
         if (is_data){
             dat_gg <- dat[ group==groups[gg], ]
@@ -60,9 +69,12 @@ invariance_alignment_cfa_config <- function(dat, group, weights=NULL,
         lambda[gg, ind_gg] <- res$lambda
         err_var[gg, ind_gg] <- res$err_var
         N[gg] <- res$nobs
+        ind_gg1 <- vcov_ind0 + 1:(2*I)
+        vcov[ind_gg1, ind_gg1] <- res$vcov
+        vcov_ind0 <- vcov_ind0+2*I
     }
     #-- output
-    res <- list(nu=nu, lambda=lambda, err_var=err_var, N=N, G=G, I=I,
+    res <- list(nu=nu, lambda=lambda, err_var=err_var, vcov=vcov, N=N, G=G, I=I,
                     items=items, groups=groups, CALL=CALL)
     return(res)
 }

@@ -1,5 +1,5 @@
 ## File Name: ccov.np.R
-## File Version: 1.218
+## File Version: 1.221
 
 
 #---- nonparametric estimation of conditional covariance
@@ -30,9 +30,9 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
     }
     # matrix of item response functions
     if (progress){
-        cat("Pairwise Estimation of Conditional Covariances\n" )
-        cat("...........................................................\n" )
-        cat("Nonparametric ICC estimation \n " )
+        cat('Pairwise Estimation of Conditional Covariances\n' )
+        cat('...........................................................\n' )
+        cat('Nonparametric ICC estimation \n ' )
     }
     icc_items <- matrix( 0, length(thetagrid), I )
     if ( I >=20 ){
@@ -57,19 +57,19 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
 
     #-- display progress
     if (progress){
-        cat("...........................................................\n" )
-        cat("Nonparametric Estimation of conditional covariances \n " )
+        cat('...........................................................\n' )
+        cat('Nonparametric Estimation of conditional covariances \n ' )
         utils::flush.console()
     }
     # calculation of conditional covariance
-    ccov.table <- data.frame( "item1ID"=rep( 1:I, I), "item2ID"=rep( 1:I, each=I ) )
+    ccov.table <- data.frame( 'item1ID'=rep( 1:I, I), 'item2ID'=rep( 1:I, each=I ) )
     ccov.table <- ccov.table[ ccov.table$item1ID < ccov.table$item2ID, ]
     ccov.table$N <- apply( ccov.table, 1, FUN=function(ll){
                     sum( rowSums( is.na( data[, c( ll[1], ll[2] ) ] ) )==0 ) } )
     ccov.table <- ccov.table[ ccov.table$N > 0, ]
     ccov.table$item1 <- colnames(data)[ ccov.table$item1ID ]
     ccov.table$item2 <- colnames(data)[ ccov.table$item2ID ]
-    ccov.table$itempair <- paste( ccov.table$item1, ccov.table$item2, sep="-" )
+    ccov.table$itempair <- paste( ccov.table$item1, ccov.table$item2, sep='-' )
     # smoothing all item pairs
     # calculate conditional covariances
     FF <- nrow(ccov.table)
@@ -112,7 +112,7 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
 
     # calculate (weighted) conditional covariance
     ccov.table$ccov <- apply( ccov.matrix, 2, FUN=function(sp){
-                        stats::weighted.mean( x=sp, w=wgt_thetagrid ) } )
+                                stats::weighted.mean( x=sp, w=wgt_thetagrid ) } )
     if (use_sum_score){
         ccov_sum_score[ is.na(ccov_sum_score) ] <- 0
         ccov.table$ccov <- ccov_sum_score

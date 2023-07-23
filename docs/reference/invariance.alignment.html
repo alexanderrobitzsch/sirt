@@ -57,7 +57,9 @@ item intercepts and item slopes (see Example 6).
 The function invariance_alignment_cfa_config estimates one-factor
 models separately for each group as a preliminary step for invariance
 alignment (see Example 6). Sampling weights are accommodated by the
-argument weights." />
+argument weights.  The computed variance matrix vcov by this function
+can be used to obtain standard errors in the invariance.alignment function
+if it is supplied as the argument vcov." />
 
 
 
@@ -148,12 +150,14 @@ item intercepts and item slopes (see Example 6).</p>
 <p>The function <code>invariance_alignment_cfa_config</code> estimates one-factor
 models separately for each group as a preliminary step for invariance
 alignment (see Example 6). Sampling weights are accommodated by the
-argument <code>weights</code>.</p>
+argument <code>weights</code>.  The computed variance matrix <code>vcov</code> by this function
+can be used to obtain standard errors in the <code>invariance.alignment</code> function
+if it is supplied as the argument <code>vcov</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>invariance.alignment</span>(<span class='no'>lambda</span>, <span class='no'>nu</span>, <span class='kw'>wgt</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>align.scale</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>),
     <span class='kw'>align.pow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>.5</span>, <span class='fl'>.5</span>), <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>1e-3</span>, <span class='kw'>psi0.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>alpha0.init</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>center</span><span class='kw'>=</span><span class='fl'>FALSE</span>,
-    <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"optim"</span>, <span class='kw'>fixed</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>meth</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='no'>...</span>)
+    <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"optim"</span>, <span class='kw'>fixed</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>meth</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>vcov</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for invariance.alignment</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
@@ -227,7 +231,14 @@ If <code>NULL</code>, then <code>fixed</code> is automatically chosen by default
     <tr>
       <th>meth</th>
       <td><p>Type of method used for optimization function. <code>meth=1</code> is the default
-and the optimization function used in Mplus.</p></td>
+and the optimization function used in Mplus. <code>meth=2</code> uses logarithmized
+item loadings in alignment.</p></td>
+    </tr>
+    <tr>
+      <th>vcov</th>
+      <td><p>Variance matrix produced by <code>invariance_alignment_cfa_config</code>
+for standard error computation. If a matrix is provided, standard errors
+are computed.</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -338,8 +349,8 @@ a differentiable optimization function. For \(p_\nu=0\) or \(p_\lambda=0\), the
 optimization function essentially counts the number of different parameter
 and mimicks a \(L_0\) penalty which is zero iff the argument is zero
 and one otherwise. It is approximated by
-$$f(x)=2 / ( 1 + \exp( - \gamma \sqrt{x^2 + \varepsilon} ) - 1$$
-(Oelker &amp; Tutz, 2017).</p>
+$$f(x)=x^2 (x^2 + \varepsilon )^{-1} $$
+(O'Neill &amp; Burke, 2023).</p>
 <p>For identification reasons, the product \(\Pi_g \psi_{g0}\)
 of all group standard deviations is set to one. The mean
 \(\alpha_{g0}\) of the first group is set to zero.</p>
@@ -381,6 +392,8 @@ equal across groups and therefore \(R^2_\lambda=1\) and \(R^2_\nu=1\)
 <dt>fopt</dt><dd><p>Minimum optimization value</p></dd>
 <dt>align.scale</dt><dd><p>Used alignment scale parameters</p></dd>
 <dt>align.pow</dt><dd><p>Used alignment power parameters</p></dd>
+<dt>vcov</dt><dd><p>Estimated variance matrix of aligned means and
+standard deviations</p></dd>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -422,10 +435,9 @@ doi: <a href='https://doi.org/10.3389/fpsyg.2014.00978'>10.3389/fpsyg.2014.00978
 invariance with many groups: Alignment and random effects.
 <em>Sociological Methods &amp; Research, 47</em>(4), 637-664.
 doi: <a href='https://doi.org/10.1177/0049124117701488'>10.1177/0049124117701488</a></p>
-<p>Oelker, M. R., &amp; Tutz, G. (2017). A uniform framework for the combination of penalties in
-generalized structured models. <em>Advances in Data Analysis and Classification, 11</em>(1),
-97-120.
-doi: <a href='https://doi.org/10.1007/s11634-015-0205-y'>10.1007/s11634-015-0205-y</a></p>
+<p>O'Neill, M., &amp; Burke, K. (2023). Variable selection using a smooth information criterion
+for distributional regression models. <em>Statistics and Computing, 33</em>(3), 71.
+doi: <a href='https://doi.org/10.1007/s11222-023-10204-8'>10.1007/s11222-023-10204-8</a></p>
 <p>Pokropek, A., Davidov, E., &amp; Schmidt, P. (2019). A Monte Carlo simulation study to
 assess the appropriateness of traditional and newer approaches to test for
 measurement invariance. <em>Structural Equation Modeling, 26</em>(5), 724-744.
@@ -612,7 +624,8 @@ see <code><a href='mcmc.2pno.ml.html'>mcmc.2pno.ml</a></code>.</p></div>
 <span class='no'>itempars</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='st'>"item"</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"I"</span>,<span class='fl'>1</span>:<span class='no'>I</span>) )
 <span class='no'>itempars</span>$<span class='no'>study1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>( <span class='no'>I</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>.3</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>1.4</span> )
 <span class='co'># simulate DIF effects plus some outliers</span>
-<span class='no'>bdif</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>I</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>.4</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>.09</span>)+( <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>I</span>)<span class='kw'>&gt;</span><span class='fl'>.9</span> )* <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>( <span class='fl'>1</span>*<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>1</span>,<span class='fl'>1</span>)+<span class='fl'>.4</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='no'>I</span>/<span class='fl'>2</span> )
+<span class='no'>bdif</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>I</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='fl'>.4</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='fl'>.09</span>) +
+             (<span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>I</span>)<span class='kw'>&gt;</span><span class='fl'>.9</span> )*<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>( <span class='fl'>1</span>*<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>1</span>,<span class='fl'>1</span>)+<span class='fl'>.4</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='no'>I</span>/<span class='fl'>2</span> )
 <span class='no'>itempars</span>$<span class='no'>study2</span> <span class='kw'>&lt;-</span> <span class='no'>itempars</span>$<span class='no'>study1</span> + <span class='no'>bdif</span>
 <span class='co'># create input for function invariance.alignment</span>
 <span class='no'>nu</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>( <span class='no'>itempars</span>[,<span class='fl'>2</span>:<span class='fl'>3</span>] )
@@ -826,6 +839,50 @@ see <code><a href='mcmc.2pno.ml.html'>mcmc.2pno.ml</a></code>.</p></div>
 <span class='co'>#--- estimate one-parameter model</span>
 <span class='no'>pars</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>invariance_alignment_cfa_config</span>(<span class='no'>dat</span>[,-<span class='fl'>1</span>], <span class='kw'>group</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>group</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='st'>"1PM"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>pars</span>)
+
+<span class='co'>#############################################################################</span>
+<span class='co'># EXAMPLE 8: Computation of standard errors</span>
+<span class='co'>#############################################################################</span>
+
+<span class='no'>G</span> <span class='kw'>&lt;-</span> <span class='fl'>3</span>  <span class='co'># number of groups</span>
+<span class='no'>I</span> <span class='kw'>&lt;-</span> <span class='fl'>5</span>  <span class='co'># number of items</span>
+<span class='co'># define lambda and nu parameters</span>
+<span class='no'>lambda</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>1</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='no'>G</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='no'>I</span>)
+<span class='no'>nu</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>0</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='no'>G</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='no'>I</span>)
+
+<span class='co'># define size of noninvariance</span>
+<span class='no'>dif</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>
+
+<span class='no'>mu1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>.3</span>,<span class='fl'>.8</span>)
+<span class='no'>sigma1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1.25</span>,<span class='fl'>1.1</span>)
+
+<span class='co'>#- 1st group</span>
+<span class='no'>lambda</span>[<span class='fl'>1</span>,<span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>+<span class='no'>dif</span>*<span class='fl'>.4</span>; <span class='no'>nu</span>[<span class='fl'>1</span>,<span class='fl'>5</span>] <span class='kw'>&lt;-</span> <span class='no'>dif</span>*<span class='fl'>.5</span>
+
+<span class='co'>#- 2nd group</span>
+<span class='no'>gg</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>
+<span class='no'>lambda</span>[<span class='no'>gg</span>,<span class='fl'>5</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>-<span class='fl'>.5</span>*<span class='no'>dif</span>; <span class='no'>nu</span>[<span class='no'>gg</span>,<span class='fl'>1</span>] <span class='kw'>&lt;-</span> -<span class='fl'>.5</span>*<span class='no'>dif</span>
+
+<span class='co'>#- 3nd group</span>
+<span class='no'>gg</span> <span class='kw'>&lt;-</span> <span class='fl'>3</span>
+<span class='no'>lambda</span>[<span class='no'>gg</span>,<span class='fl'>4</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>-<span class='fl'>.7</span>*<span class='no'>dif</span>; <span class='no'>nu</span>[<span class='no'>gg</span>,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> -<span class='fl'>.5</span>*<span class='no'>dif</span>
+
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>invariance_alignment_simulate</span>(<span class='kw'>nu</span><span class='kw'>=</span><span class='no'>nu</span>, <span class='kw'>lambda</span><span class='kw'>=</span><span class='no'>lambda</span>, <span class='kw'>err_var</span><span class='kw'>=</span><span class='fl'>1</span>+<span class='fl'>0</span>*<span class='no'>lambda</span>,
+                <span class='kw'>mu</span><span class='kw'>=</span><span class='no'>mu1</span>, <span class='kw'>sigma</span><span class='kw'>=</span><span class='no'>sigma1</span>, <span class='kw'>N</span><span class='kw'>=</span><span class='fl'>500</span>, <span class='kw'>output</span><span class='kw'>=</span><span class='st'>"data"</span>, <span class='kw'>exact</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+
+<span class='co'>#* estimate CFA</span>
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>invariance_alignment_cfa_config</span>(<span class='kw'>dat</span><span class='kw'>=</span><span class='no'>dat</span>[,-<span class='fl'>1</span>], <span class='kw'>group</span><span class='kw'>=</span><span class='no'>dat</span>$<span class='no'>group</span> )
+
+<span class='co'>#- perform invariance alignment</span>
+<span class='no'>eps</span> <span class='kw'>&lt;-</span> <span class='fl'>.001</span>
+<span class='no'>align.pow</span> <span class='kw'>&lt;-</span> <span class='fl'>0.5</span>*<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>)
+<span class='no'>lambda</span> <span class='kw'>&lt;-</span> <span class='no'>res</span>$<span class='no'>lambda</span>
+<span class='no'>nu</span> <span class='kw'>&lt;-</span> <span class='no'>res</span>$<span class='no'>nu</span>
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sirt</span><span class='kw ns'>::</span><span class='fu'>invariance.alignment</span>( <span class='kw'>lambda</span><span class='kw'>=</span><span class='no'>lambda</span>, <span class='kw'>nu</span><span class='kw'>=</span><span class='no'>nu</span>, <span class='kw'>eps</span><span class='kw'>=</span><span class='no'>eps</span>, <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"optim"</span>,
+             <span class='kw'>align.pow</span><span class='kw'>=</span><span class='no'>align.pow</span>, <span class='kw'>meth</span><span class='kw'>=</span><span class='no'>meth</span>, <span class='kw'>vcov</span><span class='kw'>=</span><span class='no'>res</span>$<span class='no'>vcov</span>)
+<span class='co'># variance matrix and standard errors</span>
+<span class='no'>mod1</span>$<span class='no'>vcov</span>
+<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='no'>mod1</span>$<span class='no'>vcov</span>))
 }</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

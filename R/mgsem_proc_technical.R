@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_technical.R
-## File Version: 0.181
+## File Version: 0.182
 
 mgsem_proc_technical <- function(technical, control, p_me, p_pen, eps_approx, suffstat,
             estimator, diffpar_pen=NULL, cd_control=NULL)
@@ -14,7 +14,7 @@ mgsem_proc_technical <- function(technical, control, p_me, p_pen, eps_approx, su
 
     #*** update list cd_control
     cd_control0 <- list(maxiter=20, tol=5*1e-4, interval_length=0.05,
-                            method="exact")
+                            method='exact')
     cd_control <- mgsem_update_list_entries(add_list=cd_control, output_list=cd_control0)
 
     if ((p_pen==2) & (p_me==2) & ( ! use_approx_method) ){

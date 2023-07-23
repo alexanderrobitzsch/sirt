@@ -1,5 +1,5 @@
 ## File Name: unidim.csn.R
-## File Version: 0.204
+## File Version: 0.205
 
 ##*** unidimensionality test
 unidim.test.csn <- function( dat, RR=400, prop.perm=.75,
@@ -27,7 +27,7 @@ unidim.test.csn <- function( dat, RR=400, prop.perm=.75,
     progress <- 1*progress
     progress_vec <- c(0,which( diff( floor( 10 * ( 1:RR ) / ( RR+1 ) ) )==1 ) )
     if (progress==1){
-        cat("|**********|\n")
+        cat('|**********|\n')
     }
     res <- gooijer_csn_table( dat=dat, dat_perm=dat_perm, RR=RR, NS=0, progress=progress,
                     progress_vec=progress_vec, score_index=as.matrix(score_index) )
@@ -35,8 +35,8 @@ unidim.test.csn <- function( dat, RR=400, prop.perm=.75,
     quants <- c(.05, .25, .50, .75, .95, .99, .999 )
     res$H0_quantiles <- stats::quantile(res$stat_perm, probs=quants )
     if ( progress==1 ){
-        cat( paste0("CSN Statistic=", round( res$stat, 5) ) )
-        cat( ", p=", round( res$p, 5 ), "\n")
+        cat( paste0('CSN Statistic=', round( res$stat, 5) ) )
+        cat( ', p=', round( res$p, 5 ), '\n')
     }
     return(res)
 }

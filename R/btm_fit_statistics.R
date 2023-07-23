@@ -1,5 +1,5 @@
 ## File Name: btm_fit_statistics.R
-## File Version: 0.209
+## File Version: 0.212
 
 
 #**** item outfit and infit statistic
@@ -40,10 +40,10 @@ btm_fit_statistics <- function( probs, dat0, ind1, ind2, TP, judge=NULL,
     win1 <- rowsum( X_var1*Z_1^2, dat0[,1] )
     win2 <- rowsum( X_var2*Z_1^2, dat0[,2] )
 
-    out <- btm_fit_combine_tables( win1=out1, win2=out2, ind1=ind1, ind2=ind2, TP=TP )
-    N <- btm_fit_combine_tables( win1=N1, win2=N2, ind1=ind1, ind2=ind2, TP=TP )
-    wvar <- btm_fit_combine_tables( win1=wvar1, win2=wvar2, ind1=ind1, ind2=ind2, TP=TP )
-    win <- btm_fit_combine_tables( win1=win1, win2=win2, ind1=ind1, ind2=ind2, TP=TP )
+    out <- btm_fit_combine_tables( win1=out1, win2=out2, ind1=ind1, ind2=ind2, TP=TP)
+    N <- btm_fit_combine_tables( win1=N1, win2=N2, ind1=ind1, ind2=ind2, TP=TP)
+    wvar <- btm_fit_combine_tables( win1=wvar1, win2=wvar2, ind1=ind1, ind2=ind2, TP=TP)
+    win <- btm_fit_combine_tables( win1=win1, win2=win2, ind1=ind1, ind2=ind2, TP=TP)
     outfit <- out/N
     infit <- win/wvar
 
@@ -61,17 +61,17 @@ btm_fit_statistics <- function( probs, dat0, ind1, ind2, TP, judge=NULL,
         #* compute agreement statistics
         if (compute_agreement){
             dat1 <- data.frame(judge=judge)
-            colnames(dat0) <- c("id1","id2","result")
+            colnames(dat0) <- c('id1','id2','result')
             ind <- dat0$id1 < dat0$id2
             dat1$id1 <- ifelse(ind, dat0$id1, dat0$id2)
             dat1$id2 <- ifelse(ind, dat0$id2, dat0$id1)
             dat1$result <- ifelse(ind, dat0$result, 1-dat0$result)
-            dat1$dyad <- paste0(dat1$id1, "-", dat1$id2)
+            dat1$dyad <- paste0(dat1$id1, '-', dat1$id2)
             a1 <- stats::aggregate( dat1$result, list(dat1$dyad), median )
-            colnames(a1) <- c("dyad", "mode")
+            colnames(a1) <- c('dyad', 'mode')
             a1$N_dyad <- stats::aggregate( 1+0*dat1$result, list(dat1$dyad), sum )[,2]
             a1 <- a1[ ( a1$N_dyad > 2 ) & ( a1$mode %in% c(0,1) ), ]
-            dat1$mode <- a1[ match(dat1$dyad, a1$dyad), "mode" ]
+            dat1$mode <- a1[ match(dat1$dyad, a1$dyad), 'mode' ]
             a2 <- stats::aggregate( dat1$result==dat1$mode, list(dat1$judge),
                                         mean, na.rm=TRUE)
             fit_judges$agree <- a2[ match(fit_judges$judge, a2[,1]), 2]

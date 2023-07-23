@@ -130,7 +130,10 @@ for more details).</p>
 
     <pre class="usage"><span class='fu'>modelfit.sirt</span>(<span class='no'>object</span>)
 
-<span class='fu'>modelfit.cor.poly</span>( <span class='no'>data</span>, <span class='no'>probs</span>, <span class='no'>theta.k</span>, <span class='no'>f.qk.yi</span>)</pre>
+<span class='fu'>modelfit.cor.poly</span>( <span class='no'>data</span>, <span class='no'>probs</span>, <span class='no'>theta.k</span>, <span class='no'>f.qk.yi</span>)
+
+<span class='co'># S3 method for sirt</span>
+<span class='fu'>IRT.modelfit</span>(<span class='no'>object</span>, <span class='no'>mod</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,6 +163,14 @@ for more details).</p>
     <tr>
       <th>f.qk.yi</th>
       <td><p>Individual posterior</p></td>
+    </tr>
+    <tr>
+      <th>mod</th>
+      <td><p>Model name</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further arguments to be passed</p></td>
     </tr>
     </table>
 

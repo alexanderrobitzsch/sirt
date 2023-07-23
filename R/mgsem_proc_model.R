@@ -1,7 +1,7 @@
 ## File Name: mgsem_proc_model.R
-## File Version: 0.306
+## File Version: 0.307
 
-mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group,
+mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group, W,
         prior_list=NULL, pen_type="lasso", fixed_parms=FALSE,
         partable_start=NULL, diffpar_pen=NULL, pen_sample_size=TRUE)
 {

@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.672
+%% File Version: 1.686
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -35,7 +35,9 @@ item intercepts and item slopes (see Example 6).
 The function \code{invariance_alignment_cfa_config} estimates one-factor
 models separately for each group as a preliminary step for invariance
 alignment (see Example 6). Sampling weights are accommodated by the
-argument \code{weights}.
+argument \code{weights}.  The computed variance matrix \code{vcov} by this function
+can be used to obtain standard errors in the \code{invariance.alignment} function
+if it is supplied as the argument \code{vcov}.
 }
 
 %% \emph{Note that this function is in an early experimental stage.}
@@ -44,7 +46,7 @@ argument \code{weights}.
 \usage{
 invariance.alignment(lambda, nu, wgt=NULL, align.scale=c(1, 1),
     align.pow=c(.5, .5), eps=1e-3, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
-    optimizer="optim", fixed=NULL, meth=1, ...)
+    optimizer="optim", fixed=NULL, meth=1, vcov=NULL, ...)
 
 \method{summary}{invariance.alignment}(object, digits=3, file=NULL, ...)
 
@@ -98,7 +100,11 @@ be fixed to one. If \code{fixed=FALSE}, the product of all SDs is set to one.
 If \code{NULL}, then \code{fixed} is automatically chosen by default. For many groups,
 \code{fixed=FALSE} is chosen.}
 \item{meth}{Type of method used for optimization function. \code{meth=1} is the default
-and the optimization function used in Mplus.}
+and the optimization function used in Mplus. \code{meth=2} uses logarithmized
+item loadings in alignment.}
+\item{vcov}{Variance matrix produced by \code{invariance_alignment_cfa_config}
+for standard error computation. If a matrix is provided, standard errors
+are computed.}
   \item{object}{
 Object of class \code{invariance.alignment}
   }
@@ -158,8 +164,8 @@ a differentiable optimization function. For \eqn{p_\nu=0} or \eqn{p_\lambda=0}, 
 optimization function essentially counts the number of different parameter
 and mimicks a \eqn{L_0} penalty which is zero iff the argument is zero
 and one otherwise. It is approximated by
-\deqn{f(x)=2 / ( 1 + \exp( - \gamma \sqrt{x^2 + \varepsilon} ) - 1}
-(Oelker & Tutz, 2017).
+\deqn{f(x)=x^2 (x^2 + \varepsilon )^{-1} }
+(O'Neill & Burke, 2023).
 
 For identification reasons, the product \eqn{\Pi_g \psi_{g0}}
 of all group standard deviations is set to one. The mean
@@ -206,6 +212,8 @@ A list with following entries
 \item{fopt}{Minimum optimization value}
 \item{align.scale}{Used alignment scale parameters}
 \item{align.pow}{Used alignment power parameters}
+\item{vcov}{Estimated variance matrix of aligned means and
+standard deviations}
 }
 
 
@@ -258,10 +266,9 @@ invariance with many groups: Alignment and random effects.
 \emph{Sociological Methods & Research, 47}(4), 637-664.
 \doi{10.1177/0049124117701488}
 
-Oelker, M. R., & Tutz, G. (2017). A uniform framework for the combination of penalties in
-generalized structured models. \emph{Advances in Data Analysis and Classification, 11}(1),
-97-120.
-\doi{10.1007/s11634-015-0205-y}
+O'Neill, M., & Burke, K. (2023). Variable selection using a smooth information criterion
+for distributional regression models. \emph{Statistics and Computing, 33}(3), 71.
+\doi{10.1007/s11222-023-10204-8}
 
 Pokropek, A., Davidov, E., & Schmidt, P. (2019). A Monte Carlo simulation study to
 assess the appropriateness of traditional and newer approaches to test for
@@ -274,6 +281,11 @@ recommendations for organizational research. \emph{Organizational Research
 Methods, 3}, 4-70.
 \doi{10.1177/109442810031002}s
 }
+
+%Oelker, M. R., & Tutz, G. (2017). A uniform framework for the combination of penalties in
+%generalized structured models. \emph{Advances in Data Analysis and Classification, 11}(1),
+%97-120.
+%\doi{10.1007/s11634-015-0205-y}
 
 %\author{
 %Alexander Robitzsch
@@ -462,7 +474,8 @@ set.seed(18785)
 itempars <- data.frame("item"=paste0("I",1:I) )
 itempars$study1 <- stats::rnorm( I, mean=.3, sd=1.4 )
 # simulate DIF effects plus some outliers
-bdif <- stats::rnorm(I, mean=.4, sd=.09)+( stats::runif(I)>.9 )* rep( 1*c(-1,1)+.4, each=I/2 )
+bdif <- stats::rnorm(I, mean=.4, sd=.09) +
+             (stats::runif(I)>.9 )*rep( 1*c(-1,1)+.4, each=I/2 )
 itempars$study2 <- itempars$study1 + bdif
 # create input for function invariance.alignment
 nu <- t( itempars[,2:3] )
@@ -676,6 +689,50 @@ print(pars$nu)
 #--- estimate one-parameter model
 pars <- sirt::invariance_alignment_cfa_config(dat[,-1], group=dat$group, model="1PM")
 print(pars)
+
+#############################################################################
+# EXAMPLE 8: Computation of standard errors
+#############################################################################
+
+G <- 3  # number of groups
+I <- 5  # number of items
+# define lambda and nu parameters
+lambda <- matrix(1, nrow=G, ncol=I)
+nu <- matrix(0, nrow=G, ncol=I)
+
+# define size of noninvariance
+dif <- 1
+
+mu1 <- c(0,.3,.8)
+sigma1 <- c(1,1.25,1.1)
+
+#- 1st group
+lambda[1,3] <- 1+dif*.4; nu[1,5] <- dif*.5
+
+#- 2nd group
+gg <- 2
+lambda[gg,5] <- 1-.5*dif; nu[gg,1] <- -.5*dif
+
+#- 3nd group
+gg <- 3
+lambda[gg,4] <- 1-.7*dif; nu[gg,2] <- -.5*dif
+
+dat <- sirt::invariance_alignment_simulate(nu=nu, lambda=lambda, err_var=1+0*lambda,
+                mu=mu1, sigma=sigma1, N=500, output="data", exact=TRUE)
+
+#* estimate CFA
+res <- sirt::invariance_alignment_cfa_config(dat=dat[,-1], group=dat$group )
+
+#- perform invariance alignment
+eps <- .001
+align.pow <- 0.5*rep(1,2)
+lambda <- res$lambda
+nu <- res$nu
+mod1 <- sirt::invariance.alignment( lambda=lambda, nu=nu, eps=eps, optimizer="optim",
+             align.pow=align.pow, meth=meth, vcov=res$vcov)
+# variance matrix and standard errors
+mod1$vcov
+sqrt(diag(mod1$vcov))
 }
 }
 

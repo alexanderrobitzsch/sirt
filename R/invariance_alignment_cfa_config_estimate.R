@@ -1,9 +1,10 @@
 ## File Name: invariance_alignment_cfa_config_estimate.R
-## File Version: 0.192
+## File Version: 0.199
 
 invariance_alignment_cfa_config_estimate <- function(dat_gg, N, weights_gg=NULL,
     model="2PM", ...)
 {
+    requireNamespace('MASS')
     is_data <- sirt_is_data(dat=dat_gg)
     #-- create lavaan model
     if (is_data){
@@ -46,7 +47,12 @@ invariance_alignment_cfa_config_estimate <- function(dat_gg, N, weights_gg=NULL,
     nu <- partable[ partable$op=='~1', 'est'][1:I_gg]
     err_var <- partable[ partable$op=='~~', 'est'][1:I_gg]
     nobs <- mod@Data@nobs[[1]]
+    # vcov <- lavaan::lavInspect(object=mod, what='information')
+    vcov <- mod@vcov$vcov
+    ind <- c(1:I_gg, 2*I_gg+1:I_gg)
+    vcov <- vcov[ ind, ind ]
+
     #--- output
-    res <- list(lambda=lambda, nu=nu, err_var=err_var, nobs=nobs)
+    res <- list(lambda=lambda, nu=nu, err_var=err_var, nobs=nobs, vcov=vcov)
     return(res)
 }

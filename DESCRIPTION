@@ -1,8 +1,8 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 3.13-164
-Date: 2023-06-21 12:54:00
+Version: 3.13-185
+Date: 2023-07-23 17:17:56
 Author: Alexander Robitzsch [aut,cre] (<https://orcid.org/0000-0002-8226-3132>)
 Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
 Description: 
@@ -27,12 +27,12 @@ Depends:
 Imports:
     CDM, graphics, methods, Rcpp, stats, TAM, utils
 Suggests:
-    coda, igraph, lavaan, lavaan.survey, MASS, Matrix,
-    miceadds, minqa, mirt, mvtnorm, nloptr, optimx, pbivnorm, 
-    pbv, psych, sfsmisc, sm, survey
+    coda, igraph, lavaan, MASS, Matrix, miceadds, minqa, mirt, 
+    mvtnorm, nloptr, optimx, pbivnorm, pbv, psych, sfsmisc, 
+    sm, survey
 LinkingTo: 
     pbv, Rcpp, RcppArmadillo
 URL: 
     https://github.com/alexanderrobitzsch/sirt,
-    https://sites.google.com/site/alexanderrobitzsch2/software
+    https://sites.google.com/view/alexander-robitzsch/software
 License: GPL (>= 2)

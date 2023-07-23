@@ -1,12 +1,12 @@
 ## File Name: lsem.estimate.R
-## File Version: 1.067
+## File Version: 1.068
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
         lavmodel, type="LSEM", h=1.1, bw=NULL, residualize=TRUE,
         fit_measures=c("rmsea","cfi","tli","gfi","srmr"), standardized=FALSE,
         standardized_type="std.all", lavaan_fct="sem", sufficient_statistics=TRUE,
-        use_lavaan_survey=FALSE, pseudo_weights=0, sampling_weights=NULL,
+        pseudo_weights=0, sampling_weights=NULL,
         loc_linear_smooth=TRUE, est_joint=FALSE, par_invariant=NULL, par_linear=NULL,
         par_quadratic=NULL, partable_joint=NULL, pw_linear=1,
         pw_quadratic=1, pd=TRUE, est_DIF=FALSE, se=NULL, kernel="gaussian", eps=1E-8,
@@ -21,6 +21,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
             stop('standardized=TRUE cannot be applied for type=\'MGM\'')
         }
     }
+    use_lavaan_survey <- FALSE
 
     #- data cleaning
     data <- as.data.frame(data)

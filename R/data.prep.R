@@ -1,5 +1,5 @@
 ## File Name: data.prep.R
-## File Version: 1.147
+## File Version: 1.149
 
 #----- data preparations for rasch.jml and rasch.mml
 data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
@@ -8,10 +8,10 @@ data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
     item.means <- colMeans( dat, na.rm=TRUE )
     item.elim <- which( item.means %in% c(0,1))
     if ( length( item.elim ) > 0 ){
-        stop( cat( paste( "There are", length(item.elim), "Items with no variance!") ) )
+        stop( cat( paste( 'There are', length(item.elim), 'Items with no variance!') ) )
     }
     if ( any( is.na(item.means)) ){
-        stop( "There are items which contains only missings!")
+        stop( 'There are items which contains only missings!')
     }
     n <- nrow(dat)
     I <- ncol(dat)
@@ -22,12 +22,12 @@ data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
 
     #* pattern
     if ( use.freqpatt ){
-        freq.patt <- apply( dat.9, 1, FUN=function(ll){ paste(ll, collapse="" ) } )  #
+        freq.patt <- apply( dat.9, 1, FUN=function(ll){ paste(ll, collapse='' ) } )  #
         dat1 <- data.frame( table( freq.patt ) )
     } else {
-        freq.patt <- paste("FP", 1000000 + 1:n, sep="")
+        freq.patt <- paste('FP', 1000000 + 1:n, sep='')
         dat1 <- data.frame( freq.patt )
-        colnames(dat1)[1] <- "freq.patt"
+        colnames(dat1)[1] <- 'freq.patt'
     }
     # weighting the frequencies if survey weights are supplied
     if( !is.null(weights) ){
@@ -38,12 +38,12 @@ data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
         if ( use.freqpatt ){
             dat1[,2] <- stats::aggregate( weights, list( freq.patt), sum )[,2]
         } else {
-            dat1[,"Freq"] <- weights
+            dat1[,'Freq'] <- weights
         }
     }
     # item pattern corresponding to frequency pattern
     if ( use.freqpatt){
-        dat2 <- matrix( as.numeric( unlist( strsplit( paste(dat1[,1]), "" ) ) ),
+        dat2 <- matrix( as.numeric( unlist( strsplit( paste(dat1[,1]), '' ) ) ),
                             ncol=ncol(dat), byrow=TRUE)
     } else {
         dat2 <- dat.9 }
@@ -52,9 +52,9 @@ data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
         # mean right
         dat1$mean <- rowSums( dat2 * dat2.resp )  / rowSums( dat2.resp )
         freq.patt <- data.frame(  freq.patt, rowMeans( dat, na.rm=TRUE ), 1:n )
-        colnames(freq.patt)[2:3] <- c("mean", "index" )
-        list( "dat"=dat, "dat2"=dat2, "dat2.resp"=dat2.resp, "dat1"=dat1,
-                "freq.patt"=freq.patt, "I"=I, "n"=n, "dat9"=dat.9 )
+        colnames(freq.patt)[2:3] <- c('mean', 'index' )
+        list( dat=dat, dat2=dat2, dat2.resp=dat2.resp, dat1=dat1,
+                freq.patt=freq.patt, I=I, n=n, dat9=dat.9 )
 }
 
 

@@ -1,5 +1,5 @@
 ## File Name: lsdm.R
-## File Version: 1.387
+## File Version: 1.388
 
 
 # LSDM - Least Squares Distance Method
@@ -12,12 +12,12 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
     CALL <- match.call()
     s1 <- Sys.time()
     # generate sequence for display
-    display.separate <- paste( rep(".", each=65 ), collapse="" )
+    display.separate <- paste( rep('.', each=65 ), collapse='' )
     # display progress
-    cat(display.separate, "\n" )
-    cat( "LSDM -- Least Squares Distance Method of Cognitive Validation \n")
-    cat("Dimitrov, D. (2007) Applied Psychological Measurement, 31, 367-387.\n")
-    cat(display.separate, "\n")
+    cat(display.separate, '\n' )
+    cat('LSDM -- Least Squares Distance Method of Cognitive Validation \n')
+    cat('Dimitrov, D. (2007) Applied Psychological Measurement, 31, 367-387.\n')
+    cat(display.separate, '\n')
     TP <- length(theta)
     I <- nrow(Qmatrix)
     thetaM <- sirt_matrix2(theta, nrow=I)
@@ -32,15 +32,15 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
     Qmatrix <- as.matrix(Qmatrix)
 
     # print Q matrix
-    cat("\nQmatrix\n\n")
+    cat('\nQmatrix\n\n')
     cmax <- apply( Qmatrix, 2, max )
     Qmatrix <- Qmatrix / sirt_matrix2(cmax, nrow=I)
     print(Qmatrix)
-    cat("\n")
+    cat('\n')
     d1 <- det( crossprod(Qmatrix) )
     # warning for singular Q matrices
     if (abs(d1) < 1E-8){
-        stop("You used a singular Q matrix as an input. LSDM cannot be computed.\n")
+        stop('You used a singular Q matrix as an input. LSDM cannot be computed.\n')
     }
     est.icc <- TRUE
     I <- nrow(data)
@@ -54,21 +54,21 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
     eps <- 1e-3
     logdata <- log( data1 + eps)
     # estimate item parameter and item quantiles
-    cat("Estimation of Item Parameters \n")
+    cat('Estimation of Item Parameters \n')
     utils::flush.console()
     icc.pars <- lsdm_est_logist_quant( probcurves=data, theta=theta,
                     quantiles=quant.list, wgt_theta=wgt_theta, est.icc=est.icc,
                     b=b, a=a)
-    cat(display.separate, "\n" )
+    cat(display.separate, '\n' )
 
     #***** Estimate attribute response curves
-    cat("Estimation of Attribute Parameters \n")
+    cat('Estimation of Attribute Parameters \n')
     utils::flush.console()
 
     Q <- Qmatrix
     eps_obj <- 1e-4
-    if (distance=="L2"){ pow_obj <- 2 }
-    if (distance=="L1"){ pow_obj <- 1 }
+    if (distance=='L2'){ pow_obj <- 2 }
+    if (distance=='L1'){ pow_obj <- 1 }
 
     #** define optimization function for LSDM method
         # P=A1 * A2
@@ -104,7 +104,7 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
     upper <- rep(0,K)
     for (tt in 1:L){
         y_tt <- logdata[,tt]
-        res <- stats::optim(par=par0, fn=lsdm_obj_fn, gr=lsdm_obj_gr, method="L-BFGS-B",
+        res <- stats::optim(par=par0, fn=lsdm_obj_fn, gr=lsdm_obj_gr, method='L-BFGS-B',
                         upper=upper, y_tt=y_tt)
         par0 <- res$par
         log.arc0[,tt] <- par0
@@ -114,10 +114,10 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
     arc0 <- exp(log.arc0)
     rownames(arc0) <- colnames(Qmatrix)
 
-    #--- estimate "ordinary" LLTM
+    #--- estimate 'ordinary' LLTM
     lltm.res1 <- stats::lm( as.numeric(icc.pars$b.1PL) ~ 0 + as.matrix(Qmatrix) )
     slltm.res1 <- summary(lltm.res1)
-    cat(display.separate, "\n")
+    cat(display.separate, '\n')
 
     # calculate Rasch data predicted by LLTM
     b_lltm <- lltm.res1$fitted
@@ -156,15 +156,15 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
     mm.lltm <- mean(mad.lltm)
 
     #* model fit LSDM
-    cat(paste( "Model Fit LSDM   -  Mean MAD:",
+    cat(paste( 'Model Fit LSDM   -  Mean MAD:',
                     formatC( round( mm0, 3 ),digits=3, width=6),
-                    "    Median MAD:", formatC( round( median(mad0), 3 ),
-                                digits=3, width=6), "\n") )
-    cat(paste( "Model Fit LLTM   -  Mean MAD:",
+                    '    Median MAD:', formatC( round( median(mad0), 3 ),
+                                digits=3, width=6), '\n') )
+    cat(paste( 'Model Fit LLTM   -  Mean MAD:',
                     formatC( round( mm.lltm, 3 ),digits=3, width=6),
-                    "    Median MAD:", formatC( round( median(mad.lltm), 3 ),
+                    '    Median MAD:', formatC( round( median(mad.lltm), 3 ),
                                     digits=3, width=6),
-                    "   R^2=", format( round( slltm.res1$r.squared, 3 ),digits=3), "\n") )
+                    '   R^2=', format( round( slltm.res1$r.squared, 3 ),digits=3), '\n') )
     item <- data.frame( N.skills=rowSums(Qmatrix), mad.lsdm=mad0,
                         mad.lltm=mad.lltm, md.lsdm=md0, md.lltm=md.lltm, icc.pars )
     colnames(W) <- colnames(Qmatrix)
@@ -177,7 +177,7 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
                 attr.pars=arc0.pars, data.fitted=data0.fitted, theta=theta,
                 item=item, data=data, Qmatrix=Qmatrix, lltm=lltm.res1, W=W,
                 distance=distance, CALL=CALL, time=time )
-    class(res) <- "lsdm"
+    class(res) <- 'lsdm'
     return(res)
 }
 

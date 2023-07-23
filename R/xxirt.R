@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.024
+## File Version: 1.025
 
 
 #--- user specified item response model
@@ -94,7 +94,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 penalty_fun_item=penalty_fun_item, group=group, par1=par1,
                 globconv=globconv, conv=conv, verbose2=verbose2, verbose3=FALSE,
                 verbose_index=verbose_index)
-                
+
     #--- run EM algorithm
     res <- do.call(what=xxirt_em_algorithm, args=em_args)
     #--- collect EM output

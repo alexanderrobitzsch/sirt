@@ -1,5 +1,5 @@
 ## File Name: xxirt_compute_itemprobs.R
-## File Version: 0.211
+## File Version: 0.212
 
 
 # compute item probabilities
@@ -22,7 +22,7 @@ xxirt_compute_itemprobs <- function( item_list, items, Theta, ncat,
         ncat_ii <- ncat[ii]
         arg_ii <- list( par=par_ii, Theta=Theta, ncat=ncat_ii )
         probs_ii <- do.call( item_ii$P, arg_ii )
-        probs[ jj, 1:ncat_ii,] <- t(probs_ii)    
+        probs[ jj, 1:ncat_ii,] <- t(probs_ii)
     }
     return(probs)
 }

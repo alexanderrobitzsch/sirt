@@ -1,10 +1,10 @@
 ## File Name: IRT.modelfit.sirt.R
-## File Version: 0.20
+## File Version: 0.21
 
 
 ###########################################################
 # general model fit function for sirt objects
-IRT.modelfit.sirt <- function( object, mod )
+IRT.modelfit.sirt <- function( object, mod, ... )
 {
     res <- modelfit.sirt(object)
     res$IRT.IC <- CDM::IRT.IC(object)

@@ -1,5 +1,5 @@
 ## File Name: mgsem.R
-## File Version: 0.545
+## File Version: 0.547
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",
@@ -63,6 +63,7 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     I <- res$I
     N <- res$N
     N_group <- res$N_group
+    W <- res$W
     random_sd <- -9
     if (test){
         random_sd <- 1e-1
@@ -73,7 +74,7 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
                     technical=technical, N_group=N_group, random_sd=random_sd,
                     pen_type=pen_type, fixed_parms=fixed_parms,
                     partable_start=partable_start, diffpar_pen=diffpar_pen,
-                    pen_sample_size=pen_sample_size)
+                    pen_sample_size=pen_sample_size, W=W)
     model <- res$model
     partable <- res$partable
     NP <- res$NP

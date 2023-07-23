@@ -1,14 +1,14 @@
 ## File Name: btm_sim.R
-## File Version: 0.03
+## File Version: 0.04
 
 btm_sim <- function(theta, eta=0, delta=-99, repeated=FALSE)
 {
     N <- length(theta)
     dat <- t( utils::combn(N,2) )
-    colnames(dat) <- c("id1", "id2")
+    colnames(dat) <- c('id1', 'id2')
     dat <- as.data.frame(dat)
     if (repeated){
-        dat2 <- dat[, c("id2","id1") ]
+        dat2 <- dat[, c('id2','id1') ]
         colnames(dat2) <- colnames(dat)
         dat <- rbind(dat, dat2 )
     }
@@ -22,7 +22,7 @@ btm_sim <- function(theta, eta=0, delta=-99, repeated=FALSE)
     probs1 <- rowCumsums.sirt(matr=probs)
     rn <- stats::runif(N1)
     result <- rowIntervalIndex.sirt(matr=probs1,rn=rn)
-    result <- 1*(result==1) + .5*(result==3) + 0*(result==2)
+    result <- 1*(result==1) + 0.5*(result==3) + 0*(result==2)
     dat <- data.frame( dat, result=result)
     rownames(dat) <- NULL
     return(dat)

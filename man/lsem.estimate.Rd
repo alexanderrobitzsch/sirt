@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.762
+%% File Version: 0.763
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -46,7 +46,7 @@ Bootstrap at the level of a cluster identifier is allowed (argument \code{cluste
 lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=NULL,
     residualize=TRUE, fit_measures=c("rmsea", "cfi", "tli", "gfi", "srmr"),
     standardized=FALSE, standardized_type="std.all", lavaan_fct="sem",
-    sufficient_statistics=TRUE, use_lavaan_survey=FALSE, pseudo_weights=0,
+    sufficient_statistics=TRUE, pseudo_weights=0,
     sampling_weights=NULL, loc_linear_smooth=TRUE, est_joint=FALSE, par_invariant=NULL,
     par_linear=NULL, par_quadratic=NULL, partable_joint=NULL, pw_linear=1,
     pw_quadratic=1, pd=TRUE, est_DIF=FALSE, se=NULL, kernel="gaussian",
@@ -121,8 +121,6 @@ if the data contain missing values. Note that the option
 \code{sufficient_statistics=TRUE} is
 only valid for (approximate) missing completely at random (MCAR) data.
 The option can only be used for continuous data.}
-\item{use_lavaan_survey}{Logical indicating whether estimation should be
-conducted with \pkg{lavaan.survey} package.}
 \item{pseudo_weights}{Integer defining a target sample size. Local weights
 are multiplied by a factor which is rounded to integers.
 This approach is referred as a pseudo weighting approach.

@@ -164,7 +164,7 @@ Bootstrap at the level of a cluster identifier is allowed (argument <code>cluste
     <pre class="usage"><span class='fu'>lsem.estimate</span>(<span class='no'>data</span>, <span class='no'>moderator</span>, <span class='no'>moderator.grid</span>, <span class='no'>lavmodel</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"LSEM"</span>, <span class='kw'>h</span><span class='kw'>=</span><span class='fl'>1.1</span>, <span class='kw'>bw</span><span class='kw'>=</span><span class='kw'>NULL</span>,
     <span class='kw'>residualize</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>fit_measures</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"rmsea"</span>, <span class='st'>"cfi"</span>, <span class='st'>"tli"</span>, <span class='st'>"gfi"</span>, <span class='st'>"srmr"</span>),
     <span class='kw'>standardized</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>standardized_type</span><span class='kw'>=</span><span class='st'>"std.all"</span>, <span class='kw'>lavaan_fct</span><span class='kw'>=</span><span class='st'>"sem"</span>,
-    <span class='kw'>sufficient_statistics</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>use_lavaan_survey</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>pseudo_weights</span><span class='kw'>=</span><span class='fl'>0</span>,
+    <span class='kw'>sufficient_statistics</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>pseudo_weights</span><span class='kw'>=</span><span class='fl'>0</span>,
     <span class='kw'>sampling_weights</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>loc_linear_smooth</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>est_joint</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>par_invariant</span><span class='kw'>=</span><span class='kw'>NULL</span>,
     <span class='kw'>par_linear</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>par_quadratic</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>partable_joint</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>pw_linear</span><span class='kw'>=</span><span class='fl'>1</span>,
     <span class='kw'>pw_quadratic</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>pd</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>est_DIF</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>se</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>kernel</span><span class='kw'>=</span><span class='st'>"gaussian"</span>,
@@ -264,11 +264,6 @@ if the data contain missing values. Note that the option
 <code>sufficient_statistics=TRUE</code> is
 only valid for (approximate) missing completely at random (MCAR) data.
 The option can only be used for continuous data.</p></td>
-    </tr>
-    <tr>
-      <th>use_lavaan_survey</th>
-      <td><p>Logical indicating whether estimation should be
-conducted with <span class="pkg">lavaan.survey</span> package.</p></td>
     </tr>
     <tr>
       <th>pseudo_weights</th>

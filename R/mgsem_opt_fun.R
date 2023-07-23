@@ -1,5 +1,5 @@
 ## File Name: mgsem_opt_fun.R
-## File Version: 0.272
+## File Version: 0.274
 
 
 mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
@@ -17,6 +17,7 @@ mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
         S1_list <- list()
         mean_residual_list <- list()
     }
+    suffstat <- opt_fun_args$suffstat
 
     ll <- 0
     chisq <- 0

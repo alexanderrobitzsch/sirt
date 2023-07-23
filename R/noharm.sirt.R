@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.922
+## File Version: 0.925
 
 
 ########################################
@@ -29,9 +29,9 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
     } else {
         input_pm <- FALSE
     }
-    res <- noharm_sirt_preproc( dat=dat, pm=pm, N=N, weights=weights, Fpatt=Fpatt, Fval=Fval,
-                Ppatt=Ppatt, Pval=Pval, Psipatt=Psipatt, Psival=Psival, wgtm=wgtm,
-                dimensions=dimensions, pos.loading=pos.loading,
+    res <- noharm_sirt_preproc( dat=dat, pm=pm, N=N, weights=weights, Fpatt=Fpatt,
+                Fval=Fval, Ppatt=Ppatt, Pval=Pval, Psipatt=Psipatt, Psival=Psival,
+                wgtm=wgtm, dimensions=dimensions, pos.loading=pos.loading,
                 pos.variance=pos.variance, pos.residcorr=pos.residcorr,
                 input_pm=input_pm, lower=lower, upper=upper)
     ss <- res$ss
@@ -62,7 +62,7 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
     lower <- res$lower
     upper <- res$upper
 
-    modesttype <- 1        # NOHARM estimation
+    modesttype <- 1   # NOHARM estimation
 
     #----
     # compute betaj
@@ -106,10 +106,10 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
 
     #* optimization
     if (is.null(par_lower)){
-        par_lower <- noharm_sirt_partable_extract_par(parm_table=parm_table, col="lower")
+        par_lower <- noharm_sirt_partable_extract_par(parm_table=parm_table, col='lower')
     }
     res <- sirt_optimizer(optimizer=optimizer, par=par0, fn=optim_fn,
-                grad=optim_gr, lower=par_lower, method="L-BFGS-B", hessian=FALSE, ...)
+                grad=optim_gr, lower=par_lower, method='L-BFGS-B', hessian=FALSE, ...)
     res_opt <- res
     par0 <- res$par
     v3 <- Sys.time()
@@ -117,9 +117,12 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
 
     #* include in parameter table
     parm_table <- noharm_sirt_partable_include_par(par=par0, parm_table=parm_table)
-    Fval <- Fmat <- noharm_sirt_create_parameter_matrices("F", parm_table=parm_table, parm_index=parm_index)
-    Pval <- Pmat <- noharm_sirt_create_parameter_matrices("P", parm_table=parm_table, parm_index=parm_index)
-    Psival <- Psimat <- noharm_sirt_create_parameter_matrices("Psi", parm_table=parm_table, parm_index=parm_index)
+    Fval <- Fmat <- noharm_sirt_create_parameter_matrices('F', parm_table=parm_table,
+                                parm_index=parm_index)
+    Pval <- Pmat <- noharm_sirt_create_parameter_matrices('P', parm_table=parm_table,
+                                parm_index=parm_index)
+    Psival <- Psimat <- noharm_sirt_create_parameter_matrices('Psi',
+                                parm_table=parm_table, parm_index=parm_index)
     estpars <- list( estF=sum(Fpatt>0), estP=sum(Ppatt>0), estPsi=sum(Psipatt>0) )
 
     #--- include colnames in estimated matrices
@@ -130,7 +133,7 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
 
     #* compute final constants
     res <- noharm_sirt_compute_final_constants( Fval=Fval, Pval=Pval, betaj=betaj,
-                modesttype=modesttype )
+                        modesttype=modesttype )
     f0 <- res$f0
     uqn <- res$uqn
     loadingsF <- res$loadingsF
@@ -189,7 +192,7 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
     }
 
     #*** rotated solution for EFA
-    if (model.type=="EFA"){
+    if (model.type=='EFA'){
         res <- noharm_sirt_efa_rotated_solution( res=res, items=items,
                     F_dimnames=F_dimnames )
     }

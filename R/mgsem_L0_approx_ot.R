@@ -1,5 +1,5 @@
 ## File Name: mgsem_L0_approx_ot.R
-## File Version: 0.01
+## File Version: 0.02
 
 
 mgsem_L0_approx_ot <- function(x, gamma, eps)

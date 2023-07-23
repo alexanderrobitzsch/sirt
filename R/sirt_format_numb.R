@@ -1,5 +1,5 @@
 ## File Name: sirt_format_numb.R
-## File Version: 0.13
+## File Version: 0.141
 
 
 #------ format numbers
@@ -10,4 +10,4 @@ sirt_format_numb <- function( x, digits )
     return(a1)
 }
 
-format.numb <- sirt_format_numb
+format_numb <- sirt_format_numb
