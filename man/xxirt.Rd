@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.501
+%% File Version: 0.503
 
 \name{xxirt}
 \alias{xxirt}
@@ -562,7 +562,7 @@ IRT.compareModels(mod1, mod2, mod2b)
 ## EXAMPLE 3: Regularized 2PL model
 #############################################################################
 
-data(data.read, package="sirt"")
+data(data.read, package="sirt")
 dat <- data.read
 
 #------ Definition of item response functions
@@ -672,7 +672,6 @@ dat1 <- sirt::sim.raschtype(theta=stats::rnorm(N*(1-prop)), b=b1, fixed.a=a1)
 dat2 <- sirt::sim.raschtype(theta=stats::rnorm(N*prop), b=b2, fixed.a=a2)
 dat <- rbind(dat1, dat2)
 
-
 #**** model specification
 
 #*** define theta distribution
@@ -709,7 +708,7 @@ P_2PLmix <- function( par, Theta, ncat)
     P <- matrix( NA, nrow=2*TP, ncol=ncat)
     TP <- nrow(Theta)/2
     P1 <- stats::plogis( a1*(Theta[1:TP,1]-b1) )
-    P2 <- stats::plogis( a2*(Theta[TP+1:TP,1]-b2) )
+    P2 <- stats::plogis( a2*(Theta[TP+1:(2*TP),1]-b2) )
     P[,2] <- c(P1, P2)
     P[,1] <- 1-P[,2]
     return(P)
