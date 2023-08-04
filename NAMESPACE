@@ -138,7 +138,13 @@ importFrom(TAM, weighted_sd)
 #************** Imports ****************************
 #***************************************************
 
-
+importFrom(parallel, clusterEvalQ)
+importFrom(parallel, clusterExport)
+importFrom(parallel, detectCores)
+importFrom(parallel, makeCluster)
+importFrom(parallel, parSapply)
+importFrom(parallel, stopCluster)
+importFrom(pbapply, pblapply)
 
 
 

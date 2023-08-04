@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.763
+%% File Version: 0.769
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -65,7 +65,8 @@ lsem_local_weights(data.mod, moderator.grid, h, sampling_weights=NULL,  bw=NULL,
      kernel="gaussian")
 
 lsem.bootstrap(object, R=100, verbose=TRUE, cluster=NULL,
-     repl_design=NULL, repl_factor=NULL, use_starting_values=TRUE)
+     repl_design=NULL, repl_factor=NULL, use_starting_values=TRUE,
+     n.core=1, cl.type="PSOCK")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -181,6 +182,11 @@ standard errors. Note that sampling weights have to be already included in
 inference, e.g., 0.05 in PISA.}
 \item{use_starting_values}{Logical indicating whether starting values should be
 used from the original sample}
+\item{n.core}{A scalar indicating the number of cores that should be used.}
+\item{cl.type}{The cluster type.
+Default value is \code{"PSOCK"}. Posix machines (Linux, Mac) generally benefit
+from much faster cluster computation if type is set to \code{type="FORK"}.
+}
 }
 
 %\details{
@@ -281,6 +287,10 @@ pmod1 <- sirt::lsem.permutationTest( mod1, B=10 )
 summary(pmod1)
 plot(pmod1, type="global")
 
+#* perform permutation test with parallel computation
+pmod1a <- sirt::lsem.permutationTest( mod1, B=10, n.core=3 )
+summary(pmod1a)
+
 #** estimate Model 1 based on pseudo weights
 mod1b <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
                lavmodel=lavmodel, h=2, std.lv=TRUE, pseudo_weights=50 )
@@ -374,6 +384,9 @@ summary(mod5b)
 bmod5b <- sirt::lsem.bootstrap(mod5b, R=100)
 # inspect parameter values and standard errors
 bmod5b$parameters
+
+#- bootstrap using parallel computing (i.e., multiple cores)
+bmod5ba <- sirt::lsem.bootstrap(mod5b, R=100, n.core=3)
 
 #- user-defined replication design
 R <- 100    # bootstrap samples

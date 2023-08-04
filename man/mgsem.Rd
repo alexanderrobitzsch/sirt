@@ -1,5 +1,5 @@
 %% File Name: mgsem.Rd
-%% File Version: 0.079
+%% File Version: 0.082
 
 \name{mgsem}
 \alias{mgsem}
@@ -11,16 +11,16 @@ Estimation of Multiple-Group Structural Equation Models
 Estimates a multiple-group structural equation model. The function allows arbitrary
 prior distributions on model parameters and regularized estimation with the SCAD and
 the LASSO penalty. Moreover, it can also conduct robust moment estimation using
-the \eqn{L_p} loss function \eqn{\rho(x)=|x|^p} for \eqn{p \ge 0}. 
+the \eqn{L_p} loss function \eqn{\rho(x)=|x|^p} for \eqn{p \ge 0}.
 See Robitzsch (2023) for more details.
 }
 \usage{
-mgsem(suffstat, model, data = NULL, group = NULL, weights = NULL, estimator = "ML", 
-     p_me = 2, p_pen = 1, pen_type = "scad", diffpar_pen = NULL, pen_sample_size = TRUE, 
-     a_scad = 3.7, eps_approx = 0.001, comp_se = TRUE, se_delta_formula = FALSE, 
-     prior_list = NULL, hessian = TRUE, fixed_parms = FALSE, cd = FALSE, 
-     cd_control = list(maxiter=20, tol=5*1e-04, interval_length=0.05, method="exact"), 
-     partable_start = NULL, num_approx = FALSE, technical = NULL, control = list())
+mgsem(suffstat, model, data=NULL, group=NULL, weights=NULL, estimator="ML",
+     p_me=2, p_pen=1, pen_type="scad", diffpar_pen=NULL, pen_sample_size=TRUE,
+     a_scad=3.7, eps_approx=0.001, comp_se=TRUE, se_delta_formula=FALSE,
+     prior_list=NULL, hessian=TRUE, fixed_parms=FALSE, cd=FALSE,
+     cd_control=list(maxiter=20, tol=5*1e-04, interval_length=0.05, method="exact"),
+     partable_start=NULL, num_approx=FALSE, technical=NULL, control=list())
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -67,7 +67,7 @@ Parameter $a$ used in SCAD penalty
 }
   \item{eps_approx}{
 Approximation value for nondifferentiable robust moment fitting function or
-penalty function 
+penalty function
 }
   \item{comp_se}{
 Logical indicating whether standard errors should be computed
@@ -95,7 +95,7 @@ Control parameters for coordinate descent estimation
 Starting values for parameter estimation
 }
   \item{num_approx}{
-Logical indicating whether derivatives should be computed based on numerical 
+Logical indicating whether derivatives should be computed based on numerical
 differentiation
 }
   \item{technical}{
@@ -130,7 +130,7 @@ A list with following values
 }
 
 \references{
-Robitzsch, A. (2023). Model-robust estimation of multiple-group structural 
+Robitzsch, A. (2023). Model-robust estimation of multiple-group structural
 equation models. \emph{Algorithms, 16}(4), 210. \doi{10.3390/a16040210}
 }
 
@@ -182,27 +182,27 @@ sigma <- sqrt(c(1,1.5,1.2))
 N <- rep(1000,3) # sample sizes per group
 
 exact <- FALSE
-suffstat <- sirt::invariance_alignment_simulate(nu, lambda, err_var, mu, sigma, N, 
+suffstat <- sirt::invariance_alignment_simulate(nu, lambda, err_var, mu, sigma, N,
                 output="suffstat", groupwise=TRUE, exact=exact)
-                
+
 #---- model specification
 
 # model specifications joint group
 est <- list(
-        ALPHA=matrix( c(0), ncol=1), 
-        NU=matrix( 0, nrow=I, ncol=1),         
+        ALPHA=matrix( c(0), ncol=1),
+        NU=matrix( 0, nrow=I, ncol=1),
         LAM=matrix(1, nrow=I, ncol=1),
         PHI=matrix(0,nrow=1,ncol=1),
         PSI=diag(rep(1,I))
         )
-   
+
 # parameter index
-index <- list( 
+index <- list(
         ALPHA=0*est$ALPHA,
         NU=1+0*est$NU,
         LAM=1+0*est$LAM,
         PHI=0*est$PHI,
-        PSI=diag(1,I) 
+        PSI=diag(1,I)
         )
 
 # lower bounds
@@ -215,14 +215,14 @@ group0 <- list(est=est, index=index, lower=lower)
 
 #*** group1
 est <- list(
-        ALPHA=matrix( c(0), ncol=1), 
-        NU=matrix( 0, nrow=I, ncol=1),         
+        ALPHA=matrix( c(0), ncol=1),
+        NU=matrix( 0, nrow=I, ncol=1),
         LAM=matrix(0, nrow=I, ncol=1),
-        PHI=matrix(1,nrow=1,ncol=1)     
+        PHI=matrix(1,nrow=1,ncol=1)
             )
-        
+
 # parameter index
-index <- list( 
+index <- list(
         ALPHA=0*est$ALPHA,
         NU=0*est$NU,
         LAM=1*est$LAM,
@@ -232,7 +232,7 @@ index <- list(
 group1 <- list(est=est, index=index, lower=lower)
 
 #*** group 2 and group 3
-        
+
 # modify parameter index
 index$ALPHA <- 1+0*est$ALPHA
 index$PHI <- 1+0*est$PHI
@@ -241,9 +241,9 @@ group3 <- group2 <- list(est=est, index=index, lower=lower)
 #*** define model
 model <- list(group0=group0, group1=group1, group2=group2, group3=group3)
 
-#-- estimate model with ML 
-res1 <- sirt::mgsem( suffstat=suffstat, model=model2, eps_approx=1e-4, estimator="ML", 
-                    technical=list(maxiter=500, optimizer="optim"), 
+#-- estimate model with ML
+res1 <- sirt::mgsem( suffstat=suffstat, model=model2, eps_approx=1e-4, estimator="ML",
+                    technical=list(maxiter=500, optimizer="optim"),
                     hessian=FALSE, comp_se=FALSE, control=list(trace=1) )
 str(res1)
 
@@ -253,8 +253,8 @@ optimizer <- "optim"
 technical <- list(maxiter=500, optimizer=optimizer)
 eps_approx <- 1e-3
 
-res2 <- sirt::mgsem( suffstat=suffstat, model=res1$model, p_me=0.5, 
-                    eps_approx=eps_approx, estimator="ME", technical=technical, 
+res2 <- sirt::mgsem( suffstat=suffstat, model=res1$model, p_me=0.5,
+                    eps_approx=eps_approx, estimator="ME", technical=technical,
                     hessian=FALSE, comp_se=FALSE, control=list(trace=1) )
 
 #---- regularized estimation
@@ -264,12 +264,12 @@ nu_lam <- 0.1    # regularization parameter
 # redefine model
 define_model <- function(model, nu_lam)
 {
-    pen_lp <- list( NU=nu_lam+0*model$group1$est$NU)    
-    ee <- "group1"    
+    pen_lp <- list( NU=nu_lam+0*model$group1$est$NU)
+    ee <- "group1"
     for (ee in c("group1","group2","group3"))
     {
         model[[ee]]$index$NU <- 1+0*index$NU
-        model[[ee]]$pen_lp <- pen_lp                                   
+        model[[ee]]$pen_lp <- pen_lp
     }
     return(model)
 }
@@ -278,10 +278,10 @@ model3 <- define_model(model=model, nu_lam=nu_lam)
 pen_type <- "scad"
 
 res3 <- sirt::mgsem( suffstat=suffstat, model=model3, p_pen=1, pen_type=pen_type,
-                    eps_approx=eps_approx, estimator="ML", 
-                    technical=list(maxiter=500, optimizer="optim"), 
+                    eps_approx=eps_approx, estimator="ML",
+                    technical=list(maxiter=500, optimizer="optim"),
                     hessian=FALSE, comp_se=FALSE, control=list(trace=1) )
-str(res3)                    
+str(res3)
 }
 }
 

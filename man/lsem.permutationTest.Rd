@@ -1,5 +1,5 @@
 %% File Name: lsem.permutationTest.Rd
-%% File Version: 0.31
+%% File Version: 0.334
 
 \name{lsem.permutationTest}
 \alias{lsem.permutationTest}
@@ -19,7 +19,8 @@ Wilhelm, & Robitzsch, 2009; Hildebrandt, Luedtke, Robitzsch, Sommer, & Wilhelm, 
 
 
 \usage{
-lsem.permutationTest(lsem.object, B=1000, residualize=TRUE, verbose=TRUE)
+lsem.permutationTest(lsem.object, B=1000, residualize=TRUE, verbose=TRUE,
+     n.core=1, cl.type="PSOCK")
 
 \method{summary}{lsem.permutationTest}(object, file=NULL, digits=3, ...)
 
@@ -43,6 +44,11 @@ should be performed for each permutation sample.
 }
   \item{verbose}{
 Optional logical printing information about computation progress.
+}
+\item{n.core}{A scalar indicating the number of cores that should be used.}
+\item{cl.type}{The cluster type.
+Default value is \code{"PSOCK"}. Posix machines (Linux, Mac) generally benefit
+from much faster cluster computation if type is set to \code{type="FORK"}.
 }
 \item{object}{Object of class \code{lsem}}
 \item{file}{A file name in which the summary output will be written.}

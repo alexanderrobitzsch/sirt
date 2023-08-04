@@ -1,5 +1,5 @@
 ## File Name: linking.haberman.lq.R
-## File Version: 0.198
+## File Version: 0.199
 
 linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     use_nu=FALSE, est_pow=FALSE, lower_pow=.1, upper_pow=3)
@@ -103,8 +103,8 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     item$b <- b_joint
 
     #- include joint item parameters
-    resid$a_joint <- item[ind_items, "a"]
-    resid$b_joint <- item[ind_items, "b"]
+    resid$a_joint <- item[ind_items, 'a']
+    resid$b_joint <- item[ind_items, 'b']
 
     # transformation for item parameters
     transf.itempars <- data.frame( study=studies, At=1/At, se_At=NA,
@@ -121,7 +121,7 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
                     converged=converged, a_log=a_log, use_nu=use_nu, est_pow=est_pow,
                     pow_slopes=pow_slopes, pow_intercepts=pow_intercepts,
                     CALL=CALL, time=time)
-    class(res) <- "linking.haberman.lq"
+    class(res) <- 'linking.haberman.lq'
     return(res)
 
 }

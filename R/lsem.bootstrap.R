@@ -1,9 +1,10 @@
 ## File Name: lsem.bootstrap.R
-## File Version: 0.351
+## File Version: 0.431
 
 
 lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
-        repl_design=NULL, repl_factor=NULL, use_starting_values=TRUE)
+        repl_design=NULL, repl_factor=NULL, use_starting_values=TRUE,
+        n.core=1, cl.type="PSOCK")
 {
     # fix seed locally
     s1 <- Sys.time()
@@ -63,26 +64,86 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
 
     repl_design_used <- matrix(NA, nrow=nrow(data), ncol=R)
 
-    rr <- 1
-    while (rr<=R){
-        lsem_bootstrap_print_progress(rr=rr, verbose=verbose, R=R)
-        #- draw bootstrap sample
-        res <- lsem_bootstrap_draw_bootstrap_sample(data=data,
-                            sampling_weights=sampling_weights, lsem_args=lsem_args,
-                            cluster=cluster, repl_design=repl_design, rr=rr)
-        lsem_args1 <- res$lsem_args1
-        #- fit model
-        mod1 <- try( do.call(what=lsem.estimate, args=lsem_args1), silent=TRUE)
+    if (n.core==1){
+        rr <- 1
+        while (rr<=R){
+            lsem_bootstrap_print_progress(rr=rr, verbose=verbose, R=R)
+            #- draw bootstrap sample
+            res <- lsem_bootstrap_draw_bootstrap_sample(data=data,
+                                sampling_weights=sampling_weights, lsem_args=lsem_args,
+                                cluster=cluster, repl_design=repl_design, rr=rr)
+            lsem_args1 <- res$lsem_args1
+            #- fit model
+            mod1 <- try( do.call(what=lsem.estimate, args=lsem_args1), silent=TRUE)
 
-        #- output collection
-        if ( ! inherits(mod1,'try-error' ) ){
-            parameters_boot[,rr] <- mod1$parameters$est
-            fitstats_joint_boot[,rr] <- mod1$fitstats_joint$value
-            parameters_var_boot[,rr] <- mod1$parameters_summary$SD^2
-            repl_design_used[,rr] <- res$repl_vector
-            moderator_density_boot[,rr] <- mod1$moderator.density$wgt
-            rr <- rr + 1
+            #- output collection
+            if ( ! inherits(mod1,'try-error' ) ){
+                parameters_boot[,rr] <- mod1$parameters$est
+                fitstats_joint_boot[,rr] <- mod1$fitstats_joint$value
+                parameters_var_boot[,rr] <- mod1$parameters_summary$SD^2
+                repl_design_used[,rr] <- res$repl_vector
+                moderator_density_boot[,rr] <- mod1$moderator.density$wgt
+                rr <- rr + 1
+            }
         }
+    }
+    if (n.core>1){
+        m <- parallel::detectCores()
+        if(n.core>m-1){
+            n.core <- m-1
+        }
+        cl <- parallel::makeCluster(spec=n.core, type=cl.type)
+
+        arglist <- list( data=data, sampling_weights=sampling_weights,
+                        lsem_args=lsem_args, cluster=cluster, repl_design=repl_design )
+
+        varlist <- c('arglist', 'lsem_bootstrap_draw_bootstrap_sample')
+        parallel::clusterExport(cl=cl, varlist=varlist, envir=environment() )
+        parallel::clusterEvalQ(cl, expr=library(sirt))
+
+        fun_lsem_bootstrap <- function(i, arglist){
+            iterate <- TRUE
+            data <- arglist$data
+            sampling_weights <- arglist$sampling_weights
+            lsem_args <- arglist$lsem_args
+            cluster <- arglist$cluster
+            repl_design <- arglist$repl_design
+            #-- estimate LSEM
+            while (iterate){
+                res <- lsem_bootstrap_draw_bootstrap_sample(data=data,
+                                sampling_weights=sampling_weights,
+                                lsem_args=lsem_args,
+                                cluster=cluster, repl_design=repl_design, rr=i)
+                lsem_args1 <- res$lsem_args1
+
+                mod1 <- try( do.call(what=lsem.estimate, args=lsem_args1),
+                                silent=TRUE)
+                res_out <- list()
+                if ( ! inherits(mod1,'try-error' ) ){
+                    res_out$parameters_boot <- mod1$parameters$est
+                    res_out$fitstats_joint_boot <- mod1$fitstats_joint$value
+                    res_out$parameters_var_boot <- mod1$parameters_summary$SD^2
+                    res_out$moderator_density_boot <- mod1$moderator.density$wgt
+                    res_out$repl_design_used <- res$repl_vector
+                    iterate <- FALSE
+                }
+            }
+            return(res_out)
+        }
+
+        res_all <- sirt_parlapply(cl=cl, X=1:R, FUN=fun_lsem_bootstrap,
+                        verbose=verbose, arglist=arglist)
+        parallel::stopCluster(cl)
+
+        for (rr in 1:R){
+            res_out_rr <- res_all[[rr]]
+            parameters_boot[,rr] <- res_out_rr$parameters_boot
+            fitstats_joint_boot[,rr] <- res_out_rr$fitstats_joint_boot
+            parameters_var_boot[,rr] <- res_out_rr$parameters_var_boot
+            repl_design_used[,rr] <- res_out_rr$repl_design_used
+            moderator_density_boot[,rr] <- res_out_rr$moderator_density_boot
+        }
+
     }
 
     #- modify output objects
@@ -106,6 +167,8 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
     object$repl_design <- repl_design
     object$repl_factor <- repl_factor
     object$repl_design_used <- repl_design_used
+    object$n.core <- n.core
+    object$cl.type <- cl.type
     s2 <- Sys.time()
     object$s1 <- s1
     object$s2 <- s2

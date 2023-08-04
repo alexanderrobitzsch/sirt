@@ -1,5 +1,5 @@
 ## File Name: linking.haebara.R
-## File Version: 0.431
+## File Version: 0.432
 
 linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         optimizer="optim", center=FALSE, eps=1e-3, par_init=NULL,
@@ -27,8 +27,8 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
 
     #* define parameter vector
     par <- c(rep(1,NI), rep(0,NI), rep(0,NS-1), rep(1, NS-1))
-    parnames <- c( paste0("a_",items), paste0("b_",items), paste0("mu_",studies[-1]),
-                    paste0("sigma_",studies[-1]) )
+    parnames <- c( paste0('a_',items), paste0('b_',items), paste0('mu_',studies[-1]),
+                    paste0('sigma_',studies[-1]) )
     names(par) <- parnames
     index_a <- 1:NI
     index_b <- NI + 1:NI
@@ -118,14 +118,14 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
     args$fn <- fct_optim
     args$grad <- grad_optim
     args$hessian <- FALSE
-    if ( ! ( "lower" %in% names(args) ) ){
+    if ( ! ( 'lower' %in% names(args) ) ){
         args$lower <- lower
     }
-    if ( ! ( "upper" %in% names(args) ) ){
+    if ( ! ( 'upper' %in% names(args) ) ){
         args$upper <- upper
     }
-    if ("method" %in% (names(args)) ){
-        if (! ( args$method %in% c("L-BFGS-B","Brent"))) {
+    if ('method' %in% (names(args)) ){
+        if (! ( args$method %in% c('L-BFGS-B','Brent'))) {
             args$lower <- NULL
             args$upper <- NULL
         }
