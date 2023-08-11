@@ -1,6 +1,6 @@
 ## File Name: xxirt_summary_parts.R
-## File Version: 0.05
-
+## File Version: 0.06
+#
 xxirt_summary_parts <- function(object, digits, len_disp=66)
 {
     sirt_display_function(length=len_disp)
@@ -18,7 +18,8 @@ xxirt_summary_parts <- function(object, digits, len_disp=66)
                     object$G, 'Group(s)',     '\n')
 
     sirt_display_function(length=len_disp)
-    cat( 'Number of iterations','=', object$iter, '\n' )
+    cat( 'Number of EM iterations','=', object$iter_em, '\n' )
+    cat( 'Number of Newton-Raphson iterations','=', object$iter_nr, '\n' )
     cat( 'Deviance','=', round( object$deviance, 2 ), ' | ' )
     cat( 'Log Likelihood','=', round( -object$deviance/2, 2 ), '\n' )
     cat( 'Penalty function','=', round( object$pen_val, 4 ), '\n' )

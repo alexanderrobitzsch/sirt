@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.503
+%% File Version: 0.513
 
 \name{xxirt}
 \alias{xxirt}
@@ -28,13 +28,19 @@ User Defined Item Response Model
 \description{
 Estimates a user defined item response model. Both, item response functions
 and latent trait distributions can be specified by the user (see Details).
+By default, the EM algorithm is used for estimation. The number of maximum
+EM iterations can be defined with the argument \code{maxit}. The \code{xxirt}
+function also allows Newton-Raphson optimization by specifying values of maximum
+number of iterations in \code{maxit_nr} larger than zero. Typically, a small initial
+number of EM iterations should be chosen to obtain reasonable starting values.
 }
 
 \usage{
 xxirt(dat, Theta=NULL, itemtype=NULL, customItems=NULL, partable=NULL,
        customTheta=NULL, group=NULL, weights=NULL, globconv=1e-06, conv=1e-04,
-       maxit=1000, mstep_iter=4, mstep_reltol=1e-06, h=1E-4, use_grad=TRUE,
-       verbose=TRUE, penalty_fun_item=NULL, np_fun_item=NULL, verbose_index=NULL,
+       maxit=1000, mstep_iter=4, mstep_reltol=1e-06, maxit_nr=0, optimizer_nr="nlminb",
+       control_nr=list(trace=1), h=1E-4, use_grad=TRUE, verbose=TRUE,
+       penalty_fun_item=NULL, np_fun_item=NULL, verbose_index=NULL,
        cv_kfold=0, cv_maxit=10)
 
 \method{summary}{xxirt}(object, digits=3, file=NULL, ...)
@@ -68,7 +74,7 @@ xxirt(dat, Theta=NULL, itemtype=NULL, customItems=NULL, partable=NULL,
 \method{IRT.se}{xxirt}(object,...)
 
 # computes Hessian matrix
-xxirt_hessian(object)
+xxirt_hessian(object, h=1e-4)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -108,7 +114,7 @@ Convergence criterion for relative change in deviance
 Convergence criterion for absolute change in parameters
 }
   \item{maxit}{
-Maximum number of iterations
+Maximum number of iterations in the EM algorithm
 }
   \item{mstep_iter}{
 Maximum number of iterations in M-step
@@ -116,6 +122,11 @@ Maximum number of iterations in M-step
   \item{mstep_reltol}{
 Convergence criterion in M-step
 }
+\item{maxit_nr}{Number of Newton-Raphson iterations after EM algorithm}
+\item{optimizer_nr}{Type of optimizer for Newton-Raphson optimization.
+Alternatives are \code{"optim"} or \code{"nlminb"} or other options of
+\code{\link{sirt_optimizer}}.}
+\item{control_nr}{Argument \code{control} for optimizer.}
 \item{h}{Numerical differentiation parameter}
 \item{use_grad}{Logical indicating whether the gradient should be supplied
 to \code{\link[stats:optim]{stats::optim}}}
@@ -314,6 +325,12 @@ summary(mod1b)
 coef(mod1b)
 vcov(mod1b)
 IRT.se(mod1b)
+
+#** start with EM and finalize with Newton-Raphson algorithm
+mod1c <- sirt::xxirt( dat=dat, Theta=Theta, partable=partable,
+                   customItems=customItems, customTheta=customTheta,
+                   maxit=20, maxit_nr=300)
+summary(mod1c)
 
 #****************************************************************************
 #******* Model 2: 2PL Model with three groups of item discriminations

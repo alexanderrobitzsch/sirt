@@ -1,12 +1,14 @@
 ## File Name: xxirt.R
-## File Version: 1.025
+## File Version: 1.081
 
 
 #--- user specified item response model
 xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 partable=NULL, customTheta=NULL, group=NULL, weights=NULL,
                 globconv=1E-6, conv=1E-4, maxit=1000, mstep_iter=4,
-                mstep_reltol=1E-6, h=1E-4, use_grad=TRUE,
+                mstep_reltol=1E-6, maxit_nr=0, optimizer_nr="nlminb",
+                control_nr=list(trace=1),
+                h=1E-4, use_grad=TRUE,
                 verbose=TRUE, penalty_fun_item=NULL,
                 np_fun_item=NULL, verbose_index=NULL,
                 cv_kfold=0, cv_maxit=10)
@@ -82,68 +84,109 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     dev <- 1E100
     converged <- FALSE
 
-    #--- create list with arguments for EM algorithm
-    em_args <- list( maxit=maxit, verbose1=verbose1, disp=disp,
-                item_list=item_list, items=items, Theta=Theta, ncat=ncat,
-                partable=partable, partable_index=partable_index, dat=dat,
-                resp_index=resp_index, dat_resp=dat_resp, dat_resp_bool=dat_resp_bool,
-                dat1=dat1, dat1_resp=dat1_resp, customTheta=customTheta, G=G, par0=par0,
-                maxK=maxK, group_index=group_index, weights=weights,
-                mstep_iter=mstep_iter, eps=eps, mstep_reltol=mstep_reltol,
-                mstep_method=mstep_method, item_index=item_index, h=h, use_grad=use_grad,
-                penalty_fun_item=penalty_fun_item, group=group, par1=par1,
-                globconv=globconv, conv=conv, verbose2=verbose2, verbose3=FALSE,
-                verbose_index=verbose_index)
+    em_iterate <- TRUE
+    do_nr <- maxit_nr>0
+    if (!do_nr){
+        iter_nr <- 0
+    }
+    do_cv <- cv_kfold>0
+    em_count <- 1
 
-    #--- run EM algorithm
-    res <- do.call(what=xxirt_em_algorithm, args=em_args)
-    #--- collect EM output
-    iter <- res$iter
-    converged <- res$converged
-    probs_items <- res$probs_items
-    p.xi.aj <- res$p.xi.aj
-    prior_Theta <- res$prior_Theta
-    n.ik <- res$n.ik
-    p.aj.xi <- res$p.aj.xi
-    N.ik <- res$N.ik
-    N.k <- res$N.k
-    post_unnorm <- res$post_unnorm
-    ll1 <- res$ll1
-    partable <- res$partable
-    par0 <- res$par0
-    pen_val <- res$pen_val
-    ll2 <- res$ll2
-    customTheta <- res$customTheta
-    par1 <- res$par1
-    ll_case <- res$ll_case
-    dev <- res$dev
-    dev00 <- res$dev00
+    while(em_iterate){
 
-    #*** optional cross-validation
-    cv_loglike <- NA
-    if (cv_kfold>0){
-        N <- nrow(dat)
-        cv_zone <- ( ( 0:(N-1) ) %% cv_kfold ) + 1
-        cv_loglike <- 0
-        em_args$partable <- partable
-        em_args$customTheta <- customTheta
-        for (jj in 1:cv_kfold){
-            weights1 <- weights*(cv_zone!=jj )
-            weights2 <- weights*(cv_zone==jj )
-            em_args$weights <- weights1
-            em_args$maxit <- cv_maxit
+        #--- create list with arguments for EM algorithm
+        em_args <- list( maxit=maxit, verbose1=verbose1, disp=disp,
+                    item_list=item_list, items=items, Theta=Theta, ncat=ncat,
+                    partable=partable, partable_index=partable_index, dat=dat,
+                    resp_index=resp_index, dat_resp=dat_resp, dat_resp_bool=dat_resp_bool,
+                    dat1=dat1, dat1_resp=dat1_resp, customTheta=customTheta, G=G,
+                    par0=par0, maxK=maxK, group_index=group_index, weights=weights,
+                    mstep_iter=mstep_iter, eps=eps, mstep_reltol=mstep_reltol,
+                    mstep_method=mstep_method, item_index=item_index, h=h,
+                    use_grad=use_grad, penalty_fun_item=penalty_fun_item, group=group,
+                    par1=par1, globconv=globconv, conv=conv, verbose2=verbose2,
+                    verbose3=FALSE, verbose_index=verbose_index)
+
+        if (em_count>1){
+            em_args$maxit <- 1
             em_args$verbose1 <- FALSE
             em_args$verbose2 <- FALSE
-            em_args$verbose3 <- TRUE
-            cat(paste0('\nCross-validation sample ', jj ), ' |' )
-            utils::flush.console()
-            res <- do.call(what=xxirt_em_algorithm, args=em_args)
-            # compute cv log likelihood
-            ll_jj <- sum( weights2 * res$ll_case )
-            cv_loglike <- cv_loglike + ll_jj
+            em_args$verbose3 <- FALSE
         }
-        cat('\n')
-    }
+
+        #--- run EM algorithm
+        em_out <- res <- do.call(what=xxirt_em_algorithm, args=em_args)
+        #--- collect EM output
+        if (em_count==1){
+            iter_em <- iter <- res$iter
+            converged <- res$converged
+        }
+        probs_items <- res$probs_items
+        p.xi.aj <- res$p.xi.aj
+        prior_Theta <- res$prior_Theta
+        n.ik <- res$n.ik
+        p.aj.xi <- res$p.aj.xi
+        N.ik <- res$N.ik
+        N.k <- res$N.k
+        post_unnorm <- res$post_unnorm
+        ll1 <- res$ll1
+        partable <- res$partable
+        par0 <- res$par0
+        pen_val <- res$pen_val
+        ll2 <- res$ll2
+        customTheta <- res$customTheta
+        par1 <- res$par1
+        ll_case <- res$ll_case
+        dev <- res$dev
+        dev00 <- res$dev00
+
+        #*** optional cross-validation
+        cv_loglike <- NA
+        if (do_cv){
+            N <- nrow(dat)
+            cv_zone <- ( ( 0:(N-1) ) %% cv_kfold ) + 1
+            cv_loglike <- 0
+            em_args$partable <- partable
+            em_args$customTheta <- customTheta
+            for (jj in 1:cv_kfold){
+                weights1 <- weights*(cv_zone!=jj )
+                weights2 <- weights*(cv_zone==jj )
+                em_args$weights <- weights1
+                em_args$maxit <- cv_maxit
+                em_args$verbose1 <- FALSE
+                em_args$verbose2 <- FALSE
+                em_args$verbose3 <- TRUE
+                cat(paste0('\nCross-validation sample ', jj ), ' |' )
+                utils::flush.console()
+                res <- do.call(what=xxirt_em_algorithm, args=em_args)
+                # compute cv log likelihood
+                ll_jj <- sum( weights2 * res$ll_case )
+                cv_loglike <- cv_loglike + ll_jj
+            }
+            cat('\n')
+        }
+
+        if (!do_nr){
+            em_iterate <- FALSE
+        }
+        
+        #*** Newton-Raphson scoring if requested
+        res_opt_nr <- opt_values_nr <- NULL
+        if (do_nr){
+            res <- xxirt_newton_raphson(em_out=em_out, em_args=em_args, maxit_nr=maxit_nr,
+                            optimizer_nr=optimizer_nr, control_nr=control_nr,
+                            verbose=verbose)
+            res_opt_nr <- res$res_opt_nr
+            iter <- res_opt_nr$iter + iter
+            iter_nr <- res_opt_nr$iter
+            opt_values_nr <- res$opt_values
+            em_args$partable <- partable <- res$partable
+            em_args$customTheta <- customTheta <- res$customTheta
+        } # end NR optimization
+        em_count <- 2
+        do_nr <- FALSE
+
+    }  # loop for final EM iteration
 
     #**** post processing
     opt_val <- dev
@@ -183,7 +226,9 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 partable_index=partable_index, items=items, dat1=dat1,
                 dat1_resp=dat1_resp, dat_resp_bool=dat_resp_bool,
                 group_index=group_index, maxK=maxK,
-                resp_index=resp_index, converged=converged, iter=iter-1,
+                resp_index=resp_index, converged=converged,
+                res_opt_nr=res_opt_nr, opt_values_nr=opt_values_nr, maxit_nr=maxit_nr,
+                iter=iter-1, iter_em=iter_em-1, iter_nr=iter_nr,
                 CALL=CALL, s1=s1, s2=s2 )
     class(res) <- 'xxirt'
     return(res)

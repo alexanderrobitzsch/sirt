@@ -1,5 +1,5 @@
 ## File Name: xxirt_em_algorithm.R
-## File Version: 0.057
+## File Version: 0.070
 
 xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_list,
             items, Theta, ncat, partable, partable_index, dat, resp_index,
@@ -58,6 +58,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         partable <- res$partable
         par0 <- res$par0
         pen_val <- res$pen_val
+        prior_par <- res$prior_par
 
         #*** M-step theta distribution
         par10 <- par1
@@ -73,6 +74,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         dev <- - 2 * sum( weights * ll_case )
         dev00 <- dev
         dev <- dev + pen_val
+        opt_fun_value <- dev00/2 + pen_val + prior_par
         globconv_temp <- abs( ( - dev + dev0 ) / dev0 )
 
         conv0 <- 0
@@ -87,11 +89,12 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         converged <- ( globconv_temp < globconv ) & ( conv_temp < conv )
 
         #-- print progress
-        res <- xxirt_print_progress( dev=dev, dev0=dev0,
+        res <- xxirt_print_progress( opt_fun_value=opt_fun_value, dev=dev, dev0=dev0,
                     dev00=dev00, pen_val=pen_val, conv0=conv0, conv1=conv1, iter=iter,
                     verbose1=verbose1, verbose2=verbose2, verbose_index=verbose_index,
-                    verbose3=verbose3)
+                    verbose3=verbose3, prior_par=prior_par)
         iter <- iter + 1
+
     }
     #---- output
     res <- list(iter=iter, converged=converged, probs_items=probs_items,
@@ -99,7 +102,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
                     p.aj.xi=p.aj.xi, N.ik=N.ik, N.k=N.k,
                     post_unnorm=post_unnorm, ll1=ll1,
                     partable=partable, par0=par0, pen_val=pen_val,
-                    ll2=ll2, customTheta=customTheta, par1=par1, ll_case=ll_case,
-                    dev=dev, dev00=dev00)
+                    prior_par=prior_par, ll2=ll2, customTheta=customTheta, par1=par1,
+                    ll_case=ll_case, dev=dev, dev00=dev00)
     return(res)
 }

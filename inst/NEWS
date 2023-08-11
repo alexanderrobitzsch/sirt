@@ -34,8 +34,22 @@ CHANGELOG sirt
 
 
 
+
+
 ------------------------------------------------------------------------
-VERSIONS sirt 3.13  |  2023-08-04  |  Last: sirt 3.13-209
+VERSIONS sirt 4.0  |  2023-08-11  |  Last: sirt 4.0-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 3.13  |  2023-08-11  |  Last: sirt 3.13-228
 ------------------------------------------------------------------------
 
 NOTE  * included arguments 'pw_linear', 'pw_quadratic' that allow 
@@ -78,12 +92,13 @@ ADDED * exported mgsem() function for estimating multiple-group SEMs
 ADDED * included option for parallel computing in lsem.permutationTest()
         and lsem.bootstrap() using the arguments 'n.core' and 'cl.type'
         (suggested by Eunike Wetzel)
-
-        
+ADDED * included option for using Newton-Raphson algorithm to estimate
+        item response models in xxirt(). This option can be requested
+        by the argument 'maxit_nr'.
+      
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: lsem.test (1), invariance.alignment (8),
-        mgsem (1), lsem.estimate (1)
-
+        mgsem (1), lsem.estimate (1), xxirt (1)
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.12  |  2022-05-16  |  Last: sirt 3.12-66

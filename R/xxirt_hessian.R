@@ -1,10 +1,9 @@
 ## File Name: xxirt_hessian.R
-## File Version: 0.572
+## File Version: 0.577
 
 #--- computation of hessian matrix
-xxirt_hessian <- function( object )
+xxirt_hessian <- function( object, h=1e-4 )
 {
-    h <- 1e-5
     item_list <- object$item_list
     items <- object$items
     Theta <- object$Theta
@@ -60,7 +59,7 @@ xxirt_hessian <- function( object )
         eps <- 1e-10
         I <- dim(probs_items0)[1]
         #*** include free paramaters in partable
-        partable <- xxirt_partable_include_freeParameters( partable, x[ 1:NPI ] )
+        partable <- xxirt_partable_include_freeParameters( partable, x=x[ 1:NPI ] )
         #**** include parameter in customTheta
         customTheta$par[ customTheta$est ] <- x[ (NPI+1):(NPI+NPT) ]
         #*** different parameters
@@ -94,7 +93,7 @@ xxirt_hessian <- function( object )
                                     partable=partable, partable_index=partable_index )
             }
             p.xi.aj <- xxirt_compute_likelihood( probs_items=probs_items, dat=dat,
-                             resp_index=resp_index, dat_resp_bool=dat_resp_bool )
+                             resp_index=NULL, dat_resp_bool=dat_resp_bool )
         } else {
             itemnr <- partable[ partable$parindex==min_ind, 'itemnr' ]
             itemnr2 <- partable[ partable$parindex==max_ind, 'itemnr' ]
@@ -139,7 +138,6 @@ xxirt_hessian <- function( object )
 
         }
 
-
         #*** compute prior distribution
         if (max_ind >=NPI+1){
             prior_Theta <- xxirt_compute_priorDistribution( Theta=Theta,
@@ -151,7 +149,6 @@ xxirt_hessian <- function( object )
         return(dev)
     }
     #*******************************
-
 
     hess <- CDM::numerical_Hessian( par=par, FUN=fct_irt, h=h, prior1=prior1,
                         par0=par, item_wise=item_wise, probs_items0=probs_items0,

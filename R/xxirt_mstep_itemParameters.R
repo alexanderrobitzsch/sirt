@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_itemParameters.R
-## File Version: 0.391
+## File Version: 0.399
 
 
 #--- M-step item parameters
@@ -142,8 +142,10 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
     if (!is.null(penalty_fun_item)){
         pen_val <- penalty_fun_item(x=mod$par)
     }
+    prior_par <- sum( xxirt_mstep_itemParameters_evalPrior(partable=partable, h=0) )
 
     #-- output
-    res <- list( ll1=mod$value, partable=partable, par0=mod$par, pen_val=pen_val )
+    res <- list( ll1=mod$value, partable=partable, par0=mod$par, pen_val=pen_val,
+                    prior_par=prior_par)
     return(res)
 }

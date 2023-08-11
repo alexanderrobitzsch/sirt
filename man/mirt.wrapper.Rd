@@ -1,5 +1,5 @@
 %% File Name: mirt.wrapper.Rd
-%% File Version: 1.864
+%% File Version: 1.867
 
 \name{mirt.wrapper}
 \alias{mirt.wrapper}
@@ -133,21 +133,14 @@ Function \code{mirt.wrapper.fscores} -- List with entries
 
 
 \seealso{
-See the \pkg{mirt} package on CRAN
-\url{https://CRAN.R-project.org/package=mirt}
-and on GitHub \url{https://github.com/philchalmers/mirt}.
-% \href{https://github.com/philchalmers/mirt}{GitHub}
-
-See \url{https://groups.google.com/forum/#!forum/mirt-package}
-for discussion about the \pkg{mirt} package. \cr
-
+See the \pkg{mirt} package manual for more information.
 
 See for the main estimation functions in \pkg{mirt}:
 \code{\link[mirt:mirt]{mirt::mirt}},
 \code{\link[mirt:multipleGroup]{mirt::multipleGroup}}
 and \code{\link[mirt:bfactor]{mirt::bfactor}}.
 
-See \code{\link[mirt:coef-method]{mirt::coef-method}}for extracting
+See \code{\link[mirt:coef-method]{mirt::coef-method}} for extracting
 coefficients.
 
 See \code{\link[mirt:mod2values]{mirt::mod2values}} for collecting

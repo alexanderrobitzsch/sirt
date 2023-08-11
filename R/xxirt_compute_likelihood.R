@@ -1,9 +1,9 @@
 ## File Name: xxirt_compute_likelihood.R
-## File Version: 0.26
+## File Version: 0.271
 
 
 ##-- xxirt compute likelihood
-xxirt_compute_likelihood <- function( probs_items, dat, resp_index,
+xxirt_compute_likelihood <- function( probs_items, dat, resp_index=NULL,
         dat_resp_bool=NULL )
 {
     N <- nrow(dat)
