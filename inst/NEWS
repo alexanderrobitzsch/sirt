@@ -37,10 +37,13 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.0  |  2023-08-11  |  Last: sirt 4.0-1
+VERSIONS sirt 4.0  |  2023-08-12  |  Last: sirt 4.0-6
 ------------------------------------------------------------------------
 
-xxx   * ...
+FIXED * fixed incorrect handling of lower and upper bounds of item
+        parameters in xxirt() when using Newton-Raphson optimization
+NOTE  * included arguments 'lower' and 'upper' in function
+        xxirt_createThetaDistribution()
 
 
 DATA  * included/modified datasets: ---

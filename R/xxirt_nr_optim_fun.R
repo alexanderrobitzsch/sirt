@@ -1,10 +1,10 @@
 ## File Name: xxirt_nr_optim_fun.R
-## File Version: 0.117
+## File Version: 0.120
 
 xxirt_nr_optim_fun <- function(x, em_args, output_all=FALSE)
 {
     pen_val <- 0
-    
+
     #*** compute prior distribution
     prior_Theta <- xxirt_compute_prior_Theta_from_x(x=x, em_args=em_args)
 

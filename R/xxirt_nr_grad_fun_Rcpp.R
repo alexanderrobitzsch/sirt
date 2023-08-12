@@ -1,5 +1,5 @@
 ## File Name: xxirt_nr_grad_fun_Rcpp.R
-## File Version: 0.158
+## File Version: 0.170
 
 xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
 {
@@ -8,6 +8,7 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
     NPT <- em_args$NPT
     free_pars_design <- em_args$free_pars_design
     h <- em_args$h
+    eps2 <- 1e-300
 
     grad <- 0*x
 
@@ -20,7 +21,7 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
                             dat=em_args$dat, dat_resp_bool=em_args$dat_resp_bool )
     ll_case0 <- xxirt_compute_casewise_likelihood(prior_Theta=prior_Theta0,
                             group=em_args$group, p.xi.aj=p.xi.aj0)
-    ll0 <- sum( em_args$weights*log(ll_case0) )
+    ll0 <- sum( em_args$weights*log(ll_case0+eps2) )
 
     partable <- xxirt_partable_include_freeParameters( partable=em_args$partable, x=x )
 
@@ -41,7 +42,7 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
                                 ncat=em_args$ncat, partable=partable1,
                                 partable_index=em_args$partable_index )
         probs_items_der[[mm]] <- (probs_temp-probs_items0)/h
-        ratio_list[[mm]] <- probs_items_der[[mm]] / probs_items0
+        ratio_list[[mm]] <- probs_items_der[[mm]] / ( probs_items0 + eps )
     }
 
     #--- loop over item parameters
@@ -68,7 +69,7 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
                                 dat=em_args$dat, dat_resp_bool=em_args$dat_resp_bool)
             ll_case_temp <- xxirt_compute_casewise_likelihood(prior_Theta=prior_Theta0,
                                 group=em_args$group, p.xi.aj=p.xi.aj.temp)
-            ll_temp <- sum( em_args$weights*log(ll_case_temp) )
+            ll_temp <- sum( em_args$weights*log(ll_case_temp+eps2) )
             grad[pp] <- -( ll_temp - ll0 ) / h
 
         }

@@ -1,5 +1,5 @@
 ## File Name: xxirt_newton_raphson.R
-## File Version: 0.191
+## File Version: 0.194
 
 
 xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
@@ -76,6 +76,11 @@ xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
 
     #-- optimize
     control_nr$maxit <- maxit_nr
+    partable_free <- partable[ partable$parfree==1, ]
+    lower <- c( partable_free$lower, customTheta$lower )
+    upper <- c( partable_free$upper, customTheta$upper )
+    names(upper) <- names(lower) <- names(x)
+
     if (verbose){
         cat( paste0('****** Newton-Raphson Optimization ********\n'))
         utils::flush.console()
@@ -83,7 +88,8 @@ xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
     res_opt_nr <- sirt_optimizer(optimizer=optimizer_nr,
                             par=x, fn=xxirt_nr_optim_fun,
                             grad=xxirt_nr_grad_fun_Rcpp, hessian=FALSE,
-                            control=control_nr, em_args=em_args )
+                            control=control_nr, em_args=em_args,
+                            lower=lower, upper=upper )
 
     #-- collect output
     x <- res_opt_nr$par

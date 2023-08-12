@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.081
+## File Version: 1.082
 
 
 #--- user specified item response model
@@ -169,7 +169,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         if (!do_nr){
             em_iterate <- FALSE
         }
-        
+
         #*** Newton-Raphson scoring if requested
         res_opt_nr <- opt_values_nr <- NULL
         if (do_nr){
