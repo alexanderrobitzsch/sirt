@@ -1,5 +1,5 @@
 ## File Name: rasch.mml2.R
-## File Version: 7.699
+## File Version: 7.717
 
 
 # Semiparametric Maximum Likelihood Estimation in the Rasch type Model
@@ -473,7 +473,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                             conv1, constraints,
                             mitermax, pure.rasch,  trait.weights, fixed.K,
                             designmatrix=designmatrix, group=group,
-                            numdiff.parm=numdiff.parm, pow.qm=pow.qm )
+                            numdiff.parm=numdiff.parm, pow.qm=pow.qm, max.b=max.b )
             se.b <- m1$se.b
         }
 
@@ -590,6 +590,7 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                 #****************************************************
                 # latent ability distribution
                 if (distribution.trait=="normal" & D==1){
+
                     delta.theta <- 1
 #                    delta.theta <- theta.k[2] - theta.k[1]
 #                    sd.trait <- mean.trait <- rep(0,G)
@@ -615,11 +616,18 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                         mean.trait[gg] <- mu
 
                         pi.k[,gg] <- sirt_dnorm_discrete( theta.k, mean=mean.trait[gg], sd=sd.trait[gg] )
-                                                    }
+                    }
+                    if (!is.null(variance.fixed)){
+                            sd.trait[1] <- sqrt(variance.fixed[1,3])
+
+                    }
+
                         if (center.trait){ mean.trait[1] <- 0 }
+
                         #*********************************
                         # SD estimation
                         if ( ( gg > 1 ) | ( sum(est.a)==0 ) | est_sd ){
+
                             #        d.change <- .est.sd( dat1.gg, f.yi.qk.gg, X1, pi.k, pi.k0, gg,
                             #        mean.trait, sd.trait, theta.k, h )
                             #    sd.trait[gg] <- sd.trait[gg] + d.change
@@ -628,7 +636,9 @@ rasch.mml2 <- function( dat, theta.k=seq(-6,6,len=21), group=NULL, weights=NULL,
                             tk <- theta.k.adj[,1]*theta.k.adj[,1]
                             h1 <- dat1.gg * ( hwt %*% tk ) * delta.theta
                             Sigma.cov <- sum( h1 ) / sum( dat1.gg )
-                            sd.trait[gg] <- sqrt(Sigma.cov)
+                            if (is.null(variance.fixed)){
+                                sd.trait[gg] <- sqrt(Sigma.cov)
+                            }
                         }
                     if ( ( ( ! is.null(est.a) ) | ( irtmodel=="npirt" ) ) & ( ! est_sd ) ){
                             sd.trait[1] <- 1

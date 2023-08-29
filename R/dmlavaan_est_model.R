@@ -1,5 +1,5 @@
 ## File Name: dmlavaan_est_model.R
-## File Version: 0.293
+## File Version: 0.297
 
 dmlavaan_est_model <- function(fun, args, h=1e-5, use_observed_info_lavaan=FALSE,
             method="sandwich")
@@ -58,7 +58,11 @@ dmlavaan_est_model <- function(fun, args, h=1e-5, use_observed_info_lavaan=FALSE
             B <- BI[sel,sel]
         }
 
-        A <- crossprod(scores) / N^2
+        A <- crossprod(scores)
+            # Revalpr("A")
+            # Revalpr("sum(scores[,1]^2)")
+            # Revalpr("sum(scores[,1]*scores[,2])")
+
         res <- dmlavaan_sandwich_formula(A=A, B=B, parnames=parnames0)
         V <- res$V
         V_sw <- V

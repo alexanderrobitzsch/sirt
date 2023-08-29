@@ -1,5 +1,5 @@
 ## File Name: dmlavaan_se_sandwich.R
-## File Version: 0.113
+## File Version: 0.115
 
 dmlavaan_se_sandwich <- function(mod1, mod2, partable, label_parnames="parnames0",
         label_NPU="NPU", label_B="B", is_dmlavaan=TRUE)
@@ -13,9 +13,7 @@ dmlavaan_se_sandwich <- function(mod1, mod2, partable, label_parnames="parnames0
     scores <- cbind( mod1$scores, mod2$scores )
     N <- mod1$N
     A <- crossprod(scores)
-    if (is_dmlavaan){
-        A <- A / N^2
-    } else {
+    if (! is_dmlavaan){
         A <- A / N^4
     }
     B <- matrix(0, nrow=NP1+NP2, ncol=NP1+NP2)

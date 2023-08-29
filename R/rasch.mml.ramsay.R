@@ -1,5 +1,5 @@
 ## File Name: rasch.mml.ramsay.R
-## File Version: 2.17
+## File Version: 2.181
 
 
 ######################################################
@@ -107,7 +107,7 @@ sim.qm.ramsay <- function( theta, b, K  ){
 .m.step.ramsay <- function( theta.k, b, n.k, n, n.jk, r.jk, I, conv1, constraints,
             mitermax, pure.rasch,  trait.weights, fixed.K,
             designmatrix=designmatrix, group=group,
-            numdiff.parm=numdiff.parm, pow.qm=1){
+            numdiff.parm=numdiff.parm, pow.qm=1, max.b=NULL){
     abs.change <- 1
     miter <- 0
     # group estimation
@@ -175,7 +175,9 @@ sim.qm.ramsay <- function( theta, b, K  ){
         # last item is the sum of all other item difficulties
         center <- is.null(constraints)
         if ( !is.null( constraints) ){   b[ constraints[,1] ] <- constraints[,2] }
-
+        if (!is.null(max.b)){
+            b <- ifelse(b>max.b, max.b, b)
+        }
         abs.change <- max( abs( b0 - b ) )
         miter <- miter+1
         }   #*** end loop

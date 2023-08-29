@@ -1,5 +1,5 @@
 ## File Name: dmlavaan_est_model_bread_matrix_score_derivatives.R
-## File Version: 0.112
+## File Version: 0.114
 
 
 dmlavaan_est_model_bread_matrix_score_derivatives <- function(fun, args,
@@ -41,7 +41,7 @@ dmlavaan_est_model_bread_matrix_score_derivatives <- function(fun, args,
     pp <- 1; hh <- 1
     for (pp in 1:NPU){
         for (hh in 1:NPU){
-            B[pp,hh] <- mean( hess[,pp,hh] )
+            B[pp,hh] <- sum( hess[,pp,hh] )
         }
     }
     B <- -B

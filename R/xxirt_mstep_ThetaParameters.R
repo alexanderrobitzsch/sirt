@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_ThetaParameters.R
-## File Version: 0.195
+## File Version: 0.217
 
 
 xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
@@ -32,20 +32,27 @@ xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
     }
     #----- end definition likelihood function
 
-    # mstep_method <- 'BFGS'
-    mstep_method <- 'L-BFGS-B'
+    mstep_method <- 'BFGS'
+    lower <- upper <- NULL
+    if (customTheta$some_bound){
+        mstep_method <- 'L-BFGS-B'
+        lower <- customTheta$lower
+        upper <- customTheta$upper
+    }
     arg_control <- list(maxit=mstep_iter)
-    if ( mstep_method=='BFGS'){
+    if ( mstep_method %in% c( 'BFGS')){
         arg_control$reltol <- mstep_reltol
     }
-    np1 <- names(par1)
-    lower <- customTheta$lower
-    upper <- customTheta$upper
-
+    if ( mstep_method %in% c( 'L-BFGS-B')){
+        arg_control$factr <- mstep_reltol
+    }
     # method L-BFGS-B uses 'factr' (and 'pgtol') instead of 'reltol' and 'abstol'
-    arg_list <- list( par=par1, fn=like_Theta, method=mstep_method, control=arg_control,
-                        lower=lower, upper=upper)
-    mod <- do.call( stats::optim, args=arg_list )
+    arg_list <- list( par=par1, fn=like_Theta, method=mstep_method, control=arg_control)
+    if (customTheta$some_bound){
+        arg_list$lower <- lower
+        arg_list$upper <- upper
+    }
+    mod <- do.call( what=stats::optim, args=arg_list )
     par1 <- mod$par
     ll2 <- mod$value
     customTheta$par[ customTheta$est ] <- par1

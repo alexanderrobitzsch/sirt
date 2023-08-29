@@ -1,5 +1,5 @@
 ## File Name: xxirt_createThetaDistribution.R
-## File Version: 0.165
+## File Version: 0.169
 
 xxirt_createThetaDistribution <- function( par, est, P, prior=NULL,
         prior_par1=NULL, prior_par2=NULL, lower=NULL, upper=NULL )
@@ -14,7 +14,7 @@ xxirt_createThetaDistribution <- function( par, est, P, prior=NULL,
     res$prior_par2 <- prior_par2
 
     NPT <- sum(est)
-    np1 <- names(par)[est]
+    np1 <- which(est)
     if (is.null(lower)){
         lower <- rep(-Inf,NPT)
     } else {
@@ -28,6 +28,7 @@ xxirt_createThetaDistribution <- function( par, est, P, prior=NULL,
     names(lower) <- names(upper) <- np1
     res$lower <- lower
     res$upper <- upper
+    res$some_bound <- ( sum(res$lower>-Inf)+sum(res$upper<Inf) )>0
     class(res) <- 'ThetaDistribution'
     return(res)
 }
