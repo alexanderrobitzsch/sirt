@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.0  |  2023-08-29  |  Last: sirt 4.0-17
+VERSIONS sirt 4.0  |  2023-09-16  |  Last: sirt 4.0-19
 ------------------------------------------------------------------------
 
 FIXED * fixed incorrect handling of lower and upper bounds of item

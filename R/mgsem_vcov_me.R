@@ -1,5 +1,5 @@
 ## File Name: mgsem_vcov_me.R
-## File Version: 0.162
+## File Version: 0.169
 
 mgsem_vcov_me <- function(coef, opt_fun_args, suffstat_vcov, comp_se,
             se_delta_formula=FALSE)
@@ -9,6 +9,8 @@ mgsem_vcov_me <- function(coef, opt_fun_args, suffstat_vcov, comp_se,
     if ( (estimator=='ML') & comp_se & se_delta_formula ){
         comp_se_me <- TRUE
     }
+    A <- NULL
+    V <- NULL
     if (comp_se_me){
         NP <- length(coef)
         parnames <- names(coef)
@@ -29,6 +31,8 @@ mgsem_vcov_me <- function(coef, opt_fun_args, suffstat_vcov, comp_se,
         suffstat_pars <- suffstat_vcov$suffstat_pars
         SP <- nrow(suffstat_pars)
         V <- suffstat_vcov$suffstat_vcov
+        rownames(V) <- suffstat_pars$label
+        colnames(V) <- suffstat_pars$label
         grad_der_suffstat <- matrix(0, nrow=NP, ncol=SP)
         rownames(grad_der_suffstat) <- parnames
         colnames(grad_der_suffstat) <- suffstat_pars$label
@@ -76,6 +80,6 @@ mgsem_vcov_me <- function(coef, opt_fun_args, suffstat_vcov, comp_se,
     }
 
     #--- output
-    res <- list(vcov=vcov, se=se, comp_se_me=comp_se_me)
+    res <- list(vcov=vcov, se=se, A=A, V=V, comp_se_me=comp_se_me)
     return(res)
 }

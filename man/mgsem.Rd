@@ -1,5 +1,5 @@
 %% File Name: mgsem.Rd
-%% File Version: 0.082
+%% File Version: 0.083
 
 \name{mgsem}
 \alias{mgsem}
@@ -124,6 +124,8 @@ A list with following values
 \item{ic}{Information criteria}
 \item{technical}{Specifications of optimizer}
 \item{suffstat_vcov}{Variance matrix of sufficient statistics}
+\item{me_delta_method}{Input and output matrices for delta method if
+\code{estimator="ME"}}
 \item{data_proc}{Processed data}
 \item{case_ll}{Casewise log-likelihood function}
 \item{\dots}{Further values}

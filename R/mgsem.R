@@ -1,5 +1,5 @@
 ## File Name: mgsem.R
-## File Version: 0.547
+## File Version: 0.553
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",
@@ -168,6 +168,7 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
     vcov <- res$vcov
     se <- res$se
     comp_se_me <- res$comp_se_me
+    me_delta_method <- res
 
     #-- residual statistics
     residuals <- mgsem_output_proc_residuals(implied=implied, suffstat=suffstat)
@@ -202,7 +203,8 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
                     pen_type=pen_type, eps_approx=eps_approx,
                     technical=technical, comp_se=comp_se, groups=groups, group=group,
                     data=data, data_proc=data_proc, case_ll=case_ll,
-                    suffstat_vcov=suffstat_vcov, CALL=CALL, s1=s1, s2=s2)
+                    suffstat_vcov=suffstat_vcov, me_delta_method=me_delta_method,
+                    CALL=CALL, s1=s1, s2=s2)
     class(res) <- 'mgsem'
     return(res)
 }
