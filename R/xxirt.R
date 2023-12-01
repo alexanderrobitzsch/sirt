@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.088
+## File Version: 1.095
 
 
 #--- user specified item response model
@@ -75,6 +75,11 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     par0 <- xxirt_partable_extract_freeParameters( partable=partable )
     par1 <- xxirt_ThetaDistribution_extract_freeParameters( customTheta=customTheta )
 
+    #***
+    if (is.null(customTheta$some_bound)){
+        customTheta$some_bound    <- FALSE
+    }
+    
     #*** verbose
     verbose1 <- verbose==1
     verbose2 <- verbose==2
@@ -116,6 +121,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
 
         #--- run EM algorithm
         em_out <- res <- do.call(what=xxirt_em_algorithm, args=em_args)
+
         #--- collect EM output
         if (em_count==1){
             iter_em <- iter <- res$iter
@@ -169,7 +175,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         if (!do_nr){
             em_iterate <- FALSE
         }
-
+        
         #*** Newton-Raphson scoring if requested
         res_opt_nr <- opt_values_nr <- NULL
         if (do_nr){

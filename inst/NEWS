@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.0  |  2023-09-16  |  Last: sirt 4.0-19
+VERSIONS sirt 4.0  |  2023-11-30  |  Last: sirt 4.0-23
 ------------------------------------------------------------------------
 
 FIXED * fixed incorrect handling of lower and upper bounds of item
@@ -46,10 +46,11 @@ NOTE  * included arguments 'lower' and 'upper' in function
         xxirt_createThetaDistribution()
 ADDED * included function dmlavaan() that allows comparing model
         parameters from two lavaan models fitted to the same dataset
+NOTE  * corrected manual of 'data.g308' (thanks to Andres Burga)
 
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: dmlavaan (1)
+EXAMP * included/modified examples: dmlavaan (1), data.g308 (1)
 
 
 
