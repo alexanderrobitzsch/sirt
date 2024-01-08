@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.095
+## File Version: 1.099
 
 
 #--- user specified item response model
@@ -79,7 +79,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     if (is.null(customTheta$some_bound)){
         customTheta$some_bound    <- FALSE
     }
-    
+
     #*** verbose
     verbose1 <- verbose==1
     verbose2 <- verbose==2
@@ -175,7 +175,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         if (!do_nr){
             em_iterate <- FALSE
         }
-        
+
         #*** Newton-Raphson scoring if requested
         res_opt_nr <- opt_values_nr <- NULL
         if (do_nr){

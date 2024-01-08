@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 1.068
+## File Version: 1.074
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -110,6 +110,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     }
     pars <- apply( pars[, c('lhs', 'op', 'rhs' ) ], 1, FUN=function(ll){
                         paste0( ll[1], ll[2], ll[3] ) } )
+
     # fit LSEM for all moderator groups
     out2 <- lsem_fitsem( dat=dat, weights=weights, lavfit=lavfit,
                     fit_measures=fit_measures, NF=NF, G=G, moderator.grid=moderator.grid,

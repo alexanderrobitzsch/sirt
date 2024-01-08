@@ -1,5 +1,5 @@
 ## File Name: lsem_fit_initial_model_sufficient_statistics.R
-## File Version: 0.05
+## File Version: 0.064
 
 lsem_fit_initial_model_sufficient_statistics <- function(dat, variables_model,
     sampling_weights, has_meanstructure)

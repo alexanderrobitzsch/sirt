@@ -1,11 +1,11 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.788
+## File Version: 3.807
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
     align.scale=c(1,1), align.pow=c(.5,.5), eps=1e-3,
     psi0.init=NULL, alpha0.init=NULL, center=FALSE, optimizer="optim",
-    fixed=NULL, meth=1, vcov=NULL, ... )
+    fixed=NULL, meth=1, vcov=NULL, eps_grid=seq(0,-10, by=-.5), ... )
 {
     CALL <- match.call()
     s1 <- Sys.time()
@@ -33,6 +33,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     wgtM <- matrix( colSums(wgt,na.rm=TRUE), nrow=W1[1], ncol=W1[2], byrow=TRUE )
     # wgtM <- matrix( 1, nrow=W1[1], ncol=W1[2], byrow=TRUE )
     wgtM <- wgt / wgtM
+
     wgt <- wgtM
 
     # missing indicator matrix: 1 - no missings
@@ -56,6 +57,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     if ( ! is.null( alpha0.init) ){ alpha0 <- alpha0.init }
     lambda <- as.matrix(lambda)
     wgt <- as.matrix(wgt)
+
     wgt_combi <- matrix(NA, nrow=nrow(group.combis), ncol=ncol(lambda) )
     for (ii in 1:I){
         wgt_combi[,ii] <- wgt[ group.combis[,1], ii]*wgt[ group.combis[,2], ii]
@@ -101,6 +103,10 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         ia_grad_optim <- NULL
     }
 
+    #** evaluate optimization function at initial solution
+    x0 <- c( alpha0[-1], psi0[-1] )
+    fct_optim_inits <- ia_fct_optim(x=x0, lambda=lambda, nu=nu,
+                            overparam=overparam, eps=eps)
 
     #* estimate alignment parameters
     min_val <- .01
@@ -116,7 +122,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     }
 
     #* define sequence of epsilon values
-    eps_vec <- 10^seq(0,-10, by=-.5)
+    eps_vec <- 10^eps_grid
     eps_vec <- sirt_define_eps_sequence(eps=eps, eps_vec=eps_vec)
 
     #- optimize (with useful starting values)
@@ -279,7 +285,8 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
             nu=nu0, nu.resid=nu.resid, fopt=fopt, align.scale=align.scale,
             align.pow=align.pow0, res_optim=res_optim, eps=eps, wgt=wgt,
             miss_items=missM, numb_items=numb_items, vcov=vcov,
-            fixed=fixed, meth=meth, s1=s1, s2=s2, time_diff=time_diff, CALL=CALL)
+            fct_optim_inits=fct_optim_inits, fixed=fixed, meth=meth,
+            s1=s1, s2=s2, time_diff=time_diff, CALL=CALL)
     class(res) <- 'invariance.alignment'
     return(res)
 }

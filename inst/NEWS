@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.0  |  2023-11-30  |  Last: sirt 4.0-23
+VERSIONS sirt 4.0  |  2024-01-08  |  Last: sirt 4.0-27
 ------------------------------------------------------------------------
 
 FIXED * fixed incorrect handling of lower and upper bounds of item
@@ -47,6 +47,7 @@ NOTE  * included arguments 'lower' and 'upper' in function
 ADDED * included function dmlavaan() that allows comparing model
         parameters from two lavaan models fitted to the same dataset
 NOTE  * corrected manual of 'data.g308' (thanks to Andres Burga)
+NOTE  * included argument 'eps_grid' in invariance.alignment()
 
 
 DATA  * included/modified datasets: ---

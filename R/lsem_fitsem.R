@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.639
+## File Version: 0.643
 
 lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
                 verbose, pars, standardized, variables_model, sufficient_statistics,
