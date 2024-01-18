@@ -1,5 +1,5 @@
 %% File Name: noharm.sirt.Rd
-%% File Version: 0.542
+%% File Version: 0.543
 
 \name{noharm.sirt}
 \alias{noharm.sirt}
@@ -203,7 +203,7 @@ Fraser, C., & McDonald, R. P. (1988). NOHARM: Least squares item factor analysis
 \doi{10.1207/s15327906mbr2302_9}
 
 Fraser, C., & McDonald, R. P. (2012). \emph{NOHARM 4 Manual}. \cr
-{http://noharm.niagararesearch.ca/nh4man/nhman.html}.
+http://noharm.niagararesearch.ca/nh4man/nhman.html.
 
 Knol, D. L., & Berger, M. P. (1991). Empirical comparison between factor analysis
 and multidimensional item response models. \emph{Multivariate Behavioral Research, 26}(3),
@@ -260,7 +260,7 @@ Model fit can be assessed by \code{\link{modelfit.sirt}}.
 See \code{\link{R2noharm}} for running the NOHARM software from within \R.
 
 See Fraser and McDonald (1988, 2012) for an implementation of the NOHARM model which
-is available as freeware ({http://noharm.niagararesearch.ca/};
+is available as freeware (http://noharm.niagararesearch.ca/;
 the link seems to be broken in the meanwhile).
 }
 

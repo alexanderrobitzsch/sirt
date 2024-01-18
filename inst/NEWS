@@ -37,7 +37,19 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.0  |  2024-01-08  |  Last: sirt 4.0-27
+VERSIONS sirt 4.1  |  2024-01-18  |  Last: sirt 4.1-1
+------------------------------------------------------------------------
+
+xxx   * ...
+
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 4.0  |  2024-01-17  |  Last: sirt 4.0-32
 ------------------------------------------------------------------------
 
 FIXED * fixed incorrect handling of lower and upper bounds of item
@@ -48,12 +60,12 @@ ADDED * included function dmlavaan() that allows comparing model
         parameters from two lavaan models fitted to the same dataset
 NOTE  * corrected manual of 'data.g308' (thanks to Andres Burga)
 NOTE  * included argument 'eps_grid' in invariance.alignment()
-
+NOTE  * included argument 'num_deriv' in invariance.alignment()
+NOTE  * changed estimation defaults in invariance.alignment() 
+        for many groups (>= 9 groups)
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: dmlavaan (1), data.g308 (1)
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 3.13  |  2023-08-11  |  Last: sirt 3.13-228

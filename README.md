@@ -8,7 +8,7 @@ a minimal runnable code necessary to reproduce the issue, which can be run on th
 all necessary information on the used librarys, the R version, and the OS it is run on, perhaps a sessionInfo().
 
 
-#### CRAN version `sirt` 3.13-228 (2023-08-11)
+#### CRAN version `sirt` 4.0-32 (2024-01-17)
 
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version-last-release/sirt)](https://cran.r-project.org/package=sirt)
@@ -22,9 +22,9 @@ The CRAN version can be installed from within R using:
 utils::install.packages("sirt")
 ```
 
-#### GitHub version `sirt` 4.0-27 (2024-01-08)
+#### GitHub version `sirt` 4.1-1 (2024-01-18)
 
-[![](https://img.shields.io/badge/github%20version-4.0--27-orange.svg)](https://github.com/alexanderrobitzsch/sirt)&#160;&#160;
+[![](https://img.shields.io/badge/github%20version-4.1--1-orange.svg)](https://github.com/alexanderrobitzsch/sirt)&#160;&#160;
 
 The version hosted [here](https://github.com/alexanderrobitzsch/sirt) is the development version of `sirt`. 
 The GitHub version can be installed using `devtools` as:

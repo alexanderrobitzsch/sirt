@@ -1,11 +1,12 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.807
+## File Version: 3.820
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
     align.scale=c(1,1), align.pow=c(.5,.5), eps=1e-3,
     psi0.init=NULL, alpha0.init=NULL, center=FALSE, optimizer="optim",
-    fixed=NULL, meth=1, vcov=NULL, eps_grid=seq(0,-10, by=-.5), ... )
+    fixed=NULL, meth=1, vcov=NULL, eps_grid=seq(0,-10, by=-.5),
+    num_deriv=FALSE, ... )
 {
     CALL <- match.call()
     s1 <- Sys.time()
@@ -26,7 +27,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     }
 
     #- choose fixed value
-    fixed <- invariance_alignment_choose_fixed(fixed=fixed, G=G, Gmax=8)
+    fixed <- invariance_alignment_choose_fixed(fixed=fixed, G=G, Gmax=999)
     reparam <- ! fixed
 
     W1 <- dim(wgt)
@@ -99,7 +100,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     if ( align.pow[1]==0){
         ia_grad_optim <- NULL
     }
-    if (meth>=2){
+    if ((meth>=2) | num_deriv ){
         ia_grad_optim <- NULL
     }
 

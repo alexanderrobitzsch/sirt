@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.jackknife1.Rd
-%% File Version: 2.18
+%% File Version: 2.191
 
 \name{rasch.jml.jackknife1}
 \alias{rasch.jml.jackknife1}
@@ -29,16 +29,16 @@ A list with following entries
   \item{item}{
         A data frame with item parameters
         \itemize{
-            \item \code{b.JML}: {Item difficulty from JML estimation}
-            \item \code{b.JMLcorr}: {Item difficulty from JML estimation by
-                    applying the correction factor \eqn{(I-1)/I}}
-            \item \code{b.jack}: {Item difficulty from Jackknife estimation}
-            \item \code{b.jackse}: {Standard error of Jackknife estimation
+            \item \code{b.JML}: Item difficulty from JML estimation
+            \item \code{b.JMLcorr}: Item difficulty from JML estimation by
+                    applying the correction factor \eqn{(I-1)/I}
+            \item \code{b.jack}: Item difficulty from Jackknife estimation
+            \item \code{b.jackse}: Standard error of Jackknife estimation
                         for item difficulties.
                         Note that this parameter refer to the standard error
-                    with respect to item sampling}
-            \item \code{b.JMLse}: {Standard error for item difficulties
-                    obtained from JML estimation}
+                    with respect to item sampling
+            \item \code{b.JMLse}: Standard error for item difficulties
+                    obtained from JML estimation
                 }
             }
   \item{jack.itemdiff}{A matrix containing all item difficulties obtained by Jackknife}
