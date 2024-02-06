@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.513
+%% File Version: 0.515
 
 \name{xxirt}
 \alias{xxirt}
@@ -74,7 +74,7 @@ xxirt(dat, Theta=NULL, itemtype=NULL, customItems=NULL, partable=NULL,
 \method{IRT.se}{xxirt}(object,...)
 
 # computes Hessian matrix
-xxirt_hessian(object, h=1e-4)
+xxirt_hessian(object, h=1e-4, use_shortcut=TRUE)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -150,6 +150,8 @@ cross-validation)}
 \item{x}{Object of class \code{xxirt}}
 \item{type}{Type of person parameter estimate. Currently, only
 \code{EAP} is implemented.}
+\item{use_shortcut}{Logical indicating whether a shortcut in the computation
+should be utilized}
 \item{\dots}{
 Further arguments to be passed
 }

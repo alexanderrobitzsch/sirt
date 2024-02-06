@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.692
+%% File Version: 1.704
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -102,7 +102,12 @@ If \code{NULL}, then \code{fixed} is automatically chosen by default. For many g
 \code{fixed=FALSE} is chosen.}
 \item{meth}{Type of method used for optimization function. \code{meth=1} is the default
 and the optimization function used in Mplus. \code{meth=2} uses logarithmized
-item loadings in alignment.}
+item loadings in alignment. The choice \code{meth=4} uses the constraint
+\eqn{\prod_g \psi_g=1} and adds the penalty \eqn{\lambda \sum_g \alpha_g^2} for
+a fixed value \eqn{\lambda} that depends on the weights \code{wgt}
+(similar to Mplus' free method).
+The choice \code{meth=3} only uses the constraint
+\eqn{\prod_g \psi_g=1} (similar to Mplus' FIXED method).}
 \item{vcov}{Variance matrix produced by \code{invariance_alignment_cfa_config}
 for standard error computation. If a matrix is provided, standard errors
 are computed.}
@@ -170,9 +175,11 @@ and one otherwise. It is approximated by
 \deqn{f(x)=x^2 (x^2 + \varepsilon )^{-1} }
 (O'Neill & Burke, 2023).
 
-For identification reasons, the product \eqn{\Pi_g \psi_{g0}}
-of all group standard deviations is set to one. The mean
-\eqn{\alpha_{g0}} of the first group is set to zero.
+For identification reasons, the product \eqn{\Pi_g \psi_{g0}} (\code{meth}=0,0.5)
+of all group standard deviations or \eqn{\psi_1} (\code{meth}=1,2)
+is set to one. The mean
+\eqn{\alpha_{g0}} of the first group is set to zero (\code{meth}=0.5,1,2) or
+a penalty function is added to the linking function (\code{meth}=0).
 
 Note that Asparouhov and Muthen (2014) use \eqn{a_\lambda=a_\nu=1}
 (which can be modified in \code{align.scale})

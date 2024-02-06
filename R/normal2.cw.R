@@ -1,5 +1,5 @@
 ## File Name: normal2.cw.R
-## File Version: 0.16
+## File Version: 0.173
 
 
 #** approximation of the bivariate normal integral
@@ -10,7 +10,7 @@ normal2.cw <- function( a, b, rho )
     #   P( X > a1, Y > b1, rho )
     #=P( -X < - a1, -Y < -b1, rho )
     if ( any( rho < 0 )){
-        stop("only positive correlations are allowed!")
+        stop('only positive correlations are allowed!')
     }
     a11 <- a1 <- - a
     b1 <- - b
@@ -41,7 +41,8 @@ normal2.cw <- function( a, b, rho )
     # adjust formula in case of APPROX. (ii)
     if ( length(ind2) > 0 ){
         # CW. Formula in (ii), p. 264
-        prob1[ind2] <- 1 - stats::pnorm( -a1[ind2] ) - stats::pnorm( -b1[ind2] ) + prob1[ind2]
+        prob1[ind2] <- 1 - stats::pnorm( -a1[ind2] ) -
+                                stats::pnorm( -b1[ind2] ) + prob1[ind2]
     }
 #    # negative correlations
 #    if ( length(ind.neg) > 0 ){

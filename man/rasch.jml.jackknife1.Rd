@@ -1,5 +1,5 @@
 %% File Name: rasch.jml.jackknife1.Rd
-%% File Version: 2.191
+%% File Version: 2.192
 
 \name{rasch.jml.jackknife1}
 \alias{rasch.jml.jackknife1}
@@ -60,6 +60,7 @@ For JML estimation \code{\link{rasch.jml}}.
 For analytical bias correction methods see \code{\link{rasch.jml.biascorr}}.
 }
 \examples{
+\dontrun{
 #############################################################################
 # EXAMPLE 1: Simulated data from the Rasch model
 #############################################################################
@@ -71,7 +72,7 @@ dat <- sirt::sim.raschtype( rnorm( N ), b )
 colnames(dat) <- paste( "I", 1:I, sep="")
 
 # estimate the Rasch model with JML
-mod <- sirt::rasch.jml( dat  )
+mod <- sirt::rasch.jml(dat)
 summary(mod)
 
 # re-estimate the Rasch model using Jackknife
@@ -96,6 +97,7 @@ mod2 <- sirt::rasch.jml.jackknife1( mod )
   ##   I10 4929 0.210  1.778     1.617  1.578    0.071   0.040
   ##   I11 4929 0.154  2.266     2.060  2.011    0.077   0.044
 #-> Item parameters obtained by jackknife seem to be acceptable.
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

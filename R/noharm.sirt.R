@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.925
+## File Version: 0.928
 
 
 ########################################
@@ -147,10 +147,11 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
     tanaka <- res$tanaka
 
     #**** arrange output list
-    res <- list( tanaka=tanaka, rmsr=rmsr, N.itempair=ss, pm=pm0, wgtm=wgtm, sumwgtm=sumwgtm,
-                lower=lower, upper=upper, residuals=residuals, final.constants=f0,
-                factor.cor=Pval, thresholds=-betaj, uniquenesses=uqn, loadings=loadingsF,
-                loadings.theta=Fval, residcorr=Psival, model.type=model.type, modtype=modtype,
+    res <- list( tanaka=tanaka, rmsr=rmsr, N.itempair=ss, pm=pm0, wgtm=wgtm,
+                sumwgtm=sumwgtm, lower=lower, upper=upper, residuals=residuals,
+                final.constants=f0, factor.cor=Pval, thresholds=-betaj,
+                uniquenesses=uqn, loadings=loadingsF, loadings.theta=Fval,
+                residcorr=Psival, model.type=model.type, modtype=modtype,
                 Nobs=N, Nitems=I, Fpatt=Fpatt, Ppatt=Ppatt, Psipatt=Psipatt,
                 dat=dat0, systime=Sys.time(), dimensions=D, display.fit=5,
                 res_opt=res_opt, parm_table=parm_table, b0=b0, b1=b1, b2=b2, b3=b3,
@@ -163,8 +164,8 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
 
     #*** compute chi square statistics
     res <- noharm_sirt_compute_chi_square_statistics( res=res,
-                residuals=residuals, pm=pm, N=N, I=I, sumwgtm=sumwgtm, modesttype=modesttype,
-                Nestpars=Nestpars )
+                residuals=residuals, pm=pm, N=N, I=I, sumwgtm=sumwgtm,
+                modesttype=modesttype, Nestpars=Nestpars )
 
     #*** compute Green-Yang reliability
     v1 <- 1 * ( ( wgtm - diag(wgtm) ) > 0 )

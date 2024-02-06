@@ -1,5 +1,5 @@
 ## File Name: regpolca_penalty_fun.R
-## File Version: 0.04
+## File Version: 0.05
 
 
 regpolca_penalty_fun <- function(x, regular_grouped, I, partable,
@@ -7,7 +7,7 @@ regpolca_penalty_fun <- function(x, regular_grouped, I, partable,
     combis_categ_list, fuse_categories, K)
 {
     pen <- 0
-    if (regular_grouped=="none"){
+    if (regular_grouped=='none'){
         #* fused probabilities among classes
         for (ii in 1L:I){
             x_ii <- x[ partable$itemnr==ii ]
@@ -34,7 +34,7 @@ regpolca_penalty_fun <- function(x, regular_grouped, I, partable,
             combis_ii <- combis_categ_list[[ii]]
             nc <- nrow(combis_ii)
             a1 <- 0
-            if (regular_grouped=="class"){
+            if (regular_grouped=='class'){
                 K1 <- max(combis_ii$cat_pair)
                 for (kk in 1:K1){
                     cii_kk <- combis_ii[ seq(kk,nc,by=nc/K), ]
@@ -44,7 +44,7 @@ regpolca_penalty_fun <- function(x, regular_grouped, I, partable,
                     a1 <- a1 + a2
                 }
             }
-            if (regular_grouped=="categ"){
+            if (regular_grouped=='categ'){
                 for (kk in 1:K){
                     cii_kk <- combis_ii[ combis_ii$class==kk, ]
                     a2 <- regpolca_penalty_fun_value_grouped(x_ii=x_ii,

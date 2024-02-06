@@ -1,5 +1,5 @@
 ## File Name: regpolca_postproc_count_regularized_parameters.R
-## File Version: 0.28
+## File Version: 0.292
 
 regpolca_postproc_count_regularized_parameters <- function(item, set_equal,
         lca_dich, probs_items, nclasses, ncats)
@@ -46,9 +46,10 @@ regpolca_postproc_count_regularized_parameters <- function(item, set_equal,
         lem1 <- c(1,2)
         for (ii in 1:I){
             item_ii <- items[ii]
-            ind_ii <- which( item[,"item"]==item_ii )
+            ind_ii <- which( item[,'item']==item_ii )
             item_tab_ii <- item[ind_ii,-lem1]
-            item_tab_ii[-c(ind_ii[1]),] <- set_equal*round( item_tab_ii[-c(ind_ii[1]),] / set_equal, 0 )
+            item_tab_ii[-c(ind_ii[1]),] <-
+                            set_equal*round( item_tab_ii[-c(ind_ii[1]),] / set_equal, 0)
             item_tab_ii[1,] <- 1 - colSums(item_tab_ii[-1,])
             item[ind_ii, -c(lem1) ] <- item_tab_ii
             LU <- length( unique( unlist(item_tab_ii[-1,] )))

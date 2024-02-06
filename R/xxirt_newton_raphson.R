@@ -1,5 +1,5 @@
 ## File Name: xxirt_newton_raphson.R
-## File Version: 0.208
+## File Version: 0.215
 
 
 xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
@@ -27,14 +27,13 @@ xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
     NPI <- length(par_items)
     NPT <- length(par_Theta)
     NP <- NPI+NPT
-
+    
     em_args$parindex_items <- 1:NPI
     if (NPI==0){
         em_args$parindex_items <- NULL
     }
     em_args$parindex_Theta <- (NPI+1):(NPI+NPT)
     x <- par0
-
     # define parameter tables for estimation
     I <- ncol(dat)
     partable$item_group_comp <- 0
@@ -84,10 +83,17 @@ xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
     #-- optimize
     control_nr$maxit <- maxit_nr
     partable_free <- partable[ partable$parfree==1, ]
-    lower <- c( partable_free$lower, customTheta$lower )
-    upper <- c( partable_free$upper, customTheta$upper )
-    names(upper) <- names(lower) <- names(x)
 
+    if (NPI>0){
+        lower <- c( partable_free$lower, customTheta$lower )
+        upper <- c( partable_free$upper, customTheta$upper )
+    } else {
+        lower <- c( customTheta$lower )
+        upper <- c( customTheta$upper )    
+    }
+    if (!is.null(lower)){ names(lower) <- names(x) }
+    if (!is.null(upper)){ names(upper) <- names(x) }
+        
     if (verbose){
         cat( paste0('****** Newton-Raphson Optimization ********\n'))
         utils::flush.console()

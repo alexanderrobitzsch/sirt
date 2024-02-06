@@ -1,5 +1,5 @@
 ## File Name: regpolca.R
-## File Version: 0.192
+## File Version: 0.195
 
 
 #- Regularized polytomous latent class analysis
@@ -49,7 +49,7 @@ regpolca <- function(dat, nclasses, weights=NULL, group=NULL,
     if (length(regular_lam)==1){
         regular_lam <- c(regular_lam, 0)
     }
-    if (regular_grouped!="none"){
+    if (regular_grouped!='none'){
         regular_lam <- c(regular_lam[1], 0)
     }
     if (sum(regular_lam)>0){
@@ -75,7 +75,7 @@ regpolca <- function(dat, nclasses, weights=NULL, group=NULL,
                     combis_ii <- rbind( combis_ii, combis2+cc )
                 }
                 combis_ii <- data.frame(combis_ii)
-                colnames(combis_ii) <- c("par1","par2")
+                colnames(combis_ii) <- c('par1','par2')
                 nri <- nrow(combis_ii)
                 n1 <- nri/nrow(combis0)
                 combis_ii$cat1 <- rep(combis0[,1], n1)
@@ -89,9 +89,9 @@ regpolca <- function(dat, nclasses, weights=NULL, group=NULL,
 
         }
 
-        if (regular_type=="scad"){ penalty_used <- penalty_D1_scad }
-        if (regular_type=="mcp"){ penalty_used <- penalty_D1_mcp }
-        if (regular_type=="lasso"){ penalty_used <- penalty_D1_abs }
+        if (regular_type=='scad'){ penalty_used <- penalty_D1_scad }
+        if (regular_type=='mcp'){ penalty_used <- penalty_D1_mcp }
+        if (regular_type=='lasso'){ penalty_used <- penalty_D1_abs }
         fuse_categories <- rep(FALSE,I)
         if (regular_lam[2]>0){
             for (ii in 1L:I){
@@ -107,9 +107,9 @@ regpolca <- function(dat, nclasses, weights=NULL, group=NULL,
             pen <- 0
             pen <- regpolca_penalty_fun( x=x, regular_grouped=regular_grouped, I=I,
                         partable=partable, combis_classes_list=combis_classes_list,
-                        regular_lam=regular_lam, eps=eps, penalty_used=penalty_used, Ni=Ni,
-                        combis_categ_list=combis_categ_list, fuse_categories=fuse_categories,
-                        K=K)
+                        regular_lam=regular_lam, eps=eps, penalty_used=penalty_used,
+                        Ni=Ni, combis_categ_list=combis_categ_list,
+                        fuse_categories=fuse_categories, K=K)
             return(pen)
         }
     }
@@ -156,6 +156,6 @@ regpolca <- function(dat, nclasses, weights=NULL, group=NULL,
                     regular_grouped=regular_grouped)
     res <- sirt_add_list_elements(res=res, res2=res2)
 
-    class(res) <- "regpolca"
+    class(res) <- 'regpolca'
     return(res)
 }

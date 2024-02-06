@@ -1,5 +1,5 @@
 %% File Name: data.trees.Rd
-%% File Version: 0.14
+%% File Version: 0.15
 
 \name{data.trees}
 \alias{data.trees}
@@ -57,7 +57,6 @@ Rating experiments in forestry: How much agreement is there in tree marking?
 Stoyan, D., Pommerening, A., & Wuensche, A. (2018).
 Rater classification by means of set-theoretic methods applied to forestry data.
 \emph{Journal of Environmental Statistics, 8}(2), 1-17.
-\url{http://www.jenvstat.org/v08/i02}
 }
 
 

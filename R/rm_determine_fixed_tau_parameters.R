@@ -1,5 +1,5 @@
 ## File Name: rm_determine_fixed_tau_parameters.R
-## File Version: 0.07
+## File Version: 0.081
 
 rm_determine_fixed_tau_parameters <- function( K, maxK, VV, tau.item.fixed=NULL, val=99)
 {
@@ -8,7 +8,7 @@ rm_determine_fixed_tau_parameters <- function( K, maxK, VV, tau.item.fixed=NULL,
             K.vv <- maxK[vv]
             if ( K.vv < K ){
                 for (zz in (K.vv+1):K ){
-                    d1 <- data.frame( "item"=vv, "categ"=zz, "val"=val)
+                    d1 <- data.frame( item=vv, categ=zz, val=val)
                     tau.item.fixed <- rbind( tau.item.fixed, d1 )
                 }
             }

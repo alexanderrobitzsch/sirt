@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.099
+## File Version: 1.107
 
 
 #--- user specified item response model
@@ -66,7 +66,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     # create item list
     item_list <- xxirt_createItemList( customItems=customItems, itemtype=itemtype,
                         items=items, partable=partable )
-
+                        
     # shortcut for calculating expected counts
     dat1_resp <- xxirt_prepare_response_data(G=G, group_index=group_index,
                         weights=weights, dat1=dat1, dat_resp=dat_resp, maxK=maxK )
@@ -79,7 +79,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     if (is.null(customTheta$some_bound)){
         customTheta$some_bound    <- FALSE
     }
-
+    
     #*** verbose
     verbose1 <- verbose==1
     verbose2 <- verbose==2
@@ -96,7 +96,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     }
     do_cv <- cv_kfold>0
     em_count <- 1
-
+    
     while(em_iterate){
 
         #--- create list with arguments for EM algorithm

@@ -1,5 +1,5 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.820
+## File Version: 3.962
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
@@ -26,9 +26,22 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         wgt <- 1+0*nu
     }
 
+    #- reparametrization of meth argument
+    meth0 <- meth
+    if (meth0==4){ meth <- 0}     # Mplus FREE
+    if (meth0==3){ meth <- 0.5}      # Mplus FIXED
+
     #- choose fixed value
     fixed <- invariance_alignment_choose_fixed(fixed=fixed, G=G, Gmax=999)
     reparam <- ! fixed
+    if (meth%in%c(0,0.5)){
+        constraint <- 'prod'
+        reparam <- TRUE
+        num_deriv <- TRUE
+    }
+    if (overparam){
+        num_deriv <- TRUE
+    }
 
     W1 <- dim(wgt)
     wgtM <- matrix( colSums(wgt,na.rm=TRUE), nrow=W1[1], ncol=W1[2], byrow=TRUE )
@@ -66,26 +79,37 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
 
     group_combis <- group.combis-1
     G1 <- G-1
+    if (overparam){
+        G1 <- G
+    }
     ind_alpha <- seq_len(G1)
     ind_psi <- G1 + ind_alpha
+    if (meth==0){
+        ind_alpha <- seq_len(G)
+        ind_psi <- G + seq_len(G1)
+    }
 
     #-- define optimization functions
-    ia_fct_optim <- function(x, lambda, nu, overparam, eps){
+    ia_fct_optim <- function(x, lambda, nu, overparam, eps, meth_ ){
         res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha,
-                        ind_psi=ind_psi, reparam=reparam)
+                        ind_psi=ind_psi, reparam=reparam, meth=meth_)
+        alpha0 <- res$alpha0
+        psi0 <- res$psi0
         val <- sirt_rcpp_invariance_alignment_opt_fct( nu=nu, lambda=lambda,
-                        alpha0=res$alpha0, psi0=res$psi0, group_combis=group_combis,
+                        alpha0=alpha0, psi0=psi0, group_combis=group_combis,
                         wgt=wgt, align_scale=align.scale,
                         align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type,
-                        reparam=FALSE, meth=meth)
+                        reparam=FALSE, meth=meth_)
         val <- val$fopt
-        if (overparam){
+        if (overparam | meth==0 ){
             G <- nrow(lambda)
-            val <- val+sum(wgt[,1]*x[1:G]^2 + wgt[,1]*x[G+(1:G)]^2 )
+            fac <- sum(wgt[,1]) / 1000
+            val <- val+fac*sum(x[1:G]^2)
         }
         return(val)
     }
-    ia_grad_optim <- function(x, lambda, nu, overparam, eps){
+
+    ia_grad_optim <- function(x, lambda, nu, overparam, eps, meth_){
         res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha,
                             ind_psi=ind_psi, reparam=reparam)
         alpha0 <- res$alpha0
@@ -93,7 +117,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         grad <- sirt_rcpp_invariance_alignment_opt_grad( nu=nu, lambda=lambda,
                         alpha0=alpha0, psi0=psi0, group_combis=group_combis, wgt=wgt,
                         align_scale=align.scale, align_pow=align.pow, eps=eps,
-                        wgt_combi=wgt_combi, type=type, reparam=reparam, meth=meth)
+                        wgt_combi=wgt_combi, type=type, reparam=reparam, meth=meth_)
         grad <- grad[-c(1,G+1)]
         return(grad)
     }
@@ -106,8 +130,14 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
 
     #** evaluate optimization function at initial solution
     x0 <- c( alpha0[-1], psi0[-1] )
+    if (overparam){
+        x0 <- c(alpha0, psi0)
+    }
+    if (meth==0){
+        x0 <- c( alpha0, psi0[-1] )
+    }
     fct_optim_inits <- ia_fct_optim(x=x0, lambda=lambda, nu=nu,
-                            overparam=overparam, eps=eps)
+                            overparam=overparam, eps=eps, meth=meth )
 
     #* estimate alignment parameters
     min_val <- .01
@@ -117,11 +147,16 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         GL <- G
         par <- c( alpha0, psi0 )
     }
+    if (meth==0){
+        par <- c( alpha0, psi0[-1] )
+    }
     lower <- c(rep(-Inf,GL), rep(min_val, GL))
     if (reparam){
         grad_optim <- NULL
     }
-
+    if (meth==0){
+        lower <- c(rep(-Inf,G), rep(min_val, GL))
+    }
     #* define sequence of epsilon values
     eps_vec <- 10^eps_grid
     eps_vec <- sirt_define_eps_sequence(eps=eps, eps_vec=eps_vec)
@@ -131,19 +166,21 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     nu1 <- nu
     est_loop <- 1
     psi_list <- list()
+
     while(est_loop>=1){
         for (eps in eps_vec){
             res_optim <- sirt_optimizer(optimizer=optimizer, par=par, fn=ia_fct_optim,
                                 grad=ia_grad_optim, lower=lower, hessian=FALSE,
                                 lambda=lambda1, nu=nu1, overparam=overparam,
-                                eps=eps, ...)
+                                eps=eps, meth_=meth, ...)
             par <- res_optim$par
             res <- invariance_alignment_define_parameters(x=res_optim$par,
-                            ind_alpha=ind_alpha, ind_psi=ind_psi, reparam=reparam)
+                            ind_alpha=ind_alpha, ind_psi=ind_psi, reparam=reparam,
+                            meth=meth)
             alpha0 <- res$alpha0
             psi0 <- res$psi0
-        }
-        if (meth%in%c(1,2)){
+        } # end eps grid loop
+        if (meth%in%c(0,0.5,1,2)){
             est_loop <- 0
         }
         if (meth>=3){
@@ -153,10 +190,12 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
             }
             if (est_loop==1){
                 est_loop <- est_loop + 1
-                nu1 <- nu/lambda*psi_list[[1]]
+                # nu1 <- nu/sqrt(mod1)*psi_list[[1]]
+                #=> likely dead code
             }
         }
-    }
+    }  # end while loop
+
     if (meth==3){
         psi0 <- psi_list[[1]]
     }
@@ -168,7 +207,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         NP <- length(par)
 
         #- gradient computation
-        ia_grad_optim_num <- function(x, lambda, nu, overparam, eps, h=1e-4){
+        ia_grad_optim_num <- function(x, lambda, nu, overparam, eps, meth=1, h=1e-4){
             NP <- length(x)
             par <- x
             grad <- rep(0,NP)
@@ -188,7 +227,8 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         h <- 1e-4
         hess_par <- matrix(NA, nrow=NP, ncol=NP)
         rownames(hess_par) <- colnames(hess_par) <- names(par)
-        args <- list(x=par, lambda=lambda, nu=nu, overparam=overparam, eps=eps)
+        args <- list(x=par, lambda=lambda, nu=nu, overparam=overparam, eps=eps,
+                        meth=meth)
         pp <- 1
         for (pp in 1:NP){
             args$x <- mgsem_add_increment(x=par, h=h, i1=pp)
@@ -230,10 +270,9 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
 
     }
 
-
     # center parameters
     res <- invariance_alignment_center_parameters(alpha0=alpha0, psi0=psi0,
-                    center=center)
+                    center=center, meth=meth )
     alpha0 <- res$alpha0
     psi0 <- res$psi0
 
@@ -286,8 +325,8 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
             nu=nu0, nu.resid=nu.resid, fopt=fopt, align.scale=align.scale,
             align.pow=align.pow0, res_optim=res_optim, eps=eps, wgt=wgt,
             miss_items=missM, numb_items=numb_items, vcov=vcov,
-            fct_optim_inits=fct_optim_inits, fixed=fixed, meth=meth,
-            s1=s1, s2=s2, time_diff=time_diff, CALL=CALL)
+            fct_optim_inits=fct_optim_inits, fixed=fixed, meth=meth0,
+            meth_internal=meth, s1=s1, s2=s2, time_diff=time_diff, CALL=CALL)
     class(res) <- 'invariance.alignment'
     return(res)
 }

@@ -1,8 +1,8 @@
 ## File Name: xxirt_hessian.R
-## File Version: 0.577
+## File Version: 0.579
 
 #--- computation of hessian matrix
-xxirt_hessian <- function( object, h=1e-4 )
+xxirt_hessian <- function( object, h=1e-4, use_shortcut=TRUE )
 {
     item_list <- object$item_list
     items <- object$items
@@ -76,15 +76,10 @@ xxirt_hessian <- function( object, h=1e-4 )
             }
         }
 
-
-
         #*** compute individual likelihood
         # if ( (! item_wise) | (min_ind==0) | (max_ind>=NPI+1 ) ){
 
-        use_shortcut <- TRUE
         use_shortcut <- use_shortcut & (IA <=2)
-
-        # use_shortcut <- FALSE
 
         if (! use_shortcut){
             if (min_ind <=NPI){
