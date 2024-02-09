@@ -33,6 +33,7 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
     arglist$standardized <- lsem.object$standardized
     arglist$standardized_type <- lsem.object$standardized_type
     arglist$lavaan_fct <- lsem.object$lavaan_fct
+    arglist$sufficient_statistics <- lsem.object$sufficient_statistics
     use_lavaan_survey <- FALSE
     arglist$pseudo_weights <- lsem.object$pseudo_weights
 
