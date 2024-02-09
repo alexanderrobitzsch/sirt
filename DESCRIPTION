@@ -33,6 +33,7 @@ Suggests:
 LinkingTo: 
     pbv, Rcpp, RcppArmadillo
 URL: 
-    https://github.com/alexanderrobitzsch/sirt,
+    https://alexanderrobitzsch.github.io/sirt/,
     https://sites.google.com/view/alexander-robitzsch/software
+BugReports: https://github.com/alexanderrobitzsch/sirt/issues
 License: GPL (>= 2)
