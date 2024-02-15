@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.107
+## File Version: 1.111
 
 
 #--- user specified item response model
@@ -51,7 +51,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         partable <- xxirt_createParTable( dat=dat, itemtype=itemtype,
                             customItems=customItems )
     }
-
+    
     # process partable and itemtype
     res <- xxirt_proc_ParTable( itemtype=itemtype, partable=partable, items=items )
     itemtype <- res$itemtype
@@ -74,7 +74,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     #*** starting values item parameters
     par0 <- xxirt_partable_extract_freeParameters( partable=partable )
     par1 <- xxirt_ThetaDistribution_extract_freeParameters( customTheta=customTheta )
-
+    
     #***
     if (is.null(customTheta$some_bound)){
         customTheta$some_bound    <- FALSE
@@ -118,7 +118,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
             em_args$verbose2 <- FALSE
             em_args$verbose3 <- FALSE
         }
-
+        
         #--- run EM algorithm
         em_out <- res <- do.call(what=xxirt_em_algorithm, args=em_args)
 

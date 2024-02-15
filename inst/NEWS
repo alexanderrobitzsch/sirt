@@ -37,10 +37,12 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.2  |  2024-02-06  |  Last: sirt 4.2-1
+VERSIONS sirt 4.2  |  2024-02-15  |  Last: sirt 4.2-2
 ------------------------------------------------------------------------
 
-xxx   * ...
+FIXED * fixed a bug in handling sufficient statistics in
+        lsem.permutationTest() (thanks to @martinabader, #22)
+
 
 
 DATA  * included/modified datasets: ---
