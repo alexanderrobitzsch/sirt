@@ -1,5 +1,5 @@
 ## File Name: lsem.bootstrap.R
-## File Version: 0.431
+## File Version: 0.432
 
 
 lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
@@ -135,7 +135,7 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
                         verbose=verbose, arglist=arglist)
         parallel::stopCluster(cl)
 
-        for (rr in 1:R){
+        for (rr in 1L:R){
             res_out_rr <- res_all[[rr]]
             parameters_boot[,rr] <- res_out_rr$parameters_boot
             fitstats_joint_boot[,rr] <- res_out_rr$fitstats_joint_boot

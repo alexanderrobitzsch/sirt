@@ -1,9 +1,9 @@
 ## File Name: lsem_fit_initial_model.R
-## File Version: 0.205
+## File Version: 0.212
 
 lsem_fit_initial_model <- function(lavmodel__, lavaan_est_fun, dat, variables_model,
     sampling_weights, has_meanstructure, sufficient_statistics, est_joint=FALSE,
-    se="standard", use_lavaan_survey=FALSE, ...)
+    se="standard", use_lavaan_survey=FALSE, is_imputed=FALSE, Nimp=0, ...)
 {
     if (est_joint){
         has_meanstructure <- TRUE
@@ -12,7 +12,8 @@ lsem_fit_initial_model <- function(lavmodel__, lavaan_est_fun, dat, variables_mo
         #- compute sufficient statistics
         res <- lsem_fit_initial_model_sufficient_statistics(dat=dat,
                     variables_model=variables_model, sampling_weights=sampling_weights,
-                    has_meanstructure=has_meanstructure)
+                    has_meanstructure=has_meanstructure,
+                    is_imputed=is_imputed, Nimp=Nimp)
         wmean <- res$wmean
         wcov <- res$wcov
         Nobs <- res$Nobs

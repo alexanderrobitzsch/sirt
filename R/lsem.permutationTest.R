@@ -1,5 +1,5 @@
 ## File Name: lsem.permutationTest.R
-## File Version: 0.592
+## File Version: 0.593
 
 
 #*** permutation test for LSEM model
@@ -18,13 +18,13 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
     object <- lsem.object
     arglist <- list()
     EE <- length(entr)
-    for (ee in 1:EE){
+    for (ee in 1L:EE){
         arglist[[ entr[ee] ]] <- object[[ entr[ee] ]]
     }
     arglist2 <- lsem.object$lavaan.args
     NL <- length(arglist2)
     if (NL > 0){
-        for (ll in 1:NL){
+        for (ll in 1L:NL){
             arglist[[ names(arglist2)[ll] ]] <- arglist2[[ names(arglist2)[ll] ]]
         }
     }
@@ -140,7 +140,7 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
 
         parallel::stopCluster(cl)
 
-        for (bb in 1:B){
+        for (bb in 1L:B){
             parameters_permutation[, bb] <- res_all[[bb]]$est
             parameters_summary_M[,bb] <- res_all[[bb]]$M
             parameters_summary_SD[,bb] <- res_all[[bb]]$SD

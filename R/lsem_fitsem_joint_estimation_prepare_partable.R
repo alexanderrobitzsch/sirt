@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem_joint_estimation_prepare_partable.R
-## File Version: 0.318
+## File Version: 0.319
 
 lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
     par_invariant=NULL, par_linear=NULL, par_quadratic=NULL, pw_linear=1,
@@ -12,7 +12,7 @@ lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
     partable1 <- lsem_fitsem_joint_estimation_prepare_partable_include_group_label(
                         partable=partable, gg=1, label_list=label_list)
     partable_mg <- partable1
-    for (gg in 2:G){
+    for (gg in 2L:G){
         partable_gg <- partable
         partable_gg <- lsem_fitsem_joint_estimation_prepare_partable_include_group_label(
                             partable=partable_gg, gg=gg, label_list=label_list)
@@ -45,7 +45,7 @@ lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
     if ( NI > 0 ){
         partable1 <- partable_mg[1,]
         NV <- ncol(partable_mg)
-        for (vv in 1:NV){
+        for (vv in 1L:NV){
             if (is.numeric(partable1[1,vv])){
                 partable1[1,vv] <- 0
             } else {
@@ -58,7 +58,7 @@ lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
         partable1$op <- '=='
         partable1c <- partable1
 
-        for (vv in 1:NI){
+        for (vv in 1L:NI){
             par_vec_vv <- par_vec[vv]
             par_vec_names_vv <- par_vec_names[vv]
             ind_vv <- which( paste(partable_mg$par)==par_vec_names[vv] )
@@ -99,7 +99,7 @@ lsem_fitsem_joint_estimation_prepare_partable <- function(partable, G,
                 par_segments[indices2, 'con_include'] <- 0
             }
 
-            for (ll in 2:LV2){
+            for (ll in 2L:LV2){
                 partable1c$con <- vv
                 if (par_vec_vv=='inv'){
                     partable1c$lhs <- plabels[1]

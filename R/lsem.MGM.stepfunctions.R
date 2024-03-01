@@ -1,5 +1,5 @@
 ## File Name: lsem.MGM.stepfunctions.R
-## File Version: 0.131
+## File Version: 0.132
 
 #**** define object with LSEM step functions
 lsem.MGM.stepfunctions <- function( object, moderator.grid )
@@ -12,7 +12,7 @@ lsem.MGM.stepfunctions <- function( object, moderator.grid )
     dfr <- NULL
     G <- length(moderator.grid)
 
-    for (gg in 1:G){
+    for (gg in 1L:G){
         mod.gg <- moderator.grid[gg]
         ind.gg <- which( ( moderator.grouped$min <=mod.gg ) &
                             ( moderator.grouped$max > mod.gg ) )

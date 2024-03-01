@@ -1,5 +1,5 @@
 ## File Name: m_est.R
-## File Version: 0.150
+## File Version: 0.151
 
 m_est <- function(data, par, optfun_case=NULL, gradfun_case=NULL,
                 bread=TRUE, optimizer="optim",
@@ -25,7 +25,7 @@ m_est <- function(data, par, optfun_case=NULL, gradfun_case=NULL,
             grad_case <- matrix(NA, nrow=N, ncol=NP)
             colnames(grad_case) <- names(par)
             args1 <- args
-            for (pp in 1:NP){
+            for (pp in 1L:NP){
                 par1 <- m_est_add_increment(x=par, pos=pp, h=h)
                 args1$par <- par1
                 val2 <- do.call(what=what_optfun, args=args1)
@@ -84,14 +84,14 @@ m_est <- function(data, par, optfun_case=NULL, gradfun_case=NULL,
         hess <- array(0, dim=c(N,NP,NP))
         h <- 1e-4
         pp <- 1
-        for (pp in 1:NP){
+        for (pp in 1L:NP){
             par_pp <- m_est_add_increment(x=coef, pos=pp, h=h)
             scores2 <- -gradfun_case(data=data, par=par_pp)
             hess[,pp,] <- (scores2-scores)/h
         }
         B <- matrix(0, nrow=NP, ncol=NP)
-        for (pp in 1:NP){
-            for (hh in 1:NP){
+        for (pp in 1L:NP){
+            for (hh in 1L:NP){
                 B[pp,hh] <- mean( hess[,pp,hh] )
             }
         }

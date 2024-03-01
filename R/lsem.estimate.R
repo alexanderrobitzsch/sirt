@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 1.074
+## File Version: 1.108
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -23,10 +23,19 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     }
     use_lavaan_survey <- FALSE
 
+    #- check if list of imputed datasets is available
+    is_imputed <- ! ( is.list(data) & is.data.frame(data) )
+
     #- data cleaning
-    data <- as.data.frame(data)
-    data <- data[ ! is.na(data[,moderator]), ]
-    moderator_variable <- data[,moderator]
+    if (!is_imputed){
+        data <- as.data.frame(data)
+        data <- data[ ! is.na(data[,moderator]), ]
+        moderator_variable <- data[,moderator]
+        Nimp <- 0
+    } else {
+        moderator_variable <- NULL
+        Nimp <- length(data)
+    }
 
     #- process arguments
     res <- lsem_estimate_proc_args( lavaan.args=lavaan.args,
@@ -35,7 +44,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                 use_lavaan_survey=use_lavaan_survey, est_joint=est_joint,
                 par_invariant=par_invariant, par_linear=par_linear,
                 par_quadratic=par_quadratic, partable_joint=partable_joint,
-                moderator.grid=moderator.grid, se=se, verbose=verbose )
+                moderator.grid=moderator.grid, se=se, verbose=verbose,
+                is_imputed=is_imputed)
     sufficient_statistics <- res$sufficient_statistics
     use_lavaan_survey <- res$use_lavaan_survey
     variables_model <- res$variables_model
@@ -51,7 +61,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
 
     # group moderator if type='MGM'
     out <- lsem_group_moderator( data=data, type=type, moderator.grid=moderator.grid,
-                moderator=moderator, residualize=residualize, h=h )
+                moderator=moderator, residualize=residualize, h=h,
+                is_imputed=is_imputed, Nimp=Nimp )
     data <- out$data
     moderator.grouped <- out$moderator.grouped
     h <- out$h
@@ -63,7 +74,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     moderator.grid=moderator.grid, lavmodel=lavmodel, h=h, bw=bw,
                     residualize=residualize, eps=eps, verbose=verbose,
                     sampling_weights=sampling_weights, kernel=kernel,
-                    variables_model=variables_model)
+                    variables_model=variables_model, is_imputed=is_imputed,
+                    Nimp=Nimp)
     G <- out$G
     data <- out$data
     weights <- out$weights
@@ -91,7 +103,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     variables_model=variables_model, sampling_weights=sampling_weights,
                     has_meanstructure=has_meanstructure,
                     sufficient_statistics=sufficient_statistics, est_joint=est_joint,
-                    se=se, use_lavaan_survey=use_lavaan_survey, ... )
+                    se=se, use_lavaan_survey=use_lavaan_survey,
+                    is_imputed=is_imputed, Nimp=Nimp, ... )
     nobs <- unlist(lavfit@Data@nobs)
 
     # extract variables which are in model and data frame
@@ -127,7 +140,8 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     loc_linear_smooth=loc_linear_smooth, pd=pd,
                     residualized_intercepts=residualized_intercepts,
                     has_meanstructure=has_meanstructure, est_DIF=est_DIF,
-                    residualize=residualize, ... )
+                    residualize=residualize, is_imputed=is_imputed,
+                    Nimp=Nimp, moderator=moderator, ... )
     dif_effects <- out2$dif_effects
     parameters <- out2$parameters
     is_meanstructure <- out2$is_meanstructure
@@ -139,8 +153,11 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     parameters_summary <- lsem_parameter_summary( parameters=parameters,
                                 moderator.density=out$moderator.density,
                                 verbose=verbose )
-    out$moderator.density$Neff <- colSums(weights)
-
+    weights0 <- weights
+    if (is_imputed){
+        weights0 <- lsem_aggregate_statistics(x=weights)
+    }
+    out$moderator.density$Neff <- colSums(weights0)
     obji0 <- obji <- out$moderator.density
     obji$moderator <- obji$moderator
     obji$wgt <- obji$wgt
@@ -148,10 +165,14 @@ lsem.estimate <- function( data, moderator, moderator.grid,
     Y <- obji0[,-1]
     dfr <- data.frame( M=colMeans(Y), SD=apply( Y, 2, stats::sd ),
                             min=apply( Y, 2, min ), max=apply( Y, 2, max ) )
-    x <- data[,moderator]
-    dfr0 <- data.frame(M=mean( x, na.rm=TRUE ), SD=out$sd.moderator,
-                        min=min( x, na.rm=TRUE ), max=max( x, na.rm=TRUE ) )
-    obji <- rbind( dfr0, dfr )
+    if (is_imputed){
+        x <- (data[[1]])[, moderator]
+    } else {
+        x <- data[,moderator]
+    }
+    dfr0 <- data.frame(M=mean(x, na.rm=TRUE ), SD=out$sd.moderator,
+                        min=min(x, na.rm=TRUE ), max=max(x, na.rm=TRUE ) )
+    obji <- rbind( dfr0, dfr)
     rownames(obji) <- NULL
     moderator.stat <- data.frame(variable=c('moderator','wgt', 'Neff'), obji )
 
@@ -188,7 +209,7 @@ lsem.estimate <- function( data, moderator, moderator.grid,
                     partable_joint=partable_joint,
                     dif_effects=dif_effects, sample_stats=sample_stats,
                     loc_linear_smooth=loc_linear_smooth,
-                    se=se, compute_se=compute_se,
+                    se=se, compute_se=compute_se, is_imputed=is_imputed, Nimp=Nimp,
                     class_boot=FALSE, type=type, CALL=CALL )
     class(res) <- 'lsem'
     return(res)

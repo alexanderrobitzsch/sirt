@@ -37,13 +37,15 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.2  |  2024-02-15  |  Last: sirt 4.2-2
+VERSIONS sirt 4.2  |  2024-03-01  |  Last: sirt 4.2-13
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in handling sufficient statistics in
         lsem.permutationTest() (thanks to @martinabader, #22)
-
-
+FIXED * fixed numerical instabilities in rasch.pairwise.itemcluster()
+        in small samples
+ADDED * added option for using a list of imputed datasets in
+        lsem.estimate()
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: ---

@@ -1,5 +1,5 @@
 ## File Name: lsem.test.R
-## File Version: 0.133
+## File Version: 0.134
 
 #**** test LSEM model based on bootstrap
 lsem.test <- function( mod, bmod, models=NULL )
@@ -23,7 +23,7 @@ lsem.test <- function( mod, bmod, models=NULL )
 
     #* define design matrix
     A <- matrix(0, nrow=NG-1, ncol=NG)
-    for (gg in 1:(NG-1)){
+    for (gg in 1L:(NG-1)){
         A[gg,gg] <- -1
         A[gg,gg+1] <- 1
     }
@@ -73,7 +73,7 @@ lsem.test <- function( mod, bmod, models=NULL )
             if (! bmod_missing){
                 est_boot <- matrix(NA, nrow=NC, ncol=R)
                 rr <- 1
-                for (rr in 1:R){
+                for (rr in 1L:R){
                     dat$y <- parameters_boot[ind_pp,rr]
                     dat$w <- bmod$moderator_density_boot[,rr]
                     mod12 <- stats::lm(formula=model_mm, data=dat)
@@ -89,7 +89,7 @@ lsem.test <- function( mod, bmod, models=NULL )
                 # global Wald test for all parameters without intercept
                 V <- stats::cov(t(est_boot))
                 A <- matrix(0, nrow=NC-1, ncol=NC)
-                for (cc in 1:(NC-1)){
+                for (cc in 1L:(NC-1)){
                     A[cc,cc+1] <- 1
                 }
                 res <- lsem_wald_test(theta=coef11, V=V, A=A)

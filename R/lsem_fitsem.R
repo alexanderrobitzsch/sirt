@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.643
+## File Version: 0.658
 
 lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
                 verbose, pars, standardized, variables_model, sufficient_statistics,
@@ -8,7 +8,8 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
                 partable_joint=NULL, pw_linear=1, pw_quadratic=1,
                 se="standard", moderator_variable=NULL,
                 loc_linear_smooth=NULL, pd=FALSE, has_meanstructure=FALSE,
-                est_DIF=FALSE, residualized_intercepts=NULL, residualize=TRUE, ... )
+                est_DIF=FALSE, residualized_intercepts=NULL, residualize=TRUE,
+                is_imputed=FALSE, Nimp=0, moderator=NULL, ... )
 {
     parameters <- NULL
     fits <- NULL
@@ -29,13 +30,17 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
 
     #- sufficient statistics
     if (sufficient_statistics){
+
         sample_stats <- lsem_fitsem_compute_sufficient_statistics(G=G, dat=dat,
-                    variables_model=variables_model, weights=weights,
-                    moderator_variable=moderator_variable,
-                    loc_linear_smooth=loc_linear_smooth, moderator.grid=moderator.grid,
-                    pd=pd, residualized_intercepts=residualized_intercepts,
-                    has_meanstructure=has_meanstructure,
-                    residualize=residualize)
+                            variables_model=variables_model, weights=weights,
+                            moderator_variable=moderator_variable,
+                            loc_linear_smooth=loc_linear_smooth,
+                            moderator.grid=moderator.grid,
+                            pd=pd, residualized_intercepts=residualized_intercepts,
+                            has_meanstructure=has_meanstructure,
+                            residualize=residualize, is_imputed=is_imputed, Nimp=Nimp,
+                            moderator=moderator)
+
     }
     if (est_joint & (! sufficient_statistics)){
         N <- nrow(dat)
@@ -100,8 +105,13 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
     }
 
     #-- separate estimation: loop over groups
-    for (gg in 1:G){
-        dat$weight <- weights[,gg]
+    for (gg in 1L:G){
+
+        if (! is_imputed){
+            dat$weight <- weights[,gg]
+        } else {
+            dat$weight <- weights[[1]][,gg]
+        }
 
         #***** fit the model using weighted data
         if (( ! sufficient_statistics) & ( est_separate)){
@@ -144,7 +154,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
         } else {
             ind <- NULL
             par_gg <- NULL
-            for (pp in 1:NP){
+            for (pp in 1L:NP){
                 ind_pp <- which(pars==pars0[pp])
                 npp <- length(ind_pp)
                 ind <- c( ind, ind_pp)

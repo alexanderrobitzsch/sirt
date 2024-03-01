@@ -1,5 +1,5 @@
 ## File Name: lsem_parameter_summary.R
-## File Version: 0.235
+## File Version: 0.236
 
 
 ## lsem parameter summary
@@ -12,7 +12,7 @@ lsem_parameter_summary <- function( parameters, moderator.density, verbose )
         utils::flush.console()
     }
     parameters_summary <- NULL
-    for (pp in 1:NP){
+    for (pp in 1L:NP){
         par.pp <- parameters[ parameters$parindex==pp, ]
         pars1 <- data.frame( par=paste(par.pp$par[1]), parindex=pp)
         x <- par.pp[,'est']

@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.769
+%% File Version: 0.773
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -71,7 +71,7 @@ lsem.bootstrap(object, R=100, verbose=TRUE, cluster=NULL,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{data}{
-Data frame
+Data frame or a list of imputed datasets
 }
   \item{moderator}{
 Variable name of the moderator
@@ -242,8 +242,9 @@ competing factor analytic approaches for the investigation of measurement invari
 Alexander Robitzsch, Oliver Luedtke, Andrea Hildebrandt
 }
 
-%% \note{
-%% }
+% \note{
+% }
+
 
 %% Note that the specified model in \code{lavaan} syntax should be explicitly saved as
 %% the object \code{lavmodel} in the global envirnoment as it is done in the examples.

@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.111
+## File Version: 1.112
 
 
 #--- user specified item response model
@@ -51,7 +51,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         partable <- xxirt_createParTable( dat=dat, itemtype=itemtype,
                             customItems=customItems )
     }
-    
+
     # process partable and itemtype
     res <- xxirt_proc_ParTable( itemtype=itemtype, partable=partable, items=items )
     itemtype <- res$itemtype
@@ -66,7 +66,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     # create item list
     item_list <- xxirt_createItemList( customItems=customItems, itemtype=itemtype,
                         items=items, partable=partable )
-                        
+
     # shortcut for calculating expected counts
     dat1_resp <- xxirt_prepare_response_data(G=G, group_index=group_index,
                         weights=weights, dat1=dat1, dat_resp=dat_resp, maxK=maxK )
@@ -74,12 +74,12 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     #*** starting values item parameters
     par0 <- xxirt_partable_extract_freeParameters( partable=partable )
     par1 <- xxirt_ThetaDistribution_extract_freeParameters( customTheta=customTheta )
-    
+
     #***
     if (is.null(customTheta$some_bound)){
         customTheta$some_bound    <- FALSE
     }
-    
+
     #*** verbose
     verbose1 <- verbose==1
     verbose2 <- verbose==2
@@ -96,7 +96,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     }
     do_cv <- cv_kfold>0
     em_count <- 1
-    
+
     while(em_iterate){
 
         #--- create list with arguments for EM algorithm
@@ -118,7 +118,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
             em_args$verbose2 <- FALSE
             em_args$verbose3 <- FALSE
         }
-        
+
         #--- run EM algorithm
         em_out <- res <- do.call(what=xxirt_em_algorithm, args=em_args)
 

@@ -1,11 +1,15 @@
 ## File Name: lsem_estimate_proc_args.R
-## File Version: 0.406
+## File Version: 0.416
 
 lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     pseudo_weights, lavmodel, data, use_lavaan_survey, est_joint=FALSE,
     par_invariant=NULL, par_linear=NULL, par_quadratic=NULL,
-    partable_joint=NULL, se=NULL, G=NULL, moderator.grid=NULL, verbose=TRUE)
+    partable_joint=NULL, se=NULL, G=NULL, moderator.grid=NULL, verbose=TRUE,
+    is_imputed=FALSE)
 {
+    if (is_imputed){
+        data <- data[[1]]
+    }
 
     use_pseudo_weights <- pseudo_weights > 0
     if ( sufficient_statistics | use_pseudo_weights ){
@@ -54,7 +58,7 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
     data_ordered <- rep(FALSE, ncol(data1))
     names(data_ordered) <- colnames(data1)
     NV <- ncol(data1)
-    for (vv in 1:NV){
+    for (vv in 1L:NV){
         data_ordered[vv] <- is.factor(data1[,vv])
     }
     some_ordinal <- FALSE
@@ -90,6 +94,6 @@ lsem_estimate_proc_args <- function(lavaan.args, sufficient_statistics,
                 variables_ordered=variables_ordered, est_joint=est_joint,
                 partable=partable, has_meanstructure=has_meanstructure, se=se,
                 compute_se=compute_se, pseudo_weights=pseudo_weights,
-                some_ordinal=some_ordinal)
+                some_ordinal=some_ordinal, is_imputed=is_imputed)
     return(res)
 }

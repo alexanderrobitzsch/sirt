@@ -1,5 +1,5 @@
 ## File Name: xxirt_nr_grad_fun_Rcpp.R
-## File Version: 0.173
+## File Version: 0.174
 
 xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
 {
@@ -11,7 +11,7 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
     eps2 <- 1e-300
 
     grad <- 0*x
-    
+
     #*** compute prior distribution
     prior_Theta0 <- xxirt_compute_prior_Theta_from_x(x=x, em_args=em_args)
 

@@ -1,5 +1,5 @@
 ## File Name: xxirt_em_algorithm.R
-## File Version: 0.087
+## File Version: 0.088
 
 xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_list,
             items, Theta, ncat, partable, partable_index, dat, resp_index,
@@ -25,7 +25,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         probs_items <- xxirt_compute_itemprobs( item_list=item_list,
                             items=items, Theta=Theta, ncat=ncat,
                             partable=partable, partable_index=partable_index )
-                            
+
         #*** compute individual likelihood
         p.xi.aj <- xxirt_compute_likelihood( probs_items=probs_items, dat=dat,
                              resp_index=resp_index, dat_resp_bool=dat_resp_bool )
@@ -33,7 +33,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         #*** compute prior distribution
         prior_Theta <- xxirt_compute_priorDistribution( Theta=Theta,
                               customTheta=customTheta, G=G )
-                              
+
         #*** compute posterior distribution and expected counts
         res <- xxirt_compute_posterior( prior_Theta=prior_Theta, p.xi.aj=p.xi.aj,
                         group=group, G=G, weights=weights, dat1=dat1,

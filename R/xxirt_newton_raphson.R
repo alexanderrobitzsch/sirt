@@ -1,5 +1,5 @@
 ## File Name: xxirt_newton_raphson.R
-## File Version: 0.215
+## File Version: 0.216
 
 
 xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
@@ -27,7 +27,7 @@ xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
     NPI <- length(par_items)
     NPT <- length(par_Theta)
     NP <- NPI+NPT
-    
+
     em_args$parindex_items <- 1:NPI
     if (NPI==0){
         em_args$parindex_items <- NULL
@@ -89,11 +89,11 @@ xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
         upper <- c( partable_free$upper, customTheta$upper )
     } else {
         lower <- c( customTheta$lower )
-        upper <- c( customTheta$upper )    
+        upper <- c( customTheta$upper )
     }
     if (!is.null(lower)){ names(lower) <- names(x) }
     if (!is.null(upper)){ names(upper) <- names(x) }
-        
+
     if (verbose){
         cat( paste0('****** Newton-Raphson Optimization ********\n'))
         utils::flush.console()

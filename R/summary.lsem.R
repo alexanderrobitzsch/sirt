@@ -1,5 +1,5 @@
 ## File Name: summary.lsem.R
-## File Version: 0.412
+## File Version: 0.415
 
 
 #-- summary lsem
@@ -38,6 +38,9 @@ summary.lsem <- function( object, file=NULL, digits=3, ... )
     cat( paste0( 'Used observations in analysis', sp_eq,
                     round(object$nobs, digits) ), '\n')
     cat('Used sampling weights:', ! object$no_sampling_weights, '\n')
+    if (object$is_imputed){
+        cat( paste0( 'Number of imputed datasets: ', object$Nimp, '\n')    )
+    }
     if ( object$type=='LSEM'){
         cat( paste0( 'Bandwidth factor', sp_eq, round(object$h,digits) ), '\n')
         cat( paste0( 'Bandwidth', sp_eq, round(object$bw,digits) ), '\n')

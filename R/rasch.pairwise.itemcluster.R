@@ -1,5 +1,5 @@
 ## File Name: rasch.pairwise.itemcluster.R
-## File Version: 0.32
+## File Version: 0.35
 
 
 #***** Pairwise estimation with itemclusters
@@ -27,7 +27,7 @@ rasch.pairwise.itemcluster <- function( dat, itemcluster=NULL,
         zerosum <- FALSE
     }
     # create count tables
-    weights <- weights / sum(weights) * nrow(dat)
+#    weights <- weights / sum(weights) * nrow(dat)
     sw <- sqrt(weights)
     dat0 <- sw*(dat==0)
     dat1 <- sw*(dat==1)
@@ -45,15 +45,16 @@ rasch.pairwise.itemcluster <- function( dat, itemcluster=NULL,
     eps0 <- eps <- exp(b)
     max.change <- 10
     iter <- 1
-
+    tol <- 1e-10
     #**** start algorithm
     while( max.change > conv ){
         b0 <- b
         eps0 <- eps
         m1 <- sirt_matrix2( eps0, nrow=I) + matrix( eps0, nrow=I, ncol=I )
+        m1 <- m1+tol
         g1 <- rowSums(nij/m1)
-        eps <- Aij_rowsums/g1
-        b <- log(eps)
+        eps <- Aij_rowsums/(g1+tol)
+        b <- log(eps+tol)
         # include item parameter constraints
         if ( ! is.null(b.fixed) ){
             eps[ b.fixed[,1] ] <- b.fixed[,3]
