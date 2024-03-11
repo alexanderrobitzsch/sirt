@@ -1,5 +1,5 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.962
+## File Version: 3.966
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
@@ -73,7 +73,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     wgt <- as.matrix(wgt)
 
     wgt_combi <- matrix(NA, nrow=nrow(group.combis), ncol=ncol(lambda) )
-    for (ii in 1:I){
+    for (ii in 1L:I){
         wgt_combi[,ii] <- wgt[ group.combis[,1], ii]*wgt[ group.combis[,2], ii]
     }
 
@@ -104,7 +104,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         if (overparam | meth==0 ){
             G <- nrow(lambda)
             fac <- sum(wgt[,1]) / 1000
-            val <- val+fac*sum(x[1:G]^2)
+            val <- val+fac*sum(x[1L:G]^2)
         }
         return(val)
     }
@@ -213,7 +213,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
             grad <- rep(0,NP)
             names(grad) <- names(x)
             args <- list(x=par, lambda=lambda, nu=nu, overparam=overparam, eps=eps)
-            for (pp in 1:NP){
+            for (pp in 1L:NP){
                 args$x <- mgsem_add_increment(x=par, h=h, i1=pp)
                 f1 <- do.call(what=ia_fct_optim, args=args)
                 args$x <- mgsem_add_increment(x=par, h=-h, i1=pp)
@@ -230,7 +230,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
         args <- list(x=par, lambda=lambda, nu=nu, overparam=overparam, eps=eps,
                         meth=meth)
         pp <- 1
-        for (pp in 1:NP){
+        for (pp in 1L:NP){
             args$x <- mgsem_add_increment(x=par, h=h, i1=pp)
             f1 <- do.call( what=ia_grad_optim_num, args=args)
             args$x <- mgsem_add_increment(x=par, h=-h, i1=pp)
@@ -246,9 +246,9 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
 
         args <- list(x=par, lambda=lambda, nu=nu, overparam=overparam, eps=eps)
 
-        for (gg in 1:G){
+        for (gg in 1L:G){
             for (subs in c('lambda','nu')){
-                for (ii in 1:I){
+                for (ii in 1L:I){
                     if (subs=='lambda'){
                         z <- lambda
                     } else {

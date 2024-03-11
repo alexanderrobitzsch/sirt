@@ -1,5 +1,5 @@
 ## File Name: xxirt_proc_ParTable.R
-## File Version: 0.464
+## File Version: 0.465
 
 #-- process parameter table
 xxirt_proc_ParTable <- function( itemtype, partable, items )
@@ -22,8 +22,8 @@ xxirt_proc_ParTable <- function( itemtype, partable, items )
     partable[ ! partable$est, 'prior' ] <- NA
     #*** list with parameter table indices
     partable$parfree <- 1*partable$est
-    partable_index <- as.list( 1:I )
-    for (ii in 1:I){
+    partable_index <- as.list( 1L:I )
+    for (ii in 1L:I){
         partable_index[[ii]] <- which( partable$itemnr==ii )
     }
     ind <- which( duplicated( partable$parindex ) & ( ! is.na( partable$prior ) ) )
@@ -54,8 +54,8 @@ xxirt_proc_ParTable <- function( itemtype, partable, items )
         NP <- max( partable$parindex, na.rm=TRUE )
     }
     if ( NP > -Inf){
-        item_index <- as.list( 1:NP )
-        for (pp in 1:NP){
+        item_index <- as.list( 1L:NP )
+        for (pp in 1L:NP){
             p1 <- partable[ paste0( partable$parindex)==pp, ]
             names(item_index)[pp] <- p1[1,'parlabel']
             item_index[[pp]] <- p1$itemnr

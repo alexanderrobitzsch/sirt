@@ -1,5 +1,5 @@
 ## File Name: amh_plot.R
-## File Version: 0.339
+## File Version: 0.342
 
 
 #*** plot results of objects of class amh
@@ -25,7 +25,7 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
     ci.quant <- - stats::qnorm( (1-conflevel)/2 )
     graphics::par( mfrow=c(2,2))
 
-    for (vv in 1:VV){
+    for (vv in 1L:VV){
         x.vv <- as.vector( mcmcobj[,vv] )
         parm.vv <- colnames(mcmcobj)[vv]
         sparm.vv <- smcmcobj[ smcmcobj$parameter==parm.vv, ]
@@ -43,7 +43,7 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
         NS <- NX / 3
         g1 <- round(seq( 0, NX, length=4 ))
 
-        for (ii in 1:3){
+        for (ii in 1L:3){
             i1 <- seq(g1[ii]+1, g1[ii+1] )
             m1 <- mean( x1[ i1 ] )
             graphics::lines( iterindex[ i1 ], rep( m1, length(i1) ), col=col.split,
@@ -65,7 +65,6 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
         mtitle <- paste0( 'Autocorrelation of ', parm.vv )
         m1 <- stats::acf( x.vv, lag.max=lag.max, plot=FALSE)
         acf1 <- m1$acf[,1,1]
-        # iter_vv <- c(0,iterindex[ 1:lag.max])
         thin_lag <- round( mean( diff(iterindex) ) )
         iter_vv <- seq( 0, lag.max )*thin_lag
         # blue dashed line at
@@ -74,7 +73,7 @@ amh_plot <- function( x, conflevel=.95, digits=3, lag.max=.1, col.smooth="red",
         graphics::plot( iter_vv, acf1, xlab='Lag', ylab='ACF',
                             main=mtitle, type='n', ylim=ylim)
         NL <- length(iter_vv)
-        for (hh in 1:NL){
+        for (hh in 1L:NL){
             graphics::lines( rep( iter_vv[hh],2), c(0, acf1[hh]) )
         }
         graphics::abline( h=bd, col='blue', lty=2)

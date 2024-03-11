@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem_raw_data_define_pseudo_weights.R
-## File Version: 0.141
+## File Version: 0.142
 
 lsem_fitsem_raw_data_define_pseudo_weights <- function(dat, pseudo_weights)
 {
@@ -14,7 +14,7 @@ lsem_fitsem_raw_data_define_pseudo_weights <- function(dat, pseudo_weights)
         weights2 <- cumsum(weights1)
         tweights2 <- floor(weights2)
         freq <- c(tweights2[1], diff(tweights2))
-        ind <- rep(1:N, freq)
+        ind <- rep(1L:N, freq)
         dat <- dat[ind,]
         sampling_weights <- NULL
     }

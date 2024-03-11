@@ -1,8 +1,7 @@
 ## File Name: dexppow.R
-## File Version: 0.052
+## File Version: 0.054
 
 
-## copied from normalp::dnormp
 dexppow <- function (x, mu=0, sigmap=1, pow=2, log=FALSE)
 {
     p <- pow

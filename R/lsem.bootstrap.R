@@ -1,5 +1,5 @@
 ## File Name: lsem.bootstrap.R
-## File Version: 0.432
+## File Version: 0.438
 
 
 lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
@@ -62,7 +62,8 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
     #-- loop over bootstrap samples
     lsem_bootstrap_print_start(verbose=verbose)
 
-    repl_design_used <- matrix(NA, nrow=nrow(data), ncol=R)
+    repl_design_used <- matrix(NA, nrow=attr(data, 'N'), ncol=R)
+    Nimp <- attr(data, 'Nimp')
 
     if (n.core==1){
         rr <- 1
@@ -131,7 +132,7 @@ lsem.bootstrap <- function(object, R=100, verbose=TRUE, cluster=NULL,
             return(res_out)
         }
 
-        res_all <- sirt_parlapply(cl=cl, X=1:R, FUN=fun_lsem_bootstrap,
+        res_all <- sirt_parlapply(cl=cl, X=1L:R, FUN=fun_lsem_bootstrap,
                         verbose=verbose, arglist=arglist)
         parallel::stopCluster(cl)
 

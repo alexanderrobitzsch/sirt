@@ -1,5 +1,5 @@
 ## File Name: lsem_bootstrap_draw_bootstrap_sample.R
-## File Version: 0.068
+## File Version: 0.076
 
 lsem_bootstrap_draw_bootstrap_sample <- function(data, sampling_weights,
     lsem_args, cluster=NULL, repl_design=NULL, rr=NULL)
@@ -8,12 +8,14 @@ lsem_bootstrap_draw_bootstrap_sample <- function(data, sampling_weights,
     ind <- NULL
     used_repl_design <- ! is.null(repl_design)
     repl_vector <- NULL
-    N1 <- N <- nrow(data)
+    N <- attr(data, 'N')
+    N1 <- N
+    Nimp <- attr(data, 'Nimp')
 
     if (! used_repl_design){
         # no replication design
         if (is.null(cluster)){
-            ind <- sample(1:N, N, replace=TRUE)
+            ind <- sample(1L:N, N, replace=TRUE)
         } else {
             cluster1 <- data[,cluster]
             t1 <- unique(cluster1)
@@ -25,8 +27,16 @@ lsem_bootstrap_draw_bootstrap_sample <- function(data, sampling_weights,
                 ind <- c(ind, v1)
             }
         }
-
-        lsem_args1$data <- data[ind,]
+        if (Nimp==0){
+            lsem_args1$data <- data[ind,]
+        } else {
+            for (ii in 1L:Nimp){
+                dat1 <- data[[ii]]
+                dat1 <- dat1[ind,]
+                data[[ii]] <- dat1
+            }
+            lsem_args1$data <- data
+        }
         lsem_args1$sampling_weights <- sampling_weights[ind]
 
         # define replication design
@@ -35,7 +45,7 @@ lsem_bootstrap_draw_bootstrap_sample <- function(data, sampling_weights,
                                 freq=as.numeric(t1) )
         rownames(t1) <- NULL
 
-        t2 <- data.frame(index=1:N1, weight=sampling_weights)
+        t2 <- data.frame(index=1L:N1, weight=sampling_weights)
         t1 <- merge(x=t1, y=t2, by='index', all=TRUE)
         t1$freq <- ifelse( is.na(t1$freq), 0, t1$freq )
         t1$repl_vector <- t1$freq * t1$weight

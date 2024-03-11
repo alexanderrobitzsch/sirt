@@ -1,5 +1,5 @@
 ## File Name: lsem.permutationTest.R
-## File Version: 0.593
+## File Version: 0.594
 
 
 #*** permutation test for LSEM model
@@ -135,7 +135,7 @@ lsem.permutationTest <- function( lsem.object, B=1000, residualize=TRUE,
         }
 
 
-        res_all <- sirt_parlapply(cl=cl, X=1:B, FUN=fun_lsem_permutation_test,
+        res_all <- sirt_parlapply(cl=cl, X=1L:B, FUN=fun_lsem_permutation_test,
                         verbose=verbose, arglist=arglist)
 
         parallel::stopCluster(cl)

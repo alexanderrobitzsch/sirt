@@ -1,5 +1,5 @@
 ## File Name: xxirt_simulate.R
-## File Version: 0.142
+## File Version: 0.144
 
 xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
                     method="random")
@@ -56,7 +56,7 @@ xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
     #--- simulate items
     TP_list <- which( indices$N > 0 )
 
-    for (ii in 1:I){
+    for (ii in 1L:I){
 
         item_ii <- items[ii]
         ncat_ii <- ncat[ii]
@@ -64,7 +64,7 @@ xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
         type_ii <- paste(partable_ii$type[1])
         LC <- length(customItems)
         ll0 <- NA
-        for (ll in 1:LC){
+        for (ll in 1L:LC){
             if (customItems[[ll]]$name==type_ii){
                 ll0 <- ll
                 customItems_ll <- customItems[[ll]]
@@ -95,7 +95,7 @@ xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
             vals <- rep(0,N_tt)
             rn_ii <- rn[index_tt, ii ]
             hh <- 1
-            for (hh in 1:(ncat_ii-1)){
+            for (hh in 1L:(ncat_ii-1)){
                 vals <- ifelse( rn_ii > quants[hh], vals+1, vals )
             }
             dat[index_tt,ii] <- vals

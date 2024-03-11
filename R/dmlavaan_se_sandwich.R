@@ -1,5 +1,5 @@
 ## File Name: dmlavaan_se_sandwich.R
-## File Version: 0.115
+## File Version: 0.116
 
 dmlavaan_se_sandwich <- function(mod1, mod2, partable, label_parnames="parnames0",
         label_NPU="NPU", label_B="B", is_dmlavaan=TRUE)
@@ -17,8 +17,8 @@ dmlavaan_se_sandwich <- function(mod1, mod2, partable, label_parnames="parnames0
         A <- A / N^4
     }
     B <- matrix(0, nrow=NP1+NP2, ncol=NP1+NP2)
-    B[ 1:NP1, 1:NP1 ] <- mod1[[ label_B ]]
-    B[ NP1 + 1:NP2, NP1 + 1:NP2 ] <- mod2[[ label_B ]]
+    B[ 1L:NP1, 1L:NP1 ] <- mod1[[ label_B ]]
+    B[ NP1 + 1L:NP2, NP1 + 1L:NP2 ] <- mod2[[ label_B ]]
     parnames0 <- c( paste0(parnames1, '_mod1'), paste0(parnames2, '_mod2') )
     res <- dmlavaan_sandwich_formula(A=A, B=B, parnames=parnames0)
     V <- res$V

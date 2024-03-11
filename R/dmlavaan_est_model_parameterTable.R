@@ -1,5 +1,5 @@
 ## File Name: dmlavaan_est_model_parameterTable.R
-## File Version: 0.072
+## File Version: 0.074
 
 dmlavaan_est_model_parameterTable <- function(mod, parnames, coef1, vcov1)
 {
@@ -20,12 +20,9 @@ dmlavaan_est_model_parameterTable <- function(mod, parnames, coef1, vcov1)
     ld <- which( substring(pn1,1,2)=='.p')
     partable[ld, 'parname'] <- paste0( partable$lhs, partable$op, partable$rhs,
                                         '.g', partable$group )[ld]
-    for (pp in 1:NPU){
+    for (pp in 1L:NPU){
         ind_pp <- which(partable$pnid==pp)
         lab1 <- partable[ind_pp[1],'parname']
-        # if (length(ind_pp)>1){
-        #     lab1 <- gsub('.g1', '', lab1, fixed=TRUE)
-        # }
         partable[ind_pp,'parname'] <- lab1
     }
 

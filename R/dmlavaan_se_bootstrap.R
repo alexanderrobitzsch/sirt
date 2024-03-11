@@ -1,5 +1,5 @@
 ## File Name: dmlavaan_se_bootstrap.R
-## File Version: 0.135
+## File Version: 0.136
 
 dmlavaan_se_bootstrap <- function(mod1, mod2, partable, R)
 {
@@ -27,11 +27,10 @@ dmlavaan_se_bootstrap <- function(mod1, mod2, partable, R)
     rr <- 1
     while (rr<=R){
         # bootstrap data
-        ind <- sort(sample(1:N, N, replace=TRUE))
+        ind <- sort(sample(1L:N, N, replace=TRUE))
         t1 <- table(ind)
         boot_sample[ as.numeric( names(t1) ), rr ] <- as.numeric(t1)
         # half sampling
-        # ind <- sample(1:N, N/2)
         data_boot <- data[ind,]
         args1a$data <- data_boot
         args2a$data <- data_boot
@@ -41,8 +40,8 @@ dmlavaan_se_bootstrap <- function(mod1, mod2, partable, R)
         accept <- ( ! inherits(mod1a,'try-error')) & ( ! inherits(mod1a,'try-error'))
         if (accept){
             rr <- rr + 1
-            est_boot1[rr-1,1:NP1] <- coef(mod1a)
-            est_boot2[rr-1,1:NP2] <- coef(mod2a)
+            est_boot1[rr-1,1L:NP1] <- coef(mod1a)
+            est_boot2[rr-1,1L:NP2] <- coef(mod2a)
         }
     }
     est_boot1 <- dmlavaan_remove_duplicated_columns(x=est_boot1)
@@ -50,7 +49,7 @@ dmlavaan_se_bootstrap <- function(mod1, mod2, partable, R)
 
     #-- now compute standard error for inference
     # pars_sel <- which( ! is.na( partable$diff ) )
-    pars_sel <- 1:nrow(partable)
+    pars_sel <- 1L:nrow(partable)
     pp <- pars_sel[1]
     for (pp in pars_sel){
         partable_pp <- partable[pp,]

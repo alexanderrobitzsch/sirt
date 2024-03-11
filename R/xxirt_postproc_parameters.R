@@ -1,5 +1,5 @@
 ## File Name: xxirt_postproc_parameters.R
-## File Version: 0.236
+## File Version: 0.237
 
 
 
@@ -20,7 +20,7 @@ xxirt_postproc_parameters <- function( partable, customTheta,
     m1 <- matrix(NA, nrow=I, ncol=PN)
     rownames(m1) <- items
     colnames(m1) <- parnames
-    for (pp in 1:PN){
+    for (pp in 1L:PN){
         p1 <- partable[ partable$parname==parnames[pp], ]
         m1[ p1$item, parnames[pp] ] <- p1$value
     }

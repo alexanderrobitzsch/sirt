@@ -1,12 +1,12 @@
 ## File Name: lsem_fitsem_compute_sufficient_statistics.R
-## File Version: 0.124
+## File Version: 0.125
 
 lsem_fitsem_compute_sufficient_statistics <- function(G, dat, variables_model,
     weights, moderator_variable=NULL, loc_linear_smooth=NULL, moderator.grid=NULL,
     pd=FALSE, residualized_intercepts=NULL,    has_meanstructure=FALSE,
     residualize=TRUE, is_imputed=FALSE, Nimp=0, moderator=NULL)
 {
-    wmean <- wcov <- Nobs <- as.list(1:G)
+    wmean <- wcov <- Nobs <- as.list(1L:G)
 
     dat0 <- dat
     if (!is_imputed){

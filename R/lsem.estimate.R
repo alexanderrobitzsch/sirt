@@ -1,5 +1,5 @@
 ## File Name: lsem.estimate.R
-## File Version: 1.108
+## File Version: 1.113
 
 # estimate LSEM model
 lsem.estimate <- function( data, moderator, moderator.grid,
@@ -178,6 +178,10 @@ lsem.estimate <- function( data, moderator, moderator.grid,
 
     #-- model parameters
     model_parameters <- setdiff( paste(parameters_summary$par), fit_measures)
+
+    #- add attr 'Nimp' to data
+    attr(data, 'Nimp') <- Nimp
+    attr(data, 'N') <- out$N
 
     #-- output
     s2 <- Sys.time()

@@ -1,5 +1,5 @@
 ## File Name: dmlavaan_joint_parameterTable.R
-## File Version: 0.06
+## File Version: 0.07
 
 dmlavaan_joint_parameterTable <- function(mod1, mod2, label_parnames="parnames0")
 {
@@ -8,7 +8,7 @@ dmlavaan_joint_parameterTable <- function(mod1, mod2, label_parnames="parnames0"
     #-- create joint parameter table
     parnames <- union(parnames1, parnames2)
     NP <- length(parnames)
-    partable <- data.frame(id=1:NP, parname=parnames)
+    partable <- data.frame(id=1L:NP, parname=parnames)
     partable$in_mod1 <- match(partable$parname, parnames1)
     partable$in_mod2 <- match(partable$parname, parnames2)
     #- first model

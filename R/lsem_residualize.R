@@ -1,5 +1,5 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.477
+## File Version: 0.478
 
 
 #**** residualize data
@@ -37,7 +37,7 @@ lsem_residualize <- function( data, moderator, moderator.grid,
     sampling_weights <- res$sampling_weights
     no_sampling_weights <- res$no_sampling_weights
 
-    res0 <- as.list(1:Nimp)
+    res0 <- as.list(1L:Nimp)
     data0 <- data
 
     # residualize

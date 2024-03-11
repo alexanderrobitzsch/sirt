@@ -1,5 +1,5 @@
 ## File Name: rasch_mirtlc_est_a.R
-## File Version: 0.16
+## File Version: 0.172
 
 
 #-- estimation of a parameter (discrimination parameter)
@@ -25,9 +25,12 @@ rasch_mirtlc_est_a <- function( theta.k, b, fixed.a, pjk, alpha1, alpha2, h,
     ll0 <- ll1 <- ll2 <- matrix(0, I, G)
     #-- groups
     for (gg in 1:G){
-        ll0[,gg] <- rowSums( r.jk[,,gg] * log( pjk.M ) + ( n.jk[,,gg] - r.jk[,,gg]  ) * log( qjk.M ) )
-        ll1[,gg] <- rowSums( r.jk[,,gg] * log( pjk1.M ) + ( n.jk[,,gg] - r.jk[,,gg]  ) * log( qjk1.M ) )
-        ll2[,gg] <- rowSums( r.jk[,,gg] * log( pjk2.M ) + ( n.jk[,,gg] - r.jk[,,gg]  ) * log( qjk2.M )     )
+        ll0[,gg] <- rowSums( r.jk[,,gg] * log( pjk.M ) +
+                                ( n.jk[,,gg] - r.jk[,,gg]  ) * log( qjk.M ) )
+        ll1[,gg] <- rowSums( r.jk[,,gg] * log( pjk1.M ) +
+                                ( n.jk[,,gg] - r.jk[,,gg]  ) * log( qjk1.M ) )
+        ll2[,gg] <- rowSums( r.jk[,,gg] * log( pjk2.M ) +
+                                ( n.jk[,,gg] - r.jk[,,gg]  ) * log( qjk2.M )     )
     }
     ll0 <- rowSums(ll0)
     ll1 <- rowSums(ll1)

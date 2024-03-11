@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem.R
-## File Version: 0.658
+## File Version: 0.661
 
 lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.grid,
                 verbose, pars, standardized, variables_model, sufficient_statistics,
@@ -44,9 +44,9 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
     }
     if (est_joint & (! sufficient_statistics)){
         N <- nrow(dat)
-        ind <- rep(1:N, G)
+        ind <- rep(1L:N, G)
         data_joint <- dat[ind, ]
-        data_joint$group__ <- rep(1:G, each=N)
+        data_joint$group__ <- rep(1L:G, each=N)
         data_joint$weight <- as.vector(weights)
         data_joint$case__ <- ind
     }
@@ -149,7 +149,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
         if (est_separate){
             ind <- match(pars0, pars)
             grid_index <- gg
-            parindex <- 1:NP
+            parindex <- 1L:NP
             par_gg <- pars0
         } else {
             ind <- NULL
@@ -161,7 +161,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
                 par_gg <- c(par_gg, rep(pars0[pp], npp) )
             }
             grid_index <- dfr.gg$group[ ind ]
-            parindex <- rep(1:NP, each=G)
+            parindex <- rep(1L:NP, each=G)
             dfr.gg$block <- dfr.gg$group <- NULL
         }
         dfr.gg <- dfr.gg[ ind, ]
@@ -171,7 +171,7 @@ lsem_fitsem <- function( dat, weights, lavfit, fit_measures, NF, G, moderator.gr
             est_fit <- lsem_lavaan_fit_measures(object=survey.fit,
                                 fit_measures=fit_measures)
             dfr.gg0 <- data.frame(grid_index=gg, moderator=moderator.grid[gg],
-                              par=fit_measures, parindex=NP+1:NF, est=est_fit, op='fit' )
+                              par=fit_measures, parindex=NP+1L:NF, est=est_fit, op='fit')
             vars <- setdiff( colnames(dfr.gg), colnames(dfr.gg0) )
             for (vv in vars){ dfr.gg0[,vv] <- NA }
             dfr.gg <- rbind( dfr.gg, dfr.gg0[, colnames(dfr.gg) ] )

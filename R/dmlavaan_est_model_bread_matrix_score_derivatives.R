@@ -1,5 +1,5 @@
 ## File Name: dmlavaan_est_model_bread_matrix_score_derivatives.R
-## File Version: 0.114
+## File Version: 0.115
 
 
 dmlavaan_est_model_bread_matrix_score_derivatives <- function(fun, args,
@@ -12,7 +12,7 @@ dmlavaan_est_model_bread_matrix_score_derivatives <- function(fun, args,
     hess <- array(NA, dim=c(N, NPU, NPU) )
     partable1 <- partable
     partable1$start <- partable$est
-    for (pp in 1:NPU){
+    for (pp in 1L:NPU){
         partable1a <- partable1
         ind_pp <- which( partable$pnid==pp )
         val <- partable1$est[ind_pp[1]]
@@ -38,9 +38,8 @@ dmlavaan_est_model_bread_matrix_score_derivatives <- function(fun, args,
         hess[,pp,] <- ( scores2-scores3 ) / (fac*h1)
     }
     B <- matrix(0, nrow=NPU, ncol=NPU)
-    pp <- 1; hh <- 1
-    for (pp in 1:NPU){
-        for (hh in 1:NPU){
+    for (pp in 1L:NPU){
+        for (hh in 1L:NPU){
             B[pp,hh] <- sum( hess[,pp,hh] )
         }
     }

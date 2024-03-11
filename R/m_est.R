@@ -1,5 +1,5 @@
 ## File Name: m_est.R
-## File Version: 0.151
+## File Version: 0.152
 
 m_est <- function(data, par, optfun_case=NULL, gradfun_case=NULL,
                 bread=TRUE, optimizer="optim",
@@ -106,7 +106,7 @@ m_est <- function(data, par, optfun_case=NULL, gradfun_case=NULL,
     }
 
     #-- create parameter table
-    partable <- data.frame(id=1:NP, parname=parnames, est=coef)
+    partable <- data.frame(id=1L:NP, parname=parnames, est=coef)
     if (!bread){
         partable$se_obs <- sqrt_diag(x=V_obs)
     }

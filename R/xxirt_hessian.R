@@ -1,5 +1,5 @@
 ## File Name: xxirt_hessian.R
-## File Version: 0.579
+## File Version: 0.584
 
 #--- computation of hessian matrix
 xxirt_hessian <- function( object, h=1e-4, use_shortcut=TRUE )
@@ -46,10 +46,10 @@ xxirt_hessian <- function( object, h=1e-4, use_shortcut=TRUE )
     par1 <- xxirt_partable_extract_freeParameters( partable=partable )
     par2 <- xxirt_parTheta_extract_freeParameters( customTheta=customTheta )
     par0 <- par <- c(par1, par2)
-
+    
     #** detect whether there are item-wise parameters
-    a1 <- aggregate( partable$itemnr, list(partable$parindex), min )
-    a2 <- aggregate( partable$itemnr, list(partable$parindex), max )
+    a1 <- stats::aggregate( partable$itemnr, list(partable$parindex), min )
+    a2 <- stats::aggregate( partable$itemnr, list(partable$parindex), max )
     item_wise <- sum(a2[,2]> a1[,2])==0
 
     #***********************
@@ -59,7 +59,7 @@ xxirt_hessian <- function( object, h=1e-4, use_shortcut=TRUE )
         eps <- 1e-10
         I <- dim(probs_items0)[1]
         #*** include free paramaters in partable
-        partable <- xxirt_partable_include_freeParameters( partable, x=x[ 1:NPI ] )
+        partable <- xxirt_partable_include_freeParameters( partable, x=x[ 1L:NPI ] )
         #**** include parameter in customTheta
         customTheta$par[ customTheta$est ] <- x[ (NPI+1):(NPI+NPT) ]
         #*** different parameters
