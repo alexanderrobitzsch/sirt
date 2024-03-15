@@ -1,5 +1,5 @@
 ## File Name: xxirt_hessian.R
-## File Version: 0.584
+## File Version: 0.585
 
 #--- computation of hessian matrix
 xxirt_hessian <- function( object, h=1e-4, use_shortcut=TRUE )
@@ -46,7 +46,7 @@ xxirt_hessian <- function( object, h=1e-4, use_shortcut=TRUE )
     par1 <- xxirt_partable_extract_freeParameters( partable=partable )
     par2 <- xxirt_parTheta_extract_freeParameters( customTheta=customTheta )
     par0 <- par <- c(par1, par2)
-    
+
     #** detect whether there are item-wise parameters
     a1 <- stats::aggregate( partable$itemnr, list(partable$parindex), min )
     a2 <- stats::aggregate( partable$itemnr, list(partable$parindex), max )

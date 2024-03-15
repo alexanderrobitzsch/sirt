@@ -1,5 +1,5 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.966
+## File Version: 3.972
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
@@ -203,7 +203,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     #-- standard error computation (if requested)
     if (! is.null(vcov)){
 
-        names(par) <- c( paste0('alpha',2:G), paste0('psi',2:G) )
+        names(par) <- c( paste0('alpha',2L:G), paste0('psi',2L:G) )
         NP <- length(par)
 
         #- gradient computation
@@ -212,7 +212,8 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
             par <- x
             grad <- rep(0,NP)
             names(grad) <- names(x)
-            args <- list(x=par, lambda=lambda, nu=nu, overparam=overparam, eps=eps)
+            args <- list(x=par, lambda=lambda, nu=nu, overparam=overparam, eps=eps,
+                                meth_=meth)
             for (pp in 1L:NP){
                 args$x <- mgsem_add_increment(x=par, h=h, i1=pp)
                 f1 <- do.call(what=ia_fct_optim, args=args)
