@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_data.R
-## File Version: 0.055
+## File Version: 0.057
 
 mgsem_proc_data <- function(data, group, weights)
 {
@@ -14,7 +14,7 @@ mgsem_proc_data <- function(data, group, weights)
     }
     idgroup <- match(group, groups)
     suffstat <- list()
-    for (gg in 1:G){
+    for (gg in 1L:G){
         ind_gg <- which(group==groups[gg])
         dat_gg <- data[ ind_gg, ]
         w <- weights[ind_gg]

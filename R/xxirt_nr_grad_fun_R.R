@@ -1,5 +1,5 @@
 ## File Name: xxirt_nr_grad_fun_R.R
-## File Version: 0.13
+## File Version: 0.141
 
 xxirt_nr_grad_fun_R <- function(x, em_args, eps=1e-100)
 {
@@ -29,7 +29,7 @@ xxirt_nr_grad_fun_R <- function(x, em_args, eps=1e-100)
     MIGC <- em_args$MIGC
     probs_items_der <- list()
 
-    for (mm in 1:MIGC){
+    for (mm in 1L:MIGC){
         free_pars_design_mm <- free_pars_design[ free_pars_design$item_group_comp==mm, ]
         x1 <- x[ em_args$parindex_items ]
         x1 <- sirt_add_increment(x=x1, pos=free_pars_design_mm$pid, value=h)
@@ -43,7 +43,7 @@ xxirt_nr_grad_fun_R <- function(x, em_args, eps=1e-100)
     }
 
     #--- loop over item parameters
-    for (pp in 1:NPI){
+    for (pp in 1L:NPI){
 
         free_pars_design_pp <- free_pars_design[pp,]
         partable_pp <- partable[ partable$parlabel==free_pars_design_pp$parlabel, ]

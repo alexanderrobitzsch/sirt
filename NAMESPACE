@@ -398,6 +398,7 @@ export(xxirt_createParTable)
 export(xxirt_createThetaDistribution)
 export(xxirt_hessian)
 export(xxirt_modifyParTable)
+export(xxirt_sandwich_pml)
 export(yen.q3)		# defunct
     
 

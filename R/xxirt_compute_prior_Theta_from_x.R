@@ -1,9 +1,8 @@
 ## File Name: xxirt_compute_prior_Theta_from_x.R
-## File Version: 0.03
+## File Version: 0.07
 
 xxirt_compute_prior_Theta_from_x <- function(x, em_args)
 {
-
     # include parameters
     customTheta <- xxirt_parTheta_include_freeParameters(
                                 customTheta=em_args$customTheta,

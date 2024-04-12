@@ -1,5 +1,5 @@
 ## File Name: xxirt_compute_posterior.R
-## File Version: 0.293
+## File Version: 0.294
 
 
 ##-- xxirt: compute posterior
@@ -21,12 +21,12 @@ xxirt_compute_posterior <- function( prior_Theta, p.xi.aj, group,
     n.ik <- array( 0, dim=c(I,maxK, TP,G) )
     N.ik <- array( 0, dim=c(I,maxK, TP) )
     pi.k <- matrix( 0, nrow=TP, ncol=G )
-    for (gg in 1:G){
+    for (gg in 1L:G){
         ind_gg <- group_index[[gg]]
         p.aj.xi.gg <- as.matrix( p.aj.xi[ind_gg, ] )
         dat1_resp_gg <- dat1_resp[ ind_gg,, ]
         weights_gg <- weights[ind_gg]
-        for (kk in 1:maxK){
+        for (kk in 1L:maxK){
             dat1_resp_gg_kk <- as.matrix(dat1_resp_gg[,,kk])
             n.ik[,kk,,gg] <- sirt_rcpp_xxirt_compute_posterior_expected_counts(
                                     dat1_resp_gg=dat1_resp_gg_kk, p_aj_xi_gg=p.aj.xi.gg,

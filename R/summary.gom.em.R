@@ -1,5 +1,5 @@
 ## File Name: summary.gom.em.R
-## File Version: 0.177
+## File Version: 0.179
 
 
 #--- summary for gom object
@@ -48,7 +48,8 @@ summary.gom <- function( object, file=NULL, ...)
 
     cat( "Number of estimated parameters", "=", object$ic$np, "\n" )
     cat( "  Number of estimated item parameters", "=", object$ic$np.item, "\n" )
-    cat( "  Number of estimated distribution parameters", "=", object$ic$np.trait, "\n\n" )
+    cat( "  Number of estimated distribution parameters", "=",
+                                        object$ic$np.trait, "\n\n" )
 
     #--- information criteria
     rm_summary_information_criteria(object=object)

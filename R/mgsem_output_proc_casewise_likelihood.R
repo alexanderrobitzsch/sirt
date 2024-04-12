@@ -1,5 +1,5 @@
 ## File Name: mgsem_output_proc_casewise_likelihood.R
-## File Version: 0.07
+## File Version: 0.08
 
 
 mgsem_output_proc_casewise_likelihood <- function(data_proc, implied, estimator="ML")
@@ -12,7 +12,7 @@ mgsem_output_proc_casewise_likelihood <- function(data_proc, implied, estimator=
         data <- data_proc$data
         idgroup <- data_proc$idgroup
         case_ll <- rep(NA,N)
-        for (gg in 1:G){
+        for (gg in 1L:G){
             implied_gg <- implied[[gg]]
             ind_gg <- which(idgroup==gg)
             Mu <- as.vector(implied_gg$Mu[,1])

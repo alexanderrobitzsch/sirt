@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.515
+%% File Version: 0.523
 
 \name{xxirt}
 \alias{xxirt}
@@ -19,6 +19,8 @@
 \alias{summary.IRT.modelfit.xxirt}
 \alias{IRT.factor.scores.xxirt}
 \alias{xxirt_hessian}
+\alias{xxirt_sandwich_pml}
+
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
@@ -39,8 +41,8 @@ number of EM iterations should be chosen to obtain reasonable starting values.
 xxirt(dat, Theta=NULL, itemtype=NULL, customItems=NULL, partable=NULL,
        customTheta=NULL, group=NULL, weights=NULL, globconv=1e-06, conv=1e-04,
        maxit=1000, mstep_iter=4, mstep_reltol=1e-06, maxit_nr=0, optimizer_nr="nlminb",
-       control_nr=list(trace=1), h=1E-4, use_grad=TRUE, verbose=TRUE,
-       penalty_fun_item=NULL, np_fun_item=NULL, verbose_index=NULL,
+       estimator="ML", control_nr=list(trace=1), h=1E-4, use_grad=TRUE, verbose=TRUE,
+       penalty_fun_item=NULL, np_fun_item=NULL, pml_args=NULL, verbose_index=NULL,
        cv_kfold=0, cv_maxit=10)
 
 \method{summary}{xxirt}(object, digits=3, file=NULL, ...)
@@ -75,6 +77,9 @@ xxirt(dat, Theta=NULL, itemtype=NULL, customItems=NULL, partable=NULL,
 
 # computes Hessian matrix
 xxirt_hessian(object, h=1e-4, use_shortcut=TRUE)
+
+#- sandwich estimate for pairwise maximum likelihood estimation
+xxirt_sandwich_pml(object, h=1e-4)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -126,6 +131,9 @@ Convergence criterion in M-step
 \item{optimizer_nr}{Type of optimizer for Newton-Raphson optimization.
 Alternatives are \code{"optim"} or \code{"nlminb"} or other options of
 \code{\link{sirt_optimizer}}.}
+\item{estimator}{Marginal maximum likelihood (\code{"ML"}) or pairwise
+maximum likelihood (\code{"PML"})
+}
 \item{control_nr}{Argument \code{control} for optimizer.}
 \item{h}{Numerical differentiation parameter}
 \item{use_grad}{Logical indicating whether the gradient should be supplied
@@ -142,6 +150,7 @@ estimation. Used as a function of \code{x} (vector of item parameters)}
 \item{file}{Optional file name to which \code{summary} output is written}
 \item{parm}{Optional vector of parameters}
 \item{level}{Confidence level}
+\item{pml_args}{Weight matrices for \code{estimator="PML"}}
 \item{verbose_index}{Logical indicating whether item index should be
 printed in estimation output}
 \item{cv_kfold}{Number of k folds in cross validation. The default is 0 (no
@@ -747,6 +756,102 @@ partable <- sirt::xxirt_createParTable( dat, itemtype=itemtype,
 mod1 <- sirt::xxirt( dat=dat, Theta=Theta, partable=partable,
                    customItems=customItems, customTheta=customTheta)
 summary(mod1)
+
+#############################################################################
+## EXAMPLE 5: Partial credit model with MML and PML
+#############################################################################
+
+data(data.gpcm, package="TAM")
+dat <- data.gpcm
+
+# recode data and include some missings
+dat[ dat[,1]==3, 1] <- 2
+dat[ 1, c(1,2) ] <- NA
+dat[2,3] <- NA
+
+#------ Definition of item response functions
+#*** IRF 2PL
+P_2PL <- function( par, Theta, ncat)
+{
+    b <- par
+    TP <- nrow(Theta)
+    P <- matrix( NA, nrow=TP, ncol=ncat)
+    P[,1] <- 1
+    for (cc in 2:ncat){
+        P[,cc] <- exp( Theta[,1] - b[cc-1] )
+    }
+    P <- P / rowSums(P)
+    return(P)
+}
+
+P_PCM2 <- function( par, Theta, ncat=3)
+{
+    P <- P_2PL(par=par, Theta=Theta, ncat=ncat)
+    return(P)
+}
+
+P_PCM3 <- function( par, Theta, ncat=4)
+{
+    P <- P_2PL(par=par, Theta=Theta, ncat=ncat)
+    return(P)
+}
+
+# define some slightly informative prior of 2PL
+par <- c( b1=-1, b2=1 )
+NP <- length(par)
+item_PCM2 <- sirt::xxirt_createDiscItem( name="PCM2", par=par, est=rep(TRUE,NP),
+               P=P_PCM2 )
+par <- c( b1=-1, b2=0, b3=1 ) ; NP <- length(par)
+item_PCM3 <- sirt::xxirt_createDiscItem( name="PCM3", par=par, est=rep(TRUE,NP),
+               P=P_PCM3 )
+
+customItems <- list( item_PCM2,  item_PCM3 )
+
+#---- definition theta distribution
+#** theta grid
+Theta <- matrix( seq(-6,6,length=21), ncol=1 )
+
+#** theta distribution
+P_Theta1 <- function( par, Theta, G){
+    mu <- par[1]
+    sigma <- max( par[2], .01 )
+    TP <- nrow(Theta)
+    pi_Theta <- matrix( 0, nrow=TP, ncol=G)
+    pi1 <- dnorm( Theta[,1], mean=mu, sd=sigma )
+    pi1 <- pi1 / sum(pi1)
+    pi_Theta[,1] <- pi1
+    return(pi_Theta)
+}
+#** create distribution class
+par_Theta <- c( "mu"=0, "sigma"=1 )
+customTheta  <- sirt::xxirt_createThetaDistribution( par=par_Theta, est=c(FALSE,TRUE),
+                       P=P_Theta1 )
+
+#-- create parameter table
+itemtype <- c("PCM2", "PCM3", "PCM3")
+partable <- sirt::xxirt_createParTable( dat, itemtype=itemtype,
+                        customItems=customItems )
+
+#***** Model 1: MML
+mod1 <- sirt::xxirt( dat=dat, Theta=Theta, partable=partable,
+                   customItems=customItems, customTheta=customTheta)
+summary(mod1)
+
+#***** Model 2: PML
+I <- ncol(dat)
+W1 <- rep(1,I)
+W2 <- 1-diag(I)
+W2[3,2] <- 0
+W2[ upper.tri(W2)] <- 0
+pml_args <- list(W1=W1/sum(W1), W2=W2/sum(W2) )
+
+mod2 <- sirt::xxirt( dat=dat, Theta=Theta, partable=partable,
+                   customItems=customItems, customTheta=mod1$customTheta,
+                   estimator="PML", pml_args=pml_args)
+
+# variance matrix
+smod2 <- sirt::xxirt_sandwich_pml(object=mod2)
+smod2
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

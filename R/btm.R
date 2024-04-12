@@ -1,5 +1,5 @@
 ## File Name: btm.R
-## File Version: 1.537
+## File Version: 1.539
 
 
 #--- Bradley-Terry model in sirt
@@ -20,7 +20,7 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
     }
 
     if ( ignore.ties ){
-        admiss <- admiss[1:2]
+        admiss <- admiss[c(1,2)]
         delta <- -99
         est.delta <- FALSE
     }
@@ -252,7 +252,7 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
 
     # fit statistics
     res0 <- btm_fit_statistics( probs=probs, dat0=dat0, ind1=ind1, ind2=ind2,
-                TP=TP, judge=judge, wgt.ties=wgt.ties )
+                    TP=TP, judge=judge, wgt.ties=wgt.ties )
     effects$outfit <- res0$outfit
     effects$infit <- res0$infit
     multiple_judges <- res0$multiple_judges
@@ -267,10 +267,10 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
     #--- output list
     effects <- effects[ order(effects$propscore, decreasing=TRUE), ]
     res <- list( effects=effects, pars=pars, summary.effects=summary.effects,
-                mle.rel=mle.rel, sepG=sep.rel, probs=probs, data=dat0,
-                multiple_judges=multiple_judges, fit_judges=fit_judges,
-                residuals=residuals, eps=eps, ignore.ties=ignore.ties,
-                wgt.ties=wgt.ties, time_alg=time_alg, ll=ll, dat=dat)
+                    mle.rel=mle.rel, sepG=sep.rel, probs=probs, data=dat0,
+                    multiple_judges=multiple_judges, fit_judges=fit_judges,
+                    residuals=residuals, eps=eps, ignore.ties=ignore.ties,
+                    wgt.ties=wgt.ties, time_alg=time_alg, ll=ll, dat=dat)
     res$CALL <- CALL
     res$iter <- iter
     ic <- list( n=length(teams), D=nrow(dat0) )

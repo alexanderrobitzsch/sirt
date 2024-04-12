@@ -1,5 +1,5 @@
 ## File Name: summary.lsem.permutationTest.R
-## File Version: 0.297
+## File Version: 0.298
 
 
 summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... )
@@ -42,7 +42,7 @@ summary.lsem.permutationTest <- function( object, file=NULL, digits=3, ... )
     cat('Global Test Statistics\n\n')
     obji <- object$teststat
     VV <- ncol(obji)
-    for (vv in 2:VV){
+    for (vv in 2L:VV){
         obji[,vv] <- round( obji[,vv], digits )
     }
     print(obji)

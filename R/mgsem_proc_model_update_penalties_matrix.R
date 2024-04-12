@@ -1,12 +1,12 @@
 ## File Name: mgsem_proc_model_update_penalties_matrix.R
-## File Version: 0.072
+## File Version: 0.073
 
 mgsem_proc_model_update_penalties_matrix <- function(partable, entries, model)
 {
 
     ND <- nrow(partable)
     for (entry in entries){
-        for (dd in 1:ND){
+        for (dd in 1L:ND){
             if (partable[dd,'unique']==1){
                 group <- partable$group[dd]+1
                 type_dd <- paste(partable$type[dd])

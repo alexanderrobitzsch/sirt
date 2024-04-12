@@ -80,7 +80,7 @@ from the <span class="pkg">coda</span> package.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>mcmcobj</dt>
 <dd><p>Objects of class <code>mcmc.list</code> as created by
-<code>coda::mcmc</code></p></dd>
+<code><a href="https://rdrr.io/pkg/coda/man/mcmc.html" class="external-link">coda::mcmc</a></code></p></dd>
 
   <dt>exclude</dt>
 <dd><p>Vector of parameters which should be excluded in calculations</p></dd>
@@ -114,7 +114,7 @@ See <code><a href="https://rdrr.io/pkg/LAM/man/amh.html" class="external-link">L
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code>coda::mcmc</code></p></div>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/coda/man/mcmc.html" class="external-link">coda::mcmc</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -160,7 +160,7 @@ See <code><a href="https://rdrr.io/pkg/LAM/man/amh.html" class="external-link">L
 <span><span class="va">mcmcobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">mcmcobj</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">mcmcobj</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"mcmc"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">mcmcobj</span>, <span class="st">"mcpar"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="va">n.burnin</span><span class="op">+</span><span class="fl">1</span>, <span class="va">n.iter</span>, <span class="va">thin</span> <span class="op">)</span></span>
-<span><span class="va">mcmcobj</span> <span class="op">&lt;-</span> <span class="fu">coda</span><span class="fu">::</span><span class="fu">mcmc</span><span class="op">(</span> <span class="va">mcmcobj</span> <span class="op">)</span></span>
+<span><span class="va">mcmcobj</span> <span class="op">&lt;-</span> <span class="fu">coda</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/mcmc.html" class="external-link">mcmc</a></span><span class="op">(</span> <span class="va">mcmcobj</span> <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># coefficients, variance covariance matrix and confidence interval</span></span>
 <span><span class="fu">mcmc_coef</span><span class="op">(</span><span class="va">mcmcobj</span><span class="op">)</span></span>

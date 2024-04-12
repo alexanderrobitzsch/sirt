@@ -1,5 +1,5 @@
 ## File Name: sirt_optimizer.R
-## File Version: 0.371
+## File Version: 0.372
 
 sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
         hessian=TRUE, control=list(), ...)
@@ -35,7 +35,7 @@ sirt_optimizer <- function(optimizer, par, fn, grad=NULL, method="L-BFGS-B",
         res0 <- do.call(what=optimx_fun, args=args)
         # res <- optimx::Rvmmin(par=par, fn=fn, gr=grad, control=control, ...)
         res <- list()
-        m1 <- as.vector(as.numeric(res0[1,1:NP]))
+        m1 <- as.vector(as.numeric(res0[1,1L:NP]))
         res$par <- m1
         res$convergence <- res0$convcode[1]
         res$iter <- res0$feval[1]

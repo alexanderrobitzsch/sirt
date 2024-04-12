@@ -1,17 +1,17 @@
 ## File Name: write.fwf2.R
-## File Version: 1.121
+## File Version: 1.124
 
 
 write.fwf2 <- function( dat, format.full, format.round, savename )
 {
     if (is.null( colnames(dat) ) ){
-        colnames(dat) <- paste( 'V', 1:( ncol(dat) ), sep='')
+        colnames(dat) <- paste( 'V', 1L:(ncol(dat)), sep='')
     }
     matr <- matrix( ' ', nrow=nrow(dat), ncol=ncol(dat))
     ind1 <- which( format.round <=0  )
     format.full[ ind1 ] <- format.full[ind1]
     format.round[ ind1 ] <- format.round[ind1]
-    for (vv in 1:( ncol(matr) ) ){
+    for (vv in 1L:(ncol(matr)) ){
         fvv <- format.round[vv]
         fff <- format.full[vv]
         matr[,vv] <- write.format2( vec1=dat[,vv], ff=fff, fr=fvv )
@@ -20,8 +20,8 @@ write.fwf2 <- function( dat, format.full, format.round, savename )
     if ( is.vector(matr) ){
         writeLines( matr, paste( savename, '.dat', sep='') )
     } else {
-        utils::write.table( matr, paste( savename, '.dat', sep=''),
-            row.names=FALSE, col.names=FALSE)
+        utils::write.table( matr, paste(savename, '.dat', sep=''),
+                    row.names=FALSE, col.names=FALSE)
     }
     dfr <- data.frame( variable=colnames(dat),
                     begin=c( 1, cumsum( format.full )[ - ncol(dat) ] + 1 ),

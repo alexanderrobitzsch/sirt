@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.704
+%% File Version: 1.708
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -743,6 +743,36 @@ mod1 <- sirt::invariance.alignment( lambda=lambda, nu=nu, eps=eps, optimizer="op
 # variance matrix and standard errors
 mod1$vcov
 sqrt(diag(mod1$vcov))
+
+#############################################################################
+# EXAMPLE 9: Comparison 2 groups for dichotomous data | data.pisaMath
+#############################################################################
+
+data(data.pisaMath)
+dat <- data.pisaMath$data
+library("lavaan")
+
+model1 <- "
+    F=~ M192Q01 + M406Q01 + M406Q02 + M423Q01 + M496Q01 + M496Q02 + M564Q01 +
+         M564Q02 + M571Q01 + M603Q01 + M603Q02
+    "
+
+fit.configural <- lavaan::cfa(model1, data=dat, group="female",
+                  ordered=TRUE, std.lv=TRUE, parameterization="theta")
+lavaan::summary(fit.configural, standardized=TRUE)
+
+# extract item parameters separate group analyses
+ipars <- lavaan::parameterEstimates(fit.configural)
+# extract lambda's: groups are in rows, items in columns
+lambda <- matrix( ipars[ ipars$op=="=~", "est"], nrow=2,  byrow=TRUE)
+colnames(lambda) <- colnames(dat)[6:16]
+# extract nu's
+nu <- matrix( ipars[ ipars$op=="|" & ipars$se !=0, "est" ], nrow=2,  byrow=TRUE)
+colnames(nu) <- colnames(dat)[6:16]
+
+# Model 1: apply invariance alignment
+mod1 <- sirt::invariance.alignment( lambda=lambda, nu=nu )
+summary(mod1)
 }
 }
 

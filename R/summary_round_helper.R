@@ -1,10 +1,10 @@
 ## File Name: summary_round_helper.R
-## File Version: 0.09
+## File Version: 0.101
 
 summary_round_helper <- function( obji, digits, exclude=NULL, print=TRUE)
 {
     NC <- ncol(obji)
-    ind <- 1:NC
+    ind <- 1L:NC
     if ( ! is.null(exclude) ){
         ind2 <- which( colnames(obji) %in% exclude )
         ind <- setdiff( ind, ind2 )

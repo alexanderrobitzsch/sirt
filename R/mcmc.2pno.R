@@ -1,5 +1,5 @@
 ## File Name: mcmc.2pno.R
-## File Version: 1.26
+## File Version: 1.271
 ##############################################
 # MCMC estimation 2PNO model
 mcmc.2pno <- function(dat, weights=NULL, burnin=500, iter=1000, N.sampvalues=1000,
@@ -24,7 +24,7 @@ mcmc.2pno <- function(dat, weights=NULL, burnin=500, iter=1000, N.sampvalues=100
     # item parameters in matrix form
     aM <- matrix( a, nrow=N, ncol=I, byrow=TRUE)
     bM <- matrix( b, nrow=N, ncol=I, byrow=TRUE)
-    theta <- qnorm( ( rowMeans( dat0,na.rm=TRUE ) + .01 ) / 1.02 )
+    theta <- stats::qnorm( ( rowMeans( dat0,na.rm=TRUE ) + .01 ) / 1.02 )
     # define lower and upper thresholds
     ZZ <- 1000
     threshlow <- -ZZ + ZZ*dat

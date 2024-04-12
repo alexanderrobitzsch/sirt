@@ -1,5 +1,5 @@
 ## File Name: sirt_EAP.R
-## File Version: 0.01
+## File Version: 0.02
 
 sirt_EAP <- function(post, theta)
 {
@@ -7,7 +7,7 @@ sirt_EAP <- function(post, theta)
     N <- nrow(post)
     D <- ncol(theta)
     EAP <- matrix(NA, nrow=N, ncol=D)
-    for (tt in 1:D){
+    for (tt in 1L:D){
         thetaM <- sirt_matrix2(theta[,tt], nrow=N)
         EAP[,tt] <- rowSums(thetaM * post)
     }

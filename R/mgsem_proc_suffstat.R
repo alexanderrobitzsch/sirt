@@ -1,12 +1,12 @@
 ## File Name: mgsem_proc_suffstat.R
-## File Version: 0.098
+## File Version: 0.099
 
 
 mgsem_proc_suffstat <- function(suffstat)
 {
     G <- length(suffstat)
     N_group <- rep(0,G)
-    for (gg in 1:G){
+    for (gg in 1L:G){
         suffstat_gg <- suffstat[[gg]]
         N_group[gg] <- suffstat_gg$N
         # rename entries

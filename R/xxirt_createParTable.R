@@ -1,5 +1,5 @@
 ## File Name: xxirt_createParTable.R
-## File Version: 0.258
+## File Version: 0.259
 
 #*** create parameter table
 xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
@@ -12,10 +12,10 @@ xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
     }
     dfr <- NULL
     CI <- length(customItems)
-    for (ii in 1:I){
+    for (ii in 1L:I){
         type_ii <- itemtype[ii]
         item_ii <- NULL
-        for ( vv in 1:CI){
+        for ( vv in 1L:CI){
             ci_ii <- customItems[[vv]]
             if ( ci_ii$name==type_ii ){
                 item_ii <- ci_ii
@@ -49,7 +49,7 @@ xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
     }
     #**** create parameter indices
     NP <- nrow(dfr)
-    dfr$rowindex <- 1:NP
+    dfr$rowindex <- 1L:NP
     # parameter index
     dfr$parindex <- cumsum( dfr$est )
     #*** parameter label

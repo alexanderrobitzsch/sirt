@@ -1,12 +1,12 @@
 ## File Name: mgsem_list_elements_est_total_implied.R
-## File Version: 0.02
+## File Version: 0.03
 
 mgsem_list_elements_est_total_implied <- function(model, is_B)
 {
     G <- length(model)-1
     est_total0 <- list()
     implied0 <- list()
-    for (gg in 1:G){
+    for (gg in 1L:G){
         est0 <- model[[1]]$est
         est_gg <- model[[gg+1]]$est
         est_total0[[gg]] <- mgsem_add_list_entries(list1=est0, add_list=est_gg,

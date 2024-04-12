@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_model.R
-## File Version: 0.307
+## File Version: 0.308
 
 mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group, W,
         prior_list=NULL, pen_type="lasso", fixed_parms=FALSE,
@@ -27,7 +27,7 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group, W,
     model <- mgsem_proc_model_single_group(model=model)
 
     #--- loop over groups
-    for (gg in 0:G){
+    for (gg in 0L:G){
 
         group <- gg
         hh <- gg+1
@@ -54,7 +54,7 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group, W,
                 M2 <- index[[type]]
                 n1 <- nrow(M1)
                 n2 <- ncol(M2)
-                for (ii in 1:n1){
+                for (ii in 1L:n1){
                     if (symm){
                         hh <- ii
                     } else {
@@ -135,8 +135,8 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group, W,
         diffpar_pen$coef_indices <- coef_indices
         dp1 <- NULL
         NW <- ncol(W)
-        for (ww in 1:NW){
-            for (uu in 1:NW){
+        for (ww in 1L:NW){
+            for (uu in 1L:NW){
                 val <- W[ww,uu]
                 if (abs(val) > 1e-14){
                     dp2 <- data.frame(index1=ww, index2=uu, W=val)
@@ -172,7 +172,7 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group, W,
     model <- mgsem_partable2model(partable=dfr, model=model, index=TRUE)
 
     #*** unique parameters
-    loop_parms <- (1:ND)[ dfr$unique==1]
+    loop_parms <- (1L:ND)[ dfr$unique==1]
 
     #- rewrite penalty parameters into model matrices
     entries <- c('pen_l2', 'pen_lp', 'pen_difflp')

@@ -1,13 +1,12 @@
 ## File Name: mgsem_suffstat_covariance_matrix.R
-## File Version: 0.099
+## File Version: 0.101
 
 mgsem_suffstat_covariance_matrix <- function(suffstat)
 {
     G <- length(suffstat)
     dfr <- NULL
-    # gg <- 1
 
-    for (gg in 1:G){
+    for (gg in 1L:G){
         suffstat_gg <- suffstat[[gg]]
         names_gg <- names(suffstat_gg)
         mu <- suffstat_gg[[ intersect( c('mu','M'), names_gg) ]]
@@ -16,23 +15,23 @@ mgsem_suffstat_covariance_matrix <- function(suffstat)
         vars <- names(mu)
         I1 <- length(mu)
         if (is.null(vars)){
-            vars <- paste0('V',1:I1)
+            vars <- paste0('V',1L:I1)
         }
         #** mu
         label <- paste0('mu_G', gg, '_', vars)
         se <- sqrt( diag(Sigma) / N )
-        dfr1 <- data.frame(type='mu', group=gg, index1=1:I1, index2=NA, label=label,
+        dfr1 <- data.frame(type='mu', group=gg, index1=1L:I1, index2=NA, label=label,
                     par=mu, se=se)
         V1 <- Sigma / N
         rownames(V1) <- colnames(V1) <- label
 
         #** sigma
-        c1 <- rbind( 1:I1, 1:I1)
+        c1 <- rbind( 1L:I1, 1L:I1)
         c2 <- utils::combn(x=I1, m=2)
         c3 <- rbind( t(c1), t(c2))
         c3 <- c3[ order(c3[,1]), ]
         label <- paste0('Sigma_G', gg, '_', vars[c3[,1]], '_', vars[c3[,2]] )
-        par <- Sigma[ c3[,1:2] ]
+        par <- Sigma[ c3[,1L:2] ]
 
         #* compute duplication matrix
         K <- mgsem_duplication_matrix(x=Sigma)

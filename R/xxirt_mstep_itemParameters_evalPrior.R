@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_itemParameters_evalPrior.R
-## File Version: 0.153
+## File Version: 0.154
 
 
 #*** evaluate prior in M-step
@@ -12,7 +12,7 @@ xxirt_mstep_itemParameters_evalPrior <- function(partable, h=0)
     #*** evaluate prior distributions in partable
     pen <- rep(0,NP1)
     if (NP>0){
-        for (pp in 1:NP){
+        for (pp in 1L:NP){
             if ( ! is.na( partable1[pp,'prior'] ) ) {
                 prior_pp <- partable1[pp,'prior']
                 val <- partable1[pp,'value'] + h

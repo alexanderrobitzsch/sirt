@@ -1,5 +1,5 @@
 ## File Name: ccov.np.R
-## File Version: 1.221
+## File Version: 1.225
 
 
 #---- nonparametric estimation of conditional covariance
@@ -36,12 +36,12 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
     }
     icc_items <- matrix( 0, length(thetagrid), I )
     if ( I >=20 ){
-        display <- seq( 1, I, floor( I/20 ) )[ 2:20 ]
+        display <- seq( 1, I, floor( I/20 ) )[ 2L:20 ]
     } else {
         display <- 20
     }
     i <- 1
-    for ( ii in 1:I ){
+    for ( ii in 1L:I ){
         obs_ii <- ! is.na( data[,ii] )
         x <- score[ obs_ii ]
         y <- data[ obs_ii, ii ]
@@ -62,10 +62,11 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
         utils::flush.console()
     }
     # calculation of conditional covariance
-    ccov.table <- data.frame( 'item1ID'=rep( 1:I, I), 'item2ID'=rep( 1:I, each=I ) )
+    ccov.table <- data.frame( item1ID=rep(1L:I, I),
+                                item2ID=rep( 1L:I, each=I) )
     ccov.table <- ccov.table[ ccov.table$item1ID < ccov.table$item2ID, ]
     ccov.table$N <- apply( ccov.table, 1, FUN=function(ll){
-                    sum( rowSums( is.na( data[, c( ll[1], ll[2] ) ] ) )==0 ) } )
+                            sum( rowSums( is.na( data[, c( ll[1], ll[2] ) ] ) )==0 ) } )
     ccov.table <- ccov.table[ ccov.table$N > 0, ]
     ccov.table$item1 <- colnames(data)[ ccov.table$item1ID ]
     ccov.table$item2 <- colnames(data)[ ccov.table$item2ID ]
@@ -76,9 +77,9 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
     ccov.matrix <- prod.matrix <- matrix( 0, nrow=length(thetagrid), ncol=FF )
     ii <- 1
     ccov_sum_score <- rep(NA, FF)
-    for (ff in 1:FF){
+    for (ff in 1L:FF){
         if (FF>20){
-            display <- seq( 1, FF, floor( FF/20 ) )[ 2:20 ]
+            display <- seq( 1, FF, floor( FF/20 ) )[ 2L:20 ]
         } else {
             display <- seq(1,FF)
         }

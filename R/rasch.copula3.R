@@ -1,5 +1,5 @@
 ## File Name: rasch.copula3.R
-## File Version: 6.53
+## File Version: 6.542
 
 
 
@@ -464,7 +464,7 @@ rasch.copula3 <- function( dat, itemcluster, dims=NULL,
                     ll1[cc] <- sum( rjkCC[[cc]] * log( rest1$pjk.theta.kCC[[cc]] ) )
                     ll2[cc] <- sum( rjkCC[[cc]] * log( rest2$pjk.theta.kCC[[cc]] ) )
                                 }
-            a1 <- aggregate( cbind( ll0, ll1, ll2 ), list(est.delta), sum, na.rm=T)
+            a1 <- stats::aggregate( cbind( ll0, ll1, ll2 ), list(est.delta), sum, na.rm=T)
             ll0 <- a1[,2]
             ll1 <- a1[,3]
             ll2 <- a1[,4]
@@ -573,7 +573,7 @@ rasch.copula3 <- function( dat, itemcluster, dims=NULL,
             ll0 <- rescop$ll
             # mu + h
             w1 <- wgt.theta
-            w2 <- dnorm( theta.k, mean=mu[gg] + h, sd=sigma[gg] )
+            w2 <- stats::dnorm( theta.k, mean=mu[gg] + h, sd=sigma[gg] )
             w1[,gg] <- w2 / sum(w2)
             rescop <- .ll.rasch.copula20( theta.k, b, alpha1, alpha2, a, dat2.li, itemcluster0,
                             CC, dp.ld, dat2.ld, dat3.ld, dat2.ld.resp, dat2.li.resp, delta,
@@ -621,7 +621,7 @@ rasch.copula3 <- function( dat, itemcluster, dims=NULL,
         prbar <- floor( prbar )
         prbar <- c( prbar[1], diff(prbar) )
         if (progress){ cat(" Estimation of sigma: |") }
-        for (gg in 2:G){
+        for (gg in 2L:G){
 #            est.aa <- est.a * (est.a==aa )
             rescop <- .ll.rasch.copula20( theta.k, b, alpha1, alpha2, a, dat2.li, itemcluster0,
                             CC, dp.ld, dat2.ld, dat3.ld, dat2.ld.resp, dat2.li.resp, delta, wgt.theta, I,
@@ -653,7 +653,7 @@ rasch.copula3 <- function( dat, itemcluster, dims=NULL,
             sigma.change <- ifelse( abs( sigma.change ) > .3, .3*sign(sigma.change), sigma.change )
             sigma.change <- sigma.change * ( ( 1:G )==gg )
             sigma <- sigma + sigma.change
-            w2 <- dnorm( theta.k, mean=mu[gg], sd=sigma[gg] )
+            w2 <- stats::dnorm( theta.k, mean=mu[gg], sd=sigma[gg] )
             wgt.theta[,gg] <- w2 / sum(w2)
 #            cat( aa, " ") ;
         if (progress){

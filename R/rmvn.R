@@ -1,5 +1,5 @@
 ## File Name: rmvn.R
-## File Version: 0.04
+## File Version: 0.05
 
 rmvn <- function(N, mu, Sigma, exact=TRUE)
 {
@@ -10,7 +10,7 @@ rmvn <- function(N, mu, Sigma, exact=TRUE)
 
     #-- compute data with exact zero means and identity covariance matrix
     if (exact){
-        c1 <- stats::cov.wt(dat0, method="ML")
+        c1 <- stats::cov.wt(dat0, method='ML')
         dat0 <- dat0 - matrix( c1$center, nrow=N, ncol=D, byrow=TRUE)
         COV0 <- c1$cov
         c0 <- svd(COV0)

@@ -1,5 +1,5 @@
 ## File Name: xxirt_simulate.R
-## File Version: 0.144
+## File Version: 0.145
 
 xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
                     method="random")
@@ -38,7 +38,7 @@ xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
     #---- simulate item responses
     I <- max(partable$itemnr)
     items <- unique(paste(partable$item))
-    ncat <- aggregate(partable$ncat, list(partable$itemnr), max)[,2]
+    ncat <- stats::aggregate(partable$ncat, list(partable$itemnr), max)[,2]
 
     dat <- as.data.frame( matrix(NA, nrow=N, ncol=I) )
     colnames(dat) <- items

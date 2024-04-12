@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.112
+## File Version: 1.159
 
 
 #--- user specified item response model
@@ -7,10 +7,9 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 partable=NULL, customTheta=NULL, group=NULL, weights=NULL,
                 globconv=1E-6, conv=1E-4, maxit=1000, mstep_iter=4,
                 mstep_reltol=1E-6, maxit_nr=0, optimizer_nr="nlminb",
-                control_nr=list(trace=1),
-                h=1E-4, use_grad=TRUE,
-                verbose=TRUE, penalty_fun_item=NULL,
-                np_fun_item=NULL, verbose_index=NULL,
+                estimator="ML", control_nr=list(trace=1),
+                h=1E-4, use_grad=TRUE, verbose=TRUE, penalty_fun_item=NULL,
+                np_fun_item=NULL, pml_args=NULL, verbose_index=NULL,
                 cv_kfold=0, cv_maxit=10)
 {
     #*** preliminaries
@@ -63,6 +62,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     item_index <- res$item_index
     dat <- as.matrix(dat)
 
+
     # create item list
     item_list <- xxirt_createItemList( customItems=customItems, itemtype=itemtype,
                         items=items, partable=partable )
@@ -97,14 +97,16 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     do_cv <- cv_kfold>0
     em_count <- 1
 
+
     while(em_iterate){
 
         #--- create list with arguments for EM algorithm
         em_args <- list( maxit=maxit, verbose1=verbose1, disp=disp,
                     item_list=item_list, items=items, Theta=Theta, ncat=ncat,
                     partable=partable, partable_index=partable_index, dat=dat,
-                    resp_index=resp_index, dat_resp=dat_resp, dat_resp_bool=dat_resp_bool,
-                    dat1=dat1, dat1_resp=dat1_resp, customTheta=customTheta, G=G,
+                    I=ncol(dat), resp_index=resp_index, dat_resp=dat_resp,
+                    dat_resp_bool=dat_resp_bool, dat1=dat1, dat1_resp=dat1_resp,
+                    customTheta=customTheta, G=G,
                     par0=par0, maxK=maxK, group_index=group_index, weights=weights,
                     mstep_iter=mstep_iter, eps=eps, mstep_reltol=mstep_reltol,
                     mstep_method=mstep_method, item_index=item_index, h=h,
@@ -119,8 +121,20 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
             em_args$verbose3 <- FALSE
         }
 
+        #-- settings for PML estimation
+        if (estimator=='PML'){
+            do_nr <- TRUE
+            maxit_nr <- maxit
+            pml_args <- xxirt_nr_pml_preproc_data(em_args=em_args, pml_args=pml_args)
+            em_args$pml_args <- pml_args
+        }
+
         #--- run EM algorithm
-        em_out <- res <- do.call(what=xxirt_em_algorithm, args=em_args)
+        if (estimator=='ML'){
+            em_out <- res <- do.call(what=xxirt_em_algorithm, args=em_args)
+        } else {
+            em_out <- res <- NULL
+        }
 
         #--- collect EM output
         if (em_count==1){
@@ -150,11 +164,11 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         cv_loglike <- NA
         if (do_cv){
             N <- nrow(dat)
-            cv_zone <- ( ( 0:(N-1) ) %% cv_kfold ) + 1
+            cv_zone <- ( ( 0L:(N-1) ) %% cv_kfold ) + 1
             cv_loglike <- 0
             em_args$partable <- partable
             em_args$customTheta <- customTheta
-            for (jj in 1:cv_kfold){
+            for (jj in 1L:cv_kfold){
                 weights1 <- weights*(cv_zone!=jj )
                 weights2 <- weights*(cv_zone==jj )
                 em_args$weights <- weights1
@@ -181,16 +195,22 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
         if (do_nr){
             res <- xxirt_newton_raphson(em_out=em_out, em_args=em_args, maxit_nr=maxit_nr,
                             optimizer_nr=optimizer_nr, control_nr=control_nr,
-                            verbose=verbose)
+                            verbose=verbose, estimator=estimator)
             res_opt_nr <- res$res_opt_nr
             iter <- res_opt_nr$iter + iter
             iter_nr <- res_opt_nr$iter
             opt_values_nr <- res$opt_values
+            em_args <- res$em_args
+            pml_args <- res$em_args$pml_args
             em_args$partable <- partable <- res$partable
+            probs_items <- res$probs_items
             em_args$customTheta <- customTheta <- res$customTheta
         } # end NR optimization
         em_count <- 2
         do_nr <- FALSE
+        if (estimator=='PML' | maxit==0){
+            em_iterate <- FALSE
+        }
 
     }  # loop for final EM iteration
 
@@ -210,18 +230,26 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
 
     #-- information criteria
     ic <- xxirt_ic( dev=dev, N=W, par_items=par_items,
-                par_Theta=par_Theta, I=I, par_items_bounds=par_items_bounds,
-                np_item=np_item)
+                    par_Theta=par_Theta, I=I, par_items_bounds=par_items_bounds,
+                    np_item=np_item, estimator=estimator)
 
     #-- compute EAP
-    EAP <- xxirt_EAP(p.aj.xi=p.aj.xi, Theta=Theta )
+    if (estimator=='ML'){
+        EAP <- xxirt_EAP(p.aj.xi=p.aj.xi, Theta=Theta )
+        loglike <- -dev/2
+    }
+    if (estimator=='PML'){
+        EAP <- NULL
+        dev <- NULL
+        loglike <- NULL
+    }
 
     #--- output
     s2 <- Sys.time()
     res <- list( partable=partable, par_items=par_items,
                 par_items_summary=par_items_summary, par_items_bounds=par_items_bounds,
                 par_Theta=par_Theta, Theta=Theta, probs_items=probs_items,
-                probs_Theta=prior_Theta, deviance=dev, loglike=-dev/2,
+                probs_Theta=prior_Theta, deviance=dev, loglike=loglike,
                 opt_val=opt_val, pen_val=pen_val, ic=ic,
                 item_list=item_list, customItems=customItems,
                 customTheta=customTheta, cv_loglike=cv_loglike,
@@ -235,6 +263,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 resp_index=resp_index, converged=converged,
                 res_opt_nr=res_opt_nr, opt_values_nr=opt_values_nr, maxit_nr=maxit_nr,
                 iter=iter-1, iter_em=iter_em-1, iter_nr=iter_nr,
+                estimator=estimator, pml_args=pml_args, em_args=em_args,
                 CALL=CALL, s1=s1, s2=s2 )
     class(res) <- 'xxirt'
     return(res)

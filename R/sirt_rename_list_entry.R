@@ -1,14 +1,14 @@
 ## File Name: sirt_rename_list_entry.R
-## File Version: 0.09
+## File Version: 0.101
 
 sirt_rename_list_entry <- function(model, name1, name2)
 {
     model_temp <- model
     G <- length(model)
-    for (gg in 1:G){
+    for (gg in 1L:G){
         model_gg <- model_temp[[gg]]
         TP <- length(model_gg)
-        for (tt in 1:TP){
+        for (tt in 1L:TP){
             model_gg_tt <- model_gg[[tt]]
             ind <- which( names(model_gg_tt)==name1)
             if (length(ind)>0){

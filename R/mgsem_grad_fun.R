@@ -1,5 +1,5 @@
 ## File Name: mgsem_grad_fun.R
-## File Version: 0.172
+## File Version: 0.173
 
 
 mgsem_grad_fun <- function(x, opt_fun_args, output_all=FALSE)
@@ -22,7 +22,7 @@ mgsem_grad_fun <- function(x, opt_fun_args, output_all=FALSE)
     est_total0 <- res$est_total0
 
     dermoments0 <- list()
-    for (gg in 1:G){
+    for (gg in 1L:G){
         grad_suffstat_fun_args <- list(suffstat=opt_fun_args$suffstat[[gg]],
                                         Mu=implied0[[gg]])
         if (estimator=='ME'){
@@ -36,7 +36,7 @@ mgsem_grad_fun <- function(x, opt_fun_args, output_all=FALSE)
                                         args=grad_suffstat_fun_args)
     }
 
-    for (dd in 1:ND){
+    for (dd in 1L:ND){
 
         group_dd <- partable$group[dd]
         i1_dd <- partable$i1[dd]

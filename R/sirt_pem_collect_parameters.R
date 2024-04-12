@@ -1,5 +1,5 @@
 ## File Name: sirt_pem_collect_parameters.R
-## File Version: 0.06
+## File Version: 0.07
 
 sirt_pem_collect_parameters <- function( parmlist, pem_parameter_index )
 {
@@ -7,7 +7,7 @@ sirt_pem_collect_parameters <- function( parmlist, pem_parameter_index )
     parm <- rep(0, NV)
     NP <- pem_parameter_index[['__n_parameters']]
     NPL <- length(parmlist)
-    for (pp in 1:NPL){
+    for (pp in 1L:NPL){
         var_pp <- names(parmlist)[pp]
         parm_index_pp <- pem_parameter_index[[ var_pp ]]
         x <- as.vector(parmlist[[pp]])

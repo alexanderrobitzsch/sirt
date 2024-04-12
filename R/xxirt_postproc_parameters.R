@@ -1,5 +1,5 @@
 ## File Name: xxirt_postproc_parameters.R
-## File Version: 0.237
+## File Version: 0.242
 
 
 
@@ -27,7 +27,6 @@ xxirt_postproc_parameters <- function( partable, customTheta,
     p1 <- partable[ ! duplicated(partable$item ), ]
     dfr <- data.frame( item=items, type=paste(p1$type), m1  )
     rownames(dfr) <- NULL
-
     #*** probabilities item parameters
     pi_dim <- dim(probs_items)
     dimnames(probs_items)[[1]] <- items
@@ -38,7 +37,6 @@ xxirt_postproc_parameters <- function( partable, customTheta,
     p1$active <- 1 * ( p1$value > p1$lower )
     p1$active <- p1$active * ( p1$value < p1$upper )
     par_items_bounds <- p1
-
     np_item <- NULL
     if ( ! is.null(np_fun_item) ){
         np_item <- np_fun_item(x=par_items)

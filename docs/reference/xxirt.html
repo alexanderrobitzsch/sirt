@@ -69,8 +69,8 @@ number of EM iterations should be chosen to obtain reasonable starting values.</
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">xxirt</span><span class="op">(</span><span class="va">dat</span>, Theta<span class="op">=</span><span class="cn">NULL</span>, itemtype<span class="op">=</span><span class="cn">NULL</span>, customItems<span class="op">=</span><span class="cn">NULL</span>, partable<span class="op">=</span><span class="cn">NULL</span>,</span>
 <span>       customTheta<span class="op">=</span><span class="cn">NULL</span>, group<span class="op">=</span><span class="cn">NULL</span>, weights<span class="op">=</span><span class="cn">NULL</span>, globconv<span class="op">=</span><span class="fl">1e-06</span>, conv<span class="op">=</span><span class="fl">1e-04</span>,</span>
 <span>       maxit<span class="op">=</span><span class="fl">1000</span>, mstep_iter<span class="op">=</span><span class="fl">4</span>, mstep_reltol<span class="op">=</span><span class="fl">1e-06</span>, maxit_nr<span class="op">=</span><span class="fl">0</span>, optimizer_nr<span class="op">=</span><span class="st">"nlminb"</span>,</span>
-<span>       control_nr<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>trace<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, h<span class="op">=</span><span class="fl">1E-4</span>, use_grad<span class="op">=</span><span class="cn">TRUE</span>, verbose<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>       penalty_fun_item<span class="op">=</span><span class="cn">NULL</span>, np_fun_item<span class="op">=</span><span class="cn">NULL</span>, verbose_index<span class="op">=</span><span class="cn">NULL</span>,</span>
+<span>       estimator<span class="op">=</span><span class="st">"ML"</span>, control_nr<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>trace<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, h<span class="op">=</span><span class="fl">1E-4</span>, use_grad<span class="op">=</span><span class="cn">TRUE</span>, verbose<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>       penalty_fun_item<span class="op">=</span><span class="cn">NULL</span>, np_fun_item<span class="op">=</span><span class="cn">NULL</span>, pml_args<span class="op">=</span><span class="cn">NULL</span>, verbose_index<span class="op">=</span><span class="cn">NULL</span>,</span>
 <span>       cv_kfold<span class="op">=</span><span class="fl">0</span>, cv_maxit<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for xxirt</span></span>
@@ -119,7 +119,10 @@ number of EM iterations should be chosen to obtain reasonable starting values.</
 <span><span class="fu"><a href="https://rdrr.io/pkg/CDM/man/vcov.html" class="external-link">IRT.se</a></span><span class="op">(</span><span class="va">object</span>,<span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># computes Hessian matrix</span></span>
-<span><span class="fu">xxirt_hessian</span><span class="op">(</span><span class="va">object</span>, h<span class="op">=</span><span class="fl">1e-4</span>, use_shortcut<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">xxirt_hessian</span><span class="op">(</span><span class="va">object</span>, h<span class="op">=</span><span class="fl">1e-4</span>, use_shortcut<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#- sandwich estimate for pairwise maximum likelihood estimation</span></span>
+<span><span class="fu">xxirt_sandwich_pml</span><span class="op">(</span><span class="va">object</span>, h<span class="op">=</span><span class="fl">1e-4</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -175,6 +178,10 @@ number of EM iterations should be chosen to obtain reasonable starting values.</
 Alternatives are <code>"optim"</code> or <code>"nlminb"</code> or other options of
 <code><a href="sirt-utilities.html">sirt_optimizer</a></code>.</p></dd>
 
+<dt>estimator</dt>
+<dd><p>Marginal maximum likelihood (<code>"ML"</code>) or pairwise
+maximum likelihood (<code>"PML"</code>)</p></dd>
+
 <dt>control_nr</dt>
 <dd><p>Argument <code>control</code> for optimizer.</p></dd>
 
@@ -210,6 +217,9 @@ estimation. Used as a function of <code>x</code> (vector of item parameters)</p>
 
 <dt>level</dt>
 <dd><p>Confidence level</p></dd>
+
+<dt>pml_args</dt>
+<dd><p>Weight matrices for <code>estimator="PML"</code></p></dd>
 
 <dt>verbose_index</dt>
 <dd><p>Logical indicating whether item index should be
@@ -868,6 +878,102 @@ package for similar functionality.</p></div>
 <span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu">xxirt</span><span class="op">(</span> dat<span class="op">=</span><span class="va">dat</span>, Theta<span class="op">=</span><span class="va">Theta</span>, partable<span class="op">=</span><span class="va">partable</span>,</span>
 <span>                   customItems<span class="op">=</span><span class="va">customItems</span>, customTheta<span class="op">=</span><span class="va">customTheta</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#############################################################################</span></span>
+<span><span class="co">## EXAMPLE 5: Partial credit model with MML and PML</span></span>
+<span><span class="co">#############################################################################</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">data.gpcm</span>, package<span class="op">=</span><span class="st">"TAM"</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">data.gpcm</span></span>
+<span></span>
+<span><span class="co"># recode data and include some missings</span></span>
+<span><span class="va">dat</span><span class="op">[</span> <span class="va">dat</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">==</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="va">dat</span><span class="op">[</span> <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span> <span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<span><span class="va">dat</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<span></span>
+<span><span class="co">#------ Definition of item response functions</span></span>
+<span><span class="co">#*** IRF 2PL</span></span>
+<span><span class="va">P_2PL</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span> <span class="va">par</span>, <span class="va">Theta</span>, <span class="va">ncat</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>    <span class="va">b</span> <span class="op">&lt;-</span> <span class="va">par</span></span>
+<span>    <span class="va">TP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">Theta</span><span class="op">)</span></span>
+<span>    <span class="va">P</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span> <span class="cn">NA</span>, nrow<span class="op">=</span><span class="va">TP</span>, ncol<span class="op">=</span><span class="va">ncat</span><span class="op">)</span></span>
+<span>    <span class="va">P</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">cc</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">ncat</span><span class="op">)</span><span class="op">{</span></span>
+<span>        <span class="va">P</span><span class="op">[</span>,<span class="va">cc</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span> <span class="va">Theta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">b</span><span class="op">[</span><span class="va">cc</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>    <span class="va">P</span> <span class="op">&lt;-</span> <span class="va">P</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">P</span><span class="op">)</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">P</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">P_PCM2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span> <span class="va">par</span>, <span class="va">Theta</span>, <span class="va">ncat</span><span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>    <span class="va">P</span> <span class="op">&lt;-</span> <span class="fu">P_2PL</span><span class="op">(</span>par<span class="op">=</span><span class="va">par</span>, Theta<span class="op">=</span><span class="va">Theta</span>, ncat<span class="op">=</span><span class="va">ncat</span><span class="op">)</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">P</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">P_PCM3</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span> <span class="va">par</span>, <span class="va">Theta</span>, <span class="va">ncat</span><span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>    <span class="va">P</span> <span class="op">&lt;-</span> <span class="fu">P_2PL</span><span class="op">(</span>par<span class="op">=</span><span class="va">par</span>, Theta<span class="op">=</span><span class="va">Theta</span>, ncat<span class="op">=</span><span class="va">ncat</span><span class="op">)</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">P</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># define some slightly informative prior of 2PL</span></span>
+<span><span class="va">par</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> b1<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, b2<span class="op">=</span><span class="fl">1</span> <span class="op">)</span></span>
+<span><span class="va">NP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">par</span><span class="op">)</span></span>
+<span><span class="va">item_PCM2</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="xxirt_createParTable.html">xxirt_createDiscItem</a></span><span class="op">(</span> name<span class="op">=</span><span class="st">"PCM2"</span>, par<span class="op">=</span><span class="va">par</span>, est<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>,<span class="va">NP</span><span class="op">)</span>,</span>
+<span>               P<span class="op">=</span><span class="va">P_PCM2</span> <span class="op">)</span></span>
+<span><span class="va">par</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> b1<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, b2<span class="op">=</span><span class="fl">0</span>, b3<span class="op">=</span><span class="fl">1</span> <span class="op">)</span> ; <span class="va">NP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">par</span><span class="op">)</span></span>
+<span><span class="va">item_PCM3</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="xxirt_createParTable.html">xxirt_createDiscItem</a></span><span class="op">(</span> name<span class="op">=</span><span class="st">"PCM3"</span>, par<span class="op">=</span><span class="va">par</span>, est<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>,<span class="va">NP</span><span class="op">)</span>,</span>
+<span>               P<span class="op">=</span><span class="va">P_PCM3</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="va">customItems</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span> <span class="va">item_PCM2</span>,  <span class="va">item_PCM3</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="co">#---- definition theta distribution</span></span>
+<span><span class="co">#** theta grid</span></span>
+<span><span class="va">Theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">6</span>,<span class="fl">6</span>,length<span class="op">=</span><span class="fl">21</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="co">#** theta distribution</span></span>
+<span><span class="va">P_Theta1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span> <span class="va">par</span>, <span class="va">Theta</span>, <span class="va">G</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">mu</span> <span class="op">&lt;-</span> <span class="va">par</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>    <span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span> <span class="va">par</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="fl">.01</span> <span class="op">)</span></span>
+<span>    <span class="va">TP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">Theta</span><span class="op">)</span></span>
+<span>    <span class="va">pi_Theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span> <span class="fl">0</span>, nrow<span class="op">=</span><span class="va">TP</span>, ncol<span class="op">=</span><span class="va">G</span><span class="op">)</span></span>
+<span>    <span class="va">pi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span> <span class="va">Theta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, mean<span class="op">=</span><span class="va">mu</span>, sd<span class="op">=</span><span class="va">sigma</span> <span class="op">)</span></span>
+<span>    <span class="va">pi1</span> <span class="op">&lt;-</span> <span class="va">pi1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">pi1</span><span class="op">)</span></span>
+<span>    <span class="va">pi_Theta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pi1</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">pi_Theta</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#** create distribution class</span></span>
+<span><span class="va">par_Theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="st">"mu"</span><span class="op">=</span><span class="fl">0</span>, <span class="st">"sigma"</span><span class="op">=</span><span class="fl">1</span> <span class="op">)</span></span>
+<span><span class="va">customTheta</span>  <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="xxirt_createThetaDistribution.html">xxirt_createThetaDistribution</a></span><span class="op">(</span> par<span class="op">=</span><span class="va">par_Theta</span>, est<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>,<span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>                       P<span class="op">=</span><span class="va">P_Theta1</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="co">#-- create parameter table</span></span>
+<span><span class="va">itemtype</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PCM2"</span>, <span class="st">"PCM3"</span>, <span class="st">"PCM3"</span><span class="op">)</span></span>
+<span><span class="va">partable</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="xxirt_createParTable.html">xxirt_createParTable</a></span><span class="op">(</span> <span class="va">dat</span>, itemtype<span class="op">=</span><span class="va">itemtype</span>,</span>
+<span>                        customItems<span class="op">=</span><span class="va">customItems</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="co">#***** Model 1: MML</span></span>
+<span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu">xxirt</span><span class="op">(</span> dat<span class="op">=</span><span class="va">dat</span>, Theta<span class="op">=</span><span class="va">Theta</span>, partable<span class="op">=</span><span class="va">partable</span>,</span>
+<span>                   customItems<span class="op">=</span><span class="va">customItems</span>, customTheta<span class="op">=</span><span class="va">customTheta</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#***** Model 2: PML</span></span>
+<span><span class="va">I</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+<span><span class="va">W1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">I</span><span class="op">)</span></span>
+<span><span class="va">W2</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">I</span><span class="op">)</span></span>
+<span><span class="va">W2</span><span class="op">[</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">W2</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">upper.tri</a></span><span class="op">(</span><span class="va">W2</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">pml_args</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>W1<span class="op">=</span><span class="va">W1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">W1</span><span class="op">)</span>, W2<span class="op">=</span><span class="va">W2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">W2</span><span class="op">)</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu">xxirt</span><span class="op">(</span> dat<span class="op">=</span><span class="va">dat</span>, Theta<span class="op">=</span><span class="va">Theta</span>, partable<span class="op">=</span><span class="va">partable</span>,</span>
+<span>                   customItems<span class="op">=</span><span class="va">customItems</span>, customTheta<span class="op">=</span><span class="va">mod1</span><span class="op">$</span><span class="va">customTheta</span>,</span>
+<span>                   estimator<span class="op">=</span><span class="st">"PML"</span>, pml_args<span class="op">=</span><span class="va">pml_args</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># variance matrix</span></span>
+<span><span class="va">smod2</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu">xxirt_sandwich_pml</span><span class="op">(</span>object<span class="op">=</span><span class="va">mod2</span><span class="op">)</span></span>
+<span><span class="va">smod2</span></span>
 <span><span class="op">}</span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

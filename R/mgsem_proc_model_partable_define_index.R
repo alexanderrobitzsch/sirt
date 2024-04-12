@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_model_partable_define_index.R
-## File Version: 0.121
+## File Version: 0.123
 
 
 mgsem_proc_model_partable_define_index <- function(partable)
@@ -9,13 +9,13 @@ mgsem_proc_model_partable_define_index <- function(partable)
     N1 <- length(ind1)
     M1 <- max(dfr$index)+10
     if (length(ind1)>0){
-        dfr$index[ind1] <- M1+1:N1
+        dfr$index[ind1] <- M1+1L:N1
     }
     dfr$index <- match(dfr$index, unique(dfr$index))
     dfr$unique <- 1 * (! duplicated(dfr$index) )
     #** find duplicated parameters
     ND <- nrow(dfr)
-    for (dd in 1:ND){
+    for (dd in 1L:ND){
         if (dfr[dd,'unique']==0){
             i1 <- which( dfr[,'index']==dfr[dd,'index'])
             i2 <- which( dfr[,'unique']==1)

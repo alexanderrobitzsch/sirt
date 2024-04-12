@@ -1,5 +1,5 @@
 ## File Name: mgsem_partable2model.R
-## File Version: 0.151
+## File Version: 0.152
 
 
 mgsem_partable2model <- function(partable, model, index=FALSE)
@@ -10,7 +10,7 @@ mgsem_partable2model <- function(partable, model, index=FALSE)
         entries <- c('est','index')
     }
     for (entry in entries){
-        for (dd in 1:ND){
+        for (dd in 1L:ND){
             hh <- partable[dd,'group']+1
             type <- paste(partable[dd,'type'])
             mat <- model[[hh]][[entry]][[type]]

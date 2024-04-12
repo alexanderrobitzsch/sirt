@@ -1,5 +1,5 @@
 ## File Name: mgsem_vcov_me.R
-## File Version: 0.169
+## File Version: 0.171
 
 mgsem_vcov_me <- function(coef, opt_fun_args, suffstat_vcov, comp_se,
             se_delta_formula=FALSE)
@@ -18,7 +18,7 @@ mgsem_vcov_me <- function(coef, opt_fun_args, suffstat_vcov, comp_se,
         grad_der_coef <- matrix(0, nrow=NP, ncol=NP)
         rownames(grad_der_coef) <- colnames(grad_der_coef) <- parnames
         h <- opt_fun_args$technical$h
-        for (pp in 1:NP){
+        for (pp in 1L:NP){
             coef1 <- mgsem_add_increment(x=coef, h=h, i1=pp)
             res1 <- mgsem_grad_fun(x=coef1, opt_fun_args=opt_fun_args, output_all=FALSE)
             coef2 <- mgsem_add_increment(x=coef, h=-h, i1=pp)
@@ -38,11 +38,11 @@ mgsem_vcov_me <- function(coef, opt_fun_args, suffstat_vcov, comp_se,
         colnames(grad_der_suffstat) <- suffstat_pars$label
         opt_fun_args1 <- opt_fun_args
         suffstat <- opt_fun_args$suffstat
-        for (pp in 1:SP){
+        for (pp in 1L:SP){
             suffstat_pars_pp <- suffstat_pars[pp,]
             group_pp <- suffstat_pars_pp$group
             val_pp <- list(NA,2)
-            for (oo in 1:2){
+            for (oo in 1L:2){
                 suffstat1 <- suffstat
                 u <- h
                 if (oo==2){

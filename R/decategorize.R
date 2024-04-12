@@ -1,5 +1,5 @@
 ## File Name: decategorize.R
-## File Version: 0.122
+## File Version: 0.124
 
 #* decategorize
 decategorize <- function( dat, categ_design=NULL )
@@ -10,9 +10,9 @@ decategorize <- function( dat, categ_design=NULL )
 
     #** handle categories
     if ( ! is.null( dfr ) ){
-        vars <- sort( unique( paste( dfr$variable )))
+        vars <- sort(unique(paste(dfr$variable)))
         VV <- length(vars)
-        for (vv in 1:VV){
+        for (vv in 1L:VV){
             dfr.vv <- dfr[ paste(dfr$variable)==vars[vv], ]
             dat4[, vars[vv] ] <- dfr.vv[ match( dat3[,vars[vv]], dfr.vv$recode ), 'orig']
         }

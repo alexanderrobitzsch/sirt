@@ -1,5 +1,5 @@
 ## File Name: xxirt_summary_parts.R
-## File Version: 0.06
+## File Version: 0.088
 #
 xxirt_summary_parts <- function(object, digits, len_disp=66)
 {
@@ -18,11 +18,21 @@ xxirt_summary_parts <- function(object, digits, len_disp=66)
                     object$G, 'Group(s)',     '\n')
 
     sirt_display_function(length=len_disp)
-    cat( 'Number of EM iterations','=', object$iter_em, '\n' )
+
+    est_ml <- object$estimator=='ML'
+
+    cat( 'Estimator','=', object$estimator, '\n' )
+    if (est_ml){
+        cat( 'Number of EM iterations','=', object$iter_em, '\n' )
+    }
     cat( 'Number of Newton-Raphson iterations','=', object$iter_nr, '\n' )
-    cat( 'Deviance','=', round( object$deviance, 2 ), ' | ' )
-    cat( 'Log Likelihood','=', round( -object$deviance/2, 2 ), '\n' )
-    cat( 'Penalty function','=', round( object$pen_val, 4 ), '\n' )
+    if (est_ml){
+        cat( 'Deviance','=', round( object$deviance, 2 ), ' | ' )
+        cat( 'Log Likelihood','=', round( -object$deviance/2, 2 ), '\n' )
+        cat( 'Penalty function','=', round( object$pen_val, 4 ), '\n' )
+    } else {
+        cat( 'Optimization function','=', round( object$res_opt_nr$objective, 2), '\n')
+    }
     cat( 'Number of persons','=', object$ic$n, '\n' )
 
     cat( 'Number of estimated parameters','=', object$ic$np, '\n' )
@@ -30,7 +40,9 @@ xxirt_summary_parts <- function(object, digits, len_disp=66)
     cat( '  Number of estimated distribution parameters','=', object$ic$np.Theta, '\n\n' )
 
     #--- information criteria
-    rm_summary_information_criteria(object=object)
+    if (est_ml){
+        rm_summary_information_criteria(object=object)
+    }
 
     #- trait parameters
     sirt_display_function(length=len_disp)

@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.2  |  2024-03-19  |  Last: sirt 4.2-40
+VERSIONS sirt 4.2  |  2024-04-12  |  Last: sirt 4.2-51
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in handling sufficient statistics in
@@ -48,10 +48,14 @@ ADDED * added option for using a list of imputed datasets in
         lsem.estimate()
 FIXED * fixed a recently introduced bug in standard error computation
         in invariance.alignment() (thanks to @meltemozcan, #25)
+ADDED * included pairwise maximum likelihood estimation in xxirt() and
+        variance matrix estimation in xxirt_sandwich_pml()
+NOTE  * included Example 9 in ?invariance.alignment for dichotomous
+        items (thanks to Sebastian Wurster)
 
 
 DATA  * included/modified datasets: ---
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: xxirt (5), invariance.alignment (9)
 
 
 

@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_rm_sdt.cpp
-//// File Version: 0.417
+//// File Version: 0.423
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -70,7 +70,7 @@ Rcpp::List sirt_rcpp_rm_sdt_posterior( Rcpp::NumericVector prob_item,
             //    if ( dat2_resp[nn,jj] ){
             //        for (kk in 1:K1){
             //            p1 <- prob.rater[ jj, dat2[nn,jj] + 1, kk]
-            //            hjikl[ item.index[jj], kk, ] <- hjikl[ item.index[jj], kk, ] * p1
+            //            hjikl[ item.index[jj], kk,] <- hjikl[ item.index[jj], kk,] * p1
             //    }
             // }
         for( int jj=0; jj<I; jj++){
@@ -179,8 +179,9 @@ Rcpp::List sirt_rcpp_rm_sdt_posterior( Rcpp::NumericVector prob_item,
 ///********************************************************************
 ///** sirt_rcpp_rm_sdt_calc_gradient_item_deriv_a
 // [[Rcpp::export]]
-Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_gradient_item_deriv_a( Rcpp::NumericVector prob0,
-        Rcpp::IntegerVector prob_D1_dim, Rcpp::NumericVector theta_k )
+Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_gradient_item_deriv_a(
+        Rcpp::NumericVector prob0, Rcpp::IntegerVector prob_D1_dim,
+        Rcpp::NumericVector theta_k )
 {
     int VV = prob_D1_dim[0];
     int K1 = prob_D1_dim[1];
@@ -216,8 +217,9 @@ Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_gradient_item_deriv_a( Rcpp::NumericVe
 ///********************************************************************
 ///** sirt_rcpp_rm_sdt_calc_gradient_item_deriv_tau
 // [[Rcpp::export]]
-Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_gradient_item_deriv_tau( Rcpp::NumericVector prob0,
-        Rcpp::IntegerVector prob_D1_dim, int cat_pp)
+Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_gradient_item_deriv_tau(
+            Rcpp::NumericVector prob0, Rcpp::IntegerVector prob_D1_dim,
+            int cat_pp)
 {
     int VV = prob_D1_dim[0];
     int K1 = prob_D1_dim[1];
@@ -327,8 +329,9 @@ double sirt_rcpp_plogis( double x)
 ///********************************************************************
 ///** sirt_rcpp_rm_sdt_calc_probs_gpcm
 // [[Rcpp::export]]
-Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_probs_gpcm( Rcpp::NumericVector a, Rcpp::NumericMatrix tau,
-    Rcpp::NumericVector theta_k, int VV, int K1, int TP, double eps, bool use_log )
+Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_probs_gpcm( Rcpp::NumericVector a,
+        Rcpp::NumericMatrix tau, Rcpp::NumericVector theta_k, int VV, int K1,
+        int TP, double eps, bool use_log )
 {
     int NH = VV*K1*TP;
     Rcpp::NumericVector probs(NH);
@@ -377,6 +380,7 @@ Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_probs_grm_rater( Rcpp::NumericMatrix c
     int NH = I*K1*K1;
     Rcpp::NumericVector prob_cum(NH);
     Rcpp::NumericVector prob_rater(NH);
+    double temp=0;
     //    for (eta in 0:K){
     //        for (k in 1:K){
     //            prob_cum2[ k, eta+1 ] <- plogis(c.rater[ii,k] - d.rater[ii]*eta)
@@ -386,7 +390,8 @@ Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_probs_grm_rater( Rcpp::NumericMatrix c
     for (int ii=0; ii<I; ii++){
         for (int cc=0; cc<K1; cc++){
             for (int kk=0; kk<K; kk++){
-                prob_cum[ ii + kk*I + cc*I*K1 ] = sirt_rcpp_plogis( c_rater(ii,kk) - d_rater[ii]*cc);
+                temp=c_rater(ii,kk) - d_rater[ii]*cc;
+                prob_cum[ ii + kk*I + cc*I*K1 ] = sirt_rcpp_plogis(temp);
             }
             prob_cum[ ii + K*I + cc*I*K1 ] = 1.0;
         }
@@ -429,11 +434,13 @@ Rcpp::NumericVector sirt_rcpp_rm_sdt_calc_probs_grm_item( Rcpp::NumericMatrix ta
     Rcpp::NumericVector prob_cum(NH);
     Rcpp::NumericVector prob_item(NH);
     double val_ii_tt = 0;
+    double temp=0;
     for (int ii=0; ii<VV; ii++){
         for (int tt=0; tt<TP; tt++){
             val_ii_tt = a_item[ii]*theta_k[tt];
             for (int kk=0; kk<K; kk++){
-                prob_cum[ ii + kk*VV + tt*VV*K1 ] = sirt_rcpp_plogis( tau_item(ii,kk) - val_ii_tt );
+                temp=tau_item(ii,kk) - val_ii_tt;
+                prob_cum[ ii + kk*VV + tt*VV*K1 ] = sirt_rcpp_plogis(temp);
             }
             prob_cum[ ii + K*VV + tt*VV*K1 ] = 1.0;
         }

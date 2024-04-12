@@ -1,5 +1,5 @@
 ## File Name: mgsem_output_proc_residuals.R
-## File Version: 0.05
+## File Version: 0.06
 
 
 mgsem_output_proc_residuals <- function(implied, suffstat)
@@ -7,7 +7,7 @@ mgsem_output_proc_residuals <- function(implied, suffstat)
     G <- length(implied)
     residuals_groupwise <- list()
     fit_total <- list(fit_Mu=0, fit_Sigma=0)
-    for (gg in 1:G){
+    for (gg in 1L:G){
         N <- suffstat[[gg]]$N
         res1 <- list()
         res1$Mu <- suffstat[[gg]]$M-implied[[gg]]$Mu

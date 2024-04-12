@@ -1,5 +1,5 @@
 ## File Name: dif.strata.variance.R
-## File Version: 0.151
+## File Version: 0.153
 
 
 
@@ -15,7 +15,7 @@ dif.strata.variance <- function( dif, se.dif, itemcluster )
     stratadif$M.DIF <- stats::aggregate( dif, list(itemcluster), mean, na.rm=TRUE )[,2]
     # DIF in strata
     SS <- nrow(stratadif)
-    for (ss in 1:SS){
+    for (ss in 1L:SS){
         items.ss <- which( itemcluster==stratadif[ss,'strata']  )
         dif.ss <- dif[ items.ss ]
         difv.ss <- dif.variance( dif=dif.ss, se.dif=se.dif[ items.ss ] )
@@ -25,8 +25,9 @@ dif.strata.variance <- function( dif, se.dif, itemcluster )
     stratadif[ is.na(stratadif ) ] <- 0
 
     sd_ni1 <- stratadif$N.Items-1
-    weighted.DIFSD <- sum(stratadif$N.Items/sum(stratadif$N.Items)*stratadif$weighted.tau)
-    unweighted.DIFSD <- sum( sd_ni1/ (sum(stratadif$N.Items)-1)*stratadif$unweighted.tau)
+    NI <- sum(stratadif$N.Items)
+    weighted.DIFSD <- sum(stratadif$N.Items/NI*stratadif$weighted.tau)
+    unweighted.DIFSD <- sum( sd_ni1/(NI-1)*stratadif$unweighted.tau)
 
     #-- output
     res <- list( stratadif=stratadif, weighted.DIFSD=weighted.DIFSD,

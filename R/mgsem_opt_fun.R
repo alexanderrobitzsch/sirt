@@ -1,5 +1,5 @@
 ## File Name: mgsem_opt_fun.R
-## File Version: 0.274
+## File Version: 0.275
 
 
 mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
@@ -86,7 +86,7 @@ mgsem_opt_fun <- function(x, opt_fun_args, output_all=FALSE)
     if (output_all){
         # chi square statistic and RMSEA
         p_mu <- 0
-        for (gg in 1:G){
+        for (gg in 1L:G){
             mu1 <- suffstat[[gg]]$M
             p_mu <- p_mu + sum(abs(mu1)>1e-14)
         }

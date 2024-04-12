@@ -1,5 +1,5 @@
 ## File Name: mgsem.R
-## File Version: 0.553
+## File Version: 0.554
 
 mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         estimator="ML", p_me=2, p_pen=1, pen_type="scad",
@@ -35,7 +35,7 @@ mgsem <- function(suffstat, model, data=NULL, group=NULL, weights=NULL,
         groups <- names(suffstat)
         G <- length(groups)
         if (is.null(groups)){
-            groups <- paste0('Group',1:G)
+            groups <- paste0('Group',1L:G)
         }
         data_proc <- NULL
         is_data <- FALSE

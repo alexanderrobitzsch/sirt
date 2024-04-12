@@ -1,5 +1,5 @@
 ## File Name: mgsem_evaluate_penalties.R
-## File Version: 0.345
+## File Version: 0.347
 
 
 mgsem_evaluate_penalties <- function(x, partable, prior_list, technical,
@@ -8,7 +8,7 @@ mgsem_evaluate_penalties <- function(x, partable, prior_list, technical,
 {
     ND <- nrow(partable)
     if (is.null(loop_parms)){
-        loop_parms <- (1:ND)[ partable$unique==1]
+        loop_parms <- (1L:ND)[ partable$unique==1]
     }
     NP <- max(partable$index)
     if (!deriv){
@@ -137,7 +137,7 @@ mgsem_evaluate_penalties <- function(x, partable, prior_list, technical,
             der_z <- val
             NP <- length(x)
             val <- rep(0,NP)
-            for (hh in 1:NDP){
+            for (hh in 1L:NDP){
                 i1 <- diffpar_pen_list_entries$index1[hh]
                 val[i1] <- val[i1] + der_z[hh]
                 i2 <- diffpar_pen_list_entries$index2[hh]

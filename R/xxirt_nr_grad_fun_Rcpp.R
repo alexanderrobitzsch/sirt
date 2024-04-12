@@ -1,5 +1,5 @@
 ## File Name: xxirt_nr_grad_fun_Rcpp.R
-## File Version: 0.174
+## File Version: 0.175
 
 xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
 {
@@ -78,7 +78,7 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
 
     #*** prior distributions
     if (NPI > 0){
-        index_items <- 1:NPI
+        index_items <- 1L:NPI
         x1 <- x[ em_args$parindex_items ]
         partable1 <- xxirt_partable_include_freeParameters( partable=em_args$partable,
                             x=x1)
@@ -93,7 +93,7 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
         if (!is.null(em_args$penalty_fun_item)){
             pen0 <- em_args$penalty_fun_item(x=x1)
             pen1 <- rep(0,NPI)
-            for (pp in 1:NPI){
+            for (pp in 1L:NPI){
                 xh <- sirt_add_increment(x=x1, pos=pp, value=h)
                 pen1[pp] <- em_args$penalty_fun_item(x=xh)
             }

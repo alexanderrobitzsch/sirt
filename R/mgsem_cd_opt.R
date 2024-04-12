@@ -1,5 +1,5 @@
 ## File Name: mgsem_cd_opt.R
-## File Version: 0.177
+## File Version: 0.178
 
 mgsem_cd_opt <- function(x, opt_fun_args, tol=1e-4, eps_approx=1e-20,
                 maxiter=100, h=1e-4, verbose=TRUE, interval_length=0.025,
@@ -29,7 +29,7 @@ mgsem_cd_opt <- function(x, opt_fun_args, tol=1e-4, eps_approx=1e-20,
 
         x0 <- x
 
-        for (pp in 1:NP){
+        for (pp in 1L:NP){
             partable <- cd_fun_args$partable
             x1 <- x[pp]
             interval <- x1 + interval_length*c(-1,1)
