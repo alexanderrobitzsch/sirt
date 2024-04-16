@@ -1,5 +1,5 @@
 ## File Name: unidim.csn.R
-## File Version: 0.205
+## File Version: 0.206
 
 ##*** unidimensionality test
 unidim.test.csn <- function( dat, RR=400, prop.perm=.75,
@@ -17,15 +17,15 @@ unidim.test.csn <- function( dat, RR=400, prop.perm=.75,
     N <- nrow(dat)
     dat_perm <- matrix(NA, N, ncol(dat) )
     SS <- nrow(score_index)
-    for (ss in 1:SS){
-        for (ii in 1:ncol(dat)){
+    for (ss in 1L:SS){
+        for (ii in 1L:ncol(dat)){
             iss <- score_index[ss,1]:score_index[ss,2]
             dat_perm[iss,ii] <- sample( dat[iss,ii] )
         }
     }
     score_index <- cbind( score_index, round( score_index[,3] * prop.perm ) )
     progress <- 1*progress
-    progress_vec <- c(0,which( diff( floor( 10 * ( 1:RR ) / ( RR+1 ) ) )==1 ) )
+    progress_vec <- c(0,which( diff( floor( 10 * ( 1L:RR ) / ( RR+1 ) ) )==1 ) )
     if (progress==1){
         cat('|**********|\n')
     }

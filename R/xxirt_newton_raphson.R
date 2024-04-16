@@ -1,5 +1,5 @@
 ## File Name: xxirt_newton_raphson.R
-## File Version: 0.259
+## File Version: 0.261
 
 
 xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
@@ -143,6 +143,6 @@ xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
     #--- output
     res <- list(res_opt_nr=res_opt_nr, partable=partable, customTheta=customTheta,
                     opt_values=opt_values, probs_items=probs_items,
-                    em_args=em_args, pml_args=pml_args)
+                    em_args=em_args)
     return(res)
 }
