@@ -1,33 +1,32 @@
 ## File Name: likelihood_adjustment.R
-## File Version: 0.17
+## File Version: 0.182
 
 
-####################################################################
-# likelihood adjustment
+#*** likelihood adjustment
 likelihood.adjustment <- function( likelihood, theta=NULL, prob.theta=NULL,
             adjfac=rep(1,nrow(likelihood)), extreme.item=5,
             target.EAP.rel=NULL, min_tuning=.2, max_tuning=3,
-            maxiter=100, conv=.0001, trait.normal=TRUE ){
+            maxiter=100, conv=.0001, trait.normal=TRUE )
+{
 
     like0 <- likelihood
     eps <- 1E-30
     normal_approx <- trait.normal
 
     if ( is.null(theta) ){
-        theta <- attr( likelihood, "theta" )[,1]
-                        }
+        theta <- attr( likelihood, 'theta' )[,1]
+    }
 
     if ( is.null(prob.theta) ){
-        prob.theta <- attr( likelihood, "prob.theta" )
-                        }
+        prob.theta <- attr( likelihood, 'prob.theta' )
+    }
 
 
-    attr(likelihood,"prob.theta") <- NULL
-    attr(likelihood,"theta") <- NULL
-    attr(likelihood,"G") <- NULL
+    attr(likelihood,'prob.theta') <- NULL
+    attr(likelihood,'theta') <- NULL
+    attr(likelihood,'G') <- NULL
 
-    #**********************
-    # add extreme item
+    #-- add extreme item
     N <- nrow(like0)
     TP <- length(theta)
     thetaM <- matrix( theta, nrow=N, ncol=TP, byrow=TRUE)
@@ -35,11 +34,8 @@ likelihood.adjustment <- function( likelihood, theta=NULL, prob.theta=NULL,
                 ( 1 - stats::plogis( thetaM - extreme.item ) )
     likelihood <- likelihood * S1
 
-# Revalpr( "mean(abs( like0 - likelihood) )")
-
     # likelihood adjustment
     like2 <- likelihood_adjustment_compute( likelihood, theta, thetaM, adjfac )
-
 
     #*** compute posterior given likelihood and empirical prior
     if ( ! is.null( target.EAP.rel ) ){
@@ -64,21 +60,21 @@ likelihood.adjustment <- function( likelihood, theta=NULL, prob.theta=NULL,
             EAP_rel0 <- res1$EAP.rel
             like2 <- res1$likelihood
             if ( EAP_rel0 < target.EAP.rel ){
-                    tuning2 <- tuning0
-                        } else {
-                    tuning1 <- tuning0
-                                }
+                tuning2 <- tuning0
+            } else {
+                tuning1 <- tuning0
+            }
             iter <- iter + 1
             change <- abs( EAP_rel0 - target.EAP.rel )
-            cat("Iteration ", iter, " | EAP reliability=", round( EAP_rel0, 4 ), "\n")
+            cat('Iteration ', iter, ' | EAP reliability=', round( EAP_rel0, 4 ), '\n')
             flush.console()
         }
-            }
-    res <- like2
-    attr( res, "theta" ) <- matrix( theta, ncol=1)
-    attr(like0,"prob.theta") -> attr( res, "prob.theta")
-    attr(like0,"G") -> attr(res, "G")
-    return(res)
     }
-####################################################################
+    res <- like2
+    attr( res, 'theta' ) <- matrix( theta, ncol=1)
+    attr(like0,'prob.theta') -> attr( res, 'prob.theta')
+    attr(like0,'G') -> attr(res, 'G')
+    return(res)
+}
+
 

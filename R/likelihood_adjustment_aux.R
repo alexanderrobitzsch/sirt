@@ -1,5 +1,5 @@
 ## File Name: likelihood_adjustment_aux.R
-## File Version: 0.19
+## File Version: 0.201
 
 
 #######################################################
@@ -15,7 +15,7 @@ likelihood_adjustment_compute <- function( likelihood, theta,
     w1 <- rowSums(likelihood)
     # compute adjusted likelihood
     like2 <- 0*likelihood
-    for (tt in 1:TP){
+    for (tt in 1L:TP){
         like2[,tt] <- sirt_dnorm( theta[tt], mean=M1, sd=SD1*adjfac*tuningfac )
     }
     like2 <- like2 / rowSums(like2) * w1
@@ -59,7 +59,7 @@ likelihood_adjustment_tuning <- function( likelihood, theta, thetaM, adjfac,
 
     res0 <- likelihood_moments( likelihood=like2 * probsM, theta=theta  )
     EAP.rel <- like_adj_EAP_reliability( res0$M, res0$SD )
-    res <- list( "likelihood"=like2, "EAP.rel"=EAP.rel )
+    res <- list( likelihood=like2, EAP.rel=EAP.rel )
     return(res)
 }
 

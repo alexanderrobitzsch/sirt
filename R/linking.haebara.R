@@ -1,5 +1,5 @@
 ## File Name: linking.haebara.R
-## File Version: 0.432
+## File Version: 0.434
 
 linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         optimizer="optim", center=FALSE, eps=1e-3, par_init=NULL,
@@ -30,10 +30,10 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
     parnames <- c( paste0('a_',items), paste0('b_',items), paste0('mu_',studies[-1]),
                     paste0('sigma_',studies[-1]) )
     names(par) <- parnames
-    index_a <- 1:NI
-    index_b <- NI + 1:NI
-    index_mu <- 2*NI + 1:(NS-1)
-    index_sigma <- 2*NI + NS - 1 + 1:(NS-1)
+    index_a <- 1L:NI
+    index_b <- NI + 1L:NI
+    index_mu <- 2*NI + 1L:(NS-1)
+    index_sigma <- 2*NI + NS - 1 + 1L:(NS-1)
     NP <- length(par)
 
     #-- initial values

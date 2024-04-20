@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_als_residual_weights.R
-## File Version: 0.372
+## File Version: 0.373
 
 
 linking_haberman_als_residual_weights <- function( logaj, logaAt,
@@ -42,17 +42,17 @@ linking_haberman_als_residual_weights <- function( logaj, logaAt,
     }
     #-- estimation LTS
     if (estimation=='LTS'){
-        for (ss in 1:NS){
+        for (ss in 1L:NS){
             e <- loga_resid[,ss]
             e <- e - median(e, na.rm=TRUE)
-            dfr_resid <- data.frame(item=1:NI, e=e )
+            dfr_resid <- data.frame(item=1L:NI, e=e )
             dfr_resid <- na.omit(dfr_resid)
             dfr_resid <- dfr_resid[ order(abs(dfr_resid$e), decreasing=TRUE), ]
             wgt_adj[ is.na(loga_resid[,ss]), ss ] <- 0
             n <- nrow(dfr_resid)
             n_del <- floor( (1-lts_prop)*n)
-            m1 <- dfr_resid[ 1:n_del, c(2,1) ]
-            wgt_adj[ dfr_resid[ 1:n_del, 1 ], ss ] <- 0
+            m1 <- dfr_resid[ 1L:n_del, c(2,1) ]
+            wgt_adj[ dfr_resid[ 1L:n_del, 1 ], ss ] <- 0
         }
     }
 

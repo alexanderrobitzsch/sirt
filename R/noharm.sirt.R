@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.928
+## File Version: 0.935
 
 
 ########################################
@@ -29,6 +29,7 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
     } else {
         input_pm <- FALSE
     }
+
     res <- noharm_sirt_preproc( dat=dat, pm=pm, N=N, weights=weights, Fpatt=Fpatt,
                 Fval=Fval, Ppatt=Ppatt, Pval=Pval, Psipatt=Psipatt, Psival=Psival,
                 wgtm=wgtm, dimensions=dimensions, pos.loading=pos.loading,
@@ -89,7 +90,6 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
     args_optim <- list(parm_table=parm_table, parm_index=parm_index, I=I, D=D,
                     b0.jk=b0.jk, b1.jk=b1.jk, b2.jk=b2.jk, b3.jk=b3.jk,
                     pm=pm, wgtm=wgtm, use_rcpp=TRUE)
-
     optim_fn <- function(x){
         args_optim$x <- x
         val <- do.call(what=noharm_sirt_optim_function, args=args_optim)

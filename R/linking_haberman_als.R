@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_als.R
-## File Version: 0.658
+## File Version: 0.659
 
 
 
@@ -60,7 +60,7 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
             logaj <- weighted_rowMeans( mat=logaM_adj1, wgt=wgtM )
         }
         if (estimation %in% c('MED')){
-            for (ii in 1:I){
+            for (ii in 1L:I){
                 logaj[ii] <- linking_haberman_compute_median(x=logaM_adj1[ii,],
                                             w=wgtM[ii,])
             }
@@ -74,7 +74,7 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
             logaAt <- res1$col
         }
         if (estimation %in% c('LTS')){
-            for (ii in 1:I){
+            for (ii in 1L:I){
                 logaj[ii] <- linking_haberman_compute_lts_mean(x=logaM_adj1[ii,],
                                         w=wgtM[ii,], lts_prop=lts_prop)
             }
@@ -96,7 +96,7 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
             logaAt <- weighted_colMeans( mat=logaMadj, wgt=wgtM )
         }
         if (estimation %in% c('MED')){
-            for (ss in 1:NS){
+            for (ss in 1L:NS){
                 logaAt[ss] <- linking_haberman_compute_median(x=logaMadj[,ss],
                                             w=wgtM[,ss])
             }

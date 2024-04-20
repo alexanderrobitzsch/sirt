@@ -1,5 +1,5 @@
 ## File Name: linking_haebara_gradient_function_R.R
-## File Version: 0.293
+## File Version: 0.294
 
 
 linking_haebara_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
@@ -11,8 +11,8 @@ linking_haebara_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
     # th=SIG*TH+MU=> logit(p)=a*(SIG*TH+MU-b)=a*SIG*(TH-(-MU)/SIG-b/SIG)
     grad <- rep(0, 2*NI+2*(NS-1) )
     names(grad) <- parnames
-    for (ii in 1:NI){
-        for (ss in 1:NS){
+    for (ii in 1L:NI){
+        for (ss in 1L:NS){
             if (est_pars[ii,ss]){
                 p_obs <- stats::plogis( aM[ii,ss] * (theta - bM[ii,ss] ) )
                 a_exp <- a[ii] * sigma[ss]

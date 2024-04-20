@@ -1,5 +1,5 @@
 ## File Name: linking.haberman.lq.R
-## File Version: 0.199
+## File Version: 0.201
 
 linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     use_nu=FALSE, est_pow=FALSE, lower_pow=.1, upper_pow=3)
@@ -43,10 +43,10 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
         y <- log(y)
     }
     X <- X0
-    for (gg in 2:G){
+    for (gg in 2L:G){
         X[ ind_studies==gg, gg-1] <- 1
     }
-    for (ii in 1:I){
+    for (ii in 1L:I){
         X[ ind_items==ii, ii+G-1] <- 1
     }
     #- fit
@@ -55,7 +55,7 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
                 upper_pow=upper_pow)
     coef0 <- mod0$coefficients
     pow_slopes <- mod0$pow
-    ind_groups <- 1:(G-1)
+    ind_groups <- 1L:(G-1)
     coef0_A <- coef0[ind_groups]
     a_joint <- coef0[-c(ind_groups)]
     ar <- y - X %*% coef0

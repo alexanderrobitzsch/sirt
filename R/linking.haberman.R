@@ -1,5 +1,5 @@
 ## File Name: linking.haberman.R
-## File Version: 2.653
+## File Version: 2.654
 
 
 #**** Linking Haberman: ETS Research Report 2009
@@ -109,7 +109,7 @@ linking.haberman <- function( itempars, personpars=NULL,
     #****
     # transform person parameters
     if ( ! is.null( personpars) ){
-        for (ll in 1:NS){
+        for (ll in 1L:NS){
             pp0 <- pp1 <- personpars[[ll]]
             pp1 <- transf.personpars$A_theta[ll] * pp1 + transf.personpars$B_theta[ll]
             ind <- which( substring( colnames(pp0),1,2) %in% c('se', 'SE') )

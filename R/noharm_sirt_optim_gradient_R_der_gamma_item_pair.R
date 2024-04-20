@@ -1,5 +1,5 @@
 ## File Name: noharm_sirt_optim_gradient_R_der_gamma_item_pair.R
-## File Version: 0.18
+## File Version: 0.192
 
 
 noharm_sirt_optim_gradient_R_der_gamma_item_pair <- function(parm_table_free, Fmat,
@@ -8,13 +8,13 @@ noharm_sirt_optim_gradient_R_der_gamma_item_pair <- function(parm_table_free, Fm
 {
     grad <- rep(0,npar)
     if (wgtm[ii,jj]>0){
-        for (hh in 1:NH){
-            mat_hh <- parm_table_free[hh,"mat"]
-            par_index_hh <- parm_table_free[hh,"index"]
-            row <- parm_table_free[hh,"row"]
-            col <- parm_table_free[hh,"col"]
+        for (hh in 1L:NH){
+            mat_hh <- parm_table_free[hh,'mat']
+            par_index_hh <- parm_table_free[hh,'index']
+            row <- parm_table_free[hh,'row']
+            col <- parm_table_free[hh,'col']
             # F
-            if (mat_hh=="F"){
+            if (mat_hh=='F'){
                 der <- 0
                 if (row==ii){
                     der <- FP[jj,col]
@@ -26,7 +26,7 @@ noharm_sirt_optim_gradient_R_der_gamma_item_pair <- function(parm_table_free, Fm
                 }
             }
             # P
-            if (mat_hh=="P"){
+            if (mat_hh=='P'){
                 der <- 0
                 if (row==col){
                     der <- Fmat[ii,col]*Fmat[jj,col]
@@ -37,7 +37,7 @@ noharm_sirt_optim_gradient_R_der_gamma_item_pair <- function(parm_table_free, Fm
                 }
             }
             # Psi
-            if (mat_hh=="Psi"){
+            if (mat_hh=='Psi'){
                 if (row==ii){
                     if (col==jj){
                         der <- 1
@@ -65,7 +65,8 @@ noharm_sirt_optim_gradient_R_der_gamma_item_pair <- function(parm_table_free, Fm
 
         #-- discrepancy function
         x_ij <- val
-        pm_exp <- b0.jk[ii,jj] + b1.jk[ii,jj]*x_ij + b2.jk[ii,jj]*x_ij^2 + b3.jk[ii,jj]*x_ij^3
+        pm_exp <- b0.jk[ii,jj] + b1.jk[ii,jj]*x_ij + b2.jk[ii,jj]*x_ij^2 +
+                        b3.jk[ii,jj]*x_ij^3
         pm_exp_der <- b1.jk[ii,jj] + 2*b2.jk[ii,jj]*x_ij + 3*b3.jk[ii,jj]*x_ij^2
         grad <- pm_exp_der*grad
         temp1 <- -2*wgtm[ii,jj] * ( pm[ii,jj] - pm_exp )

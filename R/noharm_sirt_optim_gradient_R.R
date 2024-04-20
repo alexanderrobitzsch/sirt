@@ -1,5 +1,5 @@
 ## File Name: noharm_sirt_optim_gradient_R.R
-## File Version: 0.03
+## File Version: 0.042
 
 noharm_sirt_optim_gradient_R <- function(parm_table_free, Fmat, Pmat, Psimat, FP,
     npar, NH, I, gamma_val, pm, wgtm, b0.jk, b1.jk, b2.jk, b3.jk)
@@ -14,15 +14,16 @@ noharm_sirt_optim_gradient_R <- function(parm_table_free, Fmat, Pmat, Psimat, FP
     delta <- 1+diag(gamma_val)
     grad_gamma_diag1 <- grad_gamma_diag / delta
     grad0 <- rep(0, npar)
-    for (ii in 1:(I-1)){
+    for (ii in 1L:(I-1)){
         for (jj in (ii+1):I){
             if (wgtm[ii,jj] >0 ){
                 #- compute gradient for item pair
                 grad1 <- noharm_sirt_optim_gradient_R_der_gamma_item_pair(
                             parm_table_free=parm_table_free, Fmat=Fmat, Pmat=Pmat,
-                            Psimat=Psimat, FP=FP, npar=npar, NH=NH, I=I, gamma_val=gamma_val,
-                            grad_gamma_diag1=grad_gamma_diag1, pm=pm, b0.jk=b0.jk,
-                            b1.jk=b1.jk, b2.jk=b2.jk, b3.jk=b3.jk, wgtm=wgtm, ii=ii, jj=jj )
+                            Psimat=Psimat, FP=FP, npar=npar, NH=NH, I=I,
+                            gamma_val=gamma_val, grad_gamma_diag1=grad_gamma_diag1,
+                            pm=pm, b0.jk=b0.jk, b1.jk=b1.jk, b2.jk=b2.jk, b3.jk=b3.jk,
+                            wgtm=wgtm, ii=ii, jj=jj )
                 grad0 <- grad0 + grad1
             }
         }

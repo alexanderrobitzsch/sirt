@@ -1,5 +1,5 @@
 ## File Name: linking.robust.R
-## File Version: 1.261
+## File Version: 1.263
 
 
 #*** Robust linking
@@ -16,7 +16,7 @@ linking.robust <- function(  itempars )
     KK <- length(kvec)
     se <- meanpars <- rep(NA, KK )
     # define trimming factor
-    for (kk in 1:KK){
+    for (kk in 1L:KK){
         # arrange calculations
         N <- length(x)
         k <- kk

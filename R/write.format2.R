@@ -1,5 +1,5 @@
 ## File Name: write.format2.R
-## File Version: 1.132
+## File Version: 1.133
 
 
 
@@ -16,7 +16,7 @@ write.format2 <- function( vec1, ff, fr )
         blank.vv <- paste( rep( ' ', ff+1 ), collapse='' )
         d.vv <- paste( substring( blank.vv, 1, ff+1 - nchar(d.vv) ), d.vv, sep='')
         g.vv <- grep('NA',d.vv)
-        d.vv[ g.vv  ] <- ifelse( ff > 1,  gsub( 'NA', ' .', d.vv[g.vv] ), 
+        d.vv[ g.vv  ] <- ifelse( ff > 1,  gsub( 'NA', ' .', d.vv[g.vv] ),
                                         gsub( 'NA', '.', d.vv[g.vv] ) )
         vec2 <- substring( d.vv, 1, ff )
         vec2

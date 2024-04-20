@@ -1,5 +1,5 @@
 ## File Name: noharm_sirt_preproc_pattern_matrix.R
-## File Version: 0.17
+## File Version: 0.182
 
 noharm_sirt_preproc_pattern_matrix <- function(pattmat, minval=0, symm=FALSE)
 {
@@ -15,7 +15,7 @@ noharm_sirt_preproc_pattern_matrix <- function(pattmat, minval=0, symm=FALSE)
     ind <- ( pattmat > 0 ) & ( pattmat <=1 )
     if (sum(ind) > 0 ){
         DI <- prod(dim(pattmat))
-        v1 <- matrix( 1:DI, nrow=I )
+        v1 <- matrix( 1L:DI, nrow=I )
         if (symm){
             v1 <- sirt_matrix_lower_to_upper(x=v1)
         }

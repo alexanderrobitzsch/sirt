@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_cfa_config_estimate.R
-## File Version: 0.199
+## File Version: 0.202
 
 invariance_alignment_cfa_config_estimate <- function(dat_gg, N, weights_gg=NULL,
     model="2PM", ...)
@@ -16,7 +16,7 @@ invariance_alignment_cfa_config_estimate <- function(dat_gg, N, weights_gg=NULL,
         I_gg <- length(mu)
         items_gg <- names(mu)
         if (is.null(items_gg)){
-            items_gg <- paste0('I',1:I)
+            items_gg <- paste0('I',1L:I)
         }
         names(mu) <- items_gg
         rownames(Sigma) <- items_gg
@@ -44,12 +44,12 @@ invariance_alignment_cfa_config_estimate <- function(dat_gg, N, weights_gg=NULL,
     mod <- do.call(what='sirt_import_lavaan_cfa', args=args)
     partable <- sirt_import_lavaan_parameterTable(object=mod)
     lambda <- partable[ partable$op=='=~', 'est']
-    nu <- partable[ partable$op=='~1', 'est'][1:I_gg]
-    err_var <- partable[ partable$op=='~~', 'est'][1:I_gg]
+    nu <- partable[ partable$op=='~1', 'est'][1L:I_gg]
+    err_var <- partable[ partable$op=='~~', 'est'][1L:I_gg]
     nobs <- mod@Data@nobs[[1]]
     # vcov <- lavaan::lavInspect(object=mod, what='information')
     vcov <- mod@vcov$vcov
-    ind <- c(1:I_gg, 2*I_gg+1:I_gg)
+    ind <- c(1L:I_gg, 2*I_gg+1L:I_gg)
     vcov <- vcov[ ind, ind ]
 
     #--- output

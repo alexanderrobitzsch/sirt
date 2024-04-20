@@ -1,5 +1,5 @@
 ## File Name: noharm_sirt_efa_rotated_solution.R
-## File Version: 0.05
+## File Version: 0.06
 
 
 noharm_sirt_efa_rotated_solution <- function(res, items, F_dimnames)
@@ -9,7 +9,7 @@ noharm_sirt_efa_rotated_solution <- function(res, items, F_dimnames)
     D <- ncol(L1)
     m1 <- stats::promax(L1)
     p1 <- matrix( 0, nrow=I, ncol=D)
-    for (dd in 1:D){
+    for (dd in 1L:D){
         p1[,dd] <- m1$loadings[,dd]
     }
     colnames(p1) <- F_dimnames

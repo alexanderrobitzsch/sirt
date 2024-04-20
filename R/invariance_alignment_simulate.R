@@ -1,5 +1,5 @@
 ## File Name: invariance_alignment_simulate.R
-## File Version: 0.122
+## File Version: 0.123
 
 invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
     output="data", groupwise=FALSE, exact=FALSE)
@@ -15,22 +15,22 @@ invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
     I <- ncol(nu)
     items <- colnames(nu)
     if (is.null(items)){
-        items <- paste0('I',1:I)
+        items <- paste0('I',1L:I)
     }
     n_end <- cumsum(N)
     n_start <- c(1,n_end+1)[-c(G+1)]
     #* simulate data
     if (N[1]<Inf){
-        group <- rep(1:G, N)
+        group <- rep(1L:G, N)
         dat <- matrix(NA, nrow=N_tot, ncol=I+1)
         colnames(dat) <- c('group',items)
         dat <- as.data.frame(dat)
         dat$group <- group
-        for (gg in 1:G){
+        for (gg in 1L:G){
             N_gg <- N[gg]
             ind_gg <- seq(n_start[gg], n_end[gg])
             fac <- ruvn(N=N_gg, mean=mu[gg], sd=sigma[gg], exact=FALSE)
-            for (ii in 1:I){
+            for (ii in 1L:I){
                 err_ii <- ruvn(N=N_gg, mean=0, sd=sqrt(err_var[gg,ii]), exact=FALSE )
                 dat[ind_gg, ii+1] <- nu[gg,ii] + lambda[gg,ii]*fac + err_ii
             }
@@ -47,7 +47,7 @@ invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
         res <- dat
         if (output=='suffstat'){
             res <- list(mu=list(), Sigma=list(), N=list() )
-            for (gg in 1:G){
+            for (gg in 1L:G){
                 ind_gg <- which(dat$group==gg)
                 res$mu[[gg]] <- colMeans(dat[ ind_gg, -1])
                 res$Sigma[[gg]] <- stats::cov.wt(dat[ ind_gg, -1], method='ML')$cov
@@ -58,7 +58,7 @@ invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
     #*** only compute covariance matrices
     if (N[1]==Inf){
         res <- list(mu=list(), Sigma=list(), N=list() )
-        for (gg in 1:G){
+        for (gg in 1L:G){
             lam_gg <- lambda[gg,]
             sig2_gg <- sigma[gg]^2
             res$mu[[gg]] <- nu[gg,] + lam_gg*mu[gg]
@@ -71,8 +71,8 @@ invariance_alignment_simulate <- function(nu, lambda, err_var, mu, sigma, N,
     #*** group-wise output
     if ( (output=='suffstat') & groupwise ){
         res1 <- res
-        res <- as.list(1:G)
-        for (gg in 1:G){
+        res <- as.list(1L:G)
+        for (gg in 1L:G){
             res[[gg]] <- list(mu=res1$mu[[gg]], Sigma=res1$Sigma[[gg]], N=res1$N[[gg]])
         }
     }
