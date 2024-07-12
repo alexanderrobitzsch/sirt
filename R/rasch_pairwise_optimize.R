@@ -1,5 +1,5 @@
 ## File Name: rasch_pairwise_optimize.R
-## File Version: 0.222
+## File Version: 0.223
 
 
 rasch_pairwise_optimize <- function(n.ij, n.ji, beta, zerosum, optimizer="nlminb",
@@ -15,13 +15,12 @@ rasch_pairwise_optimize <- function(n.ij, n.ji, beta, zerosum, optimizer="nlminb
         val <- sum(t3)
         return(val)
     }
-
     tol <- 1e-7
-    if (estimator=="MINCHI"){
+    if (estimator=='MINCHI'){
         y.ij <- n.ij / sqrt(n.ij+n.ji+tol)
         y.ji <- n.ji / sqrt(n.ij+n.ji+tol)
     }
-    if (estimator=="ULS"){
+    if (estimator=='ULS'){
         y.ij <- n.ij
         y.ji <- n.ji
     }

@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.755
+%% File Version: 0.760
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -643,7 +643,6 @@ mod5$transf.pars
 # EXAMPLE 8: Many studies and directional DIF
 #############################################################################
 
-## dataset 2
 set.seed(98)
 I <- 10 # number of items
 S <- 7  # number of studies
@@ -687,6 +686,41 @@ mod11 <- sirt::linking.haebara(itempars, dist="L2")
 mod12 <- sirt::linking.haebara(itempars, dist="L1")
 summary(mod11)
 summary(mod12)
+
+#############################################################################
+# EXAMPLE 9: Haberman linking for polytomous data
+#############################################################################
+
+#* attach dataset involving two countries
+data(data.timssAusTwn.scored, package="TAM")
+dat <- data.timssAusTwn.scored
+items <- grep("M0", colnames(dat), value=TRUE)
+
+#* separate scaling with the generalized partial credit model (GPCM)
+mod2a <- TAM::tam.mml.2pl( dat[dat$IDCNTRY==36,items])
+mod2b <- TAM::tam.mml.2pl( dat[dat$IDCNTRY==158,items])
+
+#* function for extracting item parameters of the GPCM
+extract_gpcm_pars <- function(mod, study)
+{
+    # extract slope parameter
+    a <- mod$B[,2,1]
+    # maximum score
+    K <- rowSums( 1-is.na( mod$AXsi[,-1] ) )
+    # extract xsi
+    xsi <- mod$xsi
+    a1 <- rep( a, K )
+    res <- data.frame( study=study, item=rownames(xsi), a=a1, b=xsi[,1] / a1 )
+    return(res)
+}
+
+itempars1 <- extract_gpcm_pars(mod=mod2a, study="CNT036")
+itempars2 <- extract_gpcm_pars(mod=mod2b, study="CNT158")
+itempars <- rbind(itempars1, itempars2)
+
+#* apply Haberman linking
+lmod1 <- sirt::linking.haberman(itempars=itempars)
+lmod1$transf.personpars
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

@@ -1,5 +1,5 @@
 ## File Name: rm_smooth_distribution.R
-## File Version: 0.25
+## File Version: 0.261
 
 rm_smooth_distribution <- function( theta.k, pi.k, est.mean=FALSE,
             skillspace="normal", est.sigma=TRUE, sigma=NULL )
@@ -12,7 +12,7 @@ rm_smooth_distribution <- function( theta.k, pi.k, est.mean=FALSE,
         w2 <- sum( theta.k^2 * pi.k ) - m2^2
         sigma <- sqrt(w2)
     }
-    if ( skillspace=="normal" ){
+    if ( skillspace=='normal' ){
         pi.k <- sirt_dnorm_discrete(x=theta.k, mean=m2, sd=sigma)
     }
     res <- list( mu=m2, sigma=sigma, pi.k=pi.k)

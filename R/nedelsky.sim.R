@@ -1,5 +1,5 @@
 ## File Name: nedelsky.sim.R
-## File Version: 0.153
+## File Version: 0.154
 
 
 #---- simulate data according to the Nedelsky model
@@ -21,7 +21,7 @@ nedelsky.sim <- function( theta, b, a=NULL, tau=NULL )
     }
     # dataset
     dat <- matrix( NA, nrow=N, ncol=I)
-    for (ii in 1:I){
+    for (ii in 1L:I){
         b0 <- as.vector(b[ii,])
         a0 <- a[ii]
         thdim <- 1
@@ -31,7 +31,7 @@ nedelsky.sim <- function( theta, b, a=NULL, tau=NULL )
         rn1 <- stats::runif(N)
         dat[,ii] <- rowIntervalIndex.sirt(matr=cprobs,rn=rn1) - 1
     }
-    colnames(dat) <- paste0( 'I', 100+1:I )
+    colnames(dat) <- paste0( 'I', 100+1L:I )
     return(dat)
 }
 

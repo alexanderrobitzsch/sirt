@@ -1,5 +1,5 @@
 ## File Name: rasch_pairwise_iterations.R
-## File Version: 0.10
+## File Version: 0.111
 
 
 rasch_pairwise_iterations <- function(eps, y.ij, delta.ij, conv, maxiter,
@@ -24,7 +24,7 @@ rasch_pairwise_iterations <- function(eps, y.ij, delta.ij, conv, maxiter,
         change_b <- max(abs( -b0 + b))
         iter <- iter + 1
         if ( progress ){
-            cat( "PL Iter.", iter, ": max. parm. change=", round( change_b, 6 ), "\n")
+            cat( 'PL Iter.', iter, ': max. parm. change=', round( change_b, 6 ), '\n')
             utils::flush.console()
         }
     } #* end estimation algorithm

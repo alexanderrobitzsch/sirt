@@ -1,5 +1,5 @@
 ## File Name: lsdm_est_logist_quant.R
-## File Version: 0.193
+## File Version: 0.196
 
 
 #--- Function for calculating logistic functions and probability quantiles
@@ -14,21 +14,21 @@ lsdm_est_logist_quant <- function( probcurves, theta, quantiles, wgt_theta,
         colnames(pars.probcurves) <- c('b.2PL', 'a.2PL', 'sigma.2PL', 'b.1PL',
                                             'sigma.1PL')
         rownames(pars.probcurves) <- rownames(probcurves)
-        for (kk in 1:I){
+        for (kk in 1L:I){
             if (!is.null(b)){
                 b0 <- b[kk]
                 a0 <- a[kk]
             }
-            pars.probcurves[kk,1:3] <- lsdm_est_logist_2pl( y=probcurves[kk,],
+            pars.probcurves[kk,1L:3] <- lsdm_est_logist_2pl( y=probcurves[kk,],
                                             theta=theta, wgt_theta=wgt_theta,
                                             b0=b0, a0=a0 )
-            pars.probcurves[kk,4:5] <- lsdm_est_logist_rasch( y=probcurves[kk,],
+            pars.probcurves[kk,4L:5] <- lsdm_est_logist_rasch( y=probcurves[kk,],
                                             theta=theta, wgt_theta=wgt_theta )
         }
     }
     # quantiles of Item Response Curves (Logistic Functions)
     probcurves.quant <- sapply( quantiles, FUN=function(ql){
-            sapply( 1:I, FUN=function(kk){
+            sapply( 1L:I, FUN=function(kk){
                     lsdm_extract_probquantile(vec=probcurves[kk,], theta=theta, quant=ql)
                 } )
             } )
@@ -40,7 +40,7 @@ lsdm_est_logist_quant <- function( probcurves, theta, quantiles, wgt_theta,
     } else {
         pars.probcurves <- probcurves.quant
     }
-    for (vv in 1:(length(quantiles))){
+    for (vv in 1L:(length(quantiles))){
         pars.probcurves[,vv] <- as.numeric( pars.probcurves[,vv] )
     }
     return(pars.probcurves)

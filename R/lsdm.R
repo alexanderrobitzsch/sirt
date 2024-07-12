@@ -1,5 +1,5 @@
 ## File Name: lsdm.R
-## File Version: 1.388
+## File Version: 1.389
 
 
 # LSDM - Least Squares Distance Method
@@ -102,7 +102,7 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
     log.arc0 <- matrix(NA, nrow=K, ncol=L)
     par0 <- rep(-2,K)
     upper <- rep(0,K)
-    for (tt in 1:L){
+    for (tt in 1L:L){
         y_tt <- logdata[,tt]
         res <- stats::optim(par=par0, fn=lsdm_obj_fn, gr=lsdm_obj_gr, method='L-BFGS-B',
                         upper=upper, y_tt=y_tt)
@@ -129,7 +129,7 @@ lsdm <- function( data, Qmatrix, theta=seq(-3,3,by=.5), wgt_theta=rep(1, length(
     arc0.pars$se.LLTM <- slltm.res1[[4]][,2]
     arc0.pars$pval.LLTM <- slltm.res1[[4]][,4]
     W <- matrix( NA, nrow=I, ncol=K )
-    for (ii in 1:I){
+    for (ii in 1L:I){
         index.ii <- which( Qmatrix[ii,] > 0 )
         L.ii <- length(index.ii)
         x.ii <- t( log.arc0[ index.ii, ] )

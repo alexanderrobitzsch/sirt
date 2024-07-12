@@ -1,5 +1,5 @@
 ## File Name: nedelsky.irf.R
-## File Version: 0.121
+## File Version: 0.122
 
 
 
@@ -11,12 +11,12 @@ nedelsky.irf <- function( Theta, K, b, a, tau, combis, thdim=1)
     C1 <- nrow(combis)
     TP <- nrow(Theta)
     prob.cats <- matrix(NA,nrow=TP, ncol=K)
-    for (cc in 1:K){
+    for (cc in 1L:K){
         prob.cats[,cc] <- stats::plogis( a*Theta[,thdim ] - b[cc] )
     }
     prob.latclasses <- matrix(1, nrow=TP, ncol=C1)
     # probabilities of latent classes
-    for (kk in 1:K){
+    for (kk in 1L:K){
         p1 <- prob.cats[,kk]
         p1 <- cbind( 1 - p1, p1 )
         p1M <- p1[, as.vector(combis[,kk])+1 ]

@@ -1,12 +1,12 @@
 ## File Name: sia.sirt.R
-## File Version: 0.29
+## File Version: 0.303
 
 
 #--- statistical implicative analysis
 #--- simplified algorithm
 sia.sirt <- function(dat, significance=.85 )
 {
-    TAM::require_namespace_msg("igraph")
+    TAM::require_namespace_msg('igraph')
     dat1 <- dat
     # order items
     dat1 <- dat1[, order( colMeans(dat1, na.rm=TRUE ) ) ]
@@ -50,10 +50,10 @@ sia.sirt <- function(dat, significance=.85 )
     I1 <- impl_significance
     # remove symmetric implications
     #    I1[ ( I1==t(I1) ) & ( I1==1 ) ] <- 0
-    for (ii in 1:(I-1) ){
+    for (ii in 1L:(I-1) ){
         for (jj in (ii+1):I){
             l2 <- I1[ii,jj] + I1[jj,ii]
-            if (l2==2 ){
+            if (l2==2){
                 if (impl_int[ii,jj] > impl_int[jj,ii] ){
                         I1[jj,ii] <- 0 } else { I1[ii,jj] <- 0 }
             } # end l2=2
@@ -81,7 +81,7 @@ sia.sirt <- function(dat, significance=.85 )
     }
 
     # descriptives
-    desc <- list( "nodes"=I  )
+    desc <- list( 'nodes'=I  )
     # unconnected nodes
     ind.uc <- intersect( which( rowSums(I1)==0 ), which( colSums(I1)==0 ) )
     UC <- length( ind.uc )
@@ -92,15 +92,15 @@ sia.sirt <- function(dat, significance=.85 )
     desc$edges <- sum(I1)
     desc$sign.implications <- sum( impl_significance, na.rm=TRUE)
     # descriptives on item level
-    desc.item <- data.frame( "item"=colnames(dat1), "p"=p )
+    desc.item <- data.frame( 'item'=colnames(dat1), 'p'=p )
     desc.item$level <- g1 <- apply( I1.pot, 1, max )
-# cat("\nc100")
+# cat('\nc100')
     #****
     # recalculate levels
     g0 <- g1
     g0 <- sort( g0, decreasing=TRUE )
     g1 <- g0
-    for (ii in 1:(I-1) ){
+    for (ii in 1L:(I-1) ){
         # ii <- 1
         vii <- names(g1)[ii]
         levii <- g1[ vii ]
@@ -110,9 +110,9 @@ sia.sirt <- function(dat, significance=.85 )
             g1 <- sort( g1, decreasing=TRUE )
         }
     }
-    desc.item[ names(g1), "level" ]  <- g1
+    desc.item[ names(g1), 'level' ]  <- g1
     if (UC > 0 ){
-        desc.item[vars.uc,"level"] <- NA
+        desc.item[vars.uc,'level'] <- NA
         g1[vars.uc] <- -1
     }
     # from objects and to objects
@@ -124,9 +124,9 @@ sia.sirt <- function(dat, significance=.85 )
     dfr <- NULL
     dfr2 <- NULL
     g1 <- g1[ colnames(I1) ]
-    CI1 <- paste0( colnames(I1), "\n(L", g1, ")")
+    CI1 <- paste0( colnames(I1), '\n(L', g1, ')')
     CI2 <- colnames(I1)
-    for (ii in 1:I){
+    for (ii in 1L:I){
         v1 <- which( I1[ii, ] > 0 )
         if ( length(v1) > 0 ){
             dfr.ii <- cbind( CI1[ii], CI1[ v1] )

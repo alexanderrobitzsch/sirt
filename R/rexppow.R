@@ -1,5 +1,5 @@
 ## File Name: rexppow.R
-## File Version: 0.22
+## File Version: 0.232
 
 
 rexppow <- function (n, mu=0, sigmap=1, pow=2, xbound=100, xdiff=.01)
@@ -15,15 +15,15 @@ rexppow <- function (n, mu=0, sigmap=1, pow=2, xbound=100, xdiff=.01)
     rn <- stats::runif(n)
     if (!use_rcpp){
         res <- rep(NA,n)
-        for (nn in 1:n){
+        for (nn in 1L:n){
             ind_nn <- min( which( rn[nn] <=dfr$cum ) )
             dfr_nn <- dfr[ind_nn,]
             ind_nn1 <- ind_nn-1
             if (ind_nn1==0){
-                res[nn] <- dfr_nn[1,"x"]
+                res[nn] <- dfr_nn[1,'x']
             } else {
-                res[nn] <- dfr_nn$min+xdiff*(rn[nn]-dfr[ind_nn1,"cum"])/
-                                    (dfr[ind_nn,"cum"]-dfr[ind_nn1,"cum"])
+                res[nn] <- dfr_nn$min+xdiff*(rn[nn]-dfr[ind_nn1,'cum'])/
+                                    (dfr[ind_nn,'cum']-dfr[ind_nn1,'cum'])
             }
         }
     } else {

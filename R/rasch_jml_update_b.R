@@ -1,5 +1,5 @@
 ## File Name: rasch_jml_update_b.R
-## File Version: 0.04
+## File Version: 0.053
 
 
 
@@ -10,7 +10,8 @@ rasch_jml_update_b <- function( b, theta, freq.thetapattern, freq.dat.resp.theta
     b.change <- 1
     iter <- 0
     while( max( abs( b.change  ) ) > conv & ( iter < bsteps ) ){
-        p.ia <- stats::plogis( theta, matrix( b, nrow=length(theta), length(b), byrow=T ) )
+        p.ia <- stats::plogis( theta,
+                        matrix( b, nrow=length(theta), length(b), byrow=TRUE ) )
         deriv <- colSums( - freq.thetapattern * p.ia * ( 1- p.ia ) )
         diff <- suffB + colSums( freq.dat.resp.thetapattern *  p.ia  )
         b.change <-  diff / deriv
@@ -18,7 +19,7 @@ rasch_jml_update_b <- function( b, theta, freq.thetapattern, freq.dat.resp.theta
             b.change[ constraints[,1] ] <- 0
         }
         if (progress){
-            cat("-")
+            cat('-')
             utils::flush.console()
         }
         b <- b - b.change

@@ -1,5 +1,5 @@
 ## File Name: linking.haberman.lq.R
-## File Version: 0.201
+## File Version: 0.202
 
 linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     use_nu=FALSE, est_pow=FALSE, lower_pow=.1, upper_pow=3)
@@ -78,7 +78,7 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     y <- itempars1[,4] * coef0_A[ ind_studies ]
     if (use_nu){
         y <- -itempars1[,4]*itempars1[,3]
-        for (gg in 2:G){
+        for (gg in 2L:G){
             ind_gg <- which(ind_studies==gg)
             X[ ind_gg, gg-1] <- itempars1[ ind_gg,3]/coef0_A[gg]
         }

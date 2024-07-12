@@ -1,10 +1,10 @@
 ## File Name: rm_determine_fixed_tau_parameters.R
-## File Version: 0.081
+## File Version: 0.082
 
 rm_determine_fixed_tau_parameters <- function( K, maxK, VV, tau.item.fixed=NULL, val=99)
 {
     if ( min(maxK) < K ){
-        for (vv in 1:VV){
+        for (vv in 1L:VV){
             K.vv <- maxK[vv]
             if ( K.vv < K ){
                 for (zz in (K.vv+1):K ){
