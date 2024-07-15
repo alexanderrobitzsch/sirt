@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.760
+%% File Version: 0.761
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -697,8 +697,8 @@ dat <- data.timssAusTwn.scored
 items <- grep("M0", colnames(dat), value=TRUE)
 
 #* separate scaling with the generalized partial credit model (GPCM)
-mod2a <- TAM::tam.mml.2pl( dat[dat$IDCNTRY==36,items])
-mod2b <- TAM::tam.mml.2pl( dat[dat$IDCNTRY==158,items])
+mod2a <- TAM::tam.mml.2pl( dat[dat$IDCNTRY==36,items], irtmodel="GPCM")
+mod2b <- TAM::tam.mml.2pl( dat[dat$IDCNTRY==158,items], irtmodel="GPCM")
 
 #* function for extracting item parameters of the GPCM
 extract_gpcm_pars <- function(mod, study)

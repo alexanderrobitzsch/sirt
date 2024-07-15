@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.2  |  2024-07-12  |  Last: sirt 4.2-61
+VERSIONS sirt 4.2  |  2024-07-15  |  Last: sirt 4.2-64
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in handling sufficient statistics in
