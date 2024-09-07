@@ -1,5 +1,5 @@
 ## File Name: sia.sirt.R
-## File Version: 0.303
+## File Version: 0.304
 
 
 #--- statistical implicative analysis
@@ -81,7 +81,7 @@ sia.sirt <- function(dat, significance=.85 )
     }
 
     # descriptives
-    desc <- list( 'nodes'=I  )
+    desc <- list( nodes=I  )
     # unconnected nodes
     ind.uc <- intersect( which( rowSums(I1)==0 ), which( colSums(I1)==0 ) )
     UC <- length( ind.uc )
@@ -92,7 +92,7 @@ sia.sirt <- function(dat, significance=.85 )
     desc$edges <- sum(I1)
     desc$sign.implications <- sum( impl_significance, na.rm=TRUE)
     # descriptives on item level
-    desc.item <- data.frame( 'item'=colnames(dat1), 'p'=p )
+    desc.item <- data.frame( item=colnames(dat1), p=p )
     desc.item$level <- g1 <- apply( I1.pot, 1, max )
 # cat('\nc100')
     #****

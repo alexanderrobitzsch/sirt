@@ -1,8 +1,8 @@
 ## File Name: rm_proc_data.R
-## File Version: 0.65
+## File Version: 0.663
 
-##########################################
-# Data preprocessing rater models
+
+#--- Data preprocessing rater models
 rm_proc_data <- function( dat, pid, rater, rater_item_int=FALSE, reference_rater=NULL )
 {
     #--- define reference rater
@@ -26,12 +26,12 @@ rm_proc_data <- function( dat, pid, rater, rater_item_int=FALSE, reference_rater
     #-- create rater indices
     rater <- paste(rater)
     # create table of rater indizes
-    rater.index <- data.frame( "rater"=sort( unique( rater )) )
+    rater.index <- data.frame( rater=sort( unique( rater )) )
     rater.index$rater.id <- seq( 1, nrow(rater.index) )
     RR <- nrow(rater.index)
 
     # create table of person indizes
-    person.index <- data.frame( "pid"=sort( unique( pid )) )
+    person.index <- data.frame( pid=sort( unique( pid )) )
     person.index$person.id <- seq( 1, nrow(person.index) )
     PP <- nrow( person.index )
 
@@ -53,8 +53,8 @@ rm_proc_data <- function( dat, pid, rater, rater_item_int=FALSE, reference_rater
     dat20 <- dat2
 
     # variable list
-    dataproc.vars <- list( item.index=rep( 1:VV, RR ),
-                            rater.index=rep(1:RR, each=VV ) )
+    dataproc.vars <- list( item.index=rep( 1L:VV, RR ),
+                            rater.index=rep(1L:RR, each=VV ) )
 
     # arrange response data
     N <- nrow(dat2)
@@ -68,12 +68,12 @@ rm_proc_data <- function( dat, pid, rater, rater_item_int=FALSE, reference_rater
 
     #--- output
     res <- list( dat2=dat2, dat2.resp=dat2.resp, dat2.NA=dat20, dat=dat,
-                person.index=person.index, rater.index=rater.index, VV=VV, N=PP, RR=RR,
-                dataproc.vars=dataproc.vars, dat2.ind.resp=dat2.ind.resp, rater=rater, pid=pid, dat=dat,
-                reference_rater=reference_rater, I0=I0)
+                person.index=person.index, rater.index=rater.index, VV=VV, N=PP,
+                RR=RR, dataproc.vars=dataproc.vars, dat2.ind.resp=dat2.ind.resp,
+                rater=rater, pid=pid, dat=dat, reference_rater=reference_rater, I0=I0)
     return(res)
 }
-#################################################
+
 
 rm_proc <- rm_proc_data
 .prep.data.rm <- rm_proc

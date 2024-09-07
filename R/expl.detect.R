@@ -1,5 +1,5 @@
 ## File Name: expl.detect.R
-## File Version: 1.313
+## File Version: 1.314
 
 
 #**** Exploratory DETECT analysis
@@ -57,7 +57,7 @@ expl.detect <- function( data, score, nclusters, N.est=NULL, seed=NULL,
     parnames <- c( 'DETECT', 'ASSI', 'RATIO', 'MADCOV100', 'MCOV100')
     colnames(detect.unweighted) <- paste( parnames, '.est', sep='')
     colnames(detect.weighted) <- paste( parnames, '.est', sep='')
-    dfr1 <- data.frame( 'N.Cluster'=2:nclusters )
+    dfr1 <- data.frame( N.Cluster=2:nclusters )
     dfr1$N.items <- I
     dfr1$N.est <- N.est
     dfr1$N.val <- length(valsample)

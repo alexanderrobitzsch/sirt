@@ -1,26 +1,26 @@
 ## File Name: eigenvalues.manymatrices.R
-## File Version: 0.10
+## File Version: 0.112
 
 ###################################################################
 # computation of eigenvalues of many matrices
 eigenvalues.manymatrices <- function( Sigma.all, itermax=10, maxconv=.001,
-    inverse=FALSE ){
+    inverse=FALSE )
+{
     D <- sqrt( ncol(Sigma.all) )
     N <- nrow( Sigma.all )
     lambda <- matrix( 0, nrow=N, ncol=D )
     U <- matrix( 0, nrow=N, ncol=D^2 )
     Sigma1 <- Sigma.all
     for (dd in 1:D){
-        # dd <- 1
         res <- .eigenvalue.manymatrices( Sigma.all=Sigma1, itermax=itermax, maxconv=maxconv )
         lambda[,dd] <- res$lambda
         U[, D*(dd-1 )+1:D ] <- res$z
         z <- res$z
         for (zz in 1:D){
             Sigma1[, D*(zz-1) + 1:D  ] <- Sigma1[, D*(zz-1) + 1:D  ] - lambda[,dd] * z[,zz] * z
-                    }
-               }
-    res <- list("lambda"=lambda, "U"=U )
+        }
+   }
+    res <- list(lambda=lambda, U=U )
     # calculate determinant
     res$logdet <- rowSums( log( lambda ) )
     res$det <- exp( res$logdet )
@@ -63,7 +63,7 @@ eigenvalues.manymatrices <- function( Sigma.all, itermax=10, maxconv=.001,
             z0 <- z
             ii <- ii+1
                         }
-        res <- list( "lambda"=lambda, "z"=z )
+        res <- list( lambda=lambda, z=z )
         return(res)
             }
 ##########################################################################

@@ -1,5 +1,5 @@
 ## File Name: tetrachoric2.R
-## File Version: 1.33
+## File Version: 1.343
 
 tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
     cor.smooth=TRUE, progress=TRUE)
@@ -17,7 +17,7 @@ tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
         dat[ dat.resp==0] <- 9
         I <- ncol(dat)
         # calculate frequencies
-        dfr <- data.frame( "item1"=rep(1:I,I), "item2"=rep(1:I, each=I ) )
+        dfr <- data.frame( item1=rep(1:I,I), item2=rep(1:I, each=I ) )
         h1 <- t( ( dat==1 ) ) %*% ( dat==0 )
         dfr$f11 <- matrix( t( ( dat==1 ) ) %*% ( dat==1 ), ncol=1, byrow=TRUE ) + .5
         dfr$f10 <- matrix( t( ( dat==1 ) ) %*% ( dat==0 ), ncol=1, byrow=TRUE ) + .5
@@ -97,7 +97,7 @@ tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
             TC <- sirt_import_psych_cor.smooth(x=TC)
         }
         rownames(TC) <- colnames(TC) <- colnames(dat)
-        res <- list("tau"=tau, "rho"=TC )
+        res <- list(tau=tau, rho=TC )
     }   # method !="Ol"
     return(res)
 }

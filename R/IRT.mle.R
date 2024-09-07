@@ -1,5 +1,5 @@
 ## File Name: IRT.mle.R
-## File Version: 0.34
+## File Version: 0.351
 
 
 #--- IRT.mle
@@ -86,7 +86,7 @@ IRT.mle <- function(data, irffct, arg.list, theta=rep(0,nrow(data)), type="MLE",
     se <-  ifelse( abs(theta)==maxval, NA, se )
     theta <- ifelse( theta==maxval, Inf, theta )
     theta <- ifelse( theta==- maxval, -Inf, theta )
-    res <- data.frame( "est"=theta, "se"=se )
+    res <- data.frame( est=theta, se=se )
 
     #--- calculate reliability
     attr(res, "type") <- type

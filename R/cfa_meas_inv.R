@@ -1,5 +1,5 @@
 ## File Name: cfa_meas_inv.R
-## File Version: 0.159
+## File Version: 0.161
 
 
 cfa_meas_inv <- function(dat, group, weights=NULL, alpha=0.01, verbose=FALSE,
@@ -24,7 +24,7 @@ cfa_meas_inv <- function(dat, group, weights=NULL, alpha=0.01, verbose=FALSE,
     args$group.equal <- c('loadings','intercepts')
 
     mod1 <- lavaan::cfa(data=dat, model=lavmodel, std.lv=TRUE, meanstructure=TRUE,
-                    group.equal=c('loadings','intercepts'), group='group',
+                    group.equal=args$group.equal, group='group',
                     sampling.weights='weight')
     partable1 <- lavaan::parameterTable(object=mod1)
     mimod1 <- mi_inv_lavaan_modification_indices(mod=mod1, op=op)

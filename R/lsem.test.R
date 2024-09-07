@@ -1,5 +1,5 @@
 ## File Name: lsem.test.R
-## File Version: 0.134
+## File Version: 0.140
 
 #**** test LSEM model based on bootstrap
 lsem.test <- function( mod, bmod, models=NULL )
@@ -68,10 +68,13 @@ lsem.test <- function( mod, bmod, models=NULL )
             mod11 <- stats::lm(formula=model_mm, data=dat, weights=w)
             coef11 <- coef(mod11)
             parameters[ind_pp,'est'] <- predict(mod11)
-
+            # compute residuals
+            resid_pp <- resid(mod11)
             NC <- length(coef11)
             if (! bmod_missing){
                 est_boot <- matrix(NA, nrow=NC, ncol=R)
+                NRES <- length(resid_pp)
+                resid_boot <- matrix(NA, nrow=NRES, ncol=R)
                 rr <- 1
                 for (rr in 1L:R){
                     dat$y <- parameters_boot[ind_pp,rr]
@@ -79,6 +82,7 @@ lsem.test <- function( mod, bmod, models=NULL )
                     mod12 <- stats::lm(formula=model_mm, data=dat)
                     parameters_boot[ind_pp,rr] <- predict(mod12)
                     est_boot[,rr] <- coef(mod12)
+                    resid_boot[,rr] <- resid(mod12)
                 }
             }
             dfr1 <- data.frame(par=pp, coef=names(coef11), est=coef11)
@@ -93,13 +97,23 @@ lsem.test <- function( mod, bmod, models=NULL )
                     A[cc,cc+1] <- 1
                 }
                 res <- lsem_wald_test(theta=coef11, V=V, A=A)
-                dfr1[1,'chisq'] <- res$chisq
-                dfr1[1,'df'] <- res$df
-                dfr1[1,'p_wald'] <- res$p
+                dfr1[1,'chisq_het'] <- res$chisq
+                dfr1[1,'df_het'] <- res$df
+                dfr1[1,'p_het'] <- res$p
+
+                ## test whether all residuals are zero
+                VR <- stats::cov(t(resid_boot))
+                A0 <- diag(NRES)
+                res1 <- lsem_wald_test(theta=resid_pp, V=VR, A=A0)
+                dfr1[1,'chisq_fit'] <- res1$chisq
+                dfr1[1,'df_fit'] <- NRES-NC
+                dfr1[1,'p_fit'] <- res1$p
+
             }
             rownames(dfr1) <- NULL
+
             test_models <- rbind(test_models, dfr1)
-        }
+        }  # end mm
     }
 
     #--- output

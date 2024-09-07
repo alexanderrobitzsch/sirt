@@ -1,5 +1,5 @@
 ## File Name: linking.haberman.R
-## File Version: 2.654
+## File Version: 2.655
 
 
 #**** Linking Haberman: ETS Research Report 2009
@@ -100,7 +100,7 @@ linking.haberman <- function( itempars, personpars=NULL,
     colnames(transf.itempars) <- c('study', 'A_a', 'se_A_a',
                 'A_b', 'se_A_b', 'B_b', 'se_B_b' )
     # new item parameters
-    joint.itempars <- data.frame('item'=items, 'aj'=aj, 'bj'=Bj )
+    joint.itempars <- data.frame(item=items, aj=aj, bj=Bj )
     # transformations for item parameters
     AtM <- sirt_matrix2( At, nrow=NI)
     BtM <- sirt_matrix2( Bt, nrow=NI)

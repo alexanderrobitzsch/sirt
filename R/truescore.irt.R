@@ -1,5 +1,5 @@
 ## File Name: truescore.irt.R
-## File Version: 0.24
+## File Version: 0.251
 
 
 #--- true score item response function
@@ -42,11 +42,11 @@ truescore.irt <- function( A, B, c=NULL, d=NULL, theta=seq(-3,3,len=21),
     h1 <- stats::optim( c( .5, 0 ), critfct )
 
     #--- OUTPUT
-    res <- data.frame( "pid"=pid, "truescore"=truescore )
+    res <- data.frame( pid=pid, truescore=truescore )
     res$truescore.error <- truescore.error
-    res2 <- data.frame( "percscore"=percscore )
+    res2 <- data.frame( percscore=percscore )
     res2$percscore.error <- percscore.error
-    res3 <- data.frame( "lower"=minf, "upper"=maxf, "a"=h1$par[1], "b"=h1$par[2] )
+    res3 <- data.frame( lower=minf, upper=maxf, a=h1$par[1], b=h1$par[2] )
     res <- cbind( res, res2, res3 )
     return(res)
 }

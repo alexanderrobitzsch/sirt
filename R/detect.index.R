@@ -1,5 +1,5 @@
 ## File Name: detect.index.R
-## File Version: 0.34
+## File Version: 0.351
 
 
 
@@ -47,7 +47,7 @@ detect.index <- function( ccovtable, itemcluster )
     parnames[ii] <- "MCOV100"
 
     #--- output
-    res <- data.frame( "unweighted"=indizes, "weighted"=weighted.indizes )
+    res <- data.frame( unweighted=indizes, weighted=weighted.indizes )
     rownames(res) <- parnames
     return(res)
 }

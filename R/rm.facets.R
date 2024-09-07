@@ -1,5 +1,5 @@
 ## File Name: rm.facets.R
-## File Version: 4.641
+## File Version: 4.645
 
 #################################################################
 # Facets Model for Raters:
@@ -64,7 +64,7 @@ rm.facets <- function( dat, pid=NULL, rater=NULL,
 
     K <- max( maxK )
     if ( is.null(Qmatrix) ){
-        Qmatrix <- matrix( 1:K, nrow=VV, ncol=K, byrow=TRUE)
+        Qmatrix <- matrix( 1L:K, nrow=VV, ncol=K, byrow=TRUE)
     }
     TP <- length(theta.k)
     I <- VV*RR
@@ -140,8 +140,8 @@ rm.facets <- function( dat, pid=NULL, rater=NULL,
     b.rater.incr <- max.b.increment
     tau.item.incr  <- max.b.increment
 
-active <- TRUE
-active <- FALSE
+    active <- TRUE
+    active <- FALSE
 
     #****************************************************
     # start EM algorithm
@@ -284,13 +284,13 @@ active <- FALSE
     #---
     # item
     if ( ! is.null(tau.item.fixed) ){
-        tau.item[ tau.item.fixed[,1:2,drop=FALSE] ] <- NA
-        se.tau.item[ tau.item.fixed[,1:2,drop=FALSE] ] <- NA
+        tau.item[ tau.item.fixed[,1L:2,drop=FALSE] ] <- NA
+        se.tau.item[ tau.item.fixed[,1L:2,drop=FALSE] ] <- NA
     }
-    item <- data.frame( "item"=colnames(dat),
-            "N"=colSums( 1-is.na(dat)),
-            "M"=colMeans( dat, na.rm=TRUE ) )
-    for (kk in 1:K){
+    item <- data.frame( item=colnames(dat),
+                        N=colSums( 1-is.na(dat)),
+                        M=colMeans( dat, na.rm=TRUE ) )
+    for (kk in 1L:K){
         item[, paste0("tau.Cat",kk) ] <- tau.item[,kk]
     }
     item$a <- a.item
@@ -325,13 +325,16 @@ active <- FALSE
     cat("EAP Reliability=", round(EAP.rel,3), "\n")
 
     s2 <- Sys.time()
-    res <-  list( deviance=dev, ic=ic, item=item, rater=rater, person=person, EAP.rel=EAP.rel, mu=mu,
-                    sigma=sigma, theta.k=theta.k, pi.k=pi.k, G=1, tau.item=tau.item, se.tau.item=se.tau.item,
-                    a.item=a.item, se.a.item=se.a.item, delta.item=delta.item, b.rater=b.rater,
-                    se.b.rater=se.b.rater, a.rater=a.rater, se.a.rater=se.a.rater, f.yi.qk=f.yi.qk,
-                    f.qk.yi=f.qk.yi, probs=probs, n.ik=n.ik, maxK=maxK, procdata=procdata, iter=iter, s1=s1, s2=s2,
-                    tau.item.fixed=tau.item.fixed, item.index=item.index, rater.index=rater.index,
-                    ipars.dat2=ipars.dat2, rater_item_int=rater_item_int, CALL=CALL,
+    res <-  list( deviance=dev, ic=ic, item=item, rater=rater, person=person,
+                    EAP.rel=EAP.rel, mu=mu, sigma=sigma, theta.k=theta.k, pi.k=pi.k, G=1,
+                    tau.item=tau.item, se.tau.item=se.tau.item,
+                    a.item=a.item, se.a.item=se.a.item, delta.item=delta.item,
+                    b.rater=b.rater, se.b.rater=se.b.rater, a.rater=a.rater,
+                    se.a.rater=se.a.rater, f.yi.qk=f.yi.qk, f.qk.yi=f.qk.yi,
+                    probs=probs, n.ik=n.ik, maxK=maxK, procdata=procdata, iter=iter,
+                    s1=s1, s2=s2, tau.item.fixed=tau.item.fixed, item.index=item.index,
+                    rater.index=rater.index, ipars.dat2=ipars.dat2,
+                    rater_item_int=rater_item_int, CALL=CALL,
                     deviance.history=deviance.history )
     class(res) <- "rm.facets"
     return(res)

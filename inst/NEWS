@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.2  |  2024-07-15  |  Last: sirt 4.2-64
+VERSIONS sirt 4.2  |  2024-09-07  |  Last: sirt 4.2-73
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in handling sufficient statistics in
@@ -55,6 +55,8 @@ NOTE  * included Example 9 in ?invariance.alignment for dichotomous
 NOTE  * included example for Haberman linking for polytomous item responses
         based on the generalized partial credit model (GPCM; see
         ?linking.haberman, Example 9)
+ADDED * included test for misfitting parameter curve in lsem.test()
+        (suggested by Tuo Liu)
 
 
 DATA  * included/modified datasets: ---

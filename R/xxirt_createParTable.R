@@ -1,5 +1,5 @@
 ## File Name: xxirt_createParTable.R
-## File Version: 0.259
+## File Version: 0.261
 
 #*** create parameter table
 xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
@@ -25,7 +25,7 @@ xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
             stop( paste0( 'Item type ', type_ii, ' not found!') )
         }
         NP <- length( item_ii$par )
-        dfr1 <- data.frame( 'item'=rep( items[ii], NP ) )
+        dfr1 <- data.frame( item=rep( items[ii], NP ) )
         dfr1$itemnr <- ii
         dfr1$ncat <- ncat1[ii]
         dfr1$class <- class(item_ii)

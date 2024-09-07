@@ -1,5 +1,5 @@
 ## File Name: fit.gradedresponse_alg.R
-## File Version: 1.173
+## File Version: 1.174
 
 
 #####################################################################
@@ -21,7 +21,7 @@
     prob[ prob < eps ] <- eps
     # calculate log-likelihood
     ll <- freq.categories * log( prob )
-    res <- list("ll"=ll, "prob"=prob )
+    res <- list(ll=ll, prob=prob )
     return(res)
 }
 

@@ -1,5 +1,5 @@
 %% File Name: lsem.test.Rd
-%% File Version: 0.081
+%% File Version: 0.083
 
 \name{lsem.test}
 \alias{lsem.test}
@@ -39,7 +39,9 @@ List of model formulas for named LSEM model parameters
 List with following entries
 
 \item{wald_test_global}{Global Wald test for model parameters}
-\item{test_models}{Output for fitted regression models}
+\item{test_models}{Output for fitted regression models. The test for parameter
+heterogeneity is included in \code{chisq_het}, while the test of a sufficient
+fit of a parameter curve is included in \code{chisq_fit}.}
 \item{parameters}{Original model parameters after fitting (i.e., smoothing) a particular
 parameter using a regression model specified in \code{models}.}
 \item{parameters_boot}{Bootstrapped model parameters after fitting (i.e., smoothing)
@@ -86,7 +88,7 @@ moderator.grid <- seq(4,23,1)
 #-- estimate LSEM with bandwidth 2
 mod <- sirt::lsem.estimate( dat, moderator="age", moderator.grid=moderator.grid,
                lavmodel=lavmodel, h=2, std.lv=TRUE)
-summary(mod1)
+summary(mod)
 
 #-- bootstrap model
 bmod <- sirt::lsem.bootstrap(mod, R=200)

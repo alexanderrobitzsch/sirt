@@ -1,5 +1,5 @@
 ## File Name: btm.R
-## File Version: 1.539
+## File Version: 1.541
 
 
 #--- Bradley-Terry model in sirt
@@ -212,7 +212,7 @@ btm <- function( data, judge=NULL, ignore.ties=FALSE, fix.eta=NULL, fix.delta=NU
     time_alg <- Sys.time() - c0
 
     # arrange output
-    pars <- data.frame('parlabel'=c('Ties', 'Home'), 'par'=c('delta', 'eta') )
+    pars <- data.frame(parlabel=c('Ties', 'Home'), par=c('delta', 'eta') )
     pars$est <- c( delta, eta )
     pars$se <- c( se.delta, se.eta )
 

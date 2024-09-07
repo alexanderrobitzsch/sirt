@@ -1,14 +1,15 @@
 ## File Name: mirt.specify.partable.R
-## File Version: 0.10
+## File Version: 0.111
 
 
 #######################################################################
 ##   function parameter table specification
-mirt.specify.partable <- function(mirt.partable, parlist, verbose=TRUE) {
+mirt.specify.partable <- function(mirt.partable, parlist, verbose=TRUE)
+{
     mirt.partable0 <- mirt.partable
     mirt.partable0$prior.type <- paste(mirt.partable0$prior.type)
     if(length(unique(mirt.partable$group))==1L) ####
-        parlist <- list('all'=parlist) ####
+        parlist <- list(all=parlist) ####
     parlistfull <- parlist ####
     gnames <- names(parlistfull) ####
     if(!all(gnames %in% unique(mirt.partable$group))) ####

@@ -84,7 +84,9 @@ if these are specified in the argument <code>models</code>.</p>
 <dd><p>Global Wald test for model parameters</p></dd>
 
 <dt>test_models</dt>
-<dd><p>Output for fitted regression models</p></dd>
+<dd><p>Output for fitted regression models. The test for parameter
+heterogeneity is included in <code>chisq_het</code>, while the test of a sufficient
+fit of a parameter curve is included in <code>chisq_fit</code>.</p></dd>
 
 <dt>parameters</dt>
 <dd><p>Original model parameters after fitting (i.e., smoothing) a particular
@@ -123,7 +125,7 @@ a particular parameter using a regression model specified in <code>models</code>
 <span><span class="co">#-- estimate LSEM with bandwidth 2</span></span>
 <span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="lsem.estimate.html">lsem.estimate</a></span><span class="op">(</span> <span class="va">dat</span>, moderator<span class="op">=</span><span class="st">"age"</span>, moderator.grid<span class="op">=</span><span class="va">moderator.grid</span>,</span>
 <span>               lavmodel<span class="op">=</span><span class="va">lavmodel</span>, h<span class="op">=</span><span class="fl">2</span>, std.lv<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#-- bootstrap model</span></span>
 <span><span class="va">bmod</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="lsem.estimate.html">lsem.bootstrap</a></span><span class="op">(</span><span class="va">mod</span>, R<span class="op">=</span><span class="fl">200</span><span class="op">)</span></span>

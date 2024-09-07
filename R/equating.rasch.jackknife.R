@@ -1,5 +1,5 @@
 ## File Name: equating.rasch.jackknife.R
-## File Version: 0.155
+## File Version: 0.157
 
 
 
@@ -19,7 +19,7 @@ equating.rasch.jackknife <- function( pars.data, display=TRUE, se.linkerror=FALS
     }
     # equating without jackknife
     mod1 <- equating.rasch( pars.data[, c( 4, 2) ], pars.data[, c(4, 3) ] )
-    res1 <- data.frame( 'unit'=itemunits, 'shift'=0, 'SD'=0, 'linkerror'=0)
+    res1 <- data.frame( unit=itemunits, shift=0, SD=0, linkerror=0)
 
     # perform jackknife
     for (nn in 1:N.units){
@@ -62,7 +62,7 @@ equating.rasch.jackknife <- function( pars.data, display=TRUE, se.linkerror=FALS
     descriptives <- data.frame( N.items=N.items, N.units=N.units,
                             shift=mod1$B.est$Stocking.Lord,
                             SD=mod1$descriptives$SD, linkerror.jackknife=linkerror,
-                        SE.SD.jackknife=se.sd, se.linkerror.jackknife=se.linkerror )
+                            SE.SD.jackknife=se.sd, se.linkerror.jackknife=se.linkerror )
     res <- list( pars.data=pars.data, itemunits=itemunits, descriptives=descriptives )
     return(res)
 }

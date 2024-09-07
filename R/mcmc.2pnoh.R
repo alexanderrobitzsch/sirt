@@ -1,7 +1,8 @@
 ## File Name: mcmc.2pnoh.R
-## File Version: 1.14
-##############################################
-# MCMC estimation 2PNO model
+## File Version: 1.155
+
+
+#*** MCMC estimation 2PNO model
 mcmc.2pnoh <- function(dat, itemgroups, prob.mastery=c(.5, .8 ),
         weights=NULL, burnin=500, iter=1000, N.sampvalues=1000,
         progress.iter=50, prior.variance=c(1,1), save.theta=FALSE )
@@ -111,7 +112,7 @@ mcmc.2pnoh <- function(dat, itemgroups, prob.mastery=c(.5, .8 ),
                         }
         # print progress
         if ( ( ii %% progress.iter )==0 ){
-            cat( "Iteration", ii, " | ", paste(Sys.time()), "\n")
+            cat( 'Iteration', ii, ' | ', paste(Sys.time()), '\n')
             flush.console() }
 
                 }
@@ -134,29 +135,29 @@ mcmc.2pnoh <- function(dat, itemgroups, prob.mastery=c(.5, .8 ),
     b <- b.chain
     d <- a*b
     theta <- theta.chain
-    colnames(a) <- paste0("alpha[", 1:I, "]")
-    colnames(b) <- paste0("beta[", 1:I, "]")
-    colnames(d) <- paste0("d[", 1:I, "]")
-    colnames(theta) <- paste0("theta[", 1:N, "]")
+    colnames(a) <- paste0('alpha[', 1:I, ']')
+    colnames(b) <- paste0('beta[', 1:I, ']')
+    colnames(d) <- paste0('d[', 1:I, ']')
+    colnames(theta) <- paste0('theta[', 1:N, ']')
     mcmcobj <- cbind( deviance.chain, a, b, d )
-    colnames(mcmcobj)[1] <- "deviance"
-    colnames(xi.chain) <- paste0("xi[", 1:K, "]")
-    colnames(omega.chain) <- paste0("omega[", 1:K, "]")
-    colnames(M.alpha.chain) <- paste0("M.alpha[", 1:K, "]")
-    colnames(M.beta.chain) <- paste0("M.beta[", 1:K, "]")
+    colnames(mcmcobj)[1] <- 'deviance'
+    colnames(xi.chain) <- paste0('xi[', 1:K, ']')
+    colnames(omega.chain) <- paste0('omega[', 1:K, ']')
+    colnames(M.alpha.chain) <- paste0('M.alpha[', 1:K, ']')
+    colnames(M.beta.chain) <- paste0('M.beta[', 1:K, ']')
     tau.chain <- omega.chain * xi.chain
-    colnames(tau.chain) <- paste0("tau[", 1:K, "]")
+    colnames(tau.chain) <- paste0('tau[', 1:K, ']')
     mcmcobj <- cbind( mcmcobj, xi.chain, omega.chain,
         M.beta.chain, M.alpha.chain, tau.chain )
-    dfr <- cbind( "sig"=sig.chain, "nu"=nu.chain )
+    dfr <- cbind( 'sig'=sig.chain, 'nu'=nu.chain )
     mcmcobj <- cbind( mcmcobj, dfr )
-    colnames(nonmastery.chain) <- paste0("nonmastery[", 1:K, "]")
-    colnames(transition.chain) <- paste0("transition[", 1:K, "]")
-    colnames(mastery.chain) <- paste0("mastery[", 1:K, "]")
+    colnames(nonmastery.chain) <- paste0('nonmastery[', 1:K, ']')
+    colnames(transition.chain) <- paste0('transition[', 1:K, ']')
+    colnames(mastery.chain) <- paste0('mastery[', 1:K, ']')
     mcmcobj <- cbind( mcmcobj, nonmastery.chain, transition.chain, mastery.chain )
     if (save.theta){ mcmcobj <- cbind( mcmcobj, theta ) }
-    class(mcmcobj) <- "mcmc"
-    attr(mcmcobj, "mcpar") <- c( burnin+1, burnin+SV, 1 )
+    class(mcmcobj) <- 'mcmc'
+    attr(mcmcobj, 'mcpar') <- c( burnin+1, burnin+SV, 1 )
     mcmcobj <- sirt_import_coda_as.mcmc.list( mcmcobj )
 
     #----
@@ -166,21 +167,18 @@ mcmc.2pnoh <- function(dat, itemgroups, prob.mastery=c(.5, .8 ),
 #    np <- 2*I + 2*K + 2
 
     s2 <- Sys.time()
-    time <- list( "start"=s1, "end"=s2, "timediff"=s2-s1 )
+    time <- list( start=s1, end=s2, timediff=s2-s1 )
+    desc <- '2PNO Hierarchical IRT Model for Criterion-Referenced Measurement'
     #----
     # result list
-    res <- list( "mcmcobj"=mcmcobj, "summary.mcmcobj"=summary.mcmcobj,
-            "ic"=ic,
-            "burnin"=burnin, "iter"=iter,
-            "alpha.chain"=a.chain, "beta.chain"=b.chain,
-            "xi.chain"=xi.chain, "omega.chain"=omega.chain,
-            "sig.chain"=sig.chain, "nu.chain"=nu.chain,
-            "theta.chain"=theta.chain,
-            "deviance.chain"=deviance.chain,
-            "EAP.rel"=EAP.rel, "person"=person,
-            "dat"=dat0, "weights"=weights,
-            "time"=time, "model"="2pnoh",
-            "description"="2PNO Hierarchical IRT Model for Criterion-Referenced Measurement")
+    res <- list( mcmcobj=mcmcobj, summary.mcmcobj=summary.mcmcobj,
+            ic=ic, burnin=burnin, iter=iter,
+            alpha.chain=a.chain, beta.chain=b.chain,
+            xi.chain=xi.chain, omega.chain=omega.chain,
+            sig.chain=sig.chain, nu.chain=nu.chain,
+            theta.chain=theta.chain, deviance.chain=deviance.chain,
+            EAP.rel=EAP.rel, person=person, dat=dat0, weights=weights,
+            time=time, model='2pnoh', description=desc)
     class(res) <- "mcmc.sirt"
     return(res)
     }

@@ -1,5 +1,5 @@
 ## File Name: class.accuracy.rasch.R
-## File Version: 0.17
+## File Version: 0.181
 
 
 #*** classification accuracy in the Rasch model
@@ -35,7 +35,7 @@ class.accuracy.rasch <- function( cutscores, b, meantheta, sdtheta, theta.l,
             m2[cc,ee] <- sum( m0[ind.cc, ind.ee ] * m1[ ind.cc, ind.ee ] )
         }
     }
-    stats <- data.frame( "agree0"=sum( diag(m2)) )
+    stats <- data.frame( agree0=sum( diag(m2)) )
     stats$agree1 <- sum( m2 * ( abs( outer( 1:CC, 1:CC, "-" ) ) <=1 ) )
 
     # calculate kappa calculation
@@ -51,7 +51,7 @@ class.accuracy.rasch <- function( cutscores, b, meantheta, sdtheta, theta.l,
     #*** accuracy by simulation
     if ( n.sims > 0 ){
         theta0 <- stats::rnorm(n.sims, mean=meantheta, sd=sdtheta )
-        theta.sim <- data.frame( "theta.true"=theta0 )
+        theta.sim <- data.frame( theta.true=theta0 )
         theta.sim$true.class <- as.numeric( paste( cut( theta0, breaks=cutscores.long, labels=1:CC) ))
         theta.sim$random.class <- sample( theta.sim$true.class )
         dat.sim <- sim.raschtype( theta=theta0, b=b )
@@ -81,6 +81,6 @@ class.accuracy.rasch <- function( cutscores, b, meantheta, sdtheta, theta.l,
     print( stats, digits=3 )
     cat("\nProbability classification table \n")
     print( round(m2,3), digits=3 )
-    res <- list( "class.stats"=stats, "class.prob"=m2)
+    res <- list( class.stats=stats, class.prob=m2)
     invisible(res)
 }
