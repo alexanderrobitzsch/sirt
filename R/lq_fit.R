@@ -1,5 +1,5 @@
 ## File Name: lq_fit.R
-## File Version: 0.154
+## File Version: 0.163
 
 lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
         est_pow=FALSE, optimizer="optim", eps_vec=10^seq(0,-10, by=-.5),
@@ -24,11 +24,13 @@ lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
     fct_optim <- function(x, y, X, pow, eps, w, Xs=NULL)
     {
         beta <- x
-        # e <- y - X %*% beta
-        # e <- sirt_rcpp_lq_fit_matrix_mult( Z=Xs, y=y, beta=beta)
-        # val <- sum( w*(e^2 + eps )^(pow/2) )
-        val <- sirt_rcpp_lq_fit_fct_optim(Z=Xs, y=y, beta=beta, pow=pow, w=w,
+        if (pow==0){
+            e <- y - X %*% beta
+            val <- sum( e^2 / ( e^2 + eps ) )
+        } else {
+            val <- sirt_rcpp_lq_fit_fct_optim(Z=Xs, y=y, beta=beta, pow=pow, w=w,
                     eps=eps)
+        }
         return(val)
     }
 
@@ -43,6 +45,20 @@ lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
         px <- ncol(X)
         der <- sirt_rcpp_lq_fit_sparse_matrix_derivative(Z=Xs, h1=h1, px=px)
         return(der)
+    }
+
+
+    if (pow==0){
+        grad_optim <- function(x, y, X, pow, eps, w, Xs=NULL)
+        {
+            NP <- length(x)
+            grad <- rep(NA, NP)
+            e <- y - X %*% x
+            for (pp in 1L:NP){
+                grad[pp] <- sum(-2*e*eps/(e^2+eps)^2*X[,pp])
+            }
+            return(grad)
+        }
     }
 
     #- define epsilon sequence

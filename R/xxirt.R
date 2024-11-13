@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.159
+## File Version: 1.172
 
 
 #--- user specified item response model
@@ -9,8 +9,8 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 mstep_reltol=1E-6, maxit_nr=0, optimizer_nr="nlminb",
                 estimator="ML", control_nr=list(trace=1),
                 h=1E-4, use_grad=TRUE, verbose=TRUE, penalty_fun_item=NULL,
-                np_fun_item=NULL, pml_args=NULL, verbose_index=NULL,
-                cv_kfold=0, cv_maxit=10)
+                np_fun_item=NULL, penalty_fun_theta=NULL, np_fun_theta=NULL,
+                pml_args=NULL, verbose_index=NULL, cv_kfold=0, cv_maxit=10)
 {
     #*** preliminaries
     CALL <- match.call()
@@ -110,7 +110,8 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                     par0=par0, maxK=maxK, group_index=group_index, weights=weights,
                     mstep_iter=mstep_iter, eps=eps, mstep_reltol=mstep_reltol,
                     mstep_method=mstep_method, item_index=item_index, h=h,
-                    use_grad=use_grad, penalty_fun_item=penalty_fun_item, group=group,
+                    use_grad=use_grad, penalty_fun_item=penalty_fun_item,
+                    penalty_fun_theta=penalty_fun_theta, group=group,
                     par1=par1, globconv=globconv, conv=conv, verbose2=verbose2,
                     verbose3=FALSE, verbose_index=verbose_index)
 
@@ -205,6 +206,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
             em_args$partable <- partable <- res$partable
             probs_items <- res$probs_items
             em_args$customTheta <- customTheta <- res$customTheta
+
         } # end NR optimization
         em_count <- 2
         do_nr <- FALSE
@@ -220,18 +222,20 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
 
     #-- collect parameters
     res <- xxirt_postproc_parameters( partable=partable, customTheta=customTheta,
-                    items=items, probs_items=probs_items, np_fun_item=np_fun_item )
+                    items=items, probs_items=probs_items, np_fun_item=np_fun_item,
+                    np_fun_theta=np_fun_theta)
     par_items <- res$par_items
     par_Theta <- res$par_Theta
     probs_items <- res$probs_items
     par_items_summary <- res$par_items_summary
     par_items_bounds <- res$par_items_bounds
     np_item <- res$np_item
+    np_theta <- res$np_theta
 
     #-- information criteria
     ic <- xxirt_ic( dev=dev, N=W, par_items=par_items,
                     par_Theta=par_Theta, I=I, par_items_bounds=par_items_bounds,
-                    np_item=np_item, estimator=estimator)
+                    np_item=np_item, np_theta=np_theta, estimator=estimator)
 
     #-- compute EAP
     if (estimator=='ML'){

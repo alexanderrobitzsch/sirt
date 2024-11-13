@@ -1,5 +1,5 @@
 ## File Name: automatic.recode.R
-## File Version: 1.193
+## File Version: 1.194
 
 #*** automatic recoding of a dataset
 automatic.recode <- function( data, exclude=NULL, pstart.min=.6,
@@ -12,7 +12,7 @@ automatic.recode <- function( data, exclude=NULL, pstart.min=.6,
     # compute frequencies
     fstart <- TAM::tam.ctt3( data, allocate=allocate, progress=FALSE)
     I <- ncol(data)
-    prbar <- floor( 10 * ( 1:I ) / (I+1) )
+    prbar <- floor( 10 * ( 1L:I ) / (I+1) )
     prbar <- c(1,which( diff(prbar)==1 )  )
 
     fstart1 <- fstart

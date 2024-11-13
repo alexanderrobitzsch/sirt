@@ -1,5 +1,5 @@
 ## File Name: IRT.expectedCounts.mirt.R
-## File Version: 0.081
+## File Version: 0.082
 
 # IRT.expectedCounts.mirt
 
@@ -28,7 +28,7 @@ IRT.expectedCounts.MultipleGroupClass <- function( object, ... )
     ind_group <- list()
     pweights <- list()
     type <- 'exp_counts'
-    for (gg in 1:G){
+    for (gg in 1L:G){
         object <- mirt.wrapper.posterior(mirt.obj=mobj, group=groups[gg])
         if (gg==1){
             theta <- object$theta.k
@@ -39,10 +39,10 @@ IRT.expectedCounts.MultipleGroupClass <- function( object, ... )
         ind_group[[gg]] <- object$ind_group
         pweights[[gg]] <- object$pweights
     }
-    dims <- dim(ll_list[[1]])[1:3]
+    dims <- dim(ll_list[[1]])[1L:3]
     ll <- array(NA, dim=c(dims, G))
     ll_pw <- rep(NA, object$N_orig)
-    for (gg in 1:G){
+    for (gg in 1L:G){
         ll[,,,gg] <- ll_list[[gg]]
         ll_pw[ ind_group[[gg]] ] <- pweights[[gg]]
     }

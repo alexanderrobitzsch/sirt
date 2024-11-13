@@ -1,5 +1,5 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.761
+%% File Version: 0.769
 
 \name{linking.haberman}
 \alias{linking.haberman}
@@ -30,7 +30,8 @@ linking.haberman(itempars, personpars, estimation="OLS", a_trim=Inf, b_trim=Inf,
 \method{summary}{linking.haberman}(object, digits=3, file=NULL, ...)
 
 linking.haberman.lq(itempars, pow=2, eps=1e-3, a_log=TRUE, use_nu=FALSE,
-      est_pow=FALSE, lower_pow=.1, upper_pow=3)
+      est_pow=FALSE, lower_pow=.1, upper_pow=3, method="joint",
+      le=FALSE, vcov_list=NULL)
 
 \method{summary}{linking.haberman.lq}(object, digits=3, file=NULL, ...)
 
@@ -93,6 +94,12 @@ item difficulties are used in linking}
 \item{est_pow}{Logical indicating whether power values should be estimated}
 \item{lower_pow}{Lower bound for estimated power}
 \item{upper_pow}{Upper bound for estimated power}
+\item{method}{Estimation method type: \code{"joint"} for joint estimation of
+distribution and item parameters, while \code{"pw1"} and \code{"pw2"} indicate
+pairwise estimation using no weights or weights for item frequencies}
+\item{le}{Logical indicating whether linking and standard errors should be
+computed}
+\item{vcov_list}{List of variance matrices of item parameters}
 \item{lambda}{Matrix containing item loadings}
 \item{nu}{Matrix containing item intercepts}
 \item{object}{Object of class \code{linking.haberman}.}
@@ -204,6 +211,7 @@ A list with following entries
   robust estimation (if used).}
   \item{selitems}{Indices of items which are present in more than one
   study.}
+  \item{vcov}{List containing standard, linking and total errors}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

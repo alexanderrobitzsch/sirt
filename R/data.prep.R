@@ -1,5 +1,5 @@
 ## File Name: data.prep.R
-## File Version: 1.149
+## File Version: 1.153
 
 #----- data preparations for rasch.jml and rasch.mml
 data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
@@ -25,7 +25,7 @@ data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
         freq.patt <- apply( dat.9, 1, FUN=function(ll){ paste(ll, collapse='' ) } )  #
         dat1 <- data.frame( table( freq.patt ) )
     } else {
-        freq.patt <- paste('FP', 1000000 + 1:n, sep='')
+        freq.patt <- paste('FP', 1000000 + 1L:n, sep='')
         dat1 <- data.frame( freq.patt )
         colnames(dat1)[1] <- 'freq.patt'
     }
@@ -51,8 +51,8 @@ data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
         dat2[ dat2==9 ] <- 0
         # mean right
         dat1$mean <- rowSums( dat2 * dat2.resp )  / rowSums( dat2.resp )
-        freq.patt <- data.frame(  freq.patt, rowMeans( dat, na.rm=TRUE ), 1:n )
-        colnames(freq.patt)[2:3] <- c('mean', 'index' )
+        freq.patt <- data.frame(  freq.patt, rowMeans( dat, na.rm=TRUE ), 1L:n )
+        colnames(freq.patt)[2L:3] <- c('mean', 'index' )
         list( dat=dat, dat2=dat2, dat2.resp=dat2.resp, dat1=dat1,
                 freq.patt=freq.patt, I=I, n=n, dat9=dat.9 )
 }
@@ -66,8 +66,10 @@ data.prep <- function( dat, weights=NULL, use.freqpatt=TRUE,
 .prnum <- function( matr, digits )
 {
     VV <- ncol(matr)
-    for (vv in 1:VV){
-        if ( is.numeric( matr[,vv]) ){ matr[,vv] <- round( matr[,vv], digits ) }
+    for (vv in 1L:VV){
+        if ( is.numeric( matr[,vv]) ){
+            matr[,vv] <- round( matr[,vv], digits )
+        }
     }
     print(matr)
 }
@@ -79,7 +81,7 @@ resp.pattern2 <- function(x)
 {
     n <- nrow(x)
     p <- ncol(x)
-    mdp <- (x %*% (2^((1:ncol(x)) - 1))) + 1
+    mdp <- (x %*% (2^((1L:ncol(x)) - 1))) + 1
     misspattern <- mdp[,1]
     misspattern <- list( miss.pattern=mdp[,1],
                         mp.index=match( mdp[,1], sort( unique(mdp[,1] ) ) ) )

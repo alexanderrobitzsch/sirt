@@ -1,5 +1,5 @@
 ## File Name: categorize.R
-## File Version: 0.192
+## File Version: 0.193
 
 
 #--- categorize variables into classes
@@ -12,7 +12,7 @@ categorize <- function( dat, categorical=NULL, quant=NULL, lowest=0)
     dfr <- NULL
     if (! is.null( categorical) ){
         VV <- length(categorical)
-        for (vv in 1:VV){
+        for (vv in 1L:VV){
             var.vv <- categorical[vv]
             dat.vv <- dat[,var.vv]
             vals.vv <- sort( unique( dat.vv ) )
@@ -31,7 +31,7 @@ categorize <- function( dat, categorical=NULL, quant=NULL, lowest=0)
         vars <- names(quant)
         VV <- length(vars)
 
-        for (vv in 1:VV){
+        for (vv in 1L:VV){
             vars.vv <- vars[vv]
             q1 <- quant[ vars.vv ]
             quant.vv <- stats::quantile( dat[,vars.vv], na.rm=TRUE,

@@ -1,5 +1,5 @@
 ## File Name: truescore_irt_irf.R
-## File Version: 0.03
+## File Version: 0.04
 
 
 #---- true score IRT - item response function
@@ -11,8 +11,8 @@ truescore_irt_irf <- function( A, B, c, d, theta )
     nB <- ncol(B)
     maxK <- nB - rowSums( is.na( B ))
     I <- nrow(B)
-    scoreM <- matrix( 1:max(maxK), nrow=TP, ncol=max(maxK), byrow=TRUE )
-    for (ii in 1:I){
+    scoreM <- matrix( 1L:max(maxK), nrow=TP, ncol=max(maxK), byrow=TRUE )
+    for (ii in 1L:I){
         prob.ii <- matrix( NA, TP, maxK[ii] )
         for (kk in seq(1, maxK[ii] ) ){
             prob.ii[,kk] <- exp( theta * A[ii,kk] + B[ii,kk] )

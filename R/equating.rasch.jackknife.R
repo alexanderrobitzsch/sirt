@@ -1,5 +1,5 @@
 ## File Name: equating.rasch.jackknife.R
-## File Version: 0.157
+## File Version: 0.158
 
 
 
@@ -11,7 +11,7 @@ equating.rasch.jackknife <- function( pars.data, display=TRUE, se.linkerror=FALS
     itemunits <- unique( pars.data[,1] )
     N.units <- length( itemunits )
     N.items <- nrow( pars.data )
-    pars.data[,4] <- paste('I', 1:N.items,sep='')
+    pars.data[,4] <- paste('I', 1L:N.items,sep='')
     # display
     if (display){
         cat( paste( 'Jackknife Equating Procedure (Stocking-Lord)\n',
@@ -22,7 +22,7 @@ equating.rasch.jackknife <- function( pars.data, display=TRUE, se.linkerror=FALS
     res1 <- data.frame( unit=itemunits, shift=0, SD=0, linkerror=0)
 
     # perform jackknife
-    for (nn in 1:N.units){
+    for (nn in 1L:N.units){
         pars.data1 <- pars.data[ pars.data[,1] !=itemunits[nn], ]
         mod.nn <- equating.rasch( x=pars.data1[, c(4,2) ], y=pars.data1[, c(4,3) ] )
         res1[ nn, 'shift' ] <- mod.nn$B.est$Stocking.Lord

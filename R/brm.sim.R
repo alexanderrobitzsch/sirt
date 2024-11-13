@@ -1,5 +1,5 @@
 ## File Name: brm.sim.R
-## File Version: 0.121
+## File Version: 0.123
 
 
 #-- brm.sim
@@ -12,7 +12,7 @@ brm.sim <- function( theta, delta, tau, K=NULL)
     if ( ! is.null(K) ){
         br <- seq( 0, 1, len=K+1 )
     }
-    for (ii in 1:I){
+    for (ii in 1L:I){
         # ii <- 1
         m1 <- exp( ( theta - delta[ii] + tau[ii] ) / 2 )
         n1 <- exp( ( - theta + delta[ii] + tau[ii] ) / 2 )

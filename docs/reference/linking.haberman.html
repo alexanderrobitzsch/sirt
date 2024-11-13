@@ -71,7 +71,8 @@ model is assumed for the original item loadings (see Details; Battauz, 2017)</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, digits<span class="op">=</span><span class="fl">3</span>, file<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">linking.haberman.lq</span><span class="op">(</span><span class="va">itempars</span>, pow<span class="op">=</span><span class="fl">2</span>, eps<span class="op">=</span><span class="fl">1e-3</span>, a_log<span class="op">=</span><span class="cn">TRUE</span>, use_nu<span class="op">=</span><span class="cn">FALSE</span>,</span>
-<span>      est_pow<span class="op">=</span><span class="cn">FALSE</span>, lower_pow<span class="op">=</span><span class="fl">.1</span>, upper_pow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span>      est_pow<span class="op">=</span><span class="cn">FALSE</span>, lower_pow<span class="op">=</span><span class="fl">.1</span>, upper_pow<span class="op">=</span><span class="fl">3</span>, method<span class="op">=</span><span class="st">"joint"</span>,</span>
+<span>      le<span class="op">=</span><span class="cn">FALSE</span>, vcov_list<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for linking.haberman.lq</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, digits<span class="op">=</span><span class="fl">3</span>, file<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -161,6 +162,18 @@ item difficulties are used in linking</p></dd>
 
 <dt>upper_pow</dt>
 <dd><p>Upper bound for estimated power</p></dd>
+
+<dt>method</dt>
+<dd><p>Estimation method type: <code>"joint"</code> for joint estimation of
+distribution and item parameters, while <code>"pw1"</code> and <code>"pw2"</code> indicate
+pairwise estimation using no weights or weights for item frequencies</p></dd>
+
+<dt>le</dt>
+<dd><p>Logical indicating whether linking and standard errors should be
+computed</p></dd>
+
+<dt>vcov_list</dt>
+<dd><p>List of variance matrices of item parameters</p></dd>
 
 <dt>lambda</dt>
 <dd><p>Matrix containing item loadings</p></dd>
@@ -306,6 +319,9 @@ The powers can also be estimated (argument <code>est_pow=TRUE</code>).</p>
   <dt>selitems</dt>
 <dd><p>Indices of items which are present in more than one
   study.</p></dd>
+
+  <dt>vcov</dt>
+<dd><p>List containing standard, linking and total errors</p></dd>
 
 </dl></div>
     <div class="section level2">

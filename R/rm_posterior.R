@@ -1,5 +1,5 @@
 ## File Name: rm_posterior.R
-## File Version: 0.17
+## File Version: 0.181
 
 
 #######################################################
@@ -18,7 +18,7 @@ rm_posterior <- function( dat2, dat2.resp, TP, pi.k,
     #--- expected counts
     n.ik <- array( 0, dim=c(TP, I, K+1 ) )
     N.ik <- array( 0, dim=c(TP, I ) )
-    for (kk in 1:(K+1) ){
+    for (kk in 1L:(K+1) ){
         n.ik[,,kk] <- crossprod( f.qk.yi, dat2.ind.resp[,,kk] )
         N.ik <- N.ik + n.ik[,,kk]
     }

@@ -1,9 +1,9 @@
 ## File Name: mcmc_summary.R
-## File Version: 0.21
+## File Version: 0.223
 
 
-########################################################
-# mcmclist descriptives
+
+#**** mcmclist descriptives
 mcmc_summary <- function( mcmcobj, quantiles=c(.025,.05,.50,.95,.975) )
 {
     summary.mcmcobj <- summary(mcmcobj, quantile=quantiles)
@@ -29,7 +29,7 @@ mcmc_summary <- function( mcmcobj, quantiles=c(.025,.05,.50,.95,.975) )
                             to=max(dat.vv) )
         MAP[ii] <- m1$x[ which( m1$y==max( m1$y) ) ]
     }
-    res <- data.frame( "MAP"=MAP, "Rhat"=Rhat )
+    res <- data.frame( MAP=MAP, Rhat=Rhat )
     rownames(res) <- vars
     smc3  <- res
     smc2 <- summary.mcmcobj$statistics
@@ -42,11 +42,10 @@ mcmc_summary <- function( mcmcobj, quantiles=c(.025,.05,.50,.95,.975) )
                 apply( as.matrix(mcmcobj), 2, skewness.sirt ),
                 statis[,c(3,4) ]    )
     colnames(statis)[3:4] <- c("MAD", "skewness" )
-    dfr <- data.frame( "parameter"=rownames(smc3),
-                statis, smc3, "SERatio"=smc2[,4] / smc2[,2],
-                "sampSize"=nrow(as.matrix(mcmcobj)), "effSize"=effSize,
-                summary.mcmcobj$quantiles )
+    dfr <- data.frame( parameter=rownames(smc3), statis, smc3,
+                    SERatio=smc2[,4] / smc2[,2], sampSize=nrow(as.matrix(mcmcobj)),
+                    effSize=effSize, summary.mcmcobj$quantiles )
     rownames(dfr) <- NULL
     return(dfr)
 }
-###########################################
+

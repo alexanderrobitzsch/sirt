@@ -1,5 +1,5 @@
 ## File Name: xxirt_nr_optim_fun.R
-## File Version: 0.124
+## File Version: 0.132
 
 xxirt_nr_optim_fun <- function(x, em_args, output_all=FALSE)
 {
@@ -31,6 +31,14 @@ xxirt_nr_optim_fun <- function(x, em_args, output_all=FALSE)
         pen_val <- em_args$penalty_fun_item(x=x1)
         ll <- ll + pen_val
     }
+
+    x2 <- x[ em_args$parindex_Theta ]
+    if (!is.null(em_args$penalty_fun_theta)){
+        pen2 <- em_args$penalty_fun_theta(x=x2)
+        ll <- ll + pen2
+        pen_val <- pen_val + pen2
+    }
+
     res <- ll
     if (output_all){
         res <- list(opt_fun=ll, pen_val=pen_val, par_prior=par_prior, ll=ll0)

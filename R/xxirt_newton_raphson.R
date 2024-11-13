@@ -1,5 +1,5 @@
 ## File Name: xxirt_newton_raphson.R
-## File Version: 0.261
+## File Version: 0.262
 
 
 xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
@@ -89,8 +89,6 @@ xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
         grad_fun <- res$grad_fun
         pml_args <- em_args$pml_args
     }
-
-
 
     if (test){
         ll1 <- opt_fun(x=x, em_args=em_args)

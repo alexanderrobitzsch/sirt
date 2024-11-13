@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.2  |  2024-09-07  |  Last: sirt 4.2-73
+VERSIONS sirt 4.2  |  2024-11-13  |  Last: sirt 4.2-89
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in handling sufficient statistics in
@@ -57,6 +57,14 @@ NOTE  * included example for Haberman linking for polytomous item responses
         ?linking.haberman, Example 9)
 ADDED * included test for misfitting parameter curve in lsem.test()
         (suggested by Tuo Liu)
+ADDED * included power p=0 in Lq norm in lq_fit()
+ADDED * included regularized estimation on theta distribution in 
+        xxirt() by including arguments 'penalty_fun_theta' and
+        'penalty_np_theta'
+ADDED * included arguments 'method', 'le' and 'vcov_list' in 
+        linking.haberman.lq() to allow for estimation based on 
+        pairwise differences in Haberman linking and the corresponding
+        estimation of linking errors and standard errors
 
 
 DATA  * included/modified datasets: ---

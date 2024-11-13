@@ -1,15 +1,15 @@
 ## File Name: tetrachoric2.R
-## File Version: 1.343
+## File Version: 1.346
 
 tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
     cor.smooth=TRUE, progress=TRUE)
 {
     # process data
     dat <- as.matrix(dat)
-    if (method=="Ol"){
+    if (method=='Ol'){
         res <- polychoric2( dat=dat, cor.smooth=cor.smooth, maxiter=maxit)
     }
-    if ( method !="Ol" ){
+    if ( method !='Ol' ){
 
         # calculate tau
         tau <- - stats::qnorm( colMeans(dat,na.rm=TRUE ) )
@@ -17,7 +17,7 @@ tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
         dat[ dat.resp==0] <- 9
         I <- ncol(dat)
         # calculate frequencies
-        dfr <- data.frame( item1=rep(1:I,I), item2=rep(1:I, each=I ) )
+        dfr <- data.frame( item1=rep(1L:I,I), item2=rep(1L:I, each=I ) )
         h1 <- t( ( dat==1 ) ) %*% ( dat==0 )
         dfr$f11 <- matrix( t( ( dat==1 ) ) %*% ( dat==1 ), ncol=1, byrow=TRUE ) + .5
         dfr$f10 <- matrix( t( ( dat==1 ) ) %*% ( dat==0 ), ncol=1, byrow=TRUE ) + .5
@@ -36,7 +36,7 @@ tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
         dfr$qi2 <- stats::qnorm( dfr$pi2)
         #******************
         # method of Bonett
-        if ( method %in% c("Bo","Di") ){
+        if ( method %in% c('Bo','Di') ){
             dfr$pmin <- ifelse( dfr$pi1 < dfr$pi2, dfr$pi1, dfr$pi2 )
             dfr$c <- ( 1 - abs( dfr$pi1 - dfr$pi2 ) / 5 - ( 0.5 - dfr$pmin)^2  ) / 2
             dfr$omega <- ( dfr$f00 * dfr$f11 ) / ( dfr$f01 * dfr$f10)
@@ -44,17 +44,23 @@ tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
         }
         #*****
         # method of Divgi
-        if ( method=="Di"){
+        if ( method=='Di'){
             dfr2 <- as.matrix(dfr)
             numdiffparm <- 1e-5
-            dfr$r0 <- sirt_rcpp_tetrachoric2_rcpp( dfr=dfr2, h=numdiffparm, maxiter=maxit )
+            dfr$r0 <- sirt_rcpp_tetrachoric2_rcpp( dfr=dfr2, h=numdiffparm,
+                                maxiter=maxit )
         }
         #******************
         # method of Tucker
-        if ( method=="Tu"){
+        if ( method=='Tu'){
             # functions defined by Cengiz Zopluoglu
-            L <- function(r,h,k) {(1/(2*pi*sqrt(1-r^2)))*exp(-((h^2-2*h*k*r+k^2)/(2*(1-r^2))))}
-            S <- function(x,r,h,k) { x-(L(r,h,k)*delta) }
+            L <- function(r,h,k)
+                {
+                        (1/(2*pi*sqrt(1-r^2)))*exp(-((h^2-2*h*k*r+k^2)/(2*(1-r^2))))
+                }
+            S <- function(x,r,h,k)
+                { x-(L(r,h,k)*delta)
+                }
             A0 <- dfr$A0 <- dfr$p11 - dfr$pi1 * dfr$pi2
             dfr$r0 <- delta / 2
             dfr$iter <- 0
@@ -63,8 +69,8 @@ tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
             dfr$conv <- 0
             ii <- 0
 
-            vars <-  c("A0","r0","iter","conv")
-            if (progress){ cat("    0 : " ) }
+            vars <-  c('A0','r0','iter','conv')
+            if (progress){ cat('    0 : ' ) }
             while( ( mean( dfr$conv) < 1 ) & ( ii < maxit ) ){
                 # iterations
                 dfr0 <- dfr
@@ -82,22 +88,22 @@ tetrachoric2 <- function( dat, method="Ol",  delta=.007, maxit=1000000,
                 i2 <- which( dfr$conv==1 & dfr0$conv==1 )
                 if (length(i2) > 0){    dfr[ i2, vars] <- dfr0[ i2, vars] }
                 if (progress){
-                    if (ii %% 100==0 ){ cat(".") ; utils::flush.console() }
-                    if (ii %% 1000==0 ){ cat("\n",ii, ": ") }
+                    if (ii %% 100==0 ){ cat('.') ; utils::flush.console() }
+                    if (ii %% 1000==0 ){ cat('\n',ii, ': ') }
                 }
             }
         #******************
-            cat("\n")
+            cat('\n')
         }
         TC <- matrix(NA, I, I )
         diag(TC) <- 1
-        TC[ as.matrix(dfr[, c("item1","item2") ] ) ] <- dfr$r0
-        TC[ as.matrix(dfr[, c("item2","item1") ] ) ] <- dfr$r0
+        TC[ as.matrix(dfr[, c('item1','item2') ] ) ] <- dfr$r0
+        TC[ as.matrix(dfr[, c('item2','item1') ] ) ] <- dfr$r0
         if (cor.smooth){
             TC <- sirt_import_psych_cor.smooth(x=TC)
         }
         rownames(TC) <- colnames(TC) <- colnames(dat)
         res <- list(tau=tau, rho=TC )
-    }   # method !="Ol"
+    }   # method !='Ol'
     return(res)
 }

@@ -1,5 +1,5 @@
 ## File Name: gom_em_est_b.R
-## File Version: 0.06
+## File Version: 0.071
 
 
 
@@ -8,9 +8,9 @@ gom_em_est_b <- function( lambda, I, K, n.ik, b, theta0.k, numdiff.parm=.001,
         max.increment, theta.k, msteps, mstepconv, eps=.001, progress=progress )
 {
     h <- numdiff.parm
-    diffindex <- 1:I
+    diffindex <- 1L:I
     if (progress){
-        cat("  M steps b parameter |")
+        cat('  M steps b parameter |')
     }
     an.ik <- aperm( n.ik, c(2,3,1) )
     it <- 0
@@ -31,11 +31,11 @@ gom_em_est_b <- function( lambda, I, K, n.ik, b, theta0.k, numdiff.parm=.001,
         conv1 <- max( abs( b - b0 ) )
         it <- it+1
         if (progress){
-            cat("-")
+            cat('-')
         }
     }
     if (progress){
-        cat(" ", it, "Step(s) \n")
+        cat(' ', it, 'Step(s) \n')
     }
     res <- list(b=b, se.b=sqrt(-1/res$d2), ll=sum(res$ll0) )
     return(res)

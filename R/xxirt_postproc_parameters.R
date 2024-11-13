@@ -1,10 +1,9 @@
 ## File Name: xxirt_postproc_parameters.R
-## File Version: 0.242
-
+## File Version: 0.249
 
 
 xxirt_postproc_parameters <- function( partable, customTheta,
-        items, probs_items, np_fun_item=NULL )
+        items, probs_items, np_fun_item=NULL, np_fun_theta=NULL )
 {
     #**** item parameters
     p1 <- partable[ partable$parfree==1, ]
@@ -38,14 +37,19 @@ xxirt_postproc_parameters <- function( partable, customTheta,
     p1$active <- p1$active * ( p1$value < p1$upper )
     par_items_bounds <- p1
     np_item <- NULL
+    np_theta <- NULL
     if ( ! is.null(np_fun_item) ){
         np_item <- np_fun_item(x=par_items)
+    }
+    if ( ! is.null(np_fun_theta) ){
+        np_theta <- np_fun_theta(x=customTheta$par)
     }
 
     #*** output
     res <- list( par_items=par_items, par_Theta=par_Theta,
                     probs_items=probs_items, par_items_summary=dfr,
-                    par_items_bounds=par_items_bounds, np_item=np_item )
+                    par_items_bounds=par_items_bounds, np_item=np_item,
+                    np_theta=np_theta)
     return(res)
 }
 

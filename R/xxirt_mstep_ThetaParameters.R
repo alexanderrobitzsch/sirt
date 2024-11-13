@@ -1,9 +1,9 @@
 ## File Name: xxirt_mstep_ThetaParameters.R
-## File Version: 0.218
+## File Version: 0.227
 
 
 xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
-            mstep_iter, N.k, par1, mstep_reltol, Theta )
+            mstep_iter, N.k, par1, mstep_reltol, Theta, penalty_fun_theta=NULL )
 {
     like_Theta <- function( x, ... )
     {
@@ -28,6 +28,10 @@ xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
             }  # end pp
         }
         ll2 <- ll2 + pen
+        if (!is.null(penalty_fun_theta)){
+            pen <- penalty_fun_theta(x=x)
+            ll2 <- ll2+pen
+        }
         return(2*ll2)
     }
     #----- end definition likelihood function
@@ -57,6 +61,13 @@ xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
     ll2 <- mod$value
     customTheta$par[ customTheta$est ] <- par1
     par1 <- xxirt_ThetaDistribution_extract_freeParameters( customTheta=customTheta )
-    res <- list( par1=par1, ll2=ll2, customTheta=customTheta)
+
+    pen_theta <- 0
+    if (!is.null(penalty_fun_theta)){
+        pen_theta <- penalty_fun_theta(x=par1)
+    }
+
+    #--- output
+    res <- list( par1=par1, ll2=ll2, customTheta=customTheta, pen_theta=pen_theta)
     return(res)
 }

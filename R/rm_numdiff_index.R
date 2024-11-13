@@ -1,5 +1,5 @@
 ## File Name: rm_numdiff_index.R
-## File Version: 0.24
+## File Version: 0.252
 
 
 ####################################################################
@@ -14,9 +14,12 @@ rm_numdiff_index <- function( pjk, pjk1, pjk2, n.ik, diffindex,
     # [items, categories, nodes]
 
     #--- evaluate expected likelihood
-    ll0 <- rm_grouped_expected_likelihood(pjk=pjk, n.ik=an.ik, diffindex=diffindex, eps=eps)
-    ll1 <- rm_grouped_expected_likelihood(pjk=pjk1, n.ik=an.ik, diffindex=diffindex, eps=eps)
-    ll2 <- rm_grouped_expected_likelihood(pjk=pjk2, n.ik=an.ik, diffindex=diffindex, eps=eps)
+    ll0 <- rm_grouped_expected_likelihood(pjk=pjk, n.ik=an.ik,
+                        diffindex=diffindex, eps=eps)
+    ll1 <- rm_grouped_expected_likelihood(pjk=pjk1, n.ik=an.ik,
+                        diffindex=diffindex, eps=eps)
+    ll2 <- rm_grouped_expected_likelihood(pjk=pjk2, n.ik=an.ik,
+                        diffindex=diffindex, eps=eps)
 
     if (! is.null(prior)){
         if (length(value) > length(ll0)){
@@ -40,7 +43,8 @@ rm_numdiff_index <- function( pjk, pjk1, pjk2, n.ik, diffindex,
 
 
     #-- trim increment
-    increment <- rm_numdiff_trim_increment( increment=increment, max.increment=max.increment, eps2=eps2 )
+    increment <- rm_numdiff_trim_increment( increment=increment,
+                        max.increment=max.increment, eps2=eps2 )
     #--- output
     res <- list(increment=increment, d1=d1, d2=d2, ll0=ll0, h=h)
     return(res)

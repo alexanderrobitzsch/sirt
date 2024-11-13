@@ -1,5 +1,5 @@
 ## File Name: f1d.irt.R
-## File Version: 1.295
+## File Version: 1.296
 
 #--- Functional unidimensional model (Ip et al., 2013)
 f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
@@ -51,7 +51,7 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
     D <- ncol(A)
     # a_i ' theta_p
     Zpi <- matrix( 0, TP, I )
-    for (dd in 1:D){
+    for (dd in 1L:D){
         Zpi <- Zpi + theta[,dd] * matrix( A[,dd], TP, I, byrow=TRUE )
     }
     # Z_pi=a_i theta_p + d_i

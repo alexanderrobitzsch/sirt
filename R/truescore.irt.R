@@ -1,5 +1,5 @@
 ## File Name: truescore.irt.R
-## File Version: 0.251
+## File Version: 0.252
 
 
 #--- true score item response function
@@ -13,7 +13,7 @@ truescore.irt <- function( A, B, c=NULL, d=NULL, theta=seq(-3,3,len=21),
     I <- nrow(B)
     if ( is.null(c) ){ c <- rep(0,I ) }
     if ( is.null(d) ){ d <- rep(1,I ) }
-    if ( is.null(pid) ){ pid <- 1:(length(theta)) }
+    if ( is.null(pid) ){ pid <- 1L:(length(theta)) }
     # true score
     truescore <- truescore_irt_irf( A=A, B=B, c=c, d=d, theta=theta )
     # calculate standard error of true score

@@ -1,5 +1,5 @@
 ## File Name: brm.irf.R
-## File Version: 0.11
+## File Version: 0.121
 
 #--- item response function (discretized) beta response model
 brm.irf <- function( Theta, delta, tau, ncat, thdim=1, eps=1E-10 )
@@ -15,7 +15,7 @@ brm.irf <- function( Theta, delta, tau, ncat, thdim=1, eps=1E-10 )
     m1 <- exp( m1 / 2 )
     m2 <- - Theta[,thdim] + delta + tau
     m2 <- exp( m2 / 2 )
-    for (cc in 1:ncat){
+    for (cc in 1L:ncat){
         probs[,cc] <- stats::dbeta( mp[cc], shape1=m1, shape2=m2 )
     }
     probs <- probs + eps

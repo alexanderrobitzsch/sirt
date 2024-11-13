@@ -70,7 +70,8 @@ number of EM iterations should be chosen to obtain reasonable starting values.</
 <span>       customTheta<span class="op">=</span><span class="cn">NULL</span>, group<span class="op">=</span><span class="cn">NULL</span>, weights<span class="op">=</span><span class="cn">NULL</span>, globconv<span class="op">=</span><span class="fl">1e-06</span>, conv<span class="op">=</span><span class="fl">1e-04</span>,</span>
 <span>       maxit<span class="op">=</span><span class="fl">1000</span>, mstep_iter<span class="op">=</span><span class="fl">4</span>, mstep_reltol<span class="op">=</span><span class="fl">1e-06</span>, maxit_nr<span class="op">=</span><span class="fl">0</span>, optimizer_nr<span class="op">=</span><span class="st">"nlminb"</span>,</span>
 <span>       estimator<span class="op">=</span><span class="st">"ML"</span>, control_nr<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>trace<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, h<span class="op">=</span><span class="fl">1E-4</span>, use_grad<span class="op">=</span><span class="cn">TRUE</span>, verbose<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>       penalty_fun_item<span class="op">=</span><span class="cn">NULL</span>, np_fun_item<span class="op">=</span><span class="cn">NULL</span>, pml_args<span class="op">=</span><span class="cn">NULL</span>, verbose_index<span class="op">=</span><span class="cn">NULL</span>,</span>
+<span>       penalty_fun_item<span class="op">=</span><span class="cn">NULL</span>, np_fun_item<span class="op">=</span><span class="cn">NULL</span>, penalty_fun_theta<span class="op">=</span><span class="cn">NULL</span>,</span>
+<span>       np_fun_theta<span class="op">=</span><span class="cn">NULL</span>, pml_args<span class="op">=</span><span class="cn">NULL</span>, verbose_index<span class="op">=</span><span class="cn">NULL</span>,</span>
 <span>       cv_kfold<span class="op">=</span><span class="fl">0</span>, cv_maxit<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for xxirt</span></span>
@@ -202,6 +203,14 @@ estimation. Used as a function of <code>x</code> (vector of item parameters)</p>
 <dt>np_fun_item</dt>
 <dd><p>Function that counts the number of item parameters in regularized
 estimation. Used as a function of <code>x</code> (vector of item parameters)</p></dd>
+
+<dt>penalty_fun_theta</dt>
+<dd><p>Optional penalty function used in regularized
+estimation. Used as a function of <code>x</code> (vector of theta parameters)</p></dd>
+
+<dt>np_fun_theta</dt>
+<dd><p>Function that counts the number of theta parameters in regularized
+estimation. Used as a function of <code>x</code> (vector of theta parameters)</p></dd>
 
 <dt>object</dt>
 <dd><p>Object of class <code>xxirt</code></p></dd>

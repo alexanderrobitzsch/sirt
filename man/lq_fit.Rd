@@ -1,5 +1,5 @@
 %% File Name: lq_fit.Rd
-%% File Version: 0.17
+%% File Version: 0.182
 
 \name{lq_fit}
 \alias{lq_fit}
@@ -49,7 +49,8 @@ Design matrix
 Optional vector of weights
 }
   \item{pow}{
-Power \eqn{p} in \eqn{L_q} norm
+Power \eqn{p} in \eqn{L_q} norm- The power \eqn{p=0} is handled using
+the loss function \eqn{f(e)=e^2/(e^2+\varepsilon)}.
 }
   \item{est_pow}{
 Logical indicating whether power should be estimated

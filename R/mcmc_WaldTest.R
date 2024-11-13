@@ -1,5 +1,5 @@
 ## File Name: mcmc_WaldTest.R
-## File Version: 0.25
+## File Version: 0.261
 
 
 #** Wald Test for a set of hypotheses
@@ -20,10 +20,10 @@ mcmc_WaldTest <- function( mcmcobj, hypotheses )
     eps <- 1E-10
     NH <- sum( v1_svd$d > eps )
     W <- t(c1) %*% v1a %*% c1
-    stat <- c( "chi2"=W, "df"=NH)
-    stat["p"] <- 1 - stats::pchisq( W, df=stat["df"])
+    stat <- c( chi2=W, df=NH)
+    stat['p'] <- 1 - stats::pchisq( W, df=stat['df'])
     res <- list( hypotheses_summary=s1, chisq_stat=stat)
-    class(res) <- "mcmc_WaldTest"
+    class(res) <- 'mcmc_WaldTest'
     return(res)
 }
 

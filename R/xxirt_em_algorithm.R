@@ -1,12 +1,12 @@
 ## File Name: xxirt_em_algorithm.R
-## File Version: 0.092
+## File Version: 0.103
 
 xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_list,
             items, Theta, ncat, partable, partable_index, dat, resp_index,
             dat_resp, dat_resp_bool, dat1, dat1_resp, group, customTheta, G, par0, maxK,
             group_index, weights, mstep_iter, eps, mstep_reltol, mstep_method,
-            item_index, h, use_grad, penalty_fun_item, par1, globconv, conv,
-            verbose_index, I)
+            item_index, h, use_grad, penalty_fun_item, penalty_fun_theta, par1,
+            globconv, conv,    verbose_index, I)
 {
     iter <- 1
     dev <- 1E100
@@ -64,10 +64,15 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         par10 <- par1
         res <- xxirt_mstep_ThetaParameters( customTheta=customTheta, G=G, eps=eps,
                         mstep_iter=mstep_iter, N.k=N.k, par1=par1,
-                        mstep_reltol=mstep_reltol, Theta=Theta )
+                        mstep_reltol=mstep_reltol, Theta=Theta,
+                        penalty_fun_theta=penalty_fun_theta)
         ll2 <- res$ll2
         customTheta <- res$customTheta
         par1 <- res$par1
+        pen_theta <- res$pen_theta
+
+        #- sum of penalty values
+        pen_val <- pen_val + pen_theta
 
         #*** compute deviance
         ll_case <- log( rowSums( post_unnorm ) )

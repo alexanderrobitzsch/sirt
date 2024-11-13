@@ -1,5 +1,5 @@
 ## File Name: fit.gradedresponse_alg.R
-## File Version: 1.174
+## File Version: 1.175
 
 
 #####################################################################
@@ -11,7 +11,7 @@
     I <- length(b)
     K <- length(b.cat)
     prob1 <- prob <- array( 1, dim=c(TP,I,K+1) )
-    for (kk in 1:K){
+    for (kk in 1L:K){
         prob1[,,kk+1] <- stats::plogis( theta +
                             matrix( b, nrow=TP, ncol=I, byrow=TRUE) + b.cat[kk] )
         prob[,,kk] <- prob1[,,kk]-prob1[,,kk+1]

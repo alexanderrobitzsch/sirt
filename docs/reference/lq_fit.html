@@ -109,7 +109,8 @@ See also the <span class="pkg">normalp</span> package.</p>
 <dd><p>Optional vector of weights</p></dd>
 
   <dt>pow</dt>
-<dd><p>Power \(p\) in \(L_q\) norm</p></dd>
+<dd><p>Power \(p\) in \(L_q\) norm- The power \(p=0\) is handled using
+the loss function \(f(e)=e^2/(e^2+\varepsilon)\).</p></dd>
 
   <dt>est_pow</dt>
 <dd><p>Logical indicating whether power should be estimated</p></dd>

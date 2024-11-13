@@ -1,5 +1,5 @@
 ## File Name: fit.adisop.R
-## File Version: 2.255
+## File Version: 2.256
 
 
 #---- Fit ADISOP model
@@ -14,11 +14,11 @@ fit.adisop <- function( freq.correct, wgt, conv=.0001,
     RR <- nrow(freq.correct)
     CC <- ncol(freq.correct)
     # auxiliary variables
-    scores <- 0:(RR-1)
+    scores <- 0L:(RR-1)
     item.psx <- colSums( freq.correct * wgt ) / colSums( wgt )
     # initialization
-    dfr0 <- data.frame( stud.index=rep(1:RR, CC),
-                        item.index=rep(1:CC,each=RR),
+    dfr0 <- data.frame( stud.index=rep(1L:RR, CC),
+                        item.index=rep(1L:CC,each=RR),
                         stud.p=rep( scores,CC),
                         item.p=rep( item.psx, each=RR ),
                         wgt2=matrix( as.matrix( wgt2 ), RR*CC, 1 ),
@@ -50,8 +50,8 @@ fit.adisop <- function( freq.correct, wgt, conv=.0001,
         # calculate sum
         Y <- outer( X1, X2, '+' )
         # preparation isotonic regression
-        dfr0 <- data.frame( stud.index=rep(1:RR, CC),
-                            item.index=rep(1:CC,each=RR),
+        dfr0 <- data.frame( stud.index=rep(1L:RR, CC),
+                            item.index=rep(1L:CC,each=RR),
                             stud.X=rep( X1,CC),
                             item.X=rep( X2, each=RR ),
                             wgt2=matrix( as.matrix( wgt2 ), RR*CC, 1 ),
@@ -75,8 +75,8 @@ fit.adisop <- function( freq.correct, wgt, conv=.0001,
     #-------------- end algorithm
 
     #**** calculate link function
-    dfr0 <- data.frame( stud.index=rep(1:RR, CC),
-                            item.index=rep(1:CC,each=RR),
+    dfr0 <- data.frame( stud.index=rep(1L:RR, CC),
+                            item.index=rep(1L:CC,each=RR),
                             stud.p=rep( X1,CC),
                             item.p=rep( X2, each=RR ),
                             wgt=matrix( as.matrix(wgt), RR*CC, 1 ),

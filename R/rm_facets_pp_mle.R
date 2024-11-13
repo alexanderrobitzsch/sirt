@@ -1,5 +1,5 @@
 ## File Name: rm_facets_pp_mle.R
-## File Version: 0.184
+## File Version: 0.187
 
 
 #*** person parameter estimation in partial credit model
@@ -46,7 +46,8 @@ rm_facets_pp_mle <- function( data, a, b, theta, WLE=FALSE,
         theta <- ifelse( abs(theta) > maxval, sign(theta)*maxval, theta )
         conv <- max( abs( theta - theta0) )
         if (progress){
-            cat("* Iteration", iter, ":", "maximum parameter change", round( conv, 5), "\n")
+            cat('* Iteration', iter, ':', 'maximum parameter change',
+                    round( conv, 5), '\n')
             utils::flush.console()
         }
         iter <- iter + 1

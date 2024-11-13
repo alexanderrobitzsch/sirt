@@ -1,5 +1,5 @@
 ## File Name: conf.detect.R
-## File Version: 1.211
+## File Version: 1.212
 
 
 # Confirmatory DETECT analysis
@@ -38,7 +38,7 @@ conf.detect <- function( data, score, itemcluster, bwscale=1.1, progress=TRUE,
     } else {
         ccovtable.list <- list()
         args_ccov_np$progress <- FALSE
-        for (pp in 1:PP){
+        for (pp in 1L:PP){
             cat( paste( 'DETECT Calculation Score ', pp, '\n', sep='') ) ;
             utils::flush.console()
             args_ccov_np$score <- score[,pp]

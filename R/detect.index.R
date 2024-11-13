@@ -1,5 +1,5 @@
 ## File Name: detect.index.R
-## File Version: 0.351
+## File Version: 0.352
 
 
 
@@ -24,27 +24,27 @@ detect.index <- function( ccovtable, itemcluster )
     ii <- 1
     indizes[ii] <- 100*mean(ccov*delta)
     weighted.indizes[ii] <- 100*stats::weighted.mean( ccov * delta, sqrt_N )
-    parnames[ii] <- "DETECT"
+    parnames[ii] <- 'DETECT'
     #--- ASSI
     ii <- 2
     indizes[ii] <- mean( sign_ccov * delta )
     weighted.indizes[ii] <- stats::weighted.mean( sign_ccov * delta, sqrt_N )
-    parnames[ii] <- "ASSI"
+    parnames[ii] <- 'ASSI'
     #--- RATIO
     ii <- 3
     indizes[ii] <- sum( ccov * delta ) / sum( abs_ccov )
     weighted.indizes[ii] <- sum( ccov * delta * sqrt_N ) / sum( abs_ccov * sqrt_N )
-    parnames[ii] <- "RATIO"
+    parnames[ii] <- 'RATIO'
     #--- MADCOV
     ii <- 4
     indizes[ii] <- 100 * mean( abs_ccov )
     weighted.indizes[ii] <- 100* stats::weighted.mean( abs_ccov, sqrt_N )
-    parnames[ii] <- "MADCOV100"
+    parnames[ii] <- 'MADCOV100'
     #--- MCOV
     ii <- 5
     indizes[ii] <- 100 * mean( ccov )
     weighted.indizes[ii] <- 100* stats::weighted.mean( ccov, sqrt_N )
-    parnames[ii] <- "MCOV100"
+    parnames[ii] <- 'MCOV100'
 
     #--- output
     res <- data.frame( unweighted=indizes, weighted=weighted.indizes )

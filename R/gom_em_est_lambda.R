@@ -1,5 +1,5 @@
 ## File Name: gom_em_est_lambda.R
-## File Version: 0.206
+## File Version: 0.207
 
 
 # estimation of lambda parameters
@@ -8,12 +8,12 @@ gom_em_est_lambda <- function( lambda, I, K, n.ik, numdiff.parm=.001,
         progress=TRUE, lambda_partable)
 {
     h <- numdiff.parm
-    diffindex <- 1:I
+    diffindex <- 1L:I
     Q0 <- 0*lambda
     se.lambda <- Q0
     an.ik <- aperm( n.ik, c(2,3,1) )
     if (progress){
-        cat("  M steps lambda parameter |")
+        cat('  M steps lambda parameter |')
     }
     it <- 0
     conv1 <- 1000
@@ -22,7 +22,7 @@ gom_em_est_lambda <- function( lambda, I, K, n.ik, numdiff.parm=.001,
     while( ( it < msteps ) & ( conv1 > mstepconv ) ){
         lambda0 <- lambda
 
-        for (kk in 1:K){
+        for (kk in 1L:K){
             Q1 <- Q0
             Q1[,kk] <- 1
             parm_temp <- lambda0
@@ -46,18 +46,18 @@ gom_em_est_lambda <- function( lambda, I, K, n.ik, numdiff.parm=.001,
         increment <- matrix( increment[ lambda_partable$par_index ], nrow=I, ncol=K)
         lambda <- lambda + increment
         d2 <- matrix(d2a[ lambda_partable$par_index ], nrow=I, ncol=K)
-        for (kk in 1:K){
+        for (kk in 1L:K){
             lambda[,kk] <- sirt_squeeze(lambda[,kk], lower=eps, upper=1-eps)
             se.lambda[,kk] <- sqrt(-1/d2[,kk])
         }
         conv1 <- max( abs( lambda - lambda0 ) )
         it <- it+1
         if (progress){
-            cat("-")
+            cat('-')
         }
     }
     if (progress){
-        cat(" ", it, "Step(s) \n")
+        cat(' ', it, 'Step(s) \n')
     }
     res <- list(lambda=lambda, se.lambda=se.lambda, ll=sum(res$ll0) )
     return(res)
