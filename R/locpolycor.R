@@ -1,5 +1,5 @@
 ## File Name: locpolycor.R
-## File Version: 0.251
+## File Version: 0.257
 
 
 locpolycor <- function(y, data.mod, moderator.grid, h=1.1,
@@ -13,6 +13,7 @@ locpolycor <- function(y, data.mod, moderator.grid, h=1.1,
 
     #- estimate thresholds
     y <- as.matrix(y)
+    N <- nrow(y)
     I <- ncol(y)
     G <- length(moderator.grid)
 

@@ -1,5 +1,5 @@
 ## File Name: mcmc_summary.R
-## File Version: 0.223
+## File Version: 0.225
 
 
 
@@ -33,7 +33,7 @@ mcmc_summary <- function( mcmcobj, quantiles=c(.025,.05,.50,.95,.975) )
     rownames(res) <- vars
     smc3  <- res
     smc2 <- summary.mcmcobj$statistics
-    colnames(summary.mcmcobj$quantiles) <- paste0( "Q", 100*quantiles )
+    colnames(summary.mcmcobj$quantiles) <- paste0( 'Q', 100*quantiles )
     # calculate effective sample size
     effSize <- sirt_import_coda_effectiveSize( mcmcobj )
     statis <- summary.mcmcobj$statistics
@@ -41,7 +41,7 @@ mcmc_summary <- function( mcmcobj, quantiles=c(.025,.05,.50,.95,.975) )
                 apply( as.matrix(mcmcobj), 2, stats::mad ),
                 apply( as.matrix(mcmcobj), 2, skewness.sirt ),
                 statis[,c(3,4) ]    )
-    colnames(statis)[3:4] <- c("MAD", "skewness" )
+    colnames(statis)[3:4] <- c('MAD', 'skewness' )
     dfr <- data.frame( parameter=rownames(smc3), statis, smc3,
                     SERatio=smc2[,4] / smc2[,2], sampSize=nrow(as.matrix(mcmcobj)),
                     effSize=effSize, summary.mcmcobj$quantiles )
