@@ -1,14 +1,15 @@
 ## File Name: locpolycor.R
-## File Version: 0.257
+## File Version: 0.271
 
 
 locpolycor <- function(y, data.mod, moderator.grid, h=1.1,
-                    model_thresh, model_polycor, kernel="gaussian",
+                    model_thresh, model_polycor, sampling_weights=NULL,
+                    kernel="gaussian",
                     eps=1e-10)
 {
     #- compute weights
-    llw <- lsem_local_weights(data.mod=x, moderator.grid=moderator.grid, h=h,
-                kernel=kernel)
+    llw <- lsem_local_weights(data.mod=data.mod, moderator.grid=moderator.grid, h=h,
+                kernel=kernel, sampling_weights=sampling_weights)
     weights_grid <- llw$weights
 
     #- estimate thresholds

@@ -1,5 +1,5 @@
 %% File Name: locpolycor.Rd
-%% File Version: 0.07
+%% File Version: 0.082
 
 \name{locpolycor}
 \alias{locpolycor}
@@ -13,7 +13,7 @@ continuous moderator variable \eqn{x}.
 }
 \usage{
 locpolycor(y, data.mod, moderator.grid, h=1.1, model_thresh, model_polycor,
-     kernel="gaussian", eps=1e-10)
+     sampling_weights=NULL, kernel="gaussian", eps=1e-10)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -38,6 +38,7 @@ Model for thresholds: can be \code{'const'} (constant function) or \code{'lin'}
 Model for polychoric correlations: can be \code{'const'} (constant function) or
 \code{'lin'} (linear function)
 }
+\item{sampling_weights}{Optional vector of sampling weights}
   \item{kernel}{
 Used kernel function, see \code{\link{lsem_local_weights}}
 }
