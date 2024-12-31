@@ -1,5 +1,5 @@
 ## File Name: mcmc.2pno_alg.R
-## File Version: 1.241
+## File Version: 1.242
 
 
 ######################
@@ -117,7 +117,7 @@
                 w1 <- weights / sum(weights )
                 m1 <- colMeans( theta.chain )
                 v1 <- sum( m1^2 * w1 ) - ( sum( m1*w1 ) )^2
-                wM <- matrix( w1, nrow=nrow(theta.chain), ncol=ncol(theta.chain), 
+                wM <- matrix( w1, nrow=nrow(theta.chain), ncol=ncol(theta.chain),
                                 byrow=TRUE )
                 h1 <- rowSums( wM * theta.chain^2 ) - ( rowSums( wM * theta.chain ) )^2
                 h1 <- mean(h1)

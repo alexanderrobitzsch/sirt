@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_invariance_alignment.cpp
-//// File Version: 2.585
+//// File Version: 2.597
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -65,8 +65,8 @@ Rcpp::NumericMatrix sirt_rcpp_invariance_alignment_nu_transformed(
 ///** sirt_rcpp_invariance_alignment_simplicity_function_value
 // [[Rcpp::export]]
 double sirt_rcpp_invariance_alignment_simplicity_function_value(
-        Rcpp::CharacterVector type, double parm1, double parm2, double scale, double power,
-        double eps)
+        Rcpp::CharacterVector type, double parm1, double parm2, double scale, 
+        double power, double eps)
 {
     double diff_par = parm1 - parm2;
     double fval=0;
@@ -95,6 +95,7 @@ Rcpp::List sirt_rcpp_invariance_alignment_opt_fct(
         bool reparam, int meth)
 {
     int I = lambda.ncol();
+    Rcpp::NumericVector fopt_item(I);
     Rcpp::NumericMatrix lambda1 = sirt_rcpp_invariance_alignment_lambda_transformed(
                                         lambda, psi0, meth);
     Rcpp::NumericMatrix nu1 = sirt_rcpp_invariance_alignment_nu_transformed(
@@ -103,7 +104,10 @@ Rcpp::List sirt_rcpp_invariance_alignment_opt_fct(
     double fopt=0;
     double parm1, parm2, parm3, parm4, fval;
     int gg1, gg2;
+    double temp1=0;
+
     for (int ii=0; ii<I; ii++){
+        temp1=0;
         for (int cc=0; cc<GC; cc++){
             gg1 = group_combis(cc,0);
             gg2 = group_combis(cc,1);
@@ -113,17 +117,21 @@ Rcpp::List sirt_rcpp_invariance_alignment_opt_fct(
             fval = sirt_rcpp_invariance_alignment_simplicity_function_value(
                             type, parm1, parm2, align_scale[0], align_pow[0], eps);
             fopt += wgt_combi(cc,ii) * fval;
+            temp1 += wgt_combi(cc,ii) * fval;
             // simplicity function nu
             parm3 = nu1( gg1, ii);
             parm4 = nu1( gg2, ii);
             fval = sirt_rcpp_invariance_alignment_simplicity_function_value(
                             type, parm3, parm4, align_scale[1], align_pow[1], eps);
             fopt += wgt_combi(cc,ii) * fval;
+            temp1 += wgt_combi(cc,ii) * fval;
         }
+        fopt_item[ii] = temp1;
     }
     //--- output
     return Rcpp::List::create(
             Rcpp::Named("fopt") = fopt,
+            Rcpp::Named("fopt_item") = fopt_item,
             Rcpp::Named("lambda1") = lambda1,
             Rcpp::Named("nu1") = nu1
         );
@@ -134,8 +142,8 @@ Rcpp::List sirt_rcpp_invariance_alignment_opt_fct(
 ///** sirt_rcpp_invariance_alignment_simplicity_function_gradient
 // [[Rcpp::export]]
 double sirt_rcpp_invariance_alignment_simplicity_function_gradient(
-        Rcpp::CharacterVector type, double parm1, double parm2, double scale, double power,
-        double eps)
+        Rcpp::CharacterVector type, double parm1, double parm2, double scale, 
+        double power, double eps)
 {
     double diff_par = parm1 - parm2;
     double fval=0;

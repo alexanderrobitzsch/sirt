@@ -1,12 +1,12 @@
 ## File Name: invariance.alignment.R
-## File Version: 3.972
+## File Version: 4.017
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
     align.scale=c(1,1), align.pow=c(.5,.5), eps=1e-3,
     psi0.init=NULL, alpha0.init=NULL, center=FALSE, optimizer="optim",
     fixed=NULL, meth=1, vcov=NULL, eps_grid=seq(0,-10, by=-.5),
-    num_deriv=FALSE, ... )
+    num_deriv=FALSE, le=FALSE, ... )
 {
     CALL <- match.call()
     s1 <- Sys.time()
@@ -90,7 +90,8 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     }
 
     #-- define optimization functions
-    ia_fct_optim <- function(x, lambda, nu, overparam, eps, meth_ ){
+    ia_fct_optim <- function(x, lambda, nu, overparam, eps, meth_,
+                        item_wise=FALSE ){
         res <- invariance_alignment_define_parameters(x=x, ind_alpha=ind_alpha,
                         ind_psi=ind_psi, reparam=reparam, meth=meth_)
         alpha0 <- res$alpha0
@@ -100,7 +101,11 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
                         wgt=wgt, align_scale=align.scale,
                         align_pow=align.pow, eps=eps, wgt_combi=wgt_combi, type=type,
                         reparam=FALSE, meth=meth_)
-        val <- val$fopt
+        if (item_wise){
+            val <- val$fopt_item
+        } else {
+            val <- val$fopt
+        }
         if (overparam | meth==0 ){
             G <- nrow(lambda)
             fac <- sum(wgt[,1]) / 1000
@@ -201,25 +206,41 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     }
 
     #-- standard error computation (if requested)
+    TEjkbc <- LEjkbc <- TEjk <- LEjk <- TE <- TEbc <- LEbc <- LE <- SE <- NULL
+    vcov0 <- vcov
+    V_TEjkbc <- V_TEjk <- V_LEjk <- V_TEbc <- V_TE <- V_LEbc <- V_LE <- NULL
+    V_LEjkbc <- NULL
+
     if (! is.null(vcov)){
 
         names(par) <- c( paste0('alpha',2L:G), paste0('psi',2L:G) )
         NP <- length(par)
 
         #- gradient computation
-        ia_grad_optim_num <- function(x, lambda, nu, overparam, eps, meth=1, h=1e-4){
+        ia_grad_optim_num <- function(x, lambda, nu, overparam, eps, meth=1,
+                                h=1e-4, item_wise=FALSE){
             NP <- length(x)
             par <- x
-            grad <- rep(0,NP)
-            names(grad) <- names(x)
+            if (!item_wise){
+                grad <- rep(0,NP)
+                names(grad) <- names(x)
+            } else {
+                grad <- matrix(0,nrow=NP, ncol=I)
+                rownames(grad) <- names(x)
+            }
             args <- list(x=par, lambda=lambda, nu=nu, overparam=overparam, eps=eps,
-                                meth_=meth)
+                                meth_=meth, item_wise=item_wise)
             for (pp in 1L:NP){
                 args$x <- mgsem_add_increment(x=par, h=h, i1=pp)
                 f1 <- do.call(what=ia_fct_optim, args=args)
                 args$x <- mgsem_add_increment(x=par, h=-h, i1=pp)
                 f2 <- do.call(what=ia_fct_optim, args=args)
-                grad[pp] <- (f1-f2)/(2*h)
+                der <- (f1-f2)/(2*h)
+                if (!item_wise){
+                    grad[pp] <- der
+                } else {
+                    grad[pp,] <- der
+                }
             }
             return(grad)
         }
@@ -265,11 +286,97 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
             }
         }
 
-        A <- MASS::ginv(hess_par) %*% hess_theta
-        vcov <- A %*% vcov %*% t(A)
+        H1 <- MASS::ginv(hess_par)
+        A <- H1 %*% hess_theta
+        vcov <- A %*% vcov0 %*% t(A)
         rownames(vcov) <- colnames(vcov) <- names(par)
+        SE <- sqrt_diag(x=vcov)
 
-    }
+        #--- linking error based on M-estimation
+        if (le){
+            args1 <- list(x=par, lambda=lambda, nu=nu, overparam=overparam, eps=eps,
+                            meth=meth, item_wise=TRUE)
+
+            # item-wise gradient
+            grad_item <- do.call( what=ia_grad_optim_num, args=args1)
+            # variance matrix (meat matrix) for linking error estimation
+            M <- 0*vcov
+            Mbc <- M
+            for (ii in 1L:I){
+                gii <- grad_item[,ii]
+                Mii <- outer(gii,gii)
+                ind <- seq(ii,2*I*G,I)
+                vcov0_ii <- vcov0[ind, ind]
+                hess_theta_ii <- hess_theta[,ind]
+                Mbcii <- hess_theta_ii %*% vcov0_ii %*% t(hess_theta_ii)
+                M <- M + Mii
+                Mbc <- Mbc + Mbcii
+            }
+            V_LE <- I/(I-1) * H1 %*% M %*% t(H1)
+            V_LEbc <- I/(I-1) * H1 %*% (M-Mbc) %*% t(H1)
+            LE <- sqrt_diag(x=V_LE, names=names(par))
+            LEbc <- sqrt_diag(x=V_LEbc, names=names(par))
+
+            V_TE <- vcov + V_LE
+            V_TEbc <- vcov + V_LEbc
+            TE <- sqrt(SE^2 + LE^2)
+            TEbc <- sqrt(SE^2 + LEbc^2)
+
+            #--- jackknife linking error
+
+            hess_par_item <- list()
+            for (ii in 1L:I){
+                hess_par_item[[ii]] <- 0*hess_par
+            }
+
+            H0 <- 0*hess_par
+            pp <- 1
+            for (pp in 1L:NP){
+                args1$x <- mgsem_add_increment(x=par, h=h, i1=pp)
+                f1 <- do.call( what=ia_grad_optim_num, args=args1)
+                args1$x <- mgsem_add_increment(x=par, h=-h, i1=pp)
+                f2 <- do.call( what=ia_grad_optim_num, args=args1)
+                der <- (f1-f2)/(2*h)
+                for (ii in 1L:I){
+                    hess_par_item[[ii]][,pp] <- der[,ii]
+                }
+            }
+            for (ii in 1L:I){
+                H0 <- H0 + hess_par_item[[ii]]
+            }
+            # hess_par=H0
+
+            # jk le
+            jkfac <- (I-1)/I
+            estdiff_jk <- matrix(NA, nrow=I, ncol=NP)
+            V_LEjkbc <- 0*V_LE
+
+            for (ii in 1L:I){
+                cii <- grad_item[,ii]
+                Aii <- hess_par - hess_par_item[[ii]]
+                A1ii <- MASS::ginv(Aii)
+                parii <- A1ii %*% cii
+                estdiff_jk[ii,] <- parii[,1]
+                # correction: see LESL paper
+                U <- A
+                ind <- seq(ii, 2*I*G, I )
+                HTii <- hess_theta
+                HTii[,ind] <- 0
+                Ui <- A1ii %*% HTii
+                Wi <- Ui-U
+                V_LEjkbc <- V_LEjkbc + jkfac*( Wi %*% vcov0 %*% t(Wi) )
+            }
+            V_LEjk <- jkfac*crossprod(estdiff_jk)
+            LEjk <- sqrt_diag(x=V_LEjk, names=names(par))
+            V_LEjkbc <- V_LEjk - V_LEjkbc
+            LEjkbc <- sqrt_diag(x=V_LEjkbc, names=names(par))
+
+            TEjk <- sqrt( SE^2 + LEjk^2)
+            TEjkbc <- sqrt( SE^2 + LEjkbc^2)
+
+        }  # end le
+
+    } # end vcov
 
     # center parameters
     res <- invariance_alignment_center_parameters(alpha0=alpha0, psi0=psi0,
@@ -325,7 +432,10 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
             lambda.resid=lambda.resid, nu.aligned=nu.aligned, lambda=lambda0,
             nu=nu0, nu.resid=nu.resid, fopt=fopt, align.scale=align.scale,
             align.pow=align.pow0, res_optim=res_optim, eps=eps, wgt=wgt,
-            miss_items=missM, numb_items=numb_items, vcov=vcov,
+            miss_items=missM, numb_items=numb_items, vcov=vcov, V_LE=V_LE,
+            V_LEbc=V_LEbc, V_TE=V_TE, V_LEjk=V_LEjk, V_LEjkbc=V_LEjkbc,
+            SE=SE, LE=LE, LEbc=LEbc, LEjk=LEjk, LEjkbc=LEjkbc,
+            TE=TE, TEbc=TEbc, TEjk=TEjk, TEjkbc=TEjkbc,
             fct_optim_inits=fct_optim_inits, fixed=fixed, meth=meth0,
             meth_internal=meth, s1=s1, s2=s2, time_diff=time_diff, CALL=CALL)
     class(res) <- 'invariance.alignment'

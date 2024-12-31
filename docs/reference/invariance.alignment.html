@@ -108,7 +108,7 @@ if it is supplied as the argument <code>vcov</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">invariance.alignment</span><span class="op">(</span><span class="va">lambda</span>, <span class="va">nu</span>, wgt<span class="op">=</span><span class="cn">NULL</span>, align.scale<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span>    align.pow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span><span class="op">)</span>, eps<span class="op">=</span><span class="fl">1e-3</span>, psi0.init<span class="op">=</span><span class="cn">NULL</span>, alpha0.init<span class="op">=</span><span class="cn">NULL</span>, center<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>    optimizer<span class="op">=</span><span class="st">"optim"</span>, fixed<span class="op">=</span><span class="cn">NULL</span>, meth<span class="op">=</span><span class="fl">1</span>, vcov<span class="op">=</span><span class="cn">NULL</span>, eps_grid<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">10</span>, by<span class="op">=</span><span class="op">-</span><span class="fl">.5</span><span class="op">)</span>,</span>
-<span>    num_deriv<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span>    num_deriv<span class="op">=</span><span class="cn">FALSE</span>, le<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for invariance.alignment</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, digits<span class="op">=</span><span class="fl">3</span>, file<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -188,6 +188,9 @@ are computed.</p></dd>
 
 <dt>num_deriv</dt>
 <dd><p>Logical indicating whether numerical derivatives should be used</p></dd>
+
+<dt>le</dt>
+<dd><p>Logical indicating whether linking errors should be calculated</p></dd>
 
   <dt>object</dt>
 <dd><p>Object of class <code>invariance.alignment</code></p></dd>
@@ -352,6 +355,9 @@ equal across groups and therefore \(R^2_\lambda=1\) and \(R^2_\nu=1\)
 <dt>vcov</dt>
 <dd><p>Estimated variance matrix of aligned means and
 standard deviations</p></dd>
+
+<dt>...</dt>
+<dd><p>More values</p></dd>
 
 </dl></div>
     <div class="section level2">
