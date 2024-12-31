@@ -1,5 +1,5 @@
 %% File Name: invariance.alignment.Rd
-%% File Version: 1.711
+%% File Version: 1.712
 
 \name{invariance.alignment}
 \alias{invariance.alignment}
@@ -47,7 +47,7 @@ if it is supplied as the argument \code{vcov}.
 invariance.alignment(lambda, nu, wgt=NULL, align.scale=c(1, 1),
     align.pow=c(.5, .5), eps=1e-3, psi0.init=NULL, alpha0.init=NULL, center=FALSE,
     optimizer="optim", fixed=NULL, meth=1, vcov=NULL, eps_grid=seq(0,-10, by=-.5),
-    num_deriv=FALSE, le=FALSE, ...)
+    num_deriv=FALSE, ...)
 
 \method{summary}{invariance.alignment}(object, digits=3, file=NULL, ...)
 
@@ -113,7 +113,6 @@ for standard error computation. If a matrix is provided, standard errors
 are computed.}
 \item{eps_grid}{Grid of logarithmized epsilon values in optimization}
 \item{num_deriv}{Logical indicating whether numerical derivatives should be used}
-\item{le}{Logical indicating whether linking errors should be calculated}
   \item{object}{
 Object of class \code{invariance.alignment}
   }

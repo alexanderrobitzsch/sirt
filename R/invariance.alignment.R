@@ -1,12 +1,12 @@
 ## File Name: invariance.alignment.R
-## File Version: 4.017
+## File Version: 4.019
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
     align.scale=c(1,1), align.pow=c(.5,.5), eps=1e-3,
     psi0.init=NULL, alpha0.init=NULL, center=FALSE, optimizer="optim",
     fixed=NULL, meth=1, vcov=NULL, eps_grid=seq(0,-10, by=-.5),
-    num_deriv=FALSE, le=FALSE, ... )
+    num_deriv=FALSE, ... )
 {
     CALL <- match.call()
     s1 <- Sys.time()
@@ -14,6 +14,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     align.pow0 <- align.pow
     align.pow <- align.pow / 2
     overparam <- FALSE
+    le <- FALSE
 
     #-- labels for groups and items
     lambda0 <- lambda <- invariance_alignment_proc_labels(x=lambda)

@@ -37,7 +37,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.2  |  2024-12-31  |  Last: sirt 4.2-104
+VERSIONS sirt 4.2  |  2024-12-31  |  Last: sirt 4.2-106
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in handling sufficient statistics in
@@ -67,8 +67,7 @@ ADDED * included arguments 'method', 'le' and 'vcov_list' in
         estimation of linking errors and standard errors
 ADDED * added function locpolycor() to compute local thresholds and
         polychoric correlations
-ADDED * included argument 'le' in invariance.alignment() for linking
-        error estimation
+
 
 
 DATA  * included/modified datasets: ---
