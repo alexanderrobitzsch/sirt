@@ -1,5 +1,5 @@
 ## File Name: linking.haberman.lq.R
-## File Version: 0.255
+## File Version: 0.256
 
 linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     use_nu=FALSE, est_pow=FALSE, lower_pow=.1, upper_pow=3, method="joint",

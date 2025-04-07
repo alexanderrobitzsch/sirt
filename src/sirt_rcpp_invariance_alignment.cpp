@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_invariance_alignment.cpp
-//// File Version: 2.597
+//// File Version: 2.598
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -65,7 +65,7 @@ Rcpp::NumericMatrix sirt_rcpp_invariance_alignment_nu_transformed(
 ///** sirt_rcpp_invariance_alignment_simplicity_function_value
 // [[Rcpp::export]]
 double sirt_rcpp_invariance_alignment_simplicity_function_value(
-        Rcpp::CharacterVector type, double parm1, double parm2, double scale, 
+        Rcpp::CharacterVector type, double parm1, double parm2, double scale,
         double power, double eps)
 {
     double diff_par = parm1 - parm2;
@@ -142,7 +142,7 @@ Rcpp::List sirt_rcpp_invariance_alignment_opt_fct(
 ///** sirt_rcpp_invariance_alignment_simplicity_function_gradient
 // [[Rcpp::export]]
 double sirt_rcpp_invariance_alignment_simplicity_function_gradient(
-        Rcpp::CharacterVector type, double parm1, double parm2, double scale, 
+        Rcpp::CharacterVector type, double parm1, double parm2, double scale,
         double power, double eps)
 {
     double diff_par = parm1 - parm2;
