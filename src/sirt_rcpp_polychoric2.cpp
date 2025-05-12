@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_polychoric2.cpp
-//// File Version: 3.449
+//// File Version: 3.451
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -272,8 +272,10 @@ Rcpp::List sirt_rcpp_polychoric2_est_itempair( Rcpp::NumericVector v1,
     rho1[0] = rho_init;
     rho[0] = rho_init;
 
-    double ll0, ll1;
-    double incr, der;
+    double ll0;
+    double ll1;
+    double incr;
+    double der;
     int iter =0;
     double aincr=1;
     while ( ( iter < maxiter ) && ( aincr > conv) && ( Ntotal > 0 )  ){

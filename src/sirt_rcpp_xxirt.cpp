@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_xxirt.cpp
-//// File Version: 0.485
+//// File Version: 0.508
 
 
 
@@ -73,6 +73,68 @@ Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_likelihood(
 ///********************************************************************
 
 
+///********************************************************************
+///** sirt_rcpp_xxirt_compute_likelihood_person_covariates
+// [[Rcpp::export]]
+Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_likelihood_person_covariates(
+        Rcpp::IntegerMatrix dat, Rcpp::LogicalMatrix dat_resp_bool,
+        Rcpp::NumericVector probs, int TP, int maxK )
+{
+    int N = dat.nrow();
+    int I = dat.ncol();
+    Rcpp::NumericMatrix p_xi_aj(N, TP);
+
+    for (int nn=0;nn<N;nn++){
+        for (int tt=0;tt<TP;tt++){
+            p_xi_aj(nn,tt) = 1;
+        }
+        for (int ii=0;ii<I;ii++){
+            if ( dat_resp_bool(nn,ii) ){
+                for (int tt=0;tt<TP;tt++){
+                    p_xi_aj(nn,tt) *= probs[ii + dat(nn,ii)*I + tt*maxK*I + nn*maxK*TP*I];
+                }
+            }
+        } // end ii
+    }  // end nn
+
+    //---- OUTPUT
+    return p_xi_aj;
+}
+///********************************************************************
+
+
+
+
+///********************************************************************
+///** sirt_rcpp_xxirt_compute_loglike_case_theta_covariates
+// [[Rcpp::export]]
+Rcpp::NumericMatrix sirt_rcpp_xxirt_compute_loglike_case_theta_covariates(
+        Rcpp::IntegerMatrix dat, Rcpp::LogicalMatrix dat_resp_bool,
+        Rcpp::NumericVector logprobs, int TP, int maxK )
+{
+    int N = dat.nrow();
+    int I = dat.ncol();
+    Rcpp::NumericMatrix p_xi_aj(N, TP);
+
+    for (int nn=0;nn<N;nn++){
+        for (int tt=0;tt<TP;tt++){
+            p_xi_aj(nn,tt) = 0;
+        }
+        for (int ii=0;ii<I;ii++){
+            if ( dat_resp_bool(nn,ii) ){
+                for (int tt=0;tt<TP;tt++){
+                    p_xi_aj(nn,tt) += logprobs[ii + dat(nn,ii)*I + tt*maxK*I + nn*maxK*TP*I];
+                }
+            }
+        } // end ii
+    }  // end nn
+
+    //---- OUTPUT
+    return p_xi_aj;
+}
+///********************************************************************
+
+
 
 ///********************************************************************
 ///** sirt_rcpp_xxirt_hessian_reduced_probs
@@ -130,11 +192,14 @@ double sirt_rcpp_xxirt_newton_raphson_derivative_par(
         Rcpp::NumericMatrix ratio, Rcpp::NumericMatrix p_xi_aj,
         int item, Rcpp::NumericMatrix prior_Theta,
         Rcpp::IntegerVector group0, Rcpp::NumericVector weights,
-        Rcpp::NumericVector ll_case0, double eps)
+        Rcpp::NumericVector ll_case0, double eps, bool person_covariates,
+        bool person_covariates_items)
 {
     int N = dat.nrow();
     int TP = p_xi_aj.ncol();
     double temp = 0;
+    double temp1 = 0;
+    double temp2 = 0;
     int ii = item-1;
     double ll_case_der_nn=0;
     double grad_pp=0;
@@ -143,8 +208,18 @@ double sirt_rcpp_xxirt_newton_raphson_derivative_par(
         if (dat_resp_bool(nn,ii)){
             ll_case_der_nn=0;
             for (int tt=0; tt<TP; tt++){
-                temp=p_xi_aj(nn,tt)*ratio( dat(nn,ii), tt);
-                ll_case_der_nn += prior_Theta(tt,group0[nn])*temp;
+                if (person_covariates_items){
+                    temp2 = ratio(dat(nn,ii), tt+nn*TP);
+                } else {
+                    temp2 = ratio(dat(nn,ii), tt);
+                }
+                temp=p_xi_aj(nn,tt)*temp2;
+                if (person_covariates){
+                    temp1=prior_Theta(tt,nn);
+                } else {
+                    temp1=prior_Theta(tt,group0[nn]);
+                }
+                ll_case_der_nn += temp1*temp;
             }
             grad_pp -= weights[nn] * ll_case_der_nn / ( ll_case0[nn] + eps );
         }

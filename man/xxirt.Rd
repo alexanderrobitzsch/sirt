@@ -1,5 +1,5 @@
 %% File Name: xxirt.Rd
-%% File Version: 0.527
+%% File Version: 0.540
 
 \name{xxirt}
 \alias{xxirt}
@@ -857,6 +857,165 @@ mod2 <- sirt::xxirt( dat=dat, Theta=Theta, partable=partable,
 # variance matrix
 smod2 <- sirt::xxirt_sandwich_pml(object=mod2)
 smod2
+
+
+#############################################################################
+## EXAMPLE 6: Person covariates for item parameters and trait distribution
+#############################################################################
+
+#-- simulate data
+set.seed(2025)
+N <- 2000
+I <- 10
+b <- c(0, seq(-2,2,len=I-1))
+b1 <- b
+b1[1] <- 1
+dat1 <- sirt::sim.raschtype( stats::rnorm(N, mean=0, sd=1), b=b )
+dat2 <- sirt::sim.raschtype( stats::rnorm(N, mean=1, sd=1.5), b=b1 )
+dat <- data.frame( group=rep( c(1,2), each=N), rbind(dat1, dat2))
+
+#***************************************************************************
+#***** Model 1: two-group Rasch model
+
+#*** IRF 1PL
+P_1PL <- function( par, Theta, ncat){
+    b <- par[1]
+    TP <- nrow(Theta)
+    P <- matrix( NA, nrow=TP, ncol=ncat)
+    P[,1] <- 1
+    for (cc in 2:ncat){
+        P[,cc] <- exp( (cc-1) * Theta[,1] - b )
+    }
+    P <- P / rowSums(P)
+    return(P)
+}
+
+#** create item classes of 1PL and 2PL models
+par <- c( b=0 )
+item_1PL <- sirt::xxirt_createDiscItem( name="1PL", par=par, est=c(TRUE), P=P_1PL )
+customItems <- list( item_1PL )
+
+#---- definition theta distribution
+
+#** theta grid
+Theta <- matrix( seq(-6,6,length=21), ncol=1 )
+
+#** theta distribution
+P_Theta1 <- function( par, Theta, G)
+{
+    mu1 <- par[1]
+    sigma1 <- max( par[2], .01 )
+    mu2 <- par[3]
+    sigma2 <- max( par[4], .01 )
+    TP <- nrow(Theta)
+    pi_Theta <- matrix( 0, nrow=TP, ncol=G)
+    pi1 <- dnorm( Theta[,1], mean=mu1, sd=sigma1 )
+    pi1 <- pi1 / sum(pi1)
+    pi_Theta[,1] <- pi1
+    pi1 <- dnorm( Theta[,1], mean=mu2, sd=sigma2 )
+    pi1 <- pi1 / sum(pi1)
+    pi_Theta[,2] <- pi1
+    return(pi_Theta)
+}
+#** create distribution class
+par_Theta <- c( "mu1"=0, "sigma1"=1, "mu2"=0, "sigma2"=1 )
+customTheta  <- sirt::xxirt_createThetaDistribution( par=par_Theta,
+                       est=c(FALSE,TRUE,TRUE,TRUE), P=P_Theta1 )
+
+#-- create parameter table
+itemtype <- rep( "1PL", I )
+partable <- sirt::xxirt_createParTable( dat[,-1], itemtype=itemtype,
+                        customItems=customItems )
+
+# estimate model
+mod1 <- sirt::xxirt( dat=dat[,-1], Theta=Theta, partable=partable, group=dat$group,
+                   customItems=customItems, customTheta=customTheta)
+summary(mod1)
+
+#***************************************************************************
+#***** Model 2: Rasch model with person covariates in trait distribution
+
+#- matrix with person covariates
+X <- dat[,"group", drop=FALSE]
+
+#** theta distribution
+P_Theta2 <- function( par, Theta, G, X)
+{
+    mu1 <- par[1]
+    sigma1 <- max( par[2], .01 )
+    mu2 <- par[3]
+    sigma2 <- max( par[4], .01 )
+    TP <- nrow(Theta)
+    N <- nrow(X)
+    pi_Theta <- matrix( 0, nrow=TP, ncol=N)
+    mu <- par[ 2*(X[,1]-1)+1 ]
+    sigma <- par[ 2*(X[,1]-1)+2 ]
+    for (tt in 1:TP){
+        pi_Theta[tt,] <- stats::dnorm(Theta[tt,1], mean=mu, sd=sigma)
+    }
+    cp <- sirt::sirt_matrix2( colSums(pi_Theta), nrow=TP)
+    pi_Theta <- pi_Theta / ( cp + 1e-80 )
+    return(pi_Theta)
+}
+
+par_Theta2 <- mod1$customTheta$par
+
+customTheta2  <- sirt::xxirt_createThetaDistribution( par=par_Theta2,
+                       est=c(FALSE,TRUE,TRUE,TRUE),
+                       P=P_Theta2, X=X, lower=c(-10,0.01, -10, 0.01) )
+
+partable2 <- mod1$partable
+
+mod2 <- sirt::xxirt( dat=dat[,-1], Theta=Theta, partable=partable2,
+                   customItems=customItems, customTheta=customTheta2)
+summary(mod2)
+
+#***************************************************************************
+#***** Model 3: Rasch model with person covariates in trait distribution and
+#*****          item parameters
+
+#*** IRF 1PL
+P_1PL <- function( par, Theta, ncat, X)
+{
+    TP <- nrow(Theta)
+    N <- nrow(X)
+    P <- array( 0, dim=c(TP,ncat,N) )
+    efficient <- TRUE
+    if (! efficient ){
+        bM <- sirt::sirt_matrix2( par[ X[,1] ], nrow=TP)
+        P1 <- stats::plogis(Theta[,1] - bM )
+    } else {
+        h1 <- exp(-Theta[,1])
+        h2 <- sirt::sirt_matrix2( exp(par[ X[,1] ]), nrow=TP)
+        P1 <- 1/ ( 1+h1*h2 )
+    }
+    P[,2,] <- P1
+    P[,1,] <- 1 - P[,2,]
+    return(P)
+}
+
+#** create item classes of 1PL and 2PL models
+par <- c( b1=0, b2=-1 )
+item_1PL <- sirt::xxirt_createDiscItem( name="1PL", par=par, est=c(TRUE,TRUE),
+                            P=P_1PL, X=X )
+
+customItems <- list( item_1PL )
+
+#-- create parameter table
+itemtype <- rep( "1PL", I )
+partable2 <- sirt::xxirt_createParTable( dat[,-1], itemtype=itemtype,
+                        customItems=customItems )
+
+#-- distribution parameters
+customTheta2b <- mod2$customTheta
+customTheta2b$par[3] <- 0      # fix mu2 to 0
+customTheta2b$est <- c(FALSE,TRUE,FALSE,TRUE)
+
+# estimate model
+mod3 <- sirt::xxirt( dat=resp, Theta=Theta, partable=partable2,
+                   customItems=customItems, customTheta=customTheta2b, mstep_iter=2)
+summary(mod3)
+
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

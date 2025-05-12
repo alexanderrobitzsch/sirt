@@ -1,8 +1,9 @@
 ## File Name: xxirt_createThetaDistribution.R
-## File Version: 0.169
+## File Version: 0.171
 
 xxirt_createThetaDistribution <- function( par, est, P, prior=NULL,
-        prior_par1=NULL, prior_par2=NULL, lower=NULL, upper=NULL )
+        prior_par1=NULL, prior_par2=NULL, lower=NULL, upper=NULL,
+        X=NULL )
 {
     res <- list()
     res$par <- par
@@ -12,6 +13,12 @@ xxirt_createThetaDistribution <- function( par, est, P, prior=NULL,
     res$prior <- prior
     res$prior_par1 <- prior_par1
     res$prior_par2 <- prior_par2
+    res$X <- X
+    if (! is.null(X) ){
+        res$person_covariates <- TRUE
+    } else {
+        res$person_covariates <- FALSE
+    }
 
     NPT <- sum(est)
     np1 <- which(est)

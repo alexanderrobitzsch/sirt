@@ -1,11 +1,13 @@
 ## File Name: xxirt_nr_grad_fun_Rcpp.R
-## File Version: 0.175
+## File Version: 0.233
 
 xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
 {
+
     NP <- em_args$NP
     NPI <- em_args$NPI
     NPT <- em_args$NPT
+    customTheta <- em_args$customTheta
     free_pars_design <- em_args$free_pars_design
     h <- em_args$h
     eps2 <- 1e-300
@@ -14,13 +16,14 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
 
     #*** compute prior distribution
     prior_Theta0 <- xxirt_compute_prior_Theta_from_x(x=x, em_args=em_args)
-
     #* compute item response probabilities
     probs_items0 <- xxirt_compute_prob_item_from_x(x=x, em_args=em_args)
+
     p.xi.aj0 <- xxirt_compute_likelihood( probs_items=probs_items0,
                             dat=em_args$dat, dat_resp_bool=em_args$dat_resp_bool )
     ll_case0 <- xxirt_compute_casewise_likelihood(prior_Theta=prior_Theta0,
-                            group=em_args$group, p.xi.aj=p.xi.aj0)
+                            group=em_args$group, p.xi.aj=p.xi.aj0,
+                            customTheta=customTheta)
     ll0 <- sum( em_args$weights*log(ll_case0+eps2) )
 
     partable <- xxirt_partable_include_freeParameters( partable=em_args$partable, x=x )
@@ -54,13 +57,32 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
         item_group_comp_pp <- free_pars_design_pp$item_group_comp
 
         #- shortcut for item parameter per one item
-        if (free_pars_design_pp$one_item){
-            ratio <- (ratio_list[[item_group_comp_pp]])[item_pp,,]
+        shortcut <- free_pars_design_pp$one_item
+        if (attr(partable,'person_covariates')){
+            shortcut <- FALSE
+        }
+
+        if (shortcut){
+            RL1 <- ratio_list[[item_group_comp_pp]]
+            person_covariates <- customTheta$person_covariates
+            person_covariates_items <- FALSE
+            if (! attr(partable,'person_covariates')){
+                ratio <- RL1[item_pp,,]
+            } else {
+                ratio <- RL1[item_pp,,,]
+                maxK <- dim(ratio)[1]
+                TP <- dim(ratio)[2]
+                N <- dim(ratio)[3]
+                ratio <- matrix(ratio, nrow=maxK, ncol=N*TP)
+                person_covariates_items <- TRUE
+            }
             grad[pp] <- sirt_rcpp_xxirt_newton_raphson_derivative_par(
                                 dat=em_args$dat, dat_resp_bool=em_args$dat_resp_bool,
                                 ratio=ratio, p_xi_aj=p.xi.aj0, item=item_pp,
                                 prior_Theta=prior_Theta0, group0=em_args$group0,
-                                weights=em_args$weights, ll_case0=ll_case0, eps=eps)
+                                weights=em_args$weights, ll_case0=ll_case0, eps=eps,
+                                person_covariates=person_covariates,
+                                person_covariates_items=person_covariates_items)
         } else {
             x1 <- x[ em_args$parindex_items ]
             x1 <- sirt_add_increment(x=x1, pos=pp, value=h)
@@ -68,10 +90,11 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
             p.xi.aj.temp <- xxirt_compute_likelihood( probs_items=probs_items_temp,
                                 dat=em_args$dat, dat_resp_bool=em_args$dat_resp_bool)
             ll_case_temp <- xxirt_compute_casewise_likelihood(prior_Theta=prior_Theta0,
-                                group=em_args$group, p.xi.aj=p.xi.aj.temp)
-            ll_temp <- sum( em_args$weights*log(ll_case_temp+eps2) )
-            grad[pp] <- -( ll_temp - ll0 ) / h
-
+                                group=em_args$group, p.xi.aj=p.xi.aj.temp,
+                                customTheta=customTheta)
+            # ll_temp <- sum( em_args$weights*log(ll_case_temp+eps2) )
+            # grad[pp] <- -( ll_temp - ll0 ) / h
+            grad[pp] <- -sum( em_args$weights* (ll_case_temp - ll_case0)/(h*ll_case0) )
         }
 
     }        # end pp
@@ -108,7 +131,8 @@ xxirt_nr_grad_fun_Rcpp <- function(x, em_args, eps=1e-100)
             prior_Theta <- xxirt_compute_prior_Theta_from_x(x=x1, em_args=em_args)
             prior_Theta_der <- ( prior_Theta - prior_Theta0 ) / h
             ll_case <- xxirt_compute_casewise_likelihood(prior_Theta=prior_Theta_der,
-                                group=em_args$group, p.xi.aj=p.xi.aj0)
+                                group=em_args$group, p.xi.aj=p.xi.aj0,
+                                customTheta=customTheta)
             grad[pp] <- -sum( em_args$weights*ll_case/(ll_case0 + eps) )
         }
     }

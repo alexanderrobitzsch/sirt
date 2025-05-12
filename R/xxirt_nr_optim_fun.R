@@ -1,9 +1,11 @@
 ## File Name: xxirt_nr_optim_fun.R
-## File Version: 0.132
+## File Version: 0.145
 
 xxirt_nr_optim_fun <- function(x, em_args, output_all=FALSE)
 {
     pen_val <- 0
+
+    customTheta <- em_args$customTheta
 
     #*** compute prior distribution
     prior_Theta <- xxirt_compute_prior_Theta_from_x(x=x, em_args=em_args)
@@ -17,7 +19,8 @@ xxirt_nr_optim_fun <- function(x, em_args, output_all=FALSE)
 
     #*** compute likelihood function
     ll_case <- xxirt_compute_casewise_likelihood(prior_Theta=prior_Theta,
-                                group=em_args$group, p.xi.aj=p.xi.aj)
+                                group=em_args$group, p.xi.aj=p.xi.aj,
+                                customTheta=customTheta)
     ll0 <- ll <- -sum( em_args$weights*log(ll_case) )
 
     #*** add prior distributions

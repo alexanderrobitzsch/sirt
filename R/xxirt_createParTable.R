@@ -1,5 +1,5 @@
 ## File Name: xxirt_createParTable.R
-## File Version: 0.261
+## File Version: 0.271
 
 #*** create parameter table
 xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
@@ -12,6 +12,7 @@ xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
     }
     dfr <- NULL
     CI <- length(customItems)
+    pc <- 0
     for (ii in 1L:I){
         type_ii <- itemtype[ii]
         item_ii <- NULL
@@ -45,8 +46,13 @@ xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
             dfr1[ ind_ii, 'prior_par1' ] <- item_ii$prior_par1
             dfr1[ ind_ii, 'prior_par2' ] <- item_ii$prior_par2
         }
+        if (item_ii$person_covariates){
+            dfr1[,'person_covariates'] <- TRUE
+            pc <- pc + 1
+        }
+
         dfr <- rbind( dfr, dfr1 )
-    }
+    }  # end ii
     #**** create parameter indices
     NP <- nrow(dfr)
     dfr$rowindex <- 1L:NP
@@ -56,5 +62,6 @@ xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
     dfr$parlabel <- paste0( dfr$item, '_', dfr$parname )
     attr(dfr, 'ncat' ) <- ncat1
     attr(dfr, 'items' ) <- items
+    attr(dfr, 'person_covariates') <- (pc>0)
     return(dfr)
 }

@@ -1,5 +1,5 @@
 ## File Name: mcmc_3pno_testlet_draw_itempars.R
-## File Version: 0.12
+## File Version: 0.137
 
 
 #---- draw item parameters a and b
@@ -8,14 +8,18 @@ mcmc_3pno_testlet_draw_itempars <- function( theta, Z, I, N, weights,
 {
     # define adjusted Z values
     gamma.testletM <- gamma.testlet[, testletgroups ]
-    if (param==1){ Z <- Z - gamma.testletM }
-    if (param==3){ Z <- Z - a.testletM*gamma.testletM }
+    if (param==1){
+        Z <- Z - gamma.testletM
+    }
+    if (param==3){
+        Z <- Z - a.testletM*gamma.testletM
+    }
     if (param==2){ # Z <- Z
         theta0 <- theta
         Z0 <- Z
     }
     # for parametrization 2, this function must be rewritten
-    # because "the theta" is now item specific
+    # because 'the theta' is now item specific
     # loop over testlets tt=1,...,TT
     # maybe for TT+1 some adjustment has to be done
     #--- parametrization param=1
@@ -57,9 +61,10 @@ mcmc_3pno_testlet_draw_itempars <- function( theta, Z, I, N, weights,
         b <- rep(NA,I)
         TTT <- TT
         if ( sum( testletgroups==TT+1 ) > 0 ){
-                TTT <- TT + 1 }
-        for (tt in 1:TTT){
-            #tt <- 1
+            TTT <- TT + 1
+        }
+        for (tt in 1L:TTT){
+
             theta <- theta0
             Z <- Z0
             ind.tt <- which( testletgroups==tt)
@@ -91,16 +96,16 @@ mcmc_3pno_testlet_draw_itempars <- function( theta, Z, I, N, weights,
                 # compute t(Xast) %*% Z (weighted)
                 mj <- Sigma %*% crossprod( Xast * weights, Z )
                 mj <- as.matrix( t(mj))
-                    }
+            }
             #--------------
             # draw item parameters
             ipars <- sirt_rmvnorm( Itt, sigma=Sigma ) + mj
             a[ind.tt] <- ipars[,1]
             b[ind.tt] <- ipars[,2]
-        }            # end testlet tt
-    } # end param=2
+        }  # end testlet tt
+    }  # end param=2
     #-- output
-    res <- list( "a"=a, "b"=b)
+    res <- list( a=a, b=b)
     return(res)
 }
 

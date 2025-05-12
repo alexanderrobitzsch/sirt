@@ -1,5 +1,5 @@
 ## File Name: xxirt_nr_grad_fun_numapprox.R
-## File Version: 0.08
+## File Version: 0.092
 
 xxirt_nr_grad_fun_numapprox <- function(x, em_args, opt_fun)
 {

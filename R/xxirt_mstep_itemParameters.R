@@ -1,13 +1,18 @@
 ## File Name: xxirt_mstep_itemParameters.R
-## File Version: 0.406
+## File Version: 0.458
 
 
 #--- M-step item parameters
 xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
             ncat, partable_index, N.ik, mstep_iter, par0, eps,
             mstep_reltol, mstep_method, item_index, h, use_grad,
-            penalty_fun_item=NULL)
+            penalty_fun_item=NULL, p.aj.xi=NULL, dat=NULL, dat_resp_bool=NULL,
+            weights=NULL)
 {
+
+    TP <- ncol(p.aj.xi)
+    maxK <- dim(N.ik)[2]
+
     #-------------------------------------------------
     #**** define likelihood function
     like_items1 <- function( x, ... )
@@ -18,7 +23,17 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
                             partable_index=partable_index )
         log_probs1 <- log( probs1 + eps )
         # log likelihood value
-        ll <- - sum( N.ik * log_probs1 )
+        if (! attr(partable, 'person_covariates') ){
+            ll <- - sum( N.ik * log_probs1 )
+        } else {
+            log_probs1 <- as.vector( log_probs1 )
+            loglike_case_theta <- sirt_rcpp_xxirt_compute_loglike_case_theta_covariates(
+                                            dat=dat, dat_resp_bool=dat_resp_bool,
+                                            logprobs=log_probs1, TP=TP, maxK=maxK )
+            ll <- -sum(weights*p.aj.xi*loglike_case_theta)
+        }
+
+
         # add prior distributions
         pen <- xxirt_mstep_itemParameters_evalPrior(partable=partable, h=0)
         # add penalty
@@ -35,11 +50,13 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
     #-------------------------------------------------
     #*** define gradient here
     #### x <- partable[ partable$parfree==1, 'value']
-    grad_items1 <- function(x, ...){
+    grad_items1 <- function(x, ...)
+    {
         partable0 <- xxirt_partable_include_freeParameters( partable=partable, x=x )
         probs1 <- xxirt_compute_itemprobs( item_list=item_list, items=items,
                             Theta=Theta, ncat=ncat, partable=partable0,
                             partable_index=partable_index )
+        logprobs1 <- log(probs1+eps)
         NP <- sum( partable$parfree==1)
         pen1 <- grad1 <- rep(0,NP)
         pen0 <- 0
@@ -50,14 +67,40 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
             N.ik_pp <- N.ik[item_index_pp,,, drop=FALSE ]
             partable_h <- xxirt_partable_include_freeParameters( partable=partable0,
                                     x=xh )
+
             probs1h <- xxirt_compute_itemprobs( item_list=item_list, items=items,
                                     Theta=Theta, ncat=ncat, partable=partable_h,
                                     partable_index=partable_index,
                                     item_index=item_index_pp)
-            ll0 <- - sum( N.ik_pp * log( probs1[ item_index_pp,,,drop=FALSE] + eps ) )
-            ll1 <- - sum( N.ik_pp * log( probs1h + eps ) )
-            grad1[pp] <- ( ll1 - ll0 )
-        }
+            logprobs1h <- log( probs1h + eps )
+            if( ! attr(partable, 'person_covariates')    ){
+                ll0 <- - sum( N.ik_pp * logprobs1[ item_index_pp,,,drop=FALSE] )
+                ll1 <- - sum( N.ik_pp * logprobs1h )
+                diff1 <- ll1-ll0
+            } else {
+
+                dat_pp <- dat[,item_index_pp,drop=FALSE]
+                dat_resp_bool_pp <- dat_resp_bool[,item_index_pp,drop=FALSE]
+                logprobs1_pp <- as.vector(logprobs1[item_index_pp,,,])
+
+                fun <- sirt_rcpp_xxirt_compute_loglike_case_theta_covariates
+                args1 <- list(dat=dat_pp, dat_resp_bool=dat_resp_bool_pp,
+                                logprobs=logprobs1_pp, TP=TP, maxK=maxK )
+                # loglike_case0 <- do.call(what=fun, args=args1 )
+                # ll0 <- -sum(weights*p.aj.xi*loglike_case0)
+
+                # args1$logprobs <- as.vector(logprobs1h)
+                # loglike_case1 <- do.call(what=fun, args=args1 )
+                # ll1 <- -sum(weights*p.aj.xi*loglike_case1)
+
+                args1$logprobs <- as.vector(logprobs1h-logprobs1_pp)
+                loglike_case2 <- do.call(what=fun, args=args1 )
+                diff1 <- -sum(weights*p.aj.xi*loglike_case2)
+
+            }
+            grad1[pp] <- diff1
+        }  # end pp
+
         #--- prior distributions
         pen <- xxirt_mstep_itemParameters_evalPrior(partable=partable0, h=0)
         pen_h <- xxirt_mstep_itemParameters_evalPrior(partable=partable0, h=h)

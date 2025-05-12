@@ -1,5 +1,5 @@
 %% File Name: xxirt_createThetaDistribution.Rd
-%% File Version: 0.151
+%% File Version: 0.154
 
 \name{xxirt_createThetaDistribution}
 \alias{xxirt_createThetaDistribution}
@@ -14,7 +14,7 @@ Creates a user defined theta distribution.
 
 \usage{
 xxirt_createThetaDistribution(par, est, P, prior=NULL, prior_par1=NULL,
-       prior_par2=NULL, lower=NULL, upper=NULL)
+       prior_par2=NULL, lower=NULL, upper=NULL, X=NULL)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -39,6 +39,7 @@ Second parameter of prior distribution
 }
 \item{lower}{Lower bounds for parameters}
 \item{upper}{Upper bounds for parameters}
+\item{X}{optional matrix of person covariates}
 }
 
 %\details{

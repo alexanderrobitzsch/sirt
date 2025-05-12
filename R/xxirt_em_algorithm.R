@@ -1,5 +1,5 @@
 ## File Name: xxirt_em_algorithm.R
-## File Version: 0.103
+## File Version: 0.159
 
 xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_list,
             items, Theta, ncat, partable, partable_index, dat, resp_index,
@@ -21,14 +21,19 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         }
         dev0 <- dev
 
+        zz0 <- Sys.time()
+
+        person_covariates_items <- attr(partable, 'person_covariates')
+
         #*** item probabilities
         probs_items <- xxirt_compute_itemprobs( item_list=item_list,
                             items=items, Theta=Theta, ncat=ncat,
-                            partable=partable, partable_index=partable_index )
+                            partable=partable, partable_index=partable_index)
 
         #*** compute individual likelihood
         p.xi.aj <- xxirt_compute_likelihood( probs_items=probs_items, dat=dat,
-                             resp_index=resp_index, dat_resp_bool=dat_resp_bool )
+                                resp_index=resp_index, dat_resp_bool=dat_resp_bool,
+                                person_covariates_items=person_covariates_items )
 
         #*** compute prior distribution
         prior_Theta <- xxirt_compute_priorDistribution( Theta=Theta,
@@ -38,7 +43,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         res <- xxirt_compute_posterior( prior_Theta=prior_Theta, p.xi.aj=p.xi.aj,
                         group=group, G=G, weights=weights, dat1=dat1,
                         dat_resp=dat_resp, maxK=maxK, group_index=group_index,
-                        dat1_resp=dat1_resp )
+                        dat1_resp=dat1_resp, customTheta=customTheta )
         n.ik <- res$n.ik
         p.aj.xi <- res$p.aj.xi
         N.ik <- res$N.ik
@@ -53,7 +58,8 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
                         mstep_iter=mstep_iter, par0=par0, eps=eps,
                         mstep_reltol=mstep_reltol, mstep_method=mstep_method,
                         item_index=item_index, h=h, use_grad=use_grad,
-                        penalty_fun_item=penalty_fun_item)
+                        penalty_fun_item=penalty_fun_item, p.aj.xi=p.aj.xi,
+                        dat=dat, dat_resp_bool=dat_resp_bool, weights=weights)
         ll1 <- res$ll1
         partable <- res$partable
         par0 <- res$par0
@@ -65,7 +71,8 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
         res <- xxirt_mstep_ThetaParameters( customTheta=customTheta, G=G, eps=eps,
                         mstep_iter=mstep_iter, N.k=N.k, par1=par1,
                         mstep_reltol=mstep_reltol, Theta=Theta,
-                        penalty_fun_theta=penalty_fun_theta)
+                        penalty_fun_theta=penalty_fun_theta, weights=weights,
+                        p.aj.xi=p.aj.xi)
         ll2 <- res$ll2
         customTheta <- res$customTheta
         par1 <- res$par1
@@ -100,7 +107,8 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
                     verbose3=verbose3, prior_par=prior_par)
         iter <- iter + 1
 
-    }
+    }  # end iterations
+
     #---- output
     res <- list(iter=iter, converged=converged, probs_items=probs_items,
                     p.xi.aj=p.xi.aj, prior_Theta=prior_Theta, n.ik=n.ik,
@@ -111,3 +119,6 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
                     ll_case=ll_case, dev=dev, dev00=dev00)
     return(res)
 }
+
+
+# cat('xxirt_compute_itemprobs') ; zz1 <- Sys.time(); print(zz1-zz0) ; zz0 <- zz1

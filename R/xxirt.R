@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.172
+## File Version: 1.188
 
 
 #--- user specified item response model
@@ -62,7 +62,6 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     item_index <- res$item_index
     dat <- as.matrix(dat)
 
-
     # create item list
     item_list <- xxirt_createItemList( customItems=customItems, itemtype=itemtype,
                         items=items, partable=partable )
@@ -96,7 +95,6 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
     }
     do_cv <- cv_kfold>0
     em_count <- 1
-
 
     while(em_iterate){
 
@@ -250,6 +248,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
 
     #--- output
     s2 <- Sys.time()
+    time_diff <- s2-s1
     res <- list( partable=partable, par_items=par_items,
                 par_items_summary=par_items_summary, par_items_bounds=par_items_bounds,
                 par_Theta=par_Theta, Theta=Theta, probs_items=probs_items,
@@ -268,7 +267,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 res_opt_nr=res_opt_nr, opt_values_nr=opt_values_nr, maxit_nr=maxit_nr,
                 iter=iter-1, iter_em=iter_em-1, iter_nr=iter_nr,
                 estimator=estimator, pml_args=pml_args, em_args=em_args,
-                CALL=CALL, s1=s1, s2=s2 )
+                CALL=CALL, s1=s1, s2=s2, time_diff=time_diff )
     class(res) <- 'xxirt'
     return(res)
 }

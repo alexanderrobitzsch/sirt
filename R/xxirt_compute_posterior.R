@@ -1,17 +1,22 @@
 ## File Name: xxirt_compute_posterior.R
-## File Version: 0.294
+## File Version: 0.301
 
 
 ##-- xxirt: compute posterior
 xxirt_compute_posterior <- function( prior_Theta, p.xi.aj, group,
                 G, weights, dat1, dat_resp, maxK, group_index, dat1_resp,
-                eps=1e-100)
+                eps=1e-100, customTheta=NULL)
 {
     N <- nrow(dat_resp)
     TP <- ncol(p.xi.aj)
     I <- ncol(dat1)
     # posterior distribution
-    prior1 <- t( prior_Theta[, group ] )
+    if (customTheta$person_covariates){
+        prior1 <- t(prior_Theta)
+    } else {
+        prior1 <- t( prior_Theta[, group ] )
+    }
+
     # p.xi.aj[ is.na(p.xi.aj) ] <- eps
     p.aj.xi <- prior1 * p.xi.aj
     p1 <- p.aj.xi
@@ -35,7 +40,6 @@ xxirt_compute_posterior <- function( prior_Theta, p.xi.aj, group,
         N.ik <- N.ik + n.ik[,,,gg]
         pi.k[,gg] <- colSums( p.aj.xi.gg * weights[ ind_gg ] )
     }  # end gg
-    res <- list( p.aj.xi=p.aj.xi, n.ik=n.ik, N.ik=N.ik, N.k=pi.k,
-                    post_unnorm=p1 )
+    res <- list( p.aj.xi=p.aj.xi, n.ik=n.ik, N.ik=N.ik, N.k=pi.k, post_unnorm=p1 )
     return(res)
 }

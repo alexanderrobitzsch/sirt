@@ -1,5 +1,5 @@
 %% File Name: xxirt_createParTable.Rd
-%% File Version: 1.16
+%% File Version: 1.172
 
 \name{xxirt_createParTable}
 \alias{xxirt_createParTable}
@@ -16,7 +16,7 @@ Create item response functions and item parameter table
 
 \usage{
 xxirt_createDiscItem( name, par, est, P, lower=-Inf, upper=Inf,
-     prior=NULL, prior_par1=NULL, prior_par2=NULL)
+     prior=NULL, prior_par1=NULL, prior_par2=NULL, X=NULL)
 
 xxirt_createParTable(dat, itemtype, customItems=NULL)
 
@@ -38,6 +38,7 @@ xxirt_modifyParTable( partable, parname, item=NULL, value=NULL,
 \item{prior}{Prior distribution}
 \item{prior_par1}{First parameter prior distribution}
 \item{prior_par2}{Second parameter prior distribution}
+\item{X}{optional matrix of person covariates}
   \item{dat}{
 Data frame with item responses
 }

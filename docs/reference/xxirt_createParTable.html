@@ -49,7 +49,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">xxirt_createDiscItem</span><span class="op">(</span> <span class="va">name</span>, <span class="va">par</span>, <span class="va">est</span>, <span class="va">P</span>, lower<span class="op">=</span><span class="op">-</span><span class="cn">Inf</span>, upper<span class="op">=</span><span class="cn">Inf</span>,</span>
-<span>     prior<span class="op">=</span><span class="cn">NULL</span>, prior_par1<span class="op">=</span><span class="cn">NULL</span>, prior_par2<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span>     prior<span class="op">=</span><span class="cn">NULL</span>, prior_par1<span class="op">=</span><span class="cn">NULL</span>, prior_par2<span class="op">=</span><span class="cn">NULL</span>, X<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">xxirt_createParTable</span><span class="op">(</span><span class="va">dat</span>, <span class="va">itemtype</span>, customItems<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
@@ -86,6 +86,9 @@
 
 <dt>prior_par2</dt>
 <dd><p>Second parameter prior distribution</p></dd>
+
+<dt>X</dt>
+<dd><p>optional matrix of person covariates</p></dd>
 
   <dt>dat</dt>
 <dd><p>Data frame with item responses</p></dd>
