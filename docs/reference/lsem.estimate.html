@@ -134,8 +134,8 @@ Bootstrap at the level of a cluster identifier is allowed (argument <code>cluste
 <span><span class="fu">lsem.MGM.stepfunctions</span><span class="op">(</span> <span class="va">object</span>, <span class="va">moderator.grid</span> <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># compute local weights</span></span>
-<span><span class="fu">lsem_local_weights</span><span class="op">(</span><span class="va">data.mod</span>, <span class="va">moderator.grid</span>, <span class="va">h</span>, sampling_weights<span class="op">=</span><span class="cn">NULL</span>,  bw<span class="op">=</span><span class="cn">NULL</span>,</span>
-<span>     kernel<span class="op">=</span><span class="st">"gaussian"</span><span class="op">)</span></span>
+<span><span class="fu">lsem_local_weights</span><span class="op">(</span><span class="va">data.mod</span>, <span class="va">moderator.grid</span>, <span class="va">h</span>, sampling_weights<span class="op">=</span><span class="cn">NULL</span>, bw<span class="op">=</span><span class="cn">NULL</span>,</span>
+<span>     kernel<span class="op">=</span><span class="st">"gaussian"</span>, is_imputed<span class="op">=</span><span class="cn">FALSE</span>, Nimp<span class="op">=</span><span class="fl">0</span>, data<span class="op">=</span><span class="cn">NULL</span>, moderator<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">lsem.bootstrap</span><span class="op">(</span><span class="va">object</span>, R<span class="op">=</span><span class="fl">100</span>, verbose<span class="op">=</span><span class="cn">TRUE</span>, cluster<span class="op">=</span><span class="cn">NULL</span>,</span>
 <span>     repl_design<span class="op">=</span><span class="cn">NULL</span>, repl_factor<span class="op">=</span><span class="cn">NULL</span>, use_starting_values<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -262,6 +262,15 @@ the <span class="pkg">lavaan</span> default is used.</p></dd>
 <dt>kernel</dt>
 <dd><p>Type of kernel function. Can be <code>"gaussian"</code>,
 <code>"uniform"</code> or <code>"epanechnikov"</code>.</p></dd>
+
+<dt>is_imputed</dt>
+<dd><p>Logical indicating whether datasets are imputed</p></dd>
+
+<dt>Nimp</dt>
+<dd><p>Number of imputed datasets</p></dd>
+
+<dt>data</dt>
+<dd><p>Optional list containing imputed datasets</p></dd>
 
 <dt>eps</dt>
 <dd><p>Minimum number for weights</p></dd>

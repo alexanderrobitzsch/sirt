@@ -1,5 +1,5 @@
 ## File Name: tam2mirt_freed.R
-## File Version: 0.155
+## File Version: 0.156
 
 #*** return lavaan syntax with freed parameters
 tam2mirt_freed <- function( D, factors, B, dat, AXsi,
@@ -44,7 +44,7 @@ tam2mirt_freed <- function( D, factors, B, dat, AXsi,
     lavsyn <- paste0( lavsyn, '\n', syn0 )
     # syntax for variances
     if (inherits(tamobj,'tam.mml')){
-        g1 <- paste0( 'Cov_', 1:D, 1:D )
+        g1 <- paste0( 'Cov_', 1L:D, 1L:D )
         syn0 <- paste0( factors, ' ~~ ', g1, '*',factors  )
         syn0 <- paste0( syn0, collapse='\n')
         lavsyn <- paste0( lavsyn, '\n', syn0 )

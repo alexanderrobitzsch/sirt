@@ -1,5 +1,5 @@
 ## File Name: xxirt_newton_raphson.R
-## File Version: 0.283
+## File Version: 0.284
 
 
 xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
@@ -93,10 +93,11 @@ xxirt_newton_raphson <- function(em_out, em_args, maxit_nr, optimizer_nr,
 
     # test <- TRUE
     if (test){
+        requireNamespace('miceadds')
         ll1 <- opt_fun(x=x, em_args=em_args)
         grad1 <- xxirt_nr_grad_fun_numapprox(x=x, em_args=em_args, opt_fun=opt_fun)
         grad2 <- grad_fun(x=x, em_args=em_args)
-        Revalpr_round('grad1-grad2',5)
+        miceadds::Revalpr_round('grad1-grad2',5)
         # stop()
     }
 

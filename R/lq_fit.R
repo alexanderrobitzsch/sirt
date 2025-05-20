@@ -1,5 +1,5 @@
 ## File Name: lq_fit.R
-## File Version: 0.163
+## File Version: 0.165
 
 lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
         est_pow=FALSE, optimizer="optim", eps_vec=10^seq(0,-10, by=-.5),
@@ -34,22 +34,23 @@ lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
         return(val)
     }
 
-    grad_optim <- function(x, y, X, Xs, pow, eps, w)
-    {
-        beta <- x
-        # e <- ( y - X %*% beta )[,1]
-        e <- sirt_rcpp_lq_fit_matrix_mult( Z=Xs, y=y, beta=beta)
-        pow2 <- pow/2-1
-        h1 <- pow*exp(pow2 * log( e^2 + eps ))*e*w
-        # der <- - colSums(X*h1)
-        px <- ncol(X)
-        der <- sirt_rcpp_lq_fit_sparse_matrix_derivative(Z=Xs, h1=h1, px=px)
-        return(der)
+    if (pow>0){
+        grad_optim <- function(x, y, X, Xs, pow, eps, w)
+        {
+            beta <- x
+            # e <- ( y - X %*% beta )[,1]
+            e <- sirt_rcpp_lq_fit_matrix_mult( Z=Xs, y=y, beta=beta)
+            pow2 <- pow/2-1
+            h1 <- pow*exp(pow2 * log( e^2 + eps ))*e*w
+            # der <- - colSums(X*h1)
+            px <- ncol(X)
+            der <- sirt_rcpp_lq_fit_sparse_matrix_derivative(Z=Xs, h1=h1, px=px)
+            return(der)
+        }
     }
 
-
     if (pow==0){
-        grad_optim <- function(x, y, X, pow, eps, w, Xs=NULL)
+        grad_optim <- function(x, y, X, Xs, pow, eps, w)
         {
             NP <- length(x)
             grad <- rep(NA, NP)

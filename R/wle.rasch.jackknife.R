@@ -1,5 +1,5 @@
 ## File Name: wle.rasch.jackknife.R
-## File Version: 1.09
+## File Version: 1.101
 
 
 ###############################################################################################
@@ -43,7 +43,7 @@ wle.rasch.jackknife <- function( dat, b, itemweights=1+0*b, pid=NULL,
                 items.ss <- colnames(dat)[ stratum==ss ]
                 II <- length(items.ss)
                 wlejack <- matrix( 0, nrow=nrow(dat), ncol=II)
-                for (ii in 1:II){   # begin loop: items within a stratum
+                for (ii in 1L:II){   # begin loop: items within a stratum
 #                    ii <- 1
                     # calculate item index
                     ind.ii <- which( colnames(dat)==items.ss[ii] )
@@ -92,7 +92,7 @@ wle.rasch.jackknife <- function( dat, b, itemweights=1+0*b, pid=NULL,
             testlet.ind <- wlejack
             cat(paste(I, "testlets\n") )
             testletcount <- rep(0,nrow(dat))
-                for (ii in 1:I){
+                for (ii in 1L:I){
                     # ii <- 1
                     wlejack[,ii] <- wle.rasch( dat=dat[, testlet !=testlets[ii] ], b=b[ testlet !=testlets[ii]  ],
                                             itemweights=itemweights[ testlet !=testlets[ii]  ],
@@ -118,7 +118,7 @@ wle.rasch.jackknife <- function( dat, b, itemweights=1+0*b, pid=NULL,
             wlejack <- matrix( 0, nrow=nrow(dat), ncol=I )
             cat("Simple random sampling of items\n")
             cat(paste(I, "items\n") )
-            for (ii in 1:I){
+            for (ii in 1L:I){
                 # ii <- 1
                 wlejack[,ii] <- wle.rasch( dat=dat[, -ii ], b=b[-ii], itemweights=itemweights[-ii],
                             theta=wle$theta  )$theta

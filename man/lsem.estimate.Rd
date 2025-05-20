@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.773
+%% File Version: 0.777
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -61,8 +61,8 @@ lsem.estimate(data, moderator, moderator.grid, lavmodel, type="LSEM", h=1.1, bw=
 lsem.MGM.stepfunctions( object, moderator.grid )
 
 # compute local weights
-lsem_local_weights(data.mod, moderator.grid, h, sampling_weights=NULL,  bw=NULL,
-     kernel="gaussian")
+lsem_local_weights(data.mod, moderator.grid, h, sampling_weights=NULL, bw=NULL,
+     kernel="gaussian", is_imputed=FALSE, Nimp=0, data=NULL, moderator=NULL)
 
 lsem.bootstrap(object, R=100, verbose=TRUE, cluster=NULL,
      repl_design=NULL, repl_factor=NULL, use_starting_values=TRUE,
@@ -152,6 +152,9 @@ computed for invariant item parameters}
 the \pkg{lavaan} default is used.}
 \item{kernel}{Type of kernel function. Can be \code{"gaussian"},
 \code{"uniform"} or \code{"epanechnikov"}.}
+\item{is_imputed}{Logical indicating whether datasets are imputed}
+\item{Nimp}{Number of imputed datasets}
+\item{data}{Optional list containing imputed datasets}
 \item{eps}{Minimum number for weights}
 \item{verbose}{Optional logical printing information about computation progress.}
 \item{object}{Object of class \code{lsem}}

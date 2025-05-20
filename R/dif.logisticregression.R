@@ -1,16 +1,12 @@
 ## File Name: dif.logisticregression.R
-## File Version: 1.204
+## File Version: 1.206
 
-#---------------------------------------------------------------------------------------##
+
+
 # This function performs itemwise DIF analysis by using logistic regression methods     ##
 # uniform and nonuniform DIF                                                            ##
 dif.logistic.regression <- function( dat, group, score, quant=1.645)
 {
-    # INPUT:
-    # dat       ... data frame (must only include item responses)
-    # group     ... group identifier (this has to be a dummy variable)
-    # score     ... matching criterion
-
     I <- ncol(dat)
     matr <- NULL
     cat('Items ')
@@ -21,8 +17,7 @@ dif.logistic.regression <- function( dat, group, score, quant=1.645)
         mod3 <- stats::glm( y  ~ score + group + score*group, data=dat.ii,
                                     family='binomial')
 
-        h1 <- data.frame( item=colnames(dat)[ii], N=sum( 1- is.na( dat[,ii] ),
-                                na.rm=TRUE))
+        h1 <- data.frame( item=colnames(dat)[ii], N=sum(1-is.na(dat[,ii]), na.rm=TRUE))
         h1$R <- min(group)
         h1$F <- max(group)
         h1$nR <- sum(  ( 1- is.na( dat[,ii] ) )* (1-group), na.rm=T)
@@ -56,7 +51,7 @@ dif.logistic.regression <- function( dat, group, score, quant=1.645)
         cat( ii, ' ' )
         utils::flush.console()
         if ( ii %% 15==0 ){ cat('\n') }
-        }
+    }
     cat('\n')
     # include variable of adjusted p values
     matr[, 'pdiff.adj' ] <- matr$pR - matr$pF - mean( matr$pR - matr$pF  )
@@ -79,12 +74,10 @@ dif.logistic.regression <- function( dat, group, score, quant=1.645)
     #**** calculation of DIF variance
     dif1 <- dif.variance( dif=matr$uniformDIF, se.dif=matr$se.uniformDIF )
     matr <- data.frame( matr[, seq(1,ind1)], uniform.EBDIF=dif1$eb.dif,
-                DIF.SD=dif1$unweighted.DIFSD, matr[, seq(ind1+1, ncol(matr)) ] )
+                    DIF.SD=dif1$unweighted.DIFSD, matr[, seq(ind1+1, ncol(matr)) ] )
     cat( paste0('\nDIF SD=', round(dif1$unweighted.DIFSD, 3 ) ), '\n')
     # sorting of the items
     g1 <- rank( matr$uniformDIF )
     matr <- data.frame( itemnr=1L:nrow(matr), sortDIFindex=g1, matr )
     return(matr)
 }
-#------------------------------------------------------------------------------
-

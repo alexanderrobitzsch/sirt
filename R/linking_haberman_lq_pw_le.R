@@ -1,7 +1,8 @@
 ## File Name: linking_haberman_lq_pw_le.R
-## File Version: 0.132
+## File Version: 0.135
 
-linking_haberman_lq_pw_le <- function(des, res_optim, vcov_list=NULL, symm_hess=FALSE)
+linking_haberman_lq_pw_le <- function(des, res_optim, itempars,
+        vcov_list=NULL, symm_hess=FALSE)
 {
     requireNamespace('MASS')
     ind_studies <- des$ind_studies

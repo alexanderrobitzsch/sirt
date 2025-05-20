@@ -1,5 +1,5 @@
 ## File Name: linking.haberman.lq.R
-## File Version: 0.256
+## File Version: 0.257
 
 linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     use_nu=FALSE, est_pow=FALSE, lower_pow=.1, upper_pow=3, method="joint",
@@ -148,7 +148,7 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     res_vcov <- NULL
     if (le){
         res_vcov <- linking_haberman_lq_pw_le(des=des_pw_slopes, res_optim=res_optim,
-                        vcov_list=vcov_list)
+                        vcov_list=vcov_list, itempars=itempars)
     }  # end if le==TRUE
 
     #- include joint item parameters

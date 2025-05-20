@@ -1,9 +1,13 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 4.2-121
-Date: 2025-05-12 12:25:44
-Author: Alexander Robitzsch [aut,cre] (<https://orcid.org/0000-0002-8226-3132>)
+Version: 4.2-124
+Date: 2025-05-20 11:56:18
+Authors@R: c( person(given = "Alexander",
+                    family = "Robitzsch",
+                    role = c("aut", "cre"),
+                    email = "robitzsch@ipn.uni-kiel.de",
+                    comment = c(ORCID = "0000-0002-8226-3132")) )
 Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
 Description: 
     Supplementary functions for item response models aiming

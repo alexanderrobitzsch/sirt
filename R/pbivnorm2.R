@@ -1,5 +1,5 @@
 ## File Name: pbivnorm2.R
-## File Version: 1.162
+## File Version: 1.166
 
 
 #*** approximation of the bivariate normal integral
@@ -47,7 +47,7 @@ pbivnorm2 <- function( x, y, rho )
     # adjust formula in case of APPROX. (ii)
     if ( length(ind2) > 0 ){
         # CW. Formula in (ii), p. 264
-        prob1[ind2] <- 1 - stats::pnorm( -a1[ind2] ) - stats::pnorm( -b1[ind2] ) + prob1[ind2]
+        prob1[ind2] <- 1-stats::pnorm(-a1[ind2])-stats::pnorm(-b1[ind2])+prob1[ind2]
     }
 #    # negative correlations
     if ( length(ind.neg) > 0 ){
