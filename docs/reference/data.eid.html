@@ -18,7 +18,7 @@ resimulated from the originally available data."><!-- mathjax --><script src="ht
     
     <a class="navbar-brand me-2" href="../index.html">sirt</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.2</small
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.3</small
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -146,12 +146,12 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span><span class="co">#-- 1b: estimation with mirt package</span></span>
 <span></span>
 <span><span class="co"># estimation with mirt</span></span>
-<span><span class="va">mod1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span> <span class="va">dat</span>, <span class="fl">1</span>, itemtype<span class="op">=</span><span class="st">"Rasch"</span><span class="op">)</span></span>
+<span><span class="va">mod1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span> <span class="va">dat</span>, <span class="fl">1</span>, itemtype<span class="op">=</span><span class="st">"Rasch"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># person parameters</span></span>
-<span><span class="va">pp1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/fscores.html" class="external-link">fscores</a></span><span class="op">(</span><span class="va">mod1b</span>, method<span class="op">=</span><span class="st">"WLE"</span><span class="op">)</span></span>
+<span><span class="va">pp1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/fscores.html" class="external-link">fscores</a></span><span class="op">(</span><span class="va">mod1b</span>, method<span class="op">=</span><span class="st">"WLE"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># extract coefficients</span></span>
 <span><span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="mirt.wrapper.html">mirt.wrapper.coef</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
@@ -161,11 +161,11 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># item fit</span></span>
-<span><span class="va">itemf1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
+<span><span class="va">itemf1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
 <span><span class="va">itemf1b</span></span>
 <span></span>
 <span><span class="co"># model fit</span></span>
-<span><span class="va">modf1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
+<span><span class="va">modf1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
 <span><span class="va">modf1b</span></span>
 <span></span>
 <span><span class="co">#-----------</span></span>
@@ -212,23 +212,23 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span><span class="co">#-- 1e: estimation with ltm package</span></span>
 <span></span>
 <span><span class="co"># estimation with rasch</span></span>
-<span><span class="va">mod1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu">rasch</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+<span><span class="va">mod1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ltm/man/rasch.html" class="external-link">rasch</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod1e</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># estimation person parameters</span></span>
-<span><span class="va">pp1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu">factor.scores</span><span class="op">(</span><span class="va">mod1e</span><span class="op">)</span></span>
+<span><span class="va">pp1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ltm/man/factor.scores.html" class="external-link">factor.scores</a></span><span class="op">(</span><span class="va">mod1e</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># plot item response functions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mod1e</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># item fit</span></span>
-<span><span class="va">itemf1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu">item.fit</span><span class="op">(</span><span class="va">mod1e</span><span class="op">)</span></span>
+<span><span class="va">itemf1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ltm/man/item.fit.html" class="external-link">item.fit</a></span><span class="op">(</span><span class="va">mod1e</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># person fit</span></span>
-<span><span class="va">persf1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu">person.fit</span><span class="op">(</span><span class="va">mod1e</span><span class="op">)</span></span>
+<span><span class="va">persf1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ltm/man/person.fit.html" class="external-link">person.fit</a></span><span class="op">(</span><span class="va">mod1e</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># goodness of fit with Bootstrap</span></span>
-<span><span class="va">modf1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu">GoF.rasch</span><span class="op">(</span><span class="va">mod1e</span>,B<span class="op">=</span><span class="fl">20</span><span class="op">)</span>    <span class="co"># use more bootstrap samples</span></span>
+<span><span class="va">modf1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ltm/man/GoF.html" class="external-link">GoF.rasch</a></span><span class="op">(</span><span class="va">mod1e</span>,B<span class="op">=</span><span class="fl">20</span><span class="op">)</span>    <span class="co"># use more bootstrap samples</span></span>
 <span><span class="va">modf1e</span></span>
 <span></span>
 <span><span class="co">#*********************************************************</span></span>
@@ -256,13 +256,13 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span><span class="co">#-- 2b: estimation with mirt package</span></span>
 <span></span>
 <span><span class="co"># estimation</span></span>
-<span><span class="va">mod2b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>,<span class="fl">1</span>,itemtype<span class="op">=</span><span class="st">"2PL"</span><span class="op">)</span></span>
+<span><span class="va">mod2b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>,<span class="fl">1</span>,itemtype<span class="op">=</span><span class="st">"2PL"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod2b</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod2b</span><span class="op">)</span></span>
 <span><span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="mirt.wrapper.html">mirt.wrapper.coef</a></span><span class="op">(</span><span class="va">mod2b</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># model fit</span></span>
-<span><span class="va">modf2b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mod2b</span><span class="op">)</span></span>
+<span><span class="va">modf2b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mod2b</span><span class="op">)</span></span>
 <span><span class="va">modf2b</span></span>
 <span></span>
 <span><span class="co">#-----------</span></span>
@@ -281,7 +281,7 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span><span class="co">#-- 2e: estimation with ltm package</span></span>
 <span></span>
 <span><span class="co"># estimation</span></span>
-<span><span class="va">mod2e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu">ltm</span><span class="op">(</span><span class="va">dat</span> <span class="op">~</span> <span class="va">z1</span> <span class="op">)</span></span>
+<span><span class="va">mod2e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ltm/man/ltm.html" class="external-link">ltm</a></span><span class="op">(</span><span class="va">dat</span> <span class="op">~</span> <span class="va">z1</span> <span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod2e</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># item response functions</span></span>
@@ -366,7 +366,7 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span><span class="co">#-- 1b: estimation with mirt package</span></span>
 <span></span>
 <span><span class="co"># estimation with tam.mml</span></span>
-<span><span class="va">mod1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span> <span class="va">dat</span>, <span class="fl">1</span>, itemtype<span class="op">=</span><span class="st">"Rasch"</span><span class="op">)</span></span>
+<span><span class="va">mod1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span> <span class="va">dat</span>, <span class="fl">1</span>, itemtype<span class="op">=</span><span class="st">"Rasch"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
 <span><span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="mirt.wrapper.html">mirt.wrapper.coef</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
@@ -376,7 +376,7 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># item fit</span></span>
-<span><span class="va">itemf1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
+<span><span class="va">itemf1b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mod1b</span><span class="op">)</span></span>
 <span><span class="va">itemf1b</span></span>
 <span></span>
 <span><span class="co">#-----------</span></span>
@@ -407,7 +407,7 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span><span class="co">#-- 1e: estimation with ltm package</span></span>
 <span></span>
 <span><span class="co"># estimation</span></span>
-<span><span class="va">mod1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu">gpcm</span><span class="op">(</span><span class="va">dat</span>, constraint<span class="op">=</span><span class="st">"1PL"</span><span class="op">)</span></span>
+<span><span class="va">mod1e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ltm/man/gpcm.html" class="external-link">gpcm</a></span><span class="op">(</span><span class="va">dat</span>, constraint<span class="op">=</span><span class="st">"1PL"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod1e</span><span class="op">)</span></span>
 <span><span class="co"># plot item response functions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mod1e</span><span class="op">)</span></span>
@@ -431,7 +431,7 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span><span class="co">#-- 2b: estimation with mirt package</span></span>
 <span></span>
 <span><span class="co"># estimation</span></span>
-<span><span class="va">mod2b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span> <span class="va">dat</span>, <span class="fl">1</span>, itemtype<span class="op">=</span><span class="st">"gpcm"</span><span class="op">)</span></span>
+<span><span class="va">mod2b</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span> <span class="va">dat</span>, <span class="fl">1</span>, itemtype<span class="op">=</span><span class="st">"gpcm"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod2b</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod2b</span><span class="op">)</span></span>
 <span><span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="mirt.wrapper.html">mirt.wrapper.coef</a></span><span class="op">(</span><span class="va">mod2b</span><span class="op">)</span></span>
@@ -447,7 +447,7 @@ Modelle mit <span style="R">R</span></em>. Available at
 <span><span class="co">#-- 2e: estimation with ltm package</span></span>
 <span></span>
 <span><span class="co"># estimation</span></span>
-<span><span class="va">mod2e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu">gpcm</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+<span><span class="va">mod2e</span> <span class="op">&lt;-</span> <span class="fu">ltm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ltm/man/gpcm.html" class="external-link">gpcm</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod2e</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mod2e</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>

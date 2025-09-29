@@ -1,8 +1,8 @@
 Package: sirt
 Type: Package
 Title: Supplementary Item Response Theory Models
-Version: 4.2-124
-Date: 2025-05-20 11:56:18
+Version: 4.3-2
+Date: 2025-09-29 11:03:03
 Authors@R: c( person(given = "Alexander",
                     family = "Robitzsch",
                     role = c("aut", "cre"),

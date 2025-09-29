@@ -12,7 +12,7 @@ functioning using logistic regression analysis (Zumbo, 1999)."><!-- mathjax --><
     
     <a class="navbar-brand me-2" href="../index.html">sirt</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.2</small
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.3</small
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -241,7 +241,7 @@ methods (Magis, Beland, Tuerlinckx, &amp; De Boeck, 2010).</p>
 <span><span class="co">#############################################################################</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/" class="external-link">TAM</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">difR</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/343Babou/difR" class="external-link">difR</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#*** (1) simulate data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">776</span><span class="op">)</span></span>
@@ -279,7 +279,7 @@ methods (Magis, Beland, Tuerlinckx, &amp; De Boeck, 2010).</p>
 <span><span class="co"># Model 2: assess DIF by logistic regression and EAPs</span></span>
 <span><span class="va">dif2</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu">dif.logistic.regression</span><span class="op">(</span> dat<span class="op">=</span><span class="va">dat</span>, score<span class="op">=</span><span class="va">mod_eap</span>, group<span class="op">=</span><span class="va">group</span><span class="op">)</span></span>
 <span><span class="co"># Model 3: assess DIF by Mantel-Haenszel statistic</span></span>
-<span><span class="va">dif3</span> <span class="op">&lt;-</span> <span class="fu">difR</span><span class="fu">::</span><span class="fu">difMH</span><span class="op">(</span>Data<span class="op">=</span><span class="va">dat</span>, group<span class="op">=</span><span class="va">group</span>, focal.name<span class="op">=</span><span class="st">"1"</span>,  purify<span class="op">=</span><span class="cn">FALSE</span> <span class="op">)</span></span>
+<span><span class="va">dif3</span> <span class="op">&lt;-</span> <span class="fu">difR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/difR/man/difMH.html" class="external-link">difMH</a></span><span class="op">(</span>Data<span class="op">=</span><span class="va">dat</span>, group<span class="op">=</span><span class="va">group</span>, focal.name<span class="op">=</span><span class="st">"1"</span>,  purify<span class="op">=</span><span class="cn">FALSE</span> <span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">dif3</span><span class="op">)</span></span>
 <span>  <span class="co">##  Mantel-Haenszel Chi-square statistic:</span></span>
 <span>  <span class="co">##</span></span>

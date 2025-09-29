@@ -1,5 +1,5 @@
 //// File Name: sirt_rcpp_xxirt.cpp
-//// File Version: 0.508
+//// File Version: 0.513
 
 
 
@@ -489,10 +489,10 @@ Rcpp::List sirt_rcpp_xxirt_nr_pml_casewise_opt_fun(
             int ii1=W2_long(nn,0)-1;
             int ii2=W2_long(nn,1)-1;
             w2ii=W2_long(nn,2);
-            if (dat_resp(cc,ii1)&dat_resp(cc,ii2)){
+            if (dat_resp(cc,ii1)&&dat_resp(cc,ii2)){
                 for (int hh=0; hh<K; hh++){
                     for (int kk=0; kk<K; kk++){
-                        if ( (dat1(cc,ii1)==hh) & (dat1(cc,ii2)==kk) ){
+                        if ( (dat1(cc,ii1)==hh) && (dat1(cc,ii2)==kk) ){
                             ind=nn+hh*NI2+kk*NI2*K+gg*NI2*K*K;
                             input=model_probs2[ind];
                             // input=std::log(t1+eps);

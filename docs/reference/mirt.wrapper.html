@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sirt</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.2</small
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.3</small
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -174,12 +174,12 @@ after each other.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>See the <span class="pkg">mirt</span> package manual for more information.</p>
 <p>See for the main estimation functions in <span class="pkg">mirt</span>:
-<code><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt::mirt</a></code>,
-<code><a href="https://rdrr.io/pkg/mirt/man/multipleGroup.html" class="external-link">mirt::multipleGroup</a></code>
-and <code><a href="https://rdrr.io/pkg/mirt/man/bfactor.html" class="external-link">mirt::bfactor</a></code>.</p>
-<p>See <code><a href="https://rdrr.io/pkg/mirt/man/coef-method.html" class="external-link">mirt::coef-method</a></code> for extracting
+<code><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt::mirt</a></code>,
+<code><a href="https://philchalmers.github.io/mirt/reference/multipleGroup.html" class="external-link">mirt::multipleGroup</a></code>
+and <code><a href="https://philchalmers.github.io/mirt/reference/bfactor.html" class="external-link">mirt::bfactor</a></code>.</p>
+<p>See <code><a href="https://philchalmers.github.io/mirt/reference/coef-method.html" class="external-link">mirt::coef-method</a></code> for extracting
 coefficients.</p>
-<p>See <code><a href="https://rdrr.io/pkg/mirt/man/mod2values.html" class="external-link">mirt::mod2values</a></code> for collecting
+<p>See <code><a href="https://philchalmers.github.io/mirt/reference/mod2values.html" class="external-link">mirt::mod2values</a></code> for collecting
 parameter values in a mirt parameter table.</p>
 <p>See <code><a href="lavaan2mirt.html">lavaan2mirt</a></code> for converting <code>lavaan</code> syntax
 to <code>mirt</code> syntax.</p>
@@ -238,17 +238,17 @@ Examples 1, 2)</p>
 <span>   <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"philchalmers/mirt"</span><span class="op">)</span></span>
 <span>          <span class="op">}</span></span>
 <span><span class="co"># now, load mirt</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/philchalmers/mirt" class="external-link">mirt</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://philchalmers.github.io/mirt/" class="external-link">mirt</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#############################################################################</span></span>
 <span><span class="co"># EXAMPLE 1: Extracting item parameters and posterior LSAT data</span></span>
 <span><span class="co">#############################################################################</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">LSAT7</span>, package<span class="op">=</span><span class="st">"mirt"</span><span class="op">)</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/expand.table.html" class="external-link">expand.table</a></span><span class="op">(</span><span class="va">LSAT7</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/expand.table.html" class="external-link">expand.table</a></span><span class="op">(</span><span class="va">LSAT7</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#*** Model 1: 3PL model for item 5 only, other items 2PL</span></span>
-<span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">data</span>, <span class="fl">1</span>, itemtype<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2PL"</span>,<span class="st">"2PL"</span>,<span class="st">"2PL"</span>,<span class="st">"2PL"</span>,<span class="st">"3PL"</span><span class="op">)</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">data</span>, <span class="fl">1</span>, itemtype<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2PL"</span>,<span class="st">"2PL"</span>,<span class="st">"2PL"</span>,<span class="st">"2PL"</span>,<span class="st">"3PL"</span><span class="op">)</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
 <span><span class="co"># extracting coefficients</span></span>
@@ -257,7 +257,7 @@ Examples 1, 2)</p>
 <span><span class="co"># summary output</span></span>
 <span><span class="fu">mirt_summary</span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
 <span><span class="co"># extract parameter values in mirt</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mod2values.html" class="external-link">mod2values</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mod2values.html" class="external-link">mod2values</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
 <span><span class="co"># extract posterior</span></span>
 <span><span class="va">post1</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu">mirt.wrapper.posterior</span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
 <span><span class="co"># extract item response functions</span></span>
@@ -271,11 +271,11 @@ Examples 1, 2)</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">postmod1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#*** Model 2: Confirmatory model with two factors</span></span>
-<span><span class="va">cmodel</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.model.html" class="external-link">mirt.model</a></span><span class="op">(</span><span class="st">"</span></span>
+<span><span class="va">cmodel</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.model.html" class="external-link">mirt.model</a></span><span class="op">(</span><span class="st">"</span></span>
 <span><span class="st">        F1=1,4,5</span></span>
 <span><span class="st">        F2=2,3</span></span>
 <span><span class="st">        "</span><span class="op">)</span></span>
-<span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">cmodel</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">cmodel</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></span>
 <span><span class="co"># extract coefficients</span></span>
@@ -299,7 +299,7 @@ Examples 1, 2)</p>
 <span><span class="fu">psych</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/describe.html" class="external-link">describe</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># estimate generalized partial credit model</span></span>
-<span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fl">1</span>, itemtype<span class="op">=</span><span class="st">"gpcm"</span><span class="op">)</span></span>
+<span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fl">1</span>, itemtype<span class="op">=</span><span class="st">"gpcm"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
 <span><span class="co"># extract coefficients</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
@@ -320,34 +320,34 @@ Examples 1, 2)</p>
 <span><span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.21</span>,<span class="fl">.297</span>,<span class="fl">1.232</span>,<span class="fl">.297</span>,<span class="fl">.81</span>,<span class="fl">.252</span>,<span class="fl">1.232</span>,<span class="fl">.252</span>,<span class="fl">1.96</span><span class="op">)</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">itemtype</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"dich"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span><span class="va">dataset1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/simdata.html" class="external-link">simdata</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">d</span>, <span class="va">N</span>, <span class="va">itemtype</span><span class="op">)</span></span>
-<span><span class="va">dataset2</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/simdata.html" class="external-link">simdata</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">d</span>, <span class="va">N</span>, <span class="va">itemtype</span>, mu<span class="op">=</span><span class="va">mu</span>, sigma<span class="op">=</span><span class="va">sigma</span><span class="op">)</span></span>
+<span><span class="va">dataset1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/simdata.html" class="external-link">simdata</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">d</span>, <span class="va">N</span>, <span class="va">itemtype</span><span class="op">)</span></span>
+<span><span class="va">dataset2</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/simdata.html" class="external-link">simdata</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">d</span>, <span class="va">N</span>, <span class="va">itemtype</span>, mu<span class="op">=</span><span class="va">mu</span>, sigma<span class="op">=</span><span class="va">sigma</span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://amices.org/mice/reference/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">dataset1</span>, <span class="va">dataset2</span><span class="op">)</span></span>
 <span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"D1"</span>, <span class="va">N</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"D2"</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#group models</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.model.html" class="external-link">mirt.model</a></span><span class="op">(</span><span class="st">"</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.model.html" class="external-link">mirt.model</a></span><span class="op">(</span><span class="st">"</span></span>
 <span><span class="st">   F1=1-5</span></span>
 <span><span class="st">   F2=6-10</span></span>
 <span><span class="st">   F3=11-15</span></span>
 <span><span class="st">      "</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># separate analysis</span></span>
-<span><span class="va">mod_configural</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/multipleGroup.html" class="external-link">multipleGroup</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">model</span>, group<span class="op">=</span><span class="va">group</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">mod_configural</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/multipleGroup.html" class="external-link">multipleGroup</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">model</span>, group<span class="op">=</span><span class="va">group</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">mirt.wrapper.coef</span><span class="op">(</span><span class="va">mod_configural</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># equal slopes (metric invariance)</span></span>
-<span><span class="va">mod_metric</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/multipleGroup.html" class="external-link">multipleGroup</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">model</span>, group<span class="op">=</span><span class="va">group</span>, invariance<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"slopes"</span><span class="op">)</span>,</span>
+<span><span class="va">mod_metric</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/multipleGroup.html" class="external-link">multipleGroup</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">model</span>, group<span class="op">=</span><span class="va">group</span>, invariance<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"slopes"</span><span class="op">)</span>,</span>
 <span>                verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">mirt.wrapper.coef</span><span class="op">(</span><span class="va">mod_metric</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># equal slopes and intercepts (scalar invariance)</span></span>
-<span><span class="va">mod_scalar</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/multipleGroup.html" class="external-link">multipleGroup</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">model</span>, group<span class="op">=</span><span class="va">group</span>,</span>
+<span><span class="va">mod_scalar</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/multipleGroup.html" class="external-link">multipleGroup</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">model</span>, group<span class="op">=</span><span class="va">group</span>,</span>
 <span>          invariance<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"slopes"</span>,<span class="st">"intercepts"</span>,<span class="st">"free_means"</span>,<span class="st">"free_varcov"</span><span class="op">)</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">mirt.wrapper.coef</span><span class="op">(</span><span class="va">mod_scalar</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># full constraint</span></span>
-<span><span class="va">mod_fullconstrain</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/multipleGroup.html" class="external-link">multipleGroup</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">model</span>, group<span class="op">=</span><span class="va">group</span>,</span>
+<span><span class="va">mod_fullconstrain</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/multipleGroup.html" class="external-link">multipleGroup</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">model</span>, group<span class="op">=</span><span class="va">group</span>,</span>
 <span>             invariance<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"slopes"</span>, <span class="st">"intercepts"</span>, <span class="st">"free_means"</span>, <span class="st">"free_var"</span><span class="op">)</span>, verbose<span class="op">=</span><span class="cn">TRUE</span> <span class="op">)</span></span>
 <span><span class="fu">mirt.wrapper.coef</span><span class="op">(</span><span class="va">mod_fullconstrain</span><span class="op">)</span></span>
 <span></span>
@@ -358,7 +358,7 @@ Examples 1, 2)</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">data.read</span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">data.read</span></span>
 <span><span class="co"># specify mirt model with some interactions</span></span>
-<span><span class="va">mirtmodel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.model.html" class="external-link">mirt.model</a></span><span class="op">(</span><span class="st">"</span></span>
+<span><span class="va">mirtmodel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.model.html" class="external-link">mirt.model</a></span><span class="op">(</span><span class="st">"</span></span>
 <span><span class="st">   A=1-4</span></span>
 <span><span class="st">   B=5-8</span></span>
 <span><span class="st">   C=9-12</span></span>
@@ -367,11 +367,11 @@ Examples 1, 2)</p>
 <span><span class="st">   (A*B*C)=12</span></span>
 <span><span class="st">   "</span> <span class="op">)</span></span>
 <span><span class="co"># estimate model</span></span>
-<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span> <span class="va">dat</span>, <span class="va">mirtmodel</span>, verbose<span class="op">=</span><span class="cn">TRUE</span>, technical<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>NCYCLES<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span> <span class="va">dat</span>, <span class="va">mirtmodel</span>, verbose<span class="op">=</span><span class="cn">TRUE</span>, technical<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>NCYCLES<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">)</span></span>
 <span><span class="co"># look at estimated parameters</span></span>
 <span><span class="fu">mirt.wrapper.coef</span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mod2values.html" class="external-link">mod2values</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mod2values.html" class="external-link">mod2values</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
 <span><span class="co"># model specification</span></span>
 <span><span class="va">res</span><span class="op">@</span><span class="va">model</span></span>
 <span></span>

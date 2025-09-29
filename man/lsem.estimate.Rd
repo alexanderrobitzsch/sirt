@@ -1,5 +1,5 @@
 %% File Name: lsem.estimate.Rd
-%% File Version: 0.777
+%% File Version: 0.778
 
 \name{lsem.estimate}
 \alias{lsem.estimate}
@@ -154,7 +154,6 @@ the \pkg{lavaan} default is used.}
 \code{"uniform"} or \code{"epanechnikov"}.}
 \item{is_imputed}{Logical indicating whether datasets are imputed}
 \item{Nimp}{Number of imputed datasets}
-\item{data}{Optional list containing imputed datasets}
 \item{eps}{Minimum number for weights}
 \item{verbose}{Optional logical printing information about computation progress.}
 \item{object}{Object of class \code{lsem}}

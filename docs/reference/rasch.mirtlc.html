@@ -16,7 +16,7 @@ Rasch (1PL) and 2PL model (Bartolucci, 2007; Bartolucci, Montanari &amp;amp; Pan
     
     <a class="navbar-brand me-2" href="../index.html">sirt</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.2</small
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.3</small
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -600,7 +600,7 @@ package. Latent class analysis can be carried out with
 <span></span>
 <span><span class="co">#----</span></span>
 <span><span class="co"># estimate model with cutomized input in mirt</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/philchalmers/mirt" class="external-link">mirt</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://philchalmers.github.io/mirt/" class="external-link">mirt</a></span><span class="op">)</span></span>
 <span><span class="co">#-- define Theta design matrix for 5 classes</span></span>
 <span><span class="va">Theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">Theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://amices.org/mice/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span> <span class="va">Theta</span>, <span class="va">Theta</span>, <span class="va">Theta</span> <span class="op">)</span></span>
@@ -614,7 +614,7 @@ package. Latent class analysis can be carried out with
 <span>  <span class="co">##   C5    0    0    0    0    1    0    0    0    0    1    0    0    0    0    1</span></span>
 <span><span class="co">#-- define mirt model</span></span>
 <span><span class="va">I</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>  <span class="co"># I=27</span></span>
-<span><span class="va">mirtmodel</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.model.html" class="external-link">mirt.model</a></span><span class="op">(</span><span class="st">"</span></span>
+<span><span class="va">mirtmodel</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.model.html" class="external-link">mirt.model</a></span><span class="op">(</span><span class="st">"</span></span>
 <span><span class="st">        C1D1=1-9 \n C2D1=1-9 \n  C3D1=1-9 \n  C4D1=1-9  \n  C5D1=1-9</span></span>
 <span><span class="st">        C1D2=10-18 \n C2D2=10-18 \n  C3D2=10-18 \n  C4D2=10-18  \n  C5D2=10-18</span></span>
 <span><span class="st">        C1D3=19-27 \n C2D3=19-27 \n  C3D3=19-27 \n  C4D3=19-27  \n  C5D3=19-27</span></span>
@@ -623,7 +623,7 @@ package. Latent class analysis can be carried out with
 <span><span class="st">                    (19-27,a11),(19-27,a12),(19-27,a13),(19-27,a14),(19-27,a15)</span></span>
 <span><span class="st">                "</span><span class="op">)</span></span>
 <span><span class="co">#-- get initial parameter values</span></span>
-<span><span class="va">mod.pars</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>, model<span class="op">=</span><span class="va">mirtmodel</span>,  pars<span class="op">=</span><span class="st">"values"</span><span class="op">)</span></span>
+<span><span class="va">mod.pars</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>, model<span class="op">=</span><span class="va">mirtmodel</span>,  pars<span class="op">=</span><span class="st">"values"</span><span class="op">)</span></span>
 <span><span class="co">#-- redefine initial parameter values</span></span>
 <span><span class="co"># set all d parameters initially to zero</span></span>
 <span><span class="va">ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span> <span class="op">(</span> <span class="va">mod.pars</span><span class="op">$</span><span class="va">name</span><span class="op">==</span><span class="st">"d"</span> <span class="op">)</span> <span class="op">)</span></span>
@@ -654,7 +654,7 @@ package. Latent class analysis can be carried out with
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co">#-- estimate model in mirt</span></span>
-<span><span class="va">mod4</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">mirtmodel</span>, pars<span class="op">=</span><span class="va">mod.pars</span>, verbose<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span><span class="va">mod4</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">mirtmodel</span>, pars<span class="op">=</span><span class="va">mod.pars</span>, verbose<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>              technical<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span> customTheta<span class="op">=</span><span class="va">Theta</span>, customPriorFun<span class="op">=</span><span class="va">lca_prior</span>,</span>
 <span>                    MAXQUAD<span class="op">=</span><span class="fl">1E20</span><span class="op">)</span> <span class="op">)</span></span>
 <span><span class="co"># correct number of estimated parameters</span></span>

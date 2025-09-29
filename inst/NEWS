@@ -36,8 +36,22 @@ CHANGELOG sirt
 
 
 
+
+
 ------------------------------------------------------------------------
-VERSIONS sirt 4.2  |  2025-05-20  |  Last: sirt 4.2-124
+VERSIONS sirt 4.3  |  2025-09-29  |  Last: sirt 4.3-2
+------------------------------------------------------------------------
+
+xxx   * ...
+
+
+DATA  * included/modified datasets: ---
+EXAMP * included/modified examples: ---
+
+
+
+------------------------------------------------------------------------
+VERSIONS sirt 4.2  |  2025-09-27  |  Last: sirt 4.2-133
 ------------------------------------------------------------------------
 
 FIXED * fixed a bug in handling sufficient statistics in
@@ -70,15 +84,11 @@ ADDED * added function locpolycor() to compute local thresholds and
 ADDED * included linking_2groups() function for (robust) Haebara and
         Stocking-Lord linking
 ADDED * added functionality for including person covariates in xxirt()
-
+ADDED * included dataset 'data.pisa2006Read'
 
 DATA  * included/modified datasets: ---
 EXAMP * included/modified examples: xxirt (5,6), invariance.alignment (9),
         linking.haberman (9), locpolycor (1), linking_2groups (1),       
-
-
-
-
 
 ------------------------------------------------------------------------
 VERSIONS sirt 4.1  |  2024-02-06  |  Last: sirt 4.1-15

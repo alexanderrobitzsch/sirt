@@ -1,5 +1,5 @@
 %% File Name: matrixfunctions.sirt.Rd
-%% File Version: 1.161
+%% File Version: 1.162
 
 \name{matrixfunctions.sirt}
 
@@ -78,8 +78,7 @@ The output of \code{rowKSmallest.sirt} are two matrices:
 Alexander Robitzsch
 
 The \pkg{Rcpp} code for \code{rowCumsums.sirt} is copied from code of
-Romain Francois
-(\url{https://lists.r-forge.r-project.org/pipermail/rcpp-devel/2010-October/001198.html}).
+Romain Francois.
 }
 
 %\note{

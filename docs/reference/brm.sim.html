@@ -20,7 +20,7 @@ mirt or TAM packages."><!-- mathjax --><script src="https://cdnjs.cloudflare.com
     
     <a class="navbar-brand me-2" href="../index.html">sirt</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.2</small
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.3</small
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -192,7 +192,7 @@ regression models in <span style="R">R</span> (Gruen, Kosmidis &amp; Zeileis, 20
 <span></span>
 <span><span class="co">#*** (2) some preliminaries for estimation of the model in mirt</span></span>
 <span><span class="co">#*** define a mirt function</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/philchalmers/mirt" class="external-link">mirt</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://philchalmers.github.io/mirt/" class="external-link">mirt</a></span><span class="op">)</span></span>
 <span><span class="va">Theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span> <span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, len<span class="op">=</span><span class="fl">21</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span> <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># compute item response function</span></span>
@@ -216,21 +216,21 @@ regression models in <span style="R">R</span> (Gruen, Kosmidis &amp; Zeileis, 20
 <span>            <span class="op">}</span></span>
 <span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"brm"</span></span>
 <span><span class="co"># create item response function</span></span>
-<span><span class="va">brm.itemfct</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/createItem.html" class="external-link">createItem</a></span><span class="op">(</span><span class="va">name</span>, par<span class="op">=</span><span class="va">par</span>, est<span class="op">=</span><span class="va">est</span>, P<span class="op">=</span><span class="va">brm.icc</span><span class="op">)</span></span>
+<span><span class="va">brm.itemfct</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/createItem.html" class="external-link">createItem</a></span><span class="op">(</span><span class="va">name</span>, par<span class="op">=</span><span class="va">par</span>, est<span class="op">=</span><span class="va">est</span>, P<span class="op">=</span><span class="va">brm.icc</span><span class="op">)</span></span>
 <span><span class="co">#*** define model in mirt</span></span>
-<span><span class="va">mirtmodel</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.model.html" class="external-link">mirt.model</a></span><span class="op">(</span><span class="st">"</span></span>
+<span><span class="va">mirtmodel</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.model.html" class="external-link">mirt.model</a></span><span class="op">(</span><span class="st">"</span></span>
 <span><span class="st">           F1=1-9</span></span>
 <span><span class="st">            "</span> <span class="op">)</span></span>
 <span><span class="va">itemtype</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"brm"</span>, <span class="va">I</span> <span class="op">)</span></span>
 <span><span class="va">customItems</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"brm"</span><span class="op">=</span><span class="va">brm.itemfct</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># define parameters to be estimated</span></span>
-<span><span class="va">mod1.pars</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">mirtmodel</span>, itemtype<span class="op">=</span><span class="va">itemtype</span>,</span>
+<span><span class="va">mod1.pars</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">mirtmodel</span>, itemtype<span class="op">=</span><span class="va">itemtype</span>,</span>
 <span>                   customItems<span class="op">=</span><span class="va">customItems</span>, pars<span class="op">=</span><span class="st">"values"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span><span class="co">#*** (3) estimate beta item response model in mirt</span></span>
-<span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>,<span class="va">mirtmodel</span>, itemtype<span class="op">=</span><span class="va">itemtype</span>, customItems<span class="op">=</span><span class="va">customItems</span>,</span>
+<span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>,<span class="va">mirtmodel</span>, itemtype<span class="op">=</span><span class="va">itemtype</span>, customItems<span class="op">=</span><span class="va">customItems</span>,</span>
 <span>               pars<span class="op">=</span><span class="va">mod1.pars</span>, verbose<span class="op">=</span><span class="cn">TRUE</span>  <span class="op">)</span></span>
 <span><span class="co"># model summaries</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>

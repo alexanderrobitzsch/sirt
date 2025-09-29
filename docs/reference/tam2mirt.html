@@ -22,7 +22,7 @@ models!)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
     
     <a class="navbar-brand me-2" href="../index.html">sirt</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.2</small
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.3</small
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,7 +114,7 @@ with freed parameters for estimation.</p></dd>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>See <code><a href="mirt.wrapper.html">mirt.wrapper</a></code> for convenience wrapper functions
-for <code><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></code> objects.</p>
+for <code><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></code> objects.</p>
 <p>See <code><a href="lavaan2mirt.html">lavaan2mirt</a></code> for converting <code>lavaan</code>
 syntax to <code>mirt</code> syntax.</p></div>
     </div>
@@ -123,7 +123,7 @@ syntax to <code>mirt</code> syntax.</p></div>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/" class="external-link">TAM</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/philchalmers/mirt" class="external-link">mirt</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://philchalmers.github.io/mirt/" class="external-link">mirt</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#############################################################################</span></span>
 <span><span class="co"># EXAMPLE 1: Estimations in TAM for data.read dataset</span></span>
@@ -148,28 +148,28 @@ syntax to <code>mirt</code> syntax.</p></div>
 <span><span class="va">mres</span> <span class="op">&lt;-</span> <span class="va">res</span><span class="op">$</span><span class="va">mirt</span></span>
 <span><span class="co"># print and parameter values</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mod2values.html" class="external-link">mod2values</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mod2values.html" class="external-link">mod2values</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span><span class="co"># model fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span><span class="co"># residual statistics</span></span>
 <span><span class="fu">mirt</span><span class="fu">::</span><span class="fu">residuals</span><span class="op">(</span><span class="va">mres</span>, type<span class="op">=</span><span class="st">"Q3"</span><span class="op">)</span></span>
 <span><span class="fu">mirt</span><span class="fu">::</span><span class="fu">residuals</span><span class="op">(</span><span class="va">mres</span>, type<span class="op">=</span><span class="st">"LD"</span><span class="op">)</span></span>
 <span><span class="co"># item fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span><span class="co"># person fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/personfit.html" class="external-link">personfit</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/personfit.html" class="external-link">personfit</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span><span class="co"># compute several types of factor scores (quite slow)</span></span>
-<span><span class="va">f1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/fscores.html" class="external-link">fscores</a></span><span class="op">(</span><span class="va">mres</span>, method<span class="op">=</span><span class="st">'WLE'</span>,response.pattern<span class="op">=</span><span class="va">dat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">f1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/fscores.html" class="external-link">fscores</a></span><span class="op">(</span><span class="va">mres</span>, method<span class="op">=</span><span class="st">'WLE'</span>,response.pattern<span class="op">=</span><span class="va">dat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span><span class="op">)</span></span>
 <span>     <span class="co"># method=MAP and EAP also possible</span></span>
 <span><span class="co"># item plot</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemplot.html" class="external-link">itemplot</a></span><span class="op">(</span><span class="va">mres</span>,<span class="st">"A3"</span><span class="op">)</span>    <span class="co"># item A3</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemplot.html" class="external-link">itemplot</a></span><span class="op">(</span><span class="va">mres</span>,<span class="fl">4</span><span class="op">)</span>       <span class="co"># fourth item</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemplot.html" class="external-link">itemplot</a></span><span class="op">(</span><span class="va">mres</span>,<span class="st">"A3"</span><span class="op">)</span>    <span class="co"># item A3</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemplot.html" class="external-link">itemplot</a></span><span class="op">(</span><span class="va">mres</span>,<span class="fl">4</span><span class="op">)</span>       <span class="co"># fourth item</span></span>
 <span><span class="co"># some more plots</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mres</span>,type<span class="op">=</span><span class="st">"info"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mres</span>,type<span class="op">=</span><span class="st">"score"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mres</span>,type<span class="op">=</span><span class="st">"trace"</span><span class="op">)</span></span>
 <span><span class="co"># compare estimates with estimated Rasch model in mirt</span></span>
-<span><span class="va">mres1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>,<span class="fl">1</span>,<span class="st">"Rasch"</span> <span class="op">)</span></span>
+<span><span class="va">mres1</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">dat</span>,<span class="fl">1</span>,<span class="st">"Rasch"</span> <span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mres1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="mirt.wrapper.html">mirt.wrapper.coef</a></span><span class="op">(</span><span class="va">mres1</span><span class="op">)</span></span>
 <span></span>
@@ -188,19 +188,19 @@ syntax to <code>mirt</code> syntax.</p></div>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">lavaan.syntax.freed</span><span class="op">)</span></span>
 <span><span class="co"># parameter estimates</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mod2values.html" class="external-link">mod2values</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mod2values.html" class="external-link">mod2values</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span><span class="va">mres</span><span class="op">@</span><span class="va">nest</span>   <span class="co"># number of estimated parameters</span></span>
 <span><span class="co"># some plots</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mres</span>,type<span class="op">=</span><span class="st">"info"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mres</span>,type<span class="op">=</span><span class="st">"score"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mres</span>,type<span class="op">=</span><span class="st">"trace"</span><span class="op">)</span></span>
 <span><span class="co"># model fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span><span class="co"># residual statistics</span></span>
 <span><span class="fu">mirt</span><span class="fu">::</span><span class="fu">residuals</span><span class="op">(</span><span class="va">mres</span>, type<span class="op">=</span><span class="st">"Q3"</span><span class="op">)</span></span>
 <span><span class="fu">mirt</span><span class="fu">::</span><span class="fu">residuals</span><span class="op">(</span><span class="va">mres</span>, type<span class="op">=</span><span class="st">"LD"</span><span class="op">)</span></span>
 <span><span class="co"># item fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#**************************************</span></span>
 <span><span class="co">#*** Model 3: 3-dimensional Rasch model</span></span>
@@ -251,11 +251,11 @@ syntax to <code>mirt</code> syntax.</p></div>
 <span>  <span class="co">##   Dim01 ~~ Cov_13*Dim03</span></span>
 <span>  <span class="co">##   Dim02 ~~ Cov_23*Dim03</span></span>
 <span><span class="co"># model fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span><span class="co"># residual statistics</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals</a></span><span class="op">(</span><span class="va">mres</span>,type<span class="op">=</span><span class="st">"LD"</span><span class="op">)</span></span>
 <span><span class="co"># item fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#**************************************</span></span>
 <span><span class="co">#*** Model 4: 3-dimensional 2PL model</span></span>
@@ -277,9 +277,9 @@ syntax to <code>mirt</code> syntax.</p></div>
 <span><span class="co"># some statistics from mirt</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span><span class="fu">mirt</span><span class="fu">::</span><span class="fu">residuals</span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">mres</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># estimate mirt model by using the generated lavaan syntax with freed parameters</span></span>
 <span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu">sirt</span><span class="fu">::</span><span class="fu"><a href="lavaan2mirt.html">lavaan2mirt</a></span><span class="op">(</span> <span class="va">dat</span>, <span class="va">res</span><span class="op">$</span><span class="va">lavaan.syntax.freed</span>,</span>
@@ -314,13 +314,13 @@ syntax to <code>mirt</code> syntax.</p></div>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">rmod1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="mirt.wrapper.html">mirt.wrapper.coef</a></span><span class="op">(</span><span class="va">rmod1</span><span class="op">)</span></span>
 <span><span class="co"># model fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">rmod1</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">rmod1</span><span class="op">)</span></span>
 <span><span class="co"># item fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">rmod1</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">rmod1</span><span class="op">)</span></span>
 <span><span class="co"># plots</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rmod1</span>,type<span class="op">=</span><span class="st">"trace"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rmod1</span>, type<span class="op">=</span><span class="st">"trace"</span>, which.items<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span> <span class="op">)</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemplot.html" class="external-link">itemplot</a></span><span class="op">(</span><span class="va">rmod1</span>,<span class="st">"O3"</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemplot.html" class="external-link">itemplot</a></span><span class="op">(</span><span class="va">rmod1</span>,<span class="st">"O3"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#******************</span></span>
 <span><span class="co">#*** Model 2: Generalized partial credit model in TAM</span></span>
@@ -332,9 +332,9 @@ syntax to <code>mirt</code> syntax.</p></div>
 <span><span class="co"># coefficients in mirt</span></span>
 <span><span class="fu"><a href="mirt.wrapper.html">mirt.wrapper.coef</a></span><span class="op">(</span><span class="va">rmod2</span><span class="op">)</span></span>
 <span><span class="co"># model fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">rmod2</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/M2.html" class="external-link">M2</a></span><span class="op">(</span><span class="va">rmod2</span><span class="op">)</span></span>
 <span><span class="co"># item fit</span></span>
-<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">rmod2</span><span class="op">)</span></span>
+<span><span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/itemfit.html" class="external-link">itemfit</a></span><span class="op">(</span><span class="va">rmod2</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

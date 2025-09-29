@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sirt</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.2</small
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.3</small
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,11 +83,11 @@ should be printed.</p></dd>
 <span><span class="co"># EXAMPLE 1: Modifying a parameter table for single group</span></span>
 <span><span class="co">#############################################################################</span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/philchalmers/mirt" class="external-link">mirt</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://philchalmers.github.io/mirt/" class="external-link">mirt</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">LSAT7</span>,package<span class="op">=</span><span class="st">"mirt"</span><span class="op">)</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/expand.table.html" class="external-link">expand.table</a></span><span class="op">(</span><span class="va">LSAT7</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/expand.table.html" class="external-link">expand.table</a></span><span class="op">(</span><span class="va">LSAT7</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">mirt.partable</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">data</span>, <span class="fl">1</span>, pars<span class="op">=</span><span class="st">"values"</span><span class="op">)</span></span>
+<span><span class="va">mirt.partable</span> <span class="op">&lt;-</span> <span class="fu">mirt</span><span class="fu">::</span><span class="fu"><a href="https://philchalmers.github.io/mirt/reference/mirt.html" class="external-link">mirt</a></span><span class="op">(</span><span class="va">data</span>, <span class="fl">1</span>, pars<span class="op">=</span><span class="st">"values"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">mirt.partable</span><span class="op">)</span></span>
 <span><span class="co">## &gt; colnames(mirt.partable) [1] 'group' 'item' 'class' 'name' 'parnum' 'value'</span></span>
 <span><span class="co">##   'lbound' 'ubound' 'est' 'prior.type' 'prior_1' 'prior_2'</span></span>
