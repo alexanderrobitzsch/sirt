@@ -39,10 +39,10 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.3  |  2025-09-29  |  Last: sirt 4.3-2
+VERSIONS sirt 4.3  |  2025-11-13  |  Last: sirt 4.3-9
 ------------------------------------------------------------------------
 
-xxx   * ...
+ADDED * included synthetic dataset data.elfe
 
 
 DATA  * included/modified datasets: ---
