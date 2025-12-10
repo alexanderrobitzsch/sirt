@@ -39,13 +39,14 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.3  |  2025-11-13  |  Last: sirt 4.3-9
+VERSIONS sirt 4.3  |  2025-12-10  |  Last: sirt 4.3-10
 ------------------------------------------------------------------------
 
 ADDED * included synthetic dataset data.elfe
+ADDED * included synthetic datasets data.kess
 
 
-DATA  * included/modified datasets: ---
+DATA  * included/modified datasets: data.elfe, data.kess
 EXAMP * included/modified examples: ---
 
 
@@ -86,7 +87,7 @@ ADDED * included linking_2groups() function for (robust) Haebara and
 ADDED * added functionality for including person covariates in xxirt()
 ADDED * included dataset 'data.pisa2006Read'
 
-DATA  * included/modified datasets: ---
+DATA  * included/modified datasets: pisa2006Read
 EXAMP * included/modified examples: xxirt (5,6), invariance.alignment (9),
         linking.haberman (9), locpolycor (1), linking_2groups (1),       
 
