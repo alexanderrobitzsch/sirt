@@ -1,8 +1,9 @@
 ## File Name: linking_haebara_summary_optimization.R
-## File Version: 0.091
+## File Version: 0.093
 
 linking_haebara_summary_optimization <- function(object, digits)
 {
+    cat('Linking method', '=', object$method, '\n')
     cat('Distance function type', '=', object$dist, '\n')
     if (object$dist=='L1'){
         cat('Epsilon Value', '=', object$eps, '\n')

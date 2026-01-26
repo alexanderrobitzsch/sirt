@@ -1,5 +1,5 @@
 %% File Name: data.pisa2006Read.Rd
-%% File Version: 0.031
+%% File Version: 0.032
 
 \name{data.pisa2006Read}
 \alias{data.pisa2006Read}
@@ -17,7 +17,7 @@ data(data.pisa2006Read)
 
 
 \format{
-The dataset includes item responses, student weights and their respective 
+The dataset includes item responses, student weights and their respective
 replicate weights.
 
 The format is

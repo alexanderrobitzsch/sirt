@@ -39,15 +39,17 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.3  |  2025-12-10  |  Last: sirt 4.3-10
+VERSIONS sirt 4.3  |  2026-01-26  |  Last: sirt 4.3-16
 ------------------------------------------------------------------------
 
-ADDED * included synthetic dataset data.elfe
+ADDED * included synthetic dataset 'data.elfe'
 ADDED * included synthetic datasets data.kess
+NOTE  * included joint Stocking-Lord linking (method='SL') in
+        linking.haebara()
 
 
 DATA  * included/modified datasets: data.elfe, data.kess
-EXAMP * included/modified examples: ---
+EXAMP * included/modified examples: linking.haebara (1)
 
 
 

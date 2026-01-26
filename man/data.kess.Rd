@@ -1,5 +1,5 @@
 %% File Name: data.kess.Rd
-%% File Version: 0.01
+%% File Version: 0.02
 
 \name{data.kess}
 \alias{data.kess}
@@ -19,7 +19,7 @@ Datasets for Longitudinal KESS Study
 These are synthetic datasets for the longitudinal German KESS study in the domains
 mathematics, reading, science and figural intelligence and Grades 4, 7, 8 and 10.
 School track (with levels 1, 2 and 3) and gender variable female are also
-included as demographic variables. 
+included as demographic variables.
 }
 
 \usage{

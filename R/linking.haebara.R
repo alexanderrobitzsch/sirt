@@ -1,9 +1,9 @@
 ## File Name: linking.haebara.R
-## File Version: 0.434
+## File Version: 0.467
 
-linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
-        optimizer="optim", center=FALSE, eps=1e-3, par_init=NULL,
-        use_rcpp=TRUE, pow=2, use_der=TRUE, ...)
+linking.haebara <- function(itempars, method="Hae", dist="L2",
+        theta=seq(-4,4, length=61), optimizer="optim", center=FALSE, eps=1e-3,
+        par_init=NULL, use_rcpp=TRUE, pow=2, use_der=TRUE, ...)
 {
     CALL <- match.call()
     s1 <- Sys.time()
@@ -45,6 +45,11 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         par <- par_init
     }
 
+    if (method=="SL"){
+        use_rcpp <- FALSE
+        dist <- "L2"
+    }
+
     #-- define optimization function
     if (use_rcpp){
         fct_optim_call <- sirt_rcpp_linking_haebara_fct_optim
@@ -54,8 +59,14 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         index_mu_ <- index_mu - 1
         index_sigma_ <- index_sigma - 1
     } else {
-        fct_optim_call <- linking_haebara_optim_function_R
-        grad_optim_call <- linking_haebara_gradient_function_R
+        if (method=="Hae"){
+            fct_optim_call <- linking_haebara_optim_function_R
+            grad_optim_call <- linking_haebara_gradient_function_R
+        }
+        if (method=="SL"){
+            fct_optim_call <- linking_sl_optim_function_R
+            grad_optim_call <- linking_sl_gradient_function_R
+        }
         index_a_ <- index_a
         index_b_ <- index_b
         index_mu_ <- index_mu
@@ -99,8 +110,33 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
         names(grad) <- parnames
         return(grad)
     }
+
     if (!use_der){
         grad_optim <- NULL
+    }
+
+
+    #- test numerical derivative
+    test <- FALSE
+    # test <- TRUE
+
+    if (test){
+        requireNamespace('miceadds')
+        set.seed(98)
+        par <- par + rnorm(NP, sd=0.1)
+        miceadds::Revalpr("par")
+        val1 <- fct_optim(x=par)
+        NP <- length(par)
+        grad1 <- rep(NA,NP)
+        h <- 1e-4
+        for (pp in 1L:NP){
+            x1 <- sirt_add_increment(x=par, pos=pp, value=h)
+            grad1[pp] <- ( fct_optim( x=x1) - val1 ) / h
+        }
+        names(grad1) <- names(par)
+        grad2 <- grad_optim(x=par)
+        miceadds::Revalpr("round( (grad1-grad2), 4)")
+        stop()
     }
 
     #-- do optimization
@@ -152,13 +188,16 @@ linking.haebara <- function(itempars, dist="L2", theta=seq(-4,4, length=61),
     muM <- sirt_matrix2(x=mu, nrow=NI)
     sigmaM <- sirt_matrix2(x=sigma, nrow=NI)
     a.resid <- aM - a*sigmaM
+    a.resid <- linking_haebara_proc_estimated_dif_effects(mat=a.resid)
+
     # th=SIG*TH+MU=> logit(p)=a*(SIG*TH+MU-b)=a*SIG*(TH-(-MU)/SIG-b/SIG)
     b.resid <- bM - ( b - muM )/sigmaM
+    b.resid <- linking_haebara_proc_estimated_dif_effects(mat=b.resid)
 
     #-- output
     s2 <- Sys.time()
     time_diff <- s2-s1
-    res <- list( pars=pars, item=item, mu=mu, sigma=sigma, a=a, b=b,
+    res <- list( method=method, pars=pars, item=item, mu=mu, sigma=sigma, a=a, b=b,
                     a.resid=a.resid, b.resid=b.resid, res_optim=res_optim,
                     est_pars=est_pars, numb_items=numb_items, center=center,
                     dist=dist, eps=eps, NP=NP, use_rcpp=use_rcpp,

@@ -1,5 +1,5 @@
 %% File Name: data.elfe.Rd
-%% File Version: 0.031
+%% File Version: 0.032
 
 \name{data.elfe}
 \alias{data.elfe}
@@ -16,7 +16,7 @@ data(data.elfe)
 }
 
 \format{
-A data frame with 1855 observations on the following 59 variables. 
+A data frame with 1855 observations on the following 59 variables.
 Included are item responses to 19 items administered at three time
 points.
 
@@ -42,10 +42,10 @@ The format is
 %%  ~~ reference to a publication or URL from which the data were obtained ~~
 %}
 \references{
-Robitzsch, A., Doerfler, T., Pfost, M., & Artelt, C. (2011). Die Bedeutung der Itemauswahl 
-und der Modellwahl fuer die laengsschnittliche Erfassung von Kompetenzen: 
-Lesekompetenzentwicklung in der Primarstufe. 
-\emph{Zeitschrift fuer Entwicklungspsychologie und paedagogische Psychologie, 43}, 
+Robitzsch, A., Doerfler, T., Pfost, M., & Artelt, C. (2011). Die Bedeutung der Itemauswahl
+und der Modellwahl fuer die laengsschnittliche Erfassung von Kompetenzen:
+Lesekompetenzentwicklung in der Primarstufe.
+\emph{Zeitschrift fuer Entwicklungspsychologie und paedagogische Psychologie, 43},
 213-227. \doi{10.1026/0049-8637/a000052}
 }
 

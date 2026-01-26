@@ -1,5 +1,5 @@
 %% File Name: linking.haebara.Rd
-%% File Version: 0.203
+%% File Version: 0.209
 
 \name{linking.haebara}
 \alias{linking.haebara}
@@ -7,7 +7,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 
 \title{
-Haebara Linking of the 2PL Model for Multiple Studies
+Haebara and Stocking-Lord Linking of the 2PL Model for Multiple Studies
 }
 
 
@@ -24,7 +24,7 @@ Hu, Rogers, & Vukmirovic, 2008).
 
 
 \usage{
-linking.haebara(itempars, dist="L2", theta=seq(-4,4, length=61),
+linking.haebara(itempars, method="Hae", dist="L2", theta=seq(-4,4, length=61),
         optimizer="optim", center=FALSE, eps=1e-3, par_init=NULL, use_rcpp=TRUE,
         pow=2, use_der=TRUE, ...)
 
@@ -40,6 +40,7 @@ in the order: study name, item name, \eqn{a} parameter, \eqn{b} parameter.
 The fifth column is an optional weight for every item and every study. See
 \code{\link{linking.haberman}} for a function which uses the same argument.
 }
+\item{method}{Haebara linking (\code{"Hae"}) or Stocking-Lord linking (\code{"SL"})}
 \item{dist}{Distance function. Options are \code{"L2"} for squared loss and
 \code{"L1"} for absolute value loss.}
 \item{theta}{Grid of theta points for 2PL item response functions}
@@ -218,6 +219,10 @@ mod1$pars
 mod2$pars
 mod3$transf.personpars
 mod4$transf.personpars
+
+# Stocking-Lord linking
+mod5 <- sirt::linking.haebara( itempars, control=list(maxit=1000), method="SL" )
+summary(mod5)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
