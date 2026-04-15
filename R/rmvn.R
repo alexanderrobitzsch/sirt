@@ -18,12 +18,11 @@ rmvn <- function(N, mu, Sigma, exact=TRUE)
         c00 <- diag(1/sqrt(c0$d)) %*% t(c0$u)
         dat00 <- dat0 %*% t(c00)
     }
-
     #-- compute data with prescribed distribution
     c11 <- Sigma_svd$u %*% diag( sqrt(Sigma_svd$d) )
     dat1 <- dat00 %*% t(c11)
     dat1 <- dat1 + matrix( mu, nrow=N, ncol=D, byrow=TRUE)
-
+    
     #--- output
     return(dat1)
 }

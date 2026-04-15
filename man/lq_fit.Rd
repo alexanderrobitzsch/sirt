@@ -1,5 +1,5 @@
 %% File Name: lq_fit.Rd
-%% File Version: 0.182
+%% File Version: 0.183
 
 \name{lq_fit}
 \alias{lq_fit}
@@ -8,7 +8,7 @@
 \alias{rexppow}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Fit of a \eqn{L_q} Regression Model
+Fit a \eqn{L_q} Regression Model
 }
 \description{
 Fits a regression model in the \eqn{L_q} norm (also labeled as the \eqn{L_p} norm).
