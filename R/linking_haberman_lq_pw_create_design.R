@@ -1,7 +1,8 @@
 ## File Name: linking_haberman_lq_pw_create_design.R
-## File Version: 0.141
+## File Version: 0.161
 
-linking_haberman_lq_pw_create_design <- function(y, ind_studies, ind_items, method)
+linking_haberman_lq_pw_create_design <- function(y, ind_studies, ind_items, method,
+        use_nu=FALSE, coef0_A=NULL, itempars=NULL)
 {
     G <- max(ind_studies)
     I <- max(ind_items)
@@ -11,7 +12,6 @@ linking_haberman_lq_pw_create_design <- function(y, ind_studies, ind_items, meth
     y_long <- NULL
     X <- NULL
     w <- NULL
-
     for (gg in 1L:(G-1)){
         for (hh in (gg+1):G){
             items_sel <- intersect( des[ des$study==gg, 'item' ],
@@ -22,14 +22,29 @@ linking_haberman_lq_pw_create_design <- function(y, ind_studies, ind_items, meth
                 X1 <- matrix(0, I1, G-1)
                 if (gg>1){
                     X1[,gg-1] <- 1
+                    if (use_nu){
+                        X1[,gg-1] <- 1/coef0_A[gg]
+                    }
                 }
                 X1[,hh-1] <- -1
+                if (use_nu){
+                    X1[,hh-1] <- -1/coef0_A[hh]
+                }
+                uu <- 1
                 for (ii in items_sel){
                     i1 <- which( ind_studies==gg & ind_items==ii )
                     i2 <- which( ind_studies==hh & ind_items==ii )
+                    if (use_nu){
+                        if (gg>1){
+                            X1[uu,gg-1] <- X1[uu,gg-1]*itempars[i1,'a']
+                        }
+                        X1[uu,hh-1] <- X1[uu,hh-1]*itempars[i2,'a']
+                    }
                     y1 <- y[i1] - y[i2]
+                    uu <- uu+1
                     y_long <- c(y_long, y1)
                 }
+
                 X <- rbind(X, X1)
                 dfr <- rbind(dfr, dfr1)
             }

@@ -1,5 +1,5 @@
 ## File Name: rmvn.R
-## File Version: 0.05
+## File Version: 0.06
 
 rmvn <- function(N, mu, Sigma, exact=TRUE)
 {
@@ -22,7 +22,7 @@ rmvn <- function(N, mu, Sigma, exact=TRUE)
     c11 <- Sigma_svd$u %*% diag( sqrt(Sigma_svd$d) )
     dat1 <- dat00 %*% t(c11)
     dat1 <- dat1 + matrix( mu, nrow=N, ncol=D, byrow=TRUE)
-    
+
     #--- output
     return(dat1)
 }

@@ -1,5 +1,5 @@
 ## File Name: linking.haebara.R
-## File Version: 0.467
+## File Version: 0.468
 
 linking.haebara <- function(itempars, method="Hae", dist="L2",
         theta=seq(-4,4, length=61), optimizer="optim", center=FALSE, eps=1e-3,
@@ -45,9 +45,9 @@ linking.haebara <- function(itempars, method="Hae", dist="L2",
         par <- par_init
     }
 
-    if (method=="SL"){
+    if (method=='SL'){
         use_rcpp <- FALSE
-        dist <- "L2"
+        dist <- 'L2'
     }
 
     #-- define optimization function
@@ -59,11 +59,11 @@ linking.haebara <- function(itempars, method="Hae", dist="L2",
         index_mu_ <- index_mu - 1
         index_sigma_ <- index_sigma - 1
     } else {
-        if (method=="Hae"){
+        if (method=='Hae'){
             fct_optim_call <- linking_haebara_optim_function_R
             grad_optim_call <- linking_haebara_gradient_function_R
         }
-        if (method=="SL"){
+        if (method=='SL'){
             fct_optim_call <- linking_sl_optim_function_R
             grad_optim_call <- linking_sl_gradient_function_R
         }
@@ -124,7 +124,7 @@ linking.haebara <- function(itempars, method="Hae", dist="L2",
         requireNamespace('miceadds')
         set.seed(98)
         par <- par + rnorm(NP, sd=0.1)
-        miceadds::Revalpr("par")
+        miceadds::Revalpr('par')
         val1 <- fct_optim(x=par)
         NP <- length(par)
         grad1 <- rep(NA,NP)
@@ -135,7 +135,7 @@ linking.haebara <- function(itempars, method="Hae", dist="L2",
         }
         names(grad1) <- names(par)
         grad2 <- grad_optim(x=par)
-        miceadds::Revalpr("round( (grad1-grad2), 4)")
+        miceadds::Revalpr('round( (grad1-grad2), 4)')
         stop()
     }
 
