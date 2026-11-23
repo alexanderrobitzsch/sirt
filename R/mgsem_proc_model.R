@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_model.R
-## File Version: 0.308
+## File Version: 0.311
 
 mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group, W,
         prior_list=NULL, pen_type="lasso", fixed_parms=FALSE,
@@ -61,7 +61,7 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group, W,
                         hh <- 1
                     }
                     for (jj in hh:n2){
-                        if( M2[ii,jj] !=0 ){   # non-missing entry in 'est'
+                        if( M2[ii,jj] !=0 ){ # non-missing entry in 'est'
                             dfr1 <- data.frame( type=type, i1=ii, i2=jj,
                                                 group=group)
                             dfr1$name <- paste0(dfr1$type, dfr1$i1, dfr1$i2,
@@ -98,8 +98,8 @@ mgsem_proc_model <- function(model, G=G, random_sd=1e-1, technical, N_group, W,
                             #- append to previous parameters
                             dfr <- rbind(dfr, dfr1)
                         }
-                    }  # end jj (i2)
-                }  # end ii  (i1)
+                    } # end jj (i2)
+                } # end ii  (i1)
             } # !is.null(M1)
         } #end types
 

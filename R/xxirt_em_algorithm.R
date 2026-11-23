@@ -1,5 +1,5 @@
 ## File Name: xxirt_em_algorithm.R
-## File Version: 0.159
+## File Version: 0.163
 
 xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_list,
             items, Theta, ncat, partable, partable_index, dat, resp_index,
@@ -11,13 +11,11 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
     iter <- 1
     dev <- 1E100
     converged <- FALSE
-    while (
-            ( iter < ( maxit + 1 ) ) & ( ! converged )
-                ){
+    while ( ( iter < ( maxit + 1 ) ) & ( ! converged ) ){
 
         if (verbose1){
             cat(disp)
-            cat('Iteration', iter, '   ', paste( Sys.time() ), '\n' )
+            cat('Iteration', iter, ' * ', paste( Sys.time() ), '\n' )
         }
         dev0 <- dev
 
@@ -37,7 +35,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
 
         #*** compute prior distribution
         prior_Theta <- xxirt_compute_priorDistribution( Theta=Theta,
-                              customTheta=customTheta, G=G )
+                                customTheta=customTheta, G=G )
 
         #*** compute posterior distribution and expected counts
         res <- xxirt_compute_posterior( prior_Theta=prior_Theta, p.xi.aj=p.xi.aj,
@@ -107,7 +105,7 @@ xxirt_em_algorithm <- function(maxit, verbose1, verbose2, verbose3, disp, item_l
                     verbose3=verbose3, prior_par=prior_par)
         iter <- iter + 1
 
-    }  # end iterations
+    } # end iterations
 
     #---- output
     res <- list(iter=iter, converged=converged, probs_items=probs_items,

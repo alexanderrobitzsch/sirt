@@ -1,5 +1,5 @@
 ## File Name: linking_2groups_haebara_fun.R
-## File Version: 0.167
+## File Version: 0.171
 
 
 #- Haebara optimization function
@@ -40,14 +40,14 @@ linking_2groups_haebara_fun <- function(x, pars, Theta, wgt, type="asymm",
         if (!simultan){ # simultan=FALSE
             z <- P1-P2
             d <- linking_2groups_power_loss(x=z, pow=pow, eps=eps, deriv=deriv)
-            if (!deriv){  # no derivative
+            if (!deriv){ # no derivative
                 val <- val + sum( wgtM*d )
-            } else {  # derivative
+            } else { # derivative
                 fac0 <- P1*(1-P1)*a1M
                 val[1] <- val[1] + sum( wgtM*d*fac0)
                 val[2] <- val[2] + sum( wgtM*d*fac0*Theta2)
             }
-        } else {  # simultan=TRUE
+        } else { # simultan=TRUE
             P0 <- stats::plogis( a * (Theta2-b) )
             z1 <- P1-P0
             z2 <- P2-P0
@@ -55,7 +55,7 @@ linking_2groups_haebara_fun <- function(x, pars, Theta, wgt, type="asymm",
             d2 <- linking_2groups_power_loss(x=z2, pow=pow, eps=eps, deriv=deriv)
             if (!deriv){ # deriv=FALSE
                 val <- val + sum( wgtM*(d1+d2) )
-            } else {  # deriv=TRUE
+            } else { # deriv=TRUE
                 fac0 <- P1*(1-P1)*a1M
                 val[1] <- val[1] + sum(wgtM*d1*fac0)
                 val[2] <- val[2] + sum(wgtM*d1*fac0*Theta2)
@@ -67,9 +67,8 @@ linking_2groups_haebara_fun <- function(x, pars, Theta, wgt, type="asymm",
                 # derivatives item difficulties
                 fac <- facP0*a
                 val[ind_b] <- val[ind_b] + rowSums( wgtM_d*fac )
-
             }
-        }  # end simultan
+        } # end simultan
     }
 
     if (type=='symm'){
@@ -77,17 +76,17 @@ linking_2groups_haebara_fun <- function(x, pars, Theta, wgt, type="asymm",
         Theta2 <- sirt_matrix2(1/sigma*Theta-mu/sigma, nrow=I)
         P1 <- stats::plogis( a1M * (Theta1-b1M) )
         P2 <- stats::plogis( a2M * (Theta2-b2M) )
-        if (!simultan){  # simultan=FALSE
+        if (!simultan){ # simultan=FALSE
             z <- P1-P2
             d <- linking_2groups_power_loss(x=z, pow=pow, eps=eps, deriv=deriv)
             if (!deriv){ # deriv=FALSE
                 val <- val + sum( wgtM*d )
-            } else {  # deriv=TRUE
+            } else { # deriv=TRUE
                 fac0 <- P2*(1-P2)*a2M
                 val[1] <- val[1] + sum( wgtM*d*fac0/sigma ) # mu
                 val[2] <- val[2] + sum( wgtM*d*fac0*Theta2/sigma ) # sigma
-            }  # end deriv
-        } else {      # simultan=TRUE
+            } # end deriv
+        } else { # simultan=TRUE
             P0 <- stats::plogis( a * (Theta2-b) )
             z1 <- P1-P0
             d1 <- linking_2groups_power_loss(x=z1, pow=pow, eps=eps, deriv=deriv)
@@ -95,7 +94,7 @@ linking_2groups_haebara_fun <- function(x, pars, Theta, wgt, type="asymm",
             d2 <- linking_2groups_power_loss(x=z2, pow=pow, eps=eps, deriv=deriv)
             if (!deriv){ # deriv=FALSE
                 val <- val + sum( wgtM*(d1+d2) )
-            } else {  # deriv=TRUE
+            } else { # deriv=TRUE
                 fac1 <- - P0*(1-P0)*a
                 fac2 <- P2*(1-P2)*a2M - P0*(1-P0)*a
                 val[1] <- val[1] + sum(-wgtM*(d1*fac1+d2*fac2)/sigma)  # mu
@@ -108,7 +107,6 @@ linking_2groups_haebara_fun <- function(x, pars, Theta, wgt, type="asymm",
                 #- derivatives item difficulties
                 fac <- facP0*a
                 val[ind_b] <- val[ind_b] + rowSums( wgtM_d*fac )
-
             }
         } # end simultan
     }

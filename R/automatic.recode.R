@@ -1,5 +1,5 @@
 ## File Name: automatic.recode.R
-## File Version: 1.194
+## File Version: 1.196
 
 #*** automatic recoding of a dataset
 automatic.recode <- function( data, exclude=NULL, pstart.min=.6,
@@ -13,7 +13,7 @@ automatic.recode <- function( data, exclude=NULL, pstart.min=.6,
     fstart <- TAM::tam.ctt3( data, allocate=allocate, progress=FALSE)
     I <- ncol(data)
     prbar <- floor( 10 * ( 1L:I ) / (I+1) )
-    prbar <- c(1,which( diff(prbar)==1 )  )
+    prbar <- c(1,which( diff(prbar)==1 ) )
 
     fstart1 <- fstart
     fstart1 <- fstart1[ ! ( fstart$Categ %in% exclude ), ]
@@ -38,9 +38,7 @@ automatic.recode <- function( data, exclude=NULL, pstart.min=.6,
 
         score <- rowMeans( data.scored, na.rm=TRUE )
         # compute frequencies in iterations
-    #    if (progress){ cat( '   apply tam.ctt3\n') }
         fiter <- TAM::tam.ctt3( data, allocate=allocate, wlescore=score, progress=FALSE)
-    #    if (progress){ cat( '   |') }
         item.stat$old.key <- item.stat$new.key
 
         fstart1 <- fiter

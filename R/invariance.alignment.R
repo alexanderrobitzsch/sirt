@@ -1,5 +1,5 @@
 ## File Name: invariance.alignment.R
-## File Version: 4.019
+## File Version: 4.023
 
 
 invariance.alignment <- function( lambda, nu, wgt=NULL,
@@ -21,16 +21,16 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
     nu0 <- nu <- invariance_alignment_proc_labels(x=nu)
 
     #-- weights
-    G <- nrow(lambda)   # number of groups
-    I <- ncol(lambda)   # number of items
+    G <- nrow(lambda) # number of groups
+    I <- ncol(lambda) # number of items
     if ( is.null(wgt) ){
         wgt <- 1+0*nu
     }
 
     #- reparametrization of meth argument
     meth0 <- meth
-    if (meth0==4){ meth <- 0}     # Mplus FREE
-    if (meth0==3){ meth <- 0.5}      # Mplus FIXED
+    if (meth0==4){ meth <- 0} # Mplus FREE
+    if (meth0==3){ meth <- 0.5} # Mplus FIXED
 
     #- choose fixed value
     fixed <- invariance_alignment_choose_fixed(fixed=fixed, G=G, Gmax=999)
@@ -200,7 +200,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
                 #=> likely dead code
             }
         }
-    }  # end while loop
+    } # end while loop
 
     if (meth==3){
         psi0 <- psi_list[[1]]
@@ -375,7 +375,7 @@ invariance.alignment <- function( lambda, nu, wgt=NULL,
             TEjk <- sqrt( SE^2 + LEjk^2)
             TEjkbc <- sqrt( SE^2 + LEjkbc^2)
 
-        }  # end le
+        } # end le
 
     } # end vcov
 

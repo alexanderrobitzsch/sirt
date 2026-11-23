@@ -1,5 +1,5 @@
 ## File Name: sirt_moving_average.R
-## File Version: 0.14
+## File Version: 0.161
 
 
 #----- moving window average for time series
@@ -11,7 +11,7 @@ sirt_moving_average <- function(x, B, fill=TRUE)
     i <- seq(B+1, N-B)
     xdiff <- x1[ -seq(1,B) ] - x1[ -seq(N-B+1,N) ]
     xdiff <- xdiff[ - seq(1,B) ]
-    y[i]  <- ( x1[i] + xdiff - c(0,x1[ -seq(N-2*B,N) ]) ) / (2*B+1)
+    y[i] <- ( x1[i] + xdiff - c(0,x1[ -seq(N-2*B,N) ])) / (2*B+1)
 
     # fill NAs at beginning and end of time series
     if(fill){

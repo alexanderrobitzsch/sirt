@@ -1,5 +1,5 @@
 ## File Name: xxirt_postproc_parameters.R
-## File Version: 0.249
+## File Version: 0.251
 
 
 xxirt_postproc_parameters <- function( partable, customTheta,
@@ -24,7 +24,7 @@ xxirt_postproc_parameters <- function( partable, customTheta,
         m1[ p1$item, parnames[pp] ] <- p1$value
     }
     p1 <- partable[ ! duplicated(partable$item ), ]
-    dfr <- data.frame( item=items, type=paste(p1$type), m1  )
+    dfr <- data.frame( item=items, type=paste(p1$type), m1 )
     rownames(dfr) <- NULL
     #*** probabilities item parameters
     pi_dim <- dim(probs_items)

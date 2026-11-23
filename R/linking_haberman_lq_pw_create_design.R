@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_lq_pw_create_design.R
-## File Version: 0.161
+## File Version: 0.162
 
 linking_haberman_lq_pw_create_design <- function(y, ind_studies, ind_items, method,
         use_nu=FALSE, coef0_A=NULL, itempars=NULL)
@@ -48,8 +48,8 @@ linking_haberman_lq_pw_create_design <- function(y, ind_studies, ind_items, meth
                 X <- rbind(X, X1)
                 dfr <- rbind(dfr, dfr1)
             }
-        }  # end hh
-    }  # end gg
+        } # end hh
+    } # end gg
 
     #- define weights
     w <- rep(1, nrow(X) )

@@ -1,5 +1,5 @@
 ## File Name: linking_sl_gradient_function_R.R
-## File Version: 0.06
+## File Version: 0.071
 
 
 linking_sl_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
@@ -44,10 +44,8 @@ linking_sl_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
                 sigma_temp <- sigma_temp - fac_ii*a[ii]*theta
                 a_temp[[ii]] <- -fac_ii*( sigma[ss]*theta - ( b[ii] - mu[ss] ) )
                 b_temp[[ii]] <- fac_ii*a[ii]
-
-            }  # end pars
-
-        }  # end ii
+            } # end pars
+        } # end ii
 
         mu_grad[ss] <- -sum( (T1-T0)*2*mu_temp*prob_theta)
         sigma_grad[ss] <- -sum( (T1-T0)*2*sigma_temp*prob_theta)
@@ -60,7 +58,7 @@ linking_sl_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
 
         val <- val + sum( (T1-T0)^2*prob_theta )
 
-    }  # end study ss
+    } # end study ss
 
 
     grad[ index_mu ] <- mu_grad[-1]

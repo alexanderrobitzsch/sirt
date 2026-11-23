@@ -1,5 +1,5 @@
 ## File Name: linking_2groups_power_loss.R
-## File Version: 0.05
+## File Version: 0.071
 
 linking_2groups_power_loss <- function(x, pow, eps, deriv=FALSE)
 {
@@ -21,7 +21,7 @@ linking_2groups_power_loss <- function(x, pow, eps, deriv=FALSE)
         }
         if (pow==0){
             # res <- x^2 / ( x^2 + eps )
-            res <- 2*x*eps  / (x^2 + eps)^2
+            res <- 2*x*eps / (x^2 + eps)^2
         }
         if (pow==2){
             res <- 2*x

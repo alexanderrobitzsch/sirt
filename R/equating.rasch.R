@@ -1,5 +1,5 @@
 ## File Name: equating.rasch.R
-## File Version: 0.247
+## File Version: 0.249
 
 
 #---- Equating (linking) in the Rasch model
@@ -42,7 +42,7 @@ equating.rasch <- function( x, y, theta=seq( -4, 4, len=100),
     x[,2] <- x[,2] + B.est[1,'Stocking.Lord']
     # transformed parameters
     transf.par <- merge( x=x, y=y, by.x=1, by.y=1, all=TRUE )
-    colnames(transf.par) <- c('item', 'TransfItempar.Gr1', 'Itempar.Gr2'  )
+    colnames(transf.par) <- c('item', 'TransfItempar.Gr1', 'Itempar.Gr2' )
     transf.par <- transf.par[ order( paste(transf.par$item ) ), ]
     # calculate variance and linking error
     des <- data.frame( N.Items=nrow(b.xy),

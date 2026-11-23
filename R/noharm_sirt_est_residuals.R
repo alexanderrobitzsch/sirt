@@ -1,5 +1,5 @@
 ## File Name: noharm_sirt_est_residuals.R
-## File Version: 0.183
+## File Version: 0.184
 
 
 #**** estimate residuals
@@ -31,7 +31,7 @@ noharm_sirt_est_residuals <- function( Fval, Pval, Fpatt, Ppatt,
     rmsr <- sqrt( sum( residuals^2 * wgtm ) / sum(wgtm) )
     RMW <- residuals * wgtm
     PMW <- pm * wgtm
-    tanaka <- 1 - sum( diag( RMW %*% RMW ) ) /  sum(diag( PMW %*% PMW ))
+    tanaka <- 1 - sum( diag( RMW %*% RMW ) ) / sum(diag( PMW %*% PMW ))
     if (modesttype==2){
         tanaka <- rmsr <- NA
     }

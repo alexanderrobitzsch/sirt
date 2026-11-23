@@ -1,5 +1,5 @@
 ## File Name: rm_numdiff_index.R
-## File Version: 0.252
+## File Version: 0.254
 
 
 ####################################################################
@@ -10,7 +10,6 @@ rm_numdiff_index <- function( pjk, pjk1, pjk2, n.ik, diffindex,
 {
     h <- numdiff.parm
     an.ik <- aperm( n.ik, c(2,3,1) )
-    # str("pjk")
     # [items, categories, nodes]
 
     #--- evaluate expected likelihood

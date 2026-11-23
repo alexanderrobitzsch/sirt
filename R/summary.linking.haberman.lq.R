@@ -1,5 +1,5 @@
 ## File Name: summary.linking.haberman.lq.R
-## File Version: 0.123
+## File Version: 0.127
 
 
 
@@ -28,10 +28,12 @@ summary.linking.haberman.lq <- function( object, digits=3, file=NULL, ... )
     cat('Converged', '=', object$converged, '\n' )
     cat('Estimated power values','=', object$est_pow, '\n')
     cat('Loss function power slopes','=', object$pow_slopes, '\n')
+    cat('Epsilon value slopes', '=', object$eps[1], '\n' )
     cat('Loss function power intercepts','=', object$pow_intercepts, '\n')
-    cat('Epsilon Value', '=', object$eps, '\n' )
+    cat('Epsilon value intercepts', '=', object$eps[2], '\n' )
     cat('a_log', '=', object$a_log, '\n' )
     cat('use_nu', '=', object$use_nu, '\n' )
+    cat('prec_weights', '=', object$prec_weights, '\n' )
 
     # cat(display_string)
     # cat('Transformation parameters (Haberman linking)\n')

@@ -1,5 +1,5 @@
 ## File Name: xxirt_simulate.R
-## File Version: 0.145
+## File Version: 0.147
 
 xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
                     method="random")
@@ -99,7 +99,7 @@ xxirt_simulate <- function(partable, customItems, Theta, customTheta, N=1e4,
                 vals <- ifelse( rn_ii > quants[hh], vals+1, vals )
             }
             dat[index_tt,ii] <- vals
-        }  # end tt
+        } # end tt
     } # end ii
 
     #--- output

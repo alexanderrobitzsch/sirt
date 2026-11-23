@@ -1,5 +1,5 @@
 ## File Name: linking_sl_optim_function_R.R
-## File Version: 0.05
+## File Version: 0.061
 
 
 linking_sl_optim_function_R <- function(NI, NS, dist, aM, bM, theta,
@@ -23,14 +23,14 @@ linking_sl_optim_function_R <- function(NI, NS, dist, aM, bM, theta,
                 T0 <- T0+wgtM[ii,ss]*p_obs
                 T1 <- T1+wgtM[ii,ss]*p_exp
 
-            }  # end pars
+            } # end pars
 
 
-        }  # end ii
+        } # end ii
 
         val <- val + sum( (T1-T0)^2*prob_theta )
 
-    }  # end item ss
+    } # end item ss
 
     #--- output
     return(val)

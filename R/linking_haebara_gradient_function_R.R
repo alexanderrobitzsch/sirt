@@ -1,5 +1,5 @@
 ## File Name: linking_haebara_gradient_function_R.R
-## File Version: 0.294
+## File Version: 0.296
 
 
 linking_haebara_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
@@ -53,9 +53,9 @@ linking_haebara_gradient_function_R <- function(NI, NS, dist, aM, bM, theta,
                     ind <- index_sigma[ss-1]
                     grad[ind] <- grad[ind] + w_t*sum(der_basis*der_t )
                 }
-            }  # end est_parm[ii,ss]
-        }  # end ss
-    }  # end ii
+            } # end est_parm[ii,ss]
+        } # end ss
+    } # end ii
 
     #--- output
     return(grad)

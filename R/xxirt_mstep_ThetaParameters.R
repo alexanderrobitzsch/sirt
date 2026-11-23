@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_ThetaParameters.R
-## File Version: 0.249
+## File Version: 0.251
 
 
 xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
@@ -13,9 +13,9 @@ xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
         arg_list <- list( par=par1, Theta=Theta, G=G )
         if (customTheta$person_covariates){
             arg_list$X <- customTheta$X
-            prior1 <- t( do.call( what=customTheta$P, args=arg_list )     )
+            prior1 <- t( do.call( what=customTheta$P, args=arg_list ) )
             # multiply by individual log-likelihood
-            ll2 <-  - sum( weights * p.aj.xi * log( prior1 + eps ) )
+            ll2 <- - sum( weights * p.aj.xi * log( prior1 + eps ) )
         } else {
             mod1 <- do.call( what=customTheta$P, args=arg_list )
             ll2 <- - sum( N.k * log( mod1 + eps ) )
@@ -30,16 +30,16 @@ xxirt_mstep_ThetaParameters <- function( customTheta, G, eps,
                     # val <- par1[ names(customTheta$prior) ]
                     val <- par1[pp]
                     arg_list <- list( val,customTheta$prior_par1[pp],
-                                                customTheta$prior_par2[pp]  )
+                                                customTheta$prior_par2[pp] )
                     prior_val <- do.call( prior_pp, arg_list )
                     pen <- pen - log( prior_val + eps )
-                }  # end if prior
-            }  # end pp
+                } # end if prior
+            } # end pp
         }
         ll2 <- ll2 + pen
         if (!is.null(penalty_fun_theta)){
             pen <- penalty_fun_theta(x=x)
-            ll2 <- ll2+pen
+            ll2 <- ll2 + pen
         }
         return(2*ll2)
     }

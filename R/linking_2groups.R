@@ -1,5 +1,5 @@
 ## File Name: linking_2groups.R
-## File Version: 0.139
+## File Version: 0.141
 
 linking_2groups <- function(pars, method, type="asymm", pow=2, eps=0.001,
             simultan=FALSE, Theta=seq(-6,6,len=101), wgt=NULL, par_init=NULL,
@@ -38,7 +38,7 @@ linking_2groups <- function(pars, method, type="asymm", pow=2, eps=0.001,
     )
 
     link_fun <- linking_functions[[method]]
-    grad_fun <- grad_functions[[method]]  # Will be NULL if method !='Hae'
+    grad_fun <- grad_functions[[method]] # Will be NULL if method !='Hae'
 
     #- check gradient
     check_gradient <- FALSE

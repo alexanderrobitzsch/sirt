@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_model_difflp_information.R
-## File Version: 0.187
+## File Version: 0.189
 
 
 mgsem_proc_model_difflp_information <- function(partable)
@@ -21,7 +21,7 @@ mgsem_proc_model_difflp_information <- function(partable)
         if (partable$group[dd]==0){
             ind <- NULL
         }
-        if ( (length(ind)>0) & (partable$pen_difflp[dd]>0)  ){
+        if ( (length(ind)>0) & (partable$pen_difflp[dd]>0) ){
             is_lpdiff_entry[dd] <- TRUE
             lpdiff_diff_indices[[dd]] <- partable[ind, 'index']
             fac <- sqrt(partable[dd,pen_entry]*partable[ind,pen_entry])

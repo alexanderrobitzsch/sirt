@@ -1,11 +1,11 @@
 ## File Name: gom_em_item_parameters.R
-## File Version: 0.09
+## File Version: 0.102
 
 
 gom_em_item_parameters <- function(dat2, dat2.resp, model, b, lambda, K,
     weights, progress)
 {
-    item <- data.frame("item"=colnames(dat2))
+    item <- data.frame(item=colnames(dat2))
     item$N <- colSums( weights*dat2.resp )
     item$p <- colSums( weights*dat2, na.rm=TRUE) / item$N
     item$b <- b

@@ -1,5 +1,5 @@
 ## File Name: sia.sirt.R
-## File Version: 0.304
+## File Version: 0.306
 
 
 #--- statistical implicative analysis
@@ -24,7 +24,7 @@ sia.sirt <- function(dat, significance=.85 )
     # n11
     n11 <- crossprod( dat1.resp * ( dat1==1 ), dat1.resp * ( dat1==1 ) )
     # calculate some probabilities
-    p10 <- n10 / ntot       # X_i=1, X_j=0
+    p10 <- n10 / ntot    # X_i=1, X_j=0
     p11 <- n11 / ntot
     # item p values in every cell
     p1 <- diag( n11 ) / diag( ntot )
@@ -34,7 +34,7 @@ sia.sirt <- function(dat, significance=.85 )
     # probability under independence
     p10_ind <- outer( p1, p0 )
     # define effect size
-    impl_int_es <- ( p10 - p10_ind  ) / sqrt( p10_ind )
+    impl_int_es <- ( p10 - p10_ind ) / sqrt( p10_ind )
     diag(impl_int_es) <- NA
     # implicative intensity t value
     impl_int_t <- sqrt( ntot ) * impl_int_es
@@ -72,21 +72,21 @@ sia.sirt <- function(dat, significance=.85 )
     dev <- 1
     while ( dev > .5 ){
         IS.old <- IS
-        G1 <-  1 * ( IS0 %*% I1 > 0 )
+        G1 <- 1 * ( IS0 %*% I1 > 0 )
         IS0 <- G1
         I1.pot[ G1 > 0 ] <- pp
-        IS <- 1 * ( IS + G1  > 0 )
+        IS <- 1 * ( IS + G1 > 0 )
         pp <- pp + 1
         dev <- sum ( abs( IS - IS.old ) )
     }
 
     # descriptives
-    desc <- list( nodes=I  )
+    desc <- list( nodes=I )
     # unconnected nodes
     ind.uc <- intersect( which( rowSums(I1)==0 ), which( colSums(I1)==0 ) )
     UC <- length( ind.uc )
     vars.uc <- rownames(I1)[ ind.uc ]
-    if (  UC > 0 ){
+    if ( UC > 0 ){
         desc$nodes.unconnected <- UC
     }
     desc$edges <- sum(I1)
@@ -110,7 +110,7 @@ sia.sirt <- function(dat, significance=.85 )
             g1 <- sort( g1, decreasing=TRUE )
         }
     }
-    desc.item[ names(g1), 'level' ]  <- g1
+    desc.item[ names(g1), 'level' ] <- g1
     if (UC > 0 ){
         desc.item[vars.uc,'level'] <- NA
         g1[vars.uc] <- -1
@@ -144,16 +144,16 @@ sia.sirt <- function(dat, significance=.85 )
     }
 
     # create igraph object
-    igraph.obj <-  igraph::graph.edgelist(dfr)
+    igraph.obj <- igraph::graph.edgelist(dfr)
     # create Rgraphviz object
 
     #*****
     # OUTPUT
     res <- list( adj.matrix=I1, adj.pot=I1.pot, adj.matrix.trans=IS,
-        desc=desc, desc.item=desc.item, impl.int=impl_int, impl.t=impl_int_t,
-        impl.significance=impl_significance, conf.loev=conf_loev,
-        graph.matr=dfr2, graph.edges=unique( c( dfr2[,1], dfr2[,2]  ) ),
-        igraph.matr=dfr, igraph.obj=igraph.obj)
+                desc=desc, desc.item=desc.item, impl.int=impl_int, impl.t=impl_int_t,
+                impl.significance=impl_significance, conf.loev=conf_loev,
+                graph.matr=dfr2, graph.edges=unique( c( dfr2[,1], dfr2[,2] ) ),
+                igraph.matr=dfr, igraph.obj=igraph.obj)
     return(res)
 }
 

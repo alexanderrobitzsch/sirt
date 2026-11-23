@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_itemParameters_evalPrior.R
-## File Version: 0.154
+## File Version: 0.156
 
 
 #*** evaluate prior in M-step
@@ -21,9 +21,9 @@ xxirt_mstep_itemParameters_evalPrior <- function(partable, h=0)
 
                 prior_val <- do.call( prior_pp, prior_args_pp )
                 pen[pp] <- - log( prior_val + eps )
-            }  # end if prior
-        }    # end pp
+            } # end if prior
+        } # end pp
 
-    }  # end if NP > 0
+    } # end if NP > 0
     return(pen)
 }

@@ -1,5 +1,5 @@
 ## File Name: noharm_sirt_preproc.R
-## File Version: 0.409
+## File Version: 0.411
 
 
 #**** data preprocessing noharm.sirt
@@ -80,7 +80,7 @@ noharm_sirt_preproc <- function( dat, pm, N, weights, Fpatt, Fval,
     }
 
     res$model.type <- model.type
-    res$modtype  <- modtype
+    res$modtype <- modtype
     # initial values if they are not provided
     if ( is.null(Psival) ){ Psival <- 0*diag(res$I) }
     if ( is.null(Psipatt) ){ Psipatt <- 0*diag(res$I) }

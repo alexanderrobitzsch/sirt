@@ -1,5 +1,5 @@
 ## File Name: expl.detect.R
-## File Version: 1.317
+## File Version: 1.319
 
 
 #**** Exploratory DETECT analysis
@@ -37,14 +37,15 @@ expl.detect <- function( data, score, nclusters, N.est=NULL, seed=NULL,
                         bwscale=bwscale, smooth=smooth, use_sum_score=use_sum_score,
                         scale_score=scale_score)
     cc_est <- cc <- do.call( what=ccov.np, args=ccov_np_args)
-    ccov.matrix <- create.ccov( cc=cc, data=data[ estsample,]  )
+    ccov.matrix <- create.ccov( cc=cc, data=data[ estsample,] )
     # create distance matrix
     cc1 <- max(ccov.matrix) - ccov.matrix
     # Ward Hierarchical Clustering
     d <- stats::as.dist(cc1)
-    fit <- stats::hclust(d, method=hclust_method)         # hierarchical cluster analysis
+    # hierarchical cluster analysis
+    fit <- stats::hclust(d, method=hclust_method)
     clusterfit <- fit
-    itemcluster <- data.frame( matrix( 0, nrow=I, ncol=nclusters ) )
+    itemcluster <- data.frame( matrix( 0, nrow=I, ncol=nclusters ))
     itemcluster[,1] <- colnames(data)
     colnames(itemcluster) <- c( 'item', paste( 'cluster', 2L:nclusters, sep='') )
     detect.unweighted <- detect.weighted <- NULL

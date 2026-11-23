@@ -1,5 +1,5 @@
 ## File Name: xxirt_proc_ParTable.R
-## File Version: 0.465
+## File Version: 0.467
 
 #-- process parameter table
 xxirt_proc_ParTable <- function( itemtype, partable, items )
@@ -7,7 +7,7 @@ xxirt_proc_ParTable <- function( itemtype, partable, items )
     #*** extract item types from partable
     itemtype <- unlist( sapply( items, FUN=function(ii){
                         partable$type[ paste(partable$item)==ii ][1]
-                        } )  )
+                        } ) )
     I <- length(items)
     partable$rowindex <- seq( 1, nrow(partable) )
     #*** parameter index

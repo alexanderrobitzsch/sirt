@@ -1,5 +1,5 @@
 ## File Name: lsem_fitsem_raw_data_lavaan.R
-## File Version: 0.136
+## File Version: 0.138
 
 lsem_fitsem_raw_data_lavaan <- function(dat, pseudo_weights, survey.fit,
         lavaan_est_fun, se, ...)
@@ -8,7 +8,7 @@ lsem_fitsem_raw_data_lavaan <- function(dat, pseudo_weights, survey.fit,
     res <- lsem_fitsem_raw_data_define_pseudo_weights(dat=dat,
                         pseudo_weights=pseudo_weights)
     dat1 <- res$dat
-    sampling_weights <- res$sampling_weights  #=NULL for pseudo weights
+    sampling_weights <- res$sampling_weights #=NULL for pseudo weights
     nobs_pseudo <- res$nobs_pseudo
     sum_weight <- res$sum_weight
     # use starting values

@@ -1,5 +1,5 @@
 ## File Name: ccov.np.R
-## File Version: 1.225
+## File Version: 1.227
 
 
 #---- nonparametric estimation of conditional covariance
@@ -84,7 +84,7 @@ ccov.np <- function( data, score, bwscale=1.1, thetagrid=seq( -3,3,len=200),
             display <- seq(1,FF)
         }
         data.ff <- data[, c( ccov.table[ff,1], ccov.table[ff,2] ) ]
-        which.ff <- which( rowSums( is.na(data.ff) )==0  )
+        which.ff <- which( rowSums( is.na(data.ff) )==0 )
         data.ff <- data.ff[ which.ff, ]
         score.ff <- score[which.ff]
         prod.matrix[,ff] <- ccov_np_regression(x=score.ff, y=data.ff[,1]*data.ff[,2],

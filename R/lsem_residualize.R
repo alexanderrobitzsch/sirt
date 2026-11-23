@@ -1,5 +1,5 @@
 ## File Name: lsem_residualize.R
-## File Version: 0.478
+## File Version: 0.479
 
 
 #**** residualize data
@@ -16,7 +16,7 @@ lsem_residualize <- function( data, moderator, moderator.grid,
     if (! is_imputed){
         data.mod <- data[, moderator, drop=TRUE ]
         Nimp <- 1
-    } else {  # use first dataset for imputed data
+    } else { # use first dataset for imputed data
         data.mod <- ( data[[1]] )[, moderator, drop=TRUE ]
     }
 
@@ -87,8 +87,8 @@ lsem_residualize <- function( data, moderator, moderator.grid,
 
                     dat2[, var.vv] <- ifelse( modgrid_index1==gg, y0, dat2[, var.vv] )
                 }
-            }  # end vv
-        }  # end residualize=TRUE
+            } # end vv
+        } # end residualize=TRUE
         res <- list( resid_vars=vars, data=dat2, weights_grid=weights, bw=bw, h=h,
                 moderator.density=moderator.density, sd.moderator=sd.moderator, G=G, N=N,
                 residualized_intercepts=residualized_intercepts,
@@ -98,7 +98,7 @@ lsem_residualize <- function( data, moderator, moderator.grid,
                 is_imputed=is_imputed, Nimp=Nimp)
         res0[[ii]] <- res
 
-    }  # end imputation loop ii
+    } # end imputation loop ii
 
     #--- process output
     if (! is_imputed){
@@ -118,7 +118,7 @@ lsem_residualize <- function( data, moderator, moderator.grid,
         ee <- 'residualized_intercepts'
         res[[ee]] <- lsem_aggregate_statistics(x=res[[ee]])
 
-    }  # end process output
+    } # end process output
 
     #-- out
     return(res)

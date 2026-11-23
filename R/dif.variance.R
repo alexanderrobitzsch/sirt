@@ -1,5 +1,5 @@
 ## File Name: dif.variance.R
-## File Version: 0.193
+## File Version: 0.194
 
 
 
@@ -7,12 +7,12 @@
 dif.variance <- function( dif, se.dif, items=paste("item",1:length(dif),sep="") )
 {
     # calculating the weights
-    wi <-  1/se.dif^2
+    wi <- 1/se.dif^2
     # mean DIF
     md <- mean(dif)
     # weighted tau2 estimator
     # formula (5) of PENFIELD & ALGINA (2006)
-    weighted.tauq <- sum( wi^2 * ( dif - md )^2 - wi  ) / sum( wi^2 )
+    weighted.tauq <- sum( wi^2 * ( dif - md )^2 - wi ) / sum( wi^2 )
     # unweighted tau2 estimator
     # formula (5) of PENFIELD & ALGINA (2006)
     unweighted.tauq <- sum( ( dif - md )^2 - se.dif^2 ) / ( length(items) - 1 )
@@ -27,7 +27,7 @@ dif.variance <- function( dif, se.dif, items=paste("item",1:length(dif),sep="") 
     #* output
     res <- list( weighted.DIFSD=sqrt(weighted.tauq),
                 unweighted.DIFSD=sqrt(unweighted.tauq),
-                mean.se.dif=sqrt( mean( se.dif^2 ) ), eb.dif=eb.dif  )
+                mean.se.dif=sqrt( mean( se.dif^2 ) ), eb.dif=eb.dif )
     return(res)
 }
 

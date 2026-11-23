@@ -1,5 +1,5 @@
 ## File Name: rasch_mirtlc_estep_lc.R
-## File Version: 0.24
+## File Version: 0.251
 
 
 #--- E Step rasch_mirtlc
@@ -19,7 +19,7 @@ rasch_mirtlc_estep_lc <- function( dat1, dat2, dat2.resp, pi.k, pjk, I,
         pi.k <- matrix( pi.k, ncol=1 )
     }
     if (G>1){
-        for (gg in 1:G){
+        for (gg in 1L:G){
             ind.gg <- group==gg
             ngg <- length(ind.gg)
             pikM <- sirt_matrix2(x=pi.k[,gg], nrow=ngg)
@@ -35,7 +35,7 @@ rasch_mirtlc_estep_lc <- function( dat1, dat2, dat2.resp, pi.k, pjk, I,
     n.k <- matrix( 0, length(theta.k), G )
     r.jk <- n.jk <- array( 0, dim=c( ncol(dat2), length(theta.k), G) )
     ll <- rep(0,G)
-    for (gg in 1:G){
+    for (gg in 1L:G){
         ind.gg <- group==gg
         n.k[,gg] <- colSums( dat1[ind.gg,2] * f.qk.yi[ind.gg,,drop=FALSE]  )
         # expected counts at theta.k and item j
@@ -51,7 +51,7 @@ rasch_mirtlc_estep_lc <- function( dat1, dat2, dat2.resp, pi.k, pjk, I,
         ll[gg] <- sum( dat1[ind.gg,2] * log( rowSums( f.yi.qk[ind.gg,]*pikM)))
     }
     res <- list( n.k=n.k, n.jk=n.jk, r.jk=r.jk, f.qk.yi=f.qk.yi, pjk=pjk,
-                f.yi.qk=f.yi.qk, ll=sum(ll) )
+                    f.yi.qk=f.yi.qk, ll=sum(ll) )
     return(res)
 }
 

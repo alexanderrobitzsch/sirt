@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_model_update_penalties_matrix.R
-## File Version: 0.073
+## File Version: 0.074
 
 mgsem_proc_model_update_penalties_matrix <- function(partable, entries, model)
 {
@@ -20,8 +20,8 @@ mgsem_proc_model_update_penalties_matrix <- function(partable, entries, model)
                         model[[group]][[entry]][[type_dd]] <- mat_gg_ee
                     }
                 }
-            }  # end is entry to be changed
-        }  # end dd
-    }  # end entry
+            } # end is entry to be changed
+        } # end dd
+    } # end entry
     return(model)
 }

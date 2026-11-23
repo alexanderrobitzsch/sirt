@@ -1,5 +1,5 @@
 ## File Name: marginal.truescore.reliability.R
-## File Version: 0.171
+## File Version: 0.172
 
 
 marginal.truescore.reliability <- function(  b, a=1+0*b, c=0*b, d=1+0*b,
@@ -22,7 +22,7 @@ marginal.truescore.reliability <- function(  b, a=1+0*b, c=0*b, d=1+0*b,
     # calculate pi_i (predicted probabilities)
     pi.i <- colSums( icc.theta * phi.kM )
 
-    #  expected number correct
+    # expected number correct
     mu <- sum(pi.i)
 
     # compute error variance
@@ -40,7 +40,7 @@ marginal.truescore.reliability <- function(  b, a=1+0*b, c=0*b, d=1+0*b,
 
     # collect all formulas for item
     item <- data.frame( item=1:I, pi=pi.i, sig2.tau=sig2.tau, sig2.error=sig2.error )
-    item$rel.item <- item$sig2.tau /  ( item$sig2.tau + item$sig2.error )
+    item$rel.item <- item$sig2.tau / ( item$sig2.tau + item$sig2.error )
 
     rel.test <- sig2.total.tau / ( sig2.total.tau + sig2.total.error )
     cat('Reliability', '=', round( rel.test,3 ),'\n')

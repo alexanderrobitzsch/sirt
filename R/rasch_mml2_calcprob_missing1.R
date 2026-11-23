@@ -1,5 +1,5 @@
 ## File Name: rasch_mml2_calcprob_missing1.R
-## File Version: 1.092
+## File Version: 1.093
 
 
 
@@ -18,7 +18,7 @@ rasch_mml2_calcprob_missing1 <- function( theta.k, b, beta, delta.miss, pjk,
     ab <- fixed.a*b
     M1 <- stats::plogis(fixed.a*thetaM1-ab)  # probability for correct item response
 
-    if (irtmodel=="missing1"){
+    if (irtmodel=='missing1'){
         # probability of a response for incorrect item responses
         M2a <- stats::plogis(thetaM2-beta)
         # probability of a response for correct item responses
@@ -37,7 +37,7 @@ rasch_mml2_calcprob_missing1 <- function( theta.k, b, beta, delta.miss, pjk,
     if (return_nonresponse_probs){
         pjk[,1,] <- (1-M2a)*(1-M1) / m3
         pjk[,2,] <- (1-M2b)*M1 / m3
-        pjk <- pjk[,1:2,]
+        pjk <- pjk[,c(1,2),]
     }
     return(pjk)
 }

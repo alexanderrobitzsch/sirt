@@ -1,5 +1,5 @@
 ## File Name: write.fwf2.R
-## File Version: 1.124
+## File Version: 1.126
 
 
 write.fwf2 <- function( dat, format.full, format.round, savename )
@@ -8,7 +8,7 @@ write.fwf2 <- function( dat, format.full, format.round, savename )
         colnames(dat) <- paste( 'V', 1L:(ncol(dat)), sep='')
     }
     matr <- matrix( ' ', nrow=nrow(dat), ncol=ncol(dat))
-    ind1 <- which( format.round <=0  )
+    ind1 <- which( format.round <=0 )
     format.full[ ind1 ] <- format.full[ind1]
     format.round[ ind1 ] <- format.round[ind1]
     for (vv in 1L:(ncol(matr)) ){

@@ -1,5 +1,5 @@
 ## File Name: lq_fit.R
-## File Version: 0.165
+## File Version: 0.167
 
 lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
         est_pow=FALSE, optimizer="optim", eps_vec=10^seq(0,-10, by=-.5),
@@ -26,7 +26,7 @@ lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
         beta <- x
         if (pow==0){
             e <- y - X %*% beta
-            val <- sum( e^2 / ( e^2 + eps ) )
+            val <- sum( w*e^2 / ( e^2 + eps ) )
         } else {
             val <- sirt_rcpp_lq_fit_fct_optim(Z=Xs, y=y, beta=beta, pow=pow, w=w,
                     eps=eps)
@@ -56,7 +56,7 @@ lq_fit <- function(y, X, w=NULL, pow=2, eps=1e-3, beta_init=NULL,
             grad <- rep(NA, NP)
             e <- y - X %*% x
             for (pp in 1L:NP){
-                grad[pp] <- sum(-2*e*eps/(e^2+eps)^2*X[,pp])
+                grad[pp] <- sum(-2*w*e*eps/(e^2+eps)^2*X[,pp])
             }
             return(grad)
         }

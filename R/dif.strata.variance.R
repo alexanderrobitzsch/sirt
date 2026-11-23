@@ -1,5 +1,5 @@
 ## File Name: dif.strata.variance.R
-## File Version: 0.153
+## File Version: 0.156
 
 
 
@@ -16,7 +16,7 @@ dif.strata.variance <- function( dif, se.dif, itemcluster )
     # DIF in strata
     SS <- nrow(stratadif)
     for (ss in 1L:SS){
-        items.ss <- which( itemcluster==stratadif[ss,'strata']  )
+        items.ss <- which( itemcluster==stratadif[ss,'strata'] )
         dif.ss <- dif[ items.ss ]
         difv.ss <- dif.variance( dif=dif.ss, se.dif=se.dif[ items.ss ] )
         stratadif$weighted.tau[ss] <- difv.ss$weighted.DIFSD

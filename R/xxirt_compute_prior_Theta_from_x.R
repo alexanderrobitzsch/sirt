@@ -1,5 +1,5 @@
 ## File Name: xxirt_compute_prior_Theta_from_x.R
-## File Version: 0.07
+## File Version: 0.081
 
 xxirt_compute_prior_Theta_from_x <- function(x, em_args)
 {
@@ -10,7 +10,7 @@ xxirt_compute_prior_Theta_from_x <- function(x, em_args)
 
     #*** compute prior distribution
     prior_Theta <- xxirt_compute_priorDistribution( Theta=em_args$Theta,
-                                  customTheta=customTheta, G=em_args$G )
+                                customTheta=customTheta, G=em_args$G )
 
     return(prior_Theta)
 }

@@ -1,5 +1,5 @@
 ## File Name: lsem_weighted_cov.R
-## File Version: 0.252
+## File Version: 0.253
 
 lsem_weighted_cov <- function( x, weights, x_resp=NULL,
         moderator_variable=NULL, loc_linear_smooth=NULL, moderator_value=NULL,
@@ -56,7 +56,7 @@ lsem_weighted_cov <- function( x, weights, x_resp=NULL,
             }
         }
         covw <- covw2
-    }  # end fit loc_linear_smooth
+    } # end fit loc_linear_smooth
 
     if (pd){
         covw <- as.matrix(Matrix::nearPD(x=covw)$mat)

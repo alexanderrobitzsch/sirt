@@ -1,5 +1,5 @@
 ## File Name: equating.rasch.jackknife.R
-## File Version: 0.158
+## File Version: 0.159
 
 
 
@@ -39,8 +39,8 @@ equating.rasch.jackknife <- function( pars.data, display=TRUE, se.linkerror=FALS
                                             alpha1=alpha1, alpha2=alpha2)
                 l1 <- c(l1, mod.ii$B.est$Stocking.Lord )
             }
-            res1[ nn, 'linkerror'] <-  sqrt( ( N.units - 2 ) / ( N.units -1 ) *
-                                            sum( ( l1 - res1[ nn, 'shift' ]  )^2 ) )
+            res1[ nn, 'linkerror'] <- sqrt( ( N.units - 2 ) / ( N.units -1 ) *
+                                            sum( ( l1 - res1[ nn, 'shift' ] )^2 ) )
         }
         # display progress
         if (display){
@@ -51,7 +51,7 @@ equating.rasch.jackknife <- function( pars.data, display=TRUE, se.linkerror=FALS
     }
     cat('\n')
     le_fac <- ( N.units - 1 ) / N.units
-    linkerror <- sqrt(  le_fac * sum( ( res1[,2] - mod1$B.est$Stocking.Lord )^2 ) )
+    linkerror <- sqrt( le_fac * sum( ( res1[,2] - mod1$B.est$Stocking.Lord )^2 ) )
     se.sd <- sqrt( le_fac * sum( ( res1[,3] - mod1$descriptives$SD )^2 ) )
     if (se.linkerror){
         se.linkerror <- sqrt( le_fac * sum( ( res1[,4] - linkerror )^2 ) )

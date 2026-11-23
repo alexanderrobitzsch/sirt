@@ -1,5 +1,5 @@
 ## File Name: linking_proc_itempars.R
-## File Version: 0.09
+## File Version: 0.104
 
 linking_proc_itempars <- function(itempars)
 {
@@ -11,6 +11,10 @@ linking_proc_itempars <- function(itempars)
         itempars$wgt <- 1
         weights_exist <- FALSE
     }
+    if (colnames(itempars)[5]=='weight_a'){
+        itempars$wgt <- 1
+    }
+
     # extract studies
     studies <- sort( paste( unique( itempars[,1] ) ) )
     NS <- length(studies)

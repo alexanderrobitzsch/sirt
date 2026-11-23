@@ -1,5 +1,5 @@
 ## File Name: xxirt_createParTable.R
-## File Version: 0.271
+## File Version: 0.272
 
 #*** create parameter table
 xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
@@ -52,7 +52,7 @@ xxirt_createParTable <- function( dat, itemtype, customItems=NULL )
         }
 
         dfr <- rbind( dfr, dfr1 )
-    }  # end ii
+    } # end ii
     #**** create parameter indices
     NP <- nrow(dfr)
     dfr$rowindex <- 1L:NP

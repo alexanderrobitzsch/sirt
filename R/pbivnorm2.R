@@ -1,15 +1,15 @@
 ## File Name: pbivnorm2.R
-## File Version: 1.166
+## File Version: 1.172
 
 
 #*** approximation of the bivariate normal integral
 #*** using the method of Cox and Wermuth (1991)
 pbivnorm2 <- function( x, y, rho )
 {
-    #  (X,Y) ~ N_2(0, rho)
-    #  P( X > a1, Y > b1, rho )
+    # (X,Y) ~ N_2(0, rho)
+    # P( X > a1, Y > b1, rho )
     #=P( -X < - a1, -Y < -b1, rho )
-    # if ( any( rho < 0 )){stop("only positive correlations are allowed!")}
+    # if ( any( rho < 0 )){stop('only positive correlations are allowed!')}
     a <- x
     b <- y
     a11 <- a1 <- - a
@@ -36,14 +36,13 @@ pbivnorm2 <- function( x, y, rho )
     }
     t1 <- stats::pnorm( - a1 )
     mu <- sirt_dnorm( a1 ) / stats::pnorm( - a1 )
-    xi <-  ( rho * mu - b1 ) / sqrt( 1 - rho^2 )
+    xi <- ( rho * mu - b1 ) / sqrt( 1 - rho^2 )
     # see Hong (1999)
     sig2 <- 1 + a1*mu - mu^2
-    #  Formula (3)
+    # Formula (3)
     # t1 * pnorm( xi )
     # Formula (4): correction in Hong (1999)
-    prob1 <- t1 * ( stats::pnorm(  xi ) - 1/2 * rho^2 / ( 1 - rho^2 ) * xi *
-                sirt_dnorm( xi ) * sig2  )
+    prob1 <- t1 * ( stats::pnorm(xi) - 0.5*rho^2/( 1-rho^2 )*xi* sirt_dnorm(xi)*sig2)
     # adjust formula in case of APPROX. (ii)
     if ( length(ind2) > 0 ){
         # CW. Formula in (ii), p. 264

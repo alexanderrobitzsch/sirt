@@ -1,5 +1,5 @@
 ## File Name: rasch.pairwise.itemcluster.R
-## File Version: 0.35
+## File Version: 0.363
 
 
 #***** Pairwise estimation with itemclusters
@@ -67,7 +67,7 @@ rasch.pairwise.itemcluster <- function( dat, itemcluster=NULL,
         }
         max.change <- max(abs( b - b0 ))
         if (progress){
-            cat( "PL Iter.", iter, ": max. parm. change=", round( max.change, 6 ), "\n")
+            cat( 'PL Iter.', iter, ': max. parm. change=', round( max.change, 6 ), '\n')
             utils::flush.console()
         }
         iter <- iter + 1
@@ -75,7 +75,7 @@ rasch.pairwise.itemcluster <- function( dat, itemcluster=NULL,
 
     #** post-processing
     item <- data.frame( N=colSums(1-is.na(dat00)),
-                    p=colMeans(dat00, na.rm=TRUE), b=log(eps) )
+                        p=colMeans(dat00, na.rm=TRUE), b=log(eps) )
     if ( is.null(itemcluster) ){
         itemcluster <- rep(0,I)
     }
@@ -83,9 +83,9 @@ rasch.pairwise.itemcluster <- function( dat, itemcluster=NULL,
 
     #-- output
     s2 <- Sys.time()
-    res <- list( b=b, eps=eps, iter=iter, conv=conv, dat=dat00,item=item,
-            fct='rasch.pairwise.itemcluster', itemcluster=itemcluster,
-            s1=s1, s2=s2, CALL=CALL )
+    res <- list( b=b, eps=eps, iter=iter, conv=conv, dat=dat00, item=item,
+                    fct='rasch.pairwise.itemcluster', itemcluster=itemcluster,
+                    s1=s1, s2=s2, CALL=CALL )
     class(res) <- 'rasch.pairwise'
     return(res)
 }

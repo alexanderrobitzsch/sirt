@@ -1,5 +1,5 @@
 ## File Name: rasch_mirtlc_mstep_lc.R
-## File Version: 0.04
+## File Version: 0.051
 
 
 #---- calculate class probabilities
@@ -12,7 +12,7 @@ rasch_mirtlc_mstep_lc <- function( pjk, n.k, r.jk, n.jk, G, Nclasses )
     if ( G> 1){
         pi.k <- n.k / matrix( colSums(n.k ), nrow=Nclasses, ncol=G, byrow=TRUE)
     }
-    for (cc in 1:Nclasses ){
+    for (cc in 1L:Nclasses ){
         if (G==1){
             pjk[ cc, ] <- r.jk[, cc, 1] / n.jk[, cc, 1]
         }

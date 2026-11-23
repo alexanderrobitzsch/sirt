@@ -1,11 +1,12 @@
 %% File Name: linking.haberman.Rd
-%% File Version: 0.769
+%% File Version: 0.776
 
 \name{linking.haberman}
 \alias{linking.haberman}
 \alias{summary.linking.haberman}
 \alias{linking.haberman.lq}
 \alias{summary.linking.haberman.lq}
+\alias{coef.linking.haberman.lq}
 \alias{linking_haberman_itempars_prepare}
 \alias{linking_haberman_itempars_convert}
 \alias{L0_polish}
@@ -31,9 +32,11 @@ linking.haberman(itempars, personpars, estimation="OLS", a_trim=Inf, b_trim=Inf,
 
 linking.haberman.lq(itempars, pow=2, eps=1e-3, a_log=TRUE, use_nu=FALSE,
       est_pow=FALSE, lower_pow=.1, upper_pow=3, method="joint",
-      le=FALSE, vcov_list=NULL)
+      prec_weights=FALSE, le=FALSE, vcov_list=NULL)
 
 \method{summary}{linking.haberman.lq}(object, digits=3, file=NULL, ...)
+
+\method{coef}{linking.haberman.lq}(object,...)
 
 ## prepare 'itempars' argument for linking.haberman()
 linking_haberman_itempars_prepare(b, a=NULL, wgt=NULL)
@@ -87,8 +90,11 @@ should be displayed.
 of main effects should be simultaneously adjusted}
 \item{vcov}{Optional indicating whether covariance matrix for linking errors
 should be computed}
-\item{pow}{Power \eqn{q}}
-\item{eps}{Epsilon value used in differentiable approximating function}
+\item{pow}{Power \eqn{q}. Can be a vector of length two for \code{linking.haberman.lq}
+with the first and second entries for slopes and intercepts, respectively.}
+\item{eps}{Epsilon value used in differentiable approximating function.
+Can be a vector of length two for \code{linking.haberman.lq}
+with the first and second entries for slopes and intercepts, respectively.}
 \item{use_nu}{Logical indicating whether item intercepts instead of
 item difficulties are used in linking}
 \item{est_pow}{Logical indicating whether power values should be estimated}
@@ -97,6 +103,10 @@ item difficulties are used in linking}
 \item{method}{Estimation method type: \code{"joint"} for joint estimation of
 distribution and item parameters, while \code{"pw1"} and \code{"pw2"} indicate
 pairwise estimation using no weights or weights for item frequencies}
+\item{prec_weights}{Logical indicating whether precision weights should be included
+in linking, which only works for \code{'use_nu=TRUE'}. In this case, the weights
+must be provided by additional columns \code{weight_a} and \code{weight_d}
+in \code{itempars}.}
 \item{le}{Logical indicating whether linking and standard errors should be
 computed}
 \item{vcov_list}{List of variance matrices of item parameters}
@@ -178,7 +188,7 @@ of explained item slopes and intercepts after linking
 in comparison to item parameters across groups
 (Asparouhov & Muthen, 2014).
 
-The function \eqn{linking.haberman.lq} uses the loss function \eqn{\rho(x)=|x|^q}.
+The function \code{linking.haberman.lq} uses the loss function \eqn{\rho(x)=|x|^q}.
 The originally proposed Haberman linking can be obtained with \code{pow=2} (\eqn{q=2}).
 The powers can also be estimated (argument \code{est_pow=TRUE}).
 }

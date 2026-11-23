@@ -1,5 +1,5 @@
 ## File Name: xxirt_hessian.R
-## File Version: 0.585
+## File Version: 0.587
 
 #--- computation of hessian matrix
 xxirt_hessian <- function( object, h=1e-4, use_shortcut=TRUE )
@@ -35,9 +35,9 @@ xxirt_hessian <- function( object, h=1e-4, use_shortcut=TRUE )
     par1 <- xxirt_partable_extract_freeParameters( partable=partable )
 
     p.xi.aj <- xxirt_compute_likelihood( probs_items=probs_items, dat=dat,
-                             resp_index=resp_index, dat_resp_bool=dat_resp_bool )
+                            resp_index=resp_index, dat_resp_bool=dat_resp_bool )
     prior_Theta <- xxirt_compute_priorDistribution( Theta=Theta,
-                                  customTheta=customTheta, G=G )
+                            customTheta=customTheta, G=G )
     prior1 <- t( prior_Theta[, group ] )
     probs_items0 <- probs_items
     p_xi_aj <- p.xi.aj
@@ -136,7 +136,7 @@ xxirt_hessian <- function( object, h=1e-4, use_shortcut=TRUE )
         #*** compute prior distribution
         if (max_ind >=NPI+1){
             prior_Theta <- xxirt_compute_priorDistribution( Theta=Theta,
-                                  customTheta=customTheta, G=G )
+                                customTheta=customTheta, G=G )
             prior1 <- t( prior_Theta[, group ] )
         }
         dev <- xxirt_hessian_compute_loglike(p.xi.aj=p.xi.aj, prior1=prior1,

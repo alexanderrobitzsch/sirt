@@ -1,5 +1,5 @@
 ## File Name: xxirt_compute_posterior.R
-## File Version: 0.301
+## File Version: 0.302
 
 
 ##-- xxirt: compute posterior
@@ -39,7 +39,7 @@ xxirt_compute_posterior <- function( prior_Theta, p.xi.aj, group,
         }
         N.ik <- N.ik + n.ik[,,,gg]
         pi.k[,gg] <- colSums( p.aj.xi.gg * weights[ ind_gg ] )
-    }  # end gg
+    } # end gg
     res <- list( p.aj.xi=p.aj.xi, n.ik=n.ik, N.ik=N.ik, N.k=pi.k, post_unnorm=p1 )
     return(res)
 }

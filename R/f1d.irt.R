@@ -1,5 +1,5 @@
 ## File Name: f1d.irt.R
-## File Version: 1.296
+## File Version: 1.298
 
 #--- Functional unidimensional model (Ip et al., 2013)
 f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
@@ -59,7 +59,7 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
 
     # starting values for a_i and d_i
     di <- intercept
-    diast <- di  # diast=d_i*
+    diast <- di # diast=d_i*
     aiast <- rep(.7,I)
 
     thetaast <- rep(0,TP)
@@ -87,8 +87,8 @@ f1d.irt <- function( dat=NULL, nnormal=1000, nfactors=3,
         aiast <- c1[2,]
 
         # compute approximation error
-        errpi <- Zpi - thetaast * matrix(aiast,TP, I, byrow=TRUE )  -
-                            matrix(diast,TP, I, byrow=TRUE )
+        errpi <- Zpi - thetaast * matrix(aiast, TP, I, byrow=TRUE ) -
+                            matrix(diast, TP, I, byrow=TRUE )
         approx.error <- sum( errpi^2 * wgt_theta ) / I
         # parameter change
         parchange <- max( abs( c(diast - diast0,aiast-aiast0,thetaast-thetaast0) ))

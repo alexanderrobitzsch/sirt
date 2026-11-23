@@ -1,5 +1,5 @@
 ## File Name: rasch.pairwise.R
-## File Version: 0.446
+## File Version: 0.448
 
 
 #------ Rasch estimation (Approximate Method)
@@ -70,7 +70,7 @@ rasch.pairwise <- function( dat, weights=NULL, conv=0.0001, maxiter=3000,
         #- direct optimization
         n.ji <- t(n.ij)
         res <- rasch_pairwise_optimize(n.ij=n.ij, n.ji=n.ji, beta=beta,
-                    zerosum=zerosum, maxiter=maxiter, estimator="MINCHI")
+                    zerosum=zerosum, maxiter=maxiter, estimator='MINCHI')
     } else {
         #- iterations
         fix_first <- version==2

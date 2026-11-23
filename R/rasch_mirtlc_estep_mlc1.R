@@ -1,5 +1,5 @@
 ## File Name: rasch_mirtlc_estep_mlc1.R
-## File Version: 0.22
+## File Version: 0.231
 
 
 # E Step Multidimensional Latent Class Rasch Model
@@ -33,7 +33,7 @@ rasch_mirtlc_estep_mlc1  <- function( dat1, dat2, dat2.resp, pi.k, pjk, I,
     f.qk.yi <- 0 * f.yi.qk
     if ( G==1 ){ pi.k <- matrix( pi.k, ncol=1 ) }
     if (G>1){
-        for ( gg in 1:G){
+        for ( gg in 1L:G){
             ind.gg <- which( group==gg )
             pikM <- sirt_matrix2(x=pi.k[,gg], nrow=length(ind.gg))
             f.qk.yi[ ind.gg, ] <- f.yi.qk[ ind.gg, ] * pikM
@@ -53,11 +53,11 @@ rasch_mirtlc_estep_mlc1  <- function( dat1, dat2, dat2.resp, pi.k, pjk, I,
     r.jk <- n.jk <- array( 0, dim=c( ncol(dat2), NT, G) )
     ll <- rep(0,G)
 
-    for (gg in 1:G){
+    for (gg in 1L:G){
         ind.gg <- which(group==gg)
         res <- mml_raschtype_counts( dat2=dat2[ind.gg,], dat2resp=dat2.resp[ind.gg,],
-                    dat1=dat1[ind.gg,2], fqkyi=f.qk.yi[ind.gg,],
-                    pik=pi.k[,gg], fyiqk=f.yi.qk[ind.gg,]  )
+                        dat1=dat1[ind.gg,2], fqkyi=f.qk.yi[ind.gg,],
+                        pik=pi.k[,gg], fyiqk=f.yi.qk[ind.gg,] )
         n.k[,gg] <- res$nk
         n.jk[,,gg] <- res$njk
         r.jk[,,gg] <- res$rjk

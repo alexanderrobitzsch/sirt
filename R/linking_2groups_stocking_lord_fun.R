@@ -1,5 +1,5 @@
 ## File Name: linking_2groups_stocking_lord_fun.R
-## File Version: 0.136
+## File Version: 0.137
 
 
 
@@ -42,14 +42,14 @@ linking_2groups_stocking_lord_fun <- function(x, pars, Theta, wgt, type="asymm",
         if (! simultan){ # simultan=FALSE
             z <- rowSums_P1 - rowSums_P2
             d <- linking_2groups_power_loss(x=z, pow=pow, eps=eps, deriv=deriv)
-            if (!deriv){  # deriv=FALSE
+            if (!deriv){ # deriv=FALSE
                 val <- val + sum( d*wgt )
-            } else {  # deriv=TRUE
+            } else { # deriv=TRUE
                 fac0 <- P1*(1-P1)*a1M
-                val[1] <- val[1] + sum(wgt*d*rowSums(fac0) )  # mu
-                val[2] <- val[2] + sum(wgt*d*rowSums(fac0*Theta) )  # sigma
+                val[1] <- val[1] + sum(wgt*d*rowSums(fac0) ) # mu
+                val[2] <- val[2] + sum(wgt*d*rowSums(fac0*Theta) ) # sigma
             }
-        } else {  # simultan=TRUE
+        } else { # simultan=TRUE
             P0 <- stats::plogis( aM * (Theta2-bM) )
             rowSums_P0 <- rowSums(P0)
             z1 <- rowSums_P1 - rowSums_P0
@@ -58,10 +58,10 @@ linking_2groups_stocking_lord_fun <- function(x, pars, Theta, wgt, type="asymm",
             d2 <- linking_2groups_power_loss(x=z2, pow=pow, eps=eps, deriv=deriv)
             if (!deriv){ # deriv=FALSE
                 val <- val + sum( (d1+d2)*wgt )
-            } else {  # deriv=TRUE
+            } else { # deriv=TRUE
                 fac0 <- P1*(1-P1)*a1M
-                val[1] <- val[1] + sum(wgt*d1*rowSums(fac0) )  # mu
-                val[2] <- val[2] + sum(wgt*d1*rowSums(fac0*Theta) )  # sigma
+                val[1] <- val[1] + sum(wgt*d1*rowSums(fac0) ) # mu
+                val[2] <- val[2] + sum(wgt*d1*rowSums(fac0*Theta) ) # sigma
                 #- derivatives item discriminations
                 fac1 <- P0*(1-P0)*(Theta2-bM)
                 val[ind_a] <- val[ind_a] - colSums(wgt*(d1+d2)*fac1)
@@ -83,10 +83,10 @@ linking_2groups_stocking_lord_fun <- function(x, pars, Theta, wgt, type="asymm",
             d <- linking_2groups_power_loss(x=z, pow=pow, eps=eps, deriv=deriv)
             if (!deriv){ # deriv=FALSE
                 val <- val + sum( d*wgt )
-            } else {  # deriv=TRUE
+            } else { # deriv=TRUE
                 fac0 <- P2*(1-P2)*a2M
-                val[1] <- val[1] + sum(wgt*d*rowSums(fac0)/sigma )  # mu
-                val[2] <- val[2] + sum(wgt*d*rowSums(fac0*Theta2)/sigma )  # sigma
+                val[1] <- val[1] + sum(wgt*d*rowSums(fac0)/sigma ) # mu
+                val[2] <- val[2] + sum(wgt*d*rowSums(fac0*Theta2)/sigma ) # sigma
             }
         } else { # simultan=TRUE
             P0 <- stats::plogis( aM * (Theta2-bM) )
@@ -96,9 +96,9 @@ linking_2groups_stocking_lord_fun <- function(x, pars, Theta, wgt, type="asymm",
             z2 <- rowSums_P2 - rowSums_P0
             d2 <- linking_2groups_power_loss(x=z2, pow=pow, eps=eps, deriv=deriv)
             wgt_d <- wgt*(d1+d2)
-            if (!deriv){  # deriv=FALSE
+            if (!deriv){ # deriv=FALSE
                 val <- val + sum(wgt_d)
-            } else {  # deriv=TRUE
+            } else { # deriv=TRUE
                 fac1 <- - P0*(1-P0)*aM
                 fac2 <- P2*(1-P2)*a2M + fac1
                 #* mu

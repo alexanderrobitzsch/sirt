@@ -1,5 +1,5 @@
 ## File Name: mgsem_evaluate_penalties_evaluate_entry.R
-## File Version: 0.189
+## File Version: 0.191
 
 
 mgsem_evaluate_penalties_evaluate_entry <- function(x, res, dd, index, partable,
@@ -31,7 +31,7 @@ mgsem_evaluate_penalties_evaluate_entry <- function(x, res, dd, index, partable,
                         args_eval=args_eval, fun_eval=fun_eval, h=h, deriv=deriv)
             res[[pen_entry]][ind_add] <- res[[pen_entry]][ind_add] + val
         }
-    }  # end is_prior
+    } # end is_prior
 
     # --- output
     return(res)

@@ -1,5 +1,5 @@
 ## File Name: mcmc_summary_print_information_criteria.R
-## File Version: 0.141
+## File Version: 0.142
 
 mcmc_summary_print_information_criteria <- function(object)
 {
@@ -11,6 +11,6 @@ mcmc_summary_print_information_criteria <- function(object)
     cat('-----------------------------------------------------------------\n')
     cat( 'Dbar','=', round( object$ic$Dbar, 2 ), '\n' )#, ' | ' )
     cat( 'Dhat','=', round( object$ic$Dhat, 2 ), '\n' )#, ' | ' )
-    cat( 'pD','=', round( object$ic$pD, 2 ),  ' | pD=Dbar - Dhat \n' )
-    cat( 'DIC','=', round( object$ic$DIC, 2 ),  ' | DIC=Dhat + pD \n\n' )
+    cat( 'pD','=', round( object$ic$pD, 2 ), ' | pD=Dbar - Dhat \n' )
+    cat( 'DIC','=', round( object$ic$DIC, 2 ), ' | DIC=Dhat + pD \n\n' )
 }

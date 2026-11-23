@@ -39,7 +39,7 @@ CHANGELOG sirt
 
 
 ------------------------------------------------------------------------
-VERSIONS sirt 4.3  |  2026-04-16  |  Last: sirt 4.3-21
+VERSIONS sirt 4.3  |  2026-11-23  |  Last: sirt 4.3-40
 ------------------------------------------------------------------------
 
 ADDED * included synthetic dataset 'data.elfe'
@@ -48,10 +48,23 @@ NOTE  * included joint Stocking-Lord linking (method='SL') in
         linking.haebara()
 FIXED * fixed data processing issue in linking.haberman.lq() with
         method='pw1' and method='pw2'
+NOTE  * included argument for using precision weights in 
+        'linking.haberman.lq'. More generally, weights can be differently
+        chosen for item slopes and item intercepts.
+NOTE  * The arguments 'pow' and 'eps' can now be differently chosen for
+        item intercepts and item slopes in 'linking.haberman.lq'.
+NOTE  * included coef method for 'linking.haberman.lq'
+ADDED * included wrapper function 'mirt_mg'
+ADDED * included function 'hh_linking' for Haberman-Halpin linking of
+        multiple groups
+FIXED * handling of weights in lq_fit() for L0 loss function were 
+        corrected; in previous version, the weights were entirely
+        omitted
 
 
 DATA  * included/modified datasets: data.elfe, data.kess
-EXAMP * included/modified examples: linking.haebara (1)
+EXAMP * included/modified examples: linking.haebara (1), mirt_mg (1),
+        hh_linking (1)
 
 
 

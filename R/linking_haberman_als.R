@@ -1,5 +1,5 @@
 ## File Name: linking_haberman_als.R
-## File Version: 0.659
+## File Version: 0.661
 
 
 
@@ -143,7 +143,7 @@ linking_haberman_als <- function(logaM, wgtM, maxiter, conv,
     #--- calculation of standard errors of regression coefficients
     sd_loga <- stats::sd(logaAt)
     if ( sd_loga < 1E-10 ){
-        res <- list( vcov=0*diag(NS-1), se=rep(0,NS-1)  )
+        res <- list( vcov=0*diag(NS-1), se=rep(0,NS-1) )
     } else {
         res <- linking_haberman_als_vcov( regr_resid=loga_resid,
                     regr_wgt=wgtM, selitems=selitems, transf_pars=logaAt,

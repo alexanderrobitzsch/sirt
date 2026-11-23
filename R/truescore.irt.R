@@ -1,5 +1,5 @@
 ## File Name: truescore.irt.R
-## File Version: 0.252
+## File Version: 0.253
 
 
 #--- true score item response function
@@ -20,7 +20,7 @@ truescore.irt <- function( A, B, c=NULL, d=NULL, theta=seq(-3,3,len=21),
     if ( is.null( error ) ){
         truescore.error <- NULL } else {
         truescore1 <- truescore_irt_irf( A=A, B=B, c=c, d=d, theta=theta + h )
-        truescore.error <- sqrt( ( ( truescore1 - truescore ) /  h )^2 ) * error
+        truescore.error <- sqrt( ( ( truescore1 - truescore ) / h )^2 ) * error
     }
     percscore <- truescore / sum( maxK )
     percscore.error <- NULL

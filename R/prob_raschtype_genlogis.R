@@ -1,5 +1,5 @@
 ## File Name: prob_raschtype_genlogis.R
-## File Version: 0.13
+## File Version: 0.141
 
 
 # probability raschtype models
@@ -12,7 +12,7 @@ prob_raschtype_genlogis <- function( theta, b, alpha1, alpha2, fixed.a=1+0*b,
     }
 
     if ( is.null(Qmatrix) ){
-        XX <- TAM::tam_outer(x=theta, y=b, op="-")
+        XX <- TAM::tam_outer(x=theta, y=b, op='-')
         XX <- as.vector(XX)
         aM <- sirt_matrix2(x=fixed.a, nrow=LT)
         XX <- aM * XX

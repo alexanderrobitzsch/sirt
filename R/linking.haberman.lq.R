@@ -1,15 +1,22 @@
 ## File Name: linking.haberman.lq.R
-## File Version: 0.275
+## File Version: 0.299
 
 linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     use_nu=FALSE, est_pow=FALSE, lower_pow=.1, upper_pow=3, method="joint",
-    le=FALSE, vcov_list=NULL)
+    prec_weights=FALSE, le=FALSE, vcov_list=NULL)
 {
     CALL <- match.call()
     s1 <- Sys.time()
 
+    pow <- extend_two(x=pow)
+    eps <- extend_two(x=eps)
+    if ((!use_nu) | (!a_log) ){
+        prec_weights <- FALSE
+        warning('Precision weights can only be used for \'use_nu=TRUE\'')
+    }
+
     use_pw <- method %in% c('pw1','pw2')
-    if ( (!use_pw) | (pow!=2) | (!a_log) ){ le <- FALSE }
+    if ( (!use_pw) | (min(pow)!=2) | (!a_log) ){ le <- FALSE }
 
     #--- process item parameters
     res <- linking_proc_itempars(itempars=itempars)
@@ -35,7 +42,7 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     IP <- nrow(itempars1)
     X0 <- matrix(0, nrow=IP, ncol=G-1+I)
     colnames(X0) <- c(studies[-1], items)
-    w <- itempars1[,5]
+    w <- itempars1[,'wgt']
 
     res_optim <- list()
     eps_vec <- 10^seq(0,-10, by=-.5)
@@ -65,9 +72,13 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     }
 
     #- fit
-    res_optim$slopes <- mod0 <- lq_fit(y=y, X=X, w=w, pow=pow, eps=eps,
+    if (prec_weights){
+        w <- itempars[, 'weight_a']
+    }
+    res_optim$slopes <- mod0 <- lq_fit(y=y, X=X, w=w, pow=pow[1], eps=eps[1],
                 eps_vec=eps_vec, est_pow=est_pow, lower_pow=lower_pow,
                 upper_pow=upper_pow)
+
     coef0 <- mod0$coefficients
     pow_slopes <- mod0$pow
     ind_groups <- 1L:(G-1)
@@ -121,7 +132,10 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     }
 
     #- fit
-    res_optim$intercepts <- mod0 <- lq_fit(y=y, X=X, w=w, pow=pow, eps=eps,
+    if (prec_weights){
+        w <- itempars[, 'weight_d']
+    }
+    res_optim$intercepts <- mod0 <- lq_fit(y=y, X=X, w=w, pow=pow[2], eps=eps[2],
                 eps_vec=eps_vec, est_pow=est_pow, lower_pow=lower_pow,
                 upper_pow=upper_pow)
     coef0 <- mod0$coefficients
@@ -161,6 +175,11 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
         resid$b_joint <- item[ind_items, 'b']
     }
 
+    pp <- transf.personpars
+    G <- nrow(pp)
+    coef1 <- c( pp[2L:G, 'B_theta'], pp[2L:G, 'A_theta'] )
+    names(coef1) <- c( paste0('mu',2L:G), paste0('sigma',2L:G) )
+
     # transformation for item parameters
     transf.itempars <- data.frame( study=studies, At=1/At, se_At=NA,
                             Bt=-Bt, se_Bt=NA )
@@ -172,10 +191,12 @@ linking.haberman.lq <- function(itempars, pow=2, eps=1e-3, a_log=TRUE,
     #-- output list
     description <- 'Linking based on L_q distance according to Haberman (2009)'
     res <- list( transf.personpars=transf.personpars, transf.itempars=transf.itempars,
-                    pow=pow, eps=eps, item=item, resid=resid, description=description,
-                    converged=converged, a_log=a_log, use_nu=use_nu, est_pow=est_pow,
-                    pow_slopes=pow_slopes, pow_intercepts=pow_intercepts,
-                    vcov=res_vcov, method=method, CALL=CALL, time=time)
+                    coef=coef1, pow=pow, eps=eps, item=item, resid=resid,
+                    description=description, converged=converged, a_log=a_log,
+                    use_nu=use_nu, est_pow=est_pow,    pow_slopes=pow_slopes,
+                    pow_intercepts=pow_intercepts,
+                    prec_weights=prec_weights, vcov=res_vcov, method=method,
+                    CALL=CALL, time=time)
     class(res) <- 'linking.haberman.lq'
     return(res)
 

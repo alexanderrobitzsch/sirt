@@ -1,5 +1,5 @@
 ## File Name: rasch_mirtlc_est_a.R
-## File Version: 0.172
+## File Version: 0.173
 
 
 #-- estimation of a parameter (discrimination parameter)
@@ -24,7 +24,7 @@ rasch_mirtlc_est_a <- function( theta.k, b, fixed.a, pjk, alpha1, alpha2, h,
     # f(x+h) - f(x-h)=2* f'(x) * h
     ll0 <- ll1 <- ll2 <- matrix(0, I, G)
     #-- groups
-    for (gg in 1:G){
+    for (gg in 1L:G){
         ll0[,gg] <- rowSums( r.jk[,,gg] * log( pjk.M ) +
                                 ( n.jk[,,gg] - r.jk[,,gg]  ) * log( qjk.M ) )
         ll1[,gg] <- rowSums( r.jk[,,gg] * log( pjk1.M ) +

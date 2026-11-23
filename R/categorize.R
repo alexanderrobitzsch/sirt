@@ -1,5 +1,5 @@
 ## File Name: categorize.R
-## File Version: 0.193
+## File Version: 0.194
 
 
 #--- categorize variables into classes
@@ -35,7 +35,7 @@ categorize <- function( dat, categorical=NULL, quant=NULL, lowest=0)
             vars.vv <- vars[vv]
             q1 <- quant[ vars.vv ]
             quant.vv <- stats::quantile( dat[,vars.vv], na.rm=TRUE,
-                            prob=seq( 0, 1, len=q1+1 )  )
+                            prob=seq( 0, 1, len=q1+1 ) )
             quant.vv[1] <- quant.vv[1] - 1
             quant.vv[q1+1] <- quant.vv[q1+1] + 1
             quant.vv <- unique( quant.vv )

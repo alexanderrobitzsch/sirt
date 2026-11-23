@@ -1,5 +1,5 @@
 ## File Name: mgsem_proc_suffstat.R
-## File Version: 0.099
+## File Version: 0.102
 
 
 mgsem_proc_suffstat <- function(suffstat)
@@ -31,7 +31,7 @@ mgsem_proc_suffstat <- function(suffstat)
         }
         suffstat_gg$vech_weights_S <- mgsem_vech(x=suffstat_gg$weights_S)
         suffstat[[gg]] <- suffstat_gg
-    }  # end gg
+    } # end gg
     N <- sum(N_group)
 
     #--- output

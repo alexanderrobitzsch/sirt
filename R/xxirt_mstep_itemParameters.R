@@ -1,5 +1,5 @@
 ## File Name: xxirt_mstep_itemParameters.R
-## File Version: 0.458
+## File Version: 0.461
 
 
 #--- M-step item parameters
@@ -99,7 +99,7 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
 
             }
             grad1[pp] <- diff1
-        }  # end pp
+        } # end pp
 
         #--- prior distributions
         pen <- xxirt_mstep_itemParameters_evalPrior(partable=partable0, h=0)
@@ -113,7 +113,7 @@ xxirt_mstep_itemParameters <- function( partable, item_list, items, Theta,
                 pen1[pp] <- penalty_fun_item(x=xh)
             }
         }
-        grad1 <- ( grad1 +  pen_h - pen + pen1 - pen0 )/h
+        grad1 <- ( grad1 + pen_h - pen + pen1 - pen0 )/h
         return(grad1)
     }
     #**** end definition gradient

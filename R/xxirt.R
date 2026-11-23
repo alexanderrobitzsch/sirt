@@ -1,5 +1,5 @@
 ## File Name: xxirt.R
-## File Version: 1.188
+## File Version: 1.196
 
 
 #--- user specified item response model
@@ -161,12 +161,14 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
 
         #*** optional cross-validation
         cv_loglike <- NA
+        cv_loglike_se <- NA
         if (do_cv){
             N <- nrow(dat)
             cv_zone <- ( ( 0L:(N-1) ) %% cv_kfold ) + 1
             cv_loglike <- 0
             em_args$partable <- partable
             em_args$customTheta <- customTheta
+            val_folds <- rep(NA, cv_kfold)
             for (jj in 1L:cv_kfold){
                 weights1 <- weights*(cv_zone!=jj )
                 weights2 <- weights*(cv_zone==jj )
@@ -180,8 +182,10 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 res <- do.call(what=xxirt_em_algorithm, args=em_args)
                 # compute cv log likelihood
                 ll_jj <- sum( weights2 * res$ll_case )
+                val_folds[jj] <- ll_jj
                 cv_loglike <- cv_loglike + ll_jj
             }
+            cv_loglike_se <- stats::sd(val_folds)*sqrt(cv_kfold)
             cat('\n')
         }
 
@@ -212,7 +216,7 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
             em_iterate <- FALSE
         }
 
-    }  # loop for final EM iteration
+    } # loop for final EM iteration
 
     #**** post processing
     opt_val <- dev
@@ -256,7 +260,8 @@ xxirt <- function( dat, Theta=NULL, itemtype=NULL, customItems=NULL,
                 opt_val=opt_val, pen_val=pen_val, ic=ic,
                 item_list=item_list, customItems=customItems,
                 customTheta=customTheta, cv_loglike=cv_loglike,
-                p.xi.aj=p.xi.aj, p.aj.xi=p.aj.xi, ll_case=ll_case,
+                cv_loglike_se=cv_loglike_se, p.xi.aj=p.xi.aj, p.aj.xi=p.aj.xi,
+                ll_case=ll_case,
                 n.ik=n.ik, EAP=EAP, dat=dat, dat_resp=dat_resp,
                 weights=weights, item_index=item_index, G=G, group=group,
                 group_orig=group0, ncat=ncat, mstepItem_method=mstep_method,

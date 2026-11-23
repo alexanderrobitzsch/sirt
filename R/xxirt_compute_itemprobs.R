@@ -1,5 +1,5 @@
 ## File Name: xxirt_compute_itemprobs.R
-## File Version: 0.226
+## File Version: 0.228
 
 
 # compute item probabilities
@@ -37,7 +37,7 @@ xxirt_compute_itemprobs <- function( item_list, items, Theta, ncat,
         } else {
             probs[jj,,,] <- aperm(probs_ii, perm=c(2,1,3) )
         }
-    }  # end jj
+    } # end jj
     return(probs)
 }
 

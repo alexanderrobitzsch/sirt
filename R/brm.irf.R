@@ -1,5 +1,5 @@
 ## File Name: brm.irf.R
-## File Version: 0.121
+## File Version: 0.122
 
 #--- item response function (discretized) beta response model
 brm.irf <- function( Theta, delta, tau, ncat, thdim=1, eps=1E-10 )
@@ -7,7 +7,7 @@ brm.irf <- function( Theta, delta, tau, ncat, thdim=1, eps=1E-10 )
     TP <- nrow(Theta)
     K <- ncat
     # compute mid points
-    mp <- seq( 1 / (2*(ncat) ), 1, 1/ncat  )
+    mp <- seq( 1 / (2*(ncat) ), 1, 1/ncat )
     probs <- matrix( 0, nrow=TP, ncol=K )
     eps <- 1E-10
     # compute beta shape parameters

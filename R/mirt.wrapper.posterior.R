@@ -1,20 +1,20 @@
 ## File Name: mirt.wrapper.posterior.R
-## File Version: 0.370
+## File Version: 0.375
 
 
 # calculation of posterior
 mirt.wrapper.posterior <- function( mirt.obj, weights=NULL, group=NULL )
 {
-    TAM::require_namespace_msg("mirt")
+    TAM::require_namespace_msg('mirt')
     mirt_class <- class(mirt.obj)
-    is_mg <- mirt_class=="MultipleGroupClass"
+    is_mg <- mirt_class=='MultipleGroupClass'
     data_group <- mirt.obj@Data$group
     orig_data <- mirt.obj@Data$data
     item_names <- colnames(orig_data)
     N_orig <- nrow(orig_data)
     G <- length(unique(data_group))
     N <- length(data_group)
-    ind_group <- 1:N
+    ind_group <- 1L:N
     id_group <- 1
     groupNames <- NULL
     if (!is.null(group)){
@@ -33,7 +33,7 @@ mirt.wrapper.posterior <- function( mirt.obj, weights=NULL, group=NULL )
     #load items
     I <- ncol( mobj@Data$data )
     items <- vector('list', I)
-    for(ii in 1:I){
+    for(ii in 1L:I){
         items[[ii]] <- mirt::extract.item(x=mobj, item=ii, group=id_group)
     }
     # check whether prodlist exists
@@ -75,11 +75,11 @@ mirt.wrapper.posterior <- function( mirt.obj, weights=NULL, group=NULL )
     dimnames(probs)[[1]] <- item_names
     # result list
     res <- list( theta.k=Theta, pi.k=pi.k, f.yi.qk=f.yi.qk, f.qk.yi=f.qk.yi,
-            n.ik=n.ik, exp_counts=exp_counts, probs=probs, N=N, TP=TP, I=I, data=resp,
-            maxK=maxK, G=G, groupNames=groupNames, group=group,
-            orig_data=orig_data, ind_group=ind_group, N_orig=N_orig,
-            mirt_class=mirt_class, pweights=pweights)
-    class(res) <- "mirt"
+                n.ik=n.ik, exp_counts=exp_counts, probs=probs, N=N, TP=TP, I=I,
+                data=resp, maxK=maxK, G=G, groupNames=groupNames, group=group,
+                orig_data=orig_data, ind_group=ind_group, N_orig=N_orig,
+                mirt_class=mirt_class, pweights=pweights)
+    class(res) <- 'mirt'
     return(res)
 }
 

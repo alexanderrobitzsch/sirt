@@ -1,5 +1,5 @@
 ## File Name: noharm.sirt.R
-## File Version: 0.940
+## File Version: 0.942
 
 
 ########################################
@@ -63,7 +63,7 @@ noharm.sirt <- function(dat, pm=NULL, N=NULL, weights=NULL, Fval=NULL, Fpatt=NUL
     lower <- res$lower
     upper <- res$upper
 
-    modesttype <- 1   # NOHARM estimation
+    modesttype <- 1 # NOHARM estimation
 
     #----
     # compute betaj

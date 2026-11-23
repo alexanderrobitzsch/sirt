@@ -1,5 +1,5 @@
 ## File Name: mirt.wrapper.fscores.R
-## File Version: 0.08
+## File Version: 0.091
 
 ##################################################################
 # calculation of factor scores (EAP, MAP and MLE) in mirt
@@ -17,7 +17,7 @@ mirt.wrapper.fscores <- function( mirt.obj, weights=NULL ){
     p.xi.aj <- mirt.post$f.yi.qk
     p.aj.xi <- mirt.post$f.qk.yi
     res <- .smirt.person.parameters( data=data, D=D, theta.k=theta.k,
-           p.xi.aj, p.aj.xi, weights=weights )
+                p.xi.aj, p.aj.xi, weights=weights )
     return(res)
-    }
+}
 ##################################################################

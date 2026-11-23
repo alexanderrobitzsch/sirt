@@ -1,5 +1,5 @@
 ## File Name: predict.btm.R
-## File Version: 0.07
+## File Version: 0.09
 
 predict.btm <- function(object, data=NULL, ...)
 {
@@ -11,8 +11,8 @@ predict.btm <- function(object, data=NULL, ...)
     teams <- paste(effects$individual)
     pars <- object$pars
     ignore.ties <- object$ignore.ties
-    delta <- pars[ pars$par=="delta", "est"]
-    eta <- pars[ pars$par=="eta", "est"]
+    delta <- pars[ pars$par=='delta', 'est']
+    eta <- pars[ pars$par=='eta', 'est']
     wgt.ties <- object$wgt.ties
     #- identify teams
     ind1 <- match( paste(dat[,1]), teams)
